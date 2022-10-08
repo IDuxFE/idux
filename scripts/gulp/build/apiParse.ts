@@ -247,7 +247,11 @@ export const migrateToProAPIs = async (proApis: JSONType, distPath: string): Pro
   const bindings = pick(proApis, bindingsFlag)[bindingsFlag]
   const components = await readJSON(distPath)
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   forIn(bindings, (component: JSONType, name: string) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     forIn(component, (attrs: Array<string>, proName: string) => {
       for (const attrName of attrs) {
         langs

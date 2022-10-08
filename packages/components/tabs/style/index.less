@@ -25,7 +25,9 @@
     font-size: @tabs-nav-font-size;
 
     &&-has-scroll {
-      padding: 0 @tabs-nav-pre-next-width;
+      > .@{tabs-prefix}-nav {
+        margin: 0 @tabs-nav-pre-next-width;;
+      }
 
       > .@{icon-prefix} {
         font-size: @tabs-icon-font-size;
@@ -175,13 +177,10 @@
       > .@{tabs-prefix}-nav {
         z-index: 1;
         > .@{tabs-prefix}-nav-tab {
-          margin-right: 4px;
           border-radius: @tabs-border-radius @tabs-border-radius 0 0;
           border-bottom: 1px solid @tabs-nav-border-color;
+          box-sizing: border-box;
 
-          &:last-child {
-            margin-right: 0;
-          }
           &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
             border: 1px solid @tabs-nav-border-color;
             border-bottom-color: @tabs-card-nav-tab-selected-background-color;
@@ -215,7 +214,7 @@
         &-bar {
           position: absolute;
           background-color: @tabs-nav-bar-color;
-          transition: left @transition-duration-base @ease-in-out, top @transition-duration-base @ease-in-out;
+          transition: width @transition-duration-base @ease-in-out, height @transition-duration-base @ease-in-out, left @transition-duration-base @ease-in-out, top @transition-duration-base @ease-in-out;
           bottom: 0;
           height: @tabs-nav-bar-height;
           border-radius: @tabs-border-radius @tabs-border-radius 0 0;

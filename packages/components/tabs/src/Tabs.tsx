@@ -8,27 +8,30 @@
 import type { TabProps, TabsProps } from './types'
 import type { VKey } from '@idux/cdk/utils'
 import type { IconInstance } from '@idux/components/icon'
-import type { ComputedRef, Ref, VNode } from 'vue'
+import type { CSSProperties, ComputedRef, PropType, Ref, VNode } from 'vue'
 
-import { computed, defineComponent, nextTick, normalizeClass, provide, ref, vShow, watch, withDirectives } from 'vue'
+import { computed, defineComponent, normalizeClass, provide, ref, vShow, watch, withDirectives } from 'vue'
 
 import { curry, isNil } from 'lodash-es'
 
 import { useResizeObserver } from '@idux/cdk/resize'
-import { addClass, callEmit, flattenNode, removeClass, useControlledProp } from '@idux/cdk/utils'
+import { addClass, callEmit, flattenNode, removeClass, useControlledProp, useState } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
 import TabNav from './TabNav'
 import { useSelectedElOffset } from './composables/useOffset'
-import { useNavRelatedElSize, useVisibleSize } from './composables/useSize'
+import { useNavRelatedElSize, useSelectedElVisibleSize } from './composables/useSize'
 import { tabsToken } from './tokens'
 import { tabsProps } from './types'
 
-export default defineComponent({
+const InternalTabs = defineComponent({
   name: 'IxTabs',
-  props: tabsProps,
-  setup(props, { slots }) {
+  props: {
+    ...tabsProps,
+    tabs: { type: Array as PropType<VNode[]>, default: undefined },
+  },
+  setup(props) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tabs`)
 
@@ -46,28 +49,37 @@ export default defineComponent({
     const horizontalPlacement = ['top', 'bottom']
     const isHorizontal = computed(() => horizontalPlacement.includes(props.placement))
 
-    const { navSize, navWrapperSize, navPreNextSize, selectedElSize, syncNavRelatedElSize } = useNavRelatedElSize(
-      isHorizontal,
-      navWrapperElRef,
-      navElRef,
-      navPreElRef,
-      selectedElRef,
-    )
+    const [navOffset, setNavOffset] = useState(0)
+    const [barStyle, setBarStyle] = useState<CSSProperties>({})
+    const { navSize, navWrapperSize, navPreNextSize, selectedElSize, syncNavElSize, syncSelectedElSize } =
+      useNavRelatedElSize(isHorizontal, navWrapperElRef, navElRef, navPreElRef, selectedElRef)
+    const { selectedElOffset, syncSelectedElOffset } = useSelectedElOffset(isHorizontal, navPreNextSize, selectedElRef)
 
-    const navOffset = ref(0)
-    const { selectedElOffset } = useSelectedElOffset(isHorizontal, selectedElRef)
+    const hasScroll = computed(() => {
+      return navSize.value! > navWrapperSize.value
+    })
 
-    const visibleSize = useVisibleSize(navWrapperSize, selectedElOffset, navOffset)
-    const hasScroll = computed(() => navSize.value > navWrapperSize.value)
+    const selectedElVisibleSize = useSelectedElVisibleSize(navWrapperSize, selectedElOffset, navOffset)
 
-    // 处理存在滚动状态下，手动点击tab时nav位置偏移（在可视范围内第一个和最后一个tab没有展示完全，需要进行偏移使其展示完全；）
-    const updateNavOffset = () => {
-      if (visibleSize.value < selectedElSize.value) {
-        // 即可视范围内最后一个tab没有展示完全
-        navOffset.value += selectedElSize.value - visibleSize.value
-      } else if (visibleSize.value / navWrapperSize.value > 1) {
-        // 即可视范围内第一个tab没有展示完全
-        navOffset.value -= visibleSize.value % navWrapperSize.value
+    // 处理存在滚动状态下，滚动到被选中的tab，并修正其位置
+    const updateSelectedOffset = () => {
+      if (hasScroll.value) {
+        const size = selectedElVisibleSize.value / navWrapperSize.value
+        const inVisibleRange = size < 2
+        if (inVisibleRange) {
+          // 可视范围内需要处理展示不全的问题，需要修正
+          if (selectedElVisibleSize.value < selectedElSize.value) {
+            // 即可视范围内最后一个tab没有展示完全
+            setNavOffset(navOffset.value + selectedElSize.value - selectedElVisibleSize.value + navPreNextSize.value)
+          } else if (selectedElVisibleSize.value / navWrapperSize.value > 1) {
+            // 即可视范围内第一个tab没有展示完全
+            setNavOffset(
+              navOffset.value - ((selectedElVisibleSize.value % navWrapperSize.value) + navPreNextSize.value),
+            )
+          }
+        } else {
+          setNavOffset(selectedElOffset.value - navPreNextSize.value)
+        }
       }
     }
 
@@ -94,6 +106,10 @@ export default defineComponent({
       const result = await leaveResult
       if (result !== false) {
         callEmit(props.onTabClick, key, evt)
+        // 处理当前被选中元素再次被点击，需要修正其位置
+        if (key === selectedKey.value) {
+          updateSelectedOffset()
+        }
         setSelectedKey(key)
       }
     }
@@ -102,20 +118,15 @@ export default defineComponent({
       if (isLineType.value && navBarElRef.value) {
         const isBarDisabled = selectedElRef.value?.classList.contains(`${mergedPrefixCls.value}-nav-tab-disabled`)
         const barDisabledClassName = `${mergedPrefixCls.value}-nav-bar-disabled`
-        const barOffset = selectedElOffset.value - navOffset.value + navPreNextSize.value + 'px'
+        const barOffset = selectedElOffset.value - navOffset.value + 'px'
         const barSize = selectedElSize.value + 'px'
 
-        if (isHorizontal.value) {
-          navBarElRef.value.style.left = barOffset
-          navBarElRef.value.style.width = barSize
-          navBarElRef.value.style.top = ''
-          navBarElRef.value.style.height = ''
-        } else {
-          navBarElRef.value.style.top = barOffset
-          navBarElRef.value.style.height = barSize
-          navBarElRef.value.style.left = ''
-          navBarElRef.value.style.width = ''
-        }
+        setBarStyle({
+          width: isHorizontal.value ? barSize : '',
+          left: isHorizontal.value ? barOffset : '',
+          top: isHorizontal.value ? '' : barOffset,
+          height: isHorizontal.value ? '' : barSize,
+        })
         if (isBarDisabled) {
           addClass(navBarElRef.value, barDisabledClassName)
         } else {
@@ -127,22 +138,24 @@ export default defineComponent({
     const handlePreClick = (evt: Event) => {
       if (!preReached.value) {
         callEmit(props.onPreClick, evt)
-        const offset = navOffset.value < navWrapperSize.value ? 0 : navOffset.value - navWrapperSize.value
-        navOffset.value = offset
+        const mergedOffset = navOffset.value + navPreNextSize.value
+        const offset = mergedOffset < navWrapperSize.value ? 0 : mergedOffset - navWrapperSize.value
+        setNavOffset(offset)
       }
     }
 
     const handleNextClick = (evt: Event) => {
       if (!nextReached.value) {
         callEmit(props.onNextClick, evt)
+        const mergedNavSize = navSize.value! + navPreNextSize.value * 2
         const _offset = navOffset.value + navWrapperSize.value
         let offset
-        if (navSize.value - _offset < navWrapperSize.value) {
-          offset = navSize.value - navWrapperSize.value
+        if (mergedNavSize - _offset < navWrapperSize.value) {
+          offset = mergedNavSize - navWrapperSize.value
         } else {
           offset = _offset
         }
-        navOffset.value = offset
+        setNavOffset(offset)
       }
     }
 
@@ -151,37 +164,86 @@ export default defineComponent({
       nextReached.value = navSize.value - navOffset.value <= navWrapperSize.value
     }
 
-    watch(navOffset, val => {
-      if (navElRef.value) {
-        navElRef.value.style.transform = `translate${isHorizontal.value ? 'X' : 'Y'}(-${val}px)`
-        judgePreNextStatus()
-        updateNavBarStyle()
-      }
-    })
-
-    watch(selectedElRef, () => {
-      if (hasScroll.value) {
-        updateNavOffset()
-      }
+    const update = () => {
+      syncNavElSize()
+      syncSelectedElSize()
+      syncSelectedElOffset()
       updateNavBarStyle()
-    })
-
-    const onTabsResize = () => {
-      syncNavRelatedElSize()
-      if (hasScroll.value) {
-        //存在滚动状态时，因为会增加前进、后退两个按钮，所以需要重新获取navWrapper宽度
-        nextTick(() => {
-          syncNavRelatedElSize()
-          updateNavOffset()
-          updateNavBarStyle()
-          judgePreNextStatus()
-        })
-      } else {
-        updateNavBarStyle()
-      }
+      judgePreNextStatus()
     }
 
-    useResizeObserver(navWrapperElRef, onTabsResize)
+    watch(
+      navOffset,
+      val => {
+        if (navElRef.value) {
+          navElRef.value.style.transform = `translate${isHorizontal.value ? 'X' : 'Y'}(-${val}px)`
+          judgePreNextStatus()
+          updateNavBarStyle()
+        }
+      },
+      {
+        flush: 'post',
+      },
+    )
+
+    let isAddTabs = false
+
+    watch(
+      () => props.tabs,
+      (val = [], oldVal = []) => {
+        update()
+        isAddTabs = val.length > oldVal.length
+      },
+      {
+        flush: 'post',
+      },
+    )
+
+    watch(
+      navSize,
+      (val, oldSize) => {
+        let offset = navOffset.value
+        const currentSize = val!
+        if (currentSize > oldSize && isAddTabs) {
+          offset += currentSize - oldSize
+          if (hasScroll.value) {
+            setNavOffset(offset)
+          }
+        } else if (currentSize < oldSize && !isAddTabs) {
+          offset += currentSize - oldSize
+          if (offset >= 0) {
+            setNavOffset(offset)
+          }
+        }
+      },
+      {
+        flush: 'post',
+      },
+    )
+
+    watch(selectedKey, val => {
+      const hasSelectedKey = props.tabs?.find(item => {
+        return val === item.key
+      })
+      if (!hasSelectedKey) {
+        selectedElRef.value = null
+      }
+    })
+
+    watch(
+      selectedElRef,
+      () => {
+        syncSelectedElSize()
+        syncSelectedElOffset()
+        updateSelectedOffset()
+        updateNavBarStyle()
+      },
+      {
+        flush: 'post',
+      },
+    )
+
+    useResizeObserver(navWrapperElRef, update)
 
     provide(tabsToken, {
       selectedKey,
@@ -193,14 +255,15 @@ export default defineComponent({
     return () => {
       let defaultSelectedKey: VKey = 1
 
-      const tabVNodes = flattenTabVNodes(slots.default?.()).map((item, index) => {
-        if (isNil(item.key)) {
-          item.key = index + 1
-        } else if (index === 0) {
-          defaultSelectedKey = item.key
-        }
-        return item
-      })
+      const tabVNodes =
+        props.tabs?.map((item, index) => {
+          if (isNil(item.key)) {
+            item.key = index + 1
+          } else if (index === 0) {
+            defaultSelectedKey = item.key as VKey
+          }
+          return item
+        }) ?? []
 
       return (
         <div class={classes.value}>
@@ -239,7 +302,9 @@ export default defineComponent({
               />
             )}
             {!isSegmentType.value && <div class={`${mergedPrefixCls.value}-nav-border`}></div>}
-            {isLineType.value && <div class={`${mergedPrefixCls.value}-nav-bar`} ref={navBarElRef}></div>}
+            {isLineType.value && (
+              <div class={`${mergedPrefixCls.value}-nav-bar`} ref={navBarElRef} style={barStyle.value}></div>
+            )}
           </div>
           <div class={`${mergedPrefixCls.value}-pane-wrapper`}>
             {filterTabVNodes(props, tabVNodes, selectedKey, defaultSelectedKey)}
@@ -267,10 +332,6 @@ function useNavPreNextClasses(
   })
 }
 
-function flattenTabVNodes(tabVNodes: VNode[] | undefined): VNode[] {
-  return flattenNode(tabVNodes, { key: '__IDUX_TAB' })
-}
-
 function filterTabVNodes(
   props: TabsProps,
   tabVNodes: VNode[],
@@ -292,3 +353,28 @@ function filterTabVNodes(
   })
   return renderTabVNodes
 }
+
+export default defineComponent({
+  name: 'IxTabs',
+  inheritAttrs: false,
+  props: tabsProps,
+  setup(props, { attrs, slots }) {
+    return () => {
+      const tabVNodes = flattenNode(slots.default?.(), { key: '__IDUX_TAB' })
+
+      const [, setSelectedKey] = useControlledProp(props, 'selectedKey')
+
+      const handleChange = (key: VKey) => {
+        setSelectedKey(key)
+      }
+
+      const internalTabsProps = {
+        ...props,
+        tabs: tabVNodes,
+        'onUpdate:selectedKey': handleChange,
+      }
+
+      return <InternalTabs {...internalTabsProps} {...attrs} v-slots={slots} />
+    }
+  },
+})
