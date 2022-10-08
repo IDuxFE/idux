@@ -16,6 +16,7 @@ export default defineComponent({
   props: optionGroupProps,
   setup(props) {
     const { props: selectProps, slots, mergedPrefixCls } = inject(selectPanelContext)!
+
     return () => {
       const { label, rawData } = props
       const _label = toString(label)

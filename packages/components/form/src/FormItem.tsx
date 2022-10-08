@@ -71,6 +71,18 @@ export default defineComponent({
       })
     })
 
+    if (__DEV__) {
+      if (props.extra || slots.extra) {
+        Logger.warn('components/form', 'the `extra` was deprecated, please use `description` instead.')
+      }
+      if (props.extraMessage || slots.extraMessage) {
+        Logger.warn('components/form', 'the `extraMessage` was deprecated, please use `description` instead.')
+      }
+      if (props.statusIcon || slots.statusIcon) {
+        Logger.warn('components/form', 'the `statusIcon` was deprecated.')
+      }
+    }
+
     return () => {
       const prefixCls = mergedPrefixCls.value
       return (
@@ -141,12 +153,6 @@ function renderControl(
     description: descriptionSlot,
     message: messageSlot,
   } = slots
-  if (__DEV__ && (extra || extraSlot)) {
-    Logger.warn('components/form', '`extra` was deprecated, please use `description` instead.')
-  }
-  if (__DEV__ && (extraMessage || extraMessageSlot)) {
-    Logger.warn('components/form', '`extraMessage` was deprecated, please use `description` instead.')
-  }
 
   const tooltipNode = renderTooltip(controlTooltipSlot, controlTooltip, controlTooltipIcon.value)
   const inputNode = (

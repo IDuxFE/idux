@@ -9,7 +9,6 @@ import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { isString } from 'lodash-es'
 
-import { Logger } from '@idux/cdk/utils'
 import { useKey } from '@idux/components/utils'
 
 import { usePaddingLeft } from '../composables/usePaddingLeft'
@@ -62,12 +61,7 @@ export default defineComponent({
 
     return () => {
       const { additional, disabled, icon, label, slots = {}, customIcon, customLabel } = props.data
-      if (__DEV__ && (slots.icon || slots.label)) {
-        Logger.warn(
-          'components/menu',
-          '`slots` of `MenuItem` was deprecated, please use `customIcon` and `customLabel` instead',
-        )
-      }
+
       const iconRender = customIcon ?? slots.icon ?? 'itemIcon'
       const iconSlot = isString(iconRender) ? menuSlots[iconRender] : iconRender
       const labelRender = customLabel ?? slots.label ?? 'itemLabel'

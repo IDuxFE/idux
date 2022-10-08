@@ -8,6 +8,7 @@
 import { computed, defineComponent, normalizeClass, provide } from 'vue'
 
 import { FORMS_CONTROL_TOKEN, useControl } from '@idux/cdk/forms'
+import { Logger } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
 import { FORM_TOKEN, formToken } from './token'
@@ -29,6 +30,15 @@ export default defineComponent({
     provide(formToken, { props, config })
 
     provide(FORM_TOKEN, { size })
+
+    if (__DEV__) {
+      if (props.hasFeedback) {
+        Logger.warn('components/form', 'the `hasFeedback` was deprecated.')
+      }
+      if (props.statusIcon) {
+        Logger.warn('components/form', 'the `statusIcon` was deprecated.')
+      }
+    }
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value

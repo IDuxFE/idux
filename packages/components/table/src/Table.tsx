@@ -11,6 +11,7 @@ import { computed, defineComponent, normalizeClass, provide } from 'vue'
 
 import { isBoolean } from 'lodash-es'
 
+import { Logger } from '@idux/cdk/utils'
 import { ɵHeader } from '@idux/components/_private/header'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxSpin } from '@idux/components/spin'
@@ -111,6 +112,36 @@ export default defineComponent({
         [`${prefixCls}-${mergedSize.value}`]: true,
       })
     })
+
+    if (__DEV__) {
+      if (props.rowClassName) {
+        Logger.warn('components/table', 'the `rowClassName` was deprecated, please use `customAdditional` instead.')
+      }
+      if (props.rowKey) {
+        Logger.warn('components/table', 'the `rowKey` was deprecated, please use `getKey` instead.')
+      }
+      if (props.scroll?.x) {
+        Logger.warn('components/table', 'the `scroll.x` was deprecated, please use `scroll.width` instead.')
+      }
+      if (props.scroll?.y) {
+        Logger.warn('components/table', 'the `scroll.y` was deprecated, please use `scroll.height` instead.')
+      }
+      if (props.columns.some(col => !!col.additional)) {
+        Logger.warn(
+          'components/table',
+          'the `additional` of TableColumn was deprecated, please use `customAdditional` instead.',
+        )
+      }
+      if (props.columns.some(col => !!col.customRender)) {
+        Logger.warn(
+          'components/table',
+          'the `customRender` of TableColumn was deprecated, please use `customCell` instead.',
+        )
+      }
+      if (props.columns.some(col => !!col.responsive)) {
+        Logger.warn('components/table', 'the `responsive` of TableColumn was deprecated.')
+      }
+    }
 
     return () => {
       const prefixCls = mergedPrefixCls.value

@@ -14,7 +14,7 @@ import { computed } from 'vue'
 
 import { isFunction, isNil } from 'lodash-es'
 
-import { Logger, type VKey, flattenNode } from '@idux/cdk/utils'
+import { type VKey, flattenNode } from '@idux/cdk/utils'
 
 import { optionGroupKey, optionKey } from '../option'
 import { generateOption } from '../utils/generateOption'
@@ -32,9 +32,6 @@ export function useConvertedOptions(props: SelectProps, slots: Slots): ComputedR
   return computed(() => {
     const dataSource = props.options ?? props.dataSource
     if (dataSource) {
-      if (__DEV__ && props.options) {
-        Logger.warn('components/select', '`options` was deprecated, please use `dataSource` instead')
-      }
       return dataSource
     }
 
@@ -175,9 +172,6 @@ function useSearchFn(props: SelectProps, mergedLabelKey: ComputedRef<string>) {
   return computed(() => {
     const searchFn = props.searchFilter ?? props.searchFn
     if (isFunction(searchFn)) {
-      if (__DEV__ && props.searchFilter) {
-        Logger.warn('components/select', '`searchFilter` was deprecated, please use `searchFn` instead')
-      }
       return searchFn
     }
     return searchFn ? getDefaultSearchFn(mergedLabelKey.value) : false

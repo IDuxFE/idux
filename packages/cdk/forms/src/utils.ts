@@ -232,6 +232,12 @@ export interface ValueControlOptions {
 export function useValueControl<T = any>(
   options: ValueControlOptions = {},
 ): ShallowRef<AbstractControl<T> | undefined> {
+  if (__DEV__) {
+    Logger.warn(
+      'cdk/forms',
+      'the `useValueControl` was deprecated, please use `useControl` or `useAccessorAndControl` instead.',
+    )
+  }
   const { controlKey = 'control' } = options
   const { props } = getCurrentInstance()!
   const parentControl = inject(FORMS_CONTROL_TOKEN, shallowRef<AbstractControl>())
@@ -291,6 +297,12 @@ export interface ValueAccessor<T = any> {
  * @deprecated please use `useAccessor` or `useAccessorAndControl` instead
  */
 export function useValueAccessor<T = any>(options: ValueAccessorOptions): ValueAccessor<T> {
+  if (__DEV__) {
+    Logger.warn(
+      'cdk/forms',
+      'the `useValueAccessor` was deprecated, please use `useAccessor` or `useAccessorAndControl` instead.',
+    )
+  }
   const { control, valueKey = 'value', disabledKey = 'disabled' } = options
   const { props } = getCurrentInstance()!
 

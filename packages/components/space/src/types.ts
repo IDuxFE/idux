@@ -25,6 +25,9 @@ export const spaceProps = {
   direction: String as PropType<SpaceDirection>,
   justify: String as PropType<SpaceJustify>,
   size: [Number, String, Array] as PropType<number | string | (string | number)[]>,
+  /**
+   * @deprecated please use `separator` instead'
+   */
   split: String,
   separator: String,
   vertical: {

@@ -565,7 +565,7 @@ export interface TreeConfig {
   getKey: string | ((data: TreeNode<any>) => any)
   labelKey: string
   /**
-   * @deprecated please use `labelKey` instead'
+   * @deprecated please use `getKey` instead'
    */
   nodeKey?: string
   showLine: boolean
@@ -578,7 +578,7 @@ export interface TreeSelectConfig {
   getKey: string | ((data: TreeNode<any>) => any)
   labelKey: string
   /**
-   * @deprecated please use `labelKey` instead'
+   * @deprecated please use `getKey` instead'
    */
   nodeKey?: string
   overlayContainer?: PortalTargetType

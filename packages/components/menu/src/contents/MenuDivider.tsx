@@ -20,6 +20,7 @@ const MenuDivider: FunctionalComponent<
   const customAdditional = menuProps.customAdditional
     ? menuProps.customAdditional({ data: props.data, index: props.index })
     : undefined
+
   return <li class={`${mergedPrefixCls.value}-divider`} {...props.data.additional} {...customAdditional}></li>
 }
 MenuDivider.displayName = 'MenuDivider'

@@ -12,7 +12,6 @@ import type {
   NotificationProviderProps,
   NotificationRef,
 } from './types'
-import type { VKey } from '@idux/cdk/utils'
 import type { CommonConfig, NotificationConfig } from '@idux/components/config'
 
 import { ComputedRef, Ref, TransitionGroup, cloneVNode, computed, defineComponent, isVNode, provide, ref } from 'vue'
@@ -20,7 +19,7 @@ import { ComputedRef, Ref, TransitionGroup, cloneVNode, computed, defineComponen
 import { isArray, isUndefined, pickBy } from 'lodash-es'
 
 import { CdkPortal } from '@idux/cdk/portal'
-import { callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
+import { Logger, VKey, callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { usePortalTarget } from '@idux/components/utils'
 
@@ -53,6 +52,12 @@ export default defineComponent({
 
     provide(notificationProviderToken, apis)
     expose(apis)
+
+    if (__DEV__) {
+      if (props.target) {
+        Logger.warn('components/notification', 'the `target` was deprecated, please use `container` instead.')
+      }
+    }
 
     return () => {
       const getChild = (notifications: NotificationOptions[]) => {

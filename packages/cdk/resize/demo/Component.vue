@@ -1,7 +1,7 @@
 <template>
   <IxSpace vertical>
-    <IxButton @click="disabled = !disabled">Change disabled</IxButton>
-    <CdkResizeObserver :disabled="disabled" @resize="onResize">
+    <IxSwitch v-model:checked="enabled" :labels="['Enable', 'Disable']"></IxSwitch>
+    <CdkResizeObserver :disabled="!enabled" @resize="onResize">
       <IxTextarea :value="text" />
     </CdkResizeObserver>
   </IxSpace>
@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const disabled = ref(false)
+const enabled = ref(true)
 const text = ref('')
 
 const onResize = (entry: ResizeObserverEntry) => {

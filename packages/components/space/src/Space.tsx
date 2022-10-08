@@ -35,7 +35,6 @@ export default defineComponent({
     const vertical = computed(() => {
       const { direction, vertical } = props
       if (direction) {
-        __DEV__ && Logger.warn('components/space', '`direction` was deprecated, please use `vertical` instead')
         return direction === 'vertical'
       }
       return vertical
@@ -68,6 +67,15 @@ export default defineComponent({
       }
     })
 
+    if (__DEV__) {
+      if (props.direction) {
+        Logger.warn('components/space', 'the `direction` was deprecated, please use `vertical` instead.')
+      }
+      if (props.split || slots.split) {
+        Logger.warn('components/space', 'the `split` was deprecated, please use `separator` instead.')
+      }
+    }
+
     return () => {
       const nodes = flattenNode(slots.default?.())
       if (nodes.length === 0) {
@@ -78,9 +86,7 @@ export default defineComponent({
       const children: VNode[] = []
 
       let separatorNode = convertStringVNode(slots, props, 'split')
-      if (separatorNode) {
-        __DEV__ && Logger.warn('components/space', '`split` was deprecated, please use `separator` instead')
-      } else {
+      if (!separatorNode) {
         separatorNode = convertStringVNode(slots, props, 'separator')
       }
 

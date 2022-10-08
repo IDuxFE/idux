@@ -8,7 +8,7 @@
 import { computed, defineComponent, normalizeClass, provide, ref, watch } from 'vue'
 
 import { useAccessorAndControl } from '@idux/cdk/forms'
-import { type VKey, useState } from '@idux/cdk/utils'
+import { Logger, type VKey, useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { useGlobalConfig } from '@idux/components/config'
@@ -169,6 +169,15 @@ export default defineComponent({
     )
 
     const renderContent = () => <OverlayContent onClick={handleOverlayClick} />
+
+    if (__DEV__) {
+      if (props.dataSource?.some(data => !!data.additional)) {
+        Logger.warn(
+          'components/cascader',
+          'the `additional` of CascaderData was deprecated, please use `customAdditional` instead.',
+        )
+      }
+    }
 
     return () => {
       const overlayProps = {

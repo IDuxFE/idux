@@ -9,8 +9,6 @@ import { computed, defineComponent, inject } from 'vue'
 
 import { isString } from 'lodash-es'
 
-import { Logger } from '@idux/cdk/utils'
-
 import { menuSubToken, menuToken } from '../../token'
 import { coverIcon } from '../Utils'
 
@@ -55,12 +53,6 @@ export default defineComponent({
 
     return () => {
       const { icon, label, slots = {}, customIcon, customLabel, customSuffix } = props.data
-      if (__DEV__ && (slots.icon || slots.label || slots.suffix)) {
-        Logger.warn(
-          'components/menu',
-          '`slots` of `MenuSub` was deprecated, please use `customIcon`, `customLabel` and `customSuffix` instead',
-        )
-      }
       const iconRender = customIcon ?? slots.icon ?? 'subIcon'
       const iconSlot = isString(iconRender) ? menuSlots[iconRender] : iconRender
       const labelRender = customLabel ?? slots.label ?? 'subLabel'

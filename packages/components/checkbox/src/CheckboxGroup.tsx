@@ -43,12 +43,15 @@ export default defineComponent({
       return gap != null ? `gap: ${convertCssPixel(gap)};` : undefined
     })
 
+    if (__DEV__) {
+      if (props.options) {
+        Logger.warn('components/checkbox', 'the `options` was deprecated, please use `dataSource` instead.')
+      }
+    }
+
     return () => {
       const { options, dataSource, vertical } = props
 
-      if (options) {
-        Logger.warn('components/checkbox', '`options` was deprecated, please use `dataSource` instead')
-      }
       const data = options ?? dataSource
 
       let children: VNodeChild[] | undefined

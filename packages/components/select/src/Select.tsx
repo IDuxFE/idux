@@ -11,7 +11,7 @@ import { type ComputedRef, Slots, computed, defineComponent, normalizeClass, pro
 
 import { useAccessorAndControl } from '@idux/cdk/forms'
 import { type VirtualScrollToFn } from '@idux/cdk/scroll'
-import { type VKey, callEmit, useState } from '@idux/cdk/utils'
+import { Logger, type VKey, callEmit, useState } from '@idux/cdk/utils'
 import { ɵInput } from '@idux/components/_private/input'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
@@ -191,6 +191,31 @@ export default defineComponent({
       }
 
       return <div>{overlayRender ? overlayRender(children) : children}</div>
+    }
+
+    if (__DEV__) {
+      if (props.options) {
+        Logger.warn('components/select', 'the `options` was deprecated, please use `dataSource` instead.')
+      }
+      if (props.searchFilter) {
+        Logger.warn('components/select', 'the `searchFilter` was deprecated, please use `searchFn` instead.')
+      }
+      if (props.maxLabelCount) {
+        Logger.warn('components/select', 'the `maxLabelCount` was deprecated, please use `maxLabel` instead.')
+      }
+      if (props.target) {
+        Logger.warn('components/select', 'the `target` was deprecated, please use `overlayContainer` instead.')
+      }
+      if (props.valueKey) {
+        Logger.warn('components/select', 'the `valueKey` was deprecated, please use `getKey` instead.')
+      }
+
+      if (props.dataSource?.some(data => !!data.additional)) {
+        Logger.warn(
+          'components/select',
+          'the `additional` of SelectData was deprecated, please use `customAdditional` instead.',
+        )
+      }
     }
 
     return () => {
