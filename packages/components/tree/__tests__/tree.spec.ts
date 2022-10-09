@@ -101,12 +101,12 @@ describe('Tree', () => {
   })
 
   describe('v-model:checkedKeys work', () => {
-    test('with cascade', async () => {
+    test('with cascaderStrategy: all', async () => {
       const onUpdateCheckedKeys = vi.fn()
       const wrapper = TreeMount({
         props: {
           dataSource: simpleDataSource,
-          cascade: true,
+          cascaderStrategy: 'all',
           checkedKeys: ['0'],
           'onUpdate:checkedKeys': onUpdateCheckedKeys,
         },
@@ -129,13 +129,13 @@ describe('Tree', () => {
       expect(allNodes[0].find('.ix-checkbox-indeterminate').exists()).toBe(true)
     })
 
-    test('with checkStrategy: all', async () => {
+    test('with cascaderStrategy: off', async () => {
       const onUpdateCheckedKeys = vi.fn()
       const wrapper = TreeMount({
         props: {
           dataSource: simpleDataSource,
           checkedKeys: ['0', '0-0'],
-          checkStrategy: 'all',
+          cascaderStrategy: 'off',
           'onUpdate:checkedKeys': onUpdateCheckedKeys,
         },
       })
@@ -152,7 +152,7 @@ describe('Tree', () => {
 
       expect(onUpdateCheckedKeys).toBeCalledWith(['0'])
 
-      await wrapper.setProps({ cascade: true, checkedKeys: [] })
+      await wrapper.setProps({ cascaderStrategy: 'all', checkedKeys: [] })
 
       // 0, checked
       await allNodes[0].find('input').setValue(true)
@@ -160,7 +160,7 @@ describe('Tree', () => {
       expect(onUpdateCheckedKeys).toBeCalledWith(['0', '0-0', '0-1', '0-2'])
     })
 
-    test('with checkStrategy: parent', async () => {
+    test('with cascaderStrategy: parent', async () => {
       const onUpdateCheckedKeys = vi.fn()
       const wrapper = TreeMount({
         props: {
@@ -186,8 +186,7 @@ describe('Tree', () => {
             },
           ],
           checkedKeys: ['0'],
-          cascade: true,
-          checkStrategy: 'parent',
+          cascaderStrategy: 'parent',
           'onUpdate:checkedKeys': onUpdateCheckedKeys,
         },
       })
@@ -222,7 +221,7 @@ describe('Tree', () => {
       expect(onUpdateCheckedKeys).toBeCalledWith(['0-0', '0-2'])
     })
 
-    test('with checkStrategy: child', async () => {
+    test('with cascaderStrategy: child', async () => {
       const onUpdateCheckedKeys = vi.fn()
       const wrapper = TreeMount({
         props: {
@@ -244,8 +243,7 @@ describe('Tree', () => {
             },
           ],
           checkedKeys: ['0-0', '0-1'],
-          cascade: true,
-          checkStrategy: 'child',
+          cascaderStrategy: 'child',
           'onUpdate:checkedKeys': onUpdateCheckedKeys,
         },
       })
@@ -296,8 +294,7 @@ describe('Tree', () => {
             },
           ],
           checkedKeys: [],
-          cascade: true,
-          checkStrategy: 'child',
+          cascaderStrategy: 'child',
           'onUpdate:checkedKeys': onUpdateCheckedKeys,
         },
       })

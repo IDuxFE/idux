@@ -8,7 +8,7 @@
 import { type ComputedRef, TransitionGroup, type VNode, computed, defineComponent, provide, ref } from 'vue'
 
 import { CdkPortal } from '@idux/cdk/portal'
-import { Logger, VKey, callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
+import { VKey, callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { usePortalTarget } from '@idux/components/utils'
 
@@ -35,12 +35,6 @@ export default defineComponent({
 
     provide(messageProviderToken, apis)
     expose(apis)
-
-    if (__DEV__) {
-      if (props.target) {
-        Logger.warn('components/message', 'the `target` was deprecated, please use `container` instead.')
-      }
-    }
 
     return () => {
       const child = messages.value.map(item => {

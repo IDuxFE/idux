@@ -78,7 +78,6 @@ export default defineComponent({
           onClick={disabled ? undefined : handleClick}
           aria-label={_label}
           aria-selected={selected}
-          {...rawData!.additional}
           {...customAdditional}
         >
           {multiple && <IxCheckbox checked={selected} disabled={disabled} />}

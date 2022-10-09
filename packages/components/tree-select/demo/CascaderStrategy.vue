@@ -9,7 +9,6 @@
     <IxTreeSelect
       v-model:value="value"
       v-model:expandedKeys="expandedKeys"
-      cascade
       multiple
       :cascaderStrategy="cascaderStrategy"
       :dataSource="treeData"

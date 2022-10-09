@@ -32,7 +32,7 @@ export default defineComponent({
       ([disabled, options]) => {
         cleanup()
         if (!disabled) {
-          stop = useResizeObserver(elementRef, handler, options).stop
+          stop = useResizeObserver(elementRef, handler, options)
         }
       },
       { immediate: true, flush: 'post' },

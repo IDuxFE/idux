@@ -1,6 +1,6 @@
 <template>
   <IxForm :control="formGroup" :labelCol="8">
-    <h4 v-typography>Name</h4>
+    <h4>Name</h4>
     <IxRow>
       <IxCol span="8">
         <IxFormItem label="First Name" required>
@@ -13,7 +13,7 @@
         </IxFormItem>
       </IxCol>
     </IxRow>
-    <h4 v-typography>Address</h4>
+    <h4>Address</h4>
     <IxFormWrapper control="address">
       <IxRow>
         <IxCol span="8">

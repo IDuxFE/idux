@@ -52,13 +52,7 @@ export const menuProps = {
     type: Boolean,
     default: true,
   },
-  /**
-   * @deprecated please use `overlayContainer` instead'
-   */
-  target: {
-    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
-    default: undefined,
-  },
+
   theme: String as PropType<MenuTheme>,
 
   // events
@@ -68,14 +62,9 @@ export const menuProps = {
 }
 
 export type MenuProps = ExtractInnerPropTypes<typeof menuProps>
-export type MenuPublicProps = Omit<ExtractPublicPropTypes<typeof menuProps>, 'target'>
+export type MenuPublicProps = ExtractPublicPropTypes<typeof menuProps>
 export type MenuComponent = DefineComponent<Omit<HTMLAttributes, keyof MenuPublicProps> & MenuPublicProps>
 export type MenuInstance = InstanceType<DefineComponent<MenuProps>>
-
-export interface MenuItemSlots {
-  icon?: string | ((data: MenuItemProps & { selected: boolean }) => VNodeChild)
-  label?: string | ((data: MenuItemProps & { selected: boolean }) => VNodeChild)
-}
 
 export interface MenuItemProps<K = VKey> {
   key?: K
@@ -83,32 +72,14 @@ export interface MenuItemProps<K = VKey> {
   disabled?: boolean
   icon?: string | VNode
   label?: string
-  /**
-   * @deprecated please use `customIcon` and `customLabel` instead'
-   */
-  slots?: MenuItemSlots
   customIcon?: string | ((data: MenuItemProps<K> & { selected: boolean }) => VNodeChild)
   customLabel?: string | ((data: MenuItemProps<K> & { selected: boolean }) => VNodeChild)
-
-  /**
-   * @deprecated please use `customAdditional` instead'
-   */
-  additional?: {
-    class?: any
-    style?: any
-    [key: string]: unknown
-  }
 }
-export type MenuItemPublicProps = Omit<MenuItemProps, 'type' | 'additional' | 'slots'>
+export type MenuItemPublicProps = Omit<MenuItemProps, 'type'>
 export type MenuItemComponent = FunctionalComponent<
   Omit<HTMLAttributes, keyof MenuItemPublicProps> & MenuItemPublicProps
 >
 export type MenuItemInstance = InstanceType<DefineComponent<MenuItemProps>>
-
-export interface MenuItemGroupSlots {
-  icon?: string | ((data: MenuItemGroupProps) => VNodeChild)
-  label?: string | ((data: MenuItemGroupProps) => VNodeChild)
-}
 
 export interface MenuItemGroupProps<K = VKey> {
   type: 'itemGroup'
@@ -116,33 +87,14 @@ export interface MenuItemGroupProps<K = VKey> {
   children?: MenuData<K>[]
   icon?: string | VNode
   label?: string
-  /**
-   * @deprecated please use `customIcon` and `customLabel` instead'
-   */
-  slots?: MenuItemGroupSlots
   customIcon?: string | ((data: MenuItemGroupProps<K>) => VNodeChild)
   customLabel?: string | ((data: MenuItemGroupProps<K>) => VNodeChild)
-
-  /**
-   * @deprecated please use `customAdditional` instead'
-   */
-  additional?: {
-    class?: any
-    style?: any
-    [key: string]: unknown
-  }
 }
-export type MenuItemGroupPublicProps = Omit<MenuItemGroupProps, 'type' | 'additional' | 'slots'>
+export type MenuItemGroupPublicProps = Omit<MenuItemGroupProps, 'type'>
 export type MenuItemGroupComponent = FunctionalComponent<
   Omit<HTMLAttributes, keyof MenuItemGroupPublicProps> & MenuItemGroupPublicProps
 >
 export type MenuItemGroupInstance = InstanceType<DefineComponent<MenuItemGroupProps>>
-
-export interface MenuSubSlots {
-  icon?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
-  label?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
-  suffix?: string | ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)
-}
 
 export interface MenuSubProps<K = VKey> {
   type: 'sub'
@@ -153,38 +105,17 @@ export interface MenuSubProps<K = VKey> {
   label?: string
   offset?: [number, number]
   suffix?: string
-  /**
-   * @deprecated please use `customIcon`, `customLabel` and `customSuffix` instead'
-   */
-  slots?: MenuSubSlots
   customIcon?: string | ((data: MenuSubProps<K> & { expanded: boolean; selected: boolean }) => VNodeChild)
   customLabel?: string | ((data: MenuSubProps<K> & { expanded: boolean; selected: boolean }) => VNodeChild)
   customSuffix?: string | ((data: MenuSubProps<K> & { expanded: boolean; selected: boolean }) => VNodeChild)
-
-  /**
-   * @deprecated please use `customAdditional` instead'
-   */
-  additional?: {
-    class?: any
-    style?: any
-    [key: string]: unknown
-  }
 }
 
-export type MenuSubPublicProps = Omit<MenuSubProps, 'type' | 'additional' | 'slots'>
+export type MenuSubPublicProps = Omit<MenuSubProps, 'type'>
 export type MenuSubComponent = FunctionalComponent<Omit<HTMLAttributes, keyof MenuSubPublicProps> & MenuSubPublicProps>
 
 export interface MenuDividerProps<K = VKey> {
   type: 'divider'
   key?: K
-  /**
-   * @deprecated please use `customAdditional` instead'
-   */
-  additional?: {
-    class?: any
-    style?: any
-    [key: string]: unknown
-  }
 }
 
 export type MenuDividerComponent = FunctionalComponent<HTMLAttributes>

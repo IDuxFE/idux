@@ -9,7 +9,6 @@ import { type ComputedRef, type Slots, type VNode, computed, reactive, ref, watc
 
 import { isNil } from 'lodash-es'
 
-import { type BreakpointKey, useSharedBreakpoints } from '@idux/cdk/breakpoint'
 import { type VKey, flattenNode } from '@idux/cdk/utils'
 import { type TableColumnBaseConfig, type TableColumnExpandableConfig, type TableConfig } from '@idux/components/config'
 
@@ -31,13 +30,12 @@ export function useColumns(
   config: TableConfig,
   scrollBarSizeOnFixedHolder: ComputedRef<number>,
 ): ColumnsContext {
-  const breakpoints = useSharedBreakpoints()
   const mergedColumns = computed(() => {
     const { columns } = props
     if (columns && columns.length > 0) {
-      return mergeColumns(props.columns, breakpoints, config.columnBase, config.columnExpandable)
+      return mergeColumns(props.columns, config.columnBase, config.columnExpandable)
     } else {
-      return mergeColumns(convertColumns(slots.default?.()), breakpoints, config.columnBase, config.columnExpandable)
+      return mergeColumns(convertColumns(slots.default?.()), config.columnBase, config.columnExpandable)
     }
   })
   const { flattedColumns, scrollBarColumn, flattedColumnsWithScrollBar } = useFlattedColumns(
@@ -134,13 +132,10 @@ export type TableColumnMergedScrollBar = TableColumnMergedBaseExtra & TableColum
 
 function mergeColumns(
   columns: TableColumn[],
-  breakpoints: Record<BreakpointKey, boolean>,
   baseConfig: TableColumnBaseConfig,
   expandableConfig: TableColumnExpandableConfig,
 ): TableColumnMerged[] {
-  return columns
-    .filter(column => !column.responsive || column.responsive.some(key => breakpoints[key]))
-    .map(column => convertColumn(column, breakpoints, baseConfig, expandableConfig))
+  return columns.map(column => convertColumn(column, baseConfig, expandableConfig))
 }
 
 export function convertColumns(nodes: VNode[] | undefined): TableColumn[] {
@@ -177,7 +172,6 @@ export function convertColumns(nodes: VNode[] | undefined): TableColumn[] {
 
 function convertColumn(
   column: TableColumn,
-  breakpoints: Record<BreakpointKey, boolean>,
   baseConfig: TableColumnBaseConfig,
   expandableConfig: TableColumnExpandableConfig,
 ): TableColumnMerged {
@@ -209,7 +203,7 @@ function convertColumn(
       newColumn.filterable = { ...baseConfig.filterable, ...filterable }
     }
     if (children?.length) {
-      newColumn.children = mergeColumns(children, breakpoints, baseConfig, expandableConfig)
+      newColumn.children = mergeColumns(children, baseConfig, expandableConfig)
     }
     return newColumn
   }

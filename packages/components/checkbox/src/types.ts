@@ -56,10 +56,6 @@ export const checkboxGroupProps = {
   disabled: { type: Boolean, default: false },
   gap: { type: [Number, String] as PropType<number | string>, default: undefined },
   name: { type: String, default: undefined },
-  /**
-   * @deprecated please use `dataSource` instead'
-   */
-  options: { type: Array as PropType<CheckboxData[]> },
   size: { type: String as PropType<FormSize>, default: undefined },
   vertical: { type: Boolean, default: false },
 
@@ -69,13 +65,13 @@ export const checkboxGroupProps = {
 } as const
 
 export type CheckboxGroupProps = ExtractInnerPropTypes<typeof checkboxGroupProps>
-export type CheckboxGroupPublicProps = Omit<ExtractPublicPropTypes<typeof checkboxGroupProps>, 'options'>
+export type CheckboxGroupPublicProps = ExtractPublicPropTypes<typeof checkboxGroupProps>
 export type CheckboxGroupComponent = DefineComponent<
   Omit<HTMLAttributes, keyof CheckboxGroupPublicProps> & CheckboxGroupPublicProps
 >
 export type CheckboxGroupInstance = InstanceType<DefineComponent<CheckboxGroupProps>>
 
 export type CheckValue = string | number | boolean
-export interface CheckboxData<K = VKey> extends CheckboxPublicProps {
+export interface CheckboxData<K = VKey> extends Omit<CheckboxPublicProps, 'value'> {
   key?: K
 }

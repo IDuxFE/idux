@@ -36,7 +36,7 @@ function convertDataSource(nodes: VNode[] | undefined): MenuData[] {
     const props = node.props ?? ({} as any)
     let data: MenuData
     if (type[itemKey]) {
-      const { key, disabled, icon, label, ...additional } = props
+      const { key, disabled, icon, label } = props
       // <IxMenuItem key="key">label</IxMenuItem>
       const { icon: customIcon, label: customLabel, default: customLabel2 } = slots
       data = {
@@ -44,12 +44,11 @@ function convertDataSource(nodes: VNode[] | undefined): MenuData[] {
         disabled: disabled || disabled === '',
         icon,
         label,
-        additional,
         customIcon,
         customLabel: customLabel ?? customLabel2,
       }
     } else if (type[itemGroupKey]) {
-      const { key, children, icon, label, ...additional } = props
+      const { key, children, icon, label } = props
       const { icon: customIcon, label: customLabel } = slots
       data = {
         type: 'itemGroup',
@@ -57,12 +56,11 @@ function convertDataSource(nodes: VNode[] | undefined): MenuData[] {
         children: children ?? convertDataSource(slots.default?.()),
         icon,
         label,
-        additional,
         customIcon,
         customLabel,
       }
     } else if (type[subKey]) {
-      const { key, children, disabled, icon, label, suffix, ...additional } = props
+      const { key, children, disabled, icon, label, suffix } = props
       const { icon: customIcon, label: customLabel, suffix: customSuffix } = slots
       data = {
         type: 'sub',
@@ -71,14 +69,14 @@ function convertDataSource(nodes: VNode[] | undefined): MenuData[] {
         disabled: disabled || disabled === '',
         icon,
         label,
-        additional,
+        suffix,
         customIcon,
         customLabel,
         customSuffix,
       }
     } else {
-      const { key, ...additional } = props
-      data = { type: 'divider', key, additional }
+      const { key } = props
+      data = { type: 'divider', key }
     }
     if (__DEV__ && data.type !== 'divider' && !data.key) {
       Logger.warn('components/menu', 'key must exist', data)

@@ -106,7 +106,7 @@ export default defineComponent({
     const offset = computed(() => props.data.offset ?? config.offset)
 
     return () => {
-      const { additional, disabled } = props.data
+      const { disabled } = props.data
       const isInline = mode.value === 'inline'
       let children: VNodeTypes
       if (isInline) {
@@ -140,7 +140,6 @@ export default defineComponent({
           aria-expanded={isExpanded.value}
           aria-haspopup={!isInline}
           role="menuitem"
-          {...additional}
           {...customAdditional}
         >
           {children}

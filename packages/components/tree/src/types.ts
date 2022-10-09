@@ -12,7 +12,7 @@ import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { CascaderStrategy } from '@idux/components/cascader'
 import type { EmptyProps } from '@idux/components/empty'
-import type { DefineComponent, HTMLAttributes, PropType, StyleValue } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export type CheckStrategy = 'all' | 'parent' | 'child'
 
@@ -32,35 +32,11 @@ export const treeProps = {
     default: undefined,
   },
   cascaderStrategy: { type: String as PropType<CascaderStrategy>, default: 'off' },
-  /**
-   * @deprecated please use `cascaderStrategy` instead'
-   *
-   *  * cascade: false + checkStrategy: 'all' = cascaderStrategy: 'off'
-   *  * cascade: true + checkStrategy: 'all' = cascaderStrategy: 'all'
-   *  * cascade: true + checkStrategy: 'parent' = cascaderStrategy: 'parent'
-   *  * cascade: true + checkStrategy: 'child' = cascaderStrategy: 'child'
-   */
-  cascade: {
-    type: Boolean,
-    default: false,
-  },
   checkable: {
     type: Boolean,
     default: false,
   },
   childrenKey: String,
-  /**
-   * @deprecated please use `cascaderStrategy` instead'
-   *
-   *  * cascade: false + checkStrategy: 'all' = cascaderStrategy: 'off'
-   *  * cascade: true + checkStrategy: 'all' = cascaderStrategy: 'all'
-   *  * cascade: true + checkStrategy: 'parent' = cascaderStrategy: 'parent'
-   *  * cascade: true + checkStrategy: 'child' = cascaderStrategy: 'child'
-   */
-  checkStrategy: {
-    type: String as PropType<CheckStrategy>,
-    default: 'all',
-  },
   checkOnClick: {
     type: Boolean,
     default: false,
@@ -84,10 +60,6 @@ export const treeProps = {
   labelKey: String,
   leafLineIcon: String,
   loadChildren: Function as PropType<(node: TreeNode<any>) => Promise<TreeNode<any>[]>>,
-  /**
-   * @deprecated please use `getKey` instead'
-   */
-  nodeKey: [String, Function] as PropType<string | ((node: TreeNode) => VKey)>,
   searchFn: Function as PropType<(node: TreeNode<any>, searchValue?: string) => boolean>,
   searchValue: String,
   selectable: {
@@ -141,7 +113,7 @@ export const treeProps = {
 } as const
 
 export type TreeProps = ExtractInnerPropTypes<typeof treeProps>
-export type TreePublicProps = Omit<ExtractPublicPropTypes<typeof treeProps>, 'nodeKey'>
+export type TreePublicProps = ExtractPublicPropTypes<typeof treeProps>
 export interface TreeBindings<K = VKey> {
   focus: (options?: FocusOptions) => void
   blur: () => void
@@ -162,15 +134,6 @@ export type TreeInstance = InstanceType<DefineComponent<TreeProps, TreeBindings>
 export type TreeCustomAdditional = (options: { node: TreeNode<any>; level: number }) => Record<string, any> | undefined
 
 export interface TreeNode<K = VKey> {
-  /**
-   * @deprecated please use `customAdditional` instead'
-   */
-  additional?: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    class?: any
-    style?: StyleValue
-    [key: string]: unknown
-  }
   children?: TreeNode<K>[]
   disabled?: boolean | TreeNodeDisabled
   isLeaf?: boolean

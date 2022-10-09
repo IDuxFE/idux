@@ -91,7 +91,6 @@ export default defineComponent({
     })
 
     const wrapperClasses = computed(() => {
-      const { wrapperClassName = '' } = props
       const action = levelAction.value
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
@@ -100,7 +99,6 @@ export default defineComponent({
         [`${prefixCls}-opened`]: animatedVisible.value,
         [`${prefixCls}-${action}`]: !!action,
         [`${prefixCls}-with-mask`]: mask.value,
-        [wrapperClassName]: !!wrapperClassName,
       })
     })
 

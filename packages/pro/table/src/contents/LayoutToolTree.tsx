@@ -75,7 +75,7 @@ export default defineComponent({
 
       const treeProps: TreeProps = {
         blocked: true,
-        cascade: true,
+        cascaderStrategy: 'all',
         checkable: true,
         checkedKeys: checkedKeys.value,
         draggable: true,

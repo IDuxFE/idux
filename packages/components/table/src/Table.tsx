@@ -11,16 +11,15 @@ import { computed, defineComponent, normalizeClass, provide } from 'vue'
 
 import { isBoolean } from 'lodash-es'
 
-import { Logger } from '@idux/cdk/utils'
 import { ɵHeader } from '@idux/components/_private/header'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxSpin } from '@idux/components/spin'
+import { useGetKey } from '@idux/components/utils'
 
 import { useColumns } from './composables/useColumns'
 import { useDataSource } from './composables/useDataSource'
 import { useExpandable } from './composables/useExpandable'
 import { useFilterable } from './composables/useFilterable'
-import { useGetRowKey } from './composables/useGetRowKey'
 import { usePagination } from './composables/usePagination'
 import { useScroll } from './composables/useScroll'
 import { useScrollOnChange } from './composables/useScrollOnChange'
@@ -45,7 +44,7 @@ export default defineComponent({
 
     const mergedAutoHeight = computed(() => props.autoHeight ?? config.autoHeight)
     const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
-    const mergedGetKey = useGetRowKey(props, config)
+    const mergedGetKey = useGetKey(props, config, 'components/table')
     const mergedEmptyCell = computed(() => props.emptyCell ?? config.emptyCell)
     const mergedSize = computed(() => props.size ?? config.size)
     const { mergedPagination } = usePagination(props, config, mergedSize)
@@ -112,36 +111,6 @@ export default defineComponent({
         [`${prefixCls}-${mergedSize.value}`]: true,
       })
     })
-
-    if (__DEV__) {
-      if (props.rowClassName) {
-        Logger.warn('components/table', 'the `rowClassName` was deprecated, please use `customAdditional` instead.')
-      }
-      if (props.rowKey) {
-        Logger.warn('components/table', 'the `rowKey` was deprecated, please use `getKey` instead.')
-      }
-      if (props.scroll?.x) {
-        Logger.warn('components/table', 'the `scroll.x` was deprecated, please use `scroll.width` instead.')
-      }
-      if (props.scroll?.y) {
-        Logger.warn('components/table', 'the `scroll.y` was deprecated, please use `scroll.height` instead.')
-      }
-      if (props.columns.some(col => !!col.additional)) {
-        Logger.warn(
-          'components/table',
-          'the `additional` of TableColumn was deprecated, please use `customAdditional` instead.',
-        )
-      }
-      if (props.columns.some(col => !!col.customRender)) {
-        Logger.warn(
-          'components/table',
-          'the `customRender` of TableColumn was deprecated, please use `customCell` instead.',
-        )
-      }
-      if (props.columns.some(col => !!col.responsive)) {
-        Logger.warn('components/table', 'the `responsive` of TableColumn was deprecated.')
-      }
-    }
 
     return () => {
       const prefixCls = mergedPrefixCls.value

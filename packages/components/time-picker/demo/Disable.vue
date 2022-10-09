@@ -4,11 +4,11 @@
     <IxTimePicker
       v-model:value="time"
       format="hh:mm:ss a"
-      allow-input
-      :hide-disabled-options="hideDisabledOptions"
-      :disabled-hours="disabledHours"
-      :disabled-minutes="disabledMinutes"
-      :disabled-seconds="disabledSeconds"
+      allowInput
+      :hideDisabledOptions="hideDisabledOptions"
+      :disabledHours="disabledHours"
+      :disabledMinutes="disabledMinutes"
+      :disabledSeconds="disabledSeconds"
     />
     <IxButton @click="hideDisabledOptions = true">hide disabled options</IxButton>
   </IxSpace>

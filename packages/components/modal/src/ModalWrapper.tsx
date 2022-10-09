@@ -66,14 +66,12 @@ export default defineComponent({
     })
 
     const wrapperClasses = computed(() => {
-      const { wrapperClassName = '' } = props
       const prefixCls = mergedPrefixCls.value
 
       return {
         [`${prefixCls}-wrapper`]: true,
         [`${prefixCls}-centered`]: centered.value,
         [`${prefixCls}-with-mask`]: mask.value,
-        [wrapperClassName]: !!wrapperClassName,
       }
     })
 

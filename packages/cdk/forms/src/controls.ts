@@ -21,9 +21,9 @@ import {
   watchEffect,
 } from 'vue'
 
-import { isArray, isNil, isPlainObject, isString } from 'lodash-es'
+import { isArray, isNil, isPlainObject } from 'lodash-es'
 
-import { Logger, hasOwnProperty } from '@idux/cdk/utils'
+import { hasOwnProperty } from '@idux/cdk/utils'
 
 import {
   type AsyncValidatorFn,
@@ -154,17 +154,6 @@ export abstract class AbstractControl<T = any> {
     return this._trigger ?? this._parent?.trigger ?? 'change'
   }
 
-  /**
-   * @deprecated
-   *
-   * Whether to remove the first and tail space
-   * Possible value: true | false
-   * Default value: false
-   */
-  get trim(): boolean {
-    return this._trim ?? this._parent?.trim ?? false
-  }
-
   name?: string
   example?: string
 
@@ -183,7 +172,6 @@ export abstract class AbstractControl<T = any> {
   private _composedAsyncValidators: AsyncValidatorFn | undefined
   private _parent: AbstractControl<T> | undefined
   private _trigger?: 'change' | 'blur' | 'submit'
-  private _trim?: boolean
 
   constructor(
     controls?: GroupControls<T> | AbstractControl<ArrayElement<T>>[],
@@ -196,12 +184,6 @@ export abstract class AbstractControl<T = any> {
     this._forEachControls(control => control.setParent(this))
     this._convertOptions(validatorOrOptions, asyncValidator)
     this._init()
-
-    if (__DEV__) {
-      if (isOptions(validatorOrOptions) && validatorOrOptions.trim) {
-        Logger.warn('cdk/forms', 'the `trim` of validatorOptions was deprecated.')
-      }
-    }
   }
 
   /**
@@ -338,16 +320,6 @@ export abstract class AbstractControl<T = any> {
   }
 
   /**
-   * @deprecated please use `setValidators` instead.
-   */
-  setValidator(newValidator?: ValidatorFn | ValidatorFn[]): void {
-    if (__DEV__) {
-      Logger.warn('cdk/forms', 'the `setValidator` was deprecated, please use `setValidators` instead.')
-    }
-    this.setValidators(newValidator)
-  }
-
-  /**
    * Sets the new sync validator for the form control, it overwrites existing sync validators.
    *
    * If you want to clear all sync validators, you can pass in a undefined.
@@ -355,16 +327,6 @@ export abstract class AbstractControl<T = any> {
   setValidators(newValidators?: ValidatorFn | ValidatorFn[]): void {
     this._validators = newValidators
     this._composedValidators = toValidator(newValidators)
-  }
-
-  /**
-   * @deprecated please use `setAsyncValidators` instead.
-   */
-  setAsyncValidator(newAsyncValidator?: AsyncValidatorFn | AsyncValidatorFn[]): void {
-    if (__DEV__) {
-      Logger.warn('cdk/forms', 'the `setAsyncValidator` was deprecated, please use `setAsyncValidators` instead.')
-    }
-    this.setAsyncValidators(newAsyncValidator)
   }
 
   /**
@@ -597,7 +559,6 @@ export abstract class AbstractControl<T = any> {
       this.name = validatorOrOptions.name
       this.example = validatorOrOptions.example
       this._trigger = validatorOrOptions.trigger ?? this._trigger
-      this._trim = validatorOrOptions.trim ?? this._trim
       this.setValidators(validatorOrOptions.validators)
       this.setAsyncValidators(validatorOrOptions.asyncValidators)
       if (validatorOrOptions.disabled) {
@@ -706,8 +667,7 @@ export class FormControl<T = any> extends AbstractControl<T> {
   }
 
   getValue(): T {
-    const value = this._valueRef.value
-    return this.trim && isString(value) ? (value as any).trim() : value
+    return this._valueRef.value
   }
 
   protected _forEachControls(_: (v: AbstractControl, k: never) => void): void {}

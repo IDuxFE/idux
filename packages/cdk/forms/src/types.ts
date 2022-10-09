@@ -41,10 +41,6 @@ export interface ValidatorOptions {
   trigger?: 'change' | 'blur' | 'submit'
   validators?: ValidatorFn | ValidatorFn[]
   asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[]
-  /**
-   * @deprecated
-   */
-  trim?: boolean
 }
 
 export type ValidateStatus = 'valid' | 'invalid' | 'validating'

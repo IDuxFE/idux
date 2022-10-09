@@ -8,15 +8,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import {
-  type ComputedRef,
   type InjectionKey,
   type ShallowRef,
   type WatchStopHandle,
-  computed,
   getCurrentInstance,
   inject,
   reactive,
-  shallowReactive,
   shallowRef,
   toRaw,
   unref,
@@ -217,130 +214,4 @@ export function useAccessorAndControl<T = any>(
   const accessor = useAccessor(control, valueKey, disabledKey)
 
   return { accessor, control }
-}
-
-/**
- * @deprecated
- */
-export interface ValueControlOptions {
-  controlKey?: string
-}
-
-/**
- * @deprecated please use  `useControl` or `useAccessorAndControl` instead
- */
-export function useValueControl<T = any>(
-  options: ValueControlOptions = {},
-): ShallowRef<AbstractControl<T> | undefined> {
-  if (__DEV__) {
-    Logger.warn(
-      'cdk/forms',
-      'the `useValueControl` was deprecated, please use `useControl` or `useAccessorAndControl` instead.',
-    )
-  }
-  const { controlKey = 'control' } = options
-  const { props } = getCurrentInstance()!
-  const parentControl = inject(FORMS_CONTROL_TOKEN, shallowRef<AbstractControl>())
-
-  const control = shallowRef<AbstractControl>()
-  let watchStop: WatchStopHandle | undefined
-
-  watch(
-    [() => props[controlKey], parentControl],
-    ([controlOrPath, pControl]) => {
-      if (watchStop) {
-        watchStop()
-        watchStop = undefined
-      }
-      if (isAbstractControl(controlOrPath)) {
-        control.value = controlOrPath
-      } else if (!!pControl && !isNil(controlOrPath)) {
-        watchStop = watch(
-          pControl.controls,
-          () => {
-            const _control = pControl.get(controlOrPath as ControlPathType)
-            if (__DEV__ && !_control) {
-              Logger.warn('cdk/forms', `not find control by [${controlOrPath}]`)
-            }
-            control.value = _control
-          },
-          { immediate: true },
-        )
-      }
-    },
-    { immediate: true },
-  )
-
-  return control
-}
-
-/**
- * @deprecated
- */
-export interface ValueAccessorOptions<T = any> {
-  control: ShallowRef<AbstractControl<T> | undefined>
-  valueKey?: string
-  disabledKey?: string
-}
-
-/**
- * @deprecated
- */
-export interface ValueAccessor<T = any> {
-  valueRef: ComputedRef<T>
-  disabled: ComputedRef<boolean>
-  markAsBlurred: () => void
-  setValue: (value: T) => void
-}
-
-/**
- * @deprecated please use `useAccessor` or `useAccessorAndControl` instead
- */
-export function useValueAccessor<T = any>(options: ValueAccessorOptions): ValueAccessor<T> {
-  if (__DEV__) {
-    Logger.warn(
-      'cdk/forms',
-      'the `useValueAccessor` was deprecated, please use `useAccessor` or `useAccessorAndControl` instead.',
-    )
-  }
-  const { control, valueKey = 'value', disabledKey = 'disabled' } = options
-  const { props } = getCurrentInstance()!
-
-  const accessor = shallowReactive({} as ValueAccessor<T>)
-  let watchStop: WatchStopHandle | undefined
-
-  watch(
-    control,
-    currControl => {
-      if (watchStop) {
-        watchStop()
-        watchStop = undefined
-      }
-
-      if (currControl) {
-        accessor.valueRef = currControl.valueRef
-        accessor.disabled = currControl.disabled
-        accessor.setValue = value => currControl.setValue(value, { dirty: true })
-        accessor.markAsBlurred = () => currControl.markAsBlurred()
-      } else {
-        const tempRef = shallowRef(props[valueKey])
-        watchStop = watch(
-          () => props[valueKey],
-          value => (tempRef.value = value),
-        )
-        accessor.valueRef = computed(() => props[valueKey] ?? tempRef.value) as ComputedRef<T>
-        accessor.disabled = computed(() => props[disabledKey]) as ComputedRef<boolean>
-        accessor.setValue = value => {
-          if (value != toRaw(accessor.valueRef.value)) {
-            tempRef.value = value
-            callEmit((props as any)[`onUpdate:${valueKey}`], value)
-          }
-        }
-        accessor.markAsBlurred = NoopFunction
-      }
-    },
-    { immediate: true },
-  )
-
-  return accessor
 }

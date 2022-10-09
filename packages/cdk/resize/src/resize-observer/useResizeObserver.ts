@@ -7,7 +7,7 @@
 
 import { watch } from 'vue'
 
-import { Logger, type MaybeElementRef, convertElement, tryOnScopeDispose } from '@idux/cdk/utils'
+import { type MaybeElementRef, convertElement, tryOnScopeDispose } from '@idux/cdk/utils'
 
 import { type ResizeListener, offResize, onResize } from './utils'
 
@@ -15,7 +15,7 @@ export function useResizeObserver(
   target: MaybeElementRef,
   listener: ResizeListener,
   options?: ResizeObserverOptions,
-): { stop: () => void } {
+): () => void {
   const stopWatch = watch(
     () => convertElement(target),
     (currElement, prevElement) => {
@@ -31,17 +31,6 @@ export function useResizeObserver(
   )
 
   const stop = () => {
-    offResize(convertElement(target), listener)
-    stopWatch()
-  }
-
-  stop.stop = () => {
-    if (__DEV__) {
-      Logger.warn(
-        'cdk/resize',
-        'the `const { stop } = useResizeObserver()` was deprecated, please use `const stop = useResizeObserver()` instead.',
-      )
-    }
     offResize(convertElement(target), listener)
     stopWatch()
   }

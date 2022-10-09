@@ -1,6 +1,6 @@
 <template>
   <IxSpace vertical>
-    <IxRadioGroup v-model:value="curType" :options="listType"></IxRadioGroup>
+    <IxRadioGroup v-model:value="curType" :dataSource="listType"></IxRadioGroup>
     <IxUpload v-model:files="files" action="https://run.mocky.io/v3/7564bc4f-780e-43f7-bc58-467959ae3354">
       <IxButton>Upload</IxButton>
       <template #list>
@@ -14,9 +14,9 @@
 import { ref } from 'vue'
 
 const listType = [
-  { label: 'text', value: 'text' },
-  { label: 'image', value: 'image' },
-  { label: 'imageCard', value: 'imageCard' },
+  { key: 'text', label: 'text' },
+  { key: 'image', label: 'image' },
+  { key: 'imageCard', label: 'imageCard' },
 ]
 const curType = ref('text')
 const files = ref([

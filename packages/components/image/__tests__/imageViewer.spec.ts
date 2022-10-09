@@ -196,13 +196,13 @@ describe('ImageViewer', () => {
     expect(onUpdateVisible).not.toBeCalled()
   })
 
-  test('target work', async () => {
+  test('container work', async () => {
     const wrapper = ImageViewerMount({ props: { visible: true } })
     await flushPromises()
 
     expect((document.querySelector('.ix-image-viewer-container .ix-image-viewer') as Element).innerHTML).not.toBe('')
 
-    await wrapper.setProps({ target: 'image-viewer-container' })
+    await wrapper.setProps({ container: 'image-viewer-container' })
 
     expect((document.querySelector('.image-viewer-container .ix-image-viewer') as Element).innerHTML).not.toBe('')
   })

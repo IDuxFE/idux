@@ -40,9 +40,9 @@ export function useScroll(
   )
 
   const scrollWithAutoHeight = useScrollWithAutoHeight(props, mergedAutoHeight, scrollBodyRef, scrollContentRef)
-  const scrollWidth = computed(() => convertCssPixel(props.scroll?.width || props.scroll?.x))
+  const scrollWidth = computed(() => convertCssPixel(props.scroll?.width))
   const scrollHeight = computed(() => {
-    let height = convertCssPixel(props.scroll?.height || props.scroll?.y)
+    let height = convertCssPixel(props.scroll?.height)
     if (!height && mergedAutoHeight.value && (props.virtual || scrollWithAutoHeight.value)) {
       height = 'auto'
     }
@@ -204,8 +204,8 @@ function useScrollWithAutoHeight(
         stopHandler()
         if (autoHeight && !virtual) {
           stopResizeObservers = [
-            useResizeObserver(scrollBodyRef, calcScrollWithAutoHeight).stop,
-            useResizeObserver(scrollContentRef, calcScrollWithAutoHeight).stop,
+            useResizeObserver(scrollBodyRef, calcScrollWithAutoHeight),
+            useResizeObserver(scrollContentRef, calcScrollWithAutoHeight),
           ]
         }
       },

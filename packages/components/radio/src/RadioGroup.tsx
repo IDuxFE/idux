@@ -10,7 +10,7 @@ import { type VNodeChild, computed, defineComponent, normalizeClass, provide } f
 import { isNil } from 'lodash-es'
 
 import { useAccessorAndControl } from '@idux/cdk/forms'
-import { Logger, convertCssPixel } from '@idux/cdk/utils'
+import { convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister } from '@idux/components/form'
 import { IxSpace } from '@idux/components/space'
@@ -45,18 +45,12 @@ export default defineComponent({
       return gap != null ? `gap: ${convertCssPixel(gap)};` : undefined
     })
 
-    if (__DEV__) {
-      if (props.options) {
-        Logger.warn('components/radio', 'the `options` was deprecated, please use `dataSource` instead.')
-      }
-    }
-
     return () => {
-      const { options, dataSource, vertical } = props
-      const data = options ?? dataSource
+      const { dataSource, vertical } = props
       let children: VNodeChild[] | undefined
-      if (data) {
-        children = data.map(item => {
+      if (dataSource) {
+        children = dataSource.map(item => {
+          // TODO: remove value
           const { key, value } = item
           return <Radio {...item} key={key ?? value} value={value ?? key} />
         })

@@ -9,7 +9,7 @@ import { Ref, Transition, computed, defineComponent, onBeforeUnmount, onMounted,
 
 import { isFirefox } from '@idux/cdk/platform'
 import { CdkPortal } from '@idux/cdk/portal'
-import { Logger, useControlledProp } from '@idux/cdk/utils'
+import { useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { usePortalTarget, useZIndex } from '@idux/components/utils'
 
@@ -70,12 +70,6 @@ export default defineComponent({
     })
 
     const style = computed(() => `z-index: ${currentZIndex.value}`)
-
-    if (__DEV__) {
-      if (props.target) {
-        Logger.warn('components/image', 'the `target` was deprecated, please use `container` instead.')
-      }
-    }
 
     return () => {
       const prefixCls = mergedPrefixCls.value

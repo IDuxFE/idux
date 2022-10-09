@@ -12,7 +12,7 @@ const TestComponent = defineComponent({
   template: `<p v-typography="type">Paragraph</p>`,
 })
 
-describe('typography.ts', () => {
+describe.skip('typography.ts', () => {
   const typographyMount = (props?: { type: TypographyProps }) =>
     mount(TestComponent, { global: { directives: { typography: IxTypography } }, props })
 

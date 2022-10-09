@@ -53,7 +53,7 @@ export default defineComponent({
       if (!mergedCheckable.value) {
         return 'off'
       }
-      return props.cascade ? props.checkStrategy : props.cascaderStrategy
+      return props.cascaderStrategy
     })
 
     const handleScrolledChange = (startIndex: number, endIndex: number, visibleNodes: any[]) => {

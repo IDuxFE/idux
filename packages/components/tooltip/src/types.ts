@@ -35,13 +35,6 @@ export const tooltipProps = {
     default: undefined,
   },
   placement: ɵOverlayPlacementDef,
-  /**
-   * @deprecated please use `overlayContainer` instead'
-   */
-  target: {
-    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
-    default: undefined,
-  },
   title: String,
   trigger: ɵOverlayTriggerDef,
   zIndex: Number,

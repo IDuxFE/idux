@@ -49,19 +49,15 @@ export default defineComponent({
     const isSelected = computed(() => selectedRowKeys.value.includes(props.rowKey))
     const isIndeterminate = computed(() => indeterminateRowKeys.value.includes(props.rowKey))
 
-    const rowClassName = computed(() =>
-      tableProps.rowClassName ? tableProps.rowClassName(props.record, props.rowIndex) : undefined,
-    )
     const classes = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-row`
       const { level, expanded } = props
-      const computeRowClassName = rowClassName.value
+
       return normalizeClass({
         [`${prefixCls}`]: true,
         [`${prefixCls}-level-${level}`]: !!level,
         [`${prefixCls}-selected`]: isSelected.value,
         [`${prefixCls}-expanded`]: expanded,
-        [computeRowClassName as string]: !!computeRowClassName,
       })
     })
 
