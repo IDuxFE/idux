@@ -72,14 +72,15 @@ function convertTableColumns(
   slots: Slots,
   isSource: boolean,
 ): TableColumn[] {
-  const { handleSelectChange, getKey, triggerRemove, disabledDataSourceKeys } = transferBindings
+  const { handleSelectChange, getKey, triggerRemove, disabledDataSourceKeys, disabledKeys } = transferBindings
 
   const convertedColumns = (columns && [...columns]) ?? []
   const selectableColumnIdx = convertedColumns.findIndex(col => 'type' in col && col.type === 'selectable')
+  const cellDisabledKeys = isSource && props.mode === 'immediate' ? disabledDataSourceKeys : disabledKeys
 
   const defaultSelectableColumn: TableColumnSelectable = {
     type: 'selectable',
-    disabled: record => disabledDataSourceKeys.value.has(getKey.value(record)) || !!props.disabled,
+    disabled: record => cellDisabledKeys.value.has(getKey.value(record)) || !!props.disabled,
     multiple: true,
     trigger: 'click',
     onChange: selectedKeys => handleSelectChange(selectedKeys),
@@ -106,7 +107,7 @@ function convertTableColumns(
           const key = getKey.value(record)
           return renderRemovableLabel(
             key,
-            disabledDataSourceKeys.value.has(key),
+            cellDisabledKeys.value.has(key),
             false,
             null,
             triggerRemove,
@@ -136,7 +137,7 @@ function convertTableColumns(
           const key = getKey.value(data.record)
           return renderRemovableLabel(
             key,
-            disabledDataSourceKeys.value.has(key),
+            cellDisabledKeys.value.has(key),
             !!ellipsis,
             () => renderLabel(data),
             triggerRemove,
