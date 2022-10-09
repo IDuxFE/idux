@@ -30,8 +30,6 @@ import Panel from './panel/Panel'
 import { SELECT_PANEL_DATA_TOKEN } from './token'
 import { type SelectData, type SelectPanelInstance, type SelectProps, selectProps } from './types'
 
-const defaultOffset: [number, number] = [0, 8]
-
 export default defineComponent({
   name: 'IxSelect',
   inheritAttrs: false,
@@ -225,7 +223,7 @@ export default defineComponent({
         clickOutside: true,
         container: mergedOverlayContainer.value,
         disabled: accessor.disabled || props.readonly,
-        offset: defaultOffset,
+        offset: props.offset ?? config.offset,
         placement: 'bottomStart',
         trigger: 'manual',
         triggerId: attrs.id,

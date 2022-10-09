@@ -71,6 +71,7 @@ export const selectProps = {
   /**
    * @deprecated please use `dataSource` instead'
    */
+  offset: Array as unknown as PropType<[number, number]>,
   options: { type: Array as PropType<SelectData[]>, default: undefined },
   overlayClassName: { type: String, default: undefined },
   overlayContainer: {

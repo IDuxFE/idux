@@ -13,7 +13,7 @@ import { useOverlayContainer } from '@idux/components/utils'
 
 import { TimePickerContext, TimeRangePickerContext } from '../tokens'
 
-const defaultOffset: [number, number] = [0, 8]
+const defaultOffset: [number, number] = [0, 4]
 export function useOverlayProps(context: TimePickerContext | TimeRangePickerContext): ComputedRef<ɵOverlayProps> {
   const { props, common, config, accessor, mergedPrefixCls, overlayOpened, setOverlayOpened } = context
   const mergedOverlayContainer = useOverlayContainer(props, config, common, mergedPrefixCls)

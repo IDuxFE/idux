@@ -14,8 +14,6 @@ import { useOverlayContainer, useZIndex } from '@idux/components/utils'
 
 import { type TooltipProps } from './types'
 
-const defaultOffset: [number, number] = [0, 12]
-
 export interface TooltipOverlayContext {
   overlayRef: Ref<ɵOverlayInstance | undefined>
   updatePopper: () => void | undefined
@@ -54,7 +52,7 @@ export function useTooltipOverlay(
       container: mergedOverlayContainer.value,
       delay: props.delay ?? config.delay,
       destroyOnHide: props.destroyOnHide ?? config.destroyOnHide,
-      offset: props.offset ?? defaultOffset,
+      offset: props.offset ?? config.offset,
       showArrow: true,
       placement: props.placement ?? config.placement,
       trigger: trigger,
