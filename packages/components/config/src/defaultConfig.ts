@@ -106,7 +106,7 @@ export const defaultConfig: GlobalConfig = {
   dropdown: {
     autoAdjust: true,
     destroyOnHide: false,
-    offset: [0, 8],
+    offset: [0, 4],
     placement: 'bottomStart',
     showArrow: false,
     trigger: 'hover',
@@ -166,7 +166,7 @@ export const defaultConfig: GlobalConfig = {
   menu: {
     getKey: 'key',
     indent: 24,
-    offset: [0, 8],
+    offset: [0, 4],
     suffix: 'right',
     theme: 'light',
   },
@@ -214,6 +214,7 @@ export const defaultConfig: GlobalConfig = {
     destroyOnHide: false,
     placement: 'top',
     trigger: 'click',
+    offset: [0, 8],
   },
   popover: {
     autoAdjust: true,
@@ -223,6 +224,7 @@ export const defaultConfig: GlobalConfig = {
     showArrow: true,
     trigger: 'hover',
     closeIcon: 'close',
+    offset: [0, 8],
   },
   progress: {
     strokeLinecap: 'round',
@@ -251,6 +253,7 @@ export const defaultConfig: GlobalConfig = {
     getKey: 'key',
     clearIcon: 'close-circle',
     labelKey: 'label',
+    offset: [0, 4],
     overlayMatchWidth: true,
     size: 'md',
     suffix: 'down',
@@ -337,6 +340,7 @@ export const defaultConfig: GlobalConfig = {
     autoAdjust: true,
     delay: 100,
     destroyOnHide: false,
+    offset: [0, 8],
     placement: 'top',
     trigger: 'hover',
   },
@@ -356,6 +360,7 @@ export const defaultConfig: GlobalConfig = {
     clearIcon: 'close-circle',
     labelKey: 'label',
     getKey: 'key',
+    offset: [0, 4],
     overlayMatchWidth: true,
     size: 'md',
     suffix: 'down',

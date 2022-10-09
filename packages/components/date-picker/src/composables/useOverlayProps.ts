@@ -12,7 +12,7 @@ import { useOverlayContainer } from '@idux/components/utils'
 
 import { type DatePickerContext, type DateRangePickerContext } from '../token'
 
-const defaultOffset: [number, number] = [0, 8]
+const defaultOffset: [number, number] = [0, 4]
 export function useOverlayProps(context: DatePickerContext | DateRangePickerContext): ComputedRef<ɵOverlayProps> {
   const { props, common, config, accessor, mergedPrefixCls, overlayOpened, setOverlayOpened, onAfterLeave } = context
   const mergedOverlayContainer = useOverlayContainer(props, config, common, mergedPrefixCls)
