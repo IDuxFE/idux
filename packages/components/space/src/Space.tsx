@@ -8,7 +8,7 @@
 import { type ComputedRef, type VNode, computed, defineComponent, normalizeClass } from 'vue'
 
 import { supportsFlexGap } from '@idux/cdk/platform'
-import { Logger, convertCssPixel, flattenNode } from '@idux/cdk/utils'
+import { convertCssPixel, flattenNode } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { type FormSize } from '@idux/components/form'
 import { convertStringVNode } from '@idux/components/utils'
@@ -32,13 +32,6 @@ export default defineComponent({
     const config = useGlobalConfig('space')
 
     const wrap = computed(() => props.wrap ?? config.wrap)
-    const vertical = computed(() => {
-      const { direction, vertical } = props
-      if (direction) {
-        return direction === 'vertical'
-      }
-      return vertical
-    })
     const mergedGaps = computed(() => {
       const { size = config.size } = props
       const sizes = Array.isArray(size) ? size : [size, size]
@@ -46,14 +39,14 @@ export default defineComponent({
     })
 
     const classes = computed(() => {
-      const { align, justify, block } = props
+      const { align, justify, block, vertical } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-align-${align}`]: align,
         [`${prefixCls}-justify-${justify}`]: justify,
         [`${prefixCls}-block`]: block,
-        [`${prefixCls}-vertical`]: vertical.value,
+        [`${prefixCls}-vertical`]: vertical,
         [`${prefixCls}-nowrap`]: !wrap.value,
       })
     })
@@ -63,18 +56,9 @@ export default defineComponent({
       if (flexGapSupported) {
         return `gap: ${rowGap} ${columnGap}`
       } else {
-        return !vertical.value && wrap.value ? `margin-bottom: -${convertCssPixel(rowGap)}` : undefined
+        return !props.vertical && wrap.value ? `margin-bottom: -${convertCssPixel(rowGap)}` : undefined
       }
     })
-
-    if (__DEV__) {
-      if (props.direction) {
-        Logger.warn('components/space', 'the `direction` was deprecated, please use `vertical` instead.')
-      }
-      if (props.split || slots.split) {
-        Logger.warn('components/space', 'the `split` was deprecated, please use `separator` instead.')
-      }
-    }
 
     return () => {
       const nodes = flattenNode(slots.default?.())
@@ -85,14 +69,10 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const children: VNode[] = []
 
-      let separatorNode = convertStringVNode(slots, props, 'split')
-      if (!separatorNode) {
-        separatorNode = convertStringVNode(slots, props, 'separator')
-      }
-
+      const separatorNode = convertStringVNode(slots, props, 'separator')
       const lastIndex = nodes.length - 1
       nodes.forEach((node, index) => {
-        const style = calcItemStyle(mergedGaps, wrap, vertical, index, lastIndex)
+        const style = calcItemStyle(mergedGaps, wrap, props.vertical, index, lastIndex)
         children.push(
           <div key={`item-${index}`} class={`${prefixCls}-item`} style={style}>
             {node}
@@ -118,7 +98,7 @@ export default defineComponent({
 const calcItemStyle = (
   mergedGaps: ComputedRef<(string | number)[]>,
   wrap: ComputedRef<boolean>,
-  vertical: ComputedRef<boolean | undefined>,
+  vertical: boolean | undefined,
   index: number,
   lastIndex: number,
 ) => {
@@ -128,7 +108,7 @@ const calcItemStyle = (
 
   const [rowGap, columnGap] = mergedGaps.value
 
-  if (vertical.value) {
+  if (vertical) {
     const marginBottom = index < lastIndex ? convertCssPixel(rowGap) : undefined
     return { marginBottom }
   } else {

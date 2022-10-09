@@ -14,13 +14,7 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } 
 import type { CascaderStrategy } from '@idux/components/cascader'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
-import type {
-  TreeCheckStrategy,
-  TreeCustomAdditional,
-  TreeDragDropOptions,
-  TreeDroppable,
-  TreeNode,
-} from '@idux/components/tree'
+import type { TreeCustomAdditional, TreeDragDropOptions, TreeDroppable, TreeNode } from '@idux/components/tree'
 import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
 export const treeSelectProps = {
@@ -35,27 +29,9 @@ export const treeSelectProps = {
   borderless: { type: Boolean, default: undefined },
   childrenKey: { type: String, default: undefined },
   cascaderStrategy: { type: String as PropType<CascaderStrategy>, default: 'off' },
-  /**
-   * @deprecated please use `cascaderStrategy` instead'
-   *
-   *  * cascade: false + checkStrategy: 'all' = cascaderStrategy: 'off'
-   *  * cascade: true + checkStrategy: 'all' = cascaderStrategy: 'all'
-   *  * cascade: true + checkStrategy: 'parent' = cascaderStrategy: 'parent'
-   *  * cascade: true + checkStrategy: 'child' = cascaderStrategy: 'child'
-   */
-  cascade: { type: Boolean, default: false },
   checkable: { type: Boolean, default: false },
   clearable: { type: Boolean, default: false },
   clearIcon: { type: String, default: undefined },
-  /**
-   * @deprecated please use `cascaderStrategy` instead'
-   *
-   *  * cascade: false + checkStrategy: 'all' = cascaderStrategy: 'off'
-   *  * cascade: true + checkStrategy: 'all' = cascaderStrategy: 'all'
-   *  * cascade: true + checkStrategy: 'parent' = cascaderStrategy: 'parent'
-   *  * cascade: true + checkStrategy: 'child' = cascaderStrategy: 'child'
-   */
-  checkStrategy: { type: String as PropType<TreeCheckStrategy>, default: 'all' },
   customAdditional: { type: Function as PropType<TreeSelectCustomAdditional>, default: undefined },
   dataSource: { type: Array as PropType<TreeSelectNode[]>, default: () => [] },
   disabled: { type: Boolean, default: false },
@@ -71,16 +47,8 @@ export const treeSelectProps = {
     type: Function as PropType<(node: TreeSelectNode<any>) => Promise<TreeSelectNode<any>[]>>,
     default: undefined,
   },
-  /**
-   * @deprecated please use `maxLabel` instead'
-   */
-  maxLabelCount: { type: [Number, String] as PropType<number | 'responsive'>, default: undefined },
   maxLabel: { type: [Number, String] as PropType<number | 'responsive'>, default: Number.MAX_SAFE_INTEGER },
   multiple: { type: Boolean, default: false },
-  /**
-   * @deprecated please use `getKey` instead'
-   */
-  nodeKey: { type: [String, Function] as PropType<string | ((node: TreeSelectNode) => VKey)>, default: undefined },
   overlayClassName: { type: String, default: undefined },
   overlayContainer: {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
@@ -99,13 +67,6 @@ export const treeSelectProps = {
   showLine: { type: Boolean, default: undefined },
   status: String as PropType<ValidateStatus>,
   suffix: { type: String, default: undefined },
-  /**
-   * @deprecated please use `overlayContainer` instead'
-   */
-  target: {
-    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
-    default: undefined,
-  },
   treeDisabled: {
     type: Function as PropType<(node: TreeSelectNode<any>) => boolean | TreeSelectNodeDisabled>,
     default: undefined,
@@ -146,10 +107,7 @@ export const treeSelectProps = {
 } as const
 
 export type TreeSelectProps = ExtractInnerPropTypes<typeof treeSelectProps>
-export type TreeSelectPublicProps = Omit<
-  ExtractPublicPropTypes<typeof treeSelectProps>,
-  'maxLabelCount' | 'overlayHeight' | 'target' | 'nodeKey'
->
+export type TreeSelectPublicProps = Omit<ExtractPublicPropTypes<typeof treeSelectProps>, 'overlayHeight'>
 export interface TreeSelectBindings<K = VKey> {
   focus: (options?: FocusOptions) => void
   blur: () => void

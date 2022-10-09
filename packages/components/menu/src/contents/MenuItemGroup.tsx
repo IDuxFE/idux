@@ -46,11 +46,11 @@ export default defineComponent({
     }
 
     return () => {
-      const { additional, icon, label, children, slots = {}, customIcon, customLabel } = props.data
+      const { icon, label, children, customIcon, customLabel } = props.data
 
-      const iconRender = customIcon ?? slots.icon ?? 'itemGroupIcon'
+      const iconRender = customIcon ?? 'itemGroupIcon'
       const iconSlot = isString(iconRender) ? menuSlots[iconRender] : iconRender
-      const labelRender = customLabel ?? slots.label ?? 'itemGroupLabel'
+      const labelRender = customLabel ?? 'itemGroupLabel'
       const labelSlot = isString(labelRender) ? menuSlots[labelRender] : labelRender
 
       const slotProps = props.data
@@ -62,7 +62,7 @@ export default defineComponent({
         ? menuProps.customAdditional({ data: props.data, index: props.index })
         : undefined
       return (
-        <li class={prefixCls} aria-label={label} {...additional} {...customAdditional}>
+        <li class={prefixCls} aria-label={label} {...customAdditional}>
           <div class={`${prefixCls}-label`} style={labelStyle.value} onClick={onClick}>
             {iconNode}
             <span>{labelNode}</span>

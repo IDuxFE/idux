@@ -50,7 +50,7 @@ export function useTransferTableProps(
       pagination: false,
       selectedRowKeys: selectedKeys.value,
       virtual: props.virtual,
-      rowKey: getKey.value as (record: unknown) => number | string,
+      getKey: getKey.value as (record: unknown) => number | string,
       onScroll: evt => {
         callEmit(props.onScroll, isSource, evt)
       },

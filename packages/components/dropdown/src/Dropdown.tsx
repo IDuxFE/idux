@@ -7,7 +7,7 @@
 
 import { computed, defineComponent, provide, toRef } from 'vue'
 
-import { Logger, useControlledProp } from '@idux/cdk/utils'
+import { useControlledProp } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { type DropdownConfig, useGlobalConfig } from '@idux/components/config'
 import { useOverlayContainer } from '@idux/components/utils'
@@ -31,11 +31,6 @@ export default defineComponent({
 
     provide(dropdownToken, { hideOnClick: toRef(props, 'hideOnClick'), setVisibility })
 
-    if (__DEV__) {
-      if (props.target) {
-        Logger.warn('components/dropdown', 'the `target`  was deprecated, please use `overlayContainer` instead.')
-      }
-    }
     return () => {
       return (
         <ɵOverlay

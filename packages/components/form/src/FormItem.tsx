@@ -20,7 +20,6 @@ import {
 import { isBoolean, isNumber, isString } from 'lodash-es'
 
 import { ValidateStatus } from '@idux/cdk/forms'
-import { Logger } from '@idux/cdk/utils'
 import { CommonConfig, useGlobalConfig } from '@idux/components/config'
 import { type ColProps, IxCol, IxRow } from '@idux/components/grid'
 import { IxIcon } from '@idux/components/icon'
@@ -70,18 +69,6 @@ export default defineComponent({
         [`${prefixCls}-label-start`]: labelAlign.value === 'start',
       })
     })
-
-    if (__DEV__) {
-      if (props.extra || slots.extra) {
-        Logger.warn('components/form', 'the `extra` was deprecated, please use `description` instead.')
-      }
-      if (props.extraMessage || slots.extraMessage) {
-        Logger.warn('components/form', 'the `extraMessage` was deprecated, please use `description` instead.')
-      }
-      if (props.statusIcon || slots.statusIcon) {
-        Logger.warn('components/form', 'the `statusIcon` was deprecated.')
-      }
-    }
 
     return () => {
       const prefixCls = mergedPrefixCls.value
@@ -145,14 +132,8 @@ function renderControl(
   mergedMessageTooltip: ComputedRef<boolean | TooltipProps | undefined>,
   prefixCls: string,
 ) {
-  const { controlTooltip, description, extra, extraMessage } = props
-  const {
-    controlTooltip: controlTooltipSlot,
-    extra: extraSlot,
-    extraMessage: extraMessageSlot,
-    description: descriptionSlot,
-    message: messageSlot,
-  } = slots
+  const { controlTooltip, description } = props
+  const { controlTooltip: controlTooltipSlot, description: descriptionSlot, message: messageSlot } = slots
 
   const tooltipNode = renderTooltip(controlTooltipSlot, controlTooltip, controlTooltipIcon.value)
   const inputNode = (
@@ -162,9 +143,7 @@ function renderControl(
     </div>
   )
   const tooltipProps = convertTooltipProps(mergedMessageTooltip.value, message.value, prefixCls)
-
-  const _descriptionSlot = extraSlot || extraMessageSlot || descriptionSlot
-  const descriptionNode = _descriptionSlot ? _descriptionSlot() : extra || extraMessage || description
+  const descriptionNode = descriptionSlot ? descriptionSlot() : description
 
   const children: VNodeChild[] = []
   if (tooltipProps) {

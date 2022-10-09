@@ -122,15 +122,15 @@ export default defineComponent({
     return () => {
       const { column } = props
 
-      const { type, additional, titleColSpan, titleRowSpan } = column as HeadColumn
+      const { type, titleColSpan, titleRowSpan } = column as HeadColumn
 
       if (type === 'scroll-bar') {
         return (
           <th
             class={classes.value}
             style={style.value}
-            colSpan={titleColSpan === 1 ? undefined : titleColSpan}
-            rowSpan={titleRowSpan === 1 ? undefined : titleRowSpan}
+            colspan={titleColSpan === 1 ? undefined : titleColSpan}
+            rowspan={titleRowSpan === 1 ? undefined : titleRowSpan}
             onClick={onClick}
           ></th>
         )
@@ -170,7 +170,6 @@ export default defineComponent({
           colSpan={titleColSpan === 1 ? undefined : titleColSpan}
           rowSpan={titleRowSpan === 1 ? undefined : titleRowSpan}
           title={_title}
-          {...additional}
           {...customAdditional}
           onClick={onClick}
         >

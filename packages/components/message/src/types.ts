@@ -55,13 +55,6 @@ export const messageProviderProps = {
   },
   maxCount: Number,
   top: [String, Number] as PropType<string | number>,
-  /**
-   * @deprecated please use `container` instead'
-   */
-  target: {
-    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
-    default: undefined,
-  },
 } as const
 export interface MessageProviderRef<K = VKey> {
   open: (options: MessageOptions<K>) => MessageRef
@@ -76,6 +69,6 @@ export interface MessageProviderRef<K = VKey> {
 }
 
 export type MessageProviderProps = ExtractInnerPropTypes<typeof messageProviderProps>
-export type MessageProviderPublicProps = Omit<ExtractPublicPropTypes<typeof messageProviderProps>, 'target'>
+export type MessageProviderPublicProps = ExtractPublicPropTypes<typeof messageProviderProps>
 export type MessageProviderComponent = DefineComponent<MessageProviderPublicProps, MessageProviderRef>
 export type MessageProviderInstance = InstanceType<DefineComponent<MessageProviderProps, MessageProviderRef>>

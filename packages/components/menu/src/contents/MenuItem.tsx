@@ -60,11 +60,11 @@ export default defineComponent({
     }
 
     return () => {
-      const { additional, disabled, icon, label, slots = {}, customIcon, customLabel } = props.data
+      const { disabled, icon, label, customIcon, customLabel } = props.data
 
-      const iconRender = customIcon ?? slots.icon ?? 'itemIcon'
+      const iconRender = customIcon ?? 'itemIcon'
       const iconSlot = isString(iconRender) ? menuSlots[iconRender] : iconRender
-      const labelRender = customLabel ?? slots.label ?? 'itemLabel'
+      const labelRender = customLabel ?? 'itemLabel'
       const labelSlot = isString(labelRender) ? menuSlots[labelRender] : labelRender
 
       const slotProps = iconSlot || labelSlot ? { ...props.data, selected: isSelected.value } : undefined
@@ -81,7 +81,6 @@ export default defineComponent({
           aria-selected={isSelected.value}
           role="menuitem"
           onClick={disabled ? undefined : onClick}
-          {...additional}
           {...customAdditional}
         >
           {iconNode}

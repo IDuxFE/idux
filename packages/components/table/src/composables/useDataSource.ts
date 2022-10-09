@@ -8,16 +8,16 @@
 import { type ComputedRef, type Ref, computed } from 'vue'
 
 import { type VKey } from '@idux/cdk/utils'
+import { type GetKeyFn } from '@idux/components/utils'
 
 import { type TablePagination, type TableProps } from '../types'
 import { type ActiveFilter } from './useFilterable'
-import { type GetRowKey } from './useGetRowKey'
 import { type ActiveSorter } from './useSortable'
 
 export function useDataSource(
   props: TableProps,
   mergedChildrenKey: ComputedRef<string>,
-  mergedGetKey: ComputedRef<GetRowKey>,
+  mergedGetKey: ComputedRef<GetKeyFn>,
   activeSorters: ComputedRef<ActiveSorter[]>,
   activeFilters: ComputedRef<ActiveFilter[]>,
   expandedRowKeys: Ref<VKey[]>,
@@ -88,7 +88,7 @@ export interface FlattedData extends MergedData {
   level?: number
 }
 
-function convertMergeData(record: unknown, getRowKey: GetRowKey, childrenKey: string, parentKey?: VKey) {
+function convertMergeData(record: unknown, getRowKey: GetKeyFn, childrenKey: string, parentKey?: VKey) {
   const rowKey = getRowKey(record)
   const result: MergedData = { record, rowKey, parentKey }
 

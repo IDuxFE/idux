@@ -5,8 +5,6 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { PopconfirmProps } from './types'
-
 import { computed, defineComponent, provide, ref } from 'vue'
 
 import { callEmit, isPromise } from '@idux/cdk/utils'
@@ -16,7 +14,7 @@ import { ɵUseTooltipOverlay } from '@idux/components/tooltip'
 
 import PopconfirmContent from './PopconfirmContent'
 import { popconfirmToken } from './token'
-import { popconfirmProps } from './types'
+import { type PopconfirmProps, popconfirmProps } from './types'
 
 export default defineComponent({
   name: 'IxPopconfirm',

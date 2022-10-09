@@ -30,12 +30,7 @@ export interface FlattenedOption {
 
 export function useConvertedOptions(props: SelectProps, slots: Slots): ComputedRef<SelectData[]> {
   return computed(() => {
-    const dataSource = props.options ?? props.dataSource
-    if (dataSource) {
-      return dataSource
-    }
-
-    return convertOptions(slots.default?.())
+    return props.dataSource ?? convertOptions(slots.default?.())
   })
 }
 
@@ -72,7 +67,7 @@ function convertOptions(nodes: VNode[] | undefined): SelectData[] {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const isOption = (type as any)[optionKey]
     if (isOption) {
-      const { key, disabled, label, value, ...additional } = props
+      const { key, disabled, label, value } = props
       const { label: customLabel, default: customLabel2 } = slots
       const _disabled = disabled || disabled === ''
       const option: SelectData = {
@@ -80,17 +75,16 @@ function convertOptions(nodes: VNode[] | undefined): SelectData[] {
         disabled: _disabled,
         label,
         value,
-        additional,
         customLabel: customLabel ?? customLabel2,
       }
 
       convertedOptions.push(option)
     } else {
-      const { key = index, label, children, ...additional } = props
+      const { key = index, label, children } = props
       const { label: customLabel, default: defaultSlot } = slots
       const _children = children ?? convertOptions(defaultSlot?.())
 
-      convertedOptions.push({ key, label, children: _children, additional, customLabel })
+      convertedOptions.push({ key, label, children: _children, customLabel })
     }
   })
 
@@ -170,7 +164,7 @@ function parseOption(option: SelectData, getKey: GetKeyFn, childrenKey: string, 
 
 function useSearchFn(props: SelectProps, mergedLabelKey: ComputedRef<string>) {
   return computed(() => {
-    const searchFn = props.searchFilter ?? props.searchFn
+    const searchFn = props.searchFn
     if (isFunction(searchFn)) {
       return searchFn
     }

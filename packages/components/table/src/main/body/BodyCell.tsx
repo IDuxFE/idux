@@ -93,7 +93,7 @@ export default defineComponent({
     return () => {
       const { column } = props
 
-      const { type, additional } = column as BodyColumn
+      const { type } = column as BodyColumn
       let children: VNodeChild
       let title: string | undefined
 
@@ -127,7 +127,7 @@ export default defineComponent({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const Tag = (tableProps.customTag?.bodyCell ?? 'td') as any
       return (
-        <Tag class={classes.value} style={style.value} title={title} {...additional} {...customAdditional}>
+        <Tag class={classes.value} style={style.value} title={title} {...customAdditional}>
           {type === 'expandable' && renderExpandableChildren(props, slots, expandable, mergedPrefixCls.value)}
           {children}
         </Tag>
@@ -159,15 +159,9 @@ function useDataValue(props: TableBodyCellProps) {
 
 function renderChildren(props: TableBodyCellProps, slots: Slots, value: string) {
   const { record, rowIndex, column } = props
-  const { customRender, customCell } = column
-
-  const cellRender = customRender ?? customCell
-  if (isFunction(cellRender)) {
-    return cellRender({ value, record, rowIndex })
-  } else if (isString(cellRender) && slots[cellRender]) {
-    return slots[cellRender]!({ value, record, rowIndex })
-  }
-  return value
+  const { customCell } = column
+  const cellRender = isString(customCell) ? slots[customCell] : customCell
+  return cellRender ? cellRender({ value, record, rowIndex }) : value
 }
 
 function renderExpandableChildren(

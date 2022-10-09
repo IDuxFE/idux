@@ -211,7 +211,7 @@ describe('TreeSelect', () => {
       ]
 
       const wrapper = TreeSelectMount({
-        props: { value: '0', open: true, dataSource, childrenKey: 'options', labelKey: 'text', nodeKey: 'value' },
+        props: { value: '0', open: true, dataSource, childrenKey: 'options', labelKey: 'text', getKey: 'value' },
       })
 
       expect(wrapper.find('.ix-selector-item').text()).toBe('Node 0')

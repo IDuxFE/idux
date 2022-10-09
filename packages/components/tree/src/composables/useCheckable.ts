@@ -24,11 +24,7 @@ export interface CheckableContext {
   handleCheck: (node: MergedNode) => void
 }
 
-export function useCheckable(
-  props: TreeProps,
-  mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>,
-  mergedCascaderStrategy: ComputedRef<CascaderStrategy>,
-): CheckableContext {
+export function useCheckable(props: TreeProps, mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>): CheckableContext {
   const [checkedKeys, setCheckedKeys] = useControlledProp(props, 'checkedKeys', () => [])
 
   const checkDisabledKeys = computed(() => {
@@ -45,7 +41,7 @@ export function useCheckable(
 
   // allCheckedKeys控制勾选框的勾选状态，checkedKeys控制回调的返回值
   const allCheckedKeys = computed(() => {
-    if (mergedCascaderStrategy.value !== 'off') {
+    if (props.cascaderStrategy !== 'off') {
       return findAllCheckedKeys(mergedNodeMap.value, checkedKeys.value, checkDisabledKeys.value)
     } else {
       return checkedKeys.value
@@ -54,7 +50,7 @@ export function useCheckable(
 
   const indeterminateKeys = computed(() => {
     const _checkedKeys = allCheckedKeys.value
-    if (_checkedKeys.length === 0 || mergedCascaderStrategy.value === 'off') {
+    if (_checkedKeys.length === 0 || props.cascaderStrategy === 'off') {
       return []
     }
 
@@ -85,7 +81,7 @@ export function useCheckable(
     const currKey = node.key
     const nodeMap = mergedNodeMap.value
     const disabledKeys = checkDisabledKeys.value
-    const cascaderStrategy = mergedCascaderStrategy.value
+    const cascaderStrategy = props.cascaderStrategy
     const cascaderEnabled = cascaderStrategy !== 'off'
     const childrenKeys = cascaderEnabled ? getChildrenKeys(node, disabledKeys) : []
     const index = allCheckedKeys.value.indexOf(currKey)

@@ -11,7 +11,6 @@ import type { TableColumnMerged, TableColumnMergedExtra } from './composables/us
 import type { FlattedData } from './composables/useDataSource'
 import type { ActiveFilter } from './composables/useFilterable'
 import type { ActiveSorter } from './composables/useSortable'
-import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
@@ -42,14 +41,6 @@ export const tableProps = {
   header: { type: [String, Object] as PropType<string | HeaderProps>, default: undefined },
   headless: { type: Boolean, default: undefined },
   pagination: { type: [Boolean, Object] as PropType<boolean | TablePagination>, default: true },
-  /**
-   * @deprecated please use `customAdditional` instead'
-   */
-  rowClassName: { type: Function as PropType<(record: any, rowIndex: number) => string>, default: undefined },
-  /**
-   * @deprecated please use `getKey` instead'
-   */
-  rowKey: { type: [String, Function] as PropType<string | ((record: any) => VKey)>, default: undefined },
   scroll: { type: Object as PropType<TableScroll>, default: undefined },
   size: { type: String as PropType<TableSize>, default: undefined },
   spin: { type: [Boolean, Object] as PropType<boolean | SpinProps>, default: undefined },
@@ -69,7 +60,7 @@ export const tableProps = {
 } as const
 
 export type TableProps = ExtractInnerPropTypes<typeof tableProps>
-export type TablePublicProps = Omit<ExtractPublicPropTypes<typeof tableProps>, 'rowClassName' | 'rowKey'>
+export type TablePublicProps = ExtractPublicPropTypes<typeof tableProps>
 export interface TableBindings {
   scrollTo: VirtualScrollToFn
 }
@@ -89,23 +80,11 @@ export type TableColumn<T = any, K = VKey> =
   | TableColumnSelectable<T, K>
 
 export interface TableColumnCommon<T = any> {
-  /**
-   * @deprecated please use `customAdditional` instead'
-   */
-  additional?: {
-    class?: any
-    style?: any
-    [key: string]: unknown
-  }
   key?: VKey
   align?: TableColumnAlign
   colSpan?: (record: T, rowIndex: number) => number
   rowSpan?: (record: T, rowIndex: number) => number
   fixed?: TableColumnFixed
-  /**
-   * @deprecated
-   */
-  responsive?: BreakpointKey[]
   titleColSpan?: number
   width?: string | number
 }
@@ -118,10 +97,6 @@ export interface TableColumnBase<T = any, K = VKey> extends TableColumnCommon<T>
   title?: string
   children?: TableColumn<T, K>[]
 
-  /**
-   * @deprecated please use `customCell` instead'
-   */
-  customRender?: string | ((data: { value: any; record: T; rowIndex: number }) => VNodeChild)
   customCell?: string | ((data: { value: any; record: T; rowIndex: number }) => VNodeChild)
   customTitle?: string | ((data: { title?: string }) => VNodeChild)
 }

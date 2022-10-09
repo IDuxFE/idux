@@ -109,7 +109,6 @@ export default defineComponent({
           onMouseenter={disabled ? undefined : handleMouseEnter}
           aria-label={label}
           aria-selected={selected}
-          {...rawData.additional}
           {...customAdditional}
         >
           {multiple && (

@@ -3,11 +3,10 @@
   "version": "1.0.0-rc.8",
   "command": {
     "publish": {
-      "allowBranch": ["main", "next", "hotfix"],
+      "allowBranch": ["main", "release", "next", "hotfix"],
       "ignoreChanges": ["*.md", "**/__tests__/**", "**/demo/**", "**/docs/**"],
       "message": "docs(release): publish %s",
-      "registry": "https://registry.npmjs.org",
-      "preid": "rc"
+      "registry": "https://registry.npmjs.org"
     },
     "bootstrap": {
       "npmClient": "pnpm"

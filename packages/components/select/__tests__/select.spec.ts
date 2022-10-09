@@ -15,9 +15,9 @@ import { SelectData, SelectProps } from '../src/types'
 describe('Select', () => {
   describe('single work', () => {
     const defaultDataSource = [
-      { key: 1, label: 'Tom', value: 'tom' },
-      { key: 2, label: 'Jerry', value: 'jerry' },
-      { key: 3, label: 'Speike', value: 'speike', disabled: true },
+      { key: 'tom', label: 'Tom' },
+      { key: 'jerry', label: 'Jerry' },
+      { key: 'speike', label: 'Speike', disabled: true },
     ]
     const defaultValue = 'tom'
     const SelectMount = (options?: MountingOptions<Partial<SelectProps>>) => {
@@ -337,7 +337,7 @@ describe('Select', () => {
     })
 
     test('searchable with searchFn work', async () => {
-      const searchFn = (option: SelectData, searchValue: string) => searchValue === option.value
+      const searchFn = (option: SelectData, searchValue: string) => searchValue === option.key
       const wrapper = SelectMount({ props: { open: true, searchable: true, searchFn } })
 
       expect(wrapper.find('.ix-selector-searchable').exists()).toBe(true)
@@ -362,7 +362,7 @@ describe('Select', () => {
             { key: 3, name: 'Speike', id: 'speike' },
           ],
           labelKey: 'name',
-          valueKey: 'id',
+          getKey: 'id',
         },
       })
 

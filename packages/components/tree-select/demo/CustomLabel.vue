@@ -5,7 +5,7 @@
     multiple
     checkable
     :dataSource="treeData"
-    :maxLabelCount="3"
+    :maxLabel="3"
   >
     <template #label="node"><IxIcon :name="node.icon" />{{ node.label }}</template>
     <template #maxLabel="moreNodes">and {{ moreNodes.length }} more selected</template>

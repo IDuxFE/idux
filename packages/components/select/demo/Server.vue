@@ -2,7 +2,7 @@
   <IxSelect
     v-model:value="value"
     searchable
-    :searchFilter="false"
+    :searchFn="false"
     placeholder="Please input search text"
     :suffix="loading ? 'loading' : undefined"
     @change="onChange"

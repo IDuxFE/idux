@@ -7,7 +7,7 @@
 
 import { computed, defineComponent, inject, normalizeClass, provide } from 'vue'
 
-import { Logger, type VKey, callEmit } from '@idux/cdk/utils'
+import { type VKey, callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { ɵDropdownToken } from '@idux/components/dropdown'
 import { useGetKey } from '@idux/components/utils'
@@ -66,24 +66,6 @@ export default defineComponent({
       })
     })
     const dateSource = useDataSource(props, slots)
-
-    if (__DEV__) {
-      if (props.target) {
-        Logger.warn('components/menu', 'the `target` was deprecated, please use `overlayContainer` instead.')
-      }
-      if (props.dataSource?.some(data => !!data.additional)) {
-        Logger.warn(
-          'components/menu',
-          'the `additional` of MenuData was deprecated, please use `customAdditional` instead.',
-        )
-      }
-      if (props.dataSource?.some(data => !!data.slots)) {
-        Logger.warn(
-          'components/menu',
-          'the `slots` of MenuData was deprecated, please use `customIcon` and `customLabel` instead.',
-        )
-      }
-    }
 
     return () => {
       return <ul class={classes.value}>{coverChildren(dateSource.value, mergedGetKey.value)}</ul>
