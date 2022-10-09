@@ -5,101 +5,49 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type Ref, onUnmounted, ref } from 'vue'
+import type { ProTransferProps, TreeTransferData } from '../types'
+import type { VKey } from '@idux/cdk/utils'
+import type { TransferDataStrategyProp } from '@idux/components/transfer'
+import type { GetKeyFn } from '@idux/components/utils'
 
-import { isNil } from 'lodash-es'
+import { type ComputedRef, type Ref, ref, watch } from 'vue'
 
-import { type VKey } from '@idux/cdk/utils'
 import { type CascaderStrategy } from '@idux/components/cascader'
-import { type TransferDataStrategiesConfig } from '@idux/components/transfer'
-import { type GetKeyFn } from '@idux/components/utils'
 
-import { type TreeTransferData } from '../types'
-import { combineTrees, filterTree, genFlattenedTreeKeys, traverseTree } from '../utils'
+import { combineTrees, filterTree, flattenTree, genFlattenedTreeKeys, traverseTree } from '../utils'
+import { useTreeDataStrategyContext } from './useTreeDataStrategyContext'
 
 export function useTreeDataStrategies<C extends VKey>(
+  props: ProTransferProps,
   childrenKey: ComputedRef<C>,
-  defaultTreeData: TreeTransferData<C>[] | undefined,
-  cascaderStrategy: CascaderStrategy = 'all',
+  cascadeStrategy: ComputedRef<CascaderStrategy>,
 ): {
   dataKeyMap: Map<VKey, TreeTransferData<C>>
   parentKeyMap: Map<VKey, VKey | undefined>
-  dataStrategies: TransferDataStrategiesConfig<TreeTransferData<C>>
+  dataStrategy: Ref<TransferDataStrategyProp<TreeTransferData<C>>>
 } {
-  const cachedTargetData = ref(defaultTreeData ?? []) as Ref<TreeTransferData<C>[]>
-  const dataKeyMap: Map<VKey, TreeTransferData<C>> = new Map()
-  const parentKeyMap: Map<VKey, VKey | undefined> = new Map()
+  const { cachedTargetData, dataKeyMap, parentKeyMap, dataStrategy } = useTreeDataStrategyContext(props, childrenKey)
 
-  onUnmounted(() => {
-    cachedTargetData.value = []
-    dataKeyMap.clear()
-    parentKeyMap.clear()
+  const getMergedDataStrategy = () => ({
+    ...dataStrategy,
+    ...createStrategy(
+      childrenKey,
+      cachedTargetData,
+      parentKeyMap,
+      dataKeyMap,
+      cascadeStrategy.value,
+      props.flatTargetData,
+    ),
   })
-
-  const genDisabledKeys = (
-    data: TreeTransferData<C>[],
-    getRowKey: (item: TreeTransferData<C>) => VKey,
-    disabledKeys?: Set<VKey>,
-  ): Set<VKey> => {
-    let keys = disabledKeys ?? new Set()
-    data.forEach(item => {
-      const key = getRowKey(item)
-      if (item.disabled) {
-        keys.add(key)
-        return
-      }
-
-      const parentKey = parentKeyMap.get(key)
-      if (!isNil(parentKey) && keys.has(parentKey)) {
-        keys.add(key)
-        return
-      }
-
-      if (item[childrenKey.value]) {
-        keys = genDisabledKeys(item[childrenKey.value]!, getRowKey, keys)
-        if (
-          item[childrenKey.value]!.length > 0 &&
-          item[childrenKey.value]!.every((child: TreeTransferData<C>) => keys.has(getRowKey(child)))
-        ) {
-          keys.add(key)
-        }
-      }
-    })
-
-    return keys
-  }
+  const mergedDataStrategy = ref<TransferDataStrategyProp<TreeTransferData<C>>>(getMergedDataStrategy())
+  watch([cascadeStrategy, childrenKey], () => {
+    mergedDataStrategy.value = getMergedDataStrategy()
+  })
 
   return {
     dataKeyMap,
     parentKeyMap,
-    dataStrategies: {
-      genDataKeys: (data, getKey) => {
-        return new Set(genFlattenedTreeKeys(data, childrenKey.value, getKey))
-      },
-      genDataKeyMap: (data, getKey) => {
-        parentKeyMap.clear()
-        dataKeyMap.clear()
-
-        traverseTree(data, childrenKey.value, (node, parents) => {
-          const key = getKey(node)
-          dataKeyMap.set(key, node)
-
-          const parent = parents[0]
-          parentKeyMap.set(key, parent && getKey(parent))
-        })
-
-        return new Map(dataKeyMap)
-      },
-      genDisabledKeys,
-      dataFilter: (data, searchValue, searchFn) => {
-        if (!searchValue) {
-          return data
-        }
-
-        return filterTree(data, childrenKey.value, item => searchFn(item, searchValue), 'or')
-      },
-      ...createStrategy(childrenKey, cachedTargetData, parentKeyMap, dataKeyMap, cascaderStrategy),
-    },
+    dataStrategy: mergedDataStrategy,
   }
 }
 
@@ -117,137 +65,97 @@ const commonRemoveFn = (keys: VKey[], selectedKeySet: VKey[], parentKeyMap: Map<
   return Array.from(newKeys)
 }
 
-function createStrategy<C extends VKey>(
-  childrenKey: ComputedRef<C>,
-  cachedTargetData: Ref<TreeTransferData<C>[]>,
-  parentKeyMap: Map<VKey, VKey | undefined>,
-  dataKeyMap: Map<VKey, TreeTransferData<C>>,
-  cascaderStrategy: CascaderStrategy,
-) {
-  switch (cascaderStrategy) {
-    case 'parent':
-      return createParentStrategy(childrenKey, cachedTargetData, dataKeyMap)
-    case 'child':
-      return createChildStrategy(childrenKey, cachedTargetData, parentKeyMap)
-    // TODO: support 'off'
-    case 'all':
-    default:
-      return createAllStrategy(childrenKey, cachedTargetData, parentKeyMap)
+const getAllSelectedKeys = <C extends VKey>(
+  selected: boolean,
+  data: TreeTransferData<C>[],
+  selectedKeySet: Set<VKey>,
+  disabledkeySet: Set<VKey>,
+  getKey: GetKeyFn,
+  childrenKey: C,
+) => {
+  let tempKeys: Set<VKey>
+  if (!selected) {
+    tempKeys = new Set()
+    disabledkeySet.forEach(key => {
+      selectedKeySet.has(key) && tempKeys.add(key)
+    })
+  } else {
+    tempKeys = new Set(genFlattenedTreeKeys(data, childrenKey, getKey))
+    disabledkeySet.forEach(key => {
+      !selectedKeySet.has(key) && tempKeys.delete(key)
+    })
   }
+
+  return Array.from(tempKeys)
 }
 
-function createAllStrategy<C extends VKey>(
-  childrenKey: ComputedRef<C>,
-  cachedTargetData: Ref<TreeTransferData<C>[]>,
-  parentKeyMap: Map<VKey, VKey | undefined>,
-): TransferDataStrategiesConfig<TreeTransferData<C>> {
-  return {
-    separateDataSource: createSeparateDataSourceFn(childrenKey, cachedTargetData, 'all'),
-    remove: (keys, selectedKeySet) => commonRemoveFn(keys, selectedKeySet, parentKeyMap),
-  }
-}
+const genDisabledKeys = <C extends VKey>(
+  data: TreeTransferData<C>[],
+  getKey: (item: TreeTransferData<C>) => VKey,
+  childrenKey: C,
+  cascade: boolean,
+): Set<VKey> => {
+  const keys = new Set<VKey>()
 
-function createChildStrategy<C extends VKey>(
-  childrenKey: ComputedRef<C>,
-  cachedTargetData: Ref<TreeTransferData<C>[]>,
-  parentKeyMap: Map<VKey, VKey | undefined>,
-): TransferDataStrategiesConfig<TreeTransferData<C>> {
-  return {
-    separateDataSource: createSeparateDataSourceFn(childrenKey, cachedTargetData, 'child'),
-    remove: (keys, selectedKeySet) => commonRemoveFn(keys, selectedKeySet, parentKeyMap),
-  }
-}
-
-function createParentStrategy<C extends VKey>(
-  childrenKey: ComputedRef<C>,
-  cachedTargetData: Ref<TreeTransferData<C>[]>,
-  dataKeyMap: Map<VKey, TreeTransferData<C>>,
-): TransferDataStrategiesConfig<TreeTransferData<C>> {
-  const separateDataSource = createSeparateDataSourceFn(childrenKey, cachedTargetData, 'parent')
-  let targetData: TreeTransferData<C>[] = []
-
-  return {
-    separateDataSource(data, _, selectedKeySet, getKey) {
-      const separatedData = separateDataSource(data, _, selectedKeySet, getKey)
-      targetData = separatedData.targetData
-      return separatedData
-    },
-    append(keys, selectedKey, getKey) {
-      const newKeySet = new Set(selectedKey)
-
-      keys.forEach(key => {
-        newKeySet.add(key)
-
-        const children = dataKeyMap.get(key)?.[childrenKey.value]
-        if (children) {
-          traverseTree(children, childrenKey.value, item => {
-            newKeySet.delete(getKey(item))
-          })
-        }
-      })
-
-      return Array.from(newKeySet)
-    },
-    remove(keys, selectedKey, getKey) {
-      const keySet = new Set(keys)
-      const newKeySet = new Set(selectedKey)
-      const deletedKeys = new Set()
-
-      // store already deleted keys
-      const deleteKey = (key: VKey) => {
-        deletedKeys.add(key)
-        newKeySet.delete(key)
+  traverseTree(
+    data,
+    childrenKey,
+    (item, parents) => {
+      const key = getKey(item)
+      const cihldren = item[childrenKey]
+      if (
+        item.disabled ||
+        (cascade &&
+          (parents.some(parent => parent.disabled) ||
+            (cihldren?.length && cihldren.every(child => keys.has(getKey(child))))))
+      ) {
+        keys.add(key)
       }
-
-      // it is not possible to get the correct selected keys from bottom to top
-      traverseTree(targetData, childrenKey.value, (item, parents) => {
-        if (keySet.has(getKey(item))) {
-          const keysInChain = [item, ...parents].map(getKey)
-          // if some of the ancestors was selected
-          // replace parent node with child nodes
-          if (keysInChain.some(key => newKeySet.has(key))) {
-            parents.forEach(parent => {
-              parent[childrenKey.value]?.forEach(child => {
-                const childKey = getKey(child)
-                // add only if the child node hasn't been deleted before
-                if (!deletedKeys.has(childKey)) {
-                  newKeySet.add(childKey)
-                }
-              })
-            })
-            // not one of the ancestors should be selected
-            keysInChain.forEach(key => deleteKey(key))
-          }
-        } else if (parents.some(parent => keySet.has(getKey(parent)))) {
-          // if some of the ancestors was removed
-          // remove the node itself
-          deleteKey(getKey(item))
-        }
-      })
-
-      return Array.from(newKeySet)
     },
-  }
+    'post',
+  )
+
+  return keys
 }
 
 function createSeparateDataSourceFn<C extends VKey>(
   childrenKey: ComputedRef<C>,
   cachedTargetData: Ref<TreeTransferData<C>[]>,
   cascaderStrategy: CascaderStrategy,
-): Exclude<TransferDataStrategiesConfig<TreeTransferData<C>>['separateDataSource'], undefined> {
+  flatTargetData: boolean | 'all' = false,
+): Exclude<TransferDataStrategyProp<TreeTransferData<C>>['separateDataSource'], undefined> {
   const getFilterFn = (
     selectedKeySet: Set<VKey>,
     getKey: GetKeyFn,
   ): ((data: TreeTransferData<C>[], isSource: boolean) => TreeTransferData<C>[]) => {
     // under cascaderStrategy `parent`, selected child nodes are not in selectedKeys
     // so we consider the item is selected when its parent exists in selectedKeys
-    const filterFn: (item: TreeTransferData<C>, parent: TreeTransferData<C>[], isSource: boolean) => boolean =
-      cascaderStrategy === 'all' || cascaderStrategy === 'child'
-        ? (item, _, isSource) => selectedKeySet.has(getKey(item)) !== isSource
-        : (item, parent, isSource) => [item, ...parent].map(getKey).some(key => selectedKeySet.has(key)) !== isSource
+    const filterFn: (item: TreeTransferData<C>, parent: TreeTransferData<C>[], isSource: boolean) => boolean = (() => {
+      switch (cascaderStrategy) {
+        case 'all':
+        case 'off':
+          return (item, _, isSource) => selectedKeySet.has(getKey(item)) !== isSource
+        case 'child':
+          return (item, _, isSource) =>
+            selectedKeySet.has(getKey(item)) !== isSource && !item[childrenKey.value]?.length
+        case 'parent':
+          return (item, parent, isSource) =>
+            [item, ...parent].map(getKey).some(key => selectedKeySet.has(key)) !== isSource
+      }
+    })()
 
-    return (data, isSource) =>
-      filterTree(data, childrenKey.value, (item, parent) => filterFn(item, parent, isSource), 'or')
+    return (data, isSource) => {
+      if (isSource || (cascaderStrategy !== 'off' && !flatTargetData)) {
+        return filterTree(data, childrenKey.value, (item, parent) => filterFn(item, parent, isSource), 'or')
+      }
+
+      return flattenTree(
+        data,
+        childrenKey.value,
+        item => ({ ...item, children: undefined }),
+        flatTargetData !== 'all' && cascaderStrategy !== 'off',
+      ).filter(item => selectedKeySet.has(getKey(item)))
+    }
   }
 
   return (data, _, selectedKeySet, getKey) => {
@@ -265,5 +173,192 @@ function createSeparateDataSourceFn<C extends VKey>(
       sourceData: filterData(data, true),
       targetData,
     }
+  }
+}
+
+function createStrategy<C extends VKey>(
+  childrenKey: ComputedRef<C>,
+  cachedTargetData: Ref<TreeTransferData<C>[]>,
+  parentKeyMap: Map<VKey, VKey | undefined>,
+  dataKeyMap: Map<VKey, TreeTransferData<C>>,
+  cascaderStrategy: CascaderStrategy,
+  flatTargetData: boolean | 'all',
+) {
+  switch (cascaderStrategy) {
+    case 'parent':
+      return createParentStrategy(childrenKey, cachedTargetData, dataKeyMap, flatTargetData)
+    case 'child':
+      return createChildStrategy(childrenKey, cachedTargetData, parentKeyMap, flatTargetData)
+    case 'off':
+      return createOffStrategy(childrenKey, cachedTargetData, flatTargetData)
+    case 'all':
+    default:
+      return createAllStrategy(childrenKey, cachedTargetData, parentKeyMap, flatTargetData)
+  }
+}
+
+function createAllStrategy<C extends VKey>(
+  childrenKey: ComputedRef<C>,
+  cachedTargetData: Ref<TreeTransferData<C>[]>,
+  parentKeyMap: Map<VKey, VKey | undefined>,
+  flatTargetData: boolean | 'all',
+): TransferDataStrategyProp<TreeTransferData<C>> {
+  return {
+    genDisabledKeys: (data, getKey) => genDisabledKeys(data, getKey, childrenKey.value, true),
+    separateDataSource: createSeparateDataSourceFn(childrenKey, cachedTargetData, 'all', flatTargetData),
+    getAllSelectedKeys: (selected, data, selectedKeySet, disabledKeySet, getKey) =>
+      getAllSelectedKeys(selected, data, selectedKeySet, disabledKeySet, getKey, childrenKey.value),
+    remove: (keys, selectedKeySet) => commonRemoveFn(keys, selectedKeySet, parentKeyMap),
+  }
+}
+
+function createChildStrategy<C extends VKey>(
+  childrenKey: ComputedRef<C>,
+  cachedTargetData: Ref<TreeTransferData<C>[]>,
+  parentKeyMap: Map<VKey, VKey | undefined>,
+  flatTargetData: boolean | 'all',
+): TransferDataStrategyProp<TreeTransferData<C>> {
+  return {
+    genDisabledKeys: (data, getKey) => genDisabledKeys(data, getKey, childrenKey.value, true),
+    getAllSelectedKeys(selected, data, selectedKeySet, disabledKeySet, getKey) {
+      if (!selected) {
+        return Array.from(selectedKeySet).filter(key => disabledKeySet.has(key))
+      }
+
+      const keys: VKey[] = []
+      flattenTree(data, childrenKey.value, undefined, true).forEach(node => {
+        const key = getKey(node)
+        if (selectedKeySet.has(key)) {
+          keys.push(key)
+        } else if (!disabledKeySet.has(key)) {
+          keys.push(key)
+        }
+      })
+
+      return keys
+    },
+    separateDataSource: createSeparateDataSourceFn(childrenKey, cachedTargetData, 'child', flatTargetData),
+    remove: (keys, selectedKeySet) => commonRemoveFn(keys, selectedKeySet, parentKeyMap),
+  }
+}
+
+function createParentStrategy<C extends VKey>(
+  childrenKey: ComputedRef<C>,
+  cachedTargetData: Ref<TreeTransferData<C>[]>,
+  dataKeyMap: Map<VKey, TreeTransferData<C>>,
+  flatTargetData: boolean | 'all',
+): TransferDataStrategyProp<TreeTransferData<C>> {
+  const separateDataSource = createSeparateDataSourceFn(childrenKey, cachedTargetData, 'parent', flatTargetData)
+  let targetData: TreeTransferData<C>[] = []
+
+  return {
+    genDisabledKeys: (data, getKey) => genDisabledKeys(data, getKey, childrenKey.value, true),
+    getAllSelectedKeys: (selected, data, selectedKeySet, disabledKeySet, getKey) => {
+      const keys: VKey[] = []
+
+      if (selected) {
+        traverseTree(data, childrenKey.value, (item, parents) => {
+          const key = getKey(item)
+          if (disabledKeySet.has(key)) {
+            ;[...parents, item].some(node => selectedKeySet.has(getKey(node))) && keys.push(key)
+            return
+          }
+
+          if (!item[childrenKey.value]?.length) {
+            keys.push(key)
+          } else if (item[childrenKey.value]!.every(child => !disabledKeySet.has(getKey(child)))) {
+            keys.push(key)
+          }
+        })
+      } else {
+        traverseTree(data, childrenKey.value, (item, parents) => {
+          const key = getKey(item)
+          if (!disabledKeySet.has(key)) {
+            return
+          }
+
+          if ([...parents, item].some(node => selectedKeySet.has(getKey(node)))) {
+            keys.push(key)
+            return
+          }
+        })
+      }
+
+      return keys
+    },
+    separateDataSource(data, _, selectedKeySet, getKey) {
+      const separatedData = separateDataSource(data, _, selectedKeySet, getKey)
+      targetData = separatedData.targetData
+      return separatedData
+    },
+    append(keys, selectedKey, getKey) {
+      const newKeySet = new Set([...selectedKey, ...keys])
+
+      keys.forEach(key => {
+        const children = dataKeyMap.get(key)?.[childrenKey.value]
+        if (children) {
+          traverseTree(children, childrenKey.value, item => {
+            newKeySet.delete(getKey(item))
+          })
+        }
+      })
+
+      return Array.from(newKeySet)
+    },
+    remove(keys: VKey[], selectedKey: VKey[], getKey: GetKeyFn) {
+      const keySet = new Set(keys)
+      const newKeySet = new Set(selectedKey)
+      const deletedKeys = new Set()
+
+      // store already deleted keys
+      const deleteKey = (key: VKey) => {
+        deletedKeys.add(key)
+        newKeySet.delete(key)
+      }
+
+      // it is not possible to get the correct selected keys from bottom to top
+      traverseTree(targetData, childrenKey.value, (item, parents) => {
+        if (keySet.has(getKey(item))) {
+          const keysInChain = [item, ...parents].map(getKey)
+          const selectedKeyIdx = keysInChain.findIndex(key => newKeySet.has(key))
+
+          // if one of the ancestors was selected
+          // replace parent node with child nodes
+          if (selectedKeyIdx > -1) {
+            // only travers chain from selected node to the bottom
+            parents.slice(0, selectedKeyIdx).forEach(parent => {
+              parent[childrenKey.value]?.forEach(child => {
+                const childKey = getKey(child)
+                // add only if the child node hasn't been deleted before
+                if (!deletedKeys.has(childKey)) {
+                  newKeySet.add(childKey)
+                }
+              })
+            })
+            // not one of the ancestors should be selected
+            keysInChain.slice(0, selectedKeyIdx + 1).forEach(key => deleteKey(key))
+          }
+        } else if (parents.some(parent => keySet.has(getKey(parent)))) {
+          // if some of the ancestors was removed
+          // remove the node itself
+          deleteKey(getKey(item))
+        }
+      })
+
+      return Array.from(newKeySet)
+    },
+  }
+}
+
+function createOffStrategy<C extends VKey>(
+  childrenKey: ComputedRef<C>,
+  cachedTargetData: Ref<TreeTransferData<C>[]>,
+  flatTargetData: boolean | 'all',
+): TransferDataStrategyProp<TreeTransferData<C>> {
+  return {
+    genDisabledKeys: (data, getKey) => genDisabledKeys(data, getKey, childrenKey.value, false),
+    separateDataSource: createSeparateDataSourceFn(childrenKey, cachedTargetData, 'off', flatTargetData),
+    getAllSelectedKeys: (selected, data, selectedKeySet, disabledKeySet, getKey) =>
+      getAllSelectedKeys(selected, data, selectedKeySet, disabledKeySet, getKey, childrenKey.value),
   }
 }

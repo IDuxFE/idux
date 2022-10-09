@@ -14,13 +14,15 @@ export function traverseTree<C extends VKey>(
   data: TreeTransferData<C>[],
   childrenKey: C,
   fn: (item: TreeTransferData<C>, parents: TreeTransferData<C>[]) => void,
+  traverseStrategy: 'pre' | 'post' = 'pre',
 ): void {
   const traverse = (_data: TreeTransferData<C>[], parents: TreeTransferData<C>[]) => {
     _data.forEach(item => {
-      fn(item, parents)
+      traverseStrategy === 'pre' && fn(item, parents)
       if (item[childrenKey]) {
         traverse(item[childrenKey]!, [item, ...parents])
       }
+      traverseStrategy === 'post' && fn(item, parents)
     })
   }
 
@@ -116,12 +118,16 @@ export function combineTrees<C extends VKey>(
 export function flattenTree<C extends VKey>(
   data: TreeTransferData<C>[],
   childrenKey: C,
+  mapFn?: (item: TreeTransferData<C>) => TreeTransferData<C>,
   leafOnly = false,
 ): TreeTransferData<C>[] {
   const res: TreeTransferData<C>[] = []
 
   traverseTree(data, childrenKey, item => {
-    ;(!leafOnly || !item[childrenKey] || item[childrenKey]!.length <= 0) && res.push(item)
+    if (!leafOnly || !item[childrenKey] || item[childrenKey]!.length <= 0) {
+      const mappedItem = mapFn ? mapFn(item) : item
+      mappedItem && res.push(mappedItem)
+    }
   })
 
   return res

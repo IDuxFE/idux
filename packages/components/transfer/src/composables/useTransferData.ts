@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TransferData, TransferDataStrategies, TransferProps } from '../types'
+import type { TransferData, TransferDataStrategy, TransferProps } from '../types'
 import type { TransferPaginationContext } from './usePagination'
 import type { TransferConfig } from '@idux/components/config'
 import type { PaginationProps } from '@idux/components/pagination'
@@ -49,24 +49,14 @@ export interface TransferDataContext<T extends TransferData = TransferData> {
 export function useTransferData<T extends TransferData = TransferData>(
   props: TransferProps,
   config: TransferConfig,
-  transferDataStrategies: TransferDataStrategies<T>,
+  transferDataStrategy: ComputedRef<TransferDataStrategy<T>>,
   transferPaginationContext: TransferPaginationContext,
 ): TransferDataContext<T> {
   const _getKey = useGetKey(props, config, 'transfer')
   const getKey = computed(() => (data: T) => _getKey.value(data) ?? data.key)
 
-  const {
-    genDataKeys,
-    genDataKeyMap,
-    genDisabledKeys,
-    separateDataSource,
-    dataFilter,
-    append: _append,
-    remove: _remove,
-  } = transferDataStrategies
-
   const dataSource = computed(() => props.dataSource as T[])
-  const dataKeyMap = computed(() => genDataKeyMap(dataSource.value, getKey.value))
+  const dataKeyMap = computed(() => transferDataStrategy.value.genDataKeyMap(dataSource.value, getKey.value))
 
   const [targetKeys, setTargetKeys] = useControlledProp(props, 'value', () => [])
   const [sourceSearchValue, setSourceSearchValue] = useControlledProp(props, 'sourceSearchValue', '')
@@ -81,30 +71,30 @@ export function useTransferData<T extends TransferData = TransferData>(
   }
 
   const separatedData = computed(() =>
-    separateDataSource(dataSource.value, dataKeyMap.value, targetKeySet.value, getKey.value),
+    transferDataStrategy.value.separateDataSource(dataSource.value, dataKeyMap.value, targetKeySet.value, getKey.value),
   )
   const sourceData = computed(() => separatedData.value.sourceData)
   const targetData = computed(() => separatedData.value.targetData)
 
-  const sourceDataKeys = computed(() => genDataKeys(sourceData.value, getKey.value))
-  const targetDataKeys = computed(() => genDataKeys(targetData.value, getKey.value))
+  const sourceDataKeys = computed(() => transferDataStrategy.value.genDataKeys(sourceData.value, getKey.value))
+  const targetDataKeys = computed(() => transferDataStrategy.value.genDataKeys(targetData.value, getKey.value))
 
   const filteredDataSource = computed(() =>
-    dataFilter(
+    transferDataStrategy.value.dataFilter(
       dataSource.value,
       sourceSearchValue.value,
       (item, searchValue) => !props.searchFn || props.searchFn(true, item, searchValue),
     ),
   )
   const filteredSourceData = computed(() =>
-    dataFilter(
+    transferDataStrategy.value.dataFilter(
       sourceData.value,
       sourceSearchValue.value,
       (item, searchValue) => !props.searchFn || props.searchFn(true, item, searchValue),
     ),
   )
   const filteredTargetData = computed(() =>
-    dataFilter(
+    transferDataStrategy.value.dataFilter(
       targetData.value,
       targetSearchValue.value,
       (item, searchValue) => !props.searchFn || props.searchFn(false, item, searchValue),
@@ -124,10 +114,10 @@ export function useTransferData<T extends TransferData = TransferData>(
   const changeTargetKeys = (removedKeys: VKey[], appendedKeys: VKey[]) => {
     let newKeys = targetKeys.value
     if (removedKeys.length > 0) {
-      newKeys = _remove(removedKeys, newKeys, getKey.value)
+      newKeys = transferDataStrategy.value.remove(removedKeys, newKeys, getKey.value)
     }
     if (appendedKeys.length > 0) {
-      newKeys = _append(appendedKeys, newKeys, getKey.value)
+      newKeys = transferDataStrategy.value.append(appendedKeys, newKeys, getKey.value)
     }
 
     handleChange(newKeys)
@@ -137,9 +127,9 @@ export function useTransferData<T extends TransferData = TransferData>(
     handleChange(Array.from(disabledTargetKeys.value))
   }
 
-  const disabledKeys = computed(() => genDisabledKeys(dataSource.value, getKey.value))
+  const disabledKeys = computed(() => transferDataStrategy.value.genDisabledKeys(dataSource.value, getKey.value))
   const disabledTargetKeys = computed(() => {
-    const keys = genDisabledKeys(targetData.value, getKey.value)
+    const keys = transferDataStrategy.value.genDisabledKeys(targetData.value, getKey.value)
 
     targetKeySet.value.forEach(key => {
       if (disabledKeys.value.has(key)) {
@@ -148,7 +138,7 @@ export function useTransferData<T extends TransferData = TransferData>(
     })
     return keys
   })
-  const disabledSourceKeys = computed(() => genDisabledKeys(sourceData.value, getKey.value))
+  const disabledSourceKeys = computed(() => transferDataStrategy.value.genDisabledKeys(sourceData.value, getKey.value))
 
   return {
     dataSource,

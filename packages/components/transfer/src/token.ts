@@ -6,13 +6,7 @@
  */
 
 import type { TransferOperationsContext } from './composables/useTransferOperations'
-import type {
-  TransferBindings,
-  TransferDataStrategiesConfig,
-  TransferListInstance,
-  TransferProps,
-  TransferSlots,
-} from './types'
+import type { TransferBindings, TransferListInstance, TransferProps, TransferSlots } from './types'
 import type { TransferConfig } from '@idux/components/config'
 import type { TransferLocale } from '@idux/components/locales'
 import type { GetKeyFn } from '@idux/components/utils'
@@ -41,5 +35,3 @@ export const transferListContext: InjectionKey<TransferListContext> = Symbol('tr
 export const TRANSFER_SOURCE_TOKEN: InjectionKey<TransferBindings> = Symbol('TRANSFER_SOURCE_TOKEN')
 export const TRANSFER_TARGET_TOKEN: InjectionKey<TransferBindings> = Symbol('TRANSFER_TARGET_TOKEN')
 export const TRANSFER_OPERATIONS_TOKEN: InjectionKey<TransferOperationsContext> = Symbol('TRANSFER_OPERATIONS_TOKEN')
-export const TRANSFER_DATA_STRATEGIES: InjectionKey<TransferDataStrategiesConfig | null> =
-  Symbol('TRANSFER_DATA_STRATEGIES')

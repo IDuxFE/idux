@@ -5,26 +5,26 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TransferData, TransferDataStrategies } from '../types'
+import type { TransferData, TransferDataStrategy, TransferProps } from '../types'
+import type { VKey } from '@idux/cdk/utils'
+import type { GetKeyFn } from '@idux/components/utils'
 
-import { inject, onUnmounted } from 'vue'
-
-import { VKey } from '@idux/cdk/utils'
-
-import { TRANSFER_DATA_STRATEGIES } from '../token'
+import { type ComputedRef, computed, onUnmounted } from 'vue'
 
 function createDefaultStrategies<T extends TransferData = TransferData>(
   defaultTargetData: T[] | undefined,
-): TransferDataStrategies<T> {
+): TransferDataStrategy<T> {
   const cachedDataKeyMap: Map<VKey, T> = new Map()
   onUnmounted(() => {
     cachedDataKeyMap.clear()
   })
 
+  const genDataKeys = (data: T[], getKey: GetKeyFn): Set<VKey> => {
+    return new Set(data.map(data => getKey(data)))
+  }
+
   return {
-    genDataKeys: (data, getKey) => {
-      return new Set(data.map(data => getKey(data)))
-    },
+    genDataKeys,
     genDataKeyMap: (dataSource, getKey) => {
       const dataKeyMap = new Map()
 
@@ -42,6 +42,22 @@ function createDefaultStrategies<T extends TransferData = TransferData>(
         }
       })
       return keys
+    },
+    getAllSelectedKeys: (selected, data, selectedKeySet, disabledkeySet, getKey) => {
+      let tempKeys: Set<VKey>
+      if (!selected) {
+        tempKeys = new Set()
+        disabledkeySet.forEach(key => {
+          selectedKeySet.has(key) && tempKeys.add(key)
+        })
+      } else {
+        tempKeys = genDataKeys(data, getKey)
+        disabledkeySet.forEach(key => {
+          !selectedKeySet.has(key) && tempKeys.delete(key)
+        })
+      }
+
+      return Array.from(tempKeys)
     },
     separateDataSource: (dataSource, dataKeyMap, selectedKeySet, getKey) => {
       const sourceData = dataSource.filter(data => !selectedKeySet.has(getKey(data)))
@@ -96,12 +112,14 @@ function createDefaultStrategies<T extends TransferData = TransferData>(
 }
 
 export function useTransferDataStrategies<T extends TransferData = TransferData>(
-  defaultTargetData: T[] | undefined,
-): TransferDataStrategies<T> {
-  const strategies = inject<TransferDataStrategies<T> | null>(TRANSFER_DATA_STRATEGIES, null)
-  const defaultStrategies = createDefaultStrategies<T>(defaultTargetData)
+  props: TransferProps,
+): ComputedRef<TransferDataStrategy<T, VKey>> {
+  const defaultStrategy = createDefaultStrategies<T>((props.defaultTargetData ?? []) as T[])
+  const strategy = computed(() => {
+    return props.dataStrategy
+      ? ({ ...defaultStrategy, ...props.dataStrategy } as TransferDataStrategy<T, VKey>)
+      : defaultStrategy
+  })
 
-  return strategies
-    ? { ...(defaultStrategies as TransferDataStrategies<T>), ...strategies }
-    : (defaultStrategies as TransferDataStrategies<T>)
+  return strategy
 }

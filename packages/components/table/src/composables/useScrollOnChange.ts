@@ -24,23 +24,66 @@ export function useScrollOnChange(
 ): void {
   const mergedScrollToTopOnChange = computed(() => props.scrollToTopOnChange ?? config.scrollToTopOnChange)
 
-  const startOnChangeWatch = () =>
-    watch(
-      [() => mergedPagination.value?.pageIndex, () => mergedPagination.value?.pageSize, activeSorters, activeFilters],
-      () => scrollTo(0),
-    )
-
-  let stopOnChangeWatch: WatchStopHandle | undefined
+  let watchStopHandlers: WatchStopHandle[] = []
+  const startOnChangeWatch = () => {
+    watchStopHandlers = [
+      watch([() => mergedPagination.value?.pageIndex, () => mergedPagination.value?.pageSize], () => scrollTo(0)),
+      watch([activeFilters, activeSorters], ([currentFilters, currentSorters], [formerFilter, formerSorters]) => {
+        if (!compareFilters(currentFilters, formerFilter) || !compareSorters(currentSorters, formerSorters)) {
+          scrollTo(0)
+        }
+      }),
+    ]
+  }
+  const stopOnChangeWatch = () => {
+    watchStopHandlers.forEach(stop => stop())
+  }
 
   watch(
     mergedScrollToTopOnChange,
     scrollToTopOnChange => {
-      stopOnChangeWatch?.()
+      stopOnChangeWatch()
 
       if (scrollToTopOnChange) {
-        stopOnChangeWatch = startOnChangeWatch()
+        startOnChangeWatch()
       }
     },
     { immediate: true },
+  )
+}
+
+function compareFilters(currentFilters: ActiveFilter[], formerFilters: ActiveFilter[]): boolean {
+  return (
+    currentFilters.length === formerFilters.length &&
+    currentFilters.every(filter => {
+      const formerFilter = formerFilters.find(f => f.key === filter.key)
+      if (!formerFilter) {
+        return false
+      }
+
+      return (
+        filter.filter === formerFilter.filter &&
+        filter.filterBy.length === formerFilter.filterBy.length &&
+        filter.filterBy.every(value => formerFilter.filterBy.includes(value))
+      )
+    })
+  )
+}
+
+function compareSorters(currentSorters: ActiveSorter[], formerSorters: ActiveSorter[]): boolean {
+  return (
+    currentSorters.length === formerSorters.length &&
+    currentSorters.every(sorter => {
+      const formerSorter = formerSorters.find(s => s.key === sorter.key)
+      if (!formerSorter) {
+        return false
+      }
+
+      return (
+        sorter.sorter === formerSorter.sorter &&
+        sorter.orderBy === formerSorter.orderBy &&
+        sorter.multiple === formerSorter.multiple
+      )
+    })
   )
 }

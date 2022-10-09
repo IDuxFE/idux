@@ -20,21 +20,28 @@ export interface SeparatedData<T extends TransferData = TransferData> {
   sourceData: T[]
   targetData: T[]
 }
-export interface TransferDataStrategiesConfig<T extends TransferData = TransferData, K = VKey> {
-  genDataKeys?: (data: T[], getKey: GetKeyFn) => Set<K>
-  genDataKeyMap?: (dataSource: T[], getKey: GetKeyFn) => Map<K, T>
-  genDisabledKeys?: (data: T[], getKey: GetKeyFn) => Set<K>
-  separateDataSource?: (
+export interface TransferDataStrategy<T extends TransferData = TransferData, K = VKey> {
+  genDataKeys: (data: T[], getKey: GetKeyFn) => Set<K>
+  genDataKeyMap: (dataSource: T[], getKey: GetKeyFn) => Map<K, T>
+  genDisabledKeys: (data: T[], getKey: GetKeyFn) => Set<K>
+  getAllSelectedKeys: (
+    selected: boolean,
+    data: T[],
+    selectedKeySet: Set<K>,
+    disabledKeySet: Set<K>,
+    getKey: GetKeyFn,
+  ) => K[]
+  separateDataSource: (
     dataSource: T[],
     dataKeyMap: Map<K, T>,
-    selectedKeySet: Set<K>,
+    targetKeySet: Set<K>,
     getKey: GetKeyFn,
   ) => SeparatedData<T>
-  dataFilter?: (data: T[], searchValue: string, searchFn: (item: T, searchValue: string) => boolean) => T[]
-  append?: (keys: K[], selectedKeys: K[], getKey: GetKeyFn) => K[]
-  remove?: (keys: K[], selectedKeys: K[], getKey: GetKeyFn) => K[]
+  dataFilter: (data: T[], searchValue: string, searchFn: (item: T, searchValue: string) => boolean) => T[]
+  append: (keys: K[], targetKeys: K[], getKey: GetKeyFn) => K[]
+  remove: (keys: K[], targetKeys: K[], getKey: GetKeyFn) => K[]
 }
-export type TransferDataStrategies<T extends TransferData = TransferData> = Required<TransferDataStrategiesConfig<T>>
+export type TransferDataStrategyProp<T extends TransferData = TransferData> = Partial<TransferDataStrategy<T>>
 
 export type TransferMode = 'default' | 'immediate'
 
@@ -125,6 +132,7 @@ export const transferProps = {
     type: Array as PropType<TransferData[]>,
     default: (): TransferData[] => [],
   },
+  dataStrategy: Object as PropType<TransferDataStrategyProp>,
   defaultTargetData: Array as PropType<TransferData[]>,
   disabled: {
     type: Boolean,

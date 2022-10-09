@@ -13,7 +13,7 @@ import { TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN } from '@idux/components/t
 import { IxTree } from '@idux/components/tree'
 
 import { useTransferTreeProps } from '../composables/useTransferTreeProps'
-import { proTransferContext } from '../token'
+import { proTransferContext, treeTransferContext } from '../token'
 import { type TreeTransferData, proTransferTreeContentProps } from '../types'
 import { genFlattenedTreeKeys } from '../utils'
 import { renderRemoveIcon } from './RenderRemovableLabel'
@@ -25,14 +25,10 @@ export default defineComponent({
       props: proTransferProps,
       slots,
       mergedPrefixCls,
-      expandedKeysContext,
-      childrenKey,
-      loadSourceChildren,
-      loadTargetChildren,
-      parentKeyMap,
       sourceContentRef,
       targetContentRef,
     } = inject(proTransferContext)!
+    const { expandedKeysContext, childrenKey, loadSourceChildren, loadTargetChildren } = inject(treeTransferContext)!
 
     const proTransferTreeCls = computed(() => `${mergedPrefixCls.value}-tree-content`)
 
@@ -42,7 +38,6 @@ export default defineComponent({
       proTransferProps,
       transferBindings,
       expandedKeysContext!,
-      parentKeyMap!,
       childrenKey,
       props.isSource ? loadSourceChildren! : loadTargetChildren!,
       props.isSource,
