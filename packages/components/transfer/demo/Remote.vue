@@ -9,7 +9,7 @@
     mode="immediate"
     :on-search="handleSearchChange"
   >
-    <template #label="item">{{ item.label ?? 'Option' + item.key }}</template>
+    <template #label="{ item }">{{ item.label ?? 'Option' + item.key }}</template>
   </IxTransfer>
 </template>
 
@@ -22,12 +22,14 @@ interface Data extends TransferData {
   key: number
   value: number
   label: string
+  disabled?: boolean
 }
 
 const allData = Array.from(new Array(1000)).map((_, idx) => ({
   key: idx,
   value: idx,
   label: 'Option' + idx,
+  disabled: idx === 1,
 }))
 
 const selectedKeys = ref<number[]>(Array.from(new Array(50)).map((_, idx) => idx))

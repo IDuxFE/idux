@@ -28,8 +28,14 @@ export default defineComponent({
     } = inject(transferContext)!
 
     const transferBindings = props.isSource ? inject(TRANSFER_SOURCE_TOKEN)! : inject(TRANSFER_TARGET_TOKEN)!
-    const { paginatedDataSource, paginatedData, selectedKeySet, disabledDataSourceKeys, handleSelectChange } =
-      transferBindings
+    const {
+      paginatedDataSource,
+      paginatedData,
+      selectedKeySet,
+      disabledDataSourceKeys,
+      disabledKeys,
+      handleSelectChange,
+    } = transferBindings
     const { triggerRemove } = inject(TRANSFER_OPERATIONS_TOKEN)!
 
     const transferListRef = props.isSource ? sourceTransferListRef : targetTransferListRef
@@ -46,6 +52,9 @@ export default defineComponent({
 
     const checkListData = computed(() =>
       props.isSource && transferProps.mode === 'immediate' ? paginatedDataSource.value : paginatedData.value,
+    )
+    const checkListDisabledKeys = computed(() =>
+      props.isSource && transferProps.mode === 'immediate' ? disabledDataSourceKeys.value : disabledKeys.value,
     )
 
     const defaultBodyRenderer = (prefixCls: string) => {
@@ -82,7 +91,7 @@ export default defineComponent({
           dataSource={checkListData.value}
           getKey={getKey.value}
           checked={item => selectedKeySet.value.has(getKey.value(item))}
-          disabled={item => transferProps.disabled || disabledDataSourceKeys.value.has(getKey.value(item))}
+          disabled={item => transferProps.disabled || checkListDisabledKeys.value.has(getKey.value(item))}
           checkable={props.isSource || transferProps.mode === 'default'}
           removable={!props.isSource && transferProps.mode === 'immediate'}
           virtual={transferProps.virtual}
