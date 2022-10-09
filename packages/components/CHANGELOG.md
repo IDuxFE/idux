@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.9](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.8...v1.0.0-rc.9) (2022-10-09)
+
+
+### Bug Fixes
+
+* **comp:button:** update the link button style ([#1174](https://github.com/IDuxFE/idux/issues/1174)) ([d21cdaa](https://github.com/IDuxFE/idux/commit/d21cdaa6628f529aae7360875efca46528c8f51a))
+* **comp:date-picker:** inputs should check disabled dates ([#1165](https://github.com/IDuxFE/idux/issues/1165)) ([c122215](https://github.com/IDuxFE/idux/commit/c122215dcc956f5cb9860dbe9a1107322fd2c822))
+* **comp:select:** input shouldn't trigger when allowInput is false ([#1168](https://github.com/IDuxFE/idux/issues/1168)) ([43b0802](https://github.com/IDuxFE/idux/commit/43b080281a04c1c119f6578827a152aeffdc9016))
+* **comp:table:** th with center align not work ([#1183](https://github.com/IDuxFE/idux/issues/1183)) ([fe7482b](https://github.com/IDuxFE/idux/commit/fe7482b3b756568d47e1c215b159d293c643c5c5))
+* **comp:table:** the pageIndex and pageSize should be controlled ([#1167](https://github.com/IDuxFE/idux/issues/1167)) ([648f832](https://github.com/IDuxFE/idux/commit/648f8326b3203813e6624d5bab0fe4862d844933))
+* **comp:table:** the scroll body is incorrect, when virtual enabled ([#1175](https://github.com/IDuxFE/idux/issues/1175)) ([295c9ad](https://github.com/IDuxFE/idux/commit/295c9ad3f87a08ee67fde04e861f9ec3b389b110))
+* **comp:tabs:** adaptive width when title changes ([#1177](https://github.com/IDuxFE/idux/issues/1177)) ([a066a19](https://github.com/IDuxFE/idux/commit/a066a1904dbcc65efc2d3ca58d1019b3d47430d3)), closes [#1163](https://github.com/IDuxFE/idux/issues/1163)
+* **comp:time-picker:** inputs should check disabled time ([#1164](https://github.com/IDuxFE/idux/issues/1164)) ([d0d4191](https://github.com/IDuxFE/idux/commit/d0d41910b5a2aa8ed40dd326b9cbd1f0ab0aaf4f))
+* **comp:upload:** fix incorrect class name when has not status ([#1126](https://github.com/IDuxFE/idux/issues/1126)) ([464ca5b](https://github.com/IDuxFE/idux/commit/464ca5b17a3083bda4ddf96e9d0cd71100a476b6))
+
+
+### Features
+
+* **comp:*:** all input components support setting status ([#1171](https://github.com/IDuxFE/idux/issues/1171)) ([c0935b2](https://github.com/IDuxFE/idux/commit/c0935b2becc61380ed06042f2f43cbeed3220228)), closes [#1099](https://github.com/IDuxFE/idux/issues/1099)
+* **comp:*:** overlay is now hidden as trigger overflows scroll parents ([#1173](https://github.com/IDuxFE/idux/issues/1173)) ([3ee8e86](https://github.com/IDuxFE/idux/commit/3ee8e866c14be1b25af05d1dc78de75d07e00f99))
+* **comp:table:** add `scrollToTopOnChange` support ([#1169](https://github.com/IDuxFE/idux/issues/1169)) ([464bf40](https://github.com/IDuxFE/idux/commit/464bf404065e75ac63ac7c32035960580bb6586b))
+* **comp:textarea:** autoRows supports setting min and max separately ([#1166](https://github.com/IDuxFE/idux/issues/1166)) ([3829665](https://github.com/IDuxFE/idux/commit/382966521ba0f2a2b1eac0078e82921295a99059))
+* **comp:transfer:** export IxTransferList component ([#1143](https://github.com/IDuxFE/idux/issues/1143)) ([fba1a5d](https://github.com/IDuxFE/idux/commit/fba1a5de84b3cf0378176d9d826fd9f997d9989c))
+* **comp:tree:** cascaderStratery instead of cascade and checkStratety ([#1172](https://github.com/IDuxFE/idux/issues/1172)) ([aedf5d8](https://github.com/IDuxFE/idux/commit/aedf5d865ad34b203bb1695cffcb4883ed6aa039))
+* **comp:upload:** actions and files are optional ([#1128](https://github.com/IDuxFE/idux/issues/1128)) ([7e9bee3](https://github.com/IDuxFE/idux/commit/7e9bee323c6d3779d04d98241445f821afebf6b7))
+* **pro:transfer:** add cascade strategy `off` ([#1186](https://github.com/IDuxFE/idux/issues/1186)) ([1df412f](https://github.com/IDuxFE/idux/commit/1df412f927e0b5453cf617eb603d8917ddcb442d))
+* **pro:transfer:** add tree transfer `cascadeStrategy` support ([#1155](https://github.com/IDuxFE/idux/issues/1155)) ([470bf8d](https://github.com/IDuxFE/idux/commit/470bf8d982a5f99670eaa0b5342f88220b4997f7))
+
+
+### BREAKING CHANGES
+
+* **comp:tree:** `cascade` and `checkStrategy` are deprecated, please use `cascaderStrategy` instead.
+* **comp:transfer:** '.ix-transfer-list' class now changed to '.ix-transfer-content'
+
+
+
+
+
 # [1.0.0-rc.8](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.7...v1.0.0-rc.8) (2022-09-23)
 
 

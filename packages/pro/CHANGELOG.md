@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.9](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.8...v1.0.0-rc.9) (2022-10-09)
+
+
+### Bug Fixes
+
+* **pro:layout:** correct router-link's path ([#1179](https://github.com/IDuxFE/idux/issues/1179)) ([#1181](https://github.com/IDuxFE/idux/issues/1181)) ([fd24ccf](https://github.com/IDuxFE/idux/commit/fd24ccfde67ea2a59d5754db9b8222b29477176c))
+* **pro:layout:** remove [display: flex] from [menu-vertical] ([#1178](https://github.com/IDuxFE/idux/issues/1178)) ([#1180](https://github.com/IDuxFE/idux/issues/1180)) ([b839427](https://github.com/IDuxFE/idux/commit/b83942770675b57d949434f6f9f496ae7602f74d))
+* **pro:search:** fix onVisibleChange and segment state initialization ([#1162](https://github.com/IDuxFE/idux/issues/1162)) ([d8ea09c](https://github.com/IDuxFE/idux/commit/d8ea09c285e765b1f364f19da7f19d81897ddf8a))
+* **pro:search:** pro search btn click shoudn't trigger foucs ([#1185](https://github.com/IDuxFE/idux/issues/1185)) ([bbb1e41](https://github.com/IDuxFE/idux/commit/bbb1e416cf0ac0ef6c7720f6dd02a9562bc4fb38))
+
+
+### Features
+
+* **comp:*:** all input components support setting status ([#1171](https://github.com/IDuxFE/idux/issues/1171)) ([c0935b2](https://github.com/IDuxFE/idux/commit/c0935b2becc61380ed06042f2f43cbeed3220228)), closes [#1099](https://github.com/IDuxFE/idux/issues/1099)
+* **comp:table:** add `scrollToTopOnChange` support ([#1169](https://github.com/IDuxFE/idux/issues/1169)) ([464bf40](https://github.com/IDuxFE/idux/commit/464bf404065e75ac63ac7c32035960580bb6586b))
+* **comp:transfer:** export IxTransferList component ([#1143](https://github.com/IDuxFE/idux/issues/1143)) ([fba1a5d](https://github.com/IDuxFE/idux/commit/fba1a5de84b3cf0378176d9d826fd9f997d9989c))
+* **comp:tree:** cascaderStratery instead of cascade and checkStratety ([#1172](https://github.com/IDuxFE/idux/issues/1172)) ([aedf5d8](https://github.com/IDuxFE/idux/commit/aedf5d865ad34b203bb1695cffcb4883ed6aa039))
+* **pro:transfer:** add cascade strategy `off` ([#1186](https://github.com/IDuxFE/idux/issues/1186)) ([1df412f](https://github.com/IDuxFE/idux/commit/1df412f927e0b5453cf617eb603d8917ddcb442d))
+* **pro:transfer:** add tree transfer `cascadeStrategy` support ([#1155](https://github.com/IDuxFE/idux/issues/1155)) ([470bf8d](https://github.com/IDuxFE/idux/commit/470bf8d982a5f99670eaa0b5342f88220b4997f7))
+
+
+### BREAKING CHANGES
+
+* **comp:tree:** `cascade` and `checkStrategy` are deprecated, please use `cascaderStrategy` instead.
+* **comp:transfer:** '.ix-transfer-list' class now changed to '.ix-transfer-content'
+
+
+
+
+
 # [1.0.0-rc.8](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.7...v1.0.0-rc.8) (2022-09-23)
 
 

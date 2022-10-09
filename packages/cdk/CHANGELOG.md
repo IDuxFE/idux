@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.9](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.8...v1.0.0-rc.9) (2022-10-09)
+
+
+### Bug Fixes
+
+* **comp:table:** the scroll body is incorrect, when virtual enabled ([#1175](https://github.com/IDuxFE/idux/issues/1175)) ([295c9ad](https://github.com/IDuxFE/idux/commit/295c9ad3f87a08ee67fde04e861f9ec3b389b110))
+
+
+### Features
+
+* **comp:*:** overlay is now hidden as trigger overflows scroll parents ([#1173](https://github.com/IDuxFE/idux/issues/1173)) ([3ee8e86](https://github.com/IDuxFE/idux/commit/3ee8e866c14be1b25af05d1dc78de75d07e00f99))
+
+
+
+
+
 # [1.0.0-rc.8](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.7...v1.0.0-rc.8) (2022-09-23)
 
 
