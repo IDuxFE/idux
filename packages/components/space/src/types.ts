@@ -19,16 +19,8 @@ export const spaceProps = {
     type: Boolean,
     default: undefined,
   },
-  /**
-   * @deprecated please use `vertical` instead'
-   */
-  direction: String as PropType<SpaceDirection>,
   justify: String as PropType<SpaceJustify>,
   size: [Number, String, Array] as PropType<number | string | (string | number)[]>,
-  /**
-   * @deprecated please use `separator` instead'
-   */
-  split: String,
   separator: String,
   vertical: {
     type: Boolean,
@@ -41,6 +33,6 @@ export const spaceProps = {
 }
 
 export type SpaceProps = ExtractInnerPropTypes<typeof spaceProps>
-export type SpacePublicProps = Omit<ExtractPublicPropTypes<typeof spaceProps>, 'direction'>
+export type SpacePublicProps = ExtractPublicPropTypes<typeof spaceProps>
 export type SpaceComponent = DefineComponent<Omit<HTMLAttributes, keyof SpacePublicProps> & SpacePublicProps>
 export type SpaceInstance = InstanceType<DefineComponent<SpaceProps>>

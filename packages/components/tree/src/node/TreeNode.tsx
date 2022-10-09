@@ -156,7 +156,6 @@ export default defineComponent({
           onDragover={mergedDraggable ? onDragover : undefined}
           onDragleave={mergedDraggable ? onDragleave : undefined}
           onDrop={mergedDraggable && !dropDisabled ? onDrop : undefined}
-          {...rawNode.additional}
           {...customAdditional}
         >
           <Indent level={level} noopIdentUnitArr={noopIdentUnitArr} prefixCls={mergedPrefixCls.value} />

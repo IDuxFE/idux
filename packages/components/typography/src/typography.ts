@@ -17,7 +17,7 @@ import { Logger, addClass, removeClass } from '@idux/cdk/utils'
  */
 const typography: FunctionDirective<HTMLElement, TypographyProps> = (el, binding) => {
   if (__DEV__) {
-    Logger.warn('components/typography', 'the `typography` was deprecated.')
+    Logger.warn('components/typography', 'the directive was deprecated.')
   }
   const className: string[] = ['ix-typography']
   const { value, oldValue } = binding

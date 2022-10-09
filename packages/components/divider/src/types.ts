@@ -20,9 +20,7 @@ export const dividerProps = {
     type: Boolean,
     default: undefined,
   },
-  position: String as PropType<'left' | 'center' | 'right'>,
   size: String as PropType<'sm' | 'md' | 'lg'>,
-  type: String as PropType<'horizontal' | 'vertical'>,
   vertical: {
     type: Boolean,
     default: undefined,

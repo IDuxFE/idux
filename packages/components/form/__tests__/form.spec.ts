@@ -321,16 +321,6 @@ describe('Form', () => {
       expect(wrapper.find('.ix-form-item-description').text()).toBe(description)
     })
 
-    test('extraMessage slot work', async () => {
-      const description = 'extraMessage'
-      const wrapper = FormItemMount({
-        props: { label: 'Username', description },
-        slots: { default: () => h(IxInput), description: () => 'description slot' },
-      })
-
-      expect(wrapper.find('.ix-form-item-description').text()).toBe('description slot')
-    })
-
     test('label work', async () => {
       let label = 'label'
       const wrapper = FormItemMount({

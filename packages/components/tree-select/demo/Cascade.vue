@@ -3,7 +3,7 @@
     v-model:value="value"
     v-model:expandedKeys="expandedKeys"
     placeholder="级联"
-    cascade
+    cascaderStrategy="all"
     checkable
     multiple
     :dataSource="treeData"

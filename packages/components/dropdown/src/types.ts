@@ -42,13 +42,6 @@ export const dropdownProps = {
     type: Boolean,
     default: undefined,
   },
-  /**
-   * @deprecated please use `overlayContainer` instead'
-   */
-  target: {
-    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
-    default: undefined,
-  },
   trigger: ɵOverlayTriggerDef,
 
   // events
@@ -56,6 +49,6 @@ export const dropdownProps = {
 } as const
 
 export type DropdownProps = ExtractInnerPropTypes<typeof dropdownProps>
-export type DropdownPublicProps = Omit<ExtractPublicPropTypes<typeof dropdownProps>, 'target'>
+export type DropdownPublicProps = ExtractPublicPropTypes<typeof dropdownProps>
 export type DropdownComponent = DefineComponent<Omit<HTMLAttributes, keyof DropdownPublicProps> & DropdownPublicProps>
 export type DropdownInstance = InstanceType<DefineComponent<DropdownProps>>

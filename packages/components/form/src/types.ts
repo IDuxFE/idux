@@ -21,30 +21,16 @@ export const formProps = {
   },
   controlCol: colProp,
   controlTooltipIcon: String,
-  /**
-   * @deprecated
-   */
-  hasFeedback: {
-    type: Boolean,
-    default: undefined,
-  },
   labelAlign: String as PropType<FormLabelAlign>,
   labelCol: colProp,
   labelTooltipIcon: String,
   layout: String as PropType<FormLayout>,
   messageTooltip: { type: [Boolean, Object] as PropType<boolean | TooltipProps>, default: false },
   size: String as PropType<FormSize>,
-  /**
-   * @deprecated
-   */
-  statusIcon: {
-    type: [Boolean, Object] as PropType<boolean | Record<ValidateStatus, string>>,
-    default: false,
-  },
 } as const
 
 export type FormProps = ExtractInnerPropTypes<typeof formProps>
-export type FormPublicProps = Omit<ExtractPublicPropTypes<typeof formProps>, 'hasFeedback' | 'statusIcon'>
+export type FormPublicProps = ExtractPublicPropTypes<typeof formProps>
 export type FormComponent = DefineComponent<Omit<HTMLAttributes, keyof FormPublicProps> & FormPublicProps>
 export type FormInstance = InstanceType<DefineComponent<FormProps>>
 
@@ -58,21 +44,6 @@ export const formItemProps = {
   controlTooltip: String,
   controlTooltipIcon: String,
   description: String,
-  /**
-   * @deprecated
-   */
-  hasFeedback: {
-    type: Boolean,
-    default: undefined,
-  },
-  /**
-   * @deprecated Use `description` instead.
-   */
-  extra: String,
-  /**
-   * @deprecated Use `description` instead.
-   */
-  extraMessage: String,
   label: [String, Number] as PropType<string | number>,
   labelAlign: String as PropType<FormLabelAlign>,
   labelCol: colProp,
@@ -88,20 +59,10 @@ export const formItemProps = {
   >,
   messageTooltip: { type: [Boolean, Object] as PropType<boolean | TooltipProps>, default: undefined },
   status: String as PropType<ValidateStatus>,
-  /**
-   * @deprecated
-   */
-  statusIcon: {
-    type: [Boolean, Object] as PropType<boolean | Record<ValidateStatus, string>>,
-    default: undefined,
-  },
 } as const
 
 export type FormItemProps = ExtractInnerPropTypes<typeof formItemProps>
-export type FormItemPublicProps = Omit<
-  ExtractPublicPropTypes<typeof formItemProps>,
-  'extra' | 'extraMessage' | 'hasFeedback' | 'statusIcon'
->
+export type FormItemPublicProps = ExtractPublicPropTypes<typeof formItemProps>
 export type FormItemComponent = DefineComponent<
   Omit<HTMLAttributes, keyof FormItemPublicProps> & FormItemPublicProps & RowProps
 >

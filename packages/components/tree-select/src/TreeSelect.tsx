@@ -9,17 +9,16 @@ import { computed, defineComponent, normalizeClass, provide, ref, watch } from '
 
 import { useAccessorAndControl } from '@idux/cdk/forms'
 import { type VirtualScrollToFn } from '@idux/cdk/scroll'
-import { Logger, type VKey, useControlledProp, useState } from '@idux/cdk/utils'
+import { type VKey, useControlledProp, useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister, useFormSize, useFormStatus } from '@idux/components/form'
 import { ɵUseOverlayState } from '@idux/components/select'
 import { type TreeInstance } from '@idux/components/tree'
-import { useOverlayContainer } from '@idux/components/utils'
+import { useGetKey, useOverlayContainer } from '@idux/components/utils'
 
 import { useMergeNodes } from './composables/useDataSource'
-import { useGetNodeKey } from './composables/useGetNodeKey'
 import { useSelectedState } from './composables/useSelectedState'
 import Content from './content/Content'
 import { treeSelectToken } from './token'
@@ -38,7 +37,7 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tree-select`)
     const mergedOverlayContainer = useOverlayContainer(props, config, common, mergedPrefixCls)
     const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
-    const mergedGetKey = useGetNodeKey(props, config)
+    const mergedGetKey = useGetKey(props, config, 'components/tree-select')
     const mergedLabelKey = computed(() => props.labelKey ?? config.labelKey)
 
     const triggerRef = ref<ɵSelectorInstance>()
@@ -154,7 +153,7 @@ export default defineComponent({
         config={config}
         dataSource={selectedNodes.value}
         disabled={accessor.disabled}
-        maxLabel={props.maxLabelCount ?? props.maxLabel}
+        maxLabel={props.maxLabel}
         multiple={props.multiple}
         opened={overlayOpened.value}
         placeholder={props.placeholder}
@@ -177,29 +176,6 @@ export default defineComponent({
     )
 
     const renderContent = () => <Content onClick={handleOverlayClick} />
-
-    if (__DEV__) {
-      props.cascade &&
-        Logger.warn(
-          'components/tree-select',
-          'the `cascade` and `checkStrategy` are deprecated, please use `cascaderStrategy` instead.',
-        )
-      if (props.maxLabelCount) {
-        Logger.warn('components/tree-select', 'the `maxLabelCount` are deprecated, please use `maxLabel` instead.')
-      }
-      if (props.nodeKey) {
-        Logger.warn('components/tree-select', 'the `nodeKey` are deprecated, please use `getKey` instead.')
-      }
-      if (props.target) {
-        Logger.warn('components/tree-select', 'the `target` are deprecated, please use `overlayContainer` instead.')
-      }
-      if (props.dataSource?.some(data => data.additional)) {
-        Logger.warn(
-          'components/tree-select',
-          'the `additional` of TreeNode was deprecated, please use `customAdditional` instead.',
-        )
-      }
-    }
 
     return () => {
       const overlayProps = {

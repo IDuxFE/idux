@@ -31,6 +31,7 @@ const columns: TableColumn<Data>[] = [
     customCell: 'name',
   },
   {
+    key: 'other',
     title: 'Other',
     children: [
       {
@@ -39,6 +40,7 @@ const columns: TableColumn<Data>[] = [
         width: 150,
       },
       {
+        key: 'address',
         title: 'Address',
         children: [
           {
@@ -48,6 +50,7 @@ const columns: TableColumn<Data>[] = [
             width: 150,
           },
           {
+            key: 'block',
             title: 'Block',
             children: [
               {
@@ -67,6 +70,7 @@ const columns: TableColumn<Data>[] = [
     ],
   },
   {
+    key: 'company',
     title: 'Company',
     children: [
       {

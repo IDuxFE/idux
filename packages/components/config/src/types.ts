@@ -208,10 +208,6 @@ export interface DrawerConfig {
   height: string | number
   mask: boolean
   maskClosable: boolean
-  /**
-   * @deprecated please use `container` instead'
-   */
-  target?: PortalTargetType
   width: string | number
 }
 
@@ -222,10 +218,6 @@ export interface DropdownConfig {
   overlayContainer?: PortalTargetType
   placement: PopperPlacement
   showArrow: boolean
-  /**
-   * @deprecated please use `overlayContainer` instead'
-   */
-  target?: PortalTargetType
   trigger: PopperTrigger
 }
 
@@ -279,10 +271,6 @@ export interface ImageViewerConfig {
   container?: PortalTargetType
   loop: boolean
   maskClosable: boolean
-  /**
-   * @deprecated please use `container` instead'
-   */
-  target?: PortalTargetType
   zoom: number[]
 }
 
@@ -292,10 +280,6 @@ export interface MenuConfig {
   offset: [number, number]
   overlayContainer?: PortalTargetType
   suffix: string
-  /**
-   * @deprecated please use `overlayContainer` instead'
-   */
-  target?: PortalTargetType
   theme: MenuTheme
 }
 
@@ -305,10 +289,6 @@ export interface MessageConfig {
   duration: number
   icon: Partial<Record<MessageType, string | VNode>>
   maxCount: number
-  /**
-   * @deprecated please use `container` instead'
-   */
-  target?: PortalTargetType
   top?: number | string
 }
 
@@ -321,10 +301,6 @@ export interface ModalConfig {
   icon?: Partial<Record<ModalType, string | VNode>>
   mask: boolean
   maskClosable: boolean
-  /**
-   * @deprecated please use `container` instead'
-   */
-  target?: PortalTargetType
   width: string | number
 }
 
@@ -337,10 +313,6 @@ export interface NotificationConfig {
   maxCount: number
   offset: number | string | (string | number)[]
   placement: NotificationPlacement
-  /**
-   * @deprecated please use `container` instead'
-   */
-  target?: PortalTargetType
 }
 
 export interface PaginationConfig {
@@ -360,10 +332,6 @@ export interface PopconfirmConfig {
   destroyOnHide: boolean
   overlayContainer?: PortalTargetType
   placement: PopperPlacement
-  /**
-   * @deprecated please use `overlayContainer` instead'
-   */
-  target?: PortalTargetType
   trigger: PopperTrigger
 }
 
@@ -373,10 +341,6 @@ export interface PopoverConfig {
   destroyOnHide: boolean
   overlayContainer?: PortalTargetType
   placement: PopperPlacement
-  /**
-   * @deprecated please use `overlayContainer` instead'
-   */
-  target?: PortalTargetType
   showArrow: boolean
   trigger: PopperTrigger
   closeIcon: string
@@ -422,14 +386,6 @@ export interface SelectConfig {
   overlayMatchWidth: boolean
   size: FormSize
   suffix: string
-  /**
-   * @deprecated please use `overlayContainer` instead'
-   */
-  target?: PortalTargetType
-  /**
-   * @deprecated please use `getKey` instead'
-   */
-  valueKey?: string
 }
 
 export interface SkeletonConfig {
@@ -478,10 +434,6 @@ export interface TableConfig {
   borderless: boolean
   childrenKey: string
   getKey: string | ((data: any) => any)
-  /**
-   * @deprecated please use `getKey` instead'
-   */
-  rowKey?: string
   size: TableSize
   scrollToTopOnChange?: boolean
 
@@ -549,10 +501,6 @@ export interface TooltipConfig {
   destroyOnHide: boolean
   overlayContainer?: PortalTargetType
   placement: PopperPlacement
-  /**
-   * @deprecated please use `overlayContainer` instead'
-   */
-  target?: PortalTargetType
   trigger: PopperTrigger
 }
 
@@ -564,10 +512,6 @@ export interface TreeConfig {
   draggableIcon: string
   getKey: string | ((data: TreeNode<any>) => any)
   labelKey: string
-  /**
-   * @deprecated please use `getKey` instead'
-   */
-  nodeKey?: string
   showLine: boolean
 }
 
@@ -577,18 +521,10 @@ export interface TreeSelectConfig {
   clearIcon: string
   getKey: string | ((data: TreeNode<any>) => any)
   labelKey: string
-  /**
-   * @deprecated please use `getKey` instead'
-   */
-  nodeKey?: string
   overlayContainer?: PortalTargetType
   overlayMatchWidth: boolean
   size: FormSize
   suffix: string
-  /**
-   * @deprecated please use `overlayContainer` instead'
-   */
-  target?: PortalTargetType
 }
 
 export interface UploadConfig {

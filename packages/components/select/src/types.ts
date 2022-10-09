@@ -61,17 +61,9 @@ export const selectProps = {
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
   getKey: { type: [String, Function] as PropType<string | ((data: SelectData) => VKey)>, default: undefined },
   labelKey: { type: String, default: undefined },
-  /**
-   * @deprecated please use `maxLabel` instead'
-   */
-  maxLabelCount: { type: [Number, String] as PropType<number | 'responsive'>, default: undefined },
   maxLabel: { type: [Number, String] as PropType<number | 'responsive'>, default: Number.MAX_SAFE_INTEGER },
   multiple: { type: Boolean, default: false },
   multipleLimit: { type: Number, default: Number.MAX_SAFE_INTEGER },
-  /**
-   * @deprecated please use `dataSource` instead'
-   */
-  options: { type: Array as PropType<SelectData[]>, default: undefined },
   overlayClassName: { type: String, default: undefined },
   overlayContainer: {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
@@ -82,25 +74,10 @@ export const selectProps = {
   placeholder: { type: String, default: undefined },
   readonly: { type: Boolean, default: false },
   searchable: { type: [Boolean, String] as PropType<boolean | 'overlay'>, default: false },
-  /**
-   * @deprecated please use `searchFn` instead'
-   */
-  searchFilter: { type: [Boolean, Function] as PropType<boolean | SelectSearchFn>, default: undefined },
   searchFn: { type: [Boolean, Function] as PropType<boolean | SelectSearchFn>, default: true },
   size: { type: String as PropType<FormSize>, default: undefined },
   status: String as PropType<ValidateStatus>,
   suffix: { type: String, default: undefined },
-  /**
-   * @deprecated please use `overlayContainer` instead'
-   */
-  target: {
-    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
-    default: undefined,
-  },
-  /**
-   * @deprecated please use `getKey` instead'
-   */
-  valueKey: { type: String, default: undefined },
   virtual: { type: Boolean, default: false },
 
   // events
@@ -136,10 +113,7 @@ export type SelectPanelComponent = DefineComponent<
 export type SelectPanelInstance = InstanceType<DefineComponent<SelectPanelProps, SelectPanelBindings>>
 
 export type SelectProps = ExtractInnerPropTypes<typeof selectProps>
-export type SelectPublicProps = Omit<
-  ExtractPublicPropTypes<typeof selectProps>,
-  'maxLabelCount' | 'options' | 'searchFilter' | 'overlayHeight' | 'overlayItemHeight' | 'target' | 'valueKey'
->
+export type SelectPublicProps = Omit<ExtractPublicPropTypes<typeof selectProps>, 'overlayHeight' | 'overlayItemHeight'>
 export interface SelectBindings {
   blur: () => void
   focus: (options?: FocusOptions) => void
@@ -157,15 +131,6 @@ export type SelectCustomAdditional = (options: {
 }) => Record<string, any> | undefined
 
 export interface SelectOptionProps<K = VKey> {
-  /**
-   * @deprecated please use `customAdditional` instead'
-   */
-  additional?: {
-    class?: any
-    style?: any
-    [key: string]: unknown
-  }
-
   disabled?: boolean
   key?: K
   label?: string | number
@@ -174,21 +139,12 @@ export interface SelectOptionProps<K = VKey> {
 
   [key: string]: any
 }
-export type SelectOptionPublicProps = Omit<SelectOptionProps, 'additional'>
+export type SelectOptionPublicProps = SelectOptionProps
 export type SelectOptionComponent = FunctionalComponent<
   Omit<HTMLAttributes, keyof SelectOptionPublicProps> & SelectOptionPublicProps
 >
 
 export interface SelectOptionGroupProps<K = VKey> {
-  /**
-   * @deprecated please use `customAdditional` instead'
-   */
-  additional?: {
-    class?: any
-    style?: any
-    [key: string]: unknown
-  }
-
   children?: SelectOptionProps<K>[]
   key?: K
   label?: string | number
@@ -197,7 +153,7 @@ export interface SelectOptionGroupProps<K = VKey> {
 
   [key: string]: any
 }
-export type SelectOptionGroupPublicProps = Omit<SelectOptionGroupProps, 'additional'>
+export type SelectOptionGroupPublicProps = SelectOptionGroupProps
 export type SelectOptionGroupComponent = FunctionalComponent<
   Omit<HTMLAttributes, keyof SelectOptionGroupPublicProps> & SelectOptionGroupPublicProps
 >

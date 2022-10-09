@@ -19,7 +19,6 @@ export const radioProps = {
 
   autofocus: { type: Boolean, default: false },
   buttoned: { type: Boolean, default: undefined },
-
   disabled: { type: Boolean, default: undefined },
   label: { type: String, default: undefined },
   mode: { type: String as PropType<RadioMode>, default: undefined },
@@ -55,10 +54,6 @@ export const radioGroupProps = {
   gap: { type: [Number, String] as PropType<number | string>, default: undefined },
   name: { type: String, default: undefined },
   mode: { type: String as PropType<RadioMode>, default: undefined },
-  /**
-   * @deprecated please use `dataSource` instead'
-   */
-  options: { type: Array as PropType<RadioData[]> },
   size: { type: String as PropType<FormSize>, default: 'md' },
   vertical: { type: Boolean, default: false },
 
@@ -68,13 +63,13 @@ export const radioGroupProps = {
 } as const
 
 export type RadioGroupProps = ExtractInnerPropTypes<typeof radioGroupProps>
-export type RadioGroupPublicProps = Omit<ExtractPublicPropTypes<typeof radioGroupProps>, 'options'>
+export type RadioGroupPublicProps = ExtractPublicPropTypes<typeof radioGroupProps>
 export type RadioGroupComponent = DefineComponent<
   Omit<HTMLAttributes, keyof RadioGroupPublicProps> & RadioGroupPublicProps
 >
 export type RadioGroupInstance = InstanceType<DefineComponent<RadioGroupProps>>
 
 export type RadioMode = 'default' | 'primary'
-export interface RadioData<K = VKey> extends RadioPublicProps {
+export interface RadioData<K = VKey> extends Omit<RadioPublicProps, 'value'> {
   key?: K
 }

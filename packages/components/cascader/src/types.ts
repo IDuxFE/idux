@@ -100,16 +100,6 @@ export type CascaderCustomAdditional = (options: {
 }) => Record<string, any> | undefined
 
 export interface CascaderData<K = VKey> {
-  /**
-   * @deprecated please use `customAdditional` instead'
-   */
-  additional?: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    class?: any
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    style?: any
-    [key: string]: unknown
-  }
   children?: CascaderData<K>[]
   disabled?: boolean
   isLeaf?: boolean

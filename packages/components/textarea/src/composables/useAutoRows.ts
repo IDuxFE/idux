@@ -222,7 +222,7 @@ export function useAutoRows(
         { immediate: true },
       ),
     ]
-    const { stop: stopResizeObserver } = useResizeObserver(textareaRef, onResize)
+    const stopResizeObserver = useResizeObserver(textareaRef, onResize)
     stopWatch = () => {
       watchStopHandlers.forEach(stop => stop())
       stopResizeObserver()

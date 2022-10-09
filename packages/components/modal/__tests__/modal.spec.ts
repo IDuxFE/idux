@@ -376,20 +376,6 @@ describe('Modal', () => {
     expect(contentDom.style.width).toBe('20%')
   })
 
-  test('wrapperClassName work', async () => {
-    let wrapperClassName = 'test-container'
-    const wrapper = ModalMount({ props: { wrapperClassName } })
-    const modalWrapper = wrapper.getComponent(ModalWrapper)
-
-    expect(modalWrapper.classes()).toContain(wrapperClassName)
-
-    wrapperClassName = 'test-container2'
-
-    await wrapper.setProps({ wrapperClassName })
-
-    expect(modalWrapper.classes()).toContain(wrapperClassName)
-  })
-
   test('zIndex work', async () => {
     const wrapper = ModalMount({ props: { zIndex: 1001 } })
     expect(document.querySelector('.ix-modal-wrapper')!.getAttribute('style')).toContain('z-index: 1001')

@@ -19,7 +19,7 @@ import { ComputedRef, Ref, TransitionGroup, cloneVNode, computed, defineComponen
 import { isArray, isUndefined, pickBy } from 'lodash-es'
 
 import { CdkPortal } from '@idux/cdk/portal'
-import { Logger, VKey, callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
+import { VKey, callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { usePortalTarget } from '@idux/components/utils'
 
@@ -52,12 +52,6 @@ export default defineComponent({
 
     provide(notificationProviderToken, apis)
     expose(apis)
-
-    if (__DEV__) {
-      if (props.target) {
-        Logger.warn('components/notification', 'the `target` was deprecated, please use `container` instead.')
-      }
-    }
 
     return () => {
       const getChild = (notifications: NotificationOptions[]) => {

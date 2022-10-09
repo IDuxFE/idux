@@ -69,7 +69,6 @@ export default defineComponent({
           v-slots={{ default: slots.label && (() => slots.label?.(item)) }}
           onCheckChange={onCheckChange}
           onRemove={onRemove}
-          {...(item.additional ?? {})}
           {...customAdditional}
         />
       )

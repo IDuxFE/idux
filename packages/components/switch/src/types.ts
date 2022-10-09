@@ -20,7 +20,7 @@ export const switchProps = {
 
   // events
   'onUpdate:checked': [Function, Array] as PropType<MaybeArray<(checked: boolean) => void>>,
-  onChange: [Function, Array] as PropType<MaybeArray<(checked: boolean) => void>>,
+  onChange: [Function, Array] as PropType<MaybeArray<(checked: boolean, oldChecked: boolean) => void>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
 } as const

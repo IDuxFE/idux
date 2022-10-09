@@ -52,12 +52,12 @@ export default defineComponent({
     })
 
     return () => {
-      const { icon, label, slots = {}, customIcon, customLabel, customSuffix } = props.data
-      const iconRender = customIcon ?? slots.icon ?? 'subIcon'
+      const { icon, label, customIcon, customLabel, customSuffix } = props.data
+      const iconRender = customIcon ?? 'subIcon'
       const iconSlot = isString(iconRender) ? menuSlots[iconRender] : iconRender
-      const labelRender = customLabel ?? slots.label ?? 'subLabel'
+      const labelRender = customLabel ?? 'subLabel'
       const labelSlot = isString(labelRender) ? menuSlots[labelRender] : labelRender
-      const suffixRender = customSuffix ?? slots.suffix ?? 'subSuffix'
+      const suffixRender = customSuffix ?? 'subSuffix'
       const suffixSlot = isString(suffixRender) ? menuSlots[suffixRender] : suffixRender
 
       const slotProps =

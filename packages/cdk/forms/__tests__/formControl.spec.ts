@@ -71,7 +71,7 @@ describe('formControl.ts', () => {
     test('validate work', async () => {
       expect(await control.validate()).toBeUndefined()
 
-      control.setValidator(Validators.required)
+      control.setValidators(Validators.required)
 
       expect(await control.validate()).toEqual({ required: { message: zhCNMessages.required({}, control) } })
     })
@@ -196,20 +196,6 @@ describe('formControl.ts', () => {
       control.setValue(' test ')
 
       expect(control.getValue()).toEqual(' test ')
-    })
-
-    test('trim enable work', () => {
-      control = new FormControl<string>('', { trim: true })
-
-      expect(control.getValue()).toEqual('')
-
-      control.setValue('test ')
-
-      expect(control.getValue()).toEqual('test')
-
-      control.setValue(' test')
-
-      expect(control.getValue()).toEqual('test')
     })
   })
 })

@@ -57,13 +57,6 @@ export const notificationProviderProps = {
   },
   maxCount: Number,
   offset: [String, Number, Array] as PropType<string | number | (number | string)[]>,
-  /**
-   * @deprecated please use `container` instead'
-   */
-  target: {
-    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
-    default: undefined,
-  },
 } as const
 
 export type NotificationType = typeof notificationType[number]
@@ -101,7 +94,7 @@ export interface NotificationRef<K = VKey> {
 }
 
 export type NotificationProviderProps = ExtractInnerPropTypes<typeof notificationProviderProps>
-export type NotificationProviderPublicProps = Omit<ExtractPublicPropTypes<typeof notificationProviderProps>, 'target'>
+export type NotificationProviderPublicProps = ExtractPublicPropTypes<typeof notificationProviderProps>
 export type NotificationProviderComponent = DefineComponent<
   Omit<HTMLAttributes, keyof NotificationProviderPublicProps> & NotificationProviderPublicProps
 >

@@ -7,7 +7,6 @@
 
 import { computed, defineComponent, normalizeClass } from 'vue'
 
-import { Logger } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { convertStringVNode } from '@idux/components/utils'
 
@@ -27,9 +26,7 @@ export default defineComponent({
         label,
         labelPlacement = config.labelPlacement,
         plain = config.plain,
-        position,
         size = config.size,
-        type,
         vertical,
       } = props
 
@@ -39,19 +36,13 @@ export default defineComponent({
         [`${prefixCls}`]: true,
         [`${prefixCls}-${size}`]: true,
         [`${prefixCls}-dashed`]: dashed,
-        [`${prefixCls}-horizontal`]: !(type === 'vertical' || vertical),
-        [`${prefixCls}-vertical`]: type === 'vertical' || vertical,
+        [`${prefixCls}-horizontal`]: !vertical,
+        [`${prefixCls}-vertical`]: vertical,
         [`${prefixCls}-plain`]: withLabel && plain,
         [`${prefixCls}-with-label`]: withLabel,
-        [`${prefixCls}-with-label-${position || labelPlacement}`]: withLabel,
+        [`${prefixCls}-with-label-${labelPlacement}`]: withLabel,
       })
     })
-
-    if (__DEV__) {
-      props.position &&
-        Logger.warn('components/divider', 'the `position` was deprecated, please use `labelPlacement` instead.')
-      props.type && Logger.warn('components/divider', 'the `type` was deprecated, please use `vertical` instead.')
-    }
 
     return () => {
       const prefixCls = mergedPrefixCls.value

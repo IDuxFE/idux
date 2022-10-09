@@ -179,9 +179,9 @@ export default defineComponent({
           }
           const { scroll, onScrolledBottom } = props
 
-          __DEV__ &&
-            !isNumber(scroll?.height || scroll?.y) &&
+          if (__DEV__ && !props.autoHeight && !isNumber(scroll?.height)) {
             Logger.warn('components/table', '`scroll.height` must is a valid number when enable virtual scroll')
+          }
 
           children.push(
             <CdkVirtualScroll
@@ -190,7 +190,7 @@ export default defineComponent({
               dataSource={flattedData.value}
               fullHeight={scroll?.fullHeight}
               getKey="rowKey"
-              height={mergedAutoHeight.value ? '100%' : ((scroll?.height || scroll?.y) as number)}
+              height={mergedAutoHeight.value ? '100%' : (scroll?.height as number)}
               itemHeight={virtualItemHeightMap[mergedSize.value]}
               itemRender={itemRender}
               contentRender={contentRender}

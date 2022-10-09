@@ -78,18 +78,7 @@ export const drawerProps = {
     default: 'end',
   },
   scrollStrategy: Object as PropType<ScrollStrategy>,
-  /**
-   * @deprecated please use `container` instead'
-   */
-  target: {
-    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
-    default: undefined,
-  },
   width: [String, Number] as PropType<string | number>,
-  /**
-   * @deprecated
-   */
-  wrapperClassName: String,
   zIndex: Number,
 
   // events
@@ -103,7 +92,7 @@ export const drawerProps = {
 } as const
 
 export type DrawerProps = ExtractInnerPropTypes<typeof drawerProps>
-export type DrawerPublicProps = Omit<ExtractPublicPropTypes<typeof drawerProps>, 'target' | 'wrapperClassName'>
+export type DrawerPublicProps = ExtractPublicPropTypes<typeof drawerProps>
 export interface DrawerBindings {
   open: () => void
   close: (evt?: Event | unknown) => Promise<void>

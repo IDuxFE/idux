@@ -14,7 +14,7 @@ import { computed, defineComponent, provide, ref } from 'vue'
 import { isNil } from 'lodash-es'
 
 import { CdkVirtualScroll } from '@idux/cdk/scroll'
-import { Logger, type VKey, callEmit } from '@idux/cdk/utils'
+import { type VKey, callEmit } from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
 import { useGlobalConfig } from '@idux/components/config'
 import { useGetKey } from '@idux/components/utils'
@@ -49,11 +49,6 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tree`)
     const config = useGlobalConfig('tree')
 
-    // TODO: remove
-    const mergedCascaderStrategy = computed(() => {
-      return props.cascade ? props.checkStrategy : props.cascaderStrategy
-    })
-
     const autoHeight = computed(() => props.autoHeight ?? config.autoHeight)
     const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
     const mergedGetKey = useGetKey(props, config, 'components/tree')
@@ -73,7 +68,7 @@ export default defineComponent({
       searchedKeys,
     )
     const flattedNodes = useFlattedNodes(mergedNodes, expandableContext, props, searchedKeys)
-    const checkableContext = useCheckable(props, mergedNodeMap, mergedCascaderStrategy)
+    const checkableContext = useCheckable(props, mergedNodeMap)
     const dragDropContext = useDragDrop(props, config, expandableContext)
     const selectableContext = useSelectable(props, mergedNodeMap)
 
@@ -165,23 +160,6 @@ export default defineComponent({
         endIndex,
         visibleNodes.map(item => item.rawNode),
       )
-    }
-
-    if (__DEV__) {
-      props.cascade &&
-        Logger.warn(
-          'components/tree',
-          'the `cascade` and `checkStrategy` are deprecated, please use `cascaderStrategy` instead.',
-        )
-      if (props.nodeKey) {
-        Logger.warn('components/tree', 'the `nodeKey` are deprecated, please use `getKey` instead.')
-      }
-      if (props.dataSource?.some(data => data.additional)) {
-        Logger.warn(
-          'components/tree',
-          'the `additional` of TreeNode was deprecated, please use `customAdditional` instead.',
-        )
-      }
     }
 
     return () => {

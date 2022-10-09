@@ -10,9 +10,9 @@ import { type ComputedRef, computed } from 'vue'
 import { isBoolean } from 'lodash-es'
 
 import { type VKey } from '@idux/cdk/utils'
+import { type GetKeyFn } from '@idux/components/utils'
 
 import { type TreeSelectNode, type TreeSelectNodeDisabled, type TreeSelectProps } from '../types'
-import { type GetNodeKey } from './useGetNodeKey'
 
 export interface MergedNode {
   children?: MergedNode[]
@@ -30,7 +30,7 @@ export interface MergedNode {
 export function useMergeNodes(
   props: TreeSelectProps,
   mergedChildrenKey: ComputedRef<string>,
-  mergedGetKey: ComputedRef<GetNodeKey>,
+  mergedGetKey: ComputedRef<GetKeyFn>,
   mergedLabelKey: ComputedRef<string>,
 ): {
   mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>
@@ -55,7 +55,7 @@ export function convertMergeNodes(
   props: TreeSelectProps,
   nodes: TreeSelectNode[],
   childrenKey: string,
-  getKey: GetNodeKey,
+  getKey: GetKeyFn,
   labelKey: string,
   parentKey?: VKey,
 ): MergedNode[] {
@@ -68,7 +68,7 @@ export function convertMergeNodes(
 function convertMergeNode(
   rawData: TreeSelectNode,
   childrenKey: string,
-  getKey: GetNodeKey,
+  getKey: GetKeyFn,
   labelKey: string,
   disabled: ((node: TreeSelectNode) => boolean | TreeSelectNodeDisabled) | undefined,
   hasLoad: boolean,

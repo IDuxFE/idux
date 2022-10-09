@@ -21,16 +21,16 @@ export default defineComponent({
       const { label, rawData } = props
       const _label = toString(label)
       const prefixCls = `${mergedPrefixCls.value}-option-group`
-      const labelRender = rawData!.customLabel ?? 'optionGroupLabel'
+      const labelRender = rawData.customLabel ?? 'optionGroupLabel'
       const labelSlot = isString(labelRender) ? slots[labelRender] : labelRender
 
       const customAdditional = selectProps.customAdditional
-        ? selectProps.customAdditional({ data: rawData!, index: props.index! })
+        ? selectProps.customAdditional({ data: rawData, index: props.index })
         : undefined
 
       return (
-        <div class={prefixCls} title={_label} aria-label={_label} {...rawData!.additional} {...customAdditional}>
-          <span class={`${prefixCls}-label`}>{labelSlot ? labelSlot(rawData!) : _label}</span>
+        <div class={prefixCls} title={_label} aria-label={_label} {...customAdditional}>
+          <span class={`${prefixCls}-label`}>{labelSlot ? labelSlot(rawData) : _label}</span>
         </div>
       )
     }

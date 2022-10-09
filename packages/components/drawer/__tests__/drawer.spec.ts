@@ -257,18 +257,18 @@ describe('Drawer', () => {
     expect(drawerWrapper.classes()).toContain('ix-drawer-top')
   })
 
-  test('target work', async () => {
-    const wrapper = DrawerMount({ props: { target: 'ix-test-container' } })
+  test('container work', async () => {
+    const wrapper = DrawerMount({ props: { container: 'ix-test-container' } })
 
     expect(document.querySelector('.ix-test-container')!.querySelector('.ix-drawer')).not.toBeNull()
 
-    const target = document.createElement('div')
-    target.classList.add('.ix-test-container2')
-    document.body.appendChild(target)
+    const container = document.createElement('div')
+    container.classList.add('.ix-test-container2')
+    document.body.appendChild(container)
 
-    await wrapper.setProps({ target })
+    await wrapper.setProps({ container })
 
-    expect(target.querySelector('.ix-drawer')).not.toBeNull()
+    expect(container.querySelector('.ix-drawer')).not.toBeNull()
   })
 
   test('width work', async () => {
@@ -285,20 +285,6 @@ describe('Drawer', () => {
     await wrapper.setProps({ width: '20%' })
 
     expect(contentDom.style.width).toBe('20%')
-  })
-
-  test('wrapperClassName work', async () => {
-    let wrapperClassName = 'test-container'
-    const wrapper = DrawerMount({ props: { wrapperClassName } })
-    const drawerWrapper = wrapper.getComponent(DrawerWrapper)
-
-    expect(drawerWrapper.classes()).toContain(wrapperClassName)
-
-    wrapperClassName = 'test-container2'
-
-    await wrapper.setProps({ wrapperClassName })
-
-    expect(drawerWrapper.classes()).toContain(wrapperClassName)
   })
 
   test('zIndex work', async () => {

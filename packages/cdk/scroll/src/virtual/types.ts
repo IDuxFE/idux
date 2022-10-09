@@ -17,10 +17,6 @@ export const virtualListProps = {
   getKey: { type: [String, Function] as PropType<string | ((item: any) => VKey)>, default: 'key' },
   height: { type: [Number, String] as PropType<number | 'auto' | '100%'>, default: 0 },
   itemHeight: { type: Number, default: 0 },
-  /**
-   * @deprecated
-   */
-  itemKey: { type: [String, Function] as PropType<string | ((item: any) => VKey)>, default: undefined },
   itemRender: { type: Function as PropType<VirtualItemRenderFn>, default: undefined },
   virtual: { type: Boolean, default: true },
   onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
@@ -31,7 +27,7 @@ export const virtualListProps = {
 } as const
 
 export type VirtualScrollProps = ExtractInnerPropTypes<typeof virtualListProps>
-export type VirtualScrollPublicProps = Omit<ExtractPublicPropTypes<typeof virtualListProps>, 'itemKey'>
+export type VirtualScrollPublicProps = ExtractPublicPropTypes<typeof virtualListProps>
 export interface VirtualScrollBindings {
   scrollTo: VirtualScrollToFn
 }

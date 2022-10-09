@@ -20,7 +20,7 @@ import {
 
 import { CdkPortal } from '@idux/cdk/portal'
 import { BlockScrollStrategy, type ScrollStrategy } from '@idux/cdk/scroll'
-import { Logger, callEmit, isPromise, useControlledProp } from '@idux/cdk/utils'
+import { callEmit, isPromise, useControlledProp } from '@idux/cdk/utils'
 import { ɵMask } from '@idux/components/_private/mask'
 import { useGlobalConfig } from '@idux/components/config'
 import { usePortalTarget, useZIndex } from '@idux/components/utils'
@@ -66,15 +66,6 @@ export default defineComponent({
     expose(apis)
 
     useScrollStrategy(props, mask, mergedVisible)
-
-    if (__DEV__) {
-      if (props.target) {
-        Logger.warn('components/modal', 'the `target` was deprecated, please use `container` instead.')
-      }
-      if (props.wrapperClassName) {
-        Logger.warn('components/modal', 'the `wrapperClassName` was deprecated.')
-      }
-    }
 
     return () => {
       if (!mergedVisible.value && props.destroyOnHide) {

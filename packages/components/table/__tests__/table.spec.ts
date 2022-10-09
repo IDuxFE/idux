@@ -359,19 +359,6 @@ describe('Table', () => {
       expect(wrapper.find('tbody').findAll('tr').length).toBe(20)
     })
 
-    test('rowClassName work', async () => {
-      const wrapper = TableMount({
-        props: { rowClassName: (_, index) => `test-table-${index}` },
-      })
-
-      const trs = wrapper.find('tbody').findAll('tr')
-
-      trs.forEach((tr, index) => {
-        tr.classes()
-        expect(tr.classes()).toContain(`test-table-${index}`)
-      })
-    })
-
     test('size work', async () => {
       const wrapper = TableMount({ props: { size: 'lg' } })
 

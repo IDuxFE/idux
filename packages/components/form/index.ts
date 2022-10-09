@@ -20,7 +20,6 @@ export { IxForm, IxFormItem, IxFormWrapper }
 export { FORM_TOKEN, FORM_ITEM_TOKEN } from './src/token'
 export {
   useFormItemRegister,
-  useFormAccessor,
   useFormElement,
   useFormFocusMonitor,
   useFormSize,

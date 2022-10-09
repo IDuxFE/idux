@@ -85,23 +85,12 @@ export const modalProps = {
   okButton: Object as PropType<ButtonProps>,
   okText: String,
   scrollStrategy: Object as PropType<ScrollStrategy>,
-  /**
-   * @deprecated please use `container` instead'
-   */
-  target: {
-    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
-    default: undefined,
-  },
   title: [String, Object] as PropType<string | VNode>,
   type: {
     type: String as PropType<ModalType>,
     default: 'default',
   },
   width: [String, Number] as PropType<string | number>,
-  /**
-   * @deprecated please use `overlayClassName` instead'
-   */
-  wrapperClassName: String,
   zIndex: Number,
 
   // events
@@ -117,7 +106,7 @@ export const modalProps = {
 } as const
 
 export type ModalProps = ExtractInnerPropTypes<typeof modalProps>
-export type ModalPublicProps = Omit<ExtractPublicPropTypes<typeof modalProps>, 'target' | 'wrapperClassName'>
+export type ModalPublicProps = ExtractPublicPropTypes<typeof modalProps>
 export interface ModalBindings {
   open: () => void
   close: (evt?: Event | unknown) => Promise<void>
