@@ -112,6 +112,17 @@ export default defineComponent({
     )
     const draggableResult = ref()
 
+    const handleOk = (evt?: unknown) => {
+      if (visible.value) {
+        ok(evt)
+      }
+    }
+    const handleCancel = (evt?: unknown) => {
+      if (visible.value) {
+        cancel(evt)
+      }
+    }
+
     onMounted(() => watchVisibleChange(props, wrapperRef, sentinelStartRef, mask, draggableResult))
 
     watch(
@@ -172,13 +183,13 @@ export default defineComponent({
                 <ɵFooter
                   v-slots={slots}
                   class={`${prefixCls}-footer`}
-                  cancel={cancel}
+                  cancel={handleCancel}
                   cancelButton={props.cancelButton}
                   cancelLoading={cancelLoading.value}
                   cancelText={cancelText.value}
                   cancelVisible={cancelVisible.value}
                   footer={props.footer}
-                  ok={ok}
+                  ok={handleOk}
                   okButton={props.okButton}
                   okLoading={okLoading.value}
                   okText={okText.value}
