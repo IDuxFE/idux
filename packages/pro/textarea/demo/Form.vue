@@ -64,9 +64,4 @@ const formGroup = useFormGroup({
   ruleName: ['', [required]],
   IP: ['', [IPValidator]],
 })
-// const onChange = (value: string | undefined, oldValue: string | undefined) => {
-//   if (value?.split('\n').length !== oldValue?.split('\n').length) {
-//     errors.value = getIpValidationResults(oldValue)
-//   }
-// }
 </script>

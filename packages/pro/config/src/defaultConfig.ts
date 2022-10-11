@@ -47,6 +47,7 @@ export const defaultConfig: ProGlobalConfig = {
     resize: 'none',
     size: 'md',
     showCount: false,
+    trim: false,
   },
   search: {
     clearable: true,
