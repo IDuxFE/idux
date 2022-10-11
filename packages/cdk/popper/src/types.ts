@@ -5,10 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { Modifier, PositioningStrategy, State } from '@popperjs/core'
+import type { Middleware, Strategy } from '@floating-ui/dom'
 import type { ComponentPublicInstance, ComputedRef, Ref } from 'vue'
 
-export type PopperPositioningStrategy = PositioningStrategy
+export type PopperStrategy = Strategy
 export type PopperTrigger = 'click' | 'hover' | 'focus' | 'contextmenu' | 'manual'
 export type PopperElement = ComponentPublicInstance | HTMLElement
 export type PopperPlacement =
@@ -87,10 +87,8 @@ export interface PopperOptions {
    */
   visible?: boolean
 
-  strategy?: PopperPositioningStrategy
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  modifiers?: Array<Partial<Modifier<unknown, any>>>
-  onFirstUpdate?: (state: Partial<State>) => void
+  strategy?: PopperStrategy
+  middlewares?: Array<Middleware>
 }
 
 export interface PopperInstance<TE extends PopperElement = PopperElement, PE extends PopperElement = PopperElement> {
@@ -113,10 +111,6 @@ export interface PopperInstance<TE extends PopperElement = PopperElement, PE ext
    * Update popper.
    */
   update(options?: Partial<PopperOptions>): void
-  /**
-   * Force update popper
-   */
-  forceUpdate(): void
   /**
    * Destroy the popper.
    * The life cycle of the popper will enter beforeDestroy.

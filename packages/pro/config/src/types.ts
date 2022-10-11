@@ -96,4 +96,5 @@ export interface ProTextareaConfig {
   resize: TextareaResize
   size: FormSize
   showCount: boolean
+  trim: boolean
 }

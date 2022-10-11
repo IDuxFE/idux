@@ -1,6 +1,6 @@
 ## API
 
-`@idux/cdk/popper` 基于 `@popperjs/core` 对浮层的创建进行了封装.
+`@idux/cdk/popper` 基于 `@floating-ui/dom` 对浮层的创建进行了封装.
 
 ### usePopper
 
@@ -20,8 +20,7 @@ export function usePopper(options?: PopperOptions): PopperInstance
 | `trigger` | 浮层的触发方式 | `PopperTrigger` | `hover` | - | - |
 | `visible` | 是否显示浮层 | `boolean` | `false` | - | - |
 | `strategy` | 浮层的定位策略 | `'absolute' \| 'fixed'` | `absolute` | - | - |
-| `modifiers` | 自定义浮层的 `modifier` | `Partial<Modifier>[]` | `[]` | - | 参见[popper.js](https://popper.js.org/docs/v2/modifiers/) |
-| `onFirstUpdate` | 浮层创建后的回调 | `(state: Partial<State>) => void` | - | - | 参见[popper.js](https://popper.js.org/docs/v2/lifecycle/#hook-into-the-lifecycle) |
+| `middleware` | 自定义浮层的 `middleware` | `Middleware[]` | `[]` | - | 参见[floating-ui](https://floating-ui.com/docs/middleware) |
 
 ```ts
 export declare type PopperPlacement = 'topStart' | 'top' | 'topEnd' | 'rightStart' | 'right' | 'rightEnd' | 'bottomStart' | 'bottom' | 'bottomEnd' | 'leftStart' | 'left' | 'leftEnd'
@@ -37,7 +36,6 @@ export type PopperTrigger = 'click' | 'hover' | 'focus' | 'contextmenu' | 'manua
 | `show` | 显示浮层 | `(delay?: number): void` | - | - | `delay` 是延迟显示的时间 |
 | `hide` | 隐藏浮层 | `(delay?: number): void` | - | - | `delay` 是延迟隐藏的时间 |
 | `update` | 更新浮层 | `(options: Partial<PopperOptions>): void` | - | - | - |
-| `forceUpdate` | 强制更新浮层 | `(): void` | - | - | - |
 | `destroy` | 销毁浮层 | `(): void` | - | - | - |
 | `visibility` | 浮层显示状态 | `ComputedRef<boolean>` | -| - | - |
 | `placement` | 浮层位置 | `ComputedRef<PopperPlacement>` | - | - | - |

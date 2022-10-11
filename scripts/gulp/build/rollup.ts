@@ -22,7 +22,7 @@ interface Options {
   minify?: boolean
 }
 
-const externalDeps = ['vue', '@vue', '@idux', '@popperjs/core', 'date-fns', 'lodash-es', 'ajv']
+const externalDeps = ['vue', '@vue', '@idux', '@floating-ui/dom', 'date-fns', 'lodash-es', 'ajv']
 
 export const getRollupSingleOptions = (options: Options): RollupOptions => {
   const { targetDirname, distDirname, compName = '', minify = false } = options

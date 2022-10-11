@@ -51,7 +51,6 @@ export default defineComponent({
       placement,
       initialize,
       update,
-      forceUpdate,
       show,
       hide,
       destroy,
@@ -79,7 +78,6 @@ export default defineComponent({
 
     expose({
       updatePopper: update,
-      forceUpdatePopper: forceUpdate,
     })
 
     const handleClickOutside = (evt: Event) => {
