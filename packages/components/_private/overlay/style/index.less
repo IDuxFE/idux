@@ -1,6 +1,7 @@
 .@{overlay-prefix} {
 
   &-arrow {
+    position: absolute;
     width: @overlay-arrow-size * 2;
     height: @overlay-arrow-size * 2;
 
@@ -14,10 +15,9 @@
 
   &[data-popper-placement^='top'] {
     .@{overlay-prefix}-arrow {
-      bottom: 0;
+      bottom: -@overlay-arrow-size * 2;
 
       &::before {
-        bottom: -@overlay-arrow-size;
         left: 0;
         border-width: @overlay-arrow-size @overlay-arrow-size 0;
         border-top-color: initial;
@@ -28,10 +28,9 @@
 
   &[data-popper-placement^='bottom'] {
     .@{overlay-prefix}-arrow {
-      top: 0;
+      top: -@overlay-arrow-size;
 
       &::before {
-        top: -@overlay-arrow-size;
         left: 0;
         border-width: 0 @overlay-arrow-size @overlay-arrow-size;
         border-bottom-color: initial;
@@ -42,12 +41,11 @@
 
   &[data-popper-placement^='left'] {
     .@{overlay-prefix}-arrow {
-      right: 0;
+      right: -@overlay-arrow-size * 2;
 
       &::before {
         border-width: @overlay-arrow-size 0 @overlay-arrow-size @overlay-arrow-size;
         border-left-color: initial;
-        right: -@overlay-arrow-size;
         transform-origin: center left;
       }
     }
@@ -55,10 +53,9 @@
 
   &[data-popper-placement^='right'] {
     .@{overlay-prefix}-arrow {
-      left: 0;
+      left: -@overlay-arrow-size;
 
       &::before {
-        left: -@overlay-arrow-size;
         border-width: @overlay-arrow-size @overlay-arrow-size @overlay-arrow-size 0;
         border-right-color: initial;
         transform-origin: center right;

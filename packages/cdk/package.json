@@ -34,7 +34,7 @@
   "jsdelivr": "./index.full.js",
   "scripts": {},
   "dependencies": {
-    "@popperjs/core": "^2.9.0",
+    "@floating-ui/dom": "^1.0.2",
     "lodash-es": "^4.17.0"
   },
   "devDependencies": {
