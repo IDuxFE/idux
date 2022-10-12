@@ -50,7 +50,6 @@ export const reMoveElement = (el: HTMLElement): void => {
 
 export const extraMove = (el: HTMLElement): DnDPosition => {
   const translate3d = el.style.transform.split('translate3d(')[1]
-  // results = ['XXpx', 'YYpx', '0px);'];
   const results = translate3d ? translate3d.split(',') : ['0', '0']
 
   return {

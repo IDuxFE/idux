@@ -29,6 +29,12 @@ export function useDraggable(
 
 export interface DraggableOptions {
   /**
+   * 拖拽底层实现
+   * * `native`: using html5 drag-drop api
+   * * `pointer`: using mouse/touch position to simulate
+   */
+  backend?: DnDBackendType
+  /**
    * 作为限制拖拽范围的元素，需自定义droppable时需指定为空
    */
   boundary?: BoundaryType
@@ -40,14 +46,13 @@ export interface DraggableOptions {
    * 拖拽把手
    */
   handle?: MaybeElementRef
-
   /**
-   * 拖拽底层实现
-   * * `native`: using html5 drag-drop api
-   * * `pointer`: using mouse/touch position to simulate
+   * 限制拖动轴 **仅在 backend=`pointer` 下可用**
+   * * `x` 只允许左右拖动
+   * * `y` 只允许上下拖动
    */
-  backend?: DnDBackendType
-
+  lockAxis?: LockAxisType
+  
   onDragStart?: DnDEvent
   onDrag?: DnDEvent
   onDragEnd?: DnDEvent
@@ -102,7 +107,7 @@ export interface DroppableOptions {
 
 | 名称            | 说明        | 类型             | 默认值        | 全局配置     | 备注                           |
 |---------------|-----------|----------------|------------|----------|------------------------------|
-| `backend`     | 拖拽底层实现       | `native` \| `pointer`  | `native` |      | *`native`: 基于HTML5 drag-drop 原生api封装<br>*`pointer`: 用于支持触摸屏及鼠标事件模拟实现的拖拽                              |
+| `backend`     | 拖拽底层实现       | `'native'` \| `'pointer'`  | `'native'` |      | *`native`: 基于HTML5 drag-drop 原生api封装<br>*`pointer`: 用于支持触摸屏及鼠标事件模拟实现的拖拽                              |
 | `boundary`    | 指定可拖放区域   | `BoundaryType` | `parent`   | -        | 需要使用`useDropabble()`时，请置`null` |
 | `disabled`    | 是否禁用      | `boolean`      | -          | -        | -                            |
 | `free`        | 是否自由拖放    | `boolean`      | -          | -        | -                            |

@@ -16,7 +16,15 @@ const CdkDraggable = Draggable as unknown as DraggableComponent
 
 export { CdkDraggable }
 
-export type { DnDElement, DnDEvent, DnDPosition, BoundaryType, DnDBackendType } from './src/types'
+export type {
+  DnDElement,
+  DnDEvent,
+  DnDPosition,
+  BoundaryType,
+  DnDBackendType,
+  DraggableOptions,
+  DroppableOptions,
+} from './src/types'
 export type { DnDState } from './src/state'
 
 export type {

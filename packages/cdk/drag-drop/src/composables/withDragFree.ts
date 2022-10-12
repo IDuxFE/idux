@@ -7,13 +7,10 @@
 
 import type { DnDEventType } from '../types'
 
-import { type MaybeElementRef, convertElement } from '@idux/cdk/utils'
-
 import { moveElement } from '../utils'
 import { type DnDContext } from './useDragDropContext'
 
-export function withDragFree(target: MaybeElementRef, context: DnDContext): void {
-  const sourceEl = convertElement(target)!
+export const withDragFree = (sourceEl: HTMLElement, context: DnDContext): void => {
   const registry = context.registry
   const state = registry.state(sourceEl)!
 
@@ -35,6 +32,7 @@ export function withDragFree(target: MaybeElementRef, context: DnDContext): void
       }
     }
   }
+
   if (state.isNative) {
     registry.on(sourceEl, 'dragend', onDragEnd)
   } else {

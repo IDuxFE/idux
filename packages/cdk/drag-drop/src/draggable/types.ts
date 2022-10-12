@@ -14,9 +14,15 @@ import { BoundaryType, DnDBackendType, DnDEvent } from '../types'
 
 export const draggableProps = {
   /**
+   * 拖拽底层实现
+   * * `native`: using html5 drag-drop api
+   * * `pointer`: using mouse/touch position to simulate
+   */
+  backend: { type: String as PropType<DnDBackendType>, default: 'native' },
+  /**
    *  元素可拖拽的区域
    *
-   *  @default 父级元素
+   *  @default 拖拽区域
    */
   boundary: { type: [String, Object] as PropType<BoundaryType>, default: 'parent' },
   /**
@@ -37,13 +43,6 @@ export const draggableProps = {
    * @default div
    */
   is: { type: [String, Object] as PropType<string | Component>, default: 'div' },
-
-  /**
-   * 拖拽底层实现
-   * * `native`: using html5 drag-drop api
-   * * `pointer`: using mouse/touch position to simulate
-   */
-  backend: { type: String as PropType<DnDBackendType>, default: 'native' },
 
   onDragStart: [Function, Array] as PropType<MaybeArray<DnDEvent>>,
   onDrag: [Function, Array] as PropType<MaybeArray<DnDEvent>>,

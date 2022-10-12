@@ -18,9 +18,9 @@ import {
   watch,
 } from 'vue'
 
-import { isFunction } from 'lodash-es'
+import { isFunction, isString } from 'lodash-es'
 
-import { type DnDBackendType, useDraggable } from '@idux/cdk/drag-drop'
+import { useDraggable } from '@idux/cdk/drag-drop'
 import { callEmit, convertCssPixel, getOffset } from '@idux/cdk/utils'
 import { ɵFooter } from '@idux/components/_private/footer'
 import { ɵHeader } from '@idux/components/_private/header'
@@ -134,8 +134,8 @@ export default defineComponent({
           draggableResult.value = useDraggable(contentRef, {
             handle: headerRef,
             free: true,
-            boundary: window,
-            backend: !props.draggable ? (props.draggable as unknown as DnDBackendType) : 'pointer',
+            boundary: wrapperRef,
+            backend: isString(draggable) ? draggable : 'pointer',
           })
         }
       },

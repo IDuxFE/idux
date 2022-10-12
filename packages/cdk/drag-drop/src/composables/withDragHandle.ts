@@ -7,13 +7,9 @@
 
 import type { DnDContext } from './useDragDropContext'
 
-import { MaybeElementRef, convertElement } from '@idux/cdk/utils'
-
 import { DnDEventType } from '../types'
 
-export const withDragHandle = (source: MaybeElementRef, handle: MaybeElementRef, context: DnDContext): void => {
-  const sourceEl = convertElement(source)!
-  const handleEl = convertElement(handle)!
+export const withDragHandle = (sourceEl: HTMLElement, handleEl: HTMLElement, context: DnDContext): void => {
   const registry = context.registry
   const state = registry.state(sourceEl)!
 

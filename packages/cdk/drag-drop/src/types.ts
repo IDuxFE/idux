@@ -34,12 +34,25 @@ export type DnDEventName =
   | 'pointerup'
 
 export type BoundaryType = 'parent' | Window | MaybeElementRef | null
-
+export type LockAxisType = 'x' | 'y'
 export interface DraggableOptions {
+  /**
+   * 拖拽底层实现
+   * * `native`: using html5 drag-drop api
+   * * `pointer`: using mouse/touch position to simulate
+   */
+  backend?: DnDBackendType
+
   /**
    * 作为限制拖拽范围的元素，需自定义droppable时需指定为空
    */
   boundary?: BoundaryType
+  /**
+   * 限制拖动轴 **仅在 backend=`pointer` 下可用**
+   * * `x` 只允许左右拖动
+   * * `y` 只允许上下拖动
+   */
+  lockAxis?: LockAxisType
   /**
    * 指定是否可以拖拽
    */
@@ -48,13 +61,6 @@ export interface DraggableOptions {
    * 拖拽把手
    */
   handle?: MaybeElementRef
-
-  /**
-   * 拖拽底层实现
-   * * `native`: using html5 drag-drop api
-   * * `pointer`: using mouse/touch position to simulate
-   */
-  backend?: DnDBackendType
 
   onDragStart?: DnDEvent
   onDrag?: DnDEvent

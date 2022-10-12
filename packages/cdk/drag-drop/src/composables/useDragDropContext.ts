@@ -94,7 +94,6 @@ export function useDragDropContext(root: MaybeElementRef): DnDContext {
       isAltPress = evt.altKey
       return
     }
-
     state.current.canDrop = canDrop(evt)
     registry.exec(dropEl, 'dragenter', [evt])
   }
@@ -103,8 +102,6 @@ export function useDragDropContext(root: MaybeElementRef): DnDContext {
     if (!state.current.dragging) {
       return
     }
-
-    state.current.updatePosition(evt)
 
     const source = draggingEl
     if (state.current.isNative) {
@@ -131,7 +128,7 @@ export function useDragDropContext(root: MaybeElementRef): DnDContext {
    * @param target
    */
   const canDrop = (target: DnDEventType) => {
-    const eventTarget = target.composedPath().find(el => registry.checkConnect(el, draggingEl))
+    const eventTarget = target.composedPath().find(el => registry.checkConnect(el, draggingEl) || el === draggingEl)
     if (eventTarget) {
       dropEl = eventTarget
       return true

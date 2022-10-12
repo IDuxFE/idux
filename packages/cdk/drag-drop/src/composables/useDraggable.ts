@@ -14,6 +14,7 @@ import { type MaybeElementRef, convertElement, tryOnScopeDispose, useEventListen
 
 import { DnDState } from '../state'
 import { extraMove, initContext, reMoveElement } from '../utils'
+import { withBoundary } from './withBoundary'
 import { withDragFree } from './withDragFree'
 import { withDragHandle } from './withDragHandle'
 
@@ -47,17 +48,18 @@ export function useDraggable(
 
     installHandlers(sourceElement)
 
+    // drag-drop the active area
+    withBoundary(sourceElement, getBoundaryElement()!, options?.lockAxis, context!)
+
     // drag-handle
     if (options?.handle) {
-      withDragHandle(source, options.handle, context!)
+      withDragHandle(sourceElement, convertElement(options.handle)!, context!)
     }
 
     // free drag-drop
     if (options?.free) {
-      withDragFree(source, context!)
+      withDragFree(sourceElement, context!)
     }
-
-    installBoundary()
 
     if (stateRef.value!.isNative) {
       sourceElement.setAttribute('draggable', 'true')
@@ -74,15 +76,6 @@ export function useDraggable(
     }
     sourceElement.classList.remove('cdk-draggable')
     convertElement(options?.handle)?.classList.remove('cdk-draggable-handle')
-  }
-
-  const installBoundary = () => {
-    // avoid repeated install listeners
-    const boundaryElement = getBoundaryElement.value
-
-    if (boundaryElement != null) {
-      context?.connect(boundaryElement!, convertElement(source)!)
-    }
   }
 
   const onDragStart = (evt: DnDEventType) => {
@@ -131,7 +124,7 @@ export function useDraggable(
     }
   }
 
-  const getBoundaryElement = computed(() => {
+  const getBoundaryElement = () => {
     switch (options?.boundary) {
       case undefined:
       case 'parent':
@@ -139,12 +132,18 @@ export function useDraggable(
       case null:
         return null
       default:
-        return convertElement(options?.boundary as MaybeElementRef)
+        return convertElement(options!.boundary as MaybeElementRef)!
     }
-  })
+  }
 
   const stopWatch = watch(
-    [() => convertElement(source), () => options!.free, () => options!.boundary, () => options!.backend],
+    [
+      () => convertElement(source),
+      () => options!.free,
+      () => options!.boundary,
+      () => options!.backend,
+      () => options!.lockAxis,
+    ],
     ([currSourceEl], [prevSourceEl]) => {
       if (prevSourceEl) {
         offDraggable(prevSourceEl)

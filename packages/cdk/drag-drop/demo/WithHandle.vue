@@ -10,9 +10,7 @@
 <script setup lang="ts">
 import { computed, reactive, ref, watchEffect } from 'vue'
 
-import { DnDBackendType } from '@idux/cdk/drag-drop'
-
-import { useDraggable } from '../src/composables/useDraggable'
+import { DnDBackendType, useDraggable } from '@idux/cdk/drag-drop'
 
 const dragRef = ref(null)
 const dragHandleRef = ref(null)
