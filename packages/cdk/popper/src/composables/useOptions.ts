@@ -7,7 +7,7 @@
 
 import type { PopperOptions } from '../types'
 
-import { type ComputedRef, computed, reactive, watch } from 'vue'
+import { type ComputedRef, computed, isReactive, reactive, watch } from 'vue'
 
 import { isEqual } from 'lodash-es'
 
@@ -39,9 +39,11 @@ export function usePopperOptions(options: PopperOptions): {
     })
   }
 
-  watch(options, _options => {
-    updateOptions(_options)
-  })
+  if (isReactive(options)) {
+    watch(options, _options => {
+      updateOptions(_options)
+    })
+  }
 
   return {
     popperOptions,
