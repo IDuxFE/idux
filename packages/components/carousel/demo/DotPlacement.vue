@@ -6,7 +6,7 @@
     <IxRadio value="end">end</IxRadio>
     <IxRadio value="none">none</IxRadio>
   </IxRadioGroup>
-  <IxCarousel :dotPlacement="value">
+  <IxCarousel class="carousel" :dotPlacement="value">
     <div class="card-item">1</div>
     <div class="card-item">2</div>
     <div class="card-item">3</div>
@@ -21,6 +21,10 @@ const value = ref('start')
 </script>
 
 <style lang="less" scoped>
+.carousel {
+  height: 160px;
+  width: 100%;
+}
 .card-item {
   height: 160px;
   line-height: 160px;
