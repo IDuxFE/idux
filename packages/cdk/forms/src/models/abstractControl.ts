@@ -18,12 +18,9 @@ import {
   ref,
   shallowRef,
   watch,
-  watchEffect,
 } from 'vue'
 
 import { isArray, isNil, isPlainObject } from 'lodash-es'
-
-import { hasOwnProperty } from '@idux/cdk/utils'
 
 import {
   type AsyncValidatorFn,
@@ -32,12 +29,20 @@ import {
   type ValidateStatus,
   type ValidatorFn,
   type ValidatorOptions,
-} from './types'
-import { Validators, addValidators, hasValidator, removeValidators } from './validators'
+} from '../types'
+import { Validators, addValidators, hasValidator, removeValidators } from '../validators'
 
-type IsNullable<T, K> = undefined extends T ? K : never
+export type IsNullable<T, K> = undefined extends T ? K : never
 
-type OptionalKeys<T> = { [K in keyof T]-?: IsNullable<T[K], K> }[keyof T]
+export type OptionalKeys<T> = { [K in keyof T]-?: IsNullable<T[K], K> }[keyof T]
+
+export type ArrayElement<A> = A extends (infer T)[] ? T : never
+
+export type GroupControls<T> = {
+  [K in keyof T]: AbstractControl<T[K]>
+}
+
+export type ControlPathType = string | number | Array<string | number>
 
 function isOptions(val?: ValidatorFn | ValidatorFn[] | ValidatorOptions): val is ValidatorOptions {
   return isPlainObject(val)
@@ -50,14 +55,6 @@ function toValidator(validator?: ValidatorFn | ValidatorFn[]): ValidatorFn | und
 function toAsyncValidator(asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[]): AsyncValidatorFn | undefined {
   return isArray(asyncValidator) ? Validators.composeAsync(asyncValidator) : asyncValidator
 }
-
-export type ArrayElement<A> = A extends (infer T)[] ? T : never
-
-export type GroupControls<T> = {
-  [K in keyof T]: AbstractControl<T[K]>
-}
-
-export type ControlPathType = string | number | Array<string | number>
 
 let controlId = 0
 export abstract class AbstractControl<T = any> {
@@ -207,9 +204,9 @@ export abstract class AbstractControl<T = any> {
    */
   abstract getValue(options?: { skipDisabled?: boolean }): T
 
-  protected abstract _forEachControls(cb: (v: AbstractControl, k: keyof T) => void): void
-
   protected abstract _calculateInitValue(): T
+  protected abstract _forEachControls(cb: (v: AbstractControl, k: keyof T) => void): void
+  protected abstract _find(name: string | number): AbstractControl | undefined
 
   /**
    * Resets the control, marking it `unblurred` `pristine`, and setting the value to initialization value.
@@ -433,29 +430,13 @@ export abstract class AbstractControl<T = any> {
     if (isNil(path)) {
       return undefined
     }
-    if (!isArray(path)) {
-      path = path.toString().split('.')
-    }
-    if (path.length === 0) {
+    const currPath = isArray(path) ? path : path.toString().split('.')
+
+    if (currPath.length === 0) {
       return undefined
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    let controlToFind: AbstractControl | undefined = this
-    // Not using Array.reduce here due to a Chrome 80 bug
-    // https://bugs.chromium.org/p/chromium/issues/detail?id=1049982
-    path.forEach((key: string | number) => {
-      if (controlToFind instanceof FormGroup) {
-        const controls = controlToFind.controls.value
-        // eslint-disable-next-line no-prototype-builtins
-        controlToFind = controls.hasOwnProperty(key) ? controls[key] : undefined
-      } else if (controlToFind instanceof FormArray) {
-        controlToFind = controlToFind.at(<number>key)
-      } else {
-        controlToFind = undefined
-      }
-    })
-    return controlToFind
+    return currPath.reduce((control: AbstractControl<any> | undefined, name) => control && control._find(name), this)
   }
 
   /**
@@ -563,12 +544,7 @@ export abstract class AbstractControl<T = any> {
       this.setAsyncValidators(validatorOrOptions.asyncValidators)
       if (validatorOrOptions.disabled) {
         disabled = true
-        const controls = this._controls.value
-        if (controls) {
-          for (const key in controls) {
-            ;(controls as any)[key].disable()
-          }
-        }
+        this._forEachControls(control => control.disable())
       }
     } else {
       this.setValidators(validatorOrOptions)
@@ -616,16 +592,11 @@ export abstract class AbstractControl<T = any> {
         status = 'invalid'
       }
 
-      const controls = this._controls.value
-      if (controls) {
-        for (const key in controls) {
-          const controlStatus = (controls as any)[key].status.value
-          if (controlStatus === 'invalid') {
-            controlsStatus = 'invalid'
-            break
-          }
+      this._forEachControls(control => {
+        if (control.status.value === 'invalid') {
+          controlsStatus = 'invalid'
         }
-      }
+      })
     }
 
     this._errors = shallowRef(errors)
@@ -640,381 +611,5 @@ export abstract class AbstractControl<T = any> {
         this._status.value = asyncErrors ? 'invalid' : 'valid'
       })
     }
-  }
-}
-
-export class FormControl<T = any> extends AbstractControl<T> {
-  readonly controls!: ComputedRef<undefined>
-  constructor(
-    private _initValue?: T,
-    validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions,
-    asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
-  ) {
-    super(undefined, validatorOrOptions, asyncValidator, _initValue)
-
-    this._watchValid()
-    this._watchStatus()
-  }
-
-  setValue(value: T, options: { dirty?: boolean; blur?: boolean } = {}): void {
-    this._valueRef.value = value
-    if (options.dirty) {
-      this.markAsDirty()
-    }
-    if (options.blur) {
-      this.markAsBlurred()
-    }
-  }
-
-  getValue(): T {
-    return this._valueRef.value
-  }
-
-  protected _forEachControls(_: (v: AbstractControl, k: never) => void): void {}
-
-  protected _calculateInitValue(): T {
-    return this._initValue as T
-  }
-
-  private _watchValid() {
-    watch(this._valueRef, () => {
-      if (this.trigger === 'change') {
-        this._validate()
-      }
-    })
-  }
-
-  private _watchStatus() {
-    watch(this._errors, errors => {
-      this._status.value = errors ? 'invalid' : 'valid'
-    })
-  }
-}
-
-export class FormGroup<T extends object = object> extends AbstractControl<T> {
-  readonly controls!: ComputedRef<GroupControls<T>>
-  protected _controls!: ShallowRef<GroupControls<T>>
-
-  constructor(
-    /**
-     * A collection of child controls, it's an object.
-     */
-    controls: GroupControls<T>,
-    validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions,
-    asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
-  ) {
-    super(controls, validatorOrOptions, asyncValidator)
-
-    this._watchValid()
-    this._watchValue()
-    this._watchStatus()
-    this._watchBlurred()
-    this._watchDirty()
-  }
-
-  setValue(value: Partial<T>, options?: { dirty?: boolean; blur?: boolean }): void {
-    const controls = this._controls.value
-    ;(Object.keys(value) as Array<keyof T>).forEach(key => {
-      const control = controls[key]
-      if (control) {
-        control.setValue(value[key]!, options)
-      }
-    })
-  }
-
-  getValue(options: { skipDisabled?: boolean } = {}): T {
-    const { skipDisabled } = options
-    const value = {} as T
-    this._forEachControls((control, key) => {
-      if (skipDisabled && control.disabled.value) {
-        return
-      }
-      value[key] = control.getValue(options)
-    })
-    return value
-  }
-
-  protected _calculateInitValue(): T {
-    return this.getValue()
-  }
-
-  protected _forEachControls(cb: (v: AbstractControl, k: keyof T) => void): void {
-    const controls = this._controls.value
-    ;(Object.keys(controls) as Array<keyof T>).forEach(key => cb(controls[key], key))
-  }
-
-  /**
-   * Add a control to this form group.
-   *
-   * @param key The control's key to add to the collection
-   * @param control Provides the control for the given key
-   */
-  addControl<K extends OptionalKeys<T>>(key: K, control: AbstractControl<T[K]>): void {
-    const controls = { ...this._controls.value }
-    if (hasOwnProperty(controls, key as string)) {
-      return
-    }
-    control.setParent(this)
-    controls[key] = control
-    this._controls.value = controls
-  }
-
-  /**
-   * Remove a control from this form group.
-   *
-   * @param key The control's key to remove from the collection
-   */
-  removeControl<K extends OptionalKeys<T>>(key: K): void {
-    const controls = { ...this._controls.value }
-    delete controls[key]
-    this._controls.value = controls
-  }
-
-  /**
-   * Replace an existing control.
-   *
-   * @param key The control's key to replace in the collection
-   * @param control Provides the control for the given key
-   */
-  setControl<K extends keyof T>(key: K, control: AbstractControl<T[K]>): void {
-    control.setParent(this)
-    const controls = { ...this._controls.value }
-    controls[key] = control
-    this._controls.value = controls
-  }
-
-  private _watchValid() {
-    watch(this._valueRef, () => {
-      if (this.trigger === 'change') {
-        this._validate()
-      }
-    })
-  }
-
-  private _watchValue() {
-    watchEffect(() => {
-      this._valueRef.value = this.getValue()
-    })
-  }
-
-  private _watchStatus() {
-    watchEffect(() => {
-      this._status.value = this._errors.value ? 'invalid' : 'valid'
-    })
-
-    watchEffect(() => {
-      let status: ValidateStatus = 'valid'
-      const controls = this._controls.value
-      for (const key in controls) {
-        const controlStatus = controls[key].status.value
-        if (controlStatus === 'invalid') {
-          status = 'invalid'
-          break
-        } else if (controlStatus === 'validating') {
-          status = 'validating'
-        }
-      }
-      this._controlsStatus.value = status
-    })
-  }
-
-  private _watchBlurred() {
-    watchEffect(() => {
-      let blurred = false
-      const controls = this._controls.value
-      for (const key in controls) {
-        if (controls[key].blurred.value) {
-          blurred = true
-          break
-        }
-      }
-      this._blurred.value = blurred
-    })
-  }
-
-  private _watchDirty() {
-    watchEffect(() => {
-      let dirty = false
-      const controls = this._controls.value
-      for (const key in controls) {
-        if (controls[key].dirty.value) {
-          dirty = true
-          break
-        }
-      }
-      this._dirty.value = dirty
-    })
-  }
-}
-
-export class FormArray<T = any> extends AbstractControl<T[]> {
-  readonly controls!: ComputedRef<AbstractControl<T>[]>
-  protected _controls!: ShallowRef<AbstractControl<T>[]>
-
-  /**
-   * Length of the control array.
-   */
-  readonly length: ComputedRef<number>
-
-  constructor(
-    /**
-     * An array of child controls. Each child control is given an index where it is registered.
-     */
-    controls: AbstractControl<T>[],
-    validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions,
-    asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
-  ) {
-    super(controls, validatorOrOptions, asyncValidator)
-
-    this.length = computed(() => this._controls.value.length)
-
-    this._watchValid()
-    this._watchValue()
-    this._watchStatus()
-    this._watchBlurred()
-    this._watchDirty()
-  }
-
-  setValue(value: T extends object ? Partial<T>[] : T[], options?: { dirty?: boolean; blur?: boolean }): void {
-    value.forEach((item, index) => {
-      const control = this.at(index)
-      if (control) {
-        control.setValue(item!, options)
-      }
-    })
-  }
-
-  getValue(options: { skipDisabled?: boolean } = {}): T[] {
-    const { skipDisabled } = options
-    return this._controls.value
-      .filter(control => !skipDisabled || !control.disabled.value)
-      .map(control => control.getValue(options))
-  }
-
-  protected _calculateInitValue(): T[] {
-    return this.getValue()
-  }
-
-  protected _forEachControls(cb: (v: AbstractControl, k: number) => void): void {
-    this._controls.value.forEach(cb)
-  }
-
-  /**
-   * Get the control at the given `index` in the array.
-   *
-   * @param index Index in the array to retrieve the control
-   */
-  at(index: number): AbstractControl<T> | undefined {
-    return this._controls.value[index]
-  }
-
-  /**
-   * Insert a new control at the end of the array.
-   *
-   * @param control Form control to be inserted
-   */
-  push(control: AbstractControl<T>): void {
-    control.setParent(this as AbstractControl)
-    this._controls.value = [...this._controls.value, control]
-  }
-
-  /**
-   * Insert a new control at the given `index` in the array.
-   *
-   * @param index Index in the array to insert the control
-   * @param control Form control to be inserted
-   */
-  insert(index: number, control: AbstractControl<T>): void {
-    control.setParent(this as AbstractControl)
-    const controls = [...this._controls.value]
-    controls.splice(index, 0, control)
-    this._controls.value = controls
-  }
-
-  /**
-   * Remove the control at the given `index` in the array.
-   *
-   * @param index Index in the array to remove the control
-   */
-  removeAt(index: number): void {
-    const controls = [...this._controls.value]
-    controls.splice(index, 1)
-    this._controls.value = controls
-  }
-
-  /**
-   * Replace an existing control.
-   *
-   * @param index Index in the array to replace the control
-   * @param control The control to replace the existing control
-   */
-  setControl(index: number, control: AbstractControl<T>): void {
-    control.setParent(this as AbstractControl)
-    const controls = [...this._controls.value]
-    controls.splice(index, 1, control)
-    this._controls.value = controls
-  }
-
-  private _watchValid() {
-    watch(this._valueRef, () => {
-      if (this.trigger === 'change') {
-        this._validate()
-      }
-    })
-  }
-
-  private _watchValue() {
-    watchEffect(() => {
-      this._valueRef.value = this.getValue()
-    })
-  }
-
-  private _watchStatus() {
-    watchEffect(() => {
-      this._status.value = this._errors.value ? 'invalid' : 'valid'
-    })
-
-    watchEffect(() => {
-      let status: ValidateStatus = 'valid'
-      const controls = this._controls.value
-      for (const control of controls) {
-        const controlStatus = control.status.value
-        if (controlStatus === 'invalid') {
-          status = 'invalid'
-          break
-        } else if (controlStatus === 'validating') {
-          status = 'validating'
-        }
-      }
-      this._controlsStatus.value = status
-    })
-  }
-
-  private _watchBlurred() {
-    watchEffect(() => {
-      let blurred = false
-      const controls = this._controls.value
-      for (const control of controls) {
-        if (control.blurred.value) {
-          blurred = true
-          break
-        }
-      }
-      this._blurred.value = blurred
-    })
-  }
-
-  private _watchDirty() {
-    watchEffect(() => {
-      let dirty = false
-      const controls = this._controls.value
-      for (const control of controls) {
-        if (control.dirty.value) {
-          dirty = true
-          break
-        }
-      }
-      this._dirty.value = dirty
-    })
   }
 }

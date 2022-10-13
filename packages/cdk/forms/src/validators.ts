@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
-import type { AbstractControl } from './controls'
+import type { AbstractControl } from './models/abstractControl'
 import type {
   AsyncValidatorFn,
   ValidateError,

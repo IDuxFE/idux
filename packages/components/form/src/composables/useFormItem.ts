@@ -19,7 +19,7 @@ import {
 import { isFunction, isObject, isString } from 'lodash-es'
 
 import { type AbstractControl, type ValidateStatus, useControl as useSelfControl } from '@idux/cdk/forms'
-import { type VKey } from '@idux/cdk/utils'
+import { type VKey, hasOwnProperty } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { type Locale } from '@idux/components/locales'
 
@@ -116,6 +116,9 @@ function getMessageByControl(control: Ref<AbstractControl | undefined>, locale: 
 
   const error = currControl.errors.value
   for (const key in error) {
+    if (!hasOwnProperty(error, key)) {
+      continue
+    }
     const { message, ...rest } = error[key]
     if (message) {
       if (isString(message)) {
@@ -132,5 +135,6 @@ function getMessageByControl(control: Ref<AbstractControl | undefined>, locale: 
       }
     }
   }
+
   return undefined
 }

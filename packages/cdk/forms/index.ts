@@ -5,7 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-export * from './src/controls'
+export { AbstractControl } from './src/models/abstractControl'
+export { FormArray } from './src/models/formArray'
+export { FormControl } from './src/models/formControl'
+export { FormGroup } from './src/models/formGroup'
+
 export * from './src/typeof'
 export * from './src/types'
 export * from './src/useForms'

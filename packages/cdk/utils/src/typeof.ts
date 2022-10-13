@@ -13,7 +13,7 @@ import { toRawType } from '@vue/shared'
 import { isFunction, isObject } from 'lodash-es'
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export function hasOwnProperty(val: object, key: string | symbol): key is keyof typeof val {
+export function hasOwnProperty(val: object, key: string | number | symbol): key is keyof typeof val {
   return Object.prototype.hasOwnProperty.call(val, key)
 }
 
