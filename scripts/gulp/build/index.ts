@@ -1,6 +1,6 @@
 import { join } from 'path'
 
-import { copy, copyFile } from 'fs-extra'
+import { copy } from 'fs-extra'
 import { series } from 'gulp'
 
 import { gulpConfig } from '../gulpConfig'
@@ -53,8 +53,7 @@ export const buildCdk = series(
 export const buildComponents = series(
   buildPackage(componentsOptions),
   async () => {
-    await copyFile(join(componentsDirname, 'bin.js'), join(componentsDistDirname, 'bin.js'))
-    await copy(icon.assetsDirname, join(componentsDistDirname, 'icon/svg'))
+    await copy(icon.assetsDirname, join(componentsDistDirname, 'icon/assets'))
   },
   buildIndex(componentsOptions),
   buildApiJson(componentsOptions),

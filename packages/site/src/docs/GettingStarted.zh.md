@@ -1,7 +1,7 @@
 ---
 category: docs
-order: 1
 title: 快速上手
+order: 1
 ---
 
 `@idux` 致力于提供给程序员**愉悦**的开发体验。
@@ -28,7 +28,7 @@ title: 快速上手
 执行以下命令并跟随提示操作，`vite` 会在当前目录下新建一个名称为 `vite-project` （如果你没有指定的话）的文件夹。
 
 ```bash
-npm init vite@latest
+npm create vite@latest
 
 cd vite-project
 
@@ -37,34 +37,32 @@ npm install
 
 ### 安装组件
 
-根据你的需求决定是否需要安装 `@idux/pro` 和复制 icon 的静态文件。
+根据你的需求决定是否需要安装 `@idux/pro`。
 
 ```bash
-# 如果不需要 `@idux/pro`， 则执行 `npm install @idux/cdk @idux/components`
 npm install @idux/cdk @idux/components @idux/pro
-
-# 如果不需要动态加载图标，则无需执行
-node ./node_modules/@idux/components/bin icon
 ```
 
 ### 初始化配置
 
-参考下面的代码对 `@idux` 进行初始化配置，包括引入国际化文件，导入模块，引入样式文件等工作。
+参考下面的代码，新建一个 `idux.ts` 文件，对 `@idux` 进行初始化配置，包括引入国际化文件，导入模块，引入样式文件等工作。
 
 ```ts
 // idux.ts
-import type { App } from "vue";
+import { type App } from "vue";
 
 // 导入 cdk 样式，注意是 `index`, 因为 cdk 不会区分主题
-import "@idux/cdk/index.css";
+import "@idux/cdk/index.min.css";
 
-// 如果不需要 reset 全局样式和滚动条样式，移除下面 2 行代码
-import "@idux/components/style/core/reset.default.css";
-import "@idux/components/style/core/reset-scroll.default.css";
+// 如果不需要 reset 全局样式，移除下一行代码，但是这可能导致部分组件样式异常，需要提供一些必须的全局样式
+// 参见：https://github.com/IDuxFE/idux/issues/1194
+import "@idux/components/style/core/reset.default.min.css";
+// 如果不需要 reset 滚动条样式，移除下一行代码
+import "@idux/components/style/core/reset-scroll.default.min.css";
 
 // 如果需要 css 按需加载，移除下面 2 行代码
-import "@idux/components/default.css";
-import "@idux/pro/default.css";
+import "@idux/components/default.min.css";
+import "@idux/pro/default.min.css";
 
 // 如果需要 js 按需加载，移除下面 3 行代码
 import IduxCdk from "@idux/cdk";
@@ -72,17 +70,14 @@ import IduxComponents from "@idux/components";
 import IduxPro from "@idux/pro";
 
 import { createGlobalConfig } from "@idux/components/config";
-import {
-  IDUX_ICON_DEPENDENCIES,
-  addIconDefinitions,
-} from "@idux/components/icon";
+import { IDUX_ICON_DEPENDENCIES, addIconDefinitions } from "@idux/components/icon";
 // import { enUS } from "@idux/components/locales";
 
 // 静态加载: `IDUX_ICON_DEPENDENCIES` 是 `@idux` 的部分组件默认所使用到图标，建议在此时静态引入。
 addIconDefinitions(IDUX_ICON_DEPENDENCIES);
 
 // 动态加载：不会被打包，可以减小包体积，需要加载的时候时候 http 请求加载
-// 注意：请确认图标的 svg 资源被正确放入到 `public/idux-icons` 目录中
+// 注意：请确认图标的 svg 资源被正确放入到 `public/idux-icons` 目录中, 可以参考下面的 vite 配置
 const loadIconDynamically = (iconName: string) => {
   return fetch(`/idux-icons/${iconName}.svg`).then((res) => res.text());
 };
@@ -100,6 +95,8 @@ const install = (app: App): void => {
 export default { install };
 ```
 
+在 `main.ts` 中引入 `idux.ts`
+
 ```ts
 // main.ts
 import { createApp } from "vue";
@@ -110,22 +107,43 @@ import App from "./App.vue";
 createApp(App).use(Idux).mount("#app");
 ```
 
+修改 `vite.config.ts`, 以支持图标资源的动态加载，如果你不需要用到动态加载图标，无需配置此项。
+
+```ts
+// vite.config.ts
+import { viteStaticCopy } from "vite-plugin-static-copy";
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    ...
+    viteStaticCopy({
+      targets: [
+        {
+          src: "./node_modules/@idux/components/icon/assets/*.svg",
+          dest: "idux-icons",
+        },
+      ],
+    }),
+  ],
+});
+```
+
 ### 类型提示
 
 我们提供了所有组件的类型定义，你可以参考下面的代码进行导入类型声明。
 
 ```ts
-// env.d.ts
+// vite-env.d.ts
 /// <reference types="vite/client" />
 /// <reference types="@idux/cdk/types" />
 /// <reference types="@idux/components/types" />
 /// <reference types="@idux/pro/types" />
 
-declare module '*.vue' {
-  import { DefineComponent } from 'vue'
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
-  const component: DefineComponent<{}, {}, any>
-  export default component
+declare module "*.vue" {
+  import type { DefineComponent } from "vue";
+  const component: DefineComponent<{}, {}, any>;
+  export default component;
 }
 ```
 
@@ -169,7 +187,8 @@ const install = (app: App): void => {
 import { IduxResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 
-export default {
+// https://vitejs.dev/config/
+export default defineConfig({
   plugins: [
     /* ... */
     Components({
@@ -179,7 +198,7 @@ export default {
       // resolvers: [IduxResolver({ importStyle: 'css' })],
     }),
   ]
-}
+})
 ```
 
 - Webpack:
@@ -211,4 +230,5 @@ import "@idux/components/button/style/themes/default_css"
 
 - [全局配置](/docs/global-config/zh)
 - [国际化配置](/docs/i18n/zh)
+- [定制主题](/docs/customize-theme/zh)
 - [使用图标](/components/icon/zh#FAQ)
