@@ -7,26 +7,35 @@
 
 import type { DnDContext } from './useDragDropContext'
 
-import { MaybeElementRef, convertElement } from '@idux/cdk/utils'
+import { DnDEventType } from '../types'
 
-export const withDragHandle = (source: MaybeElementRef, handle: MaybeElementRef, context: DnDContext): void => {
-  let dragTarget: HTMLElement | null = null
-  const sourceEl = convertElement(source)!
-  const handleEl = convertElement(handle)!
+export const withDragHandle = (sourceEl: HTMLElement, handleEl: HTMLElement, context: DnDContext): void => {
+  const registry = context.registry
+  const state = registry.state(sourceEl)!
 
   handleEl.classList.add('cdk-draggable-handle')
 
-  context.registry.on(sourceEl, 'source', 'pointerdown', e => {
-    dragTarget = e.target as HTMLElement
-  })
-
-  context.registry.on(sourceEl, 'source', 'pointerup', _ => {
-    dragTarget = null
-  })
-
-  context.registry.on(sourceEl, 'source', 'dragstart', e => {
-    if (!handleEl.contains(dragTarget)) {
+  const preventNotHandle = (target: HTMLElement, e: DnDEventType) => {
+    if (!handleEl.contains(target)) {
       e.preventDefault()
+      state.end()
     }
-  })
+  }
+
+  if (state.isNative) {
+    let dragTarget: HTMLElement | null = null
+
+    registry.on(sourceEl, 'pointerdown', e => {
+      dragTarget = e.target as HTMLElement
+    })
+
+    registry.on(sourceEl, 'pointerup', _ => {
+      dragTarget = null
+    })
+
+    registry.on(sourceEl, 'dragstart', e => preventNotHandle(dragTarget!, e))
+  } else {
+    registry.on(sourceEl, 'mousedown', e => preventNotHandle(e.target as HTMLElement, e))
+    registry.on(sourceEl, 'touchstart', e => preventNotHandle(e.target as HTMLElement, e))
+  }
 }

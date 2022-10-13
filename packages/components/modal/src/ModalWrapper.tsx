@@ -18,7 +18,7 @@ import {
   watch,
 } from 'vue'
 
-import { isFunction } from 'lodash-es'
+import { isFunction, isString } from 'lodash-es'
 
 import { useDraggable } from '@idux/cdk/drag-drop'
 import { callEmit, convertCssPixel, getOffset } from '@idux/cdk/utils'
@@ -131,7 +131,12 @@ export default defineComponent({
           draggableResult.value = undefined
         }
         if (draggable) {
-          draggableResult.value = useDraggable(contentRef, { handle: headerRef, free: true, boundary: window })
+          draggableResult.value = useDraggable(contentRef, {
+            handle: headerRef,
+            free: true,
+            boundary: wrapperRef,
+            backend: isString(draggable) ? draggable : 'pointer',
+          })
         }
       },
       { immediate: true },
