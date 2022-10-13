@@ -50,7 +50,7 @@ export default defineComponent({
       sliderRefs.value = []
     })
 
-    const { activeIndex, runningIndex, unitHeight, unitWidth, goTo, next, prev } = useStrategy(
+    const { activeIndex, runningIndex, nextIndex, unitHeight, unitWidth, goTo, next, prev } = useStrategy(
       props,
       carouselRef,
       sliderTrackRef,
@@ -93,10 +93,22 @@ export default defineComponent({
       if (width <= 0 || height <= 0 || length <= 0) {
         return undefined
       }
-      if (mergedVertical.value) {
-        return `width: ${width}px;height: ${height * length}px;`
-      }
-      return `width: ${width * length}px;height: ${height}px;`
+
+      const index = runningIndex.value > -1 ? nextIndex.value : activeIndex.value
+
+      /* eslint-disable indent */
+      return mergedVertical.value
+        ? {
+            width: `${width}px`,
+            height: `${height * length}px`,
+            transform: `translate3d(0, ${-index * unitHeight.value}px, 0)`,
+          }
+        : {
+            width: `${width * length}px`,
+            height: `${height}px`,
+            transform: `translate3d(${-index * unitWidth.value}px, 0, 0)`,
+          }
+      /* eslint-enable indent */
     })
 
     const dotsClasses = computed(() => {
@@ -135,11 +147,6 @@ export default defineComponent({
         }
       })
 
-      if (mergedVertical.value) {
-        sliderTrackElement.style.transform = `translate3d(0, ${-currRunningIndex * unitHeight.value}px, 0)`
-      } else {
-        sliderTrackElement.style.transform = `translate3d(${-currRunningIndex * unitWidth.value}px,0 , 0)`
-      }
       activeIndex.value = currRunningIndex
       runningIndex.value = -1
       startAutoplay()
