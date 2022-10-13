@@ -5,53 +5,53 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { DnDElement, DnDElementType, DnDEvent, DnDEventName } from './types'
+import type { DnDElement, DnDEvent, DnDEventName } from './types'
 
-import { MaybeElementRef, convertElement } from '@idux/cdk/utils'
+import { DnDState } from './state'
 
-type DnDEventsMap = { [key in DnDEventName]: DnDEvent }
+type DnDStateMap = { [key in DnDEventName]: DnDEvent[] } & { state: DnDState }
 
 type InnerRegistry = {
-  checkConnect: (target: DnDElement, source: DnDElement) => boolean
-  sources: Set<DnDElement>
-  targets: Set<DnDElement>
-  off: (el: DnDElement, type: DnDElementType) => void
-  exec: (el: MaybeElementRef, type: DnDElementType, eventName: DnDEventName, callback: Parameters<DnDEvent>) => void
+  on: (el: DnDElement, eventName?: DnDEventName, handler?: DnDEvent, state?: DnDState) => void
+  off: (el: DnDElement) => void
+  has: (el: DnDElement) => boolean
+  exec: (el: DnDElement, eventName: DnDEventName, callback: Parameters<DnDEvent>) => void
+  state: (el: DnDElement) => DnDState | undefined
   connect: (target: DnDElement, source: DnDElement) => void
-  on: (el: DnDElement, type: DnDElementType, eventName?: DnDEventName, handler?: DnDEvent) => void
+  checkConnect: (target: DnDElement, source: DnDElement) => boolean
 }
 
-export function DnDRegistry(): InnerRegistry {
-  // 是否内存损耗过大，考虑使用唯一标识符来代替？
-  const dndElMap = new Map<DnDElement, DnDEventsMap>()
+export const DnDRegistry = (): InnerRegistry => {
+  const dndElMap = new Map<DnDElement, DnDStateMap>()
   const connector = new Map<DnDElement, Set<DnDElement>>()
-  const sources = new Set<DnDElement>()
-  const targets = new Set<DnDElement>()
 
   /**
    * on a element handler to registry
    *
    * @param el
-   * @param type
    * @param eventName
    * @param handler
+   * @param state
    */
-  const on = (el: DnDElement, type: DnDElementType, eventName?: DnDEventName, handler?: DnDEvent): void => {
-    if (!sources.has(el) || !targets.has(el)) {
-      switch (type) {
-        case 'source':
-          sources.add(el)
-          break
-        case 'target':
-          targets.add(el)
-      }
+  const on = (el: DnDElement, eventName?: DnDEventName, handler?: DnDEvent, state?: DnDState): void => {
+    if (!dndElMap.has(el)) {
+      const dndMap = {} as DnDStateMap
+      dndMap.state = state ?? new DnDState()
 
-      if (!dndElMap.has(el)) {
-        dndElMap.set(el, {} as DnDEventsMap)
+      dndElMap.set(el, dndMap)
+    }
+
+    if (eventName && handler) {
+      const dndEventsMap = dndElMap.get(el)!
+      if (state) {
+        dndEventsMap.state = state
       }
-      if (eventName && handler) {
-        dndElMap.get(el)![eventName] = handler
+      let handlers = dndEventsMap[eventName]
+      if (!handlers) {
+        handlers = []
+        dndEventsMap[eventName] = handlers
       }
+      handlers.push(handler)
     }
   }
 
@@ -59,22 +59,13 @@ export function DnDRegistry(): InnerRegistry {
    * unregister a element from the registry
    *
    * @param el
-   * @param type
    */
-  const off = (el: DnDElement, type: DnDElementType): void => {
-    if (sources.has(el) || targets.has(el)) {
-      switch (type) {
-        case 'source':
-          sources.delete(el)
-          break
-        case 'target':
-          targets.delete(el)
-      }
-      dndElMap.delete(el)
-      connector.delete(el)
-      // connect 残留
-    }
+  const off = (el: DnDElement): void => {
+    dndElMap.delete(el)
+    connector.forEach(set => set.delete(el))
+    connector.delete(el)
   }
+
   /**
    * batch exec related event handlers
    *
@@ -83,32 +74,13 @@ export function DnDRegistry(): InnerRegistry {
    *     exec('source', 'drag', [evt])
    *   })
    * @param el trigger
-   * @param type source or target
    * @param eventName drag, dragstart, dragend, dragenter, dragover, dragleave, drop
    * @param callback event listener callback
    *
    * @returns void
    */
-  const exec = (
-    el: MaybeElementRef,
-    type: DnDElementType,
-    eventName: DnDEventName,
-    callback: Parameters<DnDEvent>,
-  ): void => {
-    const elRef = convertElement(el)!
-    switch (type) {
-      case 'target':
-        for (const source of connector.get(elRef)!) {
-          if (source === callback[0].target) {
-            dndElMap.get(source)![eventName]?.(...callback)
-            return
-          }
-        }
-        break
-      case 'source':
-        dndElMap.get(elRef)![eventName]?.(...callback)
-        break
-    }
+  const exec = (el: DnDElement, eventName: DnDEventName, callback: Parameters<DnDEvent>): void => {
+    dndElMap.get(el)?.[eventName]?.forEach(fun => fun(...callback))
   }
 
   const connect = (target: DnDElement, source: DnDElement): void => {
@@ -122,13 +94,25 @@ export function DnDRegistry(): InnerRegistry {
     return connector.has(target) && connector.get(target)!.has(source)
   }
 
+  const has = (el: DnDElement): boolean => {
+    return dndElMap.has(el)
+  }
+  /**
+   * on->state
+   *
+   * @param el
+   */
+  const state = (el: DnDElement): DnDState | undefined => {
+    return dndElMap.get(el)?.state
+  }
+
   return {
     on,
     off,
+    has,
     exec,
+    state,
     connect,
     checkConnect,
-    sources,
-    targets,
   }
 }

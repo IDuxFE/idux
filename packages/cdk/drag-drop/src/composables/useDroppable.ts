@@ -5,21 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { DnDEvent } from '../types'
+import type { DnDEventType, DroppableOptions } from '../types'
 
-import { toRaw, watch } from 'vue'
+import { watch } from 'vue'
 
-import { type MaybeElementRef, convertElement, tryOnScopeDispose, useEventListener } from '@idux/cdk/utils'
+import { type MaybeElementRef, convertElement, tryOnScopeDispose } from '@idux/cdk/utils'
 
 import { initContext } from '../utils'
 import { type DnDContext } from './useDragDropContext'
-
-export interface DroppableOptions {
-  onDragEnter?: DnDEvent
-  onDragOver?: DnDEvent
-  onDragLeave?: DnDEvent
-  onDrop?: DnDEvent
-}
 
 /**
  * make a element droppable as a container and accept draggable element
@@ -38,14 +31,18 @@ export function useDroppable(
 } {
   context = initContext(context)
 
+  const registry = context.registry
+  const state = context.state
+
   let stopConnectWatch: () => void
 
   const onDroppable = (targetElement: HTMLElement) => {
-    context?.registry.on(targetElement, 'target')
+    installHandlers(targetElement)
+    registry.on(targetElement)
   }
 
   const offDroppable = (targetElement: HTMLElement) => {
-    context?.registry.off(targetElement, 'target')
+    registry.off(targetElement)
   }
 
   /**
@@ -64,6 +61,7 @@ export function useDroppable(
       { immediate: true, flush: 'post' },
     )
   }
+
   const stopWatch = watch(
     () => convertElement(target),
     (currElement, prevElement) => {
@@ -78,38 +76,35 @@ export function useDroppable(
     { immediate: true, flush: 'post' },
   )
 
-  const onDragEnter = (evt: DragEvent) => {
-    context?.registry.exec(target, 'target', 'dragenter', [evt])
-    options?.onDragEnter?.(evt, toRaw(context!.state.currPosition.value))
+  const onDragEnter = (evt: DnDEventType) => {
+    options?.onDragEnter?.(evt, state.current.activeTransform)
   }
 
-  const onDragOver = (evt: DragEvent) => {
-    context?.registry.exec(target, 'target', 'dragover', [evt])
-    options?.onDragOver?.(evt, toRaw(context!.state.currPosition.value))
+  const onDragOver = (evt: DnDEventType) => {
+    options?.onDragOver?.(evt, state.current.activeTransform)
   }
 
-  const onDragLeave = (evt: DragEvent) => {
-    context?.registry.exec(target, 'target', 'dragleave', [evt])
-    options?.onDragLeave?.(evt, toRaw(context!.state.currPosition.value))
+  const onDragLeave = (evt: DnDEventType) => {
+    options?.onDragLeave?.(evt, state.current.activeTransform)
   }
 
-  const onDrop = (evt: DragEvent) => {
-    context?.registry.exec(target, 'target', 'drop', [evt])
-    options?.onDrop?.(evt, toRaw(context!.state.currPosition.value))
+  const onDrop = (evt: DnDEventType) => {
+    options?.onDrop?.(evt, state.current.activeTransform)
   }
 
-  const listenerStops = [
-    useEventListener(target, 'dragenter', onDragEnter),
-    useEventListener(target, 'dragover', onDragOver),
-    useEventListener(target, 'dragleave', onDragLeave),
-    useEventListener(target, 'drop', onDrop),
-  ]
+  const installHandlers = (target: HTMLElement) => {
+    if (state.current.isNative) {
+      registry.on(target, 'dragenter', onDragEnter)
+      registry.on(target, 'dragover', onDragOver)
+      registry.on(target, 'dragleave', onDragLeave)
+      registry.on(target, 'drop', onDrop)
+    }
+  }
 
   const stop = () => {
     offDroppable(convertElement(target)!)
     stopWatch()
     stopConnectWatch()
-    listenerStops.forEach(listenerStop => listenerStop())
   }
 
   tryOnScopeDispose(stop)

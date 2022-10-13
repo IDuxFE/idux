@@ -38,3 +38,8 @@ useDraggable(dragRef2, { free: true, boundary: document.documentElement })
   }
 }
 </style>
+<style>
+.ix-button {
+  transition: none;
+}
+</style>
