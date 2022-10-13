@@ -5,16 +5,17 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { CarouselProps } from '../types'
+
 import { type ComputedRef, type Ref, onMounted, ref, watch } from 'vue'
 
 import { useResizeObserver } from '@idux/cdk/resize'
 import { callEmit, convertElement, useState } from '@idux/cdk/utils'
 
-import { type CarouselProps } from '../types'
-
 export interface StrategyContext {
   activeIndex: Ref<number>
   runningIndex: Ref<number>
+  nextIndex: Ref<number>
   unitHeight: ComputedRef<number>
   unitWidth: ComputedRef<number>
   goTo(slideIndex: number): void
@@ -36,6 +37,7 @@ export function useStrategy(
   })
 
   const runningIndex = ref(-1)
+  const nextIndex = ref(-1)
   const [unitWidth, setUnitWidth] = useState(0)
   const [unitHeight, setUnitHeight] = useState(0)
 
@@ -48,14 +50,6 @@ export function useStrategy(
 
     setUnitWidth(width)
     setUnitHeight(height)
-
-    const sliderTrackElement = sliderTrackRef.value
-    if (!sliderTrackElement) {
-      return
-    }
-    sliderTrackElement.style.transform = mergedVertical.value
-      ? `translate3d(0, ${-activeIndex.value * height}px, 0)`
-      : `translate3d(${-activeIndex.value * width}px, 0, 0)`
   }
 
   useResizeObserver(carouselRef, layout)
@@ -75,7 +69,7 @@ export function useStrategy(
     )
   })
 
-  const goTo = (nextIndex: number) => {
+  const goTo = (index: number) => {
     const length = mergedLength.value
     const sliderTrackElement = sliderTrackRef.value
     const firstSliderElement = convertElement(sliderRefs.value[0])
@@ -84,7 +78,7 @@ export function useStrategy(
     if (
       length <= 1 ||
       runningIndex.value !== -1 ||
-      nextIndex === activeIndex.value ||
+      index === activeIndex.value ||
       !sliderTrackElement ||
       !firstSliderElement ||
       !lastSliderElement
@@ -92,36 +86,22 @@ export function useStrategy(
       return
     }
 
-    const { from, to } = getBoundary(activeIndex.value, nextIndex, length)
+    const { from, to } = getBoundary(activeIndex.value, index, length)
+    nextIndex.value = index
     runningIndex.value = to
-    sliderTrackElement.style.transition = `transform 0.5s ease`
 
-    const needToAdjust = length > 2 && nextIndex !== to
-    if (mergedVertical.value) {
-      if (needToAdjust) {
-        if (to < from) {
-          firstSliderElement.style.top = `${length * unitHeight.value}px`
-          lastSliderElement.style.top = ''
-        } else {
-          firstSliderElement.style.top = ''
-          lastSliderElement.style.top = `${-length * unitHeight.value}px`
-        }
-        sliderTrackElement.style.transform = `translate3d(0, ${-nextIndex * unitHeight.value}px, 0)`
+    sliderTrackElement.style.transition = `transform 0.5s ease`
+    const needToAdjust = length > 2 && index !== to
+
+    if (needToAdjust) {
+      const stylePropertyName = mergedVertical.value ? 'top' : 'left'
+      const unit = mergedVertical.value ? unitHeight.value : unitWidth.value
+      if (to < from) {
+        firstSliderElement.style[stylePropertyName] = `${length * unit}px`
+        lastSliderElement.style[stylePropertyName] = ''
       } else {
-        sliderTrackElement.style.transform = `translate3d(0, ${-to * unitHeight.value}px, 0)`
-      }
-    } else {
-      if (needToAdjust) {
-        if (to < from) {
-          firstSliderElement.style.left = `${length * unitWidth.value}px`
-          lastSliderElement.style.left = ''
-        } else {
-          firstSliderElement.style.left = ''
-          lastSliderElement.style.left = `${-length * unitWidth.value}px`
-        }
-        sliderTrackElement.style.transform = `translate3d(${-nextIndex * unitWidth.value}px, 0, 0)`
-      } else {
-        sliderTrackElement.style.transform = `translate3d(${-to * unitWidth.value}px, 0, 0)`
+        firstSliderElement.style[stylePropertyName] = ''
+        lastSliderElement.style[stylePropertyName] = `${-length * unit}px`
       }
     }
   }
@@ -136,6 +116,7 @@ export function useStrategy(
   return {
     activeIndex,
     runningIndex,
+    nextIndex,
     unitHeight,
     unitWidth,
     goTo,
@@ -144,6 +125,6 @@ export function useStrategy(
   }
 }
 
-function getBoundary(f: number, t: number, length: number) {
+function getBoundary(f: number, t: number, length: number): { from: number; to: number } {
   return { from: (f + length) % length, to: (t + length) % length }
 }
