@@ -66,8 +66,28 @@ const loadIconDynamically = (iconName: string) => {
 useGlobalConfig('icon', { loadIconDynamically })
 ```
 
-你可以执行 `node ./node_modules/@idux/components/bin icon` 命令将默认图标拷贝到 `public/idux-icons` 目录下。  
-当然，你也可以手动拷贝，默认图标的存放地址为 `./node_modules/@idux/components/icon/svg`。
+你可以 `vite-plugin-static-copy` 或者 `CopyWebpackPlugin` 将默认图标拷贝到 `public/idux-icons` 目录下。
+
+```ts
+// vite.config.ts
+import { viteStaticCopy } from "vite-plugin-static-copy";
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    ...
+    viteStaticCopy({
+      targets: [
+        {
+          src: "./node_modules/@idux/components/icon/assets/*.svg",
+          dest: "idux-icons", // `loadIconDynamically` 设置的目录名称
+        },
+      ],
+    }),
+  ],
+});
+
+当然，你也可以手动拷贝，默认图标的存放地址为 `./node_modules/@idux/components/icon/assets`。
 
 #### 静态加载
 
