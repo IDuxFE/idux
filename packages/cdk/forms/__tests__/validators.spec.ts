@@ -1,6 +1,6 @@
-import { FormControl } from '../src/controls'
 import { enUSMessages } from '../src/messages/en-US'
 import { zhCNMessages } from '../src/messages/zh-CN'
+import { FormControl } from '../src/models/formControl'
 import { AsyncValidatorFn, ValidateErrors, ValidateMessages, ValidatorFn } from '../src/types'
 import { Validators } from '../src/validators'
 

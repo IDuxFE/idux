@@ -7,7 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { AbstractControl } from './controls'
+import { AbstractControl } from './models/abstractControl'
 
 export interface ValidateError {
   /**

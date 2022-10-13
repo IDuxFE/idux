@@ -1,8 +1,8 @@
 import { flushPromises } from '@vue/test-utils'
 import { Ref, ref, watch } from 'vue'
 
-import { AbstractControl } from '../src/controls'
 import { zhCNMessages } from '../src/messages/zh-CN'
+import { AbstractControl } from '../src/models/abstractControl'
 import { AsyncValidatorFn, ValidateErrors, ValidatorFn, ValidatorOptions } from '../src/types'
 import { Validators } from '../src/validators'
 
@@ -25,7 +25,9 @@ class Control<T = unknown> extends AbstractControl<T> {
   }
 
   protected _forEachControls(): void {}
-
+  protected _find(_: string | number): AbstractControl<T> | undefined {
+    return undefined
+  }
   protected _calculateInitValue(): T {
     return undefined as unknown as T
   }
