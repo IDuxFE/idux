@@ -5,7 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { AbstractControl, FormArray, FormControl, FormGroup } from './controls'
+import { AbstractControl } from './models/abstractControl'
+import { FormArray } from './models/formArray'
+import { FormControl } from './models/formControl'
+import { FormGroup } from './models/formGroup'
 
 export const isAbstractControl = (val: unknown): val is AbstractControl => {
   return val instanceof AbstractControl

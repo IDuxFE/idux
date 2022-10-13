@@ -2,7 +2,7 @@ import { DOMWrapper, flushPromises, mount } from '@vue/test-utils'
 import { provide } from 'vue'
 
 import { Validators } from '..'
-import { FormGroup } from '../src/controls'
+import { FormGroup } from '../src/models/formGroup'
 import { useFormGroup } from '../src/useForms'
 import { FORMS_CONTROL_TOKEN, useAccessorAndControl, useControl } from '../src/utils'
 

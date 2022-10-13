@@ -24,7 +24,7 @@ import { isNil } from 'lodash-es'
 
 import { Logger, type MaybeRef, NoopFunction, callEmit, tryOnScopeDispose } from '@idux/cdk/utils'
 
-import { type AbstractControl, type ControlPathType } from './controls'
+import { type AbstractControl, type ControlPathType } from './models/abstractControl'
 import { isAbstractControl } from './typeof'
 
 export const FORMS_CONTROL_TOKEN: InjectionKey<ShallowRef<AbstractControl>> = Symbol('cdk-forms-control')

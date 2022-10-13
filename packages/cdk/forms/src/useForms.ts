@@ -7,7 +7,10 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { type AbstractControl, FormArray, FormControl, FormGroup, type GroupControls } from './controls'
+import { type AbstractControl, type GroupControls } from './models/abstractControl'
+import { FormArray } from './models/formArray'
+import { FormControl } from './models/formControl'
+import { FormGroup } from './models/formGroup'
 import { isAbstractControl } from './typeof'
 import { type AsyncValidatorFn, type ValidatorFn, type ValidatorOptions } from './types'
 
