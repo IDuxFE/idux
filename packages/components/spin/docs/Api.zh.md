@@ -21,3 +21,32 @@
 |名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 |`default` | 需要遮罩的内容区域 | - | - |
+
+### IxSpinProvider
+
+#### IxSpinProviderMethods
+
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| `open`   | 打开 | `(options: SpinOptions) => SpinRef` | `target`不传，默认为`target`为`body` |
+| `update`  | 更新 | `(options: SpinOptions) => void` | `target`不传，默认为`target`为`body` |
+| `destroy`  | 销毁 | `(target?: TargetType \| TargetType[]) => void` | `target`不传，默认为`target`为`body` |
+| `destroyAll`  | 销毁全部 | `() => void` | - |
+
+``` ts
+export type SpinOptions = Partial<
+  Omit<SpinProps, 'spinning'> & {
+    tip: string
+    target: string | HTMLElement | (() => string | HTMLElement)
+    zIndex: number
+  }
+>
+
+export type SpinRefUpdateOptions = Omit<SpinOptions, 'target'>
+
+export interface SpinRef {
+  update: (options: SpinRefUpdateOptions) => void
+  destroy: () => void
+}
+
+```

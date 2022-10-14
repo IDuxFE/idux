@@ -40,7 +40,7 @@ export default defineComponent({
     const { size, strokeWidth, radius } = useSize(props, spinConfig)
 
     const hasDefaultSlot = computed(() => hasSlot(slots))
-    const mregedIcon = computed(() => props.icon ?? spinConfig.icon)
+    const mergedIcon = computed(() => props.icon ?? spinConfig.icon)
     const mergedTip = computed(() => props.tip ?? spinConfig.tip)
 
     const { spinnerClassName, containerClassName } = useClasses(
@@ -73,11 +73,11 @@ export default defineComponent({
         return <div class={iconCls}>{slots.icon()}</div>
       }
 
-      if (mregedIcon.value) {
+      if (mergedIcon.value) {
         const iconStyle = normalizeStyle(props.duration && { animationDuration: `${props.duration}s` })
         return (
           <div class={[iconCls, props.rotate && `${iconCls}--rotate`]} style={iconStyle}>
-            <IxIcon name={mregedIcon.value} />
+            <IxIcon name={mergedIcon.value} />
           </div>
         )
       }

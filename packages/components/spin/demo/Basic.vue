@@ -1,7 +1,7 @@
 <template>
   <div>
     <IxSpin :spinning="spinning">
-      <div class="content">content</div>
+      <IxButton>1212</IxButton>
     </IxSpin>
     <div class="operation-area">
       <IxButton mode="primary" @click="changeSpinning()">切换状态</IxButton>
