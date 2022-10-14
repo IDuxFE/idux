@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.9...v1.0.0) (2022-10-14)
+
+
+### Features
+
+* **cdk:popper:** migrate popperjs to floating-ui ([#1191](https://github.com/IDuxFE/idux/issues/1191)) ([7eb77d6](https://github.com/IDuxFE/idux/commit/7eb77d66cb5063e5724c1bf2666a2e33492e09e6))
+
+
+### BREAKING CHANGES
+
+* **cdk:popper:** modifiers is now changed to middlewares
+* **cdk:popper:** forceUpdate is now removed
+* **cdk:popper:** onFirstUpdate is now removed
+
+
+
+
+
 # [1.0.0-rc.9](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.8...v1.0.0-rc.9) (2022-10-09)
 
 
