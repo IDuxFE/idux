@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.9...v1.0.0) (2022-10-14)
+
+
+### Bug Fixes
+
+* **cdk:popper:** vue warning when watch on non-reactive options ([#1197](https://github.com/IDuxFE/idux/issues/1197)) ([123e62f](https://github.com/IDuxFE/idux/commit/123e62f32e62b801dce86d799f6ab95b7025b526))
+* **comp:carousel:** gotTo doesn't work after item dynamic change ([#1196](https://github.com/IDuxFE/idux/issues/1196)) ([1406d27](https://github.com/IDuxFE/idux/commit/1406d27ca409d5ed53d81aafdf8848d173249b77))
+* **comp:modal:** prevent ok & cancel from triggering while animating ([#1190](https://github.com/IDuxFE/idux/issues/1190)) ([e207465](https://github.com/IDuxFE/idux/commit/e20746521e3dd3102b1e736802a25de6591ac927))
+
+
+### Features
+
+* **cdk:popper:** migrate popperjs to floating-ui ([#1191](https://github.com/IDuxFE/idux/issues/1191)) ([7eb77d6](https://github.com/IDuxFE/idux/commit/7eb77d66cb5063e5724c1bf2666a2e33492e09e6))
+
+
+### BREAKING CHANGES
+
+* **cdk:popper:** modifiers is now changed to middlewares
+* **cdk:popper:** forceUpdate is now removed
+* **cdk:popper:** onFirstUpdate is now removed
+
+
+
+
+
 # [1.0.0-rc.9](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.8...v1.0.0-rc.9) (2022-10-09)
 
 
