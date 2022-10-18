@@ -11,7 +11,7 @@ exports[`Collapse > panel work > header work 1`] = `
       </div>
       <!---->
     </div>
-    <transition-stub>
+    <transition-stub name=\\"ix-collapse-transition\\" appear=\\"true\\" persisted=\\"false\\" css=\\"true\\">
       <div class=\\"ix-collapse-panel-content\\" style=\\"display: none;\\">
         <div class=\\"ix-collapse-panel-content-box\\">
           <!---->
@@ -32,7 +32,7 @@ exports[`Collapse > panel work > header work 2`] = `
       </div>
       <!---->
     </div>
-    <transition-stub>
+    <transition-stub name=\\"ix-collapse-transition\\" appear=\\"true\\" persisted=\\"false\\" css=\\"true\\">
       <div class=\\"ix-collapse-panel-content\\" style=\\"display: none;\\">
         <div class=\\"ix-collapse-panel-content-box\\">
           <!---->
@@ -54,7 +54,7 @@ exports[`Collapse > render work 1`] = `
       </div>
       <!---->
     </div>
-    <transition-stub>
+    <transition-stub name=\\"ix-collapse-transition\\" appear=\\"true\\" persisted=\\"false\\" css=\\"true\\">
       <div class=\\"ix-collapse-panel-content\\" style=\\"display: none;\\">
         <div class=\\"ix-collapse-panel-content-box\\">
           <!---->
@@ -71,7 +71,7 @@ exports[`Collapse > render work 1`] = `
       </div>
       <!---->
     </div>
-    <transition-stub>
+    <transition-stub name=\\"ix-collapse-transition\\" appear=\\"true\\" persisted=\\"false\\" css=\\"true\\">
       <div class=\\"ix-collapse-panel-content\\">
         <div class=\\"ix-collapse-panel-content-box\\">
           <!---->
@@ -88,7 +88,7 @@ exports[`Collapse > render work 1`] = `
       </div>
       <!---->
     </div>
-    <transition-stub>
+    <transition-stub name=\\"ix-collapse-transition\\" appear=\\"true\\" persisted=\\"false\\" css=\\"true\\">
       <div class=\\"ix-collapse-panel-content\\" style=\\"display: none;\\">
         <div class=\\"ix-collapse-panel-content-box\\">
           <!---->
