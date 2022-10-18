@@ -1,7 +1,7 @@
 // Vitest Snapshot v1
 
 exports[`Alert > render work 1`] = `
-"<transition-stub>
+"<transition-stub name=\\"ix-alert\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
   <div class=\\"ix-alert ix-alert-info\\"><span class=\\"ix-alert-icon\\"><i class=\\"ix-icon ix-icon-bulb\\" role=\\"img\\" aria-label=\\"bulb\\"></i></span>
     <div class=\\"ix-alert-content\\">
       <div class=\\"ix-alert-title\\"></div>

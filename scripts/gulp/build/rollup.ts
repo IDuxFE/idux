@@ -127,12 +127,13 @@ export const getRollupDeclarationOptions = (options: Options): RollupOptions => 
     vuePlugin(),
     vueJsxPlugin({ enableObjectSlots: false }),
     typescript({
+      abortOnError: false,
       useTsconfigDeclarationDir: true,
       tsconfigOverride: {
+        emitDeclarationOnly: true,
         include: ['packages/**/*', 'typings/*'],
         exclude: ['packages/site/*', 'packages/**/__tests__/*', 'packages/**/demo/*'],
       },
-      abortOnError: false,
     }),
   ] as Plugin[]
 
