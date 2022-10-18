@@ -29,9 +29,6 @@
   "style": "./default.css",
   "unpkg": "./index.full.js",
   "jsdelivr": "./index.full.js",
-  "bin": {
-    "idux": "bin.js"
-  },
   "scripts": {},
   "dependencies": {
     "@idux/cdk": "^1.0.0",
