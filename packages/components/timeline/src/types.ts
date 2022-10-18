@@ -13,7 +13,7 @@ export type TimelineItemPlacement = 'start' | 'end'
 
 export const timelineProps = {
   pending: {
-    type: [String, Boolean],
+    type: [String, Boolean] as PropType<string | boolean>,
     default: false,
   },
   pendingDot: String,

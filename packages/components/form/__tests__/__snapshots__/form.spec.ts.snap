@@ -12,7 +12,7 @@ exports[`Form > basic work > render work 1`] = `
         <!---->
       </div>
       <div class=\\"ix-form-item-message\\">
-        <transition-stub>
+        <transition-stub name=\\"ix-fade-down\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
           <!---->
         </transition-stub>
       </div>
@@ -28,7 +28,7 @@ exports[`Form > basic work > render work 1`] = `
         <!---->
       </div>
       <div class=\\"ix-form-item-message\\">
-        <transition-stub>
+        <transition-stub name=\\"ix-fade-down\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
           <!---->
         </transition-stub>
       </div>
@@ -47,7 +47,7 @@ exports[`Form > basic work > render work 1`] = `
         <!---->
       </div>
       <div class=\\"ix-form-item-message\\">
-        <transition-stub>
+        <transition-stub name=\\"ix-fade-down\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
           <!---->
         </transition-stub>
       </div>
@@ -61,7 +61,7 @@ exports[`Form > basic work > render work 1`] = `
         <!---->
       </div>
       <div class=\\"ix-form-item-message\\">
-        <transition-stub>
+        <transition-stub name=\\"ix-fade-down\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
           <!---->
         </transition-stub>
       </div>
@@ -81,7 +81,7 @@ exports[`Form > item work > render work 1`] = `
       <!---->
     </div>
     <div class=\\"ix-form-item-message\\">
-      <transition-stub>
+      <transition-stub name=\\"ix-fade-down\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
         <!---->
       </transition-stub>
     </div>
@@ -100,7 +100,7 @@ exports[`Form > wrapper work > render work 1`] = `
       <!---->
     </div>
     <div class=\\"ix-form-item-message\\">
-      <transition-stub>
+      <transition-stub name=\\"ix-fade-down\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
         <!---->
       </transition-stub>
     </div>
@@ -116,7 +116,7 @@ exports[`Form > wrapper work > render work 1`] = `
       <!---->
     </div>
     <div class=\\"ix-form-item-message\\">
-      <transition-stub>
+      <transition-stub name=\\"ix-fade-down\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
         <!---->
       </transition-stub>
     </div>
@@ -135,7 +135,7 @@ exports[`Form > wrapper work > render work 1`] = `
       <!---->
     </div>
     <div class=\\"ix-form-item-message\\">
-      <transition-stub>
+      <transition-stub name=\\"ix-fade-down\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
         <!---->
       </transition-stub>
     </div>
