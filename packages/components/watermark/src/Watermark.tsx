@@ -27,11 +27,16 @@ export default defineComponent({
     const canvasRef = ref<HTMLCanvasElement>()
     const base64Ref = useCalcBase64(props, densityData)
 
+    let antiTamper: ReturnType<typeof useAntiTamper> | undefined = undefined
+
     watch(
-      [() => props.strict, () => base64Ref.value],
-      ([strict, base64]) => {
-        if (strict && base64 !== '') {
-          useAntiTamper(wrapperRef, canvasRef)
+      [wrapperRef, canvasRef, () => props.strict, base64Ref],
+      ([wrapperEl, canvasEl, strict, base64]) => {
+        if (strict && wrapperEl && canvasEl && base64 !== '') {
+          if (antiTamper) {
+            antiTamper.stop()
+          }
+          antiTamper = useAntiTamper(wrapperEl, canvasEl)
         }
       },
       {
