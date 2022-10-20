@@ -13,16 +13,20 @@ import { type ComputedRef, type Ref, onUnmounted, ref } from 'vue'
 
 import { filterTree, genFlattenedTreeKeys, traverseTree } from '../utils'
 
-export function useTreeDataStrategyContext<C extends VKey>(
-  props: ProTransferProps,
-  childrenKey: ComputedRef<C>,
-): {
+export interface TreeDataStrategyContext<C extends VKey> {
+  baseDataStrategy: TransferDataStrategyProp<TreeTransferData<C>>
   dataKeyMap: Map<VKey, TreeTransferData<C>>
   parentKeyMap: Map<VKey, VKey | undefined>
   cachedTargetData: Ref<TreeTransferData<C>[]>
-  dataStrategy: TransferDataStrategyProp<TreeTransferData<C>>
-} {
+  targetDataCount: Ref<number>
+}
+
+export function useTreeDataStrategyContext<C extends VKey>(
+  props: ProTransferProps,
+  childrenKey: ComputedRef<C>,
+): TreeDataStrategyContext<C> {
   const cachedTargetData = ref(props.defaultTargetData ?? []) as Ref<TreeTransferData<C>[]>
+  const targetDataCount = ref(0)
   const dataKeyMap: Map<VKey, TreeTransferData<C>> = new Map()
   const parentKeyMap: Map<VKey, VKey | undefined> = new Map()
 
@@ -33,10 +37,11 @@ export function useTreeDataStrategyContext<C extends VKey>(
   })
 
   return {
+    cachedTargetData,
+    targetDataCount,
     dataKeyMap,
     parentKeyMap,
-    cachedTargetData,
-    dataStrategy: {
+    baseDataStrategy: {
       genDataKeys: (data, getKey) => {
         return new Set(genFlattenedTreeKeys(data, childrenKey.value, getKey))
       },

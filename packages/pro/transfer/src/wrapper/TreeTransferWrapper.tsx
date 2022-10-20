@@ -5,6 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { TreeDataStrategyContext } from '../composables/useTreeDataStrategyContext'
 import type { CascaderStrategy } from '@idux/components/cascader'
 import type { GetKeyFn } from '@idux/components/utils'
 
@@ -33,13 +34,11 @@ export default defineComponent({
     const cascaderStrategy = computed(() => props.treeProps?.cascaderStrategy ?? 'all')
     const childrenKey = computed(() => props.treeProps?.childrenKey ?? 'children')
 
-    const { dataKeyMap, expandedKeysContext, dataStrategy } = useTreeContext(
-      props,
-      childrenKey,
-      cascaderStrategy,
-      getKey,
-      targetKeys,
-    )
+    const {
+      dataStrategyContext: { dataKeyMap, targetDataCount },
+      expandedKeysContext,
+      mergedDataStrategy,
+    } = useTreeContext(props, childrenKey, cascaderStrategy, getKey, targetKeys)
     const { dataSource, loadSourceChildren, loadTargetChildren } = useTransferData(
       props,
       getKey,
@@ -67,29 +66,13 @@ export default defineComponent({
         <ProTransferTree isSource={isSource} />
       )
     }
-    const renderTranferTreeHeaderLabel = (params: { isSource: boolean }) => {
+    const renderTranferTreeHeaderLabel = (params: { isSource: boolean; data: TreeTransferData<VKey>[] }) => {
       if (slots.headerLabel) {
         return slots.headerLabel(params)
       }
 
-      const isSource = params.isSource
-      const label = isSource ? transferLocale.toSelect : transferLocale.selected
-
-      let count = 0
-      if (isSource) {
-        dataKeyMap?.forEach((item, key) => {
-          if (!targetKeySet.value.has(key) && (!item[childrenKey.value] || item[childrenKey.value]!.length <= 0)) {
-            ++count
-          }
-        })
-      } else {
-        targetKeys.value?.forEach(key => {
-          const item = dataKeyMap?.get(key)
-          if (item && (!item[childrenKey.value] || item[childrenKey.value]!.length <= 0)) {
-            ++count
-          }
-        })
-      }
+      const label = params.isSource ? transferLocale.toSelect : transferLocale.selected
+      const count = params.isSource ? (dataKeyMap?.size ?? 0) - targetDataCount.value : targetDataCount.value
 
       return `${label} (${count})`
     }
@@ -98,7 +81,7 @@ export default defineComponent({
       const transferProps = {
         dataSource: dataSource.value,
         defaultTargetData: props.defaultTargetData,
-        dataStrategy: dataStrategy.value as TransferDataStrategyProp,
+        dataStrategy: mergedDataStrategy.value as TransferDataStrategyProp,
         value: targetKeys.value,
         sourceSelectedKeys: props.sourceSelectedKeys,
         targetSelectedKeys: props.targetSelectedKeys,
@@ -136,23 +119,28 @@ export default defineComponent({
   },
 })
 
-function useTreeContext(
+function useTreeContext<C extends VKey>(
   props: ProTransferProps,
-  childrenKey: ComputedRef<VKey>,
+  childrenKey: ComputedRef<C>,
   cascadeStrategy: ComputedRef<CascaderStrategy>,
   getKey: ComputedRef<GetKeyFn>,
   targetKeys: ComputedRef<VKey[] | undefined>,
 ): {
-  dataKeyMap?: Map<VKey, TreeTransferData<string>>
-  expandedKeysContext?: TreeExpandedKeysContext
-  dataStrategy: Ref<TransferDataStrategyProp<TreeTransferData<VKey>>>
+  dataStrategyContext: TreeDataStrategyContext<C>
+  expandedKeysContext: TreeExpandedKeysContext
+  mergedDataStrategy: Ref<TransferDataStrategyProp<TreeTransferData<C>>>
 } {
-  const { dataKeyMap, parentKeyMap, dataStrategy } = useTreeDataStrategies(props, childrenKey, cascadeStrategy)
+  const { context: dataStrategyContext, mergedDataStrategy } = useTreeDataStrategies(
+    props,
+    childrenKey,
+    cascadeStrategy,
+  )
+  const { parentKeyMap, dataKeyMap } = dataStrategyContext
   const expandedKeysContext = useTreeExpandedKeys(props, childrenKey, getKey, targetKeys, parentKeyMap, dataKeyMap)
 
   return {
-    dataKeyMap,
+    dataStrategyContext,
     expandedKeysContext,
-    dataStrategy,
+    mergedDataStrategy,
   }
 }
