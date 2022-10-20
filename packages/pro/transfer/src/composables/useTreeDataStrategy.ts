@@ -15,29 +15,20 @@ import { type ComputedRef, type Ref, ref, watch } from 'vue'
 import { type CascaderStrategy } from '@idux/components/cascader'
 
 import { combineTrees, filterTree, flattenTree, genFlattenedTreeKeys, traverseTree } from '../utils'
-import { useTreeDataStrategyContext } from './useTreeDataStrategyContext'
+import { type TreeDataStrategyContext, useTreeDataStrategyContext } from './useTreeDataStrategyContext'
 
 export function useTreeDataStrategies<C extends VKey>(
   props: ProTransferProps,
   childrenKey: ComputedRef<C>,
   cascadeStrategy: ComputedRef<CascaderStrategy>,
 ): {
-  dataKeyMap: Map<VKey, TreeTransferData<C>>
-  parentKeyMap: Map<VKey, VKey | undefined>
-  dataStrategy: Ref<TransferDataStrategyProp<TreeTransferData<C>>>
+  context: TreeDataStrategyContext<C>
+  mergedDataStrategy: Ref<TransferDataStrategyProp<TreeTransferData<C>>>
 } {
-  const { cachedTargetData, dataKeyMap, parentKeyMap, dataStrategy } = useTreeDataStrategyContext(props, childrenKey)
-
+  const context = useTreeDataStrategyContext(props, childrenKey)
   const getMergedDataStrategy = () => ({
-    ...dataStrategy,
-    ...createStrategy(
-      childrenKey,
-      cachedTargetData,
-      parentKeyMap,
-      dataKeyMap,
-      cascadeStrategy.value,
-      props.flatTargetData,
-    ),
+    ...context.baseDataStrategy,
+    ...createStrategy(context, childrenKey, cascadeStrategy.value, props.flatTargetData),
   })
   const mergedDataStrategy = ref<TransferDataStrategyProp<TreeTransferData<C>>>(getMergedDataStrategy())
   watch([cascadeStrategy, childrenKey], () => {
@@ -45,9 +36,8 @@ export function useTreeDataStrategies<C extends VKey>(
   })
 
   return {
-    dataKeyMap,
-    parentKeyMap,
-    dataStrategy: mergedDataStrategy,
+    context,
+    mergedDataStrategy,
   }
 }
 
@@ -122,8 +112,10 @@ function createSeparateDataSourceFn<C extends VKey>(
   childrenKey: ComputedRef<C>,
   cachedTargetData: Ref<TreeTransferData<C>[]>,
   cascaderStrategy: CascaderStrategy,
-  flatTargetData: boolean | 'all' = false,
+  targetDataCount: Ref<number>,
 ): Exclude<TransferDataStrategyProp<TreeTransferData<C>>['separateDataSource'], undefined> {
+  const targetDataKeySet = new Set<VKey>()
+
   const getFilterFn = (
     selectedKeySet: Set<VKey>,
     getKey: GetKeyFn,
@@ -144,18 +136,23 @@ function createSeparateDataSourceFn<C extends VKey>(
       }
     })()
 
-    return (data, isSource) => {
-      if (isSource || (cascaderStrategy !== 'off' && !flatTargetData)) {
-        return filterTree(data, childrenKey.value, (item, parent) => filterFn(item, parent, isSource), 'or')
-      }
-
-      return flattenTree(
+    return (data, isSource) =>
+      filterTree(
         data,
         childrenKey.value,
-        item => ({ ...item, children: undefined }),
-        flatTargetData !== 'all' && cascaderStrategy !== 'off',
-      ).filter(item => selectedKeySet.has(getKey(item)))
-    }
+        (item, parent) => {
+          const filterRes = filterFn(item, parent, isSource)
+
+          // set targetDataKeySet to collect targetData count later
+          // we collect this during filter process to avoid unecessary traveral
+          if (!isSource && filterRes) {
+            targetDataKeySet.add(getKey(item))
+          }
+
+          return filterRes
+        },
+        'or',
+      )
   }
 
   return (data, _, selectedKeySet, getKey) => {
@@ -163,6 +160,9 @@ function createSeparateDataSourceFn<C extends VKey>(
 
     const newTargetData = filterData(data, false)
     const previousTargetData = filterData(cachedTargetData.value, false)
+
+    targetDataCount.value = targetDataKeySet.size
+    targetDataKeySet.clear()
 
     // combine new data with previous data
     // beacause we intend to cache selected data after dataSource changes
@@ -176,36 +176,77 @@ function createSeparateDataSourceFn<C extends VKey>(
   }
 }
 
-function createStrategy<C extends VKey>(
+function createSeparateDataSourceFnWithFlatten<C extends VKey>(
   childrenKey: ComputedRef<C>,
   cachedTargetData: Ref<TreeTransferData<C>[]>,
-  parentKeyMap: Map<VKey, VKey | undefined>,
-  dataKeyMap: Map<VKey, TreeTransferData<C>>,
+  cascaderStrategy: CascaderStrategy,
+  targetDataCount: Ref<number>,
+  flatTargetData: boolean | 'all' = false,
+): Exclude<TransferDataStrategyProp<TreeTransferData<C>>['separateDataSource'], undefined> {
+  const fn = createSeparateDataSourceFn(childrenKey, cachedTargetData, cascaderStrategy, targetDataCount)
+
+  return (...args) => {
+    const { sourceData, targetData } = fn(...args)
+
+    return {
+      sourceData,
+      targetData: flattenTargetTree(targetData, childrenKey.value, cascaderStrategy, flatTargetData),
+    }
+  }
+}
+
+function flattenTargetTree<C extends VKey>(
+  data: TreeTransferData<C>[],
+  childrenKey: C,
+  cascaderStrategy: CascaderStrategy,
+  flatTargetData: boolean | 'all',
+) {
+  if (cascaderStrategy !== 'off' && !flatTargetData) {
+    return data
+  }
+
+  return flattenTree(
+    data,
+    childrenKey,
+    item => ({ ...item, children: undefined }),
+    flatTargetData !== 'all' && cascaderStrategy !== 'off',
+  )
+}
+
+function createStrategy<C extends VKey>(
+  context: TreeDataStrategyContext<C>,
+  childrenKey: ComputedRef<C>,
   cascaderStrategy: CascaderStrategy,
   flatTargetData: boolean | 'all',
 ) {
   switch (cascaderStrategy) {
     case 'parent':
-      return createParentStrategy(childrenKey, cachedTargetData, dataKeyMap, flatTargetData)
+      return createParentStrategy(context, childrenKey, flatTargetData)
     case 'child':
-      return createChildStrategy(childrenKey, cachedTargetData, parentKeyMap, flatTargetData)
+      return createChildStrategy(context, childrenKey, flatTargetData)
     case 'off':
-      return createOffStrategy(childrenKey, cachedTargetData, flatTargetData)
+      return createOffStrategy(context, childrenKey, flatTargetData)
     case 'all':
     default:
-      return createAllStrategy(childrenKey, cachedTargetData, parentKeyMap, flatTargetData)
+      return createAllStrategy(context, childrenKey, flatTargetData)
   }
 }
 
 function createAllStrategy<C extends VKey>(
+  context: TreeDataStrategyContext<C>,
   childrenKey: ComputedRef<C>,
-  cachedTargetData: Ref<TreeTransferData<C>[]>,
-  parentKeyMap: Map<VKey, VKey | undefined>,
   flatTargetData: boolean | 'all',
 ): TransferDataStrategyProp<TreeTransferData<C>> {
+  const { cachedTargetData, parentKeyMap, targetDataCount } = context
   return {
     genDisabledKeys: (data, getKey) => genDisabledKeys(data, getKey, childrenKey.value, true),
-    separateDataSource: createSeparateDataSourceFn(childrenKey, cachedTargetData, 'all', flatTargetData),
+    separateDataSource: createSeparateDataSourceFnWithFlatten(
+      childrenKey,
+      cachedTargetData,
+      'all',
+      targetDataCount,
+      flatTargetData,
+    ),
     getAllSelectedKeys: (selected, data, selectedKeySet, disabledKeySet, getKey) =>
       getAllSelectedKeys(selected, data, selectedKeySet, disabledKeySet, getKey, childrenKey.value),
     remove: (keys, selectedKeySet) => commonRemoveFn(keys, selectedKeySet, parentKeyMap),
@@ -213,11 +254,12 @@ function createAllStrategy<C extends VKey>(
 }
 
 function createChildStrategy<C extends VKey>(
+  context: TreeDataStrategyContext<C>,
   childrenKey: ComputedRef<C>,
-  cachedTargetData: Ref<TreeTransferData<C>[]>,
-  parentKeyMap: Map<VKey, VKey | undefined>,
   flatTargetData: boolean | 'all',
 ): TransferDataStrategyProp<TreeTransferData<C>> {
+  const { cachedTargetData, parentKeyMap, targetDataCount } = context
+
   return {
     genDisabledKeys: (data, getKey) => genDisabledKeys(data, getKey, childrenKey.value, true),
     getAllSelectedKeys(selected, data, selectedKeySet, disabledKeySet, getKey) {
@@ -237,19 +279,24 @@ function createChildStrategy<C extends VKey>(
 
       return keys
     },
-    separateDataSource: createSeparateDataSourceFn(childrenKey, cachedTargetData, 'child', flatTargetData),
+    separateDataSource: createSeparateDataSourceFnWithFlatten(
+      childrenKey,
+      cachedTargetData,
+      'child',
+      targetDataCount,
+      flatTargetData,
+    ),
     remove: (keys, selectedKeySet) => commonRemoveFn(keys, selectedKeySet, parentKeyMap),
   }
 }
 
 function createParentStrategy<C extends VKey>(
+  context: TreeDataStrategyContext<C>,
   childrenKey: ComputedRef<C>,
-  cachedTargetData: Ref<TreeTransferData<C>[]>,
-  dataKeyMap: Map<VKey, TreeTransferData<C>>,
   flatTargetData: boolean | 'all',
 ): TransferDataStrategyProp<TreeTransferData<C>> {
-  const separateDataSource = createSeparateDataSourceFn(childrenKey, cachedTargetData, 'parent', flatTargetData)
-  let targetData: TreeTransferData<C>[] = []
+  const { cachedTargetData, dataKeyMap, targetDataCount } = context
+  const separateDataSource = createSeparateDataSourceFn(childrenKey, cachedTargetData, 'parent', targetDataCount)
 
   return {
     genDisabledKeys: (data, getKey) => genDisabledKeys(data, getKey, childrenKey.value, true),
@@ -287,9 +334,11 @@ function createParentStrategy<C extends VKey>(
       return keys
     },
     separateDataSource(data, _, selectedKeySet, getKey) {
-      const separatedData = separateDataSource(data, _, selectedKeySet, getKey)
-      targetData = separatedData.targetData
-      return separatedData
+      const { sourceData, targetData } = separateDataSource(data, _, selectedKeySet, getKey)
+      return {
+        sourceData,
+        targetData: flattenTargetTree(targetData, childrenKey.value, 'parent', flatTargetData),
+      }
     },
     append(keys, selectedKey, getKey) {
       const newKeySet = new Set([...selectedKey, ...keys])
@@ -317,7 +366,7 @@ function createParentStrategy<C extends VKey>(
       }
 
       // it is not possible to get the correct selected keys from bottom to top
-      traverseTree(targetData, childrenKey.value, (item, parents) => {
+      traverseTree(cachedTargetData.value, childrenKey.value, (item, parents) => {
         if (keySet.has(getKey(item))) {
           const keysInChain = [item, ...parents].map(getKey)
           const selectedKeyIdx = keysInChain.findIndex(key => newKeySet.has(key))
@@ -351,13 +400,21 @@ function createParentStrategy<C extends VKey>(
 }
 
 function createOffStrategy<C extends VKey>(
+  context: TreeDataStrategyContext<C>,
   childrenKey: ComputedRef<C>,
-  cachedTargetData: Ref<TreeTransferData<C>[]>,
   flatTargetData: boolean | 'all',
 ): TransferDataStrategyProp<TreeTransferData<C>> {
+  const { cachedTargetData, targetDataCount } = context
+
   return {
     genDisabledKeys: (data, getKey) => genDisabledKeys(data, getKey, childrenKey.value, false),
-    separateDataSource: createSeparateDataSourceFn(childrenKey, cachedTargetData, 'off', flatTargetData),
+    separateDataSource: createSeparateDataSourceFnWithFlatten(
+      childrenKey,
+      cachedTargetData,
+      'off',
+      targetDataCount,
+      flatTargetData,
+    ),
     getAllSelectedKeys: (selected, data, selectedKeySet, disabledKeySet, getKey) =>
       getAllSelectedKeys(selected, data, selectedKeySet, disabledKeySet, getKey, childrenKey.value),
   }
