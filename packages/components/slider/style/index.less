@@ -48,22 +48,14 @@
 
   &-dot {
     position: absolute;
-    top: -2px;
-    width: 8px;
-    height: 8px;
-    margin-left: -4px;
+    top: @slider-height;
+    width: 1px;
+    height: 4px;
     background-color: @slider-dot-background-color;
-    border: @slider-dot-border;
-    border-radius: 50%;
     cursor: pointer;
 
-    &:first-child,
-    &:last-child {
-      margin-left: -4px;
-    }
-
     &-active {
-      border-color: @slider-dot-active-border-color;
+      background-color: @slider-dot-active-background-color;
     }
   }
 
