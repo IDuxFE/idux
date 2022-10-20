@@ -1448,7 +1448,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
               class="ix-transfer-header-label"
             >
               
-              待选 (18)
+              待选 (27)
               
             </span>
             <!---->
@@ -3113,7 +3113,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
               class="ix-transfer-header-label"
             >
               
-              已选 (2)
+              已选 (3)
               
             </span>
             <!---->
