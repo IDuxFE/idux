@@ -80,6 +80,7 @@ export default defineComponent({
     provide(proTextareaContext, {
       mergedPrefixCls,
       props,
+      accessor,
       boxSizingData,
       lineHeight,
       rowCounts,

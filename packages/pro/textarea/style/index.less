@@ -87,11 +87,11 @@
     box-shadow: @pro-textarea-active-box-shadow;
   }
   &-disabled {
-    color: @pro-textarea-disabled-color;
     background-color: @pro-textarea-disabled-background-color;
+    cursor: not-allowed;
     .@{pro-textarea-prefix}-content {
-      cursor: not-allowed;
-      opacity: 1;
+      color: @pro-textarea-disabled-color;
+      background-color: @pro-textarea-disabled-background-color;
     }
   }
 
