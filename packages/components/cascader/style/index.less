@@ -90,5 +90,16 @@
       align-items: flex-start;
       overflow: auto;
     }
+
+    @option-prefix: ~'@{cascader-prefix}-option';
+    &-multiple {
+      .@{option-prefix}-leaf.@{option-prefix}-selected:not(.@{option-prefix}-disabled) {
+        color: @cascader-option-color;
+      }
+
+      .@{option-prefix}-expanded:not(.@{option-prefix}-disabled) {
+        color: @cascader-option-color;
+      }
+    }
   }
 }
