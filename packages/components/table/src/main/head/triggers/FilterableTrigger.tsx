@@ -145,10 +145,10 @@ const renderFooter = (
   const { filterConfirm, filterReset } = locale.table
   return (
     <div class={`${mergedPrefixCls.value}-filterable-trigger-footer`}>
-      <IxButton mode="primary" size="sm" onClick={handleConfirm}>
+      <IxButton mode="primary" size="xs" onClick={handleConfirm}>
         {filterConfirm}
       </IxButton>
-      <IxButton size="sm" onClick={handleReset}>
+      <IxButton size="xs" onClick={handleReset}>
         {filterReset}
       </IxButton>
     </div>
