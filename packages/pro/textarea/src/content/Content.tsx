@@ -19,6 +19,7 @@ export default defineComponent({
     const {
       props,
       mergedPrefixCls,
+      accessor,
       boxSizingData,
       rowCounts,
       lineHeight,
@@ -54,18 +55,17 @@ export default defineComponent({
       const prefixCls = `${mergedPrefixCls.value}-content`
 
       return (
-        <div class={prefixCls}>
+        <div class={prefixCls} onMousemove={handleTextareaMouseMove} onMouseleave={handleTextareaMouseLeave}>
           {renderErrorLines()}
           <textarea
             ref={textareaRef}
             class={`${prefixCls}-textarea`}
+            disabled={accessor.disabled}
             placeholder={props.placeholder}
             onInput={handleInput}
             onCompositionstart={handleCompositionStart}
             onCompositionend={handleCompositionEnd}
             onKeydown={onKeyDown}
-            onMousemove={handleTextareaMouseMove}
-            onMouseleave={handleTextareaMouseLeave}
           ></textarea>
         </div>
       )
