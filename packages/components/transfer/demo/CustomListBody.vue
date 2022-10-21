@@ -4,7 +4,8 @@
     class="transer-demo-custom-transfer-body__transfer"
     :data-source="dataSource"
     :disabled="disabled"
-    :scroll="{ height: 300, fullHeight: true }"
+    :pagination="pagination"
+    :scroll="{ width: { source: 400 } }"
     :show-select-all="false"
   >
     <template #default="params">
@@ -12,17 +13,17 @@
         :selected-row-keys="params.selectedKeys"
         :columns="getColumns(params)"
         :data-source="params.paginatedData"
-        :pagination="params.pagination"
+        :pagination="false"
+        auto-height
       />
     </template>
-    <template #footer />
   </IxTransfer>
 </template>
 
 <script setup lang="ts">
-import type { TransferData, TransferListSlotParams } from '@idux/components/transfer'
+import type { TransferData, TransferListSlotParams, TransferPaginationProps } from '@idux/components/transfer'
 
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 import { TableColumn, TableColumnSelectable } from '@idux/components/table'
 
@@ -79,15 +80,26 @@ const dataSource: Data[] = Array.from(new Array(20)).map((_, idx) => ({
   address: 'London No.1 Lake Park',
 }))
 
+const sourcePageIndex = ref(1)
+const targetPageIndex = ref(1)
+const pagination = computed<TransferPaginationProps>(() => ({
+  pageIndex: [sourcePageIndex.value, targetPageIndex.value],
+  pageSize: [10, 10],
+  onChange(isSource, pageIndex) {
+    isSource ? (sourcePageIndex.value = pageIndex) : (targetPageIndex.value = pageIndex)
+  },
+}))
+
 const disabled = ref(false)
 </script>
 <style lang="less">
 .transer-demo-custom-transfer-body__transfer {
-  .ix-transfer-content {
-    height: auto;
-  }
-  .ix-transfer-content-source {
-    width: 500px;
+  height: 300px;
+
+  .ix-table {
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
   }
 }
 </style>
