@@ -7,11 +7,13 @@
 
 import type { ErrorLinesContext } from './composables/useErrorLines'
 import type { ProTextareaProps } from './types'
+import type { FormAccessor } from '@idux/cdk/forms'
 import type { ɵBoxSizingData } from '@idux/components/textarea'
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
 
 export interface ProTextareaContext extends ErrorLinesContext {
   props: ProTextareaProps
+  accessor: FormAccessor
   boxSizingData: ComputedRef<ɵBoxSizingData>
   lineHeight: ComputedRef<number>
   mergedPrefixCls: ComputedRef<string>
