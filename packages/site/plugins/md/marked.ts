@@ -3,6 +3,8 @@ import { parseFragment, serialize } from 'parse5'
 import { highlight, languages } from 'prismjs'
 import loadLanguages from 'prismjs/components/'
 
+import { nonBindAble } from './utils'
+
 loadLanguages(['ts', 'typescript', 'less', 'bash', 'vim', 'diff'])
 
 const renderer = new marked.Renderer()
@@ -10,8 +12,7 @@ const renderer = new marked.Renderer()
 const oldLinkHandler = renderer.link
 renderer.link = function (href: string, title: string, text: string) {
   const str = oldLinkHandler.call(this, href, title, text)
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const linkFragment: any = parseFragment(str)
+  const linkFragment = parseFragment(str)
 
   if (linkFragment && linkFragment.childNodes[0] && linkFragment.childNodes[0].nodeName === 'a') {
     if (!/^(?!www\.|(?:http|ftp)s?:\/\/|[A-Za-z]:\\|\/\/).*/.test(href)) {
@@ -39,6 +40,7 @@ renderer.heading = function (text, level) {
 
 renderer.code = function (code: string, infoString: string, escaped: boolean) {
   const lang = (infoString || '').match(/\S*/)![0]
+
   if (this.options.highlight) {
     const out = this.options.highlight(code, lang || '')
     if (out != null && out !== code) {
@@ -47,8 +49,10 @@ renderer.code = function (code: string, infoString: string, escaped: boolean) {
     }
   }
 
+  const nonBindCode = nonBindAble(code)
+
   if (!lang) {
-    return '<pre><code>' + (escaped ? code : escape(code)) + '</code></pre>'
+    return '<pre><code>' + (escaped ? nonBindCode : escape(nonBindCode)) + '</code></pre>'
   }
 
   return (
@@ -57,7 +61,7 @@ renderer.code = function (code: string, infoString: string, escaped: boolean) {
     escape(lang) +
     '">' +
     '<code>' +
-    (escaped ? code : escape(code)) +
+    (escaped ? nonBindCode : escape(nonBindCode)) +
     '</code></pre>\n'
   )
 }

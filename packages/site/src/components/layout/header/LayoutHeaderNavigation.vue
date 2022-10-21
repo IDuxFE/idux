@@ -1,10 +1,5 @@
 <template>
   <IxMenu class="header-menu" :selectedKeys="selectedKeys">
-    <!-- <IxMenuItem key="home">
-      <router-link :to="'/'">
-        <span>{{ lang == 'zh' ? '首页' : 'Home' }}</span>
-      </router-link>
-    </IxMenuItem> -->
     <IxMenuItem key="docs">
       <router-link :to="'/docs/introduce/' + lang">
         <span>{{ lang == 'zh' ? '文档' : 'Docs' }}</span>
@@ -25,14 +20,6 @@
         <span>{{ lang == 'zh' ? '开发套件' : 'CDK' }}</span>
       </router-link>
     </IxMenuItem>
-    <IxMenuItem v-if="isXs" key="github">
-      <a :href="githubUrl" target="_blank" rel="noopener noreferrer">GitHub</a>
-    </IxMenuItem>
-    <IxMenuSub v-else-if="isSm" key="more-menu" overlayClass="header-menu-sub" icon="menu">
-      <IxMenuItem>
-        <a :href="githubUrl" target="_blank" rel="noopener noreferrer">GitHub</a>
-      </IxMenuItem>
-    </IxMenuSub>
   </IxMenu>
 </template>
 

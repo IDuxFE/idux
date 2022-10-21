@@ -86,6 +86,7 @@ router.afterEach(() => {
 })
 
 const route = useRoute()
+
 const path = computed(() => route.path)
 const page = computed(() => {
   const match = route.path.match(/\/(\w+)/)

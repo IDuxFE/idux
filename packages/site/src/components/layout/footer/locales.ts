@@ -7,13 +7,13 @@ export const footerLocales = {
         {
           icon: '',
           title: '常见问题',
-          link: 'https://idux.site/docs/faq/zh',
+          link: '/docs/faq/zh',
           description: '',
         },
         {
           icon: '',
           title: '更新日志',
-          link: 'https://idux.site/docs/changelog/zh',
+          link: '/docs/changelog/zh',
           description: '',
         },
         {
@@ -32,12 +32,6 @@ export const footerLocales = {
           icon: '',
           title: '掘金',
           link: 'https://juejin.cn/user/3104676565234429',
-          description: '',
-        },
-        {
-          icon: '',
-          title: '站酷',
-          link: 'https://www.zcool.com.cn/u/24240100',
           description: '',
         },
       ],
@@ -76,13 +70,13 @@ export const footerLocales = {
         {
           icon: '',
           title: 'FAQ',
-          link: 'https://idux.site/docs/faq/en',
+          link: '/docs/faq/en',
           description: '',
         },
         {
           icon: '',
           title: 'Changelog',
-          link: 'https://idux.site/docs/changelog/en',
+          link: '/changelog/en',
           description: '',
         },
         {

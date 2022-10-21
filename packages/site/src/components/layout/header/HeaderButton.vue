@@ -1,5 +1,5 @@
 <template>
-  <IxButton icon="github" @click="onClick">
+  <IxButton class="header-button" mode="link" icon="github" @click="onClick">
     {{ starCount }}
   </IxButton>
 </template>

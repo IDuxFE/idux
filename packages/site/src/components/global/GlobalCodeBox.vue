@@ -1,15 +1,19 @@
 <template>
-  <div :id="id" class="global-code-box-wrapper">
-    <section class="global-code-box-title markdown">
-      <h3>{{ title }}</h3>
-    </section>
-    <div class="global-code-box-border">
-      <section class="global-code-box">
-        <section class="global-code-box-meta markdown">
-          <div class="global-code-box-description">
-            <slot name="description"></slot>
-          </div>
-          <div class="global-code-box-actions">
+  <div :id="id" class="global-code-box">
+    <div class="global-code-box-title markdown">
+      <h3>
+        <span>{{ title }}</span>
+        <a class="anchor" :href="'#' + id">#</a>
+      </h3>
+    </div>
+    <div class="global-code-box-description">
+      <slot name="description"></slot>
+    </div>
+    <div class="global-code-box-content">
+      <div class="global-code-box-content-border">
+        <div class="global-code-box-raw-code">
+          <slot name="rawCode"></slot>
+          <div class="global-code-box-tools">
             <IxSpace>
               <GlobalPlayground :code="code" />
               <GlobalCodeSandbox :code="code" />
@@ -26,14 +30,13 @@
               </IxTooltip>
             </IxSpace>
           </div>
-        </section>
-        <section class="global-code-box-demo">
-          <slot name="rawCode"></slot>
-        </section>
-        <section class="highlight-wrapper" :class="{ 'highlight-wrapper-expand': expanded }">
-          <slot name="highlightCode"></slot>
-        </section>
-      </section>
+        </div>
+        <Transition name="ix-fade-down">
+          <div v-if="expanded" class="global-code-box-highlight-code">
+            <slot name="highlightCode"></slot>
+          </div>
+        </Transition>
+      </div>
     </div>
   </div>
 </template>
@@ -41,7 +44,7 @@
 <script lang="ts">
 import { computed, defineComponent, inject, ref } from 'vue'
 
-import { throttle } from 'lodash-es'
+import { kebabCase, throttle } from 'lodash-es'
 
 import { useClipboard } from '@idux/cdk/clipboard'
 import { useMessage } from '@idux/components/message'
@@ -61,7 +64,7 @@ export default defineComponent({
   setup(props) {
     const { lang } = inject(appContextToken)!
 
-    const id = computed(() => `${props.packageName}-${props.componentName}-demo-${props.demoName}`)
+    const id = computed(() => `${props.packageName}-${props.componentName}-${kebabCase(props.demoName)}`)
 
     const editHref = computed(() => {
       const gitLink = `${props.packageName}/${props.componentName}/demo/${props.demoName}`
@@ -95,65 +98,67 @@ export default defineComponent({
 </script>
 
 <style lang="less">
-.global-code-box-wrapper {
+.global-code-box {
   position: relative;
   margin-bottom: 16px;
   width: 100%;
 
-  .global-code-box-border {
+  &-title {
+    margin-bottom: 0;
+  }
+
+  &-description {
+    margin-top: -8px;
+    margin-bottom: 1em;
+  }
+
+  &-content {
     padding: 8px;
     border-radius: @border-radius-md;
     background: @color-graphite-l50;
     box-shadow: inset 0 0 4px 0 rgba(0, 0, 0, 0.1);
+
+    &-border {
+      position: relative;
+      width: 100%;
+      padding: 8px;
+      background-color: @background-color-component;
+      border: 1px @border-style @border-color-split;
+      border-radius: @border-radius-md;
+      transition: @transition-all-base;
+    }
   }
 
-  .global-code-box {
+  &-raw-code {
     position: relative;
-    width: 100%;
     padding: 16px;
-    background-color: @background-color-component;
-    border: 1px @border-style @border-color-split;
-    border-radius: @border-radius-md;
-    transition: @transition-all-base;
+  }
 
-    &-title h3 {
-      margin-bottom: 0;
+  &-highlight-code {
+    padding: 8px;
+    border-radius: 0 0 @border-radius-md @border-radius-md;
+
+    pre {
+      margin: 0;
+      padding: 8px;
     }
-
-    &-description {
-      border-bottom: 1px dashed @border-color-split;
+    pre code {
+      margin: 0;
+      padding: 0;
     }
+  }
 
-    &-actions {
-      position: absolute;
-      top: 8px;
-      right: 16px;
+  &-tools {
+    position: absolute;
+    bottom: -4px;
+    right: 16px;
+    cursor: pointer;
 
-      .ix-icon {
-        color: @text-color-secondary;
-        cursor: pointer;
+    .ix-icon {
+      color: @text-color-secondary;
 
-        &:hover {
-          color: @text-color;
-        }
-      }
-    }
-
-    &-demo {
-      padding: 16px 0;
-    }
-
-    .highlight-wrapper {
-      display: none;
-      border-radius: 0 0 @border-radius-md @border-radius-md;
-
-      &-expand {
-        display: block;
-      }
-
-      pre {
-        margin: 0;
-        padding: 8px;
+      &:hover {
+        color: @text-color;
       }
     }
   }
