@@ -115,6 +115,8 @@ export function useAutoRows(
       return
     }
 
+    textarea.style.lineHeight = `${cachedLineHeight.value}px`
+
     // Use the scrollHeight to know how large the textarea *would* be if fit its entire value.
     const height = Math.max(getTextareaScrollHeight(), getTextareaPlaceholderHeight()!)
 

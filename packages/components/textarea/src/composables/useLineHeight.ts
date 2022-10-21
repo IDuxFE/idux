@@ -42,6 +42,6 @@ function calcTextareaLineHeight(textarea: HTMLTextAreaElement | undefined): numb
 
       return lineHeight
     },
-    true,
+    false,
   )
 }
