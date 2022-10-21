@@ -12,7 +12,7 @@ order: 10
 
 ## 无法通过 `useModal` 创建弹窗组件？(`useMessage`, `useDrawer`...)
 
-如果你想通过 useModal 来创建对话框，则你需要把组件包裹在 `IxModalProvider` 内部，因为这样才不会丢失应用的上下文信息, 参见[IxModalProvider](/components/modal/zh#IxModalProvider)。
+如果你想通过 useModal 来创建对话框，则你需要把组件包裹在 `IxModalProvider` 内部，因为这样才不会丢失应用的上下文信息, 参见[IxModalProvider](/components/modal/zh?tab=api#IxModalProvider)。
 
 其他通过 `useXxx` 创建的组件也是如此。
 
@@ -32,7 +32,7 @@ order: 10
 
 ## 图标不显示？如何更新图标？
 
-请务必花几分钟时间仔细阅读[快速上手](/docs/getting-started/zh) 和 [图标的动态加载与静态加载](/components/icon/zh#FAQ) 进行一些必要的配置。
+请务必花几分钟时间仔细阅读[快速上手](/docs/getting-started/zh) 和 [图标的动态加载与静态加载](/components/icon/zh?tab=api#FAQ) 进行一些必要的配置。
 
 如果你使用了动态加载，可以使用 `vite-plugin-static-copy` 或者 `CopyWebpackPlugin` 来自动更新图标。
 
@@ -58,7 +58,7 @@ export default defineConfig({
 
 ## `useFormGroup` 怎么使用, 如何自定义验证器？(`useFormControl`, `useFormArray`)
 
-请花一点时间仔细阅读 [Forms 表单](https://idux.site/cdk/forms/zh) 的**概要说明**文档。
+请花一点时间仔细阅读 [Forms 表单](https://idux.site/cdk/forms/zh?tab=overview) 的**概要说明**文档。
 
 ## 表单输入类组件的 `value` 和 `disabled` 设置不生效？
 

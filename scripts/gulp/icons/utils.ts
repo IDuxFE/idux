@@ -1,6 +1,6 @@
 import { join } from 'path'
 
-import { copy, existsSync, readFile, readdir, writeFile } from 'fs-extra'
+import { readFile, readdir, writeFile } from 'fs-extra'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
@@ -20,7 +20,7 @@ const allIconsTemplate = `export const allIcons = [
 ]
 `
 
-const { assetsDirname, publicDirname, definitionsFilename, allIconsFilename } = gulpConfig.icon
+const { assetsDirname, definitionsFilename, allIconsFilename } = gulpConfig.icon
 
 const options: OptimizeOptions = {
   plugins: [
@@ -108,12 +108,5 @@ function createDefinition(iconName: string, data: string) {
       .replace('{{definitionName}}', definitionName)
       .replace('{{name}}', _iconName)
       .replace('{{svg}}', data),
-  }
-}
-
-export async function copyToSite(): Promise<void> {
-  // 不存在的时候才 copy
-  if (!existsSync(publicDirname)) {
-    await copy(assetsDirname, publicDirname)
   }
 }

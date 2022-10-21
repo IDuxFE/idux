@@ -123,9 +123,7 @@ describe('use${compName}.ts', () => {
 }
 
 export function getAPITemplate(moduleName: string, compName: string, isEn = false): string {
-  return `## API
-
-### Ix${compName}
+  return `### Ix${compName}
 
 #### ${compName}Props
 
@@ -153,16 +151,12 @@ ${isEn ? '| Name | Description | Parameter Type | Remark |' : '| 名称 | 说明
 
 export function getThemeTemplate(isEn = false): string {
   if (isEn) {
-    return `## Theme variables
-
-| name | default | seer | mark |
+    return `| name | default | seer | mark |
 | --- | --- | --- | --- |
 | - | - | - | - |
 `
   }
-  return `## 主题变量
-
-| 名称 | default | seer | 备注 |
+  return `| 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | - | - | - | - |
 `
@@ -182,9 +176,7 @@ subtitle:
 }
 
 export function getDesignTemplate(isEn = false): string {
-  return `## ${isEn ? 'Description' : '组件定义'}
-
-## ${isEn ? 'Usage scenarios' : '使用场景'}`
+  return `### ${isEn ? 'Usage scenarios' : '使用场景'}`
 }
 
 export function getDemoTemplate(): string {

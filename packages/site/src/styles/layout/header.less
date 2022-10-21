@@ -5,6 +5,7 @@
   transition: @transition-all-base;
 
   &-logo {
+    display: inline-block;
     height: @header-height;
     line-height: @header-height;
     padding-left: @spacing-3xl;
@@ -13,9 +14,8 @@
 
     img {
       position: relative;
-      top: 16px;
+      top: 12px;
       width: 40px;
-      height: 48px;
       margin-right: @spacing-lg;
     }
 
@@ -44,7 +44,6 @@
   }
 
   &-menu {
-
     &,
     &-sub {
       text-align: center;
@@ -90,19 +89,21 @@
     }
 
     .header-search-box {
-
       .ix-input {
         background: transparent;
       }
+    }
 
+    .header-version .ix-selector-content {
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
     }
   }
 }
 
 @media (max-width: @screen-sm-max) {
-
   .header {
-
     &-search-box {
       padding-left: @spacing-sm;
 

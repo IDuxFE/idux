@@ -2,7 +2,7 @@ import { TaskFunction, series } from 'gulp'
 
 import { gulpConfig } from '../gulpConfig'
 import { clean } from '../taskHelpers'
-import { copyToSite, generateIcons } from './utils'
+import { generateIcons } from './utils'
 
 const { publicDirname, definitionsFilename } = gulpConfig.icon
 
@@ -14,8 +14,3 @@ const generate: TaskFunction = async done => {
 }
 
 export const iconsGenerate = series(iconsClean, generate)
-
-export const iconsCopy: TaskFunction = async done => {
-  await copyToSite()
-  done()
-}

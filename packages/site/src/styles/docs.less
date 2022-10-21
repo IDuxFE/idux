@@ -1,0 +1,107 @@
+/* stylelint-disable */
+.site-doc {
+  &-header {
+    margin-bottom: 8px;
+
+    > .ix-radio-group {
+      padding: 4px;
+      background-color: #eceff3;
+
+      border-radius: 22px;
+
+      .ix-radio-button {
+        text-align: center;
+        font-size: 16px;
+        height: 36px;
+        line-height: 36px;
+        min-width: 96px;
+        background-color: #eceff3;
+        color: #333333;
+        border: none;
+        border-radius: 18px;
+
+        &::before {
+          content: unset;
+        }
+
+        &:not(:first-child) {
+          margin-left: 4px;
+        }
+
+        &.ix-radio-checked {
+          background: @color-primary;
+          color: @color-white;
+          box-shadow: @shadow-bottom-sm;
+        }
+      }
+    }
+  }
+
+  &-description {
+    margin-top: -12px;
+    margin-bottom: 16px;
+  }
+
+  &-api {
+    table {
+      overflow-x: auto;
+      overflow-y: hidden;
+      line-height: 1.5715;
+
+      th {
+        font-weight: @font-weight-lg;
+      }
+      td {
+        &:first-child {
+          font-weight: @font-weight-lg;
+        }
+        & code {
+          color: @color-magenta;
+        }
+      }
+
+      @media (max-width: @screen-xs-max) {
+        display: block;
+      }
+    }
+  }
+
+  &-theme {
+    margin-top: 24px;
+  }
+}
+
+.site-anchor {
+  position: absolute;
+  top: @spacing-sm;
+  right: 0;
+
+  .ix-anchor {
+    &-link {
+      &-title {
+        width: @toc-width;
+      }
+    }
+  }
+}
+
+@media (max-width: @screen-xs-max) {
+  .site-anchor {
+    display: none;
+  }
+}
+
+.all-contributors + table {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  line-height: @line-height-base;
+  overflow: auto;
+
+  td {
+    text-align: center;
+    a {
+      text-decoration: none;
+    }
+  }
+}
