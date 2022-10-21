@@ -12,10 +12,7 @@ export function mdPlugin(): Plugin {
       vuePlugin = config.plugins.find(p => p.name === 'vite:vue')!
     },
     transform(raw, id) {
-      if (id.endsWith('.md')) {
-        return parseMd(id, raw)
-      }
-      return
+      return id.endsWith('.md') ? parseMd(id, raw) : undefined
     },
     async handleHotUpdate(ctx) {
       if (ctx.file.endsWith('.md')) {

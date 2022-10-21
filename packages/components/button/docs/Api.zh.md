@@ -1,5 +1,3 @@
-## API
-
 ### IxButton
 
 #### ButtonProps

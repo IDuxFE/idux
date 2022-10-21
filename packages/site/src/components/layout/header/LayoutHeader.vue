@@ -14,9 +14,10 @@
           </IxDropdown>
         </template>
         <template v-else>
-          <LayoutHeaderSearchBox />
+          <LayoutHeaderSearchBox v-if="!isXs && !isSm" />
           <LayoutHeaderNavigation mode="horizontal" />
-          <LayoutHeaderGithubButton v-if="!isXs && !isSm && !isHome" />
+          <HeaderVersion v-if="!isXs && !isSm" />
+          <HeaderButton v-if="!isXs && !isSm" />
         </template>
       </IxCol>
     </IxRow>

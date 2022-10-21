@@ -1,7 +1,7 @@
 <template>
   <div class="footer-item">
     <IxTooltip :title="tooltip">
-      <a :href="link" target="_blank" rel="noopener">
+      <a :href="link" :target="link.startsWith('https') ? '_blank' : '_self'" rel="noopener">
         <span v-if="icon" class="footer-item-icon">
           <IxIcon :name="icon"></IxIcon>
         </span>

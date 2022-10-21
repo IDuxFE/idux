@@ -5,6 +5,7 @@ import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
 // eslint-disable-next-line import/no-unresolved
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 import { mdPlugin } from './plugins/mdPlugin'
 import { themePlugin } from './plugins/themePlugin'
@@ -27,6 +28,14 @@ export default defineConfig(({ command }) => {
         themes: [
           { key: 'default', label: 'Default' },
           { key: 'seer', label: 'Seer' },
+        ],
+      }),
+      viteStaticCopy({
+        targets: [
+          {
+            src: '../../scripts/gulp/icons/assets/*.svg',
+            dest: 'idux-icons',
+          },
         ],
       }),
     ],
