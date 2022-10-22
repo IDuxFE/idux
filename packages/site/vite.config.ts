@@ -7,6 +7,10 @@ import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 
+import cdkPackage from '@idux/cdk/package.json'
+import componentsPackage from '@idux/components/package.json'
+import proPackage from '@idux/pro/package.json'
+
 import { mdPlugin } from './plugins/mdPlugin'
 import { themePlugin } from './plugins/themePlugin'
 import { transformIndexPlugin } from './plugins/transformIndexPlugin'
@@ -49,6 +53,9 @@ export default defineConfig(({ command }) => {
     },
     define: {
       __DEV__: !isBuild,
+      __VERSION_CDK__: `'${cdkPackage.version}'`,
+      __VERSION_COMPONENTS__: `'${componentsPackage.version}'`,
+      __VERSION_PRO__: `'${proPackage.version}'`,
     },
     css: {
       preprocessorOptions: {

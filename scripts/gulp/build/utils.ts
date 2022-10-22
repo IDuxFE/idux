@@ -1,7 +1,7 @@
 import { join } from 'path'
 
 // import { Extractor, ExtractorConfig } from '@microsoft/api-extractor'
-import { copy, copyFile, readJSON, readdir, statSync, writeFile, writeJson } from 'fs-extra'
+import { copy, copyFile, readdir, statSync, writeFile, writeJson } from 'fs-extra'
 import { TaskFunction } from 'gulp'
 import { OutputOptions, rollup } from 'rollup'
 
@@ -199,24 +199,6 @@ export const copyPackageFiles = (distDirname: string, projectRoot: string, packa
   }
 
   return copyPackageFiles
-}
-
-export const syncVersion = (distDirname: string): TaskFunction => {
-  const syncVersion: TaskFunction = async done => {
-    const filterPackages = ['site', 'packages']
-    const packages = await readdir(distDirname)
-    packages
-      .filter(packageName => !filterPackages.includes(packageName))
-      .map(async packageName => {
-        const { version } = await readJSON(join(distDirname, packageName, 'package.json'))
-        const versionString = `export const version = '${version}'`
-        await writeFile(join(distDirname, packageName, 'version/index.js'), versionString)
-        const versionDeclarationString = `export declare const version = '${version}'`
-        await writeFile(join(distDirname, packageName, 'version/index.d.ts'), versionDeclarationString)
-      })
-    done()
-  }
-  return syncVersion
 }
 
 export const buildStyle = (targetDirname: string, distDirname: string, packageName: string): TaskFunction => {

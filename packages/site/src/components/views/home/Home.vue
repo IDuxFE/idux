@@ -92,7 +92,7 @@ export default defineComponent({
       gap: 16px;
       .ix-button {
         border-radius: 40px;
-        width: 120px;
+        min-width: 120px;
         border: none;
         box-shadow: none;
       }
@@ -117,7 +117,7 @@ export default defineComponent({
           .ix-button-group {
             .ix-button {
               border-radius: 32px;
-              width: 96px;
+              min-width: 96px;
             }
           }
         }
@@ -140,7 +140,7 @@ export default defineComponent({
             gap: 12px;
             .ix-button {
               border-radius: 32px;
-              width: 88px;
+              min-width: 88px;
             }
           }
         }
