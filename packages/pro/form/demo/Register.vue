@@ -1,6 +1,6 @@
 <template>
   <IxProForm class="demo-form" autoId="register" :fields="fields" @submit="onSubmit">
-    <template #password="props">
+    <template #captcha="props">
       <IxRow gutter="8">
         <IxCol span="12">
           <IxInput v-bind="props"> </IxInput>

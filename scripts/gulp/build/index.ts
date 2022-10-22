@@ -15,7 +15,6 @@ import {
   complete,
   copyPackageFiles,
   moveDeclaration,
-  syncVersion,
 } from './utils'
 
 const { packageRoot, projectRoot, icon } = gulpConfig
@@ -81,11 +80,7 @@ export const buildStyle = series(
   complete('Style'),
 )
 
-export const buildVersion = series(
-  copyPackageFiles(distDirname, packageRoot, projectRoot),
-  syncVersion(distDirname),
-  complete('Version'),
-)
+export const buildVersion = series(copyPackageFiles(distDirname, packageRoot, projectRoot), complete('Version'))
 
 export const buildFullIndex = series(
   _buildFullIndex(cdkOptions),

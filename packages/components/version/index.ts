@@ -5,4 +5,4 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-export const version = '0.0.0-NOT-USED'
+export const version = __VERSION_COMPONENTS__

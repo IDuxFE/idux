@@ -12,6 +12,9 @@ import { upperFirst } from 'lodash'
 import { Plugin, RollupOptions } from 'rollup'
 import typescript from 'rollup-plugin-typescript2'
 
+import cdkPackage from '../../../packages/cdk/package.json'
+import componentsPackage from '../../../packages/components/package.json'
+import proPackage from '../../../packages/pro/package.json'
 import { esbuildPlugin } from './esbuild'
 
 interface Options {
@@ -23,6 +26,13 @@ interface Options {
 }
 
 const externalDeps = ['vue', '@vue', '@idux', '@floating-ui/dom', 'date-fns', 'lodash-es', 'ajv']
+const replaceOptions = {
+  __DEV__: "process.env.NODE_ENV !== 'production'",
+  __VERSION_CDK__: `'${cdkPackage.version}'`,
+  __VERSION_COMPONENTS__: `'${componentsPackage.version}'`,
+  __VERSION_PRO__: `'${proPackage.version}'`,
+  preventAssignment: true,
+}
 
 export const getRollupSingleOptions = (options: Options): RollupOptions => {
   const { targetDirname, distDirname, compName = '', minify = false } = options
@@ -32,7 +42,7 @@ export const getRollupSingleOptions = (options: Options): RollupOptions => {
 
   const plugins = [
     nodeResolve(),
-    replace({ __DEV__: "process.env.NODE_ENV !== 'production'", preventAssignment: true }),
+    replace(replaceOptions),
     vuePlugin(),
     vueJsxPlugin({ enableObjectSlots: false }),
     esbuildPlugin({ minify }),
@@ -67,7 +77,7 @@ export const getRollupFullOptions = (options: Options): RollupOptions => {
       ],
     }),
     nodeResolve(),
-    replace({ __DEV__: true, preventAssignment: true }),
+    replace(replaceOptions),
     vuePlugin(),
     vueJsxPlugin({ enableObjectSlots: false }),
     esbuildPlugin({
@@ -123,7 +133,7 @@ export const getRollupDeclarationOptions = (options: Options): RollupOptions => 
 
   const plugins = [
     nodeResolve(),
-    replace({ __DEV__: "process.env.NODE_ENV !== 'production'", preventAssignment: true }),
+    replace(replaceOptions),
     vuePlugin(),
     vueJsxPlugin({ enableObjectSlots: false }),
     typescript({
