@@ -46,7 +46,7 @@ export default defineComponent({
     onUpdated(setInputRef)
 
     const inputProps = useInputProps(context)
-    const panelProps = usePanelProps(context)
+    const panelProps = usePanelProps(props, formatRef)
 
     const { fromActiveValue, toActiveValue, setFromActiveValue, setToActiveValue } = useRangeActiveValue(
       props,

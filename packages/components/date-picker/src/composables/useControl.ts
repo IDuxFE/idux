@@ -104,7 +104,7 @@ export function useControl(
     setPanelValue(currDateValue)
   }
 
-  watch(valueRef, () => init(), { immediate: true })
+  watch([valueRef, formatRef], () => init(), { immediate: true })
   watch(inputEnableStatus, () => init())
 
   function parseInput(value: string, format: string) {

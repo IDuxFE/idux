@@ -57,7 +57,9 @@ export function useRangeControl(
   const fromDateRef = computed(() => rangeValueRef.value[0])
   const toDateRef = computed(() => rangeValueRef.value[1])
 
-  watch(valueRef, handleBufferUpdate)
+  watch([valueRef, formatRef], ([value]) => {
+    handleBufferUpdate(value)
+  })
 
   const getValidBufferValue = (value: Date | undefined, isFrom: boolean) => {
     if (isFrom) {

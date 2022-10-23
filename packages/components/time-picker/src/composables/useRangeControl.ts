@@ -43,7 +43,9 @@ export function useRangePickerControl(
     setBuffer(getRangeValue(dateConfig, values, formatRef.value))
     setBufferUpdated(true)
   }
-  watch(valueRef, handleBufferUpdate)
+  watch([valueRef, formatRef], ([value]) => {
+    handleBufferUpdate(value)
+  })
 
   const rangeValueRef = computed(() => convertArray(buffer.value))
   const fromValue = computed(() => rangeValueRef.value[0])

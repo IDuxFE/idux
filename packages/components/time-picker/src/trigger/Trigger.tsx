@@ -7,6 +7,7 @@
 
 import { computed, defineComponent, inject } from 'vue'
 
+import { callEmit } from '@idux/cdk/utils'
 import { ɵTrigger } from '@idux/components/_private/trigger'
 
 import { useTriggerProps } from '../composables/useTriggerProps'
@@ -17,18 +18,23 @@ export default defineComponent({
   setup(_, { attrs }) {
     const context = inject(timePickerContext)!
     const {
-      props: pickerProps,
+      props,
       slots,
       locale,
       mergedPrefixCls,
       formatRef,
       inputRef,
       inputEnableStatus,
-      controlContext: { inputValue, handleInput },
+      controlContext: { inputValue, handleInput: _handleInput },
     } = context
 
-    const placeholder = computed(() => pickerProps.placeholder ?? locale.timePicker.placeholder)
+    const placeholder = computed(() => props.placeholder ?? locale.timePicker.placeholder)
     const inputSize = computed(() => Math.max(10, formatRef.value.length) + 2)
+
+    const handleInput = (evt: Event) => {
+      _handleInput(evt)
+      callEmit(props.onInput, evt)
+    }
 
     const triggerProps = useTriggerProps(context)
     const renderContent = (prefixCls: string) => {

@@ -44,6 +44,11 @@ describe('TimePanel', () => {
       },
     })
 
+    expect(findCell(wrapper, 0, 12)?.props().selected).toBe(true)
+    expect(findCell(wrapper, 1, 0)?.props().selected).toBe(true)
+    expect(findCell(wrapper, 2, 0)?.props().selected).toBe(true)
+    expect(findCell(wrapper, 3, 'am')?.props().selected).toBe(true)
+
     await findCell(wrapper, 0, 4)?.trigger('click')
     expect(onChange).toBeCalledWith(new Date(2021, 12, 8, 4, 0, 0, 0))
 
@@ -159,11 +164,26 @@ describe('TimePanel', () => {
   })
 
   test('disabledHours work', async () => {
+    const onChange = vi.fn()
     const wrapper = TimePanelMount({
-      props: { value: newDate(), hourEnabled: true, disabledHours: () => [1, 2, 3, 4, 5] },
+      props: { value: newDate(), hourEnabled: true, disabledHours: () => [1, 2, 3, 4, 5], onChange },
     })
-    expect(findCell(wrapper, 0, 1)?.props().disabled).toBe(true)
-    expect(findCell(wrapper, 0, 6)?.props().disabled).toBe(false)
+
+    const disabledCell1 = findCell(wrapper, 0, 1)
+    const disabledCell5 = findCell(wrapper, 0, 5)
+    const enabledCell = findCell(wrapper, 0, 6)
+    expect(!!disabledCell1?.props().disabled).toBe(true)
+    expect(!!disabledCell5?.props().disabled).toBe(true)
+    expect(!!enabledCell?.props().disabled).toBe(false)
+
+    await disabledCell1?.trigger('click')
+    expect(onChange).not.toBeCalled()
+
+    await disabledCell5?.trigger('click')
+    expect(onChange).not.toBeCalled()
+
+    await enabledCell?.trigger('click')
+    expect(onChange).toBeCalled()
 
     expect(wrapper.html()).toMatchSnapshot()
   })
