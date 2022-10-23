@@ -43,7 +43,7 @@ describe('TimePanelCell', () => {
     const wrapper = TimePanelCellMount({ props: { value: 'cell', disabled: true, selected: false, onActive } })
     wrapper.trigger('click')
 
-    expect(wrapper.element.classList.contains('ix-time-panel-cell')).toBeTruthy()
+    expect(wrapper.element.classList.contains('ix-time-panel-cell-disabled')).toBeTruthy()
     expect(onActive).not.toBeCalled()
   })
 
@@ -52,7 +52,7 @@ describe('TimePanelCell', () => {
     const wrapper = TimePanelCellMount({ props: { value: 'cell', disabled: false, selected: true, onActive } })
     wrapper.trigger('click')
 
-    expect(wrapper.element.classList.contains('ix-time-panel-cell')).toBeTruthy()
+    expect(wrapper.element.classList.contains('ix-time-panel-cell-selected')).toBeTruthy()
     expect(onActive).not.toBeCalled()
   })
 })

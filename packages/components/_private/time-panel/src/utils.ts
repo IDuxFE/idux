@@ -5,10 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TimePanelColumnType } from './types'
+import type { AmPm, TimePanelColumnType } from './types'
 import type { DateConfig } from '@idux/components/config'
 
-export function normalizeAmPm(hour: number, is12Hours = false): 'am' | 'pm' | undefined {
+export function normalizeAmPm(hour: number, is12Hours = false): AmPm | undefined {
   if (!is12Hours) {
     return
   }
@@ -26,9 +26,9 @@ export function calculateViewHour(hour: number, is12Hours: boolean): number {
   return hour
 }
 
-export function getHourValue(hour: number, ampm?: 'am' | 'pm' | ''): number {
+export function getHourValue(hour: number, ampm?: AmPm | ''): number {
   if (ampm) {
-    ampm = ampm.toLowerCase() as 'am' | 'pm' | ''
+    ampm = ampm.toLowerCase() as AmPm | ''
     if (ampm === 'am') {
       hour >= 12 && (hour -= 12)
     }
@@ -45,7 +45,7 @@ export function calculateValue(
   dateNow: Date,
   type: TimePanelColumnType,
   is12Hours: boolean,
-  value: number | 'am' | 'pm' | '',
+  value: number | AmPm | '',
 ): Date {
   const { get, set } = dateConfig
   const selectNumber = Number(value)
@@ -59,6 +59,6 @@ export function calculateValue(
     case 'second':
       return set(newDate, selectNumber, 'second')
     case 'AM/PM':
-      return set(newDate, getHourValue(get(newDate, 'hour'), value.toString() as 'am' | 'pm' | ''), 'hour')
+      return set(newDate, getHourValue(get(newDate, 'hour'), value.toString() as AmPm | ''), 'hour')
   }
 }

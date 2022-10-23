@@ -64,7 +64,7 @@ export function usePickerControl(
     setPanelValue(dateValue.value)
   }
 
-  watch(valueProp, () => init(), { immediate: true })
+  watch([valueProp, formatRef], () => init(), { immediate: true })
 
   function parseInput(value: string, format: string) {
     return value ? dateConfig.parse(value, format) : undefined

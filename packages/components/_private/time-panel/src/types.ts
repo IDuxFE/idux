@@ -87,14 +87,14 @@ export type TimePanelInstance = InstanceType<DefineComponent<TimePanelProps>>
 
 // private
 export interface TimePanelCell {
-  value: number | 'am' | 'pm'
+  value: number | AmPm
   disabled: boolean
 }
 
 export const timePanelColumnProps = {
-  selectedValue: [String, Number] as PropType<string | number>,
+  selectedValue: [String, Number] as PropType<number | AmPm>,
   activeValue: {
-    type: [String, Number] as PropType<string | number>,
+    type: [String, Number] as PropType<number | AmPm>,
     required: true,
   },
   options: {
@@ -120,7 +120,7 @@ export const timePanelCellProps = {
     default: false,
   },
   value: {
-    type: [String, Number] as PropType<string | number>,
+    type: [String, Number] as PropType<number | AmPm>,
     required: true,
   },
 

@@ -1,58 +1,31 @@
-import { DOMWrapper, MountingOptions, mount } from '@vue/test-utils'
+import { MountingOptions, mount } from '@vue/test-utils'
 
 import { renderWork } from '@tests'
+import { parse } from 'date-fns'
+
+import { ɵTimePanel } from '@idux/components/_private/time-panel'
+import TimePanelCell from '@idux/components/_private/time-panel/src/TimePanelCell'
+import TimePanelColumn from '@idux/components/_private/time-panel/src/TimePanelColumn'
+import { ɵTrigger } from '@idux/components/_private/trigger'
 
 import IxTimePicker from '../src/TimePicker'
 import { TimePickerProps } from '../src/types'
 
-describe.skip('TimePicker', () => {
+describe('TimePicker', () => {
   const TimePickerMount = (options?: MountingOptions<Partial<TimePickerProps>>) =>
     mount(IxTimePicker, { ...options, attachTo: 'body' })
-  let bodyWrapper: DOMWrapper<HTMLElement>
 
-  function getPickerPanel() {
-    return bodyWrapper.find('.ix-time-picker-panel')
-  }
+  const findTrigger = (wrapper: ReturnType<typeof TimePickerMount>) => wrapper.findComponent(ɵTrigger)
+  const findTimePanel = (wrapper: ReturnType<typeof TimePickerMount>) => wrapper.findComponent(ɵTimePanel)
+  const findColumns = (wrapper: ReturnType<typeof TimePickerMount>) =>
+    findTimePanel(wrapper).findAllComponents(TimePanelColumn)
+  const findColumn = (wrapper: ReturnType<typeof TimePickerMount>, idx: number) => findColumns(wrapper)?.[idx]
 
-  function getOverlay() {
-    return bodyWrapper.find('.ix-overlay')
-  }
+  const findCellWithValue = (wrapper: ReturnType<typeof findColumn>, value: string | number) =>
+    wrapper.findAllComponents(TimePanelCell).find(comp => comp.props().value === value)
 
-  function getOptionList() {
-    return getPickerPanel().findAll('.ix-time-picker-panel-column')
-  }
-
-  function getOptionsItemList(listIndex: number) {
-    return getOptionList()[listIndex].findAll('.ix-time-picker-panel-cell')
-  }
-
-  function getSelectedIndex(listIndex: number): number {
-    return getOptionsItemList(listIndex).findIndex(item =>
-      item.classes().includes('ix-time-picker-panel-cell-selected'),
-    )
-  }
-
-  function getDisabledIndexs(listIndex: number): number[] {
-    return getOptionsItemList(listIndex)
-      .map((item, index) => ({
-        index,
-        cls: item.classes(),
-      }))
-      .filter(item => item.cls.includes('ix-time-picker-panel-cell-disabled'))
-      .map(item => item.index)
-  }
-
-  async function clickOption(listIndex: number, optionIndex: number) {
-    await getOptionsItemList(listIndex)[optionIndex].trigger('click')
-  }
-
-  beforeAll(async () => {
-    bodyWrapper = new DOMWrapper(document.body)
-  })
-
-  afterEach(() => {
-    document.querySelector('.ix-time-picker-panel-container')!.innerHTML = ''
-  })
+  const findCell = (wrapper: ReturnType<typeof TimePickerMount>, idx: number, value: string | number) =>
+    findCellWithValue(findColumn(wrapper, idx), value)
 
   renderWork<TimePickerProps>(IxTimePicker, { props: { open: true } })
 
@@ -60,102 +33,47 @@ describe.skip('TimePicker', () => {
     const onUpdateValue = vi.fn()
     const wrapper = TimePickerMount({
       props: {
-        value: new Date().setHours(1, 2, 3),
+        value: new Date(2021, 12, 8, 4, 5, 5, 5),
         open: true,
-        format: 'HH:mm:ss',
+        format: 'hh:mm:ss a',
         'onUpdate:value': onUpdateValue,
       },
     })
 
     // test initial value
-    expect(getSelectedIndex(0)).toBe(1)
-    expect(getSelectedIndex(1)).toBe(2)
-    expect(getSelectedIndex(2)).toBe(3)
+    expect(findTimePanel(wrapper).props().value).toEqual(new Date(2021, 12, 8, 4, 5, 5, 5))
 
     // test value change
-    await wrapper.setProps({ value: new Date().setHours(10, 20, 30) })
+    await wrapper.setProps({ value: new Date(2021, 12, 8, 4, 10, 20, 30) })
 
-    expect(getSelectedIndex(0)).toBe(10)
-    expect(getSelectedIndex(1)).toBe(20)
-    expect(getSelectedIndex(2)).toBe(30)
+    expect(findTimePanel(wrapper).props().value).toEqual(new Date(2021, 12, 8, 4, 10, 20, 30))
 
-    // test click change value
-    await clickOption(0, 5)
-    await clickOption(1, 5)
-    await clickOption(2, 5)
+    await findCell(wrapper, 1, 4)?.trigger('click')
+    expect(onUpdateValue).toBeCalledWith(new Date(2021, 12, 8, 4, 4, 20, 30))
 
-    // 毫秒数对不上。
-    // expect(onUpdateValue).lastCalledWith(new Date().setHours(5, 5, 5))
+    onUpdateValue.mockClear()
+    await findCell(wrapper, 2, 4)?.trigger('click')
+    expect(onUpdateValue).toBeCalledWith(new Date(2021, 12, 8, 4, 10, 4, 30))
 
-    /** test ampm, 12 am */
-    await wrapper.setProps({ format: 'hh:mm:ss a', value: new Date().setHours(0) })
+    onUpdateValue.mockClear()
+    await findCell(wrapper, 3, 'pm')?.trigger('click')
+    expect(onUpdateValue).toBeCalledWith(new Date(2021, 12, 8, 16, 10, 20, 30))
 
-    expect(getSelectedIndex(0)).toBe(0)
-    expect(getSelectedIndex(3)).toBe(0)
-
-    // 10 am
-    await wrapper.setProps({ value: new Date().setHours(10) })
-
-    expect(getSelectedIndex(0)).toBe(10)
-    expect(getSelectedIndex(3)).toBe(0)
-
-    // 12 pm
-    await wrapper.setProps({ value: new Date().setHours(12) })
-
-    expect(getSelectedIndex(0)).toBe(0)
-    expect(getSelectedIndex(3)).toBe(1)
-
-    // 3 pm
-    await wrapper.setProps({ value: new Date().setHours(15) })
-    expect(getSelectedIndex(0)).toBe(3)
-    expect(getSelectedIndex(3)).toBe(1)
-
-    // 12 am
-    await wrapper.setProps({ value: new Date().setHours(24) })
-    expect(getSelectedIndex(0)).toBe(0)
-    expect(getSelectedIndex(3)).toBe(0)
-
-    // test click change value when use ampm
-    await wrapper.setProps({ value: new Date().setHours(5, 5, 5) })
-
-    await clickOption(0, 0)
-    // expect(onUpdateValue).toBeCalledWith(new Date().setHours(0, 5, 5))
-
-    await clickOption(3, 1)
-    // expect(onUpdateValue).toBeCalledWith(new Date().setHours(12, 5, 5))
-
-    await clickOption(0, 5)
-    // expect(onUpdateValue).toBeCalledWith(new Date().setHours(17, 5, 5))
-
-    await clickOption(3, 0)
-    // expect(onUpdateValue).toBeCalledWith(new Date().setHours(5, 5, 5))
-
-    // test clear value
-    // await wrapper.find('.ix-time-picker').trigger('mouseenter')
-    await wrapper.find('.ix-input-suffix .ix-icon-close-circle').trigger('click')
-    expect(onUpdateValue).toBeCalledWith(null)
+    await wrapper.find('.ix-trigger-clear-icon').trigger('click')
+    expect(onUpdateValue).toBeCalledWith(undefined)
   })
 
   test('v-model:open work', async () => {
     const onUpdateOpen = vi.fn()
-    const wrapper = TimePickerMount({
-      props: {
-        open: true,
-        'onUpdate:open': onUpdateOpen,
-      },
-    })
+    const wrapper = TimePickerMount({ props: { open: false, 'onUpdate:open': onUpdateOpen } })
 
-    expect(getOverlay().isVisible()).toBe(true)
+    expect(findTimePanel(wrapper).exists()).toBeFalsy()
 
-    await wrapper.setProps({ open: false })
-
-    // 可能会报错，因为有动画。
-    expect(getOverlay().isVisible()).toBe(false)
-
-    await wrapper.find('.ix-input').trigger('click')
-
-    expect(getOverlay().isVisible()).toBe(true)
+    await findTrigger(wrapper).trigger('click')
     expect(onUpdateOpen).toBeCalledWith(true)
+
+    await wrapper.setProps({ open: true })
+    expect(findTimePanel(wrapper).isVisible()).toBeTruthy()
   })
 
   test('format work', async () => {
@@ -167,79 +85,98 @@ describe.skip('TimePicker', () => {
       },
     })
 
-    expect(getPickerPanel().element.innerHTML).toMatchSnapshot()
+    expect(wrapper.find('.ix-time-picker').find('input').element.value).toBe('01:01:01')
 
-    await wrapper.setProps({ format: 'hh:mm:ss a' })
+    await wrapper.setProps({ format: 'hh:mm-ss' })
 
-    expect(getPickerPanel().element.innerHTML).toMatchSnapshot()
+    expect(wrapper.find('.ix-time-picker').find('input').element.value).toBe('01:01-01')
   })
 
   test('disabled & disabledOptions work', async () => {
     const onUpdateValue = vi.fn()
+    const onUpdateOpen = vi.fn()
+    const onInput = vi.fn()
     const wrapper = TimePickerMount({
       props: {
         value: new Date().setHours(0, 0, 0),
-        open: true,
         disabled: true,
+        open: true,
+        format: 'hh:mm:ss',
+        'onUpdate:value': onUpdateValue,
+        onInput,
+      },
+    })
+
+    await wrapper.find('.ix-time-picker').trigger('click')
+    expect(onUpdateOpen).not.toBeCalled()
+
+    const inputEl = wrapper.find('.ix-time-picker').find('input')
+    expect(inputEl.attributes().disabled).not.toBeUndefined()
+    await inputEl.setValue('01:01:01')
+    expect(onInput).not.toBeCalled()
+
+    await wrapper.setProps({ disabled: false })
+
+    expect(inputEl.attributes().disabled).toBeUndefined()
+
+    const disabledHours = () => [1, 2, 3]
+    const disabledMinutes = (hour: number) => (hour === 5 ? [1, 2, 3] : [])
+    const disabledSeconds = (hour: number, minute: number) => (hour === 5 && minute === 5 ? [1, 2, 3] : [])
+    // test disabled fn
+    await wrapper.setProps({
+      disabledHours,
+      disabledMinutes,
+      disabledSeconds,
+    })
+
+    expect(findTimePanel(wrapper).props().disabledHours).toBe(disabledHours)
+    expect(findTimePanel(wrapper).props().disabledMinutes).toBe(disabledMinutes)
+    expect(findTimePanel(wrapper).props().disabledSeconds).toBe(disabledSeconds)
+  })
+
+  test('clearable work', async () => {
+    const onUpdateValue = vi.fn()
+    const onChange = vi.fn()
+    const onClear = vi.fn()
+    const wrapper = TimePickerMount({
+      props: {
+        value: new Date('2021-10-01'),
+        'onUpdate:value': onUpdateValue,
+        onChange,
+        onClear,
+      },
+    })
+
+    await wrapper.find('.ix-trigger-clear-icon').trigger('click')
+    expect(onClear).toBeCalled()
+    expect(onChange).toBeCalledWith(undefined, new Date('2021-10-01'))
+    expect(onUpdateValue).toBeCalledWith(undefined)
+
+    await wrapper.setProps({ clearIcon: 'close' })
+    expect(findTrigger(wrapper).props().clearIcon).toBe('close')
+  })
+
+  test('input work', async () => {
+    const onInput = vi.fn()
+    const onChange = vi.fn()
+    const onUpdateValue = vi.fn()
+    const wrapper = TimePickerMount({
+      props: {
+        value: new Date(2021, 12, 8, 0, 0, 0, 0),
+        open: true,
+        format: 'hh:mm:ss',
+        onInput,
+        onChange,
         'onUpdate:value': onUpdateValue,
       },
     })
 
-    expect(wrapper.find('.ix-input').classes()).toContain('ix-input-disabled')
+    await wrapper.find('.ix-time-picker').find('input').setValue('12:11:13')
+    expect(onInput).toBeCalled()
 
-    await wrapper.setProps({ disabled: false })
-
-    expect(wrapper.find('.ix-input').classes()).not.toContain('ix-input-disabled')
-
-    // test disabled fn
-    await wrapper.setProps({
-      disabledHours: () => [1, 2, 3],
-      disabledMinutes: (hour: number) => (hour === 5 ? [1, 2, 3] : []),
-      disabledSeconds: (hour: number, minute: number) => (hour === 5 && minute === 5 ? [1, 2, 3] : []),
-      value: new Date().setHours(5, 5, 0),
-    })
-
-    expect(getDisabledIndexs(0)).toEqual([1, 2, 3])
-    expect(getDisabledIndexs(1)).toEqual([1, 2, 3])
-    expect(getDisabledIndexs(2)).toEqual([1, 2, 3])
-
-    // test clicking disabled options
-    await clickOption(0, 1)
-    await clickOption(1, 1)
-    await clickOption(2, 1)
-    // expect(onUpdateValue).toBeCalledWith(new Date().setHours(5, 5, 0))
-
-    // test hiding disabled options
-    await wrapper.setProps({ hideDisabledOptions: true })
-
-    expect(getOptionsItemList(0).length).toBe(21)
-    expect(getOptionsItemList(1).length).toBe(57)
-    expect(getOptionsItemList(2).length).toBe(57)
-
-    expect(getDisabledIndexs(0).length).toBe(0)
-    expect(getDisabledIndexs(1).length).toBe(0)
-    expect(getDisabledIndexs(2).length).toBe(0)
-  })
-
-  test('clearable & clearIcon & clearText work', async () => {
-    const wrapper = TimePickerMount({
-      props: {
-        value: new Date(),
-      },
-    })
-
-    const commonIconCls = '.ix-input-suffix'
-    const defaultIconCls = `${commonIconCls} .ix-icon-close-circle`
-
-    expect(wrapper.find(defaultIconCls).exists()).toBe(true)
-
-    // test clearIcon
-    await wrapper.setProps({ clearIcon: 'close' })
-    expect(wrapper.find(`${commonIconCls} .ix-icon-close`).exists()).toBe(true)
-
-    // test clearable false
-    await wrapper.setProps({ clearable: false })
-    expect(wrapper.find(defaultIconCls).exists()).toBe(false)
+    const newDate = parse('12:11:13', 'hh:mm:ss', new Date())
+    expect(onChange).toBeCalledWith(newDate, new Date(2021, 12, 8, 0, 0, 0, 0))
+    expect(onUpdateValue).toBeCalledWith(newDate)
   })
 
   test('focus and blur work', async () => {
@@ -247,16 +184,15 @@ describe.skip('TimePicker', () => {
     const onBlur = vi.fn()
     const wrapper = TimePickerMount({
       props: {
-        value: new Date(),
         onFocus,
         onBlur,
       },
     })
 
-    await wrapper.find('input').trigger('focus')
+    await wrapper.find('.ix-time-picker').find('input').trigger('focus')
     expect(onFocus).toBeCalled()
 
-    await wrapper.find('input').trigger('blur')
+    await wrapper.find('.ix-time-picker').find('input').trigger('blur')
     expect(onBlur).toBeCalled()
   })
 
@@ -266,11 +202,11 @@ describe.skip('TimePicker', () => {
         suffix: 'up',
       },
     })
-    expect(wrapper.find(`.ix-input-suffix .ix-icon-up`).exists()).toBe(true)
+    expect(findTrigger(wrapper).props().suffix).toBe('up')
   })
 
   test('optionsStep work', async () => {
-    TimePickerMount({
+    const wrapper = TimePickerMount({
       props: {
         open: true,
         hourStep: 5,
@@ -279,70 +215,18 @@ describe.skip('TimePicker', () => {
       },
     })
 
-    function getOptionsContent(listIndex: number) {
-      return getOptionsItemList(listIndex).map(item => Number(item.element.innerHTML))
-    }
-
-    // is every option equal the last option plus step
-    function isStepWork(list: number[], step = 1): boolean {
-      let worked = true
-
-      list.forEach((item, idx) => {
-        if (idx > 0 && item !== list[idx - 1] + step) {
-          worked = false
-        }
-      })
-
-      return worked
-    }
-
-    expect(isStepWork(getOptionsContent(0), 5)).toEqual(true)
-    expect(isStepWork(getOptionsContent(1), 7)).toEqual(true)
-    expect(isStepWork(getOptionsContent(2), 7)).toEqual(true)
+    const timePanelProps = findTimePanel(wrapper).props()
+    expect(timePanelProps.hourStep).toBe(5)
+    expect(timePanelProps.minuteStep).toBe(7)
+    expect(timePanelProps.secondStep).toBe(7)
   })
 
   test('defaultOpenValue work', async () => {
-    const wrapper = TimePickerMount({})
+    const wrapper = TimePickerMount({ props: { open: true } })
 
-    await wrapper.find('.ix-time-picker').trigger('click')
+    expect(findTimePanel(wrapper).props().activeValue).toBeUndefined()
 
-    expect(getSelectedIndex(0)).toBe(0)
-    expect(getSelectedIndex(1)).toBe(0)
-    expect(getSelectedIndex(2)).toBe(0)
-
-    await wrapper.setProps({ defaultOpenValue: new Date().setHours(12, 20, 30) })
-
-    expect(getSelectedIndex(0)).toBe(12)
-    expect(getSelectedIndex(1)).toBe(20)
-    expect(getSelectedIndex(2)).toBe(30)
-
-    await wrapper.setProps({ format: 'hh:mm:ss a' })
-
-    expect(getSelectedIndex(0)).toBe(0)
-    expect(getSelectedIndex(1)).toBe(20)
-    expect(getSelectedIndex(2)).toBe(30)
-
-    await wrapper.setProps({ defaultOpenValue: new Date().setHours(15, 20, 30) })
-
-    expect(getSelectedIndex(0)).toBe(3)
-    expect(getSelectedIndex(1)).toBe(20)
-    expect(getSelectedIndex(2)).toBe(30)
-
-    await wrapper.setProps({ value: new Date().setHours(5, 5, 5) })
-
-    expect(getSelectedIndex(0)).toBe(5)
-    expect(getSelectedIndex(1)).toBe(5)
-    expect(getSelectedIndex(2)).toBe(5)
-  })
-
-  test('overlayClassName work', async () => {
-    TimePickerMount({
-      props: {
-        overlayClassName: 'test-overlay-class-name',
-        open: true,
-      },
-    })
-
-    expect(getOverlay().classes()).toContain('test-overlay-class-name')
+    await wrapper.setProps({ defaultOpenValue: new Date(2021, 12, 8, 15, 20, 30, 0) })
+    expect(findTimePanel(wrapper).props().activeValue).toEqual(new Date(2021, 12, 8, 15, 20, 30, 0))
   })
 })

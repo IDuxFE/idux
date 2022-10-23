@@ -7,6 +7,7 @@
 
 import { type ComputedRef, computed, defineComponent, inject } from 'vue'
 
+import { callEmit } from '@idux/cdk/utils'
 import { ɵTrigger } from '@idux/components/_private/trigger'
 
 import { useTriggerProps } from '../composables/useTriggerProps'
@@ -17,7 +18,7 @@ export default defineComponent({
   setup(_, { attrs }) {
     const context = inject(timeRangePickerContext)!
     const {
-      props: pickerProps,
+      props,
       slots,
       locale,
       mergedPrefixCls,
@@ -28,14 +29,24 @@ export default defineComponent({
     } = context
 
     const placeholders: ComputedRef<[string, string]> = computed(() => [
-      pickerProps.placeholder?.[0] ?? locale.timeRangePicker.placeholder[0],
-      pickerProps.placeholder?.[1] ?? locale.timeRangePicker.placeholder[1],
+      props.placeholder?.[0] ?? locale.timeRangePicker.placeholder[0],
+      props.placeholder?.[1] ?? locale.timeRangePicker.placeholder[1],
     ])
 
+    const handleFromInput = (evt: Event) => {
+      fromControl.handleInput(evt)
+      callEmit(props.onInput, true, evt)
+    }
+    const handleToInput = (evt: Event) => {
+      toControl.handleInput(evt)
+      callEmit(props.onInput, false, evt)
+    }
+
     function renderSide(prefixCls: string, isFrom: boolean) {
-      const { inputValue, handleInput } = isFrom ? fromControl : toControl
+      const { inputValue } = isFrom ? fromControl : toControl
       const { disabled, readonly } = triggerProps.value
       const placeholder = placeholders.value[isFrom ? 0 : 1]
+      const handleInput = isFrom ? handleFromInput : handleToInput
 
       return (
         <input

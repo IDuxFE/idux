@@ -93,6 +93,8 @@ describe('DatePicker', () => {
     await wrapper.find('.ix-date-picker').trigger('click')
     expect(onUpdateOpen).not.toBeCalled()
 
+    const inputEl = wrapper.find('.ix-date-picker').find('input')
+    expect(inputEl.attributes().disabled).not.toBeUndefined()
     await wrapper.find('.ix-date-picker').find('input').setValue('2021-03-01')
     expect(onInput).not.toBeCalled()
   })
@@ -121,6 +123,10 @@ describe('DatePicker', () => {
     const wrapper = DatePickerMount({ props: { value: new Date('2021-10-01'), format: 'dd/MM/yyyy' } })
 
     expect(wrapper.find('.ix-date-picker').find('input').element.value).toBe('01/10/2021')
+
+    await wrapper.setProps({ format: 'dd-MM-yyyy' })
+
+    expect(wrapper.find('.ix-date-picker').find('input').element.value).toBe('01-10-2021')
   })
 
   test('input work', async () => {
