@@ -147,6 +147,12 @@ declare module "*.vue" {
 }
 ```
 
+### 文档提示
+
+我们开发一套在 IDE（VSCode/Webstorm）中提供组件文档提示的扩展——[iDux-Coder](https://github.com/IDuxFE/idux-coder/releases)
+
+用于提供代码即文档的开发体验，实现在 IDE 中组件参数即查即用，而无需组件文档网站与 IDE 的来回切换，并支持高度自由的数据配置定制，是 iDux-Coder 但不仅仅只是 iDux。
+
 ### 开发调试
 
 一键启动调试，运行成功后显示欢迎页面。
