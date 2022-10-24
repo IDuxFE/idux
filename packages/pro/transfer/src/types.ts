@@ -76,6 +76,7 @@ export const proTransferProps = {
     type: [Boolean, Object] as PropType<boolean | { source: boolean; target: boolean }>,
     default: false,
   },
+  searchPlaceholder: [String, Array] as PropType<string | string[]>,
   searchFn: Function as PropType<SearchFn>,
   clearable: {
     type: Boolean as PropType<boolean>,

@@ -115,6 +115,7 @@ export interface TransferListSlotParams<T extends TransferData = TransferData> {
   showSelectAll: boolean
   // 是否可搜索
   searchable: boolean
+
   // 分页配置
   pagination: PaginationProps | null
 
@@ -127,6 +128,8 @@ export interface TransferListSlotParams<T extends TransferData = TransferData> {
   // 全部勾选触发函数
   selectAll: (selected?: boolean) => void
 
+  // 搜索placeholder
+  searchPlaceholder: string
   // 搜索输入
   searchValue: string
   // 搜索输入触发函数

@@ -63,6 +63,7 @@ export interface TransferBindings<T extends TransferData = TransferData> {
 
   showSelectAll: ComputedRef<boolean>
   searchable: ComputedRef<boolean>
+  searchPlaceholder: ComputedRef<string>
 
   pagination: ComputedRef<PaginationProps | undefined>
 
@@ -154,6 +155,7 @@ export const transferProps = {
     default: undefined,
   },
   searchFn: Function as PropType<SearchFn>,
+  searchPlaceholder: [String, Array] as PropType<string | string[]>,
   spin: {
     type: [Boolean, Object] as PropType<boolean | { source: boolean; target: boolean }>,
     default: undefined,

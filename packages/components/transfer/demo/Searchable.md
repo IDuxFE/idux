@@ -9,6 +9,10 @@ title:
 
 通过设置 `searchable`, `searchFn` 来控制穿梭框数据的搜索
 
+通过设置 `searchPlaceholder` 指定占位符
+
 ## en
 
 Control search functionality of transfer via props `searchable`, `searchFn`.
+
+Set search placeholder of tranfer via props `searchPlaceholder`

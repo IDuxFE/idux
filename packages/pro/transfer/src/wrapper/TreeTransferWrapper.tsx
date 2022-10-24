@@ -88,6 +88,7 @@ export default defineComponent({
         disabled: props.disabled,
         searchable: props.searchable,
         searchFn: props.searchFn,
+        searchPlaceholder: props.searchPlaceholder,
         clearable: props.clearable,
         clearIcon: props.clearIcon,
         showSelectAll: true,
