@@ -32,8 +32,8 @@
       border-color: #1c6eff;
     }
     &.warning {
-      color: #fdaa1d;
-      border-color: #fdaa1d;
+      color: #fa721b;
+      border-color: #fa721b;
     }
     &.risk {
       color: #cf171d;

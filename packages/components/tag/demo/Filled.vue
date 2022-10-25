@@ -38,10 +38,10 @@
       background: #1c6eff;
     }
     &.warning {
-      background: #fa721b;
+      background: #fdaa1d;
     }
     &.alert {
-      background: #fdaa1d;
+      background: #fa721b;
     }
     &.risk {
       background: #cf171d;
