@@ -144,20 +144,16 @@ const onSearch = (searchVal: string) => {
       position: sticky;
       right: 12px;
       display: none;
-      background-color: #fff;
-      transition: background-color 0.3s;
     }
 
     &:hover {
       .ix-tree-node-content-suffix {
         display: inline-block;
-        background-color: #f7f9fc;
       }
     }
     &-selected {
       .ix-tree-node-content-suffix {
         display: inline-block;
-        background-color: #edf1f7;
       }
     }
   }
