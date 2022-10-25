@@ -15,24 +15,28 @@
       <div class="demo-transfer-custom-operations__operations">
         <IxButton
           class="demo-transfer-custom-operations__operations-btn"
+          size="xs"
           :disabled="appendAllDisabled"
           :onClick="() => triggerAppendAll()"
           >all</IxButton
         >
         <IxButton
           class="demo-transfer-custom-operations__operations-btn"
+          size="xs"
           :disabled="appendDisabled"
           :onClick="() => triggerAppend()"
           >append</IxButton
         >
         <IxButton
           class="demo-transfer-custom-operations__operations-btn"
+          size="xs"
           :disabled="removeDisabled"
           :onClick="() => triggerRemove()"
           >remove</IxButton
         >
         <IxButton
           class="demo-transfer-custom-operations__operations-btn"
+          size="xs"
           :disabled="clearDisabled"
           :onClick="() => triggerClear()"
           >clear</IxButton
@@ -74,7 +78,7 @@ const disabled = ref(false)
   justify-content: center;
 
   &-btn {
-    width: 80px;
+    width: 40px;
 
     & + & {
       margin-top: 8px;
