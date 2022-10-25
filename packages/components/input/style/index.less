@@ -216,7 +216,10 @@
     display: inline-flex;
     align-items: center;
     color: @input-icon-color;
-    font-size: @input-icon-font-size;
+
+    .@{icon-prefix} {
+      font-size: @input-icon-font-size;
+    }
   }
 
   &-prefix {
