@@ -30,7 +30,7 @@ import Panel from './panel/Panel'
 import { SELECT_PANEL_DATA_TOKEN } from './token'
 import { type SelectData, type SelectPanelInstance, type SelectProps, selectProps } from './types'
 
-const defaultOffset: [number, number] = [0, 8]
+const defaultOffset: [number, number] = [0, 4]
 
 export default defineComponent({
   name: 'IxSelect',

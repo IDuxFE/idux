@@ -106,7 +106,7 @@ export const defaultConfig: GlobalConfig = {
   dropdown: {
     autoAdjust: true,
     destroyOnHide: false,
-    offset: [0, 8],
+    offset: [0, 4],
     placement: 'bottomStart',
     showArrow: false,
     trigger: 'hover',
@@ -166,7 +166,7 @@ export const defaultConfig: GlobalConfig = {
   menu: {
     getKey: 'key',
     indent: 24,
-    offset: [0, 8],
+    offset: [0, 4],
     suffix: 'right',
     theme: 'light',
   },

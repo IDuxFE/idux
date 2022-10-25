@@ -24,7 +24,7 @@ import Content from './content/Content'
 import { treeSelectToken } from './token'
 import { treeSelectProps } from './types'
 
-const defaultOffset: [number, number] = [0, 8]
+const defaultOffset: [number, number] = [0, 4]
 
 export default defineComponent({
   name: 'IxTreeSelect',

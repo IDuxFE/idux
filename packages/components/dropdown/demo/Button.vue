@@ -20,7 +20,7 @@
     </IxButtonGroup>
 
     <IxDropdown>
-      <IxButton>Button <IxIcon name="down"></IxIcon></IxButton>
+      <IxButton>Button <IxIcon name="down" style="margin-left: 4px"></IxIcon></IxButton>
       <template #overlay>
         <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
       </template>
