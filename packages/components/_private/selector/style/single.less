@@ -1,9 +1,11 @@
 .select-size(@selector-height;  @select-padding-horizontal; @selector-font-size) {
+  &.@{selector-prefix} {
+    font-size: @selector-font-size;
+  }
   .@{selector-prefix} {
     &-content {
       height: @selector-height;
       padding: 0 @select-padding-horizontal;
-      font-size: @selector-font-size;
     }
 
     &-item {
