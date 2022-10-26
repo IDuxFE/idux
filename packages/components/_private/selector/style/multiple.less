@@ -4,10 +4,12 @@
   @select-item-height: @select-height - @select-multiple-padding * 2;
   @select-item-line-height: @select-item-height - @select-border-width * 2;
 
+  &.@{selector-prefix} {
+    font-size: @select-font-size;
+  }
   .@{selector-prefix} {
     &-content {
       padding: @select-padding-vertical @select-multiple-padding;
-      font-size: @select-font-size;
 
       .@{overflow-prefix}-item {
         max-width: calc(100% - @select-icon-font-size);

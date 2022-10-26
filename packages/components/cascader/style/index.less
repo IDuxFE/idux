@@ -8,7 +8,7 @@
     align-items: center;
     padding: @cascader-option-padding;
     height: @cascader-option-height;
-    line-height: 1;
+    color: @cascader-option-color;
     transition: background @transition-duration-base, color @transition-duration-base;
     cursor: pointer;
 
@@ -52,6 +52,9 @@
       color: @cascader-option-expanded-icon-color;
       font-size: @cascader-option-expanded-icon-font-size;
     }
+    &-disabled &-expand-icon {
+      color: @cascader-option-disabled-color;
+    }
 
     &-expand-icon&-disabled {
       color: @cascader-option-disabled-color;
@@ -88,18 +91,8 @@
       display: flex;
       flex-wrap: nowrap;
       align-items: flex-start;
+      font-size: @cascader-option-font-size;
       overflow: auto;
-    }
-
-    @option-prefix: ~'@{cascader-prefix}-option';
-    &-multiple {
-      .@{option-prefix}-leaf.@{option-prefix}-selected:not(.@{option-prefix}-disabled) {
-        color: @cascader-option-color;
-      }
-
-      .@{option-prefix}-expanded:not(.@{option-prefix}-disabled) {
-        color: @cascader-option-color;
-      }
     }
   }
 }

@@ -9,6 +9,7 @@
       min-width: @item-button-size;
       height: @item-button-size;
       line-height: @item-button-size;
+      font-size: @font-size;
     }
 
     .@{button-prefix}.@{button-prefix}-icon-only {
@@ -19,6 +20,14 @@
   .@{pagination-prefix}-total,
   .@{pagination-prefix}-sizes,
   .@{pagination-prefix}-jumper {
+    height: @item-size;
+    line-height: @item-size;
+  }
+
+  .@{pagination-prefix}-sizes .@{select-prefix},
+  .@{pagination-prefix}-jumper .@{input-prefix},
+  .@{pagination-prefix}-total {
+    font-size: @font-size;
     height: @item-size;
     line-height: @item-size;
   }
