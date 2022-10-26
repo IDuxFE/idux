@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type StyleValue, computed, defineComponent, normalizeClass, onMounted, watch } from 'vue'
+import { type CSSProperties, computed, defineComponent, normalizeClass, onMounted, watch } from 'vue'
 
 import { type FormAccessor } from '@idux/cdk/forms'
 import { type TextareaConfig, useGlobalConfig } from '@idux/components/config'
@@ -91,7 +91,7 @@ export default defineComponent({
       const { class: className, style, ...rest } = attrs
       const prefixCls = mergedPrefixCls.value
       return (
-        <span class={classes.value} style={style as StyleValue} data-count={dataCount.value}>
+        <span class={classes.value} style={style as CSSProperties} data-count={dataCount.value}>
           <textarea
             {...rest}
             ref={elementRef}

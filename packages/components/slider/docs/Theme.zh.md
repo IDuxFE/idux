@@ -6,15 +6,14 @@
 | `@slider-rail-background-color` | `@color-graphite-l30` | - | - |
 | `@slider-track-background-color` | `@color-primary` | - | - |
 | `@slider-thumb-background-color` | `@color-white` | - | - |
-| `@slider-dot-background-color` | `@color-white` | - | - |
-| `@slider-dot-border` | `2px solid @color-primary` | `2px solid @color-graphite-l30` | - |
+| `@slider-dot-background-color` | `@color-primary` | `@color-graphite-l30` | - |
 | `@slider-thumb-border` | `2px solid @color-primary` | - | - |
 | `@slider-rail-hover-background-color` | `@color-graphite-l30` | - | - |
 | `@slider-track-hover-background-color` | `@color-primary` | - | - |
 | `@slider-thumb-hover-border-color` | `@color-primary` | - | - |
 | `@slider-thumb-focus-border-color` | `@color-primary` | - | - |
 | `@slider-thumb-focus-box-shadow` | `0 0 0 5px fade(#46a6ff, 12%)` | - | - |
-| `@slider-dot-active-border-color` | `@color-primary` | - | - |
+| `@slider-dot-active-background-color` | `@color-primary` | - | - |
 | `@slider-marks-label-active-color` | `rgba(0, 0, 0, 0.851)` | - | - |
 | `@slider-track-disabled-background-color` | `rgba(0, 0, 0, 0.251)` | `@color-graphite` | - |
 | `@slider-thumb-disabled-background-color` | `@color-white` | - | - |

@@ -5,7 +5,7 @@
 | `@header-line-height` | `@line-height-base` | - | - |
 | `@header-height-xl` | `@height-xl` | `@height-xl` | - |
 | `@header-height-lg` | `@height-xl` | `@height-xl` | - |
-| `@header-height-md` | `@height-lg` | `@height-xl` | - |
+| `@header-height-md` | `@height-lg` | `@height-lg` | - |
 | `@header-height-sm` | `@height-md` | `@height-md` | - |
 | `@header-font-size` | `@font-size-md` | - | - |
 | `@header-color` | `@text-color` | - | - |
@@ -14,18 +14,19 @@
 | `@header-bar-width` | `@spacing-xs` | - | - |
 | `@header-bar-margin` | `@spacing-sm 0` | - | - |
 | `@header-bar-background-color` | `@color-primary` | - | - |
+| `@header-prefix-color` | `@color-graphite-d10` | - | - |
 | `@header-prefix-margin-right` | `@spacing-sm` | - | - |
 | `@header-prefix-padding-right` | `@spacing-sm` | - | - |
-| `@header-prefix-border-right` | `@border-width-sm @border-style @border-color` | - | - |
+| `@header-prefix-border-right` | `@border-width-sm @border-style @border-color` | `none` | - |
 | `@header-prefix-font-size` | `@font-size-lg` | - | - |
 | `@header-prefix-active-color` | `@color-primary` | - | - |
 | `@header-avatar-margin-right` | `@spacing-lg` | - | - |
 | `@header-title-color` | `@color-graphite-d40` | - | - |
 | `@header-title-font-weight` | `@font-weight-xl` | - | - |
 | `@header-title-margin-right` | `@spacing-lg` | - | - |
-| `@header-title-font-size-xl` | `@font-size-3xl` | - | - |
-| `@header-title-font-size-lg` | `@font-size-2xl` | - | - |
-| `@header-title-font-size-md` | `@font-size-xl` | - | - |
+| `@header-title-font-size-xl` | `@font-size-3xl` | `@font-size-xl` | - |
+| `@header-title-font-size-lg` | `@font-size-2xl` | `@font-size-lg` | - |
+| `@header-title-font-size-md` | `@font-size-xl` | `@font-size-md` | - |
 | `@header-title-font-size-sm` | `@font-size-lg` | `@font-size-md` | - |
 | `@header-sub-title-color` | `@text-color-secondary` | - | - |
 | `@header-suffix-color` | `@text-color-secondary` | - | - |

@@ -33,9 +33,9 @@
 | `@form-active-box-shadow` | `0 0 0 2px fade(@form-active-color, 20%)` | - | - |
 | `@form-focus-color` | `@color-primary-d10` | - | - |
 | `@form-focus-box-shadow` | `0 0 0 2px fade(@form-focus-color, 20%)` | - | - |
-| `@form-disabled-color` | `@text-color-disabled` | `@color-graphite-l10` | - |
+| `@form-disabled-color` | `@text-color-disabled` | - | - |
 | `@form-disabled-border-color` | `@color-graphite-l20` | - | - |
-| `@form-disabled-background-color` | `@background-color-disabled` | `@color-graphite-l40` | - |
+| `@form-disabled-background-color` | `@background-color-disabled` | - | - |
 | `@form-icon-color` | `@color-graphite-d20` | - | - |
 | `@form-icon-hover-color` | `@color-graphite-d20` | `@color-primary` | - |
 | `@form-item-valid-color` | `@color-success` | - | - |

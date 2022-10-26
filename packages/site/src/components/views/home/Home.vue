@@ -6,7 +6,7 @@
       </video>
       <div class="home-banner-title">
         <div class="home-banner-title-desc">{{ locale.bannerTitleDesc }}</div>
-        <IxButtonGroup :size="buttonSize">
+        <IxButtonGroup :gap="16" :size="buttonSize" shape="round">
           <IxButton mode="primary" @click="gotoPage('/docs/introduce')">{{ locale.start }}</IxButton>
           <IxButton mode="link" :href="githubUrl" target="_blank">{{ locale.github }}</IxButton>
         </IxButtonGroup>
@@ -89,9 +89,7 @@ export default defineComponent({
     .ix-button-group {
       display: flex;
       justify-content: center;
-      gap: 16px;
       .ix-button {
-        border-radius: 40px;
         min-width: 120px;
         border: none;
         box-shadow: none;
@@ -116,7 +114,6 @@ export default defineComponent({
           }
           .ix-button-group {
             .ix-button {
-              border-radius: 32px;
               min-width: 96px;
             }
           }
@@ -137,9 +134,7 @@ export default defineComponent({
             margin-bottom: 16px;
           }
           .ix-button-group {
-            gap: 12px;
             .ix-button {
-              border-radius: 32px;
               min-width: 88px;
             }
           }
@@ -160,7 +155,6 @@ export default defineComponent({
             margin-bottom: 16px;
           }
           .ix-button-group {
-            gap: 8px;
             .ix-button {
               border-radius: 24px;
               width: 80px;

@@ -5,9 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { StyleValue } from 'vue'
-
-import { computed, defineComponent, normalizeClass } from 'vue'
+import { type CSSProperties, computed, defineComponent, normalizeClass } from 'vue'
 
 import { isNil } from 'lodash-es'
 
@@ -68,7 +66,7 @@ export default defineComponent({
   },
 })
 
-function renderNumericPrefix(prefixCls: string, number: number | undefined, style: StyleValue) {
+function renderNumericPrefix(prefixCls: string, number: number | undefined, style: CSSProperties) {
   if (isNil(number)) {
     return null
   }

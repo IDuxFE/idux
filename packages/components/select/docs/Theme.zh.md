@@ -32,7 +32,7 @@
 | `@select-option-height` | `@height-md` | - | - |
 | `@select-option-padding` | `@spacing-sm @spacing-md` | - | - |
 | `@select-option-color` | `@text-color` | - | - |
-| `@select-option-disabled-color` | `@text-color-disabled` | - | - |
+| `@select-option-disabled-color` | `@text-color-disabled` | `@color-graphite-l10` | - |
 | `@select-option-active-background-color` | `@color-graphite-l50` | `@color-graphite-l50` | - |
 | `@select-option-selected-color` | `@color-primary` | - | - |
 | `@select-option-selected-background-color` | `@color-primary-l50` | `@color-primary-l50` | - |
@@ -48,9 +48,9 @@
 | `@select-option-container-border-radius` | `@border-radius-sm` | - | - |
 | `@select-option-container-box-shadow` | `@shadow-bottom-md` | - | - |
 | `@select-overlay-input-padding` | `0 @spacing-md @spacing-sm` | - | - |
-| `@select-icon-font-size` | `@font-size-lg` | - | - |
+| `@select-icon-font-size` | `@font-size-lg` | `@font-size-lg` | - |
 | `@select-icon-margin-right` | `@spacing-xs` | `@spacing-sm` | - |
-| `@select-icon-color` | `@select-placeholder-color` | `@color-graphite-l20` | - |
+| `@select-icon-color` | `@select-placeholder-color` | `@color-graphite-l10` | - |
 | `@select-icon-hover-color` | `@select-color-secondary` | `@color-primary` | - |
 | `@select-icon-background-color` | `@select-background-color` | - | - |
 | `@select-multiple-padding` | `@select-padding-vertical-md` | `4px` | - |
@@ -62,7 +62,7 @@
 | `@select-multiple-item-border` | `@select-multiple-item-border-width @border-style @border-color-split` | - | - |
 | `@select-multiple-item-border-radius` | `@select-border-radius` | `2px` | - |
 | `@select-multiple-item-label-margin` | `0 -@spacing-xs 0 @spacing-xs` | - | - |
-| `@select-multiple-item-remove-icon-font-size` | `@font-size-lg` | - | - |
+| `@select-multiple-item-remove-icon-font-size` | `@font-size-lg` | `@font-size-lg` | - |
 | `@select-multiple-item-remove-icon-color` | `@color-graphite` | `@color-graphite-d20` | - |
 | `@select-multiple-item-remove-icon-hover-color` | `@color-graphite-d10` | `@color-primary-l10` | - |
 | `@select-multiple-item-remove-icon-margin` | `0 0 0 @spacing-xs` | - | - |

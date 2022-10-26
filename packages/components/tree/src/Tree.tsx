@@ -5,22 +5,23 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { MergedNode } from './composables/useDataSource'
-import type { VirtualItemRenderFn, VirtualScrollInstance, VirtualScrollToOptions } from '@idux/cdk/scroll'
-import type { StyleValue, VNodeTypes } from 'vue'
-
-import { computed, defineComponent, provide, ref } from 'vue'
+import { type CSSProperties, type VNodeTypes, computed, defineComponent, provide, ref } from 'vue'
 
 import { isNil } from 'lodash-es'
 
-import { CdkVirtualScroll } from '@idux/cdk/scroll'
+import {
+  CdkVirtualScroll,
+  type VirtualItemRenderFn,
+  type VirtualScrollInstance,
+  type VirtualScrollToOptions,
+} from '@idux/cdk/scroll'
 import { type VKey, callEmit } from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
 import { useGlobalConfig } from '@idux/components/config'
 import { useGetKey } from '@idux/components/utils'
 
 import { useCheckable } from './composables/useCheckable'
-import { useFlattedNodes, useMergeNodes } from './composables/useDataSource'
+import { type MergedNode, useFlattedNodes, useMergeNodes } from './composables/useDataSource'
 import { useDragDrop } from './composables/useDragDrop'
 import { useEvents } from './composables/useEvents'
 import { useExpandable } from './composables/useExpandable'
@@ -30,7 +31,7 @@ import TreeNode from './node/TreeNode'
 import { treeToken } from './token'
 import { treeProps } from './types'
 
-const hiddenStyle: StyleValue = {
+const hiddenStyle: CSSProperties = {
   width: 0,
   height: 0,
   display: 'flex',

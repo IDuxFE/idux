@@ -1,10 +1,10 @@
 <template>
-  <div class="button-ghost-demo">
+  <IxSpace class="button-ghost-demo">
     <IxButton mode="primary" ghost>Primary</IxButton>
     <IxButton ghost>Default</IxButton>
     <IxButton mode="dashed" ghost>Dashed</IxButton>
     <IxButton danger ghost>Danger</IxButton>
-  </div>
+  </IxSpace>
 </template>
 
 <style lang="less" scoped>

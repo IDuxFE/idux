@@ -46,15 +46,9 @@
     table {
       overflow-x: auto;
       overflow-y: hidden;
-      line-height: 1.5715;
+      line-height: 22px;
 
-      th {
-        font-weight: @font-weight-lg;
-      }
       td {
-        &:first-child {
-          font-weight: @font-weight-lg;
-        }
         & code {
           color: @color-magenta;
         }
@@ -68,6 +62,22 @@
 
   &-theme {
     margin-top: 24px;
+
+    table {
+      overflow-x: auto;
+      overflow-y: hidden;
+      line-height: 22px;
+
+      td {
+        & code {
+          color: @color-magenta;
+        }
+      }
+
+      @media (max-width: @screen-xs-max) {
+        display: block;
+      }
+    }
   }
 }
 

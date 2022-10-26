@@ -2,7 +2,7 @@
 
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@pagination-font-size-md` | `@font-size-md` | - | - |
+| `@pagination-font-size-md` | `@font-size-md` | `@font-size-sm` | - |
 | `@pagination-font-size-sm` | `@font-size-sm` | - | - |
 | `@pagination-item-icon-font-size` | `@font-size-sm` | - | - |
 | `@pagination-item-size-md` | `32px` | - | - |
@@ -11,14 +11,14 @@
 | `@pagination-item-padding-sm` | `0` | - | - |
 | `@pagination-item-input-width-md` | `48px` | - | - |
 | `@pagination-item-input-width-sm` | `40px` | - | - |
-| `@pagination-item-active-color` | `@button-primary` | `@color-primary` | - |
-| `@pagination-item-active-background-color` | `@button-primary-background-color` | `@color-primary-l50` | - |
+| `@pagination-item-active-color` | `@color-white` | `@color-primary` | - |
+| `@pagination-item-active-background-color` | `@color-primary` | `@color-primary-l50` | - |
 | `@pagination-item-color` | `@color-graphite-d40` | - | - |
-| `@pagination-item-background-color` | `tint(@button-primary-background-color, 90%)` | - | - |
+| `@pagination-item-background-color` | `tint(@color-primary, 90%)` | - | - |
 | `@pagination-item-hover-color` | `@color-graphite-d40` | - | - |
-| `@pagination-item-hover-background-color` | `tint(@button-primary-background-color, 90%)` | `@color-graphite-l50` | - |
-| `@pagination-item-disabled-color` | `@button-disable-color` | - | - |
-| `@pagination-item-disabled-background-color` | `@button-disable-background-color` | - | - |
+| `@pagination-item-hover-background-color` | `tint(@color-primary, 90%)` | `@color-graphite-l50` | - |
+| `@pagination-item-disabled-color` | `@text-color-disabled` | - | - |
+| `@pagination-item-disabled-background-color` | `@background-color-disabled` | - | - |
 | `@pagination-item-button-hover-color` | `@color-graphite-d20` | - | - |
 | `@pagination-item-button-active-color` | `@color-graphite-d20` | - | - |
 | `@pagination-item-button-hover-background-color` | `@color-graphite-l50` | - | - |
