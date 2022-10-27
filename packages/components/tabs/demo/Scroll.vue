@@ -13,7 +13,7 @@
       <IxTab v-for="panel in panels" :key="panel" :title="'Tab ' + panel"> Content of Tab {{ panel }} </IxTab>
     </IxTabs>
     <IxSpace align="center">
-      <IxButton @click="onOpen">addTab</IxButton>
+      <IxButton @click="addTab">addTab</IxButton>
       <IxButton @click="closeTab">closeTab</IxButton>
       移动到第几个：<IxInputNumber v-model:value="selectedKey" :max="20" :min="1"></IxInputNumber>
     </IxSpace>
@@ -23,13 +23,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const selectedKey = ref(1)
+const selectedKey = ref(7)
 
-const panels = ref([1, 2, 3])
-const onOpen = () => {
-  panels.value.push((panels.value[panels.value.length - 1] || 0) + 1)
+const panels = ref([1, 2, 3, 4, 5, 6, 7])
+const addTab = () => {
+  const key = (panels.value[panels.value.length - 1] || 0) + 1
+  panels.value.push(key)
+  selectedKey.value = key
 }
 const closeTab = () => {
   panels.value.pop()
+  const key = panels.value[panels.value.length - 1]
+  selectedKey.value = key
 }
 </script>

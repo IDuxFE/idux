@@ -89,13 +89,32 @@ export default defineComponent({
 
     const [navOffset, setNavOffset] = useState(0)
     const [barStyle, setBarStyle] = useState<CSSProperties>({})
-    const { navSize, navWrapperSize, navPreNextSize, selectedElSize, syncNavElSize, syncSelectedElSize } =
-      useNavRelatedElSize(isHorizontal, navWrapperElRef, navElRef, navPreElRef, selectedElRef)
-    const { selectedElOffset, syncSelectedElOffset } = useSelectedElOffset(isHorizontal, navPreNextSize, selectedElRef)
+    const {
+      navSize,
+      navWrapperSize,
+      navPreNextSize,
+      selectedElSize,
+      setNavElSize,
+      setSelectedElSize,
+      setNavPreNextElSize,
+    } = useNavRelatedElSize(isHorizontal, navWrapperElRef, navElRef, navPreElRef, selectedElRef)
+    const { selectedElOffset, setSelectedElOffset } = useSelectedElOffset(isHorizontal, navPreNextSize, selectedElRef)
 
     const hasScroll = computed(() => {
-      return navSize.value! > navWrapperSize.value
+      return navSize.value > navWrapperSize.value
     })
+
+    watch(
+      hasScroll,
+      () => {
+        setNavPreNextElSize()
+        updateNavBarStyle()
+        updateSelectedOffset()
+      },
+      {
+        flush: 'post',
+      },
+    )
 
     const selectedElVisibleSize = useSelectedElVisibleSize(navWrapperSize, selectedElOffset, navOffset)
 
@@ -132,6 +151,14 @@ export default defineComponent({
         [`${prefixCls}-${type}`]: true,
         [`${prefixCls}-nav-${placement}`]: placement === 'top' || type === 'line',
         [`${prefixCls}-nav-${mode}`]: type === 'segment',
+      })
+    })
+
+    const navWrapperClass = computed(() => {
+      const prefixCls = mergedPrefixCls.value
+      return normalizeClass({
+        [`${prefixCls}-nav-wrapper`]: true,
+        [`${prefixCls}-nav-wrapper-has-scroll`]: hasScroll.value,
       })
     })
 
@@ -203,9 +230,10 @@ export default defineComponent({
     }
 
     const update = () => {
-      syncNavElSize()
-      syncSelectedElSize()
-      syncSelectedElOffset()
+      setNavElSize()
+      setNavPreNextElSize()
+      setSelectedElSize()
+      setSelectedElOffset()
       updateNavBarStyle()
       judgePreNextStatus()
     }
@@ -239,19 +267,11 @@ export default defineComponent({
 
     watch(
       navSize,
-      (val, oldSize) => {
+      (currentSize, oldSize) => {
         let offset = navOffset.value
-        const currentSize = val!
-        if (currentSize > oldSize && isAddTabs) {
+        if (currentSize < oldSize && !isAddTabs) {
           offset += currentSize - oldSize
-          if (hasScroll.value) {
-            setNavOffset(offset)
-          }
-        } else if (currentSize < oldSize && !isAddTabs) {
-          offset += currentSize - oldSize
-          if (offset >= 0) {
-            setNavOffset(offset)
-          }
+          setNavOffset(offset > 0 ? offset : 0)
         }
       },
       {
@@ -271,8 +291,9 @@ export default defineComponent({
     watch(
       selectedElRef,
       () => {
-        syncSelectedElSize()
-        syncSelectedElOffset()
+        setSelectedElSize()
+        setSelectedElOffset()
+        setSelectedElOffset()
         updateSelectedOffset()
         updateNavBarStyle()
       },
@@ -305,12 +326,7 @@ export default defineComponent({
 
       return (
         <div class={classes.value}>
-          <div
-            class={`${mergedPrefixCls.value}-nav-wrapper ${
-              hasScroll.value ? `${mergedPrefixCls.value}-nav-wrapper-has-scroll` : ''
-            }`}
-            ref={navWrapperElRef}
-          >
+          <div class={navWrapperClass.value} ref={navWrapperElRef}>
             {hasScroll.value && (
               <IxIcon
                 class={navPreClasses.value}

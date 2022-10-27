@@ -11,7 +11,7 @@ import { useState } from '@idux/cdk/utils'
 
 export interface Offset {
   selectedElOffset: ComputedRef<number>
-  syncSelectedElOffset: () => void
+  setSelectedElOffset: () => void
 }
 
 export function useSelectedElOffset(
@@ -26,13 +26,13 @@ export function useSelectedElOffset(
     () => (isHorizontal.value ? selectedLeft.value : selectedTop.value) + navPreNextSize.value,
   )
 
-  const syncSelectedElOffset = () => {
+  const setSelectedElOffset = () => {
     setSelectedLeft(selectedElRef.value?.offsetLeft ?? 0)
     setSelectedTop(selectedElRef.value?.offsetTop ?? 0)
   }
 
   return {
     selectedElOffset,
-    syncSelectedElOffset,
+    setSelectedElOffset,
   }
 }
