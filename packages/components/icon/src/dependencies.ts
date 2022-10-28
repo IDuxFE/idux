@@ -20,6 +20,7 @@ import {
   CloseCircle,
   CloseCircleFilled,
   Collapse,
+  DialogClose,
   DoubleLeft,
   DoubleRight,
   Down,
@@ -69,10 +70,11 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   CheckCircleFilled, // Progress Modal FormItem
   Clear, // Transfer
   ClockCircle, // TimePicker
-  Close, // Stepper Modal Drawer Image Message Alert Transfer
+  Close, // Stepper Image Message Alert Transfer
   CloseCircle, // TimePicker TimeRangePicker Input Textarea Notification
   CloseCircleFilled, // Modal FormItem
   Collapse, // Pro Tree
+  DialogClose, // Modal Drawer
   DoubleLeft, // Pagination
   DoubleRight, // Pagination
   Down, // Select Table

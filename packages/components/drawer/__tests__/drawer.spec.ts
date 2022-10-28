@@ -36,7 +36,7 @@ describe('Drawer', () => {
 
   test('v-model:visible work', async () => {
     const onUpdateVisible = vi.fn()
-    const wrapper = DrawerMount({ props: { visible: false, 'onUpdate:visible': onUpdateVisible } })
+    const wrapper = DrawerMount({ props: { closeIcon: 'close', visible: false, 'onUpdate:visible': onUpdateVisible } })
     expect(isElementVisible(document.querySelector('.ix-drawer-wrapper'))).toBe(false)
 
     await wrapper.setProps({ visible: true })
@@ -51,7 +51,7 @@ describe('Drawer', () => {
   })
 
   test('closable work', async () => {
-    const wrapper = DrawerMount({ props: { closable: false } })
+    const wrapper = DrawerMount({ props: { closable: false, closeIcon: 'close' } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
     expect(drawerWrapper.find('.ix-icon-close').exists()).toBe(false)
@@ -66,7 +66,7 @@ describe('Drawer', () => {
     const wrapper = DrawerMount({ props: { closeIcon: 'up', onClose } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
-    expect(drawerWrapper.find('.ix-icon-close').exists()).toBe(false)
+    expect(drawerWrapper.find('.ix-icon-dialog-close').exists()).toBe(false)
     expect(drawerWrapper.find('.ix-icon-up').exists()).toBe(true)
 
     await drawerWrapper.find('.ix-icon-up').trigger('click')
