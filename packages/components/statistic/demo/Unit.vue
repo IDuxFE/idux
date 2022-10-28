@@ -37,12 +37,12 @@ export default defineComponent({
 .statistic-demo-unit {
   .unit-up {
     :deep(.ix-statistic-content) {
-      color: red;
+      color: #cf171d;
     }
   }
   .unit-down {
     :deep(.ix-statistic-content) {
-      color: green;
+      color: #12a679;
     }
   }
 }
