@@ -5,7 +5,7 @@
   .reset-component();
 
   position: relative;
-  padding-left: @anchor-border-width;
+  padding: @spacing-xs 0 @spacing-xs @anchor-border-width;
 
   &-wrapper {
     margin-left: @anchor-wrapper-margin-left;
@@ -47,6 +47,13 @@
 
   &-fixed &-ink &-ink-ball {
     display: none;
+  }
+
+  & > &-ink + &-link {
+    margin-top: 0;
+  }
+  &-link:last-child {
+    margin-bottom: 0;
   }
 
   &-link {
