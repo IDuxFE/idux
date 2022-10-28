@@ -127,7 +127,7 @@
         border-color: @checkbox-border-color;
 
         &::after {
-          border-color: @checkbox-disabled-color;
+          border-color: if((@theme = seer), @color-graphite-l10, @checkbox-disabled-color);
         }
       }
     }
