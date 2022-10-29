@@ -10,6 +10,17 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.0.2(2022-10-29)
+
+### Bug Fixes
+
+- **cdk:drag-drop:** handle 失效 ([677b163](https://github.com/IDuxFE/idux/commit/677b1635e54ff0d38b80563b0b6fa632f30b1432))
+- **comp:input:** input suffix 字体大小调整 ([#1233](https://github.com/IDuxFE/idux/issues/1233)) ([5d3f260](https://github.com/IDuxFE/idux/commit/5d3f2607367331059fe2ff884889227a3c4567dd))
+- **comp:tabs:** 设置 selectedKey 时，没有滚动到正确位置 ([#1236](https://github.com/IDuxFE/idux/issues/1236)) ([050a1f7](https://github.com/IDuxFE/idux/commit/050a1f7089aba2b818382393d76d6ca7acab2e2f))
+- **comp:time-picker:** time-range-picker 使用异常 ([82ce400](https://github.com/IDuxFE/idux/commit/82ce4004d98b86c53b6c2ec334542294ffa36b55))
+- **comp:transfer:** 更新 transfer 组件样式和 demo ([#1234](https://github.com/IDuxFE/idux/issues/1234)) ([d93b815](https://github.com/IDuxFE/idux/commit/d93b815f22220fb3ff11c313873cb1d1ddef1ccd))
+- **comp:*:** 部分组件样式与设计规范同步 ([#1232](https://github.com/IDuxFE/idux/issues/1232)) ([4bf61fb](https://github.com/IDuxFE/idux/commit/4bf61fbda7bf277f546e65fc0945a9720d6aeb1c))
+
 ## 1.0.1(2022-10-21)
 
 ### Bug Fixes
