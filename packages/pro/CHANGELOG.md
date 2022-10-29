@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.2](https://github.com/IDuxFE/idux/compare/v1.0.1...v1.0.2) (2022-10-29)
+
+### Bug Fixes
+
+- update components style according to UI design ([#1232](https://github.com/IDuxFE/idux/issues/1232)) ([4bf61fb](https://github.com/IDuxFE/idux/commit/4bf61fbda7bf277f546e65fc0945a9720d6aeb1c))
+
 ## [1.0.1](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.9...v1.0.1) (2022-10-21)
 
 ### Bug Fixes

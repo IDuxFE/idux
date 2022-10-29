@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.2](https://github.com/IDuxFE/idux/compare/v1.0.1...v1.0.2) (2022-10-29)
+
+### Bug Fixes
+
+- **comp:input:** input suffix is `icon size` only when it's icon ([#1233](https://github.com/IDuxFE/idux/issues/1233)) ([5d3f260](https://github.com/IDuxFE/idux/commit/5d3f2607367331059fe2ff884889227a3c4567dd))
+- **comp:tabs:** offset error when setting selectedKey ([#1236](https://github.com/IDuxFE/idux/issues/1236)) ([050a1f7](https://github.com/IDuxFE/idux/commit/050a1f7089aba2b818382393d76d6ca7acab2e2f))
+- **comp:time-picker:** resolve time-range-picker console error ([82ce400](https://github.com/IDuxFE/idux/commit/82ce4004d98b86c53b6c2ec334542294ffa36b55))
+- **comp:transfer:** update transfer style and demo ([#1234](https://github.com/IDuxFE/idux/issues/1234)) ([d93b815](https://github.com/IDuxFE/idux/commit/d93b815f22220fb3ff11c313873cb1d1ddef1ccd))
+- update components style according to UI design ([#1232](https://github.com/IDuxFE/idux/issues/1232)) ([4bf61fb](https://github.com/IDuxFE/idux/commit/4bf61fbda7bf277f546e65fc0945a9720d6aeb1c))
+
 ## [1.0.1](https://github.com/IDuxFE/idux/compare/v1.0.0-rc.9...v1.0.1) (2022-10-21)
 
 ### Bug Fixes
