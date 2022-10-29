@@ -7,7 +7,7 @@
 
 import type { IconInstance } from '@idux/components/icon'
 
-import { type ComputedRef, type Ref, computed, watchEffect } from 'vue'
+import { type ComputedRef, type Ref, computed } from 'vue'
 
 import { useState } from '@idux/cdk/utils'
 
@@ -16,8 +16,9 @@ export interface NavRelatedElSize {
   navWrapperSize: ComputedRef<number>
   navPreNextSize: ComputedRef<number>
   selectedElSize: ComputedRef<number>
-  syncNavElSize: () => void
-  syncSelectedElSize: () => void
+  setNavElSize: () => void
+  setSelectedElSize: () => void
+  setNavPreNextElSize: () => void
 }
 
 export function useNavRelatedElSize(
@@ -43,7 +44,7 @@ export function useNavRelatedElSize(
   const selectedElSize = computed(() => (isHorizontal.value ? selectedWidth.value : selectedHeight.value))
 
   // dom 的size无法响应式获取，只能手动获取
-  const syncNavElSize = () => {
+  const setNavElSize = () => {
     setNavWrapperWidth(navWrapperElRef.value?.offsetWidth ?? 0)
     setNavWrapperHeight(navWrapperElRef.value?.offsetHeight ?? 0)
 
@@ -51,24 +52,24 @@ export function useNavRelatedElSize(
     setNavHeight(navElRef.value?.offsetHeight ?? 0)
   }
 
-  const syncSelectedElSize = () => {
+  const setSelectedElSize = () => {
     setSelectedWidth(selectedElRef.value?.offsetWidth ?? 0)
     setSelectedHeight(selectedElRef.value?.offsetHeight ?? 0)
   }
 
-  // 向前、向后按钮是动态渲染的，所以可以使用 watchEffect 获取其size
-  watchEffect(() => {
+  const setNavPreNextElSize = () => {
     setNavPreNextWidth(navPreElRef.value?.$el.offsetWidth ?? 0)
     setNavPreNextHeight(navPreElRef.value?.$el.offsetHeight ?? 0)
-  })
+  }
 
   return {
     navSize,
     navWrapperSize,
     navPreNextSize,
     selectedElSize,
-    syncNavElSize,
-    syncSelectedElSize,
+    setNavElSize,
+    setSelectedElSize,
+    setNavPreNextElSize,
   }
 }
 
