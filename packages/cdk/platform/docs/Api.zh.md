@@ -17,5 +17,5 @@
 | `isSafari` | 是否为 `Safari` 浏览器  | `boolean` | - |
 | `isIOS` | 是否为 `IOS` 平台  | `boolean` | - |
 | `isAndroid` | 是否为 `Android` 平台  | `boolean` | - |
-| `supportsFlexGap` | 检查用户的浏览器是 flex 的 gap 配置  | `() => boolean` | 参见[gap](https://developer.mozilla.org/zh-CN/docs/Web/CSS/gap#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7) |
+| `supportsFlexGap` | 检查用户的浏览器是否支持 flex 的 gap 配置  | `() => boolean` | 参见[gap](https://developer.mozilla.org/zh-CN/docs/Web/CSS/gap#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7) |
 | `supportsPassiveEventListeners` | 检查用户的浏览器是否支持被动事件侦听器  | `() => boolean` | 参见 [https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md](https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md) |

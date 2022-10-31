@@ -4,18 +4,20 @@
 | --- | --- | --- | --- |
 | `@cascader-option-padding` | `@spacing-xs @spacing-xs @spacing-xs @spacing-md` | - | - |
 | `@cascader-option-height` | `@select-option-height` | - | - |
+| `@cascader-option-color` | `@select-option-color` | - | - |
+| `@cascader-option-font-size` | `@select-option-font-size` | - | - |
 | `@cascader-option-disabled-color` | `@select-option-disabled-color` | - | - |
 | `@cascader-option-active-background-color` | `@select-option-active-background-color` | - | - |
-| `@cascader-option-selected-color` | `@select-option-selected-color` | - | - |
+| `@cascader-option-selected-color` | `@select-option-selected-color` | `@cascader-option-color` | - |
 | `@cascader-option-selected-background-color` | `@select-option-selected-background-color` | - | - |
-| `@cascader-option-selected-font-weight` | `@select-option-selected-font-weight` | - | - |
+| `@cascader-option-selected-font-weight` | `@select-option-selected-font-weight` | `@font-weight-lg` | - |
 | `@cascader-option-expanded-color` | `@cascader-option-selected-color` | - | - |
 | `@cascader-option-expanded-background-color` | `@cascader-option-selected-background-color` | - | - |
 | `@cascader-option-expanded-font-weight` | `@cascader-option-selected-font-weight` | - | - |
 | `@cascader-option-label-margin-left` | `@select-option-label-margin-left` | - | - |
 | `@cascader-option-label-highlight-color` | `@color-primary` | - | - |
 | `@cascader-option-expanded-margin-left` | `@spacing-xs` | - | - |
-| `@cascader-option-expanded-icon-color` | `@text-color-secondary` | - | - |
+| `@cascader-option-expanded-icon-color` | `@text-color-secondary` | `@color-graphite-d20` | - |
 | `@cascader-option-expanded-icon-font-size` | `@select-icon-font-size` | - | - |
 | `@cascader-option-group-min-width` | `120px` | - | - |
 | `@cascader-option-group-min-height` | `180px` | - | - |

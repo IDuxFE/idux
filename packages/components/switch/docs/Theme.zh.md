@@ -21,7 +21,7 @@
 | `@switch-box-size-lg` | `28px` | - | - |
 | `@switch-box-size-padding` | `2px` | - | - |
 | `@switch-box-background-color` | `@switch-color` | - | - |
-| `@switch-box-box-shadow` | `0 2px 4px rgba(0, 0, 0, 0.25)` | - | - |
+| `@switch-box-box-shadow` | `0 2px 4px rgba(0, 0, 0, 0.25)` | `none` | - |
 | `@switch-icon-font-size-sm` | `9px` | - | - |
 | `@switch-icon-font-size-md` | `@font-size-md` | - | - |
 | `@switch-icon-font-size-lg` | `@font-size-md` | - | - |

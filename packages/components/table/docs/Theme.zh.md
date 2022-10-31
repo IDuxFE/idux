@@ -17,7 +17,7 @@
 | `@table-padding-left-lg` | `@spacing-lg` | - | - |
 | `@table-padding-right-lg` | `@spacing-lg` | - | - |
 | `@table-padding-left-md` | `@spacing-md` | - | - |
-| `@table-padding-right-md` | `@spacing-md` | `@spacing-md` | - |
+| `@table-padding-right-md` | `@spacing-md` | - | - |
 | `@table-padding-left-sm` | `@spacing-sm` | - | - |
 | `@table-padding-right-sm` | `@spacing-sm` | - | - |
 | `@table-head-color` | `@color-black` | `@color-graphite-d20` | - |
@@ -31,5 +31,3 @@
 | `@table-head-icon-hover-background-color` | `@color-graphite-l40` | - | - |
 | `@table-expandable-icon-size` | `@font-size-lg` | `@font-size-md` | - |
 | `@table-expandable-icon-color` | `@color-black` | `@color-graphite` | - |
-| `@table-padding-top-md` | - | `10px` | - |
-| `@table-padding-bottom-md` | - | `10px` | - |

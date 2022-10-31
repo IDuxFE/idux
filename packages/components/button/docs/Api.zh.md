@@ -14,7 +14,7 @@
 | `icon` | 设置图标类型 | `string \| #icon` | - | - | `loading` 为 `true` 时无效 |
 | `loading` | 设置加载中状态 | `boolean` |  - | - |- |
 | `mode` | 设置按钮种类 | `'primary' \| 'default' \| 'dashed' \| 'text' \| 'link'` | `'default'` | - |- |
-| `shape` | 设置按钮形状 | `'circle' \| 'round'` | - | - |- |
+| `shape` | 设置按钮形状 | `'square' \| 'circle' \| 'round'` | - | - |- |
 | `size` | 设置按钮大小 | `'xl' \| 'lg' \| 'md' \| 'sm' \| 'xs'` | `'md'` | - |- |
 | `type` | 原生 `button` 的 `type` 属性 | `'button' \| 'submit' \| 'reset'` | `'button'` | - | 参考 [HTML 标准](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type) |
 
@@ -24,6 +24,7 @@
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
+| `gap` | 设置按钮组的 gap 配置 | `number \| string` | - | - | 兼容性问题参见: [Can I use](https://caniuse.com/flexbox-gap) |
 | `mode` | 设置组内按钮种类 | `'primary' \| 'default' \| 'dashed' \| 'text' \| 'link'` | - | - |- |
 | `shape` | 设置组内按钮形状 | `'circle' \| 'round'` | - | - |- |
 | `size` | 设置组内按钮大小 | `'lg' \| 'md' \| 'sm'` | - | - |- |

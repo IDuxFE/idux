@@ -2,6 +2,114 @@
 
 @theme: default;
 
+:root {
+  // Graphite
+  --ix-color-graphite: @color-graphite;
+  --ix-color-graphite-d20: @color-graphite-d20;
+
+  // Primary
+  --ix-color-primary: @color-primary;
+  --ix-color-primary-l10: @color-primary-l10; // hover
+  --ix-color-primary-d10: @color-primary-d10; // active
+
+  // Success
+  --ix-color-success: @color-turquoise;
+  --ix-color-success-l10: @color-turquoise-l10; // hover
+  --ix-color-success-d10: @color-turquoise-d10; // active
+
+  // Warning
+  --ix-color-warning: @color-brown;
+  --ix-color-warning-l10: @color-brown-l10; // hover
+  --ix-color-warning-d10: @color-brown-d10; // active
+
+  // Error
+  --ix-color-error: @color-red;
+  --ix-color-error-l10: @color-red-l10; // hover
+  --ix-color-error-d10: @color-red-d10; // active
+
+  // Text
+  --ix-text-color: fade(@color-black, 85%);
+  --ix-text-color-inverse: @color-white;
+  --ix-text-color-disabled: fade(@color-black, 25%);
+
+  // Background
+  --ix-background-color: @color-white;
+  --ix-background-color-inverse: fade(@color-black, 85%);
+  --ix-background-color-disabled: hsv(0, 0, 96%);
+
+  // Border
+  --ix-border-color: hsv(0, 0, 85%);
+  --ix-border-color-inverse: @color-white;
+  --ix-border-color-split: rgb(0 0 0 / 6%);
+
+  // Border-Radius
+  --ix-border-radius-sm: 2px;
+  --ix-border-radius-md: 4px;
+  --ix-border-radius-lg: 8px;
+
+  // Height
+  --ix-height-xs: 20px;
+  --ix-height-sm: 24px;
+  --ix-height-md: 32px;
+  --ix-height-lg: 40px;
+  --ix-height-xl: 48px;
+
+  // Line-Height
+  --ix-line-height-xs: 20px;
+  --ix-line-height-sm: 22px;
+  --ix-line-height-md: 24px;
+  --ix-line-height-lg: 28px;
+  --ix-line-height-xl: 32px;
+
+  // Font-Size
+  --ix-font-size-xs: 10px;
+  --ix-font-size-sm: 12px;
+  --ix-font-size-md: 14px;
+  --ix-font-size-lg: 16px;
+  --ix-font-size-xl: 20px;
+
+  // Font-Weight
+  --ix-font-weight-xs: 200;
+  --ix-font-weight-sm: 300;
+  --ix-font-weight-md: 400;
+  --ix-font-weight-lg: 500;
+  --ix-font-weight-xl: 600;
+
+  // Spacing: margin or padding
+  --ix-spacing-xs: 4px;
+  --ix-spacing-sm: 8px;
+  --ix-spacing-md: 12px;
+  --ix-spacing-lg: 16px;
+  --ix-spacing-xl: 24px;
+  --ix-spacing-2xl: 32px;
+
+  // Motion
+  --ix-transition-duration-fast: 0.2s;
+  --ix-transition-duration-medium: 0.24s;
+  --ix-transition-duration-slow: 0.28s;
+  --ix-ease-out: cubic-bezier(0.61, 1, 0.88, 1);
+  --ix-ease-in-out: cubic-bezier(0.37, 0, 0.63, 1);
+  --ix-ease-out-circ: cubic-bezier(0, 0.55, 0.45, 1);
+  --ix-ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+// 临时兼容，后面需要移除
+// Text
+@text-color: fade(@color-black, 85%);
+@text-color-inverse: @color-white;
+@text-color-disabled: fade(@color-black, 25%);
+
+// Background
+@background-color: @color-white;
+@background-color-inverse: fade(@color-black, 85%);
+@background-color-disabled:hsv (0, 0, 96%);
+
+// Border
+@border-color: hsv(0, 0, 85%);
+@border-color-inverse: @color-white;
+@border-color-split: rgba(0, 0, 0, 0.06);
+
+// Scrollbar
 @scrollbar-width: 8px;
 @scrollbar-height: 8px;
 

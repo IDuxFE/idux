@@ -2,7 +2,7 @@
 
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@breadcrumb-base-color` | `@text-color-secondary` | - | - |
+| `@breadcrumb-base-color` | `@text-color-secondary` | `@color-graphite` | - |
 | `@breadcrumb-link-color` | `@color-graphite` | - | - |
 | `@breadcrumb-link-color-hover` | `@color-primary` | - | - |
 | `@breadcrumb-separator-color` | `@text-color-secondary` | `@color-graphite-l10` | - |

@@ -5,10 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { VNodeTypes } from 'vue'
+import { type VNodeChild, computed, defineComponent, inject, normalizeClass } from 'vue'
 
-import { computed, defineComponent, inject, normalizeClass } from 'vue'
-
+import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
@@ -36,7 +35,7 @@ export default defineComponent({
         [prefixCls]: true,
         [`${prefixCls}-block`]: block,
         [`${prefixCls}-danger`]: danger,
-        [`${prefixCls}-disabled`]: disabled || loading,
+        [`${prefixCls}-disabled`]: disabled,
         [`${prefixCls}-ghost`]: ghost,
         [`${prefixCls}-loading`]: loading,
         [`${prefixCls}-icon-only`]: !slots.default && (icon || loading),
@@ -46,17 +45,19 @@ export default defineComponent({
       })
     })
 
-    const handleLinkClick = (evt: MouseEvent) => {
+    const handleClick = (evt: MouseEvent) => {
       if (props.disabled || props.loading) {
         evt.preventDefault()
         evt.stopImmediatePropagation()
+        return
       }
+      callEmit(props.onClick, evt)
     }
 
     return () => {
       const { disabled, loading, icon, type } = props
 
-      const children: VNodeTypes[] = []
+      const children: VNodeChild[] = []
       if (loading) {
         children.push(<IxIcon name="loading"></IxIcon>)
       } else if (slots.icon) {
@@ -70,13 +71,13 @@ export default defineComponent({
 
       if (mode.value === 'link') {
         return (
-          <a class={classes.value} onClick={handleLinkClick}>
+          <a class={classes.value} onClick={handleClick}>
             {children}
           </a>
         )
       }
       return (
-        <button class={classes.value} disabled={disabled || loading} type={type}>
+        <button class={classes.value} disabled={disabled || loading} type={type} onClick={handleClick}>
           {children}
         </button>
       )

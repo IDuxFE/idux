@@ -1,5 +1,5 @@
 ---
-order: 2
+order: 5
 title:
   zh: 幽灵按钮
 ---

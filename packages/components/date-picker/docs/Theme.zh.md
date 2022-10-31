@@ -5,7 +5,7 @@
 | `@date-picker-line-height` | `@form-line-height` | - | - |
 | `@date-picker-color` | `@form-color` | - | - |
 | `@date-range-picker-trigger-separator-margin` | `@spacing-xl` | - | - |
-| `@date-panel-font-size` | `@font-size-md` | - | - |
+| `@date-panel-font-size` | `@font-size-md` | `@font-size-sm` | - |
 | `@date-panel-color` | `@text-color` | - | - |
 | `@date-panel-color-inverse` | `@text-color-inverse` | - | - |
 | `@date-panel-active-color` | `@color-primary` | - | - |
@@ -20,13 +20,13 @@
 | `@date-panel-header-height` | `@height-md` | - | - |
 | `@date-panel-header-item-padding` | `0 @spacing-xs` | - | - |
 | `@date-panel-header-border-bottom` | `none` | - | - |
-| `@date-panel-header-button-font-size` | `@font-size-lg` | - | - |
-| `@date-panel-header-button-font-weight` | `@font-weight-lg` | - | - |
+| `@date-panel-header-button-font-size` | `@font-size-lg` | `@font-size-md` | - |
+| `@date-panel-header-button-font-weight` | `@font-weight-lg` | `@font-weight-md` | - |
 | `@date-panel-header-content-spacing` | `@spacing-lg` | - | - |
 | `@date-panel-header-padding-lg` | `0 0 @spacing-2xl` | - | - |
 | `@date-panel-body-padding` | `0` | - | - |
 | `@date-panel-body-padding-lg` | `0` | - | - |
-| `@date-panel-body-font-size` | `@font-size-md` | - | - |
+| `@date-panel-body-font-size` | `@font-size-md` | `@font-size-sm` | - |
 | `@date-panel-body-header-margin-bottom` | `@spacing-md` | - | - |
 | `@date-panel-body-header-font-weight` | `@font-weight-md` | - | - |
 | `@date-panel-body-header-background-color` | `@color-graphite-l50` | - | - |
@@ -65,8 +65,8 @@
 | `@date-range-picker-overlay-padding` | `@spacing-lg @spacing-lg 0 @spacing-lg` | - | - |
 | `@date-range-picker-overlay-body-padding` | `0 0 @spacing-sm 0` | - | - |
 | `@date-range-picker-overlay-separator-width` | `@spacing-2xl` | - | - |
-| `@date-range-picker-overlay-separator-padding` | `1px 0 0 0` | - | - |
-| `@date-range-picker-overlay-separator-font-size` | `@font-size-md` | - | - |
+| `@date-range-picker-overlay-separator-padding` | `1px 0 0 0` | `4px 0 0 0` | - |
+| `@date-range-picker-overlay-separator-font-size` | `@font-size-md` | `@font-size-sm` | - |
 | `@date-range-picker-overlay-footer-border-width` | `@date-picker-overlay-footer-border-width` | - | - |
 | `@date-range-picker-overlay-footer-border-style` | `@date-picker-overlay-footer-border-style` | - | - |
 | `@date-range-picker-overlay-footer-border-color` | `@color-graphite-l30` | - | - |

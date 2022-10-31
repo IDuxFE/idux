@@ -9,39 +9,23 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/ut
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
-export type ButtonShape = 'circle' | 'round'
+export type ButtonShape = 'circle' | 'round' | 'square'
 export type ButtonSize = 'lg' | 'xl' | 'md' | 'sm' | 'xs'
 export type ButtonType = 'button' | 'submit' | 'reset'
 
 export const buttonProps = {
+  block: { type: Boolean, default: undefined },
+  danger: { type: Boolean, default: undefined },
+  disabled: { type: Boolean, default: undefined },
+  ghost: { type: Boolean, default: undefined },
+  icon: String,
+  loading: { type: Boolean, default: undefined },
   mode: String as PropType<ButtonMode>,
-  danger: {
-    type: Boolean,
-    default: undefined,
-  },
-  ghost: {
-    type: Boolean,
-    default: undefined,
-  },
-  disabled: {
-    type: Boolean,
-    default: undefined,
-  },
-  loading: {
-    type: Boolean,
-    default: undefined,
-  },
   size: String as PropType<ButtonSize>,
   shape: String as PropType<ButtonShape>,
-  block: {
-    type: Boolean,
-    default: undefined,
-  },
-  icon: String,
-  type: {
-    type: String as PropType<ButtonType>,
-    default: 'button',
-  },
+  type: { type: String as PropType<ButtonType>, default: 'button' },
+
+  onClick: [Function, Array] as PropType<(evt: MouseEvent) => void>,
 } as const
 
 export type ButtonProps = ExtractInnerPropTypes<typeof buttonProps>
@@ -52,6 +36,7 @@ export type ButtonComponent = DefineComponent<
 export type ButtonInstance = InstanceType<DefineComponent<ButtonProps>>
 
 export const buttonGroupProps = {
+  gap: { type: [Number, String] as PropType<number | string>, default: undefined },
   mode: String as PropType<ButtonMode>,
   size: String as PropType<ButtonSize>,
   shape: String as PropType<ButtonShape>,
