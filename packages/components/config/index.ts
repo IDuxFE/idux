@@ -8,3 +8,5 @@
 export * from './src/dateConfig'
 export * from './src/globalConfig'
 export * from './src/types'
+
+export { seerConfig } from './src/themeConfig/seer'
