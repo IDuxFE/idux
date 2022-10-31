@@ -29,6 +29,9 @@ export function useRowCounts(
           textarea,
           el => {
             el.value = line || 'x'
+
+            // trigger reflow to ensure scrollHeight is calculated when referenced
+            void el.scrollHeight
             return Math.round((el.scrollHeight - paddingSize) / lineHeight.value)
           },
           true,
