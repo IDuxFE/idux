@@ -6,6 +6,7 @@
       v-model:expandedKeys="expandedKeys"
       placeholder="多选"
       multiple
+      cascaderStrategy="all"
       :dataSource="treeData"
       :checkable="checkable"
     />

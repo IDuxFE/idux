@@ -24,8 +24,6 @@ import Content from './content/Content'
 import { treeSelectToken } from './token'
 import { treeSelectProps } from './types'
 
-const defaultOffset: [number, number] = [0, 8]
-
 export default defineComponent({
   name: 'IxTreeSelect',
   inheritAttrs: false,
@@ -184,7 +182,7 @@ export default defineComponent({
         clickOutside: true,
         container: mergedOverlayContainer.value,
         disabled: accessor.disabled || props.readonly,
-        offset: defaultOffset,
+        offset: props.offset ?? config.offset,
         placement: 'bottomStart',
         trigger: 'manual',
         triggerId: attrs.id,

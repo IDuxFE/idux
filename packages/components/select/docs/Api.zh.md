@@ -25,6 +25,7 @@
 | `maxLabel` | 最多显示多少个标签，响应式模式会对性能产生损耗 | `number \| 'responsive'` | - | - | - |
 | `multiple` | 多选模式 | `boolean` | `false` | - | - |
 | `multipleLimit` | 最多选中多少项 | `number` | - | - | - |
+| `offset` | 浮层相对目标元素的偏移量 | `[number, number]` | `[0, 4]` | ✅ | 第一个元素是水平偏移量，第二个元素是垂直偏移量 |
 | `overlayClassName` | 下拉菜单的 `class`  | `string` | - | - | - |
 | `overlayContainer` | 自定义下拉框容器节点  | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
 | `overlayMatchWidth` | 下拉菜单和选择器同宽  | `boolean` | `true` | ✅ | - |
