@@ -1,5 +1,11 @@
 <template>
-  <IxTransfer v-model:value="selectedKeys" :data-source="dataSource" searchable :search-fn="searchFn" />
+  <IxTransfer
+    v-model:value="selectedKeys"
+    :data-source="dataSource"
+    searchable
+    :search-placeholder="['source', 'target']"
+    :search-fn="searchFn"
+  />
 </template>
 
 <script setup lang="ts">

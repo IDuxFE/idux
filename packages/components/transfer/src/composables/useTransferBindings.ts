@@ -22,7 +22,9 @@ export function useTransferBindings<T extends TransferData = TransferData>(
   transferPaginationContext: TransferPaginationContext,
   showSelectAll: ComputedRef<boolean>,
   sourceSearchable: ComputedRef<boolean>,
+  sourceSearchPlaceholder: ComputedRef<string>,
   targetSearchable: ComputedRef<boolean>,
+  targetSearchPlaceholder: ComputedRef<string>,
 ): {
   sourceBindings: TransferBindings<T>
   targetBindings: TransferBindings<T>
@@ -89,6 +91,7 @@ export function useTransferBindings<T extends TransferData = TransferData>(
       selectAllDisabled: sourceSelectAllDisabled,
       selectAllStatus: sourceSelectAllStatus,
       searchable: sourceSearchable,
+      searchPlaceholder: sourceSearchPlaceholder,
       selectAll: handleSourceSelectAll,
       handleSelectChange: handleSourceSelectChange,
       searchValue: sourceSearchValue,
@@ -109,6 +112,7 @@ export function useTransferBindings<T extends TransferData = TransferData>(
       selectAllDisabled: targetSelectAllDisabled,
       selectAllStatus: targetSelectAllStatus,
       searchable: targetSearchable,
+      searchPlaceholder: targetSearchPlaceholder,
       selectAll: handleTargetSelectAll,
       handleSelectChange: handleTargetSelectChange,
       searchValue: targetSearchValue,

@@ -11,6 +11,7 @@ import { useGlobalConfig } from '@idux/components/config'
 
 import TransferOperations from './TransferOperations'
 import { usePagination } from './composables/usePagination'
+import { useSearchPlaceholder } from './composables/useSearchPlaceholder'
 import { useSearchable } from './composables/useSearchable'
 import { useTransferBindings } from './composables/useTransferBindings'
 import { useTransferData } from './composables/useTransferData'
@@ -32,6 +33,7 @@ export default defineComponent({
 
     const showSelectAll = computed(() => props.showSelectAll ?? config.showSelectAll)
     const { source: sourceSearchable, target: targetSearchable } = useSearchable(props, config)
+    const { source: sourcePlaceholder, target: targetPlaceholder } = useSearchPlaceholder(props, locale)
     const transferDataStrategies = useTransferDataStrategies(props)
     const transferPaginationContext = usePagination(props)
     const transferDataContext = useTransferData(props, config, transferDataStrategies, transferPaginationContext)
@@ -46,7 +48,9 @@ export default defineComponent({
       transferPaginationContext,
       showSelectAll,
       sourceSearchable,
+      sourcePlaceholder,
       targetSearchable,
+      targetPlaceholder,
     )
 
     const sourceTransferListRef = ref<TransferListInstance>()

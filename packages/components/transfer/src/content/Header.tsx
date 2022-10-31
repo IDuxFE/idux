@@ -31,6 +31,7 @@ export default defineComponent({
       selectAllDisabled,
       selectAllStatus,
       searchable,
+      searchPlaceholder,
       searchValue,
       handleSearchChange,
       selectAll,
@@ -115,7 +116,7 @@ export default defineComponent({
           disabled={transferProps.disabled}
           type="text"
           size="sm"
-          placeholder={locale.searchPlaceholder[props.isSource ? 0 : 1]}
+          placeholder={searchPlaceholder.value}
           onInput={handleInput}
           onKeydown={handleKeyDown}
         />
