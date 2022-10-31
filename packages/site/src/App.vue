@@ -1,62 +1,64 @@
 <template>
-  <IxLoadingBarProvider>
-    <IxDrawerProvider ref="drawerProviderRef">
-      <IxModalProvider ref="modalProviderRef">
-        <IxNotificationProvider ref="notificationProviderRef">
-          <IxMessageProvider ref="messageProviderRef">
-            <div class="root-wrapper">
-              <LayoutHeader></LayoutHeader>
-              <div v-if="page !== 'home'" class="main-wrapper">
-                <IxRow>
-                  <IxCol xs="0" sm="7" md="6" lg="5" xl="4" class="main-menu">
-                    <IxAffix v-if="!breakpoints.xs" style="width: unset">
-                      <LayoutSider class="side-nav"></LayoutSider>
-                    </IxAffix>
-                    <IxDropdown v-else>
-                      <IxIcon name="menu"></IxIcon>
-                      <template #overlay>
-                        <LayoutHeaderNavigation />
-                      </template>
-                    </IxDropdown>
-                  </IxCol>
-                  <IxCol xs="24" sm="17" md="18" lg="19" xl="20" class="main-content">
-                    <router-view></router-view>
-                  </IxCol>
-                  <IxCol
-                    xs="24"
-                    :sm="{ span: 17, offset: 7 }"
-                    :md="{ span: 18, offset: 6 }"
-                    :lg="{ span: 19, offset: 5 }"
-                    :xl="{ span: 20, offset: 4 }"
-                  >
-                    <LayoutFooter></LayoutFooter>
-                  </IxCol>
-                </IxRow>
-                <GlobalTheme />
+  <IxSpinProvider>
+    <IxLoadingBarProvider>
+      <IxDrawerProvider ref="drawerProviderRef">
+        <IxModalProvider ref="modalProviderRef">
+          <IxNotificationProvider ref="notificationProviderRef">
+            <IxMessageProvider ref="messageProviderRef">
+              <div class="root-wrapper">
+                <LayoutHeader></LayoutHeader>
+                <div v-if="page !== 'home'" class="main-wrapper">
+                  <IxRow>
+                    <IxCol xs="0" sm="7" md="6" lg="5" xl="4" class="main-menu">
+                      <IxAffix v-if="!breakpoints.xs" style="width: unset">
+                        <LayoutSider class="side-nav"></LayoutSider>
+                      </IxAffix>
+                      <IxDropdown v-else>
+                        <IxIcon name="menu"></IxIcon>
+                        <template #overlay>
+                          <LayoutHeaderNavigation />
+                        </template>
+                      </IxDropdown>
+                    </IxCol>
+                    <IxCol xs="24" sm="17" md="18" lg="19" xl="20" class="main-content">
+                      <router-view></router-view>
+                    </IxCol>
+                    <IxCol
+                      xs="24"
+                      :sm="{ span: 17, offset: 7 }"
+                      :md="{ span: 18, offset: 6 }"
+                      :lg="{ span: 19, offset: 5 }"
+                      :xl="{ span: 20, offset: 4 }"
+                    >
+                      <LayoutFooter></LayoutFooter>
+                    </IxCol>
+                  </IxRow>
+                  <GlobalTheme />
+                </div>
+                <template v-else>
+                  <router-view></router-view>
+                </template>
               </div>
-              <template v-else>
-                <router-view></router-view>
-              </template>
-            </div>
-            <div v-if="page !== 'home' && breakpoints.xs" class="root-drawer">
-              <div class="root-drawer-handle" @click="isDrawerOpen = !isDrawerOpen">
-                <IxIcon name="menu-fold"></IxIcon>
+              <div v-if="page !== 'home' && breakpoints.xs" class="root-drawer">
+                <div class="root-drawer-handle" @click="isDrawerOpen = !isDrawerOpen">
+                  <IxIcon name="menu-fold"></IxIcon>
+                </div>
+                <IxDrawer
+                  v-model:visible="isDrawerOpen"
+                  class="root-drawer"
+                  :closable="false"
+                  placement="start"
+                  :width="200"
+                >
+                  <LayoutSider></LayoutSider>
+                </IxDrawer>
               </div>
-              <IxDrawer
-                v-model:visible="isDrawerOpen"
-                class="root-drawer"
-                :closable="false"
-                placement="start"
-                :width="200"
-              >
-                <LayoutSider></LayoutSider>
-              </IxDrawer>
-            </div>
-          </IxMessageProvider>
-        </IxNotificationProvider>
-      </IxModalProvider>
-    </IxDrawerProvider>
-  </IxLoadingBarProvider>
+            </IxMessageProvider>
+          </IxNotificationProvider>
+        </IxModalProvider>
+      </IxDrawerProvider>
+    </IxLoadingBarProvider>
+  </IxSpinProvider>
 </template>
 
 <script setup lang="ts">

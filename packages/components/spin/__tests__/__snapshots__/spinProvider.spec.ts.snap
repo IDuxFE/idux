@@ -1,0 +1,3 @@
+// Vitest Snapshot v1
+
+exports[`SpinProvider > basic > render work 1`] = `"<div class=\\"ix-spin-provider\\">content</div>"`;
