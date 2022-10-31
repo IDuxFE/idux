@@ -16,6 +16,10 @@
 
   &-has-shadow {
     box-shadow: @card-box-shadow;
+
+    & when (@theme = seer) {
+      border: none;
+    }
   }
 
   &-hoverable {
@@ -152,10 +156,10 @@
   }
 
   &-mark-icon {
-    font-size: @font-size-xl;
+    font-size: @font-size-md;
     position: absolute;
-    top: -6px;
-    right: -4px;
+    top: -3px;
+    right: -1px;
   }
 
   &-selected {
