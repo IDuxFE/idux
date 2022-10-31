@@ -64,6 +64,9 @@ export function useAutoRows(
   function getTextareaScrollHeight() {
     return measureTextarea(textareaRef.value!, textarea => {
       textarea.value = textareaRef.value!.value
+
+      // trigger reflow to ensure scrollHeight is calculated when referenced
+      void textarea.scrollHeight
       return getHeightByScrollHeight(textarea.scrollHeight, boxSizingData.value)
     })
   }
@@ -82,6 +85,9 @@ export function useAutoRows(
       measureTextarea(textareaRef.value!, textarea => {
         textarea.style.height = ''
         textarea.value = textarea.placeholder
+
+        // trigger reflow to ensure scrollHeight is calculated when referenced
+        void textarea.scrollHeight
         cachedPlaceholderHeight = getHeightByScrollHeight(textarea.scrollHeight, boxSizingData.value)
       })
     }
