@@ -1,5 +1,3 @@
-## 主题变量
-
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@progress-normal-background-color` | `@color-success` | - | - |
@@ -14,7 +12,7 @@
 | `@progress-line-height-md` | `6px` | - | - |
 | `@progress-line-height-sm` | `2px` | - | - |
 | `@progress-line-font-size-lg` | `@font-size-md` | - | - |
-| `@progress-line-font-size-md` | `@font-size-md` | - | - |
+| `@progress-line-font-size-md` | `@font-size-md` | `@font-size-sm` | - |
 | `@progress-line-font-size-sm` | `@font-size-sm` | - | - |
 | `@progress-line-text-padding` | `0 0 0 @spacing-sm` | - | - |
 | `@progress-circle-width` | `120px` | - | - |

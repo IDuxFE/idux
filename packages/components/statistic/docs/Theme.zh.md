@@ -1,5 +1,3 @@
-## 主题变量
-
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@statistic-font-size-sm` | `@font-size-md` | - | - |
@@ -7,7 +5,7 @@
 | `@statistic-font-size-lg` | `@font-size-xl` | - | - |
 | `@statistic-font-size-xl` | `@font-size-2xl` | - | - |
 | `@statistic-line-height` | `@line-height-base` | - | - |
-| `@statistic-color` | `@color-black` | - | - |
+| `@statistic-color` | `@color-black` | `@color-graphite-d40` | - |
 | `@statistic-title-margin` | `@space-margin-lg` | - | - |
 | `@statistic-prefix-margin` | `@spacing-xs` | - | - |
 | `@statistic-suffix-margin` | `@spacing-xs` | - | - |

@@ -1,5 +1,3 @@
-## 主题变量
-
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@tree-select-option-font-size` | `@font-size-md` | `@font-size-sm` | - |
@@ -12,7 +10,7 @@
 | `@tree-select-option-selected-color` | `@color-primary` | - | - |
 | `@tree-select-option-selected-background-color` | `tint(@color-primary, 90%)` | - | - |
 | `@tree-select-option-selected-font-weight` | `@font-weight-xl` | - | - |
-| `@tree-select-option-container-padding` | `@spacing-sm` | `8px 0` | - |
+| `@tree-select-option-container-padding` | `@spacing-sm` | `4px 0` | - |
 | `@tree-select-option-container-background-color` | `@background-color-component` | - | - |
 | `@tree-select-option-container-border-radius` | `@border-radius-sm` | - | - |
 | `@tree-select-option-container-box-shadow` | `@shadow-bottom-md` | - | - |

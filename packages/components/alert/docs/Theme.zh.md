@@ -1,15 +1,13 @@
-## 主题变量
-
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@alert-success-color` | `@color-success-d10` | - | - |
-| `@alert-info-color` | `@color-info-d10` | - | - |
-| `@alert-warning-color` | `@color-warning-d10` | - | - |
-| `@alert-error-color` | `@color-error-d10` | - | - |
-| `@alert-success-background-color` | `@color-success-l50` | - | - |
-| `@alert-info-background-color` | `@color-info-l50` | - | - |
-| `@alert-warning-background-color` | `@color-warning-l50` | - | - |
-| `@alert-error-background-color` | `@color-error-l50` | - | - |
+| `@alert-success-color` | `@color-success-d10` | `#12a679` | - |
+| `@alert-info-color` | `@color-info-d10` | `@color-blue` | - |
+| `@alert-warning-color` | `@color-warning-d10` | `#a35f40` | - |
+| `@alert-error-color` | `@color-error-d10` | `@color-red-d10` | - |
+| `@alert-success-background-color` | `@color-success-l50` | `#f1faf7` | - |
+| `@alert-info-background-color` | `@color-info-l50` | `#f2f7ff` | - |
+| `@alert-warning-background-color` | `@color-warning-l50` | `#fffaf2` | - |
+| `@alert-error-background-color` | `@color-error-l50` | `#fff2f2` | - |
 | `@alert-color` | `@text-color` | - | - |
 | `@alert-color-secondary` | `@text-color-secondary` | `@color-graphite-l10` | - |
 | `@alert-font-size` | `@font-size-md` | `@font-size-sm` | - |

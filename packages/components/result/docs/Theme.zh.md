@@ -1,5 +1,3 @@
-## 主题变量
-
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@result-padding` | `@spacing-gutter * 6 @spacing-gutter * 4` | - | - |

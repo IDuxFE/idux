@@ -77,16 +77,12 @@ class UpdateStyleVariable {
     )
     const exitThemes = themes.filter(theme => theme) as string[]
     if (Object.keys(variablesEntries).length === 0) {
-      return `## 主题变量
-
-| 名称 | ${exitThemes.join(' | ')} | 备注 |
+      return `| 名称 | ${exitThemes.join(' | ')} | 备注 |
 | --- | --- | --- | --- |
 `
     }
 
-    return `## 主题变量
-
-| 名称 | ${exitThemes.join(' | ')} | 备注 |
+    return `| 名称 | ${exitThemes.join(' | ')} | 备注 |
 | --- | --- | --- | --- |
 ${variablesEntries
   .map(variable => {

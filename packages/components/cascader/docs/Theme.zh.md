@@ -1,5 +1,3 @@
-## 主题变量
-
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@cascader-option-padding` | `@spacing-xs @spacing-xs @spacing-xs @spacing-md` | - | - |

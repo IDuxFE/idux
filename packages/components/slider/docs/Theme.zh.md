@@ -1,12 +1,10 @@
-## 主题变量
-
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@slider-marks-label-color` | `rgba(0, 0, 0, 0.451)` | - | - |
 | `@slider-rail-background-color` | `@color-graphite-l30` | - | - |
 | `@slider-track-background-color` | `@color-primary` | - | - |
 | `@slider-thumb-background-color` | `@color-white` | - | - |
-| `@slider-dot-background-color` | `@color-primary` | `@color-graphite-l30` | - |
+| `@slider-dot-background-color` | `@color-graphite-l30` | `@color-graphite-l30` | - |
 | `@slider-thumb-border` | `2px solid @color-primary` | - | - |
 | `@slider-rail-hover-background-color` | `@color-graphite-l30` | - | - |
 | `@slider-track-hover-background-color` | `@color-primary` | - | - |

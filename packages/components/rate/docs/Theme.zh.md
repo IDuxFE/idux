@@ -1,9 +1,7 @@
-## 主题变量
-
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@rate-placeholder-color` | `@form-placeholder-color` | - | - |
-| `@rate-active-color` | `@color-yellow` | - | - |
+| `@rate-placeholder-color` | `@form-placeholder-color` | `@color-graphite-l10` | - |
+| `@rate-active-color` | `@color-yellow` | `@color-brown-l10` | - |
 | `@rate-size-sm` | `14px` | - | - |
 | `@rate-size-md` | `20px` | - | - |
 | `@rate-size-lg` | `28px` | - | - |

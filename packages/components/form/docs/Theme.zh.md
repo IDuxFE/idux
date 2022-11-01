@@ -1,5 +1,3 @@
-## 主题变量
-
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@form-font-size-xs` | `@font-size-sm` | - | - |
@@ -38,9 +36,9 @@
 | `@form-disabled-background-color` | `@background-color-disabled` | - | - |
 | `@form-icon-color` | `@color-graphite-d20` | - | - |
 | `@form-icon-hover-color` | `@color-graphite-d20` | `@color-primary` | - |
-| `@form-item-valid-color` | `@color-success` | - | - |
-| `@form-item-validating-color` | `@color-pending` | - | - |
-| `@form-item-invalid-color` | `@color-error` | - | - |
+| `@form-item-valid-color` | `@color-success` | `@color-success-d10` | - |
+| `@form-item-validating-color` | `@color-pending` | `@color-pending-d10` | - |
+| `@form-item-invalid-color` | `@color-error` | `@color-error-d10` | - |
 | `@form-item-invalid-box-shadow` | `0 0 0 2px fade(@form-item-invalid-color, 20%)` | - | - |
 | `@form-item-margin-bottom` | `24px` | `@spacing-sm` | - |
 | `@form-item-vertical-label-margin` | `0` | - | - |
