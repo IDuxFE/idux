@@ -187,10 +187,10 @@ export default defineComponent({
           {mergedShowArrow.value && (
             <>
               <div key="__arrow-prev" class={`${prefixCls}-arrow ${prefixCls}-arrow-prev`} onClick={prev}>
-                {slots.arrow ? slots.arrow({ type: 'prev' }) : <IxIcon name="left-circle" />}
+                {slots.arrow ? slots.arrow({ type: 'prev' }) : <IxIcon name="left-filled" />}
               </div>
               <div key="__arrow-next" class={`${prefixCls}-arrow ${prefixCls}-arrow-next`} onClick={next}>
-                {slots.arrow ? slots.arrow({ type: 'next' }) : <IxIcon name="right-circle" />}
+                {slots.arrow ? slots.arrow({ type: 'next' }) : <IxIcon name="right-filled" />}
               </div>
             </>
           )}

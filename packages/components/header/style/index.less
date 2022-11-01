@@ -68,6 +68,10 @@
     .@{icon-prefix}:hover {
       color: @header-suffix-active-color;
     }
+
+    .@{icon-prefix}:active when (@theme = seer) {
+      color: @color-blue-d10;
+    }
   }
 
   &-description {

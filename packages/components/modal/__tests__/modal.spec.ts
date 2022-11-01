@@ -87,7 +87,7 @@ describe('Modal', () => {
   })
 
   test('closable work', async () => {
-    const wrapper = ModalMount({ props: { closable: false } })
+    const wrapper = ModalMount({ props: { closable: false, closeIcon: 'close' } })
     const modalWrapper = wrapper.getComponent(ModalWrapper)
 
     expect(modalWrapper.find('.ix-icon-close').exists()).toBe(false)

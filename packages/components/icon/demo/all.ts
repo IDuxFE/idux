@@ -53,6 +53,7 @@ export const allIcons = [
   'delete',
   'delivered-procedure',
   'desktop',
+  'dialog-close',
   'disconnect',
   'dislike-filled',
   'dislike',

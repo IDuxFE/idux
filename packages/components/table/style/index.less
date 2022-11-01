@@ -101,10 +101,18 @@
   &-cell-align {
     &-center {
       text-align: center;
+
+      th& when (@theme = seer) {
+        text-align: start;
+      }
     }
 
     &-end {
       text-align: end;
+
+      th& when (@theme = seer) {
+        text-align: start;
+      }
     }
   }
 
@@ -174,6 +182,15 @@
     }
   }
 
+  & tr&-expanded-row when (@theme = seer) {
+    & > td {
+      background-color: @color-graphite-l50;
+    }
+    &:hover > td {
+      background-color: @color-graphite-l40;
+    }
+  }
+
   // --------- Selectable ---------
 
   & &-col-selectable {
@@ -198,11 +215,11 @@
   }
 
   & &-row-selected {
-    & > td {
+    & > td when not (@theme = seer) {
       background: @color-primary-l50;
     }
 
-    &:hover > td {
+    &:hover > td when not (@theme = seer) {
       background: darken(@color-primary-l50, 2%);
     }
   }

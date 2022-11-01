@@ -103,10 +103,16 @@
 
   &-success-icon {
     color: @progress-success-background-color;
+    .@{progress-prefix}-line & when (@theme = seer) {
+      font-size: @font-size-lg;
+    }
   }
 
   &-exception-icon {
     color: @progress-exception-background-color;
+    .@{progress-prefix}-line & when (@theme = seer) {
+      font-size: @font-size-lg;
+    }
   }
   // circle
 

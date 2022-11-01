@@ -58,11 +58,12 @@
 
       .@{upload-prefix}-icon-wrap {
         max-width: @upload-icon-wrap-max-width;
+        font-size: @upload-icon-font-size;
 
         .@{upload-prefix}-icon-opr {
           cursor: pointer;
           margin: @upload-icon-margin;
-          color: @color-graphite-base;
+          color: if((@theme = seer), @color-graphite-d20, @color-graphite-base);
 
           &:first-child {
             margin: 0;
@@ -95,6 +96,7 @@
         flex: 1;
         display: inline-flex;
         max-width: @upload-list-name-max-width;
+        align-items: center;
 
         .@{upload-prefix}-name {
           display: inline-block;
@@ -110,6 +112,7 @@
 
     .@{upload-prefix}-icon-file {
       margin: @upload-icon-file-margin;
+      font-size: @upload-icon-font-size;
     }
   }
 
@@ -155,6 +158,7 @@
       font-size: @upload-list-image-card-selector-font-size;
       color: @color-graphite-l20;
       border: 1px dashed @color-graphite-l30;
+      border-radius: 2px;
       background-color: @color-graphite-l50;
 
       &:hover {

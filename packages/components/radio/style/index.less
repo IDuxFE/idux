@@ -103,7 +103,7 @@
         border-color: @radio-disabled-border-color;
 
         &::after {
-          background-color: @radio-disabled-border-color;
+          background-color: if((@theme = seer), @color-graphite-l10, @radio-disabled-border-color);
         }
       }
     }

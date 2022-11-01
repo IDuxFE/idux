@@ -8,7 +8,7 @@
 import type { ConvertProgressSuccess, ProgressProps, ProgressStatus } from '../types'
 import type { ProgressConfig } from '@idux/components/config'
 
-import { type ComputedRef, computed } from 'vue'
+import { type ComputedRef, type VNodeChild, computed } from 'vue'
 
 import { isFunction } from 'lodash-es'
 
@@ -21,7 +21,7 @@ export const useInfo = (
   percent: ComputedRef<number>,
   success: ComputedRef<ConvertProgressSuccess>,
 ): {
-  formattedText: ComputedRef<string>
+  formattedText: ComputedRef<VNodeChild>
   showFormat: ComputedRef<boolean>
   showSuccessIcon: ComputedRef<boolean>
   showExceptionIcon: ComputedRef<boolean>
