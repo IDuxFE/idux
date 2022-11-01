@@ -44,15 +44,16 @@ exports[`ProTransfer > table transfer render work 1`] = `
             <!---->
             <!---->
             <div
-              class="ix-table-container ix-table-scroll-vertical"
+              class="ix-table-container"
             >
               
               <div
-                class="ix-table-fixed-holder"
-                style="overflow: hidden;"
+                class="ix-table-content"
+                style="max-height: auto;"
               >
                 <table
-                  style="table-layout: fixed; visibility: hidden;"
+                  class="ix-table-table"
+                  style="table-layout: auto;"
                 >
                   <colgroup>
                     
@@ -70,7 +71,6 @@ exports[`ProTransfer > table transfer render work 1`] = `
                     />
                     
                   </colgroup>
-                  
                   <thead
                     class="ix-table-thead"
                   >
@@ -128,33 +128,6 @@ exports[`ProTransfer > table transfer render work 1`] = `
                     </tr>
                     
                   </thead>
-                  
-                </table>
-              </div>
-              <div
-                class="ix-table-content"
-                style="overflow-y: scroll; max-height: auto;"
-              >
-                <table
-                  class="ix-table-table"
-                  style="table-layout: auto;"
-                >
-                  <colgroup>
-                    
-                    <col
-                      class="ix-table-col-selectable"
-                    />
-                    <col
-                      class=""
-                    />
-                    <col
-                      class=""
-                    />
-                    <col
-                      class=""
-                    />
-                    
-                  </colgroup>
                   <tbody
                     class="ix-table-tbody"
                   >
@@ -1107,15 +1080,16 @@ exports[`ProTransfer > table transfer render work 1`] = `
             <!---->
             <!---->
             <div
-              class="ix-table-container ix-table-scroll-vertical"
+              class="ix-table-container"
             >
               
               <div
-                class="ix-table-fixed-holder"
-                style="overflow: hidden;"
+                class="ix-table-content"
+                style="max-height: auto;"
               >
                 <table
-                  style="table-layout: fixed; visibility: hidden;"
+                  class="ix-table-table"
+                  style="table-layout: auto;"
                 >
                   <colgroup>
                     
@@ -1127,7 +1101,6 @@ exports[`ProTransfer > table transfer render work 1`] = `
                     />
                     
                   </colgroup>
-                  
                   <thead
                     class="ix-table-thead"
                   >
@@ -1175,27 +1148,6 @@ exports[`ProTransfer > table transfer render work 1`] = `
                     </tr>
                     
                   </thead>
-                  
-                </table>
-              </div>
-              <div
-                class="ix-table-content"
-                style="overflow-y: scroll; max-height: auto;"
-              >
-                <table
-                  class="ix-table-table"
-                  style="table-layout: auto;"
-                >
-                  <colgroup>
-                    
-                    <col
-                      class="ix-table-col-selectable"
-                    />
-                    <col
-                      class=""
-                    />
-                    
-                  </colgroup>
                   <tbody
                     class="ix-table-tbody"
                   >

@@ -53,11 +53,13 @@ export default defineComponent({
       virtualScrollRef,
       scrollBodyRef,
       scrollContentRef,
+      scrollHeight,
       handleScroll,
+      hasVerticalScrollbar,
+      hasHorizontalScrollbar,
       pingedStart,
       pingedEnd,
       scrollWidth,
-      scrollHeight,
       hasFixed,
       tableLayout,
     } = inject(TABLE_TOKEN)!
@@ -118,8 +120,8 @@ export default defineComponent({
         [`${prefixCls}-ping-end`]: pingedEnd.value,
         [`${prefixCls}-fixed-layout`]: tableLayout.value === 'fixed',
         [`${prefixCls}-fixed-column`]: hasFixed.value,
-        [`${prefixCls}-scroll-horizontal`]: scrollWidth.value,
-        [`${prefixCls}-scroll-vertical`]: scrollHeight.value,
+        [`${prefixCls}-scroll-horizontal`]: hasHorizontalScrollbar.value,
+        [`${prefixCls}-scroll-vertical`]: hasVerticalScrollbar.value,
       })
     })
 
@@ -127,7 +129,7 @@ export default defineComponent({
       const width = scrollWidth.value
       const height = scrollHeight.value
       const overflowX = width ? 'auto' : undefined
-      const overflowY = props.virtual ? 'hidden' : height ? 'scroll' : width ? 'hidden' : undefined
+      const overflowY = props.virtual ? 'hidden' : hasVerticalScrollbar.value ? 'scroll' : width ? 'hidden' : undefined
       const fullHeight = props.scroll?.fullHeight
       return { overflowX, overflowY, [fullHeight ? 'height' : 'maxHeight']: height }
     })
@@ -153,9 +155,9 @@ export default defineComponent({
       const children = slots.default ? slots.default() : []
 
       const prefixCls = mergedPrefixCls.value
+      const { offsetTop } = mergedSticky.value
 
-      if (scrollHeight.value || isSticky.value) {
-        const { offsetTop } = mergedSticky.value
+      if (props.virtual && (props.scroll || mergedAutoHeight.value)) {
         if (!props.headless) {
           children.push(
             <FixedHolder offsetTop={offsetTop}>
@@ -164,68 +166,64 @@ export default defineComponent({
           )
         }
 
-        if (props.virtual && (props.scroll || mergedAutoHeight.value)) {
-          const itemRender: VirtualItemRenderFn<FlattedData> = ({ item, index }) =>
-            renderBodyRow(item, index, slots, expandable.value, prefixCls)
+        const itemRender: VirtualItemRenderFn<FlattedData> = ({ item, index }) =>
+          renderBodyRow(item, index, slots, expandable.value, prefixCls)
 
-          const contentRender: VirtualContentRenderFn = children => {
-            return (
-              <table ref={scrollContentRef} class={`${prefixCls}-table`} style={tableStyle.value}>
-                <ColGroup></ColGroup>
-                <Body>{children}</Body>
-                {false && <Foot></Foot>}
-              </table>
-            )
-          }
-          const { scroll, onScrolledBottom } = props
-
-          if (__DEV__ && !props.autoHeight && !isNumber(scroll?.height)) {
-            Logger.warn('components/table', '`scroll.height` must is a valid number when enable virtual scroll')
-          }
-
-          children.push(
-            <CdkVirtualScroll
-              ref={virtualScrollRef}
-              style={contentStyle.value}
-              dataSource={flattedData.value}
-              fullHeight={scroll?.fullHeight}
-              getKey="rowKey"
-              height={mergedAutoHeight.value ? '100%' : (scroll?.height as number)}
-              itemHeight={virtualItemHeightMap[mergedSize.value]}
-              itemRender={itemRender}
-              contentRender={contentRender}
-              virtual
-              onScroll={handleScroll}
-              onScrolledBottom={onScrolledBottom}
-              onScrolledChange={handleScrolledChange}
-            />,
-          )
-        } else {
-          children.push(
-            <div ref={scrollBodyRef} class={`${prefixCls}-content`} style={contentStyle.value} onScroll={handleScroll}>
-              <table ref={scrollContentRef} class={`${prefixCls}-table`} style={tableStyle.value}>
-                <ColGroup></ColGroup>
-                <Body></Body>
-                {false && <Foot></Foot>}
-              </table>
-            </div>,
+        const contentRender: VirtualContentRenderFn = children => {
+          return (
+            <table ref={scrollContentRef} class={`${prefixCls}-table`} style={tableStyle.value}>
+              <ColGroup></ColGroup>
+              <Body>{children}</Body>
+              {false && <Foot></Foot>}
+            </table>
           )
         }
+        const { scroll, onScrolledBottom } = props
 
-        if (isSticky.value) {
-          children.push(<StickyScroll></StickyScroll>)
+        if (__DEV__ && !props.autoHeight && !isNumber(scroll?.height)) {
+          Logger.warn('components/table', '`scroll.height` must is a valid number when enable virtual scroll')
         }
+
+        children.push(
+          <CdkVirtualScroll
+            ref={virtualScrollRef}
+            style={contentStyle.value}
+            dataSource={flattedData.value}
+            fullHeight={scroll?.fullHeight}
+            getKey="rowKey"
+            height={mergedAutoHeight.value ? '100%' : (scroll?.height as number)}
+            itemHeight={virtualItemHeightMap[mergedSize.value]}
+            itemRender={itemRender}
+            contentRender={contentRender}
+            virtual
+            onScroll={handleScroll}
+            onScrolledBottom={onScrolledBottom}
+            onScrolledChange={handleScrolledChange}
+          />,
+        )
       } else {
+        const useFixedHolder = hasVerticalScrollbar.value || isSticky.value
+        !props.headless &&
+          useFixedHolder &&
+          children.push(
+            <FixedHolder offsetTop={offsetTop}>
+              <Head></Head>
+            </FixedHolder>,
+          )
         children.push(
           <div ref={scrollBodyRef} class={`${prefixCls}-content`} style={contentStyle.value} onScroll={handleScroll}>
             <table ref={scrollContentRef} class={`${prefixCls}-table`} style={tableStyle.value}>
               <ColGroup></ColGroup>
-              {!props.headless && <Head></Head>}
+              {!props.headless && !useFixedHolder && <Head></Head>}
               <Body></Body>
               {false && <Foot></Foot>}
             </table>
           </div>,
         )
+      }
+
+      if (isSticky.value) {
+        children.push(<StickyScroll></StickyScroll>)
       }
 
       return (
