@@ -1,5 +1,3 @@
-## 主题变量
-
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@table-font-size-sm` | `var(--ix-font-size-sm)` | - | - |
@@ -25,3 +23,5 @@
 | `@table-body-row-background-color-hover` | `var(--ix-background-color-light)` | - | - |
 | `@table-body-row-background-color-selected` | `var(--ix-color-primary-l50)` | - | - |
 | `@table-expandable-icon-color` | `var(--ix-text-color-info)` | - | - |
+| `@table-expandable-background-color` | `var(--ix-background-color-light)` | - | - |
+| `@table-expandable-background-color-hover` | `var(--ix-background-color-deep)` | - | - |

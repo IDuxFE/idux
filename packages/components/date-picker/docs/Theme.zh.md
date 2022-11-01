@@ -1,5 +1,3 @@
-## 主题变量
-
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@date-picker-line-height` | `@form-line-height` | - | - |

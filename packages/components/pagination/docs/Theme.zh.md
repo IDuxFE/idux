@@ -1,5 +1,3 @@
-## 主题变量
-
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@pagination-font-size-md` | `@font-size-md` | `@font-size-sm` | - |

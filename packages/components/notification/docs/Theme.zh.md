@@ -1,5 +1,3 @@
-## 主题变量
-
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@notification-padding` | `8px 8px 8px 16px` | `8px 8px 8px 16px` | - |

@@ -1,5 +1,3 @@
-## 主题变量
-
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@header-line-height` | `@line-height-base` | - | - |
@@ -29,9 +27,9 @@
 | `@header-title-font-size-md` | `@font-size-xl` | `@font-size-md` | - |
 | `@header-title-font-size-sm` | `@font-size-lg` | `@font-size-md` | - |
 | `@header-sub-title-color` | `@text-color-secondary` | - | - |
-| `@header-suffix-color` | `@text-color-secondary` | - | - |
+| `@header-suffix-color` | `@text-color-secondary` | `@color-graphite-d20` | - |
 | `@header-suffix-padding` | `0 @spacing-xs 0 @spacing-sm` | - | - |
-| `@header-suffix-active-color` | `@header-title-color` | - | - |
+| `@header-suffix-active-color` | `@header-title-color` | `@color-blue-l10` | - |
 | `@header-suffix-font-size` | `@font-size-lg` | - | - |
 | `@header-suffix-font-size-sm` | `@font-size-md` | - | - |
 | `@header-description-color` | `@text-color` | - | - |
