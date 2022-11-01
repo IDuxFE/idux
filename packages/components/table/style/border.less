@@ -1,4 +1,4 @@
-@table-border: @border-width-sm @border-style @table-border-color;
+@table-border: 1px solid @table-border-color;
 
 .@{table-prefix} {
   th {
@@ -45,11 +45,15 @@
       border: @table-border;
 
       > table {
-        > thead > tr > th:not(:last-child),
+        > thead > tr > th,
         > tbody > tr > td:not(:last-child),
         > tfoot > tr > th:not(:last-child),
         > tfoot > tr > td:not(:last-child) {
           border-right: @table-border;
+        }
+
+        > thead > tr:first-child > th:last-child {
+          border-right: none;
         }
 
         > thead {

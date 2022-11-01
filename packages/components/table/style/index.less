@@ -8,12 +8,10 @@
 @import './size.less';
 
 .@{table-prefix} {
-  .reset-component();
+  .reset-component-new();
   .clearfix();
 
   max-width: 100%;
-  color: @table-color;
-  background-color: @table-background-color;
 
   &-container {
     position: relative;
@@ -25,7 +23,7 @@
       bottom: 0;
       z-index: 1;
       width: 30px;
-      transition: box-shadow @transition-duration-base;
+      transition: box-shadow var(--ix-transition-duration-fast);
       content: '';
       pointer-events: none;
     }
@@ -59,7 +57,7 @@
       top: 50%;
       right: 0;
       width: 1px;
-      background-color: @table-head-split-color;
+      background-color: @table-border-color;
       transform: translateY(-50%);
       content: '';
     }
@@ -70,7 +68,7 @@
   }
 
   td {
-    transition: background @transition-duration-base;
+    transition: background var(--ix-transition-duration-fast);
 
     // TODO: Nest Table
   }
@@ -78,7 +76,7 @@
   tr {
     &:hover {
       > td {
-        background: @table-hover-background-color;
+        background-color: @table-body-row-background-color-hover;
       }
     }
 
@@ -86,7 +84,7 @@
     &.@{table-prefix}-empty-row {
       &:hover {
         > td {
-          background: @table-background-color;
+          background-color: var(--ix-background-color);
         }
       }
     }
@@ -101,18 +99,10 @@
   &-cell-align {
     &-center {
       text-align: center;
-
-      th& when (@theme = seer) {
-        text-align: start;
-      }
     }
 
     &-end {
       text-align: end;
-
-      th& when (@theme = seer) {
-        text-align: start;
-      }
     }
   }
 
@@ -161,15 +151,7 @@
   }
 
   // --------- Expandable ---------
-
-  & &-col-expandable {
-    width: 40px;
-  }
-
   & &-expandable-trigger {
-    width: @table-expandable-icon-size;
-    height: @table-expandable-icon-size;
-    font-size: @table-expandable-icon-size;
     margin-right: @spacing-xs;
     color: @table-expandable-icon-color;
     background-color: transparent;
@@ -182,25 +164,16 @@
     }
   }
 
-  & tr&-expanded-row when (@theme = seer) {
+  & tr&-expanded-row {
     & > td {
-      background-color: @color-graphite-l50;
+      background-color: @table-expandable-background-color;
     }
     &:hover > td {
-      background-color: @color-graphite-l40;
+      background-color: @table-expandable-background-color-hover;
     }
   }
 
   // --------- Selectable ---------
-
-  & &-col-selectable {
-    width: 40px;
-  }
-
-  & &-col-selectable&-selectable-with-dropdown {
-    width: 60px;
-  }
-
   & &-cell-selectable {
     .@{table-prefix}-selectable {
       display: flex;
@@ -214,13 +187,9 @@
     }
   }
 
-  & &-row-selected {
-    & > td when not (@theme = seer) {
-      background: @color-primary-l50;
-    }
-
-    &:hover > td when not (@theme = seer) {
-      background: darken(@color-primary-l50, 2%);
+  & tr&-row-selected {
+    & > td {
+      background: @table-body-row-background-color-selected;
     }
   }
 
@@ -228,10 +197,10 @@
 
   &-cell-sortable {
     cursor: pointer;
-    transition: background @transition-duration-base;
+    transition: background var(--ix-transition-duration-fast);
 
     &:hover {
-      background: @table-hover-background-color;
+      background: @table-body-row-background-color-hover;
     }
   }
 
@@ -273,20 +242,20 @@
   &-sortable-trigger,
   &-filterable-trigger {
     display: flex;
-    margin: 0 -@spacing-sm 0 @spacing-xs;
+    margin: 0 -8px 0 4px;
     align-items: center;
     justify-content: center;
-    border-radius: @border-radius-sm;
+    border-radius: @table-border-radius;
     color: @table-head-icon-color;
-    transition: color @transition-duration-base, background @transition-duration-base;
+    transition: color var(--ix-transition-duration-fast), background var(--ix-transition-duration-fast);
     cursor: pointer;
 
     &:hover {
-      background-color: @table-head-icon-hover-background-color;
+      background-color: @table-head-icon-background-color-hover;
     }
 
     &-active {
-      color: @table-head-icon-active-color;
+      color: @table-head-icon-color-active;
     }
   }
 
@@ -350,7 +319,7 @@
     &-holder {
       position: sticky;
       z-index: 3;
-      background-color: @background-color-component;
+      background-color: var(--ix-background-color);
     }
 
     &-scrollbar {

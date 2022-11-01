@@ -47,15 +47,20 @@ export default defineComponent({
 
     const isFixStartLast = computed(() => fixedColumnKeys.value.lastStartKey === props.column.key)
     const isFixEndFirst = computed(() => fixedColumnKeys.value.firstEndKey === props.column.key)
+    const mergedEllipsis = computed(() => {
+      // tableProps 的 ellipsis 对特殊(带有 type )的列不生效
+      const { type, ellipsis } = props.column as BodyColumn
+      return type ? ellipsis : ellipsis || tableProps.ellipsis
+    })
 
     const classes = computed(() => {
-      const { fixed, align, ellipsis = tableProps.ellipsis } = props.column as BodyColumn
+      const { fixed, align } = props.column as BodyColumn
       const prefixCls = mergedPrefixCls.value
       let classes = {
         [`${prefixCls}-cell`]: true,
         [`${prefixCls}-cell-sorted`]: !!activeSortOrderBy.value,
         [`${prefixCls}-cell-align-${align}`]: !!align && align != 'start',
-        [`${prefixCls}-cell-ellipsis`]: !!ellipsis,
+        [`${prefixCls}-cell-ellipsis`]: !!mergedEllipsis.value,
       }
       if (fixed) {
         classes = {
@@ -100,10 +105,9 @@ export default defineComponent({
       if (type === 'selectable') {
         children = renderSelectableChildren(props, slots, selectable, handleClick)
       } else {
-        const { ellipsis = tableProps.ellipsis } = column
         const text = dataValue.value
         children = renderChildren(props, slots, text)
-        title = getColTitle(ellipsis, children, text)
+        title = getColTitle(mergedEllipsis.value, children, text)
 
         // emptyCell 仅支持普通列
         if (!type && (isNil(children) || children === '')) {
@@ -115,8 +119,7 @@ export default defineComponent({
       }
 
       // see: https://github.com/IDuxFE/idux/issues/1081
-      const { fixed, ellipsis = tableProps.ellipsis } = props.column as BodyColumn
-      if (fixed && ellipsis && (isFixStartLast.value || isFixEndFirst.value)) {
+      if (props.column.fixed && mergedEllipsis.value && (isFixStartLast.value || isFixEndFirst.value)) {
         children = <span class={`${mergedPrefixCls.value}-cell-content`}>{children}</span>
       }
 

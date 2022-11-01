@@ -54,17 +54,14 @@ export default defineComponent({
       handleFilter,
     } = inject(TABLE_TOKEN)!
 
+    const mergedEllipsis = computed(() => {
+      // tableProps 的 ellipsis 对特殊(带有 type )的列不生效
+      const { type, ellipsis } = props.column as HeadColumn
+      return type ? ellipsis : ellipsis || tableProps.ellipsis
+    })
+
     const classes = computed(() => {
-      const {
-        type,
-        align,
-        ellipsis = tableProps.ellipsis,
-        fixed,
-        hasChildren,
-        key,
-        sortable,
-        filterable,
-      } = props.column as HeadColumn
+      const { type, align, fixed, hasChildren, key, sortable, filterable } = props.column as HeadColumn
       const prefixCls = mergedPrefixCls.value
       let classes: Record<string, boolean | undefined> = {
         [`${prefixCls}-cell`]: true,
@@ -73,7 +70,7 @@ export default defineComponent({
         [`${prefixCls}-cell-sortable`]: !!sortable,
         [`${prefixCls}-cell-align-center`]: hasChildren || align === 'center',
         [`${prefixCls}-cell-align-end`]: !hasChildren && align === 'end',
-        [`${prefixCls}-cell-ellipsis`]: !!ellipsis,
+        [`${prefixCls}-cell-ellipsis`]: !!mergedEllipsis.value,
       }
       if (fixed) {
         const { lastStartKey, firstEndKey } = fixedColumnKeys.value
@@ -141,7 +138,8 @@ export default defineComponent({
       if (type === 'selectable') {
         children = <SelectableTrigger />
       } else {
-        const { title, customTitle, ellipsis = tableProps.ellipsis, sortable, filterable } = column as HeadColumn
+        const { title, customTitle, sortable, filterable } = column as HeadColumn
+        const ellipsis = mergedEllipsis.value
         children = renderChildren(title, customTitle, slots)
         _title = getColTitle(ellipsis, children!, title)
 

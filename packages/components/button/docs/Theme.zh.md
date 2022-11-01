@@ -1,18 +1,12 @@
+## 主题变量
+
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@button-border-radius` | `var(--ix-border-radius-sm)` | - | - |
-| `@button-icon-color` | `inherit` | `var(--ix-color-graphite-d20)` | - |
-| `@button-icon-font-size` | `inherit` | `var(--ix-font-size-lg)` | - |
 | `@button-height-xs` | `var(--ix-height-sm)` | - | - |
 | `@button-height-sm` | `var(--ix-height-md)` | - | - |
 | `@button-height-md` | `var(--ix-height-md)` | - | - |
 | `@button-height-lg` | `var(--ix-height-lg)` | - | - |
 | `@button-height-xl` | `var(--ix-height-xl)` | - | - |
-| `@button-line-height-xs` | `var(--ix-line-height-sm)` | - | - |
-| `@button-line-height-sm` | `var(--ix-line-height-md)` | - | - |
-| `@button-line-height-md` | `var(--ix-line-height-md)` | - | - |
-| `@button-line-height-lg` | `var(--ix-line-height-lg)` | - | - |
-| `@button-line-height-xl` | `var(--ix-line-height-xl)` | - | - |
 | `@button-font-size-xs` | `var(--ix-font-size-sm)` | - | - |
 | `@button-font-size-sm` | `var(--ix-font-size-sm)` | - | - |
 | `@button-font-size-md` | `var(--ix-font-size-md)` | - | - |
@@ -31,6 +25,7 @@
 | `@button-color` | `var(--ix-text-color)` | - | - |
 | `@button-background-color` | `var(--ix-background-color)` | - | - |
 | `@button-border-color` | `var(--ix-border-color)` | - | - |
+| `@button-border-radius` | `var(--ix-border-radius-sm)` | - | - |
 | `@button-primary-color` | `var(--ix-text-color-inverse)` | - | - |
 | `@button-primary-background-color` | `var(--ix-color-primary)` | - | - |
 | `@button-primary-background-color-hover` | `var(--ix-color-primary-l10)` | - | - |
@@ -41,6 +36,8 @@
 | `@button-ghost-border-color` | `var(--ix-background-color)` | - | - |
 | `@button-ghost-background-color-hover` | `rgba(255, 255, 255, 0.2)` | - | - |
 | `@button-ghost-background-color-active` | `var(--ix-background-color)` | - | - |
+| `@button-ghost-background-color-disabled` | `rgba(255, 255, 255, 0.4)` | - | - |
 | `@button-disabled-color` | `var(--ix-text-color-disabled)` | - | - |
-| `@button-disabled-background-color` | `var(--ix-background-color-disabled)` | - | - |
-| `@button-disabled-ghost-background-color` | `rgba(255, 255, 255, 0.4)` | - | - |
+| `@button-disabled-background-color` | `var(--ix-background-color-deep)` | - | - |
+| `@button-icon-color` | `inherit` | `var(--ix-text-color-title-secondary)` | - |
+| `@button-icon-font-size` | `inherit` | `var(--ix-font-size-lg)` | - |

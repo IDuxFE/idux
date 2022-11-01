@@ -3,12 +3,9 @@
 @theme: default;
 
 :root {
-  // Graphite
-  --ix-color-graphite: @color-graphite;
-  --ix-color-graphite-d20: @color-graphite-d20;
-
   // Primary
   --ix-color-primary: @color-primary;
+  --ix-color-primary-l50: @color-primary-l50; // selected
   --ix-color-primary-l10: @color-primary-l10; // hover
   --ix-color-primary-d10: @color-primary-d10; // active
 
@@ -28,19 +25,24 @@
   --ix-color-error-d10: @color-red-d10; // active
 
   // Text
-  --ix-text-color: fade(@color-black, 85%);
-  --ix-text-color-inverse: @color-white;
-  --ix-text-color-disabled: fade(@color-black, 25%);
+  --ix-text-color: @color-grey-d40; // 默认
+  --ix-text-color-inverse: @color-white; // 反向
+  --ix-text-color-disabled: @color-grey-l10; // 禁用
+  --ix-text-color-info: @color-grey; // 提示
+  --ix-text-color-secondary: @color-grey-d10; // 辅助
+  --ix-text-color-title: @color-grey-d50; // 标题
+  --ix-text-color-title-secondary: @color-grey-d30; // 次级标题
 
   // Background
   --ix-background-color: @color-white;
-  --ix-background-color-inverse: fade(@color-black, 85%);
-  --ix-background-color-disabled: hsv(0, 0, 96%);
+  --ix-background-color-inverse: @color-grey-d40;
+  --ix-background-color-deep: @color-grey-l40;
+  --ix-background-color-light: @color-grey-l50;
 
   // Border
-  --ix-border-color: hsv(0, 0, 85%);
+  --ix-border-color: @color-grey-l20;
   --ix-border-color-inverse: @color-white;
-  --ix-border-color-split: rgb(0 0 0 / 6%);
+  --ix-border-color-secondary: @color-grey-l30;
 
   // Border-Radius
   --ix-border-radius-sm: 2px;
@@ -55,11 +57,7 @@
   --ix-height-xl: 48px;
 
   // Line-Height
-  --ix-line-height-xs: 20px;
-  --ix-line-height-sm: 22px;
-  --ix-line-height-md: 24px;
-  --ix-line-height-lg: 28px;
-  --ix-line-height-xl: 32px;
+  --ix-line-height-gutter: 8px;
 
   // Font-Size
   --ix-font-size-xs: 10px;
@@ -95,27 +93,27 @@
 
 // 临时兼容，后面需要移除
 // Text
-@text-color: fade(@color-black, 85%);
+@text-color: @color-grey-d40;
 @text-color-inverse: @color-white;
-@text-color-disabled: fade(@color-black, 25%);
+@text-color-disabled: @color-grey-l10;
 
 // Background
 @background-color: @color-white;
-@background-color-inverse: fade(@color-black, 85%);
-@background-color-disabled:hsv (0, 0, 96%);
+@background-color-inverse: @color-grey-d40;
+@background-color-disabled: @color-grey-l40;
 
 // Border
-@border-color: hsv(0, 0, 85%);
+@border-color: @color-grey-l20;
 @border-color-inverse: @color-white;
-@border-color-split: rgba(0, 0, 0, 0.06);
+@border-color-split: @color-grey-l30;
 
 // Scrollbar
 @scrollbar-width: 8px;
 @scrollbar-height: 8px;
 
-@scrollbar-thumb-background-color: #c1c1c1;
-@scrollbar-thumb-hover-background-color: #a8a8a8;
-@scrollbar-thumb-active-background-color: #787878;
+@scrollbar-thumb-background-color: @color-grey-l30;
+@scrollbar-thumb-hover-background-color: @color-grey-l10;
+@scrollbar-thumb-active-background-color: @color-grey-d10;
 @scrollbar-thumb-border: 0;
 @scrollbar-thumb-border-radius: 4px;
 @scrollbar-thumb-box-shadow: none;
