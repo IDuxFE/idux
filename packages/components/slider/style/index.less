@@ -48,11 +48,15 @@
 
   &-dot {
     position: absolute;
-    top: @slider-height;
     width: 1px;
     height: 4px;
+    margin-top: @slider-height;
     background-color: @slider-dot-background-color;
     cursor: pointer;
+
+    &:last-child {
+      margin-left: -1px;
+    }
 
     &-active {
       background-color: @slider-dot-active-background-color;
@@ -134,9 +138,14 @@
     }
 
     & .@{slider-prefix}-dot {
-      top: auto;
-      left: calc(@slider-width / 2);
-      margin-bottom: -4px;
+      margin-top: 0;
+      margin-left: @slider-width;
+      height: 1px;
+      width: 4px;
+
+      &:last-child {
+        margin-bottom: -1px;
+      }
     }
 
     & .@{slider-prefix}-mark {
