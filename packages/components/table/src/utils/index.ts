@@ -16,7 +16,7 @@ import { Logger, type VKey, convertArray, getFirstValidNode, uniqueId } from '@i
 import { type TableColumn } from '../types'
 
 export function getColTitle(
-  ellipsis: boolean | { title?: boolean },
+  ellipsis: boolean | { title?: boolean } | undefined,
   children: VNodeChild,
   title: string | undefined,
 ): string | undefined {

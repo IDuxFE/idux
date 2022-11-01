@@ -1,6 +1,6 @@
-.button-size(@height, @line-height, @font-size, @min-width, @padding) {
+.button-size(@height, @font-size, @min-width, @padding) {
   height: @height;
-  line-height: @line-height;
+  line-height: calc(@font-size + var(--ix-line-height-gutter));
   font-size: @font-size;
   min-width: @min-width;
   padding: @padding;
@@ -15,7 +15,7 @@
     border-radius: calc(@height / 2);
   }
 
-  &-icon-only {
+  &.@{button-prefix}-icon-only {
     font-size: calc(@font-size + 2px);
   }
 }
