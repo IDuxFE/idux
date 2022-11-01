@@ -34,7 +34,7 @@
   "jsdelivr": "./index.full.js",
   "scripts": {},
   "dependencies": {
-    "@floating-ui/dom": "^1.0.2",
+    "@floating-ui/dom": "^1.0.4",
     "lodash-es": "^4.17.0"
   },
   "devDependencies": {
