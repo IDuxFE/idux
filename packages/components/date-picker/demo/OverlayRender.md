@@ -2,7 +2,7 @@
 title:
   zh: 自定义面板
   en: Custom Panel
-order: 7
+order: 70
 ---
 
 ## zh

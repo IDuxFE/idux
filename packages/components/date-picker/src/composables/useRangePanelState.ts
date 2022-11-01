@@ -23,8 +23,9 @@ export interface RangePanelStateContext {
 }
 
 export function useRangePanelState(props: DateRangePanelProps, dateConfig: DateConfig): RangePanelStateContext {
-  const [selectingDate, setSelectingDate] = useState<(Date | undefined)[] | undefined>(props.value)
+  const [selectingDates, setSelectingDates] = useState<(Date | undefined)[] | undefined>(props.value)
   const [isSelecting, setIsSelecting] = useState<boolean>(false)
+
   watch(
     () => props.visible,
     () => {
@@ -34,31 +35,34 @@ export function useRangePanelState(props: DateRangePanelProps, dateConfig: DateC
 
   const panelValue = computed(() => {
     if (isSelecting.value) {
-      return sortRangeValue(dateConfig, [...convertArray(selectingDate.value)], 'date')
+      return sortRangeValue(dateConfig, [...convertArray(selectingDates.value)], 'date')
     }
 
     return convertArray(props.value)
   })
 
   const handleChange = (value: (Date | undefined)[]) => {
-    callEmit(props.onChange, sortRangeValue(dateConfig, value, 'date') as Date[])
+    const sortedRangeValue = sortRangeValue(dateConfig, value, 'date') as Date[]
+    callEmit(props.onChange, sortedRangeValue)
+    callEmit(props.onSelect, sortedRangeValue)
   }
 
   const handleDatePanelCellClick = (value: Date) => {
     if (!isSelecting.value) {
       setIsSelecting(true)
-      setSelectingDate([value, undefined])
+      setSelectingDates([value, undefined])
+      callEmit(props.onSelect, [value, undefined])
     } else {
       const propsValue = convertArray(props.value)
 
-      setIsSelecting(false)
       handleChange(
-        [selectingDate.value?.[0], value].map((dateValue, index) =>
+        [selectingDates.value?.[0], value].map((dateValue, index) =>
           propsValue[index]
             ? applyDateTime(dateConfig, propsValue[index], dateValue!, ['hour', 'minute', 'second'])
             : dateValue,
         ),
       )
+      setIsSelecting(false)
     }
   }
 
@@ -67,7 +71,7 @@ export function useRangePanelState(props: DateRangePanelProps, dateConfig: DateC
       return
     }
 
-    setSelectingDate([selectingDate.value?.[0], value])
+    setSelectingDates([selectingDates.value?.[0], value])
   }
 
   return {

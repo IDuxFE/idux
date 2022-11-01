@@ -6,7 +6,6 @@
  */
 
 import type { DatePickerProps, DateRangePickerProps, TimePanelOptions } from '../types'
-import type { ɵTimePanelProps } from '@idux/components/_private/time-panel'
 
 import { type ComputedRef, computed } from 'vue'
 
@@ -18,7 +17,7 @@ export function useTimePanelProps(
   minuteEnabled: ComputedRef<boolean>,
   secondEnabled: ComputedRef<boolean>,
   use12Hours: ComputedRef<boolean>,
-): ComputedRef<ɵTimePanelProps> {
+): ComputedRef<TimePanelOptions> {
   return computed(() => ({
     ...getTimePanelProps(props.timePanelOptions ?? {}),
     hourEnabled: hourEnabled.value,
@@ -34,7 +33,7 @@ export function useRangeTimePanelProps(
   minuteEnabled: ComputedRef<boolean>,
   secondEnabled: ComputedRef<boolean>,
   use12Hours: ComputedRef<boolean>,
-): ComputedRef<ɵTimePanelProps[]> {
+): ComputedRef<TimePanelOptions[]> {
   const getOptions = (isFrom: boolean) =>
     (isArray(props.timePanelOptions) ? props.timePanelOptions[isFrom ? 0 : 1] : props.timePanelOptions) ?? {}
 
@@ -55,7 +54,7 @@ export function useRangeTimePanelProps(
   return rangeTimePanelProps
 }
 
-function getTimePanelProps(timePanelOptions: TimePanelOptions): ɵTimePanelProps {
+function getTimePanelProps(timePanelOptions: TimePanelOptions): TimePanelOptions {
   const { disabledHours, disabledMinutes, disabledSeconds, hideDisabledOptions, hourStep, minuteStep, secondStep } =
     timePanelOptions
 

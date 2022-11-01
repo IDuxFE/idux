@@ -2,7 +2,7 @@
 title:
   zh: 禁用面板中的日期
   en: Disabled date in panel
-order: 6
+order: 60
 ---
 
 ## zh

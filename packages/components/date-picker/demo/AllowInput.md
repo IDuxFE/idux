@@ -2,7 +2,7 @@
 title:
   zh: 可输入
   en: AllowInput
-order: 1
+order: 10
 ---
 
 ## zh
