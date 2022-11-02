@@ -85,6 +85,25 @@ describe('DateRangePicker', () => {
     expect(findCell(wrapper, 'to', '11')?.classes()).toContain('ix-date-panel-cell-in-range')
   })
 
+  test('onSelect work', async () => {
+    const onSelect = vi.fn()
+    const wrapper = DateRangePickerMount({
+      props: {
+        value: [new Date('2021-10-01 00:00:00'), new Date('2021-11-11 00:00:00')],
+        onSelect,
+      },
+    })
+
+    await findCell(wrapper, 'from', '11')?.trigger('click')
+    expect(onSelect).toBeCalledWith([new Date('2021-10-11 00:00:00'), undefined])
+
+    onSelect.mockClear()
+
+    onSelect.mockClear()
+    await findCell(wrapper, 'to', '21')?.trigger('click')
+    expect(onSelect).toBeCalledWith([new Date('2021-10-11 00:00:00'), new Date('2021-11-21 00:00:00')])
+  })
+
   test('v-model:open work', async () => {
     const onUpdateOpen = vi.fn()
     const wrapper = DateRangePickerMount({ props: { open: false, 'onUpdate:open': onUpdateOpen } })

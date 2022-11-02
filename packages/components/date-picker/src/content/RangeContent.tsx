@@ -144,6 +144,7 @@ export default defineComponent({
         timePanelOptions: timePanelProps.value,
         visible: overlayVisible.value && visiblePanel.value,
         onChange: handlePanelChange,
+        onSelect: props.onSelect,
       }
 
       const panelSlots = {

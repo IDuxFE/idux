@@ -92,8 +92,9 @@ const defaultFormat = {
 | `placeholder` | 选择框默认文本 | `string[] \| #placeholder=placement:'start'\|'end'` | - | - | 默认使用 `i18n` 配置 |
 | `separator` | 自定义分隔符图标 | `string \| VNode \| #separator` | - | ✅ | - |
 | `timePanelOptions` | 时间选择面板配置 | `PickerTimePanelOptions \| PickerTimePanelOptions[]` | - | - | 如果需要对前后的时间选择器使用不同配置，可以传入一个数组 |
-| `onChange` | 值改变后的回调 | `(value: Date[], oldValue: Date[]) => void` | - | - | - |
+| `onChange` | 选中的日期范围值改变后的回调 | `(value: Date[], oldValue: Date[]) => void` | - | - | - |
 | `onInput` | 输入后的回调 | `(isFrom: boolean, evt: Event) => void` | - | - | - |
+| `onSelect` | 面板选择的日期范围值改变的回调 | `(dates: (Date | undefined)[] | undefined) => void` | - | - | 仅选中起点或终点时也会触发 |
 
 ### IxDatePickerPanel
 
@@ -122,6 +123,7 @@ const defaultFormat = {
 | `timePanelOptions` | 时间选择面板配置 | `TimePanelOptions \| TimePanelOptions[]` | - | - | 如果需要对前后的时间选择器使用不同配置，可以传入一个数组 |
 | `visible` | 当前可见的面板 | `'datePanel' \| 'timePanel' \| boolean` | - | - | 在非 `datetime` 类型时，`timepanel` 无效 |
 | `onChange` | 值改变后的回调 | `(value: Date[] | undefined) => void` | - | - | - |
+| `onSelect` | 面板选择的日期范围值改变的回调 | `(dates: (Date | undefined)[] | undefined) => void` | - | - | 仅选中起点或终点时也会触发 |
 
 #### TimePanelOptions
 

@@ -104,9 +104,10 @@ export const datePickerProps = {
   footer: { type: [Boolean, Array, Object] as PropType<boolean | ɵFooterButtonProps[] | VNode>, default: false },
   placeholder: String,
   timePanelOptions: Object as PropType<PickerTimePanelOptions>,
-  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: Date | undefined) => void>>,
+
   onChange: [Function, Array] as PropType<MaybeArray<(value: Date | undefined, oldValue: Date | undefined) => void>>,
   onInput: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: Date | undefined) => void>>,
 } as const
 
 export type DatePickerProps = ExtractInnerPropTypes<typeof datePickerProps>
@@ -125,11 +126,13 @@ export const dateRangePickerProps = {
   placeholder: Array as PropType<string[]>,
   separator: [String, Object] as PropType<string | VNode>,
   timePanelOptions: [Object, Array] as PropType<PickerTimePanelOptions | PickerTimePanelOptions[]>,
-  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: Date[] | undefined) => void>>,
+
   onChange: [Function, Array] as PropType<
     MaybeArray<(value: Date[] | undefined, oldValue: Date[] | undefined) => void>
   >,
   onInput: [Function, Array] as PropType<MaybeArray<(isFrom: boolean, evt: Event) => void>>,
+  onSelect: [Function, Array] as PropType<MaybeArray<(selectingDate: (Date | undefined)[] | undefined) => void>>,
+  'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: Date[] | undefined) => void>>,
 } as const
 
 export type DateRangePickerProps = ExtractInnerPropTypes<typeof dateRangePickerProps>
@@ -183,6 +186,7 @@ export const dateRangePanelProps = {
   visible: [String, Boolean] as PropType<'datePanel' | 'timePanel' | boolean>,
 
   onChange: [Function, Array] as PropType<MaybeArray<(value: Date[] | undefined) => void>>,
+  onSelect: [Function, Array] as PropType<MaybeArray<(selectingDate: (Date | undefined)[] | undefined) => void>>,
   'onUpdate:activeValue': [Function, Array] as PropType<MaybeArray<(date: Date[] | undefined) => void>>,
 } as const
 export type DateRangePanelProps = ExtractInnerPropTypes<typeof dateRangePanelProps>

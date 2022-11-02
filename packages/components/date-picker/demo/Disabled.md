@@ -2,7 +2,7 @@
 title:
   zh: 禁用
   en: Disabled
-order: 5
+order: 50
 ---
 
 ## zh
