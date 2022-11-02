@@ -6,7 +6,7 @@
  */
 
 import type { PagesContext } from './composables/usePages'
-import type { PaginationProps } from './types'
+import type { PaginationProps, PaginationSize } from './types'
 import type { PaginationConfig } from '@idux/components/config'
 import type { Locale } from '@idux/components/locales'
 import type { ComputedRef, InjectionKey, Slots } from 'vue'
@@ -17,6 +17,7 @@ export interface PaginationContext extends PagesContext {
   config: PaginationConfig
   locale: Locale
   mergedPrefixCls: ComputedRef<string>
+  mergedSize: ComputedRef<PaginationSize>
   jumpToIndex: (event: KeyboardEvent) => void
 }
 

@@ -5,13 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { VNodeTypes } from 'vue'
-
-import { computed, defineComponent, inject } from 'vue'
+import { type VNodeChild, computed, createTextVNode, defineComponent, inject } from 'vue'
 
 import { isNil } from 'lodash-es'
 
-import { IxButton } from '@idux/components/button'
+import { IxIcon } from '@idux/components/icon'
 
 import { paginationToken } from '../token'
 import { paginationItemProps } from '../types'
@@ -29,11 +27,6 @@ const indexDiffMap = {
   prev: -1,
   prev5: -5,
   next5: 5,
-} as const
-
-const buttonSizeTransformMap = {
-  md: 'sm',
-  sm: 'xs',
 } as const
 
 export default defineComponent({
@@ -55,11 +48,11 @@ export default defineComponent({
 
     const classes = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-item`
-      const { type } = props
       return {
         [prefixCls]: true,
+        [`${prefixCls}-${props.type}`]: true,
         [`${prefixCls}-active`]: isActive.value,
-        [`${prefixCls}-button`]: type === 'next' || type === 'prev',
+        [`${prefixCls}-disabled`]: isDisabled.value,
       }
     })
 
@@ -70,13 +63,13 @@ export default defineComponent({
 
       const { type, index } = props
       if (type === 'page') {
-        return index!.toString()
+        return index as unknown as string
       }
 
       return locale.pagination[type]
     })
 
-    const onClick = () => {
+    const handleClick = () => {
       if (isDisabled.value) {
         return
       }
@@ -90,41 +83,44 @@ export default defineComponent({
       changePageIndex(newIndex)
     }
 
+    const handleKeydown = (evt: KeyboardEvent) => {
+      if (isDisabled.value || evt.code !== 'Enter') {
+        return
+      }
+      handleClick()
+    }
+
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-item`
-
       const { index, type } = props
       const disabled = isDisabled.value
-      const active = isActive.value
-      let original: VNodeTypes
-      const icon = iconMap[type]
-      const commonButtonProps = {
-        mode: 'text',
-        size: buttonSizeTransformMap[paginationProps.size ?? config.size],
-        shape: 'circle',
-      } as const
+
+      let original: VNodeChild
+
       if (props.type === 'prev5' || type === 'next5') {
         original = (
-          <span class={`${prefixCls}-jumper`}>
-            <IxButton {...commonButtonProps} icon={icon} disabled={disabled} />
-            <IxButton {...commonButtonProps} class={`${prefixCls}-ellipsis`} icon="ellipsis" disabled={disabled} />
+          <span class={` ${prefixCls}-jumper`}>
+            <IxIcon name={iconMap[type]} />
+            <IxIcon class={`${prefixCls}-ellipsis`} name="ellipsis" />
           </span>
         )
       } else if (!isNil(index)) {
-        original = (
-          <IxButton {...commonButtonProps} icon={icon} disabled={disabled}>
-            {index}
-          </IxButton>
-        )
+        original = createTextVNode(index as unknown as string)
       } else {
-        original = <IxButton {...commonButtonProps} icon={icon} disabled={disabled}></IxButton>
+        original = <IxIcon name={iconMap[type]} />
       }
 
-      const children = slots.item ? slots.item({ index, type, active, disabled, original }) : original
+      const children = slots.item ? slots.item({ index, type, active: isActive.value, disabled, original }) : original
 
       return (
-        <li class={classes.value} title={title.value} onClick={onClick}>
-          {children}
+        <li
+          class={classes.value}
+          tabindex={disabled ? -1 : 0}
+          title={title.value}
+          onClick={handleClick}
+          onKeydown={handleKeydown}
+        >
+          <span class={`${prefixCls}-content`}>{children}</span>
         </li>
       )
     }

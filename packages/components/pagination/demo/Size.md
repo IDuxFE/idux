@@ -1,14 +1,14 @@
 ---
 title:
-  zh: 迷你版本
-  en: Small size
+  zh: 尺寸
+  en: Size
 order: 3
 ---
 
 ## zh
 
-通过设置 `size="sm"` 可以使用迷你版本。
+分页器共有 3 种尺寸：小、中、大，默认为中。
 
 ## en
 
-The mini version can be used by setting `size="sm"`.
+There are three sizes of pagination: small, medium, and large. The default is medium.

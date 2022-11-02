@@ -1,7 +1,12 @@
 @import './default.variable.less';
 
-@pagination-font-size-md: @font-size-sm;
-@pagination-item-active-color: @color-primary;
-@pagination-item-active-background-color: @color-primary-l50;
+@pagination-font-size-md: var(--ix-font-size-sm);
+@pagination-font-size-lg: var(--ix-font-size-md);
 
-@pagination-item-hover-background-color: @color-graphite-l50;
+@pagination-item-content-icon-font-size: var(--ix-font-size-lg);
+
+@pagination-color-hover: var(--ix-color-primary);
+@pagination-color-active: var(--ix-color-primary);
+@pagination-background-color-hover: var(--ix-background-color-light);
+@pagination-background-color-active: var(--ix-color-primary-l50);
+@pagination-background-color-disabled: var(--ix-background-color-deep);
