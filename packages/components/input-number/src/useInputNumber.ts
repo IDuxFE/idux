@@ -77,16 +77,20 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
 
   function updateDisplayValueFromAccessor() {
     const { value } = accessor
-    if (value === null || value === undefined) {
+    // Check whether value is empty.
+    if ((!value && value !== 0) || !String(value).trim()) {
       displayValue.value = ''
-    } else if (Number.isNaN(value)) {
+
+      // Check whether value is not a number.
+    } else if (Number.isNaN(Number(value)) || (typeof value !== 'number' && typeof value !== 'string')) {
       displayValue.value = ''
       if (__DEV__) {
         Logger.warn('components/input-number', `model value(${value}) is not a number.`)
       }
     } else {
-      if (displayValue.value === '' || value !== Number(displayValue.value)) {
-        displayValue.value = value.toFixed(precision.value)
+      const newValue = Number(value)
+      if (displayValue.value === '' || newValue !== Number(displayValue.value)) {
+        displayValue.value = newValue.toFixed(precision.value)
       }
     }
   }
