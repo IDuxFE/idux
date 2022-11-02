@@ -1,34 +1,14 @@
-.pagination-size(@font-size, @item-size, @item-padding) {
+.pagination-size(@font-size, @item-padding, @item-button-size) {
   font-size: @font-size;
-  @item-button-size: @item-size - @item-padding * 2;
+  line-height: calc(@font-size + 8px);
 
   .@{pagination-prefix}-item {
     padding: @item-padding;
 
-    .@{button-prefix} {
-      min-width: @item-button-size;
+    &-content {
       height: @item-button-size;
       line-height: @item-button-size;
-      font-size: @font-size;
+      min-width: @item-button-size;
     }
-
-    .@{button-prefix}.@{button-prefix}-icon-only {
-      width: @item-button-size;
-    }
-  }
-
-  .@{pagination-prefix}-total,
-  .@{pagination-prefix}-sizes,
-  .@{pagination-prefix}-jumper {
-    height: @item-size;
-    line-height: @item-size;
-  }
-
-  .@{pagination-prefix}-sizes .@{select-prefix},
-  .@{pagination-prefix}-jumper .@{input-prefix},
-  .@{pagination-prefix}-total {
-    font-size: @font-size;
-    height: @item-size;
-    line-height: @item-size;
   }
 }

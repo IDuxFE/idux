@@ -52,7 +52,7 @@ export function usePagination(
       ...pagination,
       pageIndex: pagination.pageIndex ?? tempIndex.value,
       pageSize: pagination.pageSize ?? tempSize.value,
-      size: mergedSize.value === 'sm' ? 'sm' : 'md',
+      size: mergedSize.value,
       onChange: handlePageChange,
     }
   })

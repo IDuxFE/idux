@@ -1,9 +1,9 @@
 <template>
-  <IxPagination :total="50" />
-  <br />
-  <IxPagination :pageIndex="pageIndex" disabled :total="500" />
-  <br />
-  <IxPagination v-model:pageIndex="pageIndex" :total="500" />
+  <IxSpace vertical block>
+    <IxPagination :total="500" />
+    <IxPagination :pageIndex="pageIndex" disabled :total="500" />
+    <IxPagination v-model:pageIndex="pageIndex" :total="500" />
+  </IxSpace>
 </template>
 
 <script setup lang="ts">

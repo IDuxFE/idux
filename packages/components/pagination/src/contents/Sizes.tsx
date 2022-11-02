@@ -13,7 +13,7 @@ import { paginationToken } from '../token'
 
 export default defineComponent({
   setup() {
-    const { props, config, locale, mergedPrefixCls, activeSize, changePageSize } = inject(paginationToken)!
+    const { props, config, locale, mergedPrefixCls, mergedSize, activeSize, changePageSize } = inject(paginationToken)!
 
     const sizeData = computed(() => {
       const { pageSizes = config.pageSizes } = props
@@ -29,15 +29,13 @@ export default defineComponent({
       return (
         <li class={prefixCls}>
           {itemsPerPage}
-          <div class={`${prefixCls}-select-wrapper`}>
-            <IxSelect
-              disabled={props.disabled}
-              dataSource={sizeData.value}
-              size="sm"
-              value={activeSize.value}
-              onChange={changePageSize}
-            />
-          </div>
+          <IxSelect
+            disabled={props.disabled}
+            dataSource={sizeData.value}
+            size={mergedSize.value === 'lg' ? 'md' : 'sm'}
+            value={activeSize.value}
+            onChange={changePageSize}
+          />
           {itemsSuffix}
         </li>
       )

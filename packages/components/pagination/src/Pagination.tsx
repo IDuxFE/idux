@@ -31,7 +31,7 @@ export default defineComponent({
 
     const showTotal = computed(() => props.showTotal ?? config.showTotal)
     const simple = computed(() => props.simple ?? config.simple)
-    const size = computed(() => props.size ?? config.size)
+    const mergedSize = computed(() => props.size ?? config.size)
     const showQuickJumper = computed(() => props.showQuickJumper ?? config.showQuickJumper)
     const showSizeChanger = computed(() => props.showSizeChanger ?? config.showSizeChanger)
 
@@ -45,6 +45,7 @@ export default defineComponent({
       config,
       locale,
       mergedPrefixCls,
+      mergedSize,
       activeIndex,
       activeSize,
       lastIndex,
@@ -59,7 +60,7 @@ export default defineComponent({
         [prefixCls]: true,
         [`${prefixCls}-disabled`]: props.disabled,
         [`${prefixCls}-simple`]: simple.value,
-        [`${prefixCls}-${size.value}`]: true,
+        [`${prefixCls}-${mergedSize.value}`]: true,
       })
     })
 
@@ -75,7 +76,12 @@ export default defineComponent({
         children.push(
           <li class={`${prefixCls}-item`}>
             {showQuickJumper.value ? (
-              <ɵInput disabled={props.disabled} size="sm" value={_activeIndex.toString()} onKeydown={jumpToIndex} />
+              <ɵInput
+                disabled={props.disabled}
+                size={mergedSize.value === 'lg' ? 'md' : 'sm'}
+                value={_activeIndex.toString()}
+                onKeydown={jumpToIndex}
+              />
             ) : (
               _activeIndex
             )}

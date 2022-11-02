@@ -182,13 +182,13 @@ describe('Table', () => {
     test('ellipsis work', async () => {
       const wrapper = TableMount({ props: { ellipsis: true } })
 
-      expect(wrapper.find('thead').find('th').classes()).toContain('ix-table-cell-ellipsis')
-      expect(wrapper.find('tbody').find('td').classes()).toContain('ix-table-cell-ellipsis')
+      expect(wrapper.find('thead').findAll('th')[2].classes()).toContain('ix-table-cell-ellipsis')
+      expect(wrapper.find('tbody').findAll('td')[2].classes()).toContain('ix-table-cell-ellipsis')
 
       await wrapper.setProps({ ellipsis: false })
 
-      expect(wrapper.find('thead').find('th').classes()).not.toContain('ix-table-cell-ellipsis')
-      expect(wrapper.find('tbody').find('td').classes()).not.toContain('ix-table-cell-ellipsis')
+      expect(wrapper.find('thead').findAll('th')[2].classes()).not.toContain('ix-table-cell-ellipsis')
+      expect(wrapper.find('tbody').findAll('td')[2].classes()).not.toContain('ix-table-cell-ellipsis')
     })
 
     test('ellipsis with title work', async () => {

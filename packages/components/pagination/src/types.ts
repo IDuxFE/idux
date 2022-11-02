@@ -8,7 +8,7 @@
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
 
-export type PaginationSize = 'sm' | 'md'
+export type PaginationSize = 'sm' | 'md' | 'lg'
 export type PaginationItemType = 'page' | 'prev' | 'next' | 'prev5' | 'next5'
 export interface PaginationItemRenderOptions {
   index?: number

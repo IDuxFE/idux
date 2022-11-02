@@ -93,19 +93,20 @@ describe('Alert', () => {
     await wrapper.setProps({ pagination: true })
 
     expect(wrapper.find('.ix-alert-content').text()).toBe('message1')
-    expect(wrapper.findAll('button')[0].classes()).toContain('ix-button-disabled')
-    expect(wrapper.findAll('button')[1].classes()).not.toContain('ix-button-disabled')
+    expect(wrapper.findAll('.ix-pagination-item')[0].classes()).toContain('ix-pagination-item-disabled')
+    expect(wrapper.findAll('.ix-pagination-item')[1].classes()).not.toContain('ix-pagination-item-disabled')
+    expect(wrapper.findAll('.ix-pagination-item')[2].classes()).not.toContain('ix-pagination-item-disabled')
 
     await wrapper.trigger('click')
     expect(wrapper.find('.ix-alert-content').text()).toBe('message1')
 
-    await wrapper.findAll('button')[1].trigger('click')
+    await wrapper.findAll('.ix-pagination-item')[2].trigger('click')
     expect(wrapper.find('.ix-alert-content').text()).toBe('message2')
 
-    await wrapper.findAll('button')[1].trigger('click')
+    await wrapper.findAll('.ix-pagination-item')[2].trigger('click')
     expect(wrapper.find('.ix-alert-content').text()).toBe('message2')
 
-    await wrapper.findAll('button')[0].trigger('click')
+    await wrapper.findAll('.ix-pagination-item')[0].trigger('click')
     expect(wrapper.find('.ix-alert-content').text()).toBe('message1')
 
     const onChange = vi.fn()
@@ -118,7 +119,7 @@ describe('Alert', () => {
     })
     expect(wrapper.find('.ix-alert-content').text()).toBe('message2')
 
-    await wrapper.findAll('button')[0].trigger('click')
+    await wrapper.findAll('.ix-pagination-item')[0].trigger('click')
     expect(onChange).toBeCalledWith(1)
   })
 })

@@ -13,7 +13,7 @@ import { paginationToken } from '../token'
 
 export default defineComponent({
   setup() {
-    const { props, locale, mergedPrefixCls, jumpToIndex } = inject(paginationToken)!
+    const { props, locale, mergedPrefixCls, mergedSize, jumpToIndex } = inject(paginationToken)!
 
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-jumper`
@@ -22,7 +22,7 @@ export default defineComponent({
       return (
         <li class={prefixCls}>
           {jumpTo}
-          <ɵInput disabled={disabled} size="sm" onKeydown={jumpToIndex} />
+          <ɵInput disabled={disabled} size={mergedSize.value === 'lg' ? 'md' : 'sm'} onKeydown={jumpToIndex} />
           {page}
         </li>
       )
