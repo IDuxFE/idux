@@ -25,7 +25,7 @@
 | `@button-background-color` | `var(--ix-background-color)` | - | - |
 | `@button-background-color-disabled` | `var(--ix-background-color-deep)` | - | - |
 | `@button-border-color` | `var(--ix-border-color)` | - | - |
-| `@button-border-radius` | `var(--ix-border-radius-sm)` | - | - |
+| `@button-border-radius` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
 | `@button-primary-color` | `var(--ix-text-color-inverse)` | - | - |
 | `@button-primary-background-color` | `var(--ix-color-primary)` | - | - |
 | `@button-primary-background-color-hover` | `var(--ix-color-primary-l10)` | - | - |

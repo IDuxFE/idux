@@ -22,4 +22,5 @@ export type {
   CollapsePanelProps,
   CollapsePanelComponent,
   CollapsePanelPublicProps as CollapsePanelInstance,
+  CollapseSize,
 } from './src/types'

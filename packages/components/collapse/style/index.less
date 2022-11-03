@@ -1,83 +1,98 @@
 @import '../../style/mixins/reset.less';
 
 .@{collapse-prefix} {
-  .reset-component();
+  .reset-component-new();
 
-  line-height: @collapse-line-height;
-  font-size: @font-size-md;
-  color: @collapse-color;
-  background-color: @color-grey-l50;
-  border: @collapse-border;
-  border-bottom: 0;
-  border-radius: @collapse-border-radius;
+  cursor: pointer;
 
-  &-borderless {
-    border: 0;
-    .@{collapse-panel-prefix}-content {
-      border-top: 0;
-      background-color: transparent;
+  &-sm {
+    font-size: @collapse-font-size-sm;
+
+    .@{header-prefix} {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    .@{collapse-prefix}-panel-content-box {
+      padding: 12px;
+    }
+
+    .@{collapse-prefix}-panel {
+      border-bottom: none;
+    }
+
+    .@{collapse-prefix}-panel:first-child {
+      border-radius: @collapse-border-radius @collapse-border-radius 0 0;
+    }
+
+    .@{collapse-prefix}-panel:last-child {
+      border-bottom: @collapse-border;
+      border-radius: 0 0 @collapse-border-radius @collapse-border-radius;
     }
   }
 
-  &-ghost {
-    border: 0;
-    background-color: transparent;
+  &-md {
+    font-size: @collapse-font-size-md;
 
-    .@{collapse-panel-prefix} {
-      border-bottom: 0;
+    .@{header-prefix} {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
 
-      .@{idux-prefix}-header {
-        background-color: transparent;
-      }
+    .@{collapse-prefix}-panel-content-box {
+      padding: 16px;
+    }
+
+    .@{collapse-prefix}-panel + .@{collapse-prefix}-panel {
+      margin-top: 8px;
+    }
+
+    .@{collapse-prefix}-panel {
+      border-radius: @collapse-border-radius;
+    }
+  }
+
+  &-panel {
+    border: @collapse-border;
+
+    .@{header-prefix} {
+      border-radius: @collapse-border-radius;
+    }
+
+    &-content {
+      background-color: @collapse-content-background-color;
+      border-top: @collapse-border;
+      border-radius: 0 0 @collapse-border-radius @collapse-border-radius;
+    }
+
+    &-disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  &-borderless {
+    .@{collapse-prefix}-panel {
+      border: 0;
 
       &-content {
         border-top: 0;
+      }
+    }
+  }
+
+  &-ghost {
+    background-color: transparent;
+
+    .@{collapse-prefix}-panel {
+      &-content,
+      .@{header-prefix} {
         background-color: transparent;
       }
     }
   }
 
-  &-borderless,
-  &-ghost {
-    .@{collapse-panel-prefix}-content-box {
-      padding-top: @collapse-panel-content-padding-top-compact;
-    }
-  }
-
-  .@{collapse-panel-prefix}:last-child {
-    border-radius: 0 0 @collapse-border-radius @collapse-border-radius;
-  }
-}
-
-.@{collapse-panel-prefix} {
-  border-bottom: @collapse-border;
-  background-color: @collapse-panel-content-background-color;
-
-  .@{idux-prefix}-header {
-    padding: @collapse-panel-header-padding;
-    background-color: @collapse-background-color;
-    cursor: pointer;
-
-    &-prefix {
-      font-size: @collapse-panel-header-prefix-font-size;
-      border-right: none;
-    }
-
-    &-title {
-      font-size: @collapse-panel-header-font-size;
-      font-weight: @collapse-panel-header-font-weight;
-    }
-  }
-
-  &-content {
-    border-top: @collapse-border;
-
-    &-box {
-      padding: @collapse-panel-content-padding;
-    }
-  }
-
-  &-disabled {
-    cursor: not-allowed;
+  // nest
+  .@{collapse-prefix} {
+    background-color: transparent;
   }
 }

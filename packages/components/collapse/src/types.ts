@@ -11,6 +11,8 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } 
 import type { HeaderProps } from '@idux/components/header'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
+export type CollapseSize = 'sm' | 'md'
+
 export const collapseProps = {
   expandedKeys: Array as PropType<VKey[]>,
   accordion: {
@@ -24,6 +26,10 @@ export const collapseProps = {
   expandIcon: String,
   ghost: {
     type: Boolean,
+    default: undefined,
+  },
+  size: {
+    type: String as PropType<CollapseSize>,
     default: undefined,
   },
 

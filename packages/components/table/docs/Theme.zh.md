@@ -13,7 +13,7 @@
 | `@table-row-padding-md` | `0 var(--ix-spacing-md)` | - | - |
 | `@table-row-padding-lg` | `0 var(--ix-spacing-lg)` | - | - |
 | `@table-border-color` | `var(--ix-border-color-secondary)` | - | - |
-| `@table-border-radius` | `var(--ix-border-radius-sm)` | - | - |
+| `@table-border-radius` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
 | `@table-head-color` | `var(--ix-text-color-title-secondary)` | - | - |
 | `@table-head-background-color` | `var(--ix-background-color-light)` | - | - |
 | `@table-head-icon-color` | `inherit` | - | - |
