@@ -1,18 +1,23 @@
 <template>
-  <IxHeader prefix="arrow-left" suffix="setting" @prefixClick="onPrefixClick" @suffixClick="onSuffixClick">
+  <IxHeader
+    description="This is a description"
+    prefix="arrow-left"
+    suffix="setting"
+    @prefixClick="onPrefixClick"
+    @suffixClick="onSuffixClick"
+  >
     Title
   </IxHeader>
-  <IxHeader>
+  <IxHeader description="This is a description">
     Title
     <template #prefix>
       <IxIcon name="caret-left-filled" @click="onPrefixClick" />
     </template>
     <template #suffix>
-      <IxButtonGroup size="xs" mode="text" :gap="8">
-        <IxButton icon="setting" @click="onSuffixClick"></IxButton>
-        <IxButton icon="menu" size="xs" @click="onSuffixClick"></IxButton>
-        <IxButton size="xs" @click="onSuffixClick">More</IxButton>
-      </IxButtonGroup>
+      <IxSpace>
+        <IxIcon name="setting" @click="onSuffixClick" />
+        <IxIcon name="menu" @click="onSuffixClick" />
+      </IxSpace>
     </template>
   </IxHeader>
 </template>

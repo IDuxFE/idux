@@ -5,11 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { VKey } from '@idux/cdk/utils'
-
 import { computed, defineComponent, normalizeClass, provide } from 'vue'
 
-import { useControlledProp } from '@idux/cdk/utils'
+import { type VKey, useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
 import { collapseToken } from './token'
@@ -26,6 +24,7 @@ export default defineComponent({
     const borderless = computed(() => props.borderless ?? config.borderless)
     const expandIcon = computed(() => props.expandIcon ?? config.expandIcon)
     const ghost = computed(() => props.ghost ?? config.ghost)
+    const mergedSize = computed(() => props.size ?? config.size)
 
     const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', () => [])
 
@@ -41,12 +40,13 @@ export default defineComponent({
       setExpandedKeys(tempKeys)
     }
 
-    provide(collapseToken, { props, slots, expandedKeys, expandIcon, handleExpand })
+    provide(collapseToken, { props, slots, mergedSize, expandedKeys, expandIcon, handleExpand })
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
+        [`${prefixCls}-${mergedSize.value}`]: true,
         [`${prefixCls}-borderless`]: borderless.value,
         [`${prefixCls}-ghost`]: ghost.value,
       })

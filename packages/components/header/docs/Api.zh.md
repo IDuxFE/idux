@@ -10,7 +10,6 @@
 | `prefix` | 标题前缀图标 | `string \| VNode` | - | - | - |
 | `size` | 标题大小 | `'lg' \| 'md' \| 'sm'` | `'md'` | - | - |
 | `showBar` | 是否显示标题前的竖条 | `boolean` | `false` | - | - |
-| `subTitle` | 二级标题文字 | `string` | - | - | - |
 | `suffix` | 标题后缀图标 | `string \| VNode` | - | - | 通常用于额外操作 |
 | `title` | 标题文字 | `string \| #default` | - | - | - |
 | `onPrefixClick` | 前缀图标被点击 | `(evt: MouseEvent) => void` | - | - | - |
@@ -23,6 +22,5 @@
 | `avatar` | 自定义头像 | - | - |
 | `description` | 自定义说明文字 | - | - |
 | `prefix` | 自定义前缀图标 | - | - |
-| `subTitle` | 自定义二级标题文字 | - | - |
 | `suffix` | 自定义后缀图标 | - | - |
 | `title` | 自定义标题文字 | - | - |

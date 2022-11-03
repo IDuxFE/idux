@@ -1,6 +1,6 @@
 <template>
-  <div :id="id" class="global-code-box">
-    <div class="global-code-box-title markdown">
+  <div :id="id" class="global-code-box markdown">
+    <div class="global-code-box-title">
       <h3>
         <span>{{ title }}</span>
         <a class="anchor" :href="'#' + id">#</a>
@@ -150,7 +150,7 @@ export default defineComponent({
 
   &-tools {
     position: absolute;
-    bottom: -4px;
+    bottom: -8px;
     right: 16px;
     cursor: pointer;
 

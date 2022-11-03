@@ -7,8 +7,8 @@ order: 0
 
 ## zh
 
-显示标题，二级标题以及描述文字。
+显示标题以及描述文字。
 
 ## en
 
-Display `title`, `subTitle` and `description`.
+Display `title` and `description`.

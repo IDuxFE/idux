@@ -16,6 +16,7 @@ import type { ButtonSize } from '@idux/components/button'
 import type { CardSize } from '@idux/components/card'
 import type { CarouselDotPlacement, CarouselDotTrigger } from '@idux/components/carousel'
 import type { CascaderData } from '@idux/components/cascader'
+import type { CollapseSize } from '@idux/components/collapse'
 import type { DatePickerType } from '@idux/components/date-picker'
 import type { FormLabelAlign, FormLayout, FormSize } from '@idux/components/form'
 import type { ListSize } from '@idux/components/list'
@@ -180,6 +181,7 @@ export interface CollapseConfig {
   borderless: boolean
   expandIcon: string
   ghost: boolean
+  size: CollapseSize
 }
 
 export interface DatePickerConfig {

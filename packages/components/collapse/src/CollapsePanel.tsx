@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { CollapsePanelProps } from './types'
+import type { CollapsePanelProps, CollapseSize } from './types'
 import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef, Slots, VNodeTypes } from 'vue'
 
@@ -29,7 +29,7 @@ export default defineComponent({
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-collapse-panel`)
-    const { slots: collapseSlots, expandedKeys, expandIcon, handleExpand } = inject(collapseToken)!
+    const { slots: collapseSlots, mergedSize, expandedKeys, expandIcon, handleExpand } = inject(collapseToken)!
 
     const key = useKey()
     const isExpanded = computed(() => expandedKeys.value.includes(key))
@@ -51,7 +51,7 @@ export default defineComponent({
 
     return () => {
       const expanded = isExpanded.value
-      const headerNode = renderHeader(props, slots, collapseSlots, key, expanded, expandIcon, handleClick)
+      const headerNode = renderHeader(props, slots, collapseSlots, key, mergedSize, expanded, expandIcon, handleClick)
       const prefixCls = mergedPrefixCls.value
       return (
         <div class={classes.value}>
@@ -72,12 +72,13 @@ function renderHeader(
   slots: Slots,
   collapseSlots: Slots,
   key: VKey,
+  mergedSize: ComputedRef<CollapseSize>,
   expanded: boolean,
   expandIcon: ComputedRef<string>,
-  handleClick: () => void,
+  changeExpand: () => void,
 ) {
   if (slots.header) {
-    return slots.header({ expanded, onClick: handleClick })
+    return slots.header({ expanded, onClick: changeExpand, changeExpand })
   }
   let iconNode: VNodeTypes | undefined
   if (collapseSlots.expandIcon) {
@@ -92,5 +93,13 @@ function renderHeader(
   const headerSlots = iconNode ? { prefix: () => iconNode } : undefined
   const { header, disabled } = props
   const headerProps = isString(header) ? { title: header } : header
-  return <IxHeader v-slots={headerSlots} disabled={disabled} onClick={handleClick} {...headerProps}></IxHeader>
+  return (
+    <IxHeader
+      v-slots={headerSlots}
+      disabled={disabled}
+      size={mergedSize.value}
+      onClick={changeExpand}
+      {...headerProps}
+    />
+  )
 }

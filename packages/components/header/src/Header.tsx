@@ -5,25 +5,16 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { AvatarProps } from '@idux/components/avatar'
-
-import { type ComputedRef, type Slot, computed, defineComponent, normalizeClass } from 'vue'
+import { type Slot, computed, defineComponent, normalizeClass } from 'vue'
 
 import { isString } from 'lodash-es'
 
 import { callEmit } from '@idux/cdk/utils'
-import { IxAvatar } from '@idux/components/avatar'
+import { type AvatarProps, IxAvatar } from '@idux/components/avatar'
 import { useGlobalConfig } from '@idux/components/config'
 import { convertIconVNode, convertStringVNode } from '@idux/components/utils'
 
-import { headerProps } from './types'
-
-const avatarSizeTransformMap = {
-  xl: 'md',
-  lg: 'md',
-  md: 'sm',
-  sm: 'sm',
-} as const
+import { type HeaderSize, headerProps } from './types'
 
 export default defineComponent({
   name: 'IxHeader',
@@ -43,8 +34,6 @@ export default defineComponent({
       })
     })
 
-    const avatarSize = computed(() => avatarSizeTransformMap[props.size])
-
     const onPrefixClick = (evt: MouseEvent) => !props.disabled && callEmit(props.onPrefixClick, evt)
     const onSuffixClick = (evt: MouseEvent) => !props.disabled && callEmit(props.onSuffixClick, evt)
 
@@ -59,33 +48,31 @@ export default defineComponent({
 
       return (
         <div class={classes.value}>
+          {prefixIconNode && (
+            <span class={`${prefixCls}-prefix`} onClick={onPrefixClick}>
+              {prefixIconNode}
+            </span>
+          )}
+          {renderAvatar(slots.avatar, props.avatar, props.size)}
           <div class={`${prefixCls}-content`}>
-            {prefixIconNode && (
-              <span class={`${prefixCls}-prefix`} onClick={onPrefixClick}>
-                {prefixIconNode}
-              </span>
-            )}
-            {renderAvatar(slots.avatar, props.avatar, avatarSize)}
-            {titleNode && <span class={`${prefixCls}-title`}>{titleNode}</span>}
-            {subTitleNode && <span class={`${prefixCls}-sub-title`}>{subTitleNode}</span>}
-            {suffixIconNode && (
-              <span class={`${prefixCls}-suffix`} onClick={onSuffixClick}>
-                {suffixIconNode}
-              </span>
-            )}
+            <div class={`${prefixCls}-title-wrapper`}>
+              {titleNode && <span class={`${prefixCls}-title`}>{titleNode}</span>}
+              {subTitleNode && <span class={`${prefixCls}-sub-title`}>{subTitleNode}</span>}
+            </div>
+            {descriptionNode && <div class={`${prefixCls}-description`}>{descriptionNode}</div>}
           </div>
-          {descriptionNode && <div class={`${prefixCls}-description`}>{descriptionNode}</div>}
+          {suffixIconNode && (
+            <span class={`${prefixCls}-suffix`} onClick={onSuffixClick}>
+              {suffixIconNode}
+            </span>
+          )}
         </div>
       )
     }
   },
 })
 
-const renderAvatar = (
-  slot: Slot | undefined,
-  avatar: string | AvatarProps | undefined,
-  size: ComputedRef<'md' | 'sm'>,
-) => {
+const renderAvatar = (slot: Slot | undefined, avatar: string | AvatarProps | undefined, size: HeaderSize) => {
   if (slot) {
     return slot()
   }
@@ -95,5 +82,5 @@ const renderAvatar = (
   }
 
   const avatarProps = isString(avatar) ? { icon: avatar } : avatar
-  return <IxAvatar size={size.value} {...avatarProps}></IxAvatar>
+  return <IxAvatar size={size} {...avatarProps}></IxAvatar>
 }

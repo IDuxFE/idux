@@ -2,11 +2,13 @@
 
 exports[`Header > render work 1`] = `
 "<div class=\\"ix-header ix-header-md\\">
-  <div class=\\"ix-header-content\\">
-    <!---->
-    <!----><span class=\\"ix-header-title\\">Header title</span>
-    <!----><span class=\\"ix-header-suffix\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span>
-  </div>
   <!---->
+  <!---->
+  <div class=\\"ix-header-content\\">
+    <div class=\\"ix-header-title-wrapper\\"><span class=\\"ix-header-title\\">Header title</span>
+      <!---->
+    </div>
+    <!---->
+  </div><span class=\\"ix-header-suffix\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span>
 </div>"
 `;

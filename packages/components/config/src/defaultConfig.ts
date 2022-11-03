@@ -79,6 +79,7 @@ export const defaultConfig: GlobalConfig = {
     borderless: false,
     expandIcon: 'right',
     ghost: false,
+    size: 'md',
   },
   datePicker: {
     allowInput: false,

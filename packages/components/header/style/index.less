@@ -4,9 +4,8 @@
 .@{header-prefix} {
   .reset-component-new();
 
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   color: @header-color;
   width: 100%;
 
@@ -27,21 +26,13 @@
     .header-size(@header-height-xl, @header-font-size-xl);
   }
 
-  &-content {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
-  }
-
   &-prefix {
-    display: flex;
-    align-items: center;
     margin-right: 16px;
   }
 
   .@{avatar-prefix} {
     margin-right: 16px;
+    align-self: center;
   }
 
   &-title {
@@ -66,19 +57,17 @@
 
   &-prefix,
   &-suffix {
-    cursor: pointer;
-    transition: color var(--ix-transition-duration-fast);
-
-    &:hover {
-      color: @header-color-hover;
-    }
-
-    &:active {
-      color: @header-color-active;
-    }
-
     .@{icon-prefix} {
       font-size: @header-icon-font-size;
+      cursor: pointer;
+
+      &:hover {
+        color: @header-color-hover;
+      }
+
+      &:active {
+        color: @header-color-active;
+      }
     }
   }
 
@@ -97,9 +86,11 @@
       cursor: not-allowed;
       color: @header-color-disabled;
 
-      &:hover,
-      &:active {
-        color: @header-color-disabled;
+      .@{icon-prefix} {
+        &:hover,
+        &:active {
+          color: @header-color-disabled;
+        }
       }
     }
 
@@ -110,7 +101,7 @@
     }
   }
 
-  &-with-bar &-content {
+  &-with-bar {
     padding-left: @header-bar-width * 2;
 
     &::before {
@@ -118,7 +109,6 @@
       left: 0;
       top: 0;
       bottom: 0;
-      margin: 4px 0;
       width: @header-bar-width;
       background-color: @header-bar-background-color;
       border-radius: calc(@header-bar-width / 2);
@@ -134,6 +124,13 @@
   line-height: @line-height;
   padding-top: calc((@height - @line-height) / 2);
   padding-bottom: calc((@height - @line-height) / 2);
+
+  &.@{header-prefix}-with-bar {
+    &::before {
+      margin-top: calc((@height - @line-height) / 2);
+      height: @line-height;
+    }
+  }
 
   &.@{header-prefix}-with-description {
     @description-line-height: calc(@header-description-font-size + var(--ix-line-height-gutter));
