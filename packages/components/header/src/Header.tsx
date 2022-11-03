@@ -36,9 +36,10 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
+        [`${prefixCls}-${props.size}`]: true,
         [`${prefixCls}-disabled`]: props.disabled,
         [`${prefixCls}-with-bar`]: props.showBar,
-        [`${prefixCls}-${props.size}`]: true,
+        [`${prefixCls}-with-description`]: props.description || slots.description,
       })
     })
 

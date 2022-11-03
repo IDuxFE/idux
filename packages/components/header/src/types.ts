@@ -9,7 +9,7 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '
 import type { AvatarProps } from '@idux/components/avatar'
 import type { DefineComponent, HTMLAttributes, PropType, VNodeChild } from 'vue'
 
-export type HeaderSize = 'xl' | 'lg' | 'md' | 'sm'
+export type HeaderSize = 'lg' | 'md' | 'sm'
 
 export const headerProps = {
   avatar: { type: [String, Object] as PropType<string | AvatarProps>, default: undefined },
