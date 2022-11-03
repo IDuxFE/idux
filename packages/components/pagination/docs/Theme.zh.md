@@ -1,6 +1,6 @@
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@pagination-font-size-sm` | `var(--ix-font-size-sm)` | `var(--ix-font-size-sm)` | - |
+| `@pagination-font-size-sm` | `var(--ix-font-size-sm)` | - | - |
 | `@pagination-font-size-md` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
 | `@pagination-font-size-lg` | `var(--ix-font-size-lg)` | `var(--ix-font-size-md)` | - |
 | `@pagination-item-padding-sm` | `0` | - | - |
@@ -13,7 +13,7 @@
 | `@pagination-item-content-icon-font-size` | `inherit` | `var(--ix-font-size-lg)` | - |
 | `@pagination-color-hover` | `var(--ix-text-color)` | `var(--ix-color-primary)` | - |
 | `@pagination-color-active` | `var(--ix-text-color-inverse)` | `var(--ix-color-primary)` | - |
-| `@pagination-color-disabled` | `var(--ix-text-color-disabled)` | `var(--ix-text-color-disabled)` | - |
+| `@pagination-color-disabled` | `var(--ix-text-color-disabled)` | - | - |
 | `@pagination-background-color-hover` | `var(--ix-background-color-deep)` | `var(--ix-background-color-light)` | - |
 | `@pagination-background-color-active` | `var(--ix-color-primary)` | `var(--ix-color-primary-l50)` | - |
 | `@pagination-background-color-disabled` | `var(--ix-background-color-deep)` | `var(--ix-background-color-deep)` | - |

@@ -21,7 +21,9 @@
 | `@button-padding-lg` | `0 var(--ix-spacing-xl)` | - | - |
 | `@button-padding-xl` | `0 var(--ix-spacing-2xl)` | - | - |
 | `@button-color` | `var(--ix-text-color)` | - | - |
+| `@button-color-disabled` | `var(--ix-text-color-disabled)` | - | - |
 | `@button-background-color` | `var(--ix-background-color)` | - | - |
+| `@button-background-color-disabled` | `var(--ix-background-color-deep)` | - | - |
 | `@button-border-color` | `var(--ix-border-color)` | - | - |
 | `@button-border-radius` | `var(--ix-border-radius-sm)` | - | - |
 | `@button-primary-color` | `var(--ix-text-color-inverse)` | - | - |
@@ -35,7 +37,5 @@
 | `@button-ghost-background-color-hover` | `rgba(255, 255, 255, 0.2)` | - | - |
 | `@button-ghost-background-color-active` | `var(--ix-background-color)` | - | - |
 | `@button-ghost-background-color-disabled` | `rgba(255, 255, 255, 0.4)` | - | - |
-| `@button-disabled-color` | `var(--ix-text-color-disabled)` | - | - |
-| `@button-disabled-background-color` | `var(--ix-background-color-deep)` | - | - |
 | `@button-icon-color` | `inherit` | `var(--ix-text-color-title-secondary)` | - |
 | `@button-icon-font-size` | `inherit` | `var(--ix-font-size-lg)` | - |
