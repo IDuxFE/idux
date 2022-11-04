@@ -7,6 +7,7 @@
 
 import type { ProSearchProps } from '../types'
 import type { ActiveSegmentContext } from './useActiveSegment'
+import type { SearchStateContext } from './useSearchStates'
 import type { ɵOverlayProps } from '@idux/components/_private/overlay'
 
 import { type ComputedRef, type Ref, nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
@@ -15,8 +16,6 @@ import { isFunction, isString } from 'lodash-es'
 
 import { useSharedFocusMonitor } from '@idux/cdk/a11y'
 import { MaybeElementRef, callEmit, useState } from '@idux/cdk/utils'
-
-import { type SearchState, type SearchStateContext, tempSearchStateKey } from './useSearchStates'
 
 export interface FocusEventContext {
   focused: ComputedRef<boolean>
@@ -31,27 +30,17 @@ export function useFocusedState(
   searchStateContext: SearchStateContext,
   activeSegmentContext: ActiveSegmentContext,
 ): FocusEventContext {
-  const { tempSearchState, searchStates } = searchStateContext
+  const { searchStates, initTempSearchState } = searchStateContext
   const { activeSegment, setInactive, setTempActive } = activeSegmentContext
   const [focused, setFocused] = useState(false)
 
-  const { setTempSegmentActive, setPrevActiveSegmentName } = manageTempSegmentActive(tempSearchState, setTempActive)
-  const { handleFocus, handleBlur } = useFocusHandlers(props, focused, setFocused, setInactive)
+  const { handleFocus, handleBlur } = useFocusHandlers(props, focused, setFocused, setInactive, initTempSearchState)
 
   watch([activeSegment, searchStates], ([segment]) => {
     if (!segment && focused.value) {
-      setTempSegmentActive()
+      setTempActive()
     }
   })
-
-  const _handleBlur = (evt: FocusEvent) => {
-    handleBlur(evt, () => {
-      // remember currently active segment to restore focus to it
-      setPrevActiveSegmentName(
-        activeSegment.value?.itemKey === tempSearchStateKey ? activeSegment.value.name : undefined,
-      )
-    })
-  }
 
   const _handleFocus = (evt: FocusEvent) => {
     if (props.disabled) {
@@ -60,7 +49,7 @@ export function useFocusedState(
 
     handleFocus(evt, () => {
       if (evt.target === elementRef.value) {
-        setTempSegmentActive()
+        setTempActive()
       }
     })
   }
@@ -73,7 +62,7 @@ export function useFocusedState(
     setFocused(false)
   }
 
-  registerHandlers(elementRef, () => getContainerEl(commonOverlayProps.value.container), _handleFocus, _handleBlur)
+  registerHandlers(elementRef, () => getContainerEl(commonOverlayProps.value.container), _handleFocus, handleBlur)
 
   return { focused, focus, blur }
 }
@@ -84,45 +73,12 @@ function getContainerEl(containerProp: ɵOverlayProps['container']): HTMLElement
   return isString(container) ? document.querySelector(/^[.#]/.test(container) ? container : `.${container}`) : container
 }
 
-function manageTempSegmentActive(
-  tempSearchState: SearchState,
-  setTempActive: (name?: string | undefined) => void,
-): {
-  setTempSegmentActive: () => void
-  setPrevActiveSegmentName: (name: string | undefined) => void
-} {
-  let prevActiveSegmentName: string | undefined
-  const setTempSegmentActive = () => {
-    let name = prevActiveSegmentName
-
-    // if no segment was active when blured, find the last segment with value
-    if (!name) {
-      name = tempSearchState.segmentValues[0]?.name ?? 'name'
-      for (let idx = tempSearchState.segmentValues.length - 1; idx > -1; idx--) {
-        if (tempSearchState.segmentValues[idx].value) {
-          name = tempSearchState.segmentValues[idx].name
-          break
-        }
-      }
-    }
-
-    setTempActive(name)
-  }
-  const setPrevActiveSegmentName = (name: string | undefined) => {
-    prevActiveSegmentName = name
-  }
-
-  return {
-    setTempSegmentActive,
-    setPrevActiveSegmentName,
-  }
-}
-
 function useFocusHandlers(
   props: ProSearchProps,
   focused: ComputedRef<boolean>,
   setFocused: (focused: boolean) => void,
   setInactive: (blur?: boolean) => void,
+  initTempSearchState: () => void,
 ): {
   handleFocus: (evt: FocusEvent, cb?: () => void) => void
   handleBlur: (evt: FocusEvent, cb?: () => void) => void
@@ -151,10 +107,12 @@ function useFocusHandlers(
       return
     }
 
+    initTempSearchState()
     cb?.()
 
     setInactive(true)
     setFocused(false)
+
     callEmit(props.onBlur, evt)
   }
 
