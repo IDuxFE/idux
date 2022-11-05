@@ -6,7 +6,9 @@
 
   position: relative;
   display: flex;
+  align-items: center;
   color: @header-color;
+  background-color: @header-background-color;
   width: 100%;
 
   &-sm {
@@ -57,6 +59,8 @@
 
   &-prefix,
   &-suffix {
+    align-self: baseline;
+
     .@{icon-prefix} {
       font-size: @header-icon-font-size;
       cursor: pointer;

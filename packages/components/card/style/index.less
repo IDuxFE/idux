@@ -1,14 +1,25 @@
 @import '../../style/mixins/reset.less';
 
 .@{card-prefix} {
-  .reset-component();
+  .reset-component-new();
 
   position: relative;
-  color: @card-color;
   background-color: @card-background-color;
   border: @card-border-width @card-border-style @card-border-color;
   border-radius: @card-border-radius;
   overflow: hidden;
+
+  &-sm {
+    .card-size(@card-font-size-sm, @card-padding-sm);
+  }
+
+  &-md {
+    .card-size(@card-font-size-md, @card-padding-md);
+  }
+
+  &-lg {
+    .card-size(@card-font-size-lg, @card-padding-lg);
+  }
 
   &-borderless {
     border: none;
@@ -32,20 +43,7 @@
     }
   }
 
-  &-sm {
-    .card-size(@card-padding-sm);
-  }
-
-  &-md {
-    .card-size(@card-padding-md);
-  }
-
-  &-lg {
-    .card-size(@card-padding-lg);
-  }
-
   &-cover {
-
     > * {
       display: block;
       width: 100%;
@@ -63,8 +61,9 @@
   }
 
   &-footer {
-    border-top: @card-border-width @card-border-style @card-border-color;
     display: flex;
+    border-top: @card-border-width @card-border-style @card-border-color;
+    list-style: none;
 
     > li {
       flex: 1;
@@ -126,13 +125,11 @@
     overflow: hidden;
     cursor: pointer;
     border: @card-border-width @card-border-style @card-border-color-selectable;
-    box-shadow: none;
 
     &:hover {
       border: @card-border-width @card-border-style @card-border-color-selectable-hover;
-      box-shadow: @card-box-shadow-selectable;
 
-      .@{card-prefix}-mark{
+      .@{card-prefix}-mark {
         border-color: @card-border-color-selectable @card-border-color-selectable transparent transparent;
       }
     }
@@ -164,7 +161,6 @@
 
   &-selected {
     border: @card-border-width @card-border-style @color-primary;
-    box-shadow: @card-box-shadow-selectable;
 
     .@{card-prefix}-mark {
       border-color: @color-primary @color-primary transparent transparent;
@@ -172,7 +168,6 @@
 
     &:hover {
       border: @card-border-width @card-border-style @color-primary;
-      box-shadow: @card-box-shadow-selectable;
 
       .@{card-prefix}-mark {
         border-color: @color-primary @color-primary transparent transparent;
@@ -191,7 +186,6 @@
 
     &.@{card-prefix}-selected:hover {
       border: @card-border-width @card-border-style @color-primary;
-      box-shadow: @card-box-shadow-selectable;
     }
   }
 
@@ -205,7 +199,6 @@
 }
 
 @keyframes card-loading {
-
   0%,
   100% {
     background-position: 0 50%;
@@ -216,9 +209,13 @@
   }
 }
 
-.card-size(@card-padding) {
+.card-size(@font-size, @card-padding) {
+  font-size: @font-size;
+  line-height: calc(@font-size + var(--ix-line-height-gutter));
+
   > .@{idux-prefix}-header {
-    padding: (@card-padding / 4) @card-padding;
+    padding-left: @card-padding;
+    padding-right: @card-padding;
   }
 
   .@{card-prefix}-body {
@@ -226,6 +223,14 @@
   }
 
   .@{card-prefix}-footer {
-    padding: (@card-padding / 4);
+    padding: @card-padding;
+  }
+
+  .@{idux-prefix}-header + .@{card-prefix}-body {
+    padding-top: 4px;
+  }
+
+  .@{card-prefix}-body + .@{card-prefix}-footer {
+    padding-top: 0;
   }
 }

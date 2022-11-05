@@ -2,15 +2,14 @@
 @import '../../style/mixins/reset.less';
 
 .@{drawer-prefix} {
-  .reset-component();
+  .reset-component-new();
 
   position: absolute;
   pointer-events: none;
   width: 100%;
   height: 100%;
   font-size: @drawer-font-size;
-  color: @drawer-color;
-  line-height: @drawer-line-height;
+  line-height: calc(@drawer-font-size + var(--ix-line-height-gutter));
 
   &-wrapper {
     position: fixed;
@@ -23,12 +22,12 @@
   }
 
   &-opened&-push {
-    transition: transform @transition-duration-fast @ease-out;
-    transition-delay: @transition-duration-fast;
+    transition: transform var(--ix-transition-duration-medium) var(--ix-ease-out);
+    transition-delay: var(--ix-transition-duration-fast);
   }
 
   &-opened&-pull {
-    transition: transform @transition-duration-fast @ease-in;
+    transition: transform var(--ix-transition-duration-medium) var(--ix-ease-in);
   }
 
   &-sentinel {
@@ -43,29 +42,27 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    background-color: @drawer-background-color;
     pointer-events: auto;
     overflow: hidden;
-    background-color: @drawer-background-color;
 
     > .@{header-prefix} {
-      padding: @drawer-header-padding;
-      .@{header-prefix}-title {
-        font-size: @drawer-title-font-size;
-      }
+      padding-left: var(--ix-spacing-lg);
+      padding-right: var(--ix-spacing-lg);
     }
   }
 
   &-body {
     flex: 1;
-    padding: @drawer-body-padding;
+    padding: var(--ix-spacing-sm) var(--ix-spacing-lg);
     overflow: auto;
   }
 
   &-footer {
-    padding: @drawer-footer-padding;
+    padding: var(--ix-spacing-md) var(--ix-spacing-lg);
 
     .@{button-prefix} + .@{button-prefix} {
-      margin-left: @drawer-footer-button-margin-left;
+      margin-left: var(--ix-spacing-sm);
     }
   }
 
