@@ -5,9 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type Slots, type VNode, computed, reactive, ref, watchEffect } from 'vue'
+import { type ComputedRef, type Ref, type Slots, type VNode, computed, reactive, ref, watch, watchEffect } from 'vue'
 
-import { isNil } from 'lodash-es'
+import { debounce, isNil } from 'lodash-es'
 
 import { type VKey, flattenNode } from '@idux/cdk/utils'
 import { type TableColumnBaseConfig, type TableColumnExpandableConfig, type TableConfig } from '@idux/components/config'
@@ -82,7 +82,7 @@ export interface ColumnsContext {
   }>
   hasEllipsis: ComputedRef<boolean>
   hasFixed: ComputedRef<boolean>
-  columnWidths: ComputedRef<number[]>
+  columnWidths: Ref<number[]>
   columnWidthsWithScrollBar: ComputedRef<number[]>
   changeColumnWidth: (key: VKey, width: number | false) => void
   columnOffsets: ComputedRef<{ starts: number[]; ends: number[] }>
@@ -284,6 +284,14 @@ function useColumnWidths(
 ) {
   const widthMap = reactive<Record<VKey, number>>({})
   const widthString = ref<string>()
+  const columnWidths = ref<number[]>([])
+  watch(
+    widthString,
+    // resizable: 列宽设置百分比的情况下，拖拽会改变多列的宽度，用 debounce 来减少重复渲染次数。
+    debounce(widths => {
+      columnWidths.value = widths ? widths.split('-').map(Number) : []
+    }, 16),
+  )
 
   watchEffect(() => {
     const keys = Object.keys(widthMap)
@@ -292,12 +300,8 @@ function useColumnWidths(
       widthString.value = undefined
       return
     }
-    widthString.value = columns.map(column => widthMap[column.key]).join('-')
-  })
 
-  const columnWidths = computed(() => {
-    const _widthString = widthString.value
-    return _widthString ? _widthString.split('-').map(Number) : []
+    widthString.value = columns.map(column => widthMap[column.key]).join('-')
   })
 
   const columnWidthsWithScrollBar = computed(() => {
