@@ -21,6 +21,10 @@ interface Data {
 
 const columns: TableColumn<Data>[] = [
   {
+    type: 'selectable',
+    fixed: 'start',
+  },
+  {
     title: 'Name',
     dataKey: 'name',
     width: 100,
@@ -36,49 +40,50 @@ const columns: TableColumn<Data>[] = [
   {
     title: 'Column 1',
     dataKey: 'address',
-    width: 150,
+    width: '10%',
     key: 'Column 1',
   },
   {
     title: 'Column 2',
     dataKey: 'address',
-    width: 150,
+    width: '10%',
     key: 'Column 2',
   },
   {
     title: 'Column 3',
     dataKey: 'address',
-    width: 150,
+    width: '10%',
     key: 'Column 3',
   },
   {
     title: 'Column 4',
     dataKey: 'address',
-    width: 150,
+    width: '10%',
     key: 'Column 4',
   },
   {
     title: 'Column 5',
     dataKey: 'address',
-    width: 150,
+    width: '10%',
     key: 'Column 5',
   },
   {
     title: 'Column 6',
     dataKey: 'address',
-    width: 150,
+    width: '10%',
     key: 'Column 6',
   },
   {
     title: 'Column 7',
     dataKey: 'address',
-    width: 150,
+    width: '10%',
     key: 'Column 7',
   },
   {
     title: 'Column 8',
     dataKey: 'address',
     key: 'Column 8',
+    width: '10%',
   },
   {
     title: 'Action',
