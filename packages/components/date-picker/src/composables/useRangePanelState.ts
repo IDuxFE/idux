@@ -17,7 +17,7 @@ import { applyDateTime, sortRangeValue } from '../utils'
 export interface RangePanelStateContext {
   panelValue: ComputedRef<(Date | undefined)[] | undefined>
   isSelecting: ComputedRef<boolean>
-  handleChange: (value: (Date | undefined)[]) => void
+  handleChange: (value: Date[] | undefined) => void
   handleDatePanelCellClick: (value: Date) => void
   handleDatePanelCellMouseenter: (value: Date) => void
 }
@@ -41,10 +41,9 @@ export function useRangePanelState(props: DateRangePanelProps, dateConfig: DateC
     return convertArray(props.value)
   })
 
-  const handleChange = (value: (Date | undefined)[]) => {
-    const sortedRangeValue = sortRangeValue(dateConfig, value, 'date') as Date[]
-    callEmit(props.onChange, sortedRangeValue)
-    callEmit(props.onSelect, sortedRangeValue)
+  const handleChange = (value: Date[] | undefined) => {
+    callEmit(props.onChange, value)
+    callEmit(props.onSelect, value)
   }
 
   const handleDatePanelCellClick = (value: Date) => {
@@ -54,13 +53,12 @@ export function useRangePanelState(props: DateRangePanelProps, dateConfig: DateC
       callEmit(props.onSelect, [value, undefined])
     } else {
       const propsValue = convertArray(props.value)
-
       handleChange(
-        [selectingDates.value?.[0], value].map((dateValue, index) =>
+        sortRangeValue(dateConfig, [selectingDates.value![0], value], 'date').map((dateValue, index) =>
           propsValue[index]
             ? applyDateTime(dateConfig, propsValue[index], dateValue!, ['hour', 'minute', 'second'])
             : dateValue,
-        ),
+        ) as Date[],
       )
       setIsSelecting(false)
     }
