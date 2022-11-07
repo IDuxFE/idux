@@ -1,12 +1,12 @@
 <template>
-  <div :id="id" class="global-code-box markdown">
-    <div class="global-code-box-title">
+  <div :id="id" class="global-code-box">
+    <div class="global-code-box-title markdown">
       <h3>
         <span>{{ title }}</span>
         <a class="anchor" :href="'#' + id">#</a>
       </h3>
     </div>
-    <div class="global-code-box-description">
+    <div class="global-code-box-description markdown">
       <slot name="description"></slot>
     </div>
     <div class="global-code-box-content">

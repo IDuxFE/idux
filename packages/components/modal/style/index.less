@@ -3,7 +3,7 @@
 @import '../../style/motion/zoom.less';
 
 .@{modal-prefix} {
-  .reset-component();
+  .reset-component-new();
 
   position: relative;
   pointer-events: none;
@@ -11,7 +11,7 @@
   max-width: @modal-max-width;
   margin: 0 auto;
   font-size: @modal-font-size;
-  line-height: @modal-line-height;
+  line-height: calc(@modal-font-size + var(--ix-line-height-gutter));
 
   &-wrapper {
     z-index: 1000;
@@ -40,16 +40,14 @@
     border-radius: @modal-border-radius;
 
     > .@{header-prefix} {
-      padding: @modal-header-padding;
-      .@{header-prefix}-title {
-        font-size: @modal-header-title-font-size;
-      }
+      padding-left: var(--ix-spacing-lg);
+      padding-right: var(--ix-spacing-lg);
     }
   }
 
   &-body {
     flex: 1;
-    padding: @modal-body-padding;
+    padding: var(--ix-spacing-sm) var(--ix-spacing-lg);
     overflow: auto;
 
     &-title {
@@ -125,15 +123,10 @@
 
   &-footer {
     text-align: end;
-    min-height: @modal-footer-min-height;
-    padding: @modal-footer-padding;
-
-    .@{button-prefix} {
-      vertical-align: bottom;
-    }
+    padding: var(--ix-spacing-md) var(--ix-spacing-lg);
 
     .@{button-prefix} + .@{button-prefix} {
-      margin-left: @modal-footer-button-margin-left;
+      margin-left: var(--ix-spacing-sm);
     }
   }
 
