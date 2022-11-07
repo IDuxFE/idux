@@ -64,9 +64,22 @@
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
+|  `selectedItem` | 自定义选中项 | `data: SelectedItemProps` | 使用该插槽后`selectedLabel`将无效 |
 |  `selectedLabel` | 自定义选中的标签 | `data: CascaderData` |  |
 |  `overflowedLabel` | 自定义超出最多显示多少个标签的内容 | `data: CascaderData[]` | 参数为超出的数组 |
 |  `optionLabel` | 自定义选项的文本 | `data: SelectOption` | - |
+
+```ts
+interface SelectedItemProps {
+  disabled: boolean
+  key: VKey
+  prefixCls: string
+  removable: boolean
+  label: string
+  value: unknown
+  onRemove: (key: VKey) => void
+}
+```
 
 #### CascaderMethods
 

@@ -76,10 +76,23 @@ export type SelectSearchFn = (data: SelectData, searchValue: string) => boolean
 | 名称 | 说明 | 参数类型 | 备注 |
 |  -- | -- | -- | -- |
 |  `default` | 选项内容 | - | - |
+|  `selectedItem` | 自定义选中项 | `data: SelectedItemProps` | 使用该插槽后`selectedLabel`将无效 |
 |  `selectedLabel` | 自定义选中的标签 | `data: SelectOption` |  |
 |  `overflowedLabel` | 自定义超出最多显示多少个标签的内容 | `data: SelectOption[]` | 参数为超出的数组 |
 |  `optionLabel` | 自定义选项的文本 | `data: SelectOption` | - |
 |  `optionGroupLabel` | 自定义选项组的文本 | `data: SelectOptionGroup` | - |
+
+```ts
+interface SelectedItemProps {
+  disabled: boolean
+  key: VKey
+  prefixCls: string
+  removable: boolean
+  label: string
+  value: unknown
+  onRemove: (key: VKey) => void
+}
+```
 
 #### SelectMethods
 
