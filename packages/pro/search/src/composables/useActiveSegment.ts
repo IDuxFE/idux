@@ -18,11 +18,12 @@ export interface ActiveSegmentContext {
   setActiveSegment: (segment: ActiveSegment | undefined) => void
   changeActive: (offset: number, crossItem?: boolean) => void
   setInactive: (blur?: boolean) => void
-  setTempActive: (name?: string) => void
+  setTempActive: (overlayOpened?: boolean) => void
 }
 export interface ActiveSegment {
   itemKey: VKey
   name: string
+  overlayOpened: boolean
 }
 type FlattenedSegment = Segment & { itemKey: VKey }
 
@@ -43,7 +44,11 @@ export function useActiveSegment(
   )
 
   const updateActiveSegment = (segment: ActiveSegment | undefined) => {
-    if (activeSegment.value?.itemKey === segment?.itemKey && activeSegment.value?.name === segment?.name) {
+    if (
+      activeSegment.value?.itemKey === segment?.itemKey &&
+      activeSegment.value?.name === segment?.name &&
+      activeSegment.value?.overlayOpened === segment?.overlayOpened
+    ) {
       return
     }
 
@@ -63,6 +68,7 @@ export function useActiveSegment(
       updateActiveSegment({
         itemKey: activeItem.value!.key,
         name: activeItem.value!.segments[offset < 0 ? 0 : activeItem.value!.segments.length - 1].name,
+        overlayOpened: !crossItem,
       })
       return
     }
@@ -73,6 +79,7 @@ export function useActiveSegment(
         ? {
             itemKey: targetSegment.itemKey,
             name: targetSegment.name,
+            overlayOpened: !crossItem,
           }
         : undefined,
     )
@@ -89,13 +96,14 @@ export function useActiveSegment(
     }
   }
 
-  const setTempActive = (name?: string) => {
+  const setTempActive = (overlayOpened = false) => {
     if (!tempSearchStateAvailable.value) {
       setInactive()
     } else {
       setActiveSegment({
         itemKey: tempSearchStateKey,
-        name: name ?? 'name',
+        name: 'name',
+        overlayOpened,
       })
     }
   }

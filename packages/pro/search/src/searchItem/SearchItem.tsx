@@ -73,6 +73,7 @@ export default defineComponent({
       setActiveSegment({
         itemKey: props.searchItem!.key,
         name,
+        overlayOpened: true,
       })
     }
     const handleCloseIconClick = (evt: Event) => {

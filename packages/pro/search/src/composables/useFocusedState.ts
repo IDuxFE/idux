@@ -38,7 +38,7 @@ export function useFocusedState(
 
   watch([activeSegment, searchStates], ([segment]) => {
     if (!segment && focused.value) {
-      setTempActive()
+      nextTick(setTempActive)
     }
   })
 
@@ -49,7 +49,7 @@ export function useFocusedState(
 
     handleFocus(evt, () => {
       if (evt.target === elementRef.value) {
-        setTempActive()
+        setTempActive(true)
       }
     })
   }

@@ -32,18 +32,17 @@ export default defineComponent({
   props: segmentProps,
   setup(props: SegmentProps) {
     const context = inject(proSearchContext)!
-    const { mergedPrefixCls, commonOverlayProps, activeSegment, searchStates } = context
+    const { mergedPrefixCls, commonOverlayProps, activeSegment, searchStates, setActiveSegment } = context
     const overlayRef = ref<ɵOverlayInstance>()
     const segmentInputRef = ref<HTMLInputElement>()
     const measureSpanRef = ref<HTMLSpanElement>()
-    const [overlayOpened, _setOverlayOpened] = useState(false)
-    const setOverlayOpened = (opened: boolean) => {
-      if (overlayOpened.value === opened) {
-        return
-      }
 
-      _setOverlayOpened(opened)
-      props.segment.onVisibleChange?.(opened)
+    function setCurrentAsActive(overlayOpened: boolean) {
+      setActiveSegment({
+        itemKey: props.itemKey,
+        name: props.segment.name,
+        overlayOpened,
+      })
     }
 
     const {
@@ -60,6 +59,7 @@ export default defineComponent({
     const isActive = computed(
       () => activeSegment.value?.itemKey === props.itemKey && activeSegment.value.name === props.segment.name,
     )
+    const overlayOpened = computed(() => isActive.value && !!activeSegment.value?.overlayOpened)
 
     const inputWidth = useInputWidth(measureSpanRef)
     const inputStyle = computed(() => ({
@@ -93,17 +93,14 @@ export default defineComponent({
     onMounted(() => {
       stopActiveSegmentWatch = watch(
         isActive,
-        (active, preActive) => {
+        active => {
           nextTick(() => {
             if (active) {
               segmentInputRef.value?.focus()
-              setOverlayOpened(true)
               if (!props.value && props.segment.defaultValue) {
                 handleSegmentChange(props.segment.name, props.segment.defaultValue)
                 handleSegmentConfirm(props.segment.name, false)
               }
-            } else if (preActive) {
-              setOverlayOpened(false)
             }
           })
         },
@@ -119,6 +116,15 @@ export default defineComponent({
         },
         { immediate: true },
       )
+      watch(
+        overlayOpened,
+        (opened, preOpened) => {
+          if (!!opened !== !!preOpened) {
+            props.segment.onVisibleChange?.(opened)
+          }
+        },
+        { immediate: true, flush: 'post' },
+      )
       registerOverlayUpdate(updateOverlay)
     })
     onBeforeUnmount(() => {
@@ -133,7 +139,7 @@ export default defineComponent({
       handleSegmentConfirm(props.segment.name, true)
     }
     const handleCancel = () => {
-      setOverlayOpened(false)
+      setCurrentAsActive(false)
       handleSegmentCancel(props.segment.name)
     }
 
@@ -142,10 +148,9 @@ export default defineComponent({
       handleCompositionStart,
       handleCompositionEnd,
       handleMouseDown,
-      handleFocus,
       handleKeyDown,
       setPanelOnKeyDown,
-    } = useInputEvents(props, context, handleSegmentInput, setOverlayOpened, handleConfirm)
+    } = useInputEvents(props, context, handleSegmentInput, setCurrentAsActive, handleConfirm)
 
     const overlayProps = useOverlayAttrs(props, mergedPrefixCls, commonOverlayProps, overlayOpened)
 
@@ -158,25 +163,31 @@ export default defineComponent({
         onInput={handleInput}
         onCompositionstart={handleCompositionStart}
         onCompositionend={handleCompositionEnd}
-        onFocus={handleFocus}
         onMousedown={handleMouseDown}
         onKeydown={handleKeyDown}
       ></input>
     )
 
-    /* eslint-disable indent */
-    const renderContent = () =>
-      overlayOpened.value
-        ? props.segment.panelRenderer?.({
-            input: props.input ?? '',
-            value: props.value,
-            cancel: handleCancel,
-            ok: handleConfirm,
-            setValue: handleChange,
-            setOnKeyDown: setPanelOnKeyDown,
-          })
-        : undefined
-    /* eslint-enable indent */
+    const renderContent = () => {
+      if (!overlayOpened.value) {
+        return
+      }
+
+      const renderedContent = props.segment.panelRenderer?.({
+        input: props.input ?? '',
+        value: props.value,
+        cancel: handleCancel,
+        ok: handleConfirm,
+        setValue: handleChange,
+        setOnKeyDown: setPanelOnKeyDown,
+      })
+
+      if (!renderedContent && isActive.value) {
+        setCurrentAsActive(false)
+      }
+
+      return renderedContent
+    }
 
     return () => {
       const { panelRenderer } = props.segment
@@ -233,7 +244,6 @@ interface InputEventHandlers {
   handleCompositionStart: () => void
   handleCompositionEnd: (evt: CompositionEvent) => void
   handleMouseDown: (evt: MouseEvent) => void
-  handleFocus: () => void
   handleKeyDown: (evt: KeyboardEvent) => void
   setPanelOnKeyDown: (onKeyDown: ((evt: KeyboardEvent) => boolean) | undefined) => void
 }
@@ -242,20 +252,14 @@ function useInputEvents(
   props: SegmentProps,
   context: ProSearchContext,
   handleSegmentInput: (name: string, input: string) => void,
-  setOverlayOpened: (opened: boolean) => void,
+  setCurrentAsActive: (overlayOpened: boolean) => void,
   confirm: () => void,
 ): InputEventHandlers {
-  const { searchStates, removeSearchState, setActiveSegment, changeActive } = context
+  const { searchStates, removeSearchState, changeActive } = context
   const [panelOnKeyDown, setPanelOnKeyDown] = useState<((evt: KeyboardEvent) => boolean) | undefined>(undefined)
 
   const isComposing = ref(false)
 
-  function setCurrentAsActive() {
-    setActiveSegment({
-      itemKey: props.itemKey,
-      name: props.segment.name,
-    })
-  }
   function removePreviousState() {
     const currentStateIndex = searchStates.value.findIndex(state => state.key === props.itemKey)
     const previousState = searchStates.value[currentStateIndex - 1]
@@ -270,7 +274,7 @@ function useInputEvents(
       handleSegmentInput(props.segment.name, (evt.target as HTMLInputElement).value)
     }
 
-    setOverlayOpened(true)
+    setCurrentAsActive(true)
   }
   const handleCompositionStart = () => {
     isComposing.value = true
@@ -281,15 +285,9 @@ function useInputEvents(
       handleInput(evt)
     }
   }
-  const handleFocus = () => {
-    setOverlayOpened(true)
-    setCurrentAsActive()
-  }
   const handleMouseDown = (evt: Event) => {
     evt.stopPropagation()
-
-    setOverlayOpened(true)
-    setCurrentAsActive()
+    setCurrentAsActive(true)
   }
   const handleKeyDown = (evt: KeyboardEvent) => {
     const paneKeyDownRes = panelOnKeyDown.value?.(evt) ?? true
@@ -313,7 +311,11 @@ function useInputEvents(
           changeActive(-1, true)
         }
         break
+      case 'Escape':
+        setCurrentAsActive(false)
+        break
       default:
+        setCurrentAsActive(true)
         break
     }
   }
@@ -322,7 +324,6 @@ function useInputEvents(
     handleInput,
     handleCompositionStart,
     handleCompositionEnd,
-    handleFocus,
     handleMouseDown,
     handleKeyDown,
     setPanelOnKeyDown,
