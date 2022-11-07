@@ -16,6 +16,7 @@ import { useDateConfig, useGlobalConfig } from '@idux/components/config'
 import { useRangeActiveValue } from '../composables/useActiveValue'
 import { useRangePanelState } from '../composables/useRangePanelState'
 import { dateRangePanelProps } from '../types'
+import { sortRangeValue } from '../utils'
 
 export default defineComponent({
   name: 'IxDateRangePanel',
@@ -45,7 +46,13 @@ export default defineComponent({
       const activeValue = isFrom ? fromActiveValue.value : toActiveValue.value
 
       const handleTimePanelChange = (value: Date) => {
-        handleChange(isFrom ? [value, panelValue.value?.[1]] : [panelValue.value?.[0], value])
+        handleChange(
+          sortRangeValue(
+            dateConfig,
+            isFrom ? [value, panelValue.value?.[1]] : [panelValue.value?.[0], value],
+            'date',
+          ) as Date[],
+        )
       }
 
       const datePanelProps = {
