@@ -162,6 +162,10 @@ export default defineComponent({
           onRemove: props.onItemRemove,
         }
 
+        const selectedItemSlot = slots.selectedItem
+        if (selectedItemSlot) {
+          return selectedItemSlot(itemProps)
+        }
         const slotOrName = slots.selectedLabel || slots.label || rawData.customLabel || props.defaultLabelSlotName
         const selectedLabelRender = isString(slotOrName) ? slots[slotOrName] : slotOrName
         const labelNode = selectedLabelRender ? selectedLabelRender(rawData) : label

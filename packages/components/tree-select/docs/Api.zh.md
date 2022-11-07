@@ -84,6 +84,7 @@
 | --- | --- | --- | --- |
 | `empty` | 自定义当下拉列表为空时显示的内容 | - | - |
 | `expandIcon` | 节点展开图标 | `{key: VKey, expanded: boolean, node: TreeSelectNode}` | - |
+|  `selectedItem` | 自定义选中项 | `{node: SelectedItemProps}` | 使用该插槽后`selectedLabel`将无效 |
 | `selectedLabel` | 自定义选中的标签 | `{node: RawNode}` | `RawNode`为用户传入的数据结构 |
 | `leafLineIcon` | 叶子节点的图标，用于替换默认的连接线 | - | 仅在 `showLine 时生效` |
 | `overflowedLabel` | 自定义超出最多显示多少个标签的内容 | `{nodes: RawNode[]}` | 参数为超出的数组 |
@@ -92,6 +93,18 @@
 | `treeLabel` | 自定义节点的文本 | `{node: TreeSelectNode}` | - |
 | `treePrefix` | 自定义节点的前缀图标 | `{key: VKey, selected: boolean, node: TreeSelectNode}` | - |
 | `treeSuffix` | 自定义节点的后缀图标 | `{key: VKey, selected: boolean, node: TreeSelectNode}` | - |
+
+```ts
+interface SelectedItemProps {
+  disabled: boolean
+  key: VKey
+  prefixCls: string
+  removable: boolean
+  label: string
+  value: unknown
+  onRemove: (key: VKey) => void
+}
+```
 
 #### TreeSelectMethods
 
