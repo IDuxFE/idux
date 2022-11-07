@@ -20,6 +20,7 @@ export const spaceProps = {
     default: undefined,
   },
   justify: String as PropType<SpaceJustify>,
+  itemless: Boolean,
   size: [Number, String, Array] as PropType<number | string | (string | number)[]>,
   separator: String,
   vertical: {

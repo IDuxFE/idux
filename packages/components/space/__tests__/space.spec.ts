@@ -53,6 +53,16 @@ describe('Space', () => {
     expect(wrapper.classes()).toContain('ix-space-justify-end')
   })
 
+  test('itemless work', async () => {
+    const wrapper = SpaceMount({ props: { itemless: true } })
+
+    expect(wrapper.findAll('.ix-space-item').length).toBe(0)
+
+    await wrapper.setProps({ itemless: false })
+
+    expect(wrapper.findAll('.ix-space-item').length).not.toBe(0)
+  })
+
   test('size work', async () => {
     const wrapper = SpaceMount({ props: { size: 'sm' } })
 

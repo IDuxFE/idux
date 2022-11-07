@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type VNode, computed, defineComponent, normalizeClass } from 'vue'
+import { type ComputedRef, type VNode, cloneVNode, computed, defineComponent, normalizeClass } from 'vue'
 
 import { supportsFlexGap } from '@idux/cdk/platform'
 import { convertCssPixel, flattenNode } from '@idux/cdk/utils'
@@ -44,10 +44,10 @@ export default defineComponent({
       return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-align-${align}`]: align,
-        [`${prefixCls}-justify-${justify}`]: justify,
         [`${prefixCls}-block`]: block,
-        [`${prefixCls}-vertical`]: vertical,
+        [`${prefixCls}-justify-${justify}`]: justify,
         [`${prefixCls}-nowrap`]: !wrap.value,
+        [`${prefixCls}-vertical`]: vertical,
       })
     })
 
@@ -73,11 +73,16 @@ export default defineComponent({
       const lastIndex = nodes.length - 1
       nodes.forEach((node, index) => {
         const style = calcItemStyle(mergedGaps, wrap, props.vertical, index, lastIndex)
-        children.push(
-          <div key={`item-${index}`} class={`${prefixCls}-item`} style={style}>
-            {node}
-          </div>,
-        )
+        if (props.itemless) {
+          children.push(cloneVNode(node, { style }))
+        } else {
+          children.push(
+            <div key={`item-${index}`} class={`${prefixCls}-item`} style={style}>
+              {node}
+            </div>,
+          )
+        }
+
         if (separatorNode && index < lastIndex) {
           children.push(
             <div key={`separator-${index}`} class={`${prefixCls}-item-separator`} style={style}>
