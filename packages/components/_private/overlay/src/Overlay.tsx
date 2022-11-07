@@ -6,7 +6,7 @@
  */
 
 import type { OverlayProps } from './types'
-import type { PopperElement, PopperEvents } from '@idux/cdk/popper'
+import type { PopperElement, PopperEvents, PopperOptions } from '@idux/cdk/popper'
 
 import {
   type ComputedRef,
@@ -18,6 +18,7 @@ import {
   defineComponent,
   onBeforeUnmount,
   onMounted,
+  ref,
   toRef,
   vShow,
   watch,
@@ -40,7 +41,9 @@ export default defineComponent({
   setup(props, { slots, attrs, expose }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-overlay`)
-    const popperOptions = usePopperOptions(props)
+    const contentArrowRef = ref<HTMLElement>()
+    const popperOptions = usePopperOptions(props, contentArrowRef)
+
     const {
       arrowRef,
       popperRef,
@@ -67,6 +70,13 @@ export default defineComponent({
     watch(
       () => props.visible,
       visible => (visible ? show() : hide()),
+    )
+    watch(
+      contentArrowRef,
+      () => {
+        arrowRef.value = contentArrowRef.value
+      },
+      { immediate: true },
     )
 
     const onAfterLeave = () => {
@@ -114,7 +124,7 @@ export default defineComponent({
         visibility,
         currentZIndex,
         contentNode!,
-        arrowRef,
+        contentArrowRef,
         popperRef,
         popperEvents,
         attrs,
@@ -134,10 +144,19 @@ export default defineComponent({
   },
 })
 
-function usePopperOptions(props: OverlayProps) {
+function usePopperOptions(props: OverlayProps, arrowRef: Ref<HTMLElement | undefined>): ComputedRef<PopperOptions> {
   return computed(() => {
     const { allowEnter, autoAdjust, delay, disabled, offset, placement, trigger } = props
-    return { allowEnter, autoAdjust, delay, disabled, offset, placement, trigger }
+    let _offset: [number, number] | undefined
+    if (!arrowRef.value) {
+      _offset = offset
+    } else {
+      const { offsetWidth, offsetHeight } = arrowRef.value
+      _offset = offset ? [...offset] : [0, 0]
+      _offset[1] += [offsetWidth, offsetHeight][1] / 2
+    }
+
+    return { allowEnter, autoAdjust, delay, disabled, offset: _offset, placement, trigger }
   })
 }
 
