@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
-import { version as lastVersion } from '@idux/components/version'
+import { version as currentVersion } from '@idux/components/version'
 
-const dataSource = ref([{ key: lastVersion, label: lastVersion }])
-const selectVersion = ref(lastVersion)
+const versions = [currentVersion, '1.0.x']
+
+const dataSource = versions.map(v => ({ key: v, label: v }))
+const selectVersion = ref(currentVersion)
+
+watch(selectVersion, version => {
+  window.location.href = `${window.location.origin}/version/${version}`
+})
 </script>
 
 <template>
-  <IxSelect
-    v-model:value="selectVersion"
-    :dataSource="dataSource"
-    class="header-version"
-    style="width: 80px"
-  ></IxSelect>
+  <IxSelect v-model:value="selectVersion" :dataSource="dataSource" class="header-version" style="width: 80px">
+  </IxSelect>
 </template>

@@ -2,7 +2,7 @@ import { dirname, join } from 'path'
 
 import { existsSync, readFileSync, readdirSync } from 'fs-extra'
 // @ts-ignore
-import { kebabCase } from 'lodash'
+import { kebabCase, upperFirst } from 'lodash'
 import { loadFront } from 'yaml-front-matter'
 
 import marked from './marked'
@@ -24,6 +24,7 @@ export function parseIndexDocs(id: string, raw: string): string {
 
   return (
     generaComponentScript(
+      packageName,
       componentName,
       demoMetas,
       apiDocName,
@@ -83,6 +84,7 @@ const locale: Record<string, Record<string, string>> = {
 }
 
 function generaComponentScript(
+  packageName: string,
   componentName: string,
   demoMetas: any[],
   apiDocName: string,
@@ -110,6 +112,8 @@ function generaComponentScript(
     components.push(themeDocName)
   }
 
+  const docsName = `Docs${upperFirst(packageName)}${upperFirst(componentName)}`
+
   return `
 <script lang='ts'>
   import { ref, watch} from 'vue'
@@ -117,13 +121,14 @@ function generaComponentScript(
   ${imports.join('\n')}
 
 export default {
-  name: 'Docs${componentName}',
+  name: '${docsName}',
   components: { 
     ${components.join(',')} 
   },
   setup() {
     const route = useRoute()
     const router = useRouter()
+
     const checkedDoc = ref(route.query.tab ?? (${demoMetas.length} ? "demo" : 'design'))
 
     watch(checkedDoc, tab => {

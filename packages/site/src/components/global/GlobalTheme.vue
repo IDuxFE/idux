@@ -5,37 +5,36 @@
         <IxIcon name="setting" />
       </span>
       <template #overlay>
-        <IxMenu :dataSource="dataSource" @click="changeTheme"></IxMenu>
+        <IxMenu v-model:selectedKeys="selectedKeys" :dataSource="dataSource"></IxMenu>
       </template>
     </IxDropdown>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref, watch } from 'vue'
+
 import { MenuData } from '@idux/components/menu'
 
 import { themeConfig } from './themeConfig'
 
-const dataSource: MenuData[] = themeConfig.map(item => {
-  return {
-    type: 'item',
-    ...item,
+const dataSource: MenuData[] = [
+  ...themeConfig,
+  { key: 'divider', type: 'divider' },
+  { key: 'title', label: 'Theme', disabled: true },
+]
+
+const themeKey = 'idux_theme'
+const selectedKeys = ref([localStorage.getItem(themeKey) || 'default'])
+
+watch(selectedKeys, ([currTheme]) => {
+  localStorage.setItem(themeKey, currTheme)
+  if (window.changeTheme) {
+    window.changeTheme(currTheme)
+  } else {
+    fetch('/themes/s/' + currTheme)
   }
 })
-dataSource.push(
-  ...[
-    { type: 'divider', key: 'divider', label: '' },
-    { type: 'item', key: 'title', label: 'Theme', disabled: true },
-  ],
-)
-
-const changeTheme = async ({ key }) => {
-  if (window.changeTheme) {
-    window.changeTheme(key)
-  } else {
-    await fetch('/themes/s/' + key)
-  }
-}
 </script>
 
 <style lang="less">

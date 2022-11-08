@@ -9,9 +9,9 @@ import type { LoadingComponent } from './src/types'
 
 import Loading from './src/Loading'
 
-const IxLoading = Loading as unknown as LoadingComponent
+const ɵLoading = Loading as unknown as LoadingComponent
 
-export { IxLoading }
+export { ɵLoading }
 
 export type { LoadingInstance, LoadingComponent, LoadingPublicProps as LoadingProps } from './src/types'
 export { loadingProps } from './src/types'
