@@ -5,8 +5,8 @@
       <IxRadio value="md">Medium</IxRadio>
       <IxRadio value="lg">Large</IxRadio>
     </IxRadioGroup>
-    <IxSpace :size="size">
-      space:
+    <IxSpace :size="size" align="center">
+      Text
       <IxButton mode="primary">Button</IxButton>
       <IxButton>Button</IxButton>
     </IxSpace>
