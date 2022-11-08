@@ -1,9 +1,9 @@
-.button-size(@height, @font-size, @min-width, @padding) {
+.button-size(@height, @font-size, @min-width, @padding-horizontal) {
   height: @height;
   line-height: calc(@font-size + var(--ix-line-height-gutter));
   font-size: @font-size;
   min-width: @min-width;
-  padding: @padding;
+  padding: 0 @padding-horizontal;
 
   &.@{button-prefix}-circle,
   &.@{button-prefix}-square {
