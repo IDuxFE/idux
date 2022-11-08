@@ -5,18 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { SpinProps } from './types'
-import type { SpinConfig } from '@idux/components/config'
-import type { ComputedRef } from 'vue'
-
-import { computed, defineComponent, normalizeClass, normalizeStyle } from 'vue'
+import { type ComputedRef, computed, defineComponent, normalizeClass, normalizeStyle } from 'vue'
 
 import { hasSlot } from '@idux/cdk/utils'
-import { IxLoading } from '@idux/components/_private/loading'
-import { useGlobalConfig } from '@idux/components/config'
+import { ɵLoading } from '@idux/components/_private/loading'
+import { type SpinConfig, useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
-import { type SpinSize, spinProps } from './types'
+import { type SpinProps, type SpinSize, spinProps } from './types'
 
 const defaultStrokeWidth: Record<SpinSize, number> = {
   sm: 3,
@@ -84,7 +80,7 @@ export default defineComponent({
 
       return (
         <div class={iconCls}>
-          <IxLoading strokeWidth={strokeWidth.value} radius={radius.value} duration={props.duration} />
+          <ɵLoading strokeWidth={strokeWidth.value} radius={radius.value} duration={props.duration} />
         </div>
       )
     }
