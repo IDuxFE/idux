@@ -9,9 +9,9 @@
 | `@table-body-row-height-sm` | `var(--ix-height-lg)` | `var(--ix-height-md)` | - |
 | `@table-body-row-height-md` | `var(--ix-height-xl)` | `var(--ix-height-lg)` | - |
 | `@table-body-row-height-lg` | `var(--ix-height-2xl)` | - | - |
-| `@table-row-padding-sm` | `var(--ix-spacing-xs) var(--ix-spacing-sm)` | - | - |
-| `@table-row-padding-md` | `var(--ix-spacing-sm) var(--ix-spacing-md)` | - | - |
-| `@table-row-padding-lg` | `var(--ix-spacing-md) var(--ix-spacing-lg)` | - | - |
+| `@table-row-padding-horizontal-sm` | `var(--ix-spacing-sm)` | - | - |
+| `@table-row-padding-horizontal-md` | `var(--ix-spacing-md)` | - | - |
+| `@table-row-padding-horizontal-lg` | `var(--ix-spacing-lg)` | - | - |
 | `@table-background-color` | `var(--ix-background-color)` | - | - |
 | `@table-border-color` | `var(--ix-border-color-secondary)` | - | - |
 | `@table-border-radius` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |

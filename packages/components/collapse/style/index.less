@@ -3,19 +3,10 @@
 .@{collapse-prefix} {
   .reset-component-new();
 
-  cursor: pointer;
+  background-color: @collapse-background-color;
 
   &-sm {
-    font-size: @collapse-font-size-sm;
-
-    .@{header-prefix} {
-      padding-left: var(--ix-spacing-md);
-      padding-right: var(--ix-spacing-md);
-    }
-
-    .@{collapse-prefix}-panel-content-box {
-      padding: var(--ix-spacing-md);
-    }
+    .collapse-size(@collapse-font-size-sm, @collapse-padding-horizontal-sm);
 
     .@{collapse-prefix}-panel {
       border-bottom: none;
@@ -32,16 +23,7 @@
   }
 
   &-md {
-    font-size: @collapse-font-size-md;
-
-    .@{header-prefix} {
-      padding-left: var(--ix-spacing-lg);
-      padding-right: var(--ix-spacing-lg);
-    }
-
-    .@{collapse-prefix}-panel-content-box {
-      padding: var(--ix-spacing-lg);
-    }
+    .collapse-size(@collapse-font-size-md, @collapse-padding-horizontal-md);
 
     .@{collapse-prefix}-panel + .@{collapse-prefix}-panel {
       margin-top: var(--ix-spacing-sm);
@@ -56,6 +38,7 @@
     border: @collapse-border;
 
     .@{header-prefix} {
+      cursor: pointer;
       border-radius: @collapse-border-radius;
     }
 
@@ -66,7 +49,9 @@
     }
 
     &-disabled {
-      cursor: not-allowed;
+      .@{header-prefix} {
+        cursor: not-allowed;
+      }
     }
   }
 
@@ -82,17 +67,42 @@
 
   &-ghost {
     background-color: transparent;
+    border-color: transparent;
 
     .@{collapse-prefix}-panel {
-      &-content,
+      border-color: transparent;
+
       .@{header-prefix} {
         background-color: transparent;
       }
+
+      &-content {
+        border-color: transparent;
+        background-color: @collapse-background-color;
+      }
+    }
+
+    .@{collapse-prefix}-panel + .@{collapse-prefix}-panel {
+      margin-top: 0;
     }
   }
 
   // nest
   .@{collapse-prefix} {
     background-color: transparent;
+  }
+}
+
+.collapse-size(@font-size, @padding-horizontal) {
+  font-size: @font-size;
+  line-height: calc(@font-size + var(--ix-line-height-gutter));
+
+  .@{header-prefix} {
+    padding-left: @padding-horizontal;
+    padding-right: @padding-horizontal;
+  }
+
+  .@{collapse-prefix}-panel-content-box {
+    padding: @padding-horizontal;
   }
 }

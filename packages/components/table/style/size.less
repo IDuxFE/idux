@@ -1,20 +1,21 @@
-.table-size( @font-size, @head-height, @body-height, @padding) {
+.table-size( @font-size, @head-height, @body-height, @padding-horizontal) {
   font-size: @font-size;
   line-height: calc(@font-size + var(--ix-line-height-gutter));
+
+  &:not(.@{table-prefix}-borderless) {
+    > .@{header-prefix} {
+      padding-left: @padding-horizontal;
+      padding-right: @padding-horizontal;
+    }
+  }
 
   .@{table-prefix}-expandable-trigger {
     font-size: calc(@font-size + 2px);
   }
 
-  .@{table-prefix}-cell,
-  .@{table-prefix}-alert-row > td,
-  .@{table-prefix}-expanded-row > td,
-  .@{table-prefix}-footer {
-    padding: @padding;
-  }
-
   th.@{table-prefix}-cell {
     height: @head-height;
+    padding: 0 @padding-horizontal;
 
     .@{table-prefix}-sortable-trigger,
     .@{table-prefix}-filterable-trigger {
@@ -31,13 +32,14 @@
   .@{table-prefix}-expanded-row > td,
   .@{table-prefix}-footer {
     height: @body-height;
+    padding: 4px @padding-horizontal;
   }
 
   // TODO: Nest Table
 }
 
 .@{table-prefix}-sm {
-  .table-size(@table-font-size-sm, @table-head-row-height-sm, @table-body-row-height-sm, @table-row-padding-sm);
+  .table-size(@table-font-size-sm, @table-head-row-height-sm, @table-body-row-height-sm, @table-row-padding-horizontal-sm);
 
   .@{table-prefix}-col-expandable,
   .@{table-prefix}-col-selectable {
@@ -47,16 +49,10 @@
   .@{table-prefix}-col-selectable&-selectable-with-dropdown {
     width: 52px;
   }
-
-  &:not(.@{table-prefix}-borderless) {
-    > .@{header-prefix} {
-      padding-left: var(--ix-spacing-sm);
-    }
-  }
 }
 
 .@{table-prefix}-md {
-  .table-size(@table-font-size-md, @table-head-row-height-md, @table-body-row-height-md, @table-row-padding-md);
+  .table-size(@table-font-size-md, @table-head-row-height-md, @table-body-row-height-md, @table-row-padding-horizontal-md);
 
   .@{table-prefix}-col-expandable,
   .@{table-prefix}-col-selectable {
@@ -66,16 +62,10 @@
   .@{table-prefix}-col-selectable&-selectable-with-dropdown {
     width: 60px;
   }
-
-  &:not(.@{table-prefix}-borderless) {
-    > .@{header-prefix} {
-      padding-left: var(--ix-spacing-md);
-    }
-  }
 }
 
 .@{table-prefix}-lg {
-  .table-size(@table-font-size-lg, @table-head-row-height-lg, @table-body-row-height-lg, @table-row-padding-lg);
+  .table-size(@table-font-size-lg, @table-head-row-height-lg, @table-body-row-height-lg, @table-row-padding-horizontal-lg);
 
   .@{table-prefix}-col-expandable,
   .@{table-prefix}-col-selectable {
@@ -84,11 +74,5 @@
 
   .@{table-prefix}-col-selectable&-selectable-with-dropdown {
     width: 68px;
-  }
-
-  &:not(.@{table-prefix}-borderless) {
-    > .@{header-prefix} {
-      padding-left: var(--ix-spacing-lg);
-    }
   }
 }

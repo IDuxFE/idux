@@ -30,10 +30,9 @@ export default defineComponent({
         return
       }
 
-      const widths = isFixedHolder ? columnWidthsWithScrollBar.value : columnWidths.value
       const prefixCls = mergedPrefixCls.value
-
-      const children = flattedColumns.value.map((column, colIndex) => {
+      const widths = isFixedHolder ? columnWidthsWithScrollBar.value : columnWidths.value
+      const children = columns.map((column, colIndex) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const { key, type } = column

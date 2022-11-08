@@ -1,7 +1,7 @@
 <template>
   <IxTable :columns="columns" :dataSource="data">
     <template #name="{ value }">
-      <a>{{ value }}</a>
+      <span>{{ value }}</span>
     </template>
     <template #action="{ record }">
       <a style="margin-right: 8px">Invite {{ record.name }}</a>

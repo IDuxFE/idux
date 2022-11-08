@@ -14,10 +14,8 @@
       <IxIcon name="caret-left-filled" @click="onPrefixClick" />
     </template>
     <template #suffix>
-      <IxSpace>
-        <IxIcon name="setting" @click="onSuffixClick" />
-        <IxIcon name="menu" @click="onSuffixClick" />
-      </IxSpace>
+      <IxButton icon="setting" mode="text" size="xs" @click="onSuffixClick" />
+      <IxButton icon="menu" mode="text" size="xs" @click="onSuffixClick" />
     </template>
   </IxHeader>
 </template>
