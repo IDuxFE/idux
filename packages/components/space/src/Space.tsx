@@ -44,10 +44,10 @@ export default defineComponent({
       return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-align-${align}`]: align,
-        [`${prefixCls}-justify-${justify}`]: justify,
         [`${prefixCls}-block`]: block,
-        [`${prefixCls}-vertical`]: vertical,
+        [`${prefixCls}-justify-${justify}`]: justify,
         [`${prefixCls}-nowrap`]: !wrap.value,
+        [`${prefixCls}-vertical`]: vertical,
       })
     })
 

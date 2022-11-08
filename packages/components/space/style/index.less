@@ -1,7 +1,6 @@
 .@{space-prefix} {
   display: inline-flex;
   flex-wrap: wrap;
-  line-height: 1;
 
   &-nowrap {
     flex-wrap: nowrap;
@@ -11,10 +10,7 @@
     flex-direction: column;
   }
 
-  &-block {
-    width: 100%;
-  }
-
+  &-block,
   &-block&-vertical > &-item {
     width: 100%;
   }
@@ -61,5 +57,9 @@
     &-space-between {
       justify-content: space-between;
     }
+  }
+
+  &-item:empty {
+    display: none;
   }
 }
