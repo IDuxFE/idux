@@ -78,6 +78,8 @@ export default defineComponent({
           visible={mergedTooltipVisible.value}
           placement={tooltipPlacement.value}
           trigger="manual"
+          onMouseenter={handleMouseEnter}
+          onMouseleave={handleMouseLeave}
           v-slots={{
             title: () =>
               isFunction(tooltipFormatter.value) ? tooltipFormatter.value(props.value!) : <span>{props.value}</span>,
