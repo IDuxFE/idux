@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/IDuxFE/idux/compare/v1.0.1...v1.1.0) (2022-11-08)
+
+### Bug Fixes
+
+- **cdk:drag-drop:** invalid handle ([677b163](https://github.com/IDuxFE/idux/commit/677b1635e54ff0d38b80563b0b6fa632f30b1432))
+
+### Features
+
+- **comp:button:** style update and group support gap ([#1235](https://github.com/IDuxFE/idux/issues/1235)) ([7613c7d](https://github.com/IDuxFE/idux/commit/7613c7d76ed7c13a7a5aca4e7ab3ed5d32a34eac))
+
 ## [1.0.2](https://github.com/IDuxFE/idux/compare/v1.0.1...v1.0.2) (2022-10-29)
 
 ### Bug Fixes
