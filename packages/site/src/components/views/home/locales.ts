@@ -9,18 +9,22 @@ export const homeLocales = {
       {
         title: '全新 Vue 3.x，无包袱更纯粹',
         descs: ['全面拥抱 Composition API，从源码到文档', '完全使用 TypeScript 开发，提供完整的类型定义'],
+        image: __BASE_URL__ + 'icons/comp-properties-1.png',
       },
       {
         title: '开箱即用，尽享高效',
         descs: ['Monorepo模式：cdk，components，pro', '开箱即用的高质量组件'],
+        image: __BASE_URL__ + 'icons/comp-properties-2.png',
       },
       {
         title: '百变百搭，灵活定制',
         descs: ['灵活的全局配置，深入细节的主题定制能力', '国际化语言支持'],
+        image: __BASE_URL__ + 'icons/comp-properties-3.png',
       },
       {
         title: '组件体验，持续迭代',
         descs: ['基于业务需求及设计趋势', '专业团队持续维护，不断提升组件质量'],
+        image: __BASE_URL__ + 'icons/comp-properties-4.png',
       },
     ],
     sceneDesc: ['多场景跨业务产品案例', '云计算&安全多场景落地，未来实现集团内全产品覆盖'],

@@ -30,6 +30,7 @@ const componentPath: Record<string, string> = {
 
 export default defineConfig(({ command }) => {
   const isBuild = command === 'build'
+  const baseUrl = '/'
 
   return {
     plugins: [
@@ -77,6 +78,7 @@ export default defineConfig(({ command }) => {
       __VERSION_CDK__: `'${cdkPackage.version}'`,
       __VERSION_COMPONENTS__: `'${componentsPackage.version}'`,
       __VERSION_PRO__: `'${proPackage.version}'`,
+      __BASE_URL__: `'${baseUrl}'`,
     },
     css: {
       preprocessorOptions: {
@@ -86,6 +88,7 @@ export default defineConfig(({ command }) => {
         },
       },
     },
+    base: baseUrl,
     build: {
       outDir: resolve(__dirname, '../../dist/site'),
       emptyOutDir: true,

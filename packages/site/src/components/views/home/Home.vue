@@ -15,7 +15,7 @@
     <IxRow class="home-comp-properties-wrapper">
       <IxCol v-for="(item, index) of locale.compProperties" :key="index" xs="24" sm="12" class="home-comp-properties">
         <dl>
-          <div class="home-comp-properties-img"></div>
+          <div class="home-comp-properties-img" :style="{ backgroundImage: `url(${item.image})` }"></div>
           <dt>{{ item.title }}</dt>
           <dd v-for="(desc, _index) of item.descs" :key="_index">{{ desc }}</dd>
         </dl>
@@ -179,30 +179,6 @@ export default defineComponent({
         width: 260px;
         height: 140px;
         background-repeat: no-repeat;
-      }
-
-      &:nth-child(1) {
-        .home-comp-properties-img {
-          background-image: url('/icons/comp-properties-1.png');
-        }
-      }
-
-      &:nth-child(2) {
-        .home-comp-properties-img {
-          background-image: url('/icons/comp-properties-2.png');
-        }
-      }
-
-      &:nth-child(3) {
-        .home-comp-properties-img {
-          background-image: url('/icons/comp-properties-3.png');
-        }
-      }
-
-      &:nth-child(4) {
-        .home-comp-properties-img {
-          background-image: url('/icons/comp-properties-4.png');
-        }
       }
 
       dl {

@@ -22,7 +22,7 @@ import { createApp } from 'vue'
 import { createGlobalConfig } from '@idux/components/config'
 
 const loadIconDynamically = (iconName: string) => {
-  return fetch(`/icon-svg/${iconName}.svg`).then(res => res.text())
+  return fetch(`/idux-icons/${iconName}.svg`).then(res => res.text())
 }
 
 const globalConfig = createGlobalConfig({
