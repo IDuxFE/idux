@@ -10,7 +10,7 @@ addIconDefinitions(IDUX_ICON_DEPENDENCIES)
 
 // 动态加载：不会被打包，可以减小包体积，需要加载的时候时候 http 请求加载
 const loadIconDynamically = (iconName: string) => {
-  return fetch(`/idux-icons/${iconName}.svg`).then(res => res.text())
+  return fetch(__BASE_URL__ + `idux-icons/${iconName}.svg`).then(res => res.text())
 }
 
 const globalConfig = createGlobalConfig({
