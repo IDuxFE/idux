@@ -25,7 +25,7 @@
 | `draggable` | 是否允许拖拽节点 | `boolean` | `false` | - | - |
 | `draggableIcon` | 拖拽节点图标 | `string \| #draggableIcon` | `holder` | - | - |
 | `droppable` | 是否允许放置节点,参见[TreeDroppable](#TreeDroppable) | `TreeDroppable` | - | - | - |
-| `empty` | 空数据时的内容 | `string \| EmptyProps \| #empty` | - | - | - |
+| `empty` | 空数据时的内容 | `'default' \| 'simple' \| EmptyProps` | `'simple'` | - | - |
 | `expandIcon` | 树节点展开图标 | `string \| [string, string] \| #expandIcon="{key: VKey, expanded: boolean, node: TreeNode}"` | `['minus-square', 'plus-square']` | - | 当为数组时表示[`展开时图标`,`未展开时图标`] |
 | `header` | 树的头部 | `string \| HeaderProps \| #header="{expanded, onClick}"` | - | - | - |
 | `height` | 设置虚拟滚动容器高度 | `number` | - | - | - |

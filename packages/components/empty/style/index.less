@@ -1,36 +1,43 @@
 @import '../../style/mixins/reset.less';
 
 .@{empty-prefix} {
-  .reset-component();
+  .reset-component-new();
 
+  color: @empty-color;
+  font-size: @empty-font-size;
+  line-height: calc(@empty-font-size + var(--ix-line-height-gutter));
+  margin: var(--ix-spacing-xl) var(--ix-spacing-lg);
   text-align: center;
-  line-height: @empty-line-height;
-  margin: @empty-margin;
 
   &-image {
-    margin-bottom: @empty-image-margin-bottom;
+    height: 100%;
 
     img {
       height: 100%;
     }
 
-    .@{icon-prefix} {
-      opacity: @empty-image-icon-opacity;
-      font-size: @empty-image-icon-font-size;
-      color: @empty-image-icon-color;
+    svg {
+      height: 100%;
+      margin: auto;
     }
   }
 
   &-description {
-    opacity: @empty-description-opacity;
-    margin: @empty-description-margin;
     color: @empty-description-color;
     font-size: @empty-description-font-size;
+    line-height: calc(@empty-description-font-size + var(--ix-line-height-gutter));
   }
 
   &-content {
-    margin-top: @empty-content-margin-top;
-    color: @empty-content-color;
-    font-size: @empty-content-font-size;
+    margin-top: var(--ix-spacing-sm);
+  }
+
+  &-simple {
+    margin: var(--ix-spacing-sm) 0;
+  }
+
+  &-simple &-description {
+    font-size: inherit;
+    line-height: inherit;
   }
 }

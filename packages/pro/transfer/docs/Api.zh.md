@@ -16,7 +16,7 @@
 | `dataSource` | 源数据数组 | `TransferData[]` | `[]` | - | - |
 | `disabled` | 是否禁用穿梭框 | `boolean` | `false` | - | - |
 | `defaultTargetData` | 初始默认目标列表数据 | `TransferData` | - | - | 仅用于设置初始数据，不可响应式变更 |
-| `empty` | 空状态的配置 | `string \| EmptyProps` | - | - | - |
+| `empty` | 空状态的配置 | `'default' \| 'simple' \| EmptyProps` | `'simple'` | - | - |
 | `flatTargetData` | 是否平展开已选树数据 | `boolean \| 'all'` | `false` | - | 平展开后仅将树的叶子节点数据以列表展示，仅在 `type` 为 `'tree'` 下生效 |
 | `getKey` | 数据项 `key` 的取值 | `string \| (item: unknown) => string \| number` | - | - | 默认取数据的 `key` 属性 |
 | `mode` | 穿梭框模式 | `'default' \| 'immediate'` | `'default'` | - | `'immediate'` 模式为勾选即触发穿梭，不展示穿梭操作按钮 |
@@ -87,7 +87,7 @@ export type ProTransferTreeProps = Pick<
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 | `clearIcon` | 清除按钮 | - | - |
-| `empty` | 穿梭框列表空状态 | `EmptyProps` | 详情参考基础穿梭框组件 |
+| `empty` | 穿梭框列表空状态 | - | 详情参考基础穿梭框组件 |
 | `header` | 穿梭框列表头部 | `TransferBindings & { isSource: boolean }` | 详情参考基础穿梭框组件  |
 | `footer` | 穿梭框列表底部 | `TransferBindings & { isSource: boolean }` | 详情参考基础穿梭框组件  |
 | `headerLabel` | 穿梭框列表头部标签 | `{ data: TransferData[], isSource: boolean }` | 详情参考基础穿梭框组件 |

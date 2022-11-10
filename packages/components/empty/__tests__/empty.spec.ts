@@ -45,12 +45,22 @@ describe('Empty', () => {
 
   test('image work', async () => {
     const wrapper = EmptyMount()
-    expect(wrapper.find('.ix-icon-empty').exists()).toBe(true)
+    expect(wrapper.find('svg').exists()).toBe(true)
 
     await wrapper.setProps({ image: 'image.url' })
 
-    expect(wrapper.find('.ix-icon-empty').exists()).toBe(false)
+    expect(wrapper.find('svg').exists()).toBe(false)
     expect(wrapper.find('img').exists()).toBe(true)
+  })
+
+  test('simple work', async () => {
+    const wrapper = EmptyMount({ props: { simple: true } })
+    expect(wrapper.classes()).toContain('ix-empty-simple')
+    expect(wrapper.html()).toMatchSnapshot()
+
+    await wrapper.setProps({ simple: false })
+
+    expect(wrapper.classes()).not.toContain('ix-empty-simple')
   })
 
   test('default slot work', async () => {

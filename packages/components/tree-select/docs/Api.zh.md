@@ -24,7 +24,7 @@
 | `draggable` | 是否允许拖拽节点 | `boolean` | `false` | - | - |
 | `draggableIcon` | 拖拽节点图标 | `string \| #draggableIcon` | `holder` | - | - |
 | `droppable` | 是否允许放置节点,参见[TreeDroppable](/components/tree/zh#TreeDroppable) | `TreeDroppable` | - | - | - |
-| `empty` | 空数据时的内容 | `string \|` [EmptyProps](/components/empty/zh#EmptyProps) | - | - | - |
+| `empty` | 空数据时的内容 | `'default' \| 'simple' \| [EmptyProps](/components/empty/zh#EmptyProps)` | `'simple'` | - | - |
 | `expandIcon` | 树组件中的展开图标 | `string \| [string, string] \| #expandIcon="{key: VKey, expanded: boolean, node: TreeNode}"` | `right` | ✅ | 当为数组时表示[`展开时图标`,`未展开时图标`] |
 | `getKey` | 获取数据的唯一标识 | `string \| (record: any) => VKey` | `key` | ✅ | - |
 | `labelKey` | 替代[TreeSelectNode](#TreeSelectNode)中的`label`字段 | `string` | `label` | ✅ | -

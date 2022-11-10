@@ -19,7 +19,7 @@
 | `customAdditional` | 自定义下拉选项的额外属性 | `SelectCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
 | `dataSource` | 选项数据源 | `SelectData[]` | - | - | 优先级高于 `default` 插槽, 性能会更好 |
 | `disabled` | 是否禁用状态 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
-| `empty` | 自定义当下拉列表为空时显示的内容 | `string \| EmptyProps \| #empty` | - | - | - |
+| `empty` | 自定义当下拉列表为空时显示的内容 | `'default' \| 'simple' \| EmptyProps` | `'simple'` | - | - |
 | `getKey` | 获取数据的唯一标识 | `string \| (data: SelectData) => VKey` | `key` | ✅ | 为了兼容之前的版本，默认值也会支持 `value` |
 | `labelKey` | 选项 label 的 key | `string` | `label` | ✅ | 仅在使用 `dataSource` 时有效 |
 | `maxLabel` | 最多显示多少个标签，响应式模式会对性能产生损耗 | `number \| 'responsive'` | - | - | - |
@@ -75,12 +75,12 @@ export type SelectSearchFn = (data: SelectData, searchValue: string) => boolean
 
 | 名称 | 说明 | 参数类型 | 备注 |
 |  -- | -- | -- | -- |
-|  `default` | 选项内容 | - | - |
-|  `selectedItem` | 自定义选中项 | `data: SelectedItemProps` | 使用该插槽后`selectedLabel`将无效 |
-|  `selectedLabel` | 自定义选中的标签 | `data: SelectOption` |  |
-|  `overflowedLabel` | 自定义超出最多显示多少个标签的内容 | `data: SelectOption[]` | 参数为超出的数组 |
-|  `optionLabel` | 自定义选项的文本 | `data: SelectOption` | - |
-|  `optionGroupLabel` | 自定义选项组的文本 | `data: SelectOptionGroup` | - |
+| `empty` | 自定义空状态 |  - | - |
+| `selectedItem` | 自定义选中项 | `data: SelectedItemProps` | 使用该插槽后`selectedLabel`将无效 |
+| `selectedLabel` | 自定义选中的标签 | `data: SelectOption` |  |
+| `overflowedLabel` | 自定义超出最多显示多少个标签的内容 | `data: SelectOption[]` | 参数为超出的数组 |
+| `optionLabel` | 自定义选项的文本 | `data: SelectOption` | - |
+| `optionGroupLabel` | 自定义选项组的文本 | `data: SelectOptionGroup` | - |
 
 ```ts
 interface SelectedItemProps {
@@ -113,7 +113,7 @@ interface SelectedItemProps {
 | `childrenKey` | 分组选项的 key | `string` | `children` | ✅ | 仅在使用 `dataSource` 时有效 |
 | `customAdditional` | 自定义下拉选项的额外属性 | `SelectCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
 | `dataSource` | 选项数据源 | `SelectData[]` | - | - | IxSelectPanel仅支持使用dataSource，不支持通过插槽配置 |
-| `empty` | 自定义当下拉列表为空时显示的内容 | `string \| EmptyProps \| #empty` | - | - | - |
+| `empty` | 自定义当下拉列表为空时显示的内容 | `'default' \| 'simple' \| EmptyProps` | `'simple'` | - | - |
 | `getKey` | 获取数据的唯一标识 | `string \| (data: SelectData) => VKey` | `key` | ✅ | 为了兼容之前的版本，默认值也会支持 `value` |
 | `labelKey` | 选项 label 的 key | `string` | `label` | ✅ | 仅在使用 `dataSource` 时有效 |
 | `multiple` | 多选模式 | `boolean` | `false` | - | - |
@@ -122,6 +122,12 @@ interface SelectedItemProps {
 | `onScroll` | 滚动事件 | `(evt: Event) => void` | - | - | - |
 | `onScrolledChange` | 滚动的位置发生变化 | `(startIndex: number, endIndex: number, visibleData: SelectData[]) => void` | - | - | 仅 `virtual` 模式下可用 |
 | `onScrolledBottom` | 滚动到底部时触发 | `() => void` | - | - | 仅 `virtual` 模式下可用 |
+
+#### SelectPanelSlots
+
+| 名称 | 说明 | 参数类型 | 备注 |
+|  -- | -- | -- | -- |
+| `empty` | 自定义空状态 |  - | - |
 
 #### SelectPanelMethods
 
