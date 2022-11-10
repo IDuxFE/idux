@@ -173,6 +173,16 @@ export default defineComponent({
       }
 
       const children: VNodeChild[] = []
+
+      if (showPlaceholder.value) {
+        const placeholderNode = slots.placeholder ? slots.placeholder() : props.placeholder
+        children.push(
+          <div key="__placeholder" class={`${prefixCls}-placeholder`}>
+            {placeholderNode}
+          </div>,
+        )
+      }
+
       if (multiple) {
         const renderRest = (rest: unknown[]) => {
           const key = '__IDUX_SELECT_MAX_ITEM'
@@ -204,15 +214,6 @@ export default defineComponent({
           dataSource.forEach(item => children.push(renderItem(item)))
         }
         children.push(<Input />)
-      }
-
-      if (showPlaceholder.value) {
-        const placeholderNode = slots.placeholder ? slots.placeholder() : props.placeholder
-        children.push(
-          <div key="__placeholder" class={`${prefixCls}-placeholder`}>
-            {placeholderNode}
-          </div>,
-        )
       }
 
       const suffixProps = {
