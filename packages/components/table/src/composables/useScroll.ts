@@ -25,12 +25,16 @@ export function useScroll(
   const scrollContentRef = ref<HTMLDivElement>()
   const scrollFootRef = ref<HTMLDivElement>()
 
-  watch(virtualScrollRef, instance => {
-    if (instance) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      scrollBodyRef.value = (instance as any).holderRef.value
-    }
-  })
+  watch(
+    virtualScrollRef,
+    instance => {
+      if (instance) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        scrollBodyRef.value = (instance as any).holderRef
+      }
+    },
+    { immediate: true },
+  )
 
   const { handleScroll, pingedStart, pingedEnd } = useScrollRef(
     scrollHeadRef,
@@ -39,18 +43,22 @@ export function useScroll(
     setStickyScrollLeft,
   )
 
-  const scrollWithAutoHeight = useScrollWithAutoHeight(props, mergedAutoHeight, scrollBodyRef, scrollContentRef)
   const scrollWidth = computed(() => convertCssPixel(props.scroll?.width))
   const scrollHeight = computed(() => {
     let height = convertCssPixel(props.scroll?.height)
-    if (!height && mergedAutoHeight.value && (props.virtual || scrollWithAutoHeight.value)) {
+    if (!height && mergedAutoHeight.value) {
       height = 'auto'
     }
     return height
   })
+  const { hasVerticalScrollbar, hasHorizontalScrollbar } = useScrollbarDetect(
+    scrollHeight,
+    scrollBodyRef,
+    scrollContentRef,
+  )
 
   const scrollBarSize = computed(() => getScrollBarSize(convertElement(scrollBodyRef)))
-  const scrollBarSizeOnFixedHolder = computed(() => (scrollHeight.value ? scrollBarSize.value : 0))
+  const scrollBarSizeOnFixedHolder = computed(() => (hasVerticalScrollbar.value ? scrollBarSize.value : 0))
 
   const scrollTo: VirtualScrollToFn = options => {
     if (props.virtual) {
@@ -73,10 +81,12 @@ export function useScroll(
     scrollFootRef,
     handleScroll,
     scrollTo,
+    hasVerticalScrollbar,
+    hasHorizontalScrollbar,
     pingedStart,
     pingedEnd,
-    scrollWidth,
     scrollHeight,
+    scrollWidth,
     scrollBarSize,
     scrollBarSizeOnFixedHolder,
   }
@@ -90,10 +100,12 @@ export interface ScrollContext {
   scrollFootRef: Ref<HTMLDivElement | undefined>
   handleScroll: (evt?: Event, scrollLeft?: number) => void
   scrollTo: VirtualScrollToFn
+  hasVerticalScrollbar: Ref<boolean>
+  hasHorizontalScrollbar: Ref<boolean>
   pingedStart: Ref<boolean>
   pingedEnd: Ref<boolean>
-  scrollWidth: ComputedRef<string>
   scrollHeight: ComputedRef<string>
+  scrollWidth: ComputedRef<string>
   scrollBarSize: ComputedRef<number>
   scrollBarSizeOnFixedHolder: ComputedRef<number>
 }
@@ -176,37 +188,52 @@ function useScrollRef(
   return { handleScroll, pingedStart, pingedEnd }
 }
 
-// 针对非虚拟滚动场景，需要判断 scrollHeight 和 clientHeight
-function useScrollWithAutoHeight(
-  props: TableProps,
-  mergedAutoHeight: ComputedRef<boolean>,
+// 检测是否有竖向滚动条
+function useScrollbarDetect(
+  scrollHeight: ComputedRef<string>,
   scrollBodyRef: Ref<HTMLDivElement | undefined>,
   scrollContentRef: Ref<HTMLDivElement | undefined>,
-) {
-  const scrollWithAutoHeight = ref(true)
+): {
+  hasVerticalScrollbar: Ref<boolean>
+  hasHorizontalScrollbar: Ref<boolean>
+} {
+  const hasVerticalScrollbar = ref(false)
+  const hasHorizontalScrollbar = ref(false)
 
-  const calcScrollWithAutoHeight = () => {
+  const checkVerticalScrollBarExistance = () => {
     const bodyEl = convertElement(scrollBodyRef.value)
-    if (!bodyEl) {
-      scrollWithAutoHeight.value = false
+    const contentEl = convertElement(scrollContentRef.value)
+    if (!bodyEl || !contentEl) {
+      hasVerticalScrollbar.value = false
+      hasHorizontalScrollbar.value = false
     } else {
-      scrollWithAutoHeight.value = bodyEl.scrollHeight > bodyEl.clientHeight
+      hasVerticalScrollbar.value = bodyEl.clientHeight < contentEl.clientHeight
+      hasHorizontalScrollbar.value = bodyEl.clientWidth < contentEl.clientWidth
     }
   }
 
   let stopResizeObservers: Array<() => void> = []
-  const stopHandler = () => stopResizeObservers.forEach(stop => stop())
+  let stopElWatch: (() => void) | undefined
+  const stopHandler = () => {
+    stopResizeObservers.forEach(stop => stop())
+    stopElWatch?.()
+
+    stopResizeObservers = []
+    stopElWatch = undefined
+  }
 
   onMounted(() => {
     watch(
-      [mergedAutoHeight, () => props.virtual],
-      ([autoHeight, virtual]) => {
+      scrollHeight,
+      height => {
         stopHandler()
-        if (autoHeight && !virtual) {
+        if (height === 'auto') {
           stopResizeObservers = [
-            useResizeObserver(scrollBodyRef, calcScrollWithAutoHeight),
-            useResizeObserver(scrollContentRef, calcScrollWithAutoHeight),
+            useResizeObserver(scrollBodyRef, checkVerticalScrollBarExistance),
+            useResizeObserver(scrollContentRef, checkVerticalScrollBarExistance),
           ]
+        } else {
+          stopElWatch = watch([scrollBodyRef, scrollContentRef], checkVerticalScrollBarExistance, { immediate: true })
         }
       },
       { immediate: true },
@@ -215,5 +242,8 @@ function useScrollWithAutoHeight(
 
   onBeforeUnmount(() => stopHandler())
 
-  return scrollWithAutoHeight
+  return {
+    hasVerticalScrollbar,
+    hasHorizontalScrollbar,
+  }
 }
