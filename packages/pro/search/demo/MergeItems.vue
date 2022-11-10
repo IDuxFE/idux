@@ -103,7 +103,9 @@ const handleValueUpdate = (searchValues: SearchValue[] | undefined) => {
   }
 
   const currentValue = securityStateValues.pop()!
-  value.value = [...searchValues!.filter(v => v.key !== 'security_state'), currentValue]
+  value.value = !securityStateValues.length
+    ? searchValues!
+    : [...searchValues!.filter(v => v.key !== 'security_state'), currentValue]
 
   securityStateField.defaultValue = currentValue.value
 }

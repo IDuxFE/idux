@@ -26,11 +26,16 @@ export function createNameSegment(
       setValue(value[0])
       ok()
     }
+    const filteredDataSource = filterSelectDataSourceByInput(names, getRawInput(input))
+    if (!filteredDataSource?.length) {
+      return
+    }
+
     return (
       <SelectPanel
         class={`${prefixCls}-name-segment-panel`}
         value={convertArray(value)}
-        dataSource={filterSelectDataSourceByInput(names, getRawInput(input))}
+        dataSource={filteredDataSource}
         multiple={false}
         onChange={handleChange}
         onConfirm={ok}
