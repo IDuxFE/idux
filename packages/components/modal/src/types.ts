@@ -103,10 +103,13 @@ export const modalProps = {
   onClose: [Function, Array] as PropType<MaybeArray<(evt?: Event | unknown) => void>>,
   onCancel: [Function, Array] as PropType<MaybeArray<(evt?: Event | unknown) => unknown>>,
   onOk: [Function, Array] as PropType<MaybeArray<(evt?: Event | unknown) => unknown>>,
+
+  // private
+  __content_node: [String, Object] as PropType<string | VNode>,
 } as const
 
 export type ModalProps = ExtractInnerPropTypes<typeof modalProps>
-export type ModalPublicProps = ExtractPublicPropTypes<typeof modalProps>
+export type ModalPublicProps = Omit<ExtractPublicPropTypes<typeof modalProps>, '__content_node'>
 export interface ModalBindings {
   open: () => void
   close: (evt?: Event | unknown) => Promise<void>
