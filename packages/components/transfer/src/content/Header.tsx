@@ -7,9 +7,7 @@
 
 import { type VNodeTypes, defineComponent, inject, normalizeClass, onMounted, ref, watch, withKeys } from 'vue'
 
-import { isArray } from 'lodash-es'
-
-import { useState } from '@idux/cdk/utils'
+import { isEmptyNode, useState } from '@idux/cdk/utils'
 import { ɵInput, type ɵInputInstance } from '@idux/components/_private/input'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { IxIcon } from '@idux/components/icon'
@@ -142,7 +140,11 @@ export default defineComponent({
     const renderSuffix = (prefixCls: string) => {
       const suffix = slots.headerSuffix?.({ isSource: props.isSource })
 
-      return suffix && <span class={`${prefixCls}-suffix`}>{suffix}</span>
+      if (isEmptyNode(suffix)) {
+        return
+      }
+
+      return <span class={`${prefixCls}-suffix`}>{suffix}</span>
     }
 
     const renderHeader = (prefixCls: string) => {
@@ -166,7 +168,7 @@ export default defineComponent({
 
       const children = renderHeader(prefixCls)
 
-      if (!children || (isArray(children) && children.length <= 0)) {
+      if (isEmptyNode(children)) {
         return
       }
 

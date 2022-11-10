@@ -50,12 +50,13 @@ export function hasSlot(slots: Slots, key = 'default'): boolean {
   return !isNil(slots[key])
 }
 
-export function isEmptyNode(node: VNodeChild): boolean {
-  return (
-    !node ||
-    isComment(node) ||
-    (isFragment(node) && (node as any).children.length === 0) ||
-    (isText(node) && (node as any).children.trim() === '')
+export function isEmptyNode(nodes: VNodeChild): boolean {
+  return convertArray(nodes).every(
+    node =>
+      !node ||
+      isComment(node) ||
+      (isFragment(node) && (node as any).children.length === 0) ||
+      (isText(node) && (node as any).children.trim() === ''),
   )
 }
 
