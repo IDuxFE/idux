@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type CSSProperties, type VNodeTypes, computed, defineComponent, provide, ref } from 'vue'
+import { type CSSProperties, type VNodeTypes, computed, defineComponent, normalizeStyle, provide, ref } from 'vue'
 
 import { isNil } from 'lodash-es'
 
@@ -15,7 +15,7 @@ import {
   type VirtualScrollInstance,
   type VirtualScrollToOptions,
 } from '@idux/cdk/scroll'
-import { type VKey, callEmit } from '@idux/cdk/utils'
+import { type VKey, callEmit, convertCssPixel } from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
 import { useGlobalConfig } from '@idux/components/config'
 import { useGetKey } from '@idux/components/utils'
@@ -185,7 +185,10 @@ export default defineComponent({
             onScrolledChange={handleScrolledChange}
           />
         ) : (
-          <div class={`${mergedPrefixCls.value}-content`}>
+          <div
+            class={`${mergedPrefixCls.value}-content`}
+            style={normalizeStyle(autoHeight.value ? undefined : { maxHeight: convertCssPixel(height) })}
+          >
             <div class={`${mergedPrefixCls.value}-content-inner`}>
               {nodes.map(item => (
                 <TreeNode node={item} {...item}></TreeNode>
