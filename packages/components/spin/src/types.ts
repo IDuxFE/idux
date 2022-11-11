@@ -50,6 +50,8 @@ export interface SpinMergedOptions extends SpinOptions {
   hasScroll: boolean
   isFullScreen: boolean
   staticPosition: boolean
+
+  stopResizeWatch?: () => void
 }
 
 export interface SpinRef {
