@@ -28,6 +28,7 @@ import type {
   TableColumnSelectable,
   TableCustomAdditional,
   TableCustomTag,
+  TableEmptyCellOptions,
   TablePagination,
   TableScroll,
   TableSize,
@@ -53,6 +54,10 @@ export const proTableProps = {
   editable: { type: Boolean, default: false },
   ellipsis: { type: [Boolean, Object] as PropType<boolean | { title?: boolean }>, default: false },
   empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
+  emptyCell: {
+    type: [String, Function] as PropType<string | ((options: TableEmptyCellOptions) => VNodeChild)>,
+    default: undefined,
+  },
   getKey: { type: [String, Function] as PropType<string | ((record: any) => any)>, default: undefined },
   header: { type: [String, Object] as PropType<string | HeaderProps>, default: undefined },
   headless: { type: Boolean, default: undefined },
