@@ -5,9 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { ComputedRef, VNode, computed, defineComponent, normalizeStyle, provide, ref } from 'vue'
+import { ComputedRef, VNode, computed, defineComponent, nextTick, normalizeStyle, provide, ref } from 'vue'
 
 import { CdkPortal, type PortalTargetType } from '@idux/cdk/portal'
+import { useResizeObserver } from '@idux/cdk/resize'
 import { addClass, convertArray, convertCssPixel, removeClass } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { convertTarget } from '@idux/components/utils'
@@ -40,8 +41,8 @@ export default defineComponent({
         const { spinning, target, width, height, isFullScreen, hasScroll, tip, zIndex } = spinOptions
         const BaseZindex = zIndex ?? BASE_ZINDEX + index
         const style = normalizeStyle({
-          width: !isFullScreen && hasScroll && convertCssPixel(width),
-          height: !isFullScreen && hasScroll && convertCssPixel(height),
+          width: !isFullScreen && hasScroll ? convertCssPixel(width) : null,
+          height: !isFullScreen && hasScroll ? convertCssPixel(height) : null,
           position: isFullScreen ? 'fixed' : '',
           zIndex: BaseZindex,
         })
@@ -54,10 +55,10 @@ export default defineComponent({
       })
 
       return (
-        <div class={`${mergedPrefixCls.value}-provider`}>
+        <>
           {children}
           {slots.default?.()}
-        </div>
+        </>
       )
     }
   },
@@ -111,9 +112,10 @@ function useSpin(mergedPrefixCls: ComputedRef<string>) {
     targets.forEach(target => {
       const currIndex = getCurrIndex(target)
       if (currIndex !== -1) {
-        const item = spins.value.splice(currIndex, 1)
-        const targetElement = _convertTarget(item[0].target)
+        const item = spins.value.splice(currIndex, 1)[0]
+        const targetElement = _convertTarget(item.target)
         targetElement && deleteClass(targetElement)
+        item.stopResizeWatch?.()
       }
     })
   }
@@ -137,9 +139,33 @@ function useSpin(mergedPrefixCls: ComputedRef<string>) {
         [
           `${mergedPrefixCls.value}-target-container`,
           staticPosition ? `${mergedPrefixCls.value}-target-container-relative` : '',
-          !isFullScreen && hasScroll ? `${mergedPrefixCls.value}-target-container-has-scroll` : '',
         ].filter(Boolean),
       )
+
+      let stopResizeWatch: (() => void) | undefined
+
+      if (!isFullScreen) {
+        stopResizeWatch = useResizeObserver(targetElement, () => {
+          // 由于spin是传送到target内部，为了不影响target的真实宽高判断
+          // 为了兼容scroll和resize同时存在时spin依然能遮住target区域
+          // 所以每次resize时需要把spin宽高置为0，再nextTick中再判断是否出现滚轮
+          const currIndex = getCurrIndex(target)
+          spins.value[currIndex].width = 0
+          spins.value[currIndex].height = 0
+          nextTick(() => {
+            const hasScroll = elementHasScroll(targetElement)
+            spins.value[currIndex].hasScroll = hasScroll
+            const hasScrollClsName = `${mergedPrefixCls.value}-target-container-has-scroll`
+            if (hasScroll) {
+              addClass(targetElement, hasScrollClsName)
+              spins.value[currIndex].width = targetElement.scrollWidth
+              spins.value[currIndex].height = targetElement.scrollHeight
+            } else {
+              removeClass(targetElement, hasScrollClsName)
+            }
+          })
+        })
+      }
 
       add({
         spinning: true,
@@ -147,10 +173,9 @@ function useSpin(mergedPrefixCls: ComputedRef<string>) {
         hasScroll,
         isFullScreen: targetElement === document.body,
         staticPosition,
-        // 当存在滚动条且需要遮住全部除了全屏外（fixed可以解决）
-        // 其余几乎无此真实场景，所以不考虑resize时动态赋值width和height，目前也没办法解决
         width: targetElement.scrollWidth,
         height: targetElement.scrollHeight,
+        stopResizeWatch,
         ...reset,
       })
     }
