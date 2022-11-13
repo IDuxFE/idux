@@ -25,7 +25,7 @@ export function useTreeExpandedKeys<C extends VKey>(
   props: ProTransferProps,
   childrenKey: ComputedRef<C>,
   getKey: ComputedRef<GetKeyFn>,
-  targetKeys: ComputedRef<VKey[] | undefined>,
+  targetKeySet: ComputedRef<Set<VKey>>,
   parentKeyMap: Map<VKey, VKey | undefined>,
   dataKeyMap: Map<VKey, TreeTransferData<C>>,
 ): TreeExpandedKeysContext {
@@ -63,17 +63,25 @@ export function useTreeExpandedKeys<C extends VKey>(
     remove && expandedKeysSource.delete(key)
   }
 
-  watch(targetKeys, (keys, oldKeys) => {
-    const newKeys = keys?.filter(key => oldKeys && oldKeys.findIndex(oldKey => oldKey === key) < 0)
-    const deletedKeys = oldKeys?.filter(oldkey => keys && keys.findIndex(key => key === oldkey) < 0)
+  watch(targetKeySet, (keys, oldKeys) => {
+    const newKeySet = new Set<VKey>()
+    keys.forEach(key => {
+      if (!oldKeys.has(key)) {
+        newKeySet.add(key)
+      }
+
+      oldKeys.delete(key)
+    })
+
+    const deletedKeySet = oldKeys
 
     const newTargetExpandedKeySet = new Set<VKey>(targetExpandedKeySet.value)
     const newSourceExpandedKeySet = new Set<VKey>(sourceExpandedKeySet.value)
 
-    deletedKeys?.forEach(key => {
+    deletedKeySet?.forEach(key => {
       syncSelectedExpandedState(key, newTargetExpandedKeySet, newSourceExpandedKeySet, true)
     })
-    newKeys?.forEach(key => {
+    newKeySet?.forEach(key => {
       syncSelectedExpandedState(key, newSourceExpandedKeySet, newTargetExpandedKeySet, props.mode !== 'immediate')
     })
 

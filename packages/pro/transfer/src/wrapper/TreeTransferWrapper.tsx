@@ -38,7 +38,7 @@ export default defineComponent({
       dataStrategyContext: { dataKeyMap, targetDataCount },
       expandedKeysContext,
       mergedDataStrategy,
-    } = useTreeContext(props, childrenKey, cascaderStrategy, getKey, targetKeys)
+    } = useTreeContext(props, childrenKey, cascaderStrategy, getKey, targetKeySet)
     const { dataSource, loadSourceChildren, loadTargetChildren } = useTransferData(
       props,
       getKey,
@@ -125,7 +125,7 @@ function useTreeContext<C extends VKey>(
   childrenKey: ComputedRef<C>,
   cascadeStrategy: ComputedRef<CascaderStrategy>,
   getKey: ComputedRef<GetKeyFn>,
-  targetKeys: ComputedRef<VKey[] | undefined>,
+  targetKeySet: ComputedRef<Set<VKey>>,
 ): {
   dataStrategyContext: TreeDataStrategyContext<C>
   expandedKeysContext: TreeExpandedKeysContext
@@ -137,7 +137,7 @@ function useTreeContext<C extends VKey>(
     cascadeStrategy,
   )
   const { parentKeyMap, dataKeyMap } = dataStrategyContext
-  const expandedKeysContext = useTreeExpandedKeys(props, childrenKey, getKey, targetKeys, parentKeyMap, dataKeyMap)
+  const expandedKeysContext = useTreeExpandedKeys(props, childrenKey, getKey, targetKeySet, parentKeyMap, dataKeyMap)
 
   return {
     dataStrategyContext,
