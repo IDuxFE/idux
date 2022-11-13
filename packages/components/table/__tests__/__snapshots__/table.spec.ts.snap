@@ -10,24 +10,21 @@ exports[`Table > basic work > render work 1`] = `
         <colgroup>
           <col class=\\"ix-table-col-expandable\\">
           <col class=\\"ix-table-col-selectable\\">
-          <col class=\\"\\">
-          <col class=\\"\\">
-          <col class=\\"\\">
-          <col class=\\"\\">
-          <col class=\\"\\">
+          <col>
+          <col>
+          <col>
+          <col>
+          <col>
         </colgroup>
         <thead class=\\"ix-table-thead\\">
           <tr class=\\"ix-table-row\\">
             <th class=\\"ix-table-cell ix-table-cell-expandable\\">
               <!---->
             </th>
-            <th class=\\"ix-table-cell ix-table-cell-selectable\\">
-              <div class=\\"ix-table-selectable\\"><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
-                  <!---->
-                  <!---->
-                </label>
-                <!---->
-              </div>
+            <th class=\\"ix-table-cell ix-table-cell-selectable\\"><span class=\\"ix-table-cell-triggers\\"><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
+              <!---->
+              <!----></label>
+              <!----></span>
             </th>
             <th class=\\"ix-table-cell\\">Name</th>
             <th class=\\"ix-table-cell\\">Age</th>
