@@ -59,7 +59,7 @@ export default defineComponent({
       }
 
       return (
-        <div class={`${mergedPrefixCls.value}-selectable`}>
+        <span class={`${mergedPrefixCls.value}-cell-triggers`}>
           <IxCheckbox
             checked={currentPageAllSelected.value}
             indeterminate={currentPageSomeSelected.value}
@@ -67,7 +67,7 @@ export default defineComponent({
             onChange={handleHeadSelectChange}
           />
           {renderDropDown()}
-        </div>
+        </span>
       )
     }
   },

@@ -152,8 +152,7 @@
   }
 
   // --------- Expandable ---------
-  & &-expandable-trigger {
-    margin-right: @spacing-xs;
+  &-expandable-trigger {
     color: @table-expandable-icon-color;
     background-color: transparent;
     border-style: none;
@@ -162,6 +161,10 @@
 
     &-disabled {
       cursor: unset;
+    }
+
+    & + * {
+      margin-left: @spacing-xs;
     }
   }
 
@@ -175,17 +178,10 @@
   }
 
   // --------- Selectable ---------
-  & &-cell-selectable {
-    .@{table-prefix}-selectable {
-      display: flex;
-      align-items: center;
-
-      &-trigger {
-        margin-left: @spacing-xs;
-        color: @table-head-icon-color;
-        cursor: pointer;
-      }
-    }
+  &-selectable-trigger {
+    margin-left: @spacing-xs;
+    color: @table-head-icon-color;
+    cursor: pointer;
   }
 
   & tr&-row-selected {

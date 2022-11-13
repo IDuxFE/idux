@@ -44,7 +44,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
             <!---->
             <!---->
             <div
-              class="ix-table-container ix-table-scroll-vertical"
+              class="ix-table-container ix-table-fixed-layout ix-table-scroll-vertical"
             >
               
               <div
@@ -59,15 +59,9 @@ exports[`ProTransfer > table transfer render work 1`] = `
                     <col
                       class="ix-table-col-selectable"
                     />
-                    <col
-                      class=""
-                    />
-                    <col
-                      class=""
-                    />
-                    <col
-                      class=""
-                    />
+                    <col />
+                    <col />
+                    <col />
                     
                   </colgroup>
                   
@@ -82,8 +76,8 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       <th
                         class="ix-table-cell ix-table-cell-selectable"
                       >
-                        <div
-                          class="ix-table-selectable"
+                        <span
+                          class="ix-table-cell-triggers"
                         >
                           <label
                             aria-checked="false"
@@ -107,7 +101,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             <!---->
                           </label>
                           <!---->
-                        </div>
+                        </span>
                       </th>
                       <th
                         class="ix-table-cell"
@@ -137,22 +131,16 @@ exports[`ProTransfer > table transfer render work 1`] = `
               >
                 <table
                   class="ix-table-table"
-                  style="table-layout: auto;"
+                  style="table-layout: fixed;"
                 >
                   <colgroup>
                     
                     <col
                       class="ix-table-col-selectable"
                     />
-                    <col
-                      class=""
-                    />
-                    <col
-                      class=""
-                    />
-                    <col
-                      class=""
-                    />
+                    <col />
+                    <col />
+                    <col />
                     
                   </colgroup>
                   <tbody
@@ -1107,7 +1095,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
             <!---->
             <!---->
             <div
-              class="ix-table-container ix-table-scroll-vertical"
+              class="ix-table-container ix-table-fixed-layout ix-table-scroll-vertical"
             >
               
               <div
@@ -1122,9 +1110,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                     <col
                       class="ix-table-col-selectable"
                     />
-                    <col
-                      class=""
-                    />
+                    <col />
                     
                   </colgroup>
                   
@@ -1139,8 +1125,8 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       <th
                         class="ix-table-cell ix-table-cell-selectable"
                       >
-                        <div
-                          class="ix-table-selectable"
+                        <span
+                          class="ix-table-cell-triggers"
                         >
                           <label
                             aria-checked="false"
@@ -1164,7 +1150,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             <!---->
                           </label>
                           <!---->
-                        </div>
+                        </span>
                       </th>
                       <th
                         class="ix-table-cell"
@@ -1184,16 +1170,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
               >
                 <table
                   class="ix-table-table"
-                  style="table-layout: auto;"
+                  style="table-layout: fixed;"
                 >
                   <colgroup>
                     
                     <col
                       class="ix-table-col-selectable"
                     />
-                    <col
-                      class=""
-                    />
+                    <col />
                     
                   </colgroup>
                   <tbody
