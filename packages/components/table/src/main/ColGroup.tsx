@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+/* eslint-disable indent */
+
 import { defineComponent, inject, normalizeClass } from 'vue'
 
 import { convertCssPixel } from '@idux/cdk/utils'
@@ -17,7 +19,6 @@ export default defineComponent({
     const {
       flattedColumns,
       flattedColumnsWithScrollBar,
-      columnWidths,
       columnWidthsWithScrollBar,
       mergedSelectableMenus,
       mergedPrefixCls,
@@ -26,24 +27,27 @@ export default defineComponent({
     return () => {
       const { isFixedHolder } = props
       const columns = isFixedHolder ? flattedColumnsWithScrollBar.value : flattedColumns.value
-      if (!columns.some(column => !!column.width || 'type' in column)) {
+
+      // 所有列的宽度都不存在且没有特殊列的时候，跳过渲染
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      if (columns.every(column => !column.width && !column.type)) {
         return
       }
 
       const prefixCls = mergedPrefixCls.value
-      const widths = isFixedHolder ? columnWidthsWithScrollBar.value : columnWidths.value
       const children = columns.map((column, colIndex) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const { key, type } = column
-        // resizable：对于固定表头，widths[colIndex] 的优先级高于 column.width， 其他情况则相反。
-        const mergedWidth = isFixedHolder ? widths[colIndex] ?? column.width : column.width ?? widths[colIndex]
-        const className = normalizeClass({
-          [`${prefixCls}-col-${type}`]: !!type,
-          [`${prefixCls}-selectable-with-dropdown`]: type === 'selectable' && mergedSelectableMenus.value.length > 0,
-        })
-
-        const style = mergedWidth ? { width: convertCssPixel(mergedWidth) } : undefined
+        const mergedWidth = isFixedHolder ? columnWidthsWithScrollBar.value[colIndex] : column.width
+        const className = type
+          ? normalizeClass({
+              [`${prefixCls}-col-${type}`]: true,
+              [`${prefixCls}-col-with-dropdown`]: type === 'selectable' && mergedSelectableMenus.value.length > 0,
+            })
+          : undefined
+        const style = mergedWidth ? `width: ${convertCssPixel(mergedWidth)}` : undefined
         return <col key={key} class={className} style={style}></col>
       })
 

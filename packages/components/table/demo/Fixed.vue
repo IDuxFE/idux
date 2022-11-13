@@ -64,26 +64,22 @@ const columns: TableColumn<Data>[] = [
   {
     title: 'Column 5',
     dataKey: 'address',
-    width: '10%',
     key: 'Column 5',
   },
   {
     title: 'Column 6',
     dataKey: 'address',
-    width: '10%',
     key: 'Column 6',
   },
   {
     title: 'Column 7',
     dataKey: 'address',
-    width: '10%',
     key: 'Column 7',
   },
   {
     title: 'Column 8',
     dataKey: 'address',
     key: 'Column 8',
-    width: '10%',
   },
   {
     title: 'Action',

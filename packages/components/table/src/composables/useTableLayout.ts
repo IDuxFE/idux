@@ -21,10 +21,10 @@ export function useTableLayout(
     if (props.tableLayout) {
       return props.tableLayout
     }
-    if (scrollHeight.value && hasFixed.value) {
+    if (scrollWidth.value && hasFixed.value) {
       return scrollWidth.value === 'max-content' ? 'auto' : 'fixed'
     }
-    if (scrollWidth.value || isSticky.value || hasEllipsis.value || props.virtual) {
+    if (scrollHeight.value || isSticky.value || hasEllipsis.value || props.virtual) {
       return 'fixed'
     }
     return 'auto'
