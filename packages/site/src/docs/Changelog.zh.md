@@ -10,7 +10,17 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
-# 1.1.0(2022-11-08)
+## 1.1.1(2022-11-13)
+
+### Bug Fixes
+
+- **comp:select:** 浮层打开时，点击 trigger 无法触发 focus ([#1271](https://github.com/IDuxFE/idux/issues/1271)) ([bd34155](https://github.com/IDuxFE/idux/commit/bd34155089c1755a8dffd31e68a9f7ff0e89ace9))
+- **comp:spin:** useSpin 移除外层容器节点且支持子元素 resize ([#1273](https://github.com/IDuxFE/idux/issues/1273)) ([bb2b4fd](https://github.com/IDuxFE/idux/commit/bb2b4fd8ea31877be0e7f6b08a8d8167275e0d0f))
+- **comp:table:** 当 scroll.with 存在时，始终显示滚动条 ([#1274](https://github.com/IDuxFE/idux/issues/1274)) ([2d8c9c4](https://github.com/IDuxFE/idux/commit/2d8c9c41e409c9ef9856a8df24d60e56907db1b4))
+- **comp:tree:** 未开启 virtual 时，height 设置不生效 ([#1244](https://github.com/IDuxFE/idux/issues/1244)) ([fa4d0f3](https://github.com/IDuxFE/idux/commit/fa4d0f3375ce62a8664c6a85ad356933a29b54b4))
+- **pro:search:** 不再自动弹出搜索条件名称选择的面板 ([#1260](https://github.com/IDuxFE/idux/issues/1260)) ([da4de16](https://github.com/IDuxFE/idux/commit/da4de1681ef5bbffdbe0f7a10d54173572a765fc))
+
+## 1.1.0(2022-11-08)
 
 ### Bug Fixes
 

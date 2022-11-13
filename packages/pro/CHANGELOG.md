@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/IDuxFE/idux/compare/v1.1.0...v1.1.1) (2022-11-13)
+
+### Bug Fixes
+
+- **pro:search:** name segment overlay isn't automatically opened now ([#1260](https://github.com/IDuxFE/idux/issues/1260)) ([da4de16](https://github.com/IDuxFE/idux/commit/da4de1681ef5bbffdbe0f7a10d54173572a765fc))
+
 # [1.1.0](https://github.com/IDuxFE/idux/compare/v1.0.1...v1.1.0) (2022-11-08)
 
 ### Bug Fixes
