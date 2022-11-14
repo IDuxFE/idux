@@ -188,14 +188,6 @@
       border: @card-border-width @card-border-style @color-primary;
     }
   }
-
-  .@{idux-prefix}-header {
-    &-content {
-      > .@{idux-prefix}-header-suffix {
-        padding: 0;
-      }
-    }
-  }
 }
 
 @keyframes card-loading {
@@ -213,7 +205,7 @@
   font-size: @font-size;
   line-height: calc(@font-size + var(--ix-line-height-gutter));
 
-  > .@{idux-prefix}-header {
+  > .@{header-prefix} {
     padding-left: @card-padding;
     padding-right: @card-padding;
   }
@@ -226,7 +218,7 @@
     padding: @card-padding;
   }
 
-  .@{idux-prefix}-header + .@{card-prefix}-body {
+  .@{header-prefix} + .@{card-prefix}-body {
     padding-top: 4px;
   }
 

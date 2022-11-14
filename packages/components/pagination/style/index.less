@@ -9,7 +9,6 @@
   list-style: none;
   outline: none;
   user-select: none;
-  background-color: @pagination-background-color;
 
   &-sm {
     .pagination-size(@pagination-font-size-sm,  @pagination-item-padding-sm, @pagination-item-content-size-sm);
@@ -74,6 +73,7 @@
 
   &-item {
     cursor: pointer;
+    line-height: 1;
     transition: color var(--ix-transition-duration-fast);
 
     &-content {
