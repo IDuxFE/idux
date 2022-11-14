@@ -1,10 +1,10 @@
 <template>
   <IxTable :columns="columns" :dataSource="data" :scroll="scroll">
     <template #name="{ value }">
-      <a>{{ value }}</a>
+      <IxButton mode="link">{{ value }}</IxButton>
     </template>
     <template #action>
-      <a>action</a>
+      <IxButton mode="link">Action</IxButton>
     </template>
   </IxTable>
 </template>

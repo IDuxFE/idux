@@ -31,7 +31,7 @@ export const tableProps = {
   customAdditional: { type: Object as PropType<TableCustomAdditional<any, any>>, default: undefined },
   customTag: { type: Object as PropType<TableCustomTag>, default: undefined },
   dataSource: { type: Array as PropType<any[]>, default: () => [] },
-  ellipsis: { type: [Boolean, Object] as PropType<boolean | { title?: boolean }>, default: false },
+  ellipsis: { type: [Boolean, Object] as PropType<boolean | { title?: boolean; head?: boolean }>, default: false },
   empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'default' },
   emptyCell: {
     type: [String, Function] as PropType<string | ((options: TableEmptyCellOptions) => VNodeChild)>,
@@ -91,7 +91,7 @@ export interface TableColumnCommon<T = any> {
 
 export interface TableColumnBase<T = any, K = VKey> extends TableColumnCommon<T> {
   dataKey?: VKey | VKey[]
-  ellipsis?: boolean | { title?: boolean }
+  ellipsis?: boolean | { title?: boolean; head?: boolean }
   sortable?: TableColumnSortable<T>
   filterable?: TableColumnFilterable<T>
   title?: string
@@ -105,7 +105,7 @@ export interface TableColumnExpandable<T = any, K = VKey> extends TableColumnBas
   type: 'expandable'
   disabled?: (record: T) => boolean
 
-  icon?: string
+  icon?: string | VNodeChild | ((options: { expanded: boolean; record: T }) => string | VNodeChild)
   indent?: number
   trigger?: 'click' | 'dblclick'
 

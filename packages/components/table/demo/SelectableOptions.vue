@@ -1,7 +1,7 @@
 <template>
   <IxTable v-model:selectedRowKeys="selectedRowKeys" :columns="columns" :dataSource="data">
     <template #name="{ value }">
-      <a>{{ value }}</a>
+      <IxButton mode="link">{{ value }}</IxButton>
     </template>
   </IxTable>
 </template>

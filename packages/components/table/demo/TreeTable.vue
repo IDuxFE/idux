@@ -1,11 +1,13 @@
 <template>
   <IxTable :columns="columns" :dataSource="data">
     <template #name="{ value }">
-      <span>{{ value }}</span>
+      <IxButton mode="link">{{ value }}</IxButton>
     </template>
     <template #action="{ record }">
-      <a style="margin-right: 8px">Invite {{ record.name }}</a>
-      <a>Delete</a>
+      <IxButtonGroup :gap="8" mode="link" separator="|">
+        <IxButton>Invite {{ record.name }}</IxButton>
+        <IxButton>Delete</IxButton>
+      </IxButtonGroup>
     </template>
   </IxTable>
 </template>

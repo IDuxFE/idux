@@ -29,7 +29,7 @@ export default defineComponent({
         onClick: cancel,
         loading: cancelLoading,
         ...cancelButton,
-      }
+      } as FooterButtonProps
     })
 
     const okButtonProps = computed<FooterButtonProps | undefined>(() => {
@@ -44,7 +44,7 @@ export default defineComponent({
         loading: okLoading,
         mode: cancelButtonProps.value ? 'primary' : 'default',
         ...okButton,
-      }
+      } as FooterButtonProps
     })
 
     return () => {

@@ -5,7 +5,18 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type Ref, type Slots, type VNode, computed, reactive, ref, watch, watchEffect } from 'vue'
+import {
+  type ComputedRef,
+  type Ref,
+  type Slots,
+  type VNode,
+  type VNodeChild,
+  computed,
+  reactive,
+  ref,
+  watch,
+  watchEffect,
+} from 'vue'
 
 import { debounce, isNil } from 'lodash-es'
 
@@ -111,7 +122,7 @@ export interface TableColumnMergedBaseExtra extends TableColumnMergedBase {
 export interface TableColumnMergedExpandable extends TableColumnMergedBaseExtra, TableColumnExpandable {
   align: TableColumnAlign
   key: VKey
-  icon: string
+  icon: string | VNodeChild | ((options: { expanded?: boolean; record: unknown }) => string | VNodeChild)
   titleColSpan: number
 }
 export interface TableColumnMergedSelectable extends TableColumnMergedBaseExtra, TableColumnSelectable {

@@ -1,5 +1,3 @@
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@space-margin-sm` | `@spacing-sm` | - | - |
-| `@space-margin-md` | `@spacing-lg` | - | - |
-| `@space-margin-lg` | `@spacing-xl` | - | - |
+| `@space-separator-color` | `var(--ix-border-color-secondary)` | - | - |

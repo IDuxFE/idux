@@ -2,8 +2,8 @@
 | --- | --- | --- | --- |
 | `@header-height-sm` | `var(--ix-height-lg)` | - | - |
 | `@header-height-md` | `var(--ix-height-xl)` | - | - |
-| `@header-height-lg` | `var(--ix-height-2xl)` | - | - |
-| `@header-height-xl` | `var(--ix-height-3xl)` | - | - |
+| `@header-height-lg` | `var(--ix-height-xl)` | - | - |
+| `@header-height-xl` | `var(--ix-height-2xl)` | - | - |
 | `@header-font-size-sm` | `var(--ix-font-size-md)` | - | - |
 | `@header-font-size-md` | `var(--ix-font-size-lg)` | - | - |
 | `@header-font-size-lg` | `var(--ix-font-size-xl)` | - | - |

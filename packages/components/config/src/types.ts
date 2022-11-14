@@ -460,7 +460,7 @@ export interface TableColumnBaseConfig {
 }
 
 export interface TableColumnExpandableConfig {
-  icon: string
+  icon: string | VNodeChild | ((expanded: boolean) => string | VNodeChild)
 }
 
 export interface TagConfig {
