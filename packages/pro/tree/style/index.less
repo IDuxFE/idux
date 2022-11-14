@@ -10,7 +10,7 @@
   flex-direction: column;
   overflow: hidden;
   transition: width @transition-duration-base;
-  
+
   &-header-wrapper,
   &-search-wrapper {
     display: flex;
@@ -29,6 +29,7 @@
   &-header-wrapper {
     .@{icon-prefix} {
       font-size: @pro-tree-header-wrapper-icon-font-size;
+      line-height: calc(@pro-tree-header-wrapper-icon-font-size + var(--ix-line-height-gutter));
       flex: auto;
       cursor: pointer;
       display: inline-block;
@@ -37,12 +38,6 @@
       &:hover {
         color: @pro-tree-header-wrapper-icon-hover-color;
       }
-    }
-
-    .@{icon-prefix},
-    .@{header-prefix}-content {
-      height: @pro-tree-header-wrapper-height;
-      line-height: @pro-tree-header-wrapper-height;
     }
 
     & + .@{divider-prefix} {

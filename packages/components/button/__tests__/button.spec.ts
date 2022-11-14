@@ -29,6 +29,9 @@ describe('Button', () => {
     await wrapper.setProps({ mode: 'link' })
 
     expect(wrapper.classes()).toContain('ix-button-link')
+    expect(wrapper.element.tagName).toEqual('BUTTON')
+
+    await wrapper.setProps({ href: '#' })
     expect(wrapper.element.tagName).toEqual('A')
   })
 

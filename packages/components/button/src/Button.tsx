@@ -15,10 +15,12 @@ import { IxIcon } from '@idux/components/icon'
 import { buttonToken } from './token'
 import { buttonProps } from './types'
 
+const aProps = ['href', 'target', 'rel', 'download', 'hreflang', 'ping']
+
 export default defineComponent({
   name: 'IxButton',
   props: buttonProps,
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-button`)
     const config = useGlobalConfig('button')
@@ -69,7 +71,8 @@ export default defineComponent({
         children.push(<span>{slots.default()}</span>)
       }
 
-      if (mode.value === 'link') {
+      // 只有在 mode = 'link' 且设置了相关的 attrs 时，才渲染成 a 标签
+      if (mode.value === 'link' && Object.keys(attrs).some(attr => aProps.includes(attr))) {
         return (
           <a class={classes.value} onClick={handleClick}>
             {children}

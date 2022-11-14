@@ -117,6 +117,7 @@
   &-link {
     background-color: transparent;
     border-color: transparent;
+    padding: 0;
 
     &:focus,
     &:hover {
@@ -126,6 +127,10 @@
     &:active {
       color: @button-primary-background-color-active;
     }
+  }
+
+  &-link {
+    color: @button-primary-background-color;
   }
 
   &-danger {
@@ -256,7 +261,7 @@
     &:hover,
     &:focus,
     &:active {
-      background-color: @button-background-color;
+      background-color: transparent;
       border-color: transparent;
     }
   }
