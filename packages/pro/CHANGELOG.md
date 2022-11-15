@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/IDuxFE/idux/compare/v1.0.1...v1.1.2) (2022-11-15)
+
+### Bug Fixes
+
+- **pro:table:** resize one column to make the other columns too narrow ([#1276](https://github.com/IDuxFE/idux/issues/1276)) ([cd4e08c](https://github.com/IDuxFE/idux/commit/cd4e08c74936f89ddf802724cb7cfa98c7ee5e7f))
+
 ## [1.1.1](https://github.com/IDuxFE/idux/compare/v1.1.0...v1.1.1) (2022-11-13)
 
 ### Bug Fixes

@@ -10,6 +10,15 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.1.2(2022-11-15)
+
+### Bug Fixes
+
+- **comp:button, card, pagination, pro:tree:** 样式问题修复 ([#1275](https://github.com/IDuxFE/idux/issues/1275)) ([6082a15](https://github.com/IDuxFE/idux/commit/6082a15ac78c0087962bd21921385734ad1b5d72))
+- **comp:modal:** 调用 userModal 的 update 更新 content，无法触发更新 ([#1270](https://github.com/IDuxFE/idux/issues/1270)) ([38f130a](https://github.com/IDuxFE/idux/commit/38f130a932938539cb25d2a71eafffb0e9a8005f))
+- **comp:transfer:** 空的 suffix 不应该被渲染 ([#1267](https://github.com/IDuxFE/idux/issues/1267)) ([4ab1ebb](https://github.com/IDuxFE/idux/commit/4ab1ebb4c02b6b55edfd2cfdece578c95668c3fd))
+- **pro:table:** resize 列宽使其他的列变得过窄 ([#1276](https://github.com/IDuxFE/idux/issues/1276)) ([cd4e08c](https://github.com/IDuxFE/idux/commit/cd4e08c74936f89ddf802724cb7cfa98c7ee5e7f))
+
 ## 1.1.1(2022-11-13)
 
 ### Bug Fixes

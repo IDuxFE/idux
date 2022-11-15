@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/IDuxFE/idux/compare/v1.1.1...v1.1.2) (2022-11-15)
+
+### Bug Fixes
+
+- **comp:button:** text and link mode remove padding and bg color ([#1275](https://github.com/IDuxFE/idux/issues/1275)) ([6082a15](https://github.com/IDuxFE/idux/commit/6082a15ac78c0087962bd21921385734ad1b5d72))
+- **comp:modal:** update modal content with `update` doesn't work ([#1270](https://github.com/IDuxFE/idux/issues/1270)) ([38f130a](https://github.com/IDuxFE/idux/commit/38f130a932938539cb25d2a71eafffb0e9a8005f))
+- **comp:transfer:** empty suffix node shouldn't be rendered ([#1267](https://github.com/IDuxFE/idux/issues/1267)) ([4ab1ebb](https://github.com/IDuxFE/idux/commit/4ab1ebb4c02b6b55edfd2cfdece578c95668c3fd))
+- **pro:table:** resize one column to make the other columns too narrow ([#1276](https://github.com/IDuxFE/idux/issues/1276)) ([cd4e08c](https://github.com/IDuxFE/idux/commit/cd4e08c74936f89ddf802724cb7cfa98c7ee5e7f))
+
 ## [1.1.1](https://github.com/IDuxFE/idux/compare/v1.1.0...v1.1.1) (2022-11-13)
 
 ### Bug Fixes
