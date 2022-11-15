@@ -35,11 +35,7 @@ export default defineComponent({
         const mergedProps = { key, visible, ref: setRef, 'onUpdate:visible': onUpdateVisible, onAfterClose }
 
         const contentNode = isVNode(content) ? cloneVNode(content, contentProps, true) : content
-        return (
-          <Modal {...mergedProps} {...restProps}>
-            {contentNode}
-          </Modal>
-        )
+        return <Modal {...mergedProps} {...restProps} __content_node={contentNode} />
       })
       return (
         <>

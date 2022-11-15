@@ -36,7 +36,7 @@ export default defineComponent({
 
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-body`
-      const defaultNode = slots.default?.()
+      const defaultNode = slots.default?.() ?? props.__content_node
 
       if (isDefault.value) {
         return <div class={prefixCls}>{defaultNode}</div>
