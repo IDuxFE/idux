@@ -1,3 +1,10 @@
 // Vitest Snapshot v1
 
-exports[`ButtonGroup > render work 1`] = `"<div class=\\"ix-button-group\\"><button class=\\"ix-button ix-button-default ix-button-md\\" type=\\"button\\"><span>default</span></button><button class=\\"ix-button ix-button-primary ix-button-md\\" type=\\"button\\"><span>primary</span></button><button class=\\"ix-button ix-button-default ix-button-lg\\" type=\\"button\\"><span>large</span></button><button class=\\"ix-button ix-button-default ix-button-circle ix-button-md\\" type=\\"button\\"><span>circle</span></button></div>"`;
+exports[`ButtonGroup > render work 1`] = `
+"<div class=\\"ix-space ix-button-group\\" style=\\"margin-bottom: -0px;\\">
+  <div class=\\"ix-space-item\\" style=\\"margin-right: 0px; padding-bottom: 0px;\\"><button class=\\"ix-button ix-button-default ix-button-md\\" type=\\"button\\"><span>default</span></button></div>
+  <div class=\\"ix-space-item\\" style=\\"margin-right: 0px; padding-bottom: 0px;\\"><button class=\\"ix-button ix-button-primary ix-button-md\\" type=\\"button\\"><span>primary</span></button></div>
+  <div class=\\"ix-space-item\\" style=\\"margin-right: 0px; padding-bottom: 0px;\\"><button class=\\"ix-button ix-button-default ix-button-lg\\" type=\\"button\\"><span>large</span></button></div>
+  <div class=\\"ix-space-item\\" style=\\"padding-bottom: 0px;\\"><button class=\\"ix-button ix-button-default ix-button-circle ix-button-md\\" type=\\"button\\"><span>circle</span></button></div>
+</div>"
+`;

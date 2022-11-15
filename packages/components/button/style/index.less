@@ -332,8 +332,10 @@
   &:not(&-with-gap) {
     .@{button-prefix} {
       border-radius: 0;
+    }
 
-      &:not(:first-child) {
+    .@{space-prefix}-item:not(:first-child) {
+      .@{button-prefix} {
         margin-left: -1px;
       }
     }
