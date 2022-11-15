@@ -6,6 +6,7 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
+import type { SpaceProps } from '@idux/components/space'
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
@@ -36,14 +37,14 @@ export type ButtonComponent = DefineComponent<
 export type ButtonInstance = InstanceType<DefineComponent<ButtonProps>>
 
 export const buttonGroupProps = {
-  gap: { type: [Number, String] as PropType<number | string>, default: undefined },
+  gap: { type: [Number, String] as PropType<number | string>, default: 0 },
   mode: String as PropType<ButtonMode>,
   size: String as PropType<ButtonSize>,
   shape: String as PropType<ButtonShape>,
 } as const
 
 export type ButtonGroupProps = ExtractInnerPropTypes<typeof buttonGroupProps>
-export type ButtonGroupPublicProps = ExtractPublicPropTypes<typeof buttonGroupProps>
+export type ButtonGroupPublicProps = ExtractPublicPropTypes<typeof buttonGroupProps> & SpaceProps
 export type ButtonGroupComponent = DefineComponent<
   Omit<HTMLAttributes, keyof ButtonGroupPublicProps> & ButtonGroupPublicProps
 >

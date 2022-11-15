@@ -19,8 +19,7 @@ export const themePlugin = (options?: Options): Plugin => {
 
   const changeRuntimeTheme = async (theme: string): Promise<void> => {
     const lessFilePath = path.join(srcPath, 'styles/themes', 'index.less')
-    const themeContent = (await readFile(lessFilePath)).toString()
-    return writeFile(lessFilePath, themeContent.replace(/\/.*?.less/, `/${theme}.less`))
+    return writeFile(lessFilePath, `@import './${theme}.less';`)
   }
 
   return {

@@ -7,8 +7,8 @@
 
 import { computed, defineComponent, normalizeClass, provide } from 'vue'
 
-import { convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { IxSpace } from '@idux/components/space'
 
 import { buttonToken } from './token'
 import { buttonGroupProps } from './types'
@@ -25,21 +25,16 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-with-gap`]: !!gap,
+        [`${prefixCls}-with-gap`]: !!gap && gap !== '0',
       })
-    })
-
-    const style = computed(() => {
-      const { gap } = props
-      return gap ? `gap: ${convertCssPixel(gap)};` : undefined
     })
 
     provide(buttonToken, props)
 
     return () => (
-      <div class={classes.value} style={style.value}>
+      <IxSpace class={classes.value} size={props.gap}>
         {slots.default && slots.default()}
-      </div>
+      </IxSpace>
     )
   },
 })

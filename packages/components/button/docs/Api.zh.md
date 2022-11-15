@@ -28,9 +28,11 @@
 
 #### ButtonGroupProps
 
+> 除以下表格之外还支持原生 `Space` 组件的[所有属性](/components/space/zh?tab=api#SpaceProps)。
+
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `gap` | 设置按钮组的 gap 配置 | `number \| string` | - | - | 兼容性问题参见: [Can I use](https://caniuse.com/flexbox-gap) |
+| `gap` | 设置按钮组的 gap 配置 | `number \| string` | `0` | - | 也就是 `Space` 的 `size` |
 | `mode` | 设置组内按钮种类 | `'primary' \| 'default' \| 'dashed' \| 'text' \| 'link'` | - | - |- |
 | `shape` | 设置组内按钮形状 | `'circle' \| 'round'` | - | - |- |
 | `size` | 设置组内按钮大小 | `'lg' \| 'md' \| 'sm'` | - | - |- |

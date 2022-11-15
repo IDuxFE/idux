@@ -1,32 +1,50 @@
-import { mount } from '@vue/test-utils'
+import { MountingOptions, mount } from '@vue/test-utils'
+import { h } from 'vue'
 
 import { renderWork } from '@tests'
 
 import Button from '../src/Button'
 import ButtonGroup from '../src/ButtonGroup'
+import { ButtonGroupProps } from '../src/types'
 
-const TestComponent = {
-  components: { ButtonGroup, Button },
-  template: `
-  <ButtonGroup :mode="mode" :size="size" :shape="shape">
-    <Button>default</Button>
-    <Button mode="primary">primary</Button>
-    <Button size="lg">large</Button>
-    <Button shape="circle">circle</Button>
-  </ButtonGroup>
-  `,
-  props: {
-    mode: String,
-    size: String,
-    shape: String,
-  },
-}
+const defaultSlot = () => [
+  h(Button, null, () => 'default'),
+  h(Button, { mode: 'primary' }, () => 'primary'),
+  h(Button, { size: 'lg' }, () => 'large'),
+  h(Button, { shape: 'circle' }, () => 'circle'),
+]
 
 describe('ButtonGroup', () => {
-  renderWork(TestComponent)
+  const ButtonGroupMount = (options?: MountingOptions<Partial<ButtonGroupProps>>) => {
+    const { slots, ...rest } = options || {}
+    return mount(ButtonGroup, {
+      ...rest,
+      slots: { default: defaultSlot, ...slots },
+    })
+  }
+
+  renderWork(ButtonGroup, { slots: { default: defaultSlot } })
+
+  test('gap work', async () => {
+    const wrapper = ButtonGroupMount({ props: { gap: 12 } })
+
+    expect(wrapper.classes()).toContain('ix-button-group-with-gap')
+
+    await wrapper.setProps({ gap: 0 })
+
+    expect(wrapper.classes()).not.toContain('ix-button-group-with-gap')
+
+    await wrapper.setProps({ gap: '0' })
+
+    expect(wrapper.classes()).not.toContain('ix-button-group-with-gap')
+
+    await wrapper.setProps({ gap: '' })
+
+    expect(wrapper.classes()).not.toContain('ix-button-group-with-gap')
+  })
 
   test('mode work', async () => {
-    const wrapper = mount(TestComponent)
+    const wrapper = ButtonGroupMount()
 
     expect(wrapper.findAll('.ix-button-primary').length).toBe(1)
     expect(wrapper.findAll('.ix-button-dashed').length).toBe(0)
@@ -38,7 +56,7 @@ describe('ButtonGroup', () => {
   })
 
   test('size work', async () => {
-    const wrapper = mount(TestComponent)
+    const wrapper = ButtonGroupMount()
 
     expect(wrapper.findAll('.ix-button-lg').length).toBe(1)
     expect(wrapper.findAll('.ix-button-md').length).toBe(3)
@@ -50,7 +68,7 @@ describe('ButtonGroup', () => {
   })
 
   test('shape work', async () => {
-    const wrapper = mount(TestComponent)
+    const wrapper = ButtonGroupMount()
 
     expect(wrapper.findAll('.ix-button-circle').length).toBe(1)
     expect(wrapper.findAll('.ix-button-round').length).toBe(0)
