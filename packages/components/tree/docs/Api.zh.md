@@ -22,7 +22,7 @@
 | `draggable` | 是否允许拖拽节点 | `boolean` | `false` | - | - |
 | `draggableIcon` | 拖拽节点图标 | `string \| #draggableIcon` | `holder` | ✅ | - |
 | `droppable` | 是否允许放置节点,参见[TreeDroppable](#TreeDroppable) | `TreeDroppable` | - | - | - |
-| `empty` | 空数据时的内容 | `string \| EmptyProps \| #empty` | - | - | - |
+| `empty` | 空数据时的内容 | `'default' \| 'simple' \| EmptyProps` | `'simple'` | - | - |
 | `expandIcon` | 展开图标 | `string \| [string, string] \| #expandIcon="{key: VKey, expanded: boolean, node: TreeNode}"` | `right` | ✅ | 当为数组时表示[`展开时图标`,`未展开时图标`] |
 | `getKey` | 获取数据的唯一标识 | `string \| (record: any) => VKey` | `key` | ✅ | - |
 | `height` | 设置虚拟滚动容器高度 | `number` | - | - | - |
@@ -89,6 +89,7 @@ export type TreeDropType = 'before' | 'inside' | 'after'
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
+| `empty` | 自定义空状态 | - | - |
 | `label` | 自定义节点的文本 | `{node: TreeNode}` | - |
 | `prefix` | 自定义节点的前缀图标 | `{key: VKey,  selected: boolean, node: TreeNode}` | - |
 | `suffix` | 自定义节点的后缀图标 | `{key: VKey, selected: boolean, node: TreeNode}` | - |

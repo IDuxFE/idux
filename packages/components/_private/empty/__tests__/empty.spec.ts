@@ -17,12 +17,16 @@ describe('Empty', () => {
   renderWork<EmptyProps>(Empty, { props: { empty: 'Empty content' } })
 
   test('empty work', async () => {
-    let empty = 'empty 1'
+    let empty = 'default'
     const wrapper = EmptyMount({ props: { empty } })
 
-    expect(wrapper.find('.ix-empty-description').text()).toBe(empty)
+    expect(wrapper.classes()).not.toContain('ix-empty-simple')
 
-    empty = 'empty 2'
+    empty = 'simple'
+    await wrapper.setProps({ empty })
+
+    expect(wrapper.classes()).toContain('ix-empty-simple')
+
     await wrapper.setProps({ empty: { description: empty } })
 
     expect(wrapper.find('.ix-empty-description').text()).toBe(empty)
@@ -30,7 +34,6 @@ describe('Empty', () => {
 
   test('empty slot work', () => {
     const wrapper = EmptyMount({
-      props: { empty: 'empty 1' },
       slots: { empty: () => h(IxEmpty, { description: 'empty slot' }) },
     })
 

@@ -83,7 +83,7 @@ export const proTransferProps = {
     default: undefined,
   },
   clearIcon: String as PropType<string>,
-  empty: [String, Object] as PropType<string | EmptyProps>,
+  empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'simple' },
   pagination: [Boolean, Object] as PropType<boolean | TransferPaginationProps>,
   mode: {
     type: String as PropType<TransferMode>,

@@ -17,7 +17,7 @@
 | `dataSource` | 源数据数组 | `TransferData[]` | `[]` | - | - |
 | `defaultTargetData` | 初始默认目标列表数据 | `TransferData` | - | - | 仅用于设置初始数据，不可响应式变更 |
 | `disabled` | 是否禁用穿梭框 | `boolean` | `false` | - | - |
-| `empty` | 空状态的配置 | `string \| EmptyProps` | - | - | - |
+| `empty` | 空状态的配置 | `'default' \| 'simple' \| EmptyProps` | `'simple'` | - | - |
 | `getKey` | 数据项 `key` 的取值 | `string \| (item: unknown) => string \| number` | - | - | 默认取数据的 `key` 属性 |
 | `mode` | 穿梭框模式 | `'default' \| 'immediate'` | `'default'` | - | `'immediate'` 模式为勾选即触发穿梭，不展示穿梭操作按钮 |
 | `pagination` | 数据列表分页配置 | `boolean \| TransferPaginationProps` | `false` | ✅ | 仅使用默认列表底部时可用 |

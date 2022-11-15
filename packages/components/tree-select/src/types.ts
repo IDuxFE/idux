@@ -38,7 +38,7 @@ export const treeSelectProps = {
   draggable: { type: Boolean, default: false },
   draggableIcon: { type: String, default: undefined },
   droppable: { type: Function as PropType<TreeDroppable>, default: undefined },
-  empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
+  empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'simple' },
   expandIcon: { type: [String, Array] as PropType<string | [string, string]>, default: undefined },
   getKey: { type: [String, Function] as PropType<string | ((data: TreeSelectNode<any>) => any)>, default: undefined },
   labelKey: { type: String, default: undefined },

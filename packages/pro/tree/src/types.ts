@@ -40,7 +40,7 @@ export const proTreeProps = {
   collapseIcon: { type: Array as PropType<string[]>, default: undefined },
   dataSource: { type: Array as PropType<TreeNode[]>, default: undefined },
   disabled: { type: Function as PropType<(node: TreeNode<any>) => boolean | TreeNodeDisabled>, default: undefined },
-  empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
+  empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'simple' },
   draggable: { type: Boolean, default: false },
   draggableIcon: { type: String, default: undefined },
   droppable: { type: Function as PropType<TreeDroppable>, default: undefined },

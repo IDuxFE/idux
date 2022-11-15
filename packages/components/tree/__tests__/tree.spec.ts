@@ -659,15 +659,10 @@ describe('Tree', () => {
   })
 
   test('empty work', async () => {
-    let emptyDescription = 'This is an empty tree'
+    const emptyDescription = 'This is an empty tree'
     const wrapper = TreeMount({
-      props: { dataSource: [], empty: emptyDescription },
+      props: { dataSource: [], empty: { description: emptyDescription } },
     })
-
-    expect(wrapper.find('.ix-empty').text()).toBe(emptyDescription)
-
-    emptyDescription = 'This is an empty tree2'
-    await wrapper.setProps({ empty: { description: emptyDescription } })
 
     expect(wrapper.find('.ix-empty').text()).toBe(emptyDescription)
   })

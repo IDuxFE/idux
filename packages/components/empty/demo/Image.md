@@ -1,14 +1,14 @@
 ---
-order: 3
+order: 2
 title:
-  zh: 图片
-  en: Image
+  zh: 自定义图片
+  en: Customize Image
 ---
 
 ## zh
 
-可以通过 `image` 或者插槽来自定义图片
+可以通过 `image` 属性或者插槽来自定义图片
 
 ## en
 
-You can customize the image through `image` or slot.
+You can customize the image through `image` prop or slot.

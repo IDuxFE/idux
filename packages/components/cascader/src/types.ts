@@ -30,7 +30,7 @@ export const cascaderProps = {
   customAdditional: { type: Function as PropType<CascaderCustomAdditional>, default: undefined },
   dataSource: { type: Array as PropType<CascaderData[]>, default: () => [] },
   disabled: { type: Boolean, default: false },
-  empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
+  empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'simple' },
   expandIcon: { type: String, default: undefined },
   expandTrigger: { type: String as PropType<CascaderExpandTrigger>, default: 'click' },
   fullPath: { type: Boolean, default: undefined },

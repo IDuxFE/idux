@@ -8,9 +8,8 @@
 import { computed, defineComponent, normalizeClass, provide } from 'vue'
 
 import { getFirstValidNode } from '@idux/cdk/utils'
-import { IxButton } from '@idux/components/button'
+import { ɵEmpty } from '@idux/components/_private/empty'
 import { useGlobalConfig } from '@idux/components/config'
-import { IxEmpty } from '@idux/components/empty'
 import { IxRow } from '@idux/components/grid'
 import { IxSpin } from '@idux/components/spin'
 
@@ -19,11 +18,6 @@ import { ListProps, listProps } from './types'
 
 export default defineComponent({
   name: 'IxList',
-  components: {
-    IxSpin,
-    IxButton,
-    IxEmpty,
-  },
   props: listProps,
   setup(props: ListProps, { slots }) {
     const common = useGlobalConfig('common')
@@ -59,9 +53,8 @@ export default defineComponent({
     return () => {
       const header = props.header ?? slots.header?.()
       const footer = props.footer ?? slots.footer?.()
-      const content = getFirstValidNode(slots.default?.())
-        ? slots.default?.()
-        : slots.empty?.() ?? <IxEmpty description={props.empty} />
+      const children = slots.default ? slots.default() : []
+      const content = getFirstValidNode(children) ? children : <ɵEmpty v-slots={slots} empty={props.empty} />
 
       const renderContent = () => {
         if (props.grid) {

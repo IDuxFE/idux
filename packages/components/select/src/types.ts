@@ -22,7 +22,7 @@ export const selectPanelProps = {
 
   customAdditional: { type: Function as PropType<SelectCustomAdditional>, default: undefined },
   dataSource: { type: Array as PropType<SelectData[]>, default: undefined },
-  empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
+  empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'simple' },
   getKey: { type: [String, Function] as PropType<string | ((data: SelectData<any>) => any)>, default: undefined },
   labelKey: { type: String, default: undefined },
   multiple: { type: Boolean, default: false },
@@ -58,7 +58,7 @@ export const selectProps = {
   customAdditional: { type: Object as PropType<SelectCustomAdditional>, default: undefined },
   dataSource: { type: Array as PropType<SelectData[]>, default: undefined },
   disabled: { type: Boolean, default: false },
-  empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
+  empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'simple' },
   getKey: { type: [String, Function] as PropType<string | ((data: SelectData) => VKey)>, default: undefined },
   labelKey: { type: String, default: undefined },
   maxLabel: { type: [Number, String] as PropType<number | 'responsive'>, default: Number.MAX_SAFE_INTEGER },

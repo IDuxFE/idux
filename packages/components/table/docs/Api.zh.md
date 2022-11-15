@@ -15,7 +15,7 @@
 | `customAdditional` | 自定义表格行和单元格的额外属性 | `TableCustomAdditional` | - | - | 参见[TableCustomAdditional](#TableCustomAdditional) |
 | `dataSource` | 表格数据数组 | `object[]` | - | - | - |
 | `ellipsis` | 超过宽度将自动省略 | `boolean \| { title: boolean }` | `false` | - | `title` 为 `false` 时, 不显示原生的 `title` |
-| `empty` | `dataSource` 为空时默认渲染的内容 | `string \| EmptyProps \| #empty` | - | - | - |
+| `empty` | `dataSource` 为空时默认渲染的内容 | `'default' \| 'simple' \| EmptyProps` | `'default'` | - | - |
 | `emptyCell` | 单元格数据为空时默认渲染的内容 | `string \| ((options: TableEmptyCellOptions) => VNodeChild) \| #emptyCell='TableEmptyCellOptions'` | - | ✅ | 仅支持普通列，且数据为 `undefined \| null \| ''` 时生效 |
 | `getKey` | 获取数据的唯一标识 | `string \| (record: any) => VKey` | `key` | ✅ | - |
 | `headless` | 是否隐藏表头 | `boolean` | `false` | - |- |
@@ -171,6 +171,7 @@ export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomSta
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 | `alert` | 表格提示 | - | - |
+| `empty` | 自定义空状态 | - | - |
 | `footer` | 表格尾部 | - | - |
 | `header` | 表格头部 | - | - |
 | `summary` | 表格总结栏 | - | - |

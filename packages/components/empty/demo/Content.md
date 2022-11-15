@@ -1,5 +1,5 @@
 ---
-order: 4
+order: 3
 title:
   zh: 自定义内容
   en: Customize content 
