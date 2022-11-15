@@ -324,7 +324,7 @@ function useColumnWidths(
   return { columnWidths, columnWidthsWithScrollBar, changeColumnWidth }
 }
 
-function useColumnOffsets(columnWidths: ComputedRef<number[]>, columnWidthsWithScrollBar: ComputedRef<number[]>) {
+function useColumnOffsets(columnWidths: Ref<number[]>, columnWidthsWithScrollBar: ComputedRef<number[]>) {
   const columnOffsets = computed(() => calculateOffsets(columnWidths.value))
   const columnOffsetsWithScrollBar = computed(() => calculateOffsets(columnWidthsWithScrollBar.value))
   return { columnOffsets, columnOffsetsWithScrollBar }

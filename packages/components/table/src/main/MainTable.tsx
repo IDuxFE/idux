@@ -150,11 +150,11 @@ export default defineComponent({
     }
 
     return () => {
+      const prefixCls = mergedPrefixCls.value
+      const autoHeight = mergedAutoHeight.value
       const children = slots.default ? slots.default() : []
 
-      const prefixCls = mergedPrefixCls.value
-
-      if (scrollHeight.value || isSticky.value) {
+      if (autoHeight || scrollHeight.value || isSticky.value) {
         const { offsetTop } = mergedSticky.value
         if (!props.headless) {
           children.push(
@@ -164,7 +164,7 @@ export default defineComponent({
           )
         }
 
-        if (props.virtual && (props.scroll || mergedAutoHeight.value)) {
+        if (props.virtual && (props.scroll || autoHeight)) {
           const itemRender: VirtualItemRenderFn<FlattedData> = ({ item, index }) =>
             renderBodyRow(item, index, slots, expandable.value, prefixCls)
 
@@ -179,7 +179,7 @@ export default defineComponent({
           }
           const { scroll, onScrolledBottom } = props
 
-          if (__DEV__ && !props.autoHeight && !isNumber(scroll?.height)) {
+          if (__DEV__ && !autoHeight && !isNumber(scroll?.height)) {
             Logger.warn('components/table', '`scroll.height` must is a valid number when enable virtual scroll')
           }
 
