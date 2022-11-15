@@ -25,15 +25,22 @@ const dataSource: MenuData[] = [
 ]
 
 const themeKey = 'idux_theme'
-const selectedKeys = ref([localStorage.getItem(themeKey) || 'default'])
+const currTheme = localStorage.getItem(themeKey) || 'default'
+const selectedKeys = ref([currTheme])
 
-watch(selectedKeys, ([currTheme]) => {
-  localStorage.setItem(themeKey, currTheme)
+const loadTheme = (theme: string) => {
   if (window.changeTheme) {
-    window.changeTheme(currTheme)
+    window.changeTheme(theme)
   } else {
-    fetch('/themes/s/' + currTheme)
+    fetch(`/themes/s/${theme}`)
   }
+}
+
+loadTheme(currTheme)
+
+watch(selectedKeys, ([theme]) => {
+  localStorage.setItem(themeKey, theme)
+  loadTheme(theme)
 })
 </script>
 
