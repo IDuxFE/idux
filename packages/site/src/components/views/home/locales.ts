@@ -3,7 +3,7 @@ export const homeLocales = {
     videoErr: '您的浏览器不支持 video 标签。',
     bannerTitle: 'iDux',
     bannerTitleDesc: '企业级设计规范 高效开发体验',
-    start: '开 始 使 用',
+    start: '开始使用',
     github: 'GitHub',
     compProperties: [
       {

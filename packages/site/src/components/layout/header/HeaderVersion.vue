@@ -1,15 +1,24 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 
 import { version as currentVersion } from '@idux/components/version'
 
-const versions = [currentVersion, '1.0.x']
-
-const dataSource = versions.map(v => ({ key: v, label: v }))
 const selectVersion = ref(currentVersion)
+const versions = ref([currentVersion])
+const dataSource = computed(() => versions.value.map(v => ({ key: v, label: v })))
 
 watch(selectVersion, version => {
   window.location.href = `${window.location.origin}/version/${version}`
+})
+
+onMounted(() => {
+  // eslint-disable-next-line no-undef
+  fetch(__BASE_URL__ + `config.json`)
+    .then(res => res.json())
+    .then(config => {
+      const { preVersions } = config
+      versions.value = [currentVersion, ...preVersions]
+    })
 })
 </script>
 

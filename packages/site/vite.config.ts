@@ -28,9 +28,9 @@ const componentPath: Record<string, string> = {
   IxLoadingBarProvider: '@idux/components/loading-bar',
 }
 
-export default defineConfig(({ command }) => {
+export default defineConfig(({ command, mode }) => {
   const isBuild = command === 'build'
-  const baseUrl = '/'
+  const baseUrl = mode === 'pre-version' ? `/version/${cdkPackage.version.slice(0, -1)}x/` : '/'
 
   return {
     plugins: [

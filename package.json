@@ -7,11 +7,13 @@
   "scripts": {
     "start": "gulp start --cwd ./packages/site --gulpfile ./scripts/gulp/gulpfile.ts",
     "build": "npm-run-all -s build:clean -p build:lib build:declaration build:style build:site",
+    "build:pre-version": "npm-run-all -s build:clean -p build:lib build:declaration build:style build:site-pre-version",
     "build:clean": "gulp build:clean --gulpfile ./scripts/gulp/gulpfile.ts",
     "build:lib": "gulp build:lib --max-old-space-size=8192 --gulpfile ./scripts/gulp/gulpfile.ts",
     "build:declaration": "gulp build:declaration --max-old-space-size=8192 --gulpfile ./scripts/gulp/gulpfile.ts",
     "build:style": "gulp build:style --max-old-space-size=8192 --gulpfile ./scripts/gulp/gulpfile.ts",
     "build:site": "gulp build:site --max-old-space-size=8192 --gulpfile ./scripts/gulp/gulpfile.ts",
+    "build:site-pre-version": "gulp build:site-pre-version --max-old-space-size=8192 --gulpfile ./scripts/gulp/gulpfile.ts",
     "icons": "gulp icons --gulpfile ./scripts/gulp/gulpfile.ts",
     "gen": "ts-node scripts/gen/generate.ts",
     "lessvariable:update": "ts-node scripts/gen/style-variable/update.ts",
