@@ -224,7 +224,10 @@ export interface DropdownConfig {
 }
 
 export interface EmptyConfig {
-  icon: string | VNode
+  /**
+   * @deprecated
+   */
+  icon?: string | VNode
   image?: string | VNode
 }
 

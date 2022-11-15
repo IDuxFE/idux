@@ -8,5 +8,5 @@
 import type { EmptyProps as IxEmptyProps } from '@idux/components/empty'
 
 export interface EmptyProps {
-  empty?: string | IxEmptyProps
+  empty?: 'default' | 'simple' | IxEmptyProps
 }

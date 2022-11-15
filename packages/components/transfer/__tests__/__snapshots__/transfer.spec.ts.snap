@@ -116,8 +116,17 @@ exports[`Transfer > render work 1`] = `
     </div>
     <div class=\\"ix-transfer-body\\">
       <div class=\\"ix-transfer-body-empty-wrapper\\">
-        <div class=\\"ix-empty\\">
-          <div class=\\"ix-empty-image\\"><i class=\\"ix-icon ix-icon-empty\\" role=\\"img\\" aria-label=\\"empty\\"></i></div>
+        <div class=\\"ix-empty ix-empty-simple\\">
+          <div class=\\"ix-empty-image\\"><svg width=\\"80\\" height=\\"60\\" viewBox=\\"0 0 80 60\\" xmlns=\\"http://www.w3.org/2000/svg\\">
+              <g fill=\\"none\\" fill-rule=\\"nonzero\\">
+                <ellipse cx=\\"40\\" cy=\\"53.29\\" fill=\\"#F7F9FC\\" rx=\\"25\\" ry=\\"3.29\\"></ellipse>
+                <path fill=\\"#EDF1F7\\" d=\\"M27.935 18h24.13c.025 0 .048.012.063.033L60 29H20l7.872-10.967a.078.078 0 0 1 .063-.033z\\"></path>
+                <path fill=\\"#E3E7EE\\" d=\\"M52.868 8.08l1.484 1.245c.013.01.015.03.004.044l-3.817 4.548a.031.031 0 0 1-.044.004l-1.484-1.246a.031.031 0 0 1-.004-.044l3.817-4.548a.031.031 0 0 1 .044-.004zm-26.373 0a.031.031 0 0 1 .044.003l3.817 4.548a.031.031 0 0 1-.004.044l-1.484 1.246a.031.031 0 0 1-.044-.004l-3.817-4.548a.031.031 0 0 1 .004-.044l1.484-1.246zM40.65 4c.018 0 .032.014.032.031v7.938a.031.031 0 0 1-.032.031h-1.937a.031.031 0 0 1-.031-.031V4.03c0-.017.014-.031.03-.031h1.938z\\"></path>
+                <path fill=\\"#FAFCFE\\" d=\\"M29.936 20h20.128c.026 0 .05.012.064.033L55 27H25l4.872-6.967a.078.078 0 0 1 .064-.033z\\"></path>
+                <path fill=\\"#E1E5EB\\" d=\\"M20 29h40v23.922a.078.078 0 0 1-.078.078H20.078a.078.078 0 0 1-.078-.078V29z\\"></path>
+                <rect width=\\"14\\" height=\\"3\\" x=\\"33\\" y=\\"43\\" fill=\\"#FFF\\" rx=\\".4\\"></rect>
+              </g>
+            </svg></div>
           <div class=\\"ix-empty-description\\">暂无数据</div>
           <!---->
         </div>

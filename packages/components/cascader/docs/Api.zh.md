@@ -20,7 +20,7 @@
 | `customAdditional` | 自定义下拉选项的额外属性 | `CascaderCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
 | `dataSource` | 树型数据数组,参见[CascaderData](#CascaderData) | `CascaderData[]` | `[]` | - | - |
 | `disabled` | 禁用选择器 | `boolean` | - | - | - |
-| `empty` | 空数据时的内容 | `string \| EmptyProps \| #empty` | - | - | - |
+| `empty` | 空数据时的内容 | `'default' \| 'simple' \| EmptyProps` | `'simple'` | - | - |
 | `expandIcon` | 展开图标 | `string \| #expandIcon="{key: VKey, expanded: boolean, data: CascaderData}"` | `right` | ✅ | - |
 | `expandTrigger` | 触发展开的方式 | `'click' \| 'hover'` | `click` | - | - |
 | `fullPath` | 选中后的值是否包含全部路径 | `boolean` | `true` | ✅ | 会影响值的类型，参见 [基本使用](#components-cascader-demo-Basic) 和 [多选模式](#components-cascader-demo-Multiple) |
@@ -64,8 +64,9 @@
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
+|  `empty` | 自定义空状态 | - | - |
 |  `selectedItem` | 自定义选中项 | `data: SelectedItemProps` | 使用该插槽后`selectedLabel`将无效 |
-|  `selectedLabel` | 自定义选中的标签 | `data: CascaderData` |  |
+|  `selectedLabel` | 自定义选中的标签 | `data: CascaderData` | - |
 |  `overflowedLabel` | 自定义超出最多显示多少个标签的内容 | `data: CascaderData[]` | 参数为超出的数组 |
 |  `optionLabel` | 自定义选项的文本 | `data: SelectOption` | - |
 

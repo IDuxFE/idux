@@ -32,7 +32,7 @@ export const tableProps = {
   customTag: { type: Object as PropType<TableCustomTag>, default: undefined },
   dataSource: { type: Array as PropType<any[]>, default: () => [] },
   ellipsis: { type: [Boolean, Object] as PropType<boolean | { title?: boolean }>, default: false },
-  empty: { type: [String, Object] as PropType<string | EmptyProps>, default: undefined },
+  empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'default' },
   emptyCell: {
     type: [String, Function] as PropType<string | ((options: TableEmptyCellOptions) => VNodeChild)>,
     default: undefined,

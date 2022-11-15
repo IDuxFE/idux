@@ -53,7 +53,7 @@ export const treeProps = {
   },
   draggableIcon: { type: String, default: undefined },
   droppable: Function as PropType<TreeDroppable>,
-  empty: [String, Object] as PropType<string | EmptyProps>,
+  empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'simple' },
   expandIcon: { type: [String, Array] as PropType<string | [string, string]>, default: undefined },
   getKey: { type: [String, Function] as PropType<string | ((data: TreeNode<any>) => any)>, default: undefined },
   height: Number,

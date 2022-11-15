@@ -8,7 +8,7 @@
 | --- | --- | --- | --- | --- | --- |
 | `header` | 列表头部 | `string \| slot` | - | - | - |
 | `footer` | 列表底部 | `string \| slot` | - | - | - |
-| `empty` | 空状态 | `string \| slot` | - | - | - |
+| `empty` | 空状态 | `'default' \| 'simple' \| EmptyProps` | `'default'` | - | - |
 | `borderless` | 是否无边框 | `boolean` | true | ✅ | - |
 | `loading` | 加载状态 | `boolean \| SpinProps` | false | - | SpinProps请参照 spin 组件 |
 | `size` | 大小 | `'lg' \| 'md' \| 'sm'` | `'md'` | ✅ | - |

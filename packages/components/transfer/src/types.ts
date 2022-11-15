@@ -139,7 +139,7 @@ export const transferProps = {
     type: Boolean,
     default: false,
   },
-  empty: [String, Object] as PropType<string | EmptyProps>,
+  empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'simple' },
   getKey: [String, Function] as PropType<string | ((item: TransferData<any>) => any)>,
   mode: {
     type: String as PropType<TransferMode>,

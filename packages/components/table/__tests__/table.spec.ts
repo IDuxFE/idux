@@ -240,13 +240,8 @@ describe('Table', () => {
     })
 
     test('empty work', async () => {
-      let emptyText = 'empty text'
-      const wrapper = TableMount({ props: { empty: emptyText, dataSource: [] } })
-
-      expect(wrapper.find('tbody').find('.ix-empty-description').text()).toBe(emptyText)
-
-      emptyText = 'empty text 2'
-      await wrapper.setProps({ empty: { description: emptyText } })
+      const emptyText = 'empty text'
+      const wrapper = TableMount({ props: { empty: { description: emptyText }, dataSource: [] } })
 
       expect(wrapper.find('tbody').find('.ix-empty-description').text()).toBe(emptyText)
     })

@@ -6,6 +6,7 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
+import type { EmptyProps } from '@idux/components/empty'
 import type { ColProps, RowProps } from '@idux/components/grid'
 import type { SpinProps } from '@idux/components/spin'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
@@ -19,7 +20,7 @@ export interface ListGridProps extends RowProps, ColPropsType {
 export const listProps = {
   header: String,
   footer: String,
-  empty: String,
+  empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'default' },
   borderless: {
     type: Boolean,
     default: undefined,

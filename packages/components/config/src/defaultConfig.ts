@@ -112,9 +112,7 @@ export const defaultConfig: GlobalConfig = {
     showArrow: false,
     trigger: 'hover',
   },
-  empty: {
-    icon: 'empty',
-  },
+  empty: {},
   form: {
     colonless: false,
     labelAlign: 'end',

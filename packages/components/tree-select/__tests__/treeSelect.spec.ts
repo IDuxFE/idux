@@ -462,13 +462,8 @@ describe('TreeSelect', () => {
     }
 
     test('empty work', async () => {
-      let emptyText = 'empty text'
-      const wrapper = TreeSelectMount({ props: { open: true, empty: emptyText, dataSource: [] } })
-
-      expect(wrapper.findComponent(Content).find('.ix-empty-description').text()).toBe(emptyText)
-
-      emptyText = 'empty text 2'
-      await wrapper.setProps({ empty: { description: emptyText } })
+      const emptyText = 'empty text'
+      const wrapper = TreeSelectMount({ props: { open: true, empty: { description: emptyText }, dataSource: [] } })
 
       expect(wrapper.findComponent(Content).find('.ix-empty-description').text()).toBe(emptyText)
     })
