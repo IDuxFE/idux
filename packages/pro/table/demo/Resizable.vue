@@ -3,6 +3,7 @@
     :columns="columns"
     :dataSource="data"
     header="Pro Table"
+    :scroll="scroll"
     :toolbar="toolbar"
     @columnsChange="onColumnsChange"
   >
@@ -49,27 +50,30 @@ const columns: ProTableColumn<Data>[] = [
     dataKey: 'name',
     changeFixed: false,
     customCell: 'name',
-    resizable: true,
+    width: 150,
     minWidth: 100,
+    maxWidth: 300,
+    resizable: true,
   },
   {
     title: 'Age',
     dataKey: 'age',
     changeFixed: false,
+    width: 100,
     resizable: true,
-    maxWidth: 120,
   },
   {
     title: 'Address',
     dataKey: 'address',
     changeFixed: false,
+    width: 400,
+    minWidth: 200,
     resizable: true,
-    maxWidth: 300,
-    minWidth: 150,
   },
   {
     title: 'Tags',
     dataKey: 'tags',
+    minWidth: 200,
     customCell: ({ value }) =>
       value.map((tag: string) => {
         let color = tag.length > 5 ? 'warning' : 'success'
@@ -84,6 +88,7 @@ const columns: ProTableColumn<Data>[] = [
     key: 'action',
     changeIndex: false,
     customCell: 'action',
+    width: 200,
   },
 ]
 
@@ -100,4 +105,6 @@ for (let index = 0; index < 100; index++) {
     } years old, living in London Park no. ${index}.`,
   })
 }
+
+const scroll = { width: 1200 }
 </script>

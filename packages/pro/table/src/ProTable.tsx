@@ -91,8 +91,9 @@ export default defineComponent({
     }
 
     return () => {
-      const { editable, customAdditional, customTag, layoutTool, toolbar, ...restProps } = props
+      const { editable, customAdditional, customTag, layoutTool, toolbar, tableLayout, ...restProps } = props
       const resizable = hasResizable.value
+      const mergedTableLayout = tableLayout ? tableLayout : resizable ? 'fixed' : undefined
 
       const mergedCustomAdditional: TableCustomAdditional = {
         ...customAdditional,
@@ -116,6 +117,7 @@ export default defineComponent({
           customAdditional={mergedCustomAdditional}
           customTag={mergedCustomTag}
           size={mergedSize.value}
+          tableLayout={mergedTableLayout}
         />
       )
     }

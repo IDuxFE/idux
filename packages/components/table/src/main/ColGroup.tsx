@@ -47,7 +47,22 @@ export default defineComponent({
               [`${prefixCls}-col-with-dropdown`]: type === 'selectable' && mergedSelectableMenus.value.length > 0,
             })
           : undefined
-        const style = mergedWidth ? `width: ${convertCssPixel(mergedWidth)}` : undefined
+        let style: string | Record<string, string> | undefined
+        if (isFixedHolder) {
+          style = mergedWidth ? `width: ${convertCssPixel(mergedWidth)}` : undefined
+        } else {
+          style = {
+            width: convertCssPixel(mergedWidth),
+            // for proTable: resizable, minWidth and maxWidth
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            minWidth: convertCssPixel(column.minWidth),
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            maxWidth: convertCssPixel(column.maxWidth),
+          }
+        }
+
         return <col key={key} class={className} style={style}></col>
       })
 

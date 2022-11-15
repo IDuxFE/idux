@@ -16,6 +16,7 @@ export function useTableLayout(
   { hasEllipsis, hasFixed }: ColumnsContext,
   { scrollWidth, scrollHeight }: ScrollContext,
   isSticky: ComputedRef<boolean>,
+  mergedAutoHeight: ComputedRef<boolean>,
 ): ComputedRef<'auto' | 'fixed'> {
   return computed(() => {
     if (props.tableLayout) {
@@ -24,7 +25,7 @@ export function useTableLayout(
     if (scrollWidth.value && hasFixed.value) {
       return scrollWidth.value === 'max-content' ? 'auto' : 'fixed'
     }
-    if (scrollHeight.value || isSticky.value || hasEllipsis.value || props.virtual) {
+    if (scrollHeight.value || mergedAutoHeight.value || isSticky.value || hasEllipsis.value || props.virtual) {
       return 'fixed'
     }
     return 'auto'
