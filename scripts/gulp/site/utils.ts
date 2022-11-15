@@ -90,7 +90,7 @@ interface DocsItem {
   order: number
 }
 
-const componentsSortMap: Record<string, number> = {
+const sortMap: Record<string, number> = {
   General: 0,
   通用: 0,
   Layout: 1,
@@ -106,13 +106,6 @@ const componentsSortMap: Record<string, number> = {
   Localization: 6,
   Other: 7,
   其他: 7,
-}
-
-const proComponentsSortMap: Record<string, number> = {
-  General: 0,
-  通用: 0,
-  Layout: 1,
-  布局: 1,
 }
 
 const defaultRoutes = [`{path: '/', 'component': () => import('./components/views/home/Home.vue')},`]
@@ -162,8 +155,8 @@ function handleDocsMeta(docsMeta: Record<string, Record<string, Meta>>) {
   const proComponents = getComponentSort(proComponentsMap)
 
   docs.sort((pre, next) => pre.order - next.order)
-  components.sort((pre, next) => componentsSortMap[pre.name] - componentsSortMap[next.name])
-  proComponents.sort((pre, next) => proComponentsSortMap[pre.name] - proComponentsSortMap[next.name])
+  components.sort((pre, next) => sortMap[pre.name] - sortMap[next.name])
+  proComponents.sort((pre, next) => sortMap[pre.name] - sortMap[next.name])
   cdk.sort((pre, next) => pre.order - next.order)
 
   return { docs, components, proComponents, cdk, routes }
