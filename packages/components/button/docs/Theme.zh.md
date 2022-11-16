@@ -30,9 +30,9 @@
 | `@button-primary-background-color` | `var(--ix-color-primary)` | - | - |
 | `@button-primary-background-color-hover` | `var(--ix-color-primary-l10)` | - | - |
 | `@button-primary-background-color-active` | `var(--ix-color-primary-d10)` | - | - |
-| `@button-danger-color` | `var(--ix-color-error)` | - | - |
-| `@button-danger-color-hover` | `var(--ix-color-error-l10)` | - | - |
-| `@button-danger-color-active` | `var(--ix-color-error-d10)` | - | - |
+| `@button-danger-color` | `var(--ix-color-red)` | - | - |
+| `@button-danger-color-hover` | `var(--ix-color-red-l10)` | - | - |
+| `@button-danger-color-active` | `var(--ix-color-red-d10)` | - | - |
 | `@button-ghost-border-color` | `var(--ix-background-color)` | - | - |
 | `@button-ghost-background-color-hover` | `rgba(255, 255, 255, 0.2)` | - | - |
 | `@button-ghost-background-color-active` | `var(--ix-background-color)` | - | - |
