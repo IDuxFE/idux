@@ -6,7 +6,7 @@
   </IxSpace>
   <IxTable :columns="columns" :dataSource="data" :pagination="false">
     <template #name="{ value }">
-      <a>{{ value }}</a>
+      <IxButton mode="link">{{ value }}</IxButton>
     </template>
   </IxTable>
 </template>

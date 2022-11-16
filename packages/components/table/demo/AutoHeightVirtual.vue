@@ -7,10 +7,10 @@
       :max="600"
       :step="100"
     ></IxInputNumber>
-    <div :style="{ height: `${containerHeight}px` }">
+    <div :style="{ height: `${containerHeight}px`, marginTop: '8px' }">
       <IxTable :columns="columns" :dataSource="data" :pagination="false" autoHeight virtual>
         <template #name="{ value }">
-          <a>{{ value }}</a>
+          <IxButton mode="link">{{ value }}</IxButton>
         </template>
       </IxTable>
     </div>

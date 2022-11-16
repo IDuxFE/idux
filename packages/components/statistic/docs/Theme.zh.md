@@ -6,6 +6,6 @@
 | `@statistic-font-size-xl` | `@font-size-2xl` | - | - |
 | `@statistic-line-height` | `@line-height-base` | - | - |
 | `@statistic-color` | `@color-black` | `@color-graphite-d40` | - |
-| `@statistic-title-margin` | `@space-margin-lg` | - | - |
+| `@statistic-title-margin` | `@spacing-xl` | - | - |
 | `@statistic-prefix-margin` | `@spacing-xs` | - | - |
 | `@statistic-suffix-margin` | `@spacing-xs` | - | - |

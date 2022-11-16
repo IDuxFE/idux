@@ -1,12 +1,5 @@
 <template>
-  <IxTable
-    :columns="columns"
-    :dataSource="dataSource"
-    :getKey="getRowKey"
-    :pagination="pagination"
-    :spin="loading"
-    @pageChange="setPagination"
-  >
+  <IxTable :columns="columns" :dataSource="dataSource" :getKey="getKey" :pagination="pagination" :spin="loading">
   </IxTable>
 </template>
 
@@ -14,10 +7,6 @@
 import { onMounted, reactive, ref } from 'vue'
 
 import { TableColumn, TablePagination } from '@idux/components/table'
-
-const pagination = reactive<TablePagination>({
-  showSizeChanger: true,
-})
 
 const setPagination = (pageIndex: number, pageSize: number) => {
   // 如果修改了 pageSize, 应该把 pageIndex 重置为 1
@@ -30,6 +19,11 @@ const setPagination = (pageIndex: number, pageSize: number) => {
 
   fetchData(pagination.pageIndex, pagination.pageSize)
 }
+
+const pagination = reactive<TablePagination>({
+  showSizeChanger: true,
+  onChange: setPagination,
+})
 
 const loading = ref(false)
 
@@ -87,5 +81,5 @@ const columns: TableColumn<RandomUser>[] = [
 
 const dataSource = ref<RandomUser[]>([])
 
-const getRowKey = (record: RandomUser) => record.login.uuid
+const getKey = (record: RandomUser) => record.login.uuid
 </script>

@@ -3,7 +3,6 @@
 exports[`Table > basic work > render work 1`] = `
 "<div class=\\"ix-table ix-table-borderless ix-table-md\\">
   <!---->
-  <!---->
   <div class=\\"ix-table-container\\">
     <div class=\\"ix-table-content\\">
       <table class=\\"ix-table-table\\" style=\\"table-layout: auto;\\">
@@ -312,7 +311,6 @@ exports[`Table > basic work > render work 1`] = `
       </table>
     </div>
   </div>
-  <!---->
   <ul class=\\"ix-pagination ix-pagination-md ix-table-pagination ix-table-pagination-end\\" position=\\"bottomEnd\\">
     <li class=\\"ix-pagination-total\\">共 100 项</li>
     <li class=\\"ix-pagination-item ix-pagination-item-prev ix-pagination-item-disabled\\" tabindex=\\"-1\\" title=\\"上一页\\"><span class=\\"ix-pagination-item-content\\"><i class=\\"ix-icon ix-icon-left\\" role=\\"img\\" aria-label=\\"left\\"></i></span></li>

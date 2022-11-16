@@ -16,7 +16,7 @@ import {
   normalizeClass,
 } from 'vue'
 
-import { isFunction, isString } from 'lodash-es'
+import { isFunction, isObject, isString } from 'lodash-es'
 
 import { type VKey, convertCssPixel } from '@idux/cdk/utils'
 
@@ -57,7 +57,8 @@ export default defineComponent({
     const mergedEllipsis = computed(() => {
       // tableProps 的 ellipsis 对特殊(带有 type )的列不生效
       const { type, ellipsis } = props.column as HeadColumn
-      return type ? ellipsis : ellipsis ?? tableProps.ellipsis
+      const _ellipsis = type ? ellipsis : ellipsis ?? tableProps.ellipsis
+      return isObject(_ellipsis) && _ellipsis.head === false ? undefined : _ellipsis
     })
 
     const classes = computed(() => {

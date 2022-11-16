@@ -5,15 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { SpinProps } from '@idux/components/spin'
-
-import { computed, defineComponent, normalizeClass, provide } from 'vue'
+import { type VNode, computed, defineComponent, normalizeClass, provide } from 'vue'
 
 import { isBoolean } from 'lodash-es'
 
 import { ɵHeader } from '@idux/components/_private/header'
 import { useGlobalConfig } from '@idux/components/config'
-import { IxSpin } from '@idux/components/spin'
+import { IxSpin, type SpinProps } from '@idux/components/spin'
 import { useGetKey } from '@idux/components/utils'
 
 import { useColumns } from './composables/useColumns'
@@ -117,10 +115,15 @@ export default defineComponent({
       const header = <ɵHeader v-slots={slots} header={props.header} />
       const footer = renderFooter(slots, prefixCls)
       const [paginationTop, paginationBottom] = renderPagination(mergedPagination.value, filteredData.value, prefixCls)
-      const children = [header, paginationTop, <MainTable />, footer, paginationBottom]
+      const children = [header]
+      const resetChildren = [paginationTop, <MainTable />, footer, paginationBottom].filter(Boolean) as VNode[]
       const spinProps = convertSpinProps(props.spin)
-      const spinWrapper = spinProps ? <IxSpin {...spinProps}>{children}</IxSpin> : children
-      return <div class={classes.value}>{spinWrapper}</div>
+      if (spinProps) {
+        children.push(<IxSpin {...spinProps}>{resetChildren}</IxSpin>)
+      } else {
+        children.push(...resetChildren)
+      }
+      return <div class={classes.value}>{children}</div>
     }
   },
 })
