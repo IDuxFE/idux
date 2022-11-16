@@ -320,6 +320,8 @@ export abstract class AbstractControl<T = any> {
    * Sets the new sync validator for the form control, it overwrites existing sync validators.
    *
    * If you want to clear all sync validators, you can pass in a undefined.
+   *
+   * When you add or remove a validator at run time, you must call `validate()` for the new validation to take effect.
    */
   setValidators(newValidators?: ValidatorFn | ValidatorFn[]): void {
     this._validators = newValidators
@@ -330,6 +332,8 @@ export abstract class AbstractControl<T = any> {
    * Sets the new async validator for the form control, it overwrites existing async validators.
    *
    * If you want to clear all async validators, you can pass in a undefined.
+   *
+   * When you add or remove a validator at run time, you must call `validate()` for the new validation to take effect.
    */
   setAsyncValidators(newAsyncValidators?: AsyncValidatorFn | AsyncValidatorFn[]): void {
     this._asyncValidators = newAsyncValidators

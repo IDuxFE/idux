@@ -1,4 +1,3 @@
-## API
 
 ### IxForm
 
@@ -62,9 +61,9 @@
 function useFormItemRegister(control: ShallowRef<AbstractControl | undefined>): void
 ```
 
-## FAQ
+### FAQ
 
-### 自定义表单组件
+#### 自定义表单组件
 
 参考下列代码来自定义表单组件，实现 `control` 并与 `IxFormItem` 配合使用。
 
