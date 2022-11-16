@@ -1,18 +1,17 @@
 .alert-status-color (@type, @color, @background-color) {
-  &&-@{type} {
+  &-@{type} {
     color: @color;
   }
 
-  &&-@{type} {
+  &-@{type} {
     background-color: @background-color;
   }
 }
 
 .alert-transition () {
-
   &-enter-active,
   &-leave-active {
-    transition: @transition-all-base;
+    transition: all var(--ix-transition-duration-fast);
   }
 
   &-enter-from,
