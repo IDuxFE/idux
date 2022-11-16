@@ -189,7 +189,7 @@ function renderExpandableChildren(
   } else {
     iconNode = isFunction(icon) ? icon({ expanded, record }) : icon
     if (isString(iconNode)) {
-      iconNode = <IxIcon name={iconNode} />
+      iconNode = <IxIcon name={iconNode} rotate={expanded ? 90 : 0} />
     }
   }
 

@@ -58,7 +58,7 @@ export default defineComponent({
       // tableProps 的 ellipsis 对特殊(带有 type )的列不生效
       const { type, ellipsis } = props.column as HeadColumn
       const _ellipsis = type ? ellipsis : ellipsis ?? tableProps.ellipsis
-      return isObject(_ellipsis) && !_ellipsis.head ? undefined : _ellipsis
+      return isObject(_ellipsis) && _ellipsis.head === false ? undefined : _ellipsis
     })
 
     const classes = computed(() => {

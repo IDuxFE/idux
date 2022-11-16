@@ -20,7 +20,7 @@ export function getColTitle(
   children: VNodeChild,
   title: string | undefined,
 ): string | undefined {
-  if (!ellipsis || (isObject(ellipsis) && !ellipsis.title)) {
+  if (!ellipsis || (isObject(ellipsis) && ellipsis.title === false)) {
     return undefined
   }
 
