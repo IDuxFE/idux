@@ -1,12 +1,14 @@
 <template>
-  <IxSpace>
+  <IxButtonGroup>
     <IxButton @Click="orderByAgeAscend">Order By Age(Ascend)</IxButton>
     <IxButton @Click="orderByGradeDescend">Order By Grade(Descend)</IxButton>
     <IxButton @Click="clear">Clear</IxButton>
-  </IxSpace>
+  </IxButtonGroup>
+  <br />
+  <br />
   <IxTable :columns="columns" :dataSource="data" :pagination="false">
     <template #name="{ value }">
-      <a>{{ value }}</a>
+      <IxButton mode="link">{{ value }}</IxButton>
     </template>
   </IxTable>
 </template>

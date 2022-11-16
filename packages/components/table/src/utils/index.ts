@@ -7,11 +7,11 @@
 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
-import { type VNode, type VNodeChild } from 'vue'
+import { Text, type VNodeChild } from 'vue'
 
-import { isObject, isString } from 'lodash-es'
+import { isNumber, isObject, isString } from 'lodash-es'
 
-import { Logger, type VKey, convertArray, getFirstValidNode, uniqueId } from '@idux/cdk/utils'
+import { Logger, type VKey, convertArray, flattenNode, uniqueId } from '@idux/cdk/utils'
 
 import { type TableColumn } from '../types'
 
@@ -20,20 +20,20 @@ export function getColTitle(
   children: VNodeChild,
   title: string | undefined,
 ): string | undefined {
-  if (!ellipsis || (isObject(ellipsis) && !ellipsis.title)) {
+  if (!ellipsis || (isObject(ellipsis) && ellipsis.title === false)) {
     return undefined
   }
 
-  let _title = title
-  if (isString(children)) {
-    _title = children
-  } else {
-    const node = getFirstValidNode(children as VNode)
-    if (node && isString(node.children)) {
-      _title = node.children
-    }
+  if (isString(children) || isNumber(children)) {
+    return children as string
   }
-  return _title
+
+  const textNode = flattenNode(children).find(node => node.type === Text)
+  if (textNode) {
+    return textNode.children as string
+  }
+
+  return title
 }
 
 export function getColumnKey(column: TableColumn): VKey {
@@ -41,7 +41,7 @@ export function getColumnKey(column: TableColumn): VKey {
     return column.key
   }
   // @ts-ignore
-  if (column.dataKey && column.dataKey) {
+  if (column.dataKey) {
     // @ts-ignore
     return convertArray(column.dataKey).join('-')
   }

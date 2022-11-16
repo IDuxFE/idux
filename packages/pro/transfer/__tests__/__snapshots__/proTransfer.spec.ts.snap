@@ -42,7 +42,6 @@ exports[`ProTransfer > table transfer render work 1`] = `
           >
             
             <!---->
-            <!---->
             <div
               class="ix-table-container ix-table-fixed-layout ix-table-scroll-vertical"
             >
@@ -1001,8 +1000,6 @@ exports[`ProTransfer > table transfer render work 1`] = `
               </div>
               
             </div>
-            <!---->
-            <!---->
             
           </div>
           
@@ -1092,7 +1089,6 @@ exports[`ProTransfer > table transfer render work 1`] = `
             class="ix-table ix-table-auto-height ix-table-borderless ix-table-md ix-pro-transfer-table-content"
           >
             
-            <!---->
             <!---->
             <div
               class="ix-table-container ix-table-fixed-layout ix-table-scroll-vertical"
@@ -1370,8 +1366,6 @@ exports[`ProTransfer > table transfer render work 1`] = `
               </div>
               
             </div>
-            <!---->
-            <!---->
             
           </div>
           

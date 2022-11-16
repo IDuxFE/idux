@@ -1,7 +1,7 @@
 <template>
   <IxTable :columns="columns" :dataSource="data" :borderless="false" :scroll="scroll">
     <template #name="{ value }">
-      <a>{{ value }}</a>
+      <IxButton mode="link">{{ value }}</IxButton>
     </template>
   </IxTable>
 </template>

@@ -132,6 +132,7 @@ export default defineComponent({
   &-raw-code {
     position: relative;
     padding: 16px;
+    margin-bottom: 8px;
   }
 
   &-highlight-code {
@@ -150,7 +151,7 @@ export default defineComponent({
 
   &-tools {
     position: absolute;
-    bottom: -8px;
+    bottom: -12px;
     right: 16px;
     cursor: pointer;
 

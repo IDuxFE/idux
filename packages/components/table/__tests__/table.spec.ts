@@ -207,6 +207,22 @@ describe('Table', () => {
       expect(wrapper.find('tbody').findAll('td')[2].attributes('title')).not.toBe(undefined)
     })
 
+    test('ellipsis with head work', async () => {
+      const wrapper = TableMount({ props: { ellipsis: { head: false } } })
+
+      expect(wrapper.find('thead').findAll('th')[2].classes()).not.toContain('ix-table-cell-ellipsis')
+      expect(wrapper.find('tbody').findAll('td')[2].classes()).toContain('ix-table-cell-ellipsis')
+      expect(wrapper.find('thead').findAll('th')[2].attributes('title')).toBe(undefined)
+      expect(wrapper.find('tbody').findAll('td')[2].attributes('title')).not.toBe(undefined)
+
+      await wrapper.setProps({ ellipsis: { head: true } })
+
+      expect(wrapper.find('thead').findAll('th')[2].classes()).toContain('ix-table-cell-ellipsis')
+      expect(wrapper.find('tbody').findAll('td')[2].classes()).toContain('ix-table-cell-ellipsis')
+      expect(wrapper.find('thead').findAll('th')[2].attributes('title')).not.toBe(undefined)
+      expect(wrapper.find('tbody').findAll('td')[2].attributes('title')).not.toBe(undefined)
+    })
+
     test('ellipsis with columns work', async () => {
       const wrapper = TableMount({
         props: {

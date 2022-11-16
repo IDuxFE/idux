@@ -187,7 +187,10 @@ function renderExpandableChildren(
   } else if (isString(customIcon) && slots[customIcon]) {
     iconNode = slots[customIcon]!({ expanded, record })
   } else {
-    iconNode = <IxIcon name={icon} rotate={expanded ? 90 : 0} />
+    iconNode = isFunction(icon) ? icon({ expanded, record }) : icon
+    if (isString(iconNode)) {
+      iconNode = <IxIcon name={iconNode} rotate={expanded ? 90 : 0} />
+    }
   }
 
   return (

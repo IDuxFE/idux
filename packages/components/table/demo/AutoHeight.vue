@@ -7,13 +7,13 @@
     :step="100"
   ></IxInputNumber>
 
-  <div :style="{ height: `${containerHeight}px` }">
+  <div :style="{ height: `${containerHeight}px`, marginTop: '8px' }">
     <IxTable :columns="columns" :dataSource="data" autoHeight :scroll="scroll">
       <template #name="{ value }">
-        <a>{{ value }}</a>
+        <IxButton mode="link">{{ value }}</IxButton>
       </template>
       <template #action>
-        <a>action</a>
+        <IxButton>Action</IxButton>
       </template>
     </IxTable>
   </div>

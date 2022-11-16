@@ -14,7 +14,7 @@
 | `columns` | 表格列的配置描述 | `TableColumn[]` | - | - |  参见[TableColumn](#TableColumn)  |
 | `customAdditional` | 自定义表格行和单元格的额外属性 | `TableCustomAdditional` | - | - | 参见[TableCustomAdditional](#TableCustomAdditional) |
 | `dataSource` | 表格数据数组 | `object[]` | - | - | - |
-| `ellipsis` | 超过宽度将自动省略 | `boolean \| { title: boolean }` | `false` | - | `title` 为 `false` 时, 不显示原生的 `title` |
+| `ellipsis` | 超过宽度将自动省略 | `boolean \| { title?: boolean; head?: boolean }` | `false` | - | 对带有 `type` 的列不生效; `title` 为 `false` 时, 不显示原生的 `title`; `head` 为 `false` 时, 对表头不生效 |
 | `empty` | `dataSource` 为空时默认渲染的内容 | `'default' \| 'simple' \| EmptyProps` | `'default'` | - | - |
 | `emptyCell` | 单元格数据为空时默认渲染的内容 | `string \| ((options: TableEmptyCellOptions) => VNodeChild) \| #emptyCell='TableEmptyCellOptions'` | - | ✅ | 仅支持普通列，且数据为 `undefined \| null \| ''` 时生效 |
 | `getKey` | 获取数据的唯一标识 | `string \| (record: any) => VKey` | `key` | ✅ | - |
@@ -69,7 +69,7 @@ export type TableColumn<T = any, V = any> =
 | `key` | 表格列 `key` 的取值 | `string \| number` | - | - | 默认为 `dataKey` 或者 `type` |
 | `children` | 子列的配置项 | `TableColumnBase[]` | - | - | 用于设置分组表头 |
 | `dataKey` | 数据在数据项中对应的路径 | `string \| string[]` | - | - | 支持通过数组查询嵌套路径 |
-| `ellipsis` | 超过宽度将自动省略 | `boolean` | - | - | 优先级高于 `props` 中的 `ellipsis` |
+| `ellipsis` | 超过宽度将自动省略 | `boolean \| { title?: boolean; head?: boolean }` | - | - | 优先级高于 `props` 中的 `ellipsis`, 且对带有 `type` 的列生效  |
 | `sortable` | 是否可排序, 参见[TableColumnSortable](#TableColumnSortable) | `TableColumnSortable` | - | - | - |
 | `title` | 列头的文本 | `string` | - | - | - |
 | `customCell` | 自定义单元格内容 | `string \| ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
@@ -83,7 +83,7 @@ export type TableColumn<T = any, V = any> =
 | --- | --- | --- | --- | --- | --- |
 | `type` | 列类型 | `'expandable'` | - | - | 必填 |
 | `disabled` |  设置是否允许行展开 | `(record:T) => boolean` | - | - | - |
-| `icon` | 展开按钮图标 | `string` | `'right'` | ✅ | - |
+| `icon` | 展开按钮图标 | `string \| VNode \| ((data: { expanded: boolean; record: T }) => string \| VNodeChild)` | `'right'` | ✅ | - |
 | `indent` | 展示树形数据时，每层缩进的宽度 | `number` | `12` | - | - |
 | `trigger` | 不通过图标，触发行展开的方式 | `'click' \| 'doubleClick'` | - | - | - |
 | `onChange` | 展开状态发生变化时触发 | `(expendedRowKeys: (string \| number)[], expendedRecords: T[]) => void` | - | - | - |

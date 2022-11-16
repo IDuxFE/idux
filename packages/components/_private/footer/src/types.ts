@@ -7,9 +7,10 @@
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { ButtonProps } from '@idux/components/button'
-import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
+import type { ButtonHTMLAttributes, DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
 
-export interface FooterButtonProps extends ButtonProps {
+export interface FooterButtonProps extends ButtonHTMLAttributes, ButtonProps {
+  disabled?: boolean
   key?: VKey
   text?: string | VNode
   onClick?: (evt: Event) => void
