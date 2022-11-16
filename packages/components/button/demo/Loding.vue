@@ -1,5 +1,5 @@
 <template>
-  <IxSpace>
+  <IxSpace align="center">
     <IxButton mode="primary" icon="search" loading>Primary</IxButton>
     <IxButton icon="search" loading>Default</IxButton>
     <IxButton mode="dashed" loading>Dashed</IxButton>

@@ -1,7 +1,7 @@
 <template>
   <IxSpace vertical>
     <IxRadioGroup v-model:value="size" :dataSource="sizeData" />
-    <IxSpace>
+    <IxSpace align="center">
       <IxButton mode="primary" :size="size">Primary</IxButton>
       <IxButton :size="size">Default</IxButton>
       <IxButton mode="dashed" :size="size">Dashed</IxButton>

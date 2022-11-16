@@ -1,5 +1,5 @@
 <template>
-  <IxSpace>
+  <IxSpace align="center">
     <IxButton mode="primary" danger>Primary</IxButton>
     <IxButton danger>Default</IxButton>
     <IxButton mode="dashed" danger>Dashed</IxButton>
