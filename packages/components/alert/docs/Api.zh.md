@@ -1,5 +1,3 @@
-## API
-
 ### IxAlert
 
 #### AlertProps
