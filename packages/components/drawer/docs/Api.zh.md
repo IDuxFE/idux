@@ -1,4 +1,3 @@
-## API
 
 ### IxDrawer
 
@@ -116,9 +115,9 @@ export interface DrawerRef extends DrawerBindings {
 export const MODAL_TOKEN: InjectionKey<DrawerBindings>;
 ```
 
-## FAQ
+### FAQ
 
-### 销毁所有抽屉
+#### 销毁所有抽屉
 
 当路由发生改变时，如何在根组件 (App.vue) 中销毁所有抽屉？
 

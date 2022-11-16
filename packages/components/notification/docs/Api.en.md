@@ -1,4 +1,3 @@
-## API
 
 ### IxNotification
 

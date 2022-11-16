@@ -261,12 +261,12 @@ const formGroup = useFormGroup({
 })
 ```
 
-## FAQ
+### FAQ
 
-### 更多的使用示例和场景？
+#### 更多的使用示例和场景？
 
 参见 [@idux/components/form](https://idux.site/components/form/zh)
 
-### 更多的使用细节和文档？
+#### 更多的使用细节和文档？
 
 参见 [@angular/forms](https://angular.cn/guide/forms-overview)

@@ -1,4 +1,3 @@
-## API
 
 ### FocusMonitor
 
@@ -97,8 +96,8 @@ export interface FocusMonitorOptions {
 export const useSharedFocusMonitor: () => FocusMonitor
 ```
 
-## FAQ
+### FAQ
 
-### 更多的使用细节和文档？
+#### 更多的使用细节和文档？
 
 参见 [material.angular.cn](https://material.angular.cn/cdk/a11y/overview)

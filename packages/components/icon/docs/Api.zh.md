@@ -1,4 +1,3 @@
-## API
 
 ### IxIcon
 
@@ -19,9 +18,9 @@
 | `addIconDefinitions` | 用于静态引入图标 | `(icons: IconDefinition[]) => void` | - |
 | `fetchIconFormScript` | 用于从 [iconfont](https://www.iconfont.cn) 获取图标资源文件 | `(url: string \| string[])=> void` | - |
 
-## FAQ
+### FAQ
 
-### 动态加载和静态加载
+#### 动态加载和静态加载
 
 无论是 `@idux` 提供的默认图标还是自定义的图标，我们都提供了两种加载方式。  
 它们各有优缺点，我们推荐首屏使用到的图标使用静态加载的方式，避免请求数量过多，其他的时候，使用动态加载的方式。

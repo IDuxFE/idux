@@ -1,4 +1,3 @@
-## API
 
 `@idux/cdk/popper` 基于 `@floating-ui/dom` 对浮层的创建进行了封装.
 

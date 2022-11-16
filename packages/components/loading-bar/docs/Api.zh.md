@@ -1,4 +1,3 @@
-## API
 
 使用 LoadingBar 只有一种方法，在 IxLoadingBarProvider 组件里面嵌套使用 `useLoadingBar`
 
