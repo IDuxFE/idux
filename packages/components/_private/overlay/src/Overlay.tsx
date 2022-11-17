@@ -69,7 +69,13 @@ export default defineComponent({
     watch(popperOptions, options => update(options))
     watch(
       () => props.visible,
-      visible => (visible ? show() : hide()),
+      visible => {
+        visible ? show() : hide()
+
+        if (visible && props.destroyOnHide) {
+          initialize()
+        }
+      },
     )
     watch(
       contentArrowRef,
