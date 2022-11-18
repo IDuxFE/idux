@@ -5,6 +5,7 @@
   min-width: 0;
   outline: 0;
   color: @input-color;
+  border: 1px solid @input-border-color;
 
   &[disabled] {
     cursor: not-allowed;
@@ -13,35 +14,30 @@
   .placeholder(@input-placeholder-color);
 }
 
-.input-size(@font-size; @padding-vertical; @padding-horizontal;) {
+.input-size(@height, @font-size, @border-radius) {
+  height: @height;
   font-size: @font-size;
-  padding: @padding-vertical (@padding-horizontal - 4) @padding-vertical @padding-horizontal;
+  line-height: calc(@font-size + var(--ix-line-height-gutter));
 
-  &.@{input-prefix}-clearable {
-    .@{input-prefix}-clear {
-      right: @padding-horizontal - 4;
-    }
+  &,
+  .@{input-prefix}-addon {
+    border-radius: @border-radius;
   }
-}
 
-.input-hover(@color: @input-hover-color) {
-  border-color: @color;
-}
-
-.input-active(@border-color: @input-active-color; @box-shadow: @input-active-box-shadow) {
-  border-color: @border-color;
-  box-shadow: @box-shadow;
-
-  &:hover {
-    .input-hover(@border-color);
+  .@{input-prefix}-addon,
+  .@{input-prefix}-clear {
+    line-height: calc(@height - 2px);
   }
 }
 
 .input-disabled() {
-  color: @input-disabled-color;
-  background-color: @input-disabled-background-color;
+  color: @input-color-disabled;
+  background-color: @input-background-color-disabled;
   border-color: @input-border-color;
   box-shadow: none;
   cursor: not-allowed;
-  opacity: 1;
+
+  &:hover {
+    border-color: @input-border-color;
+  }
 }

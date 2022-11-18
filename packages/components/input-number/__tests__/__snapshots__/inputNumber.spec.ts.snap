@@ -1,6 +1,6 @@
 // Vitest Snapshot v1
 
 exports[`InputNumber > render work 1`] = `
-"<span class=\\"ix-input ix-input-md ix-input-with-prefix ix-input-with-suffix ix-input-number\\"><span class=\\"ix-input-prefix\\"><span class=\\"ix-input-number-increase\\" role=\\"button\\"><i class=\\"ix-icon ix-icon-up\\" role=\\"img\\" aria-label=\\"up\\"></i></span></span><input class=\\"ix-input-inner\\" type=\\"text\\" autocomplete=\\"off\\" aria-valuemin=\\"-Infinity\\" aria-valuemax=\\"Infinity\\"><span class=\\"ix-input-suffix\\"><span class=\\"ix-input-number-decrease\\" role=\\"button\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></span></span>
+"<span class=\\"ix-input ix-input-md ix-input-with-suffix ix-input-number\\"><!----><input class=\\"ix-input-inner\\" type=\\"text\\" autocomplete=\\"off\\" aria-valuemin=\\"-Infinity\\" aria-valuemax=\\"Infinity\\"><span class=\\"ix-input-suffix\\"><span class=\\"ix-input-number-increase\\" role=\\"button\\"><i class=\\"ix-icon ix-icon-up\\" role=\\"img\\" aria-label=\\"up\\"></i></span><span class=\\"ix-input-number-decrease\\" role=\\"button\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></span></span>
 <!----></span>"
 `;

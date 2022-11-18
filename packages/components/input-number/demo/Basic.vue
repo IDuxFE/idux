@@ -18,7 +18,7 @@
       @blur="onBlur"
       @focus="onFocus"
     >
-      <template v-if="value <= 1" #addonBefore>倒计时</template>
+      <template #addonBefore>倒计时</template>
       <template #addonAfter>天</template>
     </IxInputNumber>
   </IxSpace>

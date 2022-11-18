@@ -67,26 +67,33 @@ export default defineComponent({
     }
 
     return () => {
+      const prefixCls = mergedPrefixCls.value
       const vSlots = {
         ...slots,
-        prefix: () => (
+        suffix: () => [
           <span
-            class={['ix-input-number-increase', isDisabledInc.value ? 'ix-input-number-increase--disabled' : '']}
+            key="increase"
+            class={normalizeClass({
+              [`${prefixCls}-increase`]: true,
+              [`${prefixCls}-increase-disabled`]: isDisabled.value || isDisabledInc.value,
+            })}
             role="button"
             onClick={handleIncrease}
           >
             <IxIcon name="up" />
-          </span>
-        ),
-        suffix: () => (
+          </span>,
           <span
-            class={['ix-input-number-decrease', isDisabledDec.value ? 'ix-input-number-decrease--disabled' : '']}
+            key="decrease"
+            class={normalizeClass({
+              [`${prefixCls}-decrease`]: true,
+              [`${prefixCls}-decrease-disabled`]: isDisabled.value || isDisabledDec.value,
+            })}
             role="button"
             onClick={handleDecrease}
           >
             <IxIcon name="down" />
-          </span>
-        ),
+          </span>,
+        ],
       }
       return (
         <ɵInput

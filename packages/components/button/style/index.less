@@ -116,7 +116,7 @@
   &-text,
   &-link {
     background-color: transparent;
-    border-color: transparent;
+    border: none;
     padding: 0;
     min-width: auto;
     height: auto;
@@ -164,20 +164,6 @@
     &:active {
       color: @button-primary-color;
       background-color: @button-danger-color-active;
-    }
-  }
-
-  &-danger&-text,
-  &-danger&-link {
-    border-color: transparent;
-
-    &:focus,
-    &:hover {
-      border-color: transparent;
-    }
-
-    &:active {
-      border-color: transparent;
     }
   }
 
@@ -264,7 +250,6 @@
     &:focus,
     &:active {
       background-color: transparent;
-      border-color: transparent;
     }
   }
 

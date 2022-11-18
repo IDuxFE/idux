@@ -1,16 +1,16 @@
 <template>
   <IxForm class="demo-form" labelCol="6">
     <IxFormItem label="Valid" status="valid" :message="messageMap">
-      <IxInput v-model:value="formValue.valid"></IxInput>
+      <IxInput v-model:value="formValue.valid" status="valid"></IxInput>
     </IxFormItem>
     <IxFormItem label="Validating" status="validating" :message="messageMap">
-      <IxInput v-model:value="formValue.validating"></IxInput>
+      <IxInput v-model:value="formValue.validating" status="validating"></IxInput>
     </IxFormItem>
     <IxFormItem label="Invalid" status="invalid" :message="messageMap">
-      <IxInput v-model:value="formValue.invalid"></IxInput>
+      <IxInput v-model:value="formValue.invalid" status="invalid"></IxInput>
     </IxFormItem>
     <IxFormItem label="Dynamic" :status="status" :message="getMessage">
-      <IxInput v-model:value="formValue.dynamic"></IxInput>
+      <IxInput v-model:value="formValue.dynamic" :status="status"></IxInput>
     </IxFormItem>
     <IxFormItem :controlCol="{ offset: 6 }">
       <IxButton @click="changeStatus">Change Status</IxButton>
