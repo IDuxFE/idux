@@ -1,41 +1,45 @@
-@import '../../style/mixins/borderless.less';
 @import '../../style/mixins/placeholder.less';
 @import '../../style/mixins/reset.less';
 @import './mixin.less';
 
 .@{input-prefix} {
-  .reset-component();
-  .input-inner();
+  .reset-component-new();
 
   background-color: @input-background-color;
-  border: @input-border-width @input-border-style @input-border-color;
-  border-radius: @input-border-radius;
-  transition: all @transition-duration-base @ease-in-out;
+  transition: all var(--ix-transition-duration-fast) var(--ix-ease-in-out);
 
-  .@{input-prefix}-inner {
+  &-sm {
+    .input-size(@input-height-sm, @input-font-size-sm, @input-border-radius-sm);
+  }
+
+  &-md {
+    .input-size(@input-height-md, @input-font-size-md, @input-border-radius-md);
+  }
+
+  &-lg {
+    .input-size(@input-height-lg, @input-font-size-lg, @input-border-radius-lg);
+  }
+
+  &,
+  &-inner {
     .input-inner();
-
-    border: @input-border-width @input-border-style @input-border-color;
   }
 
-  &:hover {
-    .input-hover();
-  }
-
-  &-inner,
-  &-wrapper {
-    &:hover {
-      .input-hover();
-    }
+  &:hover,
+  &-inner:hover,
+  &-wrapper:hover {
+    border-color: @input-border-color-focus;
   }
 
   &:focus,
   &-focused {
-    .input-active();
+    border-color: @input-border-color-focus;
+    box-shadow: @input-box-shadow-focus;
 
     .@{input-prefix}-inner,
     .@{input-prefix}-wrapper {
-      .input-active();
+      border-color: @input-border-color-focus;
+      box-shadow: @input-box-shadow-focus;
     }
   }
 
@@ -43,18 +47,10 @@
   &-disabled {
     .input-disabled();
 
+    .@{input-prefix}-addon,
     .@{input-prefix}-inner,
     .@{input-prefix}-wrapper {
       .input-disabled();
-    }
-
-    &:hover {
-      .input-hover(@input-border-color);
-
-      .@{input-prefix}-inner,
-      .@{input-prefix}-wrapper {
-        .input-hover(@input-border-color);
-      }
     }
   }
 
@@ -65,25 +61,41 @@
     &-focused,
     &[disabled],
     &-disabled {
-      .borderless();
+      background-color: transparent;
+      border-color: transparent;
+      box-shadow: none;
 
       .@{input-prefix}-inner,
       .@{input-prefix}-wrapper {
-        .borderless();
+        background-color: transparent;
+        border-color: transparent;
+        box-shadow: none;
       }
     }
   }
 
-  &-sm {
-    .input-size(@input-font-size-sm; @input-padding-vertical-sm; @input-padding-horizontal-sm;);
+  &,
+  &-wrapper,
+  &-inner {
+    // border-width: 1px
+    padding: 0 7px 0 11px;
   }
 
-  &-md {
-    .input-size(@input-font-size-md; @input-padding-vertical-md; @input-padding-horizontal-md;);
+  &-addon {
+    padding: 0 11px;
+
+    .@{selector-prefix} {
+      margin: 0 -11px;
+    }
   }
 
-  &-lg {
-    .input-size(@input-font-size-lg; @input-padding-vertical-lg; @input-padding-horizontal-lg;);
+  &-clear {
+    right: 7px;
+  }
+
+  &-clearable:not(&-with-suffix) &-inner {
+    // icon-font-size + 4px
+    padding-right: 20px;
   }
 
   &-with-addon-after,
@@ -93,58 +105,8 @@
     border: none;
     box-shadow: none;
 
-    &.@{input-prefix}-sm {
-      .@{input-prefix}-addon,
-      .@{input-prefix}-wrapper,
-      .@{input-prefix}-inner {
-        padding: @input-padding-vertical-sm @input-padding-horizontal-sm;
-      }
-
-      .@{input-prefix}-addon {
-        .@{selector-prefix} {
-          margin: @input-addon-margin-with-selector-sm;
-        }
-      }
-
-      .@{input-prefix}-wrapper .@{input-prefix}-inner {
-        padding: 0;
-      }
-    }
-
-    &.@{input-prefix}-md {
-      .@{input-prefix}-addon,
-      .@{input-prefix}-wrapper,
-      .@{input-prefix}-inner {
-        padding: @input-padding-vertical-md @input-padding-horizontal-md;
-      }
-
-      .@{input-prefix}-addon {
-        .@{selector-prefix} {
-          margin: @input-addon-margin-with-selector-md;
-        }
-      }
-
-      .@{input-prefix}-wrapper .@{input-prefix}-inner {
-        padding: 0;
-      }
-    }
-
-    &.@{input-prefix}-lg {
-      .@{input-prefix}-addon,
-      .@{input-prefix}-wrapper,
-      .@{input-prefix}-inner {
-        padding: @input-padding-vertical-lg @input-padding-horizontal-lg;
-      }
-
-      .@{input-prefix}-addon {
-        .@{selector-prefix} {
-          margin: @input-addon-margin-with-selector-lg;
-        }
-      }
-
-      .@{input-prefix}-wrapper .@{input-prefix}-inner {
-        padding: 0;
-      }
+    .@{input-prefix}-wrapper .@{input-prefix}-inner {
+      padding: 0;
     }
   }
 
@@ -152,8 +114,7 @@
     display: inline-block;
     text-align: center;
     background-color: @input-addon-background-color;
-    border: @input-border-width @input-border-style @input-border-color;
-    border-radius: @input-border-radius;
+    border: 1px solid @input-border-color;
     white-space: nowrap;
 
     &:first-child {
@@ -185,7 +146,7 @@
     .@{selector-prefix} {
       &-content {
         background-color: inherit;
-        border: @input-border-width @input-border-style transparent;
+        border-color: transparent;
         box-shadow: none;
       }
 
@@ -216,44 +177,34 @@
     display: inline-flex;
     align-items: center;
     color: @input-icon-color;
-
-    .@{icon-prefix} {
-      font-size: @input-icon-font-size;
-    }
+    font-size: @input-icon-font-size;
   }
 
   &-prefix {
-    margin-right: @input-wrapper-inner-margin;
+    margin-right: 4px;
   }
 
   &-suffix {
-    margin-left: @input-wrapper-inner-margin;
+    margin-left: 4px;
     cursor: pointer;
   }
 
   &-clear {
     position: absolute;
     z-index: 1;
+    color: @input-icon-color;
     font-size: @input-icon-font-size;
-    line-height: @input-clear-icon-line-height;
     cursor: pointer;
     opacity: 0;
-    color: @input-icon-color;
     background: @input-background-color;
-    transition: @transition-all-base;
+    transition: all var(--ix-transition-duration-fast) var(--ix-ease-in-out);
 
     &:hover {
-      color: @input-icon-hover-color;
+      color: @input-icon-color-hover;
     }
-  }
 
-  &-clearable {
-    .@{input-prefix}-clear.visible {
+    &.visible {
       opacity: 1;
-    }
-
-    .@{input-prefix}-inner {
-      padding-right: @input-icon-font-size + 2;
     }
   }
 
@@ -262,7 +213,7 @@
     display: inline-flex;
     align-items: center;
     width: 100%;
-    border: @input-border-width @input-border-style @input-border-color;
+    border: 1px solid @input-border-color;
 
     .@{input-prefix}-inner {
       padding: 0;
@@ -273,44 +224,35 @@
 
   // form status
   &&-invalid {
-    border-color: @form-item-invalid-color;
+    border-color: @form-invalid-color;
 
     &:hover {
-      border-color: @form-item-invalid-color;
+      border-color: @form-invalid-color;
     }
 
-    .@{idux-prefix}-input-wrapper,
-    .@{idux-prefix}-input-inner {
-      border-color: @form-item-invalid-color;
+    .@{input-prefix}-wrapper,
+    .@{input-prefix}-inner {
+      border-color: @form-invalid-color;
 
       &:hover {
-        border-color: @form-item-invalid-color;
-      }
-    }
-
-    .@{idux-prefix}-input-suffix,
-    .@{idux-prefix}-input-prefix {
-      color: @form-item-invalid-color;
-
-      &:hover {
-        color: @form-item-invalid-color;
+        border-color: @form-invalid-color;
       }
     }
 
     &:focus,
-    &.@{idux-prefix}-input-focused {
-      border-color: @form-item-invalid-color;
-      box-shadow: @form-item-invalid-box-shadow;
+    &.@{input-prefix}-focused {
+      border-color: @form-invalid-color;
+      box-shadow: @form-invalid-box-shadow;
 
-      .@{idux-prefix}-input-wrapper,
-      .@{idux-prefix}-input-inner {
+      .@{input-prefix}-wrapper,
+      .@{input-prefix}-inner {
         box-shadow: none;
       }
     }
 
-    .@{idux-prefix}-input-addon {
-      color: @form-item-invalid-color;
-      border-color: @form-item-invalid-color;
+    .@{input-prefix}-addon {
+      color: @form-invalid-color;
+      border-color: @form-invalid-color;
 
       .@{selector-prefix} {
         &:hover &-content,

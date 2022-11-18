@@ -8,7 +8,9 @@
         <div class="home-banner-title-desc">{{ locale.bannerTitleDesc }}</div>
         <IxButtonGroup :gap="16" :size="buttonSize" shape="round">
           <IxButton mode="primary" @click="gotoPage('/docs/introduce')">{{ locale.start }}</IxButton>
-          <IxButton mode="link" :href="githubUrl" target="_blank">{{ locale.github }}</IxButton>
+          <IxButton>
+            <a :href="githubUrl" target="_blank">{{ locale.github }}</a>
+          </IxButton>
         </IxButtonGroup>
       </div>
     </div>
@@ -93,6 +95,10 @@ export default defineComponent({
         min-width: 120px;
         border: none;
         box-shadow: none;
+
+        a {
+          text-decoration: none;
+        }
       }
 
       .ix-button-link {

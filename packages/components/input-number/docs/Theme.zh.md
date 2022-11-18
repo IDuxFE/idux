@@ -1,10 +1,5 @@
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@input-number-width-sm` | `20px` | - | - |
-| `@input-number-width-md` | `24px` | - | - |
-| `@input-number-width-lg` | `24px` | - | - |
-| `@input-number-button-hover-color` | `@input-active-color` | - | - |
-| `@input-number-error` | `@color-error` | - | - |
-| `@input-number-disabled-color` | `@input-disabled-color` | - | - |
-| `@input-number-button-background-color` | `@color-white` | - | - |
-| `@input-number-disabled-background-color` | `@input-disabled-background-color` | - | - |
+| `@input-number-color-disabled` | `@input-color-disabled` | - | - |
+| `@input-number-icon-color-hover` | `@input-icon-color-hover` | - | - |
+| `@input-number-invalid-color` | `@form-invalid-color` | - | - |
