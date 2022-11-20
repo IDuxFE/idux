@@ -25,7 +25,7 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-with-gap`]: !!gap && gap !== '0',
+        [`${prefixCls}-compact`]: !gap || gap === '0',
       })
     })
 

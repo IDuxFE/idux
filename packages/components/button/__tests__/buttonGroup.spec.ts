@@ -28,19 +28,19 @@ describe('ButtonGroup', () => {
   test('gap work', async () => {
     const wrapper = ButtonGroupMount({ props: { gap: 12 } })
 
-    expect(wrapper.classes()).toContain('ix-button-group-with-gap')
+    expect(wrapper.classes()).not.toContain('ix-button-group-compact')
 
     await wrapper.setProps({ gap: 0 })
 
-    expect(wrapper.classes()).not.toContain('ix-button-group-with-gap')
+    expect(wrapper.classes()).toContain('ix-button-group-compact')
 
     await wrapper.setProps({ gap: '0' })
 
-    expect(wrapper.classes()).not.toContain('ix-button-group-with-gap')
+    expect(wrapper.classes()).toContain('ix-button-group-compact')
 
     await wrapper.setProps({ gap: '' })
 
-    expect(wrapper.classes()).not.toContain('ix-button-group-with-gap')
+    expect(wrapper.classes()).toContain('ix-button-group-compact')
   })
 
   test('mode work', async () => {
