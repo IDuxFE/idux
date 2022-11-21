@@ -44,7 +44,7 @@ export const buttonGroupProps = {
 } as const
 
 export type ButtonGroupProps = ExtractInnerPropTypes<typeof buttonGroupProps>
-export type ButtonGroupPublicProps = ExtractPublicPropTypes<typeof buttonGroupProps> & SpaceProps
+export type ButtonGroupPublicProps = ExtractPublicPropTypes<typeof buttonGroupProps> & Omit<SpaceProps, 'size'>
 export type ButtonGroupComponent = DefineComponent<
   Omit<HTMLAttributes, keyof ButtonGroupPublicProps> & ButtonGroupPublicProps
 >
