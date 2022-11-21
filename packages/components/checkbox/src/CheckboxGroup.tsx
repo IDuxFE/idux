@@ -7,10 +7,7 @@
 
 import { type VNodeChild, computed, defineComponent, normalizeClass, provide } from 'vue'
 
-import { isNil } from 'lodash-es'
-
 import { useAccessorAndControl } from '@idux/cdk/forms'
-import { convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister } from '@idux/components/form'
 import { IxSpace } from '@idux/components/space'
@@ -29,23 +26,23 @@ export default defineComponent({
     useFormItemRegister(control)
     provide(checkboxGroupToken, { props, accessor })
 
+    const mergedGap = computed(() => {
+      return props.gap ?? (props.buttoned ? 0 : 8)
+    })
+
     const classes = computed(() => {
-      const { gap } = props
+      const { buttoned } = props
+      const gap = mergedGap.value
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-with-gap`]: !isNil(gap),
+        [`${common.prefixCls}-button-group`]: buttoned,
+        [`${common.prefixCls}-button-group-compact`]: buttoned && (!gap || gap === '0'),
       })
     })
 
-    const style = computed(() => {
-      const { gap } = props
-      return gap != null ? `gap: ${convertCssPixel(gap)};` : undefined
-    })
-
     return () => {
-      const { dataSource, vertical } = props
-
+      const { dataSource } = props
       let children: VNodeChild[] | undefined
       if (dataSource) {
         children = dataSource.map(item => {
@@ -57,9 +54,9 @@ export default defineComponent({
         children = slots.default ? slots.default() : undefined
       }
       return (
-        <div class={classes.value} style={style.value}>
-          {vertical ? <IxSpace vertical={true}>{children}</IxSpace> : children}
-        </div>
+        <IxSpace class={classes.value} size={mergedGap.value}>
+          {children}
+        </IxSpace>
       )
     }
   },

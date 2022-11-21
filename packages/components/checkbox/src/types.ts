@@ -10,6 +10,7 @@
 import type { AbstractControl } from '@idux/cdk/forms'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
+import type { SpaceProps } from '@idux/components/space'
 import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes, PropType } from 'vue'
 
 export const checkboxProps = {
@@ -57,7 +58,6 @@ export const checkboxGroupProps = {
   gap: { type: [Number, String] as PropType<number | string>, default: undefined },
   name: { type: String, default: undefined },
   size: { type: String as PropType<FormSize>, default: undefined },
-  vertical: { type: Boolean, default: false },
 
   // events
   'onUpdate:value': { type: [Function, Array] as PropType<MaybeArray<(value: any) => void>> },
@@ -65,7 +65,7 @@ export const checkboxGroupProps = {
 } as const
 
 export type CheckboxGroupProps = ExtractInnerPropTypes<typeof checkboxGroupProps>
-export type CheckboxGroupPublicProps = ExtractPublicPropTypes<typeof checkboxGroupProps>
+export type CheckboxGroupPublicProps = ExtractPublicPropTypes<typeof checkboxGroupProps> & Omit<SpaceProps, 'size'>
 export type CheckboxGroupComponent = DefineComponent<
   Omit<HTMLAttributes, keyof CheckboxGroupPublicProps> & CheckboxGroupPublicProps
 >

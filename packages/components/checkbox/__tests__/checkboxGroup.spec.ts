@@ -108,7 +108,7 @@ describe('CheckboxGroup', () => {
       },
     })
 
-    expect(wrapper.findAll('.ix-checkbox-button').length).toBe(3)
+    expect(wrapper.findAll('.ix-button').length).toBe(3)
   })
 
   test('size work', async () => {
@@ -116,17 +116,6 @@ describe('CheckboxGroup', () => {
       props: { buttoned: true, size: 'sm' },
     })
 
-    expect(wrapper.findAll('.ix-checkbox-sm').length).toBe(3)
-  })
-
-  test('gap work', async () => {
-    const wrapper = CheckboxGroupMount()
-
-    expect(wrapper.classes()).not.toContain('ix-checkbox-group-with-gap')
-
-    await wrapper.setProps({ gap: 8 })
-
-    expect(wrapper.classes()).toContain('ix-checkbox-group-with-gap')
-    expect((wrapper.element as HTMLElement).style.gap).toEqual('8px')
+    expect(wrapper.findAll('.ix-button-sm').length).toBe(3)
   })
 })
