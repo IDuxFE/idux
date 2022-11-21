@@ -31,6 +31,8 @@
 
 #### CheckboxGroupProps
 
+> 除以下表格之外还支持 `Space` 组件的[所有属性](/components/space/zh?tab=api#SpaceProps)。
+
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
@@ -38,10 +40,9 @@
 | `buttoned` | 设置组内 `IxCheckbox` 的 `buttoned` 属性 | `boolean` | `false` | - | - |
 | `dataSource` | 勾选框组数据源 | `CheckboxData[]` | - | - | 优先级高于 `default` 插槽 |
 | `disabled` | 设置组内 `IxCheckbox` 的 `disabled` 属性 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
-| `gap` | 设置组内 `IxCheckbox` 的间隔 | `number \| string` | - | - | - |
+| `gap` | 设置勾选框组的 gap 配置 | `number \| string` | - | - | 也就是 `Space` 的 `size`, 默认为 `8`, 为按钮组时默认为 `0` |
 | `name` | 设置组内 `IxCheckbox` 的 `name` 属性 | `string` | - | - |- |
 | `size` | 设置组内 `IxCheckbox` 的 `size` 属性 | `'sm' \| 'md' \| 'lg'`| - | - | - |
-| `vertical` | 设置组内排列方向 | `boolean` | - | - | 默认为水平排列方向，可设`true`为垂直排列 |
 | `onChange` | 选中值发生变化后的回调 | `(newValue: any[], oldValue: any[]) => void`| - | - | - |
 
 ```ts

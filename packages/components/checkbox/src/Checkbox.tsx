@@ -20,6 +20,12 @@ import { convertStringVNode, useKey } from '@idux/components/utils'
 import { type CheckboxGroupContext, checkboxGroupToken } from './token'
 import { type CheckValue, type CheckboxProps, checkboxProps } from './types'
 
+const buttonSizeMap = {
+  sm: 'xs',
+  md: 'sm',
+  lg: 'md',
+}
+
 export default defineComponent({
   name: 'IxCheckbox',
   inheritAttrs: false,
@@ -45,7 +51,10 @@ export default defineComponent({
       return checkboxGroup ? key : undefined
     })
     const isButtoned = computed(() => props.buttoned ?? checkboxGroup?.props.buttoned ?? false)
-    const size = computed(() => props.size ?? checkboxGroup?.props.size ?? formContext?.size.value ?? config.size)
+    const mergedSize = computed(() => {
+      const size = props.size ?? checkboxGroup?.props.size ?? formContext?.size.value ?? config.size
+      return buttonSizeMap[size]
+    })
     const { isChecked, isDisabled, isFocused, handleChange, handleBlur, handleFocus } = useCheckbox(
       props,
       checkboxGroup,
@@ -57,12 +66,14 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const classes = {
         [prefixCls]: true,
-        [`${prefixCls}-button`]: buttoned,
         [`${prefixCls}-checked`]: !indeterminate && isChecked.value,
         [`${prefixCls}-disabled`]: isDisabled.value,
         [`${prefixCls}-focused`]: isFocused.value,
         [`${prefixCls}-indeterminate`]: indeterminate,
-        [`${prefixCls}-${size.value}`]: buttoned,
+        [`${common.prefixCls}-button`]: buttoned,
+        [`${common.prefixCls}-button-default`]: buttoned,
+        [`${common.prefixCls}-button-disabled`]: buttoned && isDisabled.value,
+        [`${common.prefixCls}-button-${mergedSize.value}`]: buttoned,
       }
       return normalizeClass([classes, attrs.class])
     })
@@ -98,8 +109,8 @@ export default defineComponent({
             />
             {!isButtoned.value && <span class={`${prefixCls}-input-box`} tabindex={tabindex as number} />}
           </span>
+          {isButtoned.value && <span class={`${prefixCls}-input-tick`} tabindex={tabindex as number} />}
           {labelNode && <span class={`${prefixCls}-label`}>{labelNode}</span>}
-          {isButtoned.value && <span class={`${prefixCls}-button-tick`} tabindex={tabindex as number} />}
         </label>
       )
     }

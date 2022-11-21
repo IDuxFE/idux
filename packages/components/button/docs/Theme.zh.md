@@ -1,7 +1,7 @@
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@button-font-size-xs` | `var(--ix-font-size-sm)` | - | - |
-| `@button-font-size-sm` | `var(--ix-font-size-sm)` | - | - |
+| `@button-font-size-sm` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
 | `@button-font-size-md` | `var(--ix-font-size-md)` | - | - |
 | `@button-font-size-lg` | `var(--ix-font-size-lg)` | `var(--ix-font-size-md)` | - |
 | `@button-font-size-xl` | `var(--ix-font-size-xl)` | `var(--ix-font-size-lg)` | - |

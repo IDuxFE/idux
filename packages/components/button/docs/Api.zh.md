@@ -28,7 +28,7 @@
 
 #### ButtonGroupProps
 
-> 除以下表格之外还支持原生 `Space` 组件的[所有属性](/components/space/zh?tab=api#SpaceProps)。
+> 除以下表格之外还支持 `Space` 组件的[所有属性](/components/space/zh?tab=api#SpaceProps)。
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
