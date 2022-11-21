@@ -29,6 +29,8 @@
 
 #### RadioGroupProps
 
+ 除以下表格之外还支持 `Space` 组件的[所有属性](/components/space/zh?tab=api#SpaceProps)。
+
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
@@ -36,11 +38,10 @@
 | `buttoned` | 设置单选框组内 `IxRadio` 的 `buttoned` | `boolean` | - | - | - |
 | `dataSource` | 以配置形式设置子元素 | `RadioData[]`| - | 优先级高于 `default` 插槽 |  |
 | `disabled` | 设置单选框组内 `IxRadio` 的 `disabled` | `boolean` | - | - | 使用 `control` 时，此配置无效 |
-| `gap` | 设置单选框组内的 `IxRadio` 的间隔 | `number \| string` | - | - | - |
+| `gap` | 设置单选框组内的 `IxRadio` 的间隔 | `number \| string` | - | - | 也就是 `Space` 的 `size`, 默认为 `8`, 为按钮组时默认为 `0` |
 | `name` | 设置单选框组内的 `IxRadio` 的原生 `name` 属性 | `string` | - | - | - |
 | `mode` | 设置单选框组内 `IxRadio` 的 `mode` | `'default' \| 'primary'`| - | - | - |
 | `size` | 设置单选框组内 `IxRadio` 的 `size` | `'sm' \| 'md' \| 'lg'`| `'md'` | - | - |
-| `vertical` | 设置组内排列方向 | `boolean` | - | - | 默认为水平排列方向，可设`true`为垂直排列 |
 | `onChange` | 选中值发生变化后的回调 | `(value: any, oldValue: any) => void`| - | - | - |
 
 ```ts

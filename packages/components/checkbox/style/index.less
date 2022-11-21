@@ -1,5 +1,4 @@
 @import '../../style/mixins/reset.less';
-@import './mixin.less';
 
 .@{checkbox-prefix} {
   &:not(.@{button-prefix}) {
@@ -27,7 +26,6 @@
   &-input {
     position: relative;
     line-height: 1;
-    outline: none;
     cursor: pointer;
 
     &-inner {
@@ -46,6 +44,7 @@
       display: block;
       width: 16px;
       height: 16px;
+      background-color: @checkbox-background-color;
       border: 1px solid @checkbox-border-color;
       border-radius: @checkbox-border-radius;
       transition: all var(--ix-transition-duration-fast) var(--ix-ease-in-out);
@@ -76,6 +75,14 @@
     }
   }
 
+  &:hover &-input-box {
+    border-color: @checkbox-border-color-hover;
+  }
+
+  &-focused &-input-box {
+    border-color: @checkbox-border-color-focus;
+  }
+
   &-checked {
     .@{checkbox-prefix}-input {
       &-box {
@@ -95,6 +102,7 @@
 
     &.@{button-prefix} {
       z-index: 2;
+      color: @checkbox-color-active;
       border-color: @checkbox-color-active;
     }
   }
@@ -115,14 +123,6 @@
     }
   }
 
-  &:hover &-input-box {
-    border-color: @checkbox-border-color-hover;
-  }
-
-  &-focused &-input-box {
-    border-color: @checkbox-border-color-focus;
-  }
-
   &&-disabled {
     cursor: not-allowed;
     color: @checkbox-color-disabled;
@@ -136,10 +136,10 @@
           border-color: @checkbox-color-disabled;
         }
       }
+    }
 
-      &-tick {
-        border-top-color: @checkbox-color-disabled;
-      }
+    &.@{checkbox-prefix}-checked .@{checkbox-prefix}-input-tick {
+      border-top-color: @checkbox-color-disabled;
     }
 
     &.@{checkbox-prefix}-indeterminate .@{checkbox-prefix}-input-box {
@@ -150,7 +150,7 @@
 
     &.@{button-prefix} {
       z-index: 0;
-      border-color: @button-border-color;
+      border-color: @checkbox-border-color;
     }
   }
 

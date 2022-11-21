@@ -93,11 +93,13 @@ describe('Checkbox', () => {
       props: { size: 'sm' },
     })
 
-    expect(wrapper.classes()).not.toContain('ix-button-sm')
+    expect(wrapper.classes()).not.toContain('ix-checkbox-sm')
+    expect(wrapper.classes()).not.toContain('ix-button-xs')
 
     await wrapper.setProps({ buttoned: true })
 
-    expect(wrapper.classes()).toContain('ix-button-sm')
+    expect(wrapper.classes()).toContain('ix-checkbox-sm')
+    expect(wrapper.classes()).toContain('ix-button-xs')
   })
 
   test('disabled work', async () => {

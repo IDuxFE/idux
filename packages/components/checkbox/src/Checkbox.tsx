@@ -51,10 +51,7 @@ export default defineComponent({
       return checkboxGroup ? key : undefined
     })
     const isButtoned = computed(() => props.buttoned ?? checkboxGroup?.props.buttoned ?? false)
-    const mergedSize = computed(() => {
-      const size = props.size ?? checkboxGroup?.props.size ?? formContext?.size.value ?? config.size
-      return buttonSizeMap[size]
-    })
+    const size = computed(() => props.size ?? checkboxGroup?.props.size ?? formContext?.size.value ?? config.size)
     const { isChecked, isDisabled, isFocused, handleChange, handleBlur, handleFocus } = useCheckbox(
       props,
       checkboxGroup,
@@ -64,16 +61,18 @@ export default defineComponent({
       const { indeterminate } = props
       const buttoned = isButtoned.value
       const prefixCls = mergedPrefixCls.value
+      const commonPrefixCls = common.prefixCls
       const classes = {
         [prefixCls]: true,
         [`${prefixCls}-checked`]: !indeterminate && isChecked.value,
         [`${prefixCls}-disabled`]: isDisabled.value,
         [`${prefixCls}-focused`]: isFocused.value,
         [`${prefixCls}-indeterminate`]: indeterminate,
-        [`${common.prefixCls}-button`]: buttoned,
-        [`${common.prefixCls}-button-default`]: buttoned,
-        [`${common.prefixCls}-button-disabled`]: buttoned && isDisabled.value,
-        [`${common.prefixCls}-button-${mergedSize.value}`]: buttoned,
+        [`${prefixCls}-${size.value}`]: buttoned,
+        [`${commonPrefixCls}-button`]: buttoned,
+        [`${commonPrefixCls}-button-default`]: buttoned,
+        [`${commonPrefixCls}-button-disabled`]: buttoned && isDisabled.value,
+        [`${commonPrefixCls}-button-${buttonSizeMap[size.value]}`]: buttoned,
       }
       return normalizeClass([classes, attrs.class])
     })

@@ -116,6 +116,6 @@ describe('CheckboxGroup', () => {
       props: { buttoned: true, size: 'sm' },
     })
 
-    expect(wrapper.findAll('.ix-button-sm').length).toBe(3)
+    expect(wrapper.findAll('.ix-checkbox-sm').length).toBe(3)
   })
 })

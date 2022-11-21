@@ -43,11 +43,11 @@ describe('Radio', () => {
   test('buttoned work', async () => {
     const wrapper = RadioMount({ props: { buttoned: true } })
 
-    expect(wrapper.classes()).toContain('ix-radio-button')
+    expect(wrapper.classes()).toContain('ix-button')
 
     await wrapper.setProps({ buttoned: false })
 
-    expect(wrapper.classes()).not.toContain('ix-radio-button')
+    expect(wrapper.classes()).not.toContain('ix-button')
   })
 
   test('disabled work', async () => {
@@ -81,17 +81,21 @@ describe('Radio', () => {
   })
 
   test('mode work', async () => {
-    const wrapper = RadioMount({ props: { buttoned: true, mode: 'primary' } })
+    const wrapper = RadioMount({ props: { checked: true, buttoned: true, mode: 'primary' } })
 
-    expect(wrapper.classes()).toContain('ix-radio-primary')
+    expect(wrapper.classes()).toContain('ix-button-primary')
 
     await wrapper.setProps({ mode: 'default' })
 
-    expect(wrapper.classes()).toContain('ix-radio-default')
+    expect(wrapper.classes()).toContain('ix-button-default')
 
-    await wrapper.setProps({ buttoned: false, mode: 'primary' })
+    await wrapper.setProps({ checked: false, mode: 'primary' })
 
-    expect(wrapper.classes()).not.toContain('ix-radio-primary')
+    expect(wrapper.classes()).not.toContain('ix-button-primary')
+
+    await wrapper.setProps({ buttoned: false })
+
+    expect(wrapper.classes()).not.toContain('ix-button-default')
   })
 
   test('size work', async () => {
