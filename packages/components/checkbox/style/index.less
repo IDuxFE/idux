@@ -133,18 +133,18 @@
         border-color: @checkbox-border-color;
 
         &::after {
-          border-color: @checkbox-color-disabled;
+          border-color: var(--ix-text-color-info);
         }
       }
     }
 
     &.@{checkbox-prefix}-checked .@{checkbox-prefix}-input-tick {
-      border-top-color: @checkbox-color-disabled;
+      border-top-color: var(--ix-text-color-info);
     }
 
     &.@{checkbox-prefix}-indeterminate .@{checkbox-prefix}-input-box {
       &::after {
-        background-color: @checkbox-color-disabled;
+        background-color: var(--ix-text-color-info);
       }
     }
 

@@ -105,7 +105,7 @@
         border-color: @radio-border-color;
 
         &::after {
-          background-color: @radio-color-disabled;
+          background-color: var(--ix-text-color-info);
         }
       }
     }
@@ -116,7 +116,8 @@
     }
 
     &.@{button-prefix}.@{radio-prefix}-checked {
-      background-color: @radio-background-color-disabled;
+      color: var(--ix-text-color-inverse);
+      background-color: var(--ix-text-color-info);
     }
   }
 
