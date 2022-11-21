@@ -8,10 +8,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { AbstractControl } from '@idux/cdk/forms'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
+import type { FormSize } from '@idux/components/form'
+import type { SpaceProps } from '@idux/components/space'
 import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes, PropType } from 'vue'
-
-import { type ExtractInnerPropTypes, type ExtractPublicPropTypes, MaybeArray, type VKey } from '@idux/cdk/utils'
-import { type FormSize } from '@idux/components/form'
 
 export const radioProps = {
   control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
@@ -55,7 +55,6 @@ export const radioGroupProps = {
   name: { type: String, default: undefined },
   mode: { type: String as PropType<RadioMode>, default: undefined },
   size: { type: String as PropType<FormSize>, default: 'md' },
-  vertical: { type: Boolean, default: false },
 
   // events
   'onUpdate:value': { type: [Function, Array] as PropType<MaybeArray<(value: any) => void>> },
@@ -63,7 +62,7 @@ export const radioGroupProps = {
 } as const
 
 export type RadioGroupProps = ExtractInnerPropTypes<typeof radioGroupProps>
-export type RadioGroupPublicProps = ExtractPublicPropTypes<typeof radioGroupProps>
+export type RadioGroupPublicProps = ExtractPublicPropTypes<typeof radioGroupProps> & Omit<SpaceProps, 'size'>
 export type RadioGroupComponent = DefineComponent<
   Omit<HTMLAttributes, keyof RadioGroupPublicProps> & RadioGroupPublicProps
 >

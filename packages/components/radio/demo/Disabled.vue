@@ -1,12 +1,8 @@
 <template>
-  <IxRadio :disabled="disabled">A</IxRadio>
-  <IxRadio checked :disabled="disabled">B</IxRadio>
-  <IxButton @click="toggle">Toggle</IxButton>
+  <IxSpace align="center">
+    <IxRadio disabled>A</IxRadio>
+    <IxRadio :checked="true" disabled>B</IxRadio>
+    <IxRadio buttoned disabled>C</IxRadio>
+    <IxRadio :checked="true" buttoned disabled>D</IxRadio>
+  </IxSpace>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-
-const disabled = ref(true)
-const toggle = () => (disabled.value = !disabled.value)
-</script>

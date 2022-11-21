@@ -1,22 +1,26 @@
 @import '../../style/mixins/reset.less';
-@import './mixin.less';
 
 .@{radio-prefix} {
-  .reset-component();
+  &:not(.@{button-prefix}) {
+    .reset-component-new();
 
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  font-size: @radio-font-size-md;
-  line-height: @radio-line-height;
-  color: @radio-color;
-  cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    line-height: unset;
+    cursor: pointer;
 
-  &:not(&-button)::after {
-    display: inline-block;
-    width: 0;
-    overflow: hidden;
-    content: '\a0';
+    &::after {
+      display: inline-block;
+      width: 0;
+      overflow: hidden;
+      content: '\a0';
+    }
+
+    .@{radio-prefix}-label {
+      font-size: @radio-font-size;
+      line-height: calc(@radio-font-size + var(--ix-line-height-gutter));
+      padding: @radio-label-padding;
+    }
   }
 
   &-input {
@@ -38,233 +42,85 @@
     &-box {
       position: relative;
       display: block;
-      width: @radio-box-size;
-      height: @radio-box-size;
+      width: 16px;
+      height: 16px;
       background-color: @radio-background-color;
-      border: @radio-border-width @radio-border-style @radio-border-color;
-      border-radius: @radio-box-border-radius;
-      transition: all @transition-duration-base @ease-in-out;
+      border: 1px solid @radio-border-color;
+      border-radius: 50%;
+      transition: all var(--ix-transition-duration-fast) var(--ix-ease-in-out);
 
       &::after {
         position: absolute;
-        top: ((@radio-box-size - @radio-dot-size) / 2) - @radio-border-width;
-        left: ((@radio-box-size - @radio-dot-size) / 2) - @radio-border-width;
-        width: @radio-dot-size;
-        height: @radio-dot-size;
-        background-color: @radio-active-color;
-        border-radius: @radio-dot-size;
+        top: 3px;
+        left: 3px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
         transform: scale(0);
         opacity: 0;
-        transition: all @transition-duration-base @ease-in-out;
+        transition: all var(--ix-transition-duration-fast) var(--ix-ease-in-out);
         content: '';
       }
     }
   }
 
-  &-label {
-    padding: @radio-label-padding;
+  &:hover &-input-box {
+    border-color: @radio-border-color-hover;
   }
 
-  &:hover:not(&-disabled) &-input-box {
-    border-color: @radio-hover-color;
-  }
-
-  &&-focused:not(&-disabled) &-input-box {
-    border-color: @radio-focus-color;
+  &-focused &-input-box {
+    border-color: @radio-border-color-focus;
   }
 
   &-checked {
-    .@{radio-prefix} {
-      &-input {
-        &-box {
-          border-color: @radio-active-color;
-
-          &::after {
-            transform: scale(1);
-            opacity: 1;
-            transition: all @transition-duration-base @ease-in-out;
-          }
-        }
-      }
-    }
-  }
-
-  &-disabled {
-    cursor: not-allowed;
-    color: @radio-disabled-color;
-
     .@{radio-prefix}-input {
-      &-inner {
-        cursor: not-allowed;
-      }
-
       &-box {
-        background-color: @radio-disabled-background-color;
-        border-color: @radio-disabled-border-color;
+        border-color: @radio-color-active;
 
         &::after {
-          background-color: if((@theme = seer), @color-graphite-l10, @radio-disabled-border-color);
+          opacity: 1;
+          transform: scale(1);
+          background-color: @radio-color-active;
         }
       }
     }
-  }
-}
 
-.@{radio-prefix}-button {
-  display: inline-block;
-  text-align: center;
-  background-color: @radio-background-color;
-  border: @radio-border-width @radio-border-style @radio-border-color;
-  border-radius: @radio-border-radius;
-  transition: all @transition-duration-base @ease-in-out;
-
-  .@{radio-prefix} {
-    &-input {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      width: 100%;
-      height: 100%;
-
-      &-inner {
-        width: 0;
-        height: 0;
-        pointer-events: none;
-      }
+    &.@{button-prefix} {
+      z-index: 2;
     }
 
-    &-label {
-      padding: 0;
+    &.@{button-prefix}-default {
+      color: @radio-color-active;
+      border-color: @radio-color-active;
     }
   }
 
-  &:not(.@{radio-prefix}-disabled):hover {
-    color: @radio-hover-color;
-  }
+  &&-disabled {
+    cursor: not-allowed;
+    color: @radio-color-disabled;
 
-  &:not(.@{radio-prefix}-disabled).@{radio-prefix}-focused {
-    color: @radio-focus-color;
-  }
+    .@{radio-prefix}-input {
+      &-box {
+        background-color: @radio-background-color-disabled;
+        border-color: @radio-border-color;
 
-  &.@{radio-prefix}-checked {
-    z-index: 1;
-    color: @radio-active-color;
-    border-color: @radio-active-color;
-
-    &:not(.@{radio-prefix}-disabled):hover {
-      border-color: @radio-hover-color;
-    }
-  }
-
-  &.@{radio-prefix}-primary.@{radio-prefix}-checked {
-    color: @radio-background-color;
-    background: @radio-active-color;
-    border-color: @radio-active-color;
-
-    &:not(.@{radio-prefix}-disabled):hover {
-      background: @radio-hover-color;
-      border-color: @radio-hover-color;
-    }
-  }
-
-  &.@{radio-prefix}-disabled.@{radio-prefix}-checked {
-    color: @radio-disabled-color;
-    background-color: @radio-disabled-background-color;
-    border-color: @radio-border-color;
-  }
-
-  &.@{radio-prefix}-sm {
-    .radio-size(@radio-height-sm, @radio-min-width-sm, @radio-font-size-sm, @radio-padding-horizontal-sm);
-  }
-
-  &.@{radio-prefix}-md {
-    .radio-size(@radio-height-md, @radio-min-width-md, @radio-font-size-md, @radio-padding-horizontal-md);
-  }
-
-  &.@{radio-prefix}-lg {
-    .radio-size(@radio-height-lg, @radio-min-width-lg, @radio-font-size-lg, @radio-padding-horizontal-lg);
-  }
-}
-
-.@{radio-group-prefix} {
-  display: inline-flex;
-  align-items: center;
-  flex-wrap: wrap;
-
-  .@{radio-prefix} {
-    &:not(&-button):not(:last-child) {
-      margin-right: @radio-group-item-margin-right;
-    }
-
-    &-button {
-      border-right-width: 0;
-      border-radius: 0;
-
-      &:first-child {
-        border-radius: @radio-border-radius 0 0 @radio-border-radius;
-      }
-
-      &:last-child {
-        border-radius: 0 @radio-border-radius @radio-border-radius 0;
-        border-right-width: @radio-border-width;
-      }
-
-      &:not(:last-child)::before {
-        position: absolute;
-        top: -@radio-border-width;
-        right: -@radio-border-width;
-        display: block;
-        box-sizing: content-box;
-        width: @radio-border-width;
-        height: 100%;
-        padding: @radio-border-width 0;
-        background-color: @radio-border-color;
-        transition: all @transition-duration-base @ease-in-out;
-        content: '';
-      }
-
-      &.@{radio-prefix}-checked:not(.@{radio-prefix}-disabled) {
-        &::before {
-          background-color: @radio-active-color;
+        &::after {
+          background-color: @radio-color-disabled;
         }
       }
     }
+
+    &.@{button-prefix} {
+      z-index: 0;
+      border-color: @radio-border-color;
+    }
+
+    &.@{button-prefix}.@{radio-prefix}-checked {
+      background-color: @radio-background-color-disabled;
+    }
   }
 
-  &-no-gap {
-    .@{radio-prefix} {
-      &:not(&-button):not(:last-child) {
-        margin-right: @radio-group-item-margin-right;
-      }
-
-      &-button {
-        border-right-width: 0;
-        border-radius: 0;
-
-        &:first-child {
-          border-radius: @radio-border-radius 0 0 @radio-border-radius;
-        }
-
-        &:last-child {
-          border-radius: 0 @radio-border-radius @radio-border-radius 0;
-          border-right-width: @radio-border-width;
-        }
-
-        &:first-child:last-child {
-          border-radius: @radio-border-radius;
-        }
-
-        &.@{radio-prefix}-checked:not(.@{radio-prefix}-disabled) {
-          & + .@{radio-prefix}-button {
-            border-left-color: @radio-active-color;
-          }
-
-          &:hover + .@{radio-prefix}-button {
-            border-left-color: @radio-hover-color;
-          }
-        }
-      }
-    }
+  &-group {
+    line-height: 0;
   }
 }

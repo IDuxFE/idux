@@ -15,10 +15,16 @@ import { useAccessorAndControl } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN, useFormElement, useFormItemRegister } from '@idux/components/form'
-import { useKey } from '@idux/components/utils'
+import { convertStringVNode, useKey } from '@idux/components/utils'
 
 import { type RadioGroupContext, radioGroupToken } from './token'
 import { type RadioProps, radioProps } from './types'
+
+const buttonSizeMap = {
+  sm: 'xs',
+  md: 'sm',
+  lg: 'md',
+}
 
 export default defineComponent({
   name: 'IxRadio',
@@ -55,25 +61,30 @@ export default defineComponent({
     )
     const classes = computed(() => {
       const buttoned = isButtoned.value
+      const checked = isChecked.value
+      const isPrimary = buttoned && checked && mode.value === 'primary'
       const prefixCls = mergedPrefixCls.value
+      const commonPrefixCls = common.prefixCls
       const classes = {
         [prefixCls]: true,
-        [`${prefixCls}-button`]: buttoned,
         [`${prefixCls}-checked`]: isChecked.value,
         [`${prefixCls}-disabled`]: isDisabled.value,
         [`${prefixCls}-focused`]: isFocused.value,
-        [`${prefixCls}-${mode.value}`]: buttoned,
         [`${prefixCls}-${size.value}`]: buttoned,
+        [`${commonPrefixCls}-button`]: buttoned,
+        [`${commonPrefixCls}-button-default`]: buttoned && !isPrimary,
+        [`${commonPrefixCls}-button-primary`]: isPrimary,
+        [`${commonPrefixCls}-button-disabled`]: buttoned && isDisabled.value,
+        [`${commonPrefixCls}-button-${buttonSizeMap[size.value]}`]: buttoned,
       }
       return normalizeClass([classes, attrs.class])
     })
 
     return () => {
-      const prefixCls = mergedPrefixCls.value
       const { autofocus, label } = props
-      const labelNode = slots.default?.() ?? label
-      const labelWrapper = labelNode && <span class={`${prefixCls}-label`}>{labelNode}</span>
       const { class: className, style, type, tabindex, ...restAttrs } = attrs
+      const prefixCls = mergedPrefixCls.value
+      const labelNode = convertStringVNode(slots.default, label)
       return (
         <label
           class={classes.value}
@@ -98,9 +109,9 @@ export default defineComponent({
               onFocus={handleFocus}
               {...restAttrs}
             />
-            {isButtoned.value ? null : <span class={`${prefixCls}-input-box`} tabindex={tabindex as number}></span>}
+            {!isButtoned.value && <span class={`${prefixCls}-input-box`} tabindex={tabindex as number} />}
           </span>
-          {labelWrapper}
+          {labelNode && <span class={`${prefixCls}-label`}>{labelNode}</span>}
         </label>
       )
     }

@@ -48,11 +48,11 @@ describe('RadioGroup', () => {
   test('buttoned work', async () => {
     const wrapper = RadioGroupMount({ props: { buttoned: true } })
 
-    expect(wrapper.findAll('.ix-radio-button').length).toBe(4)
+    expect(wrapper.findAll('.ix-button').length).toBe(4)
 
     await wrapper.setProps({ buttoned: false })
 
-    expect(wrapper.findAll('.ix-radio-button').length).toBe(0)
+    expect(wrapper.findAll('.ix-button').length).toBe(0)
   })
 
   test('disabled work', async () => {
@@ -63,17 +63,6 @@ describe('RadioGroup', () => {
     await wrapper.setProps({ disabled: false })
 
     expect(wrapper.findAll('.ix-radio-disabled').length).toBe(0)
-  })
-
-  test('gap work', async () => {
-    const wrapper = RadioGroupMount()
-
-    expect(wrapper.classes()).not.toContain('ix-radio-group-with-gap')
-
-    await wrapper.setProps({ gap: 8 })
-
-    expect(wrapper.classes()).toContain('ix-radio-group-with-gap')
-    expect((wrapper.element as HTMLElement).style.gap).toEqual('8px')
   })
 
   test('name work', async () => {
@@ -87,13 +76,14 @@ describe('RadioGroup', () => {
   })
 
   test('mode work', async () => {
-    const wrapper = RadioGroupMount({ props: { mode: 'primary', buttoned: true } })
+    const wrapper = RadioGroupMount({ props: { value: 'a', mode: 'primary', buttoned: true } })
 
-    expect(wrapper.findAll('.ix-radio-primary').length).toBe(4)
+    expect(wrapper.findAll('.ix-button-primary').length).toBe(1)
+    expect(wrapper.findAll('.ix-button-default').length).toBe(3)
 
     await wrapper.setProps({ mode: 'default' })
 
-    expect(wrapper.findAll('.ix-radio-default').length).toBe(4)
+    expect(wrapper.findAll('.ix-button-default').length).toBe(4)
   })
 
   test('dataSource work', async () => {
