@@ -6,10 +6,10 @@
 | `@alert-icon-font-size` | `inherit` | `var(--ix-font-size-lg)` | - |
 | `@alert-color` | `@text-color` | - | - |
 | `@alert-color-secondary` | `@text-color-secondary` | - | - |
-| `@alert-success-color` | `var(--ix-turquoise-d10)` | - | - |
+| `@alert-success-color` | `var(--ix-color-turquoise)` | `var(--ix-color-turquoise-d10)` | - |
 | `@alert-info-color` | `var(--ix-color-primary)` | - | - |
 | `@alert-warning-color` | `var(--ix-color-brown)` | - | - |
-| `@alert-error-color` | `var(--ix-color-red-d10)` | - | - |
+| `@alert-error-color` | `var(--ix-color-red)` | `var(--ix-color-red-d10)` | - |
 | `@alert-success-background-color` | `#f1faf7` | - | - |
 | `@alert-info-background-color` | `#f2f7ff` | - | - |
 | `@alert-warning-background-color` | `#fffaf2` | - | - |

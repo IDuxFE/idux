@@ -4,33 +4,18 @@
     margin-bottom: 8px;
 
     > .ix-radio-group {
-      padding: 4px;
       background-color: #eceff3;
+      border-radius: 20px;
+      padding: 4px;
 
-      border-radius: 22px;
-
-      .ix-radio-button {
-        text-align: center;
-        font-size: 16px;
-        height: 36px;
-        line-height: 36px;
-        min-width: 96px;
-        background-color: #eceff3;
-        color: #333333;
+      .ix-button {
+        background-color: transparent;
+        min-width: 64px;
         border: none;
-        border-radius: 18px;
-
-        &::before {
-          content: unset;
-        }
-
-        &:not(:first-child) {
-          margin-left: 4px;
-        }
+        border-radius: 16px;
 
         &.ix-radio-checked {
           background: @color-primary;
-          color: @color-white;
           box-shadow: @shadow-bottom-sm;
         }
       }

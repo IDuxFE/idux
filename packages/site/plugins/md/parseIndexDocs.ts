@@ -183,7 +183,7 @@ function generateHeader(title: string, description: string) {
 	<div class="markdown site-doc-description">
 		${description}
 	</div>
-  <IxRadioGroup v-model:value="checkedDoc" :dataSource="docRadioData" size="lg" buttoned />
+  <IxRadioGroup v-model:value="checkedDoc" :dataSource="docRadioData" size="lg" gap="16px" mode="primary" buttoned />
 </section>
 `
 }
