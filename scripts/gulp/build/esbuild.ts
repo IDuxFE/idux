@@ -15,7 +15,7 @@ interface Options extends TransformOptions {
 const defaultOptions: Options = {
   include: /\.(tsx?|jsx)$/,
   exclude: /\.(mjs?|js)$/,
-  target: 'ESNext',
+  target: ['ESNext', 'node16', 'chrome79', 'edge79', 'firefox72', 'safari13'],
   minify: false,
   sourcemap: false,
   jsxFactory: 'h',

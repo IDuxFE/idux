@@ -30,7 +30,6 @@ import type { PaginationSize } from '@idux/components/pagination'
 import type { ProgressFormat, ProgressIcons, ProgressSize } from '@idux/components/progress'
 import type { ResultStatus } from '@idux/components/result'
 import type { SelectData } from '@idux/components/select'
-import type { SpaceSize } from '@idux/components/space'
 import type { SpinSize, SpinTipAlignType } from '@idux/components/spin'
 import type { StepperLabelPlacement, StepperSize } from '@idux/components/stepper'
 import type {
@@ -111,6 +110,7 @@ export interface CommonConfig {
   prefixCls: string
   overlayContainer?: PortalTargetType
   overlayZIndex: number
+  theme: 'default' | 'seer'
 }
 
 export interface AlertConfig {
@@ -306,7 +306,10 @@ export interface ModalConfig {
   icon?: Partial<Record<ModalType, string | VNode>>
   mask: boolean
   maskClosable: boolean
-  width: string | number
+  /**
+   * @deprecated
+   */
+  width?: string | number
 }
 
 export interface NotificationConfig {
@@ -401,7 +404,7 @@ export interface SkeletonConfig {
 }
 
 export interface SpaceConfig {
-  size: number | string | [number | string, number | string] | SpaceSize
+  size: number | string | [number | string, number | string]
   wrap: boolean
 }
 

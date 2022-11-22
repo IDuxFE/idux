@@ -8,7 +8,7 @@
 | `v-model:visible` | 是否可见 | `boolean` | - | - | - |
 | `cancelButton` | 取消按钮的属性 | `ButtonProps` | - | - | - |
 | `cancelText` | 取消按钮的文本 | `string` | `取消` | - | - |
-| `centered` | 垂直居中展示 | `boolean` | `false` | ✅ | - |
+| `centered` | 垂直居中展示 | `boolean` | `false` | ✅ | `seer` 主题默认为 `true` |
 | `closable` | 是否显示右上角的关闭按钮 | `boolean` | `true` | ✅ | - |
 | `closeIcon` | 自定义关闭图标 | `string \| VNode \| #closeIcon` | `close` | ✅ | - |
 | `closeOnDeactivated` | 是否在 [onDeactivated](https://cn.vuejs.org/api/composition-api-lifecycle.html#ondeactivated) 时关闭 | `boolean` | `true` | - | - |
@@ -20,14 +20,14 @@
 | `header` | 对话框标题 | `string \| HeaderProps \| #header={closable, closeIcon, onClose}` | - | - | - |
 | `icon` | 自定义图标 | `string \| VNode \| #icon` | - | ✅ | 当 `type` 不为 `default` 时有效 |
 | `mask` | 是否展示蒙层 | `boolean` | `true` | ✅ | - |
-| `maskClosable` | 点击蒙层是否允许关闭 | `boolean` | `true` | ✅ | - |
+| `maskClosable` | 点击蒙层是否允许关闭 | `boolean` | `true` | ✅ |  `seer` 主题默认为 `false` |
 | `animatable` | 是否开启弹窗动画效果 | `boolean` | `true` | - | - |
 | `offset` | 对话框偏移量 | `number \| string` | `128` | - |  为顶部偏移量，仅在`centered=false` 时生效 |
 | `okButton` | 确认按钮的属性 | `ButtonProps` | - | - | - |
 | `okText` | 确认按钮的文本 | `string` | `确定` | - | - |
 | `title` | 对话框次标题 | `string  \| VNode \| #title` | - | - | 当 `type` 不为 `default` 时有效 |
 | `type` | 对话框类型 | `'default' \| 'confirm' \| 'info' \| 'success' \| 'warning' \| 'error'` | `default` | - | - |
-| `width` | 对话框宽度 | `string \| number` | `520` | ✅ | - |
+| `width` | 对话框宽度 | `string \| number` | - | - | `default` 类型默认宽度 `480px`, 其他类型默认宽度 `400` |
 | `zIndex` | 设置对话框的 `z-index` | `number` | - | - | - |
 | `onAfterOpen` | 打开后的回调 | `() => void` | - | - | - |
 | `onAfterClose` | 关闭后的回调 | `() => void` | - | - | - |

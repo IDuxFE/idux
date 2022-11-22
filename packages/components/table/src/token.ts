@@ -14,7 +14,7 @@ import type { ScrollContext } from './composables/useScroll'
 import type { SelectableContext } from './composables/useSelectable'
 import type { SortableContext } from './composables/useSortable'
 import type { StickyContext } from './composables/useSticky'
-import type { TableEmptyCellOptions, TableProps, TableSize } from './types'
+import type { TableEmptyCellOptions, TableProps } from './types'
 import type { VKey } from '@idux/cdk/utils'
 import type { TableConfig } from '@idux/components/config'
 import type { Locale } from '@idux/components/locales'
@@ -37,7 +37,7 @@ export interface TableContext
   mergedPrefixCls: ComputedRef<string>
   mergedAutoHeight: ComputedRef<boolean>
   mergedEmptyCell: ComputedRef<string | ((options: TableEmptyCellOptions) => VNodeChild) | undefined>
-  mergedSize: ComputedRef<TableSize>
+  mergedVirtualItemHeight: ComputedRef<number>
   tableLayout: ComputedRef<'auto' | 'fixed'>
 }
 

@@ -59,10 +59,10 @@ export const sortGradient = (gradients: StringGradients): SortGradientResult[] =
  *     "100%": "#ffffff"
  *   }
  */
-export const handleGradient = (strokeColor: ProgressGradient): string => {
+export const handleGradient = (strokeColor: ProgressGradient, element: HTMLDivElement | undefined): string => {
   const {
-    from = '#3366ff', // @color-primary
-    to = '#3366ff', // @color-primary
+    from = element ? getComputedStyle(element).getPropertyValue('--ix-color-primary') : '#1c6eff', // @color-primary
+    to = element ? getComputedStyle(element).getPropertyValue('--ix-color-primary') : '#1c6eff', // @color-primary
     direction = 'to right',
     ...rest
   } = strokeColor

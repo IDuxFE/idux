@@ -39,7 +39,7 @@
 | `searchFn` | 根据搜索的文本进行筛选 | `boolean \| SelectSearchFn` | `true` | - | 为 `true` 时使用默认的搜索规则, 如果使用远程搜索，应该设置为 `false` |
 | `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |
 | `status` | 手动指定校验状态 | `valid \| invalid \| validating` | - | - | - |
-| `strategy` | 设置级联策略 | `'all' \| 'parent' \| 'child'` | `'off'` | - | 具体用法参见 [级联策略](#components-cascader-demo-Strategy) |
+| `strategy` | 设置级联策略 | `'all' \| 'parent' \| 'child' \| 'off'` | `'all'` | - | 具体用法参见 [级联策略](#components-cascader-demo-Strategy) |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | `down` | ✅ | - |
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | 需要设置 `height` |
 | `onChange` | 选中值发生改变后的回调 | `(value: any, oldValue: any) => void` | - | - | - |

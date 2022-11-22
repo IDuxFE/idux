@@ -5,11 +5,11 @@
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `colonless` | 配置 `IxFormItem` 的 `colon` 默认值 | `boolean` | `false` | ✅ | - |
+| `colonless` | 配置 `IxFormItem` 的 `colon` 默认值 | `boolean` | `false` | ✅ | `seer` 主题默认为 `true` |
 | `control` | 表单的控制器 | `string \| number \| AbstractControl` | - | - | 通常是配合 `useFormGroup` 使用 |
 | `controlCol` | 配置 `IxFormItem` 的 `controlCol` 默认值 | `number \| ColProps` | - | - | - |
 | `controlTooltipIcon` | 配置表单控件的提示信息icon | `string` | `'info-circle'` | ✅ | - |
-| `labelAlign` | 配置 `IxFormItem` 的 `labelAlign` 默认值 | `'start' \| 'end'` | `'end'` | ✅ | - |
+| `labelAlign` | 配置 `IxFormItem` 的 `labelAlign` 默认值 | `'start' \| 'end'` | `'end'` | ✅ | `seer` 主题默认为 `'start'` |
 | `labelCol` | 配置 `IxFormItem` 的 `labelCol` 默认值 | `number \| ColProps` | - | - | - |
 | `labelTooltipIcon` | 配置表单文本的提示信息icon | `string` | `'question-circle'` | ✅ | - |
 | `layout` | 表单布局 | `'horizontal' \| 'vertical' \| 'inline'` | `'horizontal'` | ✅ | - |

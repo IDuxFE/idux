@@ -19,13 +19,15 @@ order: 3
 ```ts
 // main.ts
 import { createApp } from 'vue'
-import { createGlobalConfig } from '@idux/components/config'
+import { createGlobalConfig, seerConfig } from '@idux/components/config'
 
 const loadIconDynamically = (iconName: string) => {
   return fetch(`/idux-icons/${iconName}.svg`).then(res => res.text())
 }
 
 const globalConfig = createGlobalConfig({
+  // 我们对 seer 主题的全局配置进行了优化，打开注释即可使用
+  // ...seerConfig,
   icon: { loadIconDynamically },
 })
 

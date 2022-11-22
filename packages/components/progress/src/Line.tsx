@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent, inject, ref } from 'vue'
 
 import { isObject } from 'lodash-es'
 
@@ -21,6 +21,7 @@ export default defineComponent({
     const computedProps = useProps(props, config)
     const lineMergedPrefixCls = computed(() => `${mergedPrefixCls.value}-line`)
 
+    const elementRef = ref<HTMLDivElement>()
     const lineClasses = computed(() => {
       const prefixCls = lineMergedPrefixCls.value
 
@@ -39,7 +40,7 @@ export default defineComponent({
       height: computedProps.value.strokeWidth && `${computedProps.value.strokeWidth}px`,
       width: `${percent.value}%`,
       background: isObject(computedProps.value.strokeColor)
-        ? handleGradient(computedProps.value.strokeColor)
+        ? handleGradient(computedProps.value.strokeColor, elementRef.value)
         : computedProps.value.strokeColor ?? '',
     }))
 
@@ -47,7 +48,7 @@ export default defineComponent({
       const prefixCls = lineMergedPrefixCls.value
 
       return (
-        <div class={lineClasses.value}>
+        <div ref={elementRef} class={lineClasses.value}>
           <div class={`${prefixCls}-outer`}>
             <div class={`${prefixCls}-inner`}>
               {computedProps.value.success?.percent && (
