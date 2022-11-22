@@ -14,7 +14,7 @@
       <IxInput></IxInput>
     </IxFormItem>
     <IxFormItem>
-      <IxButton mode="primary">Submit</IxButton>
+      <IxButton mode="primary" type="submit">Submit</IxButton>
     </IxFormItem>
   </IxForm>
 </template>

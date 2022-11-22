@@ -10,7 +10,7 @@
     <IxRow>
       <IxCol span="24" class="text-right">
         <IxSpace>
-          <IxButton mode="primary" @click="onSearch">Search</IxButton>
+          <IxButton mode="primary" type="submit" @click="onSearch">Search</IxButton>
           <IxButton @click="onClear">Clear</IxButton>
           <IxButton mode="link" :icon="showMore ? 'up' : 'down'" @click="showMore = !showMore">Collapse</IxButton>
         </IxSpace>

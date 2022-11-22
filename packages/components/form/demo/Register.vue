@@ -60,7 +60,7 @@
       <IxCheckbox control="agree">I have read the <a>agreement</a> </IxCheckbox>
     </IxFormItem>
     <IxFormItem :controlCol="noLabelControlCol">
-      <IxButton mode="primary" @click="register">Register</IxButton>
+      <IxButton mode="primary" type="submit" @click="register">Register</IxButton>
     </IxFormItem>
   </IxForm>
 </template>

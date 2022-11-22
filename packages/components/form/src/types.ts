@@ -27,6 +27,8 @@ export const formProps = {
   layout: String as PropType<FormLayout>,
   messageTooltip: { type: [Boolean, Object] as PropType<boolean | TooltipProps>, default: false },
   size: String as PropType<FormSize>,
+
+  onSubmit: { type: Function as PropType<(evt: Event) => void>, default: (evt: Event) => evt.preventDefault() },
 } as const
 
 export type FormProps = ExtractInnerPropTypes<typeof formProps>

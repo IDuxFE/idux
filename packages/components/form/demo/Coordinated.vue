@@ -13,7 +13,7 @@
       <IxCheckbox control="subscribe">Subscribe notifications</IxCheckbox>
     </IxFormItem>
     <IxFormItem :controlCol="{ offset: 6 }">
-      <IxButton mode="primary" @click="onSubmit">Submit</IxButton>
+      <IxButton mode="primary" type="submit" @click="onSubmit">Submit</IxButton>
     </IxFormItem>
   </IxForm>
 </template>
