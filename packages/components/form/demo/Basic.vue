@@ -15,7 +15,7 @@
       <IxCheckbox control="remember">Remember me</IxCheckbox>
     </IxFormItem>
     <IxFormItem>
-      <IxButton mode="primary" block @click="login">Login</IxButton>
+      <IxButton mode="primary" block type="submit" @click="login">Login</IxButton>
     </IxFormItem>
     <IxRow>
       <IxCol span="12">

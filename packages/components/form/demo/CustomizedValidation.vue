@@ -13,7 +13,7 @@
       <IxInput v-model:value="formValue.dynamic" :status="status"></IxInput>
     </IxFormItem>
     <IxFormItem :controlCol="{ offset: 6 }">
-      <IxButton @click="changeStatus">Change Status</IxButton>
+      <IxButton type="submit" @click="changeStatus">Change Status</IxButton>
     </IxFormItem>
   </IxForm>
 </template>

@@ -33,7 +33,7 @@
         </IxCol>
       </IxRow>
       <IxFormItem>
-        <IxButton mode="primary" @click="onSubmit">Submit</IxButton>
+        <IxButton mode="primary" type="submit" @click="onSubmit">Submit</IxButton>
       </IxFormItem>
     </IxFormWrapper>
   </IxForm>

@@ -15,6 +15,7 @@
 | `layout` | 表单布局 | `'horizontal' \| 'vertical' \| 'inline'` | `'horizontal'` | ✅ | - |
 | `messageTooltip` | 以 tooltip 的形式提示错误信息 | `boolean \| TooltipProps` | `false` | - | - |
 | `size` | 表单大小 | `'sm' \| 'md' \| 'lg'` | `'md'` | ✅ | - |
+| `onSubmit` | 表单提交事件 | `(evt: Event) => void` | `(evt: Event) => evt.preventDefault()` | - | 默认会阻止掉表单提交事件 |
 
 ### IxFormItem
 

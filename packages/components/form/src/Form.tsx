@@ -39,6 +39,10 @@ export default defineComponent({
       })
     })
 
-    return () => <form class={classes.value}>{slots.default && slots.default()}</form>
+    return () => (
+      <form class={classes.value} onSubmit={props.onSubmit}>
+        {slots.default && slots.default()}
+      </form>
+    )
   },
 })

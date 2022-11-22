@@ -21,7 +21,7 @@
       </template>
       <template #action="{ record }">
         <IxSpace v-if="record.editable">
-          <IxButton @click="onSave">Save</IxButton>
+          <IxButton type="submit" @click="onSave">Save</IxButton>
           <IxButton @click="onCancel">Cancel</IxButton>
         </IxSpace>
       </template>
