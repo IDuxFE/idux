@@ -8,14 +8,14 @@
 | 名称 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `type` | 类型，可选 `line` `circle` `dashboard` | `string` | `line` | - | - |
-| `format` | 内容的函数模板，支持插槽 | `function(percent, successPercent) \| #format="percent, successPercent"`| percent => percent + '%' | ✅ | - |
+| `format` | 内容的函数模板，支持插槽 | `function(percent, successPercent) \| #format="percent, successPercent"`| `percent => percent + '%'` | ✅ | - |
 | `percent` | 百分比 | `number` | 0  | - | - |
 | `status` | 状态，可选：`success` `exception` `normal` `active`(仅限line) | `string` | - | - | - |
 | `hideInfo` | 是否显示进度数值或状态图标 | `boolean` | `false` | - | - |
 | `success` | 成功进度条相关配置 | `{ percent: number, strokeColor: string }` | - | - | - |
 | `trailColor` | 未完成的分段的颜色 | `string` | - | - | - |
 | `strokeColor` | 进度条的色彩 | `string` | - | - | - |
-| `strokeLinecap` | 进度条的样式，可选：`round` `square`| `string` | `round` | - | - |
+| `strokeLinecap` | 进度条的样式 | `'round' \| 'square'` | `'round'` | ✅ | `seer` 主题默认为 `'square'` |
 | `icons` | 进度条状态图标 | `{ success: string \| VNode, exception: string \| VNode }` | - | ✅ | - |
 
 `type="line"`

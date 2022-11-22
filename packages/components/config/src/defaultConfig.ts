@@ -14,6 +14,7 @@ export const defaultConfig: GlobalConfig = {
   common: {
     prefixCls: 'ix',
     overlayZIndex: 1000,
+    theme: 'default',
   },
   locale: zhCN,
 
@@ -188,7 +189,6 @@ export const defaultConfig: GlobalConfig = {
     closeOnEsc: true,
     mask: true,
     maskClosable: true,
-    width: 520,
   },
   notification: {
     destroyOnHover: false,
@@ -261,7 +261,7 @@ export const defaultConfig: GlobalConfig = {
     animated: true,
   },
   space: {
-    size: 'md',
+    size: 8,
     wrap: true,
   },
   spin: {

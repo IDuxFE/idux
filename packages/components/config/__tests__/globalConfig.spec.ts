@@ -31,7 +31,7 @@ describe('globalConfig', () => {
   test('useGlobalConfig work', async () => {
     const wrapper = mount(ParentComponent)
 
-    expect(wrapper.text()).toEqual('lg')
+    expect(wrapper.text()).toEqual('md')
 
     wrapper.vm.changeConfig({ size: 'sm' })
     await flushPromises()

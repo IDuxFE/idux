@@ -29,7 +29,7 @@ export const createGlobalConfig = (config: DeepPartialGlobalConfig): Plugin => {
     const compNames = Object.keys(config) as GlobalConfigKey[]
     compNames.forEach(compName => {
       const token = tokenMap.get(compName)!
-      const currConfig = defaultConfig[compName]
+      const currConfig = cloneDeep(defaultConfig[compName])
       merge(currConfig, config[compName])
       app.provide(token, currConfig)
     })

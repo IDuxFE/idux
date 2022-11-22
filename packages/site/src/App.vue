@@ -33,7 +33,7 @@
                       <LayoutFooter></LayoutFooter>
                     </IxCol>
                   </IxRow>
-                  <GlobalTheme />
+                  <GlobalTheme @themeChange="onThemeChange" />
                 </div>
                 <template v-else>
                   <router-view></router-view>
@@ -67,6 +67,7 @@ import { computed, provide, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import { useSharedBreakpoints } from '@idux/cdk/breakpoint'
+import { GlobalConfig, GlobalConfigKey, defaultConfig, seerConfig, useGlobalConfig } from '@idux/components/config'
 import { DrawerProviderInstance } from '@idux/components/drawer'
 import { MessageProviderInstance } from '@idux/components/message'
 import { ModalProviderInstance } from '@idux/components/modal'
@@ -96,7 +97,6 @@ const page = computed(() => {
 })
 
 const breakpoints = useSharedBreakpoints()
-const isDrawerOpen = ref(false)
 
 const appContext: AppContext = {
   org: 'IDuxFE',
@@ -108,4 +108,23 @@ const appContext: AppContext = {
 }
 
 provide(appContextToken, appContext)
+
+const isDrawerOpen = ref(false)
+
+const configChanges = {} as Record<GlobalConfigKey, (config: Partial<GlobalConfig[GlobalConfigKey]>) => void>
+const compNames = Object.keys(defaultConfig) as GlobalConfigKey[]
+compNames.forEach(compName => {
+  const [, change] = useGlobalConfig(compName, {})
+  configChanges[compName] = change
+})
+
+const onThemeChange = (theme: string) => {
+  const config = theme === 'seer' ? seerConfig : defaultConfig
+  const compNames = Object.keys(config) as GlobalConfigKey[]
+  compNames.forEach(compName => {
+    const currConfig = config[compName]
+    const currChange = configChanges[compName]
+    currChange(currConfig!)
+  })
+}
 </script>

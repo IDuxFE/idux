@@ -31,6 +31,9 @@ import { renderPagination } from './other/Pagination'
 import { TABLE_TOKEN } from './token'
 import { tableProps } from './types'
 
+const virtualItemHeightForSeer = { sm: 32, md: 40, lg: 56 } as const
+const virtualItemHeightForDefault = { sm: 40, md: 48, lg: 56 } as const
+
 export default defineComponent({
   name: 'IxTable',
   props: tableProps,
@@ -45,6 +48,11 @@ export default defineComponent({
     const mergedGetKey = useGetKey(props, config, 'components/table')
     const mergedEmptyCell = computed(() => props.emptyCell ?? config.emptyCell)
     const mergedSize = computed(() => props.size ?? config.size)
+    const mergedVirtualItemHeight = computed(() =>
+      common.theme === 'seer'
+        ? virtualItemHeightForSeer[mergedSize.value]
+        : virtualItemHeightForDefault[mergedSize.value],
+    )
     const { mergedPagination } = usePagination(props, config, mergedSize)
 
     const stickyContext = useSticky(props)
@@ -78,7 +86,7 @@ export default defineComponent({
       locale,
       mergedPrefixCls,
       mergedEmptyCell,
-      mergedSize,
+      mergedVirtualItemHeight,
       mergedAutoHeight,
       ...columnsContext,
       ...scrollContext,

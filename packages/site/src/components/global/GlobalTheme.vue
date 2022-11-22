@@ -18,6 +18,8 @@ import { MenuData } from '@idux/components/menu'
 
 import { themeConfig } from './themeConfig'
 
+const emit = defineEmits(['themeChange'])
+
 const dataSource: MenuData[] = [
   ...themeConfig,
   { key: 'divider', type: 'divider' },
@@ -29,6 +31,7 @@ const currTheme = localStorage.getItem(themeKey) || 'default'
 const selectedKeys = ref([currTheme])
 
 const loadTheme = (theme: string) => {
+  emit('themeChange', theme)
   if (window.changeTheme) {
     window.changeTheme(theme)
   } else {

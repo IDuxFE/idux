@@ -214,7 +214,14 @@ function useConfig(props: ModalProps, config: ModalConfig) {
   const closeOnEsc = computed(() => props.closeOnEsc ?? config.closeOnEsc)
   const mask = computed(() => props.mask ?? config.mask)
   const maskClosable = computed(() => props.maskClosable ?? config.maskClosable)
-  const width = computed(() => convertCssPixel(props.width ?? config.width))
+  const width = computed(() => {
+    const { width = config.width } = props
+    if (width) {
+      return convertCssPixel(width)
+    } else {
+      return props.type === 'default' ? '480px' : '400px'
+    }
+  })
 
   return { centered, closable, closeIcon, closeOnEsc, width, mask, maskClosable }
 }
