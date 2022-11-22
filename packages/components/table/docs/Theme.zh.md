@@ -16,7 +16,7 @@
 | `@table-border-color` | `var(--ix-border-color-secondary)` | - | - |
 | `@table-border-radius` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
 | `@table-head-color` | `var(--ix-text-color-title-secondary)` | - | - |
-| `@table-head-background-color` | `var(--ix-background-color-light)` | - | - |
+| `@table-head-background-color` | `var(--ix-background-color-middle)` | - | - |
 | `@table-head-separator-color` | `var(--ix-border-color)` | - | - |
 | `@table-head-icon-color` | `inherit` | - | - |
 | `@table-head-icon-color-active` | `var(--ix-color-primary)` | - | - |
@@ -26,4 +26,4 @@
 | `@table-body-row-background-color-selected` | `var(--ix-color-primary-l50)` | - | - |
 | `@table-expandable-icon-color` | `var(--ix-text-color-info)` | - | - |
 | `@table-expandable-background-color` | `var(--ix-background-color-light)` | - | - |
-| `@table-expandable-background-color-hover` | `var(--ix-background-color-deep)` | - | - |
+| `@table-expandable-background-color-hover` | `var(--ix-background-color-middle)` | - | - |

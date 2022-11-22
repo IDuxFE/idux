@@ -10,12 +10,12 @@
 | `@pagination-item-content-size-md` | `24px` | - | - |
 | `@pagination-item-content-size-lg` | `32px` | - | - |
 | `@pagination-item-content-border-radius` | `50%` | - | - |
-| `@pagination-item-content-icon-font-size` | `inherit` | `var(--ix-font-size-lg)` | - |
+| `@pagination-item-content-icon-font-size` | `var(--ix-font-size-lg)` | - | - |
 | `@pagination-color-hover` | `var(--ix-text-color)` | `var(--ix-color-primary)` | - |
 | `@pagination-color-active` | `var(--ix-text-color-inverse)` | `var(--ix-color-primary)` | - |
 | `@pagination-color-disabled` | `var(--ix-text-color-disabled)` | - | - |
 | `@pagination-background-color` | `var(--ix-background-color)` | - | - |
 | `@pagination-background-color-hover` | `var(--ix-background-color-deep)` | `var(--ix-background-color-light)` | - |
 | `@pagination-background-color-active` | `var(--ix-color-primary)` | `var(--ix-color-primary-l50)` | - |
-| `@pagination-background-color-disabled` | `var(--ix-background-color-deep)` | `var(--ix-background-color-deep)` | - |
+| `@pagination-background-color-disabled` | `var(--ix-background-color-deep)` | - | - |
 | `@pagination-outline-color` | `var(--ix-color-primary-l10)` | - | - |

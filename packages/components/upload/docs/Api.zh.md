@@ -32,7 +32,7 @@
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `type` | 展示的形式 | `text \| image \| imageCard` | `text` | ✅ | - |
-| `icon` | 展示的icon   | `Record<file \| preview \| download \| remove \| retry, string \| VNode`>  | `{file: 'paper-clip', remove: 'delete', retry: 'edit'}` | ✅ | - |
+| `icon` | 展示的icon   | `Record<file \| preview \| download \| remove \| retry, string \| VNode`>  | `{file: 'paper-clip', remove: 'close', retry: 'edit'}` | ✅ | - |
 | `onDownload`   | 点击下载文件时的回调 | `(file: UploadFile) => void` | -  | -  | -  |
 | `onPreview`    | 点击文件链接或预览图标时的回调 | `(file: UploadFile) => void` | - | - | - |
 | `onRemove`     | 点击移除文件时的回调，返回boolean表示是否允许移除，支持Promise | `(file: UploadFile) => boolean \| Promise<boolean>` | `() => true` | -  | - |

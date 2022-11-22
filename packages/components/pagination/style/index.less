@@ -85,7 +85,7 @@
       border-radius: @pagination-item-content-border-radius;
 
       > .@{icon-prefix},
-      &-jumper > .@{icon-prefix} {
+      .@{pagination-prefix}-item-jumper > .@{icon-prefix} {
         font-size: @pagination-item-content-icon-font-size;
       }
     }
@@ -95,6 +95,8 @@
     }
 
     &-jumper {
+      display: inline-flex;
+
       > .@{icon-prefix} {
         display: none;
       }

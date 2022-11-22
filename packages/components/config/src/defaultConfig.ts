@@ -213,7 +213,7 @@ export const defaultConfig: GlobalConfig = {
     destroyOnHide: false,
     placement: 'top',
     trigger: 'click',
-    offset: [0, 8],
+    offset: [0, 4],
   },
   popover: {
     autoAdjust: true,
@@ -223,7 +223,7 @@ export const defaultConfig: GlobalConfig = {
     showArrow: true,
     trigger: 'hover',
     closeIcon: 'close',
-    offset: [0, 8],
+    offset: [0, 4],
   },
   progress: {
     strokeLinecap: 'round',
@@ -339,7 +339,7 @@ export const defaultConfig: GlobalConfig = {
     autoAdjust: true,
     delay: 100,
     destroyOnHide: false,
-    offset: [0, 8],
+    offset: [0, 4],
     placement: 'top',
     trigger: 'hover',
   },
@@ -376,7 +376,7 @@ export const defaultConfig: GlobalConfig = {
     type: 'text',
     icon: {
       file: 'paper-clip',
-      remove: 'delete',
+      remove: 'close',
       retry: 'edit',
     },
   },

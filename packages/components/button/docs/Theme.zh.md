@@ -37,5 +37,5 @@
 | `@button-ghost-background-color-hover` | `rgba(255, 255, 255, 0.2)` | - | - |
 | `@button-ghost-background-color-active` | `var(--ix-background-color)` | - | - |
 | `@button-ghost-background-color-disabled` | `rgba(255, 255, 255, 0.4)` | - | - |
-| `@button-icon-color` | `inherit` | `var(--ix-text-color-title-secondary)` | - |
+| `@button-icon-color` | `inherit` | `var(--ix-text-color-secondary)` | - |
 | `@button-icon-font-size` | `inherit` | `var(--ix-font-size-lg)` | - |

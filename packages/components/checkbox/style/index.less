@@ -138,10 +138,6 @@
       }
     }
 
-    &.@{checkbox-prefix}-checked .@{checkbox-prefix}-input-tick {
-      border-top-color: var(--ix-text-color-info);
-    }
-
     &.@{checkbox-prefix}-indeterminate .@{checkbox-prefix}-input-box {
       &::after {
         background-color: var(--ix-text-color-info);
@@ -151,6 +147,15 @@
     &.@{button-prefix} {
       z-index: 0;
       border-color: @checkbox-border-color;
+    }
+
+    &:not(.@{checkbox-prefix}-checked).@{button-prefix} {
+      color: var(--ix-text-color-info);
+      background-color: var(--ix-background-color-middle);
+    }
+
+    &.@{checkbox-prefix}-checked .@{checkbox-prefix}-input-tick {
+      border-top-color: var(--ix-text-color-info);
     }
   }
 

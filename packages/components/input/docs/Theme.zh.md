@@ -20,5 +20,5 @@
 | `@input-box-shadow-focus` | `0 0 0 2px fade(@color-primary, 20%)` | - | - |
 | `@input-icon-color` | `var(--ix-text-color-title-secondary)` | - | - |
 | `@input-icon-color-hover` | `var(--ix-color-primary)` | - | - |
-| `@input-icon-font-size` | `inherit` | - | - |
+| `@input-icon-font-size` | `var(--ix-font-size-lg)` | - | - |
 | `@input-addon-background-color` | `var(--ix-background-color-light)` | - | - |
