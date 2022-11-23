@@ -24,6 +24,15 @@ describe('Alert', () => {
 
     await wrapper.setProps({ type: 'info' })
     expect(wrapper.find('.ix-alert').classes()).toContain('ix-alert-info')
+
+    await wrapper.setProps({ type: 'offline' })
+    expect(wrapper.find('.ix-alert').classes()).toContain('ix-alert-offline')
+  })
+
+  test('props banner work', async () => {
+    const wrapper = AlertMount({ props: { banner: true } })
+
+    expect(wrapper.find('.ix-alert').classes()).toContain('ix-alert-banner')
   })
 
   test('props icon work', async () => {

@@ -25,6 +25,7 @@ export const defaultConfig: GlobalConfig = {
       error: 'info-circle',
       info: 'bulb',
       warning: 'exclamation-circle',
+      offline: 'exclamation-circle',
     },
   },
   anchor: {

@@ -149,12 +149,12 @@
       border-color: @checkbox-border-color;
     }
 
-    &:not(.@{checkbox-prefix}-checked).@{button-prefix} {
+    &.@{button-prefix}:not(.@{checkbox-prefix}-checked) {
       color: var(--ix-text-color-info);
       background-color: var(--ix-background-color-middle);
     }
 
-    &.@{checkbox-prefix}-checked .@{checkbox-prefix}-input-tick {
+    &.@{button-prefix}.@{checkbox-prefix}-checked .@{checkbox-prefix}-input-tick {
       border-top-color: var(--ix-text-color-info);
     }
   }

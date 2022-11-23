@@ -9,14 +9,9 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export const alertProps = {
-  closable: {
-    type: Boolean,
-    default: undefined,
-  },
-  closeIcon: {
-    type: String,
-    default: 'close',
-  },
+  banner: { type: Boolean, default: false },
+  closable: { type: Boolean, default: undefined },
+  closeIcon: { type: String, default: 'close' },
   description: String,
   icon: String,
   title: [String, Array] as PropType<string | string[]>,
@@ -26,7 +21,7 @@ export const alertProps = {
   },
   type: {
     type: String as PropType<AlertType>,
-    default: 'info',
+    default: 'warning',
   },
   onAfterClose: [Function, Array] as PropType<MaybeArray<() => void>>,
   onBeforeClose: [Function, Array] as PropType<MaybeArray<() => void | boolean | Promise<boolean>>>,
@@ -38,7 +33,7 @@ export type AlertPublicProps = ExtractPublicPropTypes<typeof alertProps>
 export type AlertComponent = DefineComponent<Omit<HTMLAttributes, keyof AlertPublicProps> & AlertPublicProps>
 export type AlertInstance = InstanceType<DefineComponent<AlertProps>>
 
-export type AlertType = 'success' | 'info' | 'warning' | 'error'
+export type AlertType = 'success' | 'info' | 'warning' | 'error' | 'offline'
 export interface AlertPagination {
   pageIndex?: number
   onChange?: (pageIndex: number) => void
