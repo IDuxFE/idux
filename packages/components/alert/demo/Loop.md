@@ -1,5 +1,5 @@
 ---
-order: 6
+order: 12
 title:
   zh: 轮播的提示
   en: Loop banner

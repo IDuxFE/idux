@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 6
 title:
   zh: 可关闭的
   en: Closable

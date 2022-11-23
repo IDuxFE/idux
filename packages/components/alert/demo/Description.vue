@@ -3,6 +3,7 @@
     <IxAlert
       title="Vue 是什么？"
       description="Vue 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。"
+      type="info"
     >
     </IxAlert>
     <IxAlert type="success">

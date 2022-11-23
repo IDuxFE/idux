@@ -63,6 +63,7 @@ export default defineComponent({
       return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-${props.type}`]: true,
+        [`${prefixCls}-banner`]: props.banner,
         [`${prefixCls}-with-description`]: slots.description || props.description,
       })
     })

@@ -1,5 +1,5 @@
 ---
-order: 4
+order: 8
 title:
   zh: 自定义图标
 ---
