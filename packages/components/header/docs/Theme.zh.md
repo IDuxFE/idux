@@ -8,7 +8,7 @@
 | `@header-font-size-md` | `var(--ix-font-size-lg)` | - | - |
 | `@header-font-size-lg` | `var(--ix-font-size-xl)` | - | - |
 | `@header-font-size-xl` | `var(--ix-font-size-2xl)` | - | - |
-| `@header-color` | `var(--ix-text-color-title)` | `var(--ix-text-color)` | - |
+| `@header-color` | `var(--ix-text-color-title)` | - | - |
 | `@header-color-hover` | `var(--ix-color-primary-l10)` | - | - |
 | `@header-color-active` | `var(--ix-color-primary-d10)` | - | - |
 | `@header-color-disabled` | `var(--ix-text-color-disabled)` | - | - |

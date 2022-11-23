@@ -90,7 +90,7 @@ describe('Upload list render', () => {
     await flushPromises()
 
     expect(wrapper.find('.ix-icon-paper-clip').exists()).toBeTruthy()
-    expect(wrapper.find('.ix-icon-delete').exists()).toBeTruthy()
+    expect(wrapper.find('.ix-icon-close').exists()).toBeTruthy()
     expect(wrapper.find('.ix-icon-edit').exists()).toBeTruthy()
 
     const wrapperFileSuccess = uploadFilesMount({

@@ -463,7 +463,7 @@ export interface TableColumnBaseConfig {
 }
 
 export interface TableColumnExpandableConfig {
-  icon: string | VNodeChild | ((expanded: boolean) => string | VNodeChild)
+  icon: string | VNodeChild | ((options: { expanded: boolean; record: any }) => string | VNodeChild)
 }
 
 export interface TagConfig {

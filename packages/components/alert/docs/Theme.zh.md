@@ -3,7 +3,7 @@
 | `@alert-height` | `var(--ix-height-md)` | - | - |
 | `@alert-font-size` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
 | `@alert-border-radius` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
-| `@alert-icon-font-size` | `inherit` | `var(--ix-font-size-lg)` | - |
+| `@alert-icon-font-size` | `var(--ix-font-size-lg)` | - | - |
 | `@alert-color` | `@text-color` | - | - |
 | `@alert-color-secondary` | `@text-color-secondary` | - | - |
 | `@alert-success-color` | `var(--ix-color-turquoise)` | `var(--ix-color-turquoise-d10)` | - |
