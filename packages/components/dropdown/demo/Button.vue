@@ -3,7 +3,7 @@
     <IxButtonGroup>
       <IxButton @click="onClick">Button</IxButton>
       <IxDropdown>
-        <IxButton icon="ellipsis"></IxButton>
+        <IxButton icon="ellipsis" shape="square"></IxButton>
         <template #overlay>
           <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
         </template>
@@ -12,7 +12,7 @@
     <IxButtonGroup>
       <IxButton @click="onClick">Button</IxButton>
       <IxDropdown>
-        <IxButton icon="setting"></IxButton>
+        <IxButton icon="setting" shape="square"></IxButton>
         <template #overlay>
           <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
         </template>
@@ -20,7 +20,7 @@
     </IxButtonGroup>
 
     <IxDropdown>
-      <IxButton>Button <IxIcon name="down"></IxIcon></IxButton>
+      <IxButton>Button <IxIcon name="down" size="16px" style="margin-left: 4px"></IxIcon></IxButton>
       <template #overlay>
         <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
       </template>
