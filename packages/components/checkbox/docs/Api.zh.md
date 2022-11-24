@@ -19,6 +19,7 @@
 | `value` | 设置勾选框的值，与 `IxCheckboxGroup` 配合使用 | `any`| - | - | 不传时使用 `key` 作为 `value` |
 | `size` | 按钮大小 | `'sm' \| 'md' \| 'lg'` | `md` | - | 仅`buttoned`为`true`时生效 |
 | `onChange` | 选中状态发生变化后的回调 | `(newChecked: boolean \| string \| number, oldChecked: boolean \| string \| number) => void`| - | - | - |
+| `waveless` | 是否关闭按钮点击时波纹动画 | `boolean` | `false` | ✅ | 存在[浏览器兼容性](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Animations_API/Keyframe_Formats#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7) |
 
 #### CheckboxMethods
 

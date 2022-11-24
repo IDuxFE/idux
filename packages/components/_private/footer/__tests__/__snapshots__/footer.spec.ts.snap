@@ -1,3 +1,9 @@
 // Vitest Snapshot v1
 
-exports[`Footer > render work 1`] = `"<div><button class=\\"ix-button ix-button-primary ix-button-md\\" type=\\"button\\"><span>ok</span></button><button class=\\"ix-button ix-button-default ix-button-md\\" type=\\"button\\"><span>cancel</span></button></div>"`;
+exports[`Footer > render work 1`] = `
+"<div><button class=\\"ix-button ix-button-primary ix-button-md\\" type=\\"button\\"><span>ok</span>
+    <div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div>
+  </button><button class=\\"ix-button ix-button-default ix-button-md\\" type=\\"button\\"><span>cancel</span>
+    <div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div>
+  </button></div>"
+`;

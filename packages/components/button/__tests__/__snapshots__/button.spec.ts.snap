@@ -1,3 +1,7 @@
 // Vitest Snapshot v1
 
-exports[`Button > render work 1`] = `"<button class=\\"ix-button ix-button-default ix-button-md\\" type=\\"button\\"></button>"`;
+exports[`Button > render work 1`] = `
+"<button class=\\"ix-button ix-button-default ix-button-md\\" type=\\"button\\">
+  <div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div>
+</button>"
+`;

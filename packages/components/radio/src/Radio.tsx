@@ -13,6 +13,7 @@ import { isNil } from 'lodash-es'
 
 import { useAccessorAndControl } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
+import { ɵWave, type ɵWaveInstance } from '@idux/components/_private/wave'
 import { useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN, useFormElement, useFormItemRegister } from '@idux/components/form'
 import { convertStringVNode, useKey } from '@idux/components/utils'
@@ -37,6 +38,7 @@ export default defineComponent({
     const config = useGlobalConfig('radio')
 
     const { elementRef, focus, blur } = useFormElement<HTMLInputElement>()
+    const waveRef = ref<ɵWaveInstance>()
     expose({ focus, blur })
 
     const formContext = inject(FORM_TOKEN, null)
@@ -52,12 +54,15 @@ export default defineComponent({
     })
     const isButtoned = computed(() => props.buttoned ?? radioGroup?.props.buttoned)
     const size = computed(() => props.size ?? radioGroup?.props.size ?? formContext?.size.value ?? config.size)
+    const mergedWaveless = computed(() => props.waveless ?? config.waveless)
     const mode = computed(() => props.mode ?? radioGroup?.props.mode ?? 'default')
     const { isChecked, isDisabled, isFocused, handleChange, handleBlur, handleFocus } = useRadio(
       props,
       radioGroup,
       elementRef,
       mergedValue,
+      waveRef,
+      mergedWaveless,
     )
     const classes = computed(() => {
       const buttoned = isButtoned.value
@@ -109,8 +114,13 @@ export default defineComponent({
               onFocus={handleFocus}
               {...restAttrs}
             />
-            {!isButtoned.value && <span class={`${prefixCls}-input-box`} tabindex={tabindex as number} />}
+            {!isButtoned.value && (
+              <span class={`${prefixCls}-input-box`} tabindex={tabindex as number}>
+                {!mergedWaveless.value && <ɵWave ref="waveRef" />}
+              </span>
+            )}
           </span>
+          {isButtoned.value && !mergedWaveless.value && <ɵWave ref={waveRef} />}
           {labelNode && <span class={`${prefixCls}-label`}>{labelNode}</span>}
         </label>
       )
@@ -123,6 +133,8 @@ const useRadio = (
   radioGroup: RadioGroupContext | null,
   elementRef: Ref<HTMLInputElement | undefined>,
   mergedValue: ComputedRef<unknown>,
+  waveRef: Ref<ɵWaveInstance | undefined>,
+  mergedWaveless: ComputedRef<boolean>,
 ) => {
   let isChecked: ComputedRef<boolean>
   let isDisabled: ComputedRef<boolean>
@@ -154,6 +166,7 @@ const useRadio = (
         elementRef.value.checked = false
         callEmit(props.onChange, checked, !checked)
         callEmit(groupProps.onChange, value, oldValue)
+        !mergedWaveless.value && waveRef.value?.play()
       }
     }
   } else {
@@ -172,6 +185,7 @@ const useRadio = (
         accessor.setValue(checked)
         elementRef.value.checked = false
         callEmit(props.onChange, checked, !checked)
+        !mergedWaveless.value && waveRef.value?.play()
       }
     }
   }

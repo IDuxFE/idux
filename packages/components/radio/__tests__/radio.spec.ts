@@ -111,4 +111,20 @@ describe('Radio', () => {
 
     expect(wrapper.classes()).not.toContain('ix-radio-lg')
   })
+
+  test('waveless work', async () => {
+    const wrapper = RadioMount()
+
+    expect(wrapper.find('.ix-radio-input-box .ix-wave').exists()).toBeTruthy()
+    expect(wrapper.find('.ix-radio-input + .ix-wave').exists()).toBeFalsy()
+
+    await wrapper.setProps({ buttoned: true })
+
+    expect(wrapper.find('.ix-radio-input-box .ix-wave').exists()).toBeFalsy()
+    expect(wrapper.find('.ix-radio-input + .ix-wave').exists()).toBeTruthy()
+
+    await wrapper.setProps({ waveless: true })
+
+    expect(wrapper.find('.ix-wave').exists()).toBeFalsy()
+  })
 })

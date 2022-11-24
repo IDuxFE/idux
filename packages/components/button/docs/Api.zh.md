@@ -17,6 +17,7 @@
 | `shape` | 设置按钮形状 | `'square' \| 'circle' \| 'round'` | - | - |- |
 | `size` | 设置按钮大小 | `'xl' \| 'lg' \| 'md' \| 'sm' \| 'xs'` | `'md'` | ✅ | `seer` 主题下默认为 `'sm'` |
 | `type` | 原生 `button` 的 `type` 属性 | `'button' \| 'submit' \| 'reset'` | `'button'` | - | 参考 [HTML 标准](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type) |
+| `waveless` | 是否关闭按钮点击时波纹动画 | `boolean` | `false` | ✅ | 不支持`link`和`text`模式，且存在[浏览器兼容性](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Animations_API/Keyframe_Formats#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7) |
 
 #### ButtonSlots
 

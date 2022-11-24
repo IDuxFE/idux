@@ -140,4 +140,31 @@ describe('Button', () => {
     })
     expect(wrapper.text()).toEqual(text)
   })
+
+  test('waveless work', async () => {
+    const text = 'Button'
+    const wrapper = ButtonMount({
+      slots: {
+        default: text,
+      },
+    })
+
+    expect(wrapper.find('.ix-wave').exists()).toBeTruthy()
+
+    await wrapper.setProps({ waveless: true })
+
+    expect(wrapper.find('.ix-wave').exists()).toBeFalsy()
+
+    await wrapper.setProps({ waveless: false, mode: 'text' })
+
+    expect(wrapper.find('.ix-wave').exists()).toBeFalsy()
+
+    await wrapper.setProps({ mode: 'link' })
+
+    expect(wrapper.find('.ix-wave').exists()).toBeFalsy()
+
+    await wrapper.setProps({ mode: 'default' })
+
+    expect(wrapper.find('.ix-wave').exists()).toBeTruthy()
+  })
 })

@@ -17,6 +17,7 @@
 | `onChange` | 选中状态发生变化后的回调 | `(checked: boolean, oldChecked: boolean) => void`| - | - | - |
 | `onBlur` | 失去焦点后触发 | `(evt: FocusEvent) => void`| - | - | - |
 | `onFocus` | 获取焦点后触发 | `(evt: FocusEvent) => void`| - | - | - |
+| `waveless` | 是否关闭按钮点击时波纹动画 | `boolean` | `false` | ✅ | 存在[浏览器兼容性](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Animations_API/Keyframe_Formats#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7) |
 
 #### RadioMethods
 

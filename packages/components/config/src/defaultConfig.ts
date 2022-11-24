@@ -49,6 +49,7 @@ export const defaultConfig: GlobalConfig = {
   },
   button: {
     size: 'md',
+    waveless: false,
   },
   card: {
     borderless: false,
@@ -75,6 +76,7 @@ export const defaultConfig: GlobalConfig = {
   },
   checkbox: {
     size: 'md',
+    waveless: false,
   },
   collapse: {
     accordion: false,
@@ -233,6 +235,7 @@ export const defaultConfig: GlobalConfig = {
   },
   radio: {
     size: 'md',
+    waveless: false,
   },
   rate: {
     allowHalf: false,

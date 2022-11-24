@@ -203,4 +203,20 @@ describe('Checkbox', () => {
 
     expect(blurFn).toBeCalledTimes(1)
   })
+
+  test('waveless work', async () => {
+    const wrapper = CheckboxMount()
+
+    expect(wrapper.find('.ix-checkbox-input-box .ix-wave').exists()).toBeTruthy()
+    expect(wrapper.find('.ix-checkbox-input-tick + .ix-wave').exists()).toBeFalsy()
+
+    await wrapper.setProps({ buttoned: true })
+
+    expect(wrapper.find('.ix-checkbox-input-box .ix-wave').exists()).toBeFalsy()
+    expect(wrapper.find('.ix-checkbox-input-tick + .ix-wave').exists()).toBeTruthy()
+
+    await wrapper.setProps({ waveless: true })
+
+    expect(wrapper.find('.ix-wave').exists()).toBeFalsy()
+  })
 })
