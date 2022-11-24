@@ -44,6 +44,7 @@ const useCollapsed = (props: LayoutSiderProps) => {
     return breakpoint ? BREAKPOINTS_KEYS.indexOf(breakpoint) : -1
   })
   const useBreakpoint = computed(() => breakpointIndex.value > -1)
+  const breakpoints = useSharedBreakpoints()
 
   let stopBreakpoints: WatchStopHandle | undefined
   watch(
@@ -52,7 +53,6 @@ const useCollapsed = (props: LayoutSiderProps) => {
       stopBreakpoints?.()
 
       if (breakpoint) {
-        const breakpoints = useSharedBreakpoints()
         stopBreakpoints = watchEffect(() => {
           const currBreakpointIndex = BREAKPOINTS_KEYS.findIndex(key => breakpoints[key])
           setCollapsed(currBreakpointIndex <= breakpointIndex.value)
