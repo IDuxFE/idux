@@ -60,6 +60,10 @@
 
   &-show-line {
     .@{tree-node-prefix} {
+      &-content-prefix {
+        padding-left: 8px;
+      }
+
       &-last {
         .@{tree-node-prefix}-leaf-line {
           &::before {
@@ -83,7 +87,7 @@
 
         &::after {
           position: absolute;
-          top: 50%;
+          top: calc(50% - @tree-node-line-size / 2);
           width: (@tree-node-content-height / 4);
           .horizontal-line();
 
@@ -179,6 +183,9 @@
     width: @tree-node-content-height;
     align-self: stretch;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: default;
 
     &-line {
@@ -225,8 +232,9 @@
 
     &-prefix,
     &-suffix {
-      display: inline-block;
-      text-align: center;
+      display: flex;
+      justify-items: center;
+      align-items: center;
     }
 
     &-label {
