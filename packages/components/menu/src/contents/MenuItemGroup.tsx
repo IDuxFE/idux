@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, provide } from 'vue'
+import { computed, defineComponent, inject, normalizeClass, provide } from 'vue'
 
 import { isString } from 'lodash-es'
 
@@ -41,6 +41,14 @@ export default defineComponent({
     const paddingLeft = usePaddingLeft(menuProps, mode, indent, level, !!menuItemGroupContext)
     const labelStyle = computed(() => ({ paddingLeft: paddingLeft.value }))
 
+    const classes = computed(() => {
+      const prefixCls = mergedPrefixCls.value
+      return normalizeClass({
+        [`${prefixCls}-item-group`]: true,
+        [`${prefixCls}-level-${level}`]: true,
+      })
+    })
+
     const onClick = (evt: Event) => {
       handleClick(key, 'itemGroup', evt)
     }
@@ -62,7 +70,7 @@ export default defineComponent({
         ? menuProps.customAdditional({ data: props.data, index: props.index })
         : undefined
       return (
-        <li class={prefixCls} aria-label={label} {...customAdditional}>
+        <li class={classes.value} aria-label={label} {...customAdditional}>
           <div class={`${prefixCls}-label`} style={labelStyle.value} onClick={onClick}>
             {iconNode}
             <span>{labelNode}</span>

@@ -1,9 +1,9 @@
 .@{collapse-transition-prefix} {
-
   &-enter-active,
   &-leave-active {
     overflow: hidden;
-    transition: height @transition-duration-base @ease-in-out, width @transition-duration-base @ease-in-out,
-      opacity @transition-duration-base @ease-in-out;
+    transition: height var(--ix-transition-duration-medium) var(--ix-ease-in-out),
+      width var(--ix-transition-duration-medium) var(--ix-ease-in-out),
+      opacity var(--ix-transition-duration-medium) var(--ix-ease-in-out);
   }
 }

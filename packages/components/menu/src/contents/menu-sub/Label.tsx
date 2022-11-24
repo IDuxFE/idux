@@ -19,7 +19,14 @@ export default defineComponent({
     const { props, key, isExpanded, isSelected, changeExpanded, handleMouseEvent, mode, paddingLeft } =
       inject(menuSubToken)!
 
-    const suffix = computed(() => props.data.suffix ?? config.suffix)
+    const mergedSuffix = computed(() => {
+      const { suffix } = props.data
+      if (suffix) {
+        return suffix
+      }
+      return mode.value !== 'horizontal' ? config.suffix : undefined
+    })
+
     const rotate = computed(() => {
       if (mode.value === 'inline') {
         return isExpanded.value ? -90 : 90
@@ -66,7 +73,7 @@ export default defineComponent({
           : undefined
       const iconNode = coverIcon(iconSlot, slotProps!, icon)
       const labelNode = labelSlot ? labelSlot(slotProps!) : label
-      const suffixNode = coverIcon(suffixSlot, slotProps!, suffix.value, rotate.value)
+      const suffixNode = coverIcon(suffixSlot, slotProps!, mergedSuffix.value, rotate.value)
 
       const prefixCls = `${mergedPrefixCls.value}-sub-label`
       return (

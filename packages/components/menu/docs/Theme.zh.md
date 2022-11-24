@@ -1,39 +1,31 @@
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@menu-text-color` | `@text-color` | - | - |
-| `@menu-background-color` | `@background-color-component` | - | - |
-| `@menu-highlight-color` | `@color-primary` | - | - |
-| `@menu-highlight-background-color` | `~colorPalette('@{color-primary}', -50) ` | - | - |
-| `@menu-disabled-color` | `@disabled-color` | - | - |
-| `@menu-disabled-background-color` | `transparent` | - | - |
-| `@menu-border-width` | `@border-width-sm` | - | - |
-| `@menu-border-style` | `@border-style` | - | - |
-| `@menu-border-color` | `@border-color-split` | - | - |
-| `@menu-font-size` | `@font-size-md` | - | - |
-| `@menu-vertical-padding` | `4px 8px` | - | - |
-| `@menu-vertical-font-size` | `@font-size-md` | - | - |
-| `@menu-item-height` | `@height-lg` | `44px` | - |
-| `@menu-item-padding-left` | `@spacing-md` | - | - |
-| `@menu-item-padding-right` | `@spacing-xl` | - | - |
-| `@menu-item-margin` | `@spacing-xs 0` | - | - |
-| `@menu-item-icon-margin-right` | `@spacing-sm` | - | - |
-| `@menu-item-border-right-width` | `@border-width-lg` | - | - |
-| `@menu-item-border-bottom-width` | `@border-width-md` | - | - |
-| `@menu-item-group-text-color` | `@text-color-secondary` | - | - |
-| `@menu-item-group-content-padding-left` | `@spacing-xl` | - | - |
-| `@menu-item-horizontal-padding` | `0 @spacing-xs` | - | - |
-| `@menu-item-divider-margin` | `@spacing-xs` | - | - |
-| `@menu-sub-suffix-icon-right` | `8px` | - | - |
+| `@menu-text-color` | `var(--ix-text-color)` | - | - |
+| `@menu-text-color-hover` | `var(--ix-text-color)` | - | - |
+| `@menu-text-color-active` | `var(--ix-color-primary)` | - | - |
+| `@menu-text-color-disabled` | `var(--ix-text-color-disabled)` | - | - |
+| `@menu-background-color` | `var(--ix-background-color)` | - | - |
+| `@menu-background-color-hover` | `var(--ix-background-color-middle)` | - | - |
+| `@menu-background-color-active` | `var(--ix-color-primary-l50)` | - | - |
+| `@menu-background-color-disabled` | `var(--ix-background-color)` | - | - |
+| `@menu-horizontal-background-color-active` | `var(--ix-background-color-light)` | - | - |
+| `@menu-border-color` | `var(--ix-border-color)` | - | - |
+| `@menu-height` | `var(--ix-height-md)` | `36px` | - |
+| `@menu-border-radius` | `var(--ix-border-radius-md)` | `0` | - |
+| `@menu-font-size` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
+| `@menu-icon-font-size` | `var(--ix-font-size-lg)` | - | - |
+| `@menu-item-group-text-color` | `var(--ix-text-color-info)` | - | - |
 | `@menu-overlay-min-width` | `128px` | - | - |
 | `@menu-overlay-border-radius` | `@border-radius-md` | `@border-radius-sm` | - |
 | `@menu-overlay-box-shadow` | `@shadow-bottom-md` | - | - |
-| `@menu-dark-disabled-color` | `@disabled-color-dark` | - | - |
-| `@menu-dark-color` | `@text-color-dark` | `@color-graphite-l30` | - |
-| `@menu-dark-background-color` | `@background-color-component-dark` | `@color-graphite-d40` | - |
-| `@menu-dark-highlight-background-color` | `fade(@color-white, 6%)` | `@color-graphite-d30` | - |
-| `@menu-dark-highlight-color` | `@color-primary` | `@color-graphite-l30` | - |
-| `@menu-dark-group-label-color` | `@color-graphite-d10` | - | - |
-| `@menu-collapsed-font-size` | `@font-size-lg` | - | - |
-| `@menu-collapsed-width` | `64px` | `44px` | - |
-| `@menu-sub-inline-font-size` | `@font-size-md` | - | - |
-| `@menu-icon-font-size` | `@font-size-lg` | - | - |
+| `@menu-collapsed-width` | `48px` | `44px` | - |
+| `@menu-dark-text-color` | `var(--ix-text-color-inverse)` | - | - |
+| `@menu-dark-text-color-hover` | `var(--ix-color-primary)` | `var(--ix-text-color-inverse)` | - |
+| `@menu-dark-text-color-active` | `var(--ix-color-primary)` | `var(--ix-text-color-inverse)` | - |
+| `@menu-dark-text-color-disabled` | `var(--ix-text-color-inverse-disabled)` | - | - |
+| `@menu-dark-background-color` | `var(--ix-background-color-inverse)` | - | - |
+| `@menu-dark-background-color-hover` | `transparent` | `@color-graphite-d50` | - |
+| `@menu-dark-background-color-active` | `@color-black` | `var(--ix-color-primary)` | - |
+| `@menu-dark-background-color-disabled` | `transparent` | - | - |
+| `@menu-dark-horizontal-background-color-active` | `@color-grey-d30` | `@color-graphite-d30` | - |
+| `@menu-dark-item-group-text-color` | `@color-grey-d10` | `@color-graphite-d10` | - |

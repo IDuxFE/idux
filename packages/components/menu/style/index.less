@@ -1,131 +1,80 @@
 @import '../../style/motion/fade.less';
+@import '../../style/mixins/clearfix.less';
 @import '../../style/mixins/ellipsis.less';
-@import '../../style/mixins/reset.less';
 
-@import './menu.less';
-@import './dark.less';
+@import './mode.less';
 @import './collapsed.less';
+@import './level.less';
+@import './light.less';
+@import './dark.less';
 
 .@{menu-prefix} {
-  .reset-component();
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: @menu-font-size;
+  line-height: calc(@menu-font-size + var(--ix-line-height-gutter));
+  transition: background-color var(--ix-transition-duration-slow), width var(--ix-transition-duration-medium);
 
-  transition: background @transition-duration-base, width @transition-duration-base;
+  .clearfix();
 
-  &-vertical,
-  &-inline {
-    width: 100%;
-    // https://github.com/IDuxFE/idux/issues/1013
-    padding: 0.02px 0;
-    font-size: @menu-vertical-font-size;
-    border-right: @menu-border-width @menu-border-style @menu-border-color;
+  a {
+    color: inherit;
+    text-decoration: none;
 
-    &.@{menu-prefix}-collapsed {
-      width: @menu-collapsed-width;
-    }
-
-    .@{menu-prefix}-item,
-    .@{menu-prefix}-sub-label {
-      margin: @menu-item-margin;
-    }
-
-    .@{menu-prefix}-item {
-      &::after {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        border-right: @menu-item-border-right-width @menu-border-style @menu-highlight-color;
-        content: '';
-        transform: scaleY(0);
-        opacity: 0;
-        transition: transform @transition-duration-base @ease-in-out, opacity @transition-duration-base @ease-in-out;
-      }
-
-      &-selected {
-        &::after {
-          transform: scaleY(1);
-          opacity: 1;
-        }
-      }
-    }
-
-    .@{menu-prefix}-divider {
-      width: 100%;
-      border-top: @menu-border-width @menu-border-style @menu-border-color;
+    ::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: transparent;
+      content: '';
     }
   }
 
-  &-vertical,
-  &-horizontal {
-    .@{menu-prefix}-sub-expanded {
-      color: @menu-highlight-color;
-      .@{menu-prefix}-sub-label a {
-        color: @menu-highlight-color;
-      }
+  &-item,
+  &-item-group-label,
+  &-sub-label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: @menu-height;
+    padding-left: 16px;
+    padding-right: calc(@menu-icon-font-size + 12px);
+    .ellipsis();
+
+    .@{icon-prefix} {
+      font-size: @menu-icon-font-size;
+    }
+
+    .@{icon-prefix} + span {
+      margin-left: 8px;
     }
   }
 
-  &-horizontal {
-    line-height: @menu-item-height;
-
-    .@{menu-prefix}-item,
-    .@{menu-prefix}-sub {
-      display: inline-block;
-      vertical-align: bottom;
-    }
-
-    .@{menu-prefix}-item,
-    .@{menu-prefix}-sub-label {
-      margin: 0 @menu-item-padding-left;
-      padding: @menu-item-horizontal-padding;
-      border-bottom: @menu-item-border-bottom-width @menu-border-style transparent;
-      transition: border @transition-duration-base;
-
-      &:hover,
-      &-expanded,
-      &-selected {
-        border-color: @menu-highlight-color;
-      }
-
-      &-disabled {
-        border-color: transparent !important;
-      }
-    }
-
-    .@{menu-prefix}-item:hover,
-    .@{menu-prefix}-item-selected,
-    .@{menu-prefix}-sub-label:hover,
-    .@{menu-prefix}-sub-expanded .@{menu-prefix}-sub-label,
-    .@{menu-prefix}-sub-selected .@{menu-prefix}-sub-label {
-      border-color: @menu-highlight-color;
-    }
-
-    .@{menu-prefix}-item-disabled,
-    .@{menu-prefix}-sub-disabled .@{menu-prefix}-sub-label {
-      border-color: transparent !important;
-    }
-
-    .@{menu-prefix}-sub-label-suffix {
-      display: none;
-    }
-
-    .@{menu-prefix}-divider {
-      display: inline-block;
-      vertical-align: bottom;
-      height: @menu-item-height - @menu-item-divider-margin * 2;
-      margin: @menu-item-divider-margin 0;
-      border-right: @menu-border-width @menu-border-style @menu-border-color;
-    }
+  &-item,
+  &-sub-label {
+    cursor: pointer;
+    transition: color var(--ix-transition-duration-fast) var(--ix-ease-in-out),
+      background-color var(--ix-transition-duration-fast) var(--ix-ease-in-out),
+      border-color var(--ix-transition-duration-fast) var(--ix-ease-in-out);
   }
 
-  &-sub {
-    .@{menu-prefix}-inline {
+  &-item&-item-disabled,
+  &-sub-disabled > &-sub-label {
+    cursor: not-allowed;
+  }
+
+  &-overlay {
+    min-width: @menu-overlay-min-width;
+    background-color: @menu-background-color;
+    border-radius: @menu-overlay-border-radius;
+    box-shadow: @menu-overlay-box-shadow;
+
+    .@{menu-prefix} {
       border-right: 0;
-      font-size: @menu-sub-inline-font-size;
     }
-  }
-
-  .@{icon-prefix} {
-    font-size: @menu-icon-font-size;
   }
 }
