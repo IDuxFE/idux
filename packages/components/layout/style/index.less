@@ -1,7 +1,7 @@
 @import '../../style/mixins/reset.less';
 
 .@{layout-prefix} {
-  .reset-component();
+  .reset-component-new();
 
   display: grid;
   grid-template:
@@ -10,13 +10,10 @@
     'sider footer footer';
   grid-template-columns: auto 1fr auto;
   grid-template-rows: auto 1fr auto;
-  grid-area: content;
 
   &-header {
     position: relative;
     grid-area: header;
-    background-color: @layout-header-background-color;
-    color: @layout-header-color;
     height: @layout-header-height;
     line-height: @layout-header-height;
     padding: @layout-header-padding;
@@ -30,18 +27,14 @@
   &-footer {
     position: relative;
     grid-area: footer;
-    background: @layout-footer-background;
-    color: @layout-footer-color;
     padding: @layout-footer-padding;
   }
 
   &-sider {
     position: relative;
     grid-area: sider;
-    background: @layout-sider-background;
-    color: @layout-sider-color;
     width: @layout-sider-width;
-    transition: width @transition-duration-base;
+    transition: width var(--ix-transition-duration-medium) var(--ix-ease-in-out);
 
     &-collapsed {
       width: @layout-sider-collapsed-width;
