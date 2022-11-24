@@ -34,19 +34,20 @@ export default defineComponent({
     } = inject(menuToken)!
     const menuSubContext = inject(menuSubToken, null)
     const menuItemGroupContext = inject(menuItemGroupToken, false)
+    const level = menuSubContext ? menuSubContext.level + 1 : 1
 
     const isSelected = computed(() => selectedKeys.value.includes(key))
 
     const classes = computed(() => {
-      const prefixCls = `${mergedPrefixCls.value}-item`
+      const prefixCls = mergedPrefixCls.value
       return normalizeClass({
-        [prefixCls]: true,
-        [`${prefixCls}-disabled`]: props.data.disabled,
-        [`${prefixCls}-selected`]: isSelected.value,
+        [`${prefixCls}-item`]: true,
+        [`${prefixCls}-level-${level}`]: true,
+        [`${prefixCls}-item-disabled`]: props.data.disabled,
+        [`${prefixCls}-item-selected`]: isSelected.value,
       })
     })
 
-    const level = menuSubContext ? menuSubContext.level + 1 : 1
     const mode = computed(() => menuProps.mode)
     const paddingLeft = usePaddingLeft(menuProps, mode, indent, level, menuItemGroupContext)
     const style = computed(() => {
@@ -60,12 +61,14 @@ export default defineComponent({
     }
 
     return () => {
-      const { disabled, icon, label, customIcon, customLabel } = props.data
+      const { disabled, icon, label, customIcon, customLabel, customSuffix } = props.data
 
       const iconRender = customIcon ?? 'itemIcon'
       const iconSlot = isString(iconRender) ? menuSlots[iconRender] : iconRender
       const labelRender = customLabel ?? 'itemLabel'
       const labelSlot = isString(labelRender) ? menuSlots[labelRender] : labelRender
+      const suffixRender = customSuffix ?? 'itemSuffix'
+      const suffixSlot = isString(suffixRender) ? menuSlots[suffixRender] : suffixRender
 
       const slotProps = iconSlot || labelSlot ? { ...props.data, selected: isSelected.value } : undefined
       const iconNode = coverIcon(iconSlot, slotProps!, icon)
@@ -73,6 +76,7 @@ export default defineComponent({
       const customAdditional = menuProps.customAdditional
         ? menuProps.customAdditional({ data: props.data, index: props.index })
         : undefined
+      const suffixNode = coverIcon(suffixSlot, slotProps!, props.data.suffix)
       return (
         <li
           class={classes.value}
@@ -85,6 +89,7 @@ export default defineComponent({
         >
           {iconNode}
           <span>{labelNode}</span>
+          {suffixNode && <span class={`${mergedPrefixCls.value}-item-suffix`}>{suffixNode}</span>}
         </li>
       )
     }

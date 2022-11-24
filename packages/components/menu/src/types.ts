@@ -48,6 +48,10 @@ export const menuProps = {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
     default: undefined,
   },
+  overlayDelay: {
+    type: [Number, Array] as PropType<number | [number | null, number | null]>,
+    default: [0, 100],
+  },
   selectable: {
     type: Boolean,
     default: true,
@@ -72,8 +76,10 @@ export interface MenuItemProps<K = VKey> {
   disabled?: boolean
   icon?: string | VNode
   label?: string
+  suffix?: string
   customIcon?: string | ((data: MenuItemProps<K> & { selected: boolean }) => VNodeChild)
   customLabel?: string | ((data: MenuItemProps<K> & { selected: boolean }) => VNodeChild)
+  customSuffix?: string | ((data: MenuItemProps<K> & { selected: boolean }) => VNodeChild)
 }
 export type MenuItemPublicProps = Omit<MenuItemProps, 'type'>
 export type MenuItemComponent = FunctionalComponent<

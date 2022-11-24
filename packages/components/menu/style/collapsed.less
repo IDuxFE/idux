@@ -1,11 +1,8 @@
 .@{menu-prefix} {
-
   &-collapsed {
     .@{menu-prefix}-item,
     .@{menu-prefix}-item-group-label,
     .@{menu-prefix}-sub-label {
-      font-size: @menu-collapsed-font-size;
-
       .@{icon-prefix} + span {
         display: none;
       }
@@ -20,13 +17,18 @@
     }
   }
 
-  &-vertical&-collapsed,
-  &-inline&-collapsed {
+  &-collapsed&-vertical,
+  &-collapsed&-inline {
+    width: @menu-collapsed-width;
+
     .@{menu-prefix}-item,
     .@{menu-prefix}-sub > .@{menu-prefix}-sub-label,
-    .@{menu-prefix}-item-group .@{menu-prefix}-item,
     .@{menu-prefix}-item-group .@{menu-prefix}-sub-label {
-      padding: 0 ~'calc(50% - @{menu-collapsed-font-size} / 2)';
+      padding: if(
+        (@theme = seer),
+        0 calc(50% - @menu-icon-font-size / 2),
+        0 calc(50% - 4px - @menu-icon-font-size / 2)
+      );
     }
   }
 }

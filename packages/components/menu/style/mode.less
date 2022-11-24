@@ -1,0 +1,58 @@
+.@{menu-prefix} {
+  &-vertical,
+  &-inline {
+    width: 100%;
+    // https://github.com/IDuxFE/idux/issues/1013
+    padding: 0.02px 0;
+    border-right: 1px solid @menu-border-color;
+
+    .@{menu-prefix}-item,
+    .@{menu-prefix}-sub-label {
+      margin: if((@theme = seer), 0, 4px);
+      border-radius: @menu-border-radius;
+    }
+
+    .@{menu-prefix}-item-suffix,
+    .@{menu-prefix}-sub-label-suffix {
+      position: absolute;
+      right: if((@theme = seer), 8px, 4px);
+    }
+
+    .@{menu-prefix}-divider {
+      width: 100%;
+      border-top: 1px solid @menu-border-color;
+    }
+  }
+
+  &-horizontal {
+    display: flex;
+    align-items: center;
+
+    .@{menu-prefix}-item-suffix,
+    .@{menu-prefix}-sub-label-suffix {
+      position: unset;
+      margin-left: 4px;
+    }
+
+    .@{menu-prefix}-item,
+    .@{menu-prefix}-sub-label {
+      margin: if((@theme = seer), 0, 0 4px);
+      padding: if((@theme = seer), 0 20px, 0 16px);
+      border-top: 2px solid transparent;
+      border-bottom: 2px solid transparent;
+    }
+
+    .@{menu-prefix}-divider {
+      display: inline-block;
+      vertical-align: bottom;
+      height: calc(@menu-height - 8px);
+      border-right: 1px solid @menu-border-color;
+    }
+  }
+
+  &-sub {
+    .@{menu-prefix}-inline {
+      border-right: 0;
+    }
+  }
+}

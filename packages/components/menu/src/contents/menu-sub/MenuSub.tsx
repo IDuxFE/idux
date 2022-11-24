@@ -32,8 +32,6 @@ import InlineContent from './InlineContent'
 import Label from './Label'
 import OverlayContent from './OverlayContent'
 
-const defaultDelay: [number, number] = [0, 100]
-
 export default defineComponent({
   name: 'MenuSub',
   props: menuSubProps,
@@ -85,13 +83,13 @@ export default defineComponent({
     const placement = computed(() => (mode.value === 'vertical' ? 'rightStart' : 'bottomStart'))
 
     const classes = computed(() => {
-      const prefixCls = `${mergedPrefixCls.value}-sub`
+      const prefixCls = mergedPrefixCls.value
       return normalizeClass({
-        [prefixCls]: true,
-        [`${prefixCls}-disabled`]: props.data.disabled,
-        [`${prefixCls}-expanded`]: isExpanded.value,
-        [`${prefixCls}-selected`]: isSelected.value,
-        [`${prefixCls}-${mode.value}`]: true,
+        [`${prefixCls}-sub`]: true,
+        [`${prefixCls}-level-${level}`]: true,
+        [`${prefixCls}-sub-disabled`]: props.data.disabled,
+        [`${prefixCls}-sub-expanded`]: isExpanded.value,
+        [`${prefixCls}-sub-selected`]: isSelected.value,
       })
     })
 
@@ -121,7 +119,7 @@ export default defineComponent({
             autoAdjust
             container={mergedOverlayContainer.value}
             destroyOnHide={false}
-            delay={defaultDelay}
+            delay={menuProps.overlayDelay}
             disabled={disabled}
             offset={offset.value}
             placement={placement.value}

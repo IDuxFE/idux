@@ -1,12 +1,18 @@
 @import './default.variable.less';
 
-@menu-item-height: 44px;
+@menu-height: 36px;
+@menu-border-radius: 0;
+@menu-font-size: var(--ix-font-size-sm);
 
-@menu-dark-background-color: @color-graphite-d40;
-@menu-dark-color: @color-graphite-l30;
-@menu-dark-highlight-background-color: @color-graphite-d30;
-@menu-dark-highlight-color: @color-graphite-l30;
+@menu-overlay-border-radius: @border-radius-sm;
 
 @menu-collapsed-width: 44px;
 
-@menu-overlay-border-radius: @border-radius-sm;
+// dark
+@menu-dark-text-color-hover: var(--ix-text-color-inverse);
+@menu-dark-text-color-active: var(--ix-text-color-inverse);
+@menu-dark-background-color-hover: @color-graphite-d50;
+@menu-dark-background-color-active: var(--ix-color-primary);
+@menu-dark-horizontal-background-color-active: @color-graphite-d30;
+
+@menu-dark-item-group-text-color: @color-graphite-d10;

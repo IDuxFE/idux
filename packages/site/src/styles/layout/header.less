@@ -56,8 +56,8 @@
       & > .ix-menu-sub .ix-menu-sub-title,
       & > .ix-menu-item {
         height: @header-height;
-        line-height: @header-height - @menu-item-border-bottom-width * 2;
-        border-top: @menu-item-border-bottom-width @menu-border-style transparent;
+        line-height: @header-height - 2px * 2;
+        border-top: 2px solid transparent;
       }
 
       & > .ix-menu-sub:hover,
@@ -65,8 +65,8 @@
       & > .ix-menu-sub-selected,
       & > .ix-menu-item:hover,
       & > .ix-menu-item-selected {
-        border-top: @menu-item-border-bottom-width @menu-border-style @menu-highlight-color;
-        border-bottom: @menu-item-border-bottom-width @menu-border-style transparent;
+        border-top: 2px solid @menu-text-color-active;
+        border-bottom: 2px solid transparent;
       }
     }
   }

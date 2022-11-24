@@ -23,7 +23,7 @@ export const seerConfig: DeepPartialGlobalConfig = {
     labelAlign: 'start',
   },
   menu: {
-    indent: 16,
+    offset: [0, 4],
   },
   modal: {
     centered: true,

@@ -166,8 +166,8 @@ export const defaultConfig: GlobalConfig = {
   },
   menu: {
     getKey: 'key',
-    indent: 24,
-    offset: [0, 4],
+    indent: 16,
+    offset: [0, 8],
     suffix: 'right',
     theme: 'light',
   },

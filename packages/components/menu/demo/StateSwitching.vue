@@ -97,10 +97,20 @@ const dataSource: MenuData[] = [
     key: 'sub4',
     icon: 'github',
     label: 'Menu Sub 4',
-    disabled: true,
     children: [
       { key: 'item10', label: 'Item 10' },
       { key: 'item11', label: 'Item 11' },
+    ],
+  },
+  {
+    type: 'sub',
+    key: 'sub5',
+    icon: 'gitlab',
+    label: 'Menu Sub 5',
+    disabled: true,
+    children: [
+      { key: 'item12', label: 'Item 12' },
+      { key: 'item13', label: 'Item 13' },
     ],
   },
 ]

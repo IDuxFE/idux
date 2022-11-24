@@ -11,11 +11,12 @@
 | `customAdditional` | 自定义下拉选项的额外属性 | `MenuCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
 | `dataSource` | 菜单数据数组 | `MenuData[]` | - | - | 优先级高于 `default` 插槽 |
 | `getKey` | 获取数据的唯一标识 | `string \| (data: MenuData) => VKey` | `key` | ✅ | - |
-| `indent` | `inline` 模式时的菜单缩进宽度 | `string \| number` | `24` | ✅ | `seer` 主题下默认为 `16` |
+| `indent` | `inline` 模式时的菜单缩进宽度 | `string \| number` | `16` | ✅ | - |
 | `mode` | 菜单模式，现在支持垂直、水平和内嵌 | `'vertical' \| 'horizontal' \| 'inline'` | `'vertical'` | - | - |
 | `multiple` | 是否支持多选 | `boolean` | `false` | - | - |
 | `overlayClassName` | 悬浮层的自定义 `class` | `string` | - | - | `inline` 模式时无效 |
 | `overlayContainer` | 自定义菜单容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | `inline` 模式时无效 |
+| `overlayDelay` | 浮层的打开和关闭延迟 | `number \| [number | null, number | null]` | `[0, 100]` | - | 为数组时，第一个元素是延迟显示的时间，第二个元素是延迟隐藏的时间 |
 | `selectable` | 是否允许选中 | `boolean` | `true` | - | - |
 | `theme` | 主题颜色 | `'light' \| 'dark'` | `'light'` | ✅ | - |
 | `onClick` | 点击菜单后的回调 | `(options: MenuClickOptions) => void` | - | - |
@@ -41,8 +42,10 @@ export type MenuCustomAdditional = (options: { data: MenuData; index: number }) 
 | `disabled` | 是否禁用 | `boolean` | - | - | - |
 | `icon` | 菜单图标| `string  \| VNode` | - | - |
 | `label` | 菜单文本 | `string`  | - | - |
+| `suffix` | 后缀图标 | `string` | - | - | - |
 | `customIcon` | 自定义图标 | `string \| ((data: MenuItemProps & { selected: boolean }) => VNodeChild)` | `'itemIcon'` | - | 类型为 `string` 时，对应插槽名 |
 | `customLabel` | 自定义文本 | `string \| ((data: MenuItemProps & { selected: boolean }) => VNodeChild)` | `'itemLabel'` | - | 类型为 `string` 时，对应插槽名 |
+| `customSuffix` | 自定义文本 | `string \| ((data: MenuItemProps & { selected: boolean }) => VNodeChild)` | `'itemLabel'` | - | 类型为 `string` 时，对应插槽名 |
 
 #### MenuItemGroupProps
 
@@ -67,7 +70,7 @@ export type MenuCustomAdditional = (options: { data: MenuData; index: number }) 
 | `icon` | 菜单图标| `string \| VNode` | - | - |
 | `label` | 菜单文本 | `string`  | - | - |
 | `offset` | 浮层偏移量 | `[number, number]` | `[0, 4]` | ✅ | `inline` 模式时无效 |
-| `suffix` | 后缀图标 | `string` | `right` | ✅ | - |
+| `suffix` | 后缀图标 | `string` | `right` | ✅ | `horizontal` 模式下全局配置不生效 |
 | `customIcon` | 自定义图标 | `string \| ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)` | `'subIcon'` | - | 类型为 `string` 时，对应插槽名 |
 | `customLabel` | 自定义文本 | `string \| ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)` | `'subLabel'` | - | 类型为 `string` 时，对应插槽名 |
 | `customSuffix` | 自定义后缀图标 | `string \| ((data: MenuSubProps & { expanded: boolean; selected: boolean }) => VNodeChild)` | `'subSuffix'` | - | 类型为 `string` 时，对应插槽名 |

@@ -1,64 +1,56 @@
 .@{menu-prefix} {
-
-  &&-dark {
-    color: @menu-dark-color;
+  &-dark {
+    color: @menu-dark-text-color;
     background-color: @menu-dark-background-color;
 
-    a {
-      color: @menu-dark-color;
-    }
-
     .@{menu-prefix}-item-group-label {
-      color: @menu-dark-group-label-color;
+      color: @menu-dark-item-group-text-color;
     }
 
-    .@{menu-prefix}-sub-label:hover:not(.@{menu-prefix}-sub-disabled) {
-      color: @menu-dark-highlight-color;
-      background-color: @menu-dark-highlight-background-color;
+    .@{menu-prefix}-item,
+    .@{menu-prefix}-sub-label {
+      &:hover {
+        color: @menu-dark-text-color-hover;
+        background-color: @menu-dark-background-color-hover;
+      }
     }
-    
-    .@{menu-prefix}-item:not(.@{menu-prefix}-item-disabled):not(.@{menu-prefix}-item-selected),
-    .@{menu-prefix}-sub:not(.@{menu-prefix}-sub-disabled):not(.@{menu-prefix}-sub-selected) > .@{menu-prefix}-sub-label {
 
-      &:hover,
-      &:active {
-        color: @menu-dark-highlight-color;
-        background-color: @menu-dark-highlight-background-color;
-      }
-
-      &:hover a,
-      &:active a {
-        color:@menu-dark-highlight-color;
-      }
+    .@{menu-prefix}-item.@{menu-prefix}-item-selected {
+      background-color: @menu-dark-background-color-active;
     }
 
     .@{menu-prefix}-item.@{menu-prefix}-item-selected,
-    .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label {
-      background: @menu-dark-highlight-background-color;
-      color: @menu-dark-highlight-color;
-
-      a {
-        color: @menu-dark-highlight-color;
-      }
+    .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label,
+    &:not(.@{menu-prefix}-inline) > .@{menu-prefix}-sub-expanded > .@{menu-prefix}-sub-label {
+      color: @menu-dark-text-color-active;
+      font-weight: var(--ix-font-weight-lg);
     }
 
-    .@{menu-prefix}-item-disabled,
+    .@{menu-prefix}-item.@{menu-prefix}-item-disabled,
     .@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-label {
-      color: @menu-dark-disabled-color;
+      color: @menu-dark-text-color-disabled;
+      background-color: @menu-dark-background-color-disabled;
+    }
+  }
 
-      a {
-        color: @menu-dark-disabled-color;
-      }
+  &-dark&-horizontal {
+    .@{menu-prefix}-item:hover,
+    .@{menu-prefix}-sub-label:hover,
+    .@{menu-prefix}-item.@{menu-prefix}-item-selected,
+    .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label,
+    .@{menu-prefix}-sub-expanded > .@{menu-prefix}-sub-label {
+      background-color: @menu-dark-horizontal-background-color-active;
+    }
+
+    .@{menu-prefix}-item.@{menu-prefix}-item-disabled,
+    .@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-label {
+      background-color: @menu-dark-background-color;
+      border-bottom-color: transparent;
     }
   }
 
   &-dark&-inline,
   &-dark&-vertical {
-    border-right: 0;
-
-    .@{menu-prefix}-divider {
-      width: ~'calc(100% - @{menu-item-divider-margin} * 2)';
-      margin: 0 @menu-item-divider-margin;
-    }
+    border-right-color: transparent;
   }
 }
