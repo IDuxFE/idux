@@ -66,13 +66,13 @@ export function useFlattedNodes(
     const expandedKeysMap = new Map(expandedKeys.value.map((item, index) => [item, index]))
     const searchedKeysMap = new Map(searchedKeys.value.map((item, index) => [item, index]))
 
+    if (searchValue && !searchedKeysMap.size) {
+      return []
+    }
+
     if (expandedKeysMap.size || searchedKeysMap.size) {
       const nodes = flatNode(mergedNodes.value, expandedKeysMap, searchedKeysMap)
       return nodes
-    }
-
-    if (searchValue && !searchedKeysMap.size) {
-      return []
     }
 
     return mergedNodes.value.map(item => ({ ...item, expanded: false, level: 0 }))
