@@ -421,15 +421,13 @@ describe('ProTree', () => {
 
     const input = wrapper.find('.ix-pro-tree-search-wrapper .ix-input-inner')
 
-    const allNodes = wrapper.findAll('.ix-tree-node')
-
-    expect(allNodes[1].find('.ix-tree-node-content-label-highlight').exists()).toBe(true)
+    expect(!!wrapper.findAll('.ix-tree-node')[1]?.find('.ix-tree-node-content-label-highlight').exists()).toBe(true)
 
     await wrapper.setProps({
       searchValue: 'tmp',
     })
 
-    expect(allNodes[1].find('.ix-tree-node-content-label-highlight').exists()).toBe(false)
+    expect(!!wrapper.findAll('.ix-tree-node')[1]?.find('.ix-tree-node-content-label-highlight').exists()).toBe(false)
 
     await input.setValue('search text')
 

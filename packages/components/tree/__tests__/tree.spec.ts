@@ -908,7 +908,7 @@ describe('Tree', () => {
     await wrapper.setProps({ searchValue: '0-0-0-0' })
 
     allNodes = wrapper.findAll('.ix-tree-node')
-    expect(allNodes.length).toBe(4)
+    expect(allNodes.length).toBe(0)
     expect(wrapper.html()).toMatchSnapshot()
 
     // setValue = ''
