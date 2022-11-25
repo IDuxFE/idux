@@ -8,29 +8,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
-import type { LayoutSiderProps } from '@idux/components/layout'
+import type { LayoutFixedType, LayoutProps, LayoutSiderProps } from '@idux/components/layout'
 import type { MenuClickOptions, MenuData, MenuProps, MenuTheme } from '@idux/components/menu'
 import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
 
 export const proLayoutProps = {
-  activeKey: {
-    type: [String, Number, Symbol] as PropType<VKey>,
-    default: undefined,
-  },
-  collapsed: {
-    type: Boolean,
-    default: undefined,
-  },
-  compress: {
-    type: Boolean,
-    default: true,
-  },
+  activeKey: { type: [String, Number, Symbol] as PropType<VKey>, default: undefined },
+  /**
+   * @deprecated
+   */
+  collapsed: { type: Boolean, default: undefined },
+  /**
+   * @deprecated
+   */
+  compress: { type: Boolean, default: true },
   fixed: {
-    type: [Boolean, Object] as PropType<boolean | { header: boolean; sider: boolean }>,
-    default: false,
+    type: [Boolean, Object] as PropType<LayoutFixedType>,
+    default: true,
   },
   headerMenu: {
     type: Object as PropType<MenuProps>,
+    default: undefined,
+  },
+  logo: {
+    type: Object as PropType<ProLayoutLogo>,
     default: undefined,
   },
   menus: {
@@ -41,8 +42,10 @@ export const proLayoutProps = {
     type: Object as PropType<LayoutSiderProps>,
     default: undefined,
   },
-  siderHover: {
-    type: [Boolean, Object] as PropType<boolean | SiderHover>,
+  /**
+   * @deprecated
+   */ siderHover: {
+    type: [Boolean, Object] as PropType<boolean | { delay: number }>,
     default: undefined,
   },
   siderMenu: {
@@ -50,16 +53,19 @@ export const proLayoutProps = {
     default: undefined,
   },
   theme: {
-    type: [String, Object] as PropType<MenuTheme | { header: MenuTheme; sider: MenuTheme }>,
-    default: 'light',
+    type: [String, Object] as PropType<ProLayoutTheme>,
+    default: () => ({ header: 'dark', sider: 'light' }),
   },
   type: {
     type: String as PropType<ProLayoutType>,
-    default: 'mixin',
+    default: 'both',
   },
 
   // event
   'onUpdate:activeKey': [Function, Array] as PropType<MaybeArray<(activeKey: any | null) => void>>,
+  /**
+   * @deprecated
+   */
   'onUpdate:collapsed': [Function, Array] as PropType<MaybeArray<(collapsed: boolean) => void>>,
   onMenuClick: [Function, Array] as PropType<MaybeArray<(options: MenuClickOptions<any>) => void>>,
 } as const
@@ -67,7 +73,7 @@ export const proLayoutProps = {
 export type ProLayoutProps = ExtractInnerPropTypes<typeof proLayoutProps>
 export type ProLayoutPublicProps = ExtractPublicPropTypes<typeof proLayoutProps>
 export type ProLayoutComponent = DefineComponent<
-  Omit<HTMLAttributes, keyof ProLayoutPublicProps> & ProLayoutPublicProps
+  Omit<HTMLAttributes, keyof ProLayoutPublicProps> & LayoutProps & ProLayoutPublicProps
 >
 export type ProLayoutInstance = InstanceType<DefineComponent<ProLayoutProps>>
 
@@ -85,11 +91,10 @@ export type ProLayoutSiderTriggerComponent = DefineComponent<
 >
 export type ProLayoutSiderTriggerInstance = InstanceType<DefineComponent<ProLayoutSiderTriggerProps>>
 
-export type ProLayoutFixed = boolean | { header: boolean; sider: boolean }
+export interface ProLayoutLogo {
+  image: string | VNode
+  title: string
+  link: string
+}
+export type ProLayoutTheme = MenuTheme | { header: MenuTheme; sider: MenuTheme }
 export type ProLayoutType = 'header' | 'sider' | 'mixin' | 'both'
-export interface SiderHover {
-  delay: number
-}
-export interface SiderHoverCtrl extends SiderHover {
-  enable: boolean
-}

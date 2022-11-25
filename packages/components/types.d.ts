@@ -40,6 +40,7 @@ import type {
   LayoutFooterComponent,
   LayoutHeaderComponent,
   LayoutSiderComponent,
+  LayoutSiderTriggerComponent,
 } from '@idux/components/layout'
 import type { ListComponent, ListItemComponent } from '@idux/components/list'
 import type { LoadingBarProviderComponent } from '@idux/components/loading-bar'
@@ -129,6 +130,7 @@ declare module 'vue' {
     IxLayoutFooter: LayoutFooterComponent
     IxLayoutHeader: LayoutHeaderComponent
     IxLayoutSider: LayoutSiderComponent
+    IxLayoutSiderTrigger: LayoutSiderTriggerComponent
     IxList: ListComponent
     IxListItem: ListItemComponent
     IxMenu: MenuComponent

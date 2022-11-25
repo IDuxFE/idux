@@ -35,7 +35,7 @@ export default defineComponent({
 
     const handleClick = (evt: Event) => {
       evt.stopPropagation()
-      setCollapsed(!collapsed.value)
+      setCollapsed(!collapsed.value, 'trigger')
     }
 
     return () => {

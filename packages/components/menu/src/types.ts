@@ -50,7 +50,7 @@ export const menuProps = {
   },
   overlayDelay: {
     type: [Number, Array] as PropType<number | [number | null, number | null]>,
-    default: [0, 100],
+    default: (): [number, number] => [0, 100],
   },
   selectable: {
     type: Boolean,

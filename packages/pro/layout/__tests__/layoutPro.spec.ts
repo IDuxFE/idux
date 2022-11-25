@@ -55,7 +55,8 @@ const dataSource: MenuData[] = [
   { type: 'item', key: 'item12', icon: 'mail', label: 'Item 12' },
 ]
 
-const defaultSelectedLabel = 'Item 5'
+const defaultSelectedSubLabel = 'Sub Menu 1'
+const defaultSelectedItemLabel = 'Item 5'
 const defaultContent = 'This is page content'
 
 describe('ProLayout', () => {
@@ -86,16 +87,17 @@ describe('ProLayout', () => {
       props: { 'onUpdate:activeKey': onUpdateActiveKey },
     })
 
-    expect(wrapper.find('.ix-menu-item-selected').text()).toBe(defaultSelectedLabel)
+    expect(wrapper.find('.ix-pro-layout-header').find('.ix-menu-item-selected').text()).toBe(defaultSelectedSubLabel)
+    expect(wrapper.find('.ix-pro-layout-sider').find('.ix-menu-item-selected').text()).toBe(defaultSelectedItemLabel)
 
     await wrapper.setProps({ activeKey: 'item7' })
 
-    expect(wrapper.find('.ix-menu-item-selected').text()).toBe('Item 7')
+    expect(wrapper.find('.ix-pro-layout-sider').find('.ix-menu-item-selected').text()).toBe('Item 7')
 
-    const items = await wrapper.findAll('.ix-menu-item')
+    const items = await wrapper.find('.ix-pro-layout-sider').findAll('.ix-menu-item')
     await items[items.length - 1].trigger('click')
 
-    expect(onUpdateActiveKey).toBeCalledWith('item12')
+    expect(onUpdateActiveKey).toBeCalled()
   })
 
   test('v-model:collapsed work', async () => {
@@ -107,30 +109,30 @@ describe('ProLayout', () => {
       },
     })
 
-    expect(wrapper.find('.ix-pro-layout-sider-collapsed').exists()).toBe(true)
+    expect(wrapper.find('.ix-layout-sider-collapsed').exists()).toBe(true)
 
     await wrapper.setProps({ collapsed: false })
 
-    expect(wrapper.find('.ix-pro-layout-sider-collapsed').exists()).toBe(false)
+    expect(wrapper.find('.ix-layout-sider-collapsed').exists()).toBe(false)
 
     await wrapper.findComponent(LayoutSiderTrigger).trigger('click')
 
-    expect(onUpdateCollapsed).toBeCalledWith(true)
+    expect(onUpdateCollapsed).toBeCalledWith(true, 'trigger')
   })
 
   test('compress work', async () => {
     const wrapper = ProLayoutMount({})
     await flushPromises()
 
-    expect(wrapper.classes()).not.toContain('ix-pro-layout-float')
+    expect(wrapper.classes()).not.toContain('ix-layout-float-sider')
 
     await wrapper.setProps({ compress: false })
 
-    expect(wrapper.classes()).toContain('ix-pro-layout-float')
+    expect(wrapper.classes()).toContain('ix-layout-float-sider')
 
     await wrapper.setProps({ compress: true })
 
-    expect(wrapper.classes()).not.toContain('ix-pro-layout-float')
+    expect(wrapper.classes()).not.toContain('ix-layout-float-sider')
   })
 
   test('collapsedDelay work', async () => {
@@ -144,42 +146,15 @@ describe('ProLayout', () => {
     })
     await flushPromises()
 
-    expect(wrapper.find('.ix-pro-layout-sider-collapsed').exists()).toBe(true)
+    expect(wrapper.find('.ix-layout-sider-collapsed').exists()).toBe(true)
 
-    await wrapper.findComponent(LayoutSider).trigger('mouseenter')
+    await wrapper.findComponent(LayoutSider).trigger('pointerenter')
 
     expect(onUpdateCollapsed).not.toBeCalled()
 
     await wait(10)
 
-    expect(onUpdateCollapsed).toBeCalledWith(false)
-  })
-
-  test('fixed work', async () => {
-    const wrapper = ProLayoutMount({ props: { fixed: true } })
-    await flushPromises()
-
-    expect(wrapper.classes()).toContain('ix-pro-layout-fixed')
-    expect(wrapper.find('.ix-pro-layout-header').classes()).toContain('ix-pro-layout-header-fixed')
-    expect(wrapper.find('.ix-pro-layout-sider').classes()).toContain('ix-pro-layout-sider-fixed')
-
-    await wrapper.setProps({ fixed: false })
-
-    expect(wrapper.classes()).not.toContain('ix-pro-layout-fixed')
-    expect(wrapper.find('.ix-pro-layout-header').classes()).not.toContain('ix-pro-layout-header-fixed')
-    expect(wrapper.find('.ix-pro-layout-sider').classes()).not.toContain('ix-pro-layout-sider-fixed')
-
-    await wrapper.setProps({ fixed: { header: true, sider: false } })
-
-    expect(wrapper.classes()).toContain('ix-pro-layout-fixed')
-    expect(wrapper.find('.ix-pro-layout-header').classes()).toContain('ix-pro-layout-header-fixed')
-    expect(wrapper.find('.ix-pro-layout-sider').classes()).not.toContain('ix-pro-layout-sider-fixed')
-
-    await wrapper.setProps({ fixed: { header: false, sider: true } })
-
-    expect(wrapper.classes()).toContain('ix-pro-layout-fixed')
-    expect(wrapper.find('.ix-pro-layout-header').classes()).not.toContain('ix-pro-layout-header-fixed')
-    expect(wrapper.find('.ix-pro-layout-sider').classes()).toContain('ix-pro-layout-sider-fixed')
+    expect(onUpdateCollapsed).toBeCalledWith(false, 'pointer')
   })
 
   test('menus work', async () => {
@@ -195,15 +170,20 @@ describe('ProLayout', () => {
   })
 
   test('theme work', async () => {
-    const wrapper = ProLayoutMount({ props: { mode: 'both' } })
+    const wrapper = ProLayoutMount()
 
-    expect(wrapper.find('.ix-pro-layout-header').classes()).toContain('ix-pro-layout-header-light')
+    expect(wrapper.find('.ix-pro-layout-header').classes()).toContain('ix-pro-layout-header-dark')
     expect(wrapper.find('.ix-pro-layout-sider').classes()).toContain('ix-pro-layout-sider-light')
 
     await wrapper.setProps({ theme: 'dark' })
 
     expect(wrapper.find('.ix-pro-layout-header').classes()).toContain('ix-pro-layout-header-dark')
     expect(wrapper.find('.ix-pro-layout-sider').classes()).toContain('ix-pro-layout-sider-dark')
+
+    await wrapper.setProps({ theme: 'light' })
+
+    expect(wrapper.find('.ix-pro-layout-header').classes()).toContain('ix-pro-layout-header-light')
+    expect(wrapper.find('.ix-pro-layout-sider').classes()).toContain('ix-pro-layout-sider-light')
 
     await wrapper.setProps({ theme: { header: 'light', sider: 'dark' } })
 
@@ -213,6 +193,12 @@ describe('ProLayout', () => {
 
   test('type work', async () => {
     const wrapper = ProLayoutMount()
+
+    expect(wrapper.classes()).toContain('ix-pro-layout-is-both')
+    expect(wrapper.find('.ix-pro-layout-header').exists()).toBe(true)
+    expect(wrapper.find('.ix-pro-layout-sider').exists()).toBe(true)
+
+    await wrapper.setProps({ type: 'mixin' })
 
     expect(wrapper.classes()).toContain('ix-pro-layout-is-mixin')
     expect(wrapper.find('.ix-pro-layout-header').exists()).toBe(true)
@@ -229,12 +215,6 @@ describe('ProLayout', () => {
     expect(wrapper.classes()).toContain('ix-pro-layout-is-sider')
     expect(wrapper.find('.ix-pro-layout-header').exists()).toBe(false)
     expect(wrapper.find('.ix-pro-layout-sider').exists()).toBe(true)
-
-    await wrapper.setProps({ type: 'both' })
-
-    expect(wrapper.classes()).toContain('ix-pro-layout-is-both')
-    expect(wrapper.find('.ix-pro-layout-header').exists()).toBe(true)
-    expect(wrapper.find('.ix-pro-layout-sider').exists()).toBe(true)
   })
 
   test('slots work', async () => {
@@ -250,7 +230,7 @@ describe('ProLayout', () => {
       },
     })
 
-    expect(wrapper.find('.ix-pro-layout-header-logo').find('#logo').exists()).toBe(true)
+    expect(wrapper.find('.ix-pro-layout-logo').find('#logo').exists()).toBe(true)
     expect(wrapper.find('.ix-pro-layout-header-extra').find('#extra').exists()).toBe(true)
     expect(wrapper.find('.ix-pro-layout-sider-header').find('#siderHeader').exists()).toBe(true)
     expect(wrapper.find('.ix-pro-layout-sider-footer').find('#siderFooter').exists()).toBe(true)

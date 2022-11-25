@@ -13,7 +13,7 @@ import { FORM_TOKEN } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
 
 import { buttonToken } from './token'
-import { buttonProps } from './types'
+import { type ButtonGroupProps, buttonProps } from './types'
 
 const aProps = ['href', 'target', 'rel', 'download', 'hreflang', 'ping']
 
@@ -24,14 +24,22 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-button`)
     const config = useGlobalConfig('button')
-    const groupProps = inject(buttonToken, {})
+    const groupProps = inject(buttonToken, {} as ButtonGroupProps)
     const formContext = inject(FORM_TOKEN, null)
 
     const mode = computed(() => props.mode ?? groupProps.mode ?? 'default')
     const size = computed(() => props.size ?? groupProps.size ?? formContext?.size.value ?? config.size)
 
     const classes = computed(() => {
-      const { block, danger, disabled, ghost, loading, icon, shape = groupProps.shape } = props
+      const {
+        block = groupProps.block,
+        danger = groupProps.danger,
+        disabled = groupProps.disabled,
+        ghost = groupProps.ghost,
+        loading,
+        icon,
+        shape = groupProps.shape,
+      } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
@@ -40,7 +48,7 @@ export default defineComponent({
         [`${prefixCls}-disabled`]: disabled,
         [`${prefixCls}-ghost`]: ghost,
         [`${prefixCls}-loading`]: loading,
-        [`${prefixCls}-icon-only`]: !slots.default && (icon || loading),
+        [`${prefixCls}-icon-only`]: !slots.default && (icon || loading || slots.icon),
         [`${prefixCls}-${mode.value}`]: mode.value,
         [`${prefixCls}-${shape}`]: !!shape,
         [`${prefixCls}-${size.value}`]: true,

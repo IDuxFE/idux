@@ -32,7 +32,11 @@
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
+| `block` | 将按钮宽度调整为自适应其父元素的宽度 | `boolean` | - | - |- |
+| `danger` | 设置按钮组危险状态 | `boolean` | - | - |- |
+| `disabled` | 设置按钮组禁用状态 | `boolean` | - | - |- |
 | `gap` | 设置按钮组的 gap 配置 | `number \| string` | `0` | - | 也就是 `Space` 的 `size` |
+| `ghost` | 设置按钮组为幽灵状态 | `boolean` | - | - |- |
 | `mode` | 设置组内按钮种类 | `'primary' \| 'default' \| 'dashed' \| 'text' \| 'link'` | - | - |- |
 | `shape` | 设置组内按钮形状 | `'circle' \| 'round'` | - | - |- |
 | `size` | 设置组内按钮大小 | `'lg' \| 'md' \| 'sm'` | - | - |- |

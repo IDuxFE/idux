@@ -1,5 +1,5 @@
 .@{menu-prefix} {
-  color: @menu-text-color;
+  color: @menu-color;
   background-color: @menu-background-color;
 
   &-item-group-label {
@@ -9,7 +9,7 @@
   &-item,
   &-sub-label {
     &:hover {
-      color: @menu-text-color-hover;
+      color: @menu-color-hover;
       background-color: @menu-background-color-hover;
     }
   }
@@ -21,12 +21,12 @@
   &-item&-item-selected,
   &-sub-selected > &-sub-label,
   &:not(&-inline) > &-sub-expanded > &-sub-label {
-    color: @menu-text-color-active;
+    color: @menu-color-active;
   }
 
   &-item&-item-disabled,
   &-sub-disabled > &-sub-label {
-    color: @menu-text-color-disabled;
+    color: @menu-color-disabled;
     background-color: @menu-background-color-disabled;
   }
 
@@ -37,7 +37,7 @@
     .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label,
     .@{menu-prefix}-sub-expanded > .@{menu-prefix}-sub-label {
       background-color: @menu-horizontal-background-color-active;
-      border-bottom-color: @menu-text-color-active;
+      border-bottom-color: @menu-color-active;
     }
 
     .@{menu-prefix}-item.@{menu-prefix}-item-disabled,

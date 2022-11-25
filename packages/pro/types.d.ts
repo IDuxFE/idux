@@ -17,6 +17,9 @@ declare module 'vue' {
   export interface GlobalComponents {
     IxProForm: ProFormComponent
     IxProLayout: ProLayoutComponent
+    /**
+     * @deprecated please use `IxLayoutSiderTrigger` instead'
+     */
     IxProLayoutSiderTrigger: ProLayoutSiderTriggerComponent
     IxProTable: ProTableComponent
     IxProTableLayoutTool: ProTableLayoutToolComponent

@@ -37,7 +37,11 @@ export type ButtonComponent = DefineComponent<
 export type ButtonInstance = InstanceType<DefineComponent<ButtonProps>>
 
 export const buttonGroupProps = {
+  block: { type: Boolean, default: undefined },
+  danger: { type: Boolean, default: undefined },
+  disabled: { type: Boolean, default: undefined },
   gap: { type: [Number, String] as PropType<number | string>, default: 0 },
+  ghost: { type: Boolean, default: undefined },
   mode: String as PropType<ButtonMode>,
   size: String as PropType<ButtonSize>,
   shape: String as PropType<ButtonShape>,

@@ -1,101 +1,30 @@
 .@{pro-layout-prefix}-header {
   display: flex;
   align-items: center;
-  z-index: 2;
-  height: @pro-layout-header-height;
-  line-height: @pro-layout-header-height;
+  height: @menu-height-level-1;
+  line-height: @menu-height-level-1;
+  padding: 0 16px;
+  z-index: 99;
 
-  &-fixed {
-    position: sticky;
-  }
-
-  &-logo {
-    min-width: @pro-layout-header-logo-width;
-    height: @pro-layout-header-height;
-    line-height: @pro-layout-header-height;
+  > * {
+    height: 100%;
   }
 
   &-content {
-    flex: 1;
-
-    .@{menu-prefix} {
-      border: 0;
-      border-radius: 0;
-
-      &-horizontal {
-        .@{menu-prefix} {
-
-          &-sub-label {
-            overflow: hidden;
-            margin: @pro-layout-header-item-margin;
-            padding: 0;
-            border: 0;
-          }
-        }
-      }
-
-      &-item,
-      &-sub {
-        overflow: hidden;
-        margin: @pro-layout-header-item-margin;
-        padding: @pro-layout-header-item-padding;
-        &-horizontal {
-          padding: 0;
-          .@{menu-prefix}-sub-label {
-            padding: @pro-layout-header-item-padding;
-          }
-        }
-      }
-    }
+    flex: 1 1 0%;
   }
 
   &-extra {
+    display: flex;
+    align-items: center;
+    float: right;
+    margin-left: auto;
     width: auto;
-  }
+    overflow: hidden;
 
-  &-light {
-    .header-themes('light');
-  }
-
-  &-dark {
-    .header-themes('dark');
-  }
-
-  &-menu-overlay {
-
-    .@{menu-prefix} {
-      &-vertical {
-        font-size: @pro-layout-header-vertical-menu-item-font-size;
-        padding: 4px 8px;
-        border-radius: @border-radius-sm;
-
-        .@{menu-prefix}-item-group > .@{menu-prefix}-item-group-content {
-          .@{menu-prefix}-item {
-            padding: 0 12px;
-            margin: 0 4px;
-            border-radius: @border-radius-sm;
-          }
-        }
-
-        .@{menu-prefix} {
-          &-item {
-            height: @pro-layout-header-vertical-menu-item-line-height;
-            line-height: @pro-layout-header-vertical-menu-item-line-height;
-
-
-            &-group-label {
-              padding-left: 16px;
-              font-size: @pro-layout-header-vertical-menu-item-font-size;
-              height: @pro-layout-header-vertical-menu-item-height;
-              line-height: @pro-layout-header-vertical-menu-item-height;
-            }
-          }
-        }
-      }
-    }
-
-    &-dark {
-      .header-overlay-themes('dark')
+    .@{button-prefix}-text {
+      height: @menu-height-level-1;
+      padding: 12px;
     }
   }
 }

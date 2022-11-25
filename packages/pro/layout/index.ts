@@ -11,6 +11,9 @@ import ProLayout from './src/Layout'
 import ProLayoutSiderTrigger from './src/LayoutSiderTrigger'
 
 const IxProLayout = ProLayout as unknown as ProLayoutComponent
+/**
+ * @deprecated please use `IxLayoutSiderTrigger` instead'
+ */
 const IxProLayoutSiderTrigger = ProLayoutSiderTrigger as unknown as ProLayoutSiderTriggerComponent
 
 export { IxProLayout, IxProLayoutSiderTrigger }
@@ -22,4 +25,7 @@ export type {
   ProLayoutSiderTriggerInstance,
   ProLayoutSiderTriggerComponent,
   ProLayoutSiderTriggerPublicProps as ProLayoutSiderTriggerProps,
+  ProLayoutLogo,
+  ProLayoutTheme,
+  ProLayoutType,
 } from './src/types'

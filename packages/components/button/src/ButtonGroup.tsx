@@ -32,7 +32,7 @@ export default defineComponent({
     provide(buttonToken, props)
 
     return () => (
-      <IxSpace class={classes.value} size={props.gap}>
+      <IxSpace class={classes.value} block={props.block} size={props.gap}>
         {slots.default && slots.default()}
       </IxSpace>
     )

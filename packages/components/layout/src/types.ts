@@ -7,9 +7,12 @@
 
 import type { BreakpointKey } from '@idux/cdk/breakpoint'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, VNodeChild } from 'vue'
 
-export const layoutProps = {} as const
+export const layoutProps = {
+  fixed: { type: [Boolean, Object] as PropType<LayoutFixedType>, default: false },
+  floatSider: { type: Boolean, default: false },
+} as const
 
 export type LayoutProps = ExtractInnerPropTypes<typeof layoutProps>
 export type LayoutPublicProps = ExtractPublicPropTypes<typeof layoutProps>
@@ -44,14 +47,15 @@ export type LayoutFooterComponent = DefineComponent<
 export type LayoutFooterInstance = InstanceType<DefineComponent<LayoutFooterProps>>
 
 export const layoutSiderProps = {
-  collapsed: {
-    type: Boolean,
-    default: undefined,
-  },
+  collapsed: { type: Boolean, default: undefined },
   breakpoint: String as PropType<BreakpointKey>,
+  pointer: { type: Boolean, default: false },
+  pointerDelay: { type: [Number, Array] as PropType<number | [number, number]>, default: () => [0, 100] },
 
   // events
-  'onUpdate:collapsed': [Function, Array] as PropType<MaybeArray<(collapsed: boolean) => void>>,
+  'onUpdate:collapsed': [Function, Array] as PropType<
+    MaybeArray<(collapsed: boolean, changeType: LayoutCollapseChangeType) => void>
+  >,
 } as const
 
 export type LayoutSiderProps = ExtractInnerPropTypes<typeof layoutSiderProps>
@@ -60,3 +64,20 @@ export type LayoutSiderComponent = DefineComponent<
   Omit<HTMLAttributes, keyof LayoutSiderPublicProps> & LayoutSiderPublicProps
 >
 export type LayoutSiderInstance = InstanceType<DefineComponent<LayoutSiderProps>>
+
+export const layoutSiderTriggerProps = {
+  icon: {
+    type: [String, Array] as PropType<string | VNodeChild | Array<string | VNodeChild>>,
+    default: undefined,
+  },
+} as const
+
+export type LayoutSiderTriggerProps = ExtractInnerPropTypes<typeof layoutSiderTriggerProps>
+export type LayoutSiderTriggerPublicProps = ExtractPublicPropTypes<typeof layoutSiderTriggerProps>
+export type LayoutSiderTriggerComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof LayoutSiderTriggerPublicProps> & LayoutSiderTriggerPublicProps
+>
+export type LayoutSiderTriggerInstance = InstanceType<DefineComponent<LayoutSiderTriggerProps>>
+
+export type LayoutFixedType = boolean | { header: boolean; sider: boolean }
+export type LayoutCollapseChangeType = 'breakpoint' | 'pointer' | 'trigger'
