@@ -7,27 +7,30 @@
       color: @menu-dark-item-group-text-color;
     }
 
-    .@{menu-prefix}-item,
-    .@{menu-prefix}-sub-label {
-      &:hover {
-        color: @menu-dark-color-hover;
-        background-color: @menu-dark-background-color-hover;
-      }
+    .@{menu-prefix}-item:hover,
+    .@{menu-prefix}-sub-label:hover {
+      color: @menu-dark-color-hover;
     }
 
-    .@{menu-prefix}-item.@{menu-prefix}-item-selected {
+    .@{menu-prefix}-item:hover,
+    .@{menu-prefix}-sub-label:hover,
+    &:not(.@{menu-prefix}-inline) .@{menu-prefix}-sub-expanded > .@{menu-prefix}-sub-label {
+      background-color: @menu-dark-background-color-hover;
+    }
+
+    .@{menu-prefix}-item.@{menu-prefix}-item-selected,
+    &.@{menu-prefix}-vertical.@{menu-prefix}-collapsed .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label {
       background-color: @menu-dark-background-color-active;
     }
 
     .@{menu-prefix}-item.@{menu-prefix}-item-selected,
-    .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label,
-    &:not(.@{menu-prefix}-inline) > .@{menu-prefix}-sub-expanded > .@{menu-prefix}-sub-label {
+    .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label {
       color: @menu-dark-color-active;
       font-weight: var(--ix-font-weight-lg);
     }
 
-    .@{menu-prefix}-item.@{menu-prefix}-item-disabled,
-    .@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-label {
+    & .@{menu-prefix}-item.@{menu-prefix}-item-disabled,
+    & .@{menu-prefix}-sub.@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-label {
       color: @menu-dark-color-disabled;
       background-color: @menu-dark-background-color-disabled;
     }
@@ -50,7 +53,8 @@
   }
 
   &-dark&-inline,
-  &-dark&-vertical {
-    border-right-color: transparent;
+  &-dark&-vertical,
+  &-dark&-horizontal {
+    box-shadow: none;
   }
 }

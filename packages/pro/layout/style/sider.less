@@ -3,10 +3,6 @@
   flex-direction: column;
   z-index: 90;
 
-  .@{menu-prefix} {
-    border-right: 0;
-  }
-
   &-header {
     display: flex;
     align-items: center;
@@ -14,13 +10,17 @@
 
   &-content {
     flex: 1 1 0%;
+    overflow: hidden;
   }
 
   &-footer {
     display: flex;
     align-items: center;
     background-color: inherit;
-    border-top: 1px solid @menu-border-color;
+
+    .@{button-prefix}-text {
+      padding: 8px;
+    }
   }
 
   &-trigger {
@@ -60,11 +60,15 @@
 
     .@{pro-layout-prefix}-sider-header,
     .@{pro-layout-prefix}-sider-footer {
-      padding: if(
-        (@theme = seer),
-        0 calc(50% - @menu-icon-font-size / 2),
-        0 calc(50% - 4px - @menu-icon-font-size / 2)
-      );
+      padding: 0;
+    }
+
+    .@{pro-layout-prefix}-sider-footer {
+      .@{button-prefix}-text {
+        > .@{icon-prefix} + span {
+          display: none;
+        }
+      }
     }
   }
 }

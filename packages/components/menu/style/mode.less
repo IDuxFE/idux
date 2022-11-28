@@ -4,7 +4,13 @@
     width: 100%;
     // https://github.com/IDuxFE/idux/issues/1013
     padding: 0.02px 0;
-    border-right: 1px solid @menu-border-color;
+    box-shadow: 1px 0 0 @menu-border-color;
+
+    // nest menu
+    .@{menu-prefix}-vertical,
+    .@{menu-prefix}-inline {
+      box-shadow: none;
+    }
 
     .@{menu-prefix}-item,
     .@{menu-prefix}-sub-label {
@@ -27,6 +33,7 @@
   &-horizontal {
     display: flex;
     align-items: center;
+    box-shadow: 0 1px 0 @menu-border-color;
 
     .@{menu-prefix}-item-suffix,
     .@{menu-prefix}-sub-label-suffix {

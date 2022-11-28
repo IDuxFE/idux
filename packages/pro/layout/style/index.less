@@ -48,6 +48,12 @@
     }
   }
 
+  &-is-both &-header &-header-content when (@theme = default) {
+    > .@{menu-prefix} {
+      margin-left: -4px;
+    }
+  }
+
   &.@{layout-prefix}-fixed-sider {
     .@{pro-layout-prefix}-sider {
       overflow-y: hidden;

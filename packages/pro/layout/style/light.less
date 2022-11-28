@@ -2,6 +2,14 @@
   background-color: @pro-background-color;
   transition: background-color var(--ix-transition-duration-slow);
 
+  .@{menu-prefix} {
+    box-shadow: none;
+  }
+
+  &-logo > a > h1 {
+    color: var(--ix-text-color-title);
+  }
+
   &-header {
     background-color: @menu-background-color;
     box-shadow: @pro-layout-header-box-shadow;
