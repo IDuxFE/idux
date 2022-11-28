@@ -14,8 +14,8 @@ const IxSpin = Spin as unknown as SpinComponent
 const IxSpinProvider = SpinProvider as unknown as SpinProviderComponent
 
 export { IxSpin, IxSpinProvider }
-
 export { useSpin } from './src/useSpin'
+export { SPIN_PROVIDER_TOKEN } from './src/token'
 
 export type {
   SpinInstance,

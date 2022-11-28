@@ -13,7 +13,7 @@ import { useGlobalConfig } from '@idux/components/config'
 import { usePortalTarget } from '@idux/components/utils'
 
 import Message from './Message'
-import { messageProviderToken } from './token'
+import { MESSAGE_PROVIDER_TOKEN } from './token'
 import { type MessageOptions, type MessageRef, messageProviderProps } from './types'
 
 export default defineComponent({
@@ -33,7 +33,7 @@ export default defineComponent({
 
     const apis = { open, info, success, warning, error, loading, update, destroy, destroyAll }
 
-    provide(messageProviderToken, apis)
+    provide(MESSAGE_PROVIDER_TOKEN, apis)
     expose(apis)
 
     return () => {

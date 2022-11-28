@@ -11,10 +11,10 @@ import { inject } from 'vue'
 
 import { throwError } from '@idux/cdk/utils'
 
-import { modalProviderToken } from './token'
+import { MODAL_PROVIDER_TOKEN } from './token'
 
 export const useModal = (): ModalProviderRef => {
-  const modalProviderRef = inject(modalProviderToken, null)
+  const modalProviderRef = inject(MODAL_PROVIDER_TOKEN, null)
   if (modalProviderRef === null) {
     return throwError('components/modal', '<IxModalProvider> not found.')
   }

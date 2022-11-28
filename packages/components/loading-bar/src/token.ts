@@ -8,4 +8,5 @@
 import type { LoadingBarProviderRef } from './types'
 import type { InjectionKey } from 'vue'
 
-export const loadingBarProviderToken: InjectionKey<LoadingBarProviderRef> = Symbol('loadingBarProviderToken')
+// public
+export const LOADING_BAR_PROVIDER_TOKEN: InjectionKey<LoadingBarProviderRef> = Symbol('LOADING_BAR_PROVIDER_TOKEN')

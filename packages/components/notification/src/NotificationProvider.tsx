@@ -24,7 +24,7 @@ import { useGlobalConfig } from '@idux/components/config'
 import { usePortalTarget } from '@idux/components/utils'
 
 import Notification from './Notification'
-import { notificationProviderToken } from './token'
+import { NOTIFICATION_PROVIDER_TOKEN } from './token'
 import { notificationPlacement, notificationProviderProps, notificationType } from './types'
 
 const groupPositions = {
@@ -50,7 +50,7 @@ export default defineComponent({
     const apis = { open, info, success, warning, error, update, destroy, destroyAll }
     const placementNotifications = usePlacementNotifications(props, config, notifications)
 
-    provide(notificationProviderToken, apis)
+    provide(NOTIFICATION_PROVIDER_TOKEN, apis)
     expose(apis)
 
     return () => {

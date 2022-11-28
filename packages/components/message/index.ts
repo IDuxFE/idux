@@ -15,6 +15,7 @@ const IxMessageProvider = MessageProvider as unknown as MessageProviderComponent
 
 export { IxMessage, IxMessageProvider }
 export { useMessage } from './src/useMessage'
+export { MESSAGE_PROVIDER_TOKEN } from './src/token'
 
 export type {
   MessageInstance,

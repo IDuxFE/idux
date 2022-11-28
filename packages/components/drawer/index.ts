@@ -15,7 +15,7 @@ const IxDrawerProvider = DrawerProvider as unknown as DrawerProviderComponent
 
 export { IxDrawer, IxDrawerProvider }
 export { useDrawer } from './src/useDrawer'
-export { DRAWER_TOKEN } from './src/token'
+export { DRAWER_TOKEN, DRAWER_PROVIDER_TOKEN } from './src/token'
 
 export type {
   DrawerInstance,

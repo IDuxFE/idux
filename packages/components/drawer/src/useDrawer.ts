@@ -11,10 +11,10 @@ import { inject } from 'vue'
 
 import { throwError } from '@idux/cdk/utils'
 
-import { drawerProviderToken } from './token'
+import { DRAWER_PROVIDER_TOKEN } from './token'
 
 export const useDrawer = (): DrawerProviderRef => {
-  const drawerProviderRef = inject(drawerProviderToken, null)
+  const drawerProviderRef = inject(DRAWER_PROVIDER_TOKEN, null)
   if (drawerProviderRef === null) {
     return throwError('components/drawer', '<IxDrawerProvider> not found.')
   }

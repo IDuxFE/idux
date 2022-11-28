@@ -8,4 +8,4 @@
 import type { MessageProviderRef } from './types'
 import type { InjectionKey } from 'vue'
 
-export const messageProviderToken: InjectionKey<MessageProviderRef> = Symbol('messageProviderToken')
+export const MESSAGE_PROVIDER_TOKEN: InjectionKey<MessageProviderRef> = Symbol('MESSAGE_PROVIDER_TOKEN')

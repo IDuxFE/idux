@@ -11,10 +11,10 @@ import { inject } from 'vue'
 
 import { throwError } from '@idux/cdk/utils'
 
-import { notificationProviderToken } from './token'
+import { NOTIFICATION_PROVIDER_TOKEN } from './token'
 
 export const useNotification = (): NotificationProviderRef => {
-  const notificationProviderRef = inject(notificationProviderToken, null)
+  const notificationProviderRef = inject(NOTIFICATION_PROVIDER_TOKEN, null)
   if (notificationProviderRef === null) {
     return throwError('components/notification', '<IxNotificationProvider> not found.')
   }

@@ -15,6 +15,7 @@ const IxNotificationProvider = NotificationProvider as unknown as NotificationPr
 
 export { IxNotification, IxNotificationProvider }
 export { useNotification } from './src/useNotification'
+export { NOTIFICATION_PROVIDER_TOKEN } from './src/token'
 
 export type {
   NotificationInstance,

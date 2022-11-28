@@ -14,6 +14,7 @@ const IxLoadingBarProvider = LoadingBarProvider as unknown as LoadingBarProvider
 export { IxLoadingBarProvider }
 
 export { useLoadingBar } from './src/useLoadingBar'
+export { LOADING_BAR_PROVIDER_TOKEN } from './src/token'
 
 export type {
   LoadingBarOptions,

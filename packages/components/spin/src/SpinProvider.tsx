@@ -14,7 +14,7 @@ import { useGlobalConfig } from '@idux/components/config'
 import { convertTarget } from '@idux/components/utils'
 
 import IxSpin from './Spin'
-import { spinProviderToken } from './token'
+import { SPIN_PROVIDER_TOKEN } from './token'
 import { type SpinMergedOptions, type SpinOptions, SpinRef, SpinRefUpdateOptions, spinProviderProps } from './types'
 
 const BASE_ZINDEX = 2000
@@ -31,7 +31,7 @@ export default defineComponent({
 
     const apis = { open, update, destroy, destroyAll }
 
-    provide(spinProviderToken, apis)
+    provide(SPIN_PROVIDER_TOKEN, apis)
     expose(apis)
 
     return () => {

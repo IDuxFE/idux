@@ -13,7 +13,7 @@ import { cloneVNode, defineComponent, isVNode, provide, shallowRef } from 'vue'
 import { NoopFunction, callEmit, convertArray, uniqueId } from '@idux/cdk/utils'
 
 import Drawer from './Drawer'
-import { drawerProviderToken } from './token'
+import { DRAWER_PROVIDER_TOKEN } from './token'
 
 export default defineComponent({
   name: 'IxDrawerProvider',
@@ -21,7 +21,7 @@ export default defineComponent({
     const { drawers, setDrawerRef, open, update, destroy, destroyAll } = useDrawer()
     const apis = { open, update, destroy, destroyAll }
 
-    provide(drawerProviderToken, apis)
+    provide(DRAWER_PROVIDER_TOKEN, apis)
     expose(apis)
 
     return () => {
