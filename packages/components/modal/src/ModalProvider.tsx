@@ -13,7 +13,7 @@ import { cloneVNode, defineComponent, isVNode, provide, shallowRef } from 'vue'
 import { NoopFunction, callEmit, convertArray, uniqueId } from '@idux/cdk/utils'
 
 import Modal from './Modal'
-import { modalProviderToken } from './token'
+import { MODAL_PROVIDER_TOKEN } from './token'
 
 export default defineComponent({
   name: 'IxModalProvider',
@@ -22,7 +22,7 @@ export default defineComponent({
       useModal()
     const apis = { open, confirm, info, success, warning, error, update, destroy, destroyAll }
 
-    provide(modalProviderToken, apis)
+    provide(MODAL_PROVIDER_TOKEN, apis)
     expose(apis)
 
     return () => {

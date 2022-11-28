@@ -11,10 +11,10 @@ import { inject } from 'vue'
 
 import { throwError } from '@idux/cdk/utils'
 
-import { messageProviderToken } from './token'
+import { MESSAGE_PROVIDER_TOKEN } from './token'
 
 export const useMessage = (): MessageProviderRef => {
-  const modalProviderRef = inject(messageProviderToken, null)
+  const modalProviderRef = inject(MESSAGE_PROVIDER_TOKEN, null)
   if (modalProviderRef === null) {
     return throwError('components/message', '<IxMessageProvider> not found.')
   }

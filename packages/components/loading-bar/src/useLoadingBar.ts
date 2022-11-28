@@ -11,10 +11,10 @@ import { inject } from 'vue'
 
 import { throwError } from '@idux/cdk/utils'
 
-import { loadingBarProviderToken } from './token'
+import { LOADING_BAR_PROVIDER_TOKEN } from './token'
 
 export const useLoadingBar = (): LoadingBarProviderRef => {
-  const providerRef = inject(loadingBarProviderToken, null)
+  const providerRef = inject(LOADING_BAR_PROVIDER_TOKEN, null)
   if (providerRef === null) {
     return throwError('cbomponents/loading-bar', '<IxLoadingBarProvider> not found.')
   }

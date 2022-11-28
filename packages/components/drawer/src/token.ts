@@ -27,7 +27,6 @@ export interface DrawerContext {
 
 export const drawerToken: InjectionKey<DrawerContext> = Symbol('drawerToken')
 
-export const drawerProviderToken: InjectionKey<DrawerProviderRef> = Symbol('drawerProviderToken')
-
 // public token
 export const DRAWER_TOKEN: InjectionKey<DrawerBindings> = Symbol('DRAWER_TOKEN')
+export const DRAWER_PROVIDER_TOKEN: InjectionKey<DrawerProviderRef> = Symbol('DRAWER_PROVIDER_TOKEN')

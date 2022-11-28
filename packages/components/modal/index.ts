@@ -15,7 +15,7 @@ const IxModalProvider = ModalProvider as unknown as ModalProviderComponent
 
 export { IxModal, IxModalProvider }
 export { useModal } from './src/useModal'
-export { MODAL_TOKEN } from './src/token'
+export { MODAL_TOKEN, MODAL_PROVIDER_TOKEN } from './src/token'
 
 export type {
   ModalInstance,

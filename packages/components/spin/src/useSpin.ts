@@ -11,10 +11,10 @@ import { inject } from 'vue'
 
 import { throwError } from '@idux/cdk/utils'
 
-import { spinProviderToken } from './token'
+import { SPIN_PROVIDER_TOKEN } from './token'
 
 export const useSpin = (): SpinProviderRef => {
-  const spinProviderRef = inject(spinProviderToken, null)
+  const spinProviderRef = inject(SPIN_PROVIDER_TOKEN, null)
   if (spinProviderRef === null) {
     return throwError('components/spin', '<IxSpinProvider> not found.')
   }

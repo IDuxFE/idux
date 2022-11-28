@@ -13,7 +13,7 @@ import { ɵMask } from '@idux/components/_private/mask'
 import { LoadingBarConfig, useGlobalConfig } from '@idux/components/config'
 import { usePortalTarget } from '@idux/components/utils'
 
-import { loadingBarProviderToken } from './token'
+import { LOADING_BAR_PROVIDER_TOKEN } from './token'
 import {
   LoadingBarOptions,
   LoadingBarProviderProps,
@@ -43,7 +43,7 @@ export default defineComponent({
     })
     const apis = { start, finish, error }
 
-    provide(loadingBarProviderToken, apis)
+    provide(LOADING_BAR_PROVIDER_TOKEN, apis)
     expose(apis)
 
     return () => {

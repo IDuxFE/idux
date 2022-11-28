@@ -8,4 +8,5 @@
 import type { NotificationProviderRef } from './types'
 import type { InjectionKey } from 'vue'
 
-export const notificationProviderToken: InjectionKey<NotificationProviderRef> = Symbol('notificationProviderToken')
+// public
+export const NOTIFICATION_PROVIDER_TOKEN: InjectionKey<NotificationProviderRef> = Symbol('NOTIFICATION_PROVIDER_TOKEN')

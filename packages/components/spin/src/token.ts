@@ -8,4 +8,5 @@
 import type { SpinProviderRef } from './types'
 import type { InjectionKey } from 'vue'
 
-export const spinProviderToken: InjectionKey<SpinProviderRef> = Symbol('spinProviderToken')
+// public
+export const SPIN_PROVIDER_TOKEN: InjectionKey<SpinProviderRef> = Symbol('SPIN_PROVIDER_TOKEN')
