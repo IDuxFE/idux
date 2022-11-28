@@ -1,8 +1,8 @@
 .@{pro-layout-prefix}-header {
   display: flex;
   align-items: center;
-  height: @menu-height-level-1;
-  line-height: @menu-height-level-1;
+  height: if((@theme = seer), @menu-height-level-1, calc(@menu-height-level-1 + 8px));
+  line-height: if((@theme = seer), @menu-height-level-1, calc(@menu-height-level-1 + 8px));
   padding: 0 16px;
   z-index: 99;
 
@@ -23,7 +23,7 @@
     overflow: hidden;
 
     .@{button-prefix}-text {
-      height: @menu-height-level-1;
+      height: if((@theme = seer), @menu-height-level-1, calc(@menu-height-level-1 + 8px));
       padding: 12px;
     }
   }

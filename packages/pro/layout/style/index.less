@@ -15,8 +15,8 @@
   &-logo {
     position: relative;
     overflow: hidden;
-    height: @menu-height-level-1;
-    line-height: @menu-height-level-1;
+    height: if((@theme = seer), @menu-height-level-1, calc(@menu-height-level-1 + 8px));
+    line-height: if((@theme = seer), @menu-height-level-1, calc(@menu-height-level-1 + 8px));
     transition: padding var(--ix-transition-duration-fast) var(--ix-ease-in-out);
 
     > a {
