@@ -6,26 +6,29 @@
     color: @menu-item-group-text-color;
   }
 
-  &-item,
-  &-sub-label {
-    &:hover {
-      color: @menu-color-hover;
-      background-color: @menu-background-color-hover;
-    }
+  &-item:hover,
+  &-sub-label:hover {
+    color: @menu-color-hover;
   }
 
-  &-item&-item-selected {
+  &-item:hover,
+  &-sub-label:hover,
+  &:not(&-inline) &-sub-expanded > &-sub-label {
+    background-color: @menu-background-color-hover;
+  }
+
+  &-item&-item-selected,
+  &-vertical&-collapsed &-sub-selected > &-sub-label {
     background-color: @menu-background-color-active;
   }
 
   &-item&-item-selected,
-  &-sub-selected > &-sub-label,
-  &:not(&-inline) > &-sub-expanded > &-sub-label {
+  &-sub-selected > &-sub-label {
     color: @menu-color-active;
   }
 
-  &-item&-item-disabled,
-  &-sub-disabled > &-sub-label {
+  & &-item&-item-disabled,
+  & &-sub&-sub-disabled > &-sub-label {
     color: @menu-color-disabled;
     background-color: @menu-background-color-disabled;
   }

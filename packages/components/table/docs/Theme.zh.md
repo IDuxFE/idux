@@ -3,9 +3,9 @@
 | `@table-font-size-sm` | `var(--ix-font-size-sm)` | - | - |
 | `@table-font-size-md` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
 | `@table-font-size-lg` | `var(--ix-font-size-lg)` | `var(--ix-font-size-md)` | - |
-| `@table-head-row-height-sm` | `var(--ix-height-md)` | `var(--ix-height-sm)` | - |
+| `@table-head-row-height-sm` | `var(--ix-height-md)` | `var(--ix-height-md)` | - |
 | `@table-head-row-height-md` | `var(--ix-height-lg)` | `var(--ix-height-md)` | - |
-| `@table-head-row-height-lg` | `var(--ix-height-xl)` | `var(--ix-height-lg)` | - |
+| `@table-head-row-height-lg` | `var(--ix-height-xl)` | `var(--ix-height-md)` | - |
 | `@table-body-row-height-sm` | `var(--ix-height-lg)` | `var(--ix-height-md)` | - |
 | `@table-body-row-height-md` | `var(--ix-height-xl)` | `var(--ix-height-lg)` | - |
 | `@table-body-row-height-lg` | `var(--ix-height-2xl)` | - | - |

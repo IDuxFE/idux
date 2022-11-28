@@ -15,6 +15,7 @@
   list-style: none;
   font-size: @menu-font-size;
   line-height: calc(@menu-font-size + var(--ix-line-height-gutter));
+  z-index: 9;
   transition: background-color var(--ix-transition-duration-slow), width var(--ix-transition-duration-medium);
 
   .clearfix();
@@ -74,7 +75,7 @@
     box-shadow: @menu-overlay-box-shadow;
 
     .@{menu-prefix} {
-      border-right: 0;
+      box-shadow: none;
     }
   }
 }

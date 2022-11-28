@@ -1,15 +1,28 @@
 <template>
   <div style="border: 1px solid var(--ix-border-color); height: 300px">
-    <IxProLayout v-model:activeKey="activeKey" :logo="logo" :menus="dataSource" :type="type">
+    <IxProLayout
+      v-model:activeKey="activeKey"
+      v-model:collapsed="collapsed"
+      :logo="logo"
+      :menus="dataSource"
+      :type="type"
+    >
       <template #itemLabel="item">
         <router-link to="#pro-layout-demo-type">{{ item.label }}</router-link>
       </template>
-      <template #headerExtra>
+      <template v-if="type !== 'sider'" #headerExtra>
         <IxButtonGroup align="center" :gap="8" ghost mode="text">
           <IxButton icon="search" />
           <IxButton icon="alert" />
           <IxButton icon="setting" />
           <IxButton icon="question-circle" />
+        </IxButtonGroup>
+      </template>
+      <template v-else #siderFooter>
+        <IxButtonGroup align="center" block justify="space-between" :gap="8" mode="text" :vertical="collapsed">
+          <IxButton icon="search">搜索</IxButton>
+          <IxButton icon="alert">消息</IxButton>
+          <IxButton icon="setting">设置</IxButton>
         </IxButtonGroup>
       </template>
       <template #siderHeader>
@@ -48,6 +61,7 @@ const logo = {
 const type = ref<ProLayoutType>('mixin')
 
 const activeKey = ref()
+const collapsed = ref(false)
 const dataSource: MenuData[] = [
   {
     type: 'sub',

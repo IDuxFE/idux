@@ -6,6 +6,7 @@
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:activeKey` | 当前激活的菜单 | `VKey` | `menus`第一个叶子节点 | - | - |
+| `v-model:collapsed` | 侧边栏折叠状态 | `boolean` | `false` | --- | --- |
 | `fixed` | 顶部栏和侧边栏是否固定 | `boolean \| { sider: boolean, header: boolean }` | `true` | - | - |
 | `headerMenu` | 顶部菜单组件的更多配置 | `MenuProps` | - | - | 例如：`getKey` |
 | `menus` | 菜单数据 | `MenuData[]` | `[]` | - | - |

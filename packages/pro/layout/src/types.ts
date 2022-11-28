@@ -8,15 +8,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
-import type { LayoutFixedType, LayoutProps, LayoutSiderProps } from '@idux/components/layout'
+import type { LayoutCollapseChangeType, LayoutFixedType, LayoutProps, LayoutSiderProps } from '@idux/components/layout'
 import type { MenuClickOptions, MenuData, MenuProps, MenuTheme } from '@idux/components/menu'
 import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
 
 export const proLayoutProps = {
   activeKey: { type: [String, Number, Symbol] as PropType<VKey>, default: undefined },
-  /**
-   * @deprecated
-   */
   collapsed: { type: Boolean, default: undefined },
   /**
    * @deprecated
@@ -63,10 +60,9 @@ export const proLayoutProps = {
 
   // event
   'onUpdate:activeKey': [Function, Array] as PropType<MaybeArray<(activeKey: any | null) => void>>,
-  /**
-   * @deprecated
-   */
-  'onUpdate:collapsed': [Function, Array] as PropType<MaybeArray<(collapsed: boolean) => void>>,
+  'onUpdate:collapsed': [Function, Array] as PropType<
+    MaybeArray<(collapsed: boolean, changeType: LayoutCollapseChangeType) => void>
+  >,
   onMenuClick: [Function, Array] as PropType<MaybeArray<(options: MenuClickOptions<any>) => void>>,
 } as const
 
