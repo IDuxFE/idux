@@ -1,0 +1,46 @@
+.@{pro-layout-prefix} {
+  .@{pro-layout-prefix}-header-dark {
+    color: @menu-dark-color;
+    background-color: @menu-dark-background-color;
+
+    .@{pro-layout-prefix}-logo {
+      h1 {
+        color: @menu-dark-color;
+      }
+    }
+
+    .@{menu-prefix}-dark.@{menu-prefix}-horizontal {
+      .@{menu-prefix}-item:hover,
+      .@{menu-prefix}-sub-label:hover,
+      .@{menu-prefix}-item.@{menu-prefix}-item-selected,
+      .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label,
+      .@{menu-prefix}-sub-expanded > .@{menu-prefix}-sub-label {
+        background-color: @menu-dark-horizontal-background-color-active;
+      }
+
+      .@{menu-prefix}-item.@{menu-prefix}-item-disabled,
+      .@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-label {
+        background-color: @menu-dark-background-color;
+        border-bottom-color: transparent;
+      }
+    }
+  }
+
+  .@{pro-layout-prefix}-sider-dark {
+    color: @menu-dark-color;
+    background-color: @menu-dark-background-color;
+
+    .@{layout-prefix}-sider-trigger,
+    .@{pro-layout-prefix}-sider-trigger {
+      > .@{button-prefix} {
+        color: @menu-dark-color;
+        background-color: transparent;
+
+        &:hover {
+          color: @menu-dark-color-hover;
+          background-color: @menu-dark-background-color-hover;
+        }
+      }
+    }
+  }
+}

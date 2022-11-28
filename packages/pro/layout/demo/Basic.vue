@@ -1,21 +1,54 @@
 <template>
-  <IxProLayout v-model:activeKey="activeKey" :menus="dataSource">
-    <template #itemLabel="item">
-      <router-link to="#pro-layout-demo-Basic">{{ item.label }}</router-link>
-    </template>
-    <template #logo>
-      <div class="logo">Logo</div>
-    </template>
-    <div class="content">
-      <div>Currently active is: {{ activeKey }}</div>
-    </div>
-  </IxProLayout>
+  <div style="border: 1px solid var(--ix-border-color); height: 300px">
+    <IxProLayout v-model:activeKey="activeKey" :logo="logo" :menus="dataSource">
+      <template #itemLabel="item">
+        <router-link to="#pro-layout-demo-basic">{{ item.label }}</router-link>
+      </template>
+      <template #headerExtra>
+        <IxButtonGroup align="center" :gap="8" ghost mode="text">
+          <IxButton icon="search" />
+          <IxButton icon="alert" />
+          <IxButton icon="setting" />
+          <IxButton icon="question-circle" />
+        </IxButtonGroup>
+      </template>
+      <template #siderFooter>
+        <IxLayoutSiderTrigger />
+      </template>
+      <IxSpace block vertical>
+        <IxRow gutter="8">
+          <IxCol :span="6">
+            <IxCard> <p>Card Content</p> </IxCard>
+          </IxCol>
+          <IxCol :span="6">
+            <IxCard> <p>Card Content</p> </IxCard>
+          </IxCol>
+          <IxCol :span="6">
+            <IxCard> <p>Card Content</p> </IxCard>
+          </IxCol>
+          <IxCol :span="6">
+            <IxCard> <p>Card Content</p> </IxCard>
+          </IxCol>
+        </IxRow>
+        <IxCard> <p>Card Content</p> </IxCard>
+        <IxCard> <p>Card Content</p> </IxCard>
+        <IxCard> <p>Card Content</p> </IxCard>
+        <IxCard> <p>Card Content</p> </IxCard>
+      </IxSpace>
+    </IxProLayout>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 
 import { type MenuData } from '@idux/components/menu'
+
+const logo = {
+  image: '/icons/logo.svg',
+  title: 'Pro Layout',
+  link: '/pro/layout/zh',
+}
 
 const activeKey = ref()
 const dataSource: MenuData[] = [
@@ -27,7 +60,6 @@ const dataSource: MenuData[] = [
     children: [
       { type: 'item', key: 'item4', label: 'Item 4', icon: 'setting' },
       { type: 'item', key: 'item5', label: 'Item 5', icon: 'setting' },
-      { type: 'divider', key: 'divider2' },
       {
         type: 'sub',
         key: 'sub2',
@@ -63,16 +95,3 @@ const dataSource: MenuData[] = [
   { type: 'item', key: 'item2', icon: 'mail', label: 'Item 2' },
 ]
 </script>
-
-<style lang="less" scoped>
-.logo {
-  padding-left: 24px;
-  font-weight: bold;
-  font-size: 24px;
-}
-
-.content {
-  padding: 24px;
-  line-height: 24px;
-}
-</style>

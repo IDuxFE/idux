@@ -1,6 +1,6 @@
 .@{menu-prefix} {
   &-dark {
-    color: @menu-dark-text-color;
+    color: @menu-dark-color;
     background-color: @menu-dark-background-color;
 
     .@{menu-prefix}-item-group-label {
@@ -10,7 +10,7 @@
     .@{menu-prefix}-item,
     .@{menu-prefix}-sub-label {
       &:hover {
-        color: @menu-dark-text-color-hover;
+        color: @menu-dark-color-hover;
         background-color: @menu-dark-background-color-hover;
       }
     }
@@ -22,13 +22,13 @@
     .@{menu-prefix}-item.@{menu-prefix}-item-selected,
     .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label,
     &:not(.@{menu-prefix}-inline) > .@{menu-prefix}-sub-expanded > .@{menu-prefix}-sub-label {
-      color: @menu-dark-text-color-active;
+      color: @menu-dark-color-active;
       font-weight: var(--ix-font-weight-lg);
     }
 
     .@{menu-prefix}-item.@{menu-prefix}-item-disabled,
     .@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-label {
-      color: @menu-dark-text-color-disabled;
+      color: @menu-dark-color-disabled;
       background-color: @menu-dark-background-color-disabled;
     }
   }

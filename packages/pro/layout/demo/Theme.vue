@@ -1,47 +1,70 @@
 <template>
-  <IxProLayout v-model:activeKey="activeKey" :menus="dataSource" type="both" :theme="theme">
-    <template #itemLabel="item">
-      <router-link to="#pro-layout-demo-Theme">{{ item.label }}</router-link>
-    </template>
-    <template #logo>
-      <div class="logo">Logo</div>
-    </template>
-    <div class="layout-content">
-      <IxSpace>
-        <div>whole: <IxSelect v-model:value="wholeTheme" :dataSource="wholdThemeOptionss"></IxSelect></div>
-        <template v-if="wholeTheme === 'separate'">
-          <div>header: <IxSelect v-model:value="separateTheme.header" :dataSource="themesOptions"></IxSelect></div>
-          <div>sider: <IxSelect v-model:value="separateTheme.sider" :dataSource="themesOptions"></IxSelect></div>
-        </template>
+  <div style="border: 1px solid var(--ix-border-color); height: 300px">
+    <IxProLayout v-model:activeKey="activeKey" :logo="logo" :menus="dataSource" :theme="mergedTheme">
+      <template #itemLabel="item">
+        <router-link to="#pro-layout-demo-theme">{{ item.label }}</router-link>
+      </template>
+      <template #headerExtra>
+        <IxButtonGroup align="center" :gap="8" ghost mode="text">
+          <IxButton icon="search" />
+          <IxButton icon="alert" />
+          <IxButton icon="setting" />
+          <IxButton icon="question-circle" />
+        </IxButtonGroup>
+      </template>
+      <template #siderFooter>
+        <IxLayoutSiderTrigger />
+      </template>
+      <IxSpace block vertical>
+        <IxCard>
+          <IxSpace vertical>
+            <IxRadioGroup v-model:value="wholeTheme" :dataSource="wholeThemeOptions"> </IxRadioGroup>
+            <template v-if="wholeTheme === 'mix'">
+              <IxSpace>
+                <span>Header: </span>
+                <IxRadioGroup v-model:value="mix.header" :dataSource="themesOptions"> </IxRadioGroup>
+              </IxSpace>
+              <IxSpace>
+                <span>Sider : </span>
+                <IxRadioGroup v-model:value="mix.sider" :dataSource="themesOptions"> </IxRadioGroup>
+              </IxSpace>
+            </template>
+          </IxSpace>
+        </IxCard>
+        <IxCard> <p>Card Content</p> </IxCard>
+        <IxCard> <p>Card Content</p> </IxCard>
+        <IxCard> <p>Card Content</p> </IxCard>
+        <IxCard> <p>Card Content</p> </IxCard>
       </IxSpace>
-    </div>
-  </IxProLayout>
+    </IxProLayout>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
 
 import { type MenuData } from '@idux/components/menu'
+import { type ProLayoutTheme } from '@idux/pro/layout'
+
+const logo = {
+  image: '/icons/logo.svg',
+  title: 'Pro Layout',
+  link: '/pro/layout/zh',
+}
 
 const activeKey = ref()
 const wholeTheme = ref('light')
 const themesOptions = [
-  { key: 'light', label: 'light' },
-  { key: 'dark', label: 'dark' },
+  { key: 'light', label: 'Light' },
+  { key: 'dark', label: 'Dark' },
 ]
-const wholdThemeOptionss = [...themesOptions, { key: 'separate', label: 'separate' }]
-const separateTheme = reactive({
-  header: 'light',
-  sider: 'light',
-})
-const theme = computed(() => {
-  if (wholeTheme.value === 'separate') {
-    return {
-      header: separateTheme.header,
-      sider: separateTheme.sider,
-    }
+const wholeThemeOptions = [...themesOptions, { key: 'mix', label: 'Mix Theme' }]
+const mix = reactive({ header: 'light', sider: 'light' })
+const mergedTheme = computed(() => {
+  if (wholeTheme.value === 'mix') {
+    return { header: mix.header, sider: mix.sider } as ProLayoutTheme
   }
-  return wholeTheme.value
+  return wholeTheme.value as ProLayoutTheme
 })
 const dataSource: MenuData[] = [
   {
@@ -52,7 +75,6 @@ const dataSource: MenuData[] = [
     children: [
       { type: 'item', key: 'item4', label: 'Item 4', icon: 'setting' },
       { type: 'item', key: 'item5', label: 'Item 5', icon: 'setting' },
-      { type: 'divider', key: 'divider2' },
       {
         type: 'sub',
         key: 'sub2',
@@ -88,15 +110,3 @@ const dataSource: MenuData[] = [
   { type: 'item', key: 'item2', icon: 'mail', label: 'Item 2' },
 ]
 </script>
-
-<style lang="less" scoped>
-.logo {
-  padding-left: 24px;
-  font-weight: bold;
-  font-size: 24px;
-}
-
-.layout-content {
-  padding: 48px;
-}
-</style>

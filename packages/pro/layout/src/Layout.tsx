@@ -5,9 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type Ref, computed, defineComponent, normalizeClass, provide, ref } from 'vue'
-
-import { isBoolean, isUndefined } from 'lodash-es'
+import { computed, defineComponent, normalizeClass, provide } from 'vue'
 
 import { useControlledProp } from '@idux/cdk/utils'
 import { IxLayout, IxLayoutContent, IxLayoutFooter } from '@idux/components/layout'
@@ -18,7 +16,7 @@ import { useHeaderMenus, useSiderMenus } from './composables/useMenu'
 import Header from './contents/Header'
 import Sider from './contents/Sider'
 import { proLayoutToken } from './token'
-import { type ProLayoutProps, type SiderHoverCtrl, proLayoutProps } from './types'
+import { proLayoutProps } from './types'
 import { getTargetPaths } from './utils/menu'
 
 export default defineComponent({
@@ -33,10 +31,10 @@ export default defineComponent({
     const headerMenus = useHeaderMenus(props)
     const activeHeaderKey = useActiveHeaderKey(props, activePaths, headerMenus)
     const siderMenus = useSiderMenus(props, activeHeaderKey)
-    const [collapsed, setCollapsed] = useControlledProp(props, 'collapsed', false)
-    const siderHover = useHoverTrigger(props)
-
-    const { handleCollapsedDelay } = useHandleCollapsedDelay(siderHover, setCollapsed)
+    const [collapsed, setCollapsed] = useControlledProp(props, 'collapsed', () => {
+      const { collapsed = false } = props.sider || {}
+      return collapsed
+    })
 
     provide(proLayoutToken, {
       props,
@@ -49,19 +47,14 @@ export default defineComponent({
       activeHeaderKey,
       siderMenus,
       collapsed,
-      siderHover,
-      handleCollapsedDelay, // 延迟折叠
       setCollapsed,
     })
 
-    const layoutClasses = computed(() => {
-      const { type, fixed, compress } = props
+    const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-is-${type}`]: true,
-        [`${prefixCls}-fixed`]: fixed,
-        [`${prefixCls}-float`]: !compress,
+        [`${prefixCls}-is-${props.type}`]: true,
       })
     })
 
@@ -73,9 +66,9 @@ export default defineComponent({
     return () => {
       const prefixCls = mergedPrefixCls.value
       return (
-        <IxLayout class={layoutClasses.value}>
-          {props.type !== 'sider' && <Header />}
-          {showSider.value && <Sider />}
+        <IxLayout class={classes.value} fixed={props.fixed} floatSider={!props.compress}>
+          {props.type !== 'sider' && <Header v-slots={slots} />}
+          {showSider.value && <Sider v-slots={slots} />}
           <IxLayoutContent class={`${prefixCls}-content`}>{slots.default?.()}</IxLayoutContent>
           {slots.footer && <IxLayoutFooter class={`${prefixCls}-footer`}>{slots.footer()}</IxLayoutFooter>}
         </IxLayout>
@@ -83,43 +76,3 @@ export default defineComponent({
     }
   },
 })
-
-function useHoverTrigger(props: ProLayoutProps): ComputedRef<SiderHoverCtrl> {
-  return computed(() => {
-    if (isUndefined(props.siderHover) || isBoolean(props.siderHover)) {
-      return {
-        enable: !!props.siderHover,
-        delay: 0,
-      }
-    }
-    return {
-      enable: true,
-      ...props.siderHover,
-    }
-  })
-}
-
-function useHandleCollapsedDelay(siderHover: ComputedRef<SiderHoverCtrl>, setCollapsed: (collapsed: boolean) => void) {
-  const timer: Ref<number | null> = ref(null)
-
-  const handleCollapsedDelay = (collapsed: boolean) => {
-    if (siderHover.value.delay) {
-      timer.value && clearTimeout(timer.value)
-      if (!collapsed) {
-        timer.value = setTimeout(() => {
-          setCollapsed(collapsed)
-          timer.value = null
-        }, siderHover.value.delay)
-      } else {
-        setCollapsed(collapsed)
-      }
-    } else {
-      setCollapsed(collapsed)
-    }
-  }
-
-  return {
-    timer,
-    handleCollapsedDelay,
-  }
-}

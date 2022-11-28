@@ -15,23 +15,13 @@ import { IxMenu, type MenuClickOptions, type MenuData, type MenuProps } from '@i
 
 import { proLayoutToken } from '../token'
 import { getTargetPaths } from '../utils/menu'
+import Logo from './Logo'
 
 export default defineComponent({
-  name: 'ProLayoutSider',
-  setup() {
-    const {
-      props,
-      slots,
-      mergedPrefixCls,
-      activeKey,
-      setActiveKey,
-      activePaths,
-      siderMenus,
-      collapsed,
-      siderHover,
-      setCollapsed,
-      handleCollapsedDelay,
-    } = inject(proLayoutToken)!
+  name: 'IxProLayoutSider',
+  setup(_, { slots }) {
+    const { props, mergedPrefixCls, activeKey, setActiveKey, activePaths, siderMenus, collapsed, setCollapsed } =
+      inject(proLayoutToken)!
 
     const { expandedKeys, setExpandedKeys } = useExpandedKeys(activePaths, siderMenus)
 
@@ -40,18 +30,11 @@ export default defineComponent({
       return isObject(theme) ? theme.sider : theme
     })
 
-    const fixed = computed(() => {
-      const { fixed } = props
-      return isObject(fixed) ? fixed.sider : fixed
-    })
-
     const classes = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-sider`
       return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-${theme.value}`]: true,
-        [`${prefixCls}-collapsed`]: collapsed.value,
-        [`${prefixCls}-fixed`]: fixed.value,
       })
     })
 
@@ -60,49 +43,39 @@ export default defineComponent({
       callEmit(props['onMenuClick'], menuClickOption)
     }
 
-    const siderEvent = {
-      onMouseenter() {
-        handleCollapsedDelay(false)
-      },
-      onMouseleave() {
-        handleCollapsedDelay(true)
-      },
-    }
-
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-sider`
+      const { siderHover } = props
+      const innerSiderProps: LayoutSiderProps = {
+        collapsed: collapsed.value,
+        'onUpdate:collapsed': setCollapsed,
+        pointer: !!siderHover,
+        pointerDelay: isObject(siderHover) ? siderHover.delay : undefined,
+      }
+      const siderProps = mergeProps(innerSiderProps, props.sider!) as LayoutSiderProps
 
-      const menuProps = mergeProps(
-        {
-          overlayClassName: `${prefixCls}-menu-overlay`,
-          collapsed: collapsed.value,
-          dataSource: siderMenus.value,
-          expandedKeys: expandedKeys.value,
-          'onUpdate:expandedKeys': setExpandedKeys,
-          selectedKeys: menuSelectedKeys.value,
-          'onUpdate:selectedKeys': keys => setActiveKey(keys[0]),
-          mode: 'inline',
-          theme: theme.value,
-          onClick: onMenuClick,
-        } as MenuProps,
-        props.siderMenu!,
-      )
+      const innerMenuProps: MenuProps = {
+        overlayClassName: `${prefixCls}-menu-overlay`,
+        collapsed: siderProps.collapsed,
+        dataSource: siderMenus.value,
+        expandedKeys: expandedKeys.value,
+        'onUpdate:expandedKeys': setExpandedKeys,
+        selectedKeys: menuSelectedKeys.value,
+        'onUpdate:selectedKeys': keys => setActiveKey(keys[0]),
+        mode: !siderProps.collapsed || siderProps.pointer ? 'inline' : 'vertical',
+        theme: theme.value,
+        onClick: onMenuClick,
+      }
+      const menuProps = mergeProps(innerMenuProps, props.siderMenu!)
 
       const contentNode = slots.siderContent ? slots.siderContent(menuProps) : <IxMenu v-slots={slots} {...menuProps} />
 
-      const siderProps = mergeProps(
-        {
-          collapsed: collapsed.value,
-          'onUpdate:collapsed': setCollapsed,
-        } as LayoutSiderProps,
-        props.sider!,
-      )
-
       return (
-        <IxLayoutSider class={classes.value} {...siderProps} {...(siderHover.value.enable ? siderEvent : undefined)}>
-          {slots.siderHeader && <div class={`${mergedPrefixCls.value}-sider-header`}>{slots.siderHeader()}</div>}
+        <IxLayoutSider class={classes.value} {...siderProps}>
+          {props.type === 'sider' && <Logo v-slots={slots} />}
+          {slots.siderHeader && <div class={`${prefixCls}-header`}>{slots.siderHeader()}</div>}
           <div class={`${prefixCls}-content`}>{contentNode}</div>
-          {slots.siderFooter && <div class={`${mergedPrefixCls.value}-sider-footer`}>{slots.siderFooter()}</div>}
+          {slots.siderFooter && <div class={`${prefixCls}-footer`}>{slots.siderFooter()}</div>}
         </IxLayoutSider>
       )
     }

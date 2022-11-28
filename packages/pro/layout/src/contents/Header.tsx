@@ -15,20 +15,16 @@ import { IxMenu, type MenuClickOptions, type MenuProps } from '@idux/components/
 
 import { proLayoutToken } from '../token'
 import { getDefaultPaths } from '../utils/menu'
+import Logo from './Logo'
 
 export default defineComponent({
-  name: 'ProLayoutHeader',
-  setup() {
-    const { props, slots, mergedPrefixCls, setActiveKey, headerMenus, activeHeaderKey } = inject(proLayoutToken)!
+  name: 'IxProLayoutHeader',
+  setup(_, { slots }) {
+    const { props, mergedPrefixCls, setActiveKey, headerMenus, activeHeaderKey } = inject(proLayoutToken)!
 
     const theme = computed(() => {
       const { theme } = props
       return isObject(theme) ? theme.header : theme
-    })
-
-    const fixed = computed(() => {
-      const { fixed } = props
-      return isObject(fixed) ? fixed.header : fixed
     })
 
     const classes = computed(() => {
@@ -36,7 +32,6 @@ export default defineComponent({
       return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-${theme.value}`]: true,
-        [`${prefixCls}-fixed`]: fixed.value,
       })
     })
 
@@ -60,17 +55,15 @@ export default defineComponent({
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-header`
 
-      const menuProps = mergeProps(
-        {
-          overlayClassName: `${prefixCls}-menu-overlay`,
-          dataSource: headerMenus.value,
-          selectedKeys: menuSelectedKeys.value,
-          mode: 'horizontal',
-          theme: theme.value,
-          onClick: onMenuClick,
-        } as MenuProps,
-        props.headerMenu!,
-      )
+      const innerMenuProps: MenuProps = {
+        overlayClassName: `${prefixCls}-menu-overlay`,
+        dataSource: headerMenus.value,
+        selectedKeys: menuSelectedKeys.value,
+        mode: 'horizontal',
+        theme: theme.value,
+        onClick: onMenuClick,
+      }
+      const menuProps = mergeProps(innerMenuProps, props.headerMenu!)
 
       const contentNode = slots.headerContent ? (
         slots.headerContent(menuProps)
@@ -80,7 +73,7 @@ export default defineComponent({
 
       return (
         <IxLayoutHeader class={classes.value}>
-          {slots.logo && <div class={`${prefixCls}-logo`}>{slots.logo()}</div>}
+          {<Logo v-slots={slots} />}
           <div class={`${prefixCls}-content`}>{contentNode}</div>
           {slots.headerExtra && <div class={`${prefixCls}-extra`}>{slots.headerExtra()}</div>}
         </IxLayoutHeader>

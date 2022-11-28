@@ -1,42 +1,60 @@
-@import './mixin.less';
 @import './header.less';
 @import './sider.less';
+@import './light.less';
+@import './dark.less';
 
 .@{pro-layout-prefix} {
-  height: @pro-layout-height;
-  overflow: auto;
+  &-content {
+    padding: 16px;
+  }
 
-  &-fixed {
+  &-footer {
+    padding: 16px 32px;
+  }
+
+  &-logo {
+    position: relative;
     overflow: hidden;
+    height: if((@theme = seer), @menu-height-level-1, calc(@menu-height-level-1 + 8px));
+    line-height: if((@theme = seer), @menu-height-level-1, calc(@menu-height-level-1 + 8px));
+    transition: padding var(--ix-transition-duration-fast) var(--ix-ease-in-out);
 
-    .@{pro-layout-prefix}-content {
-      overflow: auto;
+    > a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      height: 100%;
+      margin-right: 16px;
+
+      > img {
+        display: inline-block;
+        height: @pro-layout-logo-image-height;
+      }
+
+      > h1 {
+        display: inline-block;
+        margin: 0 0 0 12px;
+        font-size: @pro-layout-logo-font-size;
+        font-weight: @pro-layout-logo-font-weight;
+        animation: ix-layout-sider-text-hidden var(--ix-transition-duration-medium);
+      }
     }
   }
 
-  &-float {
-    display: flow-root;
-    position: relative;
-
-    &.@{pro-layout-prefix}-is-both, &.@{pro-layout-prefix}-is-mixin {
-      .@{pro-layout-prefix}-sider {
-        height: calc(100% - @pro-layout-header-height);
-      }
+  &-is-mixin &-header,
+  &-is-both &-header {
+    .@{pro-layout-prefix}-logo {
+      min-width: calc(@layout-sider-width - 16px);
     }
+  }
 
-    &.@{pro-layout-prefix}-is-sider {
-      .@{pro-layout-prefix}-sider {
-        height: 100%;
-      }
-    }
-
+  &.@{layout-prefix}-fixed-sider {
     .@{pro-layout-prefix}-sider {
-      position: absolute;
+      overflow-y: hidden;
     }
 
-    .@{pro-layout-prefix}-content {
-      margin-left: @layout-sider-collapsed-width;
-      width: calc(100% - @layout-sider-collapsed-width);
+    .@{pro-layout-prefix}-sider-content {
+      overflow-y: auto;
     }
   }
 }

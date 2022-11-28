@@ -1,37 +1,73 @@
 <template>
-  <IxProLayout
-    v-model:activeKey="activeKey"
-    v-model:collapsed="collapsed"
-    :siderHover="siderHover"
-    :menus="dataSource"
-    :compress="false"
-    :style="{ height: '300px' }"
-  >
-    <template #itemLabel="item">
-      <router-link to="#pro-layout-demo-Type">{{ item.label }}</router-link>
-    </template>
-    <template #headerExtra>
-      <IxProLayoutSiderTrigger></IxProLayoutSiderTrigger>
-    </template>
-    <template #siderFooter>
-      <IxProLayoutSiderTrigger></IxProLayoutSiderTrigger>
-    </template>
-    <div class="content">
-      <IxButton @click="collapsed = !collapsed">Change Collapsed</IxButton>
-    </div>
-  </IxProLayout>
+  <div style="border: 1px solid var(--ix-border-color); height: 300px">
+    <IxProLayout
+      v-model:activeKey="activeKey"
+      :floatSider="sider.pointer"
+      :logo="logo"
+      :menus="dataSource"
+      :sider="sider"
+    >
+      <template #itemLabel="item">
+        <router-link to="#pro-layout-demo-basic">{{ item.label }}</router-link>
+      </template>
+      <template #headerExtra>
+        <IxButtonGroup align="center" :gap="8" ghost mode="text">
+          <IxButton icon="search" />
+          <IxButton icon="alert" />
+          <IxButton icon="setting" />
+          <IxButton icon="question-circle" />
+        </IxButtonGroup>
+      </template>
+      <template #siderFooter>
+        <IxLayoutSiderTrigger> Trigger Change </IxLayoutSiderTrigger>
+      </template>
+      <IxSpace block vertical>
+        <IxRow gutter="8">
+          <IxCol :span="6">
+            <IxCard> <p>Card Content</p> </IxCard>
+          </IxCol>
+          <IxCol :span="6">
+            <IxCard> <p>Card Content</p> </IxCard>
+          </IxCol>
+          <IxCol :span="6">
+            <IxCard>
+              <IxCheckbox v-model:checked="sider.pointer"> Enable Pointer </IxCheckbox>
+            </IxCard>
+          </IxCol>
+          <IxCol :span="6">
+            <IxCard> <p>Card Content</p> </IxCard>
+          </IxCol>
+        </IxRow>
+        <IxCard> <p>Card Content</p> </IxCard>
+        <IxCard> <p>Card Content</p> </IxCard>
+        <IxCard> <p>Card Content</p> </IxCard>
+        <IxCard> <p>Card Content</p> </IxCard>
+      </IxSpace>
+    </IxProLayout>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 
+import { type LayoutSiderProps } from '@idux/components/layout'
 import { type MenuData } from '@idux/components/menu'
 
+const logo = {
+  image: '/icons/logo.svg',
+  title: 'Pro Layout',
+  link: '/pro/layout/zh',
+}
+
 const activeKey = ref()
-const collapsed = ref(true)
-const siderHover = ref({
-  delay: 500,
+const sider = reactive<LayoutSiderProps>({
+  pointer: true,
+  'onUpdate:collapsed': (collapsed, changeType) => {
+    console.log(collapsed, changeType)
+    sider.pointer = changeType === 'pointer'
+  },
 })
+
 const dataSource: MenuData[] = [
   {
     type: 'sub',
@@ -41,7 +77,6 @@ const dataSource: MenuData[] = [
     children: [
       { type: 'item', key: 'item4', label: 'Item 4', icon: 'setting' },
       { type: 'item', key: 'item5', label: 'Item 5', icon: 'setting' },
-      { type: 'divider', key: 'divider2' },
       {
         type: 'sub',
         key: 'sub2',
@@ -77,10 +112,3 @@ const dataSource: MenuData[] = [
   { type: 'item', key: 'item2', icon: 'mail', label: 'Item 2' },
 ]
 </script>
-
-<style lang="less" scoped>
-.content {
-  padding: 24px;
-  line-height: 24px;
-}
-</style>

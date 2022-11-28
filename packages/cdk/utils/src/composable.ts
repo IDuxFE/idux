@@ -50,18 +50,20 @@ export function useState<T>(defaultOrFactory: T | (() => T), shallow = true): [C
   return [computed(() => state.value) as ComputedRef<T>, setState]
 }
 
-export function useControlledProp<T, K extends keyof T>(props: T, key: K): [ComputedRef<T[K]>, (value: T[K]) => void]
+export function useControlledProp<T, K extends keyof T>(
+  props: T,
+  key: K,
+): [ComputedRef<T[K]>, (value: T[K], ...args: unknown[]) => void]
 export function useControlledProp<T, K extends keyof T>(
   props: T,
   key: K,
   defaultOrFactory: Exclude<T[K], undefined> | (() => Exclude<T[K], undefined>),
-): [ComputedRef<Exclude<T[K], undefined>>, (value: Exclude<T[K], undefined>) => void]
+): [ComputedRef<Exclude<T[K], undefined>>, (value: Exclude<T[K], undefined>, ...args: unknown[]) => void]
 export function useControlledProp<T, K extends keyof T>(
   props: T,
   key: K,
   defaultOrFactory?: Exclude<T[K], undefined> | (() => Exclude<T[K], undefined>),
-): [ComputedRef<T[K]>, (value: T[K]) => void] {
-  const defaultValue = (isFunction(defaultOrFactory) ? defaultOrFactory() : defaultOrFactory)!
+): [ComputedRef<T[K]>, (value: T[K], ...args: unknown[]) => void] {
   const tempProp = shallowRef(props[key])
 
   watch(
@@ -69,13 +71,15 @@ export function useControlledProp<T, K extends keyof T>(
     value => (tempProp.value = value),
   )
 
-  const state = computed(() => props[key] ?? tempProp.value ?? defaultValue)
+  const state = computed(
+    () => props[key] ?? tempProp.value ?? (isFunction(defaultOrFactory) ? defaultOrFactory() : defaultOrFactory)!,
+  )
 
-  const setState = (value: T[K]) => {
+  const setState = (value: T[K], ...args: unknown[]) => {
     if (value !== toRaw(state.value)) {
       tempProp.value = value
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      callEmit((props as any)[`onUpdate:${key as string}`], value)
+      callEmit((props as any)[`onUpdate:${key as string}`], value, ...args)
     }
   }
 

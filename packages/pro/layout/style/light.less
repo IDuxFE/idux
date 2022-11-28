@@ -1,0 +1,46 @@
+.@{pro-layout-prefix} {
+  background-color: @pro-background-color;
+  transition: background-color var(--ix-transition-duration-slow);
+
+  &-header {
+    background-color: @menu-background-color;
+    box-shadow: @pro-layout-header-box-shadow;
+    transition: background-color var(--ix-transition-duration-slow);
+
+    .@{menu-prefix}-horizontal {
+      .@{menu-prefix}-item:hover,
+      .@{menu-prefix}-sub-label:hover,
+      .@{menu-prefix}-item.@{menu-prefix}-item-selected,
+      .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label,
+      .@{menu-prefix}-sub-expanded > .@{menu-prefix}-sub-label {
+        border-top-color: @menu-color-active;
+        border-bottom-color: transparent;
+      }
+
+      .@{menu-prefix}-item.@{menu-prefix}-item-disabled,
+      .@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-label {
+        border-top-color: transparent;
+      }
+    }
+  }
+
+  &-sider {
+    background-color: @menu-background-color;
+    box-shadow: @pro-layout-sider-box-shadow;
+    transition: background-color var(--ix-transition-duration-slow), width var(--ix-transition-duration-medium);
+
+    &-trigger {
+      &:hover {
+        color: @menu-background-color-hover;
+      }
+    }
+
+    .@{layout-prefix}-sider-trigger {
+      > .@{button-prefix} {
+        &:hover {
+          background-color: @menu-background-color-hover;
+        }
+      }
+    }
+  }
+}

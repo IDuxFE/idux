@@ -1,30 +1,53 @@
 <template>
-  <IxProLayout v-model:activeKey="activeKey" :menus="dataSource" :type="type">
-    <template #itemLabel="item">
-      <router-link to="#pro-layout-demo-Type">{{ item.label }}</router-link>
-    </template>
-    <template #logo>
-      <div class="logo">Logo</div>
-    </template>
-    <div class="layout-content">
-      <IxRadioGroup v-model:value="type" buttoned>
-        <IxRadio value="header">Header</IxRadio>
-        <IxRadio value="sider">Sider</IxRadio>
-        <IxRadio value="both">Both</IxRadio>
-        <IxRadio value="mixin">Mixin</IxRadio>
-      </IxRadioGroup>
-    </div>
-  </IxProLayout>
+  <div style="border: 1px solid var(--ix-border-color); height: 300px">
+    <IxProLayout v-model:activeKey="activeKey" :logo="logo" :menus="dataSource" :type="type">
+      <template #itemLabel="item">
+        <router-link to="#pro-layout-demo-type">{{ item.label }}</router-link>
+      </template>
+      <template #headerExtra>
+        <IxButtonGroup align="center" :gap="8" ghost mode="text">
+          <IxButton icon="search" />
+          <IxButton icon="alert" />
+          <IxButton icon="setting" />
+          <IxButton icon="question-circle" />
+        </IxButtonGroup>
+      </template>
+      <template #siderHeader>
+        <IxLayoutSiderTrigger> Current activeKey: {{ activeKey }} </IxLayoutSiderTrigger>
+      </template>
+      <IxSpace block vertical>
+        <IxCard>
+          <IxRadioGroup v-model:value="type" buttoned>
+            <IxRadio value="both">Both</IxRadio>
+            <IxRadio value="mixin">Mixin</IxRadio>
+            <IxRadio value="header">Header</IxRadio>
+            <IxRadio value="sider">Sider</IxRadio>
+          </IxRadioGroup>
+        </IxCard>
+        <IxCard> <p>Card Content</p> </IxCard>
+        <IxCard> <p>Card Content</p> </IxCard>
+        <IxCard> <p>Card Content</p> </IxCard>
+        <IxCard> <p>Card Content</p> </IxCard>
+      </IxSpace>
+    </IxProLayout>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 
 import { type MenuData } from '@idux/components/menu'
+import { type ProLayoutType } from '@idux/pro/layout'
+
+const logo = {
+  image: '/icons/logo.svg',
+  title: 'Pro Layout',
+  link: '/pro/layout/zh',
+}
+
+const type = ref<ProLayoutType>('mixin')
 
 const activeKey = ref()
-const type = ref('mixin')
-
 const dataSource: MenuData[] = [
   {
     type: 'sub',
@@ -34,7 +57,6 @@ const dataSource: MenuData[] = [
     children: [
       { type: 'item', key: 'item4', label: 'Item 4', icon: 'setting' },
       { type: 'item', key: 'item5', label: 'Item 5', icon: 'setting' },
-      { type: 'divider', key: 'divider2' },
       {
         type: 'sub',
         key: 'sub2',
@@ -70,16 +92,3 @@ const dataSource: MenuData[] = [
   { type: 'item', key: 'item2', icon: 'mail', label: 'Item 2' },
 ]
 </script>
-
-<style lang="less" scoped>
-.logo {
-  padding-left: 24px;
-  font-weight: bold;
-  font-size: 24px;
-}
-
-.layout-content {
-  padding: 48px;
-  line-height: 120px;
-}
-</style>

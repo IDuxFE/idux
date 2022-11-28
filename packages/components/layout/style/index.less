@@ -10,13 +10,49 @@
     'sider footer footer';
   grid-template-columns: auto 1fr auto;
   grid-template-rows: auto 1fr auto;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 
   &-header {
     position: relative;
     grid-area: header;
-    height: @layout-header-height;
-    line-height: @layout-header-height;
-    padding: @layout-header-padding;
+  }
+
+  &-sider {
+    position: relative;
+    grid-area: sider;
+    width: @layout-sider-width;
+    height: 100%;
+    transition: width var(--ix-transition-duration-medium);
+
+    &-trigger {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      z-index: 10;
+      justify-content: space-between;
+
+      > span {
+        animation: ix-layout-sider-text-hidden var(--ix-transition-duration-medium);
+      }
+
+      > .@{button-prefix} {
+        padding: 8px;
+      }
+    }
+
+    &-collapsed {
+      width: @layout-sider-collapsed-width;
+
+      .@{layout-prefix}-sider-trigger {
+        justify-content: center;
+
+        > span {
+          display: none;
+        }
+      }
+    }
   }
 
   &-content {
@@ -27,17 +63,54 @@
   &-footer {
     position: relative;
     grid-area: footer;
-    padding: @layout-footer-padding;
   }
 
-  &-sider {
-    position: relative;
-    grid-area: sider;
-    width: @layout-sider-width;
-    transition: width var(--ix-transition-duration-medium) var(--ix-ease-in-out);
+  &-fixed-header {
+    overflow: hidden;
 
-    &-collapsed {
-      width: @layout-sider-collapsed-width;
+    .@{layout-prefix}-header {
+      position: sticky;
     }
+
+    .@{layout-prefix}-content {
+      overflow-y: auto;
+    }
+  }
+
+  &-fixed-sider {
+    .@{layout-prefix}-sider {
+      position: sticky;
+      overflow-y: auto;
+    }
+  }
+
+  &-float-sider {
+    position: relative;
+
+    .@{layout-prefix}-sider {
+      position: absolute;
+    }
+
+    .@{layout-prefix}-content {
+      margin-left: @layout-sider-collapsed-width;
+      width: calc(100% - @layout-sider-collapsed-width);
+    }
+  }
+}
+
+@keyframes ix-layout-sider-text-hidden {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+
+  80% {
+    display: none;
+    opacity: 0;
+  }
+
+  100% {
+    display: unset;
+    opacity: 1;
   }
 }

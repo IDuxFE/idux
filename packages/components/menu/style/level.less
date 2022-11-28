@@ -3,16 +3,16 @@
     .@{menu-prefix}-level-1.@{menu-prefix}-item,
     .@{menu-prefix}-level-1.@{menu-prefix}-item-group > .@{menu-prefix}-item-group-label,
     .@{menu-prefix}-level-1.@{menu-prefix}-sub > .@{menu-prefix}-sub-label {
-      height: if((@theme = seer), 44px, 40px);
-      font-size: var(--ix-font-size-md);
-      line-height: calc(var(--ix-font-size-md) + var(--ix-line-height-gutter));
+      height: @menu-height-level-1;
+      font-size: @menu-font-size-level-1;
+      line-height: calc(@menu-font-size-level-1 + var(--ix-line-height-gutter));
     }
 
     &.@{menu-prefix}-horizontal when (@theme = default) {
       .@{menu-prefix}-item,
       .@{menu-prefix}-item-group > .@{menu-prefix}-item-group-label,
       .@{menu-prefix}-sub > .@{menu-prefix}-sub-label {
-        height: 48px;
+        height: calc(@menu-height-level-1 + 8px);
       }
     }
   }

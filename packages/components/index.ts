@@ -33,7 +33,14 @@ import { IxIcon } from '@idux/components/icon'
 import { IxImage, IxImageViewer } from '@idux/components/image'
 import { IxInput } from '@idux/components/input'
 import { IxInputNumber } from '@idux/components/input-number'
-import { IxLayout, IxLayoutContent, IxLayoutFooter, IxLayoutHeader, IxLayoutSider } from '@idux/components/layout'
+import {
+  IxLayout,
+  IxLayoutContent,
+  IxLayoutFooter,
+  IxLayoutHeader,
+  IxLayoutSider,
+  IxLayoutSiderTrigger,
+} from '@idux/components/layout'
 import { IxList, IxListItem } from '@idux/components/list'
 import { IxLoadingBarProvider } from '@idux/components/loading-bar'
 import { IxMenu, IxMenuDivider, IxMenuItem, IxMenuItemGroup, IxMenuSub } from '@idux/components/menu'
@@ -116,6 +123,7 @@ const components = [
   IxLayoutFooter,
   IxLayoutHeader,
   IxLayoutSider,
+  IxLayoutSiderTrigger,
   IxList,
   IxListItem,
   IxLoadingBarProvider,

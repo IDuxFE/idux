@@ -8,9 +8,10 @@
 import { type ComputedRef, type InjectionKey, type Slots } from 'vue'
 
 import { type VKey } from '@idux/cdk/utils'
+import { type LayoutCollapseChangeType } from '@idux/components/layout'
 import { type MenuData } from '@idux/components/menu'
 
-import { type ProLayoutProps, type SiderHoverCtrl } from './types'
+import { type ProLayoutProps } from './types'
 
 export interface ProLayoutContext {
   props: ProLayoutProps
@@ -23,9 +24,7 @@ export interface ProLayoutContext {
   activeHeaderKey: ComputedRef<VKey | undefined>
   siderMenus: ComputedRef<MenuData[]>
   collapsed: ComputedRef<boolean>
-  siderHover: ComputedRef<SiderHoverCtrl>
-  setCollapsed: (collapsed: boolean) => void
-  handleCollapsedDelay: (collapsed: boolean) => void
+  setCollapsed: (collapsed: boolean, changeType: LayoutCollapseChangeType) => void
 }
 
 export const proLayoutToken: InjectionKey<ProLayoutContext> = Symbol('proLayout')
