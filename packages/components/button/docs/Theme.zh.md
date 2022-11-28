@@ -38,4 +38,4 @@
 | `@button-ghost-background-color-active` | `var(--ix-background-color)` | - | - |
 | `@button-ghost-background-color-disabled` | `rgba(255, 255, 255, 0.4)` | - | - |
 | `@button-icon-color` | `inherit` | `var(--ix-text-color-secondary)` | - |
-| `@button-icon-font-size` | `inherit` | `var(--ix-font-size-lg)` | - |
+| `@button-icon-font-size` | `var(--ix-font-size-lg)` | - | - |

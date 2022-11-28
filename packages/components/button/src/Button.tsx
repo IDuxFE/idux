@@ -61,7 +61,12 @@ export default defineComponent({
 
       const children: VNodeChild[] = []
       if (loading) {
-        children.push(<IxIcon name="loading"></IxIcon>)
+        children.push(
+          // loading 状态下的行高问题
+          <span class={`${mergedPrefixCls.value}-loading-icon`}>
+            <IxIcon name="loading"></IxIcon>
+          </span>,
+        )
       } else if (slots.icon) {
         children.push(slots.icon())
       } else if (icon) {
