@@ -14,13 +14,11 @@
 
   &,
   & .@{menu-prefix}-dropdown {
-    background-color: @dropdown-background-color;
     border-radius: @dropdown-border-radius;
-    box-shadow: @dropdown-box-shadow;
     min-width: @dropdown-min-width;
   }
 
-  .@{menu-prefix}-dropdown {
-    box-shadow: none;
+  & .@{menu-prefix}-dropdown:not(.@{menu-prefix}-dark) {
+    box-shadow: @dropdown-box-shadow;
   }
 }
