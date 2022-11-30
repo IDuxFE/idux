@@ -7,21 +7,11 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { ValidatorFn, ValidatorOptions } from '@idux/cdk/forms'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
-import type { CascaderProps } from '@idux/components/cascader'
-import type { CheckboxProps } from '@idux/components/checkbox'
-import type { DatePickerProps, DateRangePickerProps } from '@idux/components/date-picker'
 import type { EmptyProps } from '@idux/components/empty'
 import type { HeaderProps } from '@idux/components/header'
-import type { InputProps } from '@idux/components/input'
-import type { InputNumberProps } from '@idux/components/input-number'
-import type { RadioProps } from '@idux/components/radio'
-import type { RateProps } from '@idux/components/rate'
-import type { SelectProps } from '@idux/components/select'
 import type { SpinProps } from '@idux/components/spin'
-import type { SwitchProps } from '@idux/components/switch'
 import type {
   TableColumnBase,
   TableColumnExpandable,
@@ -33,10 +23,7 @@ import type {
   TableSize,
   TableSticky,
 } from '@idux/components/table'
-import type { TextareaProps } from '@idux/components/textarea'
-import type { TimeRangePickerProps } from '@idux/components/time-picker'
 import type { TooltipProps } from '@idux/components/tooltip'
-import type { TreeSelectProps } from '@idux/components/tree-select'
 import type { DefineComponent, HTMLAttributes, PropType, VNodeChild } from 'vue'
 
 export const proTableProps = {
@@ -104,31 +91,30 @@ export type ProTableLayoutToolComponent = DefineComponent<
 >
 export type ProTableLayoutToolInstance = InstanceType<DefineComponent<ProTableLayoutToolProps>>
 
-export type ProTableColumn<T = any, K = VKey, FT = 'input'> =
-  | ProTableColumnBase<T, K, FT>
-  | ProTableColumnExpandable<T, K, FT>
-  | ProTableColumnSelectable<T>
+export type ProTableColumn<T = any, K = VKey> =
+  | ProTableColumnBase<T, K>
+  | ProTableColumnExpandable<T, K>
+  | ProTableColumnSelectable<T, K>
   | ProTableColumnIndexable<T, K>
 
-export interface ProTableColumnBase<T = any, K = VKey, FT = 'input'>
+export interface ProTableColumnBase<T = any, K = VKey>
   extends TableColumnBase<T, K>,
     ProTableColumnResizable,
-    ProTableColumnLayoutConfig,
-    ProTableColumnFieldTypeWithProps<FT> {
+    ProTableColumnLayoutConfig {
   copyable?: boolean
   editable?: boolean
   tooltip?: string | TooltipProps
   tooltipIcon?: string
 
-  children?: ProTableColumn<T>[]
+  children?: ProTableColumn<T, K>[]
 }
 
-export interface ProTableColumnExpandable<T = any, K = VKey, FT = 'input'>
+export interface ProTableColumnExpandable<T = any, K = VKey>
   extends Omit<TableColumnExpandable<T, K>, keyof ProTableColumnBase>,
-    ProTableColumnBase<T, K, FT> {}
+    ProTableColumnBase<T, K> {}
 
-export interface ProTableColumnSelectable<T = any>
-  extends TableColumnSelectable<T>,
+export interface ProTableColumnSelectable<T = any, K = VKey>
+  extends TableColumnSelectable<T, K>,
     ProTableColumnResizable,
     ProTableColumnLayoutConfig {}
 
@@ -147,30 +133,4 @@ export type ProTableColumnResizable = {
   maxWidth?: number | string
   minWidth?: number | string
   resizable?: boolean
-}
-
-export interface ProTableColumnFieldProps {
-  cascader: CascaderProps
-  checkbox: CheckboxProps
-  date: DatePickerProps
-  dateRange: DateRangePickerProps
-  input: InputProps
-  inputNumber: InputNumberProps
-  radio: RadioProps
-  rate: RateProps
-  select: SelectProps
-  switch: SwitchProps
-  textarea: TextareaProps
-  time: TimeRangePickerProps
-  timeRange: TimeRangePickerProps
-  treeSelect: TreeSelectProps
-}
-
-export type ProTableColumnFieldType = keyof ProTableColumnFieldProps
-
-export type ProTableColumnFieldTypeWithProps<FT> = {
-  fieldType?: FT
-  fieldProps?: FT extends ProTableColumnFieldType ? ProTableColumnFieldProps[FT] : Record<string, any>
-  fieldValidators?: ValidatorFn | ValidatorFn[] | ValidatorOptions
-  format?: string
 }
