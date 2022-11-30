@@ -78,6 +78,7 @@ export default defineComponent({
       mergedLabelKey,
       mergedFullPath,
       mergedDataMap,
+      selectedStateContext.selectedKeys,
     )
 
     watch(overlayOpened, opened => {

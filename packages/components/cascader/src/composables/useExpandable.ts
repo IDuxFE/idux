@@ -7,6 +7,8 @@
 
 import { type ComputedRef, type Ref, type WritableComputedRef, ref } from 'vue'
 
+import { isNil } from 'lodash-es'
+
 import { type VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 import { type GetKeyFn } from '@idux/components/utils'
 
@@ -27,8 +29,19 @@ export function useExpandable(
   mergedLabelKey: ComputedRef<string>,
   mergedFullPath: ComputedRef<boolean>,
   mergedDataMap: ComputedRef<Map<VKey, MergedData>>,
+  selectedKeys: ComputedRef<VKey[]>,
 ): ExpandableContext {
-  const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', () => [])
+  const getDefaultExpandedKeys = (firstSelectedKey: VKey) => {
+    if (isNil(firstSelectedKey)) {
+      return []
+    }
+    const dataMap = mergedDataMap.value
+    const currData = dataMap.get(firstSelectedKey)
+    return getParentKeys(dataMap, currData, false)
+  }
+  const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', () =>
+    getDefaultExpandedKeys(selectedKeys.value[0]),
+  )
   const [loadedKeys, setLoadedKeys] = useControlledProp(props, 'loadedKeys', () => [])
   const loadingKeys = ref<VKey[]>([])
 
