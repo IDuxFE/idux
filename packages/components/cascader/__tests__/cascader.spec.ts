@@ -1,4 +1,4 @@
-import { MountingOptions, mount } from '@vue/test-utils'
+import { MountingOptions, VueWrapper, mount } from '@vue/test-utils'
 
 import { renderWork } from '@tests'
 
@@ -125,6 +125,9 @@ const defaultMultipleValue = [
 ]
 const defaultExpandedKeys = ['components', 'general']
 
+const getAllOptionGroup = (wrapper: VueWrapper) =>
+  wrapper.findComponent(OverlayContent).findAll('.ix-cascader-option-group')
+
 describe('Cascader', () => {
   describe('single work', () => {
     const CascaderMount = (options?: MountingOptions<Partial<CascaderProps>>) => {
@@ -168,18 +171,46 @@ describe('Cascader', () => {
 
       expect(wrapper.find('.ix-selector-item').exists()).toBe(false)
 
-      const allGroups = wrapper.findComponent(OverlayContent).findAll('.ix-cascader-option-group')
-
-      await allGroups[2].find('.ix-cascader-option').trigger('click')
+      await getAllOptionGroup(wrapper)[2].find('.ix-cascader-option').trigger('click')
 
       // expect(onUpdateValue).toBeCalledWith(['components', 'general', 'button'])
       // expect(onChange).toBeCalledWith(['components', 'general', 'button'], undefined)
 
       await wrapper.setProps({ value: ['components', 'general', 'button'] })
-      await allGroups[2].find('.ix-cascader-option').trigger('click')
+      await getAllOptionGroup(wrapper)[2].find('.ix-cascader-option').trigger('click')
 
       // expect(onUpdateValue).toBeCalledWith(['pro', 'pro-layout'])
       // expect(onChange).toBeCalledWith(['pro', 'pro-layout'], ['components', 'general', 'button'])
+    })
+
+    test('v-model:expandedKeys work', async () => {
+      const onUpdateExpandedKeys = vi.fn()
+      const wrapper = CascaderMount({
+        props: {
+          open: true,
+          expandedKeys: defaultExpandedKeys,
+          'onUpdate:expandedKeys': onUpdateExpandedKeys,
+        },
+      })
+
+      expect(getAllOptionGroup(wrapper).length).toBe(3)
+
+      await wrapper.setProps({ expandedKeys: ['components'] })
+
+      expect(getAllOptionGroup(wrapper).length).toBe(2)
+
+      await wrapper
+        .findComponent(OverlayContent)
+        .findAll('.ix-cascader-option-group')[1]
+        .find('.ix-cascader-option')
+        .trigger('click')
+
+      expect(onUpdateExpandedKeys).toBeCalledWith(['components', 'general'])
+
+      // see https://github.com/IDuxFE/idux/issues/1192
+      await wrapper.setProps({ expandedKeys: undefined })
+
+      expect(getAllOptionGroup(wrapper).length).toBe(3)
     })
   })
 
@@ -221,9 +252,7 @@ describe('Cascader', () => {
 
       expect(wrapper.findAll('.ix-selector-item').length).toBe(1)
 
-      const allGroups = wrapper.findComponent(OverlayContent).findAll('.ix-cascader-option-group')
-
-      await allGroups[2].find('.ix-cascader-option').trigger('click')
+      await getAllOptionGroup(wrapper)[2].find('.ix-cascader-option').trigger('click')
 
       // expect(onUpdateValue).toBeCalledWith([
       //   ['components', 'general', 'button'],
