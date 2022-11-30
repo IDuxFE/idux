@@ -332,6 +332,24 @@
         }
       }
 
+      &-nav-top,
+      &-nav-bottom {
+        > .@{tabs-prefix} {
+          &-nav-wrapper {
+            > .@{tabs-prefix}-nav {
+              > .@{tabs-prefix}-nav-tab {
+                padding: 0;
+                min-width: auto;
+
+                + .@{tabs-prefix}-nav-tab {
+                  margin: 0 0 0 32px;
+                }
+              }
+            }
+          }
+        }
+      }
+
       &-nav-bottom {
         &.@{tabs-prefix} {
           flex-direction: column-reverse;
