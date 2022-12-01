@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/IDuxFE/idux/compare/v1.0.1...v1.2.1) (2022-12-01)
+
+### Bug Fixes
+
+- **cdk:drag-drop:** invalid handle ([677b163](https://github.com/IDuxFE/idux/commit/677b1635e54ff0d38b80563b0b6fa632f30b1432))
+- **comp:transfer:** empty suffix node shouldn't be rendered ([#1267](https://github.com/IDuxFE/idux/issues/1267)) ([4ab1ebb](https://github.com/IDuxFE/idux/commit/4ab1ebb4c02b6b55edfd2cfdece578c95668c3fd))
+
+### Features
+
+- **comp:button:** style update and group support gap ([#1235](https://github.com/IDuxFE/idux/issues/1235)) ([7613c7d](https://github.com/IDuxFE/idux/commit/7613c7d76ed7c13a7a5aca4e7ab3ed5d32a34eac))
+- **pro:layout:** add logo prop and update style ([#1307](https://github.com/IDuxFE/idux/issues/1307)) ([1d47a0c](https://github.com/IDuxFE/idux/commit/1d47a0c4557b66a1f01b006b95780ee69eb9ff13))
+
 # [1.2.0](https://github.com/IDuxFE/idux/compare/v1.0.1...v1.2.0) (2022-11-28)
 
 ### Bug Fixes
