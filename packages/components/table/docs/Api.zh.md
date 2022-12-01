@@ -204,3 +204,13 @@ export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomSta
   </IxTable>
 </template>
 ```
+
+### FAQ
+
+#### 发现表头不显示怎么办？
+
+- 请先检查是否配置了 `headless=true`
+- 请检查 `columns` 的唯一键是否存在重复，唯一键的优先级如下：
+  - `key` > `dataKey` > `type`
+  - 如果一个 `column` 中不存在上面三个值，会默认生成一个随机的 `key`
+- 请检查 `scroll.width` 是否小于已配置列宽(`column.width`)的和，且存在没有配置列宽的列。
