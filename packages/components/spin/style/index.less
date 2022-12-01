@@ -1,32 +1,5 @@
 @import '../../style/mixins/reset.less';
 
-.spin-mask(@position: absolute) {
-  position: @position;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  user-select: none;
-};
-
-.spin-size(@size) {
-  &-@{size} {
-    size: 1em;
-    .@{spin-prefix}-spinner {
-      @spin-size: 'spin-icon-size-@{size}';
-      @font-size: 'spin-font-size-@{size}';
-
-      &-icon {
-        font-size: @@spin-size;
-      }
-
-      &-tip {
-        font-size: @@font-size;
-      }
-    }
-  }
-}
-
 .@{spin-prefix} {
   .reset-component();
 
@@ -39,24 +12,24 @@
       position: relative;
     }
     &-has-scroll {
-      >.@{spin-prefix} {
-        >.@{spin-prefix}-spinner {
+      > .@{spin-prefix} {
+        > .@{spin-prefix}-spinner {
           position: sticky;
           top: 50%;
           left: 50%;
         }
       }
     }
-    >.@{spin-prefix} {
+    > .@{spin-prefix} {
       left: 0;
       top: 0;
       right: 0;
       bottom: 0;
       position: absolute;
-      background-color: hsl(0deg 0% 100% / 40%);
+      background-color: rgb(255 255 255 / 40%);
     }
   }
-  
+
   &-spinner {
     .spin-mask();
 
@@ -112,6 +85,33 @@
       user-select: none;
       clear: both;
       overflow: hidden;
+    }
+  }
+}
+
+.spin-mask(@position: absolute) {
+  position: @position;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  user-select: none;
+}
+
+.spin-size(@size) {
+  &-@{size} {
+    size: 1em;
+    .@{spin-prefix}-spinner {
+      @spin-size: 'spin-icon-size-@{size}';
+      @font-size: 'spin-font-size-@{size}';
+
+      &-icon {
+        font-size: @@spin-size;
+      }
+
+      &-tip {
+        font-size: @@font-size;
+      }
     }
   }
 }
