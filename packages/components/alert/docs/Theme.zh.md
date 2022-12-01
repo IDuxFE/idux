@@ -8,7 +8,7 @@
 | `@alert-color-secondary` | `@text-color-secondary` | - | - |
 | `@alert-success-color` | `var(--ix-color-turquoise)` | `var(--ix-color-turquoise-d10)` | - |
 | `@alert-info-color` | `var(--ix-color-primary)` | - | - |
-| `@alert-warning-color` | `var(--ix-color-brown)` | - | - |
+| `@alert-warning-color` | `var(--ix-color-brown)` | `#a35f40` | - |
 | `@alert-error-color` | `var(--ix-color-red)` | `var(--ix-color-red-d10)` | - |
 | `@alert-offline-color` | `var(--ix-text-color-disabled)` | - | - |
 | `@alert-success-background-color` | `#f1faf7` | - | - |

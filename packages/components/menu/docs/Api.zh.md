@@ -45,7 +45,7 @@ export type MenuCustomAdditional = (options: { data: MenuData; index: number }) 
 | `suffix` | 后缀图标 | `string` | - | - | - |
 | `customIcon` | 自定义图标 | `string \| ((data: MenuItemProps & { selected: boolean }) => VNodeChild)` | `'itemIcon'` | - | 类型为 `string` 时，对应插槽名 |
 | `customLabel` | 自定义文本 | `string \| ((data: MenuItemProps & { selected: boolean }) => VNodeChild)` | `'itemLabel'` | - | 类型为 `string` 时，对应插槽名 |
-| `customSuffix` | 自定义文本 | `string \| ((data: MenuItemProps & { selected: boolean }) => VNodeChild)` | `'itemLabel'` | - | 类型为 `string` 时，对应插槽名 |
+| `customSuffix` | 自定义文本 | `string \| ((data: MenuItemProps & { selected: boolean }) => VNodeChild)` | `'itemSuffix'` | - | 类型为 `string` 时，对应插槽名 |
 
 #### MenuItemGroupProps
 

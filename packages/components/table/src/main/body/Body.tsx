@@ -21,6 +21,7 @@ export default defineComponent({
       props,
       slots: tableSlots,
       mergedPrefixCls,
+      mergedAutoHeight,
       flattedData,
       expandable,
       scrollWidth,
@@ -28,7 +29,9 @@ export default defineComponent({
       isSticky,
     } = inject(TABLE_TOKEN)!
 
-    const showMeasure = computed(() => scrollWidth.value || scrollHeight.value || isSticky.value)
+    const showMeasure = computed(
+      () => mergedAutoHeight.value || scrollWidth.value || scrollHeight.value || isSticky.value,
+    )
 
     return () => {
       const prefixCls = mergedPrefixCls.value
