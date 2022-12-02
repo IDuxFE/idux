@@ -50,13 +50,24 @@ export default defineComponent({
       setSearchValue(inputValue)
     }
 
-    const handleCheckAll = (checked: boolean) =>
+    const handleCheckAll = (checked: boolean) => {
       loopColumns(mergedColumns.value, column => {
         // undefined or true
         if (column.changeVisible !== false) {
           column.visible = checked
         }
       })
+      handleFixedChange()
+    }
+
+    const handleFixedChange = () => {
+      const { startColumns, centerColumns, endColumns } = groupColumns(mergedColumns.value)
+      setMergedColumns([...startColumns, ...centerColumns, ...endColumns])
+    }
+
+    const handleVisibleChange = () => {
+      setMergedColumns([...mergedColumns.value])
+    }
 
     return () => {
       const { startColumns, centerColumns, endColumns } = groupColumns(mergedColumns.value)
@@ -81,11 +92,6 @@ export default defineComponent({
         } else {
           setMergedColumns([...startColumns, ...centerColumns, ...columns])
         }
-      }
-
-      const handleFixedChange = () => {
-        const { startColumns, centerColumns, endColumns } = groupColumns(mergedColumns.value)
-        setMergedColumns([...startColumns, ...centerColumns, ...endColumns])
       }
 
       const settingLength = mergedColumns.value.length
@@ -121,6 +127,7 @@ export default defineComponent({
                 title={startPinTitle}
                 onDrop={handleDrop}
                 onFixedChange={handleFixedChange}
+                onVisibleChange={handleVisibleChange}
               />
             )}
             {(!withFixed || centerColumns.length > 0) && (
@@ -131,6 +138,7 @@ export default defineComponent({
                 title={withFixed ? noPinTitle : undefined}
                 onDrop={handleDrop}
                 onFixedChange={handleFixedChange}
+                onVisibleChange={handleVisibleChange}
               />
             )}
             {hasEndFixed && (
@@ -141,6 +149,7 @@ export default defineComponent({
                 title={endPinTitle}
                 onDrop={handleDrop}
                 onFixedChange={handleFixedChange}
+                onVisibleChange={handleVisibleChange}
               />
             )}
           </div>

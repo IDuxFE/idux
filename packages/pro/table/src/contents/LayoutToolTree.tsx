@@ -23,6 +23,7 @@ export default defineComponent({
     title: { type: String, default: undefined },
     onDrop: { type: Function, required: true },
     onFixedChange: { type: Function, required: true },
+    onVisibleChange: { type: Function, required: true },
   },
   setup(props) {
     const key = useKey()
@@ -46,6 +47,7 @@ export default defineComponent({
           currColumn = parent
         }
       }
+      props.onVisibleChange()
     }
 
     const onDrop = (options: TreeDragDropOptions) => {
@@ -66,7 +68,7 @@ export default defineComponent({
       loopColumns(column.children, child => {
         child.fixed = fixed
       })
-      props.onFixedChange!()
+      props.onFixedChange()
     }
 
     return () => {
