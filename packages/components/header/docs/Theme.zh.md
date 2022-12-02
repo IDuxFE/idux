@@ -15,10 +15,10 @@
 | `@header-background-color` | `var(--ix-background-color)` | - | - |
 | `@header-bar-width` | `4px` | - | - |
 | `@header-bar-background-color` | `var(--ix-color-primary)` | - | - |
-| `@header-title-font-weight` | `var(--ix-font-weight-lg)` | - | - |
+| `@header-title-font-weight` | `var(--ix-font-weight-xl)` | - | - |
 | `@header-sub-title-color` | `var(--ix-text-color-title-secondary)` | - | - |
 | `@header-sub-title-font-size` | `var(--ix-font-size-md)` | - | - |
 | `@header-suffix-color` | `var(--ix-text-color-title-secondary)` | - | - |
 | `@header-description-color` | `var(--ix-text-color-info)` | - | - |
 | `@header-description-font-size` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
-| `@header-icon-font-size` | `inherit` | `var(--ix-font-size-lg)` | - |
+| `@header-icon-font-size` | `var(--ix-font-size-icon)` | - | - |

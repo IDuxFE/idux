@@ -52,6 +52,7 @@ export function useTooltipOverlay(
       container: mergedOverlayContainer.value,
       delay: props.delay ?? config.delay,
       destroyOnHide: props.destroyOnHide ?? config.destroyOnHide,
+      disabled: props.disabled,
       offset: props.offset ?? config.offset,
       showArrow: true,
       placement: props.placement ?? config.placement,

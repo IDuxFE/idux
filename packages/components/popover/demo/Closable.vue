@@ -1,5 +1,5 @@
 <template>
-  <IxPopover v-model:visible="visible" header="Title" :closable="true" trigger="manual">
+  <IxPopover v-model:visible="visible" header="Title" closable trigger="manual">
     <template #content>
       <div>This is content...</div>
       <div>This is content...</div>

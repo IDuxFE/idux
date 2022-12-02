@@ -12,23 +12,12 @@ import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 import { ɵOverlayDelayDef, ɵOverlayPlacementDef, ɵOverlayTriggerDef } from '@idux/components/_private/overlay'
 
 export const tooltipProps = {
-  visible: {
-    type: Boolean,
-    default: undefined,
-  },
-  autoAdjust: {
-    type: Boolean,
-    default: undefined,
-  },
-  closeOnDeactivated: {
-    type: Boolean,
-    default: true,
-  },
-  destroyOnHide: {
-    type: Boolean,
-    default: undefined,
-  },
+  visible: { type: Boolean, default: undefined },
+  autoAdjust: { type: Boolean, default: undefined },
+  closeOnDeactivated: { type: Boolean, default: true },
+  destroyOnHide: { type: Boolean, default: undefined },
   delay: ɵOverlayDelayDef,
+  disabled: { type: Boolean, default: false },
   offset: Array as unknown as PropType<[number, number]>,
   overlayContainer: {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,

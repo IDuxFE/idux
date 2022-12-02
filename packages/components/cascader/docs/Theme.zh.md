@@ -24,4 +24,4 @@
 | `@cascader-overlay-background-color` | `@select-option-container-background-color` | - | - |
 | `@cascader-overlay-border-radius` | `@select-option-container-border-radius` | - | - |
 | `@cascader-overlay-box-shadow` | `@select-option-container-box-shadow` | - | - |
-| `@cascader-overlay-search-wrapper-padding` | `@select-overlay-input-padding` | - | - |
+| `@cascader-overlay-search-wrapper-padding` | `@select-overlay-search-wrapper-padding` | - | - |

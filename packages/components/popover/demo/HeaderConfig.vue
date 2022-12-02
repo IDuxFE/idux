@@ -14,7 +14,7 @@
     </IxPopover>
     <IxPopover :header="header">
       <template #header>
-        <span>Title</span>
+        <IxHeader title="Title" />
       </template>
       <template #content>
         <div>This is content...</div>

@@ -17,6 +17,11 @@
   color: var(--ix-text-color);
 }
 
+.reset-font-size(@font-size) {
+  font-size: @font-size;
+  line-height: calc(@font-size + var(--ix-line-height-gutter));
+}
+
 .reset-scroll() {
   ::-webkit-scrollbar {
     width: @scrollbar-width;

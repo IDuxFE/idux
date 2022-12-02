@@ -35,7 +35,6 @@ export default defineComponent({
 
     provide(popconfirmToken, {
       props,
-      slots,
       locale,
       mergedPrefixCls,
       visible,
@@ -49,10 +48,11 @@ export default defineComponent({
 
     return () => {
       const prefixCls = mergedPrefixCls.value
+      const { default: defaultSlot, ...restSlots } = slots
       return (
         <ɵOverlay
           ref={overlayRef}
-          v-slots={{ default: slots.default, content: () => <PopconfirmContent /> }}
+          v-slots={{ default: defaultSlot, content: () => <PopconfirmContent v-slots={restSlots} /> }}
           class={prefixCls}
           transitionName={`${common.prefixCls}-fade`}
           {...overlayProps.value}

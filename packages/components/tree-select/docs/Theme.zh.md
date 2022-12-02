@@ -14,6 +14,6 @@
 | `@tree-select-option-container-background-color` | `@background-color-component` | - | - |
 | `@tree-select-option-container-border-radius` | `@border-radius-sm` | - | - |
 | `@tree-select-option-container-box-shadow` | `@shadow-bottom-md` | - | - |
-| `@tree-select-option-container-search-wrapper-padding` | `0 @spacing-md @spacing-md @spacing-md` | - | - |
+| `@tree-select-option-container-search-wrapper-padding` | `@select-overlay-search-wrapper-padding` | - | - |
 | `@tree-select-option-container-tree-node-padding` | `0 0 0 @spacing-xs` | - | - |
 | `@tree-select-border-radius` | - | `@border-radius-sm` | - |

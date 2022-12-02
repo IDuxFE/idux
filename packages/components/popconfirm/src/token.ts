@@ -7,11 +7,10 @@
 
 import type { PopconfirmProps } from './types'
 import type { Locale } from '@idux/components/locales'
-import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
+import type { ComputedRef, InjectionKey, Ref } from 'vue'
 
 export interface PopconfirmContext {
   props: PopconfirmProps
-  slots: Slots
   locale: Locale
   mergedPrefixCls: ComputedRef<string>
   visible: ComputedRef<boolean>
