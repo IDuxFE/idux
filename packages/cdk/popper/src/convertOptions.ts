@@ -16,6 +16,7 @@ import {
   type Placement,
   flip,
   offset as offsetMiddleware,
+  shift,
 } from '@floating-ui/dom'
 
 import { arrow } from './middlewares/arrow'
@@ -41,6 +42,7 @@ export function convertOptions(baseOptions: BaseOptions, extraOptions: ExtraOpti
         crossAxis: offset[0],
       }),
       autoAdjust && flip({ padding: 4 }),
+      autoAdjust && shift(),
       ...middlewares,
       referenceHidden(),
       updatePlacement(_updatePlacement),
