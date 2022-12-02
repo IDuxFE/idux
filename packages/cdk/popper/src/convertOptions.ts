@@ -5,9 +5,6 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { BaseOptions } from './composables/useOptions'
-import type { PopperPlacement } from './types'
-
 import { kebabCase } from 'lodash-es'
 
 import {
@@ -16,11 +13,14 @@ import {
   type Placement,
   flip,
   offset as offsetMiddleware,
+  shift,
 } from '@floating-ui/dom'
 
+import { type BaseOptions } from './composables/useOptions'
 import { arrow } from './middlewares/arrow'
 import { referenceHidden } from './middlewares/refenceHidden'
 import { updatePlacement } from './middlewares/updatePlacement'
+import { type PopperPlacement } from './types'
 
 export interface ExtraOptions {
   arrowElement: HTMLElement | undefined
@@ -41,6 +41,7 @@ export function convertOptions(baseOptions: BaseOptions, extraOptions: ExtraOpti
         crossAxis: offset[0],
       }),
       autoAdjust && flip({ padding: 4 }),
+      autoAdjust && shift(),
       ...middlewares,
       referenceHidden(),
       updatePlacement(_updatePlacement),

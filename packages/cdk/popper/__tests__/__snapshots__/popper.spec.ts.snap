@@ -12,12 +12,12 @@ exports[`usePopper > options > autoAdjust work 2`] = `
 
 exports[`usePopper > options > offset work 1`] = `
 "<div id=\\"trigger\\">Trigger</div>
-<div id=\\"overlay\\" style=\\"position: absolute; left: 4px; top: -4px;\\" data-popper-reference-hidden=\\"\\" data-popper-placement=\\"top\\">Popper</div>"
+<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: -4px;\\" data-popper-reference-hidden=\\"\\" data-popper-placement=\\"top\\">Popper</div>"
 `;
 
 exports[`usePopper > options > offset work 2`] = `
 "<div id=\\"trigger\\">Trigger</div>
-<div id=\\"overlay\\" style=\\"position: absolute; left: 8px; top: -8px;\\" data-popper-reference-hidden=\\"\\" data-popper-placement=\\"top\\">Popper</div>"
+<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: -8px;\\" data-popper-reference-hidden=\\"\\" data-popper-placement=\\"top\\">Popper</div>"
 `;
 
 exports[`usePopper > options > placement work 1`] = `
