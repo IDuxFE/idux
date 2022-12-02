@@ -45,7 +45,7 @@
 | `@select-option-container-background-color` | `@background-color-component` | - | - |
 | `@select-option-container-border-radius` | `@border-radius-sm` | - | - |
 | `@select-option-container-box-shadow` | `@shadow-bottom-md` | - | - |
-| `@select-overlay-input-padding` | `0 @spacing-md @spacing-sm` | - | - |
+| `@select-overlay-search-wrapper-padding` | `4px 12px 8px` | - | - |
 | `@select-icon-font-size` | `@font-size-lg` | `@font-size-lg` | - |
 | `@select-icon-margin-right` | `@spacing-xs` | `@spacing-sm` | - |
 | `@select-icon-color` | `@select-placeholder-color` | `@color-graphite-l10` | - |

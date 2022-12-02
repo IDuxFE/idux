@@ -27,7 +27,7 @@ describe('Popover', () => {
       slots,
     })
 
-    expect(document.querySelector('.ix-popover .ix-header')!.textContent).toBe('Title')
+    expect(document.querySelector('.ix-popover .ix-header-title')!.textContent).toBe('Title')
 
     await wrapper.setProps({ header: 'Title 2' })
 
@@ -49,7 +49,8 @@ describe('Popover', () => {
       slots,
     })
 
-    expect(document.querySelector('.ix-popover-with-header')).toBeTruthy()
+    expect(document.querySelector('.ix-popover .ix-header-title')!.textContent).toBe('Title')
+    expect(document.querySelector('.ix-popover .ix-header-sub-title')!.textContent).toBe('subTitle')
     expect(document.querySelector('.ix-popover-overlay-container')!.innerHTML).toMatchSnapshot()
   })
 

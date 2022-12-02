@@ -46,5 +46,5 @@ const renderContent = (props: TooltipProps, slots: Slots, prefixCls: string) => 
   if (!(slots.title || props.title)) {
     return null
   }
-  return <div class={`${prefixCls}-wrapper`}>{slots.title?.() ?? props.title}</div>
+  return <div class={`${prefixCls}-wrapper`}>{slots.title ? slots.title() : props.title}</div>
 }

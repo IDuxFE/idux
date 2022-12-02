@@ -3,47 +3,32 @@
 
 .@{popover-prefix} {
   .reset-component();
+  .reset-font-size(@popover-font-size);
 
-  z-index: 1000;
-  font-size: @popover-font-size;
   color: @popover-color;
   background-color: @popover-background-color;
   border-radius: @popover-border-radius;
   box-shadow: @popover-box-shadow;
+  z-index: 1000;
 
   &-wrapper {
     position: relative;
     word-wrap: break-word;
-    min-width: @popover-wrapper-min-width;
-    padding: @popover-wrapper-padding;
+    min-width: @popover-min-width;
     z-index: 1;
 
-    &.@{popover-prefix}-with-header {
-      padding: @popover-wrapper-with-header-padding;
-    }
-  }
-
-  .@{header-prefix} {
-    padding: @popover-header-padding;
-
-    &-content {
-      height: @popover-header-height;
-    }
-
-    &-suffix {
-      .@{icon-prefix}:hover {
-        color: @popover-close-icon-hover-color;
-      }
-
-      .@{icon-prefix}:active {
-        color: @popover-close-icon-active-color;
-      }
+    > .@{header-prefix} {
+      padding-left: 12px;
+      padding-right: 12px;
     }
   }
 
   &-content {
-    padding: @popover-content-padding;
-    line-height: @popover-content-line-height;
+    padding: 12px;
+  }
+
+  .@{header-prefix} + &-content {
+    padding-top: 4px;
   }
 
   .@{overlay-prefix}-arrow {

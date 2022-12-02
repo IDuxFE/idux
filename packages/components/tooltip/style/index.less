@@ -3,21 +3,20 @@
 
 .@{tooltip-prefix} {
   .reset-component();
+  .reset-font-size(@tooltip-font-size);
 
-  z-index: 1000;
-  font-size: @tooltip-font-size;
   color: @tooltip-color;
   background-color: @tooltip-background-color;
   border-radius: @tooltip-border-radius;
   box-shadow: @tooltip-box-shadow;
+  z-index: 1000;
 
   &-wrapper {
     position: relative;
     word-wrap: break-word;
-    max-width: @tooltip-wrapper-max-width;
-    min-width: @tooltip-wrapper-min-width;
-    min-height: @tooltip-wrapper-min-height;
-    padding: @tooltip-wrapper-padding;
+    min-width: @tooltip-min-width;
+    max-width: @tooltip-max-width;
+    padding: 4px 8px;
     z-index: 1;
   }
 

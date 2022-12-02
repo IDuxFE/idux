@@ -63,8 +63,6 @@ const renderContent = (
     return null
   }
 
-  let cls = `${prefixCls}-wrapper`
-
   const children: VNode[] = []
   if (slots.header || props.header) {
     children.push(
@@ -77,13 +75,11 @@ const renderContent = (
         v-slots={{ header: slots.header }}
       />,
     )
-
-    cls += ` ${prefixCls}-with-header`
   }
 
   if (slots.content || props.content) {
-    children.push(<div class={`${prefixCls}-content`}>{slots.content?.() ?? props.content}</div>)
+    children.push(<div class={`${prefixCls}-content`}>{slots.content ? slots.content() : props.content}</div>)
   }
 
-  return <div class={cls}>{children}</div>
+  return <div class={`${prefixCls}-wrapper`}>{children}</div>
 }

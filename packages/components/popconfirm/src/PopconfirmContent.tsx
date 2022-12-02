@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { ɵFooter } from '@idux/components/_private/footer'
 import { IxIcon } from '@idux/components/icon'
@@ -14,18 +14,19 @@ import { popconfirmToken } from './token'
 import { type PopconfirmButtonProps } from './types'
 
 export default defineComponent({
-  setup() {
-    const { props, slots, locale, mergedPrefixCls, cancelLoading, okLoading, cancel, ok } = inject(popconfirmToken)!
+  name: 'IxPopconfirmContent',
+  setup(_, { slots }) {
+    const { props, locale, mergedPrefixCls, cancelLoading, okLoading, cancel, ok } = inject(popconfirmToken)!
 
     const cancelText = computed(() => props.cancelText ?? locale.popconfirm.cancelText)
     const okText = computed(() => props.okText ?? locale.popconfirm.okText)
 
-    const cancelButton = computed<PopconfirmButtonProps>(() => {
-      return { size: 'xs', ...props.cancelButton }
+    const cancelButton = computed(() => {
+      return { size: 'xs', ...props.cancelButton } as PopconfirmButtonProps
     })
 
-    const okButton = computed<PopconfirmButtonProps>(() => {
-      return { size: 'xs', ...props.okButton }
+    const okButton = computed(() => {
+      return { size: 'xs', ...props.okButton } as PopconfirmButtonProps
     })
 
     return () => {
@@ -33,8 +34,12 @@ export default defineComponent({
       const iconNode = slots.icon ? slots.icon() : props.icon ? <IxIcon name={props.icon}></IxIcon> : undefined
       const titleNode = slots.title ? slots.title() : props.title
       const contentNode = slots.content ? slots.content() : props.content
+      const classes = normalizeClass({
+        [`${prefixCls}-wrapper`]: true,
+        [`${prefixCls}-with-content`]: !!contentNode,
+      })
       return (
-        <div class={`${prefixCls}-wrapper`}>
+        <div class={classes}>
           {(iconNode || titleNode) && (
             <div class={`${prefixCls}-title`}>
               {iconNode}
