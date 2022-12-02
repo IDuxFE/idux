@@ -61,6 +61,9 @@ const columns: ProTableColumn<Data>[] = [
     changeFixed: false,
     width: 100,
     resizable: true,
+    sortable: {
+      sorter: (curr, next) => curr.age - next.age,
+    },
   },
   {
     title: 'Address',
