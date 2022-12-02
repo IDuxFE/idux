@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/IDuxFE/idux/compare/v1.2.1...v1.2.2) (2022-12-02)
+
+### Bug Fixes
+
+- **dropdown,header,tree-select:** update style with design ([#1319](https://github.com/IDuxFE/idux/issues/1319)) ([145865c](https://github.com/IDuxFE/idux/commit/145865c64034515af1e86f63fd9c939fd30f0126))
+
 ## [1.2.1](https://github.com/IDuxFE/idux/compare/v1.0.1...v1.2.1) (2022-12-01)
 
 ### Bug Fixes
