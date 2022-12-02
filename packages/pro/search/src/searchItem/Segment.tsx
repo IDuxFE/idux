@@ -160,6 +160,8 @@ export default defineComponent({
         class={inputClasses.value}
         value={props.input ?? ''}
         disabled={props.disabled}
+        title={props.segment.placeholder}
+        placeholder={props.segment.placeholder}
         onInput={handleInput}
         onCompositionstart={handleCompositionStart}
         onCompositionend={handleCompositionEnd}
@@ -206,7 +208,7 @@ export default defineComponent({
             renderTrigger()
           )}
           <span class={`${prefixCls}-measure-span`} ref={measureSpanRef}>
-            {props.input ?? ''}
+            {props.input || props.segment.placeholder || ''}
           </span>
         </span>
       )

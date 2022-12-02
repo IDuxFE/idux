@@ -1,6 +1,7 @@
 @import '../../style/mixins/reset.less';
 @import '../../../components/select/style/index.less';
 @import '../../../components/style/mixins/ellipsis.less';
+@import '../../../components//style//mixins//placeholder.less';
 
 .@{pro-search-prefix} {
   .reset-component();
@@ -44,6 +45,7 @@
   &-placeholder {
     color: @pro-search-placeholder-color;
     padding: 0 @pro-search-placeholder-padding-horizontal;
+    .ellipsis();
   }
   &-clear-icon {
     position: absolute;
@@ -189,6 +191,8 @@
       height: 100%;
       max-width: 100%;
       outline: none;
+
+      .placeholder(@pro-search-placeholder-color);
     }
 
     &-overlay {

@@ -37,6 +37,7 @@ const searchFields: SearchField[] = [
     type: 'input',
     label: 'Keyword',
     multiple: true,
+    placeholder: 'please input keyword',
     fieldConfig: {
       trim: true,
     },
