@@ -107,18 +107,16 @@
     display: inline-block;
     max-width: 100%;
     color: @pro-search-color;
-
-    &:not(&-tag) {
-      margin-left: @pro-search-item-margin-left;
-      padding-bottom: @pro-search-item-tag-padding-vertical;
-      &:first-child {
-        margin-left: @pro-search-item-margin-left + @pro-search-item-tag-margin-left;
-      }
+    margin-left: @pro-search-item-margin-left;
+    padding-bottom: @pro-search-item-tag-padding-vertical;
+    &:first-child {
+      margin-left: @pro-search-item-margin-left + @pro-search-item-tag-margin-left;
     }
 
     &-tag {
       position: relative;
       display: inline-flex;
+      max-width: 100%;
       align-items: center;
       height: @pro-search-item-height;
       padding: @pro-search-item-tag-padding-vertical @pro-search-item-tag-padding-horizontal;
@@ -148,25 +146,25 @@
         .ellipsis();
       }
 
-      &.@{pro-search-prefix}-search-item-invalid {
+      &-close-icon {
+        display: flex;
+        align-items: center;
+        margin-left: @pro-search-close-icon-margin-left;
+        cursor: pointer;
+        z-index: 1;
+      }
+
+      &&-invalid {
         border: 1px solid @pro-search-item-tag-invalid-border-color;
       }
-    }
 
-    &-close-icon {
-      display: flex;
-      align-items: center;
-      margin-left: @pro-search-close-icon-margin-left;
-      cursor: pointer;
-      z-index: 1;
-    }
-
-    &-invalid-tooltip {
-      background-color: @pro-search-item-tag-invalid-tooltip-background-color;
-      color: @pro-search-item-tag-invalid-tooltip-color;
-
-      .@{overlay-prefix}-arrow {
-        color: @pro-search-item-tag-invalid-tooltip-background-color;
+      &-invalid-tooltip {
+        background-color: @pro-search-item-tag-invalid-tooltip-background-color;
+        color: @pro-search-item-tag-invalid-tooltip-color;
+  
+        .@{overlay-prefix}-arrow {
+          color: @pro-search-item-tag-invalid-tooltip-background-color;
+        }
       }
     }
   }
