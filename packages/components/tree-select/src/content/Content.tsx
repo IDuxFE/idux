@@ -236,7 +236,8 @@ export default defineComponent({
         children.unshift(
           <div class={`${prefixCls}-overlay-search-wrapper`}>
             <IxButton
-              size="md"
+              size="xs"
+              shape="square"
               title={expandAllBtnStatus.value ? locale.treeSelect.expandAll : locale.treeSelect.collapseAll}
               icon={expandAllBtnStatus.value ? 'tree-expand' : 'tree-unexpand'}
               onClick={handleExpandAll}

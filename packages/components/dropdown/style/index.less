@@ -4,6 +4,11 @@
 .@{dropdown-prefix} {
   .reset-component-new();
 
+  background-color: @dropdown-background-color;
+  box-shadow: @dropdown-box-shadow;
+  border-radius: @dropdown-border-radius;
+  min-width: @dropdown-min-width;
+
   &-trigger {
     cursor: pointer;
   }
@@ -12,13 +17,7 @@
     color: @dropdown-background-color;
   }
 
-  &,
-  & .@{menu-prefix}-dropdown {
-    border-radius: @dropdown-border-radius;
-    min-width: @dropdown-min-width;
-  }
-
-  & .@{menu-prefix}-dropdown:not(.@{menu-prefix}-dark) {
-    box-shadow: @dropdown-box-shadow;
+  .@{menu-prefix}-dropdown {
+    box-shadow: none;
   }
 }

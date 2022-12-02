@@ -12,20 +12,20 @@
   width: 100%;
 
   &-sm {
-    .header-size(@header-height-sm, @header-font-size-sm);
+    .header-size(@header-height-sm, @header-font-size-sm, 8px);
   }
 
   &-md {
-    .header-size(@header-height-md, @header-font-size-md);
+    .header-size(@header-height-md, @header-font-size-md, 8px);
   }
 
   &-lg {
-    .header-size(@header-height-lg, @header-font-size-lg);
+    .header-size(@header-height-lg, @header-font-size-lg, 8px);
   }
 
   // @deprecated
   &-xl {
-    .header-size(@header-height-xl, @header-font-size-xl);
+    .header-size(@header-height-xl, @header-font-size-xl, 12px);
   }
 
   &-prefix {
@@ -34,7 +34,6 @@
 
   .@{avatar-prefix} {
     margin-right: 16px;
-    align-self: center;
   }
 
   &-title-wrapper {
@@ -61,19 +60,18 @@
 
   &-prefix,
   &-suffix {
-    align-self: flex-start;
     cursor: pointer;
 
-    &:hover > .@{icon-prefix} {
+    .@{icon-prefix} {
+      font-size: @header-icon-font-size;
+    }
+
+    &:hover {
       color: @header-color-hover;
     }
 
-    &:active > .@{icon-prefix} {
+    &:active {
       color: @header-color-active;
-    }
-
-    > .@{icon-prefix} {
-      font-size: @header-icon-font-size;
     }
   }
 
@@ -121,15 +119,22 @@
       content: '';
     }
   }
+
+  &-with-description {
+    .@{header-prefix}-prefix,
+    .@{header-prefix}-suffix {
+      align-self: flex-start;
+    }
+  }
 }
 
-.header-size(@height, @font-size) {
+.header-size(@height, @font-size, @padding) {
   @line-height: calc(@font-size + var(--ix-line-height-gutter));
 
   font-size: @font-size;
   line-height: @line-height;
-  padding-top: calc((@height - @line-height) / 2);
-  padding-bottom: calc((@height - @line-height) / 2);
+  min-height: @height;
+  padding: @padding 0;
 
   &.@{header-prefix}-with-bar {
     &::before {
@@ -139,9 +144,6 @@
   }
 
   &.@{header-prefix}-with-description {
-    @description-line-height: calc(@header-description-font-size + var(--ix-line-height-gutter));
-
-    padding-top: calc((@height + 16px - @line-height - @description-line-height) / 2);
-    padding-bottom: calc((@height + 16px - @line-height - @description-line-height) / 2);
+    min-height: calc(@height + 16px);
   }
 }

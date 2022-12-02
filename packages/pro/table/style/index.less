@@ -21,25 +21,17 @@
         color: @text-color;
         font-weight: @font-weight-md;
       }
-
-      &-suffix {
-        color: @text-color;
-
-        &:hover {
-          .@{pro-table-prefix}-layout-tool-header-icon-active:not(:hover) {
-            color: @text-color;
-          }
-        }
-
-        .@{icon-prefix} + .@{icon-prefix} {
-          margin-left: @spacing-sm;
-        }
-      }
     }
 
     &-header {
       &-icon {
-        &-active {
+        color: @text-color;
+
+        &:hover {
+          color: @color-primary;
+        }
+
+        &&-active {
           color: @color-primary;
         }
       }
