@@ -24,7 +24,7 @@ export interface ColumnsContext {
 
 export function useColumns(props: ProTableProps, config: ProTableConfig): ColumnsContext {
   const originalColumns = computed(() => props.columns)
-  const [mergedColumns, setMergedColumns] = useState(mergeColumns(originalColumns.value, config), false)
+  const [mergedColumns, setMergedColumns] = useState(mergeColumns(originalColumns.value, config))
   const mergedColumnMap = computed(() => {
     const map = new Map<VKey, ProTableColumn>()
     loopColumns(mergedColumns.value, column => map.set(column.key!, column))
