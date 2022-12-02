@@ -70,6 +70,7 @@ export default defineComponent({
       visible => {
         visible ? show() : hide()
       },
+      { flush: 'post' },
     )
     watch(
       contentArrowRef,
