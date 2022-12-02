@@ -9,6 +9,7 @@ import { defineComponent, inject, normalizeClass } from 'vue'
 
 import { IxIcon } from '@idux/components/icon'
 import { IxPopover } from '@idux/components/popover'
+import { IxSpace } from '@idux/components/space'
 import { TableSize } from '@idux/components/table'
 
 import LayoutToolContent from './contents/LayoutToolContent'
@@ -31,21 +32,30 @@ export default defineComponent({
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-layout-tool`
       const layoutLocale = locale.table.layout
-      const size = mergedSize.value
+
       const renderIcon = (type: TableSize) => {
         const name = defaultIconMap[type]
         const title = layoutLocale[type]
         return (
           <IxIcon
             key={name}
-            class={normalizeClass([`${prefixCls}-header-icon`, size === type ? `${prefixCls}-header-icon-active` : ''])}
+            class={normalizeClass([
+              `${prefixCls}-header-icon`,
+              mergedSize.value === type ? `${prefixCls}-header-icon-active` : '',
+            ])}
             name={name}
             title={title}
             onClick={() => setMergedSize(type)}
           />
         )
       }
-      const suffixNode = [renderIcon('sm'), renderIcon('md'), renderIcon('lg')]
+      const suffixNode = (
+        <IxSpace>
+          {renderIcon('sm')}
+          {renderIcon('md')}
+          {renderIcon('lg')}
+        </IxSpace>
+      )
       const popoverHeader = { title: layoutLocale.title, suffix: suffixNode }
 
       return (

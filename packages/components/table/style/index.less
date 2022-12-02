@@ -194,11 +194,6 @@
 
   &-cell-sortable {
     cursor: pointer;
-    transition: background var(--ix-transition-duration-fast);
-
-    &:hover {
-      background: @table-body-row-background-color-hover;
-    }
   }
 
   &-sortable-trigger {
@@ -242,6 +237,7 @@
     margin: 0 -8px 0 4px;
     align-items: center;
     justify-content: center;
+    user-select: none;
     border-radius: @table-border-radius;
     color: @table-head-icon-color;
     transition: color var(--ix-transition-duration-fast), background var(--ix-transition-duration-fast);

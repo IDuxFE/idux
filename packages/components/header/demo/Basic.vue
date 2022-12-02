@@ -1,7 +1,7 @@
 <template>
-  <IxHeader title="Title" description="This is a description" />
+  <IxHeader title="Title" suffix="close" />
   <IxHeader>
     Title
-    <template #description> This is a description </template>
+    <template #suffix> <IxIcon name="close"></IxIcon> </template>
   </IxHeader>
 </template>

@@ -13,9 +13,9 @@ import { isString } from 'lodash-es'
 
 import { type VirtualScrollToOptions } from '@idux/cdk/scroll'
 import { useState } from '@idux/cdk/utils'
+import { IxButtonGroup } from '@idux/components/button'
 import { useGlobalConfig as useComponentsGlobalConfig } from '@idux/components/config'
 import { IxHeader } from '@idux/components/header'
-import { IxSpace } from '@idux/components/space'
 import { IxTable, type TableCustomAdditional, type TableCustomTag, type TableInstance } from '@idux/components/table'
 import { useGlobalConfig } from '@idux/pro/config'
 
@@ -73,7 +73,11 @@ export default defineComponent({
       if (toolbar.length <= 1) {
         return toolbar
       }
-      return <IxSpace align="center">{toolbar}</IxSpace>
+      return (
+        <IxButtonGroup align="center" gap={8}>
+          {toolbar}
+        </IxButtonGroup>
+      )
     }
 
     const renderHeader = () => {
