@@ -21,6 +21,8 @@
 | `@menu-overlay-border-radius` | `@border-radius-md` | `@border-radius-sm` | - |
 | `@menu-overlay-box-shadow` | `@shadow-bottom-md` | - | - |
 | `@menu-collapsed-width` | `48px` | `44px` | - |
+| `@menu-trigger-color` | `@color-grey-d20` | `@color-graphite-d20` | - |
+| `@menu-trigger-background-color` | `var(--ix-background-color-deep)` | - | - |
 | `@menu-dark-color` | `var(--ix-text-color-inverse)` | - | - |
 | `@menu-dark-color-hover` | `var(--ix-color-inverse)` | `var(--ix-text-color-inverse)` | - |
 | `@menu-dark-color-active` | `var(--ix-color-inverse)` | `var(--ix-text-color-inverse)` | - |
@@ -31,3 +33,5 @@
 | `@menu-dark-background-color-disabled` | `transparent` | - | - |
 | `@menu-dark-horizontal-background-color-active` | `@color-grey-d30` | `@color-graphite-d30` | - |
 | `@menu-dark-item-group-text-color` | `@color-grey-d10` | `@color-graphite-d10` | - |
+| `@menu-dark-trigger-color` | `@color-grey-l10` | `@color-graphite-l10` | - |
+| `@menu-dark-trigger-background-color` | `@color-grey-d30` | `@color-graphite-d30` | - |
