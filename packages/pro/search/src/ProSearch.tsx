@@ -138,14 +138,14 @@ export default defineComponent({
           <div class={`${prefixCls}-input-container`} style={containerStyle.value}>
             <div class={`${prefixCls}-input-content`}>
               <ɵOverflow
-                v-show={!activeSegment.value}
+                v-show={!focused.value}
                 v-slots={overflowSlots}
                 prefixCls={prefixCls}
                 dataSource={searchItems.value}
                 getKey={item => item.key}
                 maxLabel={props.maxLabel}
               />
-              <div class={`${prefixCls}-search-item-container`} v-show={activeSegment.value}>
+              <div class={`${prefixCls}-search-item-container`} v-show={focused.value}>
                 {searchItems.value?.map(item => (
                   <SearchItemComp key={item.key} searchItem={item} />
                 ))}
