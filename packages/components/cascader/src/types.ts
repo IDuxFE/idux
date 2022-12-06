@@ -8,10 +8,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
-import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
+import type { OverlayContainerType } from '@idux/components/utils'
 import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
 export const cascaderProps = {
@@ -45,7 +45,7 @@ export const cascaderProps = {
   multipleLimit: { type: Number, default: Number.MAX_SAFE_INTEGER },
   overlayClassName: { type: String, default: undefined },
   overlayContainer: {
-    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    type: [String, HTMLElement, Function] as PropType<OverlayContainerType>,
     default: undefined,
   },
   overlayMatchWidth: { type: Boolean, default: undefined },

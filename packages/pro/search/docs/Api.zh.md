@@ -10,7 +10,7 @@
 | `clearable` | 是否可清除 | `boolean` | `true` | ✅ | - |
 | `clearIcon` | 清除图标 | `string \| VNode \| #clearIcon` | `close-circle` | ✅ | - |
 | `disabled` | 是否禁用 | `boolean` | `false` | - | - |
-| `overlayContainer` | 自定义浮层容器节点  | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
+| `overlayContainer` | 自定义浮层容器节点  | `string \| HTMLElement \| (trigger?: Element) => string \| HTMLElement` | - | ✅ | - |
 | `placeholder` | 默认文本 | `string` | - | - | - |
 | `searchFields` | 搜索选项 | `SearchField[]` | - | - | 用于配置支持那些搜索条件 |
 | `onChange` | 搜索条件改变之后的回调 | `(value: searchValue[] \| undefined, oldValue: searchValue[] \| undefined) => void` | - | - | - |

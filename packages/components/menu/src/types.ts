@@ -7,8 +7,8 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
+import type { OverlayContainerType } from '@idux/components/utils'
 import type { DefineComponent, FunctionalComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
 export type MenuMode = 'vertical' | 'horizontal' | 'inline'
@@ -45,7 +45,7 @@ export const menuProps = {
   },
   overlayClassName: String,
   overlayContainer: {
-    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    type: [String, HTMLElement, Function] as PropType<OverlayContainerType>,
     default: undefined,
   },
   overlayDelay: {

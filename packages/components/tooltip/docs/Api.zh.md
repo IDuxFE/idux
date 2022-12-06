@@ -12,7 +12,7 @@
 | `delay` | 浮层显示隐藏延时 | `number \| [number, number]` | `100` | ✅ | - |
 | `disabled` | 禁用浮层 | `boolean` | `false` | - | - |
 | `offset` | 浮层相对目标元素的偏移量 | `[number, number]` | `[0, 4]` | ✅ | 第一个元素是水平偏移量，第二个元素是垂直偏移量 |
-| `overlayContainer` | 自定义容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
+| `overlayContainer` | 自定义容器节点 | `string \| HTMLElement \| (trigger?: Element) => string \| HTMLElement` | - | ✅ | - |
 | `placement` | 浮层的对齐方式 | `OverlayPlacement` | `top` | ✅ | - |
 | `title` | 浮层的标题 | `string` | - | - | - |
 | `trigger` | 浮层触发方式 | `PopperTrigger` | `hover` | ✅ | - |

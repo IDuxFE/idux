@@ -43,6 +43,7 @@ import type { TagShape } from '@idux/components/tag'
 import type { TextareaAutoRows, TextareaResize } from '@idux/components/textarea'
 import type { TreeNode } from '@idux/components/tree'
 import type { UploadFilesType, UploadIconType, UploadRequestMethod, UploadRequestOption } from '@idux/components/upload'
+import type { OverlayContainerType } from '@idux/components/utils'
 import type { VNode, VNodeChild } from 'vue'
 
 export interface GlobalConfig {
@@ -108,7 +109,7 @@ export interface GlobalConfig {
 export type GlobalConfigKey = keyof GlobalConfig
 export interface CommonConfig {
   prefixCls: string
-  overlayContainer?: PortalTargetType
+  overlayContainer?: OverlayContainerType
   overlayZIndex: number
   theme: 'default' | 'seer'
 }
@@ -166,7 +167,7 @@ export interface CascaderConfig {
   fullPath: boolean
   getKey: string | ((data: CascaderData<any>) => any)
   labelKey: string
-  overlayContainer?: PortalTargetType
+  overlayContainer?: OverlayContainerType
   overlayMatchWidth: boolean
   size: FormSize
   suffix: string
@@ -192,7 +193,7 @@ export interface DatePickerConfig {
   format?: Partial<Record<DatePickerType, string>>
   size: FormSize
   suffix: string
-  overlayContainer?: PortalTargetType
+  overlayContainer?: OverlayContainerType
 }
 
 export interface DividerConfig {
@@ -217,7 +218,7 @@ export interface DropdownConfig {
   autoAdjust: boolean
   destroyOnHide: boolean
   offset: [number, number]
-  overlayContainer?: PortalTargetType
+  overlayContainer?: OverlayContainerType
   placement: PopperPlacement
   showArrow: boolean
   trigger: PopperTrigger
@@ -283,7 +284,7 @@ export interface MenuConfig {
   getKey: string | ((data: MenuData<any>) => any)
   indent: number
   offset: [number, number]
-  overlayContainer?: PortalTargetType
+  overlayContainer?: OverlayContainerType
   suffix: string
   theme: MenuTheme
 }
@@ -338,7 +339,7 @@ export interface PopconfirmConfig {
   autoAdjust: boolean
   delay: number | [number | null, number | null]
   destroyOnHide: boolean
-  overlayContainer?: PortalTargetType
+  overlayContainer?: OverlayContainerType
   placement: PopperPlacement
   trigger: PopperTrigger
   offset: [number, number]
@@ -348,7 +349,7 @@ export interface PopoverConfig {
   autoAdjust: boolean
   delay: number | [number | null, number | null]
   destroyOnHide: boolean
-  overlayContainer?: PortalTargetType
+  overlayContainer?: OverlayContainerType
   placement: PopperPlacement
   showArrow: boolean
   trigger: PopperTrigger
@@ -393,7 +394,7 @@ export interface SelectConfig {
   getKey: string | ((data: SelectData<any>) => any)
   labelKey: string
   offset: [number, number]
-  overlayContainer?: PortalTargetType
+  overlayContainer?: OverlayContainerType
   overlayMatchWidth: boolean
   size: FormSize
   suffix: string
@@ -493,7 +494,7 @@ export interface TimePickerConfig {
   clearIcon: string
   size: FormSize
   suffix: string
-  overlayContainer?: PortalTargetType
+  overlayContainer?: OverlayContainerType
   allowInput: boolean | 'overlay'
   format: string
 }
@@ -510,7 +511,7 @@ export interface TooltipConfig {
   autoAdjust: boolean
   delay: number | [number | null, number | null]
   destroyOnHide: boolean
-  overlayContainer?: PortalTargetType
+  overlayContainer?: OverlayContainerType
   placement: PopperPlacement
   offset: [number, number]
   trigger: PopperTrigger
@@ -534,7 +535,7 @@ export interface TreeSelectConfig {
   getKey: string | ((data: TreeNode<any>) => any)
   labelKey: string
   offset: [number, number]
-  overlayContainer?: PortalTargetType
+  overlayContainer?: OverlayContainerType
   overlayMatchWidth: boolean
   size: FormSize
   suffix: string

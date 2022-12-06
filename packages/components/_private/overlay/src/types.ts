@@ -31,7 +31,7 @@ export const overlayProps = {
     default: undefined,
   },
   container: {
-    type: [String, HTMLElement, Function] as PropType<string | HTMLElement | (() => string | HTMLElement)>,
+    type: Function as PropType<(element?: Element) => string | HTMLElement>,
     required: true,
   },
   delay: overlayDelayDef,

@@ -76,7 +76,7 @@ describe('Image', () => {
       zoom: [1, 2],
       loop: false,
       maskClosable: false,
-      container: 'ix-image-container',
+      container: '.ix-image-container',
       'onUpdate:visible': () => {},
       'onUpdate:activeIndex': () => {},
     }

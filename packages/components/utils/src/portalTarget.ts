@@ -7,7 +7,16 @@
 
 import { type ComputedRef, computed } from 'vue'
 
-import { PortalTargetType } from '@idux/cdk/portal'
+import { isFunction } from 'lodash-es'
+
+import { type PortalTargetType } from '@idux/cdk/portal'
+
+export type OverlayContainerType =
+  | string
+  | HTMLElement
+  | null
+  | undefined
+  | ((element?: Element) => string | HTMLElement | null | undefined)
 
 interface ContainerProps {
   container?: PortalTargetType
@@ -16,30 +25,28 @@ interface ContainerProps {
 export function usePortalTarget(
   props: ContainerProps,
   config: ContainerProps,
-  common: { overlayContainer?: PortalTargetType },
+  common: { overlayContainer?: OverlayContainerType },
   mergedPrefix: ComputedRef<string>,
-): ComputedRef<PortalTargetType> {
+): ComputedRef<() => string | HTMLElement> {
   return computed(() => {
-    return props.container ?? config.container ?? common.overlayContainer ?? `.${mergedPrefix.value}-container`
+    const container = props.container ?? config.container ?? common.overlayContainer
+    return () => (isFunction(container) ? container() : container) ?? `.${mergedPrefix.value}-container`
   })
 }
 
 interface OverlayContainerProps {
-  overlayContainer?: PortalTargetType
+  overlayContainer?: OverlayContainerType
 }
 
 export function useOverlayContainer(
   props: OverlayContainerProps,
   config: OverlayContainerProps,
-  common: { overlayContainer?: PortalTargetType },
+  common: { overlayContainer?: OverlayContainerType },
   mergedPrefix: ComputedRef<string>,
-): ComputedRef<PortalTargetType> {
+): ComputedRef<(element?: Element) => string | HTMLElement> {
   return computed(() => {
-    return (
-      props.overlayContainer ??
-      config.overlayContainer ??
-      common.overlayContainer ??
-      `.${mergedPrefix.value}-overlay-container`
-    )
+    const container = props.overlayContainer ?? config.overlayContainer ?? common.overlayContainer
+    return element =>
+      (isFunction(container) ? container(element) : container) ?? `.${mergedPrefix.value}-overlay-container`
   })
 }

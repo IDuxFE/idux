@@ -28,7 +28,9 @@ order: 10
 
 ## 在浮层组件中打开另一个浮层组件，导致原浮层消失？(如：`Select`, `Dropdown`, `Popover`...)
 
-可以通过设置 `overlayContainer` 来解决，把浮层插入到当前的 `DOM` 内，而不是默认的 `body` 上。
+可以通过设置 `overlayContainer` 来解决，把浮层插入到当前的 `DOM` 内，而不是默认的 `body` 上。  
+例如你可以设置 `<IxSelect :overlayContainer='trigger => trigger.parentElement' />` 在 Popover 中渲染下拉框组件。  
+你也可以通过在全局配置中设置来进行全局覆盖，例如：`useGlobalConfig('common', { overlayContainer: element => element?.parentElement })`，需要特别注意的是，这里的 `element` 可能为空，因为该配置对于 `Modal, Drawer` 等组件同样生效，此类组件不存在 `trigger` 元素。
 
 ## 图标不显示？如何更新图标？
 

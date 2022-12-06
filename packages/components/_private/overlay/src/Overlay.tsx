@@ -61,6 +61,9 @@ export default defineComponent({
 
     const { destroy: popperDestroy } = usePopperInit(props, initialize, destroy)
     const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visibility)
+    const mergedContainer = computed(() => {
+      return () => props.container(convertElement(triggerRef)!)
+    })
 
     watch(visibility, value => callEmit(props['onUpdate:visible'], value))
     watch(placement, value => callEmit(props['onUpdate:placement'], value))
@@ -114,7 +117,7 @@ export default defineComponent({
         return (
           <>
             {trigger}
-            <CdkPortal target={props.container} load={false}></CdkPortal>
+            <CdkPortal target={mergedContainer.value} load={false}></CdkPortal>
           </>
         )
       }
@@ -134,7 +137,7 @@ export default defineComponent({
       return (
         <>
           {trigger}
-          <CdkPortal target={props.container} load={visibility.value}>
+          <CdkPortal target={mergedContainer.value} load={visibility.value}>
             <Transition appear name={props.transitionName} onAfterLeave={onAfterLeave}>
               {content}
             </Transition>
