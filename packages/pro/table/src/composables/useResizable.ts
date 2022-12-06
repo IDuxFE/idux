@@ -16,7 +16,7 @@ export interface ResizableContext {
   onResizeEnd: (key: VKey, width: number) => void
 }
 
-export function useResizable({ mergedColumns, mergedColumnMap }: ColumnsContext): ResizableContext {
+export function useResizable({ mergedColumns, setMergedColumns, mergedColumnMap }: ColumnsContext): ResizableContext {
   const hasResizable = computed(() => mergedColumns.value.some(column => column.resizable))
 
   const onResizeEnd = (key: VKey, width: number) => {
@@ -24,6 +24,7 @@ export function useResizable({ mergedColumns, mergedColumnMap }: ColumnsContext)
     if (targetColumn) {
       targetColumn.width = width
     }
+    setMergedColumns([...mergedColumns.value])
   }
 
   return { hasResizable, onResizeEnd }

@@ -40,7 +40,7 @@ export default defineComponent({
     const { hasResizable, onResizeEnd } = useResizable(columnsContext)
     const mergedConfigSize = computed(() => props.size ?? baseConfig.size)
     const [mergedSize, setMergedSize] = useState(mergedConfigSize.value)
-    watch(() => mergedConfigSize.value, setMergedSize)
+    watch(mergedConfigSize, setMergedSize)
 
     provide(proTableToken, {
       props,
