@@ -115,7 +115,7 @@ describe('ProLayout', () => {
 
     expect(wrapper.find('.ix-layout-sider-collapsed').exists()).toBe(false)
 
-    await wrapper.findComponent(IxLayoutSiderTrigger).trigger('click')
+    await wrapper.findComponent(IxLayoutSiderTrigger).find('button').trigger('click')
 
     expect(onUpdateCollapsed).toBeCalledWith(true, 'trigger')
   })
