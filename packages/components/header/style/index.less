@@ -61,6 +61,7 @@
 
   &-prefix,
   &-suffix {
+    display: inline-block;
     cursor: pointer;
 
     .@{icon-prefix} {
@@ -135,7 +136,6 @@
   font-size: @font-size;
   line-height: @line-height;
   min-height: @height;
-  padding: @padding 0;
 
   &.@{header-prefix}-with-bar {
     &::before {
@@ -146,5 +146,7 @@
 
   &.@{header-prefix}-with-description {
     min-height: calc(@height + 16px);
+    padding-top: @padding;
+    padding-bottom: @padding;
   }
 }
