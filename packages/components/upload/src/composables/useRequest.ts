@@ -105,7 +105,8 @@ export function useRequest(props: UploadProps, files: ComputedRef<UploadFile[]>)
       })
     setFileStatus(file, 'uploading', props.onFileStatusChange)
     file.percent = 0
-    aborts.set(file.key, uploadHttpRequest(requestOption)?.abort ?? (() => {}))
+    const requestHandler = await uploadHttpRequest(requestOption)
+    aborts.set(file.key, requestHandler?.abort ?? (() => {}))
     fileUploading.value.push(file)
   }
 
