@@ -202,7 +202,7 @@ describe('ImageViewer', () => {
 
     expect((document.querySelector('.ix-image-viewer-container .ix-image-viewer') as Element).innerHTML).not.toBe('')
 
-    await wrapper.setProps({ container: 'image-viewer-container' })
+    await wrapper.setProps({ container: '.image-viewer-container' })
 
     expect((document.querySelector('.image-viewer-container .ix-image-viewer') as Element).innerHTML).not.toBe('')
   })

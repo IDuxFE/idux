@@ -57,6 +57,7 @@ describe('DateRangePicker', () => {
     const onUpdateVisible = vi.fn()
     const wrapper = DateRangePickerMount({
       props: {
+        open: false,
         value: [new Date('2021-10-01 00:00:00'), new Date('2021-11-11 00:00:00')],
         'onUpdate:value': onUpdateValue,
         onChange,
@@ -64,11 +65,14 @@ describe('DateRangePicker', () => {
       },
     })
 
-    expect(findCell(wrapper, 'from', '1')?.classes()).toContain('ix-date-panel-cell-selected')
-    expect(findCell(wrapper, 'to', '11')?.classes()).toContain('ix-date-panel-cell-selected')
+    // 不能一开始就打开，用例跑不过
+    await wrapper.setProps({ open: true })
 
-    await findCell(wrapper, 'from', '11')?.trigger('click')
-    await findCell(wrapper, 'to', '21')?.trigger('click')
+    expect(findCell(wrapper, 'from', '1')!.classes()).toContain('ix-date-panel-cell-selected')
+    expect(findCell(wrapper, 'to', '11')!.classes()).toContain('ix-date-panel-cell-selected')
+
+    await findCell(wrapper, 'from', '11')!.trigger('click')
+    await findCell(wrapper, 'to', '21')!.trigger('click')
     await triggerConfirm(wrapper)
 
     expect(onUpdateValue).toBeCalledWith([new Date('2021-10-11 00:00:00'), new Date('2021-11-21 00:00:00')])
@@ -89,10 +93,14 @@ describe('DateRangePicker', () => {
     const onSelect = vi.fn()
     const wrapper = DateRangePickerMount({
       props: {
+        open: false,
         value: [new Date('2021-10-01 00:00:00'), new Date('2021-11-11 00:00:00')],
         onSelect,
       },
     })
+
+    // 不能一开始就打开，用例跑不过
+    await wrapper.setProps({ open: true })
 
     await findCell(wrapper, 'from', '11')?.trigger('click')
     expect(onSelect).toBeCalledWith([new Date('2021-10-11 00:00:00'), undefined])

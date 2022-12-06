@@ -11,7 +11,7 @@
 | `disabled` | 菜单是否禁用 | `boolean` | `false` | - | - |
 | `hideOnClick` | 点击后是否隐藏菜单 | `boolean` | `true` | - | - |
 | `offset` | 悬浮层位置偏移量 | `[number, number]` | `[0,8]` | ✅ | - |
-| `overlayContainer` | 自定义下拉框容器节点  | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
+| `overlayContainer` | 自定义下拉框容器节点  | `string \| HTMLElement \| (trigger?: Element) => string \| HTMLElement` | - | ✅ | - |
 | `placement` | 悬浮层的对齐方式 | `PopperPlacement` | `'bottomStart'` | ✅ | - |
 | `showArrow` | 是否显示箭头 | `boolean` | `false` | ✅ | - |
 | `trigger` | 悬浮层触发方式 | `PopperTrigger` | `hover` | ✅ | - |

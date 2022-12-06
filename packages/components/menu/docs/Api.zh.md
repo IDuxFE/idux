@@ -15,7 +15,7 @@
 | `mode` | 菜单模式，现在支持垂直、水平和内嵌 | `'vertical' \| 'horizontal' \| 'inline'` | `'vertical'` | - | - |
 | `multiple` | 是否支持多选 | `boolean` | `false` | - | - |
 | `overlayClassName` | 悬浮层的自定义 `class` | `string` | - | - | `inline` 模式时无效 |
-| `overlayContainer` | 自定义菜单容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | `inline` 模式时无效 |
+| `overlayContainer` | 自定义菜单容器节点 | `string \| HTMLElement \| (trigger?: Element) => string \| HTMLElement` | - | ✅ | `inline` 模式时无效 |
 | `overlayDelay` | 浮层的打开和关闭延迟 | `number \| [number, number]` | `[0, 100]` | - | 为数组时，第一个元素是延迟显示的时间，第二个元素是延迟隐藏的时间 |
 | `selectable` | 是否允许选中 | `boolean` | `true` | - | - |
 | `theme` | 主题颜色 | `'light' \| 'dark'` | `'light'` | ✅ | - |

@@ -49,13 +49,13 @@ export default defineComponent({
     return () => {
       return (
         <>
+          {slots.default?.()}
           <CdkPortal target={mergedPortalTarget.value}>
             <ɵMask class={`${mergedPrefixCls.value}-mask`} mask={mask.value} visible={visible.value} />
             <Transition appear name={`${common.prefixCls}-move-up`}>
               <div v-show={visible.value} class={classes.value} style={{ maxWidth: `${progress.value}%` }} />
             </Transition>
           </CdkPortal>
-          {slots.default?.()}
         </>
       )
     }

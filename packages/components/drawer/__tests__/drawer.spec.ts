@@ -258,7 +258,7 @@ describe('Drawer', () => {
   })
 
   test('container work', async () => {
-    const wrapper = DrawerMount({ props: { container: 'ix-test-container' } })
+    const wrapper = DrawerMount({ props: { container: '.ix-test-container' } })
 
     expect(document.querySelector('.ix-test-container')!.querySelector('.ix-drawer')).not.toBeNull()
 

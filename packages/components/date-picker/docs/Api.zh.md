@@ -19,7 +19,7 @@
 | `timeFormat` | `'datetime'`下的时间格式 | `string` | - | ✅ | 全局配置同`TimePicker`的format, 仅在`'datetime'`类型下生效，可用于配置时间面板的列显示，参考[TimePicker](/components/time-picker/zh) |
 | `dateFormat` | `'datetime'`下的日期格式 | `string` | - | ✅ | 全局配置同`DatePicker`的`'date'`类型format, 仅在`'datetime'`类型下生效 |
 | `overlayClassName` | 日期面板的 `class`  | `string` | - | - | - |
-| `overlayContainer` | 自定义浮层容器节点 | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
+| `overlayContainer` | 自定义浮层容器节点 | `string \| HTMLElement \| (trigger?: Element) => string \| HTMLElement` | - | ✅ | - |
 | `overlayRender` | 自定义日期面板内容的渲染  | `(children:VNode[]) => VNodeChild` | - | - | - |
 | `readonly` | 只读模式 | `boolean` | - | - | - |
 | `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |

@@ -8,9 +8,8 @@
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { DatePanelProps, DateRangePanelProps } from '@idux/components/date-picker'
 import type { SelectData } from '@idux/components/select'
+import type { OverlayContainerType } from '@idux/components/utils'
 import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
-
-import { PortalTargetType } from '@idux/cdk/portal'
 
 export interface SearchValue<V = unknown> {
   key: VKey
@@ -152,7 +151,7 @@ export const proSearchProps = {
   },
   errors: Array as PropType<SearchItemError[]>,
   overlayContainer: {
-    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    type: [String, HTMLElement, Function] as PropType<OverlayContainerType>,
     default: undefined,
   },
   placeholder: String,

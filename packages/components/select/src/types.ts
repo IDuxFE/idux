@@ -8,11 +8,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
-import type { PortalTargetType } from '@idux/cdk/portal'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
+import type { OverlayContainerType } from '@idux/components/utils'
 import type { DefineComponent, FunctionalComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
 export const selectPanelProps = {
@@ -67,7 +67,7 @@ export const selectProps = {
   offset: Array as unknown as PropType<[number, number]>,
   overlayClassName: { type: String, default: undefined },
   overlayContainer: {
-    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    type: [String, HTMLElement, Function] as PropType<OverlayContainerType>,
     default: undefined,
   },
   overlayMatchWidth: { type: Boolean, default: undefined },

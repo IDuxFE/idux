@@ -6,10 +6,10 @@
  */
 
 import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
-import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { ɵFooterButtonProps } from '@idux/components/_private/footer'
 import type { FormSize } from '@idux/components/form'
+import type { OverlayContainerType } from '@idux/components/utils'
 import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
 export interface PickerTimePanelOptions {
@@ -68,7 +68,7 @@ const datePickerCommonProps = {
   timeFormat: String,
   overlayClassName: String,
   overlayContainer: {
-    type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
+    type: [String, HTMLElement, Function] as PropType<OverlayContainerType>,
     default: undefined,
   },
   overlayRender: Function as PropType<(children: VNode[]) => VNodeChild>,

@@ -33,7 +33,7 @@
 | `multiple` | 多选模式 | `boolean` | `false` | - | - |
 | `offset` | 浮层相对目标元素的偏移量 | `[number, number]` | `[0, 4]` | ✅ | 第一个元素是水平偏移量，第二个元素是垂直偏移量 |
 | `overlayClassName` | 下拉菜单的 `class`  | `string` | - | - | - |
-| `overlayContainer` | 自定义浮层容器节点  | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
+| `overlayContainer` | 自定义浮层容器节点  | `string \| HTMLElement \| (trigger?: Element) => string \| HTMLElement` | - | ✅ | - |
 | `overlayMatchWidth` | 下拉菜单和选择器同宽  | `boolean` | `true` | ✅ | - |
 | `overlayRender` | 自定义下拉菜单内容的渲染  | `(children:VNode[]) => VNodeTypes` | - | - | - |
 | `placeholder` | 选择框默认文本 | `string` | - | - | - |
