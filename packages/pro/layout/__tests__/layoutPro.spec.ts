@@ -3,10 +3,10 @@ import { h } from 'vue'
 
 import { renderWork, wait } from '@tests'
 
+import { IxLayoutSiderTrigger } from '@idux/components/layout'
 import { type MenuData } from '@idux/components/menu'
 
 import ProLayout from '../src/Layout'
-import LayoutSiderTrigger from '../src/LayoutSiderTrigger'
 import LayoutSider from '../src/contents/Sider'
 import { ProLayoutProps } from '../src/types'
 
@@ -105,7 +105,7 @@ describe('ProLayout', () => {
     const wrapper = ProLayoutMount({
       props: { collapsed: true, 'onUpdate:collapsed': onUpdateCollapsed },
       slots: {
-        siderFooter: () => h(LayoutSiderTrigger),
+        siderFooter: () => h(IxLayoutSiderTrigger),
       },
     })
 
@@ -115,7 +115,7 @@ describe('ProLayout', () => {
 
     expect(wrapper.find('.ix-layout-sider-collapsed').exists()).toBe(false)
 
-    await wrapper.findComponent(LayoutSiderTrigger).trigger('click')
+    await wrapper.findComponent(IxLayoutSiderTrigger).trigger('click')
 
     expect(onUpdateCollapsed).toBeCalledWith(true, 'trigger')
   })

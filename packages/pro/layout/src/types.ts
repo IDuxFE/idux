@@ -73,20 +73,6 @@ export type ProLayoutComponent = DefineComponent<
 >
 export type ProLayoutInstance = InstanceType<DefineComponent<ProLayoutProps>>
 
-export const proLayoutSiderTriggerProps = {
-  icon: {
-    type: [String, Array] as PropType<string | Array<string | VNode>>,
-    default: undefined,
-  },
-} as const
-
-export type ProLayoutSiderTriggerProps = ExtractInnerPropTypes<typeof proLayoutSiderTriggerProps>
-export type ProLayoutSiderTriggerPublicProps = ExtractPublicPropTypes<typeof proLayoutSiderTriggerProps>
-export type ProLayoutSiderTriggerComponent = DefineComponent<
-  Omit<HTMLAttributes, keyof ProLayoutSiderTriggerPublicProps> & ProLayoutSiderTriggerPublicProps
->
-export type ProLayoutSiderTriggerInstance = InstanceType<DefineComponent<ProLayoutSiderTriggerProps>>
-
 export interface ProLayoutLogo {
   image: string | VNode
   title: string

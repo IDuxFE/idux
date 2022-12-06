@@ -37,16 +37,12 @@
     box-shadow: @pro-layout-sider-box-shadow;
     transition: background-color var(--ix-transition-duration-slow), width var(--ix-transition-duration-medium);
 
-    &-trigger {
-      &:hover {
-        color: @menu-background-color-hover;
-      }
-    }
-
     .@{layout-prefix}-sider-trigger {
       > .@{button-prefix} {
+        background-color: var(--ix-background-color-medium);
+
         &:hover {
-          background-color: @menu-background-color-hover;
+          background-color: var(--ix-background-color-deep);
         }
       }
     }
