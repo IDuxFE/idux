@@ -2,8 +2,8 @@
   <IxProTree
     v-model:collapsed="collapsed"
     v-model:checkedKeys="checkedKeys"
-    v-model:selectedKeys="selectedKeys"
     v-model:expandedKeys="expandedKeys"
+    :selectedKeys="selectedKeys"
     class="demo-pro-tree"
     placeholder="搜索"
     :style="{ height: '400px' }"
@@ -11,6 +11,7 @@
     :checkable="true"
     :dataSource="treeData"
     :onSearch="onSearch"
+    :onUpdate:selectedKeys="onUpdateSelectedKeys"
   >
     <template #header>
       <IxHeader size="sm">
@@ -20,15 +21,19 @@
         </template>
       </IxHeader>
     </template>
-    <template #suffix>
-      <IxIcon :style="{ 'margin-right': '8px' }" name="edit" @click="handleEdit" />
-      <IxIcon name="delete" @click="handleDelete" />
+    <template #suffix="{ key, selected, node }">
+      <IxSpace>
+        <IxIcon name="edit" @click.stop="handleEdit(key, selected, node)" />
+        <IxIcon name="delete" @click.stop="handleDelete(key, selected, node)" />
+      </IxSpace>
     </template>
   </IxProTree>
 </template>
 
 <script setup lang="ts">
 import { nextTick, ref } from 'vue'
+
+import { type TreeNode } from '@idux/components'
 
 const treeData = [
   {
@@ -108,14 +113,14 @@ const selectedKeys = ref(['0'])
 const expandedKeys = ref(['0', '0-1'])
 const collapsed = ref(false)
 
-const handleEdit = (evt: Event) => {
-  console.log('edit')
-  evt.stopPropagation()
+const handleEdit = (key: string, selected: boolean, node: TreeNode) => {
+  selectedKeys.value = [key]
+  console.log('edit', key, selected, node)
 }
 
-const handleDelete = (evt: Event) => {
-  console.log('delete')
-  evt.stopPropagation()
+const handleDelete = (key: string, selected: boolean, node: TreeNode) => {
+  selectedKeys.value = [key]
+  console.log('delete', key, selected, node)
 }
 
 const handleAdd = () => {
@@ -130,6 +135,10 @@ const onSearch = (searchVal: string) => {
       expandedKeys.value = ['0', '0-1']
     })
   }
+}
+
+const onUpdateSelectedKeys = (keys: string[]) => {
+  selectedKeys.value = keys
 }
 </script>
 
