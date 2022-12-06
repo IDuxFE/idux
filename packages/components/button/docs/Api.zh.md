@@ -32,6 +32,7 @@
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
+| `align` | 设置对齐方式, `align-items` | `'start' \| 'center' \| 'end' \| 'baseline' \| 'stretch'` | `'center'` | - | 参见[MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/align-items) |
 | `block` | 将按钮宽度调整为自适应其父元素的宽度 | `boolean` | - | - |- |
 | `danger` | 设置按钮组危险状态 | `boolean` | - | - |- |
 | `disabled` | 设置按钮组禁用状态 | `boolean` | - | - |- |

@@ -1,7 +1,7 @@
 // Vitest Snapshot v1
 
 exports[`ButtonGroup > render work 1`] = `
-"<div class=\\"ix-space ix-button-group ix-button-group-compact\\" style=\\"margin-bottom: -0px;\\">
+"<div class=\\"ix-space ix-space-align-center ix-button-group ix-button-group-compact\\" style=\\"margin-bottom: -0px;\\">
   <div class=\\"ix-space-item\\" style=\\"margin-right: 0px; padding-bottom: 0px;\\"><button class=\\"ix-button ix-button-default ix-button-md\\" type=\\"button\\"><span>default</span></button></div>
   <div class=\\"ix-space-item\\" style=\\"margin-right: 0px; padding-bottom: 0px;\\"><button class=\\"ix-button ix-button-primary ix-button-md\\" type=\\"button\\"><span>primary</span></button></div>
   <div class=\\"ix-space-item\\" style=\\"margin-right: 0px; padding-bottom: 0px;\\"><button class=\\"ix-button ix-button-default ix-button-lg\\" type=\\"button\\"><span>large</span></button></div>
