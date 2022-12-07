@@ -110,7 +110,7 @@ export type GlobalConfigKey = keyof GlobalConfig
 export interface CommonConfig {
   prefixCls: string
   overlayContainer?: OverlayContainerType
-  overlayZIndex: number
+  overlayZIndex: number | (() => number)
   theme: 'default' | 'seer'
 }
 

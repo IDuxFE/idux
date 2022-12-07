@@ -11,7 +11,7 @@ describe('zIndex.ts', () => {
     },
     setup(props) {
       const visible = toRef(props, 'visible')
-      const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), ref(3000), visible)
+      const currentZIndex = useZIndex(toRef(props, 'zIndex'), ref(3000), visible)
       const style = computed(() => ({ zIndex: currentZIndex.value }))
 
       return {

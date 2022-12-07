@@ -44,7 +44,7 @@ export default defineComponent({
     const mask = computed(() => props.mask ?? config.mask)
 
     const { visible, setVisible, animatedVisible, mergedVisible } = useVisible(props)
-    const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visible)
+    const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visible)
 
     const { open, close } = useTrigger(props, setVisible)
     const { level, levelAction, push, pull } = useLevel(visible)

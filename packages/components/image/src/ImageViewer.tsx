@@ -32,7 +32,7 @@ export default defineComponent({
     const mergedPortalTarget = usePortalTarget(props, config, common, mergedPrefixCls)
 
     const [visible, setVisible] = useControlledProp(props, 'visible', false)
-    const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visible)
+    const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visible)
 
     const zoom = computed(() => props.zoom ?? config.zoom)
     const loop = computed(() => props.loop ?? config.loop)

@@ -34,7 +34,7 @@ export function useTooltipOverlay(
   const mergedOverlayContainer = useOverlayContainer(props, config, common, mergedPrefixCls)
 
   const [visible, setVisible] = useControlledProp(props, 'visible', false)
-  const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visible)
+  const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visible)
 
   onDeactivated(() => {
     if (visible.value && props.closeOnDeactivated) {
