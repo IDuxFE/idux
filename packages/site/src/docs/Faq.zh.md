@@ -32,6 +32,18 @@ order: 10
 例如你可以设置 `<IxSelect :overlayContainer='trigger => trigger.parentElement' />` 在 Popover 中渲染下拉框组件。  
 你也可以通过在全局配置中设置来进行全局覆盖，例如：`useGlobalConfig('common', { overlayContainer: element => element?.parentElement })`，需要特别注意的是，这里的 `element` 可能为空，因为该配置对于 `Modal, Drawer` 等组件同样生效，此类组件不存在 `trigger` 元素。
 
+## 如何自定义控制浮层的 `z-index`? 通常在与其他组件库混用，或者使用了微前端框架的情况下需要。
+
+首先我们大多数浮层组件都提供了 `zIndex` 的配置（如果没有，可以给我们提供 issue 或者直接 PR），你可以精确的控制它们。  
+如果你觉得控制每一个组件的 `zIndex` 比较麻烦，我们也提供了全局配置以便于你进行全局统一管理，例如：
+
+```ts
+const initZIndex = 1000
+const indexCount = 0
+const customGetZIndex = () => initZIndex + indexCount++
+useGlobalConfig('common', { overlayZIndex: customGetZIndex })
+```
+
 ## 图标不显示？如何更新图标？
 
 请务必花几分钟时间仔细阅读[快速上手](/docs/getting-started/zh) 和 [图标的动态加载与静态加载](/components/icon/zh?tab=api#FAQ) 进行一些必要的配置。

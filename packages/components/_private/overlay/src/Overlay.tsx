@@ -5,9 +5,6 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { OverlayProps } from './types'
-import type { PopperElement, PopperEvents, PopperOptions } from '@idux/cdk/popper'
-
 import {
   type ComputedRef,
   type Ref,
@@ -26,13 +23,13 @@ import {
 } from 'vue'
 
 import { vClickOutside } from '@idux/cdk/click-outside'
-import { usePopper } from '@idux/cdk/popper'
+import { type PopperElement, type PopperEvents, type PopperOptions, usePopper } from '@idux/cdk/popper'
 import { CdkPortal } from '@idux/cdk/portal'
 import { Logger, callEmit, convertElement, getFirstValidNode } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { useZIndex } from '@idux/components/utils'
 
-import { overlayProps } from './types'
+import { type OverlayProps, overlayProps } from './types'
 
 export default defineComponent({
   name: 'ɵOverlay',
@@ -60,7 +57,7 @@ export default defineComponent({
     } = usePopper({ ...popperOptions.value, visible: props.visible })
 
     const { destroy: popperDestroy } = usePopperInit(props, initialize, destroy)
-    const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visibility)
+    const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visibility)
     const mergedContainer = computed(() => {
       return () => props.container(convertElement(triggerRef)!)
     })
@@ -225,7 +222,7 @@ function renderContent(
   const prefixCls = mergedPrefixCls.value
   const { triggerId } = props
   const overlayId = triggerId != null ? `overlay-${triggerId}` : undefined
-  const style = currentZIndex.value ? `z-index: ${currentZIndex.value}` : undefined
+  const style = `z-index: ${currentZIndex.value}`
   const overlay = (
     <div ref={popperRef} id={overlayId} class={prefixCls} style={style} {...popperEvents.value} {...attrs}>
       {contentNode}

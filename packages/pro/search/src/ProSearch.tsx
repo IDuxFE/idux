@@ -63,7 +63,9 @@ export default defineComponent({
       searchStateContext,
       activeSegmentContext,
     )
-    const { currentZIndex } = useZIndex(toRef(props, 'zIndex'), toRef(componentCommon, 'overlayZIndex'), ref(true))
+
+    //TODO: fix ref(true)
+    const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(componentCommon, 'overlayZIndex'), ref(true))
 
     const { initSearchStates, clearSearchState } = searchStateContext
     const { activeSegment } = activeSegmentContext

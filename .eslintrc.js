@@ -148,7 +148,7 @@ module.exports = {
     'vue/max-attributes-per-line': 'off',
     'vue/multi-word-component-names': 'off',
     'vue/v-on-event-hyphenation': 'off',
-    'vue/require-default-prop': 'error',
+    'vue/require-default-prop': 'off',
     'vue/require-explicit-emits': 'error',
 
     'jsdoc/newline-after-description': 1,

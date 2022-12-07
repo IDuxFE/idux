@@ -7,37 +7,36 @@
 
 import { type ComputedRef, type Ref, computed, ref, watch } from 'vue'
 
-import { isNil } from 'lodash-es'
+import { isFunction } from 'lodash-es'
 
-const zIndexCount = ref(0)
+let zIndexCount = 0
 
 type UseZIndex = (
   controlZIndex: Ref<number | undefined>,
-  commonZIndex: Ref<number>,
+  configZIndex: Ref<number | (() => number)>,
   visible: Ref<boolean>,
-) => {
-  currentZIndex: ComputedRef<number>
-  nextZIndex: () => number
-}
-export const useZIndex: UseZIndex = (controlZIndex, commonZIndex, visible) => {
-  const innerZIndex = ref(commonZIndex.value + zIndexCount.value)
-  const currentZIndex = computed(() => controlZIndex.value ?? innerZIndex.value)
-  const nextZIndex = () => {
-    if (isNil(controlZIndex.value)) {
-      innerZIndex.value = commonZIndex.value + zIndexCount.value
-      zIndexCount.value++
+) => ComputedRef<number>
+
+export const useZIndex: UseZIndex = (controlZIndex, configZIndex, visible) => {
+  const getZIndex = () => {
+    const zIndex = configZIndex.value
+    if (isFunction(zIndex)) {
+      return zIndex()
     }
-    return currentZIndex.value
+    return zIndex + zIndexCount++
   }
+
+  const innerZIndex = ref(0)
 
   watch(
     visible,
     newVisible => {
       if (newVisible) {
-        nextZIndex()
+        innerZIndex.value = getZIndex()
       }
     },
     { immediate: true },
   )
-  return { currentZIndex, nextZIndex }
+
+  return computed(() => controlZIndex.value ?? innerZIndex.value)
 }
