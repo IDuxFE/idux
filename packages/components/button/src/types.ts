@@ -6,7 +6,7 @@
  */
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
-import type { SpaceProps } from '@idux/components/space'
+import type { SpaceAlign, SpaceProps } from '@idux/components/space'
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export type ButtonMode = 'primary' | 'default' | 'dashed' | 'text' | 'link'
@@ -37,6 +37,7 @@ export type ButtonComponent = DefineComponent<
 export type ButtonInstance = InstanceType<DefineComponent<ButtonProps>>
 
 export const buttonGroupProps = {
+  align: { type: String as PropType<SpaceAlign>, default: 'center' },
   block: { type: Boolean, default: undefined },
   danger: { type: Boolean, default: undefined },
   disabled: { type: Boolean, default: undefined },
