@@ -1,6 +1,5 @@
 .table-size( @font-size, @head-height, @body-height, @padding-horizontal) {
-  font-size: @font-size;
-  line-height: calc(@font-size + var(--ix-line-height-gutter));
+  .reset-font-size(@font-size);
 
   &:not(.@{table-prefix}-borderless) {
     > .@{header-prefix} {

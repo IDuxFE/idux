@@ -3,13 +3,13 @@
 
 .@{pagination-prefix} {
   .reset-component-new();
+  .reset-color(@pagination-color, @pagination-background-color);
 
   display: flex;
   align-items: center;
   list-style: none;
   outline: none;
   user-select: none;
-  background-color: @pagination-background-color;
 
   &-sm {
     .pagination-size(@pagination-font-size-sm,  @pagination-item-padding-sm, @pagination-item-content-size-sm);

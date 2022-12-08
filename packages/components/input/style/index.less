@@ -4,8 +4,8 @@
 
 .@{input-prefix} {
   .reset-component-new();
+  .reset-color(@input-color, @input-background-color);
 
-  background-color: @input-background-color;
   transition: all var(--ix-transition-duration-fast) var(--ix-ease-in-out);
 
   &-sm {

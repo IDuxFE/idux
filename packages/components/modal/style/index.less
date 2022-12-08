@@ -10,8 +10,6 @@
   width: auto;
   max-width: @modal-max-width;
   margin: 0 auto;
-  font-size: @modal-font-size;
-  line-height: calc(@modal-font-size + var(--ix-line-height-gutter));
 
   &-wrapper {
     z-index: 1000;
@@ -29,15 +27,17 @@
   }
 
   &-content {
+    .reset-font-size();
+    .reset-color();
+
     position: relative;
     display: flex;
     flex-direction: column;
     height: 100%;
     pointer-events: auto;
     overflow: hidden;
-    background-color: @modal-background-color;
-    box-shadow: @modal-box-shadow;
     border-radius: @modal-border-radius;
+    box-shadow: @modal-box-shadow;
 
     > .@{header-prefix} {
       padding-left: var(--ix-spacing-lg);
@@ -51,7 +51,8 @@
     overflow: auto;
 
     &-title {
-      font-size: @modal-body-title-font-size;
+      .reset-font-size(@modal-body-title-font-size);
+
       font-weight: @modal-body-title-font-weight;
       margin-bottom: @modal-body-title-margin-bottom;
       color: @modal-body-title-color;
@@ -63,7 +64,6 @@
       justify-content: center;
       width: 100%;
       padding: @modal-body-content-padding;
-      font-size: @modal-body-content-font-size;
       color: @modal-body-content-color;
       &&-only-title {
         align-items: center;

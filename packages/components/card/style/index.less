@@ -2,9 +2,9 @@
 
 .@{card-prefix} {
   .reset-component-new();
+  .reset-color();
 
   position: relative;
-  background-color: @card-background-color;
   border: @card-border-width @card-border-style @card-border-color;
   border-radius: @card-border-radius;
   overflow: hidden;
@@ -202,8 +202,7 @@
 }
 
 .card-size(@font-size, @card-padding) {
-  font-size: @font-size;
-  line-height: calc(@font-size + var(--ix-line-height-gutter));
+  .reset-font-size(@font-size);
 
   > .@{header-prefix} {
     padding-left: @card-padding;

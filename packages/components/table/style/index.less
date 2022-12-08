@@ -9,9 +9,9 @@
 
 .@{table-prefix} {
   .reset-component-new();
+  .reset-color();
   .clearfix();
 
-  background-color: @table-background-color;
   max-width: 100%;
 
   &-container {
@@ -85,7 +85,7 @@
     &.@{table-prefix}-empty-row {
       &:hover {
         > td {
-          background-color: @table-background-color;
+          background-color: var(--ix-background-color);
         }
       }
     }
@@ -320,7 +320,7 @@
     &-holder {
       position: sticky;
       z-index: 3;
-      background-color: @table-background-color;
+      background-color: var(--ix-background-color);
     }
 
     &-scrollbar {

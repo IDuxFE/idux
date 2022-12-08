@@ -2,8 +2,7 @@
 
 .@{collapse-prefix} {
   .reset-component-new();
-
-  background-color: @collapse-background-color;
+  .reset-color();
 
   &-sm {
     .collapse-size(@collapse-font-size-sm, @collapse-padding-horizontal-sm);
@@ -78,7 +77,7 @@
 
       &-content {
         border-color: transparent;
-        background-color: @collapse-background-color;
+        background-color: var(--ix-background-color);
       }
     }
 
@@ -94,8 +93,7 @@
 }
 
 .collapse-size(@font-size, @padding-horizontal) {
-  font-size: @font-size;
-  line-height: calc(@font-size + var(--ix-line-height-gutter));
+  .reset-font-size(@font-size);
 
   .@{header-prefix} {
     padding-left: @padding-horizontal;

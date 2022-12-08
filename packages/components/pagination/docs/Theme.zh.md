@@ -11,6 +11,7 @@
 | `@pagination-item-content-size-lg` | `32px` | - | - |
 | `@pagination-item-content-border-radius` | `50%` | - | - |
 | `@pagination-item-content-icon-font-size` | `var(--ix-font-size-lg)` | - | - |
+| `@pagination-color` | `var(--ix-text-color)` | - | - |
 | `@pagination-color-hover` | `var(--ix-text-color)` | `var(--ix-color-primary)` | - |
 | `@pagination-color-active` | `var(--ix-text-color-inverse)` | `var(--ix-color-primary)` | - |
 | `@pagination-color-disabled` | `var(--ix-text-color-disabled)` | - | - |

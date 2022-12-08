@@ -8,8 +8,6 @@
   pointer-events: none;
   width: 100%;
   height: 100%;
-  font-size: @drawer-font-size;
-  line-height: calc(@drawer-font-size + var(--ix-line-height-gutter));
 
   &-wrapper {
     position: fixed;
@@ -38,11 +36,13 @@
   }
 
   &-content {
+    .reset-font-size();
+    .reset-color();
+
     position: relative;
     display: flex;
     flex-direction: column;
     height: 100%;
-    background-color: @drawer-background-color;
     pointer-events: auto;
     overflow: hidden;
 

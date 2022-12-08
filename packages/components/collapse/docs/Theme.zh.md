@@ -6,5 +6,4 @@
 | `@collapse-padding-horizontal-md` | `var(--ix-spacing-lg)` | - | - |
 | `@collapse-border` | `1px solid var(--ix-border-color)` | - | - |
 | `@collapse-border-radius` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
-| `@collapse-background-color` | `var(--ix-background-color)` | - | - |
 | `@collapse-content-background-color` | `var(--ix-background-color-light)` | - | - |

@@ -1,11 +1,10 @@
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@alert-height` | `var(--ix-height-md)` | - | - |
-| `@alert-font-size` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
 | `@alert-border-radius` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
-| `@alert-icon-font-size` | `var(--ix-font-size-lg)` | - | - |
-| `@alert-color` | `@text-color` | - | - |
-| `@alert-color-secondary` | `@text-color-secondary` | - | - |
+| `@alert-icon-color` | `var(--ix-text-color-secondary)` | - | - |
+| `@alert-icon-color-hover` | `var(--ix-color-primary)` | - | - |
+| `@alert-banner-border-color` | `var(--ix-border-color-secondary)` | - | - |
 | `@alert-success-color` | `var(--ix-color-turquoise)` | `var(--ix-color-turquoise-d10)` | - |
 | `@alert-info-color` | `var(--ix-color-primary)` | - | - |
 | `@alert-warning-color` | `var(--ix-color-brown)` | `#a35f40` | - |
@@ -16,4 +15,3 @@
 | `@alert-warning-background-color` | `#fffaf2` | - | - |
 | `@alert-error-background-color` | `#fff2f2` | - | - |
 | `@alert-offline-background-color` | `#f7f7f8` | - | - |
-| `@alert-banner-border-color` | `var(--ix-border-color-secondary)` | - | - |

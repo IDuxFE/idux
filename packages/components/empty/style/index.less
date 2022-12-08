@@ -2,10 +2,9 @@
 
 .@{empty-prefix} {
   .reset-component-new();
+  .reset-font-size();
 
   color: @empty-color;
-  font-size: @empty-font-size;
-  line-height: calc(@empty-font-size + var(--ix-line-height-gutter));
   margin: var(--ix-spacing-xl) var(--ix-spacing-lg);
   text-align: center;
 
@@ -24,8 +23,7 @@
 
   &-description {
     color: @empty-description-color;
-    font-size: @empty-description-font-size;
-    line-height: calc(@empty-description-font-size + var(--ix-line-height-gutter));
+    .reset-font-size(@empty-description-font-size);
   }
 
   &-content {

@@ -8,7 +8,6 @@
 | `@card-padding-lg` | `@spacing-xl` | - | - |
 | `@card-border-width` | `@border-width-sm` | - | - |
 | `@card-border-style` | `@border-style` | - | - |
-| `@card-background-color` | `var(--ix-background-color)` | - | - |
 | `@card-border-color` | `@color-graphite-l30` | - | - |
 | `@card-border-color-hover` | `transparent` | - | - |
 | `@card-border-radius` | `@border-radius-sm` | - | - |
