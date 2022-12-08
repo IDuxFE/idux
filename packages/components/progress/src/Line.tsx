@@ -31,6 +31,9 @@ export default defineComponent({
         [`${prefixCls}-round`]: computedProps.value.strokeLinecap === 'round',
       }
     })
+    const innerStyle = computed(() => ({
+      background: computedProps.value.trailColor ?? '',
+    }))
     const successStyle = computed(() => ({
       height: computedProps.value.strokeWidth && `${computedProps.value.strokeWidth}px`,
       width: `${formattedSuccess.value.percent ?? 0}%`,
@@ -50,7 +53,7 @@ export default defineComponent({
       return (
         <div ref={elementRef} class={lineClasses.value}>
           <div class={`${prefixCls}-outer`}>
-            <div class={`${prefixCls}-inner`}>
+            <div class={`${prefixCls}-inner`} style={innerStyle.value}>
               {computedProps.value.success?.percent && (
                 <div class={`${prefixCls}-success-bg`} style={successStyle.value}></div>
               )}
