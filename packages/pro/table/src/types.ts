@@ -38,7 +38,7 @@ export const proTableProps = {
   customTag: { type: Object as PropType<TableCustomTag>, default: undefined },
   dataSource: { type: Array as PropType<any[]>, default: () => [] },
   editable: { type: Boolean, default: false },
-  ellipsis: { type: [Boolean, Object] as PropType<boolean | { title?: boolean }>, default: false },
+  ellipsis: { type: [Boolean, Object] as PropType<boolean | { title?: boolean; head?: boolean }>, default: false },
   empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'default' },
   getKey: { type: [String, Function] as PropType<string | ((record: any) => any)>, default: undefined },
   header: { type: [String, Object] as PropType<string | HeaderProps>, default: undefined },
