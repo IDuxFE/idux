@@ -37,7 +37,8 @@ export default defineComponent({
           </a>
         )
       }
-      return <div class={`${mergedPrefixCls.value}-logo`}>{logoNode}</div>
+
+      return logoNode && <div class={`${mergedPrefixCls.value}-logo`}>{logoNode}</div>
     }
   },
 })

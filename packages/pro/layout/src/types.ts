@@ -76,7 +76,7 @@ export type ProLayoutInstance = InstanceType<DefineComponent<ProLayoutProps>>
 export interface ProLayoutLogo {
   image: string | VNode
   title: string
-  link: string
+  link?: string
 }
 export type ProLayoutTheme = MenuTheme | { header: MenuTheme; sider: MenuTheme }
 export type ProLayoutType = 'header' | 'sider' | 'mixin' | 'both'
