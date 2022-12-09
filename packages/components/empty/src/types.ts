@@ -10,9 +10,6 @@ import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
 
 export const emptyProps = {
   description: String,
-  /**
-   * @deprecated
-   */
   icon: [String, Object] as PropType<string | VNode>,
   image: [String, Object] as PropType<string | VNode>,
   simple: Boolean,

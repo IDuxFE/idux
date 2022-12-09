@@ -7,8 +7,8 @@ title:
 
 ## zh
 
-可以通过 `image` 属性或者插槽来自定义图片
+可以通过 `image`, `icon` 属性或者插槽来自定义图片
 
 ## en
 
-You can customize the image through `image` prop or slot.
+You can customize the image through `image`, `icon` prop or slot.
