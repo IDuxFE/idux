@@ -16,7 +16,7 @@
 | `progress` | 进度条配置，见 [ProgressProps](/components/progress/zh#ProgressProps) | `ProgressProps` | - | - | - |
 | `name` | 发到后台的文件参数名 | `string` | `file` | ✅  | - |
 | `withCredentials` | 请求是否携带cookie | `boolean` | `false` | ✅ | - |
-| `customRequest` | 覆盖内置的上传行为，自定义上传实现 | `(option: UploadRequestOption) => { abort: () => void }` | 基于XMLHttpRequest实现  | - | - |
+| `customRequest` | 覆盖内置的上传行为，自定义上传实现 | `(option: UploadRequestOption) => Promise<UploadRequestHandler \| void> \| UploadRequestHandler \| void` | 基于XMLHttpRequest实现  | - | - |
 | `requestData` | 上传附加的参数  | `Record<string, unknown> \| ((file: UploadFile) => Record<string, unknown> \| Promise<Record<string, unknown>>)` | - | - | - |
 | `requestHeaders` | 设置上传请求的请求头  | `UploadRequestHeader` | -  | -  | -  |
 | `requestMethod` | 上传请求的http method | `UploadRequestMethod` | `post` | ✅ | - |

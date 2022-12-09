@@ -18,6 +18,9 @@ export type UploadRequestStatus = 'loadstart' | 'progress' | 'abort' | 'error' |
 export type UploadFileStatus = 'selected' | 'cancel' | 'uploading' | 'error' | 'success' | 'abort'
 export type UploadFilesType = 'text' | 'image' | 'imageCard'
 export type UploadIconType = 'file' | 'preview' | 'download' | 'remove' | 'retry'
+export interface UploadRequestHandler {
+  abort?: () => void
+}
 export interface UploadProgressEvent extends ProgressEvent {
   percent?: number
 }
@@ -88,7 +91,9 @@ export const uploadProps = {
   },
   progress: Object as PropType<ProgressProps>,
   name: String,
-  customRequest: Function as PropType<(option: UploadRequestOption<any>) => { abort: () => void }>,
+  customRequest: Function as PropType<
+    (option: UploadRequestOption<any>) => Promise<UploadRequestHandler | void> | UploadRequestHandler | void
+  >,
   withCredentials: {
     type: Boolean,
     default: undefined,
