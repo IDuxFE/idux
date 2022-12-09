@@ -91,7 +91,7 @@ export function useStrategy(
     runningIndex.value = to
 
     sliderTrackElement.style.transition = `transform 0.5s ease`
-    const needToAdjust = length > 2 && index !== to
+    const needToAdjust = index !== to
 
     if (needToAdjust) {
       const stylePropertyName = mergedVertical.value ? 'top' : 'left'
