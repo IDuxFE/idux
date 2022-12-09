@@ -3,10 +3,10 @@
   margin: 0;
   padding: 0;
   color: var(--ix-text-color);
-  font-size: @font-size-base;
+  .reset-font-size();
+
   font-variant: @font-variant-base;
   font-feature-settings: @font-feature-settings-base;
-  line-height: calc(@font-size-base + var(--ix-line-height-gutter));
   list-style: none;
 }
 
@@ -14,12 +14,16 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: var(--ix-text-color);
 }
 
-.reset-font-size(@font-size) {
+.reset-font-size(@font-size: var(--ix-font-size)) {
   font-size: @font-size;
   line-height: calc(@font-size + var(--ix-line-height-gutter));
+}
+
+.reset-color(@text-color: var(--ix-text-color), @background-color: var(--ix-background-color)) {
+  color: @text-color;
+  background-color: @background-color;
 }
 
 .reset-scroll() {

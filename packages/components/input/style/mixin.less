@@ -15,9 +15,9 @@
 }
 
 .input-size(@height, @font-size, @border-radius) {
+  .reset-font-size(@font-size);
+
   height: @height;
-  font-size: @font-size;
-  line-height: calc(@font-size + var(--ix-line-height-gutter));
 
   &,
   .@{input-prefix}-addon {

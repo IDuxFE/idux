@@ -17,9 +17,10 @@
     }
 
     .@{checkbox-prefix}-label {
-      font-size: @checkbox-font-size;
-      line-height: calc(@checkbox-font-size + var(--ix-line-height-gutter));
+      .reset-font-size();
+
       padding: @checkbox-label-padding;
+      color: @checkbox-color;
     }
   }
 

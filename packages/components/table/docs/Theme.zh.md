@@ -12,7 +12,6 @@
 | `@table-row-padding-horizontal-sm` | `var(--ix-spacing-sm)` | - | - |
 | `@table-row-padding-horizontal-md` | `var(--ix-spacing-md)` | - | - |
 | `@table-row-padding-horizontal-lg` | `var(--ix-spacing-lg)` | - | - |
-| `@table-background-color` | `var(--ix-background-color)` | - | - |
 | `@table-border-color` | `var(--ix-border-color-secondary)` | - | - |
 | `@table-border-radius` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
 | `@table-head-color` | `var(--ix-text-color-title-secondary)` | - | - |

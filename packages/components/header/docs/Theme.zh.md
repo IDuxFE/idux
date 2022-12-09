@@ -12,7 +12,6 @@
 | `@header-color-hover` | `var(--ix-color-primary-l10)` | - | - |
 | `@header-color-active` | `var(--ix-color-primary-d10)` | - | - |
 | `@header-color-disabled` | `var(--ix-text-color-disabled)` | - | - |
-| `@header-background-color` | `var(--ix-background-color)` | - | - |
 | `@header-bar-width` | `4px` | - | - |
 | `@header-bar-background-color` | `var(--ix-color-primary)` | - | - |
 | `@header-title-font-weight` | `var(--ix-font-weight-xl)` | - | - |
@@ -20,5 +19,4 @@
 | `@header-sub-title-font-size` | `var(--ix-font-size-md)` | - | - |
 | `@header-suffix-color` | `var(--ix-text-color-title-secondary)` | - | - |
 | `@header-description-color` | `var(--ix-text-color-info)` | - | - |
-| `@header-description-font-size` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
 | `@header-icon-font-size` | `var(--ix-font-size-icon)` | - | - |

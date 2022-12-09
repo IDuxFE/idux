@@ -3,6 +3,7 @@
 
 .@{button-prefix} {
   .reset-component-new();
+  .reset-color(@button-color, @button-background-color);
 
   position: relative;
   display: inline-flex;
@@ -16,8 +17,6 @@
   touch-action: manipulation;
   outline: none;
   text-decoration: none;
-  color: @button-color;
-  background-color: @button-background-color;
   border: 1px solid @button-border-color;
   border-radius: @button-border-radius;
   transition: all var(--ix-transition-duration-fast) var(--ix-ease-in-out);

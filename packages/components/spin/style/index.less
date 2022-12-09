@@ -1,7 +1,7 @@
 @import '../../style/mixins/reset.less';
 
 .@{spin-prefix} {
-  .reset-component();
+  .reset-component-new();
 
   position: relative;
 
@@ -110,7 +110,7 @@
       }
 
       &-tip {
-        font-size: @@font-size;
+        .reset-font-size(@@font-size);
       }
     }
   }

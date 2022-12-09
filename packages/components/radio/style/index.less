@@ -17,9 +17,10 @@
     }
 
     .@{radio-prefix}-label {
-      font-size: @radio-font-size;
-      line-height: calc(@radio-font-size + var(--ix-line-height-gutter));
+      .reset-font-size();
+
       padding: @radio-label-padding;
+      color: @radio-color;
     }
   }
 

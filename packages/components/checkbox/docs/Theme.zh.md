@@ -1,6 +1,5 @@
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
-| `@checkbox-font-size` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
 | `@checkbox-color` | `var(--ix-text-color)` | - | - |
 | `@checkbox-color-active` | `var(--ix-color-primary)` | - | - |
 | `@checkbox-color-disabled` | `var(--ix-text-color-disabled)` | - | - |

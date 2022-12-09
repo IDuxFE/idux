@@ -3,12 +3,11 @@
 
 .@{header-prefix} {
   .reset-component-new();
+  .reset-color(@header-color);
 
   position: relative;
   display: flex;
   align-items: center;
-  color: @header-color;
-  background-color: @header-background-color;
   width: 100%;
 
   &-sm {
@@ -46,11 +45,11 @@
   }
 
   &-sub-title {
-    color: @header-sub-title-color;
-    font-size: @header-sub-title-font-size;
-    line-height: calc(@header-sub-title-font-size + var(--ix-line-height-gutter));
-    margin-left: 8px;
+    .reset-font-size(@header-sub-title-font-size);
     .ellipsis();
+
+    color: @header-sub-title-color;
+    margin-left: 8px;
   }
 
   &-suffix {
@@ -78,10 +77,10 @@
   }
 
   &-description {
+    .reset-font-size();
+
     width: 100%;
     color: @header-description-color;
-    font-size: @header-description-font-size;
-    line-height: calc(@header-description-font-size + var(--ix-line-height-gutter));
   }
 
   &-disabled {
@@ -133,8 +132,8 @@
 .header-size(@height, @font-size, @padding) {
   @line-height: calc(@font-size + var(--ix-line-height-gutter));
 
-  font-size: @font-size;
-  line-height: @line-height;
+  .reset-font-size(@font-size);
+
   min-height: @height;
 
   &.@{header-prefix}-with-bar {

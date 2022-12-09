@@ -4,17 +4,20 @@
 .@{dropdown-prefix} {
   .reset-component-new();
 
-  background-color: @dropdown-background-color;
   box-shadow: @dropdown-box-shadow;
   border-radius: @dropdown-border-radius;
   min-width: @dropdown-min-width;
 
+  &,
   &-trigger {
+    .reset-font-size();
+
     cursor: pointer;
   }
 
+  &,
   .@{overlay-prefix}-arrow {
-    color: @dropdown-background-color;
+    .reset-color();
   }
 
   .@{menu-prefix}-dropdown {
