@@ -1,10 +1,10 @@
 <template>
   <div>
     <IxTooltip title="3 done / 3 in progress / 4 to do">
-      <IxProgress :percent="60" :success="{ percent: 30 }" />
+      <IxProgress :percent="60" :success="{ percent: 30, strokeColor: 'green' }" />
     </IxTooltip>
     <IxTooltip title="3 done / 3 in progress / 4 to do">
-      <IxProgress :percent="60" :success="{ percent: 30 }" type="circle" />
+      <IxProgress :percent="60" :success="{ percent: 30, strokeColor: 'green' }" type="circle" />
     </IxTooltip>
     <IxTooltip title="3 done / 3 in progress / 4 to do">
       <IxProgress :percent="60" :success="{ percent: 30, strokeColor: 'red' }" type="dashboard" />

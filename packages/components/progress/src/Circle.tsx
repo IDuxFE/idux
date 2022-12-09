@@ -63,7 +63,7 @@ export default defineComponent({
     const strokePath = useCirclePath(calcSharedProperties, computedProps.value, percent, formattedSuccess)
 
     const trailPathAttr = computed(() => ({
-      stroke: '#f5f5f5',
+      stroke: computedProps.value.trailColor ?? '#f5f5f5',
       'fill-opacity': '0',
       'stroke-linecap': computedProps.value.strokeLinecap,
       'stroke-width': strokeWidth.value,
