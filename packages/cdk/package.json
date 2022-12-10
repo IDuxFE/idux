@@ -32,6 +32,7 @@
   "style": "./default.css",
   "unpkg": "./index.full.js",
   "jsdelivr": "./index.full.js",
+  "sideEffects": false,
   "scripts": {},
   "dependencies": {
     "@floating-ui/dom": "^1.0.4",

@@ -10,10 +10,10 @@ const init: TaskFunction = done => {
 
 const start: TaskFunction = done => execNodeTask('vite', ['--host'])(done)
 
-const build: TaskFunction = done => execNodeTask('lerna', ['run', 'build', '--scope', '@idux/site'])(done)
+const build: TaskFunction = done => execNodeTask('vite', ['build'])(done)
 
 const buildPreVersion: TaskFunction = done =>
-  execNodeTask('lerna', ['run', 'build:pre-version', '--scope', '@idux/site'])(done)
+  execNodeTask('vite', ['build', '--mode', 'pre-version'])(done)
 
 export const siteStart = series(init, start)
 export const siteBuild = series(init, build)
