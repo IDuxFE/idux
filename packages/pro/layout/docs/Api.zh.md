@@ -9,12 +9,21 @@
 | `v-model:collapsed` | 侧边栏折叠状态 | `boolean` | `false` | --- | --- |
 | `fixed` | 顶部栏和侧边栏是否固定 | `boolean \| { sider: boolean, header: boolean }` | `true` | - | - |
 | `headerMenu` | 顶部菜单组件的更多配置 | `MenuProps` | - | - | 例如：`getKey` |
+| `logo` | 自定义 logo | `ProLayoutLogo` | - | - | 一般用于展示 logo, 默认渲染在顶部的左侧区域，当 `type='sider'` 时，渲染在侧边栏的顶部 |
 | `menus` | 菜单数据 | `MenuData[]` | `[]` | - | - |
 | `sider` | 侧边栏的更多配置 | `LayoutSiderProps` | - | - | 例如：`collapsed`,`breakpoint`, `pointer` 等配置 |
 | `siderMenu` | 侧边栏菜单组件的更多配置 | `MenuProps` | - | - | 例如：`getKey`, `indent` 和 `mode` |
 | `theme` | 主题 | `'light' \| 'dark' \| { sider: 'light' \| 'dark', header: 'light' \| 'dark' }` | `{ sider: 'light', header: 'dark' }` | - | - |
 | `type` | 布局类型 | `'both' \| 'mixin' \| 'header' \| 'sider'` | `both` | - | 参见示例：[布局类型](#pro-layout-demo-Type) |
 | `onMenuClick` | 点击菜单回调 | `(options: MenuClickOptions) => void`| - | -  | - |
+
+```ts
+interface ProLayoutLogo {
+  image: string | VNode
+  title: string
+  link?: string
+}
+```
 
 #### ProLayoutSlots
 

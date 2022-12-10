@@ -3,9 +3,7 @@
 exports[`ProLayout > render work 1`] = `
 "<section class=\\"ix-layout ix-layout-fixed-header ix-layout-fixed-sider ix-pro-layout ix-pro-layout-is-both\\">
   <header class=\\"ix-layout-header ix-pro-layout-header ix-pro-layout-header-dark\\">
-    <div class=\\"ix-pro-layout-logo\\">
-      <!---->
-    </div>
+    <!---->
     <div class=\\"ix-pro-layout-header-content\\">
       <ul class=\\"ix-menu ix-menu-dark ix-menu-horizontal\\">
         <li class=\\"ix-menu-item ix-menu-level-1 ix-menu-item-selected\\" aria-label=\\"Sub Menu 1\\" aria-selected=\\"true\\" role=\\"menuitem\\"><i class=\\"ix-icon ix-icon-setting\\" role=\\"img\\" aria-label=\\"setting\\"></i><span>Sub Menu 1</span>

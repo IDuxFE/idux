@@ -217,6 +217,33 @@ describe('ProLayout', () => {
     expect(wrapper.find('.ix-pro-layout-sider').exists()).toBe(true)
   })
 
+  test('logo work', async () => {
+    const wrapper = ProLayoutMount()
+
+    expect(wrapper.find('.ix-pro-layout-logo').exists()).toBe(false)
+
+    await wrapper.setProps({
+      logo: {
+        image: '../assets/1.png',
+        title: 'Pro Layout',
+      },
+    })
+
+    expect(wrapper.find('.ix-pro-layout-logo').exists()).toBe(true)
+
+    await wrapper.setProps({
+      type: 'sider',
+    })
+
+    expect(wrapper.find('.ix-pro-layout-logo').exists()).toBe(true)
+
+    await wrapper.setProps({
+      logo: null,
+    })
+
+    expect(wrapper.find('.ix-pro-layout-logo').exists()).toBe(false)
+  })
+
   test('slots work', async () => {
     const wrapper = ProLayoutMount({
       props: { type: 'both' },
@@ -230,11 +257,38 @@ describe('ProLayout', () => {
       },
     })
 
-    expect(wrapper.find('.ix-pro-layout-logo').find('#logo').exists()).toBe(true)
-    expect(wrapper.find('.ix-pro-layout-header-extra').find('#extra').exists()).toBe(true)
-    expect(wrapper.find('.ix-pro-layout-sider-header').find('#siderHeader').exists()).toBe(true)
-    expect(wrapper.find('.ix-pro-layout-sider-footer').find('#siderFooter').exists()).toBe(true)
-    expect(wrapper.find('.ix-pro-layout-content').find('#default').exists()).toBe(true)
-    expect(wrapper.find('.ix-pro-layout-footer').find('#footer').exists()).toBe(true)
+    expect(wrapper.find('.ix-pro-layout-header .ix-pro-layout-logo #logo').exists()).toBe(true)
+    expect(wrapper.find('.ix-pro-layout-sider .ix-pro-layout-logo').exists()).toBe(false)
+    expect(wrapper.find('.ix-pro-layout-header-extra #extra').exists()).toBe(true)
+    expect(wrapper.find('.ix-pro-layout-sider-header #siderHeader').exists()).toBe(true)
+    expect(wrapper.find('.ix-pro-layout-sider-footer #siderFooter').exists()).toBe(true)
+    expect(wrapper.find('.ix-pro-layout-content #default').exists()).toBe(true)
+    expect(wrapper.find('.ix-pro-layout-footer #footer').exists()).toBe(true)
+
+    await wrapper.setProps({
+      type: 'sider',
+    })
+
+    expect(wrapper.find('.ix-pro-layout-header .ix-pro-layout-logo').exists()).toBe(false)
+    expect(wrapper.find('.ix-pro-layout-sider .ix-pro-layout-logo #logo').exists()).toBe(true)
+
+    const wrapper2 = ProLayoutMount({
+      props: { type: 'both' },
+      slots: {
+        siderHeader: () => h('div', { id: 'siderHeader' }),
+        siderFooter: () => h('div', { id: 'siderFooter' }),
+        default: () => h('div', { id: 'default' }),
+        footer: () => h('div', { id: 'footer' }),
+      },
+    })
+
+    expect(wrapper2.find('.ix-pro-layout-header .ix-pro-layout-logo').exists()).toBe(false)
+    expect(wrapper2.find('.ix-pro-layout-header-extra').exists()).toBe(false)
+
+    await wrapper2.setProps({
+      type: 'sider',
+    })
+
+    expect(wrapper2.find('.ix-pro-layout-sider .ix-pro-layout-logo').exists()).toBe(false)
   })
 })
