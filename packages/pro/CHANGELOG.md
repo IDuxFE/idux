@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://github.com/IDuxFE/idux/compare/v1.2.3...v1.2.4) (2022-12-10)
+
+### Bug Fixes
+
+- **comp:\*:** the font size under seer theme is incorrect ([#1343](https://github.com/IDuxFE/idux/issues/1343)) ([5c74fcf](https://github.com/IDuxFE/idux/commit/5c74fcf6964bd7d76e5d35f5bf84ca52b0f21fae))
+- **comp:empty:** style update with icon ([#1349](https://github.com/IDuxFE/idux/issues/1349)) ([69ec9f9](https://github.com/IDuxFE/idux/commit/69ec9f944ea3569b6a85c0bcb9eb278f2fad084e))
+- **pro:layout:** the dom still renders without the logo ([#1348](https://github.com/IDuxFE/idux/issues/1348)) ([375c691](https://github.com/IDuxFE/idux/commit/375c69132dcd06a46cdbf449aac8760d2e25eab5))
+- **pro:table:** wrong type of ellipsis ([#1345](https://github.com/IDuxFE/idux/issues/1345)) ([86c59f8](https://github.com/IDuxFE/idux/commit/86c59f8e98b70248178c2c8d4fc440d33b91ca7f))
+
 ## [1.2.3](https://github.com/IDuxFE/idux/compare/v1.2.2...v1.2.3) (2022-12-07)
 
 ### Bug Fixes
