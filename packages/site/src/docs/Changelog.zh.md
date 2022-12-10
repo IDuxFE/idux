@@ -10,6 +10,19 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.2.4(2022-12-10)
+
+### Bug Fixes
+
+- **comp:\*:** 部分组件的字体大小在 seer 主题下不正确 ([#1343](https://github.com/IDuxFE/idux/issues/1343)) ([5c74fcf](https://github.com/IDuxFE/idux/commit/5c74fcf6964bd7d76e5d35f5bf84ca52b0f21fae))
+- **comp:carousel:** 当只有2个子面板的时候，切换白屏 ([#1346](https://github.com/IDuxFE/idux/issues/1346)) ([6a5f46b](https://github.com/IDuxFE/idux/commit/6a5f46b3af56efe3c74434845708843483e13557))
+- **comp:checkbox:** 禁用样式异常 ([#1344](https://github.com/IDuxFE/idux/issues/1344)) ([55b0be8](https://github.com/IDuxFE/idux/commit/55b0be849a43cf06c6dd98f4086ae0db37728ecf))
+- **comp:date-picker,comp:time-picker:** 打开 picker 时不应该滚动窗口 ([#1342](https://github.com/IDuxFE/idux/issues/1342)) ([cce0c0e](https://github.com/IDuxFE/idux/commit/cce0c0e81b67722f797f73db52632974ad7822b9))
+- **comp:empty:** 补充图标的样式 ([#1349](https://github.com/IDuxFE/idux/issues/1349)) ([69ec9f9](https://github.com/IDuxFE/idux/commit/69ec9f944ea3569b6a85c0bcb9eb278f2fad084e))
+- **comp:progress:** trailColor 不工作 ([#1347](https://github.com/IDuxFE/idux/issues/1347)) ([f448714](https://github.com/IDuxFE/idux/commit/f448714ab19d8c2e5ddb170ed4dec5f9a8526054))
+- **comp:upload:** customRequest 允许可选和 async ([#1340](https://github.com/IDuxFE/idux/issues/1340)) ([52250a5](https://github.com/IDuxFE/idux/commit/52250a55225b8d36df904e3211d463fb67d23308))
+- **pro:layout:** 没有设置 logo 时,依旧渲染了 dom ([#1348](https://github.com/IDuxFE/idux/issues/1348)) ([375c691](https://github.com/IDuxFE/idux/commit/375c69132dcd06a46cdbf449aac8760d2e25eab5))
+
 ## 1.2.3(2022-12-07)
 
 ### Bug Fixes
