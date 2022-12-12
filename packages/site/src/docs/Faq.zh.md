@@ -30,7 +30,13 @@ order: 10
 
 可以通过设置 `overlayContainer` 来解决，把浮层插入到当前的 `DOM` 内，而不是默认的 `body` 上。  
 例如你可以设置 `<IxSelect :overlayContainer='trigger => trigger.parentElement' />` 在 Popover 中渲染下拉框组件。  
-你也可以通过在全局配置中设置来进行全局覆盖，例如：`useGlobalConfig('common', { overlayContainer: element => element?.parentElement })`，需要特别注意的是，这里的 `element` 可能为空，因为该配置对于 `Modal, Drawer` 等组件同样生效，此类组件不存在 `trigger` 元素。
+你也可以通过在全局配置中设置来进行全局覆盖，例如：
+
+```ts
+// 也可以在初始化的时候，使用 createGlobalConfig
+// 需要特别注意的是，这里的 `trigger` 可能为空，因为该配置对于 `Modal, Drawer` 等组件同样生效，此类组件不存在 `trigger` 元素。
+useGlobalConfig('common', { overlayContainer: trigger => trigger?.parentElement })
+```
 
 ## 如何自定义控制浮层的 `z-index`? 通常在与其他组件库混用，或者使用了微前端框架的情况下需要。
 
@@ -41,6 +47,7 @@ order: 10
 const initZIndex = 1000
 const indexCount = 0
 const customGetZIndex = () => initZIndex + indexCount++
+// 也可以在初始化的时候，使用 createGlobalConfig
 useGlobalConfig('common', { overlayZIndex: customGetZIndex })
 ```
 

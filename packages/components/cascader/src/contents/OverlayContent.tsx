@@ -9,7 +9,7 @@
 
 import { type VNode, computed, defineComponent, inject, watch } from 'vue'
 
-import { callEmit } from '@idux/cdk/utils'
+import { type VKey, callEmit } from '@idux/cdk/utils'
 import { ɵInput } from '@idux/components/_private/input'
 
 import { cascaderToken } from '../token'
@@ -30,13 +30,14 @@ export default defineComponent({
       updateOverlay,
     } = inject(cascaderToken)!
 
+    const defaultKey = Symbol() as VKey
     const contentData = computed(() => {
-      const dataSource = [mergedData.value]
+      const dataSource = [{ key: defaultKey, dataSource: mergedData.value }]
       const dataMap = mergedDataMap.value
       expandedKeys.value.forEach(key => {
         const currData = dataMap.get(key)
         if (currData && currData.children) {
-          dataSource.push(currData.children)
+          dataSource.push({ key, dataSource: currData.children })
         }
       })
       return dataSource
@@ -79,7 +80,7 @@ export default defineComponent({
       const contentNode = searchValue ? (
         <OverlayOptionGroup dataSource={searchedData.value} />
       ) : (
-        contentData.value.map((dataSource, index) => <OverlayOptionGroup key={index} dataSource={dataSource} />)
+        contentData.value.map(item => <OverlayOptionGroup {...item} />)
       )
       children.push(
         <div key="__content" class={`${prefixCls}-overlay-content`}>

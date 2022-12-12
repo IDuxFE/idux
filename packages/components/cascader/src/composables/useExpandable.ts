@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type Ref, type WritableComputedRef, ref } from 'vue'
+import { type ComputedRef, type Ref, ref } from 'vue'
 
 import { isNil } from 'lodash-es'
 
@@ -17,7 +17,7 @@ import { callChange, getParentKeys } from '../utils'
 import { type MergedData, convertMergedData, convertMergedDataMap } from './useDataSource'
 
 export interface ExpandableContext {
-  expandedKeys: WritableComputedRef<VKey[]>
+  expandedKeys: ComputedRef<VKey[]>
   handleExpand: (key: VKey) => void
   loadingKeys: Ref<VKey[]>
 }
