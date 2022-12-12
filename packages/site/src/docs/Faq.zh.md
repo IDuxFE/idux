@@ -33,9 +33,11 @@ order: 10
 你也可以通过在全局配置中设置来进行全局覆盖，例如：
 
 ```ts
-// 也可以在初始化的时候，使用 createGlobalConfig
+
 // 需要特别注意的是，这里的 `trigger` 可能为空，因为该配置对于 `Modal, Drawer` 等组件同样生效，此类组件不存在 `trigger` 元素。
-useGlobalConfig('common', { overlayContainer: trigger => trigger?.parentElement })
+const overlayContainer = (trigger?: Element) => trigger?.parentElement
+// 也可以在局部组件中使用 useGlobalConfig 来设置
+createGlobalConfig({ common: { overlayContainer } })
 ```
 
 ## 如何自定义控制浮层的 `z-index`? 通常在与其他组件库混用，或者使用了微前端框架的情况下需要。
@@ -46,9 +48,9 @@ useGlobalConfig('common', { overlayContainer: trigger => trigger?.parentElement 
 ```ts
 const initZIndex = 1000
 const indexCount = 0
-const customGetZIndex = () => initZIndex + indexCount++
-// 也可以在初始化的时候，使用 createGlobalConfig
-useGlobalConfig('common', { overlayZIndex: customGetZIndex })
+const overlayZIndex = () => initZIndex + indexCount++
+// 也可以在局部组件中使用 useGlobalConfig 来设置
+createGlobalConfig({ common: { overlayZIndex } })
 ```
 
 ## 图标不显示？如何更新图标？
