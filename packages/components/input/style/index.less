@@ -6,8 +6,6 @@
   .reset-component-new();
   .reset-color(@input-color, @input-background-color);
 
-  transition: all var(--ix-transition-duration-fast) var(--ix-ease-in-out);
-
   &-sm {
     .input-size(@input-height-sm, @input-font-size-sm, @input-border-radius-sm);
   }
@@ -60,18 +58,33 @@
     &:focus,
     &-focused,
     &[disabled],
-    &-disabled {
+    .@{input-prefix}-disabled {
       background-color: transparent;
       border-color: transparent;
       box-shadow: none;
+
+      &:hover {
+        border-color: transparent;
+      }
 
       .@{input-prefix}-inner,
       .@{input-prefix}-wrapper {
         background-color: transparent;
         border-color: transparent;
         box-shadow: none;
+
+        &:hover {
+          border-color: transparent;
+        }
       }
     }
+  }
+
+  &,
+  &-wrapper,
+  &-inner,
+  &-addon {
+    transition: all var(--ix-transition-duration-fast) var(--ix-ease-in-out);
   }
 
   &,
