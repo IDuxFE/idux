@@ -3,7 +3,7 @@
 
   height: @height;
   min-width: @min-width;
-  padding: 0 @padding-horizontal;
+  padding: calc((@height - @font-size - var(--ix-line-height-gutter) - 2px) / 2) @padding-horizontal;
 
   &.@{button-prefix}-circle,
   &.@{button-prefix}-square {
