@@ -23,7 +23,7 @@ import { debounce } from 'lodash-es'
 import { type VKey, useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
-import { useKey, useOverlayContainer } from '@idux/components/utils'
+import { useKey } from '@idux/components/utils'
 
 import { usePaddingLeft } from '../../composables/usePaddingLeft'
 import { type MenuSubContext, menuItemGroupToken, menuSubToken, menuToken } from '../../token'
@@ -53,7 +53,7 @@ export default defineComponent({
     const menuItemGroupContext = inject(menuItemGroupToken, false)
 
     const key = useKey()
-    const mergedOverlayContainer = useOverlayContainer(menuProps, config, common, mergedPrefixCls)
+
     const mode = useMode(menuProps, menuSubContext)
     const level = menuSubContext ? menuSubContext.level + 1 : 1
     const paddingLeft = usePaddingLeft(menuProps, mode, indent, level, menuItemGroupContext)
@@ -117,7 +117,8 @@ export default defineComponent({
             v-slots={{ default: trigger, content: content }}
             class={overlayClasses.value}
             autoAdjust
-            container={mergedOverlayContainer.value}
+            container={menuProps.overlayContainer ?? config.overlayContainer}
+            containerFallback={`.${mergedPrefixCls.value}-overlay-container`}
             destroyOnHide={false}
             delay={menuProps.overlayDelay}
             disabled={disabled}

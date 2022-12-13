@@ -27,7 +27,6 @@ export default defineComponent({
     const { overlayRef, updatePopper, visible, setVisible, overlayProps } = ɵUseTooltipOverlay(
       props,
       config,
-      common,
       mergedPrefixCls,
     )
 

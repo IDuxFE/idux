@@ -14,7 +14,7 @@ import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/s
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister, useFormSize, useFormStatus } from '@idux/components/form'
 import { ɵUseOverlayState } from '@idux/components/select'
-import { useGetKey, useOverlayContainer } from '@idux/components/utils'
+import { useGetKey } from '@idux/components/utils'
 
 import { useActiveState } from './composables/useActiveState'
 import { useDataSource } from './composables/useDataSource'
@@ -35,7 +35,6 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const config = useGlobalConfig('cascader')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-cascader`)
-    const mergedOverlayContainer = useOverlayContainer(props, config, common, mergedPrefixCls)
 
     const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
     const mergedClearIcon = computed(() => props.clearIcon ?? config.clearIcon)
@@ -175,7 +174,8 @@ export default defineComponent({
       const overlayProps = {
         class: overlayClasses.value,
         clickOutside: true,
-        container: mergedOverlayContainer.value,
+        container: props.overlayContainer ?? config.overlayContainer,
+        containerFallback: `.${mergedPrefixCls.value}-overlay-container`,
         disabled: accessor.disabled || props.readonly,
         offset: defaultOffset,
         placement: 'bottomStart',

@@ -27,26 +27,9 @@ export function usePortalTarget(
   config: ContainerProps,
   common: { overlayContainer?: OverlayContainerType },
   mergedPrefix: ComputedRef<string>,
-): ComputedRef<() => string | HTMLElement> {
+): ComputedRef<string | HTMLElement> {
   return computed(() => {
     const container = props.container ?? config.container ?? common.overlayContainer
-    return () => (isFunction(container) ? container() : container) ?? `.${mergedPrefix.value}-container`
-  })
-}
-
-interface OverlayContainerProps {
-  overlayContainer?: OverlayContainerType
-}
-
-export function useOverlayContainer(
-  props: OverlayContainerProps,
-  config: OverlayContainerProps,
-  common: { overlayContainer?: OverlayContainerType },
-  mergedPrefix: ComputedRef<string>,
-): ComputedRef<(element?: Element) => string | HTMLElement> {
-  return computed(() => {
-    const container = props.overlayContainer ?? config.overlayContainer ?? common.overlayContainer
-    return element =>
-      (isFunction(container) ? container(element) : container) ?? `.${mergedPrefix.value}-overlay-container`
+    return (isFunction(container) ? container() : container) ?? `.${mergedPrefix.value}-container`
   })
 }

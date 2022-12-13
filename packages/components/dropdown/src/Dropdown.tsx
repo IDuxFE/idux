@@ -10,7 +10,6 @@ import { computed, defineComponent, provide, toRef } from 'vue'
 import { useControlledProp } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { type DropdownConfig, useGlobalConfig } from '@idux/components/config'
-import { useOverlayContainer } from '@idux/components/utils'
 
 import { dropdownToken } from './token'
 import { type DropdownProps, dropdownProps } from './types'
@@ -24,7 +23,6 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const config = useGlobalConfig('dropdown')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-dropdown`)
-    const mergedOverlayContainer = useOverlayContainer(props, config, common, mergedPrefixCls)
 
     const [visibility, setVisibility] = useControlledProp(props, 'visible', false)
     const configProps = useConfigProps(props, config, setVisibility)
@@ -37,7 +35,8 @@ export default defineComponent({
           visible={visibility.value}
           v-slots={{ default: slots.default, content: slots.overlay }}
           class={mergedPrefixCls.value}
-          container={mergedOverlayContainer.value}
+          container={props.overlayContainer ?? config.overlayContainer}
+          containerFallback={`.${mergedPrefixCls.value}-overlay-container`}
           delay={defaultDelay}
           disabled={props.disabled}
           transitionName={`${common.prefixCls}-fade`}

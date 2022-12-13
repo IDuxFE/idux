@@ -22,6 +22,8 @@ import {
   withDirectives,
 } from 'vue'
 
+import { isFunction } from 'lodash-es'
+
 import { vClickOutside } from '@idux/cdk/click-outside'
 import { type PopperElement, type PopperEvents, type PopperOptions, usePopper } from '@idux/cdk/popper'
 import { CdkPortal } from '@idux/cdk/portal'
@@ -59,7 +61,8 @@ export default defineComponent({
     const { destroy: popperDestroy } = usePopperInit(props, initialize, destroy)
     const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visibility)
     const mergedContainer = computed(() => {
-      return () => props.container(convertElement(triggerRef)!)
+      const { container = common.overlayContainer } = props
+      return (isFunction(container) ? container(convertElement(triggerRef)!) : container) ?? props.containerFallback
     })
 
     watch(visibility, value => callEmit(props['onUpdate:visible'], value))
@@ -221,7 +224,7 @@ function renderContent(
   }
   const prefixCls = mergedPrefixCls.value
   const { triggerId } = props
-  const overlayId = triggerId != null ? `overlay-${triggerId}` : undefined
+  const overlayId = triggerId != null ? `__IDUX_OVERLAY-${triggerId}` : undefined
   const style = `z-index: ${currentZIndex.value}`
   const overlay = (
     <div ref={popperRef} id={overlayId} class={prefixCls} style={style} {...popperEvents.value} {...attrs}>

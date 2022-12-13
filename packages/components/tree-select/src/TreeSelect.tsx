@@ -16,7 +16,7 @@ import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister, useFormSize, useFormStatus } from '@idux/components/form'
 import { ɵUseOverlayState } from '@idux/components/select'
 import { type TreeInstance } from '@idux/components/tree'
-import { useGetKey, useOverlayContainer } from '@idux/components/utils'
+import { useGetKey } from '@idux/components/utils'
 
 import { useMergeNodes } from './composables/useDataSource'
 import { useSelectedState } from './composables/useSelectedState'
@@ -33,7 +33,6 @@ export default defineComponent({
     const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('treeSelect')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tree-select`)
-    const mergedOverlayContainer = useOverlayContainer(props, config, common, mergedPrefixCls)
     const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
     const mergedGetKey = useGetKey(props, config, 'components/tree-select')
     const mergedLabelKey = computed(() => props.labelKey ?? config.labelKey)
@@ -180,7 +179,8 @@ export default defineComponent({
         class: overlayClasses.value,
         style: overlayStyle.value,
         clickOutside: true,
-        container: mergedOverlayContainer.value,
+        container: props.overlayContainer ?? config.overlayContainer,
+        containerFallback: `.${mergedPrefixCls.value}-overlay-container`,
         disabled: accessor.disabled || props.readonly,
         offset: props.offset ?? config.offset,
         placement: 'bottomStart',
