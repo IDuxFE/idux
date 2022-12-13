@@ -6,10 +6,7 @@
   .reset-color(@button-color, @button-background-color);
 
   position: relative;
-  display: inline-flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
   text-align: center;
   white-space: nowrap;
   cursor: pointer;
@@ -44,16 +41,27 @@
     content: '\a0';
   }
 
-  &-loading-icon > .@{icon-prefix},
-  & > .@{icon-prefix} {
+  > .@{icon-prefix} {
+    color: @button-icon-color;
     font-size: @button-icon-font-size;
+  }
+
+  &:hover,
+  &:active,
+  &-primary,
+  &-link,
+  &-danger,
+  &-ghost,
+  &-disabled {
+    > .@{icon-prefix} {
+      color: inherit;
+    }
   }
 
   > span {
     display: inline-block;
   }
 
-  &-loading-icon + span,
   > .@{icon-prefix} + span {
     margin-left: @spacing-xs;
   }
@@ -74,7 +82,6 @@
     .button-size(@button-height-lg, @button-font-size-lg, @button-min-width-lg, @button-padding-horizontal-lg);
 
     &.@{button-prefix}-icon-only {
-      .@{button-prefix}-loading-icon > .@{icon-prefix},
       > .@{icon-prefix} {
         font-size: calc(@button-icon-font-size + 2px);
       }
@@ -85,7 +92,6 @@
     .button-size(@button-height-xl, @button-font-size-xl, @button-min-width-xl, @button-padding-horizontal-xl);
 
     &.@{button-prefix}-icon-only {
-      .@{button-prefix}-loading-icon > .@{icon-prefix},
       > .@{icon-prefix} {
         font-size: calc(@button-icon-font-size + 4px);
       }
@@ -97,7 +103,6 @@
     background-color: @button-primary-background-color;
     border-color: @button-primary-background-color;
 
-    &:focus,
     &:hover {
       background-color: @button-primary-background-color-hover;
       border-color: @button-primary-background-color-hover;
@@ -111,7 +116,6 @@
 
   &-default,
   &-dashed {
-    &:focus,
     &:hover {
       color: @button-primary-background-color-hover;
       border-color: @button-primary-background-color-hover;
@@ -135,7 +139,6 @@
     min-width: auto;
     height: auto;
 
-    &:focus,
     &:hover {
       color: @button-primary-background-color-hover;
     }
@@ -153,7 +156,6 @@
     color: @button-danger-color;
     border-color: @button-danger-color;
 
-    &:focus,
     &:hover {
       color: @button-danger-color-hover;
       border-color: @button-danger-color-hover;
@@ -169,7 +171,6 @@
     color: @button-primary-color;
     background-color: @button-danger-color;
 
-    &:focus,
     &:hover {
       color: @button-primary-color;
       background-color: @button-danger-color-hover;
@@ -185,7 +186,6 @@
     color: @button-primary-color;
     border-color: @button-ghost-border-color;
 
-    &:focus,
     &:hover {
       color: @button-primary-color;
       border-color: @button-ghost-border-color;
@@ -202,7 +202,6 @@
   &-ghost&-danger {
     background-color: transparent;
 
-    &:focus,
     &:hover {
       background-color: @button-ghost-background-color-hover;
     }
@@ -216,7 +215,6 @@
     color: @button-primary-background-color;
     border-color: @button-primary-background-color;
 
-    &:focus,
     &:hover {
       color: @button-primary-background-color-hover;
       border-color: @button-primary-background-color-hover;
@@ -232,7 +230,6 @@
     color: @button-danger-color;
     border-color: @button-danger-color;
 
-    &:focus,
     &:hover {
       color: @button-danger-color-hover;
       border-color: @button-danger-color-hover;
@@ -249,7 +246,6 @@
 
     &,
     &:hover,
-    &:focus,
     &:active {
       color: @button-color-disabled;
       background-color: @button-background-color-disabled;
@@ -261,7 +257,6 @@
   &-disabled&-text {
     &,
     &:hover,
-    &:focus,
     &:active {
       background-color: transparent;
     }
@@ -270,7 +265,6 @@
   &-disabled&-ghost {
     &,
     &:hover,
-    &:focus,
     &:active {
       background-color: @button-ghost-background-color-disabled;
     }
@@ -301,12 +295,6 @@
   &-icon-only {
     min-width: auto;
   }
-
-  &-default:not(&-danger):not(&-disabled):not(:hover):not(:focus):not(:active) {
-    .@{icon-prefix} {
-      color: @button-icon-color;
-    }
-  }
 }
 
 .@{button-prefix}-group {
@@ -316,7 +304,6 @@
     z-index: auto;
 
     &:hover,
-    &:focus,
     &:active {
       z-index: 2;
     }

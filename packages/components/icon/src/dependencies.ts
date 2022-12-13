@@ -30,6 +30,7 @@ import {
   ExclamationCircleFilled,
   FilterFilled,
   Holder,
+  Info,
   InfoCircle,
   InfoCircleFilled,
   LayoutCompact,
@@ -51,6 +52,7 @@ import {
   RotateRight,
   Search,
   StarFilled,
+  Success,
   TreeExpand,
   TreeUnexpand,
   Uncollapse,
@@ -84,6 +86,7 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   ExclamationCircleFilled, // Modal Popconfirm
   FilterFilled, // Table
   Holder, // tree
+  Info, // Stepper
   InfoCircle, // Message Result Alert Notification
   InfoCircleFilled, // Modal
   LayoutCompact, // ProTable
@@ -104,6 +107,7 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   RotateLeft, // Image
   RotateRight, // Image
   Search, // Select Transfer
+  Success, // Stopper
   StarFilled, // Rate
   User, // Avatar
   Uncollapse, // Pro Tree
