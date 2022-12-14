@@ -80,6 +80,7 @@ export function createSelectSegment(
   return {
     name: searchField.type,
     inputClassName: [inputClassName, `${prefixCls}-select-segment-input`],
+    placeholder: searchField.placeholder,
     defaultValue,
     parse: input => parseInput(input, searchField),
     format: value => formatValue(value, searchField),

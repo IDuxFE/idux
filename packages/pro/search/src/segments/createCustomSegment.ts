@@ -23,6 +23,7 @@ export function createCustomSegment(prefixCls: string, searchField: CustomSearch
   return {
     name: 'custom',
     inputClassName: [inputClassName, `${prefixCls}-custom-segment-input`],
+    placeholder: searchField.placeholder,
     defaultValue,
     parse,
     format,

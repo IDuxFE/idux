@@ -53,6 +53,7 @@ export function createDatePickerSegment(
   return {
     name: searchField.type,
     inputClassName: [inputClassName, `${prefixCls}-date-picker-segment-input`],
+    placeholder: searchField.placeholder,
     defaultValue,
     parse: input => parseInput(input, dateConfig, searchField),
     format: value => formatValue(value, dateConfig, searchField),

@@ -66,6 +66,7 @@ interface SearchItemConfirmContext<V = unknown> extends Partial<SearchValue<V>> 
 | `defaultOperator` | 默认的操作符 | `string` | - | - | 提供时，会自动填入默认的操作符 |
 | `defaultValue` | 默认值 | - | - | - | 提供时，会自动填入默认值 |
 | `inputClassName` | 输入框class | `string` | - | - | 用于自定义输入框样式 |
+| `placeholder` | 输入框placeholder | `string` | - | - | 搜索值输入框的占位符 |
 | `validator` | 搜索项校验函数 | `(value: SearchValue) => { message?: string } | undefined` | - | - | 返回错误信息 |
 
 #### InputSearchField
