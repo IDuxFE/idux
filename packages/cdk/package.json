@@ -35,7 +35,7 @@
   "sideEffects": false,
   "scripts": {},
   "dependencies": {
-    "@floating-ui/dom": "^1.0.4",
+    "@floating-ui/dom": "^1.0.10",
     "lodash-es": "^4.17.0"
   },
   "devDependencies": {
