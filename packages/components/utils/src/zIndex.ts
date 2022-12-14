@@ -7,7 +7,7 @@
 
 import { type ComputedRef, type Ref, computed, ref, watch } from 'vue'
 
-import { isFunction } from 'lodash-es'
+import { isFunction, isNil } from 'lodash-es'
 
 let zIndexCount = 0
 
@@ -31,7 +31,7 @@ export const useZIndex: UseZIndex = (controlZIndex, configZIndex, visible) => {
   watch(
     visible,
     newVisible => {
-      if (newVisible) {
+      if (newVisible && isNil(controlZIndex.value)) {
         innerZIndex.value = getZIndex()
       }
     },

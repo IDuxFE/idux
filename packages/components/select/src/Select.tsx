@@ -17,7 +17,6 @@ import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { type SelectConfig, useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister, useFormSize, useFormStatus } from '@idux/components/form'
-import { useOverlayContainer } from '@idux/components/utils'
 
 import { useActiveState } from './composables/useActiveState'
 import { GetKeyFn, useGetOptionKey } from './composables/useGetOptionKey'
@@ -38,7 +37,6 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const config = useGlobalConfig('select')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-select`)
-    const mergedOverlayContainer = useOverlayContainer(props, config, common, mergedPrefixCls)
 
     const triggerRef = ref<ɵSelectorInstance>()
     const focus = () => triggerRef.value?.focus()
@@ -196,7 +194,8 @@ export default defineComponent({
         class: overlayClasses.value,
         style: overlayStyle.value,
         clickOutside: true,
-        container: mergedOverlayContainer.value,
+        container: props.overlayContainer ?? config.overlayContainer,
+        containerFallback: `.${mergedPrefixCls.value}-overlay-container`,
         disabled: accessor.disabled || props.readonly,
         offset: props.offset ?? config.offset,
         placement: 'bottomStart',

@@ -7,6 +7,7 @@
 
 import type { PopperOptions, PopperPlacement, PopperTrigger } from '@idux/cdk/popper'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
+import type { OverlayContainerType } from '@idux/components/utils'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export const overlayPlacementDef = String as PropType<PopperPlacement>
@@ -18,6 +19,8 @@ export const overlayProps = {
     type: Boolean,
     default: undefined,
   },
+  placement: overlayPlacementDef,
+
   allowEnter: {
     type: Boolean,
     default: undefined,
@@ -31,7 +34,11 @@ export const overlayProps = {
     default: undefined,
   },
   container: {
-    type: Function as PropType<(element?: Element) => string | HTMLElement>,
+    type: [String, HTMLElement, Function] as PropType<OverlayContainerType>,
+    default: undefined,
+  },
+  containerFallback: {
+    type: String,
     required: true,
   },
   delay: overlayDelayDef,
@@ -44,7 +51,6 @@ export const overlayProps = {
     default: undefined,
   },
   offset: Array as unknown as PropType<[number, number]>,
-  placement: overlayPlacementDef,
   showArrow: {
     type: Boolean,
     default: undefined,
