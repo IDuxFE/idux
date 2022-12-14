@@ -7,12 +7,13 @@
 
 /* eslint-disable vue/no-ref-as-operand */
 
-import { type ComputedRef, computed, defineComponent, inject, normalizeClass, ref } from 'vue'
+import { type ComputedRef, Ref, computed, defineComponent, inject, normalizeClass, ref } from 'vue'
 
 import { isNil } from 'lodash-es'
 
 import { useAccessorAndControl } from '@idux/cdk/forms'
 import { callEmit } from '@idux/cdk/utils'
+import { ɵWave, type ɵWaveInstance } from '@idux/components/_private/wave'
 import { useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN, useFormElement, useFormItemRegister } from '@idux/components/form'
 import { convertStringVNode, useKey } from '@idux/components/utils'
@@ -37,6 +38,7 @@ export default defineComponent({
     const config = useGlobalConfig('checkbox')
 
     const { elementRef, focus, blur } = useFormElement()
+    const waveRef = ref<ɵWaveInstance>()
     expose({ focus, blur })
 
     const formContext = inject(FORM_TOKEN, null)
@@ -52,10 +54,13 @@ export default defineComponent({
     })
     const isButtoned = computed(() => props.buttoned ?? checkboxGroup?.props.buttoned ?? false)
     const size = computed(() => props.size ?? checkboxGroup?.props.size ?? formContext?.size.value ?? config.size)
+    const mergedWaveless = computed(() => props.waveless ?? config.waveless)
     const { isChecked, isDisabled, isFocused, handleChange, handleBlur, handleFocus } = useCheckbox(
       props,
       checkboxGroup,
       mergedValue,
+      waveRef,
+      mergedWaveless,
     )
     const classes = computed(() => {
       const { indeterminate } = props
@@ -106,9 +111,14 @@ export default defineComponent({
               onFocus={handleFocus}
               {...restAttrs}
             />
-            {!isButtoned.value && <span class={`${prefixCls}-input-box`} tabindex={tabindex as number} />}
+            {!isButtoned.value && (
+              <span class={`${prefixCls}-input-box`} tabindex={tabindex as number}>
+                {!mergedWaveless.value && <ɵWave ref={waveRef} />}
+              </span>
+            )}
           </span>
           {isButtoned.value && <span class={`${prefixCls}-input-tick`} tabindex={tabindex as number} />}
+          {isButtoned.value && !mergedWaveless.value && <ɵWave ref={waveRef} />}
           {labelNode && <span class={`${prefixCls}-label`}>{labelNode}</span>}
         </label>
       )
@@ -120,6 +130,8 @@ const useCheckbox = (
   props: CheckboxProps,
   checkboxGroup: CheckboxGroupContext | null,
   mergedValue: ComputedRef<unknown>,
+  waveRef: Ref<ɵWaveInstance | undefined>,
+  mergedWaveless: ComputedRef<boolean>,
 ) => {
   let isChecked: ComputedRef<boolean>
   let isDisabled: ComputedRef<boolean>
@@ -162,6 +174,7 @@ const useCheckbox = (
       accessor.setValue(newValue)
       callEmit(props.onChange, checkValue, oldCheckValue)
       callEmit(groupProps.onChange, newValue, oldValue)
+      !mergedWaveless.value && waveRef.value?.play()
     }
   } else {
     const { accessor, control } = useAccessorAndControl<CheckValue>({ valueKey: 'checked' })
@@ -183,6 +196,7 @@ const useCheckbox = (
       const oldChecked = !checked ? trueValue : falseValue
       accessor.setValue(newChecked)
       callEmit(props.onChange, newChecked, oldChecked)
+      !mergedWaveless.value && waveRef.value?.play()
     }
   }
 

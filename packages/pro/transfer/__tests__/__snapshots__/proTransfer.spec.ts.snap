@@ -94,8 +94,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                               />
                               <span
                                 class="ix-checkbox-input-box"
-                              />
+                              >
+                                <div
+                                  aria-hidden="true"
+                                  class="ix-wave"
+                                />
+                              </span>
                             </span>
+                            <!---->
                             <!---->
                             <!---->
                           </label>
@@ -214,8 +220,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -264,8 +276,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -315,8 +333,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -365,8 +389,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -415,8 +445,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -465,8 +501,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -515,8 +557,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -565,8 +613,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -616,8 +670,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -666,8 +726,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -716,8 +782,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -766,8 +838,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -817,8 +895,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -867,8 +951,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -917,8 +1007,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -967,8 +1063,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -1028,6 +1130,10 @@ exports[`ProTransfer > table transfer render work 1`] = `
           role="img"
         />
         
+        <div
+          aria-hidden="true"
+          class="ix-wave"
+        />
       </button>
       <button
         class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
@@ -1041,6 +1147,10 @@ exports[`ProTransfer > table transfer render work 1`] = `
           role="img"
         />
         
+        <div
+          aria-hidden="true"
+          class="ix-wave"
+        />
       </button>
     </div>
   </div>
@@ -1140,8 +1250,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                               />
                               <span
                                 class="ix-checkbox-input-box"
-                              />
+                              >
+                                <div
+                                  aria-hidden="true"
+                                  class="ix-wave"
+                                />
+                              </span>
                             </span>
+                            <!---->
                             <!---->
                             <!---->
                           </label>
@@ -1230,8 +1346,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -1269,8 +1391,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -1307,8 +1435,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -1345,8 +1479,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
                             />
                             <span
                               class="ix-checkbox-input-box"
-                            />
+                            >
+                              <div
+                                aria-hidden="true"
+                                class="ix-wave"
+                              />
+                            </span>
                           </span>
+                          <!---->
                           <!---->
                           <!---->
                         </label>
@@ -1417,8 +1557,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1495,8 +1641,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -1550,8 +1702,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -1605,8 +1763,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -1662,8 +1826,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -1717,8 +1887,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -1777,8 +1953,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -1835,8 +2017,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -1895,8 +2083,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -1950,8 +2144,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -2007,8 +2207,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -2062,8 +2268,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -2122,8 +2334,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -2180,8 +2398,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -2240,8 +2464,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -2295,8 +2525,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -2352,8 +2588,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -2407,8 +2649,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -2467,8 +2715,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -2525,8 +2779,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -2585,8 +2845,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -2640,8 +2906,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -2697,8 +2969,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -2752,8 +3030,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -2812,8 +3096,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -2870,8 +3160,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -2930,8 +3226,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -2985,8 +3287,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -3032,6 +3340,10 @@ exports[`ProTransfer > tree transfer render work 1`] = `
           role="img"
         />
         
+        <div
+          aria-hidden="true"
+          class="ix-wave"
+        />
       </button>
       <button
         class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
@@ -3045,6 +3357,10 @@ exports[`ProTransfer > tree transfer render work 1`] = `
           role="img"
         />
         
+        <div
+          aria-hidden="true"
+          class="ix-wave"
+        />
       </button>
     </div>
   </div>
@@ -3082,8 +3398,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3168,8 +3490,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -3228,8 +3556,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -3286,8 +3620,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>
@@ -3346,8 +3686,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <span
                         class="ix-checkbox-input-box"
-                      />
+                      >
+                        <div
+                          aria-hidden="true"
+                          class="ix-wave"
+                        />
+                      </span>
                     </span>
+                    <!---->
                     <!---->
                     <!---->
                   </label>

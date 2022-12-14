@@ -144,6 +144,7 @@ export interface BadgeConfig {
 
 export interface ButtonConfig {
   size: ButtonSize
+  waveless: boolean
 }
 
 export interface CardConfig {
@@ -175,6 +176,7 @@ export interface CascaderConfig {
 
 export interface CheckboxConfig {
   size: FormSize
+  waveless: boolean
 }
 
 export interface CollapseConfig {
@@ -368,6 +370,7 @@ export interface ProgressConfig {
 
 export interface RadioConfig {
   size: FormSize
+  waveless: boolean
 }
 
 export interface RateConfig {

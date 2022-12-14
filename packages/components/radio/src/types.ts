@@ -24,6 +24,7 @@ export const radioProps = {
   mode: { type: String as PropType<RadioMode>, default: undefined },
   size: { type: String as PropType<FormSize>, default: undefined },
   value: { type: null, default: undefined },
+  waveless: { type: Boolean, default: false },
 
   // events
   'onUpdate:checked': { type: [Function, Array] as PropType<MaybeArray<(checked: boolean) => void>> },

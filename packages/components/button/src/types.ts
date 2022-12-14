@@ -25,6 +25,7 @@ export const buttonProps = {
   size: String as PropType<ButtonSize>,
   shape: String as PropType<ButtonShape>,
   type: { type: String as PropType<ButtonType>, default: 'button' },
+  waveless: { type: Boolean, default: undefined },
 
   onClick: [Function, Array] as PropType<(evt: MouseEvent) => void>,
 } as const

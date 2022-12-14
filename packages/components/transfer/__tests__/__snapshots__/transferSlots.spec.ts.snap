@@ -30,8 +30,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
             />
             <span
               class="ix-checkbox-input-box"
-            />
+            >
+              <div
+                aria-hidden="true"
+                class="ix-wave"
+              />
+            </span>
           </span>
+          <!---->
           <!---->
           <!---->
         </label>
@@ -76,8 +82,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -105,8 +117,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -133,8 +151,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -161,8 +185,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -189,8 +219,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -217,8 +253,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -246,8 +288,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -274,8 +322,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -302,8 +356,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -330,8 +390,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -358,8 +424,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -386,8 +458,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -415,8 +493,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -443,8 +527,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -471,8 +561,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -499,8 +595,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -528,8 +630,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -556,8 +664,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -584,8 +698,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -612,8 +732,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -644,6 +770,10 @@ exports[`Transfer > clearIcon slot work 1`] = `
           role="img"
         />
         
+        <div
+          aria-hidden="true"
+          class="ix-wave"
+        />
       </button>
       <button
         class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
@@ -657,6 +787,10 @@ exports[`Transfer > clearIcon slot work 1`] = `
           role="img"
         />
         
+        <div
+          aria-hidden="true"
+          class="ix-wave"
+        />
       </button>
     </div>
   </div>
@@ -687,8 +821,14 @@ exports[`Transfer > clearIcon slot work 1`] = `
             />
             <span
               class="ix-checkbox-input-box"
-            />
+            >
+              <div
+                aria-hidden="true"
+                class="ix-wave"
+              />
+            </span>
           </span>
+          <!---->
           <!---->
           <!---->
         </label>
@@ -811,8 +951,14 @@ exports[`Transfer > default slot work 1`] = `
             />
             <span
               class="ix-checkbox-input-box"
-            />
+            >
+              <div
+                aria-hidden="true"
+                class="ix-wave"
+              />
+            </span>
           </span>
+          <!---->
           <!---->
           <!---->
         </label>
@@ -992,8 +1138,14 @@ exports[`Transfer > default slot work 1`] = `
             />
             <span
               class="ix-checkbox-input-box"
-            />
+            >
+              <div
+                aria-hidden="true"
+                class="ix-wave"
+              />
+            </span>
           </span>
+          <!---->
           <!---->
           <!---->
         </label>
@@ -1167,8 +1319,14 @@ exports[`Transfer > empty slot work 1`] = `
             />
             <span
               class="ix-checkbox-input-box"
-            />
+            >
+              <div
+                aria-hidden="true"
+                class="ix-wave"
+              />
+            </span>
           </span>
+          <!---->
           <!---->
           <!---->
         </label>
@@ -1213,8 +1371,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1242,8 +1406,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1270,8 +1440,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1298,8 +1474,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1326,8 +1508,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1354,8 +1542,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1383,8 +1577,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1411,8 +1611,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1439,8 +1645,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1467,8 +1679,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1495,8 +1713,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1523,8 +1747,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1552,8 +1782,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1580,8 +1816,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1608,8 +1850,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1636,8 +1884,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1665,8 +1919,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1693,8 +1953,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1721,8 +1987,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1749,8 +2021,14 @@ exports[`Transfer > empty slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1781,6 +2059,10 @@ exports[`Transfer > empty slot work 1`] = `
           role="img"
         />
         
+        <div
+          aria-hidden="true"
+          class="ix-wave"
+        />
       </button>
       <button
         class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
@@ -1794,6 +2076,10 @@ exports[`Transfer > empty slot work 1`] = `
           role="img"
         />
         
+        <div
+          aria-hidden="true"
+          class="ix-wave"
+        />
       </button>
     </div>
   </div>
@@ -1824,8 +2110,14 @@ exports[`Transfer > empty slot work 1`] = `
             />
             <span
               class="ix-checkbox-input-box"
-            />
+            >
+              <div
+                aria-hidden="true"
+                class="ix-wave"
+              />
+            </span>
           </span>
+          <!---->
           <!---->
           <!---->
         </label>
@@ -1896,8 +2188,14 @@ exports[`Transfer > footer slot work 1`] = `
             />
             <span
               class="ix-checkbox-input-box"
-            />
+            >
+              <div
+                aria-hidden="true"
+                class="ix-wave"
+              />
+            </span>
           </span>
+          <!---->
           <!---->
           <!---->
         </label>
@@ -1963,8 +2261,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -1992,8 +2296,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2020,8 +2330,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2048,8 +2364,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2076,8 +2398,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2104,8 +2432,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2133,8 +2467,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2161,8 +2501,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2189,8 +2535,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2217,8 +2569,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2245,8 +2603,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2273,8 +2637,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2302,8 +2672,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2330,8 +2706,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2358,8 +2740,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2386,8 +2774,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2415,8 +2809,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2443,8 +2843,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2471,8 +2877,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2499,8 +2911,14 @@ exports[`Transfer > footer slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2654,8 +3072,14 @@ exports[`Transfer > footer slot work 1`] = `
             />
             <span
               class="ix-checkbox-input-box"
-            />
+            >
+              <div
+                aria-hidden="true"
+                class="ix-wave"
+              />
+            </span>
           </span>
+          <!---->
           <!---->
           <!---->
         </label>
@@ -2893,8 +3317,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
             />
             <span
               class="ix-checkbox-input-box"
-            />
+            >
+              <div
+                aria-hidden="true"
+                class="ix-wave"
+              />
+            </span>
           </span>
+          <!---->
           <!---->
           <!---->
         </label>
@@ -2945,8 +3375,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -2974,8 +3410,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3002,8 +3444,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3030,8 +3478,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3058,8 +3512,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3086,8 +3546,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3115,8 +3581,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3143,8 +3615,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3171,8 +3649,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3199,8 +3683,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3227,8 +3717,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3255,8 +3751,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3284,8 +3786,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3312,8 +3820,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3340,8 +3854,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3368,8 +3888,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3397,8 +3923,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3425,8 +3957,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3453,8 +3991,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3481,8 +4025,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <!---->
             </label>
@@ -3513,6 +4063,10 @@ exports[`Transfer > headerLabel slot work 1`] = `
           role="img"
         />
         
+        <div
+          aria-hidden="true"
+          class="ix-wave"
+        />
       </button>
       <button
         class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
@@ -3526,6 +4080,10 @@ exports[`Transfer > headerLabel slot work 1`] = `
           role="img"
         />
         
+        <div
+          aria-hidden="true"
+          class="ix-wave"
+        />
       </button>
     </div>
   </div>
@@ -3556,8 +4114,14 @@ exports[`Transfer > headerLabel slot work 1`] = `
             />
             <span
               class="ix-checkbox-input-box"
-            />
+            >
+              <div
+                aria-hidden="true"
+                class="ix-wave"
+              />
+            </span>
           </span>
+          <!---->
           <!---->
           <!---->
         </label>
@@ -3686,8 +4250,14 @@ exports[`Transfer > label slot work 1`] = `
             />
             <span
               class="ix-checkbox-input-box"
-            />
+            >
+              <div
+                aria-hidden="true"
+                class="ix-wave"
+              />
+            </span>
           </span>
+          <!---->
           <!---->
           <!---->
         </label>
@@ -3732,8 +4302,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -3769,8 +4345,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -3805,8 +4387,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -3841,8 +4429,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -3877,8 +4471,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -3913,8 +4513,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -3950,8 +4556,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -3986,8 +4598,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -4022,8 +4640,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -4058,8 +4682,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -4094,8 +4724,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -4130,8 +4766,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -4167,8 +4809,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -4203,8 +4851,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -4239,8 +4893,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -4275,8 +4935,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -4312,8 +4978,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -4348,8 +5020,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -4384,8 +5062,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -4420,8 +5104,14 @@ exports[`Transfer > label slot work 1`] = `
                 />
                 <span
                   class="ix-checkbox-input-box"
-                />
+                >
+                  <div
+                    aria-hidden="true"
+                    class="ix-wave"
+                  />
+                </span>
               </span>
+              <!---->
               <!---->
               <span
                 class="ix-checkbox-label"
@@ -4460,6 +5150,10 @@ exports[`Transfer > label slot work 1`] = `
           role="img"
         />
         
+        <div
+          aria-hidden="true"
+          class="ix-wave"
+        />
       </button>
       <button
         class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
@@ -4473,6 +5167,10 @@ exports[`Transfer > label slot work 1`] = `
           role="img"
         />
         
+        <div
+          aria-hidden="true"
+          class="ix-wave"
+        />
       </button>
     </div>
   </div>
@@ -4503,8 +5201,14 @@ exports[`Transfer > label slot work 1`] = `
             />
             <span
               class="ix-checkbox-input-box"
-            />
+            >
+              <div
+                aria-hidden="true"
+                class="ix-wave"
+              />
+            </span>
           </span>
+          <!---->
           <!---->
           <!---->
         </label>

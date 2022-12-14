@@ -1,7 +1,8 @@
 // Vitest Snapshot v1
 
 exports[`Checkbox > render work 1`] = `
-"<label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"></span></span>
+"<label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+  <!---->
   <!---->
   <!---->
 </label>"

@@ -5,9 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type VNodeChild, computed, defineComponent, inject, normalizeClass } from 'vue'
+import { type VNodeChild, computed, defineComponent, inject, normalizeClass, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
+import { ɵWave, type ɵWaveInstance } from '@idux/components/_private/wave'
 import { useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
@@ -27,8 +28,13 @@ export default defineComponent({
     const groupProps = inject(buttonToken, {} as ButtonGroupProps)
     const formContext = inject(FORM_TOKEN, null)
 
+    const waveRef = ref<ɵWaveInstance>()
+
     const mode = computed(() => props.mode ?? groupProps.mode ?? 'default')
     const size = computed(() => props.size ?? groupProps.size ?? formContext?.size.value ?? config.size)
+    const mergedWaveless = computed(
+      () => mode.value === 'text' || mode.value === 'link' || (props.waveless ?? config.waveless),
+    )
 
     const classes = computed(() => {
       const {
@@ -61,6 +67,10 @@ export default defineComponent({
         evt.stopImmediatePropagation()
         return
       }
+
+      if (!mergedWaveless.value && waveRef.value) {
+        waveRef.value.play()
+      }
       callEmit(props.onClick, evt)
     }
 
@@ -90,6 +100,7 @@ export default defineComponent({
       return (
         <button class={classes.value} disabled={disabled || loading} type={type} onClick={handleClick}>
           {children}
+          {!mergedWaveless.value && <ɵWave ref={waveRef} />}
         </button>
       )
     }

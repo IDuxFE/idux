@@ -26,6 +26,7 @@ export const checkboxProps = {
   falseValue: { type: [String, Number, Boolean] as PropType<CheckValue>, default: false },
   value: { type: null, default: undefined },
   size: { type: String as PropType<FormSize>, default: undefined },
+  waveless: { type: Boolean, default: false },
 
   // events
   'onUpdate:checked': { type: [Function, Array] as PropType<MaybeArray<(checked: any) => void>> },
