@@ -2,7 +2,7 @@
 | --- | --- | --- | --- |
 | `@table-font-size-sm` | `var(--ix-font-size-sm)` | - | - |
 | `@table-font-size-md` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
-| `@table-font-size-lg` | `var(--ix-font-size-lg)` | `var(--ix-font-size-md)` | - |
+| `@table-font-size-lg` | `var(--ix-font-size-lg)` | `var(--ix-font-size-sm)` | - |
 | `@table-head-row-height-sm` | `var(--ix-height-md)` | `var(--ix-height-md)` | - |
 | `@table-head-row-height-md` | `var(--ix-height-lg)` | `var(--ix-height-md)` | - |
 | `@table-head-row-height-lg` | `var(--ix-height-xl)` | `var(--ix-height-md)` | - |
@@ -23,6 +23,6 @@
 | `@table-head-font-weight` | `var(--ix-font-weight-lg)` | `var(--ix-font-weight-md)` | - |
 | `@table-body-row-background-color-hover` | `var(--ix-background-color-light)` | - | - |
 | `@table-body-row-background-color-selected` | `var(--ix-color-primary-l50)` | - | - |
-| `@table-expandable-icon-color` | `var(--ix-text-color-info)` | - | - |
+| `@table-expandable-icon-color` | `var(--ix-text-color-secondary)` | - | - |
 | `@table-expandable-background-color` | `var(--ix-background-color-light)` | - | - |
 | `@table-expandable-background-color-hover` | `var(--ix-background-color-medium)` | - | - |
