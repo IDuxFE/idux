@@ -1,5 +1,5 @@
 import { mkdirSync, readFileSync } from 'fs'
-import { readFile, writeFile } from 'fs/promises'
+import { writeFile } from 'fs/promises'
 import path from 'path'
 
 import { existsSync, writeFileSync } from 'fs-extra'
@@ -83,7 +83,7 @@ export const themePlugin = (options?: Options): Plugin => {
       await Promise.all(
         options!.themes!.map(async theme => {
           const themeLess = themeLessContent.replace('themes/index', `themes/${theme.key}`)
-          await compile(themeLess, path.join(buildThemeDir, `${theme.key}.css`), true)
+          await compile(themeLess, path.join(buildThemeDir, `${theme.key}.css`))
         }),
       )
     },

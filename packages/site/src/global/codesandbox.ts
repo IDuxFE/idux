@@ -110,8 +110,8 @@ import IduxCdk from '@idux/cdk';
 import IduxComponents from '@idux/components';
 import IduxPro from '@idux/pro';
 
-import '@idux/components/default.min.css';
-import '@idux/pro/default.min.css';
+import '@idux/components/default.css';
+import '@idux/pro/default.css';
 
 import { createGlobalConfig } from "@idux/components/config";
 import {

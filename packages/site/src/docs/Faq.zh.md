@@ -8,7 +8,7 @@ order: 10
 
 请确认是否正确引入了组件样式，请参考: [快速上手](/docs/getting-started/zh) 和 [定制主题](/docs/customize-theme/zh) 进行一些必要的配置。
 
-需要强调的是，在没有特殊需求的情况下，请使用组件库提供的 reset 样式，`"@idux/components/style/core/reset.default.min.css"`。如果没有引入它，务必确认是否提供了必要的全局样式，参见[#1194](https://github.com/IDuxFE/idux/issues/1194)。
+需要强调的是，在没有特殊需求的情况下，请使用组件库提供的 reset 样式，`"@idux/components/style/core/reset.default.css"`。如果没有引入它，务必确认是否提供了必要的全局样式，参见[#1194](https://github.com/IDuxFE/idux/issues/1194)。
 
 ## 无法通过 `useModal` 创建弹窗组件？(`useMessage`, `useDrawer`...)
 
