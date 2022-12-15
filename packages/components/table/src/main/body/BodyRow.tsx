@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type VNodeTypes, computed, defineComponent, inject, normalizeClass } from 'vue'
+import { type ComputedRef, Ref, type VNodeTypes, computed, defineComponent, inject, normalizeClass, ref } from 'vue'
 
 import { type VKey } from '@idux/cdk/utils'
 
@@ -36,7 +36,7 @@ export default defineComponent({
       currentPageRowKeys,
     } = inject(TABLE_TOKEN)!
 
-    const { expandDisabled, handleExpend, selectDisabled, handleSelect, clickEvents } = useEvents(
+    const { expandDisabled, handleExpend, selectDisabled, handleSelect, isHover, attrs } = useEvents(
       props,
       expandable,
       checkExpandDisabled,
@@ -68,17 +68,19 @@ export default defineComponent({
         : undefined
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const Tag = (tableProps.customTag?.bodyRow ?? 'tr') as any
+
       return (
-        <Tag class={classes.value} {...clickEvents.value} {...customAdditional}>
+        <Tag class={classes.value} {...attrs.value} {...customAdditional}>
           {renderChildren(
             props,
             flattedColumns,
-            expandDisabled.value,
+            expandDisabled,
             handleExpend,
             isSelected,
             isIndeterminate,
             selectDisabled,
             handleSelect,
+            isHover,
           )}
         </Tag>
       )
@@ -104,48 +106,67 @@ function useEvents(
 
   const selectDisabled = computed(() => currentPageRowKeys.value.disabledRowKeys.includes(props.rowKey))
   const selectTrigger = computed(() => selectable.value?.trigger)
+  const showIndex = computed(() => selectable.value?.showIndex)
+  const isHover = ref(false)
   const handleSelect = () => {
     const { rowKey, record } = props
     handleSelectChange(rowKey, record)
   }
 
   const handleClick = () => {
-    if (expendTrigger.value === 'click' && !expandDisabled.value) {
-      handleExpend()
-    }
-    if (selectTrigger.value === 'click' && !selectDisabled.value) {
-      handleSelect()
-    }
+    expendTrigger.value === 'click' && handleExpend()
+    selectTrigger.value === 'click' && handleSelect()
   }
 
   const handleDblclick = () => {
-    if (expendTrigger.value === 'dblclick' && !expandDisabled.value) {
-      handleExpend()
-    }
-    if (selectTrigger.value === 'dblclick' && !selectDisabled.value) {
-      handleSelect()
-    }
+    expendTrigger.value === 'dblclick' && handleExpend()
+    selectTrigger.value === 'dblclick' && handleSelect()
   }
 
-  const clickEvents = computed(() => {
-    const onClick = expendTrigger.value === 'click' || selectTrigger.value === 'click' ? handleClick : undefined
-    const onDblclick =
-      expendTrigger.value === 'dblclick' || selectTrigger.value === 'dblclick' ? handleDblclick : undefined
-    return { onClick, onDblclick }
+  const handleMouseenter = () => (isHover.value = true)
+  const handleMouseleave = () => (isHover.value = false)
+
+  const attrs = computed(() => {
+    const _expandDisabled = expandDisabled.value
+    const _expendTrigger = expendTrigger.value
+    const _selectDisabled = selectDisabled.value
+    const _selectTrigger = selectTrigger.value
+
+    const clickEnabled =
+      (!_expandDisabled && _expendTrigger === 'click') || (!_selectDisabled && _selectTrigger === 'click')
+    const dblclickEnabled =
+      (!_expandDisabled && _expendTrigger === 'dblclick') || (!_selectDisabled && _selectTrigger === 'dblclick')
+    const mouseEnabled = !_selectDisabled && showIndex.value
+
+    let cursor = ''
+    if (clickEnabled || dblclickEnabled) {
+      cursor = 'pointer'
+    } else if ((_expandDisabled && _expendTrigger) || (_selectDisabled && _selectTrigger)) {
+      cursor = 'not-allowed'
+    }
+
+    return {
+      style: cursor ? `cursor: ${cursor}` : undefined,
+      onClick: clickEnabled ? handleClick : undefined,
+      onDblclick: dblclickEnabled ? handleDblclick : undefined,
+      onMouseenter: mouseEnabled ? handleMouseenter : undefined,
+      onMouseleave: mouseEnabled ? handleMouseleave : undefined,
+    }
   })
 
-  return { expandDisabled, handleExpend, selectDisabled, handleSelect, clickEvents }
+  return { expandDisabled, handleExpend, selectDisabled, handleSelect, isHover, attrs }
 }
 
 function renderChildren(
   props: TableBodyRowProps,
   flattedColumns: ComputedRef<TableColumnMerged[]>,
-  expandDisabled: boolean,
+  expandDisabled: ComputedRef<boolean>,
   handleExpend: () => void,
   isSelected: ComputedRef<boolean>,
   isIndeterminate: ComputedRef<boolean>,
   selectDisabled: ComputedRef<boolean>,
   handleSelect: () => void,
+  isHover: Ref<boolean>,
 ) {
   const children: VNodeTypes[] = []
   const { rowIndex, record, level } = props
@@ -169,13 +190,14 @@ function renderChildren(
     }
     if (type === 'expandable') {
       colProps.expanded = props.expanded
-      colProps.disabled = expandDisabled
+      colProps.disabled = expandDisabled.value
       colProps.handleExpend = handleExpend
     } else if (type === 'selectable') {
       colProps.selected = isSelected.value
       colProps.indeterminate = isIndeterminate.value
       colProps.disabled = selectDisabled.value
       colProps.handleSelect = handleSelect
+      colProps.isHover = isHover.value
     }
     children.push(<BodyCell {...colProps}></BodyCell>)
   })

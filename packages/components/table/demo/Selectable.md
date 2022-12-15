@@ -11,6 +11,7 @@ order: 30
 
 - 支持多选和单选
 - 支持通过行的点击或者双击事件来进行选中
+- 支持默认显示序号, 悬浮时显示勾选框
 - 通常情况下，你不需要用到 `reactive`, 除非你需要切换某个配置
 
 ## en
@@ -19,4 +20,5 @@ Configure `TableColumnSelectable` in `columns` to support row selection.
 
 - Multiple or single options are supported
 - Supports row `click` or `dblclick` events to select
+- Support default display serial number, and display checkbox in hover
 - Normally you don't need to use Reactive unless you need to switch a configuration

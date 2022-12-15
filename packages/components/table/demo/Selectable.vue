@@ -1,18 +1,19 @@
 <template>
-  <IxSpace>
-    <IxSwitch v-model:checked="selectableColumn.multiple" :labels="['Checkbox', 'Radio']"></IxSwitch>
-    <IxRadioGroup v-model:value="selectableColumn.trigger">
-      <IxRadio value="click">Click</IxRadio>
-      <IxRadio value="dblclick">DblClick</IxRadio>
-    </IxRadioGroup>
+  <IxSpace vertical block>
+    <IxSpace align="center">
+      <IxRadioGroup v-model:value="selectableColumn.trigger">
+        <IxRadio value="click">Click</IxRadio>
+        <IxRadio value="dblclick">DblClick</IxRadio>
+      </IxRadioGroup>
+      <IxSwitch v-model:checked="selectableColumn.multiple" :labels="['Multiple', 'Multiple']"></IxSwitch>
+      <IxSwitch v-model:checked="selectableColumn.showIndex" :labels="['Index', 'Index']"></IxSwitch>
+    </IxSpace>
+    <IxTable v-model:selectedRowKeys="selectedRowKeys" :columns="columns" :dataSource="data" :pagination="false">
+      <template #name="{ value }">
+        <IxButton mode="link">{{ value }}</IxButton>
+      </template>
+    </IxTable>
   </IxSpace>
-  <br />
-  <br />
-  <IxTable v-model:selectedRowKeys="selectedRowKeys" :columns="columns" :dataSource="data" :pagination="false">
-    <template #name="{ value }">
-      <IxButton mode="link">{{ value }}</IxButton>
-    </template>
-  </IxTable>
 </template>
 
 <script lang="ts" setup>
@@ -33,8 +34,10 @@ const selectedRowKeys = ref([1])
 
 const selectableColumn = reactive<TableColumnSelectable<Data>>({
   type: 'selectable',
+  align: 'center',
   disabled: record => record.key === 4,
   multiple: true,
+  showIndex: false,
   onChange: (selectedKeys, selectedRows) => console.log(selectedKeys, selectedRows),
 })
 

@@ -122,6 +122,7 @@ export interface TableColumnSelectable<T = any, K = VKey> extends TableColumnCom
   disabled?: (record: T) => boolean
   multiple?: boolean
   menus?: ('all' | 'invert' | 'none' | 'pageInvert' | MenuData)[]
+  showIndex?: boolean
   trigger?: 'click' | 'dblclick'
 
   onChange?: (selectedRowKeys: K[], selectedRows: T[]) => void
@@ -246,6 +247,7 @@ export const tableBodyCellProps = {
   disabled: { type: Boolean, default: undefined },
   expanded: { type: Boolean, default: undefined },
   handleExpend: { type: Function as PropType<() => void>, default: undefined },
+  isHover: { type: Boolean, default: undefined },
   selected: { type: Boolean, default: undefined },
   indeterminate: { type: Boolean, default: undefined },
   handleSelect: { type: Function as PropType<() => void>, default: undefined },

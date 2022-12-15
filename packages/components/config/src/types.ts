@@ -458,6 +458,7 @@ export interface TableConfig {
 
   columnBase: TableColumnBaseConfig
   columnExpandable: TableColumnExpandableConfig
+  columnSelectable: TableColumnSelectableConfig
 }
 
 export interface TableColumnBaseConfig {
@@ -468,6 +469,10 @@ export interface TableColumnBaseConfig {
 
 export interface TableColumnExpandableConfig {
   icon: string | VNodeChild | ((options: { expanded: boolean; record: any }) => string | VNodeChild)
+}
+
+export interface TableColumnSelectableConfig {
+  showIndex: boolean
 }
 
 export interface TagConfig {
