@@ -45,24 +45,20 @@ npm install @idux/cdk @idux/components @idux/pro
 
 ### 初始化配置
 
-参考下面的代码，新建一个 `idux.ts` 文件，对 `@idux` 进行初始化配置，包括引入国际化文件，导入模块，引入样式文件等工作。
+参考下面的代码，新建一个 `idux.ts` 文件，对 `@idux` 进行初始化配置，包括引入国际化文件，导入模块，引入样式文件等工作。  
 
 ```ts
 // idux.ts
 import { type App } from "vue";
 
-// 导入 cdk 样式，注意是 `index`, 因为 cdk 不会区分主题
-import "@idux/cdk/index.min.css";
-
-// 如果不需要 reset 全局样式，移除下一行代码，但是这可能导致部分组件样式异常，需要提供一些必须的全局样式
-// 参见：https://github.com/IDuxFE/idux/issues/1194
-import "@idux/components/style/core/reset.default.min.css";
-// 如果不需要 reset 滚动条样式，移除下一行代码
-import "@idux/components/style/core/reset-scroll.default.min.css";
-
+// 示例导入的是 default 主题，如果需要使用其他主题或者定制主题，请参考定制主题的文档
 // 如果需要 css 按需加载，移除下面 2 行代码
-import "@idux/components/default.min.css";
-import "@idux/pro/default.min.css";
+import "@idux/components/default.full.css";
+import "@idux/pro/default.css";
+// 如果需要 css 按需加载，则按需添加下面的代码
+// import "@idux/cdk/index.css";
+// import "@idux/components/style/core/reset.default.css";
+// import "@idux/components/style/core/reset-scroll.default.css";
 
 // 如果需要 js 按需加载，移除下面 3 行代码
 import IduxCdk from "@idux/cdk";
@@ -134,17 +130,11 @@ export default defineConfig({
 我们提供了所有组件的类型定义，你可以参考下面的代码进行导入类型声明。
 
 ```ts
-// vite-env.d.ts
+// env.d.ts
 /// <reference types="vite/client" />
 /// <reference types="@idux/cdk/types" />
 /// <reference types="@idux/components/types" />
 /// <reference types="@idux/pro/types" />
-
-declare module "*.vue" {
-  import type { DefineComponent } from "vue";
-  const component: DefineComponent<{}, {}, any>;
-  export default component;
-}
 ```
 
 ### 文档提示
@@ -171,7 +161,7 @@ npm run dev
 
 当你只用到 `@idux` 的部分组件且比较在意包体积大小时，可以只加载用到的组件。
 
-推荐仅按需加载 js 代码，css 代码无需按需加载, 首先你需要修改 `idux.ts` 中的代码。
+推荐**仅按需加载 js 代码**，css 代码无需按需加载, 首先你需要修改 `idux.ts` 中的代码。
 
 ```diff
 - import IduxCdk from "@idux/cdk";
@@ -199,9 +189,9 @@ export default defineConfig({
     /* ... */
     Components({
       resolvers: [IduxResolver()],
-      // 可以通过指定 `importStyle` 来按需加载 css 或 less 代码
-      // 别忘了移除掉 idux.ts 中的样式导入代码
-      // resolvers: [IduxResolver({ importStyle: 'css' })],
+      // 可以通过指定 `importStyle` 来按需加载 css 或 less 代码, 也支持不同的主题
+      // 别忘了修改 idux.ts 中的样式导入代码
+      // resolvers: [IduxResolver({ importStyle: 'css', importStyleTheme: 'default' })],
     }),
   ]
 })

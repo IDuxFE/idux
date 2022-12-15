@@ -15,60 +15,34 @@ order: 5
 - `default`: 默认主题
 - `seer`: 安全主题
 
+默认的 `@idux/components/(default|seer).full.(css|less)` 文件中已经包含了内置的 `reset` 样式，如果不需要的话，可以替换成相应的 `@idux/components/(default|seer).(css|less)` 文件，同时应该提供最基础的 reset 样式，参见：[#1194](https://github.com/IDuxFE/idux/issues/1194).
+
 ### 方式一: 使用 CSS
 
 如果项目不使用 Less，可在入口的 CSS 文件(如：`style.css`)或者 ts 文件(如：`idux.ts`/`main.ts`)中，全量引入主题样式文件。
 
-CSS 文件中引入：
-
 ```css
 /* 默认主题*/
-@import "@idux/components/default.min.css";
-@import "@idux/pro/default.min.css";
+@import "@idux/components/default.full.css";
+@import "@idux/pro/default.css";
 
 /* 安全主题 */
-/* @import "@idux/components/seer.min.css" */
-/* @import "@idux/pro/seer.min.css" */
-```
-
-ts 文件中引入：
-
-```ts
-// 默认主题
-import "@idux/components/default.min.css";
-import "@idux/pro/default.min.css";
-
-// 安全主题
-// import "@idux/components/seer.min.css"
-// import "@idux/pro/seer.min.css"
+/* @import "@idux/components/seer.full.css" */
+/* @import "@idux/pro/seer.css" */
 ```
 
 ### 方式二：使用 Less
 
 可在入口的 Less 文件(如：`style.less`)或者 ts 文件(如：`idux.ts`/`main.ts`)中，全量引入主题样式文件, 同时还需要在构建工具中配置 less。
 
-Less 文件中引入：
-
 ```less
 /* 默认主题*/
-@import "@idux/components/default.less";
+@import "@idux/components/default.full.less";
 @import "@idux/pro/default.less";
 
 /* 安全主题 */
-/* @import "@idux/components/seer.less" */
+/* @import "@idux/components/seer.full.less" */
 /* @import "@idux/pro/seer.less" */
-```
-
-ts 文件中引入：
-
-```ts
-// 默认主题
-import "@idux/components/default.less";
-import "@idux/pro/default.less";
-
-// 安全主题
-// import "@idux/components/seer.less"
-// import "@idux/pro/seer.less"
 ```
 
 配置 less, 以 vite 为例，修改 `vite.config.ts`:
