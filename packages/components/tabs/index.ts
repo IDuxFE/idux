@@ -23,4 +23,5 @@ export type {
   TabsPublicProps as TabsProps,
   TabPublicProps as TabProps,
   TabsPlacement,
+  TabsSize,
 } from './src/types'
