@@ -25,7 +25,7 @@
 | `@form-color-secondary` | `@text-color-secondary` | - | - |
 | `@form-tooltip-color` | `@text-color-secondary` | `@color-primary-l10` | - |
 | `@form-background-color` | `@background-color-component` | - | - |
-| `@form-placeholder-color` | `@color-graphite` | - | - |
+| `@form-placeholder-color` | `var(--ix-text-color-disabled)` | - | - |
 | `@form-hover-color` | `@color-primary-l10` | - | - |
 | `@form-active-color` | `@color-primary` | - | - |
 | `@form-active-box-shadow` | `0 0 0 2px fade(@form-active-color, 20%)` | - | - |

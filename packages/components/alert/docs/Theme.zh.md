@@ -9,7 +9,7 @@
 | `@alert-info-color` | `var(--ix-color-primary)` | - | - |
 | `@alert-warning-color` | `var(--ix-color-brown)` | `#a35f40` | - |
 | `@alert-error-color` | `var(--ix-color-red)` | `var(--ix-color-red-d10)` | - |
-| `@alert-offline-color` | `var(--ix-text-color-disabled)` | - | - |
+| `@alert-offline-color` | `var(--ix-text-color-info)` | - | - |
 | `@alert-success-background-color` | `#f1faf7` | - | - |
 | `@alert-info-background-color` | `#f2f7ff` | - | - |
 | `@alert-warning-background-color` | `#fffaf2` | - | - |

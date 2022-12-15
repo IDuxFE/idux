@@ -10,9 +10,8 @@
 | `@input-border-radius-md` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
 | `@input-border-radius-lg` | `var(--ix-border-radius-lg)` | `var(--ix-border-radius-sm)` | - |
 | `@input-color` | `var(--ix-text-color)` | - | - |
-| `@input-color-secondary` | `var(--ix-text-color-secondary)` | - | - |
 | `@input-color-disabled` | `var(--ix-text-color-disabled)` | - | - |
-| `@input-placeholder-color` | `var(--ix-text-color-info)` | - | - |
+| `@input-placeholder-color` | `@form-placeholder-color` | - | - |
 | `@input-background-color` | `var(--ix-background-color)` | - | - |
 | `@input-background-color-disabled` | `var(--ix-background-color-deep)` | - | - |
 | `@input-border-color` | `var(--ix-border-color)` | - | - |
