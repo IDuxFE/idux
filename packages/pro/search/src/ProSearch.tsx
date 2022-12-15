@@ -18,9 +18,11 @@ import { useCommonOverlayProps } from './composables/useCommonOverlayProps'
 import { useFocusedState } from './composables/useFocusedState'
 import { useSearchItems } from './composables/useSearchItem'
 import { useSearchItemErrors } from './composables/useSearchItemErrors'
-import { useSearchStates } from './composables/useSearchStates'
+import { tempSearchStateKey, useSearchStates } from './composables/useSearchStates'
+import { useSearchTrigger } from './composables/useSearchTrigger'
 import { useSearchValues } from './composables/useSearchValues'
 import SearchItemComp from './searchItem/SearchItem'
+import SearchItemTagComp from './searchItem/SearchItemTag'
 import { proSearchContext } from './token'
 import { type SearchItem, proSearchProps } from './types'
 import { renderIcon } from './utils/RenderIcon'
@@ -47,6 +49,7 @@ export default defineComponent({
       errors,
       dateConfig,
     )
+    const searchTriggerContext = useSearchTrigger()
     const elementRef = ref<HTMLElement | undefined>()
 
     const activeSegmentContext = useActiveSegment(
@@ -66,7 +69,7 @@ export default defineComponent({
 
     const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(componentCommon, 'overlayZIndex'), focused)
 
-    const { initSearchStates, clearSearchState } = searchStateContext
+    const { initSearchStates, clearSearchState, getSearchStateByKey } = searchStateContext
     const { activeSegment } = activeSegmentContext
 
     watch(
@@ -98,8 +101,13 @@ export default defineComponent({
 
     expose({ focus, blur })
 
-    const handleSearchBtnClick = () => {
+    const { onSearchTrigger, triggerSearch } = searchTriggerContext
+    onSearchTrigger(() => {
       callEmit(props.onSearch, searchValues.value)
+    }, 'post')
+
+    const handleSearchBtnClick = () => {
+      triggerSearch()
     }
     const handleClearBtnClick = () => {
       clearSearchState()
@@ -120,13 +128,26 @@ export default defineComponent({
 
       ...searchStateContext,
       ...activeSegmentContext,
+      ...searchTriggerContext,
     })
 
     return () => {
       const prefixCls = mergedPrefixCls.value
 
       const overflowSlots = {
-        item: (item: SearchItem) => <SearchItemComp key={item.key} tagOnly={true} searchItem={item} />,
+        item: (item: SearchItem) => {
+          const searchState = getSearchStateByKey(item.key)!
+
+          const tagSegments = item.segments.map(segment => {
+            const segmentValue = searchState.segmentValues.find(sv => sv.name === segment.name)!
+            return {
+              name: segment.name,
+              input: segment.format(segmentValue?.value),
+            }
+          })
+
+          return <SearchItemTagComp key={item.key} itemKey={item.key} segments={tagSegments} error={item.error} />
+        },
         rest: (rest: SearchItem[]) => (
           <span class={`${prefixCls}-search-item ${prefixCls}-search-item-tag`}>
             {slots.overflowedLabel?.(rest) ?? `+ ${rest.length}`}
@@ -142,7 +163,7 @@ export default defineComponent({
                 v-show={!focused.value}
                 v-slots={overflowSlots}
                 prefixCls={prefixCls}
-                dataSource={searchItems.value}
+                dataSource={searchItems.value.filter(item => item.key !== tempSearchStateKey)}
                 getKey={item => item.key}
                 maxLabel={props.maxLabel}
               />

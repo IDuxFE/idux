@@ -37,8 +37,10 @@ export function useSegmentStates(
     removeSearchState,
     convertStateToValue,
     initTempSearchState,
+    activeSegment,
     changeActive,
     setInactive,
+    onSearchTrigger,
   } = proSearchContext
   const segmentStates = ref<SegmentStates>({})
 
@@ -149,6 +151,18 @@ export function useSegmentStates(
       setInactive()
     }
   }
+
+  onSearchTrigger(() => {
+    if (
+      !props.searchItem?.key ||
+      !activeSegment.value?.itemKey ||
+      activeSegment.value.itemKey !== props.searchItem.key
+    ) {
+      return
+    }
+
+    handleSegmentConfirm(activeSegment.value.name, true)
+  }, 'pre')
 
   return {
     segmentStates,

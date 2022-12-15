@@ -184,10 +184,6 @@ export default defineComponent({
         setOnKeyDown: setPanelOnKeyDown,
       })
 
-      if (!renderedContent && isActive.value) {
-        setCurrentAsActive(false)
-      }
-
       return renderedContent
     }
 
