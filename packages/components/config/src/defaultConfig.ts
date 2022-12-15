@@ -285,6 +285,9 @@ export const defaultConfig: GlobalConfig = {
   switch: {
     size: 'md',
   },
+  tabs: {
+    size: 'md',
+  },
   table: {
     autoHeight: false,
     borderless: true,

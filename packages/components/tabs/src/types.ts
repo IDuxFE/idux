@@ -13,6 +13,7 @@ import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 export type TabsType = 'card' | 'line' | 'segment'
 export type TabsPlacement = 'top' | 'bottom' | 'start' | 'end'
 export type TabsMode = 'default' | 'primary'
+export type TabsSize = 'lg' | 'md'
 
 export const tabsProps = {
   selectedKey: { type: [Number, String, Symbol] as PropType<VKey>, default: undefined },
@@ -20,6 +21,7 @@ export const tabsProps = {
   forceRender: { type: Boolean, default: false },
   placement: { type: String as PropType<TabsPlacement>, default: 'top' },
   mode: { type: String as PropType<TabsMode>, default: 'default' },
+  size: String as PropType<TabsSize>,
 
   'onUpdate:selectedKey': [Function, Array] as PropType<MaybeArray<(key: any) => void>>,
   onTabClick: [Function, Array] as PropType<MaybeArray<(key: any, evt: Event) => void>>,

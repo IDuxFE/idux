@@ -1,7 +1,7 @@
 // Vitest Snapshot v1
 
 exports[`Tabs > render work 1`] = `
-"<div class=\\"ix-tabs ix-tabs-card ix-tabs-nav-top\\">
+"<div class=\\"ix-tabs ix-tabs-md ix-tabs-card ix-tabs-nav-top\\">
   <div class=\\"ix-tabs-nav-wrapper\\">
     <!---->
     <div class=\\"ix-tabs-nav\\"></div>

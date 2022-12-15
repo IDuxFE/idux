@@ -72,6 +72,7 @@ export default defineComponent({
   setup(props) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tabs`)
+    const config = useGlobalConfig('tabs')
 
     const navWrapperElRef = ref<HTMLElement | null>(null)
     const navElRef = ref<HTMLElement | null>(null)
@@ -86,6 +87,8 @@ export default defineComponent({
 
     const horizontalPlacement = ['top', 'bottom']
     const isHorizontal = computed(() => horizontalPlacement.includes(props.placement))
+
+    const mergedSize = computed(() => props.size ?? config.size)
 
     const [navOffset, setNavOffset] = useState(0)
     const [barStyle, setBarStyle] = useState<CSSProperties>({})
@@ -146,8 +149,10 @@ export default defineComponent({
     const classes = computed(() => {
       const { type, placement, mode } = props
       const prefixCls = mergedPrefixCls.value
+      const size = mergedSize.value
       return normalizeClass({
         [prefixCls]: true,
+        [`${prefixCls}-${size}`]: true,
         [`${prefixCls}-${type}`]: true,
         [`${prefixCls}-nav-${placement}`]: placement === 'top' || type === 'line',
         [`${prefixCls}-nav-${mode}`]: type === 'segment',

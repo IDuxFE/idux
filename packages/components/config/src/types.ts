@@ -39,6 +39,7 @@ import type {
   TablePaginationPosition,
   TableSize,
 } from '@idux/components/table'
+import type { TabsSize } from '@idux/components/tabs'
 import type { TagShape } from '@idux/components/tag'
 import type { TextareaAutoRows, TextareaResize } from '@idux/components/textarea'
 import type { TreeNode } from '@idux/components/tree'
@@ -93,6 +94,7 @@ export interface GlobalConfig {
   statistic: StatisticConfig
   stepper: StepperConfig
   switch: SwitchConfig
+  tabs: TabsConfig
   table: TableConfig
   tag: TagConfig
   tagGroup: TagGroupConfig
@@ -442,6 +444,10 @@ export interface StepperConfig {
 
 export interface SwitchConfig {
   size: FormSize
+}
+
+export interface TabsConfig {
+  size: TabsSize
 }
 
 export interface TableConfig {

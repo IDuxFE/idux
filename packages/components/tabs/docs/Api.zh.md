@@ -10,6 +10,7 @@
 | `mode` | 当`type`为`segment`时按钮的样式 | `'default' \| 'primary'` | `'default'` | - | - |
 | `placement` | 标签的方位 | `'top' \| 'start' \| 'end' \| 'bottom'` | `'top'` | - | 其他类型仅在type为`line`生效 |
 | `type` | 标签的类型 | `'card' \| 'line' \| 'segment'` | `'card'`| - | - |
+| `size` | 标签页的尺寸 | `'lg' \| 'md'` | `'md'` | ✅ | - |
 | `onTabClick` | 标签被点击的回调 | `(key: VKey, evt: Event) => void`| - | - | - |
 | `onPreClick` | 滚动状态下，Pre按钮被点击的回调 | `(evt: Event) => void`| - | - | - |
 | `onNextClick` | 滚动状态下，Next按钮被点击的回调 | `(evt: Event) => void`| - | - | - |

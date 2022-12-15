@@ -146,6 +146,18 @@ describe('Tabs', () => {
     expect(wrapper.findAll('.ix-tabs-pane').length).toBe(1)
   })
 
+  test('size work', async () => {
+    const wrapper = TabsMount()
+
+    expect(wrapper.classes()).toContain('ix-tabs-md')
+
+    await wrapper.setProps({
+      size: 'lg',
+    })
+
+    expect(wrapper.classes()).toContain('ix-tabs-lg')
+  })
+
   describe('Tab', () => {
     test('no key work', async () => {
       const wrapper = TabsMount({
