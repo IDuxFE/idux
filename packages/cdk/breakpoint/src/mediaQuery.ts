@@ -22,6 +22,7 @@ export interface MediaQueryState {
 }
 
 interface Query {
+  referenceCnt: number
   media: string
   matches: Ref<boolean>
   destroy: () => void
@@ -36,9 +37,16 @@ const _queries = new Map<string, Query>()
  */
 export function useMediaQuery(value: string | string[]): ComputedRef<MediaQueryState> {
   const queries = splitQueries(value).map(query => registerQuery(query))
-
   tryOnScopeDispose(() => {
     queries.forEach(query => {
+      // minus reference count
+      query.referenceCnt--
+
+      // do not destroy when the same query is used in more than one scope
+      if (query.referenceCnt > 0) {
+        return
+      }
+
       query.destroy()
       _queries.delete(query.media)
     })
@@ -70,7 +78,10 @@ export function isMediaMatched(value: string | string[]): boolean {
 function registerQuery(query: string): Query {
   // Only set up a new MediaQueryList if it is not already being listened for.
   if (_queries.has(query)) {
-    return _queries.get(query)!
+    const output = _queries.get(query)!
+    output.referenceCnt++
+
+    return output
   }
 
   const mql = matchMedia(query)
@@ -81,7 +92,7 @@ function registerQuery(query: string): Query {
   mql.addEventListener('change', handler)
   const destroy = () => mql.removeEventListener('change', handler)
 
-  const output = { matches, destroy, media: query }
+  const output = { referenceCnt: 1, matches, destroy, media: query }
   _queries.set(query, output)
   return output
 }
