@@ -30,10 +30,11 @@ export type ProTableColumn<T = any, V = any, CT = 'input'> =
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
+| `layoutable` | 是否在布局设置菜单中显示此列 | `boolean` | - | - | 为 `false` 时，将不显示此列 |
 | `changeFixed` | 是否可以改变列的固定状态 | `boolean` | - | - | 为 `false` 时，此列将不能调整固定状态，但依旧可以设置 `fixed` |
 | `changeIndex` | 是否可以改变列的顺序 | `boolean` | - | - | 为 `false` 时，将不可调整列的顺序 |
 | `changeVisible` | 是否可以改变列的显示状态 | `boolean` | - | - | 为 `false` 时，此列将不能调整显示状态，但依旧可以设置 `visible` |
-| `visible` | 是否显示此列 | `boolean` | - | - | 为 `false` 时，将不显示此列 |
+| `visible` | 是否在表格中渲染此列 | `boolean` | - | - | 为 `false` 时，将不渲染此列 |
 
 ##### ProTableColumnResizable
 

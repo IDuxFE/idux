@@ -123,6 +123,7 @@ export interface ProTableColumnIndexable<T = any, K = VKey> extends ProTableColu
 }
 
 export type ProTableColumnLayoutConfig = {
+  layoutable?: boolean
   changeFixed?: boolean
   changeIndex?: boolean
   changeVisible?: boolean
