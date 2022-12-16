@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/IDuxFE/idux/compare/v1.2.3...v1.3.0) (2022-12-16)
+
+### Bug Fixes
+
+- **cdk:breakpoint:** query unexpectedly destroyed ([#1357](https://github.com/IDuxFE/idux/issues/1357)) ([2b45f6b](https://github.com/IDuxFE/idux/commit/2b45f6b6c6fdf3cc3febd41861c766c6fc705816))
+- **cdk:popper:** update floating-ui to fix position error under scale ([#1362](https://github.com/IDuxFE/idux/issues/1362)) ([8aeb214](https://github.com/IDuxFE/idux/commit/8aeb2149ff2d81c5d5ab1a9fec763d1efa156fd6))
+- **comp:\*:** opening overlay once triggers two zIndex changes ([#1355](https://github.com/IDuxFE/idux/issues/1355)) ([7cec4ec](https://github.com/IDuxFE/idux/commit/7cec4ec5d9c882d9fae54cba221efda34ba3bc93))
+- **comp:\*:** the font size under seer theme is incorrect ([#1343](https://github.com/IDuxFE/idux/issues/1343)) ([5c74fcf](https://github.com/IDuxFE/idux/commit/5c74fcf6964bd7d76e5d35f5bf84ca52b0f21fae))
+- **comp:\*:** the text color variable update ([#1358](https://github.com/IDuxFE/idux/issues/1358)) ([49c8743](https://github.com/IDuxFE/idux/commit/49c874344710d8edbe43c48c010d2b97f4b0bb3b))
+- **comp:button:** display to inline-block and remove focus style ([#1354](https://github.com/IDuxFE/idux/issues/1354)) ([107c03e](https://github.com/IDuxFE/idux/commit/107c03e20c2db96f0bd7fecd6da8a9eee084dcf5))
+- **comp:carousel:** only two items and arrow is true, the switch appears blank ([#1346](https://github.com/IDuxFE/idux/issues/1346)) ([6a5f46b](https://github.com/IDuxFE/idux/commit/6a5f46b3af56efe3c74434845708843483e13557))
+- **comp:cascader:** when children changed,the scrollbar should be pinned ([#1353](https://github.com/IDuxFE/idux/issues/1353)) ([031834e](https://github.com/IDuxFE/idux/commit/031834e6d9b948b4a065a8a56bdf4afc1c2145a3)), closes [#1316](https://github.com/IDuxFE/idux/issues/1316)
+- **comp:checkbox:** style error when disabled ([#1344](https://github.com/IDuxFE/idux/issues/1344)) ([55b0be8](https://github.com/IDuxFE/idux/commit/55b0be849a43cf06c6dd98f4086ae0db37728ecf))
+- **comp:date-picker,comp:time-picker:** opening picker shouldn't scroll to window top ([#1342](https://github.com/IDuxFE/idux/issues/1342)) ([cce0c0e](https://github.com/IDuxFE/idux/commit/cce0c0e81b67722f797f73db52632974ad7822b9))
+- **comp:empty:** style update with icon ([#1349](https://github.com/IDuxFE/idux/issues/1349)) ([69ec9f9](https://github.com/IDuxFE/idux/commit/69ec9f944ea3569b6a85c0bcb9eb278f2fad084e))
+- **comp:input:** the transition was inconsistent ([#1352](https://github.com/IDuxFE/idux/issues/1352)) ([9950e6f](https://github.com/IDuxFE/idux/commit/9950e6f966aa8964ba6283a75b1505da22bc87cd))
+- **comp:progress:** trailColor not work ([#1347](https://github.com/IDuxFE/idux/issues/1347)) ([f448714](https://github.com/IDuxFE/idux/commit/f448714ab19d8c2e5ddb170ed4dec5f9a8526054))
+- **comp:upload:** customRequest allows optional and async ([#1340](https://github.com/IDuxFE/idux/issues/1340)) ([52250a5](https://github.com/IDuxFE/idux/commit/52250a55225b8d36df904e3211d463fb67d23308))
+- **pro:layout:** the dom still renders without the logo ([#1348](https://github.com/IDuxFE/idux/issues/1348)) ([375c691](https://github.com/IDuxFE/idux/commit/375c69132dcd06a46cdbf449aac8760d2e25eab5))
+- **pro:search:** zIndex should be updated only when focused change ([#1356](https://github.com/IDuxFE/idux/issues/1356)) ([61a51fd](https://github.com/IDuxFE/idux/commit/61a51fd62c9ab74601261ac82be692ee782ceb4f))
+- **pro:table:** wrong type of ellipsis ([#1345](https://github.com/IDuxFE/idux/issues/1345)) ([86c59f8](https://github.com/IDuxFE/idux/commit/86c59f8e98b70248178c2c8d4fc440d33b91ca7f))
+- **scripts:** remove min.css ([#1359](https://github.com/IDuxFE/idux/issues/1359)) ([20f04f4](https://github.com/IDuxFE/idux/commit/20f04f45dbb0927ce0314ff731bb7ac4c0e9b9db))
+
+### Features
+
+- **comp:button,checkbox,radio:** add waveless prop ([#1303](https://github.com/IDuxFE/idux/issues/1303)) ([4881414](https://github.com/IDuxFE/idux/commit/4881414bf48fee70cc13f0038e8487b5390a92d3))
+- **comp:table:** selectable supports showIndex ([#1360](https://github.com/IDuxFE/idux/issues/1360)) ([19e6f68](https://github.com/IDuxFE/idux/commit/19e6f685cda0c1900fa624a09349e95593c32d3b))
+- **comp:tabs:** add size props, default value is md ([#1361](https://github.com/IDuxFE/idux/issues/1361)) ([41eb8d9](https://github.com/IDuxFE/idux/commit/41eb8d92af463c0e36a2bba0c631cd9acf5e45fe))
+- **pro:search:** search btn triggers search change now ([#1321](https://github.com/IDuxFE/idux/issues/1321)) ([e44673f](https://github.com/IDuxFE/idux/commit/e44673f5320a76d9daca61f887a44e377d206815))
+- **pro:search:** support searchField placeholder ([#1322](https://github.com/IDuxFE/idux/issues/1322)) ([84d0e66](https://github.com/IDuxFE/idux/commit/84d0e662024bd9f763a9f5debd65e90d52238c4b))
+- **pro:table:** support layoutable ([#1364](https://github.com/IDuxFE/idux/issues/1364)) ([2e7533c](https://github.com/IDuxFE/idux/commit/2e7533cfebbbb12bd682b4805fb600d3a438607e))
+
 ## [1.2.4](https://github.com/IDuxFE/idux/compare/v1.2.3...v1.2.4) (2022-12-10)
 
 ### Bug Fixes

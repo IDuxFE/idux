@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/IDuxFE/idux/compare/v1.2.3...v1.3.0) (2022-12-16)
+
+### Bug Fixes
+
+- **cdk:breakpoint:** query unexpectedly destroyed ([#1357](https://github.com/IDuxFE/idux/issues/1357)) ([2b45f6b](https://github.com/IDuxFE/idux/commit/2b45f6b6c6fdf3cc3febd41861c766c6fc705816))
+- **cdk:popper:** update floating-ui to fix position error under scale ([#1362](https://github.com/IDuxFE/idux/issues/1362)) ([8aeb214](https://github.com/IDuxFE/idux/commit/8aeb2149ff2d81c5d5ab1a9fec763d1efa156fd6))
+
 ## [1.2.4](https://github.com/IDuxFE/idux/compare/v1.2.3...v1.2.4) (2022-12-10)
 
 **Note:** Version bump only for package @idux/cdk
