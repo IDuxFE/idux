@@ -43,7 +43,7 @@ const onColumnsChange = console.log
 const columns: ProTableColumn<Data>[] = [
   {
     type: 'indexable',
-    changeVisible: false,
+    layoutable: false,
   },
   {
     title: 'Name',

@@ -1,8 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import path from 'path'
 
 import { copy, copyFile, pathExists, readFile, readdirSync, remove, writeFile } from 'fs-extra'
-
-// @ts-ignore
 import less from 'less'
 
 import { gulpConfig } from '../gulpConfig'
@@ -10,9 +11,9 @@ import { gulpConfig } from '../gulpConfig'
 const { themes } = gulpConfig.build
 
 export async function compile(content: string, savePath: string, rootPath?: string): Promise<void> {
-  const plugins: any[] = []
+  const plugins = []
 
-  const lessOptions: any = { plugins, javascriptEnabled: true }
+  const lessOptions = { plugins, javascriptEnabled: true }
 
   if (rootPath) {
     lessOptions.paths = [path.dirname(rootPath)]
@@ -21,8 +22,8 @@ export async function compile(content: string, savePath: string, rootPath?: stri
 
   return less
     .render(content, lessOptions)
-    .then(({ css }: any) => writeFile(savePath, css))
-    .catch((err: any) => Promise.reject(err))
+    .then(({ css }) => writeFile(savePath, css))
+    .catch(err => Promise.reject(err))
 }
 
 function compileTheme(content: string, saveDirname: string, themeName: string) {

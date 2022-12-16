@@ -116,7 +116,7 @@ export default defineComponent({
             />
             {!isButtoned.value && (
               <span class={`${prefixCls}-input-box`} tabindex={tabindex as number}>
-                {!mergedWaveless.value && <ɵWave ref="waveRef" />}
+                {!mergedWaveless.value && <ɵWave ref={waveRef} />}
               </span>
             )}
           </span>

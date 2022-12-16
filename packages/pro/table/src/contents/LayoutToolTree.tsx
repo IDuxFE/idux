@@ -81,7 +81,7 @@ export default defineComponent({
         checkable: true,
         checkedKeys: checkedKeys.value,
         draggable: true,
-        dataSource: columns,
+        dataSource: columns.filter(column => column.layoutable !== false),
         disabled: disableColumn,
         empty: '',
         childrenKey: 'children',
