@@ -9,6 +9,8 @@ import type { ɵTriggerProps } from '@idux/components/_private/trigger'
 
 import { type ComputedRef, computed } from 'vue'
 
+import { isArray } from 'lodash-es'
+
 import { TimePickerContext, TimeRangePickerContext } from '../tokens'
 
 export function useTriggerProps(context: TimePickerContext | TimeRangePickerContext): ComputedRef<ɵTriggerProps> {
@@ -39,7 +41,11 @@ export function useTriggerProps(context: TimePickerContext | TimeRangePickerCont
 
   return computed(() => ({
     borderless: props.borderless,
-    clearable: !props.readonly && !accessor.disabled && (props.clearable ?? config.clearable) && !!accessor.value,
+    clearable:
+      !props.readonly &&
+      !accessor.disabled &&
+      (props.clearable ?? config.clearable) &&
+      (isArray(accessor.value) ? !!accessor.value.length : !!accessor.value),
     clearIcon: props.clearIcon ?? config.clearIcon,
     disabled: accessor.disabled,
     focused: isFocused.value,
