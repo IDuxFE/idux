@@ -173,26 +173,21 @@ function renderExpandableChildren(
   expandable: ComputedRef<TableColumnMergedExpandable | undefined>,
   prefixCls: string,
 ) {
-  const { icon, customIcon, indent } = expandable.value!
-  const { record, expanded, level = 0, disabled } = props
-  const style = {
-    marginLeft: indent ? convertCssPixel(level * indent) : undefined,
+  if (props.disabled) {
+    return undefined
   }
+
+  const { icon, customIcon, indent } = expandable.value!
+  const { record, expanded, level = 0 } = props
+  const style = indent ? `margin-left: ${convertCssPixel(level * indent)}` : undefined
 
   let iconNode: VNodeChild | null
-  if (disabled) {
-    iconNode = null
-  } else if (isFunction(customIcon)) {
-    iconNode = customIcon({ expanded: !!expanded, record })
-  } else if (isString(customIcon) && slots[customIcon]) {
-    iconNode = slots[customIcon]!({ expanded, record })
+  const iconRender = (isString(customIcon) ? slots[customIcon] : customIcon) ?? icon
+  if (isFunction(iconRender)) {
+    iconNode = iconRender({ expanded: !!expanded, record })
   } else {
-    iconNode = isFunction(icon) ? icon({ expanded, record }) : icon
-    if (isString(iconNode)) {
-      iconNode = <IxIcon name={iconNode} rotate={expanded ? 90 : 0} />
-    }
+    iconNode = isString(iconRender) ? <IxIcon name={iconRender} rotate={expanded ? 90 : 0} /> : iconRender
   }
-
   return (
     <button class={`${prefixCls}-expandable-trigger`} style={style} type="button" onClick={props.handleExpend}>
       {iconNode}
@@ -206,9 +201,13 @@ function renderSelectableChildren(
   selectable: ComputedRef<TableColumnMergedSelectable | undefined>,
   onClick: (evt: Event) => void,
 ) {
-  const { selected: checked, indeterminate, disabled, handleSelect: onChange } = props
-  const { multiple, customCell } = selectable.value!
+  const { selected: checked, indeterminate, disabled, isHover, rowIndex, handleSelect: onChange } = props
+  const { showIndex, multiple, customCell } = selectable.value!
   const customRender = isString(customCell) ? slots[customCell] : customCell
+  if (!customRender && !checked && !isHover && showIndex) {
+    const style = disabled ? 'cursor: not-allowed' : 'cursor: pointer'
+    return <span style={style}>{rowIndex}</span>
+  }
   if (multiple) {
     const checkboxProps = { checked, disabled, indeterminate, onChange, onClick }
     return customRender ? customRender(checkboxProps) : <IxCheckbox {...checkboxProps}></IxCheckbox>

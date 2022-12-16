@@ -100,6 +100,7 @@ export type TableColumn<T = any, V = any> =
 | `disabled` |  设置是否允许行选择 | `(record: T, rowIndex: number) => boolean` | - | - | - |
 | `multiple` | 是否支持多选 | `boolean` | `true` | - | - |
 | `menus` | 自定义列头下拉菜单 | `('all' \| 'invert' \| 'none' \| 'pageInvert' \| MenuData)[]` | - | - | - |
+| `showIndex` | 是否显示序号 | `boolean` | `false` | ✅ | - |
 | `trigger` | 不通过点击选择框，触发行选择的方式 | `'click' \| 'doubleClick'` | - | - | - |
 | `onChange` | 选中状态发生变化时触发 | `(selectedRowKeys: (string \| number)[], selectedRecords: T[]) => void` | - | - | - |
 | `onMenuClick` | 点击下拉菜单时触发 | `(options: MenuClickOptions, currentPageRowKeys: VKey[]) => void` | - | - | 如果点击时预设的值, 则不会触发该回调（例如：`all`, 那么触发的是 `onSelectAll`） |

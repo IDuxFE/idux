@@ -312,6 +312,9 @@ export const defaultConfig: GlobalConfig = {
     columnExpandable: {
       icon: 'right',
     },
+    columnSelectable: {
+      showIndex: false,
+    },
   },
   tag: {},
   tagGroup: {
