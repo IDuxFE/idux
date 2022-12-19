@@ -1,26 +1,24 @@
 <template>
-  <IxSpace style="margin-bottom: 8px">
-    <IxButton @click="onAdd">Add</IxButton>
-    <IxButton @click="onSaveAll">Save All</IxButton>
-    <IxButton @click="onCancelAll">Cancel All</IxButton>
-  </IxSpace>
+  <div style="margin-bottom: 8px">
+    <IxButton :disabled="isEditing" @click="onAdd">Add</IxButton>
+  </div>
   <IxFormWrapper :control="formGroup">
     <IxTable :columns="columns" :dataSource="data" :spin="spinning">
       <template #name="{ value, record }">
         <IxFormItem v-if="record.editable" messageTooltip>
-          <IxInput :control="formGroup.get([record.key, 'name'])"></IxInput>
+          <IxInput control="name"></IxInput>
         </IxFormItem>
         <span v-else>{{ value }}</span>
       </template>
       <template #age="{ value, record }">
         <IxFormItem v-if="record.editable" messageTooltip>
-          <IxInputNumber :control="formGroup.get([record.key, 'age'])"></IxInputNumber>
+          <IxInputNumber control="age"></IxInputNumber>
         </IxFormItem>
         <span v-else>{{ value }}</span>
       </template>
       <template #address="{ value, record }">
         <IxFormItem v-if="record.editable" messageTooltip>
-          <IxInput :control="formGroup.get([record.key, 'address'])"></IxInput>
+          <IxInput control="address"></IxInput>
         </IxFormItem>
         <span v-else>{{ value }}</span>
       </template>
@@ -31,8 +29,8 @@
             <IxButton @click="onCancel(record)">Cancel</IxButton>
           </template>
           <template v-else>
-            <IxButton @click="onEdit(record)">Edit</IxButton>
-            <IxButton @click="onDelete(record)">Delete</IxButton>
+            <IxButton :disabled="isEditing" @click="onEdit(record)">Edit</IxButton>
+            <IxButton :disabled="isEditing" @click="onDelete(record)">Delete</IxButton>
           </template>
         </IxButtonGroup>
       </template>
@@ -43,10 +41,10 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import { isString } from 'lodash-es'
+import { isSymbol } from 'lodash-es'
 
 import { Validators, useFormGroup } from '@idux/cdk/forms'
-import { VKey, uniqueId } from '@idux/cdk/utils'
+import { VKey } from '@idux/cdk/utils'
 import { useMessage } from '@idux/components/message'
 import { TableColumn } from '@idux/components/table'
 
@@ -86,6 +84,7 @@ const columns: TableColumn<Data>[] = [
 
 const data = ref<Data[]>([])
 const spinning = ref(false)
+const isEditing = ref(false)
 const { success } = useMessage()
 
 for (let index = 0; index < 3; index++) {
@@ -98,41 +97,32 @@ for (let index = 0; index < 3; index++) {
 }
 
 const { required, range, maxLength } = Validators
-const formGroup = useFormGroup<Record<VKey, Data>>({})
+const formGroup = useFormGroup<Data>({
+  key: [undefined],
+  name: ['', required],
+  age: [undefined, [required, range(18, 99)]],
+  address: ['', maxLength(100)],
+})
 
-const createRecordGroup = (record: Data) => {
-  return useFormGroup<Data>({
-    key: [record.key],
-    name: [record.name, required],
-    age: [record.age, [required, range(18, 99)]],
-    address: [record.address, maxLength(100)],
-  })
-}
-
-const addKeyPrefix = 'ADD_TABLE_KEY'
 const onAdd = () => {
-  // formGroup 不支持 Symbol 的 Key, 这里要注意保证可以的唯一性
-  const key = uniqueId(addKeyPrefix)
-  const addRecord = { key, editable: true } as Data
-  formGroup.setControl(key, createRecordGroup(addRecord))
+  const addRecord = { key: Symbol(), editable: true } as Data
   data.value = [addRecord, ...data.value]
+  isEditing.value = true
 }
 
 const onSave = (record: Data) => {
-  const currRecordGroup = formGroup.get(record.key!)
-  if (currRecordGroup.valid.value) {
-    const formValue = currRecordGroup.getValue()
+  if (formGroup.valid.value) {
+    const formValue = formGroup.getValue()
     spinning.value = true
-    // 判断是否为新增
-    if (isString(record.key) && record.key.startsWith(addKeyPrefix)) {
+    // Symbol 的 key 代表新增
+    if (isSymbol(record.key)) {
       // 调用新增接口, 参数中可能需要去掉 key
       console.log('add', formValue)
     } else {
       // 调用修改的接口
       console.log('edit', formValue)
     }
-
-    // 请求成功后，刷新数据，只更新当前行的数据
+    // 请求成功后，刷新数据
     setTimeout(() => {
       const copyData = [...data.value]
       const targetIndex = copyData.findIndex(item => item.key === record.key)
@@ -140,27 +130,30 @@ const onSave = (record: Data) => {
       copyData.splice(targetIndex, 1, formValue)
       data.value = copyData
       success(`${formValue.name} saved successfully`)
-      formGroup.removeControl(record.key as never)
       spinning.value = false
+      isEditing.value = false
     }, 1000)
   } else {
-    currRecordGroup.markAsDirty()
+    formGroup.markAsDirty()
   }
 }
 
 const onCancel = (record: Data) => {
-  // 判断是否为新增
-  if (isString(record.key) && record.key.startsWith(addKeyPrefix)) {
+  // Symbol 的 key 代表新增
+  if (isSymbol(record.key)) {
     data.value = data.value.filter(item => item.key !== record.key)
   } else {
     record.editable = false
   }
-  formGroup.removeControl(record.key as never)
+  isEditing.value = false
+  formGroup.reset()
+  formGroup.markAsPristine()
 }
 
 const onEdit = (record: Data) => {
-  formGroup.setControl(record.key!, createRecordGroup(record))
+  formGroup.setValue(record)
   record.editable = true
+  isEditing.value = true
 }
 
 const onDelete = (record: Data) => {
@@ -172,51 +165,5 @@ const onDelete = (record: Data) => {
     success(`${record.name} deleted successfully`)
     spinning.value = false
   }, 1000)
-}
-
-const onSaveAll = () => {
-  if (formGroup.valid.value) {
-    const records = Object.values(formGroup.getValue())
-    const addRecords: Data[] = []
-    const editRecords: Data[] = []
-
-    records.forEach(record => {
-      // 判断是否为新增
-      if (isString(record.key) && record.key.startsWith(addKeyPrefix)) {
-        // 可能需要去掉 key
-        addRecords.push(record)
-      } else {
-        editRecords.push(record)
-      }
-    })
-
-    if (addRecords.length === 0 && editRecords.length === 0) {
-      return
-    }
-    // 请求新增/修改接口
-    spinning.value = true
-    console.log('add', addRecords)
-    console.log('edit', editRecords)
-
-    // 请求成功后，刷新数据
-    setTimeout(() => {
-      data.value = data.value.map(item => {
-        const key = item.key!
-        const newItem = records.find(record => record.key === key)
-        return newItem ? newItem : item
-      })
-      records.forEach(record => formGroup.removeControl(record.key as never))
-      spinning.value = false
-    }, 1000)
-  } else {
-    formGroup.markAsDirty()
-  }
-}
-
-const onCancelAll = () => {
-  data.value = data.value.map(item => {
-    item.editable = false
-    return item
-  })
 }
 </script>

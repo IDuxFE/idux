@@ -20,7 +20,9 @@ import {
   watch,
 } from 'vue'
 
-import { isArray, isNil, isPlainObject } from 'lodash-es'
+import { isArray, isNil, isPlainObject, isString } from 'lodash-es'
+
+import { convertArray } from '@idux/cdk/utils'
 
 import {
   type AsyncValidatorFn,
@@ -434,7 +436,8 @@ export abstract class AbstractControl<T = any> {
     if (isNil(path)) {
       return undefined
     }
-    const currPath = isArray(path) ? path : path.toString().split('.')
+
+    const currPath = isString(path) ? path.split('.') : convertArray(path)
 
     if (currPath.length === 0) {
       return undefined

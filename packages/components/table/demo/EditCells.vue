@@ -103,7 +103,7 @@ const onEdit = (record: Data, type: 'name' | 'age' | 'address') => {
 
 const onSave = (record: Data, type: 'name' | 'age' | 'address') => {
   if (editControl.valid.value) {
-    // 发起请求，成功后刷新数据
+    // 发起请求，成功后刷新数据, 最好只更新当前行的数据，
     record[type] = editControl.getValue()
     record.editable = undefined
   } else {

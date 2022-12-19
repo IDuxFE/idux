@@ -1,24 +1,25 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 import { version as currentVersion } from '@idux/components/version'
 
 const selectVersion = ref(currentVersion)
-const versions = ref([currentVersion])
+const versions = computed(() => {
+  const [major, minor] = currentVersion.split('.')
+  const minorVersions = []
+  for (let index = Number(minor) - 1; index >= 0; index--) {
+    minorVersions.push(`${major}.${index}.x`)
+  }
+  const majorVersion = []
+  for (let index = Number(major) - 1; index >= 1; index--) {
+    majorVersion.push(`${index}.x`)
+  }
+  return [currentVersion].concat(minorVersions, majorVersion)
+})
 const dataSource = computed(() => versions.value.map(v => ({ key: v, label: v })))
 
 watch(selectVersion, version => {
   window.location.href = `${window.location.origin}/version/${version}`
-})
-
-onMounted(() => {
-  // eslint-disable-next-line no-undef
-  fetch(__BASE_URL__ + `config.json`)
-    .then(res => res.json())
-    .then(config => {
-      const { preVersions } = config
-      versions.value = [currentVersion, ...preVersions]
-    })
 })
 </script>
 
