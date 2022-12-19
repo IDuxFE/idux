@@ -1,8 +1,8 @@
 ---
 title:
-  zh: 可编辑行(多行)
+  zh: 可编辑行(单行)
   en: Editable rows
-order: 88
+order: 87
 ---
 
 ## zh
