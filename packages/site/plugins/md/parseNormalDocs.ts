@@ -10,7 +10,7 @@ export function parseNormalDocs(id: string, raw: string): string {
   // 用 title 判断是否为 global docs
   const isGlobal = !!meta.title
   const isChangeLog = filename.startsWith('Changelog')
-  const toc = generateToc(content, isGlobal, isChangeLog)
+  const toc = isChangeLog ? '' : generateToc(content)
   const markedContent = marked(content)
 
   if (isGlobal) {
@@ -40,7 +40,7 @@ interface NewHeading extends marked.Tokens.Heading {
   children?: NewHeading[]
 }
 
-function generateToc(content: string, isGlobal: boolean, isChangeLog: boolean): string {
+function generateToc(content: string): string {
   const lexer = new marked.Lexer()
   const tokens = lexer.lex(content)
   const res: NewHeading[] = []
@@ -58,24 +58,23 @@ function generateToc(content: string, isGlobal: boolean, isChangeLog: boolean): 
       if (item.depth === depthFlag) {
         res.push({ ...item, children: [] })
         lastDepth2Index++
-      } else if (!isChangeLog && item.depth - 1 === depthFlag) {
+      } else if (item.depth - 1 === depthFlag) {
         res[lastDepth2Index]?.children!.push(item)
       }
     }
   })
 
   const render = (headings: NewHeading) => {
-    const children = headings.children
-    const lowerText = headings.text.toLowerCase().replace(/[\s?.]/g, '-')
-    const text = headings.text.replace(/__.*$/, '')
+    const { text, children } = headings
+
     if (children?.length) {
       let str = ''
       for (const item of children) {
         str += render(item)
       }
-      return `<IxAnchorLink href="#${lowerText}" title="${text}">${str}</IxAnchorLink>`
+      return `<IxAnchorLink href="#${text}" title="${text}">${str}</IxAnchorLink>`
     } else {
-      return `<IxAnchorLink href="#${lowerText}" title="${text}" />`
+      return `<IxAnchorLink href="#${text}" title="${text}" />`
     }
   }
   return `<IxAnchor class="site-anchor" affix :offset="16">${res.map(render).join('')}</IxAnchor>`
