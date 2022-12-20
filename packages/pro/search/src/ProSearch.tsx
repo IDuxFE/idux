@@ -98,6 +98,17 @@ export default defineComponent({
         zIndex: currentZIndex.value,
       }),
     )
+    const searchItemContainerStyle = computed(() => {
+      if (!focused.value) {
+        return normalizeStyle({
+          height: 0,
+          width: 0,
+          opacity: 0,
+        })
+      }
+
+      return undefined
+    })
 
     expose({ focus, blur })
 
@@ -167,7 +178,7 @@ export default defineComponent({
                 getKey={item => item.key}
                 maxLabel={props.maxLabel}
               />
-              <div class={`${prefixCls}-search-item-container`} v-show={focused.value}>
+              <div class={`${prefixCls}-search-item-container`} style={searchItemContainerStyle.value}>
                 {searchItems.value?.map(item => (
                   <SearchItemComp key={item.key} searchItem={item} />
                 ))}

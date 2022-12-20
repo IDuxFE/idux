@@ -54,7 +54,6 @@ export default defineComponent({
     const classes = computed(() => {
       return normalizeClass({
         [prefixCls.value]: true,
-        [`${prefixCls.value}-tag`]: !isActive.value,
         [`${prefixCls.value}-invalid`]: !!props.searchItem?.error,
       })
     })
