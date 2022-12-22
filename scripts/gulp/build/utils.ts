@@ -36,7 +36,7 @@ const writePackageJson = (distDirname: string, packageName: string, compName: st
   "module": "./index.js",
   "typings": "./index.d.ts",
   "style": "./style/themes/default.css",
-  "sideEffects": false
+  "sideEffects": ["*.css", "*.less"]
 }`,
   )
 }

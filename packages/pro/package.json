@@ -30,7 +30,10 @@
   "style": "./default.css",
   "unpkg": "./index.full.js",
   "jsdelivr": "./index.full.js",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css",
+    "*.less"
+  ],
   "scripts": {},
   "dependencies": {
     "@idux/cdk": "^1.3.0",
