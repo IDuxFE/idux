@@ -78,11 +78,10 @@ const loadIconDynamically = (iconName: string) => {
   return fetch(`/idux-icons/${iconName}.svg`).then((res) => res.text());
 };
 
-const globalConfig = createGlobalConfig({
-  // 默认为中文，可以打开注释设置为其他语言
-  // locale: enUS,
-  icon: { loadIconDynamically },
-});
+const customConfig = { icon: { loadIconDynamically } }
+// 如果是 seer 主题
+// customConfig = merge(seerConfig, { icon: { loadIconDynamically } })
+const globalConfig = createGlobalConfig(customConfig)
 
 const install = (app: App): void => {
   app.use(IduxCdk).use(IduxComponents).use(IduxPro).use(globalConfig);

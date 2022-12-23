@@ -34,6 +34,7 @@ import type { SpinSize, SpinTipAlignType } from '@idux/components/spin'
 import type { StepperLabelPlacement, StepperSize } from '@idux/components/stepper'
 import type {
   TableColumnAlign,
+  TableColumnIndexable,
   TableColumnSortOrder,
   TableEmptyCellOptions,
   TablePaginationPosition,
@@ -465,6 +466,7 @@ export interface TableConfig {
   columnBase: TableColumnBaseConfig
   columnExpandable: TableColumnExpandableConfig
   columnSelectable: TableColumnSelectableConfig
+  columnIndexable: Omit<TableColumnIndexable, 'type'>
 }
 
 export interface TableColumnBaseConfig {

@@ -21,12 +21,7 @@ import {
 import { debounce, isNil } from 'lodash-es'
 
 import { type VKey, flattenNode } from '@idux/cdk/utils'
-import {
-  type TableColumnBaseConfig,
-  type TableColumnExpandableConfig,
-  TableColumnSelectableConfig,
-  type TableConfig,
-} from '@idux/components/config'
+import { type TableConfig } from '@idux/components/config'
 
 import { tableColumnKey } from '../column'
 import {
@@ -48,12 +43,7 @@ export function useColumns(
 ): ColumnsContext {
   const mergedColumns = computed(() => {
     const { columns } = props
-    return mergeColumns(
-      columns && columns.length > 0 ? columns : convertColumns(slots.default?.()),
-      config.columnBase,
-      config.columnExpandable,
-      config.columnSelectable,
-    )
+    return mergeColumns(columns && columns.length > 0 ? columns : convertColumns(slots.default?.()), config)
   })
   const { flattedColumns, scrollBarColumn, flattedColumnsWithScrollBar } = useFlattedColumns(
     mergedColumns,
@@ -108,7 +98,7 @@ export interface ColumnsContext {
 }
 
 export type TableColumnMerged = (TableColumnMergedBase | TableColumnMergedExpandable | TableColumnMergedSelectable) & {
-  type?: 'selectable' | 'expandable' | 'scroll-bar'
+  type?: 'selectable' | 'expandable' | 'scroll-bar' | 'indexable'
 }
 export type TableColumnMergedExtra =
   | TableColumnMergedBaseExtra
@@ -151,13 +141,8 @@ export interface TableColumnScrollBar {
 
 export type TableColumnMergedScrollBar = TableColumnMergedBaseExtra & TableColumnScrollBar
 
-function mergeColumns(
-  columns: TableColumn[],
-  baseConfig: TableColumnBaseConfig,
-  expandableConfig: TableColumnExpandableConfig,
-  selectableConfig: TableColumnSelectableConfig,
-): TableColumnMerged[] {
-  return columns.map(column => convertColumn(column, baseConfig, expandableConfig, selectableConfig))
+function mergeColumns(columns: TableColumn[], config: TableConfig): TableColumnMerged[] {
+  return columns.map(column => convertColumn(column, config))
 }
 
 export function convertColumns(nodes: VNode[] | undefined): TableColumn[] {
@@ -192,25 +177,25 @@ export function convertColumns(nodes: VNode[] | undefined): TableColumn[] {
   return columns
 }
 
-function convertColumn(
-  column: TableColumn,
-  baseConfig: TableColumnBaseConfig,
-  expandableConfig: TableColumnExpandableConfig,
-  selectableConfig: TableColumnSelectableConfig,
-): TableColumnMerged {
-  const { align = baseConfig.align } = column
+function convertColumn(column: TableColumn, config: TableConfig): TableColumnMerged {
+  const { columnBase, columnExpandable, columnSelectable, columnIndexable } = config
+  const { align = columnBase.align } = column
   const key = getColumnKey(column)
 
   if ('type' in column) {
     const { type } = column
     if (type === 'expandable') {
-      const { icon = expandableConfig.icon } = column
+      const { icon = columnExpandable.icon } = column
       return { ...column, key, align, icon }
     }
     if (type === 'selectable') {
       // The default value for `multiple` is true
-      const { multiple = true, showIndex = selectableConfig.showIndex } = column
+      const { multiple = true, showIndex = columnSelectable.showIndex } = column
       return { ...column, key, align, multiple, showIndex } as TableColumnMerged
+    }
+    if (type === 'indexable') {
+      const align = column.align ?? columnIndexable.align ?? columnBase.align
+      return { ...columnIndexable, ...column, align, key } as TableColumnMerged
     }
     // for ProTable to support more type
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -220,13 +205,13 @@ function convertColumn(
     const { sortable, filterable, children } = column
     const newColumn = { ...column, key, align }
     if (sortable) {
-      newColumn.sortable = { ...baseConfig.sortable, ...sortable }
+      newColumn.sortable = { ...columnBase.sortable, ...sortable }
     }
     if (filterable) {
-      newColumn.filterable = { ...baseConfig.filterable, ...filterable }
+      newColumn.filterable = { ...columnBase.filterable, ...filterable }
     }
     if (children?.length) {
-      newColumn.children = mergeColumns(children, baseConfig, expandableConfig, selectableConfig)
+      newColumn.children = mergeColumns(children, config)
     }
     return newColumn
   }

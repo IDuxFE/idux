@@ -48,7 +48,9 @@ export type TableColumn<T = any, V = any> =
   | TableColumnSelectable<T>
 ```
 
-#### 通用配置。
+#### TableColumnCommon
+
+所有列的通用配置。
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -59,7 +61,7 @@ export type TableColumn<T = any, V = any> =
 | `titleColSpan` | 设置表头的 `colSpan` | - | - | - | 为 `0` 时，不渲染 |
 | `width` | 列宽度 | `string \| number` | - | - | - |
 
-##### TableColumnBase
+#### TableColumnBase
 
 普通列配置的属性。
 
@@ -74,7 +76,7 @@ export type TableColumn<T = any, V = any> =
 | `customCell` | 自定义单元格内容 | `string \| ((data: { value: V; record: T; rowIndex: number }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
 | `customTitle` | 自定义表头标题 | `string \| ((data: { title?: string }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
 
-##### TableColumnExpandable
+#### TableColumnExpandable
 
 可展开列配置的属性, 继承 `TableColumnBase`。
 
@@ -90,7 +92,7 @@ export type TableColumn<T = any, V = any> =
 | `customExpand` | 自定义展开内容 | `string \| ((data: { record: T; rowIndex: number }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
 | `customIcon` | 自定义展开图标 | `string \| ((data: { expanded: boolean; record: T }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
 
-##### TableColumnSelectable
+#### TableColumnSelectable
 
 可选择列配置的属性。
 
@@ -111,7 +113,19 @@ export type TableColumn<T = any, V = any> =
 | `onSelectPageInvert` | 点击反选当页所有时触发 | `() => void` | - | - | 配置 `menus= ['pageInvert']` 时生效 |
 | `customCell` | 自定义单元格内容 | `string \| ((data: { checked: boolean;  disabled: boolean;  indeterminate?: boolean, onChange: () => void,  onClick: () => void }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
 
-##### TableColumnSortable
+#### TableColumnIndexable
+
+序号列配置的属性。
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `type` | 列类型 | `'indexable'` | - | - | 必填 |
+| `ellipsis` | 超过宽度将自动省略 | `boolean \| { title?: boolean; head?: boolean }` | - | ✅ | -  |
+| `title` | 列头的文本 | `string` | - | ✅ | - |
+| `customCell` | 自定义单元格内容 | `string \| ((data: { record: T; rowIndex: number, pageSize: number, pageIndex: number }) => VNodeChild)` | ✅ | - | 类型为 `string` 时，对应插槽名 |
+| `customTitle` | 自定义表头标题 | `string \| ((data: { title?: string }) => VNodeChild)` | - | ✅ | 类型为 `string` 时，对应插槽名 |
+
+#### TableColumnSortable
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
@@ -122,7 +136,7 @@ export type TableColumn<T = any, V = any> =
 | `sorter` | 本地模式下，排序的运行函数 | `(curr: T, next: T) => number` | - | - | 参考 [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) |
 | `onChange` | 排序规则改变后的回调 | `(currOrderBy?: TableColumnSortOrder) => void` | - | - | 通常用于受控模式或服务端排序 |
 
-##### TableColumnFilterable
+#### TableColumnFilterable
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |

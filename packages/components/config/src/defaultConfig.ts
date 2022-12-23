@@ -315,6 +315,10 @@ export const defaultConfig: GlobalConfig = {
     columnSelectable: {
       showIndex: false,
     },
+    columnIndexable: {
+      align: 'center',
+      customCell: ({ rowIndex, pageSize, pageIndex }) => (pageIndex - 1) * pageSize + rowIndex + 1,
+    },
   },
   tag: {},
   tagGroup: {

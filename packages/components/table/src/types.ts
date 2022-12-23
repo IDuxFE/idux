@@ -78,6 +78,7 @@ export type TableColumn<T = any, K = VKey> =
   | TableColumnBase<T, K>
   | TableColumnExpandable<T, K>
   | TableColumnSelectable<T, K>
+  | TableColumnIndexable<T>
 
 export interface TableColumnCommon<T = any> {
   key?: VKey
@@ -142,6 +143,14 @@ export interface TableColumnSelectable<T = any, K = VKey> extends TableColumnCom
         onChange: () => void
         onClick: () => void
       }) => VNodeChild)
+}
+
+export interface TableColumnIndexable<T = any> extends TableColumnCommon<T> {
+  type: 'indexable'
+  ellipsis?: boolean | { title?: boolean; head?: boolean }
+  title?: string
+  customCell?: string | ((data: { record: T; rowIndex: number; pageSize: number; pageIndex: number }) => VNodeChild)
+  customTitle?: string | ((data: { title?: string }) => VNodeChild)
 }
 
 export interface TableCustomAdditional<T = any, K = VKey> {
