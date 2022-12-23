@@ -70,7 +70,8 @@ export interface ProFormConfig {
 }
 
 export interface ProTableConfig {
-  columnIndexable: Omit<ProTableColumnIndexable, 'type'>
+  // @deprecated please use `columnIndexable` of TableConfig instead'
+  columnIndexable?: Omit<ProTableColumnIndexable, 'type'>
   layoutTool: {
     searchable: boolean
   }

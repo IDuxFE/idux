@@ -15,6 +15,7 @@ import type { SpinProps } from '@idux/components/spin'
 import type {
   TableColumnBase,
   TableColumnExpandable,
+  TableColumnIndexable,
   TableColumnSelectable,
   TableCustomAdditional,
   TableCustomTag,
@@ -95,7 +96,7 @@ export type ProTableColumn<T = any, K = VKey> =
   | ProTableColumnBase<T, K>
   | ProTableColumnExpandable<T, K>
   | ProTableColumnSelectable<T, K>
-  | ProTableColumnIndexable<T, K>
+  | ProTableColumnIndexable<T>
 
 export interface ProTableColumnBase<T = any, K = VKey>
   extends TableColumnBase<T, K>,
@@ -118,9 +119,10 @@ export interface ProTableColumnSelectable<T = any, K = VKey>
     ProTableColumnResizable,
     ProTableColumnLayoutConfig {}
 
-export interface ProTableColumnIndexable<T = any, K = VKey> extends ProTableColumnBase<T, K> {
-  type: 'indexable'
-}
+export interface ProTableColumnIndexable<T = any>
+  extends TableColumnIndexable<T>,
+    ProTableColumnResizable,
+    ProTableColumnLayoutConfig {}
 
 export type ProTableColumnLayoutConfig = {
   layoutable?: boolean

@@ -62,27 +62,6 @@ export type ProTableColumn<T = any, V = any, CT = 'input'> =
 
 可选择列配置的属性，继承 `TableColumnSelectable, ProTableColumnLayoutConfig, ProTableColumnResizable`
 
-##### ProTableColumnIndexable
-
-序号列配置的属性，继承 `ProTableColumnBase`
-
-| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| `type` | 列类型 | `'indexable'` | - | - | 必填 |
-
-其他的所有属性都支持全局配置，其默认配置如下：
-
-```ts
-export const defaultConfig: ProGlobalConfig = {
-  table: {
-    columnIndexable: {
-      align: 'center',
-      customCell: ({ rowIndex }) => rowIndex,
-    },
-  },
-}
-```
-
 ### IxProTableLayoutTool
 
 表格布局设置组件，大部分情况下，你都不需要使用它。

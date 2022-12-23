@@ -25,6 +25,7 @@ export type {
   TableColumnBase,
   TableColumnExpandable,
   TableColumnSelectable,
+  TableColumnIndexable,
   TableCustomAdditional,
   TableCustomTag,
   TablePagination,

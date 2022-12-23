@@ -9,8 +9,9 @@ import { type ComputedRef, type Slots, type VNodeChild, computed, defineComponen
 
 import { isFunction, isNil, isString } from 'lodash-es'
 
-import { convertArray, convertCssPixel } from '@idux/cdk/utils'
+import { Logger, convertArray, convertCssPixel } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
+import { TableConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { IxRadio } from '@idux/components/radio'
 
@@ -20,11 +21,16 @@ import {
   type TableColumnMergedSelectable,
 } from '../../composables/useColumns'
 import { TABLE_TOKEN } from '../../token'
-import { type TableBodyCellProps, tableBodyCellProps } from '../../types'
+import {
+  type TableBodyCellProps,
+  type TableColumnIndexable,
+  type TablePagination,
+  tableBodyCellProps,
+} from '../../types'
 import { getColTitle } from '../../utils'
 
 type BodyColumn = TableColumnMergedExtra & {
-  type: 'selectable' | 'expandable' | undefined
+  type: 'selectable' | 'expandable' | 'indexable' | undefined
 }
 
 export default defineComponent({
@@ -33,6 +39,7 @@ export default defineComponent({
     const {
       props: tableProps,
       slots,
+      config,
       mergedPrefixCls,
       mergedEmptyCell,
       activeOrderByMap,
@@ -41,6 +48,7 @@ export default defineComponent({
       isSticky,
       expandable,
       selectable,
+      mergedPagination,
     } = inject(TABLE_TOKEN)!
     const activeSortOrderBy = computed(() => activeOrderByMap[props.column.key])
     const dataValue = useDataValue(props)
@@ -103,7 +111,9 @@ export default defineComponent({
       let title: string | undefined
 
       if (type === 'selectable') {
-        children = renderSelectableChildren(props, slots, selectable, handleClick)
+        children = renderSelectableChildren(props, slots, selectable, handleClick, config, mergedPagination)
+      } else if (type === 'indexable') {
+        children = renderIndexableChildren(props, slots, column as TableColumnIndexable, mergedPagination)
       } else {
         const text = dataValue.value
         children = renderChildren(props, slots, text)
@@ -200,14 +210,17 @@ function renderSelectableChildren(
   slots: Slots,
   selectable: ComputedRef<TableColumnMergedSelectable | undefined>,
   onClick: (evt: Event) => void,
+  config: TableConfig,
+  mergedPagination: ComputedRef<TablePagination | null>,
 ) {
-  const { selected: checked, indeterminate, disabled, isHover, rowIndex, handleSelect: onChange } = props
+  const { selected: checked, indeterminate, disabled, isHover, handleSelect: onChange } = props
   const { showIndex, multiple, customCell } = selectable.value!
-  const customRender = isString(customCell) ? slots[customCell] : customCell
-  if (!customRender && !checked && !isHover && showIndex) {
-    const style = disabled ? 'cursor: not-allowed' : 'cursor: pointer'
-    return <span style={style}>{rowIndex}</span>
+
+  if (!checked && !isHover && showIndex) {
+    return renderIndexableChildren(props, slots, config.columnIndexable as TableColumnIndexable, mergedPagination)
   }
+
+  const customRender = isString(customCell) ? slots[customCell] : customCell
   if (multiple) {
     const checkboxProps = { checked, disabled, indeterminate, onChange, onClick }
     return customRender ? customRender(checkboxProps) : <IxCheckbox {...checkboxProps}></IxCheckbox>
@@ -215,4 +228,22 @@ function renderSelectableChildren(
     const radioProps = { checked, disabled, onChange, onClick }
     return customRender ? customRender(radioProps) : <IxRadio {...radioProps}></IxRadio>
   }
+}
+
+function renderIndexableChildren(
+  props: TableBodyCellProps,
+  slots: Slots,
+  indexable: TableColumnIndexable,
+  mergedPagination: ComputedRef<TablePagination | null>,
+) {
+  const { record, rowIndex, disabled } = props
+  const { customCell } = indexable
+  const { pageIndex = 1, pageSize = 0 } = mergedPagination.value || {}
+  const customRender = isString(customCell) ? slots[customCell] : customCell
+  if (!customRender) {
+    __DEV__ && Logger.warn('components/table', 'invalid customCell, please check the column is correct')
+    return undefined
+  }
+  const style = disabled ? 'cursor: not-allowed' : 'cursor: pointer'
+  return <span style={style}>{customRender({ record, rowIndex, pageIndex, pageSize })}</span>
 }

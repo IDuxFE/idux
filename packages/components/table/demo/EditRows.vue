@@ -214,9 +214,11 @@ const onSaveAll = () => {
 }
 
 const onCancelAll = () => {
-  data.value = data.value.map(item => {
-    item.editable = false
-    return item
-  })
+  data.value = data.value
+    .filter(item => isString(item.key) && !item.key.startsWith(addKeyPrefix))
+    .map(item => {
+      item.editable = false
+      return item
+    })
 }
 </script>

@@ -29,10 +29,6 @@ export const defaultConfig: ProGlobalConfig = {
     schemaFormatter: (fields, schema) => ({ fields: fields || {}, schema: schema || ({} as ProFormJsonSchema) }),
   },
   table: {
-    columnIndexable: {
-      align: 'center',
-      customCell: ({ rowIndex }) => rowIndex,
-    },
     layoutTool: {
       searchable: false,
     },
