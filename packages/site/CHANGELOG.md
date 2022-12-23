@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/IDuxFE/idux/compare/v1.3.0...v1.3.1) (2022-12-23)
+
+### Bug Fixes
+
+- **comp:table:** incorrect serial number ([#1370](https://github.com/IDuxFE/idux/issues/1370)) ([f19efbe](https://github.com/IDuxFE/idux/commit/f19efbe0e6a893e1211e1df97893094f68fb2c25))
+
 # [1.3.0](https://github.com/IDuxFE/idux/compare/v1.2.3...v1.3.0) (2022-12-16)
 
 ### Bug Fixes

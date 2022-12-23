@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/IDuxFE/idux/compare/v1.3.0...v1.3.1) (2022-12-23)
+
+### Bug Fixes
+
+- failed to import style file, in webpack project ([#1369](https://github.com/IDuxFE/idux/issues/1369)) ([c2288d5](https://github.com/IDuxFE/idux/commit/c2288d5f6840ca3c2b463e78add9a0efbf5f178d))
+
 # [1.3.0](https://github.com/IDuxFE/idux/compare/v1.2.3...v1.3.0) (2022-12-16)
 
 ### Bug Fixes

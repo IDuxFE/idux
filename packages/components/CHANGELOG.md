@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/IDuxFE/idux/compare/v1.3.0...v1.3.1) (2022-12-23)
+
+### Bug Fixes
+
+- **comp:modal:** reading contains after onmounted causes an exception ([#1371](https://github.com/IDuxFE/idux/issues/1371)) ([de416c1](https://github.com/IDuxFE/idux/commit/de416c10416ef4577f1fc09c108b61000e078e3e))
+- **comp:table:** incorrect serial number ([#1370](https://github.com/IDuxFE/idux/issues/1370)) ([f19efbe](https://github.com/IDuxFE/idux/commit/f19efbe0e6a893e1211e1df97893094f68fb2c25))
+- **comp:textarea:** lineheight error when not rendered initially ([#1372](https://github.com/IDuxFE/idux/issues/1372)) ([627e018](https://github.com/IDuxFE/idux/commit/627e01800c24cc96891920e89c9a8af077691449))
+- **comp:time-picker:** range with empty array shouldn't be clearable ([#1365](https://github.com/IDuxFE/idux/issues/1365)) ([e6800a7](https://github.com/IDuxFE/idux/commit/e6800a74abb6c64c7c76de1564711c9c6be0b12b))
+- **comp:tree:** indeterminateKeys shouldn't check disabled state ([#1373](https://github.com/IDuxFE/idux/issues/1373)) ([0607e5c](https://github.com/IDuxFE/idux/commit/0607e5cf958f561f9dbd3a1d5199f143e4127d71))
+- failed to import style file, in webpack project ([#1369](https://github.com/IDuxFE/idux/issues/1369)) ([c2288d5](https://github.com/IDuxFE/idux/commit/c2288d5f6840ca3c2b463e78add9a0efbf5f178d))
+
 # [1.3.0](https://github.com/IDuxFE/idux/compare/v1.2.3...v1.3.0) (2022-12-16)
 
 ### Bug Fixes
