@@ -20,7 +20,7 @@ import { useLineHeight } from './useLineHeight'
 
 export interface AutoRowsContext {
   resizeToFitContent: (force?: boolean) => void
-  lineHeight: ComputedRef<number>
+  lineHeight: Ref<number>
   boxSizingData: ComputedRef<BoxSizingData>
 }
 

@@ -15,7 +15,7 @@ export interface ProTextareaContext extends ErrorLinesContext {
   props: ProTextareaProps
   accessor: FormAccessor
   boxSizingData: ComputedRef<ɵBoxSizingData>
-  lineHeight: ComputedRef<number>
+  lineHeight: Ref<number>
   mergedPrefixCls: ComputedRef<string>
   rowCounts: ComputedRef<number[]>
   textareaRef: Ref<HTMLTextAreaElement | undefined>

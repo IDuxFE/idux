@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type Ref, computed } from 'vue'
+import { type Ref, customRef, watch } from 'vue'
 
 import { getBoxSizingData } from '../utils/getBoxSizingData'
 import { measureTextarea } from '../utils/measureTextarea'
@@ -16,8 +16,30 @@ import { measureTextarea } from '../utils/measureTextarea'
  * @param textareaRef reference of a textarea element
  * @return ComputedRef of line height
  */
-export function useLineHeight(textareaRef: Ref<HTMLTextAreaElement | undefined>): ComputedRef<number> {
-  return computed(() => calcTextareaLineHeight(textareaRef.value))
+export function useLineHeight(textareaRef: Ref<HTMLTextAreaElement | undefined>): Ref<number> {
+  let lineHeight = 0
+
+  return customRef((track, trigger) => {
+    watch(textareaRef, () => {
+      lineHeight = calcTextareaLineHeight(textareaRef.value)
+      trigger()
+    })
+
+    return {
+      get() {
+        if (!textareaRef.value) {
+          return 0
+        }
+
+        const value = lineHeight || (lineHeight = calcTextareaLineHeight(textareaRef.value))
+        track()
+        return value
+      },
+      set() {
+        // this is readonly, no setter provided
+      },
+    }
+  })
 }
 
 function calcTextareaLineHeight(textarea: HTMLTextAreaElement | undefined): number {
@@ -40,7 +62,7 @@ function calcTextareaLineHeight(textarea: HTMLTextAreaElement | undefined): numb
       const lineHeight = el.scrollHeight - paddingSize
       el.rows = rows
 
-      return lineHeight
+      return lineHeight > 0 ? lineHeight : 0
     },
     false,
   )
