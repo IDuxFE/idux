@@ -37,7 +37,7 @@ export default defineComponent({
   props: menuSubProps,
   setup(props) {
     const common = useGlobalConfig('common')
-    const mergedTransitionName = computed(() => `${common.prefixCls}-fade`)
+    const mergedTransitionName = computed(() => `${common.prefixCls}-fade-fast`)
 
     // menuContext must exist
     const {

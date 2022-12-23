@@ -240,9 +240,9 @@ function watchVisibleChange(
     () => props.visible,
     visible => {
       if (visible) {
-        const wrapperElement = wrapperRef.value!
+        const wrapperElement = wrapperRef.value
         const activeElement = document.activeElement
-        if (!wrapperElement.contains(activeElement)) {
+        if (wrapperElement && !wrapperElement.contains(activeElement)) {
           lastOutSideActiveElement = activeElement as HTMLElement
           sentinelStartRef.value?.focus()
         }
@@ -329,9 +329,9 @@ function useEvents(
 ) {
   let lastOutSideActiveElement: HTMLElement | null = null
   const onEnter = () => {
-    const wrapperElement = wrapperRef.value!
+    const wrapperElement = wrapperRef.value
     const activeElement = document.activeElement
-    if (!wrapperElement.contains(activeElement)) {
+    if (wrapperElement && !wrapperElement.contains(activeElement)) {
       lastOutSideActiveElement = activeElement as HTMLElement
     }
 
@@ -347,9 +347,9 @@ function useEvents(
   }
 
   const onAfterEnter = () => {
-    const wrapperElement = wrapperRef.value!
+    const wrapperElement = wrapperRef.value
     const activeElement = document.activeElement
-    if (!wrapperElement.contains(activeElement)) {
+    if (wrapperElement && !wrapperElement.contains(activeElement)) {
       wrapperElement.focus()
     }
 
@@ -366,7 +366,7 @@ function useEvents(
         !activeElement ||
         activeElement === document.body ||
         activeElement === wrapperElement ||
-        wrapperElement.contains(activeElement)
+        (wrapperElement && wrapperElement.contains(activeElement))
       ) {
         lastOutSideActiveElement.focus()
       }
