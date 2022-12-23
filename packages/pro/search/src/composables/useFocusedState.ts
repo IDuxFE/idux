@@ -62,15 +62,20 @@ export function useFocusedState(
     setFocused(false)
   }
 
-  registerHandlers(elementRef, () => getContainerEl(commonOverlayProps.value.container), _handleFocus, handleBlur)
+  registerHandlers(elementRef, () => getContainerEl(commonOverlayProps.value), _handleFocus, handleBlur)
 
   return { focused, focus, blur }
 }
 
-function getContainerEl(containerProp: ɵOverlayProps['container']): HTMLElement | null {
-  const container = isFunction(containerProp) ? containerProp() : containerProp
+function getContainerEl(commonOverlayProps: ɵOverlayProps): HTMLElement | null {
+  const container = isFunction(commonOverlayProps.container)
+    ? commonOverlayProps.container()
+    : commonOverlayProps.container
+  const resolvedContainer = container ?? commonOverlayProps.containerFallback
 
-  return isString(container) ? document.querySelector(/^[.#]/.test(container) ? container : `.${container}`) : container
+  return isString(resolvedContainer)
+    ? document.querySelector(/^[.#]/.test(resolvedContainer) ? resolvedContainer : `.${resolvedContainer}`)
+    : resolvedContainer
 }
 
 function useFocusHandlers(
