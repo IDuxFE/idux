@@ -55,20 +55,15 @@ export function useCheckable(props: TreeProps, mergedNodeMap: ComputedRef<Map<VK
     }
 
     const indeterminateKeySet = new Set<VKey>()
-    const disabledKeys = checkDisabledKeys.value
     const nodeMap = mergedNodeMap.value
     _checkedKeys.forEach(key => {
       const { parentKey } = nodeMap.get(key) || {}
       if (!isNil(parentKey)) {
         let parent = nodeMap.get(parentKey)
         if (parent && !_checkedKeys.includes(parent.key)) {
-          if (!disabledKeys.includes(parentKey)) {
-            indeterminateKeySet.add(parentKey)
-          }
+          indeterminateKeySet.add(parentKey)
           while (parent && !isNil(parent.parentKey)) {
-            if (!disabledKeys.includes(parent.parentKey)) {
-              indeterminateKeySet.add(parent.parentKey)
-            }
+            indeterminateKeySet.add(parent.parentKey)
             parent = nodeMap.get(parent.parentKey)
           }
         }
