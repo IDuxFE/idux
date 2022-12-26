@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, computed, reactive, watch } from 'vue'
+import { type ComputedRef, type Ref, computed, reactive, ref, watch } from 'vue'
 
 import { type VKey, callEmit } from '@idux/cdk/utils'
 
@@ -13,7 +13,7 @@ import { type TableColumnSortOrder, type TableColumnSortable } from '../types'
 import { type TableColumnMerged } from './useColumns'
 
 export interface SortableContext {
-  activeSorters: ComputedRef<ActiveSorter[]>
+  activeSorters: Ref<ActiveSorter[]>
   activeOrderByMap: Record<VKey, TableColumnSortOrder | undefined>
   handleSort: (key: VKey, sortable: TableColumnSortable) => void
 }
@@ -27,8 +27,9 @@ export interface ActiveSorter {
 
 export function useSortable(flattedColumns: ComputedRef<TableColumnMerged[]>): SortableContext {
   const sortableColumns = computed(() => flattedColumns.value.filter(column => column.sortable))
-  const activeOrderByMap = reactive<Record<VKey, TableColumnSortOrder | undefined>>({})
   const multipleEnabled = computed(() => sortableColumns.value.some(column => column.sortable!.multiple !== undefined))
+  const activeOrderByMap = reactive<Record<VKey, TableColumnSortOrder | undefined>>({})
+  const activeSorters = ref<ActiveSorter[]>([])
 
   watch(
     sortableColumns,
@@ -48,19 +49,9 @@ export function useSortable(flattedColumns: ComputedRef<TableColumnMerged[]>): S
           activeOrderByMap[key] = undefined
         }
       })
+      activeSorters.value = getActiveSorters(currColumns, activeOrderByMap)
     },
     { immediate: true },
-  )
-
-  const activeSorters = computed(() =>
-    sortableColumns.value
-      .map(column => {
-        const { key, sortable } = column
-        const { multiple = 0, orderBy = activeOrderByMap[key], sorter } = sortable!
-        return { key, multiple, orderBy, sorter } as ActiveSorter
-      })
-      .filter(item => item.orderBy)
-      .sort((c1, c2) => c2.multiple - c1.multiple),
   )
 
   const handleSort = (activeKey: VKey, activeSortable: TableColumnSortable) => {
@@ -80,7 +71,7 @@ export function useSortable(flattedColumns: ComputedRef<TableColumnMerged[]>): S
         }
       })
     }
-
+    activeSorters.value = getActiveSorters(sortableColumns.value, activeOrderByMap)
     callEmit(onChange, nextOrderBy, activeSorters.value)
   }
 
@@ -93,4 +84,18 @@ function getNextOrderBy(orders: TableColumnSortOrder[], currOrderBy?: TableColum
   }
 
   return orders[orders.indexOf(currOrderBy) + 1]
+}
+
+function getActiveSorters(
+  sortableColumns: TableColumnMerged[],
+  activeOrderByMap: Record<VKey, TableColumnSortOrder | undefined>,
+) {
+  return sortableColumns
+    .map(column => {
+      const { key, sortable } = column
+      const { multiple = 0, orderBy = activeOrderByMap[key], sorter } = sortable!
+      return { key, multiple, orderBy, sorter } as ActiveSorter
+    })
+    .filter(item => item.orderBy)
+    .sort((c1, c2) => c2.multiple - c1.multiple)
 }

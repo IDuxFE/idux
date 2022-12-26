@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, computed, reactive, watch } from 'vue'
+import { type ComputedRef, type Ref, computed, reactive, ref, watch } from 'vue'
 
 import { type VKey, callEmit } from '@idux/cdk/utils'
 
@@ -13,8 +13,8 @@ import { type TableColumnFilterable } from '../types'
 import { type TableColumnMerged } from './useColumns'
 
 export interface FilterableContext {
-  activeFilters: ComputedRef<ActiveFilter[]>
-  activeFilterByMap: Record<VKey, VKey[]>
+  activeFilters: Ref<ActiveFilter[]>
+  activeFilterByMap: Record<VKey, VKey[] | undefined>
   handleFilter: (key: VKey, filterable: TableColumnFilterable, filterBy: VKey[]) => void
 }
 
@@ -27,6 +27,7 @@ export interface ActiveFilter {
 export function useFilterable(flattedColumns: ComputedRef<TableColumnMerged[]>): FilterableContext {
   const filterableColumns = computed(() => flattedColumns.value.filter(column => column.filterable))
   const activeFilterByMap = reactive<Record<VKey, VKey[]>>({})
+  const activeFilters = ref<ActiveFilter[]>([])
 
   watch(
     filterableColumns,
@@ -46,26 +47,16 @@ export function useFilterable(flattedColumns: ComputedRef<TableColumnMerged[]>):
           activeFilterByMap[key] = []
         }
       })
+      activeFilters.value = getActiveFilters(currColumns, activeFilterByMap)
     },
     { immediate: true },
-  )
-
-  const activeFilters = computed(
-    () =>
-      filterableColumns.value
-        .map(column => {
-          const { key, filterable } = column
-          const { filter, filterBy = activeFilterByMap[key] } = filterable!
-          return { key, filter, filterBy }
-        })
-        .filter(item => item.filter && item.filterBy.length > 0) as ActiveFilter[],
   )
 
   const handleFilter = (activeKey: VKey, activeFilterable: TableColumnFilterable, filterBy: VKey[]) => {
     const { onChange } = activeFilterable
 
     activeFilterByMap[activeKey] = filterBy
-
+    activeFilters.value = getActiveFilters(filterableColumns.value, activeFilterByMap)
     callEmit(onChange, filterBy, activeFilters.value)
   }
 
@@ -74,4 +65,14 @@ export function useFilterable(flattedColumns: ComputedRef<TableColumnMerged[]>):
     activeFilterByMap,
     handleFilter,
   }
+}
+
+function getActiveFilters(filterableColumns: TableColumnMerged[], activeFilterByMap: Record<VKey, VKey[]>) {
+  return filterableColumns
+    .map(column => {
+      const { key, filterable } = column
+      const { filter, filterBy = activeFilterByMap[key] } = filterable!
+      return { key, filter, filterBy }
+    })
+    .filter(item => item.filter && item.filterBy.length > 0) as ActiveFilter[]
 }
