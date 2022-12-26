@@ -18,7 +18,7 @@ import {
 
 import { isFunction, isObject, isString } from 'lodash-es'
 
-import { type VKey, convertCssPixel } from '@idux/cdk/utils'
+import { NoopArray, type VKey, convertCssPixel } from '@idux/cdk/utils'
 
 import { type TableColumnMergedExtra } from '../../composables/useColumns'
 import { TABLE_TOKEN } from '../../token'
@@ -104,7 +104,7 @@ export default defineComponent({
     })
 
     const activeSortOrderBy = computed(() => activeOrderByMap[props.column.key])
-    const activeFilterBy = computed(() => activeFilterByMap[props.column.key])
+    const activeFilterBy = computed(() => activeFilterByMap[props.column.key] || NoopArray)
     const onUpdateFilterBy = (filterBy: VKey[]) => {
       const { key, filterable } = props.column
       handleFilter(key, filterable!, filterBy)
