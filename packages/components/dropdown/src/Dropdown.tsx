@@ -9,10 +9,10 @@ import { computed, defineComponent, provide, toRef } from 'vue'
 
 import { useControlledProp } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
-import { type DropdownConfig, useGlobalConfig } from '@idux/components/config'
+import { useGlobalConfig } from '@idux/components/config'
 
 import { dropdownToken } from './token'
-import { type DropdownProps, dropdownProps } from './types'
+import { dropdownProps } from './types'
 
 const defaultDelay: [number, number] = [0, 100]
 
@@ -25,40 +25,31 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-dropdown`)
 
     const [visibility, setVisibility] = useControlledProp(props, 'visible', false)
-    const configProps = useConfigProps(props, config, setVisibility)
 
     provide(dropdownToken, { hideOnClick: toRef(props, 'hideOnClick'), setVisibility })
 
     return () => {
-      return (
-        <ɵOverlay
-          visible={visibility.value}
-          v-slots={{ default: slots.default, content: slots.overlay }}
-          class={mergedPrefixCls.value}
-          container={props.overlayContainer ?? config.overlayContainer}
-          containerFallback={`.${mergedPrefixCls.value}-overlay-container`}
-          delay={defaultDelay}
-          disabled={props.disabled}
-          transitionName={`${common.prefixCls}-fade`}
-          {...configProps.value}
-        />
-      )
+      const { trigger = config.trigger, placement = config.placement } = props
+
+      const overlayProps = {
+        class: mergedPrefixCls.value,
+        autoAdjust: props.autoAdjust ?? config.autoAdjust,
+        clickOutside: trigger === 'click' || trigger === 'contextmenu',
+        container: props.overlayContainer ?? config.overlayContainer,
+        containerFallback: `.${mergedPrefixCls.value}-overlay-container`,
+        delay: defaultDelay,
+        destroyOnHide: props.destroyOnHide ?? config.destroyOnHide,
+        disabled: props.disabled,
+        offset: props.offset ?? config.offset,
+        placement,
+        showArrow: props.showArrow ?? config.showArrow,
+        transitionName: `${common.prefixCls}-${placement.startsWith('top') ? 'slide-down' : 'slide-up'}`,
+        trigger,
+        visible: visibility.value,
+        ['onUpdate:visible']: setVisibility,
+      } as const
+
+      return <ɵOverlay v-slots={{ default: slots.default, content: slots.overlay }} {...overlayProps} />
     }
   },
 })
-
-function useConfigProps(props: DropdownProps, config: DropdownConfig, setVisibility: (value: boolean) => void) {
-  return computed(() => {
-    const trigger = props.trigger ?? config.trigger
-    return {
-      autoAdjust: props.autoAdjust ?? config.autoAdjust,
-      clickOutside: trigger === 'click' || trigger === 'contextmenu',
-      destroyOnHide: props.destroyOnHide ?? config.destroyOnHide,
-      offset: props.offset ?? config.offset,
-      placement: props.placement ?? config.placement,
-      showArrow: props.showArrow ?? config.showArrow,
-      trigger: trigger,
-      ['onUpdate:visible']: setVisibility,
-    }
-  })
-}
