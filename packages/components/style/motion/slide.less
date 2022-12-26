@@ -1,6 +1,6 @@
 @import '../variable/animation.less';
 
-.slide-motion(@className, @origin, @scale, @duration: @transition-duration-base) {
+.slide-motion(@className, @origin, @duration: var(--ix-transition-duration-medium)) {
   .@{idux-prefix}-@{className}-enter-active,
   .@{idux-prefix}-@{className}-leave-active {
     transform-origin: @origin;
@@ -9,21 +9,21 @@
   }
 
   .@{idux-prefix}-@{className}-enter-active {
-    transition-timing-function: @ease-out-quint;
+    transition-timing-function: var(--ix-ease-out-quint);
   }
 
   .@{idux-prefix}-@{className}-leave-active {
-    transition-timing-function: @ease-in-quint;
+    transition-timing-function: var(--ix-ease-in-quint);
   }
 
   .@{idux-prefix}-@{className}-enter-from,
   .@{idux-prefix}-@{className}-leave-to {
-    transform: @scale;
+    transform: scaleY(0.8);
     opacity: 0;
   }
 }
 
-.slide-motion(slide-up, @scale-origin-slide-up, @scale-slide-up);
-.slide-motion(slide-down, @scale-origin-slide-down, @scale-slide-down);
-.slide-motion(slide-left, @scale-origin-slide-left, @scale-slide-left);
-.slide-motion(slide-right, @scale-origin-slide-right, @scale-slide-right);
+.slide-motion(slide-up, 0% 0%);
+.slide-motion(slide-down, 100% 100%);
+.slide-motion(slide-left, 0% 0%);
+.slide-motion(slide-right, 100% 0);

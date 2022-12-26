@@ -37,7 +37,6 @@ export default defineComponent({
   props: menuSubProps,
   setup(props) {
     const common = useGlobalConfig('common')
-    const mergedTransitionName = computed(() => `${common.prefixCls}-fade-fast`)
 
     // menuContext must exist
     const {
@@ -124,7 +123,7 @@ export default defineComponent({
             disabled={disabled}
             offset={offset.value}
             placement={placement.value}
-            transitionName={mergedTransitionName.value}
+            transitionName={`${common.prefixCls}-slide-up`}
             trigger="manual"
             visible={isExpanded.value}
           />
