@@ -2,16 +2,17 @@
 @import '../../style/mixins/ellipsis.less';
 
 .@{anchor-prefix} {
-  .reset-component();
-
   position: relative;
-  padding: @spacing-xs 0 @spacing-xs @anchor-border-width;
+  padding: 4px 0 4px @anchor-ink-ball-width;
 
   &-wrapper {
-    margin-left: @anchor-wrapper-margin-left;
-    padding-left: @anchor-wrapper-padding-left;
+    .reset-component-new();
+    .reset-font-size();
+    .reset-color();
+
+    margin-left: -4px;
+    padding-left: 4px;
     overflow: auto;
-    background-color: @anchor-background-color;
   }
 
   &-ink {
@@ -23,10 +24,10 @@
     &::before {
       position: relative;
       display: block;
-      width: @anchor-ink-line-width;
+      width: 1px;
       height: 100%;
       margin: 0 auto;
-      background-color: @anchor-border-color;
+      background-color: var(--ix-border-color);
       content: ' ';
     }
 
@@ -35,9 +36,9 @@
       display: none;
       width: @anchor-ink-ball-width;
       height: @anchor-ink-ball-height;
-      background-color: @anchor-ink-ball-background-color;
-      border-radius: @anchor-ink-ball-radius;
-      transition: top @transition-duration-base @ease-in-out;
+      border-radius: @anchor-ink-ball-width;
+      background-color: @anchor-color-active;
+      transition: top var(--ix-transition-duration-fast) var(--ix-ease-in-out);
 
       &-visible {
         display: inline-block;
@@ -57,25 +58,19 @@
   }
 
   &-link {
-    margin: @anchor-link-margin;
-    line-height: @anchor-link-line-height;
+    margin: 8px 0 8px 16px;
 
     &-title {
       .ellipsis();
 
       position: relative;
       display: block;
-      font-size: @anchor-link-font-size;
-      color: @anchor-color;
       text-decoration: none;
-      transition: @transition-all-base;
+      transition: color var(--ix-transition-duration-fast);
 
-      &:hover {
-        color: @anchor-link-hover-color;
-      }
-      
+      &:hover,
       &-active {
-        color: @anchor-link-active-color;
+        color: @anchor-color-active;
       }
     }
   }
