@@ -42,4 +42,5 @@ export type {
 } from './src/types'
 
 // private
+export { tableProps as ɵTableProps } from './src/types'
 export { getColumnKey as ɵGetColumnKey } from './src/utils'
