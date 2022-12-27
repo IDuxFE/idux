@@ -1,6 +1,6 @@
 ---
 category: components
-type: 其他
+type: 导航
 title: Anchor
 subtitle: 锚点
 theme: true

@@ -1,7 +1,8 @@
 @import '../../style/mixins/reset.less';
 
 .@{avatar-prefix} {
-  .reset-component();
+  .reset-component-new();
+  .reset-color(@avatar-color, @avatar-background-color);
 
   position: relative;
   display: inline-block;
@@ -9,8 +10,6 @@
   vertical-align: middle;
   white-space: nowrap;
   overflow: hidden;
-  color: @avatar-color;
-  background-color: @avatar-background-color;
 
   &-circle {
     border-radius: @avatar-border-radius-circle;
@@ -25,15 +24,15 @@
   }
 
   &-lg {
-    .avatar-size(@avatar-size-lg, @avatar-font-size-lg);
+    .avatar-size(@avatar-size-lg);
   }
 
   &-md {
-    .avatar-size(@avatar-size-md, @avatar-font-size-md);
+    .avatar-size(@avatar-size-md);
   }
 
   &-sm {
-    .avatar-size(@avatar-size-sm, @avatar-font-size-sm);
+    .avatar-size(@avatar-size-sm);
   }
 
   &-text {
@@ -50,12 +49,12 @@
   }
 }
 
-.avatar-size(@size, @font-size) {
+.avatar-size(@size) {
   width: @size;
   height: @size;
   line-height: @size;
 
-  &.@{avatar-prefix}-icon {
-    font-size: @font-size;
+  .@{icon-prefix} {
+    font-size: calc(@size / 2);
   }
 }
