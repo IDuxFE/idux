@@ -1,50 +1,54 @@
 @import '../../style/mixins/reset.less';
 
 .@{back-top-prefix} {
-  .reset-component();
+  .reset-component-new();
+  .reset-color(@back-top-color, @back-top-background-color);
+  .back-top-size(@back-top-size-lg);
 
   position: fixed;
-  right: @back-top-right-xl;
-  bottom: @back-top-bottom;
+  right: 64px;
+  bottom: 48px;
   z-index: 10;
-  background-color: @back-top-background-color;
-  width: @back-top-width;
-  height: @back-top-height;
-  color: @back-top-color;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: @back-top-font-size;
   border-radius: @back-top-border-radius;
   box-shadow: @back-top-box-shadow;
+  text-align: center;
   cursor: pointer;
+  transition: all var(--ix-transition-duration-fast);
 
   &:hover {
-    background-color: @back-top-background-hover-color;
-    color: @back-top-hover-color;
+    color: @back-top-color-hover;
   }
 }
 
-@media screen and (min-width: @screen-lg) and (max-width: @screen-lg-max) {
+@media screen and (max-width: @screen-lg-max) {
   .@{back-top-prefix} {
-    right: @back-top-right-lg;
+    right: 48px;
   }
 }
 
-@media screen and (min-width: @screen-md) and (max-width: @screen-md-max) {
+@media screen and (max-width: @screen-md-max) {
   .@{back-top-prefix} {
-    right: @back-top-right-md;
+    right: 40px;
+    .back-top-size(@back-top-size-md);
   }
 }
 
-@media screen and (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+@media screen and (max-width: @screen-sm-max) {
   .@{back-top-prefix} {
-    right: @back-top-right-sm;
+    right: 32px;
   }
 }
 
 @media screen and (max-width: @screen-xs-max) {
   .@{back-top-prefix} {
-    right: @back-top-right-xs;
+    right: 24px;
+    .back-top-size(@back-top-size-sm);
   }
+}
+
+.back-top-size(@size) {
+  width: @size;
+  height: @size;
+  line-height: @size;
+  font-size: calc(@size / 2);
 }

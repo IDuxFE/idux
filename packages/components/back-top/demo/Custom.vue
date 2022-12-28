@@ -16,7 +16,7 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {
-    const target = ref<HTMLElement | null>(null)
+    const target = ref<HTMLElement>()
     return { target }
   },
 })

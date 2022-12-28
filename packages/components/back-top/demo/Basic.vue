@@ -1,4 +1,4 @@
 <template>
   Scroll down to see the bottom-right button.
-  <IxBackTop />
+  <IxBackTop :visibilityHeight="200" />
 </template>
