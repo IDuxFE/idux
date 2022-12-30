@@ -19,7 +19,7 @@ export type FromToGradients = { from: string; to: string }
 export type ProgressGradient = { direction?: string } & (StringGradients | FromToGradients)
 
 export interface ProgressSuccess {
-  percent?: number | string
+  percent?: number
   strokeColor?: string
 }
 
@@ -41,7 +41,7 @@ export const progressProps = {
   },
   format: Function as PropType<ProgressFormat>,
   percent: {
-    type: [String, Number] as PropType<string | number>,
+    type: Number,
     default: 0,
   },
   status: String as PropType<ProgressStatus>,
@@ -53,11 +53,11 @@ export const progressProps = {
   trailColor: String,
   strokeColor: [String, Object] as PropType<string | ProgressGradient>,
   strokeLinecap: String as PropType<ProgressStrokeLinecap>,
-  strokeWidth: [String, Number] as PropType<string | number>,
-  gapDegree: [String, Number] as PropType<string | number>,
+  strokeWidth: Number,
+  gapDegree: Number,
   gapPosition: String as PropType<ProgressGapPositionType>,
   width: {
-    type: [String, Number] as PropType<string | number>,
+    type: Number,
     default: 132,
   },
   size: String as PropType<ProgressSize>,

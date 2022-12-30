@@ -365,10 +365,8 @@ export interface PopoverConfig {
 export interface ProgressConfig {
   size: ProgressSize
   format: ProgressFormat
-  defaultCircleStrokeWidth?: string | number
-  strokeWidth?: string | number
   strokeLinecap: 'round' | 'square'
-  icon?: Partial<ProgressIcons>
+  icon: Partial<ProgressIcons>
 }
 
 export interface RadioConfig {

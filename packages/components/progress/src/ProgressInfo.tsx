@@ -5,28 +5,30 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type VNode, defineComponent, inject } from 'vue'
+import { type VNode, computed, defineComponent, inject } from 'vue'
 
-import { isString } from 'lodash-es'
+import { isFunction, isString } from 'lodash-es'
 
 import { IxIcon } from '@idux/components/icon'
 
-import { useIcons } from './composables/useIcons'
-import { useInfo } from './composables/useInfo'
 import { progressContext } from './tokens'
+import { fullPercent } from './util'
 
 export default defineComponent({
-  setup() {
-    const { props, config, slots, mergedPrefixCls, status, percent, formattedSuccess } = inject(progressContext)!
-    const { formattedText, showSuccessIcon, showExceptionIcon, showFormat } = useInfo(
-      props,
-      config,
-      status,
-      percent,
-      formattedSuccess,
-    )
+  setup(_, { slots }) {
+    const { props, config, mergedPrefixCls, status, percent, successPercent } = inject(progressContext)!
 
-    const icons = useIcons(props, config)
+    const formatFn = computed(() => props.format ?? config.format)
+    const formattedText = computed(() => formatFn.value(percent.value, successPercent.value))
+
+    const showSuccessIcon = computed(
+      () => status.value === 'success' || (status.value === 'normal' && percent.value === fullPercent),
+    )
+    const showExceptionIcon = computed(() => status.value === 'exception')
+    const showFormat = computed(() => isFunction(props.format) || !(showSuccessIcon.value || showExceptionIcon.value))
+
+    const mergedIconSuccess = computed(() => props.icons?.success ?? config.icon.success)
+    const mergedIconException = computed(() => props.icons?.exception ?? config.icon.exception)
 
     const renderInfo = () => {
       if (showFormat.value) {
@@ -35,12 +37,12 @@ export default defineComponent({
 
       const prefixCls = mergedPrefixCls.value
 
-      if (showSuccessIcon.value) {
-        return renderIcon(icons.value.success, `${prefixCls}-success-icon`)
+      if (showSuccessIcon.value && mergedIconSuccess.value) {
+        return renderIcon(mergedIconSuccess.value, `${prefixCls}-success-icon`)
       }
 
-      if (showExceptionIcon.value) {
-        return renderIcon(icons.value.exception, `${prefixCls}-exception-icon`)
+      if (showExceptionIcon.value && mergedIconException.value) {
+        return renderIcon(mergedIconException.value, `${prefixCls}-exception-icon`)
       }
 
       return null
@@ -53,7 +55,7 @@ export default defineComponent({
       const slot = slots.format ?? slots.default
       return (
         <div class={`${mergedPrefixCls.value}-info`}>
-          {slot ? slot({ percent: percent.value, successPercent: formattedSuccess.value.percent }) : renderInfo()}
+          {slot ? slot({ percent: percent.value, successPercent: successPercent.value }) : renderInfo()}
         </div>
       )
     }

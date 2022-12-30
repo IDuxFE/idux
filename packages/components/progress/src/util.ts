@@ -9,14 +9,14 @@ import { ProgressGradient, StringGradients } from './types'
 
 export const fullPercent = 100
 
-export function convertPercent(percent: number | string | undefined): number {
+export function convertPercent(percent: number | undefined): number {
   if (!percent || percent < 0) {
     return 0
   }
   if (percent > fullPercent) {
     return fullPercent
   }
-  return parseInt(percent as string, 10)
+  return percent
 }
 
 interface SortGradientResult {

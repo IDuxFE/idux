@@ -5,16 +5,15 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { ComputedRef, computed, defineComponent, inject, ref } from 'vue'
+import { ComputedRef, computed, defineComponent, inject } from 'vue'
 
 import { isObject } from 'lodash-es'
 
 import { convertNumber, uniqueId } from '@idux/cdk/utils'
 
 import ProgressInfo from './ProgressInfo'
-import { useProps } from './composables/useProps'
 import { progressContext } from './tokens'
-import { ConvertProgressSuccess, ProgressGapPositionType, ProgressProps, StringGradients } from './types'
+import { ProgressGapPositionType, ProgressProps, StringGradients } from './types'
 import { handleCircleGradient } from './util'
 
 export interface CalcSharedProperties {
@@ -31,48 +30,46 @@ const defaultStrokeWidth = 6
 
 export default defineComponent({
   name: 'IxProgressCircle',
-  setup() {
-    const { props, config, mergedPrefixCls, percent, formattedSuccess } = inject(progressContext)!
+  setup(_, { slots }) {
+    const { props, mergedPrefixCls, mergedStrokeLinecap, percent, successPercent } = inject(progressContext)!
 
     const circleMergedPrefixCls = computed(() => `${mergedPrefixCls.value}-circle`)
-    const computedProps = useProps(props, config)
 
-    const strokeWidth = computed(() =>
-      convertNumber(computedProps.value.strokeWidth ?? config.defaultCircleStrokeWidth, defaultStrokeWidth),
-    )
-    const isGradient = computed(() => isObject(computedProps.value.strokeColor))
-    const linearGradientId = ref(`ix-progress-gradient-${uniqueId()}`)
+    const strokeWidth = computed(() => convertNumber(props.strokeWidth, defaultStrokeWidth))
+    const isGradient = computed(() => isObject(props.strokeColor))
+    const linearGradientId = computed(() => `${mergedPrefixCls.value}-gradient-${uniqueId()}`)
+
     const calcSharedProperties = computed<CalcSharedProperties>(() => {
-      const isCircle = computedProps.value.type === 'circle'
+      const isCircle = props.type === 'circle'
       const radius = 50 - strokeWidth.value / 2
       return {
         isGradient: isGradient.value,
         percent: percent.value,
         linearGradientId: linearGradientId.value,
         radius,
-        gapPosition: computedProps.value.gapPosition ?? (isCircle ? 'top' : 'bottom'),
+        gapPosition: props.gapPosition ?? (isCircle ? 'top' : 'bottom'),
         len: Math.PI * 2 * radius,
-        gapDegree: convertNumber(computedProps.value.gapDegree ?? (isCircle ? 0 : 75)),
+        gapDegree: convertNumber(props.gapDegree ?? (isCircle ? 0 : 75)),
       }
     })
     const circleGradient = computed(() => {
-      return isGradient.value ? handleCircleGradient(computedProps.value.strokeColor as StringGradients) : []
+      return isGradient.value ? handleCircleGradient(props.strokeColor as StringGradients) : []
     })
     const pathString = usePathString(calcSharedProperties)
     const trailPathStyle = useTrailPathStyle(calcSharedProperties)
-    const strokePath = useCirclePath(calcSharedProperties, computedProps.value, percent, formattedSuccess)
+    const strokePath = useCirclePath(calcSharedProperties, circleMergedPrefixCls, props, percent, successPercent)
 
     const trailPathAttr = computed(() => ({
-      stroke: computedProps.value.trailColor ?? '#f5f5f5',
+      stroke: props.trailColor ?? '#f5f5f5',
       'fill-opacity': '0',
-      'stroke-linecap': computedProps.value.strokeLinecap,
+      'stroke-linecap': mergedStrokeLinecap.value,
       'stroke-width': strokeWidth.value,
       d: pathString.value,
     }))
     const strokePathAttr = computed(() => ({
       'fill-opacity': '0',
-      'stroke-linecap': computedProps.value.strokeLinecap,
-      'stroke-width': computedProps.value.percent ? strokeWidth.value : 0,
+      'stroke-linecap': mergedStrokeLinecap.value,
+      'stroke-width': percent.value ? strokeWidth.value : 0,
       d: pathString.value,
     }))
 
@@ -85,9 +82,9 @@ export default defineComponent({
       }
     })
     const circleStyle = computed(() => ({
-      width: computedProps.value.width && `${computedProps.value.width}px`,
-      height: computedProps.value.width && `${computedProps.value.width}px`,
-      fontSize: computedProps.value.width && `${convertNumber(computedProps.value.width) * 0.15 + 6}px`,
+      width: props.width && `${props.width}px`,
+      height: props.width && `${props.width}px`,
+      fontSize: props.width && `${convertNumber(props.width) * 0.15 + 6}px`,
     }))
 
     const renderDefs = () => {
@@ -127,7 +124,7 @@ export default defineComponent({
           ></path>
           {renderStrokePath()}
         </svg>
-        <ProgressInfo />
+        <ProgressInfo v-slots={slots} />
       </div>
     )
   },
@@ -184,15 +181,14 @@ function useTrailPathStyle(calcSharedProperties: ComputedRef<CalcSharedPropertie
 
 function useCirclePath(
   calcSharedProperties: ComputedRef<CalcSharedProperties>,
+  circleMergedPrefixCls: ComputedRef<string>,
   props: ProgressProps,
   percent: ComputedRef<number>,
-  success: ComputedRef<ConvertProgressSuccess>,
+  successPercent: ComputedRef<number>,
 ) {
   return computed(() => {
-    const successPercent = success.value.percent
-
     const { gapDegree, len, isGradient, linearGradientId } = calcSharedProperties.value
-    const strokeProgress = successPercent > 0 ? [successPercent, percent.value] : [percent.value]
+    const strokeProgress = successPercent.value > 0 ? [successPercent.value, percent.value] : [percent.value]
     const successColor = props.success?.strokeColor
 
     return strokeProgress
@@ -201,8 +197,8 @@ function useCirclePath(
         return {
           stroke: isGradient && !hasSuccessPercent ? `url(#${linearGradientId})` : undefined,
           strokeClasses: [
-            !isGradient && hasSuccessPercent ? 'ix-progress-circle-success' : '',
-            isGradient ? '' : 'ix-progress-circle-bg',
+            !isGradient && hasSuccessPercent ? `${circleMergedPrefixCls.value}-success` : '',
+            isGradient ? '' : `${circleMergedPrefixCls.value}-bg`,
           ],
           strokePathStyle: {
             stroke: !isGradient ? (hasSuccessPercent ? successColor : (props.strokeColor as string)) : undefined,

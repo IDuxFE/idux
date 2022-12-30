@@ -11,10 +11,9 @@ import { useGlobalConfig } from '@idux/components/config'
 
 import Circle from './Circle'
 import Line from './Line'
-import { useStatus } from './composables/useStatus'
 import { progressContext } from './tokens'
-import { progressProps } from './types'
-import { convertPercent } from './util'
+import { progressProps, progressStatus } from './types'
+import { convertPercent, fullPercent } from './util'
 
 export default defineComponent({
   name: 'IxProgress',
@@ -25,9 +24,20 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-progress`)
 
     const percent = computed(() => convertPercent(props.percent))
-    const formattedSuccess = computed(() => ({ ...props.success, percent: convertPercent(props.success?.percent) }))
+    const successPercent = computed(() => convertPercent(props.success?.percent))
+    const mergedSize = computed(() => props.size ?? config.size)
+    const mergedStrokeLinecap = computed(() => props.strokeLinecap ?? config.strokeLinecap)
 
-    const status = useStatus(props, percent, formattedSuccess)
+    const status = computed(() => {
+      if (
+        !progressStatus.includes(props.status!) &&
+        (percent.value >= fullPercent || successPercent.value >= fullPercent)
+      ) {
+        return 'success'
+      }
+
+      return props.status ?? 'normal'
+    })
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
@@ -40,16 +50,17 @@ export default defineComponent({
     provide(progressContext, {
       props,
       config,
-      slots,
       mergedPrefixCls,
+      mergedSize,
+      mergedStrokeLinecap,
       percent,
-      formattedSuccess,
+      successPercent,
       status,
     })
 
     return () => {
       const ProgressComponent = props.type === 'line' ? Line : Circle
-      return <ProgressComponent class={classes.value} />
+      return <ProgressComponent v-slots={slots} class={classes.value} />
     }
   },
 })
