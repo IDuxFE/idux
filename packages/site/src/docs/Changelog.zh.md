@@ -10,6 +10,20 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.3.2(2023-01-03)
+
+### Bug Fixes
+
+- **comp:alert:** 样式更新 ([#1377](https://github.com/IDuxFE/idux/issues/1377)) ([30d1ab3](https://github.com/IDuxFE/idux/commit/30d1ab381b4eb833e12137d6d85d9a230ca411f1))
+- **comp:anchor:** 样式更新，支持 css variable ([#1379](https://github.com/IDuxFE/idux/issues/1379)) ([3a106d9](https://github.com/IDuxFE/idux/commit/3a106d952b6ec3217d7f95655f2406457383b873))
+- **comp:anchor:** 样式更新，支持 css variable ([#1380](https://github.com/IDuxFE/idux/issues/1380)) ([f83ccc8](https://github.com/IDuxFE/idux/commit/f83ccc80a8aeb5ddc1efb0d27582dfcfd22df919))
+- **comp:back-top:**  样式更新，支持 css variable ([#1381](https://github.com/IDuxFE/idux/issues/1381)) ([cb97fd0](https://github.com/IDuxFE/idux/commit/cb97fd0905c544e5d43eb62d0ea9bb49eaa4db16))
+- **comp:overlay:** 快速切换显隐导致定位异常 ([#1384](https://github.com/IDuxFE/idux/issues/1384)) ([5d13977](https://github.com/IDuxFE/idux/commit/5d139778a494b36feeece08b0c5c27f68bd66a37))
+- **comp:progress:** 带小数点时展示异常 ([#1382](https://github.com/IDuxFE/idux/issues/1382)) ([e474fa5](https://github.com/IDuxFE/idux/commit/e474fa534ea9dc147a544b6f641b55803cc950b6))
+- **comp:table:** 单选并支持点击选中时，无法反选 ([#1383](https://github.com/IDuxFE/idux/issues/1383)) ([1300c13](https://github.com/IDuxFE/idux/commit/1300c134d11132455f5e259b98fc5bf9f7d17aa4))
+- **comp:table:** 当 columns 为动态加载时，排序和过滤功能异常 ([#1376](https://github.com/IDuxFE/idux/issues/1376)) ([9163d69](https://github.com/IDuxFE/idux/commit/9163d69bac526f1aa7dae86e769f830e3e01acd9))
+- **pro:table:** 部分 props 没有被正确的穿透 ([#1378](https://github.com/IDuxFE/idux/issues/1378)) ([edb23d4](https://github.com/IDuxFE/idux/commit/edb23d42b9d2479fa10b17f201e0a87c45c4cd7e))
+
 ## 1.3.1(2022-12-23)
 
 ### Bug Fixes
