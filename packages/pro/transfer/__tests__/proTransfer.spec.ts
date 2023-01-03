@@ -143,19 +143,19 @@ describe('ProTransfer', () => {
       .findAll('tr:not(.ix-table-measure-row)')[0]
       .find('.ix-checkbox')
       .find('input')
-      .setValue(true)
+      .trigger('click')
     await sourceTable
       .find('tbody')
       .findAll('tr:not(.ix-table-measure-row)')[1]
       .find('.ix-checkbox')
       .find('input')
-      .setValue(true)
+      .trigger('click')
     await sourceTable
       .find('tbody')
       .findAll('tr:not(.ix-table-measure-row)')[2]
       .find('.ix-checkbox')
       .find('input')
-      .setValue(true)
+      .trigger('click')
 
     await appendTrigger.trigger('click')
     expect(onChange).toBeCalledWith([0, 1, 2, 3, 4, 5, 7], [0, 1, 2, 3, 4])
@@ -165,19 +165,19 @@ describe('ProTransfer', () => {
       .findAll('tr:not(.ix-table-measure-row)')[0]
       .find('.ix-checkbox')
       .find('input')
-      .setValue(true)
+      .trigger('click')
     await targetTable
       .find('tbody')
       .findAll('tr:not(.ix-table-measure-row)')[1]
       .find('.ix-checkbox')
       .find('input')
-      .setValue(true)
+      .trigger('click')
     await targetTable
       .find('tbody')
       .findAll('tr:not(.ix-table-measure-row)')[2]
       .find('.ix-checkbox')
       .find('input')
-      .setValue(true)
+      .trigger('click')
     await removeTrigger.trigger('click')
     expect(onChange).toBeCalledWith([1, 3, 4], [0, 1, 2, 3, 4])
   })
@@ -219,25 +219,25 @@ describe('ProTransfer', () => {
       .findAll('tr:not(.ix-table-measure-row)')[0]
       .find('.ix-checkbox')
       .find('input')
-      .setValue(true)
+      .trigger('click')
     await sourceTable
       .find('tbody')
       .findAll('tr:not(.ix-table-measure-row)')[1]
       .find('.ix-checkbox')
       .find('input')
-      .setValue(true)
+      .trigger('click')
     await sourceTable
       .find('tbody')
       .findAll('tr:not(.ix-table-measure-row)')[2]
       .find('.ix-checkbox')
       .find('input')
-      .setValue(true)
+      .trigger('click')
     await sourceTable
       .find('tbody')
       .findAll('tr:not(.ix-table-measure-row)')[3]
       .find('.ix-checkbox')
       .find('input')
-      .setValue(true)
+      .trigger('click')
 
     const [, targetTable] = wrapper.findAll('.ix-table')
 

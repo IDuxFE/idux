@@ -214,7 +214,7 @@ function renderSelectableChildren(
   mergedPagination: ComputedRef<TablePagination | null>,
 ) {
   const { selected: checked, indeterminate, disabled, isHover, handleSelect: onChange } = props
-  const { showIndex, multiple, customCell } = selectable.value!
+  const { showIndex, multiple, customCell, trigger } = selectable.value!
 
   if (!checked && !isHover && showIndex) {
     return renderIndexableChildren(props, slots, config.columnIndexable as TableColumnIndexable, mergedPagination)
@@ -222,11 +222,22 @@ function renderSelectableChildren(
 
   const customRender = isString(customCell) ? slots[customCell] : customCell
   if (multiple) {
-    const checkboxProps = { checked, disabled, indeterminate, onChange, onClick }
-    return customRender ? customRender(checkboxProps) : <IxCheckbox {...checkboxProps}></IxCheckbox>
+    // 存在trigger时将事件代理到bodyCell进行处理
+    const exitTriggerCheckboxProps = { checked, disabled, indeterminate }
+    const checkboxProps = { ...exitTriggerCheckboxProps, onChange, onClick }
+    return customRender ? (
+      customRender(trigger ? exitTriggerCheckboxProps : checkboxProps)
+    ) : (
+      <IxCheckbox {...(trigger ? exitTriggerCheckboxProps : checkboxProps)}></IxCheckbox>
+    )
   } else {
-    const radioProps = { checked, disabled, onChange, onClick }
-    return customRender ? customRender(radioProps) : <IxRadio {...radioProps}></IxRadio>
+    const exitTriggerRadioProps = { checked, disabled }
+    const radioProps = { ...exitTriggerRadioProps, onChange, onClick }
+    return customRender ? (
+      customRender(radioProps)
+    ) : (
+      <IxRadio {...(trigger ? exitTriggerRadioProps : radioProps)}></IxRadio>
+    )
   }
 }
 
