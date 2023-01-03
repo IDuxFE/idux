@@ -5,18 +5,19 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ConvertProgressSuccess, ProgressProps, ProgressStatus } from './types'
+import type { ProgressProps, ProgressSize, ProgressStatus, ProgressStrokeLinecap } from './types'
 import type { ProgressConfig } from '@idux/components/config'
-import type { ComputedRef, InjectionKey, Slots } from 'vue'
+import type { ComputedRef, InjectionKey } from 'vue'
 
 interface ProgressContext {
   config: Readonly<ProgressConfig>
   mergedPrefixCls: ComputedRef<string>
+  mergedSize: ComputedRef<ProgressSize>
+  mergedStrokeLinecap: ComputedRef<ProgressStrokeLinecap>
   props: ProgressProps
-  slots: Slots
   status: ComputedRef<ProgressStatus>
+  successPercent: ComputedRef<number>
   percent: ComputedRef<number>
-  formattedSuccess: ComputedRef<ConvertProgressSuccess>
 }
 
 export const progressContext: InjectionKey<ProgressContext> = Symbol('progressContext')

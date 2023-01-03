@@ -28,6 +28,9 @@ describe('Progress', () => {
     await wrapper.setProps({ percent: 50 })
     expect(wrapper.text()).toBe('50%')
 
+    await wrapper.setProps({ percent: 60.7 })
+    expect(wrapper.text()).toBe('60.7%')
+
     await wrapper.setProps({ percent: 100 })
     expect(wrapper.text()).toBe('')
   })

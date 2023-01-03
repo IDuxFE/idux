@@ -232,6 +232,10 @@ export const defaultConfig: GlobalConfig = {
     strokeLinecap: 'round',
     size: 'md',
     format: (percent: number) => percent + '%',
+    icon: {
+      success: 'check',
+      exception: 'close',
+    },
   },
   radio: {
     size: 'md',

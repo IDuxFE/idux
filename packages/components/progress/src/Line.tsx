@@ -10,57 +10,53 @@ import { computed, defineComponent, inject, ref } from 'vue'
 import { isObject } from 'lodash-es'
 
 import ProgressInfo from './ProgressInfo'
-import { useProps } from './composables/useProps'
 import { progressContext } from './tokens'
 import { handleGradient } from './util'
 
 export default defineComponent({
   name: 'IxProgressLine',
-  setup() {
-    const { props, config, mergedPrefixCls, percent, formattedSuccess } = inject(progressContext)!
-    const computedProps = useProps(props, config)
+  setup(_, { slots }) {
+    const { props, mergedPrefixCls, mergedSize, mergedStrokeLinecap, percent, successPercent } =
+      inject(progressContext)!
+
     const lineMergedPrefixCls = computed(() => `${mergedPrefixCls.value}-line`)
 
     const elementRef = ref<HTMLDivElement>()
-    const lineClasses = computed(() => {
+    const classes = computed(() => {
       const prefixCls = lineMergedPrefixCls.value
 
       return {
         [prefixCls]: true,
-        [`${prefixCls}-${computedProps.value.size}`]: true,
-        [`${prefixCls}-round`]: computedProps.value.strokeLinecap === 'round',
+        [`${prefixCls}-${mergedSize.value}`]: true,
+        [`${prefixCls}-round`]: mergedStrokeLinecap.value === 'round',
       }
     })
     const innerStyle = computed(() => ({
-      background: computedProps.value.trailColor ?? '',
+      background: props.trailColor,
     }))
     const successStyle = computed(() => ({
-      height: computedProps.value.strokeWidth && `${computedProps.value.strokeWidth}px`,
-      width: `${formattedSuccess.value.percent ?? 0}%`,
-      background: formattedSuccess.value.strokeColor ?? '',
+      height: `${props.strokeWidth}px`,
+      width: `${successPercent.value}%`,
+      background: props.success?.strokeColor,
     }))
     const bgStyle = computed(() => ({
-      height: computedProps.value.strokeWidth && `${computedProps.value.strokeWidth}px`,
+      height: `${props.strokeWidth}px`,
       width: `${percent.value}%`,
-      background: isObject(computedProps.value.strokeColor)
-        ? handleGradient(computedProps.value.strokeColor, elementRef.value)
-        : computedProps.value.strokeColor ?? '',
+      background: isObject(props.strokeColor) ? handleGradient(props.strokeColor, elementRef.value) : props.strokeColor,
     }))
 
     return () => {
       const prefixCls = lineMergedPrefixCls.value
 
       return (
-        <div ref={elementRef} class={lineClasses.value}>
+        <div ref={elementRef} class={classes.value}>
           <div class={`${prefixCls}-outer`}>
             <div class={`${prefixCls}-inner`} style={innerStyle.value}>
-              {computedProps.value.success?.percent && (
-                <div class={`${prefixCls}-success-bg`} style={successStyle.value}></div>
-              )}
+              {!!successPercent.value && <div class={`${prefixCls}-success-bg`} style={successStyle.value}></div>}
               <div class={`${prefixCls}-bg`} style={bgStyle.value}></div>
             </div>
           </div>
-          <ProgressInfo />
+          <ProgressInfo v-slots={slots} />
         </div>
       )
     }

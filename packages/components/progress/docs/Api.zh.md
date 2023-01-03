@@ -16,14 +16,14 @@
 | `trailColor` | 未完成的分段的颜色 | `string` | - | - | - |
 | `strokeColor` | 进度条的色彩 | `string` | - | - | - |
 | `strokeLinecap` | 进度条的样式 | `'round' \| 'square'` | `'round'` | ✅ | `seer` 主题默认为 `'square'` |
-| `icons` | 进度条状态图标 | `{ success: string \| VNode, exception: string \| VNode }` | - | ✅ | - |
+| `icons` | 进度条状态图标 | `{ success: string \| VNode, exception: string \| VNode }` | `{success: 'check', exception: 'close'}` | ✅ | - |
 
 `type="line"`
 
 | 名称 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `size` | 进度条尺寸 | `lg \| 'md' \| 'sm'` | `'md'` | ✅ | - |
-| `strokeColor` | 进度条的色彩，传入 object 时为渐变 | `string` \| { from: string; to: string; direction: string } | - | - | - |
+| `strokeColor` | 进度条的色彩，传入 object 时为渐变 | `string` \| `{ from: string; to: string; direction: string }` | - | - | - |
 | `strokeWidth` | 进度条线的宽度，单位 px | `number` | 10 | - | - |
 
 `type="circle"`
@@ -31,7 +31,7 @@
 | 名称 | 说明 | 类型 | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `width` | 圆形进度条画布宽度，单位 px | `number` | 132 | - | - |
-| `strokeColor` | 圆形进度条的色彩，传入 object 时为渐变 | `string \| object` | - | - | - |
+| `strokeColor` | 圆形进度条的色彩，传入 object 时为渐变 | `string` \| `{ from: string; to: string; direction: string }` | - | - | - |
 | `strokeWidth` | 圆形进度条线的宽度，单位是进度条画布宽度的百分比 | `number` | 6 | - | - |
 
 `type="dashboard"`
