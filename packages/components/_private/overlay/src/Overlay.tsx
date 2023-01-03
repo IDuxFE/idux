@@ -58,12 +58,14 @@ export default defineComponent({
       destroy,
     } = usePopper({ ...popperOptions.value, visible: props.visible })
 
-    const { destroy: popperDestroy } = usePopperInit(props, initialize, destroy)
     const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visibility)
     const mergedContainer = computed(() => {
       const { container = common.overlayContainer } = props
       return (isFunction(container) ? container(convertElement(triggerRef)!) : container) ?? props.containerFallback
     })
+
+    onMounted(() => initialize())
+    onBeforeUnmount(() => destroy())
 
     watch(visibility, value => callEmit(props['onUpdate:visible'], value))
     watch(placement, value => callEmit(props['onUpdate:placement'], value))
@@ -72,6 +74,9 @@ export default defineComponent({
       () => props.visible,
       visible => {
         visible ? show() : hide()
+        if (visible && props.destroyOnHide) {
+          initialize()
+        }
       },
       { flush: 'post' },
     )
@@ -85,7 +90,7 @@ export default defineComponent({
 
     const onAfterLeave = () => {
       if (props.destroyOnHide) {
-        popperDestroy()
+        destroy()
       }
       callEmit(props.onAfterLeave)
     }
@@ -162,50 +167,6 @@ function usePopperOptions(props: OverlayProps, arrowRef: Ref<HTMLElement | undef
 
     return { allowEnter, autoAdjust, delay, disabled, offset: _offset, placement, trigger }
   })
-}
-
-function usePopperInit(
-  props: OverlayProps,
-  initialize: () => void,
-  destroy: () => void,
-): {
-  initialize: () => void
-  destroy: () => void
-} {
-  let initialized = false
-  const _initialize = () => {
-    if (initialized) {
-      return
-    }
-
-    initialize()
-    initialized = true
-  }
-  const _destroy = () => {
-    if (!initialized) {
-      return
-    }
-
-    destroy()
-    initialized = false
-  }
-
-  onMounted(_initialize)
-  onBeforeUnmount(_destroy)
-
-  watch(
-    () => props.visible,
-    visible => {
-      if (visible) {
-        initialize()
-      }
-    },
-  )
-
-  return {
-    initialize: _initialize,
-    destroy: _destroy,
-  }
 }
 
 function renderContent(
