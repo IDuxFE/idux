@@ -7,7 +7,7 @@
 
 import type { SelectProps } from '../types'
 
-import { type ComputedRef, watchEffect } from 'vue'
+import { type ComputedRef, watch } from 'vue'
 
 import { useState } from '@idux/cdk/utils'
 
@@ -22,13 +22,19 @@ export function useActiveState(props: SelectProps, inputValue: ComputedRef<strin
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [activeValue, setActiveValue] = useState<any>(undefined)
 
-  watchEffect(() => {
-    if (!props.allowInput || !inputValue.value) {
-      return
-    }
+  watch(
+    inputValue,
+    value => {
+      if (!props.allowInput || !value) {
+        return
+      }
 
-    setActiveValue(inputValue.value)
-  })
+      setActiveValue(value)
+    },
+    {
+      immediate: true,
+    },
+  )
 
   return {
     activeValue,

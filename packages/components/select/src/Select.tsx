@@ -78,10 +78,13 @@ export default defineComponent({
     const { activeValue, setActiveValue } = useActiveState(props, inputValue)
 
     const handleKeyDown = useKeyboardEvents(
+      inputValue,
+      selectedValue,
       computed(() => !!props.multiple),
       activeValue,
       changeActiveIndex,
       changeSelected,
+      handleRemove,
       clearInput,
       setOverlayOpened,
     )
@@ -99,6 +102,7 @@ export default defineComponent({
       if (props.multiple) {
         clearInput()
       } else {
+        props.allowInput && clearInput()
         setOverlayOpened(false)
       }
     }
