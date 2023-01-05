@@ -15,7 +15,7 @@ interface Data extends TreeTransferData<'children'> {
   disabled?: boolean
 }
 
-const createData = (idx: number): Data => ({
+const createData = (idx: number, includeDisabled = true): Data => ({
   key: `${idx}`,
   disabled: false,
   label: `Selection-${idx}`,
@@ -37,7 +37,7 @@ const createData = (idx: number): Data => ({
         },
         {
           key: `${idx}-2-2`,
-          disabled: true,
+          disabled: includeDisabled,
           label: `Selection-${idx}-2-2`,
         },
       ],
@@ -62,6 +62,7 @@ describe('ProTransfer', () => {
     .flat()
 
   const mockedTreeDataSource = Array.from(new Array(5)).map((_, idx) => createData(idx + 1))
+  const noneDisabledTreeDataSource = Array.from(new Array(5)).map((_, idx) => createData(idx + 1, false))
 
   const ProTableTransferMount = (options?: MountingOptions<Partial<ProTransferProps>>) => {
     const sourceColumns: TableColumn[] = [
@@ -275,6 +276,93 @@ describe('ProTransfer', () => {
     await targetTree.findAll('.ix-tree-node')[0].find('.ix-pro-transfer-tree-content-close-icon').trigger('click')
 
     expect(wrapper.findAll('.ix-tree')[1]).toBeUndefined()
+  })
+
+  test('tree cascaderStrategy off work', async () => {
+    const onChange = vi.fn()
+    const wrapper = proTreeTransferMount({
+      props: { dataSource: noneDisabledTreeDataSource, onChange, treeProps: { cascaderStrategy: 'off' } },
+    })
+
+    const [appendTrigger, removeTrigger] = wrapper.findComponent(TransferOperations).findAllComponents(IxButton)
+
+    const [sourceTree] = wrapper.findAll('.ix-tree')
+    const sourceNodes = sourceTree.findAll('.ix-tree-node')
+    await sourceNodes[2].find('input').setValue(true)
+    await sourceNodes[3].find('input').setValue(true)
+    await sourceNodes[4].find('input').setValue(true)
+    await appendTrigger.trigger('click')
+
+    const targetList = wrapper.findComponent(IxTransferList)
+
+    expect(targetList.findAll('.ix-transfer-list-item').length).toBe(3)
+    expect(onChange).toBeCalledWith(['1-2', '1-2-1', '1-2-2'], [])
+
+    await onChange.mockClear()
+
+    await targetList.findAll('.ix-transfer-list-item')[0].find('input').setValue(true)
+    await removeTrigger.trigger('click')
+
+    expect(targetList.findAll('.ix-transfer-list-item').length).toBe(2)
+    expect(onChange).toBeCalledWith(['1-2-1', '1-2-2'], ['1-2', '1-2-1', '1-2-2'])
+  })
+
+  test('tree cascaderStrategy child work', async () => {
+    const onChange = vi.fn()
+    const wrapper = proTreeTransferMount({
+      props: { dataSource: noneDisabledTreeDataSource, onChange, treeProps: { cascaderStrategy: 'child' } },
+    })
+
+    const [appendTrigger, removeTrigger] = wrapper.findComponent(TransferOperations).findAllComponents(IxButton)
+
+    const [sourceTree] = wrapper.findAll('.ix-tree')
+    const sourceNodes = sourceTree.findAll('.ix-tree-node')
+    await sourceNodes[2].find('input').setValue(true)
+    await sourceNodes[3].find('input').setValue(true)
+    await sourceNodes[4].find('input').setValue(true)
+    await appendTrigger.trigger('click')
+
+    const [, targetTree] = wrapper.findAll('.ix-tree')
+
+    expect(targetTree.findAll('.ix-tree-node').length).toBe(4)
+    expect(onChange).toBeCalledWith(['1-2-1', '1-2-2'], [])
+
+    await onChange.mockClear()
+
+    await targetTree.findAll('.ix-tree-node')[2].find('input').setValue(true)
+    await removeTrigger.trigger('click')
+
+    expect(targetTree.findAll('.ix-tree-node').length).toBe(3)
+    expect(onChange).toBeCalledWith(['1-2-2'], ['1-2-1', '1-2-2'])
+  })
+
+  test('tree cascaderStrategy parent work', async () => {
+    const onChange = vi.fn()
+    const wrapper = proTreeTransferMount({
+      props: { dataSource: noneDisabledTreeDataSource, onChange, treeProps: { cascaderStrategy: 'parent' } },
+    })
+
+    const [appendTrigger, removeTrigger] = wrapper.findComponent(TransferOperations).findAllComponents(IxButton)
+
+    const [sourceTree] = wrapper.findAll('.ix-tree')
+    const sourceNodes = sourceTree.findAll('.ix-tree-node')
+    await sourceNodes[2].find('input').setValue(true)
+    await sourceNodes[3].find('input').setValue(true)
+    await sourceNodes[4].find('input').setValue(true)
+    await appendTrigger.trigger('click')
+
+    const [, targetTree] = wrapper.findAll('.ix-tree')
+
+    expect(targetTree.findAll('.ix-tree-node').length).toBe(4)
+    expect(onChange).toBeCalledWith(['1-2'], [])
+
+    await onChange.mockClear()
+
+    await targetTree.findAll('.ix-tree-node')[2].find('input').setValue(true)
+    await removeTrigger.trigger('click')
+
+    expect(targetTree.findAll('.ix-tree-node').length).toBe(3)
+    expect(onChange).toBeCalledWith(['1-2-2'], ['1-2'])
   })
 
   test('flatTargetData work', async () => {
