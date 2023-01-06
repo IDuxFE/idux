@@ -7,6 +7,8 @@
 
 import { type PropType, Slot, computed, defineComponent, inject, normalizeClass } from 'vue'
 
+import { isNil } from 'lodash-es'
+
 import { IxCheckbox } from '@idux/components/checkbox'
 import { convertIconVNode, useKey } from '@idux/components/utils'
 
@@ -35,9 +37,10 @@ export default defineComponent({
       activeKey,
       setActiveKey,
       expandedKeys,
+      setExpandedKeys,
       setOverlayOpened,
       loadingKeys,
-      selectedKeys,
+      selectedWithStrategyKeys,
       selectedLimit,
       selectedLimitTitle,
       indeterminateKeys,
@@ -48,7 +51,7 @@ export default defineComponent({
     const isDisabled = computed(() => props.rawData.disabled)
     const isExpanded = computed(() => expandedKeys.value.includes(key))
     const isLoading = computed(() => loadingKeys.value.includes(key))
-    const isSelected = computed(() => selectedKeys.value.includes(key))
+    const isSelected = computed(() => selectedWithStrategyKeys.value.includes(key))
     const isIndeterminate = computed(() => indeterminateKeys.value.includes(key))
 
     const classes = computed(() => {
@@ -71,6 +74,9 @@ export default defineComponent({
         }
         handleSelect(key)
         setOverlayOpened(false)
+
+        // 如果一级节点是叶子节点，被点击后关闭所有展开的节点。
+        isNil(props.parentKey) && setExpandedKeys([])
       } else {
         cascaderProps.strategy === 'off' && handleSelect(key)
         cascaderProps.expandTrigger === 'click' && handleExpand(key)

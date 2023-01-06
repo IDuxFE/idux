@@ -18,6 +18,7 @@ import { type MergedData, convertMergedData, convertMergedDataMap } from './useD
 
 export interface ExpandableContext {
   expandedKeys: ComputedRef<VKey[]>
+  setExpandedKeys: (value: VKey[]) => void
   handleExpand: (key: VKey) => void
   loadingKeys: Ref<VKey[]>
 }
@@ -104,5 +105,5 @@ export function useExpandable(
     callChange(mergedDataMap, newKeys, onExpandedChange)
   }
 
-  return { expandedKeys, handleExpand, loadingKeys }
+  return { expandedKeys, setExpandedKeys, handleExpand, loadingKeys }
 }
