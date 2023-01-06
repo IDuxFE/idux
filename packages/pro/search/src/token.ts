@@ -21,6 +21,7 @@ export interface ProSearchContext extends SearchStateContext, ActiveSegmentConte
   locale: ProSearchLocale
   mergedPrefixCls: ComputedRef<string>
   commonOverlayProps: ComputedRef<ɵOverlayProps>
+  focused: ComputedRef<boolean>
 }
 
 export interface SearchItemContext extends SegmentOverlayUpdateContext, SegmentStatesContext {}
