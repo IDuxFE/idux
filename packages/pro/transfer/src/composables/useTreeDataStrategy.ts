@@ -136,23 +136,36 @@ function createSeparateDataSourceFn<C extends VKey>(
       }
     })()
 
-    return (data, isSource) =>
-      filterTree(
-        data,
-        childrenKey.value,
-        (item, parent) => {
-          const filterRes = filterFn(item, parent, isSource)
+    return (data, isSource) => {
+      if (isSource || cascaderStrategy !== 'off') {
+        return filterTree(
+          data,
+          childrenKey.value,
+          (item, parent) => {
+            const filterRes = filterFn(item, parent, isSource)
 
-          // set targetDataKeySet to collect targetData count later
-          // we collect this during filter process to avoid unecessary traveral
-          if (!isSource && filterRes) {
-            targetDataKeySet.add(getKey(item))
-          }
+            // set targetDataKeySet to collect targetData count later
+            // we collect this during filter process to avoid unecessary traveral
+            if (!isSource && filterRes) {
+              targetDataKeySet.add(getKey(item))
+            }
 
-          return filterRes
-        },
-        'or',
-      )
+            return filterRes
+          },
+          'or',
+        )
+      }
+
+      const res: TreeTransferData<C>[] = []
+      traverseTree(data, childrenKey.value, (item, parent) => {
+        const key = getKey(item)
+        if (filterFn(item, parent, isSource) && !targetDataKeySet.has(key)) {
+          targetDataKeySet.add(key)
+          res.push({ ...item, [childrenKey.value]: undefined })
+        }
+      })
+      return res
+    }
   }
 
   return (data, _, selectedKeySet, getKey) => {
@@ -190,7 +203,8 @@ function createSeparateDataSourceFnWithFlatten<C extends VKey>(
 
     return {
       sourceData,
-      targetData: flattenTargetTree(targetData, childrenKey.value, cascaderStrategy, flatTargetData),
+      targetData:
+        cascaderStrategy === 'off' ? targetData : flattenTargetTree(targetData, childrenKey.value, flatTargetData),
     }
   }
 }
@@ -198,19 +212,13 @@ function createSeparateDataSourceFnWithFlatten<C extends VKey>(
 function flattenTargetTree<C extends VKey>(
   data: TreeTransferData<C>[],
   childrenKey: C,
-  cascaderStrategy: CascaderStrategy,
   flatTargetData: boolean | 'all',
 ) {
-  if (cascaderStrategy !== 'off' && !flatTargetData) {
+  if (!flatTargetData) {
     return data
   }
 
-  return flattenTree(
-    data,
-    childrenKey,
-    item => ({ ...item, children: undefined }),
-    flatTargetData !== 'all' && cascaderStrategy !== 'off',
-  )
+  return flattenTree(data, childrenKey, item => ({ ...item, children: undefined }), flatTargetData !== 'all')
 }
 
 function createStrategy<C extends VKey>(
@@ -337,7 +345,7 @@ function createParentStrategy<C extends VKey>(
       const { sourceData, targetData } = separateDataSource(data, _, selectedKeySet, getKey)
       return {
         sourceData,
-        targetData: flattenTargetTree(targetData, childrenKey.value, 'parent', flatTargetData),
+        targetData: flattenTargetTree(targetData, childrenKey.value, flatTargetData),
       }
     },
     append(keys, selectedKey, getKey) {
