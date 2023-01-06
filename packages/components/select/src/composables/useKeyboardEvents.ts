@@ -11,10 +11,13 @@ import type { ComputedRef } from 'vue'
 import { isNil } from 'lodash-es'
 
 export function useKeyboardEvents(
+  inputValue: ComputedRef<string>,
+  selectedValue: ComputedRef<VKey[]>,
   isMultiple: ComputedRef<boolean>,
   activeValue: ComputedRef<VKey>,
   changeActiveIndex: (offset: number) => void,
   changeSelected: (key: VKey) => void,
+  handleRemove: (key: VKey) => void,
   clearInput: () => void,
   setOverlayOpened: (opened: boolean) => void,
 ): (evt: KeyboardEvent) => void {
@@ -32,7 +35,15 @@ export function useKeyboardEvents(
         evt.preventDefault()
         const key = activeValue.value
         !isNil(key) && changeSelected(key)
-        isMultiple.value ? clearInput() : setOverlayOpened(false)
+        clearInput()
+        !isMultiple.value && setOverlayOpened(false)
+        break
+      }
+      case 'Backspace': {
+        const selectedLength = selectedValue.value.length
+        if (!inputValue.value && selectedLength) {
+          handleRemove(selectedValue.value[selectedLength - 1])
+        }
         break
       }
       case 'Escape':
