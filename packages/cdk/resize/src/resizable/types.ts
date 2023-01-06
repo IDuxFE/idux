@@ -72,7 +72,7 @@ export type ResizableHandleInstance = InstanceType<DefineComponent<ResizableHand
 
 export type ResizableOptions = Omit<ResizablePublicProps, 'disabled' | 'is' | 'handlers'>
 
-export type ResizableHandlePlacement = typeof allHandlePlacements[number]
+export type ResizableHandlePlacement = (typeof allHandlePlacements)[number]
 
 export interface ResizePosition {
   width: number

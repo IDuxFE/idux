@@ -59,8 +59,8 @@ export const notificationProviderProps = {
   offset: [String, Number, Array] as PropType<string | number | (number | string)[]>,
 } as const
 
-export type NotificationType = typeof notificationType[number]
-export type NotificationPlacement = typeof notificationPlacement[number]
+export type NotificationType = (typeof notificationType)[number]
+export type NotificationPlacement = (typeof notificationPlacement)[number]
 export type NotificationNodePropKey = 'title' | 'content' | 'footer'
 export type NotificationProps = ExtractInnerPropTypes<typeof notificationProps>
 export type NotificationPublicProps = ExtractPublicPropTypes<typeof notificationProps>

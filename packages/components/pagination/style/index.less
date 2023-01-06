@@ -116,14 +116,14 @@
       }
     }
 
-    &:hover {
+    &:hover:not(&-disabled) {
       color: @pagination-color-hover;
       .@{pagination-prefix}-item-content {
         background-color: @pagination-background-color-hover;
       }
     }
 
-    &&-active {
+    &&-active:not(&-disabled) {
       color: @pagination-color-active;
       .@{pagination-prefix}-item-content {
         background-color: @pagination-background-color-active;
@@ -133,9 +133,6 @@
     &&-disabled {
       cursor: not-allowed;
       color: @pagination-color-disabled;
-      .@{pagination-prefix}-item-content {
-        background-color: @pagination-background-color;
-      }
     }
 
     &&-active&-disabled &-content {
