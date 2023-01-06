@@ -137,6 +137,7 @@ export default defineComponent({
       locale: locale.search,
       mergedPrefixCls,
       commonOverlayProps,
+      focused,
 
       ...searchStateContext,
       ...activeSegmentContext,

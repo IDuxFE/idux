@@ -32,7 +32,7 @@ export default defineComponent({
   props: segmentProps,
   setup(props: SegmentProps) {
     const context = inject(proSearchContext)!
-    const { mergedPrefixCls, commonOverlayProps, activeSegment, searchStates, setActiveSegment } = context
+    const { mergedPrefixCls, commonOverlayProps, focused, activeSegment, searchStates, setActiveSegment } = context
     const overlayRef = ref<ɵOverlayInstance>()
     const segmentInputRef = ref<HTMLInputElement>()
     const measureSpanRef = ref<HTMLSpanElement>()
@@ -59,7 +59,7 @@ export default defineComponent({
     const isActive = computed(
       () => activeSegment.value?.itemKey === props.itemKey && activeSegment.value.name === props.segment.name,
     )
-    const overlayOpened = computed(() => isActive.value && !!activeSegment.value?.overlayOpened)
+    const overlayOpened = computed(() => focused.value && isActive.value && !!activeSegment.value?.overlayOpened)
 
     const inputWidth = useInputWidth(measureSpanRef)
     const inputStyle = computed(() => ({
@@ -170,12 +170,8 @@ export default defineComponent({
       ></input>
     )
 
-    const renderContent = () => {
-      if (!overlayOpened.value) {
-        return
-      }
-
-      const renderedContent = props.segment.panelRenderer?.({
+    const renderContent = () =>
+      props.segment.panelRenderer?.({
         input: props.input ?? '',
         value: props.value,
         cancel: handleCancel,
@@ -183,9 +179,6 @@ export default defineComponent({
         setValue: handleChange,
         setOnKeyDown: setPanelOnKeyDown,
       })
-
-      return renderedContent
-    }
 
     return () => {
       const { panelRenderer } = props.segment
