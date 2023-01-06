@@ -45,5 +45,13 @@
     display: inline-flex;
     justify-content: center;
     flex-direction: column;
+    opacity: 0;
+    transition: opacity var(--ix-transition-duration-medium) var(--ix-ease-in-out);
+  }
+
+  &:hover:not(.@{input-prefix}-disabled) {
+    .@{input-prefix}-suffix {
+      opacity: 1;
+    }
   }
 }
