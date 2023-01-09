@@ -10,6 +10,17 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.3.3(2023-01-09)
+
+### Bug Fixes
+
+- **comp:cascader:** 选中和展开状态展示不正确 ([#1386](https://github.com/IDuxFE/idux/issues/1386)) ([847f139](https://github.com/IDuxFE/idux/commit/847f1394ea970eb3b91ee095ea30aa75c2760610))
+- **comp:header:** 移除背景颜色 ([#1392](https://github.com/IDuxFE/idux/issues/1392)) ([55bb758](https://github.com/IDuxFE/idux/commit/55bb75847ea1ca7d6e3372d3b2c71315c086c66c))
+- **comp:input-number:** 增加和减少的按钮默认不显示 ([#1385](https://github.com/IDuxFE/idux/issues/1385)) ([b77fac6](https://github.com/IDuxFE/idux/commit/b77fac60833d6ca544812d74417d5a604075de36))
+- **comp:select:** 输入了一个值后，就无法选择其他的值 ([#1387](https://github.com/IDuxFE/idux/issues/1387)) ([59fc80e](https://github.com/IDuxFE/idux/commit/59fc80e5a8439fc34d61ea104f1f53dcce9a701e))
+- **pro:search:** 浮层的 zIndex 计算错误 ([#1389](https://github.com/IDuxFE/idux/issues/1389)) ([81ff47e](https://github.com/IDuxFE/idux/commit/81ff47e9ac9a2afceb4ac8726f6f2618a6933377))
+- **pro:transfer:** 树穿梭框的 'off' 级联策略下展示错误 ([#1388](https://github.com/IDuxFE/idux/issues/1388)) ([796bfaf](https://github.com/IDuxFE/idux/commit/796bfaf6ce627d564a8db9e7675b9879342e4e5f))
+
 ## 1.3.2(2023-01-03)
 
 ### Bug Fixes
