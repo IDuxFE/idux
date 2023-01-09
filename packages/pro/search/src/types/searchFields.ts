@@ -27,7 +27,7 @@ interface SearchFieldBase<V = unknown> {
 }
 
 export const searchDataTypes = ['select', 'input', 'datePicker', 'dateRangePicker', 'custom'] as const
-export type SearchDataTypes = typeof searchDataTypes[number]
+export type SearchDataTypes = (typeof searchDataTypes)[number]
 
 export interface SelectSearchField extends SearchFieldBase<VKey | VKey[]> {
   type: 'select'
