@@ -664,6 +664,7 @@ describe('Tree', () => {
       props: { dataSource: [], empty: { description: emptyDescription } },
     })
 
+    expect(wrapper.classes()).toContain('ix-tree-empty')
     expect(wrapper.find('.ix-empty').text()).toBe(emptyDescription)
   })
 
@@ -673,6 +674,7 @@ describe('Tree', () => {
       slots: { empty: () => h(IxEmpty, { description: 'empty slot' }) },
     })
 
+    expect(wrapper.classes()).toContain('ix-tree-empty')
     expect(wrapper.find('.ix-empty-description').text()).toBe('empty slot')
   })
 
