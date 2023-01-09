@@ -1,6 +1,6 @@
 @import '../variable/animation.less';
 
-.zoom-motion(@className, @origin: @scale-origin-zoom-center, @scale: @scale-zoom-big, @duration: @transition-duration-base) {
+.zoom-motion(@className, @origin, @scale, @duration: var(--ix-transition-duration-medium)) {
   .@{idux-prefix}-@{className}-enter-active,
   .@{idux-prefix}-@{className}-leave-active {
     transform-origin: @origin;
@@ -9,30 +9,19 @@
   }
 
   .@{idux-prefix}-@{className}-enter-active {
-    transition-timing-function: @ease-out-circ;
+    transition-timing-function: var(--ix-ease-out-circ);
   }
 
   .@{idux-prefix}-@{className}-leave-active {
-    transition-timing-function: @ease-in-out-circ;
+    transition-timing-function: var(--ix-ease-in-circ);
   }
 
   .@{idux-prefix}-@{className}-enter-from,
   .@{idux-prefix}-@{className}-leave-to {
     opacity: 0;
-    transform: ~'scale(@{scale})';
+    transform: @scale;
   }
 }
 
-// Modal, Select choose item
-.zoom-motion(zoom, @scale-origin-zoom-center, @scale-zoom-small);
-
-// Popover, Popconfirm, Dropdown
-.zoom-motion(zoom-big);
-
-// Tooltip
-.zoom-motion(zoom-big-fast, @scale-origin-zoom-center, @scale-zoom-big, @transition-duration-fast);
-
-.zoom-motion(zoom-up, @scale-origin-zoom-up);
-.zoom-motion(zoom-down, @scale-origin-zoom-down);
-.zoom-motion(zoom-right, @scale-origin-zoom-right);
-.zoom-motion(zoom-left, @scale-origin-zoom-left);
+.zoom-motion(zoom, 50% 50%, scale(0.8));
+.zoom-motion(zoom-fast, 50% 50%, scale(0.8), var(--ix-transition-duration-fast));

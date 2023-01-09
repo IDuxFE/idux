@@ -1,16 +1,19 @@
 <template>
   <IxSpace size="16px">
-    <IxBadge count="5">
+    <IxBadge count="9">
       <a href="#"></a>
     </IxBadge>
-    <IxBadge count="0" showZero>
+    <IxBadge count="9" status="success">
       <a href="#"></a>
     </IxBadge>
-    <IxBadge>
+    <IxBadge count="9" status="info">
       <a href="#"></a>
-      <template #count>
-        <IxIcon name="clock-circle" :size="16"></IxIcon>
-      </template>
+    </IxBadge>
+    <IxBadge count="9" status="warning">
+      <a href="#"></a>
+    </IxBadge>
+    <IxBadge count="9" style="--ix-badge-background-color: #000">
+      <a href="#"></a>
     </IxBadge>
   </IxSpace>
 </template>

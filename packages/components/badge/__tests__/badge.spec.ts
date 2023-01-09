@@ -8,82 +8,96 @@ import { BadgeProps } from '../src/types'
 describe('Badge', () => {
   const BadgeMount = (options?: MountingOptions<Partial<BadgeProps>>) => mount(IxBadge, { ...options })
 
-  renderWork(IxBadge)
+  renderWork(IxBadge, { props: { count: 9 }, slots: { default: '<a href="#"></a>' } })
+  renderWork(IxBadge, { props: { count: 9 } })
 
-  // 基本功能测试
   test('count work', async () => {
     const wrapper = BadgeMount({ props: { count: 10 } })
-    const badge = wrapper.find('.ix-badge')
-    expect(badge.text()).toBe('10')
-    expect(badge.html()).toMatchSnapshot()
+
+    let countCurrents = wrapper.findAll('.ix-badge-count-current')
+
+    expect(countCurrents[0].text()).toBe('1')
+    expect(countCurrents[1].text()).toBe('0')
+
     await wrapper.setProps({ count: '50' })
-    expect(badge.text()).toBe('50')
-    expect(badge.html()).toMatchSnapshot()
-    await wrapper.setProps({ count: '1-1' })
-    expect(badge.text()).toBe('1-1')
-    expect(badge.html()).toMatchSnapshot()
+    countCurrents = wrapper.findAll('.ix-badge-count-current')
+
+    expect(countCurrents[0].text()).toBe('5')
+    expect(countCurrents[1].text()).toBe('0')
   })
 
-  // 是否显示0
-  test('showZero work', async () => {
-    const wrapper = BadgeMount({ props: { count: 0 } })
-    const badge = wrapper.find('.ix-badge')
-    expect(badge.classes()).toContain('ix-badge-hide-zero')
-    expect(badge.text()).toBe('')
-    expect(badge.html()).toMatchSnapshot()
-    await wrapper.setProps({ showZero: true })
-    expect(badge.classes()).not.toContain('ix-badge-hide-zero')
-    expect(badge.text()).toBe('0')
-    expect(badge.html()).toMatchSnapshot()
-  })
-
-  // 超出的数据显示
-  test('overflowCount work', async () => {
-    const wrapper = BadgeMount({ props: { count: 100 } })
-    const badge = wrapper.find('.ix-badge')
-    expect(badge.text()).toBe('99+')
-    expect(badge.html()).toMatchSnapshot()
-    await wrapper.setProps({ count: '1000', overflowCount: 999 })
-    expect(badge.text()).toBe('999+')
-    expect(badge.html()).toMatchSnapshot()
-
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
-
-    await wrapper.setProps({ count: '1000', overflowCount: '999' })
-    expect(badge.text()).toBe('999+')
-    expect(badge.html()).toMatchSnapshot()
-    await wrapper.setProps({ count: '1000', overflowCount: 'xxx' })
-    expect(badge.text()).toBe('1000')
-    expect(badge.html()).toMatchSnapshot()
-
-    expect(warn).toBeCalledTimes(2)
-  })
-
-  // 圆点徽标呈现
-  test('dot work', async () => {
-    const wrapper = BadgeMount()
-    const badge = wrapper.find('.ix-badge')
-    expect(badge.classes()).not.toContain('ix-badge-dot')
-    expect(badge.html()).toMatchSnapshot()
-    await wrapper.setProps({ dot: true })
-    expect(badge.classes()).toContain('ix-badge-dot')
-    expect(badge.text()).toBe('')
-    expect(badge.html()).toMatchSnapshot()
-  })
-
-  // 设置颜色属性
-  test('color work', async () => {
-    const wrapper = BadgeMount({ props: { color: '#f00' } })
-    const badge = wrapper.find('.ix-badge')
-    expect(badge.attributes().style).toContain('background-color: rgb(255, 0, 0)')
-    expect(badge.html()).toMatchSnapshot()
-  })
-
-  // 自定义插槽
   test('count slot work', async () => {
     const wrapper = BadgeMount({ slots: { count: '<div class="count-slot"></div>' } })
-    const countSlot = wrapper.find('.count-slot')
-    expect(countSlot.exists()).toBe(true)
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.count-slot').exists()).toBe(true)
+  })
+
+  test('dot work', async () => {
+    const wrapper = BadgeMount({ props: { dot: true } })
+
+    expect(wrapper.find('.ix-badge-dot').exists()).toBe(true)
+    expect(wrapper.find('.ix-badge-count').exists()).toBe(false)
+
+    await wrapper.setProps({ dot: false })
+
+    expect(wrapper.find('.ix-badge-dot').exists()).toBe(false)
+    expect(wrapper.find('.ix-badge-count').exists()).toBe(false)
+
+    await wrapper.setProps({ count: 9 })
+
+    expect(wrapper.find('.ix-badge-dot').exists()).toBe(false)
+    expect(wrapper.find('.ix-badge-count').exists()).toBe(true)
+  })
+
+  test('overflowCount work', async () => {
+    const wrapper = BadgeMount({ props: { count: 100 } })
+
+    expect(wrapper.find('.ix-badge-count').text()).toBe('99+')
+
+    await wrapper.setProps({ count: 1000, overflowCount: 999 })
+
+    expect(wrapper.find('.ix-badge-count').text()).toBe('999+')
+
+    await wrapper.setProps({ count: 1000, overflowCount: '888' })
+
+    expect(wrapper.find('.ix-badge-count').text()).toBe('888+')
+
+    await wrapper.setProps({ count: 1000, overflowCount: 'xxx' })
+
+    const countCurrents = wrapper.findAll('.ix-badge-count-current')
+
+    expect(countCurrents[0].text()).toBe('1')
+    expect(countCurrents[1].text()).toBe('0')
+    expect(countCurrents[2].text()).toBe('0')
+  })
+
+  test('showZero work', async () => {
+    const wrapper = BadgeMount({ props: { count: 0 } })
+
+    expect(wrapper.find('.ix-badge-count').exists()).toBe(false)
+
+    await wrapper.setProps({ showZero: true })
+
+    expect(wrapper.find('.ix-badge-count').exists()).toBe(true)
+    expect(wrapper.find('.ix-badge-count-current').text()).toBe('0')
+  })
+
+  test('status work', async () => {
+    const wrapper = BadgeMount({ props: { status: 'error' } })
+
+    expect(wrapper.classes()).toContain('ix-badge-error')
+
+    await wrapper.setProps({ status: 'info' })
+
+    expect(wrapper.classes()).toContain('ix-badge-info')
+  })
+
+  test('title work', async () => {
+    const wrapper = BadgeMount({ props: { count: 9 } })
+
+    expect(wrapper.find('.ix-badge-count').attributes().title).toBe('9')
+
+    await wrapper.setProps({ title: 'custom title' })
+
+    expect(wrapper.find('.ix-badge-count').attributes().title).toBe('custom title')
   })
 })
