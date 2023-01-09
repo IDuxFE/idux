@@ -13,9 +13,11 @@
 | `@tree-node-selected-background-color` | `@color-graphite-l40` | `@color-white` | - |
 | `@tree-node-line-size` | `1px` | - | - |
 | `@tree-node-line-color` | `@color-graphite` | - | - |
-| `@tree-node-padding-vertical` | `(@spacing-sm / 2)` | `0` | - |
+| `@tree-node-padding-vertical` | `(@spacing-sm / 2)` | `0px` | - |
 | `@tree-node-content-height` | `@height-sm` | `@height-md` | - |
+| `@tree-node-content-padding` | `0 @spacing-sm 0 @spacing-xs` | - | - |
 | `@tree-node-content-label-padding` | `0 @spacing-xs` | - | - |
 | `@tree-node-content-label-highlight-color` | `@color-primary` | - | - |
-| `@tree-node-checkbox-margin` | `0 @spacing-xs 0 (@tree-node-content-height / 2 - @tree-icon-font-size / 2)` | - | - |
+| `@tree-node-checkbox-margin` | `0 @spacing-xs 0 (@tree-node-icon-width / 2 - @tree-icon-font-size / 2)` | - | - |
+| `@tree-node-icon-width` | `@height-sm` | - | - |
 | `@tree-expand-icon-color` | `@color-graphite` | - | - |

@@ -12,4 +12,4 @@
 | `@pro-tree-header-wrapper-height` | `38px` | - | - |
 | `@pro-tree-divider-horizontal-spacing` | `@pro-tree-header-search-wrapper-horizontal-spacing` | - | - |
 | `@pro-tree-divider-vertical-spacing` | `8px` | - | - |
-| `@pro-tree-node-padding` | `0 0 0 8px` | `0 0 0 4px` | - |
+| `@pro-tree-node-padding` | `0 0 0 8px` | - | - |

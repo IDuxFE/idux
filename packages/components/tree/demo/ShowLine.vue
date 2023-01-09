@@ -1,5 +1,6 @@
 <template>
   <IxSpace>
+    <IxCheckbox v-model:checked="showLine">Show Line</IxCheckbox>
     <IxCheckbox v-model:checked="customExpandIcon">Custom expandIcon</IxCheckbox>
     <IxCheckbox v-model:checked="customLeafLineIcon">Custom leafLineIcon</IxCheckbox>
     <IxCheckbox v-model:checked="checkable">Checkable</IxCheckbox>
@@ -11,8 +12,11 @@
     :checkable="checkable"
     :dataSource="treeData"
     :leafLineIcon="customLeafLineIcon ? 'file' : undefined"
-    showLine
+    :showLine="showLine"
   >
+    <template #prefix="{ node }">
+      <IxIcon :name="getNodeLabelIcon(node)" />
+    </template>
     <template #expandIcon="{ expanded }">
       <IxIcon v-if="customExpandIcon" :name="expanded ? 'folder-open' : 'folder'"></IxIcon>
       <IxIcon v-else name="right" :rotate="expanded ? 90 : 0"></IxIcon>
@@ -29,6 +33,7 @@ const customExpandIcon = ref(false)
 const customLeafLineIcon = ref(false)
 const checkable = ref(false)
 const expandedKeys = ref(['0', '0-0', '0-1'])
+const showLine = ref(true)
 
 const treeData = ref<TreeNode[]>([
   {
@@ -81,4 +86,12 @@ const treeData = ref<TreeNode[]>([
     ],
   },
 ])
+
+const getNodeLabelIcon = (node: TreeNode) => {
+  if (node.isLeaf || !node.children || node.children.length <= 0) {
+    return 'desktop'
+  }
+
+  return expandedKeys.value.includes(node.key as string) ? 'folder-open' : 'folder'
+}
 </script>
