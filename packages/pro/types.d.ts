@@ -5,8 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { LayoutSiderTriggerComponent } from '@idux/components/layout'
 import type { ProFormComponent } from '@idux/pro/form'
-import type { ProLayoutComponent, ProLayoutSiderTriggerComponent } from '@idux/pro/layout'
+import type { ProLayoutComponent } from '@idux/pro/layout'
 import type { ProSearchComponent } from '@idux/pro/search'
 import type { ProTableComponent, ProTableLayoutToolComponent } from '@idux/pro/table'
 import type { ProTextareaComponent } from '@idux/pro/textarea'
@@ -20,7 +21,7 @@ declare module 'vue' {
     /**
      * @deprecated please use `IxLayoutSiderTrigger` instead'
      */
-    IxProLayoutSiderTrigger: ProLayoutSiderTriggerComponent
+    IxProLayoutSiderTrigger: LayoutSiderTriggerComponent
     IxProTable: ProTableComponent
     IxProTableLayoutTool: ProTableLayoutToolComponent
     IxProTextarea: ProTextareaComponent

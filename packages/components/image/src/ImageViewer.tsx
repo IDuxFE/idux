@@ -77,7 +77,7 @@ export default defineComponent({
 
       return (
         <CdkPortal target={mergedPortalTarget.value} load={visible.value}>
-          <Transition name={`${common.prefixCls}-zoom-big-fast`} appear>
+          <Transition name={`${common.prefixCls}-zoom`} appear>
             {visible.value && (
               <div class={prefixCls} style={style.value}>
                 <div class={`${prefixCls}-opr`}>

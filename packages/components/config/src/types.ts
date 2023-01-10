@@ -140,9 +140,12 @@ export interface BackTopConfig {
 }
 
 export interface BadgeConfig {
-  showZero: boolean
+  /**
+   * @deprecated
+   */
   dot: boolean
   overflowCount: number | string
+  showZero: boolean
 }
 
 export interface ButtonConfig {

@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 6
 title:
   zh: 独立使用
 ---

@@ -1,16 +1,10 @@
 <template>
   <IxSpace size="16px">
-    <IxBadge count="5">
+    <IxBadge count="5" title="The number is 5">
       <a href="#"></a>
     </IxBadge>
-    <IxBadge count="0" showZero>
+    <IxBadge dot title="This is a dot">
       <a href="#"></a>
-    </IxBadge>
-    <IxBadge>
-      <a href="#"></a>
-      <template #count>
-        <IxIcon name="clock-circle" :size="16"></IxIcon>
-      </template>
     </IxBadge>
   </IxSpace>
 </template>

@@ -1,7 +1,7 @@
 ---
 order: 0
 title:
-  zh: 基本
+  zh: 基本使用
 ---
 
 ## zh

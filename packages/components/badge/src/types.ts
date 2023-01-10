@@ -8,24 +8,30 @@
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
-export const backTopProps = {
-  count: {
-    type: [String, Number] as PropType<string | number>,
-    default: 0,
-  },
-  showZero: {
-    type: Boolean,
-    default: undefined,
-  },
-  overflowCount: Number,
-  dot: {
-    type: Boolean,
-    default: undefined,
-  },
-  color: String,
+export const badgeProps = {
+  /**
+   * @deprecated please use `--ix-badge-background-color` instead
+   */
+  color: { type: String },
+  count: { type: [String, Number] as PropType<string | number>, default: 0 },
+  dot: { type: [Boolean, String] as PropType<boolean | 'inline'>, default: undefined },
+  overflowCount: { type: [String, Number] as PropType<string | number> },
+  showZero: { type: Boolean, default: undefined },
+  status: { type: String as PropType<'success' | 'info' | 'error' | 'warning'>, default: 'error' },
+  title: { type: String },
 } as const
 
-export type BadgeProps = ExtractInnerPropTypes<typeof backTopProps>
-export type BadgePublicProps = ExtractPublicPropTypes<typeof backTopProps>
+export type BadgeProps = ExtractInnerPropTypes<typeof badgeProps>
+export type BadgePublicProps = ExtractPublicPropTypes<typeof badgeProps>
 export type BadgeComponent = DefineComponent<Omit<HTMLAttributes, keyof BadgePublicProps> & BadgePublicProps>
 export type BadgeInstance = InstanceType<DefineComponent<BadgeProps>>
+
+export const badgeSubProps = {
+  count: { type: Number, required: true },
+  dot: { type: Boolean, required: true },
+  overflowCount: { type: Number, required: true },
+  prefixCls: { type: String, required: true },
+  showZero: { type: Boolean, required: true },
+  status: { type: String as PropType<'success' | 'info' | 'error' | 'warning'>, required: true },
+  title: { type: String },
+} as const

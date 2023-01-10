@@ -1,6 +1,6 @@
 @import '../variable/animation.less';
 
-.slide-motion(@className, @origin, @duration: var(--ix-transition-duration-medium)) {
+.slide-motion(@className, @origin, @scale, @duration: var(--ix-transition-duration-medium)) {
   .@{idux-prefix}-@{className}-enter-active,
   .@{idux-prefix}-@{className}-leave-active {
     transform-origin: @origin;
@@ -18,12 +18,12 @@
 
   .@{idux-prefix}-@{className}-enter-from,
   .@{idux-prefix}-@{className}-leave-to {
-    transform: scaleY(0.8);
     opacity: 0;
+    transform: @scale;
   }
 }
 
-.slide-motion(slide-up, 0% 0%);
-.slide-motion(slide-down, 100% 100%);
-.slide-motion(slide-left, 0% 0%);
-.slide-motion(slide-right, 100% 0);
+.slide-motion(slide-up, 0% 0%, scaleY(0.8));
+.slide-motion(slide-down, 100% 100%, scaleY(0.8));
+.slide-motion(slide-left, 0% 0%, scaleX(0.8));
+.slide-motion(slide-right, 100% 0, scaleX(0.8));

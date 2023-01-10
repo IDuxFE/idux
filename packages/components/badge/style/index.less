@@ -1,58 +1,186 @@
 @import '../../style/mixins/reset.less';
+@import '../../style/motion/zoom.less';
 
 .@{badge-prefix} {
-  .reset-component();
+  .reset-component-new();
 
   display: inline-block;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: auto;
-  transform: translate(50%, -50%);
-  transform-origin: 100% 0;
-  font-size: @font-size-md;
-  color: @badge-color;
+  position: relative;
+  line-height: 1;
 
-  &-wrapper {
-    position: relative;
+  &-sub {
+    .reset-component-new();
+
     display: inline-block;
-    line-height: 1;
-  }
+    overflow: hidden;
 
-  &-slot-count {
-    font-size: @font-size-base;
-  }
+    &:last-child {
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translate(50%, -50%);
+      transform-origin: 100% 0;
+    }
 
-  &-dot {
-    width: @badge-dot-size;
-    height: @badge-dot-size;
-    border-radius: 100%;
-    box-shadow: 0 0 0 1px @color-white;
-    background-color: @badge-color;
+    &:first-child {
+      position: unset;
+      transform: none;
+      transform-origin: unset;
+      box-shadow: none;
+      vertical-align: bottom;
+    }
+
+    &-enter-active,
+    &-leave-active {
+      animation-fill-mode: both;
+      animation-duration: var(--ix-transition-duration-slow);
+    }
+
+    &-enter-active {
+      animation-timing-function: var(--ix-ease-out-back);
+
+      &:last-child {
+        animation-name: ix-badge-sub-last-enter;
+      }
+
+      &:first-child {
+        animation-name: ix-badge-sub-first-enter;
+      }
+    }
+
+    &-leave-active {
+      animation-timing-function: var(--ix-ease-in-back);
+
+      &:last-child {
+        animation-name: ix-badge-sub-last-leave;
+      }
+
+      &:first-child {
+        animation-name: ix-badge-sub-first-leave;
+      }
+    }
   }
 
   &-count {
-    height: @badge-size;
-    padding: @badge-padding;
-    min-width: @badge-size;
-    color: @color-white;
+    z-index: auto;
+    min-width: @badge-count-size;
+    height: @badge-count-size;
+    line-height: @badge-count-size;
     font-size: @badge-font-size;
-    line-height: @badge-line-height;
-    white-space: nowrap;
+    color: @badge-color;
+    background-color: var(--ix-badge-background-color);
+    border-radius: calc(@badge-count-size / 2);
+    box-shadow: 0 0 0 1px @badge-color;
     text-align: center;
-    background: @badge-color;
-    border-radius: @badge-border-radius;
-    box-shadow: 0 0 0 1px @color-white;
+
+    &-track {
+      position: relative;
+      display: inline-block;
+      height: @badge-count-size;
+      transition: all var(--ix-transition-duration-medium) var(--ix-ease-in-out);
+      .safari-fix-motion();
+    }
+
+    &-unit {
+      display: block;
+      height: @badge-count-size;
+      .safari-fix-motion();
+    }
   }
 
-  &-hide-zero {
-    display: none;
+  &-count-multiple {
+    padding: 0 4px;
   }
 
-  &-empty {
-    position: unset;
-    box-shadow: none;
-    transform: none;
-    transform-origin: unset;
+  &-dot {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    top: -1px;
+    z-index: auto;
+    width: @badge-dot-size;
+    height: @badge-dot-size;
+    border-radius: 100%;
+    background-color: var(--ix-badge-background-color);
+    box-shadow: 0 0 0 1px var(--ix-background-color);
+  }
+
+  &-error {
+    --ix-badge-background-color: @badge-background-color-error;
+  }
+
+  &-success {
+    --ix-badge-background-color: @badge-background-color-success;
+  }
+
+  &-info {
+    --ix-badge-background-color: @badge-background-color-info;
+  }
+
+  &-warning {
+    --ix-badge-background-color: @badge-background-color-warning;
+  }
+
+  &-content {
+    display: inline-block;
+    color: var(--ix-text-color);
+  }
+
+  &-dot + &-content {
+    .reset-font-size();
+
+    margin-left: 8px;
+  }
+}
+
+// Safari will blink with transform when inner element has absolute style.
+.safari-fix-motion() {
+  /* stylelint-disable property-no-vendor-prefix */
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  /* stylelint-enable property-no-vendor-prefix */
+}
+
+@keyframes ix-badge-sub-last-enter {
+  0% {
+    transform: scale(0) translate(50%, -50%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1) translate(50%, -50%);
+  }
+}
+
+@keyframes ix-badge-sub-last-leave {
+  0% {
+    transform: scale(1) translate(50%, -50%);
+  }
+
+  100% {
+    transform: scale(0) translate(50%, -50%);
+    opacity: 0;
+  }
+}
+
+@keyframes ix-badge-sub-first-enter {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes ix-badge-sub-first-leave {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+    opacity: 0;
   }
 }
