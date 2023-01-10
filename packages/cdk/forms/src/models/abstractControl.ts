@@ -15,12 +15,14 @@ import {
   type WatchOptions,
   type WatchStopHandle,
   computed,
+  nextTick,
   ref,
   shallowRef,
   watch,
+  watchEffect,
 } from 'vue'
 
-import { isArray, isNil, isPlainObject, isString } from 'lodash-es'
+import { isArray, isFunction, isNil, isPlainObject, isString } from 'lodash-es'
 
 import { convertArray } from '@idux/cdk/utils'
 
@@ -162,8 +164,10 @@ export abstract class AbstractControl<T = any> {
   protected _controlsStatus!: Ref<ValidateStatus>
   protected _errors!: ShallowRef<ValidateErrors | undefined>
   protected _disabled!: Ref<boolean>
+  protected _disabledFn?: (control: AbstractControl, initializing: boolean) => boolean
   protected _blurred = ref(false)
   protected _dirty = ref(false)
+  protected _initializing = ref(true)
 
   private _validators: ValidatorFn | ValidatorFn[] | undefined
   private _composedValidators: ValidatorFn | undefined
@@ -542,44 +546,63 @@ export abstract class AbstractControl<T = any> {
     validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions,
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
   ) {
-    let disabled = false
+    let _disabled = false
     if (isOptions(validatorOrOptions)) {
-      this.name = validatorOrOptions.name
-      this.example = validatorOrOptions.example
-      this._trigger = validatorOrOptions.trigger ?? this._trigger
-      this.setValidators(validatorOrOptions.validators)
-      this.setAsyncValidators(validatorOrOptions.asyncValidators)
-      if (validatorOrOptions.disabled) {
-        disabled = true
-        this._forEachControls(control => control.disable())
+      const { name, example, trigger, validators, asyncValidators, disabled } = validatorOrOptions
+      this.name = name
+      this.example = example
+      this.setValidators(validators)
+      this.setAsyncValidators(asyncValidators)
+
+      if (trigger) {
+        this._trigger = trigger
+      }
+
+      if (disabled) {
+        if (isFunction(disabled)) {
+          _disabled = disabled(this, true)
+          this._disabledFn = disabled
+        } else {
+          _disabled = true
+        }
+        _disabled && this._forEachControls(control => control.disable())
       }
     } else {
       this.setValidators(validatorOrOptions)
       this.setAsyncValidators(asyncValidator)
     }
-    this._disabled = ref(disabled)
+    this._disabled = ref(_disabled)
   }
 
   private _init(): void {
-    ;(this as any).controls = computed(() => this._controls.value)
-    ;(this as any).valueRef = computed(() => this._valueRef.value)
+    const current = this as any
+    current.controls = computed(() => this._controls.value)
+    current.valueRef = computed(() => this._valueRef.value)
     this._initErrorsAndStatus()
-    ;(this as any).errors = computed(() => this._errors.value)
-    ;(this as any).status = computed(() => {
+    current.errors = computed(() => this._errors.value)
+    current.status = computed(() => {
       const selfStatus = this._status.value
       if (selfStatus === 'valid') {
         return this._controlsStatus.value
       }
       return selfStatus
     })
-    ;(this as any).valid = computed(() => this.status.value === 'valid')
-    ;(this as any).invalid = computed(() => this.status.value === 'invalid')
-    ;(this as any).validating = computed(() => this.status.value === 'validating')
-    ;(this as any).disabled = computed(() => this._disabled.value)
-    ;(this as any).blurred = computed(() => this._blurred.value)
-    ;(this as any).unblurred = computed(() => !this._blurred.value)
-    ;(this as any).dirty = computed(() => this._dirty.value)
-    ;(this as any).pristine = computed(() => !this._dirty.value)
+    current.valid = computed(() => this.status.value === 'valid')
+    current.invalid = computed(() => this.status.value === 'invalid')
+    current.validating = computed(() => this.status.value === 'validating')
+    current.disabled = computed(() => this._disabled.value)
+    current.blurred = computed(() => this._blurred.value)
+    current.unblurred = computed(() => !this._blurred.value)
+    current.dirty = computed(() => this._dirty.value)
+    current.pristine = computed(() => !this._dirty.value)
+
+    if (this._disabledFn) {
+      nextTick(() => {
+        watchEffect(() => {
+          this._disabled.value = this._disabledFn!(this, false)
+        })
+      })
+    }
   }
 
   private _initErrorsAndStatus() {

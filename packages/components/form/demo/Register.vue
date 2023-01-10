@@ -37,6 +37,9 @@
     <IxFormItem label="Website" labelFor="website">
       <IxInput id="website" control="website"> </IxInput>
     </IxFormItem>
+    <IxFormItem label="time" labelFor="time" required>
+      <IxTimePicker control="time"></IxTimePicker>
+    </IxFormItem>
     <IxFormItem
       label="Captcha"
       labelFor="captcha"
@@ -52,9 +55,6 @@
           <IxButton @click="getCaptcha">Get captcha</IxButton>
         </IxCol>
       </IxRow>
-    </IxFormItem>
-    <IxFormItem label="time" labelFor="time" required>
-      <IxTimePicker control="time"></IxTimePicker>
     </IxFormItem>
     <IxFormItem control="agree" :controlCol="noLabelControlCol">
       <IxCheckbox control="agree">I have read the <a>agreement</a> </IxCheckbox>
@@ -86,26 +86,31 @@ const { required, email } = Validators
 const formGroup = useFormGroup({
   email: ['', [required, email]],
   password: ['', required],
-  confirmPassword: ['', [required, confirmPasswordValidator]],
+  confirmPassword: [
+    '',
+    {
+      validators: [required, confirmPasswordValidator],
+      disabled: (control, initializing) => (initializing ? true : control.root.get('password')!.invalid.value),
+    },
+  ],
   nickname: ['', required],
   phoneNumberPrefix: ['+86', required],
   phoneNumber: ['', required],
   website: [''],
   time: [Date.now(), required],
-  captcha: ['', { validators: [required], disabled: true }],
+  captcha: [
+    '',
+    {
+      validators: [required],
+      disabled: (control, initializing) => (initializing ? true : !control.root.get('agree')!.valueRef.value),
+    },
+  ],
   agree: [false],
 })
 
 const passwordControl = formGroup.get('password')
 const confirmPasswordControl = formGroup.get('confirmPassword')
 passwordControl.watchValue(() => confirmPasswordControl.validate())
-
-const captchaControl = formGroup.get('captcha')
-const agreeControl = formGroup.get('agree')
-
-agreeControl.watchValue(value => {
-  value ? captchaControl.enable() : captchaControl.disable()
-})
 
 const register = () => {
   if (formGroup.valid.value) {
