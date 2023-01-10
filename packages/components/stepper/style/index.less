@@ -12,6 +12,14 @@
   width: 100%;
   background: @stepper-background;
   text-align: start;
+
+  &-dot {
+    .@{stepper-item-prefix}-title {
+      &::after {
+        border-top: @stepper-dot-border;
+      }
+    }
+  }
 }
 
 .@{stepper-item-prefix} {

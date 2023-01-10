@@ -24,13 +24,14 @@ export default defineComponent({
     const size = computed(() => props.size ?? config.size)
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
-      const { labelPlacement = config.labelPlacement, percent, vertical } = props
+      const { labelPlacement = config.labelPlacement, percent, vertical, dot } = props
       return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-label-${labelPlacement}`]: true,
         [`${prefixCls}-${size.value}`]: true,
         [`${prefixCls}-vertical`]: vertical,
         [`${prefixCls}-with-percent`]: percent != null,
+        [`${prefixCls}-dot`]: dot,
       })
     })
 
