@@ -35,7 +35,7 @@ export interface AsyncValidatorFn {
 }
 
 export interface ValidatorOptions {
-  disabled?: boolean
+  disabled?: boolean | ((control: AbstractControl, initializing: boolean) => boolean)
   name?: string
   example?: string
   trigger?: 'change' | 'blur' | 'submit'

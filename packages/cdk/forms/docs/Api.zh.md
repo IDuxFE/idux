@@ -81,7 +81,7 @@ export function useFormControl<T>(
 
 | 名称 | 说明 | 类型 | 默认值 | 备注 |
 | --- | --- | --- | --- | --- |
-| `disabled` | 默认禁用当前控件 | `boolean` | - | - |
+| `disabled` | 默认禁用当前控件 | `boolean \| (control: AbstractControl, initializing: boolean) => boolean` | - | `initializing` 为 `true` 时，表示处于初始化中，此时 `control` 的部分属性还不能访问。 |
 | `name` | 控件的名称 | `string` | - | 通常用于自定义提示信息 |
 | `example` | 控件的示例 | `string` | - | 通常用于自定义提示信息 |
 | `trigger` | 验证器触发的时机 | `'change' \| 'blur' \| 'submit'` | `change` | - |
@@ -380,7 +380,7 @@ export abstract class AbstractControl<T = any> {
     /**
      * 获取给定控件名称或路径的子控件
      *
-     * @param path 子控件的路径，可以是字符串或者数字，也可以是由 `.` 分割的字符串，还可以是一个数组
+     * @param path 子控件的路径，可以是字符串或者数字，也可以是一个数组
      */
     get<K extends OptionalKeys<T>>(path: K): AbstractControl<T[K]> | undefined;
     get<K extends keyof T>(path: K): AbstractControl<T[K]>;

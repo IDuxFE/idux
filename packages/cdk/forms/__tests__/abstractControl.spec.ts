@@ -330,5 +330,39 @@ describe('abstractControl.ts', () => {
 
       expect(control.hasError('async')).toEqual(true)
     })
+
+    test('disabled work', async () => {
+      control = new Control({ validators: Validators.required, disabled: true })
+
+      expect(await control.validate()).toEqual(undefined)
+
+      control.enable()
+
+      expect(await control.validate()).toEqual({ required: { message: zhCNMessages.required({}, control) } })
+
+      control = new Control({
+        validators: [Validators.required, Validators.maxLength(5)],
+        disabled: (control, initializing) => (initializing ? false : control.valueRef.value === 'disabled'),
+      })
+
+      expect(await control.validate()).toEqual({ required: { message: zhCNMessages.required({}, control) } })
+
+      control.setValue('disable')
+      await flushPromises()
+
+      expect(await control.validate()).toEqual({
+        maxLength: {
+          actual: 7,
+          isArray: false,
+          maxLength: 5,
+          message: zhCNMessages.maxLength({ actual: 7, isArray: false, maxLength: 5 }, control),
+        },
+      })
+
+      control.setValue('disabled')
+      await flushPromises()
+
+      expect(await control.validate()).toEqual(undefined)
+    })
   })
 })

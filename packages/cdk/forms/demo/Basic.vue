@@ -3,12 +3,12 @@
     Name: <CustomInput control="name" /> <br />
     Age: <CustomInput control="age" /> <br />
     Email: <CustomInput control="email" /> <br />
-    City: <CustomInput control="address.city" /> <br />
-    Street: <CustomInput control="address.street" /> <br />
-    Zip: <CustomInput control="address.zip" /> <br />
-    Remark-0: <CustomInput control="remarks.0" /> <br />
-    Remark-1:<CustomInput control="remarks.1" /> <br />
-    Remark-2:<CustomInput control="remarks.2" /> <br />
+    City: <CustomInput :control="['address', 'city']" /> <br />
+    Street: <CustomInput :control="['address', 'street']" /> <br />
+    Zip: <CustomInput :control="['address', 'zip']" /> <br />
+    Remark-0: <CustomInput :control="['remarks', 0]" /> <br />
+    Remark-1:<CustomInput :control="['remarks', 1]" /> <br />
+    Remark-2:<CustomInput :control="['remarks', 2]" /> <br />
 
     <IxButton mode="primary" @click="onSubmit">Submit</IxButton>
   </CustomForm>
