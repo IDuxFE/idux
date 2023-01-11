@@ -13,10 +13,34 @@
   background: @stepper-background;
   text-align: start;
 
-  &-dot {
+  // labelPlacement = 'end'
+  &-dotted-line {
     .@{stepper-item-prefix}-title {
       &::after {
         border-top: @stepper-dot-border;
+      }
+    }
+  }
+  &-dashed-line {
+    .@{stepper-item-prefix}-title {
+      &::after {
+        border-top: @stepper-dashed-border;
+      }
+    }
+  }
+
+  // labelPlacement = 'bottom'
+  &-dotted-line {
+    .@{stepper-item-prefix}-tail {
+      &::after {
+        border-top: @stepper-dot-border;
+      }
+    }
+  }
+  &-dashed-line {
+    .@{stepper-item-prefix}-tail {
+      &::after {
+        border-top: @stepper-dashed-border;
       }
     }
   }
@@ -58,7 +82,6 @@
     &::after {
       display: inline-block;
       height: 100%;
-      border-radius: 1px;
       border-top: @stepper-line-border;
       border-right: @stepper-line-border;
       transition: border-color @transition-duration-base;

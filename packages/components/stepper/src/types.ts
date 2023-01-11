@@ -11,6 +11,7 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } 
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export type StepperLabelPlacement = 'end' | 'bottom'
+export type StepperLineStyle = 'solid' | 'dotted' | 'dashed'
 export type StepperSize = 'md' | 'sm'
 export type StepperStatus = 'process' | 'finish' | 'wait' | 'error'
 
@@ -34,9 +35,9 @@ export const stepperProps = {
     type: Boolean,
     default: false,
   },
-  dot: {
-    type: Boolean,
-    default: false,
+  lineStyle: {
+    type: String as PropType<StepperLineStyle>,
+    default: 'solid',
   },
 
   'onUpdate:activeKey': [Function, Array] as PropType<MaybeArray<(key: any) => void>>,
