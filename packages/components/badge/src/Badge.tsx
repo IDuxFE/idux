@@ -7,7 +7,7 @@
 
 import { computed, defineComponent, normalizeClass } from 'vue'
 
-import { convertNumber } from '@idux/cdk/utils'
+import { convertNumber, isNumeric } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
 import BadgeSub from './BadgeSub'
@@ -27,6 +27,11 @@ export default defineComponent({
     const mergedOverflowCount = computed(() =>
       Math.max(0, convertNumber(props.overflowCount ?? config.overflowCount, Number.MAX_VALUE)),
     )
+    // 兼容之前的用法
+    const mergedText = computed(() => {
+      const { count } = props
+      return isNumeric(count) ? undefined : (count as string)
+    })
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
@@ -62,6 +67,7 @@ export default defineComponent({
               prefixCls={prefixCls}
               showZero={mergedShowZero.value}
               status={props.status}
+              text={mergedText.value}
               title={props.title}
             />
           )}

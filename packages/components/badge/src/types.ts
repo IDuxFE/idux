@@ -33,5 +33,6 @@ export const badgeSubProps = {
   prefixCls: { type: String, required: true },
   showZero: { type: Boolean, required: true },
   status: { type: String as PropType<'success' | 'info' | 'error' | 'warning'>, required: true },
+  text: { type: String },
   title: { type: String },
 } as const
