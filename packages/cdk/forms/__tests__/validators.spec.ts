@@ -1,11 +1,11 @@
 import { enUSMessages } from '../src/messages/en-US'
-import { zhCNMessages } from '../src/messages/zh-CN'
 import { FormControl } from '../src/models/formControl'
 import { AsyncValidatorFn, ValidateErrors, ValidateMessages, ValidatorFn } from '../src/types'
 import { Validators } from '../src/validators'
 
 describe('validators.ts', () => {
   const control = new FormControl()
+  const { getError } = Validators
 
   test('required work', () => {
     const required = Validators.required
@@ -14,9 +14,7 @@ describe('validators.ts', () => {
     expect(required('value', control)).toBeUndefined()
     expect(required([1, 2], control)).toBeUndefined()
 
-    const errorMessage = {
-      required: { message: zhCNMessages.required({}, control) },
-    }
+    const errorMessage = { required: getError('required', control) }
     expect(required(undefined, control)).toEqual(errorMessage)
     expect(required(undefined, control)).toEqual(errorMessage)
     expect(required('', control)).toEqual(errorMessage)
@@ -28,9 +26,8 @@ describe('validators.ts', () => {
 
     expect(requiredTrue(true, control)).toBeUndefined()
 
-    const errorMessage = (actual: unknown) => ({
-      requiredTrue: { actual, message: zhCNMessages.requiredTrue({ actual }, control) },
-    })
+    const errorMessage = (actual: unknown) => ({ requiredTrue: getError('requiredTrue', control, { actual }) })
+
     expect(requiredTrue(undefined, control)).toEqual(errorMessage(undefined))
     expect(requiredTrue(undefined, control)).toEqual(errorMessage(undefined))
     expect(requiredTrue('', control)).toEqual(errorMessage(''))
@@ -46,9 +43,8 @@ describe('validators.ts', () => {
     expect(email(undefined, control)).toBeUndefined()
     expect(email('test@gmail.com', control)).toBeUndefined()
 
-    const errorMessage = (actual: unknown) => ({
-      email: { actual, message: zhCNMessages.email({ actual }, control) },
-    })
+    const errorMessage = (actual: unknown) => ({ email: getError('email', control, { actual }) })
+
     expect(email({}, control)).toEqual(errorMessage({}))
     expect(email('test', control)).toEqual(errorMessage('test'))
   })
@@ -63,9 +59,8 @@ describe('validators.ts', () => {
     expect(minOne(1, control)).toBeUndefined()
     expect(minOne(2, control)).toBeUndefined()
 
-    const errorMessage = (actual: unknown) => ({
-      min: { actual, min: 1, message: zhCNMessages.min({ actual, min: 1 }, control) },
-    })
+    const errorMessage = (actual: unknown) => ({ min: getError('min', control, { actual, min: 1 }) })
+
     expect(minOne(0, control)).toEqual(errorMessage(0))
     expect(minOne('0', control)).toEqual(errorMessage('0'))
   })
@@ -80,9 +75,8 @@ describe('validators.ts', () => {
     expect(maxOne(1, control)).toBeUndefined()
     expect(maxOne(0, control)).toBeUndefined()
 
-    const errorMessage = (actual: unknown) => ({
-      max: { actual, max: 1, message: zhCNMessages.max({ actual, max: 1 }, control) },
-    })
+    const errorMessage = (actual: unknown) => ({ max: getError('max', control, { actual, max: 1 }) })
+
     expect(maxOne(2, control)).toEqual(errorMessage(2))
     expect(maxOne('2', control)).toEqual(errorMessage('2'))
   })
@@ -97,9 +91,8 @@ describe('validators.ts', () => {
     expect(range3To9(3, control)).toBeUndefined()
     expect(range3To9(9, control)).toBeUndefined()
 
-    const errorMessage = (actual: unknown) => ({
-      range: { actual, min: 3, max: 9, message: zhCNMessages.range({ actual, min: 3, max: 9 }, control) },
-    })
+    const errorMessage = (actual: unknown) => ({ range: getError('range', control, { actual, min: 3, max: 9 }) })
+
     expect(range3To9(2, control)).toEqual(errorMessage(2))
     expect(range3To9('2', control)).toEqual(errorMessage('2'))
     expect(range3To9(10, control)).toEqual(errorMessage(10))
@@ -119,13 +112,9 @@ describe('validators.ts', () => {
     expect(minLengthTwo([1, 2, 3], control)).toBeUndefined()
 
     const errorMessage = (actual: unknown, isArray: boolean) => ({
-      minLength: {
-        actual,
-        isArray,
-        minLength: 2,
-        message: zhCNMessages.minLength({ actual, isArray, minLength: 2 }, control),
-      },
+      minLength: getError('minLength', control, { actual, isArray, minLength: 2 }),
     })
+
     expect(minLengthTwo('t', control)).toEqual(errorMessage(1, false))
     expect(minLengthTwo([1], control)).toEqual(errorMessage(1, true))
   })
@@ -143,13 +132,9 @@ describe('validators.ts', () => {
     expect(maxLengthTwo([1], control)).toBeUndefined()
 
     const errorMessage = (actual: unknown, isArray: boolean) => ({
-      maxLength: {
-        actual,
-        isArray,
-        maxLength: 2,
-        message: zhCNMessages.maxLength({ actual, isArray, maxLength: 2 }, control),
-      },
+      maxLength: getError('maxLength', control, { actual, isArray, maxLength: 2 }),
     })
+
     expect(maxLengthTwo('test', control)).toEqual(errorMessage(4, false))
     expect(maxLengthTwo([1, 2, 3], control)).toEqual(errorMessage(3, true))
   })
@@ -167,14 +152,9 @@ describe('validators.ts', () => {
     expect(rangeLength2To5([1, 2, 3, 4, 5], control)).toBeUndefined()
 
     const errorMessage = (actual: unknown, isArray: boolean) => ({
-      rangeLength: {
-        actual,
-        isArray,
-        minLength: 2,
-        maxLength: 5,
-        message: zhCNMessages.rangeLength({ actual, isArray, minLength: 2, maxLength: 5 }, control),
-      },
+      rangeLength: getError('rangeLength', control, { actual, isArray, minLength: 2, maxLength: 5 }),
     })
+
     expect(rangeLength2To5('t', control)).toEqual(errorMessage(1, false))
     expect(rangeLength2To5([1, 2, 3, 4, 5, 6], control)).toEqual(errorMessage(6, true))
   })
@@ -189,12 +169,9 @@ describe('validators.ts', () => {
     expect(stringPattern('test', control)).toBeUndefined()
 
     let errorMessage = (actual: unknown) => ({
-      pattern: {
-        actual,
-        pattern: '^[a-zA-Z]+$',
-        message: zhCNMessages.pattern({ actual, pattern: '^[a-zA-Z]+$' }, control),
-      },
+      pattern: getError('pattern', control, { actual, pattern: '^[a-zA-Z]+$' }),
     })
+
     expect(stringPattern('test1', control)).toEqual(errorMessage('test1'))
     expect(stringPattern(1, control)).toEqual(errorMessage(1))
 
@@ -209,13 +186,8 @@ describe('validators.ts', () => {
     expect(regExpPattern('test', control)).toBeUndefined()
     expect(regExpPattern('test1', control)).toBeUndefined()
 
-    errorMessage = (actual: unknown) => ({
-      pattern: {
-        actual,
-        pattern: '/[a-zA-Z]+/',
-        message: zhCNMessages.pattern({ actual, pattern: '/[a-zA-Z]+/' }, control),
-      },
-    })
+    errorMessage = (actual: unknown) => ({ pattern: getError('pattern', control, { actual, pattern: '/[a-zA-Z]+/' }) })
+
     expect(regExpPattern(1, control)).toEqual(errorMessage(1))
 
     const regExpPattern2 = Validators.pattern(new RegExp('^[a-zA-Z]+$'))
@@ -223,12 +195,9 @@ describe('validators.ts', () => {
     expect(regExpPattern2('test', control)).toBeUndefined()
 
     errorMessage = (actual: unknown) => ({
-      pattern: {
-        actual,
-        pattern: '/^[a-zA-Z]+$/',
-        message: zhCNMessages.pattern({ actual, pattern: '/^[a-zA-Z]+$/' }, control),
-      },
+      pattern: getError('pattern', control, { actual, pattern: '/^[a-zA-Z]+$/' }),
     })
+
     expect(regExpPattern2('test1', control)).toEqual(errorMessage('test1'))
     expect(regExpPattern2(1, control)).toEqual(errorMessage(1))
   })
@@ -253,7 +222,7 @@ describe('validators.ts', () => {
     })
     expect(compose([_validator('a', message1), _validator('a', message2)])!('test', control)).toEqual({ a: message2 })
     expect(compose([undefined, nullValidator, required])!('', control)).toEqual({
-      required: { message: zhCNMessages.required({}, control) },
+      required: getError('required', control),
     })
   })
 
@@ -286,10 +255,8 @@ describe('validators.ts', () => {
 
     setMessages(enUSMessages)
 
-    expect(required('', control)).toEqual({ required: { message: enUSMessages.required({}, control) } })
-    expect(requiredTrue(false, control)).toEqual({
-      requiredTrue: { message: enUSMessages.requiredTrue({ actual: false }, control), actual: false },
-    })
+    expect(required('', control)).toEqual({ required: getError('required', control) })
+    expect(requiredTrue(false, control)).toEqual({ requiredTrue: getError('requiredTrue', control, { actual: false }) })
   })
 
   test('setMessages custom messages work', () => {
