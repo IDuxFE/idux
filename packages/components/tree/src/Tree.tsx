@@ -113,6 +113,7 @@ export default defineComponent({
         [`${prefixCls}-auto-height`]: autoHeight.value,
         [`${prefixCls}-focused`]: focused.value,
         [`${prefixCls}-show-line`]: mergedShowLine.value,
+        [`${prefixCls}-empty`]: !flattedNodes.value.length,
       }
     })
 

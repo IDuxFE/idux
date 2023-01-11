@@ -687,7 +687,7 @@ exports[`Tree > render work 1`] = `
 `;
 
 exports[`Tree > searchFn work 1`] = `
-"<div class=\\"ix-tree ix-tree-active\\" role=\\"tree\\">
+"<div class=\\"ix-tree ix-tree-active ix-tree-empty\\" role=\\"tree\\">
   <!----><input style=\\"width: 0px; height: 0px; display: flex; overflow: hidden; opacity: 0; border: 0px; padding: 0px; margin: 0px;\\" tabindex=\\"0\\" aria-label=\\"for screen reader\\">
   <div class=\\"ix-empty ix-empty-simple\\">
     <div class=\\"ix-empty-image\\"><svg width=\\"80\\" height=\\"60\\" viewBox=\\"0 0 80 60\\" xmlns=\\"http://www.w3.org/2000/svg\\">
@@ -891,7 +891,7 @@ exports[`Tree > searchValue work 2`] = `
 `;
 
 exports[`Tree > searchValue work 3`] = `
-"<div class=\\"ix-tree ix-tree-active\\" role=\\"tree\\">
+"<div class=\\"ix-tree ix-tree-active ix-tree-empty\\" role=\\"tree\\">
   <!----><input style=\\"width: 0px; height: 0px; display: flex; overflow: hidden; opacity: 0; border: 0px; padding: 0px; margin: 0px;\\" tabindex=\\"0\\" aria-label=\\"for screen reader\\">
   <div class=\\"ix-empty ix-empty-simple\\">
     <div class=\\"ix-empty-image\\"><svg width=\\"80\\" height=\\"60\\" viewBox=\\"0 0 80 60\\" xmlns=\\"http://www.w3.org/2000/svg\\">
