@@ -34,6 +34,10 @@ export const stepperProps = {
     type: Boolean,
     default: false,
   },
+  dot: {
+    type: Boolean,
+    default: false,
+  },
 
   'onUpdate:activeKey': [Function, Array] as PropType<MaybeArray<(key: any) => void>>,
 } as const
