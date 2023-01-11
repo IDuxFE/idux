@@ -1,9 +1,7 @@
 <template>
   <div class="floatButton">
     <IxDropdown placement="top" :offset="[0, 16]">
-      <span class="ix-dropdown-trigger">
-        <IxIcon name="setting" />
-      </span>
+      <IxIcon name="setting" />
       <template #overlay>
         <IxMenu v-model:selectedKeys="selectedKeys" :dataSource="dataSource"></IxMenu>
       </template>
@@ -60,6 +58,10 @@ watch(selectedKeys, ([theme]) => {
   padding: 6px;
   border-radius: 50%;
   box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:hover {
     color: #1c6eff;

@@ -20,6 +20,7 @@ const scopes = [
   'packaging',
   'release',
   'changelog',
+  'docs',
 ]
 
 // precomputed scope
