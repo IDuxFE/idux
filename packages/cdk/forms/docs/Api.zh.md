@@ -104,7 +104,7 @@ export function useFormControl<T>(
 | `maxLength()` | 验证表单控件的值的长度小于或等于指定的数字 | `number` | - | 验证失败返回 `{ maxLength: { message: '', maxLength, actual: value.length, isArray } }`|
 | `rangeLength()` | 验证表单控件的值的长度范围 | `number, number` | - | 验证失败返回 `{ rangeLength: { message: '', minLength, maxLength, actual: value.length, isArray } }`|
 | `pattern()` | 验证表单控件的值匹配一个正则表达式 | `string \| RegExp` | - | 验证失败返回 `{ pattern: { message: '', pattern, actual: value } }`|
-| `setMessages()` | 设置验证失败的提示信息 | `ValidateMessages` | - | 每次设置的 `messages` 会跟之前的进行合并, 默认的提示信息为 `zhCNMessages` |
+| `setMessages()` | 设置验证失败的提示信息 | `(messages: ValidateMessages, locale?: string)` | - | 每次设置的 `messages` 会跟之前的进行合并, 默认的提示信息为 `zhCNMessages`。 `locale` 是可选的参数, 传入后会将 `messages` 转换成 i18n 的格式。 |
 
 更多默认的提示信息，参见 [messages](https://github.com/IDuxFE/idux/tree/main/packages/cdk/forms/src/messages)
 

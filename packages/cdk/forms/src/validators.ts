@@ -19,7 +19,7 @@ import type {
   ValidatorFn,
 } from './types'
 
-import { isArray, isFunction, isNil, isNumber, isString } from 'lodash-es'
+import { isArray, isFunction, isNil, isNumber, isString, merge } from 'lodash-es'
 
 import { convertArray, isNumeric } from '@idux/cdk/utils'
 
@@ -30,10 +30,15 @@ const emailRegexp =
   /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 
 export class Validators {
-  private static messages: ValidateMessages = zhCNMessages
+  private static messages: ValidateMessages = mergedLocaleMessages({}, zhCNMessages, 'zh-CN')
 
-  static setMessages(messages: ValidateMessages): void {
-    Validators.messages = { ...Validators.messages, ...messages }
+  /**
+   *
+   * @param messages the validation messages
+   * @param locale the i18n type is optional
+   */
+  static setMessages(messages: ValidateMessages, locale?: string): void {
+    Validators.messages = mergedLocaleMessages(Validators.messages, messages, locale)
   }
 
   static getMessage(key: string): ValidateMessage | undefined {
@@ -46,7 +51,7 @@ export class Validators {
     errorContext: Omit<ValidateError, 'message'> = {},
   ): ValidateError {
     let message: string | ValidateMessageFn | Record<string, string | ValidateMessageFn> | undefined = undefined
-    const validMessage = Validators.messages[key] || Validators.messages.default || undefined
+    const validMessage = Validators.messages[key] || Validators.messages.default
     if (isFunction(validMessage)) {
       message = validMessage(errorContext, control)
     } else {
@@ -240,6 +245,17 @@ function mergeMessages(validateErrors: (ValidateErrors | undefined)[]): Validate
   })
 
   return Object.keys(res).length === 0 ? undefined : res
+}
+
+function mergedLocaleMessages(currMessages: ValidateMessages, newMessages: ValidateMessages, locale?: string) {
+  if (!locale) {
+    return merge(currMessages, newMessages)
+  }
+  const messageWithLocale = {} as any
+  Object.keys(newMessages).forEach(key => {
+    messageWithLocale[key] = { [locale]: newMessages[key] }
+  })
+  return merge(currMessages, messageWithLocale)
 }
 
 /**

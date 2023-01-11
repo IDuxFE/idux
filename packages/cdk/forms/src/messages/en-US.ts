@@ -28,10 +28,10 @@ export const enUSMessages = {
   },
   email: (_: Omit<ValidateError, 'message'>, control: AbstractControl): string => {
     const { example } = control
-    return `Must be a valid email address.${example ? '. Example: ' + example : ''}`
+    return `Must be a valid email address.${example ? ' Example: ' + example : ''}`
   },
   min: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
-    return `Must be a number greater than or equal to ${err.min}`
+    return `Must be a number greater than or equal to ${err.min}.`
   },
   max: (err: Omit<ValidateError, 'message'>, __: AbstractControl): string => {
     return `Must be a number less than or equal to ${err.max}.`

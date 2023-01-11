@@ -1,7 +1,6 @@
 import { flushPromises } from '@vue/test-utils'
 import { Ref, ref, watch } from 'vue'
 
-import { zhCNMessages } from '../src/messages/zh-CN'
 import { AbstractControl } from '../src/models/abstractControl'
 import { AsyncValidatorFn, ValidateErrors, ValidatorFn, ValidatorOptions } from '../src/types'
 import { Validators } from '../src/validators'
@@ -44,6 +43,8 @@ class Control<T = unknown> extends AbstractControl<T> {
 }
 
 describe('abstractControl.ts', () => {
+  const { getError } = Validators
+
   describe('basic work', () => {
     let control: AbstractControl
 
@@ -78,39 +79,27 @@ describe('abstractControl.ts', () => {
       // setValidators start
       control.setValidators(required)
 
-      expect(await control.validate()).toEqual({ required: { message: zhCNMessages.required({}, control) } })
+      expect(await control.validate()).toEqual({ required: getError('required', control) })
 
       control.setValidators([email])
       control.setValue('test')
 
-      expect(await control.validate()).toEqual({
-        email: { actual: 'test', message: zhCNMessages.email({ actual: 'test' }, control) },
-      })
+      expect(await control.validate()).toEqual({ email: getError('email', control, { actual: 'test' }) })
       // setValidators end
 
       // addValidators start
       control.addValidators(minLength5)
 
       expect(await control.validate()).toEqual({
-        email: { actual: 'test', message: zhCNMessages.email({ actual: 'test' }, control) },
-        minLength: {
-          actual: 4,
-          isArray: false,
-          minLength: 5,
-          message: zhCNMessages.minLength({ actual: 4, isArray: false, minLength: 5 }, control),
-        },
+        email: getError('email', control, { actual: 'test' }),
+        minLength: getError('minLength', control, { actual: 4, isArray: false, minLength: 5 }),
       })
 
       control.addValidators([maxLength10])
       control.setValue('test@idux.com')
 
       expect(await control.validate()).toEqual({
-        maxLength: {
-          actual: 13,
-          isArray: false,
-          maxLength: 10,
-          message: zhCNMessages.maxLength({ actual: 13, isArray: false, maxLength: 10 }, control),
-        },
+        maxLength: getError('maxLength', control, { actual: 13, isArray: false, maxLength: 10 }),
       })
       // addValidators end
 
@@ -122,9 +111,7 @@ describe('abstractControl.ts', () => {
       control.removeValidators(minLength5)
       control.setValue('test')
 
-      expect(await control.validate()).toEqual({
-        email: { actual: 'test', message: zhCNMessages.email({ actual: 'test' }, control) },
-      })
+      expect(await control.validate()).toEqual({ email: getError('email', control, { actual: 'test' }) })
       // removeValidators end
 
       // hasValidator start
@@ -305,7 +292,7 @@ describe('abstractControl.ts', () => {
     test('options work', async () => {
       control = new Control({ validators: Validators.required })
 
-      expect(await control.validate()).toEqual({ required: { message: zhCNMessages.required({}, control) } })
+      expect(await control.validate()).toEqual({ required: getError('required', control) })
 
       expect(control.trigger).toEqual('change')
 
@@ -318,7 +305,7 @@ describe('abstractControl.ts', () => {
       const _asyncValidator = (_: unknown) => Promise.resolve({ async: { message: 'async' } } as ValidateErrors)
 
       control = new Control(Validators.required, _asyncValidator)
-      expect(await control.validate()).toEqual({ required: { message: zhCNMessages.required({}, control) } })
+      expect(await control.validate()).toEqual({ required: getError('required', control) })
 
       control.setValue('test')
       control.validate()
@@ -338,25 +325,20 @@ describe('abstractControl.ts', () => {
 
       control.enable()
 
-      expect(await control.validate()).toEqual({ required: { message: zhCNMessages.required({}, control) } })
+      expect(await control.validate()).toEqual({ required: getError('required', control) })
 
       control = new Control({
         validators: [Validators.required, Validators.maxLength(5)],
         disabled: (control, initializing) => (initializing ? false : control.valueRef.value === 'disabled'),
       })
 
-      expect(await control.validate()).toEqual({ required: { message: zhCNMessages.required({}, control) } })
+      expect(await control.validate()).toEqual({ required: getError('required', control) })
 
       control.setValue('disable')
       await flushPromises()
 
       expect(await control.validate()).toEqual({
-        maxLength: {
-          actual: 7,
-          isArray: false,
-          maxLength: 5,
-          message: zhCNMessages.maxLength({ actual: 7, isArray: false, maxLength: 5 }, control),
-        },
+        maxLength: getError('maxLength', control, { actual: 7, isArray: false, maxLength: 5 }),
       })
 
       control.setValue('disabled')

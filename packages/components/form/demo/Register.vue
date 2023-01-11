@@ -89,7 +89,7 @@ const formGroup = useFormGroup({
   confirmPassword: [
     '',
     {
-      validators: [required, confirmPasswordValidator],
+      validators: [confirmPasswordValidator],
       disabled: (control, initializing) => (initializing ? true : control.root.get('password')!.invalid.value),
     },
   ],

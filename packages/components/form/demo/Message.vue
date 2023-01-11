@@ -47,35 +47,39 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { AbstractControl, ValidateErrors, Validators, useFormGroup } from '@idux/cdk/forms'
+import { AbstractControl, ValidateErrors, Validators, enUSMessages, useFormGroup } from '@idux/cdk/forms'
 
-Validators.setMessages({
-  required: '必填项/Input is required',
-  mobilePhone: (_err, _control) => '手机号码格式不正确/Mobile phone number is not valid',
-  passwordRequired: {
-    'zh-CN': '请确认你的密码',
-    'en-US': 'Please confirm your password',
-  },
-  passwordConfirm: {
-    'zh-CN': '两次密码输入不一致',
-    'en-US': 'Two passwords that you enter is inconsistent',
-  },
-})
+Validators.setMessages({ required: '必填项' }, 'zh-CN')
+Validators.setMessages(enUSMessages, 'en-US')
 
 const confirmPasswordValidator = (value: string, control: AbstractControl): ValidateErrors | undefined => {
   if (!value) {
-    return { passwordRequired: Validators.getError('passwordRequired', control) }
+    return {
+      passwordRequired: {
+        message: {
+          'zh-CN': '请确认你的密码',
+          'en-US': 'Please confirm your password',
+        },
+      },
+    }
   } else if (value !== control.root.get('password')?.getValue()) {
-    return { passwordConfirm: Validators.getError('passwordConfirm', control) }
+    return {
+      passwordConfirm: {
+        message: {
+          'zh-CN': '两次密码输入不一致',
+          'en-US': 'Two passwords that you enter is inconsistent',
+        },
+      },
+    }
   }
   return undefined
 }
 
-const mobilePhoneValidator = (value: string, control: AbstractControl): ValidateErrors | undefined => {
+const mobilePhoneValidator = (value: string, _: AbstractControl): ValidateErrors | undefined => {
   if (!value || /(^1\d{10}$)/.test(value)) {
     return undefined
   }
-  return { mobilePhone: Validators.getError('mobilePhone', control) }
+  return { mobilePhone: { message: '手机号码格式不正确/Mobile phone number is not valid' } }
 }
 
 export default defineComponent({
@@ -89,7 +93,7 @@ export default defineComponent({
     const formGroup = useFormGroup({
       email: ['', { name: 'E-mail', validators: [required, email] }],
       password: ['', [required, minLength(12), maxLength(16)]],
-      confirmPassword: ['', [required, confirmPasswordValidator]],
+      confirmPassword: ['', [confirmPasswordValidator]],
       nickname: ['', [required]],
       phoneNumberPrefix: ['+86', [required]],
       phoneNumber: ['', [required, mobilePhoneValidator]],
