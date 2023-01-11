@@ -18,6 +18,7 @@ export const badgeProps = {
   overflowCount: { type: [String, Number] as PropType<string | number> },
   showZero: { type: Boolean, default: undefined },
   status: { type: String as PropType<'success' | 'info' | 'error' | 'warning'>, default: 'error' },
+  processing: { type: Boolean, default: false },
   title: { type: String },
 } as const
 

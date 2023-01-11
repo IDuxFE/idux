@@ -106,4 +106,14 @@ describe('Badge', () => {
 
     expect(wrapper.find('.ix-badge-count').attributes().title).toBe('custom title')
   })
+
+  test('processing work', async () => {
+    const wrapper = BadgeMount({ props: { processing: true } })
+
+    expect(wrapper.classes()).toContain('ix-badge-processing')
+
+    await wrapper.setProps({ processing: false })
+
+    expect(wrapper.classes()).not.toContain('ix-badge-processing')
+  })
 })

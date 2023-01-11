@@ -12,7 +12,6 @@
     .reset-component-new();
 
     display: inline-block;
-    overflow: hidden;
 
     &:last-child {
       position: absolute;
@@ -73,6 +72,7 @@
     box-shadow: 0 0 0 1px @badge-color;
     text-align: center;
     white-space: nowrap;
+    font-variant-numeric: tabular-nums;
 
     &-track {
       position: relative;
@@ -80,6 +80,13 @@
       height: @badge-count-size;
       transition: all var(--ix-transition-duration-medium) var(--ix-ease-in-out);
       .safari-fix-motion();
+
+      &-wrapper {
+        white-space: nowrap;
+        display: inline-block;
+        height: @badge-count-size;
+        overflow: hidden;
+      }
     }
 
     &-unit {
@@ -133,6 +140,25 @@
 
     margin-left: 8px;
   }
+
+  &-processing {
+    .@{badge-prefix} {
+
+      &-dot,
+      &-count {
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          border-radius: inherit;
+          animation: ix-badge-wave-spread 2s cubic-bezier(0, 0, 0.2, 1) 1s infinite;
+        }
+      }
+    }
+  }
 }
 
 // Safari will blink with transform when inner element has absolute style.
@@ -183,6 +209,18 @@
 
   100% {
     transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes ix-badge-wave-spread {
+  from {
+    box-shadow: 0 0 1px 0 var(--ix-badge-background-color);
+    opacity: 0.6;
+  }
+
+  to {
+    box-shadow: 0 0 1px 5px var(--ix-badge-background-color);
     opacity: 0;
   }
 }

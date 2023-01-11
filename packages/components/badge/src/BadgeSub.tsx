@@ -54,7 +54,7 @@ export default defineComponent({
         <Transition name={`${prefixCls}-sub`} appear>
           {countNode && (
             <sup class={classes.value} title={title as string}>
-              {countNode}
+              <span class={`${prefixCls}-count-track-wrapper`}>{countNode}</span>
             </sup>
           )}
         </Transition>
