@@ -72,6 +72,7 @@
     border-radius: calc(@badge-count-size / 2);
     box-shadow: 0 0 0 1px @badge-color;
     text-align: center;
+    white-space: nowrap;
 
     &-track {
       position: relative;
@@ -88,7 +89,8 @@
     }
   }
 
-  &-count-multiple {
+  &-count-multiple,
+  &-sub-text {
     padding: 0 4px;
   }
 

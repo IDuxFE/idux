@@ -32,11 +32,13 @@ export default defineComponent({
     })
 
     return () => {
-      const { prefixCls, dot } = props
-      if (dot) {
+      const { prefixCls, dot, text } = props
+      if (dot || text) {
         return (
           <Transition name={`${prefixCls}-sub`} appear>
-            <sup class={classes.value} title={props.title}></sup>
+            <sup class={classes.value} title={props.title}>
+              {text && <span class={`${prefixCls}-sub-text`}>{text}</span>}
+            </sup>
           </Transition>
         )
       }

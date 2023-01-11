@@ -24,6 +24,12 @@ describe('Badge', () => {
 
     expect(countCurrents[0].text()).toBe('5')
     expect(countCurrents[1].text()).toBe('0')
+
+    // 非 number 情况
+    await wrapper.setProps({ count: 'New' })
+
+    expect(wrapper.find('.ix-badge-count-current').exists()).toBe(false)
+    expect(wrapper.find('.ix-badge-count').text()).toBe('New')
   })
 
   test('count slot work', async () => {
