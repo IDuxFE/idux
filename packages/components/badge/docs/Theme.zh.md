@@ -2,6 +2,7 @@
 | --- | --- | --- | --- |
 | `@badge-dot-size` | `6px` | - | - |
 | `@badge-count-size` | `16px` | - | - |
+| `@badge-count-padding` | `0 5px` | - | - |
 | `@badge-font-size` | `var(--ix-font-size-sm)` | - | - |
 | `@badge-color` | `var(--ix-text-color-inverse)` | - | - |
 | `@badge-background-color-error` | `var(--ix-color-red)` | - | - |

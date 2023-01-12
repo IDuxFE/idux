@@ -62,7 +62,7 @@
 
   &-count {
     z-index: auto;
-    min-width: @badge-count-size;
+    padding: @badge-count-padding;
     height: @badge-count-size;
     line-height: @badge-count-size;
     font-size: @badge-font-size;
@@ -94,11 +94,6 @@
       height: @badge-count-size;
       .safari-fix-motion();
     }
-  }
-
-  &-count-multiple,
-  &-sub-text {
-    padding: 0 4px;
   }
 
   &-dot {
