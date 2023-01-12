@@ -46,6 +46,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       const { disabled, icon } = props
+      const { dot, labelPlacement } = parentProps
+
       return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-${status.value}`]: true,
@@ -53,6 +55,8 @@ export default defineComponent({
         [`${prefixCls}-clickable`]: parentProps.clickable && !disabled,
         [`${prefixCls}-disabled`]: disabled,
         [`${prefixCls}-with-icon`]: icon || !!slots.icon,
+        [`${prefixCls}-dot`]: dot,
+        [`${prefixCls}-label-${labelPlacement}`]: true,
       })
     })
 
@@ -66,6 +70,7 @@ export default defineComponent({
     return () => {
       const prefixCls = mergedPrefixCls.value
       const clickable = parentProps.clickable && !props.disabled
+      const { dot } = parentProps
       const iconNode = renderIcon(props, slots, parentProps, status, key)
       const titleNode = convertStringVNode(slots, props, 'title')
       const descriptionNode = convertStringVNode(slots, props, 'description')
@@ -77,7 +82,7 @@ export default defineComponent({
           onClick={clickable ? onClick : undefined}
         >
           <div class={`${prefixCls}-tail`}></div>
-          <div class={`${prefixCls}-icon`}>{iconNode}</div>
+          <div class={`${prefixCls}-icon`}>{dot ? '' : iconNode}</div>
           <div class={`${prefixCls}-content`}>
             <div class={`${prefixCls}-title`}>{titleNode}</div>
             {descriptionNode && <div class={`${prefixCls}-description`}>{descriptionNode}</div>}
