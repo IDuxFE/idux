@@ -14,8 +14,8 @@ import { type ComputedRef, type Ref, ref, watch } from 'vue'
 
 import { type CascaderStrategy } from '@idux/components/cascader'
 
-import { combineTrees, filterTree, flattenTree, genFlattenedTreeKeys, traverseTree } from '../utils'
 import { type TreeDataStrategyContext, useTreeDataStrategyContext } from './useTreeDataStrategyContext'
+import { combineTrees, filterTree, flattenTree, genFlattenedTreeKeys, traverseTree } from '../utils'
 
 export function useTreeDataStrategies<C extends VKey>(
   props: ProTransferProps,

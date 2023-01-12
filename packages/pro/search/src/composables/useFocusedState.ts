@@ -5,9 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ProSearchProps } from '../types'
 import type { ActiveSegmentContext } from './useActiveSegment'
 import type { SearchStateContext } from './useSearchStates'
+import type { ProSearchProps } from '../types'
 import type { ɵOverlayProps } from '@idux/components/_private/overlay'
 
 import { type ComputedRef, type Ref, nextTick, onBeforeUnmount, onMounted, watch } from 'vue'

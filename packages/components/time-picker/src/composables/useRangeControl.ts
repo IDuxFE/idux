@@ -13,8 +13,8 @@ import { computed, watch } from 'vue'
 
 import { convertArray, useState } from '@idux/cdk/utils'
 
-import { convertToDate } from '../utils'
 import { type PickerControlContext, usePickerControl } from './useControl'
+import { convertToDate } from '../utils'
 
 type RangeValueType = TimeRangePickerProps['value']
 

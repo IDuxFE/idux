@@ -25,6 +25,7 @@ import { type FormItemProps, type FormProps } from '@idux/components/form'
 import { type RowProps } from '@idux/components/grid'
 import { type ProFormConfig } from '@idux/pro/config'
 
+import { type SchemaValidatorCreator } from './useAjvValidator'
 import {
   type ObjectKeywords,
   type ProFormFieldsSchema,
@@ -33,7 +34,6 @@ import {
   type ProFormProps,
   type StringKeywords,
 } from '../types'
-import { type SchemaValidatorCreator } from './useAjvValidator'
 
 export interface FormContext {
   formGroup: FormGroup
