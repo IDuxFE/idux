@@ -7,7 +7,7 @@
 | ---| --- | --- | --- | --- | --- |
 `v-model:activeKey` | 当前的激活节点的 `key` | `VKey` | - | - | - |
 `clickable` | 是否可点击 | `boolean` | `false` | - | - |
-`dot` | 是否为点状步骤条 | `boolean \| #dot={key, status}` | `false` | - | - |
+`dot` | 是否为点状步骤条 | `boolean` | `false` | - | - |
 `labelPlacement` | 指定文本信息放置的位置 | `'end' \| 'bottom'` | `'end'` | -| - |
 `percent` | 当前激活节点的进度 | `number` | - | - | 取值是 0-100 |
 `size` | 指定节点的大小 | `'md' \| 'sm'` | `'md'` | ✅ | - |

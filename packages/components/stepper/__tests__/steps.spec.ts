@@ -55,6 +55,15 @@ describe('Stepper', () => {
     expect(onUpdateActiveKey).toBeCalledTimes(1)
   })
 
+  test('dot work', async () => {
+    const wrapper = StepperMount({ props: { dot: true } })
+    const items = await wrapper.findAll('.ix-stepper-item')
+
+    expect(items[0].classes()).toContain('ix-stepper-item-dot')
+    expect(items[1].classes()).toContain('ix-stepper-item-dot')
+    expect(items[2].classes()).toContain('ix-stepper-item-dot')
+  })
+
   test('labelPlacement work', async () => {
     const wrapper = StepperMount({ props: { labelPlacement: 'bottom' } })
 
