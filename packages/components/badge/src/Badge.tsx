@@ -35,9 +35,11 @@ export default defineComponent({
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
+      const { status, processing } = props
       return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-${props.status}`]: true,
+        [`${prefixCls}-${status}`]: true,
+        [`${prefixCls}-processing`]: processing,
       })
     })
 
