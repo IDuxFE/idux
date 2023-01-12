@@ -16,9 +16,9 @@ import { isFunction, isNil } from 'lodash-es'
 
 import { type VKey, flattenNode } from '@idux/cdk/utils'
 
+import { GetKeyFn } from './useGetOptionKey'
 import { optionGroupKey, optionKey } from '../option'
 import { generateOption } from '../utils/generateOption'
-import { GetKeyFn } from './useGetOptionKey'
 
 export interface FlattenedOption {
   key: VKey

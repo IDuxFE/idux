@@ -7,13 +7,13 @@
 
 import { computed, defineComponent, inject, normalizeClass, provide, watch } from 'vue'
 
+import SearchItemTag from './SearchItemTag'
+import Segment from './Segment'
 import { tempSearchStateKey } from '../composables/useSearchStates'
 import { useSegmentOverlayUpdate } from '../composables/useSegmentOverlayUpdate'
 import { useSegmentStates } from '../composables/useSegmentStates'
 import { proSearchContext, searchItemContext } from '../token'
 import { searchItemProps } from '../types'
-import SearchItemTag from './SearchItemTag'
-import Segment from './Segment'
 
 export default defineComponent({
   props: searchItemProps,

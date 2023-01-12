@@ -11,9 +11,9 @@ import { VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 import { type TreeConfig } from '@idux/components/config'
 import { type GetKeyFn } from '@idux/components/utils'
 
+import { type MergedNode, convertMergeNodes, convertMergedNodeMap } from './useDataSource'
 import { type TreeNode, type TreeProps } from '../types'
 import { callChange, getParentKeys } from '../utils'
-import { type MergedNode, convertMergeNodes, convertMergedNodeMap } from './useDataSource'
 
 export interface ExpandableContext {
   expandIcon: ComputedRef<string | string[]>

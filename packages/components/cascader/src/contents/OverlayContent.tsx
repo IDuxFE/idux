@@ -12,8 +12,8 @@ import { type VNode, computed, defineComponent, inject, watch } from 'vue'
 import { type VKey, callEmit } from '@idux/cdk/utils'
 import { ɵInput } from '@idux/components/_private/input'
 
-import { cascaderToken } from '../token'
 import OverlayOptionGroup from './OverlayOptionGroup'
+import { cascaderToken } from '../token'
 
 export default defineComponent({
   setup() {

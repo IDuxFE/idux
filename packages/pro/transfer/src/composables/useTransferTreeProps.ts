@@ -5,9 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ProTransferProps, TransferData } from '../types'
 import type { TransferTreeLoadChildren } from './useTransferData'
 import type { TreeExpandedKeysContext } from './useTreeExpandedKeys'
+import type { ProTransferProps, TransferData } from '../types'
 import type { TransferBindings } from '@idux/components/transfer'
 import type { TreeNode, TreeProps } from '@idux/components/tree'
 

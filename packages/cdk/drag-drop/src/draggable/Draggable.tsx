@@ -11,8 +11,8 @@ import { computed, defineComponent, normalizeClass, reactive, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 
-import { useDraggable } from '../composables/useDraggable'
 import { draggableProps } from './types'
+import { useDraggable } from '../composables/useDraggable'
 
 const style = {
   width: 'fit-content',
