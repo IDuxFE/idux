@@ -46,7 +46,7 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       const { disabled, icon } = props
-      const { dot, labelPlacement } = parentProps
+      const { dot } = parentProps
 
       return normalizeClass({
         [prefixCls]: true,
@@ -56,7 +56,6 @@ export default defineComponent({
         [`${prefixCls}-disabled`]: disabled,
         [`${prefixCls}-with-icon`]: icon || !!slots.icon,
         [`${prefixCls}-dot`]: dot,
-        [`${prefixCls}-label-${labelPlacement}`]: true,
       })
     })
 

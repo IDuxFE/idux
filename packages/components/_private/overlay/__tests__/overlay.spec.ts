@@ -12,7 +12,7 @@ describe('Overlay', () => {
   const OverlayMount = (options?: MountingOptions<Partial<OverlayProps>>) => {
     const { props, ...rest } = options || {}
     return mount(Overlay, {
-      props: { container: () => '.ix-overlay-container', ...props },
+      props: { container: () => '.ix-overlay-container', containerFallback: '.ix-overlay-container', ...props },
       ...rest,
     } as MountingOptions<OverlayProps>)
   }
@@ -26,7 +26,10 @@ describe('Overlay', () => {
     document.querySelector('.ix-overlay-container')!.innerHTML = ''
   })
 
-  renderWork<OverlayProps>(Overlay, { props: { container: () => '.ix-overlay-container', visible: true }, slots })
+  renderWork<OverlayProps>(Overlay, {
+    props: { container: () => '.ix-overlay-container', containerFallback: '.ix-overlay-container', visible: true },
+    slots,
+  })
 
   test('visible work', async () => {
     const onUpdateVisible = vi.fn()
