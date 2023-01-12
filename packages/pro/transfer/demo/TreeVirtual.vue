@@ -11,11 +11,11 @@
 </template>
 
 <script setup lang="ts">
+import type { ProTransferInstance, TransferData } from '@idux/pro/transfer'
+
 import { ref } from 'vue'
 
-import { ProTransferInstance } from '@idux/pro/transfer'
-
-interface Data {
+interface Data extends TransferData {
   key: string
   disabled: boolean
   label: string

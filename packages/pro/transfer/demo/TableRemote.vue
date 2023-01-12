@@ -17,12 +17,13 @@
 </template>
 
 <script setup lang="ts">
+import type { TransferData, TransferPaginationProps } from '@idux/components/transfer'
+
 import { computed, onMounted, ref } from 'vue'
 
 import { TableColumn } from '@idux/components/table'
-import { TransferPaginationProps } from '@idux/components/transfer'
 
-interface Data {
+interface Data extends TransferData {
   key: number
   disabled: boolean
   name: string
