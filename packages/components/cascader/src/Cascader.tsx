@@ -70,7 +70,14 @@ export default defineComponent({
     )
     const activeStateContext = useActiveState(props, mergedDataMap)
     const selectedStateContext = useSelectedState(props, accessor, mergedDataMap, mergedFullPath, mergedGetDisabled)
-    const { searchedData } = useSearchable(props, mergedLabelKey, mergedDataMap, inputValue, mergedGetDisabled)
+    const { searchedData } = useSearchable(
+      props,
+      mergedData,
+      mergedDataMap,
+      mergedLabelKey,
+      inputValue,
+      mergedGetDisabled,
+    )
     const expandableContext = useExpandable(
       props,
       mergedGetKey,

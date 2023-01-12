@@ -55,6 +55,7 @@ export const cascaderProps = {
   readonly: { type: Boolean, default: false },
   searchable: { type: [Boolean, String] as PropType<boolean | 'overlay'>, default: false },
   searchFn: { type: [Boolean, Function] as PropType<boolean | CascaderSearchFn>, default: true },
+  separator: { type: String, default: '/' },
   size: { type: String as PropType<FormSize>, default: undefined },
   status: String as PropType<ValidateStatus>,
   strategy: { type: String as PropType<CascaderStrategy>, default: 'all' },
