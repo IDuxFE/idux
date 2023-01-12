@@ -9,9 +9,9 @@ import { type ComputedRef, computed } from 'vue'
 
 import { type VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 
-import { type TableProps } from '../types'
 import { type TableColumnMerged, type TableColumnMergedExpandable } from './useColumns'
 import { type MergedData } from './useDataSource'
+import { type TableProps } from '../types'
 
 export function useExpandable(props: TableProps, flattedColumns: ComputedRef<TableColumnMerged[]>): ExpandableContext {
   const expandable = computed(() =>

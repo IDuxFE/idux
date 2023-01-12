@@ -13,9 +13,9 @@ import { type FormAccessor } from '@idux/cdk/forms'
 import { NoopArray, type VKey, callEmit, convertArray } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
+import { type MergedData } from './useDataSource'
 import { type CascaderProps, type CascaderStrategy } from '../types'
 import { getChildrenKeys, getParentKeys } from '../utils'
-import { type MergedData } from './useDataSource'
 
 export interface SelectedStateContext {
   selectedKeys: ComputedRef<VKey[]>

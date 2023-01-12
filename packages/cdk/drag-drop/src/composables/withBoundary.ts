@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { LockAxisType } from '../types'
 import { type DnDContext } from './useDragDropContext'
+import { LockAxisType } from '../types'
 
 export const withBoundary = (
   sourceEl: HTMLElement,

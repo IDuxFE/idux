@@ -13,9 +13,9 @@ import { type VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 import { type Locale } from '@idux/components/locales'
 import { type MenuClickOptions, type MenuData } from '@idux/components/menu'
 
-import { type TableProps } from '../types'
 import { type TableColumnMerged, type TableColumnMergedSelectable } from './useColumns'
 import { type DataSourceContext, type MergedData } from './useDataSource'
+import { type TableProps } from '../types'
 
 export function useSelectable(
   props: TableProps,

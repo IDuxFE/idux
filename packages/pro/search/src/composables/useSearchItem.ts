@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ProSearchProps, SearchField, SearchItem, SearchItemError } from '../types'
 import type { SearchState } from './useSearchStates'
+import type { ProSearchProps, SearchField, SearchItem, SearchItemError } from '../types'
 import type { DateConfig } from '@idux/components/config'
 
 import { type ComputedRef, type Slots, computed } from 'vue'

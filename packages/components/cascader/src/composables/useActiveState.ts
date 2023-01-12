@@ -9,8 +9,8 @@ import { type ComputedRef, type Ref, computed } from 'vue'
 
 import { type VKey, useState } from '@idux/cdk/utils'
 
-import { type CascaderProps } from '../types'
 import { type MergedData } from './useDataSource'
+import { type CascaderProps } from '../types'
 
 export interface ActiveStateContext {
   activeKey: Ref<VKey | undefined>

@@ -10,9 +10,9 @@ import { type PropType, type VNode, computed, defineComponent, inject, normalize
 import { CdkVirtualScroll, type VirtualItemRenderFn } from '@idux/cdk/scroll'
 import { ɵEmpty } from '@idux/components/_private/empty'
 
+import OverlayOption from './OverlayOption'
 import { type MergedData } from '../composables/useDataSource'
 import { cascaderToken } from '../token'
-import OverlayOption from './OverlayOption'
 
 export default defineComponent({
   props: {

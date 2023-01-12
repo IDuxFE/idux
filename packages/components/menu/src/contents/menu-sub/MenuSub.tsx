@@ -25,12 +25,12 @@ import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
 import { useKey } from '@idux/components/utils'
 
-import { usePaddingLeft } from '../../composables/usePaddingLeft'
-import { type MenuSubContext, menuItemGroupToken, menuSubToken, menuToken } from '../../token'
-import { type MenuData, type MenuProps, type MenuSubProps, menuSubProps } from '../../types'
 import InlineContent from './InlineContent'
 import Label from './Label'
 import OverlayContent from './OverlayContent'
+import { usePaddingLeft } from '../../composables/usePaddingLeft'
+import { type MenuSubContext, menuItemGroupToken, menuSubToken, menuToken } from '../../token'
+import { type MenuData, type MenuProps, type MenuSubProps, menuSubProps } from '../../types'
 
 export default defineComponent({
   name: 'MenuSub',

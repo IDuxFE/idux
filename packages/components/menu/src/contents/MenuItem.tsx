@@ -11,10 +11,10 @@ import { isString } from 'lodash-es'
 
 import { useKey } from '@idux/components/utils'
 
+import { coverIcon } from './Utils'
 import { usePaddingLeft } from '../composables/usePaddingLeft'
 import { menuItemGroupToken, menuSubToken, menuToken } from '../token'
 import { menuItemProps } from '../types'
-import { coverIcon } from './Utils'
 
 export default defineComponent({
   name: 'MenuItem',
