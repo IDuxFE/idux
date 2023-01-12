@@ -19,6 +19,7 @@
 | `customAdditional` | 自定义下拉选项的额外属性 | `CascaderCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
 | `dataSource` | 树型数据数组,参见[CascaderData](#CascaderData) | `CascaderData[]` | `[]` | - | - |
 | `disabled` | 禁用选择器 | `boolean` | - | - | - |
+| `disableData` | 动态禁用某些项 | `(data: CascaderData) => boolean` | - | - | - |
 | `empty` | 空数据时的内容 | `'default' \| 'simple' \| EmptyProps` | `'simple'` | - | - |
 | `expandIcon` | 展开图标 | `string \| #expandIcon="{key: VKey, expanded: boolean, data: CascaderData}"` | `right` | ✅ | - |
 | `expandTrigger` | 触发展开的方式 | `'click' \| 'hover'` | `click` | - | - |

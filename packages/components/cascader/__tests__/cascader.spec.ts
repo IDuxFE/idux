@@ -212,6 +212,22 @@ describe('Cascader', () => {
 
       expect(getAllOptionGroup(wrapper).length).toBe(3)
     })
+
+    test('disableData  work', async () => {
+      const wrapper = CascaderMount({
+        props: {
+          open: true,
+          disableData: data => data.key === 'button',
+        },
+      })
+
+      expect(getAllOptionGroup(wrapper)[2].find('.ix-cascader-option-disabled').text()).toBe('Button')
+
+      await wrapper.setProps({ disableData: (data: CascaderData) => data.key === 'pro' })
+
+      expect(getAllOptionGroup(wrapper)[2].find('.ix-cascader-option-disabled').exists()).toBe(false)
+      expect(getAllOptionGroup(wrapper)[0].find('.ix-cascader-option-disabled').text()).toBe('Pro')
+    })
   })
 
   describe('multiple work', () => {

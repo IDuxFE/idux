@@ -15,7 +15,7 @@ import type { SelectedStateContext } from './composables/useSelectedState'
 import type { CascaderProps } from './types'
 import type { FormAccessor } from '@idux/cdk/forms'
 import type { CascaderConfig } from '@idux/components/config'
-import type { GetKeyFn } from '@idux/components/utils'
+import type { GetDisabledFn, GetKeyFn } from '@idux/components/utils'
 import type { ComputedRef, InjectionKey, Slots } from 'vue'
 
 export interface CascaderContext
@@ -29,6 +29,7 @@ export interface CascaderContext
   config: CascaderConfig
   mergedPrefixCls: ComputedRef<string>
   mergedGetKey: ComputedRef<GetKeyFn>
+  mergedGetDisabled: ComputedRef<GetDisabledFn>
   mergedChildrenKey: ComputedRef<string>
   mergedClearIcon: ComputedRef<string>
   mergedExpandIcon: ComputedRef<string>

@@ -10,6 +10,7 @@ import { type ComputedRef, computed } from 'vue'
 import { isFunction } from 'lodash-es'
 
 import { NoopArray, type VKey } from '@idux/cdk/utils'
+import { type GetDisabledFn } from '@idux/components/utils'
 
 import { type MergedData } from './useDataSource'
 import { type CascaderData, type CascaderProps, type CascaderSearchFn } from '../types'
@@ -23,6 +24,7 @@ export function useSearchable(
   mergedLabelKey: ComputedRef<string>,
   mergedDataMap: ComputedRef<Map<VKey, MergedData>>,
   inputValue: ComputedRef<string>,
+  mergedGetDisabled: ComputedRef<GetDisabledFn>,
 ): SearchableContext {
   const mergedSearchFn = useSearchFn(props, mergedLabelKey)
   const parentEnabled = computed(() => props.multiple || props.strategy === 'off')
@@ -34,6 +36,7 @@ export function useSearchable(
       return NoopArray as unknown as VKey[]
     }
     const _parentEnabled = parentEnabled.value
+    const getDisabledFn = mergedGetDisabled.value
     const keySet = new Set<VKey>()
     mergedDataMap.value.forEach(data => {
       const { key, rawData } = data
@@ -44,7 +47,7 @@ export function useSearchable(
         if (_parentEnabled || data.isLeaf) {
           keySet.add(key)
         }
-        processChildren(keySet, data, _parentEnabled)
+        processChildren(keySet, data, _parentEnabled, getDisabledFn)
       }
     })
     return [...keySet]
@@ -75,13 +78,13 @@ function getDefaultSearchFn(labelKey: string): CascaderSearchFn {
   }
 }
 
-function processChildren(keySet: Set<VKey>, data: MergedData, parentEnabled: boolean) {
+function processChildren(keySet: Set<VKey>, data: MergedData, parentEnabled: boolean, getDisabledFn: GetDisabledFn) {
   if (!data || !data.children) {
     return
   }
 
   data.children.forEach(child => {
-    if (child.rawData.disabled || keySet.has(child.key)) {
+    if (getDisabledFn(child.rawData) || keySet.has(child.key)) {
       return
     }
 
@@ -89,6 +92,6 @@ function processChildren(keySet: Set<VKey>, data: MergedData, parentEnabled: boo
       keySet.add(child.key)
     }
 
-    processChildren(keySet, child, parentEnabled)
+    processChildren(keySet, child, parentEnabled, getDisabledFn)
   })
 }
