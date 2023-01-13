@@ -11,14 +11,17 @@
 
   &-sm {
     .card-size(@card-font-size-sm, @card-padding-sm);
+    .card-footer-margin(@card-padding-sm);
   }
 
   &-md {
     .card-size(@card-font-size-md, @card-padding-md);
+    .card-footer-margin(@card-padding-md);
   }
 
   &-lg {
     .card-size(@card-font-size-lg, @card-padding-lg);
+    .card-footer-margin(@card-padding-lg);
   }
 
   &-borderless {
@@ -218,5 +221,23 @@
 
   .@{header-prefix} + .@{card-prefix}-body {
     padding-top: 4px;
+  }
+}
+
+.card-footer-margin(@margin) when(@margin = @card-padding-sm) {
+  .@{card-prefix}-footer {
+    margin-top: 4px;
+  }
+}
+
+.card-footer-margin(@margin) when(@margin = @card-padding-md) {
+  .@{card-prefix}-footer {
+    margin-top: 8px;
+  }
+}
+
+.card-footer-margin(@margin) when(@margin = @card-padding-lg) {
+  .@{card-prefix}-footer {
+    margin-top: 12px;
   }
 }
