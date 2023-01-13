@@ -10,9 +10,7 @@ import type { GetKeyFn } from '@idux/components/utils'
 
 import { type ComputedRef, computed, watch } from 'vue'
 
-import { type VKey, useControlledProp } from '@idux/cdk/utils'
-
-import { traverseTree } from '../utils'
+import { type VKey, traverseTree, useControlledProp } from '@idux/cdk/utils'
 
 export interface TreeExpandedKeysContext {
   sourceExpandedKeys: ComputedRef<VKey[]>
@@ -21,13 +19,13 @@ export interface TreeExpandedKeysContext {
   handleTargetExpandedChange: (keys: VKey[]) => void
 }
 
-export function useTreeExpandedKeys<C extends VKey>(
+export function useTreeExpandedKeys<V extends TreeTransferData<V, C>, C extends string>(
   props: ProTransferProps,
   childrenKey: ComputedRef<C>,
   getKey: ComputedRef<GetKeyFn>,
   targetKeySet: ComputedRef<Set<VKey>>,
   parentKeyMap: Map<VKey, VKey | undefined>,
-  dataKeyMap: Map<VKey, TreeTransferData<C>>,
+  dataKeyMap: Map<VKey, TreeTransferData<V, C>>,
 ): TreeExpandedKeysContext {
   const [sourceExpandedKeys, setSourceExpandedKeys] = useControlledProp(props, 'sourceExpandedKeys', () => [])
   const [targetExpandedKeys, setTargetExpandedKeys] = useControlledProp(props, 'targetExpandedKeys', () => [])

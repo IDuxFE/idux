@@ -26,8 +26,23 @@ export function useTransferTableProps(
 ): ComputedRef<TableProps> {
   const { paginatedData, paginatedDataSource, selectedKeys, getKey } = transferBindings
 
+  const convertedColumns = computed(() =>
+    convertTableColumns(
+      isSource ? props.tableProps?.sourceColumns : props.tableProps?.targetColumns,
+      mergedPrefixCls,
+      transferBindings,
+      props,
+      slots,
+      isSource,
+    ),
+  )
+
+  const onScroll: TableProps['onScroll'] = evt => callEmit(props.onScroll, isSource, evt)
+  const onScrolledChange: TableProps['onScrolledChange'] = (startIndex, endIndex, visibleData) =>
+    callEmit(props.onScrolledChange, isSource, startIndex, endIndex, visibleData)
+  const onScrolledBottom: TableProps['onScrolledBottom'] = () => callEmit(props.onScrolledBottom, isSource)
+
   return computed<TableProps>(() => {
-    const columns = isSource ? props.tableProps?.sourceColumns : props.tableProps?.targetColumns
     /* eslint-disable indent */
     const scroll = props.scroll?.height
       ? {
@@ -45,21 +60,15 @@ export function useTransferTableProps(
       autoHeight: !scroll,
       ...customTableProps,
       dataSource: isSource && props.mode === 'immediate' ? paginatedDataSource.value : paginatedData.value,
-      columns: convertTableColumns(columns, mergedPrefixCls, transferBindings, props, slots, isSource),
+      columns: convertedColumns.value,
       scroll,
       pagination: false,
       selectedRowKeys: selectedKeys.value,
       virtual: props.virtual,
       getKey: getKey.value as (record: unknown) => number | string,
-      onScroll: evt => {
-        callEmit(props.onScroll, isSource, evt)
-      },
-      onScrolledChange: (startIndex, endIndex, visibleData) => {
-        callEmit(props.onScrolledChange, isSource, startIndex, endIndex, visibleData)
-      },
-      onScrolledBottom: () => {
-        callEmit(props.onScrolledBottom, isSource)
-      },
+      onScroll,
+      onScrolledChange,
+      onScrolledBottom,
     }
   })
 }

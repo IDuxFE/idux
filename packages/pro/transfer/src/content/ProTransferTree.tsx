@@ -7,16 +7,15 @@
 
 import { computed, defineComponent, inject, normalizeStyle } from 'vue'
 
-import { type VKey, convertCssPixel } from '@idux/cdk/utils'
+import { VKey, convertCssPixel, getTreeKeys } from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
-import { TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN } from '@idux/components/transfer'
+import { TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN, type TransferBindings } from '@idux/components/transfer'
 import { IxTree } from '@idux/components/tree'
 
 import { renderRemoveIcon } from './RenderRemovableLabel'
 import { useTransferTreeProps } from '../composables/useTransferTreeProps'
 import { proTransferContext, treeTransferContext } from '../token'
 import { type TreeTransferData, proTransferTreeContentProps } from '../types'
-import { genFlattenedTreeKeys } from '../utils'
 
 export default defineComponent({
   props: proTransferTreeContentProps,
@@ -28,27 +27,25 @@ export default defineComponent({
       sourceContentRef,
       targetContentRef,
     } = inject(proTransferContext)!
-    const { expandedKeysContext, childrenKey, loadSourceChildren, loadTargetChildren } = inject(treeTransferContext)!
 
     const proTransferTreeCls = computed(() => `${mergedPrefixCls.value}-tree-content`)
 
-    const transferBindings = inject(props.isSource ? TRANSFER_SOURCE_TOKEN : TRANSFER_TARGET_TOKEN)!
+    const treeContext = inject(treeTransferContext)!
+    const { childrenKey } = treeContext
+    const transferBindings = inject(
+      props.isSource ? TRANSFER_SOURCE_TOKEN : TRANSFER_TARGET_TOKEN,
+    )! as TransferBindings<TreeTransferData>
     const { disabledKeys, getKey, triggerRemove } = transferBindings
-    const treeProps = useTransferTreeProps(
-      proTransferProps,
-      transferBindings,
-      expandedKeysContext!,
-      childrenKey,
-      props.isSource ? loadSourceChildren! : loadTargetChildren!,
-      props.isSource,
-    )
 
-    const renderTreeRemovableSuffix = ({ node }: { node: TreeTransferData<VKey> }) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const treeProps = useTransferTreeProps<any, string>(proTransferProps, treeContext, transferBindings, props.isSource)
+
+    const renderTreeRemovableSuffix = ({ node }: { node: TreeTransferData<Record<VKey, unknown>, string> }) => {
       const prefixCls = proTransferTreeCls.value
       const key = getKey.value(node)
 
       const onClick = () => {
-        triggerRemove(genFlattenedTreeKeys([node], childrenKey.value, getKey.value))
+        triggerRemove(getTreeKeys([node], childrenKey.value, getKey.value).filter(key => !disabledKeys.value.has(key)))
       }
 
       return (
