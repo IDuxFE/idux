@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, TreeTypeData, VKey } from '@idux/cdk/utils'
 import type { CascaderStrategy } from '@idux/components/cascader'
 import type { EmptyProps } from '@idux/components/empty'
 import type { TableColumn, TableProps } from '@idux/components/table'
@@ -25,9 +25,8 @@ import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 export type ProTransferTypes = 'table' | 'tree'
 export type { TransferData } from '@idux/components/transfer'
 
-export type TreeTransferData<C extends VKey = 'children'> = TransferData & {
-  [key in C]?: TreeTransferData<C>[]
-}
+export type TreeTransferData<V extends object = Record<VKey, unknown>, C extends string = 'children'> = TransferData &
+  TreeTypeData<V, C>
 
 export type ProTransferTableProps<T = any, K = VKey> = {
   sourceColumns: TableColumn<T, K>[]
@@ -45,7 +44,7 @@ export type ProTransferTreeProps = Pick<
   | 'onExpand'
   | 'onExpandedChange'
 > & {
-  cascaderStrategy: CascaderStrategy
+  cascaderStrategy?: CascaderStrategy
 }
 
 export interface TransferContentInstance {

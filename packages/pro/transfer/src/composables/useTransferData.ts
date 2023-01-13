@@ -11,9 +11,7 @@ import type { GetKeyFn } from '@idux/components/utils'
 
 import { type ComputedRef, computed, reactive } from 'vue'
 
-import { type VKey, callEmit } from '@idux/cdk/utils'
-
-import { traverseTree } from '../utils'
+import { type VKey, callEmit, traverseTree } from '@idux/cdk/utils'
 
 export type TransferTreeLoadChildren = ComputedRef<((node: TreeNode<VKey>) => Promise<TreeNode<VKey>[]>) | undefined>
 
@@ -23,7 +21,7 @@ export interface TransferDataContext {
   loadTargetChildren: TransferTreeLoadChildren
 }
 
-export function useTransferData<C extends VKey>(
+export function useTransferData<V extends TreeTransferData<V, C>, C extends string>(
   props: ProTransferProps,
   getKey: ComputedRef<GetKeyFn>,
   childrenKey: ComputedRef<C>,
@@ -34,7 +32,7 @@ export function useTransferData<C extends VKey>(
   handleSourceExpandedChange?: (keys: VKey[]) => void,
   handleTargetExpandedChange?: (keys: VKey[]) => void,
 ): TransferDataContext {
-  const loadedChildrenMap = reactive(new Map<VKey, TreeTransferData<C>[]>())
+  const loadedChildrenMap = reactive(new Map<VKey, TreeTransferData<V, C>[]>())
 
   const setExpanded = (key: VKey, isSource: boolean) => {
     const expandedKeys = isSource ? sourceExpandedKeys?.value : targetExpandedKeys?.value
@@ -49,7 +47,7 @@ export function useTransferData<C extends VKey>(
     }
   }
 
-  const mergeData = (data: TreeTransferData<C>[]): TreeTransferData<C>[] => {
+  const mergeData = (data: TreeTransferData<V, C>[]): TreeTransferData<V, C>[] => {
     const _childrenKey = childrenKey.value
 
     return data.map(item => {
@@ -57,11 +55,11 @@ export function useTransferData<C extends VKey>(
       const loadedChildren = loadedChildrenMap.get(getKey.value(item))
 
       if (loadedChildren) {
-        mappedItem[_childrenKey] = loadedChildren as TreeTransferData<C>[C]
+        mappedItem[_childrenKey] = loadedChildren as TreeTransferData<V, C>[C]
       }
 
       if (mappedItem[_childrenKey] && mappedItem[_childrenKey]!.length > 0) {
-        mappedItem[_childrenKey] = mergeData(mappedItem[_childrenKey]!) as TreeTransferData<C>[C]
+        mappedItem[_childrenKey] = mergeData(mappedItem[_childrenKey]!) as TreeTransferData<V, C>[C]
       }
 
       return mappedItem
@@ -73,7 +71,7 @@ export function useTransferData<C extends VKey>(
       return props.dataSource
     }
 
-    const data = mergeData(props.dataSource as TreeTransferData<C>[])
+    const data = mergeData(props.dataSource as TreeTransferData<V, C>[])
     return data
   })
 
@@ -89,7 +87,7 @@ export function useTransferData<C extends VKey>(
     }
 
     return async (node: TreeNode<VKey>, isSource: boolean) => {
-      const loadedData = (await _loadChildren(node as TreeTransferData<C>)) as TreeTransferData<C>[]
+      const loadedData = (await _loadChildren(node as TreeTransferData<V, C>)) as TreeTransferData<V, C>[]
       const key = getKey.value(node)
 
       if (!loadedData || loadedData.length <= 0) {
@@ -102,7 +100,7 @@ export function useTransferData<C extends VKey>(
       if (targetKeySet.value.has(key)) {
         const orignalKeys = Array.from(targetKeySet.value)
         const keySet = new Set(targetKeySet.value)
-        traverseTree<C>(loadedData, childrenKey.value, item => {
+        traverseTree(loadedData, childrenKey.value, item => {
           keySet.add(getKey.value(item))
         })
 

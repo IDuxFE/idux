@@ -11,11 +11,13 @@
 </template>
 
 <script setup lang="ts">
+import type { TransferData } from '@idux/pro/transfer'
+
 import { ref } from 'vue'
 
 import { TableColumn } from '@idux/components/table'
 
-interface Data {
+interface Data extends TransferData {
   key: number
   disabled: boolean
   name: string

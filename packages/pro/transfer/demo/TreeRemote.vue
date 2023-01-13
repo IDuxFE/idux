@@ -14,11 +14,11 @@
 </template>
 
 <script setup lang="ts">
-import type { TransferPaginationProps } from '@idux/components/transfer'
+import type { TransferData, TransferPaginationProps } from '@idux/components/transfer'
 
 import { computed, onMounted, ref } from 'vue'
 
-interface Data {
+interface Data extends TransferData {
   key: string
   label: string
   disabled?: boolean
