@@ -62,15 +62,18 @@
 
   &-footer {
     display: flex;
+    height: @height-lg;
     border-top: @card-border-width @card-border-style @card-border-color;
     list-style: none;
 
     > li {
       flex: 1;
+      align-self: stretch;
 
       > .@{idux-prefix}-button {
         border: none;
         width: 100%;
+        height: 100%;
       }
 
       &:not(:last-child) {
@@ -213,15 +216,7 @@
     padding: @card-padding;
   }
 
-  .@{card-prefix}-footer {
-    padding: @card-padding;
-  }
-
   .@{header-prefix} + .@{card-prefix}-body {
     padding-top: 4px;
-  }
-
-  .@{card-prefix}-body + .@{card-prefix}-footer {
-    padding-top: 0;
   }
 }
