@@ -14,7 +14,7 @@ import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/s
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister, useFormSize, useFormStatus } from '@idux/components/form'
 import { ɵUseOverlayState } from '@idux/components/select'
-import { useGetKey } from '@idux/components/utils'
+import { useGetDisabled, useGetKey } from '@idux/components/utils'
 
 import { useActiveState } from './composables/useActiveState'
 import { useDataSource } from './composables/useDataSource'
@@ -41,6 +41,7 @@ export default defineComponent({
     const mergedExpandIcon = computed(() => props.expandIcon ?? config.expandIcon)
     const mergedFullPath = computed(() => props.fullPath ?? config.fullPath)
     const mergedGetKey = useGetKey(props, config, 'components/cascader')
+    const mergedGetDisabled = useGetDisabled(props)
     const mergedLabelKey = computed(() => props.labelKey ?? config.labelKey)
 
     const triggerRef = ref<ɵSelectorInstance>()
@@ -68,11 +69,19 @@ export default defineComponent({
       mergedFullPath,
     )
     const activeStateContext = useActiveState(props, mergedDataMap)
-    const selectedStateContext = useSelectedState(props, accessor, mergedDataMap, mergedFullPath)
-    const { searchedData } = useSearchable(props, mergedLabelKey, mergedDataMap, inputValue)
+    const selectedStateContext = useSelectedState(props, accessor, mergedDataMap, mergedFullPath, mergedGetDisabled)
+    const { searchedData } = useSearchable(
+      props,
+      mergedData,
+      mergedDataMap,
+      mergedLabelKey,
+      inputValue,
+      mergedGetDisabled,
+    )
     const expandableContext = useExpandable(
       props,
       mergedGetKey,
+      mergedGetDisabled,
       mergedChildrenKey,
       mergedLabelKey,
       mergedFullPath,
@@ -107,6 +116,7 @@ export default defineComponent({
       mergedExpandIcon,
       mergedFullPath,
       mergedGetKey,
+      mergedGetDisabled,
       mergedLabelKey,
       accessor,
       inputValue,

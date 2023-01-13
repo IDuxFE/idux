@@ -10,6 +10,7 @@ import { type ComputedRef } from 'vue'
 import { isNil } from 'lodash-es'
 
 import { type MaybeArray, type VKey, callEmit } from '@idux/cdk/utils'
+import { GetDisabledFn } from '@idux/components/utils'
 
 import { type MergedData } from '../composables/useDataSource'
 import { type CascaderData } from '../types'
@@ -30,16 +31,20 @@ export function callChange(
   }
 }
 
-export function getChildrenKeys(currData: MergedData | undefined, filterDisabled: boolean): VKey[] {
+export function getChildrenKeys(
+  currData: MergedData | undefined,
+  filterDisabled: boolean,
+  getDisabledFn: GetDisabledFn,
+): VKey[] {
   if (!currData || !currData.children) {
     return []
   }
   const keys: VKey[] = []
   currData.children.forEach(item => {
     const { key, rawData } = item
-    if (!filterDisabled || !rawData.disabled) {
+    if (!filterDisabled || !getDisabledFn(rawData)) {
       keys.push(key)
-      keys.push(...getChildrenKeys(item, filterDisabled))
+      keys.push(...getChildrenKeys(item, filterDisabled, getDisabledFn))
     }
   })
   return keys
@@ -49,11 +54,12 @@ export function getParentKeys(
   dataMap: Map<VKey, MergedData>,
   currData: MergedData | undefined,
   filterDisabled: boolean,
+  getDisabledFn: GetDisabledFn,
 ): VKey[] {
   const keys: VKey[] = []
   while (currData && !isNil(currData.parentKey)) {
     const { parentKey, rawData } = currData
-    if (!filterDisabled || !rawData.disabled) {
+    if (!filterDisabled || !getDisabledFn(rawData)) {
       // 保证父组件的顺序
       keys.unshift(parentKey)
       currData = dataMap.get(parentKey)

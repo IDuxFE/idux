@@ -72,8 +72,27 @@
         }
       }
     }
-    .@{tree-node-prefix} {
+    &.@{tree-prefix}-blocked .@{tree-node-prefix} {
       transition: none;
+      background-color: @pro-transfer-list-background-color;
+      &:hover {
+        background-color: @pro-transfer-list-item-hover-color;
+        &-content {
+          background-color: @pro-transfer-list-item-hover-color;
+        }
+      }
+      &-content {
+        background-color: @pro-transfer-list-background-color;
+        transition: none;
+      }
+
+      &-active:not(&-disabled),
+      &-selected:not(&-disabled) {
+        background-color: @pro-transfer-list-background-color;
+        &:hover {
+          background-color: @pro-transfer-list-item-hover-color;
+        }
+      }
     }
     &-close-icon {
       padding: @pro-transfer-tree-close-icon-padding;

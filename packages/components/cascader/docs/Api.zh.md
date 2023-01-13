@@ -19,6 +19,7 @@
 | `customAdditional` | 自定义下拉选项的额外属性 | `CascaderCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
 | `dataSource` | 树型数据数组,参见[CascaderData](#CascaderData) | `CascaderData[]` | `[]` | - | - |
 | `disabled` | 禁用选择器 | `boolean` | - | - | - |
+| `disableData` | 动态禁用某些项 | `(data: CascaderData) => boolean` | - | - | - |
 | `empty` | 空数据时的内容 | `'default' \| 'simple' \| EmptyProps` | `'simple'` | - | - |
 | `expandIcon` | 展开图标 | `string \| #expandIcon="{key: VKey, expanded: boolean, data: CascaderData}"` | `right` | ✅ | - |
 | `expandTrigger` | 触发展开的方式 | `'click' \| 'hover'` | `click` | - | - |
@@ -37,6 +38,7 @@
 | `readonly` | 只读模式 | `boolean` | - | - | - |
 | `searchable` | 是否可搜索 | `boolean \| 'overlay'` | `false` | - | 当为 `true` 时搜索功能集成在选择器上，当为 `overlay` 时，搜索功能集成在悬浮层上 |
 | `searchFn` | 根据搜索的文本进行筛选 | `boolean \| SelectSearchFn` | `true` | - | 为 `true` 时使用默认的搜索规则, 如果使用远程搜索，应该设置为 `false` |
+| `separator` | 设置分割符 | `string` | `/` | - | - |
 | `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |
 | `status` | 手动指定校验状态 | `valid \| invalid \| validating` | - | - | - |
 | `strategy` | 设置级联策略 | `'all' \| 'parent' \| 'child' \| 'off'` | `'all'` | - | 具体用法参见 [级联策略](#components-cascader-demo-Strategy) |

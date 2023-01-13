@@ -80,14 +80,15 @@ export function useCheckable(props: TreeProps, mergedNodeMap: ComputedRef<Map<VK
     const cascaderEnabled = cascaderStrategy !== 'off'
     const childrenKeys = cascaderEnabled ? getChildrenKeys(node, disabledKeys) : []
     const index = allCheckedKeys.value.indexOf(currKey)
-    const checked = index > -1
+
     let tempKeys = [...allCheckedKeys.value]
 
-    if (
-      checked ||
-      (childrenKeys.length &&
+    const checked =
+      index > -1 ||
+      (!!childrenKeys.length &&
         childrenKeys.every(key => tempKeys.includes(key) || indeterminateKeys.value.includes(key)))
-    ) {
+
+    if (checked) {
       const parentKeys = cascaderEnabled ? getParentKeys(nodeMap, node, disabledKeys) : []
       tempKeys.splice(index, 1)
       tempKeys = tempKeys.filter(key => !parentKeys.includes(key) && !childrenKeys.includes(key))

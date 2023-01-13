@@ -10,6 +10,7 @@ import { type ComputedRef, computed } from 'vue'
 import { isFunction } from 'lodash-es'
 
 import { NoopArray, type VKey } from '@idux/cdk/utils'
+import { type GetDisabledFn } from '@idux/components/utils'
 
 import { type MergedData } from './useDataSource'
 import { type CascaderData, type CascaderProps, type CascaderSearchFn } from '../types'
@@ -20,9 +21,11 @@ export interface SearchableContext {
 
 export function useSearchable(
   props: CascaderProps,
-  mergedLabelKey: ComputedRef<string>,
+  mergedData: ComputedRef<MergedData[]>,
   mergedDataMap: ComputedRef<Map<VKey, MergedData>>,
+  mergedLabelKey: ComputedRef<string>,
   inputValue: ComputedRef<string>,
+  mergedGetDisabled: ComputedRef<GetDisabledFn>,
 ): SearchableContext {
   const mergedSearchFn = useSearchFn(props, mergedLabelKey)
   const parentEnabled = computed(() => props.multiple || props.strategy === 'off')
@@ -34,19 +37,9 @@ export function useSearchable(
       return NoopArray as unknown as VKey[]
     }
     const _parentEnabled = parentEnabled.value
+    const getDisabledFn = mergedGetDisabled.value
     const keySet = new Set<VKey>()
-    mergedDataMap.value.forEach(data => {
-      const { key, rawData } = data
-      if (keySet.has(key)) {
-        return
-      }
-      if (searchFn(rawData, searchValue)) {
-        if (_parentEnabled || data.isLeaf) {
-          keySet.add(key)
-        }
-        processChildren(keySet, data, _parentEnabled)
-      }
-    })
+    mergedData.value.forEach(data => doSearch(keySet, data, searchFn, searchValue, _parentEnabled, getDisabledFn))
     return [...keySet]
   })
 
@@ -75,13 +68,35 @@ function getDefaultSearchFn(labelKey: string): CascaderSearchFn {
   }
 }
 
-function processChildren(keySet: Set<VKey>, data: MergedData, parentEnabled: boolean) {
+function doSearch(
+  keySet: Set<VKey>,
+  data: MergedData,
+  searchFn: CascaderSearchFn,
+  searchValue: string,
+  _parentEnabled: boolean,
+  getDisabledFn: GetDisabledFn,
+) {
+  const { key, rawData } = data
+  if (keySet.has(key) || getDisabledFn(rawData)) {
+    return
+  }
+  if (searchFn(rawData, searchValue)) {
+    if (_parentEnabled || data.isLeaf) {
+      keySet.add(key)
+    }
+    processChildren(keySet, data, _parentEnabled, getDisabledFn)
+  } else if (data.children) {
+    data.children.forEach(child => doSearch(keySet, child, searchFn, searchValue, _parentEnabled, getDisabledFn))
+  }
+}
+
+function processChildren(keySet: Set<VKey>, data: MergedData, parentEnabled: boolean, getDisabledFn: GetDisabledFn) {
   if (!data || !data.children) {
     return
   }
 
   data.children.forEach(child => {
-    if (child.rawData.disabled || keySet.has(child.key)) {
+    if (keySet.has(child.key) || getDisabledFn(child.rawData)) {
       return
     }
 
@@ -89,6 +104,6 @@ function processChildren(keySet: Set<VKey>, data: MergedData, parentEnabled: boo
       keySet.add(child.key)
     }
 
-    processChildren(keySet, child, parentEnabled)
+    processChildren(keySet, child, parentEnabled, getDisabledFn)
   })
 }
