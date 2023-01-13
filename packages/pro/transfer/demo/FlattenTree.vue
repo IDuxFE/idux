@@ -3,9 +3,11 @@
 </template>
 
 <script setup lang="ts">
+import type { TransferData } from '@idux/pro/transfer'
+
 import { ref } from 'vue'
 
-interface Data {
+interface Data extends TransferData {
   key: string
   disabled: boolean
   label: string

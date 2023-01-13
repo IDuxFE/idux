@@ -18,10 +18,11 @@
 
 <script setup lang="ts">
 import type { CascaderStrategy } from '@idux/components/cascader'
+import type { TransferData } from '@idux/pro/transfer'
 
 import { ref, watch } from 'vue'
 
-interface Data {
+interface Data extends TransferData {
   key: string
   disabled: boolean
   label: string
@@ -80,7 +81,7 @@ const dataSource: Data[] = [
             children: [
               {
                 key: '1-3-2-1',
-                disabled: false,
+                disabled: true,
                 label: 'Selection-1-3-2-1',
               },
               {

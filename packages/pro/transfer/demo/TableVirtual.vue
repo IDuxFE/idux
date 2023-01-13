@@ -19,12 +19,12 @@
 </template>
 
 <script setup lang="ts">
+import type { TableColumn } from '@idux/components/table'
+import type { ProTransferInstance, TransferData } from '@idux/pro/transfer'
+
 import { ref } from 'vue'
 
-import { TableColumn } from '@idux/components/table'
-import { ProTransferInstance } from '@idux/pro/transfer'
-
-interface Data {
+interface Data extends TransferData {
   key: number
   disabled: boolean
   name: string

@@ -6,58 +6,94 @@
  */
 
 import type { ProTransferProps, TreeTransferData } from '../types'
-import type { VKey } from '@idux/cdk/utils'
 import type { TransferDataStrategyProp } from '@idux/components/transfer'
 
-import { type ComputedRef, type Ref, onUnmounted, ref } from 'vue'
+import { type ComputedRef, type Ref, computed, onUnmounted, ref } from 'vue'
 
-import { filterTree, genFlattenedTreeKeys, traverseTree } from '../utils'
+import { type VKey, filterTree, getTreeKeys, mergeTree, traverseTree } from '@idux/cdk/utils'
+import {
+  type GetKeyFn,
+  type TreeCascadeStrategy,
+  type TreeCheckStateResolver,
+  type TreeCheckStateResolverContext,
+  useTreeCheckStateResolver,
+} from '@idux/components/utils'
 
-export interface TreeDataStrategyContext<C extends VKey> {
-  baseDataStrategy: TransferDataStrategyProp<TreeTransferData<C>>
-  dataKeyMap: Map<VKey, TreeTransferData<C>>
-  parentKeyMap: Map<VKey, VKey | undefined>
-  cachedTargetData: Ref<TreeTransferData<C>[]>
+export interface TreeDataStrategyContext<
+  V extends TreeTransferData<V, C> = TreeTransferData,
+  C extends string = 'children',
+> {
+  baseDataStrategy: TransferDataStrategyProp<V>
+  checkStateResolver: TreeCheckStateResolver<V, C>
+  dataMap: Map<VKey, V>
+  parentKeyMap: Map<VKey, VKey>
+  getKey: ComputedRef<GetKeyFn>
+  childrenKey: ComputedRef<C>
+  cachedTargetData: Ref<V[]>
   targetDataCount: Ref<number>
 }
 
-export function useTreeDataStrategyContext<C extends VKey>(
+export function useTreeDataStrategyContext<V extends TreeTransferData<V, C>, C extends string>(
   props: ProTransferProps,
   childrenKey: ComputedRef<C>,
-): TreeDataStrategyContext<C> {
-  const cachedTargetData = ref(props.defaultTargetData ?? []) as Ref<TreeTransferData<C>[]>
+  getKey: ComputedRef<GetKeyFn>,
+  cascadeStrategy: ComputedRef<TreeCascadeStrategy>,
+): TreeDataStrategyContext<V, C> {
+  const cachedTargetData = ref(props.defaultTargetData ?? []) as Ref<V[]>
   const targetDataCount = ref(0)
-  const dataKeyMap: Map<VKey, TreeTransferData<C>> = new Map()
-  const parentKeyMap: Map<VKey, VKey | undefined> = new Map()
+  const dataMap: Map<VKey, V> = new Map()
+  const parentKeyMap: Map<VKey, VKey> = new Map()
+  const depthMap: Map<VKey, number> = new Map()
+
+  const dataRef: Ref<V[]> = ref([])
+  const checkStateResolverContext = computed<TreeCheckStateResolverContext<V, C>>(() => ({
+    data: dataRef.value,
+    dataMap,
+    parentKeyMap,
+    depthMap,
+  }))
+
+  const checkStateResolver = useTreeCheckStateResolver(checkStateResolverContext, childrenKey, getKey, cascadeStrategy)
 
   onUnmounted(() => {
     cachedTargetData.value = []
-    dataKeyMap.clear()
+    dataMap.clear()
     parentKeyMap.clear()
+    depthMap.clear()
   })
 
   return {
     cachedTargetData,
+    checkStateResolver,
     targetDataCount,
-    dataKeyMap,
+    dataMap,
     parentKeyMap,
+    getKey,
+    childrenKey,
     baseDataStrategy: {
-      genDataKeys: (data, getKey) => {
-        return new Set(genFlattenedTreeKeys(data, childrenKey.value, getKey))
+      genDataKeys: data => {
+        return new Set(getTreeKeys(data, childrenKey.value, getKey.value))
       },
-      genDataKeyMap: (data, getKey) => {
+      genDataKeyMap: data => {
         parentKeyMap.clear()
-        dataKeyMap.clear()
+        dataMap.clear()
+        depthMap.clear()
+        dataRef.value = data
 
-        traverseTree(data, childrenKey.value, (node, parents) => {
-          const key = getKey(node)
-          dataKeyMap.set(key, node)
+        traverseTree(
+          mergeTree(cachedTargetData.value, data, childrenKey.value, getKey.value),
+          childrenKey.value,
+          (node, parents) => {
+            const key = getKey.value(node)
+            dataMap.set(key, node)
+            depthMap.set(key, parents.length)
 
-          const parent = parents[0]
-          parentKeyMap.set(key, parent && getKey(parent))
-        })
+            const parent = parents[0]
+            parent && parentKeyMap.set(key, getKey.value(parent))
+          },
+        )
 
-        return new Map(dataKeyMap)
+        return new Map(dataMap)
       },
       dataFilter: (data, searchValue, searchFn) => {
         if (!searchValue) {

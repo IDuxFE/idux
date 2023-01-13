@@ -47,6 +47,7 @@ export function useTransferSelectState(
 
   const {
     dataKeyMap,
+    dataSource,
     sourceData,
     targetData,
     sourceDataKeys,
@@ -187,7 +188,7 @@ export function useTransferSelectState(
       return
     }
 
-    const data = isSource ? sourceData.value : targetData.value
+    const data = isSource ? (props.mode === 'default' ? sourceData.value : dataSource.value) : targetData.value
     const _disabledKeys = isSource ? (props.mode === 'default' ? disabledSourceKeys : disabledKeys) : disabledTargetKeys
     const selectedKeySet = isSource ? sourceSelectedKeySet : targetSelectedKeySet
     const setSelectedKeys = isSource ? setSourceSelectedKeys : setTargetSelectedKeys

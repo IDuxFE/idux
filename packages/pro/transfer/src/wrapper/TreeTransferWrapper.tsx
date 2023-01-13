@@ -34,11 +34,14 @@ export default defineComponent({
     const cascaderStrategy = computed(() => props.treeProps?.cascaderStrategy ?? 'all')
     const childrenKey = computed(() => props.treeProps?.childrenKey ?? 'children')
 
-    const {
-      dataStrategyContext: { dataKeyMap, targetDataCount },
-      expandedKeysContext,
-      mergedDataStrategy,
-    } = useTreeContext(props, childrenKey, cascaderStrategy, getKey, targetKeySet)
+    const { dataStrategyContext, expandedKeysContext, mergedDataStrategy } = useTreeContext(
+      props,
+      childrenKey,
+      cascaderStrategy,
+      getKey,
+      targetKeySet,
+    )
+    const { dataMap, targetDataCount } = dataStrategyContext
     const { dataSource, loadSourceChildren, loadTargetChildren } = useTransferData(
       props,
       getKey,
@@ -56,6 +59,7 @@ export default defineComponent({
       childrenKey,
       loadSourceChildren,
       loadTargetChildren,
+      dataStrategyContext,
       expandedKeysContext,
     })
 
@@ -66,13 +70,13 @@ export default defineComponent({
         <ProTransferTree isSource={isSource} />
       )
     }
-    const renderTranferTreeHeaderLabel = (params: { isSource: boolean; data: TreeTransferData<VKey>[] }) => {
+    const renderTranferTreeHeaderLabel = (params: { isSource: boolean; data: TreeTransferData[] }) => {
       if (slots.headerLabel) {
         return slots.headerLabel(params)
       }
 
       const label = params.isSource ? transferLocale.toSelect : transferLocale.selected
-      const count = params.isSource ? (dataKeyMap?.size ?? 0) - targetDataCount.value : targetDataCount.value
+      const count = params.isSource ? (dataMap?.size ?? 0) - targetDataCount.value : targetDataCount.value
 
       return `${label} (${count})`
     }
@@ -120,24 +124,25 @@ export default defineComponent({
   },
 })
 
-function useTreeContext<C extends VKey>(
+function useTreeContext<C extends string>(
   props: ProTransferProps,
   childrenKey: ComputedRef<C>,
   cascadeStrategy: ComputedRef<CascaderStrategy>,
   getKey: ComputedRef<GetKeyFn>,
   targetKeySet: ComputedRef<Set<VKey>>,
 ): {
-  dataStrategyContext: TreeDataStrategyContext<C>
+  dataStrategyContext: TreeDataStrategyContext<TreeTransferData, C>
   expandedKeysContext: TreeExpandedKeysContext
-  mergedDataStrategy: Ref<TransferDataStrategyProp<TreeTransferData<C>>>
+  mergedDataStrategy: Ref<TransferDataStrategyProp<TreeTransferData<TreeTransferData, C>>>
 } {
   const { context: dataStrategyContext, mergedDataStrategy } = useTreeDataStrategies(
     props,
     childrenKey,
+    getKey,
     cascadeStrategy,
   )
-  const { parentKeyMap, dataKeyMap } = dataStrategyContext
-  const expandedKeysContext = useTreeExpandedKeys(props, childrenKey, getKey, targetKeySet, parentKeyMap, dataKeyMap)
+  const { parentKeyMap, dataMap } = dataStrategyContext
+  const expandedKeysContext = useTreeExpandedKeys(props, childrenKey, getKey, targetKeySet, parentKeyMap, dataMap)
 
   return {
     dataStrategyContext,

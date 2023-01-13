@@ -9,18 +9,20 @@
 </template>
 
 <script setup lang="ts">
+import type { TreeNode } from '@idux/components/tree'
+import type { TransferData } from '@idux/pro/transfer'
+
 import { ref } from 'vue'
 
-interface Data {
+interface Data extends TransferData {
   key: string
   disabled: boolean
   label: string
   children?: Data[]
-  isLeaf?: boolean
 }
 
 const targetKeys = ref<string[]>([])
-const loadChildren = (node: Data) => {
+const loadChildren = ((node: Data) => {
   const depth = node.key.split('-').length
   if (depth > 2) {
     return
@@ -41,7 +43,7 @@ const loadChildren = (node: Data) => {
       1000,
     )
   })
-}
+}) as (node: TreeNode) => Promise<TreeNode[]>
 
 const dataSource: Data[] = [
   {
