@@ -10,18 +10,15 @@
   overflow: hidden;
 
   &-sm {
-    .card-size(@card-font-size-sm, @card-padding-sm);
-    .card-footer-margin(@card-padding-sm);
+    .card-size(@card-font-size-sm, @card-padding-sm, 2px);
   }
 
   &-md {
-    .card-size(@card-font-size-md, @card-padding-md);
-    .card-footer-margin(@card-padding-md);
+    .card-size(@card-font-size-md, @card-padding-md, 4px);
   }
 
   &-lg {
-    .card-size(@card-font-size-lg, @card-padding-lg);
-    .card-footer-margin(@card-padding-lg);
+    .card-size(@card-font-size-lg, @card-padding-lg, 8px);
   }
 
   &-borderless {
@@ -65,18 +62,15 @@
 
   &-footer {
     display: flex;
-    height: @height-lg;
     border-top: @card-border-width @card-border-style @card-border-color;
     list-style: none;
 
     > li {
       flex: 1;
-      align-self: stretch;
 
       > .@{idux-prefix}-button {
         border: none;
         width: 100%;
-        height: 100%;
       }
 
       &:not(:last-child) {
@@ -207,7 +201,7 @@
   }
 }
 
-.card-size(@font-size, @card-padding) {
+.card-size(@font-size, @card-padding, @footer-margin) {
   .reset-font-size(@font-size);
 
   > .@{header-prefix} {
@@ -222,22 +216,8 @@
   .@{header-prefix} + .@{card-prefix}-body {
     padding-top: 4px;
   }
-}
 
-.card-footer-margin(@margin) when(@margin = @card-padding-sm) {
-  .@{card-prefix}-footer {
-    margin-top: 4px;
-  }
-}
-
-.card-footer-margin(@margin) when(@margin = @card-padding-md) {
-  .@{card-prefix}-footer {
-    margin-top: 8px;
-  }
-}
-
-.card-footer-margin(@margin) when(@margin = @card-padding-lg) {
-  .@{card-prefix}-footer {
-    margin-top: 12px;
+  .@{card-prefix}-footer button {
+    margin: @footer-margin 0;
   }
 }
