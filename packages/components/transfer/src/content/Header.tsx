@@ -57,11 +57,19 @@ export default defineComponent({
       handleSearchChange(searchInputValue.value)
     }
 
+    let timer: number | null = null
     const handleInput = (evt: Event) => {
       const value = (evt.target as HTMLInputElement).value
       setSearchInputValue(value)
 
-      if (!value) {
+      if (value) {
+        if (timer) {
+          clearTimeout(timer)
+        }
+        timer = setTimeout(() => {
+          triggerSearch()
+        }, 1000)
+      } else {
         triggerSearch()
       }
     }
