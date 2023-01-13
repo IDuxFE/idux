@@ -65,9 +65,9 @@ export function convertMergedData(
   parentKey?: VKey,
   parentLabel?: string,
 ): MergedData[] {
-  const { loadChildren } = props
+  const { loadChildren, separator } = props
   return data.map(item =>
-    convertMergedItem(item, getKey, childrenKey, labelKey, fullPath, !!loadChildren, parentKey, parentLabel),
+    convertMergedItem(item, getKey, childrenKey, labelKey, separator, fullPath, !!loadChildren, parentKey, parentLabel),
   )
 }
 
@@ -76,16 +76,19 @@ function convertMergedItem(
   getKey: GetKeyFn,
   childrenKey: string,
   labelKey: string,
+  separator: string,
   fullPath: boolean,
   hasLoad: boolean,
   parentKey?: VKey,
   parentLabel?: string,
 ): MergedData {
   const key = getKey(rawData)
-  const label = (fullPath && !isNil(parentLabel) ? `${parentLabel}/${rawData[labelKey]}` : rawData[labelKey]) as string
+  const label = (
+    fullPath && !isNil(parentLabel) ? `${parentLabel}${separator}${rawData[labelKey]}` : rawData[labelKey]
+  ) as string
   const subData = rawData[childrenKey] as CascaderData[] | undefined
   const children = subData?.map(item =>
-    convertMergedItem(item, getKey, childrenKey, labelKey, fullPath, hasLoad, key, label),
+    convertMergedItem(item, getKey, childrenKey, labelKey, separator, fullPath, hasLoad, key, label),
   )
   return {
     children,
