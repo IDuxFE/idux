@@ -12,6 +12,7 @@ import { isNil } from 'lodash-es'
 import { type FormAccessor } from '@idux/cdk/forms'
 import { NoopArray, type VKey, callEmit, convertArray } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { type GetDisabledFn } from '@idux/components/utils'
 
 import { type MergedData } from './useDataSource'
 import { type CascaderProps, type CascaderStrategy } from '../types'
@@ -33,6 +34,7 @@ export function useSelectedState(
   accessor: FormAccessor,
   mergedDataMap: ComputedRef<Map<VKey, MergedData>>,
   mergedFullPath: ComputedRef<boolean>,
+  mergedGetDisabled: ComputedRef<GetDisabledFn>,
 ): SelectedStateContext {
   const locale = useGlobalConfig('locale')
   const selectedKeys = computed(() => {
@@ -62,7 +64,9 @@ export function useSelectedState(
   })
   const strategyEnabled = computed(() => props.multiple && props.strategy !== 'off')
   const selectedWithStrategyKeys = computed(() => {
-    return strategyEnabled.value ? getCascadedKeys(mergedDataMap.value, selectedKeys.value) : selectedKeys.value
+    return strategyEnabled.value
+      ? getCascadedKeys(mergedDataMap.value, selectedKeys.value, mergedGetDisabled.value)
+      : selectedKeys.value
   })
 
   const indeterminateKeys = computed(() => {
@@ -72,12 +76,13 @@ export function useSelectedState(
     const indeterminateKeySet = new Set<VKey>()
     const cascadedKeys = selectedWithStrategyKeys.value
     const dataMap = mergedDataMap.value
+    const getDisabledFn = mergedGetDisabled.value
     cascadedKeys.forEach(key => {
       let currData = dataMap.get(key)
       while (currData && !isNil(currData.parentKey)) {
         const parentKey = currData.parentKey
         const parent = dataMap.get(parentKey)
-        if (parent && !parent.rawData.disabled && !cascadedKeys.includes(parentKey)) {
+        if (parent && !getDisabledFn(parent.rawData) && !cascadedKeys.includes(parentKey)) {
           indeterminateKeySet.add(parentKey)
         }
         currData = parent
@@ -92,15 +97,16 @@ export function useSelectedState(
     if (!mergedFullPath.value) {
       currValue = props.multiple ? keys : keys[0]
     } else {
+      const getDisabledFn = mergedGetDisabled.value
       if (!props.multiple) {
         const currKey = keys[0]
         const dataMap = mergedDataMap.value
-        currValue = getParentKeys(dataMap, dataMap.get(currKey), true)
+        currValue = getParentKeys(dataMap, dataMap.get(currKey), true, getDisabledFn)
         currValue.push(currKey)
       } else {
         const dataMap = mergedDataMap.value
         currValue = keys.map(currKey => {
-          const parentKeys = getParentKeys(dataMap, dataMap.get(currKey), true)
+          const parentKeys = getParentKeys(dataMap, dataMap.get(currKey), true, getDisabledFn)
           parentKeys.push(currKey)
           return parentKeys
         })
@@ -128,7 +134,8 @@ export function useSelectedState(
     const dataMap = mergedDataMap.value
     const currData = dataMap.get(key)
     const _strategyEnabled = strategyEnabled.value
-    const childrenKeys = _strategyEnabled ? getChildrenKeys(currData, true) : []
+    const getDisabledFn = mergedGetDisabled.value
+    const childrenKeys = _strategyEnabled ? getChildrenKeys(currData, true, getDisabledFn) : []
     const keySet = new Set(cascadedKeys)
 
     if (
@@ -137,13 +144,13 @@ export function useSelectedState(
     ) {
       keySet.delete(key)
       if (_strategyEnabled) {
-        getParentKeys(dataMap, currData, true).forEach(key => keySet.delete(key))
+        getParentKeys(dataMap, currData, true, getDisabledFn).forEach(key => keySet.delete(key))
         childrenKeys.forEach(key => keySet.delete(key))
       }
     } else {
       keySet.add(key)
       if (_strategyEnabled) {
-        setParentChecked(dataMap, currData, keySet)
+        setParentChecked(dataMap, currData, keySet, getDisabledFn)
         childrenKeys.forEach(key => keySet.add(key))
       }
     }
@@ -173,7 +180,7 @@ export function useSelectedState(
  * 根据当前选中的 keys 来获取对应级联关系的 keys
  * 只是看是否开启级联
  */
-function getCascadedKeys(dataMap: Map<VKey, MergedData>, checkedKys: VKey[]) {
+function getCascadedKeys(dataMap: Map<VKey, MergedData>, checkedKys: VKey[], getDisabledFn: GetDisabledFn) {
   const keySet = new Set(checkedKys)
   let lastParentKey: VKey
 
@@ -183,10 +190,10 @@ function getCascadedKeys(dataMap: Map<VKey, MergedData>, checkedKys: VKey[]) {
       return
     }
     const { parentKey } = currData
-    const childrenKeys = getChildrenKeys(currData, true)
+    const childrenKeys = getChildrenKeys(currData, true, getDisabledFn)
     childrenKeys.forEach(key => keySet.add(key))
     if (parentKey && lastParentKey !== parentKey) {
-      setParentChecked(dataMap, currData, keySet)
+      setParentChecked(dataMap, currData, keySet, getDisabledFn)
       lastParentKey = parentKey
     }
   })
@@ -194,13 +201,18 @@ function getCascadedKeys(dataMap: Map<VKey, MergedData>, checkedKys: VKey[]) {
   return [...keySet]
 }
 
-function setParentChecked(dataMap: Map<VKey, MergedData>, currData: MergedData | undefined, keySet: Set<VKey>) {
+function setParentChecked(
+  dataMap: Map<VKey, MergedData>,
+  currData: MergedData | undefined,
+  keySet: Set<VKey>,
+  getDisabledFn: GetDisabledFn,
+) {
   let parentSelected = true
   while (parentSelected && currData && !isNil(currData.parentKey)) {
     const parentKey = currData.parentKey
     const parent = dataMap.get(parentKey)
-    if (parent && !currData.rawData.disabled) {
-      parentSelected = parent.children!.every(item => item.rawData.disabled || keySet.has(item.key))
+    if (parent && !getDisabledFn(currData.rawData)) {
+      parentSelected = parent.children!.every(item => getDisabledFn(item.rawData) || keySet.has(item.key))
       parentSelected && keySet.add(currData.parentKey)
     }
     currData = parent

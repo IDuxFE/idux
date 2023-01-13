@@ -32,6 +32,7 @@ export default defineComponent({
       slots,
       mergedPrefixCls,
       mergedExpandIcon,
+      mergedGetDisabled,
       mergedLabelKey,
       inputValue,
       activeKey,
@@ -48,7 +49,7 @@ export default defineComponent({
       handleExpand,
     } = inject(cascaderToken)!
     const isActive = computed(() => key === activeKey.value)
-    const isDisabled = computed(() => props.rawData.disabled)
+    const isDisabled = computed(() => mergedGetDisabled.value(props.rawData))
     const isExpanded = computed(() => expandedKeys.value.includes(key))
     const isLoading = computed(() => loadingKeys.value.includes(key))
     const isSelected = computed(() => selectedWithStrategyKeys.value.includes(key))

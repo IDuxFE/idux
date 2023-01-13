@@ -10,7 +10,7 @@ import { type ComputedRef, type Ref, ref } from 'vue'
 import { isNil } from 'lodash-es'
 
 import { type VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
-import { type GetKeyFn } from '@idux/components/utils'
+import { type GetDisabledFn, type GetKeyFn } from '@idux/components/utils'
 
 import { type MergedData, convertMergedData, convertMergedDataMap } from './useDataSource'
 import { type CascaderData, type CascaderProps } from '../types'
@@ -26,6 +26,7 @@ export interface ExpandableContext {
 export function useExpandable(
   props: CascaderProps,
   mergedGetKey: ComputedRef<GetKeyFn>,
+  mergedGetDisabled: ComputedRef<GetDisabledFn>,
   mergedChildrenKey: ComputedRef<string>,
   mergedLabelKey: ComputedRef<string>,
   mergedFullPath: ComputedRef<boolean>,
@@ -38,7 +39,7 @@ export function useExpandable(
     }
     const dataMap = mergedDataMap.value
     const currData = dataMap.get(firstSelectedKey)
-    return getParentKeys(dataMap, currData, false)
+    return getParentKeys(dataMap, currData, false, mergedGetDisabled.value)
   }
   const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', () =>
     getDefaultExpandedKeys(selectedKeys.value[0]),
@@ -91,7 +92,7 @@ export function useExpandable(
 
     if (!currExpanded) {
       const dataMap = mergedDataMap.value
-      const newKeys = getParentKeys(dataMap, dataMap.get(key), false)
+      const newKeys = getParentKeys(dataMap, dataMap.get(key), false, mergedGetDisabled.value)
       newKeys.push(key)
       handleChange(newKeys, !currExpanded, currData!.rawData)
     }
