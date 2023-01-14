@@ -43,11 +43,11 @@ export default defineComponent({
     })
 
     return () => {
-      const { count, disabled, index, prefixCls, tooltip, value } = props
+      const { count, disabled, index, prefixCls, tooltip, value, color } = props
 
       const iconNode = slots.default!()
       const itemNode = (
-        <li ref={liRef} class={classes.value}>
+        <li ref={liRef} class={classes.value} style={`color: ${color}`}>
           <span
             aria-checked={value > index}
             aria-posinset={index + 1}
