@@ -75,6 +75,7 @@ export const rateItemProps = {
     type: Number,
     required: true,
   },
+  color: String,
 
   // events
   onClick: {

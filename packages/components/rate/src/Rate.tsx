@@ -140,6 +140,7 @@ export default defineComponent({
             value={itemValue}
             onClick={handleItemClick}
             onMouseMove={handleItemMouseMove}
+            color={props.color}
           >
             {slots.icon?.({ disabled, focused, index }) ?? <IxIcon name={iconRef.value} />}
           </RateItem>,
