@@ -142,6 +142,7 @@ const renderFooter = (props: CardProps, slots: Slots, prefixCls: string) => {
       if (isVNode(item)) {
         itemChild = item
       } else {
+        item.waveless = true
         const { text, ...rest } = item
         itemChild = (
           <IxButton waveless={true} {...rest}>
