@@ -5,12 +5,16 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { SelectPanelData } from './panels'
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
+import type { SelectPanelData, TreeSelectPanelData } from './panels'
 import type { SearchItemError } from './searchItem'
 import type { SearchValue } from './searchValue'
 import type { InputFormater, InputParser, PanelRenderContext } from './segment'
-import type { VKey } from '@idux/cdk/utils'
+import type { MaybeArray, VKey } from '@idux/cdk/utils'
+import type { CascaderStrategy } from '@idux/components/cascader'
 import type { DatePanelProps, DateRangePanelProps } from '@idux/components/date-picker'
+import type { TreeDragDropOptions } from '@idux/components/tree'
 import type { VNodeChild } from 'vue'
 
 interface SearchFieldBase<V = unknown> {
@@ -26,9 +30,6 @@ interface SearchFieldBase<V = unknown> {
   onPanelVisibleChange?: (visible: boolean) => void
 }
 
-export const searchDataTypes = ['select', 'input', 'datePicker', 'dateRangePicker', 'custom'] as const
-export type SearchDataTypes = (typeof searchDataTypes)[number]
-
 export interface SelectSearchField extends SearchFieldBase<VKey | VKey[]> {
   type: 'select'
   fieldConfig: {
@@ -40,6 +41,34 @@ export interface SelectSearchField extends SearchFieldBase<VKey | VKey[]> {
     virtual?: boolean
     searchFn?: (data: SelectPanelData, searchText: string) => boolean
     overlayItemWidth?: number
+  }
+}
+
+export interface TreeSelectSearchField extends SearchFieldBase<VKey | VKey[]> {
+  type: 'treeSelect'
+  fieldConfig: {
+    dataSource: TreeSelectPanelData[]
+    multiple?: boolean
+    checkable?: boolean
+    cascaderStrategy: CascaderStrategy
+    draggable?: boolean
+    draggableIcon?: string
+    showLine?: boolean
+    searchable?: boolean
+    separator?: string
+    virtual?: boolean
+    searchFn?: (node: TreeSelectPanelData, searchValue?: string) => boolean
+
+    onCheck?: MaybeArray<(checked: boolean, node: TreeSelectPanelData) => void>
+    onDragstart?: MaybeArray<(options: TreeDragDropOptions<any>) => void>
+    onDragend?: MaybeArray<(options: TreeDragDropOptions<any>) => void>
+    onDragenter?: MaybeArray<(options: TreeDragDropOptions<any>) => void>
+    onDragleave?: MaybeArray<(options: TreeDragDropOptions<any>) => void>
+    onDragover?: MaybeArray<(options: TreeDragDropOptions<any>) => void>
+    onDrop?: MaybeArray<(options: TreeDragDropOptions<any>) => void>
+    onExpand?: MaybeArray<(expanded: boolean, node: TreeSelectPanelData) => void>
+    onSelect?: MaybeArray<(selected: boolean, node: TreeSelectPanelData) => void>
+    onLoaded?: MaybeArray<(loadedKeys: any[], node: TreeSelectPanelData) => void>
   }
 }
 
@@ -84,7 +113,11 @@ export interface CustomSearchField extends SearchFieldBase {
 
 export type SearchField =
   | SelectSearchField
+  | TreeSelectSearchField
   | InputSearchField
   | DatePickerSearchField
   | DateRangePickerSearchField
   | CustomSearchField
+
+export const searchDataTypes = ['select', 'treeSelect', 'input', 'datePicker', 'dateRangePicker', 'custom'] as const
+export type SearchDataTypes = (typeof searchDataTypes)[number]

@@ -224,6 +224,17 @@
       .panel-footer();
     }
   }
+  &-tree-select-panel {
+    &-body {
+      padding: @spacing-sm 0;
+      .@{tree-node-prefix} {
+        padding: 0 @spacing-sm;
+      }
+    }
+    &-footer {
+      .panel-footer();
+    }
+  }
   &-date-picker-panel {
     &-body {
       padding: @pro-search-date-picker-panel-body-padding;
@@ -242,6 +253,10 @@
   &-select-panel {
     min-width: @pro-search-select-panel-min-width;
   }
+  &-tree-select-panel {
+    min-width: @pro-search-tree-select-panel-min-width;
+    max-width: @pro-search-tree-select-panel-max-width;
+  }
 
   &-name-segment-input {
     min-width: @pro-search-name-segment-input-min-width;
@@ -258,6 +273,10 @@
   &-select-segment-input {
     min-width: @pro-search-select-segment-input-min-width;
     text-align: @pro-search-select-segment-input-text-align;
+  }
+  &-tree-select-segment-input {
+    min-width: @pro-search-tree-select-segment-input-min-width;
+    text-align: @pro-search-tree-select-segment-input-text-align;
   }
   &-date-picker-segment-input {
     min-width: @pro-search-date-picker-segment-input-min-width;
