@@ -44,7 +44,7 @@ export type ProTableColumn<T = any, V = any, CT = 'input'> =
 | --- | --- | --- | --- | --- | --- |
 | `maxWidth` | 列的最大宽度 | `number` | - | - | - |
 | `minWidth` | 列的最小宽度 | `number` | - | - | - |
-| `resizable` | 是否开启列宽调整 | `boolean` | `false` | - | - |
+| `resizable` | 是否开启列宽调整 | `boolean` | `false` | - | 如果设为 `true`, 请同时设置一个非百分比的 `column.width` |
 
 ##### ProTableColumnBase
 
