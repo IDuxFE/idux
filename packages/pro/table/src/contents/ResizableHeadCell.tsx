@@ -16,7 +16,7 @@ export default defineComponent({
   setup(props, { slots }) {
     const elementRef = ref<HTMLDivElement>()
     const onResizeEnd: ResizableEvent = position => {
-      callEmit(props.onResizeEnd, props.column.key, position.width)
+      callEmit(props.onResizeEnd, props.column.key, position.width, position.offsetWidth)
     }
     const resizableOptions = reactive<ResizableOptions>({
       maxWidth: props.column.maxWidth,

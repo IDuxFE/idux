@@ -50,7 +50,7 @@ const columns: ProTableColumn<Data>[] = [
     dataKey: 'name',
     changeFixed: false,
     customCell: 'name',
-    width: 150,
+    width: 100,
     minWidth: 100,
     maxWidth: 300,
     resizable: true,
@@ -69,14 +69,14 @@ const columns: ProTableColumn<Data>[] = [
     title: 'Address',
     dataKey: 'address',
     changeFixed: false,
-    width: 400,
-    minWidth: 200,
+    width: 200,
+    minWidth: 100,
     resizable: true,
   },
   {
     title: 'Tags',
     dataKey: 'tags',
-    minWidth: 200,
+    width: 200,
     customCell: ({ value }) =>
       value.map((tag: string) => {
         let color = tag.length > 5 ? 'warning' : 'success'

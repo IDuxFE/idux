@@ -37,19 +37,16 @@ export function getColTitle(
 }
 
 export function getColumnKey(column: TableColumn): VKey {
-  if (column.key) {
-    return column.key
+  if ('key' in column) {
+    return column.key!
   }
-  // @ts-ignore
-  if (column.dataKey) {
-    // @ts-ignore
+  if ('dataKey' in column) {
     return convertArray(column.dataKey).join('-')
   }
-  // @ts-ignore
-  if (column.type) {
-    // @ts-ignore
+  if ('type' in column) {
     return `__IDUX_table_column_key_${column.type}`
   }
+
   __DEV__ &&
     Logger.warn(
       'components/table',
