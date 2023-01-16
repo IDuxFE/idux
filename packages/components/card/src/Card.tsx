@@ -143,7 +143,11 @@ const renderFooter = (props: CardProps, slots: Slots, prefixCls: string) => {
         itemChild = item
       } else {
         const { text, ...rest } = item
-        itemChild = <IxButton {...rest}>{text}</IxButton>
+        itemChild = (
+          <IxButton waveless={true} {...rest}>
+            {text}
+          </IxButton>
+        )
       }
       return itemChild ? <li>{itemChild}</li> : null
     })

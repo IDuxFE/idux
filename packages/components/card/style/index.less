@@ -10,15 +10,15 @@
   overflow: hidden;
 
   &-sm {
-    .card-size(@card-font-size-sm, @card-padding-sm);
+    .card-size(@card-font-size-sm, @card-padding-sm, 2px);
   }
 
   &-md {
-    .card-size(@card-font-size-md, @card-padding-md);
+    .card-size(@card-font-size-md, @card-padding-md, 4px);
   }
 
   &-lg {
-    .card-size(@card-font-size-lg, @card-padding-lg);
+    .card-size(@card-font-size-lg, @card-padding-lg, 8px);
   }
 
   &-borderless {
@@ -201,7 +201,7 @@
   }
 }
 
-.card-size(@font-size, @card-padding) {
+.card-size(@font-size, @card-padding, @footer-margin) {
   .reset-font-size(@font-size);
 
   > .@{header-prefix} {
@@ -213,15 +213,11 @@
     padding: @card-padding;
   }
 
-  .@{card-prefix}-footer {
-    padding: @card-padding;
-  }
-
   .@{header-prefix} + .@{card-prefix}-body {
     padding-top: 4px;
   }
 
-  .@{card-prefix}-body + .@{card-prefix}-footer {
-    padding-top: 0;
+  .@{card-prefix}-footer button {
+    margin: @footer-margin 0;
   }
 }
