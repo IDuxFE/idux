@@ -125,7 +125,7 @@ export default defineComponent({
       const itemValue = convertNumber(hoverValue.value ?? accessor.value)
       const itemPrefixCls = `${mergedPrefixCls.value}-item`
 
-      const { tooltips } = props
+      const { tooltips, color } = props
       const children = []
       for (let index = 0; index < count; index++) {
         children.push(
@@ -137,6 +137,7 @@ export default defineComponent({
             index={index}
             prefixCls={itemPrefixCls}
             tooltip={tooltips[index]}
+            color={color}
             value={itemValue}
             onClick={handleItemClick}
             onMouseMove={handleItemMouseMove}

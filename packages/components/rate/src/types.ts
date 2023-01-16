@@ -30,6 +30,10 @@ export const rateProps = {
     default: (): string[] => [],
   },
   size: String as PropType<FormSize>,
+  color: {
+    type: String,
+    default: undefined,
+  },
 
   // events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: number) => void>>,
@@ -75,6 +79,7 @@ export const rateItemProps = {
     type: Number,
     required: true,
   },
+  color: String,
 
   // events
   onClick: {
