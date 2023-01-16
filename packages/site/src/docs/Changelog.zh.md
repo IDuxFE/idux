@@ -10,6 +10,30 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 1.4.0(2023-01-16)
+
+### Bug Fixes
+
+- **comp:badge:** 支持非数字的字符 ([#1399](https://github.com/IDuxFE/idux/issues/1399)) ([5400b29](https://github.com/IDuxFE/idux/commit/5400b29de42776e6078752f4495f3fc3d8401dba))
+- **comp:tree:** `onCheck` 的回调参数不正确 ([#1404](https://github.com/IDuxFE/idux/issues/1404)) ([2858da6](https://github.com/IDuxFE/idux/commit/2858da62cf218a4397d4266fe853866a638b6a3d))
+- **comp:tree:** 被选中的节点样式不正确 ([#1416](https://github.com/IDuxFE/idux/issues/1416)) ([b112049](https://github.com/IDuxFE/idux/commit/b1120491a71f5f68f6c6332c9f0f58156106354a))
+- **comp:tree:** showLine 时没有对齐 ([#1393](https://github.com/IDuxFE/idux/issues/1393)) ([0dd030d](https://github.com/IDuxFE/idux/commit/0dd030de66cf84a7d3a3e0f043ced4bdde2b17d1))
+- **pro:table:** resize 后宽度计算问题 ([#1417](https://github.com/IDuxFE/idux/issues/1417)) ([d7ef42c](https://github.com/IDuxFE/idux/commit/d7ef42cca7b2ca6611cd352b1f68592f1fa0b421))
+- **pro:transfer:** 优化 tree 展开节点的逻辑 ([#1414](https://github.com/IDuxFE/idux/issues/1414)) ([fec5fee](https://github.com/IDuxFE/idux/commit/fec5fee6146cd9412abdcb4bd4a8a6b42c78bf58))
+- **pro:transfer:** 覆盖树节点被选中的样式 ([#1407](https://github.com/IDuxFE/idux/issues/1407)) ([477ac44](https://github.com/IDuxFE/idux/commit/477ac44f11036d33bfc487c51b44d54e765139ed))
+- **pro:tree:** 空状态的图标没有居中 ([#1394](https://github.com/IDuxFE/idux/issues/1394)) ([2c58ca2](https://github.com/IDuxFE/idux/commit/2c58ca23132609febd9b985b9eb912fd52105c52))
+
+### Features
+
+- **cdk:forms:** `ValidatorOptions` 的 `disabled` 支持函数形式 ([#1395](https://github.com/IDuxFE/idux/issues/1395)) ([d633174](https://github.com/IDuxFE/idux/commit/d633174afbf32d05a6d42c793ded4cb3eeeb952c))
+- **cdk:forms:** `setMessages` 新增第二个参数用于支持 `i18n` ([#1398](https://github.com/IDuxFE/idux/issues/1398)) ([0a8b116](https://github.com/IDuxFE/idux/commit/0a8b116c432617701108d0dfe2322efccf7d0ac7))
+- **cdk:utils, pro:search:** 新增 tree 相关工具函数, 高级搜索支持 `'treeSelect'` ([#1391](https://github.com/IDuxFE/idux/issues/1391)) ([4bf719d](https://github.com/IDuxFE/idux/commit/4bf719ddcea66b12500d2df891c09ba0af8621f1))
+- **cdk:utils:** 新增 tree 相关工具函数，修复过滤和分页的问题 ([#1406](https://github.com/IDuxFE/idux/issues/1406)) ([56035c1](https://github.com/IDuxFE/idux/commit/56035c131cacbdf32c3eee3387f266768a85124b))
+- **comp:badge:** 新增 processing 配置 ([#1400](https://github.com/IDuxFE/idux/issues/1400)) ([ba15f33](https://github.com/IDuxFE/idux/commit/ba15f33eaa0393ef466cdef0c0327703f728ad21))
+- **comp:badge:** 新增 status 配置, 支持 css variable ([#1390](https://github.com/IDuxFE/idux/issues/1390)) ([da3905e](https://github.com/IDuxFE/idux/commit/da3905e626e5f8f14d11f9330aa2ac7eb73b874b))
+- **comp:cascader:** 新增 disableData 用于支持动态禁用选项 ([#1408](https://github.com/IDuxFE/idux/issues/1408)) ([65328e7](https://github.com/IDuxFE/idux/commit/65328e7ee5b6e0794a856741f7b66b8817f6c7b3))
+- **comp:stepper:** 新增 dot 配置 ([#1401](https://github.com/IDuxFE/idux/issues/1401)) ([aa90a7e](https://github.com/IDuxFE/idux/commit/aa90a7e55c809e8b8e1fdc98836bcc7029fcaff7)), closes [#1082](https://github.com/IDuxFE/idux/issues/1082)
+
 ## 1.3.3(2023-01-09)
 
 ### Bug Fixes
