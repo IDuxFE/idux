@@ -6,7 +6,6 @@
  */
 
 import type { ActiveSegmentContext } from './useActiveSegment'
-import type { SearchStateContext } from './useSearchStates'
 import type { ProSearchProps } from '../types'
 import type { ɵOverlayProps } from '@idux/components/_private/overlay'
 
@@ -16,6 +15,8 @@ import { isFunction, isString } from 'lodash-es'
 
 import { useSharedFocusMonitor } from '@idux/cdk/a11y'
 import { MaybeElementRef, callEmit, useState } from '@idux/cdk/utils'
+
+import { type SearchStateContext, tempSearchStateKey } from './useSearchStates'
 
 export interface FocusEventContext {
   focused: ComputedRef<boolean>
@@ -34,7 +35,7 @@ export function useFocusedState(
   const { activeSegment, setInactive, setTempActive } = activeSegmentContext
   const [focused, setFocused] = useState(false)
 
-  const { handleFocus, handleBlur } = useFocusHandlers(props, focused, setFocused, setInactive, initTempSearchState)
+  const { handleFocus, handleBlur } = useFocusHandlers(props, focused, setFocused, setInactive)
 
   watch([activeSegment, searchStates], ([segment]) => {
     if (!segment && focused.value) {
@@ -47,10 +48,19 @@ export function useFocusedState(
       return
     }
 
-    handleFocus(evt, () => {
-      if (evt.target === elementRef.value) {
-        setTempActive(true)
-      }
+    if (evt.target === elementRef.value) {
+      setTempActive(activeSegment.value?.itemKey !== tempSearchStateKey)
+    }
+
+    handleFocus(evt)
+  }
+  const _handleBlur = (evt: FocusEvent) => {
+    if (props.disabled) {
+      return
+    }
+
+    handleBlur(evt, () => {
+      initTempSearchState()
     })
   }
 
@@ -62,7 +72,7 @@ export function useFocusedState(
     setFocused(false)
   }
 
-  registerHandlers(elementRef, () => getContainerEl(commonOverlayProps.value), _handleFocus, handleBlur)
+  registerHandlers(elementRef, () => getContainerEl(commonOverlayProps.value), _handleFocus, _handleBlur)
 
   return { focused, focus, blur }
 }
@@ -83,7 +93,6 @@ function useFocusHandlers(
   focused: ComputedRef<boolean>,
   setFocused: (focused: boolean) => void,
   setInactive: (blur?: boolean) => void,
-  initTempSearchState: () => void,
 ): {
   handleFocus: (evt: FocusEvent, cb?: () => void) => void
   handleBlur: (evt: FocusEvent, cb?: () => void) => void
@@ -112,7 +121,6 @@ function useFocusHandlers(
       return
     }
 
-    initTempSearchState()
     cb?.()
 
     setInactive(true)

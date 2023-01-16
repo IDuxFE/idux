@@ -41,7 +41,9 @@ export function useTreeExpandedKeys<V extends TreeTransferData<V, C>, C extends 
   ) => {
     const processExpandedKey = (key: VKey) => {
       if (expandedKeysSource.has(key)) {
-        !expandedKeysTarget.has(key) && expandedKeysTarget.add(key)
+        expandedKeysTarget.add(key)
+      } else if (remove) {
+        expandedKeysTarget.delete(key)
       }
     }
 
@@ -57,8 +59,6 @@ export function useTreeExpandedKeys<V extends TreeTransferData<V, C>, C extends 
         processExpandedKey(getKey.value(item))
       })
     }
-
-    remove && expandedKeysSource.delete(key)
   }
 
   watch(targetKeySet, (keys, oldKeys) => {
@@ -77,10 +77,10 @@ export function useTreeExpandedKeys<V extends TreeTransferData<V, C>, C extends 
     const newSourceExpandedKeySet = new Set<VKey>(sourceExpandedKeySet.value)
 
     deletedKeySet?.forEach(key => {
-      syncSelectedExpandedState(key, newTargetExpandedKeySet, newSourceExpandedKeySet, true)
+      syncSelectedExpandedState(key, newTargetExpandedKeySet, newSourceExpandedKeySet, false)
     })
     newKeySet?.forEach(key => {
-      syncSelectedExpandedState(key, newSourceExpandedKeySet, newTargetExpandedKeySet, props.mode !== 'immediate')
+      syncSelectedExpandedState(key, newSourceExpandedKeySet, newTargetExpandedKeySet, true)
     })
 
     setTargetExpandedKeys(Array.from(newTargetExpandedKeySet))

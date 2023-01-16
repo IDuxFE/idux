@@ -5,12 +5,21 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, VKey } from '@idux/cdk/utils'
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
+import type { ExtractInnerPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
+import type { CascaderStrategy } from '@idux/components/cascader'
 import type { DatePanelProps, DateRangePanelProps } from '@idux/components/date-picker'
 import type { SelectData } from '@idux/components/select'
+import type { TreeDragDropOptions, TreeDroppable } from '@idux/components/tree'
+import type { TreeSelectNode } from '@idux/components/tree-select'
 import type { PropType } from 'vue'
 
 export type SelectPanelData = Required<Pick<SelectData, 'key' | 'label'>> & SelectData
+export type TreeSelectPanelData = TreeSelectNode &
+  Required<Pick<TreeSelectNode, 'key' | 'label'>> & {
+    children?: TreeSelectPanelData[]
+  }
 
 export const proSearchSelectPanelProps = {
   value: { type: Array as PropType<VKey[]>, default: undefined },
@@ -27,6 +36,45 @@ export const proSearchSelectPanelProps = {
   onCancel: Function as PropType<() => void>,
 } as const
 export type ProSearchSelectPanelProps = ExtractInnerPropTypes<typeof proSearchSelectPanelProps>
+
+export const proSearchTreeSelectPanelProps = {
+  value: { type: Array as PropType<VKey[]>, default: undefined },
+  searchValue: { type: String, default: undefined },
+  dataSource: { type: Array as PropType<TreeSelectPanelData[]>, default: undefined },
+  multiple: { type: Boolean, default: false },
+  checkable: { type: Boolean, default: false },
+  expandedKeys: { type: Array as PropType<VKey[]>, default: undefined },
+  cascaderStrategy: { type: String as PropType<CascaderStrategy>, default: 'off' },
+  draggable: { type: Boolean, default: false },
+  draggableIcon: { type: String, default: undefined },
+  droppable: { type: Function as PropType<TreeDroppable>, default: undefined },
+
+  expandIcon: { type: [String, Array] as PropType<string | [string, string]>, default: undefined },
+  loadChildren: {
+    type: Function as PropType<(node: TreeSelectPanelData) => Promise<TreeSelectPanelData[]>>,
+    default: undefined,
+  },
+  leafLineIcon: { type: String, default: undefined },
+  showLine: { type: Boolean, default: undefined },
+  searchFn: Function as PropType<(node: TreeSelectPanelData, searchValue?: string) => boolean>,
+  virtual: { type: Boolean, default: false },
+
+  onChange: Function as PropType<(value: VKey[]) => void>,
+  onConfirm: Function as PropType<() => void>,
+  onCancel: Function as PropType<() => void>,
+
+  onCheck: [Function, Array] as PropType<MaybeArray<(checked: boolean, node: TreeSelectPanelData) => void>>,
+  onDragstart: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions<any>) => void>>,
+  onDragend: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions<any>) => void>>,
+  onDragenter: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions<any>) => void>>,
+  onDragleave: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions<any>) => void>>,
+  onDragover: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions<any>) => void>>,
+  onDrop: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions<any>) => void>>,
+  onExpand: [Function, Array] as PropType<MaybeArray<(expanded: boolean, node: TreeSelectPanelData) => void>>,
+  onSelect: [Function, Array] as PropType<MaybeArray<(selected: boolean, node: TreeSelectPanelData) => void>>,
+  onLoaded: [Function, Array] as PropType<MaybeArray<(loadedKeys: any[], node: TreeSelectPanelData) => void>>,
+} as const
+export type ProSearchTreeSelectPanelProps = ExtractInnerPropTypes<typeof proSearchTreeSelectPanelProps>
 
 export const proSearchDatePanelProps = {
   panelType: {

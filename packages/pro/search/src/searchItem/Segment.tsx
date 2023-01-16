@@ -8,7 +8,6 @@
 import {
   type ComputedRef,
   type Ref,
-  type WatchStopHandle,
   computed,
   defineComponent,
   inject,
@@ -89,14 +88,23 @@ export default defineComponent({
       })
     })
 
-    let stopActiveSegmentWatch: WatchStopHandle
     onMounted(() => {
-      stopActiveSegmentWatch = watch(
+      watch(
+        activeSegment,
+        () => {
+          nextTick(() => {
+            if (isActive.value) {
+              segmentInputRef.value?.focus()
+            }
+          })
+        },
+        { immediate: true },
+      )
+      watch(
         isActive,
         active => {
           nextTick(() => {
             if (active) {
-              segmentInputRef.value?.focus()
               if (!props.value && props.segment.defaultValue) {
                 handleSegmentChange(props.segment.name, props.segment.defaultValue)
                 handleSegmentConfirm(props.segment.name, false)
@@ -128,7 +136,6 @@ export default defineComponent({
       registerOverlayUpdate(updateOverlay)
     })
     onBeforeUnmount(() => {
-      stopActiveSegmentWatch?.()
       unregisterOverlayUpdate(updateOverlay)
     })
 

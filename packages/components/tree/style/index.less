@@ -258,11 +258,11 @@
       }
     }
 
-    &-active:not(&-disabled) &-content {
+    &-active:not(&-disabled) .@{tree-node-prefix}-content {
       background-color: @tree-node-hover-background-color;
     }
 
-    &-selected:not(&-disabled) &-content {
+    &-selected:not(&-disabled) .@{tree-node-prefix}-content {
       background-color: @tree-node-selected-background-color;
       color: @tree-node-selected-color;
       &:hover {
@@ -270,7 +270,7 @@
       }
     }
 
-    &-disabled &-content {
+    &-disabled .@{tree-node-prefix}-content {
       color: @tree-node-disabled-color;
       cursor: not-allowed;
 
@@ -284,11 +284,11 @@
       box-shadow: 0 0 0 @tree-box-shadow-size @tree-box-shadow-color;
     }
 
-    &-drop-before &-content {
+    &-drop-before .@{tree-node-prefix}-content {
       box-shadow: 0 -@tree-box-shadow-size 0 0 @tree-box-shadow-color;
     }
 
-    &-drop-after &-content {
+    &-drop-after .@{tree-node-prefix}-content {
       box-shadow: 0 @tree-box-shadow-size 0 0 @tree-box-shadow-color;
     }
   }

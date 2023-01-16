@@ -102,7 +102,7 @@ export function useActiveSegment(
     } else {
       setActiveSegment({
         itemKey: tempSearchStateKey,
-        name: 'name',
+        name: activeSegment.value?.itemKey === tempSearchStateKey ? activeSegment.value.name : 'name',
         overlayOpened,
       })
     }

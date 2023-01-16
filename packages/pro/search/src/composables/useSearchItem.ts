@@ -16,6 +16,7 @@ import { createDateRangePickerSegment } from '../segments/CreateDateRangePickerS
 import { createNameSegment } from '../segments/CreateNameSegment'
 import { createOperatorSegment } from '../segments/CreateOperatorSegment'
 import { createSelectSegment } from '../segments/CreateSelectSegment'
+import { createTreeSelectSegment } from '../segments/CreateTreeSelectSegment'
 import { createCustomSegment } from '../segments/createCustomSegment'
 import { createInputSegment } from '../segments/createInputSegment'
 
@@ -69,6 +70,8 @@ function createSearchItemContentSegment(
   switch (searchField.type) {
     case 'select':
       return createSelectSegment(prefixCls, searchField)
+    case 'treeSelect':
+      return createTreeSelectSegment(prefixCls, searchField)
     case 'input':
       return createInputSegment(prefixCls, searchField)
     case 'datePicker':

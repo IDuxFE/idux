@@ -93,7 +93,7 @@ SelectSearchFieldConfig
 | --- | --- | --- | --- | --- | --- |
 | `dataSource` | 类型 | `SelectPanelData[]` | - | - | 继承自`SelectData`，但`key`和`label`为必填,不支持可配，详情参考[Select](/components/select/zh) |
 | `multiple` | 是否为多选 | `boolean` | - | - | 默认为单选 |
-| `searchable` | 是否支持筛选 | `boolean` | false | - | 默认不支持 |
+| `searchable` | 是否支持筛选 | `boolean` | `false` | - | 默认不支持 |
 | `searchFn` | 搜索函数 | `(data: SelectPanelData, searchText: string) => boolean` | - | - | 默认模糊匹配 |
 | `separator` | 多选分隔符 | `string` | `'|'` | - | - |
 | `showSelectAll` | 是否支持全选 | `boolean` | `true` | - | - |
@@ -104,6 +104,49 @@ SelectSearchFieldConfig
 
 ```typescript
 type SelectPanelData = Required<Pick<SelectData, 'key' | 'label'>> & SelectData
+```
+
+#### TreeSelectSearchField
+
+树选择类型
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `type` | 类型 | `'treeSelect'` | - | - | 固定为 `'select'` |
+| `fieldConfig` | 配置 | `TreeSelectSearchFieldConfig` | - | - | - |
+
+TreeSelectSearchFieldConfig
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `dataSource` | 类型 | `TreeSelectPanelData[]` | - | - | 继承自`TreeSelectNode`，但`key`和`label`为必填,不支持可配，且`childrenKey`固定为`'children'`，详情参考[Tree](/components/tree/zh) |
+| `multiple` | 是否为多选 | `boolean` | - | - | 默认为单选 |
+| `checkable` | 是否可勾选 | `boolean` | - | - | 默认不可勾选 |
+| `cascaderStrategy` | 级联策略 | `CascaderStrategy` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `draggable` | 是否可拖拽 | `boolean` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `draggableIcon` | 拖拽图标 | `string` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `showLine` | 是否展示连线 | `boolean` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `searchable` | 是否支持筛选 | `boolean` | false | - | 默认不支持 |
+| `searchFn` | 搜索函数 | `(node: TreeSelectPanelData, searchValue?: string) => boolean` | - | - | 默认模糊匹配 |
+| `separator` | 多选分隔符 | `string` | `'|'` | - | - |
+| `virtual` | 是否支持虚拟滚动 | `boolean` | `false` | - | 默认不支持 |
+
+| `onCheck` | 勾选回调函数 | `(checked: boolean, node: TreeSelectPanelData) => void | ((checked: boolean, node: TreeSelectPanelData) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onDragstart` | `dragstart` 触发时调用 | `(options: TreeDragDropOptions<any>) => void | ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onDragend` | `dragend` 触发时调用 | `(options: TreeDragDropOptions<any>) => void | ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onDragenter` | `dragenter` 触发时调用 | `(options: TreeDragDropOptions<any>) => void | ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onDragleave` | `dragleave` 触发时调用 | `(options: TreeDragDropOptions<any>) => void | ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onDragover` | `dragover` 触发时调用 | `(options: TreeDragDropOptions<any>) => void | ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onDrop` | `drop` 触发时调用 | `(options: TreeDragDropOptions<any>) => void | ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onExpand` | 点击展开图标时触发 | `(expanded: boolean, node: TreeSelectPanelData) => void | ((expanded: boolean, node: TreeSelectPanelData) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onSelect` | 选中状态发生变化时触发 | `(selected: boolean, node: TreeSelectPanelData) => void | ((selected: boolean, node: TreeSelectPanelData) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onLoaded` | 子节点加载完毕时触发 | `(loadedKeys: any[], node: TreeSelectPanelData) => void | ((loadedKeys: any[], node: TreeSelectPanelData) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+
+```typescript
+type TreeSelectPanelData = TreeSelectNode &
+  Required<Pick<TreeSelectNode, 'key' | 'label'>> & {
+    children?: TreeSelectPanelData[]
+  }
 ```
 
 #### DatePickerSearchField
@@ -169,5 +212,6 @@ interface PanelRenderContext<V = unknown> {
   ok: () => void // 确认
   cancel: () => void // 取消
   setValue: (value: V) => void // 设置搜索值
+  setOnKeyDown: (onKeyDown: ((evt: KeyboardEvent) => boolean) | undefined) => void // 设置 `keydown` 回调函数
 }
 ```
