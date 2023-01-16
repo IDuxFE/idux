@@ -95,6 +95,47 @@ const searchFields: SearchField[] = [
     },
   },
   {
+    type: 'treeSelect',
+    label: 'Tree Data',
+    key: 'tree_data',
+    fieldConfig: {
+      multiple: true,
+      searchable: true,
+      checkable: true,
+      cascaderStrategy: 'all',
+      dataSource: [
+        {
+          label: 'Node 0',
+          key: '0',
+          children: [
+            {
+              label: 'Node 0-0',
+              key: '0-0',
+              children: [
+                {
+                  label: 'Node 0-0-0',
+                  key: '0-0-0',
+                },
+                {
+                  label: 'Node 0-0-1',
+                  key: '0-0-1',
+                },
+              ],
+            },
+            {
+              label: 'Node 0-1',
+              key: '0-1',
+              children: [
+                { label: 'Node 0-1-0', key: '0-1-0' },
+                { label: 'Node 0-1-1', key: '0-1-1' },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
     type: 'datePicker',
     label: 'Date',
     key: 'date',
