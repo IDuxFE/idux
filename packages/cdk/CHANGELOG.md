@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/IDuxFE/idux/compare/v1.3.3...v1.4.0) (2023-01-16)
+
+### Features
+
+- **cdk:forms:** the disabled of ValidatorOptions support function ([#1395](https://github.com/IDuxFE/idux/issues/1395)) ([d633174](https://github.com/IDuxFE/idux/commit/d633174afbf32d05a6d42c793ded4cb3eeeb952c))
+- **cdk:forms:** the setMessages supports setting locale for i18n ([#1398](https://github.com/IDuxFE/idux/issues/1398)) ([0a8b116](https://github.com/IDuxFE/idux/commit/0a8b116c432617701108d0dfe2322efccf7d0ac7))
+- **cdk:utils:** add tree utils, fix data param of getAllSelectedKeys, fix filtered or paginated tree data value error ([#1406](https://github.com/IDuxFE/idux/issues/1406)) ([56035c1](https://github.com/IDuxFE/idux/commit/56035c131cacbdf32c3eee3387f266768a85124b))
+
 ## [1.3.3](https://github.com/IDuxFE/idux/compare/v1.3.2...v1.3.3) (2023-01-09)
 
 ### Bug Fixes

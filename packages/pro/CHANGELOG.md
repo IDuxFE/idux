@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/IDuxFE/idux/compare/v1.3.3...v1.4.0) (2023-01-16)
+
+### Bug Fixes
+
+- **comp:tree:** lines are not aligned ([#1393](https://github.com/IDuxFE/idux/issues/1393)) ([0dd030d](https://github.com/IDuxFE/idux/commit/0dd030de66cf84a7d3a3e0f043ced4bdde2b17d1))
+- **pro:table:** width calculation problem after resize ([#1417](https://github.com/IDuxFE/idux/issues/1417)) ([d7ef42c](https://github.com/IDuxFE/idux/commit/d7ef42cca7b2ca6611cd352b1f68592f1fa0b421))
+- **pro:transfer:** optimze tree expanded keys sync logic ([#1414](https://github.com/IDuxFE/idux/issues/1414)) ([fec5fee](https://github.com/IDuxFE/idux/commit/fec5fee6146cd9412abdcb4bd4a8a6b42c78bf58))
+- **pro:transfer:** overide transfer tree node selected bg color ([#1407](https://github.com/IDuxFE/idux/issues/1407)) ([477ac44](https://github.com/IDuxFE/idux/commit/477ac44f11036d33bfc487c51b44d54e765139ed))
+
+### Features
+
+- **cdk:utils, pro:search:** add tree utils, add pro search `'treeSelect'` field ([#1391](https://github.com/IDuxFE/idux/issues/1391)) ([4bf719d](https://github.com/IDuxFE/idux/commit/4bf719ddcea66b12500d2df891c09ba0af8621f1))
+- **cdk:utils:** add tree utils, fix data param of getAllSelectedKeys, fix filtered or paginated tree data value error ([#1406](https://github.com/IDuxFE/idux/issues/1406)) ([56035c1](https://github.com/IDuxFE/idux/commit/56035c131cacbdf32c3eee3387f266768a85124b))
+- **comp:badge:** add status prop and support css variable ([#1390](https://github.com/IDuxFE/idux/issues/1390)) ([da3905e](https://github.com/IDuxFE/idux/commit/da3905e626e5f8f14d11f9330aa2ac7eb73b874b))
+
 ## [1.3.3](https://github.com/IDuxFE/idux/compare/v1.3.2...v1.3.3) (2023-01-09)
 
 ### Bug Fixes
