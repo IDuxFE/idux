@@ -30,6 +30,10 @@ export const rateProps = {
     default: (): string[] => [],
   },
   size: String as PropType<FormSize>,
+  color: {
+    type: String,
+    default: '#F8D81A',
+  },
 
   // events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: number) => void>>,
