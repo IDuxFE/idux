@@ -27,3 +27,37 @@
 .slide-motion(slide-down, 100% 100%, scaleY(0.8));
 .slide-motion(slide-left, 0% 0%, scaleX(0.8));
 .slide-motion(slide-right, 100% 0, scaleX(0.8));
+
+.@{idux-prefix}-slide-auto-enter-active,
+.@{idux-prefix}-slide-auto-leave-active {
+  transform-origin: 0% 0%;
+  transition-property: transform, opacity;
+  transition-duration: var(--ix-transition-duration-medium);
+
+  &[data-popper-placement^='top'] {
+    transform-origin: 100% 100%;
+  }
+
+  &[data-popper-placement^='left'] {
+    transform-origin: 100% 0;
+  }
+}
+
+.@{idux-prefix}-slide-auto-enter-active {
+  transition-timing-function: var(--ix-ease-out-quint);
+}
+
+.@{idux-prefix}-slide-auto-leave-active {
+  transition-timing-function: var(--ix-ease-in-quint);
+}
+
+.@{idux-prefix}-slide-auto-enter-from,
+.@{idux-prefix}-slide-auto-leave-to {
+  opacity: 0;
+  transform: scaleY(0.8);
+
+  &[data-popper-placement^='right'],
+  &[data-popper-placement^='left'] {
+    transform: scaleX(0.8);
+  }
+}
