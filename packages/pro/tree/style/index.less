@@ -54,8 +54,10 @@
     flex: 1;
     height: 0;
 
-    &-node {
-      padding: @pro-tree-node-padding;
+    &.@{tree-prefix}-blocked {
+      .@{tree-prefix}-node {
+        padding: @pro-tree-node-padding;
+      }
     }
   }
 
