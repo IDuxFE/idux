@@ -34,10 +34,10 @@ function createDefaultStrategies<T extends TransferData = TransferData>(
 
       return dataKeyMap
     },
-    genDisabledKeys: (data, getKey) => {
+    genDisabledKeys: (data, getKey, disableData) => {
       const keys = new Set<VKey>()
       data.forEach(item => {
-        if (item.disabled) {
+        if (item.disabled || disableData?.(item)) {
           keys.add(getKey(item))
         }
       })

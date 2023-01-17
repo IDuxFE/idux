@@ -90,6 +90,7 @@ export default defineComponent({
         sourceSelectedKeys: props.sourceSelectedKeys,
         targetSelectedKeys: props.targetSelectedKeys,
         disabled: props.disabled,
+        disableData: props.disableData,
         searchable: props.searchable,
         searchFn: props.searchFn,
         searchPlaceholder: props.searchPlaceholder,

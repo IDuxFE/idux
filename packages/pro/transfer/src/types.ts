@@ -67,6 +67,7 @@ export const proTransferProps = {
     type: Boolean as PropType<boolean>,
     default: false,
   },
+  disableData: Function as PropType<(data: any) => boolean>,
   virtual: {
     type: Boolean as PropType<boolean>,
     default: false,

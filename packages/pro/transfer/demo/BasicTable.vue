@@ -3,6 +3,7 @@
     v-model:value="targetKeys"
     type="table"
     :scroll="{ width: { source: 500 } }"
+    :disable-data="disableData"
     :data-source="dataSource"
     :table-props="tableProps"
   />
@@ -17,7 +18,6 @@ import { TableColumn } from '@idux/components/table'
 
 interface Data extends TransferData {
   key: number
-  disabled: boolean
   name: string
   age: number
   address: string
@@ -54,9 +54,11 @@ const targetKeys = ref<number[]>(Array.from(new Array(10)).map((_, idx) => idx))
 
 const dataSource: Data[] = Array.from(new Array(20)).map((_, idx) => ({
   key: idx,
-  disabled: [1, 6, 12, 16].includes(idx),
   name: 'Candidate' + idx,
   age: idx,
   address: 'London No.1 Lake Park',
 }))
+const disableData = (item: Data) => {
+  return [1, 6, 12, 16].includes(item.key)
+}
 </script>

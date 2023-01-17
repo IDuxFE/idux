@@ -16,6 +16,7 @@
 | `dataSource` | 源数据数组 | `TransferData[]` | `[]` | - | - |
 | `defaultTargetData` | 初始默认目标列表数据 | `TransferData` | - | - | 仅用于设置初始数据，不可响应式变更 |
 | `disabled` | 是否禁用穿梭框 | `boolean` | `false` | - | - |
+| `disableData` | 穿梭框数据项禁用判断函数 | `(data: any) => boolean` | - | - | 接收某一项数据作为参数，返回 `true` 则表示该项数据被禁用 |
 | `empty` | 空状态的配置 | `'default' \| 'simple' \| EmptyProps` | `'simple'` | - | - |
 | `getKey` | 数据项 `key` 的取值 | `string \| (item: unknown) => string \| number` | - | - | 默认取数据的 `key` 属性 |
 | `mode` | 穿梭框模式 | `'default' \| 'immediate'` | `'default'` | - | `'immediate'` 模式为勾选即触发穿梭，不展示穿梭操作按钮 |

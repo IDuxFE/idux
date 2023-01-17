@@ -63,10 +63,12 @@ const getAllSelectedKeys = <V extends TreeTransferData<V, C>, C extends string>(
 const genDisabledKeys = <V extends TreeTransferData<V, C>, C extends string>(
   data: V[],
   getKey: (item: V) => VKey,
+  disableData: ((item: V) => boolean) | undefined,
   childrenKey: C,
   cascade: boolean,
 ): Set<VKey> => {
   const keys = new Set<VKey>()
+  const checkDisabled = (item: V) => item.disabled || !!disableData?.(item)
 
   traverseTree(
     data,
@@ -75,9 +77,9 @@ const genDisabledKeys = <V extends TreeTransferData<V, C>, C extends string>(
       const key = getKey(item)
       const children = item[childrenKey]
       if (
-        item.disabled ||
+        checkDisabled(item) ||
         (cascade &&
-          (parents.some(parent => parent.disabled) ||
+          (parents.some(parent => checkDisabled(parent)) ||
             (children?.length && children.every(child => keys.has(getKey(child))))))
       ) {
         keys.add(key)
@@ -189,7 +191,8 @@ function createStrategy<V extends TreeTransferData<V, C>, C extends string>(
   const { cachedTargetData, checkStateResolver, childrenKey, dataMap, targetDataCount } = context
 
   return {
-    genDisabledKeys: (data, getKey) => genDisabledKeys(data, getKey, childrenKey.value, cascaderStrategy !== 'off'),
+    genDisabledKeys: (data, getKey, disableData) =>
+      genDisabledKeys(data, getKey, disableData, childrenKey.value, cascaderStrategy !== 'off'),
     getAllSelectedKeys: (selected, data, selectedKeySet, disabledKeySet) =>
       getAllSelectedKeys(selected, checkStateResolver, data, selectedKeySet, disabledKeySet),
     separateDataSource: createSeparateDataSourceFn(

@@ -23,7 +23,7 @@ export interface SeparatedData<T extends TransferData = TransferData> {
 export interface TransferDataStrategy<T extends TransferData = TransferData, K = VKey> {
   genDataKeys: (data: T[], getKey: GetKeyFn) => Set<K>
   genDataKeyMap: (dataSource: T[], getKey: GetKeyFn) => Map<K, T>
-  genDisabledKeys: (data: T[], getKey: GetKeyFn) => Set<K>
+  genDisabledKeys: (data: T[], getKey: GetKeyFn, disableData: ((data: T) => boolean) | undefined) => Set<K>
   getAllSelectedKeys: (
     selected: boolean,
     data: T[],
@@ -139,6 +139,7 @@ export const transferProps = {
     type: Boolean,
     default: false,
   },
+  disableData: Function as PropType<(data: any) => boolean>,
   empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'simple' },
   getKey: [String, Function] as PropType<string | ((item: TransferData<any>) => any)>,
   mode: {

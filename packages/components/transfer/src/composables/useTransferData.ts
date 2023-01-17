@@ -127,9 +127,11 @@ export function useTransferData<T extends TransferData = TransferData>(
     handleChange(Array.from(disabledTargetKeys.value))
   }
 
-  const disabledKeys = computed(() => transferDataStrategy.value.genDisabledKeys(dataSource.value, getKey.value))
+  const disabledKeys = computed(() =>
+    transferDataStrategy.value.genDisabledKeys(dataSource.value, getKey.value, props.disableData),
+  )
   const disabledTargetKeys = computed(() => {
-    const keys = transferDataStrategy.value.genDisabledKeys(targetData.value, getKey.value)
+    const keys = transferDataStrategy.value.genDisabledKeys(targetData.value, getKey.value, props.disableData)
 
     targetKeySet.value.forEach(key => {
       if (disabledKeys.value.has(key)) {
@@ -138,7 +140,9 @@ export function useTransferData<T extends TransferData = TransferData>(
     })
     return keys
   })
-  const disabledSourceKeys = computed(() => transferDataStrategy.value.genDisabledKeys(sourceData.value, getKey.value))
+  const disabledSourceKeys = computed(() =>
+    transferDataStrategy.value.genDisabledKeys(sourceData.value, getKey.value, props.disableData),
+  )
 
   return {
     dataSource,

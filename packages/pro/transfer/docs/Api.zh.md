@@ -14,6 +14,7 @@
 | `clearIcon` | 清除图标 | `string \| #clearIcon` | `clear` | ✅ | - |
 | `dataSource` | 源数据数组 | `TransferData[]` | `[]` | - | - |
 | `disabled` | 是否禁用穿梭框 | `boolean` | `false` | - | - |
+| `disableData` | 穿梭框数据项禁用判断函数 | `(data: any) => boolean` | - | - | 接收某一项数据作为参数，返回 `true` 则表示该项数据被禁用 |
 | `defaultTargetData` | 初始默认目标列表数据 | `TransferData` | - | - | 仅用于设置初始数据，不可响应式变更 |
 | `empty` | 空状态的配置 | `'default' \| 'simple' \| EmptyProps` | `'simple'` | - | - |
 | `flatTargetData` | 是否平展开已选树数据 | `boolean \| 'all'` | `false` | - | 平展开后仅将树的叶子节点数据以列表展示，仅在 `type` 为 `'tree'` 下生效 |

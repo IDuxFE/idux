@@ -12,13 +12,25 @@ import TransferOperations from '../src/TransferOperations'
 import TransferContent from '../src/content/Content'
 import TransferHeader from '../src/content/Header'
 import TransferListItem from '../src/list/ListItem'
-import { TransferProps } from '../src/types'
+import { TransferData, TransferProps } from '../src/types'
 
-const mockedDataSource = Array.from(new Array(20)).map((_, idx) => ({
+interface Data extends TransferData {
+  key: number
+  value: number
+  disabled?: boolean
+}
+
+const mockedDataSource: Data[] = Array.from(new Array(20)).map((_, idx) => ({
   key: idx,
   value: idx,
   disabled: [1, 6, 12, 16].includes(idx),
 }))
+const mockedNonDisabledDataSource = mockedDataSource.map(item => {
+  const _item = { ...item }
+  delete _item.disabled
+
+  return _item
+})
 
 describe('Transfer', () => {
   const TransferMount = (options?: MountingOptions<Partial<TransferProps>>) =>
@@ -252,6 +264,49 @@ describe('Transfer', () => {
     })
 
     expect(wrapper.find('.ix-transfer-header-clear-icon').find('.ix-icon-up').exists()).toBeTruthy()
+  })
+
+  test('disableData work', async () => {
+    const onChange = vi.fn()
+    const wrapper = TransferMount({
+      props: {
+        dataSource: mockedNonDisabledDataSource,
+        disableData: (item: Data) => [1, 6, 12, 16].includes(item.key),
+        onChange,
+      },
+    })
+
+    const [sourceList, targetList] = wrapper.findAllComponents(TransferContent)
+    const [appendTrigger] = wrapper.findComponent(TransferOperations).findAllComponents(IxButton)
+    await Promise.all(
+      sourceList
+        .findAllComponents(TransferListItem)
+        .filter(item => [1, 2, 3, 4, 5, 6].includes(item.props().value))
+        .map(item => item.findComponent(IxCheckbox).find('input').setValue(true)),
+    )
+    await appendTrigger.trigger('click')
+
+    expect(onChange).toBeCalledWith([2, 3, 4, 5], [])
+    expect(
+      [2, 3, 4, 5].some(
+        value => sourceList.findAllComponents(TransferListItem).findIndex(item => item.props().value === value) > -1,
+      ),
+    ).toBeFalsy()
+    expect(
+      [2, 3, 4, 5].every(
+        value => targetList.findAllComponents(TransferListItem).findIndex(item => item.props().value === value) > -1,
+      ),
+    ).toBeTruthy()
+    expect(
+      [1, 6].every(
+        value => sourceList.findAllComponents(TransferListItem).findIndex(item => item.props().value === value) > -1,
+      ),
+    ).toBeTruthy()
+    expect(
+      [1, 6].some(
+        value => targetList.findAllComponents(TransferListItem).findIndex(item => item.props().value === value) > -1,
+      ),
+    ).toBeFalsy()
   })
 
   test('pagination work', async () => {
