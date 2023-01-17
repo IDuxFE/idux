@@ -86,14 +86,8 @@ export function useActiveSegment(
     /* eslint-enable indent */
   }
 
-  const setInactive = (blur?: boolean) => {
+  const setInactive = () => {
     setActiveSegment(undefined)
-
-    // when no segment is active the component will lose focus
-    // so set the container element focused if we do not intend to blur the component
-    if (!blur) {
-      elementRef.value?.focus()
-    }
   }
 
   const setTempActive = (overlayOpened = false) => {
@@ -102,7 +96,7 @@ export function useActiveSegment(
     } else {
       setActiveSegment({
         itemKey: tempSearchStateKey,
-        name: activeSegment.value?.itemKey === tempSearchStateKey ? activeSegment.value.name : 'name',
+        name: 'name',
         overlayOpened,
       })
     }
