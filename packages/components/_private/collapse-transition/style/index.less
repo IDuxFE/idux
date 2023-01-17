@@ -2,8 +2,16 @@
   &-enter-active,
   &-leave-active {
     overflow: hidden;
-    transition: height var(--ix-transition-duration-medium) var(--ix-ease-in-out),
-      width var(--ix-transition-duration-medium) var(--ix-ease-in-out),
-      opacity var(--ix-transition-duration-medium) var(--ix-ease-in-out);
+    transition-property: height, width, opacity;
+  }
+
+  &-enter-active {
+    transition-duration: var(--ix-transition-duration-slow);
+    transition-timing-function: var(--ix-ease-out-quint);
+  }
+
+  &-leave-active {
+    transition-duration: var(--ix-transition-duration-medium);
+    transition-timing-function: var(--ix-ease-out-quint);
   }
 }
