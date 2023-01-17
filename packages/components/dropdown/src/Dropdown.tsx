@@ -43,7 +43,7 @@ export default defineComponent({
         offset: props.offset ?? config.offset,
         placement,
         showArrow: props.showArrow ?? config.showArrow,
-        transitionName: `${common.prefixCls}-${placement.startsWith('top') ? 'slide-down' : 'slide-up'}`,
+        transitionName: `${common.prefixCls}-slide-auto`,
         trigger,
         visible: visibility.value,
         ['onUpdate:visible']: setVisibility,

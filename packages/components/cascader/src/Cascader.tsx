@@ -189,7 +189,7 @@ export default defineComponent({
         disabled: accessor.disabled || props.readonly,
         offset: defaultOffset,
         placement: 'bottomStart',
-        transitionName: `${common.prefixCls}-slide-up`,
+        transitionName: `${common.prefixCls}-slide-auto`,
         trigger: 'manual',
         triggerId: attrs.id,
         visible: overlayOpened.value,
