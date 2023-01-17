@@ -35,6 +35,7 @@ export default defineComponent({
     const overlayRef = ref<ɵOverlayInstance>()
     const segmentInputRef = ref<HTMLInputElement>()
     const measureSpanRef = ref<HTMLSpanElement>()
+    const contentNodeEmpty = ref(false)
 
     function setCurrentAsActive(overlayOpened: boolean) {
       setActiveSegment({
@@ -58,7 +59,16 @@ export default defineComponent({
     const isActive = computed(
       () => activeSegment.value?.itemKey === props.itemKey && activeSegment.value.name === props.segment.name,
     )
-    const overlayOpened = computed(() => focused.value && isActive.value && !!activeSegment.value?.overlayOpened)
+    const _overlayOpened = computed(
+      () => focused.value && isActive.value && !!activeSegment.value?.overlayOpened && !contentNodeEmpty.value,
+    )
+    const [overlayOpened, setOverlayOpened] = useState(_overlayOpened.value)
+
+    // use a proxied state to prevent unnecessary effect triggering
+    // which causes component render to trigger multiple times
+    watch(_overlayOpened, (opened, oldOpened) => {
+      opened !== oldOpened && setOverlayOpened(opened)
+    })
 
     const inputWidth = useInputWidth(measureSpanRef)
     const inputStyle = computed(() => ({
@@ -177,8 +187,8 @@ export default defineComponent({
       ></input>
     )
 
-    const renderContent = () =>
-      props.segment.panelRenderer?.({
+    const renderContent = () => {
+      const contentNode = props.segment.panelRenderer?.({
         input: props.input ?? '',
         value: props.value,
         cancel: handleCancel,
@@ -186,6 +196,10 @@ export default defineComponent({
         setValue: handleChange,
         setOnKeyDown: setPanelOnKeyDown,
       })
+
+      contentNodeEmpty.value = !contentNode
+      return contentNode
+    }
 
     return () => {
       const { panelRenderer } = props.segment
