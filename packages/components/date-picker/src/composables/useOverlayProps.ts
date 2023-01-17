@@ -22,7 +22,7 @@ export function useOverlayProps(context: DatePickerContext | DateRangePickerCont
       disabled: accessor.disabled || props.readonly,
       offset: defaultOffset,
       placement: 'bottomStart',
-      transitionName: `${common.prefixCls}-fade`,
+      transitionName: `${common.prefixCls}-slide-auto`,
       trigger: 'manual',
       visible: overlayOpened.value,
       'onUpdate:visible': setOverlayOpened,

@@ -1,18 +1,19 @@
 @import '../variable/animation.less';
 
-.slide-motion(@className, @origin, @scale, @duration: var(--ix-transition-duration-medium)) {
+.slide-motion(@className, @origin, @scale) {
   .@{idux-prefix}-@{className}-enter-active,
   .@{idux-prefix}-@{className}-leave-active {
     transform-origin: @origin;
     transition-property: transform, opacity;
-    transition-duration: @duration;
   }
 
   .@{idux-prefix}-@{className}-enter-active {
+    transition-duration: var(--ix-transition-duration-medium);
     transition-timing-function: var(--ix-ease-out-quint);
   }
 
   .@{idux-prefix}-@{className}-leave-active {
+    transition-duration: var(--ix-transition-duration-fast);
     transition-timing-function: var(--ix-ease-in-quint);
   }
 
@@ -32,7 +33,6 @@
 .@{idux-prefix}-slide-auto-leave-active {
   transform-origin: 0% 0%;
   transition-property: transform, opacity;
-  transition-duration: var(--ix-transition-duration-medium);
 
   &[data-popper-placement^='top'] {
     transform-origin: 100% 100%;
@@ -44,10 +44,12 @@
 }
 
 .@{idux-prefix}-slide-auto-enter-active {
+  transition-duration: var(--ix-transition-duration-medium);
   transition-timing-function: var(--ix-ease-out-quint);
 }
 
 .@{idux-prefix}-slide-auto-leave-active {
+  transition-duration: var(--ix-transition-duration-fast);
   transition-timing-function: var(--ix-ease-in-quint);
 }
 
