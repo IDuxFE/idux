@@ -40,6 +40,7 @@ export function useSegmentStates(
     activeSegment,
     changeActive,
     setInactive,
+    setTempActive,
     onSearchTrigger,
   } = proSearchContext
   const segmentStates = ref<SegmentStates>({})
@@ -102,8 +103,8 @@ export function useSegmentStates(
     const validateRes = validateSearchState(key)
 
     if (!validateRes) {
-      removeSearchState(key)
       initTempSearchState()
+      removeSearchState(key)
     } else {
       updateSearchState(key)
     }
@@ -118,7 +119,11 @@ export function useSegmentStates(
       removed: !validateRes,
     })
 
-    setInactive()
+    if (key !== tempSearchStateKey) {
+      setInactive()
+    } else {
+      setTempActive()
+    }
   }
 
   const handleSegmentConfirm = (name: string, confirmItem?: boolean) => {

@@ -5,7 +5,6 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ActiveSegmentContext } from './useActiveSegment'
 import type { ProSearchProps } from '../types'
 import type { ɵOverlayProps } from '@idux/components/_private/overlay'
 
@@ -13,68 +12,85 @@ import { type ComputedRef, type Ref, nextTick, onBeforeUnmount, onMounted, watch
 
 import { isFunction, isString } from 'lodash-es'
 
-import { useSharedFocusMonitor } from '@idux/cdk/a11y'
+import { type FocusOrigin, useSharedFocusMonitor } from '@idux/cdk/a11y'
 import { MaybeElementRef, callEmit, useState } from '@idux/cdk/utils'
 
-import { type SearchStateContext, tempSearchStateKey } from './useSearchStates'
+type FocusHandler = (evt: FocusEvent, origin?: FocusOrigin) => void
+type BlurHandler = (evt: FocusEvent) => void
 
-export interface FocusEventContext {
+export interface FocusStateContext {
   focused: ComputedRef<boolean>
   focus: (options?: FocusOptions) => void
   blur: () => void
+  onFocus: (handler: FocusHandler, deep?: boolean) => void
+  onBlur: (handler: BlurHandler, deep?: boolean) => void
 }
 
 export function useFocusedState(
   props: ProSearchProps,
   elementRef: Ref<HTMLElement | undefined>,
   commonOverlayProps: ComputedRef<ɵOverlayProps>,
-  searchStateContext: SearchStateContext,
-  activeSegmentContext: ActiveSegmentContext,
-): FocusEventContext {
-  const { searchStates, initTempSearchState } = searchStateContext
-  const { activeSegment, setInactive, setTempActive } = activeSegmentContext
+): FocusStateContext {
   const [focused, setFocused] = useState(false)
+  const { handleFocus, handleBlur } = useFocusHandlers(props, focused, setFocused)
 
-  const { handleFocus, handleBlur } = useFocusHandlers(props, focused, setFocused, setInactive)
+  const focusHandlerSet = new Set<FocusHandler>()
+  const blurHandlerSet = new Set<BlurHandler>()
+  const deepFocusHandlerSet = new Set<FocusHandler>()
+  const deepBlurHandlerSet = new Set<BlurHandler>()
+  const onFocus = (handler: FocusHandler, deep = false) => {
+    ;(deep ? deepFocusHandlerSet : focusHandlerSet).add(handler)
+  }
+  const onBlur = (handler: BlurHandler, deep = false) => {
+    ;(deep ? deepBlurHandlerSet : blurHandlerSet).add(handler)
+  }
 
-  watch([activeSegment, searchStates], ([segment]) => {
-    if (!segment && focused.value) {
-      nextTick(setTempActive)
-    }
+  onBeforeUnmount(() => {
+    focusHandlerSet.clear()
+    blurHandlerSet.clear()
+    deepFocusHandlerSet.clear()
+    deepBlurHandlerSet.clear()
   })
 
-  const _handleFocus = (evt: FocusEvent) => {
+  const _handleFocus = (evt: FocusEvent, origin: FocusOrigin) => {
     if (props.disabled) {
       return
     }
 
-    if (evt.target === elementRef.value) {
-      setTempActive(activeSegment.value?.itemKey !== tempSearchStateKey)
-    }
+    deepFocusHandlerSet.forEach(handler => handler(evt, origin))
 
-    handleFocus(evt)
+    handleFocus(evt, () => {
+      focusHandlerSet.forEach(handler => handler(evt, origin))
+    })
   }
   const _handleBlur = (evt: FocusEvent) => {
     if (props.disabled) {
       return
     }
 
+    deepBlurHandlerSet.forEach(handler => handler(evt))
+
     handleBlur(evt, () => {
-      initTempSearchState()
+      blurHandlerSet.forEach(handler => handler(evt))
     })
   }
 
-  const focus = (options?: FocusOptions) => {
-    elementRef.value?.focus(options)
+  const { focus, blur } = registerFocusBlurHandlers(
+    elementRef,
+    () => getContainerEl(commonOverlayProps.value),
+    _handleFocus,
+    _handleBlur,
+  )
+
+  const _focus = (options?: FocusOptions) => {
+    focus('program', options)
   }
-  const blur = () => {
-    setInactive(true)
+  const _blur = () => {
+    blur()
     setFocused(false)
   }
 
-  registerHandlers(elementRef, () => getContainerEl(commonOverlayProps.value), _handleFocus, _handleBlur)
-
-  return { focused, focus, blur }
+  return { focused, focus: _focus, blur: _blur, onFocus, onBlur }
 }
 
 function getContainerEl(commonOverlayProps: ɵOverlayProps): HTMLElement | null {
@@ -92,7 +108,6 @@ function useFocusHandlers(
   props: ProSearchProps,
   focused: ComputedRef<boolean>,
   setFocused: (focused: boolean) => void,
-  setInactive: (blur?: boolean) => void,
 ): {
   handleFocus: (evt: FocusEvent, cb?: () => void) => void
   handleBlur: (evt: FocusEvent, cb?: () => void) => void
@@ -123,7 +138,6 @@ function useFocusHandlers(
 
     cb?.()
 
-    setInactive(true)
     setFocused(false)
 
     callEmit(props.onBlur, evt)
@@ -151,25 +165,28 @@ function useFocusHandlers(
   }
 }
 
-function registerHandlers(
+function registerFocusBlurHandlers(
   elementRef: Ref<HTMLElement | undefined>,
   getOverlayContainer: () => HTMLElement | null,
-  handleFocus: (evt: FocusEvent) => void,
+  handleFocus: (evt: FocusEvent, origin: FocusOrigin) => void,
   handleBlur: (evt: FocusEvent) => void,
-): void {
-  const { monitor, stopMonitoring } = useSharedFocusMonitor()
+): {
+  focus: (origin: FocusOrigin | undefined, options?: FocusOptions) => void
+  blur: () => void
+} {
+  const { monitor, stopMonitoring, focusVia, blurVia } = useSharedFocusMonitor()
 
   const monitoredElements = new Set<MaybeElementRef>()
   const bindMonitor = (
     elRef: MaybeElementRef<HTMLElement | undefined | null>,
-    onFocus: (evt: FocusEvent) => void,
+    onFocus: (evt: FocusEvent, origin: FocusOrigin) => void,
     onBlur: (evt: FocusEvent) => void,
   ) => {
     watch(monitor(elRef, true), evt => {
       const { origin, event } = evt
       if (event) {
         if (origin) {
-          onFocus(event)
+          onFocus(event, origin)
         } else {
           onBlur(event)
         }
@@ -188,8 +205,8 @@ function registerHandlers(
   onMounted(() => {
     bindMonitor(
       elementRef,
-      (...args) => {
-        handleFocus(...args)
+      (evt, origin) => {
+        handleFocus(evt, origin)
 
         // overlayContainer isn't rendered until at least one of the inner overlays is rendered
         // so we monitor the overlay container after focus (current logic ensures that overlay renders after focus)
@@ -211,4 +228,9 @@ function registerHandlers(
   onBeforeUnmount(() => {
     unbindMonitor()
   })
+
+  return {
+    focus: (origin, options) => focusVia(elementRef.value, origin ?? 'program', options),
+    blur: () => blurVia(elementRef.value),
+  }
 }

@@ -15,6 +15,7 @@ import { useGlobalConfig } from '@idux/pro/config'
 
 import { useActiveSegment } from './composables/useActiveSegment'
 import { useCommonOverlayProps } from './composables/useCommonOverlayProps'
+import { useControl } from './composables/useControl'
 import { useFocusedState } from './composables/useFocusedState'
 import { useSearchItems } from './composables/useSearchItem'
 import { useSearchItemErrors } from './composables/useSearchItemErrors'
@@ -59,13 +60,10 @@ export default defineComponent({
       searchStateContext.tempSearchStateAvailable,
     )
     const commonOverlayProps = useCommonOverlayProps(props, config, mergedPrefixCls)
-    const { focused, focus, blur } = useFocusedState(
-      props,
-      elementRef,
-      commonOverlayProps,
-      searchStateContext,
-      activeSegmentContext,
-    )
+    const focusStateContext = useFocusedState(props, elementRef, commonOverlayProps)
+    const { focused, focus, blur } = focusStateContext
+
+    useControl(elementRef, activeSegmentContext, searchStateContext, focusStateContext)
 
     const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(componentCommon, 'overlayZIndex'), focused)
 
