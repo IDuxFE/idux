@@ -5,11 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, normalizeClass, normalizeStyle, ref } from 'vue'
+import { computed, defineComponent, normalizeClass, normalizeStyle, onMounted, ref, watch } from 'vue'
 
 import { isNil } from 'lodash-es'
 
-import { type VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
+import { type VKey, callEmit, useControlledProp, useState } from '@idux/cdk/utils'
 import { ɵHeader } from '@idux/components/_private/header'
 import { ɵInput } from '@idux/components/_private/input'
 import { IxButton } from '@idux/components/button'
@@ -32,11 +32,29 @@ export default defineComponent({
     const mergedClearIcon = computed(() => props.clearIcon ?? config.clearIcon)
     const mergedCollapseIcon = computed(() => props.collapseIcon ?? config.collapseIcon)
 
-    const expandAllBtnStatus = ref(false)
+    /**
+     * true: 显示展开全部  false：显示收起全部
+     */
+    const [expandAllBtnStatus, setExpandAllBtnStatus] = useState(false)
     const treeRef = ref<TreeInstance>()
 
     const [searchValue, setSearchValue] = useControlledProp(props, 'searchValue', '')
+    const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', [])
     const [collapsed, setCollapsed] = useControlledProp(props, 'collapsed')
+
+    onMounted(() => {
+      setExpandAllBtnStatusWithFlattedNodes()
+    })
+
+    watch(
+      expandedKeys,
+      () => {
+        setExpandAllBtnStatusWithFlattedNodes()
+      },
+      {
+        flush: 'post',
+      },
+    )
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
@@ -55,8 +73,8 @@ export default defineComponent({
 
     const handleExpandAll = () => {
       const currStatus = expandAllBtnStatus.value
-      expandAllBtnStatus.value = !currStatus
-      expandAllBtnStatus.value ? treeRef.value?.collapseAll() : treeRef.value?.expandAll()
+      setExpandAllBtnStatus(!currStatus)
+      currStatus ? treeRef.value?.expandAll() : treeRef.value?.collapseAll()
     }
 
     const handleCollapsed = () => {
@@ -75,6 +93,29 @@ export default defineComponent({
       callEmit(props.onClear, evt)
     }
 
+    /**
+     * 根据当前的树状态来动态改变【展开/收起】按钮的状态，例如搜索或者改变 expandedKeys；
+     * 若当前渲染的节点中存在展开的节点则按钮的操作为收起全部
+     */
+    const setExpandAllBtnStatusWithFlattedNodes = () => {
+      const nodes = treeRef.value?._getFlattedNodes() ?? []
+      const expandedKeysLength = expandedKeys.value.length
+
+      let nextStatus = !expandAllBtnStatus.value
+
+      // 若不存在expandedKeys，则需要将按钮设置为全部展开
+      if (!expandedKeysLength) {
+        nextStatus = true
+      } else {
+        // 若当前渲染的节点有一个存在于expandedKeys中时，则按钮需要设置收起全部
+        nextStatus = !nodes.some(node => {
+          return expandedKeys.value.includes(node.key)
+        })
+      }
+
+      setExpandAllBtnStatus(nextStatus)
+    }
+
     expose({
       collapseAll: () => treeRef.value?.collapseAll(),
       expandAll: () => treeRef.value?.expandAll(),
@@ -85,7 +126,7 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const treeProps = {
         checkedKeys: props.checkedKeys,
-        expandedKeys: props.expandedKeys,
+        expandedKeys: expandedKeys.value,
         selectedKeys: props.selectedKeys,
         loadedKeys: props.loadedKeys,
 
@@ -133,7 +174,7 @@ export default defineComponent({
         onScrolledBottom: props.onScrolledBottom,
         onScrolledChange: props.onScrolledChange,
         'onUpdate:checkedKeys': props['onUpdate:checkedKeys'],
-        'onUpdate:expandedKeys': props['onUpdate:expandedKeys'],
+        'onUpdate:expandedKeys': setExpandedKeys,
         'onUpdate:selectedKeys': props['onUpdate:selectedKeys'],
         'onUpdate:loadedKeys': props['onUpdate:loadedKeys'],
       }
