@@ -1,27 +1,27 @@
 @import '../variable/animation.less';
 
-.zoom-motion(@className, @origin, @scale, @duration: var(--ix-transition-duration-medium)) {
+.zoom-motion(@className, @duration: @transition-duration-base) {
   .@{idux-prefix}-@{className}-enter-active,
   .@{idux-prefix}-@{className}-leave-active {
-    transform-origin: @origin;
+    transform-origin: 50% 50%;
     transition-property: opacity, transform;
-    transition-duration: @duration;
   }
 
   .@{idux-prefix}-@{className}-enter-active {
+    transition-duration: var(--ix-transition-duration-slow);
     transition-timing-function: var(--ix-ease-out-circ);
   }
 
   .@{idux-prefix}-@{className}-leave-active {
+    transition-duration: var(--ix-transition-duration-medium);
     transition-timing-function: var(--ix-ease-in-circ);
   }
 
   .@{idux-prefix}-@{className}-enter-from,
   .@{idux-prefix}-@{className}-leave-to {
     opacity: 0;
-    transform: @scale;
+    transform: scale(0.2);
   }
 }
 
-.zoom-motion(zoom, 50% 50%, scale(0.8));
-.zoom-motion(zoom-fast, 50% 50%, scale(0.8), var(--ix-transition-duration-fast));
+.zoom-motion(zoom);
