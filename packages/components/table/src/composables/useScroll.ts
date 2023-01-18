@@ -9,7 +9,7 @@ import { type ComputedRef, type Ref, computed, onBeforeUnmount, onMounted, ref, 
 
 import { useResizeObserver } from '@idux/cdk/resize'
 import { type VirtualScrollInstance, type VirtualScrollToFn, getScrollBarSize, scrollToTop } from '@idux/cdk/scroll'
-import { Logger, convertCssPixel, convertElement } from '@idux/cdk/utils'
+import { Logger, callEmit, convertCssPixel, convertElement } from '@idux/cdk/utils'
 
 import { type StickyContext } from './useSticky'
 import { type TableProps } from '../types'
@@ -33,6 +33,7 @@ export function useScroll(
   })
 
   const { handleScroll, pingedStart, pingedEnd } = useScrollRef(
+    props,
     scrollHeadRef,
     scrollBodyRef,
     scrollFootRef,
@@ -104,6 +105,7 @@ export interface ScrollOptions {
 }
 
 function useScrollRef(
+  props: TableProps,
   scrollHeadRef: Ref<HTMLDivElement | undefined>,
   scrollBodyRef: Ref<HTMLDivElement | undefined>,
   scrollFootRef: Ref<HTMLDivElement | undefined>,
@@ -170,6 +172,10 @@ function useScrollRef(
       const { scrollWidth, clientWidth } = currentTarget
       pingedStart.value = mergedScrollLeft > 0
       pingedEnd.value = mergedScrollLeft < scrollWidth - clientWidth
+    }
+
+    if (evt?.type === 'scroll') {
+      callEmit(props.onScroll, evt)
     }
   }
 
