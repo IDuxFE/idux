@@ -1,5 +1,0 @@
-blank_issues_enabled: true
-contact_links:
-  - name: Create new issue
-    url: https://new-issue.idux.site
-    about: The issue which is not created via https://new-issue.idux.site will be closed immediately.
