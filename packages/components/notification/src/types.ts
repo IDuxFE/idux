@@ -39,7 +39,6 @@ export const notificationProps = {
   icon: [String, Object] as PropType<string | VNode>,
   closeIcon: [String, Object] as PropType<string | VNode>,
   type: String as PropType<NotificationType>,
-  key: [String, Number, Symbol] as PropType<VKey>,
   title: [String, Object] as PropType<string | VNode>,
   content: [String, Object] as PropType<string | VNode>,
   footer: [String, Array, Object] as PropType<string | NotificationButtonProps[] | VNode>,
@@ -71,6 +70,7 @@ export type NotificationInstance = InstanceType<DefineComponent<NotificationProp
 
 // 通过useNotification的配置
 export interface NotificationOptions<K = VKey> extends PickRequire<NotificationProps, 'title' | 'content'> {
+  key: K
   contentProps?: Record<string, unknown> | VNodeProps
   onDestroy?: (key: K) => void
 }
