@@ -40,10 +40,6 @@ export function useInputState(props: SelectorProps, mergedSearchable: ComputedRe
   }
 
   const handleBlur = (evt: FocusEvent) => {
-    if (props.allowInput && !props.multiple) {
-      props.value[0] = inputValue.value
-      inputValue.value = ''
-    }
     isFocused.value = false
     callEmit(props.onBlur, evt)
   }
