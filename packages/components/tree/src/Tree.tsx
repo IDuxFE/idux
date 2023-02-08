@@ -146,6 +146,10 @@ export default defineComponent({
       return mergedNodeMap.value.get(key)?.rawNode
     }
 
+    const _getFlattedNodes = () => {
+      return flattedNodes.value
+    }
+
     expose({
       focus,
       blur,
@@ -153,6 +157,9 @@ export default defineComponent({
       collapseAll: expandableContext.collapseAll,
       scrollTo,
       getNode,
+
+      // private
+      _getFlattedNodes,
     })
 
     const handleScrolledChange = (startIndex: number, endIndex: number, visibleNodes: MergedNode[]) => {
