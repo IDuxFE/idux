@@ -107,7 +107,13 @@ export default defineComponent({
       }
     }
 
-    const handleBlur = () => accessor.markAsBlurred()
+    const handleBlur = () => {
+      if (props.allowInput && inputValue.value) {
+        changeSelected(inputValue.value)
+        clearInput()
+      }
+      accessor.markAsBlurred()
+    }
     const handleItemRemove = (value: VKey) => {
       focus()
       handleRemove(value)
