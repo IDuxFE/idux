@@ -18,8 +18,8 @@ export function useDataSource(
   props: TableProps,
   mergedChildrenKey: ComputedRef<string>,
   mergedGetKey: ComputedRef<GetKeyFn>,
-  activeSorters: ComputedRef<ActiveSorter[]>,
-  activeFilters: ComputedRef<ActiveFilter[]>,
+  activeSorters: Ref<ActiveSorter[]>,
+  activeFilters: Ref<ActiveFilter[]>,
   expandedRowKeys: Ref<VKey[]>,
   mergedPagination: ComputedRef<TablePagination | null>,
 ): DataSourceContext {

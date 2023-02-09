@@ -369,6 +369,10 @@ describe('Table', () => {
       await wrapper.setProps({ pagination: { pageSize: 20 } })
 
       expect(wrapper.find('tbody').findAll('tr').length).toBe(20)
+
+      await wrapper.setProps({ pagination: { size: 'sm' } })
+
+      expect(wrapper.find('.ix-table-pagination').classes()).toContain('ix-pagination-sm')
     })
 
     test('size work', async () => {

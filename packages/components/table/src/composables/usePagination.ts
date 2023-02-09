@@ -49,10 +49,10 @@ export function usePagination(
     }
     return {
       ...config.pagination,
+      size: mergedSize.value, // 用户可以通过 pagination 来覆盖 size
       ...pagination,
       pageIndex: pagination.pageIndex ?? tempIndex.value,
       pageSize: pagination.pageSize ?? tempSize.value,
-      size: mergedSize.value,
       onChange: handlePageChange,
     }
   })
