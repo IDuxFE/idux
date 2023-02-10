@@ -87,6 +87,7 @@ export default defineComponent({
       handleRemove,
       clearInput,
       setOverlayOpened,
+      blur,
     )
 
     watch(overlayOpened, opened => {
