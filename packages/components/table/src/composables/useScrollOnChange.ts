@@ -10,7 +10,7 @@ import type { ActiveSorter } from './useSortable'
 import type { TablePagination, TableProps } from '../types'
 import type { TableConfig } from '@idux/components/config'
 
-import { type ComputedRef, type WatchStopHandle, computed, watch } from 'vue'
+import { type ComputedRef, type Ref, type WatchStopHandle, computed, watch } from 'vue'
 
 import { type VirtualScrollToFn } from '@idux/cdk/scroll'
 
@@ -18,8 +18,8 @@ export function useScrollOnChange(
   props: TableProps,
   config: TableConfig,
   mergedPagination: ComputedRef<TablePagination | null>,
-  activeSorters: ComputedRef<ActiveSorter[]>,
-  activeFilters: ComputedRef<ActiveFilter[]>,
+  activeSorters: Ref<ActiveSorter[]>,
+  activeFilters: Ref<ActiveFilter[]>,
   scrollTo: VirtualScrollToFn,
 ): void {
   const mergedScrollToTopOnChange = computed(() => props.scrollToTopOnChange ?? config.scrollToTopOnChange)
