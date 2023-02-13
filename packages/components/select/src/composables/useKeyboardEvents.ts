@@ -20,6 +20,7 @@ export function useKeyboardEvents(
   handleRemove: (key: VKey) => void,
   clearInput: () => void,
   setOverlayOpened: (opened: boolean) => void,
+  blur: () => void | undefined,
 ): (evt: KeyboardEvent) => void {
   return (evt: KeyboardEvent) => {
     switch (evt.code) {
@@ -36,7 +37,10 @@ export function useKeyboardEvents(
         const key = activeValue.value
         !isNil(key) && changeSelected(key)
         clearInput()
-        !isMultiple.value && setOverlayOpened(false)
+        if (!isMultiple.value) {
+          setOverlayOpened(false)
+          blur()
+        }
         break
       }
       case 'Backspace': {
