@@ -20,7 +20,7 @@
   }
 
   &-table-content,
-  &-tree-content {
+  &-tree-content .@{tree-prefix}-node &-tree-content {
     &-close-icon {
       margin-left: auto;
       cursor: pointer;
@@ -59,7 +59,7 @@
   }
 
   &-tree-content {
-    &-removable {
+    &&-removable {
       .@{tree-node-prefix}-content-suffix {
         position: sticky;
         right: 0;
@@ -94,7 +94,7 @@
         }
       }
     }
-    &-close-icon {
+    & .@{tree-node-prefix} &-close-icon {
       padding: @pro-transfer-tree-close-icon-padding;
     }
   }
