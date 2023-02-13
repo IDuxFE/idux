@@ -10,6 +10,21 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.4.1(2023-02-13)
+
+### Bug Fixes
+
+- **comp:\*:** 使用更智能的淡入淡出的动画 ([#1422](https://github.com/IDuxFE/idux/issues/1422)) ([33fb35f](https://github.com/IDuxFE/idux/commit/33fb35ff3e420c723bd6bf56d0b4149bf7f388b5))
+- **comp:card:** 移除底部的 padding 以及按钮点击效果 ([#1418](https://github.com/IDuxFE/idux/issues/1418)) ([0612164](https://github.com/IDuxFE/idux/commit/0612164270e4837bf502df6951c42643475ebbfd))
+- **comp:select:** blur 事件导致 item 渲染不正确 ([#1437](https://github.com/IDuxFE/idux/issues/1437)) ([b15fedd](https://github.com/IDuxFE/idux/commit/b15fedd291622e3faa25c2430e9ce690f4202521)), closes [#1431](https://github.com/IDuxFE/idux/issues/1431)
+- **comp:select:** 在回车事件后触发 blur ([#1441](https://github.com/IDuxFE/idux/issues/1441)) ([391c526](https://github.com/IDuxFE/idux/commit/391c526d4fa9c12af33eaf3c89e1699f52bd16f5))
+- **comp:table:** onScroll 未生效 ([#1428](https://github.com/IDuxFE/idux/issues/1428)) ([79136b5](https://github.com/IDuxFE/idux/commit/79136b5813c3ed14c13ab82062e79cca751ebebe))
+- **comp:table:** 分页器的大小不能够自定义覆盖 ([#1440](https://github.com/IDuxFE/idux/issues/1440)) ([b647883](https://github.com/IDuxFE/idux/commit/b64788390a513f5d77e3bd6a4896abeb72e3017d))
+- **comp:transfer:** 全选的状态错误 ([#1442](https://github.com/IDuxFE/idux/issues/1442)) ([ff3bcf9](https://github.com/IDuxFE/idux/commit/ff3bcf9def843043769d27c06200e6df0138f03d))
+- **pro:search:** 面板为空时，渲染异常 ([#1424](https://github.com/IDuxFE/idux/issues/1424)) ([7829ca1](https://github.com/IDuxFE/idux/commit/7829ca1389d7b42cb04dc4da872ff2dcdba62cc4))
+- **pro:transfer:** `children` 策略下数量计算错误 ([#1443](https://github.com/IDuxFE/idux/issues/1443)) ([e0f9597](https://github.com/IDuxFE/idux/commit/e0f9597364e823bc9b4927ea9472bd3891e1a207))
+- **pro:tree:** 全展开的状态异常 ([#1429](https://github.com/IDuxFE/idux/issues/1429)) ([2d2d7ca](https://github.com/IDuxFE/idux/commit/2d2d7ca1a6c8b4a64f5c8e42f6e1f83ff4d01a7e))
+
 # 1.4.0(2023-01-16)
 
 ### Bug Fixes
