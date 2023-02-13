@@ -59,29 +59,35 @@ export function useTransferSelectState(
     getKey,
   } = transferDataContext
 
-  const sourceDataCount = computed(() =>
-    props.mode === 'immediate' ? dataKeyMap.value.size : sourceDataKeys.value.size,
-  )
-  const targetDataCount = computed(() => targetDataKeys.value.size)
   const sourceCheckableDataCount = computed(() => {
+    const sourceDataCount = props.mode === 'immediate' ? dataKeyMap.value.size : sourceDataKeys.value.size
     const disabledCount = props.mode === 'immediate' ? disabledKeys.value.size : disabledSourceKeys.value.size
 
-    return sourceDataCount.value - disabledCount
+    return sourceDataCount - disabledCount
   })
   const targetCheckableDataCount = computed(() => targetDataKeys.value.size - disabledTargetKeys.value.size)
 
-  const sourceSelectAllStatus = computed(() => {
+  const getAllSelectedStatus = (isSource: boolean) => {
+    const allSelectedKeys = transferDataStrategy.value.getAllSelectedKeys(
+      true,
+      isSource ? (props.mode === 'immediate' ? dataSource.value : sourceData.value) : targetData.value,
+      new Set(),
+      new Set(),
+      getKey.value,
+    )
+    const selectedkeyCount = (isSource ? sourceSelectedKeys : targetSelectedKeys).value.length
+    const selectedKeySet = isSource ? sourceSelectedKeySet.value : targetSelectedKeySet.value
+
     return {
-      checked: sourceDataCount.value >= sourceSelectedKeys.value.length && sourceSelectedKeys.value.length > 0,
-      indeterminate: sourceDataCount.value > sourceSelectedKeys.value.length && sourceSelectedKeys.value.length > 0,
+      checked: selectedkeyCount > 0,
+      indeterminate:
+        (allSelectedKeys.length !== selectedkeyCount || allSelectedKeys.some(key => !selectedKeySet.has(key))) &&
+        selectedkeyCount > 0,
     }
-  })
-  const targetSelectAllStatus = computed(() => {
-    return {
-      checked: targetDataCount.value >= targetSelectedKeys.value.length && targetSelectedKeys.value.length > 0,
-      indeterminate: targetDataCount.value > targetSelectedKeys.value.length && targetSelectedKeys.value.length > 0,
-    }
-  })
+  }
+
+  const sourceSelectAllStatus = computed(() => getAllSelectedStatus(true))
+  const targetSelectAllStatus = computed(() => getAllSelectedStatus(false))
 
   let transferBySelectionChangeLocked = false
   watch(sourceSelectedKeySet, (currentCheckedKeys, originalCheckedKeys) => {
