@@ -118,7 +118,7 @@ export default defineComponent({
         expandedKeys: expandedKeys.value,
         expandIcon: expandIcon,
         getKey: 'key',
-        autoHeight: true,
+        height: 256,
         loadChildren,
         leafLineIcon,
         virtual,
