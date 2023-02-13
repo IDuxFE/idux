@@ -33,16 +33,16 @@
     }
   }
 
-  &-label {
-    display: inline-block;
+  & &-label {
+    display: inline-flex;
     flex-grow: 0;
     overflow: hidden;
     white-space: nowrap;
-    vertical-align: middle;
-    text-align: end;
+    align-items: flex-start;
+    justify-content: flex-end;
 
     &-start {
-      text-align: start;
+      justify-content: flex-start;                
     }
 
     > label {
