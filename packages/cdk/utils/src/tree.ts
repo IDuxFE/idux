@@ -63,7 +63,7 @@ export function mapTree<V extends TreeTypeData<V, C>, R extends object, C extend
 export function filterTree<V extends TreeTypeData<V, C>, C extends keyof V>(
   data: V[],
   childrenKey: C,
-  filterFn: (item: V, parents: V[]) => boolean,
+  filterFn: (item: V, parents: V[], filteredChildren: V[] | undefined) => boolean,
   filterStrategy: 'and' | 'or' = 'or',
 ): V[] {
   const filter = (_data: V[], parents: V[]): V[] => {
@@ -76,7 +76,7 @@ export function filterTree<V extends TreeTypeData<V, C>, C extends keyof V>(
         children = filter(item[childrenKey]!, [item, ...parents])
       }
 
-      let itemValid = filterFn(item, parents)
+      let itemValid = filterFn(item, parents, children)
       const childrenValid = (children && children.length > 0) || (!item[childrenKey]?.length && itemValid)
 
       itemValid = filterStrategy === 'and' ? childrenValid && itemValid : childrenValid || itemValid
