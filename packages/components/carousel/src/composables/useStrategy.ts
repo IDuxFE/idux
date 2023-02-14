@@ -7,7 +7,7 @@
 
 import type { CarouselProps } from '../types'
 
-import { type ComputedRef, onMounted, ref, watch } from 'vue'
+import { type ComputedRef, type Ref, onMounted, ref, watch } from 'vue'
 
 import { useResizeObserver } from '@idux/cdk/resize'
 import { callEmit, convertElement, useState } from '@idux/cdk/utils'
@@ -46,7 +46,9 @@ export function useStrategy(
     if (!carouselElement) {
       return
     }
-    const { width, height } = carouselElement.getBoundingClientRect()
+
+    const width = carouselElement.offsetWidth
+    const height = carouselElement.offsetHeight
 
     setUnitWidth(width)
     setUnitHeight(height)
