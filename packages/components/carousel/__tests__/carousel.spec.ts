@@ -130,4 +130,24 @@ describe('Carousel', () => {
     await wrapper.find('.ix-carousel-slider-track').trigger('transitionend')
     expect(onChange).toHaveBeenCalledTimes(1)
   })
+
+  test('goTo, next, prev work', async () => {
+    const wrapper = CarouselMount()
+
+    expect(wrapper.findAll('.ix-carousel-dot')[0].classes()).toContain('ix-carousel-dot-active')
+
+    await wrapper.vm.goTo(1)
+
+    expect(wrapper.findAll('.ix-carousel-dot')[1].classes()).toContain('ix-carousel-dot-active')
+
+    await wrapper.find('.ix-carousel-slider-track').trigger('transitionend')
+    await wrapper.vm.next()
+
+    expect(wrapper.findAll('.ix-carousel-dot')[2].classes()).toContain('ix-carousel-dot-active')
+
+    await wrapper.find('.ix-carousel-slider-track').trigger('transitionend')
+    await wrapper.vm.prev()
+
+    expect(wrapper.findAll('.ix-carousel-dot')[1].classes()).toContain('ix-carousel-dot-active')
+  })
 })
