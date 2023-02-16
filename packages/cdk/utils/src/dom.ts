@@ -11,6 +11,8 @@ import { isString } from 'lodash-es'
 
 export type EventTarget = HTMLElement | Document | Window | null | undefined
 
+export type Dimensions = { [key in 'width' | 'height']: number }
+
 export function on<K extends keyof HTMLElementEventMap>(
   el: EventTarget,
   type: K | undefined,
@@ -151,4 +153,24 @@ export function getMouseEvent(evt: MouseEvent | TouchEvent): MouseEvent | Touch 
 export function getMouseClientXY(evt: MouseEvent | TouchEvent): { clientX: number; clientY: number } {
   const { clientX, clientY } = getMouseEvent(evt)
   return { clientX, clientY }
+}
+
+export function getCssDimensions(element: HTMLElement): Dimensions & { fallback: boolean } {
+  const css = getComputedStyle(element)
+  let width = parseFloat(css.width)
+  let height = parseFloat(css.height)
+  const offsetWidth = element.offsetWidth
+  const offsetHeight = element.offsetHeight
+  const shouldFallback = Math.round(width) !== offsetWidth || Math.round(height) !== offsetHeight
+
+  if (shouldFallback) {
+    width = offsetWidth
+    height = offsetHeight
+  }
+
+  return {
+    width,
+    height,
+    fallback: shouldFallback,
+  }
 }

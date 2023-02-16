@@ -10,7 +10,7 @@ import type { CarouselProps } from '../types'
 import { type ComputedRef, type Ref, onMounted, ref, watch } from 'vue'
 
 import { useResizeObserver } from '@idux/cdk/resize'
-import { callEmit, convertElement, useState } from '@idux/cdk/utils'
+import { callEmit, convertElement, getCssDimensions, useState } from '@idux/cdk/utils'
 
 export interface StrategyContext {
   activeIndex: Ref<number>
@@ -47,8 +47,7 @@ export function useStrategy(
       return
     }
 
-    const width = carouselElement.offsetWidth
-    const height = carouselElement.offsetHeight
+    const { width, height } = getCssDimensions(carouselElement)
 
     setUnitWidth(width)
     setUnitHeight(height)
@@ -78,7 +77,7 @@ export function useStrategy(
     const lastSliderElement = convertElement(sliderRefs.value[length - 1])
 
     if (
-      length <= 1 ||
+      length < 1 ||
       runningIndex.value !== -1 ||
       index === activeIndex.value ||
       !sliderTrackElement ||
