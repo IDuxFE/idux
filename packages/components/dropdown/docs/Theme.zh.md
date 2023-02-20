@@ -4,3 +4,4 @@
 | `@dropdown-border-radius` | `@menu-overlay-border-radius` | - | - |
 | `@dropdown-box-shadow` | `@menu-overlay-box-shadow` | - | - |
 | `@dropdown-min-width` | `@menu-overlay-min-width` | - | - |
+| `@dropdown-menu-container-padding` | `@spacing-sm 0` | `@spacing-xs 0` | - |
