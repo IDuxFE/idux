@@ -18,7 +18,7 @@
 | `@date-panel-header-height` | `@height-md` | - | - |
 | `@date-panel-header-item-padding` | `0 @spacing-xs` | - | - |
 | `@date-panel-header-border-bottom` | `none` | - | - |
-| `@date-panel-header-button-font-size` | `@font-size-lg` | `@font-size-md` | - |
+| `@date-panel-header-button-font-size` | `@font-size-lg` | `@font-size-sm` | - |
 | `@date-panel-header-button-font-weight` | `@font-weight-lg` | `@font-weight-md` | - |
 | `@date-panel-header-content-spacing` | `@spacing-lg` | - | - |
 | `@date-panel-header-padding-lg` | `0 0 @spacing-2xl` | - | - |
