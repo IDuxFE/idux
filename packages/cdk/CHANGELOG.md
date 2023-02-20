@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.2](https://github.com/IDuxFE/idux/compare/v1.4.1...v1.4.2) (2023-02-20)
+
+### Bug Fixes
+
+- **comp:carousel:** when items is dynamically reduced to 1, layout error ([#1450](https://github.com/IDuxFE/idux/issues/1450)) ([2e37c44](https://github.com/IDuxFE/idux/commit/2e37c447a9672c35c25fe448250d0fbcc01646d0))
+
 ## [1.4.1](https://github.com/IDuxFE/idux/compare/v1.4.0...v1.4.1) (2023-02-13)
 
 ### Bug Fixes
