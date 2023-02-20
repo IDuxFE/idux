@@ -3,13 +3,13 @@
     <IxInput v-model:value="value" :addonBefore="addonBefore" :addonAfter="addonAfter" />
     <IxInput v-model:value="value">
       <template #addonBefore>
-        <IxSelect v-model:value="addonBefore" style="width: 80px">
+        <IxSelect v-model:value="addonBefore" style="width: 88px">
           <IxSelectOption key="https" label="https://"></IxSelectOption>
           <IxSelectOption key="http" label="http://"></IxSelectOption>
         </IxSelect>
       </template>
       <template #addonAfter>
-        <IxSelect v-model:value="addonAfter" style="width: 60px">
+        <IxSelect v-model:value="addonAfter" style="width: 72px">
           <IxSelectOption key="com" label=".com"></IxSelectOption>
           <IxSelectOption key="cn" label=".cn"></IxSelectOption>
         </IxSelect>
