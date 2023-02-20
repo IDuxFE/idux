@@ -10,6 +10,18 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.4.2(2023-02-20)
+
+### Bug Fixes
+
+- **comp:carousel:** 当动态减少 item 的数量为 1 时，展示异常 ([#1450](https://github.com/IDuxFE/idux/issues/1450)) ([2e37c44](https://github.com/IDuxFE/idux/commit/2e37c447a9672c35c25fe448250d0fbcc01646d0))
+- **comp:carousel:** 缩放后的展示异常 ([#1448](https://github.com/IDuxFE/idux/issues/1448)) ([58ee991](https://github.com/IDuxFE/idux/commit/58ee991568e5b397fac95baa70bbc98866290c78))
+- **comp:empty:** 解决 svg 的 id 冲突问题 ([#1451](https://github.com/IDuxFE/idux/issues/1451)) ([8ca7a08](https://github.com/IDuxFE/idux/commit/8ca7a08b86b8cc185f936da2afcb0b191f672894))
+- **comp:upload:** 文本不居中 ([#1461](https://github.com/IDuxFE/idux/issues/1461)) ([afeb80e](https://github.com/IDuxFE/idux/commit/afeb80e942a4fb9f399a75d601897ef7e8e5293a))
+- Select 和 ProTable 的样式问题 ([#1452](https://github.com/IDuxFE/idux/issues/1452)) ([c07ef31](https://github.com/IDuxFE/idux/commit/c07ef312795834867d658703842a02244456328a))
+- **pro:search:** `treeSelect` 的高度异常 ([#1445](https://github.com/IDuxFE/idux/issues/1445)) ([388da6a](https://github.com/IDuxFE/idux/commit/388da6a6b1f2d5eeac354eeedabe4c81bf89f976))
+- **pro:search:** 移除浮层面板的动画效果 ([#1447](https://github.com/IDuxFE/idux/issues/1447)) ([4c28a78](https://github.com/IDuxFE/idux/commit/4c28a78c83a1f820b8976956549c27390316135e))
+
 ## 1.4.1(2023-02-13)
 
 ### Bug Fixes
