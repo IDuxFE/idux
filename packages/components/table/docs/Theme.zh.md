@@ -17,12 +17,12 @@
 | `@table-head-color` | `var(--ix-text-color-title-secondary)` | - | - |
 | `@table-head-background-color` | `var(--ix-background-color-medium)` | - | - |
 | `@table-head-separator-color` | `var(--ix-border-color)` | - | - |
-| `@table-head-icon-color` | `inherit` | - | - |
+| `@table-head-icon-color` | `inherit` | `@color-graphite-l10` | - |
 | `@table-head-icon-color-active` | `var(--ix-color-primary)` | - | - |
 | `@table-head-icon-background-color-hover` | `var(--ix-background-color-deep)` | - | - |
 | `@table-head-font-weight` | `var(--ix-font-weight-lg)` | `var(--ix-font-weight-md)` | - |
 | `@table-body-row-background-color-hover` | `var(--ix-background-color-light)` | - | - |
-| `@table-body-row-background-color-selected` | `var(--ix-color-primary-l50)` | - | - |
-| `@table-expandable-icon-color` | `var(--ix-text-color-secondary)` | - | - |
+| `@table-body-row-background-color-selected` | `var(--ix-color-primary-l50)` | `inherit` | - |
+| `@table-expandable-icon-color` | `var(--ix-text-color-secondary)` | `@color-graphite-l10` | - |
 | `@table-expandable-background-color` | `var(--ix-background-color-light)` | - | - |
 | `@table-expandable-background-color-hover` | `var(--ix-background-color-medium)` | - | - |
