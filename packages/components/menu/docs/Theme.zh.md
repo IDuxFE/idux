@@ -22,8 +22,8 @@
 | `@menu-overlay-box-shadow` | `@shadow-bottom-md` | - | - |
 | `@menu-collapsed-width` | `48px` | `44px` | - |
 | `@menu-dark-color` | `var(--ix-text-color-inverse)` | - | - |
-| `@menu-dark-color-hover` | `var(--ix-color-inverse)` | `var(--ix-text-color-inverse)` | - |
-| `@menu-dark-color-active` | `var(--ix-color-inverse)` | `var(--ix-text-color-inverse)` | - |
+| `@menu-dark-color-hover` | `var(--ix-text-color-inverse)` | - | - |
+| `@menu-dark-color-active` | `var(--ix-text-color-inverse)` | - | - |
 | `@menu-dark-color-disabled` | `var(--ix-text-color-inverse-disabled)` | - | - |
 | `@menu-dark-background-color` | `var(--ix-background-color-inverse)` | - | - |
 | `@menu-dark-background-color-hover` | `var(--ix-text-color-title-secondary)` | `@color-graphite-d50` | - |
