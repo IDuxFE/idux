@@ -16,7 +16,7 @@
 | `@slider-track-disabled-background-color` | `rgba(0, 0, 0, 0.251)` | `@color-graphite` | - |
 | `@slider-thumb-disabled-background-color` | `@color-white` | - | - |
 | `@slider-thumb-disabled-border-color` | `rgba(0, 0, 0, 0.251)` | `@color-graphite` | - |
-| `@slider-dot-disabled-active-border-color` | `rgba(0, 0, 0, 0.251)` | `@color-graphite` | - |
+| `@slider-dot-disabled-active-background-color` | `rgba(0, 0, 0, 0.251)` | `@color-graphite` | - |
 | `@slider-thumb-width` | `10px` | - | - |
 | `@slider-thumb-height` | `10px` | - | - |
 | `@slider-thumb-margin-top` | `-3px` | - | - |
