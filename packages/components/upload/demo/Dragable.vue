@@ -28,5 +28,10 @@ const files = ref([])
   &-icon {
     font-size: 24px;
   }
+
+  p {
+    font-size: 14px;
+    margin: 8px 0 0 0;
+  }
 }
 </style>
