@@ -193,6 +193,9 @@
   }
 
   & tr&-row-selected {
+    &:hover > td {
+      background-color: @table-body-row-background-color-hover; 
+    }
     & > td {
       background: @table-body-row-background-color-selected;
     }
