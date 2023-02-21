@@ -29,7 +29,6 @@ export function usePanelProps(
     multiple: props.multiple,
     multipleLimit: props.multipleLimit,
     virtual: props.virtual,
-
     'onUpdate:activeValue': setActiveValue,
     onOptionClick,
     onScroll: props.onScroll,

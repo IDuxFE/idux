@@ -12,6 +12,7 @@ import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
+import type { SpinProps } from '@idux/components/spin'
 import type { OverlayContainerType } from '@idux/components/utils'
 import type { DefineComponent, FunctionalComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
@@ -79,6 +80,7 @@ export const selectProps = {
   size: { type: String as PropType<FormSize>, default: undefined },
   status: String as PropType<ValidateStatus>,
   suffix: { type: String, default: undefined },
+  spin: { type: [Boolean, Object] as PropType<boolean | SpinProps>, default: undefined },
   virtual: { type: Boolean, default: false },
 
   // events

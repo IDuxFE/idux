@@ -9,6 +9,8 @@
 
 import { type ComputedRef, Slots, computed, defineComponent, normalizeClass, provide, ref, watch } from 'vue'
 
+import { isBoolean } from 'lodash-es'
+
 import { useAccessorAndControl } from '@idux/cdk/forms'
 import { type VirtualScrollToFn } from '@idux/cdk/scroll'
 import { type VKey, callEmit, useState } from '@idux/cdk/utils'
@@ -17,6 +19,7 @@ import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { type SelectConfig, useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister, useFormSize, useFormStatus } from '@idux/components/form'
+import { IxSpin } from '@idux/components/spin'
 
 import { useActiveState } from './composables/useActiveState'
 import { GetKeyFn, useGetOptionKey } from './composables/useGetOptionKey'
@@ -167,8 +170,14 @@ export default defineComponent({
       />
     )
 
+    const renderLoading = (children: JSX.Element) => {
+      const { spin } = props
+      const spinProps = isBoolean(spin) ? { spinning: spin } : spin
+      return spinProps ? <IxSpin {...spinProps}>{children}</IxSpin> : children
+    }
+
     const renderContent = () => {
-      const children = [<Panel ref={panelRef} v-slots={slots} {...panelProps.value} />]
+      const children = [renderLoading(<Panel ref={panelRef} v-slots={slots} {...panelProps.value} />)]
       const { searchable, overlayRender } = props
 
       if (searchable === 'overlay') {
