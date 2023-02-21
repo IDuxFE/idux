@@ -8,7 +8,7 @@
 import type { SelectPanelData } from '../types'
 import type { VKey } from '@idux/cdk/utils'
 
-import { isNil } from 'lodash-es'
+import { isNil, toString } from 'lodash-es'
 
 export function getSelectDataSourceKeys(dataSource: SelectPanelData[]): VKey[] {
   const keys = []
@@ -66,22 +66,6 @@ export function filterDataSource(
   return filteredData
 }
 
-export function filterSelectDataSourceByInput(
-  dataSource: SelectPanelData[],
-  input: string | undefined,
-  searchFn?: (data: SelectPanelData, searchText: string) => boolean,
-): SelectPanelData[] {
-  if (!input) {
-    return dataSource
-  }
-
-  const filterFn = searchFn
-    ? (option: SelectPanelData) => searchFn(option, input.trim())
-    : (option: SelectPanelData) => matchRule(option.label, input.trim())
-
-  return filterDataSource(dataSource, filterFn)
-}
-
-function matchRule(srcString: string | number | undefined, targetString: string): boolean {
-  return !isNil(srcString) && String(srcString).toLowerCase().includes(targetString.toLowerCase())
+export function matchRule(srcString: string | number | undefined, targetString: string): boolean {
+  return !isNil(srcString) && toString(srcString).toLowerCase().includes(targetString.toLowerCase())
 }

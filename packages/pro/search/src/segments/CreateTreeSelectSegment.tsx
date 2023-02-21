@@ -41,6 +41,7 @@ export function createTreeSelectSegment(
       onDrop,
       onExpand,
       onSelect,
+      onSearch,
       onLoaded,
     },
     defaultValue,
@@ -58,11 +59,8 @@ export function createTreeSelectSegment(
   const panelRenderer = (context: PanelRenderContext<VKey | VKey[] | undefined>) => {
     const { input, value, setValue, ok, cancel } = context
     const panelValue = convertArray(value)
-    const lastInputPart = input
-      .trim()
-      .split(separator ?? defaultSeparator)
-      .pop()
-      ?.trim()
+    const inputParts = input.trim().split(separator ?? defaultSeparator)
+    const lastInputPart = inputParts.length > panelValue.length ? inputParts.pop()?.trim() : ''
 
     const handleChange = (value: VKey[]) => {
       if (!multiple) {
@@ -76,7 +74,7 @@ export function createTreeSelectSegment(
     return (
       <TreeSelectPanel
         value={panelValue}
-        searchValue={searchable && lastInputPart && !nodeLabelMap.has(lastInputPart) ? lastInputPart : undefined}
+        searchValue={searchable && lastInputPart ? lastInputPart : undefined}
         dataSource={dataSource}
         draggable={draggable}
         draggableIcon={draggableIcon}
@@ -95,6 +93,7 @@ export function createTreeSelectSegment(
         onDrop={onDrop}
         onExpand={onExpand}
         onSelect={onSelect}
+        onSearch={onSearch}
         onLoaded={onLoaded}
         onChange={handleChange}
         onConfirm={ok}

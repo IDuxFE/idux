@@ -99,6 +99,7 @@ SelectSearchFieldConfig
 | `showSelectAll` | 是否支持全选 | `boolean` | `true` | - | - |
 | `virtual` | 是否支持虚拟滚动 | `boolean` | `false` | - | 默认不支持 |
 | `overlayItemWidth` | 选项宽度 | `number` | - | - | - |
+| `onSearch` | 搜索回调函数 | `(searchValue: string) => void | ((searchValue: string) => void)[]` | - | - | 在触发搜索值改变时执行 |
 
 > 注：使用 `Ctrl + Enter` 在多选下切换面板中选项选中状态
 
@@ -140,6 +141,7 @@ TreeSelectSearchFieldConfig
 | `onDrop` | `drop` 触发时调用 | `(options: TreeDragDropOptions<any>) => void | ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
 | `onExpand` | 点击展开图标时触发 | `(expanded: boolean, node: TreeSelectPanelData) => void | ((expanded: boolean, node: TreeSelectPanelData) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
 | `onSelect` | 选中状态发生变化时触发 | `(selected: boolean, node: TreeSelectPanelData) => void | ((selected: boolean, node: TreeSelectPanelData) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onSearch` | 搜索回调函数 | `(searchValue: string) => void | ((searchValue: string) => void)[]` | - | - | 在触发搜索值改变时执行 |
 | `onLoaded` | 子节点加载完毕时触发 | `(loadedKeys: any[], node: TreeSelectPanelData) => void | ((loadedKeys: any[], node: TreeSelectPanelData) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
 
 ```typescript

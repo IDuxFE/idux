@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, provide, watch } from 'vue'
+import { computed, defineComponent, inject, provide } from 'vue'
 
 import SearchItemTag from './SearchItemTag'
 import Segment from './Segment'
@@ -20,9 +20,13 @@ export default defineComponent({
   setup(props) {
     const context = inject(proSearchContext)!
     const { props: proSearchProps, mergedPrefixCls, activeSegment } = context
-    const segmentStateContext = useSegmentStates(props, proSearchProps, context)
+
+    const isActive = computed(() => activeSegment.value?.itemKey === props.searchItem!.key)
+    const itemVisible = computed(() => isActive.value && !proSearchProps.disabled)
+
+    const segmentStateContext = useSegmentStates(props, proSearchProps, context, isActive)
     const segmentOverlayUpdateContext = useSegmentOverlayUpdate()
-    const { segmentStates, initSegmentStates } = segmentStateContext
+    const { segmentStates } = segmentStateContext
 
     provide(searchItemContext, {
       ...segmentStateContext,
@@ -36,18 +40,10 @@ export default defineComponent({
         const segmentState = segmentStates.value[segment.name]
         return {
           ...segment,
-          input: segmentState.input,
-          value: segmentState.value,
+          input: segmentState?.input,
+          value: segmentState?.value,
         }
       })
-    })
-
-    const isActive = computed(() => activeSegment.value?.itemKey === props.searchItem!.key)
-    const itemVisible = computed(() => isActive.value && !proSearchProps.disabled)
-    watch(isActive, active => {
-      if (!active) {
-        initSegmentStates()
-      }
     })
 
     return () => (

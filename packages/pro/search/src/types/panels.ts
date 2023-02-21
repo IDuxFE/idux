@@ -27,19 +27,21 @@ export const proSearchSelectPanelProps = {
   multiple: { type: Boolean, default: false },
   showSelectAll: { type: Boolean, default: true },
   allSelected: Boolean,
-  virtual: { type: Boolean, default: false },
+  searchValue: { type: String, default: undefined },
+  searchFn: Function as PropType<(data: SelectPanelData, searchValue?: string) => boolean>,
   setOnKeyDown: Function as PropType<(onKeyDown: ((evt: KeyboardEvent) => boolean) | undefined) => void>,
+  virtual: { type: Boolean, default: false },
 
-  onChange: Function as PropType<(value: VKey[]) => void>,
-  onSelectAllClick: Function as PropType<() => void>,
-  onConfirm: Function as PropType<() => void>,
-  onCancel: Function as PropType<() => void>,
+  onChange: [Function, Array] as PropType<MaybeArray<(value: VKey[]) => void>>,
+  onConfirm: [Function, Array] as PropType<MaybeArray<() => void>>,
+  onCancel: [Function, Array] as PropType<MaybeArray<() => void>>,
+  onSearch: [Function, Array] as PropType<MaybeArray<(searchValue: string) => void>>,
+  onSelectAllClick: [Function, Array] as PropType<MaybeArray<() => void>>,
 } as const
 export type ProSearchSelectPanelProps = ExtractInnerPropTypes<typeof proSearchSelectPanelProps>
 
 export const proSearchTreeSelectPanelProps = {
   value: { type: Array as PropType<VKey[]>, default: undefined },
-  searchValue: { type: String, default: undefined },
   dataSource: { type: Array as PropType<TreeSelectPanelData[]>, default: undefined },
   multiple: { type: Boolean, default: false },
   checkable: { type: Boolean, default: false },
@@ -56,6 +58,7 @@ export const proSearchTreeSelectPanelProps = {
   },
   leafLineIcon: { type: String, default: undefined },
   showLine: { type: Boolean, default: undefined },
+  searchValue: { type: String, default: undefined },
   searchFn: Function as PropType<(node: TreeSelectPanelData, searchValue?: string) => boolean>,
   virtual: { type: Boolean, default: false },
 
@@ -72,6 +75,7 @@ export const proSearchTreeSelectPanelProps = {
   onDrop: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions<any>) => void>>,
   onExpand: [Function, Array] as PropType<MaybeArray<(expanded: boolean, node: TreeSelectPanelData) => void>>,
   onSelect: [Function, Array] as PropType<MaybeArray<(selected: boolean, node: TreeSelectPanelData) => void>>,
+  onSearch: [Function, Array] as PropType<MaybeArray<(searchValue: string) => void>>,
   onLoaded: [Function, Array] as PropType<MaybeArray<(loadedKeys: any[], node: TreeSelectPanelData) => void>>,
 } as const
 export type ProSearchTreeSelectPanelProps = ExtractInnerPropTypes<typeof proSearchTreeSelectPanelProps>

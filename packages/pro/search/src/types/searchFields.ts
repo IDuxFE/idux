@@ -39,7 +39,8 @@ export interface SelectSearchField extends SearchFieldBase<VKey | VKey[]> {
     separator?: string
     showSelectAll?: boolean
     virtual?: boolean
-    searchFn?: (data: SelectPanelData, searchText: string) => boolean
+    searchFn?: (data: SelectPanelData, searchText?: string) => boolean
+    onSearch?: MaybeArray<(searchValue: string) => void>
     overlayItemWidth?: number
   }
 }
@@ -68,6 +69,7 @@ export interface TreeSelectSearchField extends SearchFieldBase<VKey | VKey[]> {
     onDrop?: MaybeArray<(options: TreeDragDropOptions<any>) => void>
     onExpand?: MaybeArray<(expanded: boolean, node: TreeSelectPanelData) => void>
     onSelect?: MaybeArray<(selected: boolean, node: TreeSelectPanelData) => void>
+    onSearch?: MaybeArray<(searchValue: string) => void>
     onLoaded?: MaybeArray<(loadedKeys: any[], node: TreeSelectPanelData) => void>
   }
 }
