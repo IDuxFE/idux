@@ -13,17 +13,19 @@ import {
   inject,
   onBeforeUnmount,
   onMounted,
+  onUnmounted,
   ref,
   watch,
 } from 'vue'
 
-import { type VKey, useState } from '@idux/cdk/utils'
+import { type VKey, callEmit, useState } from '@idux/cdk/utils'
 import { IxButton } from '@idux/components/button'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { IxSelectPanel, type SelectData, type SelectPanelInstance } from '@idux/components/select'
 
 import { proSearchContext } from '../token'
-import { type ProSearchSelectPanelProps, proSearchSelectPanelProps } from '../types'
+import { type ProSearchSelectPanelProps, type SelectPanelData, proSearchSelectPanelProps } from '../types'
+import { filterDataSource, matchRule } from '../utils/selectData'
 
 export default defineComponent({
   props: proSearchSelectPanelProps,
@@ -31,6 +33,19 @@ export default defineComponent({
     const { locale, mergedPrefixCls } = inject(proSearchContext)!
     const [activeValue, setActiveValue] = useState<VKey | undefined>(undefined)
     const partiallySelected = computed(() => props.value && props.value.length > 0 && !props.allSelected)
+    const filteredDataSource = computed(() => {
+      const { dataSource, searchValue, searchFn } = props
+      if (!searchValue) {
+        return dataSource
+      }
+
+      const trimedSearchValue = searchValue?.trim() ?? ''
+      const mergedSearchFn = searchFn
+        ? (option: SelectPanelData) => searchFn(option, trimedSearchValue)
+        : (option: SelectPanelData) => matchRule(option.label, trimedSearchValue)
+
+      return filterDataSource(dataSource ?? [], mergedSearchFn)
+    })
 
     watch(
       () => props.value,
@@ -38,7 +53,19 @@ export default defineComponent({
         const key = value?.[value.length - 1]
         key && setActiveValue(key)
       },
+      { immediate: true },
     )
+    watch(
+      () => props.searchValue,
+      searchValue => {
+        callEmit(props.onSearch, searchValue ?? '')
+      },
+    )
+    onUnmounted(() => {
+      if (props.searchValue) {
+        callEmit(props.onSearch, '')
+      }
+    })
 
     const panelRef = ref<SelectPanelInstance>()
     const changeSelected = (key: VKey) => {
@@ -48,27 +75,30 @@ export default defineComponent({
       const isSelected = targetIndex > -1
 
       if (!multiple) {
-        props.onChange?.([key])
+        callEmit(props.onChange, [key])
         return
       }
       if (isSelected) {
-        props.onChange?.(currValue.filter((_, index) => targetIndex !== index))
+        callEmit(
+          props.onChange,
+          currValue.filter((_, index) => targetIndex !== index),
+        )
         return
       }
 
-      props.onChange?.([...currValue, key])
+      callEmit(props.onChange, [...currValue, key])
     }
     const handleOptionClick = (option: SelectData) => {
       changeSelected(option.key!)
     }
     const handleConfirm = () => {
-      props.onConfirm?.()
+      callEmit(props.onConfirm)
     }
     const handleCancel = () => {
-      props.onCancel?.()
+      callEmit(props.onCancel)
     }
     const handleSelectAllClick = () => {
-      props.onSelectAllClick?.()
+      callEmit(props.onSelectAllClick)
     }
 
     const handleKeyDown = useOnKeyDown(props, panelRef, activeValue, changeSelected, handleConfirm)
@@ -120,7 +150,7 @@ export default defineComponent({
       const prefixCls = `${mergedPrefixCls.value}-select-panel`
       const panelProps = {
         activeValue: activeValue.value,
-        dataSource: props.dataSource,
+        dataSource: filteredDataSource.value,
         multiple: props.multiple,
         getKey: 'key',
         labelKey: 'label',

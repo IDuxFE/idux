@@ -5,6 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { SearchField } from './searchFields'
 import type { SearchValue } from './searchValue'
 import type { Segment } from './segment'
 import type { ExtractInnerPropTypes, VKey } from '@idux/cdk/utils'
@@ -26,6 +27,7 @@ export interface SearchItem {
   key: VKey
   optionKey?: VKey
   error?: SearchItemError
+  searchField: SearchField
   segments: Segment[]
 }
 

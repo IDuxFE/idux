@@ -12,12 +12,7 @@ import { isNil, toString } from 'lodash-es'
 import { type VKey, convertArray } from '@idux/cdk/utils'
 
 import SelectPanel from '../panel/SelectPanel'
-import {
-  filterDataSource,
-  filterSelectDataSourceByInput,
-  findDataSourceItem,
-  getSelectDataSourceKeys,
-} from '../utils/selectData'
+import { filterDataSource, getSelectDataSourceKeys } from '../utils/selectData'
 
 const defaultSeparator = '|'
 
@@ -26,7 +21,7 @@ export function createSelectSegment(
   searchField: SelectSearchField,
 ): Segment<VKey | VKey[] | undefined> {
   const {
-    fieldConfig: { dataSource, separator, searchable, showSelectAll, searchFn, multiple, virtual },
+    fieldConfig: { dataSource, separator, searchable, showSelectAll, searchFn, multiple, virtual, onSearch },
     defaultValue,
     inputClassName,
     onPanelVisibleChange,
@@ -36,17 +31,8 @@ export function createSelectSegment(
     const { input, value, setValue, ok, cancel, setOnKeyDown } = context
     const panelValue = convertArray(value)
     const keys = getSelectDataSourceKeys(dataSource)
-    const selectableKeys = getSelectDataSourceKeys(filterDataSource(dataSource, option => !option.disabled))
-    const lastInputPart = input
-      .trim()
-      .split(separator ?? defaultSeparator)
-      .pop()
-      ?.trim()
-
-    const panelDataSource =
-      searchable && !findDataSourceItem(dataSource, item => item.label === lastInputPart)
-        ? filterSelectDataSourceByInput(dataSource, lastInputPart, searchFn)
-        : dataSource
+    const inputParts = input.trim().split(separator ?? defaultSeparator)
+    const lastInputPart = inputParts.length > panelValue.length ? inputParts.pop()?.trim() : ''
 
     const handleChange = (value: VKey[]) => {
       if (!multiple) {
@@ -57,6 +43,7 @@ export function createSelectSegment(
       }
     }
     const handleSelectAll = () => {
+      const selectableKeys = getSelectDataSourceKeys(filterDataSource(dataSource, option => !option.disabled))
       setValue(selectableKeys.length !== panelValue.length ? selectableKeys : undefined)
     }
 
@@ -64,15 +51,18 @@ export function createSelectSegment(
       <SelectPanel
         value={panelValue}
         allSelected={panelValue.length > 0 && keys.length <= panelValue.length}
-        dataSource={panelDataSource}
+        dataSource={dataSource}
         multiple={multiple}
         virtual={virtual}
         setOnKeyDown={setOnKeyDown}
         showSelectAll={showSelectAll}
+        searchValue={searchable ? lastInputPart : ''}
+        searchFn={searchFn}
         onChange={handleChange}
         onSelectAllClick={handleSelectAll}
         onConfirm={ok}
         onCancel={cancel}
+        onSearch={onSearch}
       />
     )
   }

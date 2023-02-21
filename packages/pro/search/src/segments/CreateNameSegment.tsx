@@ -10,7 +10,7 @@ import type { PanelRenderContext, SearchField, Segment } from '../types'
 import { type VKey, convertArray } from '@idux/cdk/utils'
 
 import SelectPanel from '../panel/SelectPanel'
-import { filterSelectDataSourceByInput } from '../utils/selectData'
+import { filterDataSource, matchRule } from '../utils/selectData'
 
 export const defaultNameSegmentEndSymbol = ':'
 
@@ -26,7 +26,7 @@ export function createNameSegment(
       setValue(value[0])
       ok()
     }
-    const filteredDataSource = filterSelectDataSourceByInput(names, getRawInput(input))
+    const filteredDataSource = filterDataSource(names, nameOption => matchRule(nameOption.label, getRawInput(input)))
     if (!filteredDataSource?.length) {
       return
     }

@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, computed, defineComponent, inject } from 'vue'
+import { type ComputedRef, computed, defineComponent, inject, onUnmounted, watch } from 'vue'
 
 import { isFunction } from 'lodash-es'
 
@@ -27,6 +27,18 @@ export default defineComponent({
         return 'off'
       }
       return props.cascaderStrategy
+    })
+
+    watch(
+      () => props.searchValue,
+      searchValue => {
+        callEmit(props.onSearch, searchValue ?? '')
+      },
+    )
+    onUnmounted(() => {
+      if (props.searchValue) {
+        callEmit(props.onSearch, '')
+      }
     })
 
     const { expandedKeys, setExpandedKeys } = useExpandedKeys(props)

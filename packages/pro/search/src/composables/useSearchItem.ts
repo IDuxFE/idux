@@ -43,6 +43,7 @@ export function useSearchItems(
         key: searchState.key,
         optionKey: searchState.fieldKey,
         error: searchItemErrors.value?.find(error => error.index === searchState.index),
+        searchField,
         segments: searchState.segmentValues
           .map(segmentValue => {
             if (segmentValue.name === 'name') {

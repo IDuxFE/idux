@@ -7,17 +7,17 @@
 
 import type { ProSearchContext } from '../token'
 
-import { type Ref, ref, watch } from 'vue'
+import { type ComputedRef, type Ref, ref, watch } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 
-import { SearchState, tempSearchStateKey } from '../composables/useSearchStates'
+import { type SegmentValue, tempSearchStateKey } from '../composables/useSearchStates'
 import { type ProSearchProps, type SearchItemProps, Segment, searchDataTypes } from '../types'
 
 type SegmentStates = Record<string, { input: string; value: unknown; index: number }>
 export interface SegmentStatesContext {
   segmentStates: Ref<SegmentStates>
-  initSegmentStates: () => void
+  initSegmentStates: (force?: boolean) => void
   handleSegmentInput: (name: string, input: string) => void
   handleSegmentChange: (name: string, value: unknown) => void
   handleSegmentConfirm: (name: string, confirmItem?: boolean) => void
@@ -28,6 +28,7 @@ export function useSegmentStates(
   props: SearchItemProps,
   proSearchProps: ProSearchProps,
   proSearchContext: ProSearchContext,
+  isActive: ComputedRef<boolean>,
 ): SegmentStatesContext {
   const {
     getSearchStateByKey,
@@ -44,9 +45,7 @@ export function useSegmentStates(
   } = proSearchContext
   const segmentStates = ref<SegmentStates>({})
 
-  const _genInitSegmentState = (segment: Segment, searchState: SearchState, index: number) => {
-    const name = segment.name
-    const segmentValue = searchState?.segmentValues.find(value => value.name === name)
+  const _genInitSegmentState = (segment: Segment, segmentValue: SegmentValue | undefined, index: number) => {
     return {
       input: segment.format(segmentValue?.value) ?? '',
       value: segmentValue?.value,
@@ -55,9 +54,19 @@ export function useSegmentStates(
   }
 
   // reset temp segment states
-  const initSegmentStates = () => {
+  const initSegmentStates = (force = false) => {
+    const searchState = getSearchStateByKey(props.searchItem!.key)!
+
     segmentStates.value = props.searchItem!.segments.reduce((states, segment, index) => {
-      states[segment.name] = _genInitSegmentState(segment, getSearchStateByKey(props.searchItem!.key)!, index)
+      const currentSegmentState = segmentStates.value[segment.name]
+      const segmentValue = searchState?.segmentValues.find(value => value.name === segment.name)
+
+      if (currentSegmentState && !force) {
+        states[segment.name] = { ...currentSegmentState, index }
+      } else {
+        states[segment.name] = _genInitSegmentState(segment, segmentValue, index)
+      }
+
       return states
     }, {} as SegmentStates)
   }
@@ -69,14 +78,29 @@ export function useSegmentStates(
       return
     }
 
+    const searchState = getSearchStateByKey(props.searchItem!.key)!
     const segment = props.searchItem!.segments[segmentState.index]
-    segmentStates.value[name] = _genInitSegmentState(
-      segment,
-      getSearchStateByKey(props.searchItem!.key)!,
-      segmentState.index,
-    )
+    const segmentValue = searchState?.segmentValues.find(value => value.name === segment.name)
+    segmentStates.value[name] = _genInitSegmentState(segment, segmentValue, segmentState.index)
   }
-  watch(() => props.searchItem?.segments, initSegmentStates, { immediate: true })
+
+  watch(
+    () => props.searchItem?.segments,
+    (segments, oldSegments) => {
+      if (
+        segments?.length !== oldSegments?.length ||
+        segments?.some(segment => !oldSegments?.find(oldSegment => oldSegment.name === segment.name))
+      ) {
+        initSegmentStates()
+      }
+    },
+    { immediate: true },
+  )
+  watch([isActive, () => props.searchItem?.searchField], ([active, searchField]) => {
+    if (!active || !searchField) {
+      initSegmentStates(true)
+    }
+  })
 
   const setSegmentValue = (name: string, value: unknown) => {
     if (!segmentStates.value[name]) {
