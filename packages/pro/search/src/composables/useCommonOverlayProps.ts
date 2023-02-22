@@ -21,6 +21,6 @@ export function useCommonOverlayProps(
     container: props.overlayContainer ?? config.overlayContainer,
     containerFallback: `.${mergedPrefixCls.value}-overlay-container`,
     placement: 'bottomStart',
-    offset: [0, 4],
+    offset: [0, 8],
   }))
 }
