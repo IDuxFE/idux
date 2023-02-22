@@ -23,8 +23,8 @@
     </template>
     <template #suffix="{ key, selected, node }">
       <IxSpace>
-        <IxIcon name="edit" @click.stop="handleEdit(key, selected, node)" />
-        <IxIcon name="delete" @click.stop="handleDelete(key, selected, node)" />
+        <IxIcon class="operation-icon" name="edit" @click.stop="handleEdit(key, selected, node)" />
+        <IxIcon class="operation-icon" name="delete" @click.stop="handleDelete(key, selected, node)" />
       </IxSpace>
     </template>
   </IxProTree>
@@ -145,6 +145,7 @@ const onUpdateSelectedKeys = (keys: string[]) => {
 <style lang="less">
 .demo-pro-tree {
   .add-btn {
+    font-size: 12px;
     color: #1c6eff;
   }
 
@@ -164,6 +165,13 @@ const onUpdateSelectedKeys = (keys: string[]) => {
       .ix-tree-node-content-suffix {
         display: inline-block;
       }
+    }
+  }
+
+  .operation-icon {
+    color: #5e6573;
+    &:hover {
+      color: #1c6eff;
     }
   }
 }
