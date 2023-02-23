@@ -5,12 +5,15 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { AbstractControl } from '@idux/cdk/forms'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export const rateProps = {
+  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
   value: [Number, String] as PropType<number | string>,
+
   allowHalf: {
     type: Boolean,
     default: undefined,
