@@ -20,3 +20,6 @@
 | `@pagination-background-color-active` | `var(--ix-color-primary)` | `var(--ix-color-primary-l50)` | - |
 | `@pagination-background-color-disabled` | `var(--ix-background-color-deep)` | - | - |
 | `@pagination-outline-color` | `var(--ix-color-primary-l10)` | - | - |
+| `@pagination-total-color` | `var(--ix-text-color)` | `var(--ix-text-color-info)` | - |
+| `@pagination-sizes-color` | `var(--ix-text-color)` | `var(--ix-text-color-info)` | - |
+| `@pagination-jumper-color` | `var(--ix-text-color)` | `var(--ix-text-color-info)` | - |
