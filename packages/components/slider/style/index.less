@@ -16,14 +16,17 @@
   touch-action: none;
 
   &:not(&-disabled) {
-    &:hover &-rail {
+    &:hover .@{slider-prefix}-rail {
       background-color: @slider-rail-hover-background-color;
     }
 
-    &:hover &-track {
+    &:hover .@{slider-prefix}-track {
       background-color: @slider-track-hover-background-color;
     }
 
+    .@{slider-prefix}-dot-active {
+      background-color: @slider-dot-active-background-color;
+    }
   }
   
   &-rail {
@@ -56,10 +59,6 @@
 
     &:last-child {
       margin-left: -1px;
-    }
-
-    &-active {
-      background-color: @slider-dot-active-background-color;
     }
   }
 
@@ -179,7 +178,7 @@
       cursor: not-allowed;
 
       &-active {
-        border-color: @slider-dot-disabled-active-border-color;
+        background-color: @slider-dot-disabled-active-background-color;
       }
     }
 

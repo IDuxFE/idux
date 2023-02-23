@@ -1,9 +1,11 @@
 <template>
   <h4>marks & step</h4>
-  <IxSlider v-model:value="value0" :marks="marks"></IxSlider>
+  <IxSlider v-model:value="value0" :disabled="isDisabled" :marks="marks"></IxSlider>
 
   <h4>step=null</h4>
-  <IxSlider v-model:value="value1" :marks="marks" :step="null"></IxSlider>
+  <IxSlider v-model:value="value1" :disabled="isDisabled" :marks="marks" :step="null"></IxSlider>
+
+  Disabled: <IxSwitch v-model:checked="isDisabled"></IxSwitch>
 </template>
 
 <script setup lang="ts">
@@ -23,4 +25,5 @@ const marks = {
 
 const value0 = ref(30)
 const value1 = ref(50)
+const isDisabled = ref(false)
 </script>
