@@ -5,7 +5,7 @@
   .reset-color();
 
   &-sm {
-    .collapse-size(@collapse-font-size-sm, @collapse-padding-horizontal-sm);
+    .collapse-size(@collapse-font-size-sm, @collapse-expand-icon-font-size-sm, @collapse-padding-horizontal-sm);
 
     .@{collapse-prefix}-panel {
       border-bottom: none;
@@ -22,7 +22,7 @@
   }
 
   &-md {
-    .collapse-size(@collapse-font-size-md, @collapse-padding-horizontal-md);
+    .collapse-size(@collapse-font-size-md, @collapse-expand-icon-font-size-md, @collapse-padding-horizontal-md);
 
     .@{collapse-prefix}-panel + .@{collapse-prefix}-panel {
       margin-top: var(--ix-spacing-sm);
@@ -51,6 +51,10 @@
       .@{header-prefix} {
         cursor: not-allowed;
       }
+    }
+
+    & &-expand-icon {
+      display: block;
     }
   }
 
@@ -88,12 +92,16 @@
   }
 }
 
-.collapse-size(@font-size, @padding-horizontal) {
+.collapse-size(@font-size, @expand-icon-font-size, @padding-horizontal) {
   .reset-font-size(@font-size);
 
   .@{header-prefix} {
     padding-left: @padding-horizontal;
     padding-right: @padding-horizontal;
+  }
+
+  .@{header-prefix} .@{collapse-prefix}-panel-expand-icon {
+    font-size: @expand-icon-font-size;
   }
 
   .@{collapse-prefix}-panel-content-box {

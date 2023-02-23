@@ -2,6 +2,8 @@
 | --- | --- | --- | --- |
 | `@collapse-font-size-sm` | `var(--ix-font-size-sm)` | - | - |
 | `@collapse-font-size-md` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
+| `@collapse-expand-icon-font-size-sm` | `var(--ix-font-size-xl)` | - | - |
+| `@collapse-expand-icon-font-size-md` | `var(--ix-font-size-2xl)` | - | - |
 | `@collapse-padding-horizontal-sm` | `var(--ix-spacing-md)` | - | - |
 | `@collapse-padding-horizontal-md` | `var(--ix-spacing-lg)` | - | - |
 | `@collapse-border` | `1px solid var(--ix-border-color)` | - | - |

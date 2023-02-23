@@ -51,8 +51,19 @@ export default defineComponent({
 
     return () => {
       const expanded = isExpanded.value
-      const headerNode = renderHeader(props, slots, collapseSlots, key, mergedSize, expanded, expandIcon, handleClick)
       const prefixCls = mergedPrefixCls.value
+      const headerNode = renderHeader(
+        props,
+        slots,
+        prefixCls,
+        collapseSlots,
+        key,
+        mergedSize,
+        expanded,
+        expandIcon,
+        handleClick,
+      )
+
       return (
         <div class={classes.value}>
           {headerNode}
@@ -70,6 +81,7 @@ export default defineComponent({
 function renderHeader(
   props: CollapsePanelProps,
   slots: Slots,
+  prefixCls: string,
   collapseSlots: Slots,
   key: VKey,
   mergedSize: ComputedRef<CollapseSize>,
@@ -88,7 +100,9 @@ function renderHeader(
     }
   } else {
     const iconName = expandIcon.value
-    iconNode = iconName ? <IxIcon name={iconName} rotate={expanded ? 90 : 0} /> : undefined
+    iconNode = iconName ? (
+      <IxIcon class={`${prefixCls}-expand-icon`} name={iconName} rotate={expanded ? 90 : 0} />
+    ) : undefined
   }
   const headerSlots = iconNode ? { prefix: () => iconNode } : undefined
   const { header, disabled } = props
