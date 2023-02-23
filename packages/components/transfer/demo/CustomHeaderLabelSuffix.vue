@@ -11,15 +11,17 @@
       <span v-else> Target ({{ data.length }}) </span>
     </template>
     <template #headerSuffix>
-      <IxIcon name="plus" :onClick="handleSuffixClick" />
+      <IxIcon name="plus" size="16px" :onClick="handleSuffixClick" />
     </template>
   </IxTransfer>
 </template>
 
 <script setup lang="ts">
+import type { TransferData } from '@idux/components/transfer'
+
 import { ref } from 'vue'
 
-interface Data {
+interface Data extends TransferData {
   key: number
   value: number
   label: string

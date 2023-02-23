@@ -79,6 +79,7 @@ function createPagination(
     return {
       simple: true,
       showTotal: false,
+      showQuickJumper: true,
       ...pagination,
       pageIndex: pageIndex.value,
       pageSize: pageSize.value,
