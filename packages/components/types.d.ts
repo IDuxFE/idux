@@ -23,6 +23,7 @@ import type {
   DateRangePanelComponent,
   DateRangePickerComponent,
 } from '@idux/components/date-picker'
+import type { DescComponent, DescItemComponent } from '@idux/components/desc'
 import type { DividerComponent } from '@idux/components/divider'
 import type { DrawerComponent, DrawerProviderComponent } from '@idux/components/drawer'
 import type { DropdownComponent } from '@idux/components/dropdown'
@@ -111,6 +112,8 @@ declare module 'vue' {
     IxDatePanel: DatePanelComponent
     IxDateRangePicker: DateRangePickerComponent
     IxDateRangePanel: DateRangePanelComponent
+    IxDesc: DescComponent
+    IxDescItem: DescItemComponent
     IxDivider: DividerComponent
     IxDrawer: DrawerComponent
     IxDrawerProvider: DrawerProviderComponent

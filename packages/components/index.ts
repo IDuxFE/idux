@@ -22,6 +22,7 @@ import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
 import { IxCollapse, IxCollapsePanel } from '@idux/components/collapse'
 import { IxComment } from '@idux/components/comment'
 import { IxDatePanel, IxDatePicker, IxDateRangePanel, IxDateRangePicker } from '@idux/components/date-picker'
+import { IxDesc, IxDescItem } from '@idux/components/desc'
 import { IxDivider } from '@idux/components/divider'
 import { IxDrawer, IxDrawerProvider } from '@idux/components/drawer'
 import { IxDropdown } from '@idux/components/dropdown'
@@ -102,6 +103,8 @@ const components = [
   IxDatePanel,
   IxDateRangePicker,
   IxDateRangePanel,
+  IxDesc,
+  IxDescItem,
   IxDivider,
   IxDrawer,
   IxDrawerProvider,
@@ -215,6 +218,7 @@ export * from '@idux/components/collapse'
 export * from '@idux/components/comment'
 export * from '@idux/components/config'
 export * from '@idux/components/date-picker'
+export * from '@idux/components/desc'
 export * from '@idux/components/divider'
 export * from '@idux/components/drawer'
 export * from '@idux/components/dropdown'
