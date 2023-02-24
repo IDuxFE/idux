@@ -10,19 +10,19 @@
       white-space: nowrap;
       color: @desc-item-label-color;
 
-      > label {
-        display: inline-block;
-
-        &::after {
-          position: relative;
-          margin: 0 8px;
-          content: ' ';
-        }
+      &::after {
+        position: relative;
+        margin: 0 8px;
+        content: ' ';
       }
 
-      &-colon > label::after {
+      &-colon::after {
         margin: 0 10px 0 3px;
         content: ':';
+      }
+
+      > label {
+        display: inline-block;
       }
 
       &-start {
@@ -34,6 +34,7 @@
   &-content {
     display: table-cell;
     width: 100%;
+    padding-right: 16px;
   }
 
   &-sm &-item {
@@ -51,6 +52,7 @@
   &-vertical &-item &-item-label {
     display: block;
     text-align: start;
+    margin-bottom: 8px;
   }
 }
 

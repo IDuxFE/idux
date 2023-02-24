@@ -1,6 +1,6 @@
 <template>
   <IxRadioGroup v-model:value="size" :dataSource="sizes"> </IxRadioGroup>
-  <IxDesc header="多列数据" :size="size">
+  <IxDesc header="自定义尺寸" :size="size">
     <IxDescItem label="策略名称">保障网络会议</IxDescItem>
     <IxDescItem label="状态">禁用</IxDescItem>
     <IxDescItem label="操作人">saas</IxDescItem>

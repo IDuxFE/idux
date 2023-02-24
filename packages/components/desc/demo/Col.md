@@ -1,5 +1,5 @@
 ---
-order: 2
+order: 3
 title:
   zh: 响应式列
   en: Reactive column

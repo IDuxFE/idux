@@ -1,5 +1,5 @@
 <template>
-  <IxDesc header="多列数据" labelWidth="64px">
+  <IxDesc header="多列数据" labelWidth="56px">
     <IxDescItem label="策略名称">保障网络会议</IxDescItem>
     <IxDescItem label="状态">禁用</IxDescItem>
     <IxDescItem label="操作人">saas</IxDescItem>

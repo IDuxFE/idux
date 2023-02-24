@@ -1,5 +1,5 @@
 <template>
-  <IxDesc header="响应式列" :col="{ xs: 1, sm: 2, md: 3, lg: 4, xl: 6 }" labelWidth="64px">
+  <IxDesc header="响应式列" :col="{ xs: 1, sm: 2, md: 3, lg: 4, xl: 6 }">
     <IxDescItem label="策略名称">保障网络会议</IxDescItem>
     <IxDescItem label="状态">禁用</IxDescItem>
     <IxDescItem label="操作人">saas</IxDescItem>

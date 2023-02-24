@@ -3,6 +3,7 @@
 #### DescProps
 
 > 除以下表格之外还支持 `IxRow` 的[所有配置](/components/grid/zh?tab=api#RowProps)。  
+
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `col` | 每一行展示多少列数据 | `number \| Record<BreakpointKey, number>` | `3` | ✅ | - |
@@ -26,6 +27,7 @@
 #### DescItemProps
 
 > 除以下表格之外还支持 `IxCol` 的[所有配置](/components/grid/zh?tab=api#ColProps)。
+
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `col` | 包含列的数量 | `number \| Record<BreakpointKey, number>` | `1` | - | - |

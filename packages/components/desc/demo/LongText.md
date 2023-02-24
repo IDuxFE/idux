@@ -1,5 +1,5 @@
 ---
-order: 6
+order: 2
 title:
   zh: 超长文本
   en: Long text

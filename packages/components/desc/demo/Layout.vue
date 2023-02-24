@@ -1,5 +1,5 @@
 <template>
-  <IxDesc header="垂直布局" col="6" layout="vertical">
+  <IxDesc header="垂直布局" layout="vertical">
     <IxDescItem label="策略名称">保障网络会议</IxDescItem>
     <IxDescItem label="状态">禁用</IxDescItem>
     <IxDescItem label="操作人">saas</IxDescItem>
