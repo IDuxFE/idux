@@ -194,7 +194,7 @@
 
   & tr&-row-selected {
     &:hover > td {
-      background-color: @table-body-row-background-color-hover; 
+      background-color: @table-body-row-background-color-hover;
     }
     & > td {
       background: @table-body-row-background-color-selected;
@@ -355,5 +355,10 @@
         }
       }
     }
+  }
+
+  // chrome 83: virtual + fixed column
+  .cdk-virtual-scroll-content {
+    display: block;
   }
 }
