@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.3](https://github.com/IDuxFE/idux/compare/v1.4.2...v1.4.3) (2023-02-27)
+
+### Bug Fixes
+
+- **pro:search:** change proSearch overlay vertical offset to 8px ([#1463](https://github.com/IDuxFE/idux/issues/1463)) ([2da284d](https://github.com/IDuxFE/idux/commit/2da284de936a4d427691a31569ec8902b7d80549))
+- **pro:search:** mutiple search filed validation error ([#1475](https://github.com/IDuxFE/idux/issues/1475)) ([b961c4e](https://github.com/IDuxFE/idux/commit/b961c4e5769647323085d31a9b3f73ce12bb67a0))
+- **pro:search:** panel onkeydown should only be called when opened ([#1477](https://github.com/IDuxFE/idux/issues/1477)) ([76a1bac](https://github.com/IDuxFE/idux/commit/76a1bacdadcc909584b22366f62be50ae7f42ba8))
+- **pro:tree:** tree content horizontal padding ([#1466](https://github.com/IDuxFE/idux/issues/1466)) ([ec8c61d](https://github.com/IDuxFE/idux/commit/ec8c61dce3cc554c77d6016d5ce69ab5ab085e3b))
+
 ## [1.4.2](https://github.com/IDuxFE/idux/compare/v1.4.1...v1.4.2) (2023-02-20)
 
 ### Bug Fixes
