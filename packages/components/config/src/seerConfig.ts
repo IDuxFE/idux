@@ -18,6 +18,10 @@ export const seerConfig: DeepPartialGlobalConfig = {
   button: {
     size: 'sm',
   },
+  desc: {
+    colonless: true,
+    labelAlign: 'start',
+  },
   form: {
     colonless: true,
     labelAlign: 'start',

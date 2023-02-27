@@ -18,6 +18,7 @@ import type { CarouselDotPlacement, CarouselDotTrigger } from '@idux/components/
 import type { CascaderData } from '@idux/components/cascader'
 import type { CollapseSize } from '@idux/components/collapse'
 import type { DatePickerType } from '@idux/components/date-picker'
+import type { DescLabelAlign, DescLayout, DescSize } from '@idux/components/desc'
 import type { FormLabelAlign, FormLayout, FormSize } from '@idux/components/form'
 import type { ListSize } from '@idux/components/list'
 import type { LoadingBarAnimation } from '@idux/components/loading-bar'
@@ -64,6 +65,7 @@ export interface GlobalConfig {
   checkbox: CheckboxConfig
   collapse: CollapseConfig
   datePicker: DatePickerConfig
+  desc: DescConfig
   divider: DividerConfig
   drawer: DrawerConfig
   dropdown: DropdownConfig
@@ -202,6 +204,14 @@ export interface DatePickerConfig {
   size: FormSize
   suffix: string
   overlayContainer?: OverlayContainerType
+}
+
+export interface DescConfig {
+  col: number | Record<BreakpointKey, number>
+  colonless: boolean
+  labelAlign: DescLabelAlign
+  layout: DescLayout
+  size: DescSize
 }
 
 export interface DividerConfig {

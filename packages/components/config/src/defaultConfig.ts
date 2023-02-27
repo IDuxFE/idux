@@ -93,6 +93,13 @@ export const defaultConfig: GlobalConfig = {
     size: 'md',
     suffix: 'calendar',
   },
+  desc: {
+    col: 3,
+    colonless: false,
+    labelAlign: 'end',
+    layout: 'horizontal',
+    size: 'md',
+  },
   divider: {
     dashed: false,
     labelPlacement: 'center',

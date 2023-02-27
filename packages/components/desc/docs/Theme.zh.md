@@ -1,0 +1,9 @@
+| 名称 | default | seer | 备注 |
+| --- | --- | --- | --- |
+| `@desc-item-height-sm` | `var(--ix-height-sm)` | - | - |
+| `@desc-item-height-md` | `var(--ix-height-md)` | - | - |
+| `@desc-item-height-lg` | `var(--ix-height-lg)` | - | - |
+| `@desc-item-font-size-sm` | `var(--ix-font-size-sm)` | `var(--ix-font-size-sm)` | - |
+| `@desc-item-font-size-md` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
+| `@desc-item-font-size-lg` | `var(--ix-font-size-lg)` | `var(--ix-font-size-sm)` | - |
+| `@desc-item-label-color` | `var(--ix-text-color-info)` | - | - |

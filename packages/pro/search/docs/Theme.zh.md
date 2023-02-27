@@ -63,6 +63,8 @@
 | `@pro-search-name-segment-panel-min-width` | `100px` | - | - |
 | `@pro-search-operator-segment-panel-min-width` | `20px` | - | - |
 | `@pro-search-select-panel-min-width` | `100px` | - | - |
+| `@pro-search-tree-select-panel-min-width` | `200px` | - | - |
+| `@pro-search-tree-select-panel-max-width` | `400px` | - | - |
 | `@pro-search-name-segment-input-min-width` | `60px` | - | - |
 | `@pro-search-name-segment-input-text-align` | `start` | - | - |
 | `@pro-search-operator-segment-input-min-width` | `20px` | - | - |
@@ -71,6 +73,8 @@
 | `@pro-search-input-segment-input-text-align` | `start` | - | - |
 | `@pro-search-select-segment-input-min-width` | `100px` | - | - |
 | `@pro-search-select-segment-input-text-align` | `start` | - | - |
+| `@pro-search-tree-select-segment-input-min-width` | `200px` | - | - |
+| `@pro-search-tree-select-segment-input-text-align` | `start` | - | - |
 | `@pro-search-date-picker-segment-input-min-width` | `100px` | - | - |
 | `@pro-search-date-picker-segment-input-text-align` | `start` | - | - |
 | `@pro-search-date-range-picker-segment-input-min-width` | `100px` | - | - |
