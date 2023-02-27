@@ -10,6 +10,23 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.4.3(2023-02-27)
+
+### Bug Fixes
+
+- **comp:alert:** 图标应该总是顶部对齐 ([#1467](https://github.com/IDuxFE/idux/issues/1467)) ([c71ee04](https://github.com/IDuxFE/idux/commit/c71ee046f74d602967a4699c7c53a0971302414d))
+- **comp:icon:** 图标资源更新 ([#1468](https://github.com/IDuxFE/idux/issues/1468)) ([78918ae](https://github.com/IDuxFE/idux/commit/78918ae3a4866827eb1ed07235e19b5b49d074e2))
+- **comp:rate:** control 不生效 ([#1471](https://github.com/IDuxFE/idux/issues/1471)) ([0b2dfa1](https://github.com/IDuxFE/idux/commit/0b2dfa11c6b0a27f509b8ce8d56402c6e15a90ab))
+- **comp:slider:** 禁用状态下的标记颜色不正确 ([#1457](https://github.com/IDuxFE/idux/issues/1457)) ([d215935](https://github.com/IDuxFE/idux/commit/d2159356f6ff0a144ae42d16eb05aad6fea5399b))
+- **comp:spin:** 遮罩层的透明度不正确 ([#1464](https://github.com/IDuxFE/idux/issues/1464)) ([f88ad9a](https://github.com/IDuxFE/idux/commit/f88ad9a86e86479a36d863ed48cb9ffb6eecc7f5))
+- **comp:stepper:** 步骤条的连线 dashed 不起作用 ([#1458](https://github.com/IDuxFE/idux/issues/1458)) ([c688624](https://github.com/IDuxFE/idux/commit/c688624953502cf9dfce61cc08c6be1cf3ba92f4))
+- **comp:table:** 在 chrome83 的虚拟滚动+固定列异常 ([#1473](https://github.com/IDuxFE/idux/issues/1473)) ([4523705](https://github.com/IDuxFE/idux/commit/452370565c4b099d53e2e186e64d0ecd285f564f))
+- **comp:transfer:** 分页器的快速跳转不生效，后缀图标样式问题 ([#1459](https://github.com/IDuxFE/idux/issues/1459)) ([499ae90](https://github.com/IDuxFE/idux/commit/499ae902879597a53de0005f148aa9426a7c2287))
+- **pro:search:** 浮层面板的 offset ([#1463](https://github.com/IDuxFE/idux/issues/1463)) ([2da284d](https://github.com/IDuxFE/idux/commit/2da284de936a4d427691a31569ec8902b7d80549))
+- **pro:search:** multiple 时验证异常 ([#1475](https://github.com/IDuxFE/idux/issues/1475)) ([b961c4e](https://github.com/IDuxFE/idux/commit/b961c4e5769647323085d31a9b3f73ce12bb67a0))
+- **pro:search:** 面板的键盘事件应该只在面板打开时触发 ([#1477](https://github.com/IDuxFE/idux/issues/1477)) ([76a1bac](https://github.com/IDuxFE/idux/commit/76a1bacdadcc909584b22366f62be50ae7f42ba8))
+- **pro:tree:** padding 样式异常 ([#1466](https://github.com/IDuxFE/idux/issues/1466)) ([ec8c61d](https://github.com/IDuxFE/idux/commit/ec8c61dce3cc554c77d6016d5ce69ab5ab085e3b))
+
 ## 1.4.2(2023-02-20)
 
 ### Bug Fixes
