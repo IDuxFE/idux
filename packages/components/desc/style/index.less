@@ -1,0 +1,63 @@
+@import '../../style/mixins/reset.less';
+
+.@{desc-prefix} {
+  &-item {
+    .reset-component();
+
+    &-label {
+      display: table-cell;
+      text-align: end;
+      white-space: nowrap;
+      color: @desc-item-label-color;
+
+      &::after {
+        position: relative;
+        margin: 0 8px;
+        content: ' ';
+      }
+
+      &-colon::after {
+        margin: 0 10px 0 3px;
+        content: ':';
+      }
+
+      > label {
+        display: inline-block;
+      }
+
+      &-start {
+        text-align: start;
+      }
+    }
+  }
+
+  &-content {
+    display: table-cell;
+    width: 100%;
+    padding-right: 16px;
+  }
+
+  &-sm &-item {
+    .desc-item-size(@desc-item-height-sm, @desc-item-font-size-sm);
+  }
+
+  &-md &-item {
+    .desc-item-size(@desc-item-height-md, @desc-item-font-size-md);
+  }
+
+  &-lg &-item {
+    .desc-item-size(@desc-item-height-lg, @desc-item-font-size-lg);
+  }
+
+  &-vertical &-item &-item-label {
+    display: block;
+    text-align: start;
+    margin-bottom: 8px;
+  }
+}
+
+.desc-item-size(@height, @font-size) {
+  .reset-font-size(@font-size);
+
+  padding: calc((@height - @font-size - var(--ix-line-height-gutter)) / 2) 0;
+}

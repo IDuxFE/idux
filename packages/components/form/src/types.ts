@@ -15,10 +15,7 @@ const colProp = [Number, String, Object] as PropType<number | string | ColProps>
 
 export const formProps = {
   control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
-  colonless: {
-    type: Boolean,
-    default: undefined,
-  },
+  colonless: { type: Boolean, default: undefined },
   controlCol: colProp,
   controlTooltipIcon: String,
   labelAlign: String as PropType<FormLabelAlign>,
@@ -37,10 +34,7 @@ export type FormComponent = DefineComponent<Omit<HTMLAttributes, keyof FormPubli
 export type FormInstance = InstanceType<DefineComponent<FormProps>>
 
 export const formItemProps = {
-  colonless: {
-    type: Boolean,
-    default: undefined,
-  },
+  colonless: { type: Boolean, default: undefined },
   control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
   controlCol: colProp,
   controlTooltip: String,
@@ -52,10 +46,7 @@ export const formItemProps = {
   labelFor: [String, Number] as PropType<string | number>,
   labelTooltip: String,
   labelTooltipIcon: String,
-  required: {
-    type: Boolean,
-    default: false,
-  },
+  required: { type: Boolean, default: false },
   message: [String, Function, Object] as PropType<
     string | ((control?: AbstractControl) => string) | Partial<Record<ValidateStatus, string>>
   >,
@@ -83,5 +74,5 @@ export type FormWrapperInstance = InstanceType<DefineComponent<FormItemProps>>
 
 export type FormColType = number | string | ColProps
 export type FormLabelAlign = 'start' | 'end'
-export type FormLayout = 'horizontal' | 'vertical' | `inline`
+export type FormLayout = 'horizontal' | 'vertical' | 'inline'
 export type FormSize = 'sm' | 'md' | 'lg'
