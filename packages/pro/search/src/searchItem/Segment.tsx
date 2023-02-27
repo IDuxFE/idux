@@ -167,7 +167,7 @@ export default defineComponent({
       handleMouseDown,
       handleKeyDown,
       setPanelOnKeyDown,
-    } = useInputEvents(props, context, handleSegmentInput, setCurrentAsActive, handleConfirm)
+    } = useInputEvents(props, context, overlayOpened, handleSegmentInput, setCurrentAsActive, handleConfirm)
 
     const overlayProps = useOverlayAttrs(props, mergedPrefixCls, commonOverlayProps, overlayOpened)
 
@@ -263,6 +263,7 @@ interface InputEventHandlers {
 function useInputEvents(
   props: SegmentProps,
   context: ProSearchContext,
+  overlayOpened: ComputedRef<boolean>,
   handleSegmentInput: (name: string, input: string) => void,
   setCurrentAsActive: (overlayOpened: boolean) => void,
   confirm: () => void,
@@ -302,15 +303,20 @@ function useInputEvents(
     setCurrentAsActive(true)
   }
   const handleKeyDown = (evt: KeyboardEvent) => {
-    const paneKeyDownRes = panelOnKeyDown.value?.(evt) ?? true
-    if (!paneKeyDownRes) {
+    evt.stopPropagation()
+    if (overlayOpened.value && panelOnKeyDown.value && !panelOnKeyDown.value(evt)) {
       return
     }
 
     switch (evt.key) {
       case 'Enter':
         evt.preventDefault()
-        confirm()
+        if (props.value) {
+          confirm()
+        } else {
+          setCurrentAsActive(true)
+        }
+
         break
       case 'Backspace':
         if (!props.input) {
