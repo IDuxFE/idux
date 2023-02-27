@@ -135,14 +135,22 @@ export function useSearchStates(
       return false
     }
 
-    const searchField = props.searchFields?.find(field => field.key === searchState.fieldKey)
-
-    const count = dataKeyCountMap.get(searchState.fieldKey)
-    if (count && count > (existed ? 1 : 0)) {
-      return !!searchField?.multiple
+    // all valid segmentValue are not allowd to be undefined or null
+    // when current value isn't valid, return immediatly
+    if (!searchState.segmentValues.every(segmentValue => !isNil(segmentValue.value))) {
+      return false
     }
 
-    return searchState.segmentValues.every(segmentValue => !isNil(segmentValue.value))
+    const count = dataKeyCountMap.get(searchState.fieldKey)
+
+    // if there are more than one searchState of the same field key
+    // check whether mutiple searchState is allowed from the field config
+    if (count && count > (existed ? 1 : 0)) {
+      return !!props.searchFields?.find(field => field.key === searchState.fieldKey)?.multiple
+    }
+
+    // all validations are passed
+    return true
   }
 
   const validateSearchState = (key: VKey) => {
