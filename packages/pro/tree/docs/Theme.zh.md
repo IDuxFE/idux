@@ -10,6 +10,8 @@
 | `@pro-tree-header-wrapper-icon-font-size` | `@font-size-lg` | - | - |
 | `@pro-tree-header-wrapper-icon-hover-color` | `@color-primary` | - | - |
 | `@pro-tree-header-wrapper-height` | `38px` | - | - |
+| `@pro-tree-content-horizontal-spacing` | `12px` | - | - |
+| `@pro-tree-content-vertical-spacing` | `0` | - | - |
 | `@pro-tree-divider-horizontal-spacing` | `@pro-tree-header-search-wrapper-horizontal-spacing` | - | - |
 | `@pro-tree-divider-vertical-spacing` | `8px` | - | - |
 | `@pro-tree-node-padding` | `0 0 0 8px` | - | - |
