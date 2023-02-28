@@ -180,6 +180,7 @@ export default defineComponent({
                   closable={closable.value}
                   closeIcon={closeIcon.value}
                   header={props.header}
+                  size={props.type === 'default' ? 'md' : 'sm'}
                   onClose={close}
                 />
                 <ModalBody></ModalBody>

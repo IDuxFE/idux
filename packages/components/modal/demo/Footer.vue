@@ -14,9 +14,9 @@
 </template>
 
 <script setup lang="ts">
-import { h, ref } from 'vue'
+import { h, reactive, ref } from 'vue'
 
-import { useModal } from '@idux/components/modal'
+import { ModalButtonProps, useModal } from '@idux/components/modal'
 
 const { confirm } = useModal()
 
@@ -37,6 +37,18 @@ const openModal1 = () => {
 }
 
 const openModal2 = () => {
+  const asyncButton: ModalButtonProps = reactive({
+    text: 'My Ok',
+    loading: false,
+    mode: 'primary',
+    onClick: () => {
+      asyncButton.loading = true
+      setTimeout(() => {
+        asyncButton.loading = false
+        modalRef.ok()
+      }, 1000)
+    },
+  })
   const modalRef = confirm({
     title: 'Customize footer via footer',
     content: h('p', 'Some contents...'),
@@ -45,11 +57,7 @@ const openModal2 = () => {
         text: 'My Cancel',
         onClick: () => modalRef.cancel(),
       },
-      {
-        text: 'My Ok',
-        mode: 'primary',
-        onClick: () => modalRef.ok(),
-      },
+      asyncButton,
     ],
   })
 }
