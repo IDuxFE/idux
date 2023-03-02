@@ -89,3 +89,47 @@ interface SelectedItemProps {
 | --- | --- | --- | --- |
 | `blur` | 失去焦点 | - | - |
 | `focus` | 获取焦点 | - | - |
+
+### IxCascaderPanel
+
+级联选择面板
+
+#### CascaderPanelProps
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `v-model:selectedKeys` | 当前选中的的值 | `any \| any[] \| any[][]` | - | - | - |
+| `v-model:expandedKeys` | 展开节点的 `key` 数组 | `VKey[]` | - | - | - |
+| `v-model:loadedKeys` | 已经加载完毕的节点的 `key` | `VKey[]` | - | - | - |
+| `childrenKey` | 替代[CascaderData](#CascaderData)中的`children`字段 | `string` | `children` | ✅ | - |
+| `customAdditional` | 自定义下拉选项的额外属性 | `CascaderCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
+| `dataSource` | 树型数据数组,参见[CascaderData](#CascaderData) | `CascaderData[]` | `[]` | - | - |
+| `disabled` | 禁用选择器 | `boolean` | - | - | - |
+| `disableData` | 动态禁用某些项 | `(data: CascaderData) => boolean` | - | - | - |
+| `empty` | 空数据时的内容 | `'default' \| 'simple' \| EmptyProps` | `'simple'` | - | - |
+| `expandIcon` | 展开图标 | `string \| #expandIcon="{key: VKey, expanded: boolean, data: CascaderData}"` | `right` | ✅ | - |
+| `expandTrigger` | 触发展开的方式 | `'click' \| 'hover'` | `click` | - | - |
+| `fullPath` | 选中后的值是否包含全部路径 | `boolean` | `true` | ✅ | 会影响值的类型，参见 [基本使用](#components-cascader-demo-Basic) 和 [多选模式](#components-cascader-demo-Multiple) |
+| `getKey` | 获取数据的唯一标识 | `string \| (data: CascaderData) => VKey` | `key` | ✅ | - |
+| `labelKey` | 替代[CascaderData](#CascaderData)中的`label`字段 | `string` | `label` | ✅ | -
+| `loadChildren` | 加载子节点数据 | `(data: CascaderData) => Promise<CascaderData[]>` | - | - | - |
+| `maxLabel` | 最多显示多少个标签 | `number \| 'responsive'` | - | - | 响应式模式会对性能产生损耗 |
+| `multiple` | 多选模式 | `boolean` | `false` | - | - |
+| `multipleLimit` | 最多选中多少项 | `number` | - | - | - |
+| `searchable` | 是否可搜索 | `boolean \| 'overlay'` | `false` | - | 当为 `true` 时搜索功能集成在选择器上，当为 `overlay` 时，搜索功能集成在悬浮层上 |
+| `searchFn` | 根据搜索的文本进行筛选 | `boolean \| SelectSearchFn` | `true` | - | 为 `true` 时使用默认的搜索规则, 如果使用远程搜索，应该设置为 `false` |
+| `separator` | 设置分割符 | `string` | `/` | - | - |
+| `strategy` | 设置级联策略 | `'all' \| 'parent' \| 'child' \| 'off'` | `'all'` | - | 具体用法参见 [级联策略](#components-cascader-demo-Strategy) |
+| `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | 需要设置 `height` |
+| `onSelect` | 选中值触发 | `(option: CascaderData, oldValue: any) => void` | - | - | - |
+| `onExpand` | 点击展开图标时触发 | `(expanded: boolean, isSelected: boolean) => void` | - | - | - |
+| `onExpandedChange` | 展开状态发生变化时触发 | `(expendedKeys: VKey[], expendedData: CascaderData[]) => void` | - | - | - |
+| `onLoaded` | 子节点加载完毕时触发 | `(loadedKeys: VKey[], data: CascaderData) => void` | - | - | - |
+| `onSearch` | 开启搜索功能后，输入后的回调 | `(searchValue: string) => void` | - | - | 通常用于服务端搜索 |
+
+#### CascaderPanelSlots
+
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+|  `empty` | 自定义空状态 | - | - |
+|  `optionLabel` | 自定义选项的文本 | `data: SelectOption` | - |

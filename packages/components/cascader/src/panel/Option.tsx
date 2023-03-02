@@ -9,11 +9,12 @@ import { type PropType, Slot, computed, defineComponent, inject, normalizeClass 
 
 import { isNil } from 'lodash-es'
 
+import { callEmit } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { convertIconVNode, useKey } from '@idux/components/utils'
 
 import { type MergedData } from '../composables/useDataSource'
-import { cascaderToken } from '../token'
+import { cascaderPanelToken } from '../token'
 import { type CascaderData } from '../types'
 
 export default defineComponent({
@@ -28,18 +29,16 @@ export default defineComponent({
   setup(props) {
     const key = useKey()
     const {
-      props: cascaderProps,
+      props: cascaderPanelProps,
       slots,
       mergedPrefixCls,
       mergedExpandIcon,
       mergedGetDisabled,
       mergedLabelKey,
-      inputValue,
       activeKey,
       setActiveKey,
       expandedKeys,
       setExpandedKeys,
-      setOverlayOpened,
       loadingKeys,
       selectedWithStrategyKeys,
       selectedLimit,
@@ -47,7 +46,7 @@ export default defineComponent({
       indeterminateKeys,
       handleSelect,
       handleExpand,
-    } = inject(cascaderToken)!
+    } = inject(cascaderPanelToken)!
     const isActive = computed(() => key === activeKey.value)
     const isDisabled = computed(() => mergedGetDisabled.value(props.rawData))
     const isExpanded = computed(() => expandedKeys.value.includes(key))
@@ -68,44 +67,48 @@ export default defineComponent({
       })
     })
 
+    const _handleSelect = () => {
+      handleSelect(key)
+      callEmit(cascaderPanelProps.onSelect, props.rawData, isSelected.value)
+    }
+
     const handleClick = () => {
       if (props.isLeaf) {
         if (!isSelected.value && selectedLimit.value) {
           return
         }
-        handleSelect(key)
-        setOverlayOpened(false)
+        _handleSelect()
 
         // 如果一级节点是叶子节点，被点击后关闭所有展开的节点。
         isNil(props.parentKey) && setExpandedKeys([])
       } else {
-        cascaderProps.strategy === 'off' && handleSelect(key)
-        cascaderProps.expandTrigger === 'click' && handleExpand(key)
+        cascaderPanelProps.strategy === 'off' && _handleSelect()
+        cascaderPanelProps.expandTrigger === 'click' && handleExpand(key)
       }
     }
 
     const handleCheckboxClick = (evt: Event) => {
       evt.stopPropagation()
-      handleSelect(key)
+      _handleSelect()
     }
     const handleMouseEnter = () => {
       setActiveKey(key)
-      !props.isLeaf && cascaderProps.expandTrigger === 'hover' && handleExpand(key)
+      !props.isLeaf && cascaderPanelProps.expandTrigger === 'hover' && handleExpand(key)
     }
 
     return () => {
       const { rawData, label } = props
-      const { multiple } = cascaderProps
+      const { multiple } = cascaderPanelProps
       const disabled = isDisabled.value
       const selected = isSelected.value
       const prefixCls = `${mergedPrefixCls.value}-option`
+      const searchValue = cascaderPanelProps.searchValue
 
-      const searchValue = inputValue.value
       const mergedLabel = searchValue ? label : (rawData[mergedLabelKey.value] as string)
       // 优先显示 selectedLimitTitle
       const title = (!(disabled || selected) && selectedLimitTitle.value) || mergedLabel
-      const customAdditional = cascaderProps.customAdditional
-        ? cascaderProps.customAdditional({ data: rawData, index: props.index })
+      const customAdditional = cascaderPanelProps.customAdditional
+        ? cascaderPanelProps.customAdditional({ data: rawData, index: props.index })
         : undefined
 
       return (

@@ -12,7 +12,7 @@ import { isNil } from 'lodash-es'
 import { type VKey } from '@idux/cdk/utils'
 import { type GetKeyFn } from '@idux/components/utils'
 
-import { type CascaderData, type CascaderProps } from '../types'
+import { type CascaderData, type CascaderPanelProps, type CascaderProps } from '../types'
 
 export interface MergedData {
   children?: MergedData[]
@@ -29,7 +29,7 @@ export interface DataSourceContext {
 }
 
 export function useDataSource(
-  props: CascaderProps,
+  props: CascaderProps | CascaderPanelProps,
   mergedGetKey: ComputedRef<GetKeyFn>,
   mergedChildrenKey: ComputedRef<string>,
   mergedLabelKey: ComputedRef<string>,
@@ -56,7 +56,7 @@ export function useDataSource(
 }
 
 export function convertMergedData(
-  props: CascaderProps,
+  props: CascaderProps | CascaderPanelProps,
   getKey: GetKeyFn,
   childrenKey: string,
   labelKey: string,

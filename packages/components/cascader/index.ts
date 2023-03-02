@@ -5,18 +5,23 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { CascaderComponent } from './src/types'
+import type { CascaderComponent, CascaderPanelComponent } from './src/types'
 
 import Cascader from './src/Cascader'
+import CascaderPanel from './src/panel/Panel'
 
 const IxCascader = Cascader as unknown as CascaderComponent
+const IxCascaderPanel = CascaderPanel as unknown as CascaderPanelComponent
 
-export { IxCascader }
+export { IxCascader, IxCascaderPanel }
 
 export type {
   CascaderInstance,
   CascaderComponent,
   CascaderPublicProps as CascaderProps,
+  CascaderPanelInstance,
+  CascaderPanelComponent,
+  CascaderPanelPublicProps as CascaderPanelProps,
   CascaderData,
   CascaderExpandTrigger,
   CascaderSearchFn,

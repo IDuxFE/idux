@@ -10,7 +10,6 @@ import { type ComputedRef, type Ref, computed } from 'vue'
 import { type VKey, useState } from '@idux/cdk/utils'
 
 import { type MergedData } from './useDataSource'
-import { type CascaderProps } from '../types'
 
 export interface ActiveStateContext {
   activeKey: Ref<VKey | undefined>
@@ -18,10 +17,7 @@ export interface ActiveStateContext {
   setActiveKey: (key: VKey) => void
 }
 
-export function useActiveState(
-  props: CascaderProps,
-  mergedDataMap: ComputedRef<Map<VKey, MergedData>>,
-): ActiveStateContext {
+export function useActiveState(mergedDataMap: ComputedRef<Map<VKey, MergedData>>): ActiveStateContext {
   const [activeKey, setActiveKey] = useState<VKey | undefined>(undefined)
 
   const activeData = computed(() => {

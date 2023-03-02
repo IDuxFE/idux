@@ -13,7 +13,7 @@ import { type VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 import { type GetDisabledFn, type GetKeyFn } from '@idux/components/utils'
 
 import { type MergedData, convertMergedData, convertMergedDataMap } from './useDataSource'
-import { type CascaderData, type CascaderProps } from '../types'
+import { type CascaderData, type CascaderPanelProps, type CascaderProps } from '../types'
 import { callChange, getParentKeys } from '../utils'
 
 export interface ExpandableContext {
@@ -24,7 +24,7 @@ export interface ExpandableContext {
 }
 
 export function useExpandable(
-  props: CascaderProps,
+  props: CascaderProps | CascaderPanelProps,
   mergedGetKey: ComputedRef<GetKeyFn>,
   mergedGetDisabled: ComputedRef<GetDisabledFn>,
   mergedChildrenKey: ComputedRef<string>,

@@ -14,6 +14,53 @@ import type { FormSize } from '@idux/components/form'
 import type { OverlayContainerType } from '@idux/components/utils'
 import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
+export const cascaderPanelProps = {
+  selectedKeys: { type: null, default: undefined },
+  expandedKeys: { type: Array as PropType<VKey[]>, default: undefined },
+  loadedKeys: { type: Array as PropType<VKey[]>, default: undefined },
+  childrenKey: { type: String, default: undefined },
+  customAdditional: { type: Function as PropType<CascaderCustomAdditional>, default: undefined },
+  dataSource: { type: Array as PropType<CascaderData[]>, default: () => [] },
+  disableData: { type: Function as PropType<(data: CascaderData<any>) => boolean> },
+  empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'simple' },
+  expandIcon: { type: String, default: undefined },
+  expandTrigger: { type: String as PropType<CascaderExpandTrigger>, default: 'click' },
+
+  fullPath: { type: Boolean, default: undefined },
+  getKey: { type: [String, Function] as PropType<string | ((data: CascaderData<any>) => any)>, default: undefined },
+  labelKey: { type: String, default: undefined },
+  loadChildren: {
+    type: Function as PropType<(data: CascaderData<any>) => Promise<CascaderData<any>[]>>,
+    default: undefined,
+  },
+
+  maxLabel: { type: [Number, String] as PropType<number | 'responsive'>, default: Number.MAX_SAFE_INTEGER },
+  multiple: { type: Boolean, default: false },
+  multipleLimit: { type: Number, default: Number.MAX_SAFE_INTEGER },
+
+  searchable: { type: [Boolean, String] as PropType<boolean | 'overlay'>, default: false },
+  searchFn: { type: [Boolean, Function] as PropType<boolean | CascaderSearchFn>, default: true },
+  searchValue: String,
+
+  separator: { type: String, default: '/' },
+  strategy: { type: String as PropType<CascaderStrategy>, default: 'all' },
+  virtual: { type: Boolean, default: false },
+
+  // events
+  'onUpdate:selectedKeys': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,
+  'onUpdate:expandedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
+  'onUpdate:loadedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
+  onExpand: [Function, Array] as PropType<MaybeArray<(expanded: boolean, data: CascaderData) => void>>,
+  onExpandedChange: [Function, Array] as PropType<MaybeArray<(expendedKeys: any[], data: CascaderData[]) => void>>,
+  onLoaded: [Function, Array] as PropType<MaybeArray<(loadedKeys: any[], data: CascaderData) => void>>,
+  onSelect: [Function, Array] as PropType<MaybeArray<(option: CascaderData, isSelected: boolean) => void>>,
+  onSearch: [Function, Array] as PropType<MaybeArray<(value: string) => void>>,
+
+  // private
+  _virtualScrollHeight: { type: Number, default: 256 },
+  _virtualScrollItemHeight: { type: Number, default: 32 },
+} as const
+
 export const cascaderProps = {
   control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
   value: { type: null, default: undefined },
@@ -73,11 +120,14 @@ export const cascaderProps = {
   onExpandedChange: [Function, Array] as PropType<MaybeArray<(expendedKeys: any[], data: CascaderData[]) => void>>,
   onLoaded: [Function, Array] as PropType<MaybeArray<(loadedKeys: any[], data: CascaderData) => void>>,
   onSearch: [Function, Array] as PropType<MaybeArray<(value: string) => void>>,
-
-  // private
-  overlayHeight: { type: Number, default: 256 },
-  overlayItemHeight: { type: Number, default: 32 },
 } as const
+
+export type CascaderPanelProps = ExtractInnerPropTypes<typeof cascaderPanelProps>
+export type CascaderPanelPublicProps = ExtractPublicPropTypes<typeof cascaderPanelProps>
+export type CascaderPanelComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof CascaderPanelPublicProps> & CascaderPanelPublicProps
+>
+export type CascaderPanelInstance = InstanceType<DefineComponent<CascaderProps, CascaderBindings>>
 
 export type CascaderProps = ExtractInnerPropTypes<typeof cascaderProps>
 export type CascaderPublicProps = Omit<

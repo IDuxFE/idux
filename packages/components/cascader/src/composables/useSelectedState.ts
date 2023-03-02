@@ -5,68 +5,53 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, computed, toRaw } from 'vue'
+import { type ComputedRef, type Ref, computed, toRaw } from 'vue'
 
 import { isNil } from 'lodash-es'
 
-import { type FormAccessor } from '@idux/cdk/forms'
-import { NoopArray, type VKey, callEmit, convertArray } from '@idux/cdk/utils'
-import { useGlobalConfig } from '@idux/components/config'
+import { NoopArray, type VKey, convertArray } from '@idux/cdk/utils'
 import { type GetDisabledFn } from '@idux/components/utils'
 
 import { type MergedData } from './useDataSource'
-import { type CascaderProps, type CascaderStrategy } from '../types'
+import { type CascaderStrategy } from '../types'
 import { getChildrenKeys, getParentKeys } from '../utils'
 
 export interface SelectedStateContext {
-  selectedKeys: ComputedRef<VKey[]>
-  selectedLimit: ComputedRef<boolean>
-  selectedLimitTitle: ComputedRef<string>
-  selectedData: ComputedRef<MergedData[]>
+  resolvedSelectedKeys: ComputedRef<VKey[]>
   selectedWithStrategyKeys: ComputedRef<VKey[]>
-  indeterminateKeys: ComputedRef<VKey[]>
+  strategyEnabled: ComputedRef<boolean>
   handleSelect: (key: VKey) => void
-  handleClear: (evt: MouseEvent) => void
+  setValue: (keys: VKey[]) => void
 }
 
 export function useSelectedState(
-  props: CascaderProps,
-  accessor: FormAccessor,
   mergedDataMap: ComputedRef<Map<VKey, MergedData>>,
   mergedFullPath: ComputedRef<boolean>,
   mergedGetDisabled: ComputedRef<GetDisabledFn>,
+  multiple: Ref<boolean>,
+  strategy: Ref<CascaderStrategy>,
+  selectedKeys: Ref<VKey | VKey[] | VKey[][]>,
+  setSelectedKeys: (keys: VKey | VKey[] | VKey[][]) => void,
 ): SelectedStateContext {
-  const locale = useGlobalConfig('locale')
-  const selectedKeys = computed(() => {
-    const tempKeys = convertArray(accessor.value)
+  const resolvedSelectedKeys = computed(() => {
+    const tempKeys = convertArray<VKey | VKey[]>(selectedKeys.value)
     if (!mergedFullPath.value) {
-      return tempKeys
+      return tempKeys as VKey[]
     }
     // 单选直接拿最后一个值最为选中的 key
-    if (!props.multiple) {
-      const lastKey = tempKeys[tempKeys.length - 1]
+    if (!multiple.value) {
+      const lastKey = tempKeys[tempKeys.length - 1] as VKey
       return isNil(lastKey) ? [] : [lastKey]
     }
     // 多选时 tempKeys 应该是一个二维数组，然后拿第二层的最后一个元素作为 key
-    return tempKeys.map(keys => keys[keys.length - 1]).filter(key => !isNil(key))
-  })
-  const selectedLimit = computed(() => selectedKeys.value.length >= props.multipleLimit)
-  const selectedLimitTitle = computed(() => {
-    if (!selectedLimit.value) {
-      return ''
-    }
-    return locale.select.limitMessage.replace('${0}', `${props.multipleLimit}`)
+    return (tempKeys as VKey[][]).map(keys => keys[keys.length - 1]).filter(key => !isNil(key)) as VKey[]
   })
 
-  const selectedData = computed(() => {
-    const dataMap = mergedDataMap.value
-    return selectedKeys.value.map(key => dataMap.get(key)!).filter(Boolean)
-  })
-  const strategyEnabled = computed(() => props.multiple && props.strategy !== 'off')
+  const strategyEnabled = computed(() => multiple.value && strategy.value !== 'off')
   const selectedWithStrategyKeys = computed(() => {
     return strategyEnabled.value
-      ? getCascadedKeys(mergedDataMap.value, selectedKeys.value, mergedGetDisabled.value)
-      : selectedKeys.value
+      ? getCascadedKeys(mergedDataMap.value, resolvedSelectedKeys.value, mergedGetDisabled.value)
+      : resolvedSelectedKeys.value
   })
 
   const indeterminateKeys = computed(() => {
@@ -95,10 +80,10 @@ export function useSelectedState(
     let currValue: VKey | VKey[] | VKey[][]
 
     if (!mergedFullPath.value) {
-      currValue = props.multiple ? keys : keys[0]
+      currValue = multiple.value ? keys : keys[0]
     } else {
       const getDisabledFn = mergedGetDisabled.value
-      if (!props.multiple) {
+      if (!multiple.value) {
         const currKey = keys[0]
         const dataMap = mergedDataMap.value
         currValue = getParentKeys(dataMap, dataMap.get(currKey), true, getDisabledFn)
@@ -113,20 +98,18 @@ export function useSelectedState(
       }
     }
 
-    const oldValue = toRaw(accessor.value)
+    const oldValue = toRaw(selectedKeys.value)
     if (currValue !== oldValue) {
-      accessor.setValue(currValue)
-      callEmit(props.onChange, currValue, oldValue)
+      setSelectedKeys(currValue)
     }
   }
 
   const handleSelect = (key: VKey) => {
-    const { multiple } = props
     const cascadedKeys = selectedWithStrategyKeys.value
     const currIndex = cascadedKeys.indexOf(key)
     const isSelected = currIndex > -1
 
-    if (!multiple) {
+    if (!multiple.value) {
       !isSelected && setValue([key])
       return
     }
@@ -154,25 +137,15 @@ export function useSelectedState(
         childrenKeys.forEach(key => keySet.add(key))
       }
     }
-    setValue([...getCascadedKeysByStrategy(dataMap, keySet, props.strategy)])
-  }
-
-  const handleClear = (evt: MouseEvent) => {
-    evt.stopPropagation()
-    setValue([])
-    callEmit(props.onClear, evt)
+    setValue([...getCascadedKeysByStrategy(dataMap, keySet, strategy.value)])
   }
 
   return {
-    selectedKeys,
-    selectedLimit,
-    selectedLimitTitle,
-    selectedData,
+    resolvedSelectedKeys,
     selectedWithStrategyKeys,
-    indeterminateKeys,
+    strategyEnabled,
     handleSelect,
-
-    handleClear,
+    setValue,
   }
 }
 

@@ -17,7 +17,7 @@ import { IxBreadcrumb, IxBreadcrumbItem } from '@idux/components/breadcrumb'
 import { IxButton, IxButtonGroup } from '@idux/components/button'
 import { IxCard, IxCardGrid } from '@idux/components/card'
 import { IxCarousel } from '@idux/components/carousel'
-import { IxCascader } from '@idux/components/cascader'
+import { IxCascader, IxCascaderPanel } from '@idux/components/cascader'
 import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
 import { IxCollapse, IxCollapsePanel } from '@idux/components/collapse'
 import { IxComment } from '@idux/components/comment'
@@ -94,6 +94,7 @@ const components = [
   IxCardGrid,
   IxCarousel,
   IxCascader,
+  IxCascaderPanel,
   IxComment,
   IxCheckbox,
   IxCheckboxGroup,
