@@ -13,6 +13,7 @@ import { useControlledProp } from '@idux/cdk/utils'
 
 export function usePanelProps(
   props: CascaderProps,
+  searchValue: ComputedRef<string>,
   setOverlayOpened: (opened: boolean) => void,
 ): ComputedRef<Partial<CascaderPanelProps>> {
   const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys')
@@ -43,6 +44,7 @@ export function usePanelProps(
 
     searchable: props.searchable,
     searchFn: props.searchFn,
+    searchValue: searchValue.value,
     strategy: props.strategy,
     virtual: props.virtual,
 
