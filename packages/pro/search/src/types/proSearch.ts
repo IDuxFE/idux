@@ -10,7 +10,7 @@ import type { SearchItemConfirmContext, SearchItemError } from './searchItem'
 import type { SearchValue } from './searchValue'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { OverlayContainerType } from '@idux/components/utils'
-import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
 export const proSearchProps = {
   value: Array as PropType<SearchValue[]>,
@@ -19,6 +19,7 @@ export const proSearchProps = {
     default: undefined,
   },
   clearIcon: [String, Object] as PropType<string | VNode>,
+  customNameLabel: [String, Function] as PropType<string | ((searchField: SearchField) => VNodeChild)>,
   maxLabel: { type: [Number, String] as PropType<number | 'responsive'>, default: 'responsive' },
   searchIcon: [String, Object] as PropType<string | VNode>,
   disabled: {

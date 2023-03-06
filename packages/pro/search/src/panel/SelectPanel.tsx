@@ -29,7 +29,7 @@ import { filterDataSource, matchRule } from '../utils/selectData'
 
 export default defineComponent({
   props: proSearchSelectPanelProps,
-  setup(props) {
+  setup(props, { slots }) {
     const { locale, mergedPrefixCls } = inject(proSearchContext)!
     const [activeValue, setActiveValue] = useState<VKey | undefined>(undefined)
     const partiallySelected = computed(() => props.value && props.value.length > 0 && !props.allSelected)
@@ -159,7 +159,7 @@ export default defineComponent({
       return (
         <div class={prefixCls} tabindex={-1} onMousedown={evt => evt.preventDefault()}>
           {renderSelectAll()}
-          <IxSelectPanel ref={panelRef} class={`${prefixCls}-inner`} {...panelProps} />
+          <IxSelectPanel ref={panelRef} class={`${prefixCls}-inner`} v-slots={slots} {...panelProps} />
           {renderFooter()}
         </div>
       )

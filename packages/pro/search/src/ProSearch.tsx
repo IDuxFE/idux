@@ -134,7 +134,6 @@ export default defineComponent({
 
     provide(proSearchContext, {
       props,
-      slots,
       locale: locale.search,
       mergedPrefixCls,
       commonOverlayProps,
@@ -184,7 +183,7 @@ export default defineComponent({
               />
               <div class={`${prefixCls}-search-item-container`} style={searchItemContainerStyle.value}>
                 {searchItems.value?.map(item => (
-                  <SearchItemComp key={item.key} searchItem={item} />
+                  <SearchItemComp key={item.key} v-slots={slots} searchItem={item} />
                 ))}
               </div>
               {searchValueEmpty.value && !activeSegment.value && (

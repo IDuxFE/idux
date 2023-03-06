@@ -38,7 +38,12 @@ export function useSearchItems(
       )
       const searchField = searchFields?.find(field => field.key === searchState.fieldKey)
       const operatorSegment = searchField && createOperatorSegment(mergedPrefixCls.value, searchField)
-      const nameSegment = createNameSegment(mergedPrefixCls.value, searchFields, !operatorSegment)
+      const nameSegment = createNameSegment(
+        mergedPrefixCls.value,
+        searchFields,
+        props.customNameLabel,
+        !operatorSegment,
+      )
 
       return {
         key: searchState.key,

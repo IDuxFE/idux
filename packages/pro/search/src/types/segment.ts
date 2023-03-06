@@ -6,12 +6,13 @@
  */
 
 import type { ExtractInnerPropTypes, VKey } from '@idux/cdk/utils'
-import type { PropType, VNodeChild } from 'vue'
+import type { PropType, Slots, VNodeChild } from 'vue'
 
 export type InputFormater<V = unknown> = (value: V) => string
 export type InputParser<V = unknown> = (input: string) => V | null
 
 export interface PanelRenderContext<V = unknown> {
+  slots: Slots
   input: string
   value: V
   ok: () => void

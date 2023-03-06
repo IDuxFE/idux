@@ -26,6 +26,7 @@ interface SearchFieldBase<V = unknown> {
   defaultValue?: V
   inputClassName?: string
   placeholder?: string
+  customOperatorLabel?: string | ((operator: string) => VNodeChild)
   validator?: (value: SearchValue<V>) => Omit<SearchItemError, 'index'> | undefined
   onPanelVisibleChange?: (visible: boolean) => void
 }

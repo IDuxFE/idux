@@ -17,7 +17,7 @@ import { searchItemProps } from '../types'
 
 export default defineComponent({
   props: searchItemProps,
-  setup(props) {
+  setup(props, { slots }) {
     const context = inject(proSearchContext)!
     const { props: proSearchProps, mergedPrefixCls, activeSegment } = context
 
@@ -63,6 +63,7 @@ export default defineComponent({
           {segmentRenderDatas.value.map(segment => (
             <Segment
               key={segment.name}
+              v-slots={slots}
               itemKey={props.searchItem!.key}
               input={segment.input}
               value={segment.value}

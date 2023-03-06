@@ -5,7 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { PanelRenderContext, SearchField, Segment } from '../types'
+import type { PanelRenderContext, SearchField, Segment, SelectPanelData } from '../types'
+import type { VNodeChild } from 'vue'
+
+import { isString } from 'lodash-es'
 
 import { type VKey, convertArray } from '@idux/cdk/utils'
 
@@ -17,11 +20,12 @@ export const defaultNameSegmentEndSymbol = ':'
 export function createNameSegment(
   prefixCls: string,
   searchFields: SearchField[] | undefined,
+  customNameLabel: string | ((searchField: SearchField) => VNodeChild) | undefined,
   showEndSymbol: boolean,
 ): Segment<VKey | undefined> {
   const names = getSearchOptionNameList(searchFields ?? [])
   const panelRenderer = (context: PanelRenderContext<VKey | undefined>) => {
-    const { input, value, setValue, ok, setOnKeyDown } = context
+    const { slots, input, value, setValue, ok, setOnKeyDown } = context
     const handleChange = (value: VKey[]) => {
       setValue(value[0])
       ok()
@@ -31,9 +35,27 @@ export function createNameSegment(
       return
     }
 
+    const renderNameLabel = (key: VKey, renderer?: (searchField: SearchField) => VNodeChild) => {
+      if (!renderer) {
+        return undefined
+      }
+
+      const searchField = searchFields!.find(field => field.key === key)!
+      return renderer(searchField)
+    }
+
+    const _customNameLabel = customNameLabel ?? 'nameLabel'
+
+    const panelSlots = {
+      optionLabel: isString(_customNameLabel)
+        ? (option: SelectPanelData) => renderNameLabel(option.key, slots[_customNameLabel])
+        : (option: SelectPanelData) => renderNameLabel(option.key, _customNameLabel),
+    }
+
     return (
       <SelectPanel
         class={`${prefixCls}-name-segment-panel`}
+        v-slots={panelSlots}
         value={convertArray(value)}
         dataSource={filteredDataSource}
         multiple={false}
