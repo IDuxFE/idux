@@ -75,5 +75,10 @@ export type ProTableColumn<T = any, V = any, CT = 'input'> =
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:searchValue` | 搜索的文本 | `string` | - | - | - |
-| `placeholder` | 搜索框的占位符 | `string` | ✅ | - | 通过 locale 全局配置 |
-| `searchable` | 是否开启搜索功能 | `boolean` | ✅ | - | - |
+| `v-model:visible` | 浮层的显示隐藏 | `boolean` | - | - | - |
+| `changeSize` | 是否支持修改表格的尺寸 | `boolean` | `true` | ✅ |- |
+| `className` | 自定义浮层的 `class` | `string` | - | - |- |
+| `placeholder` | 搜索框的占位符 | `string` | `搜索关键字` | ✅ | 通过 locale 全局配置 |
+| `resetable` | 是否支持重置布局设置 | `boolean` | `true` | ✅ |- |
+| `searchable` | 是否开启搜索功能 | `boolean` | `false` | ✅ | - |
+| `onReset` | 点击重置按钮后的回调 | `(evt: MouseEvent) => boolean \| void` | - | - | 返回 `false` 会阻止组件内部的重置操作 |

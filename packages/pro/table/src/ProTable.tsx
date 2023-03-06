@@ -9,7 +9,7 @@
 
 import { computed, defineComponent, provide, ref, watch } from 'vue'
 
-import { isString } from 'lodash-es'
+import { isObject, isString } from 'lodash-es'
 
 import { type VirtualScrollToOptions } from '@idux/cdk/scroll'
 import { useState } from '@idux/cdk/utils'
@@ -44,7 +44,6 @@ export default defineComponent({
 
     provide(proTableToken, {
       props,
-      slots,
       config,
       locale,
       mergedPrefixCls,
@@ -59,10 +58,12 @@ export default defineComponent({
     })
 
     const renderLayoutTool = () => {
-      if (!props.layoutTool) {
+      const { layoutTool } = props
+      if (!layoutTool) {
         return null
       }
-      return <ProTableLayoutTool />
+      const toolProps = isObject(layoutTool) ? layoutTool : undefined
+      return <ProTableLayoutTool {...toolProps} />
     }
 
     const renderToolbar = () => {

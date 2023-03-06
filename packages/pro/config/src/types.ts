@@ -73,6 +73,8 @@ export interface ProTableConfig {
   // @deprecated please use `columnIndexable` of TableConfig instead'
   columnIndexable?: Omit<ProTableColumnIndexable, 'type'>
   layoutTool: {
+    changeSize: boolean
+    resetable: boolean
     searchable: boolean
   }
 }
