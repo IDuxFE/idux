@@ -14,7 +14,7 @@ import type { SegmentStatesContext } from './composables/useSegmentStates'
 import type { ProSearchProps } from './types'
 import type { ɵOverlayProps } from '@idux/components/_private/overlay'
 import type { ProSearchLocale } from '@idux/pro/locales'
-import type { ComputedRef, InjectionKey, Slots } from 'vue'
+import type { ComputedRef, InjectionKey } from 'vue'
 
 export interface ProSearchContext
   extends SearchStateContext,
@@ -22,7 +22,6 @@ export interface ProSearchContext
     ActiveSegmentContext,
     SearchTriggerContext {
   props: ProSearchProps
-  slots: Slots
   locale: ProSearchLocale
   mergedPrefixCls: ComputedRef<string>
   commonOverlayProps: ComputedRef<ɵOverlayProps>

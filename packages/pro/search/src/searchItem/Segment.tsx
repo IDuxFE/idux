@@ -29,7 +29,7 @@ import { type SegmentProps, segmentProps } from '../types'
 
 export default defineComponent({
   props: segmentProps,
-  setup(props: SegmentProps) {
+  setup(props: SegmentProps, { slots }) {
     const context = inject(proSearchContext)!
     const { mergedPrefixCls, commonOverlayProps, focused, activeSegment, searchStates, setActiveSegment } = context
     const overlayRef = ref<ɵOverlayInstance>()
@@ -189,6 +189,7 @@ export default defineComponent({
 
     const renderContent = () => {
       const contentNode = props.segment.panelRenderer?.({
+        slots,
         input: props.input ?? '',
         value: props.value,
         cancel: handleCancel,

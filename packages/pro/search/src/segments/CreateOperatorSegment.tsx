@@ -5,7 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { PanelRenderContext, SearchField, Segment } from '../types'
+import type { PanelRenderContext, SearchField, Segment, SelectPanelData } from '../types'
+
+import { isString } from 'lodash-es'
 
 import { type VKey, convertArray } from '@idux/cdk/utils'
 
@@ -15,19 +17,30 @@ export function createOperatorSegment(
   prefixCls: string,
   searchField: SearchField,
 ): Segment<string | undefined> | undefined {
-  if (!searchField.operators || searchField.operators.length <= 0) {
+  const { operators, defaultOperator, customOperatorLabel } = searchField
+  if (!operators || operators.length <= 0) {
     return
   }
 
   const panelRenderer = (context: PanelRenderContext<string | undefined>) => {
-    const { value, setValue, ok, setOnKeyDown } = context
+    const { slots, value, setValue, ok, setOnKeyDown } = context
     const handleChange = (value: string[]) => {
       setValue(value[0])
       ok()
     }
+
+    const panelSlots = {
+      optionLabel:
+        customOperatorLabel &&
+        (isString(customOperatorLabel)
+          ? (option: SelectPanelData) => slots[customOperatorLabel]?.(option.key)
+          : (option: SelectPanelData) => customOperatorLabel?.(option.key as string)),
+    }
+
     return (
       <SelectPanel
         class={`${prefixCls}-operator-segment-panel`}
+        v-slots={panelSlots}
         value={convertArray(value)}
         dataSource={searchField.operators?.map(operator => ({ key: operator, label: operator }))}
         multiple={false}
@@ -41,7 +54,7 @@ export function createOperatorSegment(
   return {
     name: 'operator',
     inputClassName: `${prefixCls}-operator-segment-input`,
-    defaultValue: searchField.operators.find(op => op === searchField.defaultOperator),
+    defaultValue: operators.find(op => op === defaultOperator),
     parse: input => parseInput(input, searchField),
     format: value => value ?? '',
     panelRenderer,

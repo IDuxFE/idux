@@ -9,6 +9,7 @@
 | `v-model:errors` | 校验错误 | `{ index: number, message: string }` | - | - | - |
 | `clearable` | 是否可清除 | `boolean` | `true` | ✅ | - |
 | `clearIcon` | 清除图标 | `string \| VNode \| #clearIcon` | `close-circle` | ✅ | - |
+| `customNameLabel` | 自定义搜索项名称下拉选择label | `string \| ((searchField: SearchField) => VNodeChild \| #nameLabel` | - | - | - |
 | `disabled` | 是否禁用 | `boolean` | `false` | - | - |
 | `overlayContainer` | 自定义浮层容器节点  | `string \| HTMLElement \| (trigger?: Element) => string \| HTMLElement` | - | ✅ | - |
 | `placeholder` | 默认文本 | `string` | - | - | - |
@@ -65,6 +66,7 @@ interface SearchItemConfirmContext<V = unknown> extends Partial<SearchValue<V>> 
 | `operators` | 搜索条件的中间操作符 | `string[]` | - | - | 提供时，会在搜索词条名称中间增加一个操作符，如 `'='`, `'!='` |
 | `defaultOperator` | 默认的操作符 | `string` | - | - | 提供时，会自动填入默认的操作符 |
 | `defaultValue` | 默认值 | - | - | - | 提供时，会自动填入默认值 |
+| `customOperatorLabel` | 自定义操作符下拉选择label | `string \| ((operator: string) => VNodeChild)` | - | - | - |
 | `inputClassName` | 输入框class | `string` | - | - | 用于自定义输入框样式 |
 | `placeholder` | 输入框placeholder | `string` | - | - | 搜索值输入框的占位符 |
 | `validator` | 搜索项校验函数 | `(value: SearchValue) => { message?: string } | undefined` | - | - | 返回错误信息 |

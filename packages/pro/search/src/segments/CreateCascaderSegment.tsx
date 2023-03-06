@@ -88,7 +88,7 @@ export function createCascaderSegment(
         expandIcon={expandIcon}
         expandTrigger={expandTrigger}
         fullPath={fullPath ?? defaultFullPath}
-        strategy={cascaderStrategy}
+        strategy={mergedCascaderStrategy}
         separator={pathSeparator}
         multiple={multiple}
         virtual={virtual}
@@ -197,8 +197,6 @@ function getKeyByLabels(
 
   const checkedKeys = checkedKeysResolver.appendKeys([], keys)
 
-  console.log(keys, checkedKeys)
-
   if (!pathSeparator) {
     return checkedKeys
   }
@@ -211,7 +209,6 @@ function getKeyByLabels(
       keys.unshift((currentKey = parentKeyMap.get(currentKey)!))
     }
 
-    console.log('getKeys', keys)
     return keys
   }
 
