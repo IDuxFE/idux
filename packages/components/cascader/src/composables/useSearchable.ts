@@ -13,25 +13,24 @@ import { NoopArray, type VKey } from '@idux/cdk/utils'
 import { type GetDisabledFn } from '@idux/components/utils'
 
 import { type MergedData } from './useDataSource'
-import { type CascaderData, type CascaderProps, type CascaderSearchFn } from '../types'
+import { type CascaderData, type CascaderPanelProps, type CascaderSearchFn } from '../types'
 
 export interface SearchableContext {
   searchedData: ComputedRef<MergedData[]>
 }
 
 export function useSearchable(
-  props: CascaderProps,
+  props: CascaderPanelProps,
   mergedData: ComputedRef<MergedData[]>,
   mergedDataMap: ComputedRef<Map<VKey, MergedData>>,
   mergedLabelKey: ComputedRef<string>,
-  inputValue: ComputedRef<string>,
   mergedGetDisabled: ComputedRef<GetDisabledFn>,
 ): SearchableContext {
   const mergedSearchFn = useSearchFn(props, mergedLabelKey)
   const parentEnabled = computed(() => props.multiple || props.strategy === 'off')
 
   const searchedKeys = computed(() => {
-    const searchValue = inputValue.value
+    const searchValue = props.searchValue
     const searchFn = mergedSearchFn.value
     if (!searchValue || !searchFn) {
       return NoopArray as unknown as VKey[]
@@ -51,7 +50,7 @@ export function useSearchable(
   return { searchedData }
 }
 
-function useSearchFn(props: CascaderProps, mergedLabelKey: ComputedRef<string>) {
+function useSearchFn(props: CascaderPanelProps, mergedLabelKey: ComputedRef<string>) {
   return computed(() => {
     const searchFn = props.searchFn
     if (isFunction(searchFn)) {

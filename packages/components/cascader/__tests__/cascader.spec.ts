@@ -3,7 +3,7 @@ import { MountingOptions, VueWrapper, mount } from '@vue/test-utils'
 import { renderWork } from '@tests'
 
 import Cascader from '../src/Cascader'
-import OverlayContent from '../src/contents/OverlayContent'
+import Panel from '../src/panel/Panel'
 import { CascaderData, CascaderProps } from '../src/types'
 
 const defaultDataSource: CascaderData[] = [
@@ -125,8 +125,7 @@ const defaultMultipleValue = [
 ]
 const defaultExpandedKeys = ['components', 'general']
 
-const getAllOptionGroup = (wrapper: VueWrapper) =>
-  wrapper.findComponent(OverlayContent).findAll('.ix-cascader-option-group')
+const getAllOptionGroup = (wrapper: VueWrapper) => wrapper.findComponent(Panel).findAll('.ix-cascader-option-group')
 
 describe('Cascader', () => {
   describe('single work', () => {
@@ -200,7 +199,7 @@ describe('Cascader', () => {
       expect(getAllOptionGroup(wrapper).length).toBe(2)
 
       await wrapper
-        .findComponent(OverlayContent)
+        .findComponent(Panel)
         .findAll('.ix-cascader-option-group')[1]
         .find('.ix-cascader-option')
         .trigger('click')

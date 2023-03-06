@@ -5,10 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, normalizeClass, provide, ref, watch } from 'vue'
+import { computed, defineComponent, normalizeClass, provide, ref, toRef, watch } from 'vue'
 
 import { useAccessorAndControl } from '@idux/cdk/forms'
-import { type VKey, useState } from '@idux/cdk/utils'
+import { type VKey, callEmit, useState } from '@idux/cdk/utils'
+import { ɵInput } from '@idux/components/_private/input'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { useGlobalConfig } from '@idux/components/config'
@@ -16,13 +17,12 @@ import { useFormItemRegister, useFormSize, useFormStatus } from '@idux/component
 import { ɵUseOverlayState } from '@idux/components/select'
 import { useGetDisabled, useGetKey } from '@idux/components/utils'
 
-import { useActiveState } from './composables/useActiveState'
 import { useDataSource } from './composables/useDataSource'
-import { useExpandable } from './composables/useExpandable'
-import { useSearchable } from './composables/useSearchable'
+import { usePanelProps } from './composables/usePanelProps'
+import { useSelectedData } from './composables/useSelectedData'
 import { useSelectedState } from './composables/useSelectedState'
-import OverlayContent from './contents/OverlayContent'
-import { cascaderToken } from './token'
+import Panel from './panel/Panel'
+import { CASCADER_PANEL_DATA_TOKEN } from './token'
 import { cascaderProps } from './types'
 
 const defaultOffset: [number, number] = [0, 4]
@@ -38,7 +38,6 @@ export default defineComponent({
 
     const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
     const mergedClearIcon = computed(() => props.clearIcon ?? config.clearIcon)
-    const mergedExpandIcon = computed(() => props.expandIcon ?? config.expandIcon)
     const mergedFullPath = computed(() => props.fullPath ?? config.fullPath)
     const mergedGetKey = useGetKey(props, config, 'components/cascader')
     const mergedGetDisabled = useGetDisabled(props)
@@ -61,33 +60,19 @@ export default defineComponent({
     const mergedSize = useFormSize(props, config)
     const mergedStatus = useFormStatus(props, control)
 
-    const { mergedData, mergedDataMap } = useDataSource(
-      props,
-      mergedGetKey,
-      mergedChildrenKey,
-      mergedLabelKey,
-      mergedFullPath,
-    )
-    const activeStateContext = useActiveState(props, mergedDataMap)
-    const selectedStateContext = useSelectedState(props, accessor, mergedDataMap, mergedFullPath, mergedGetDisabled)
-    const { searchedData } = useSearchable(
-      props,
-      mergedData,
+    const dataSourceContext = useDataSource(props, mergedGetKey, mergedChildrenKey, mergedLabelKey, mergedFullPath)
+    const { mergedDataMap } = dataSourceContext
+    const selectedStateContext = useSelectedState(
       mergedDataMap,
-      mergedLabelKey,
-      inputValue,
-      mergedGetDisabled,
-    )
-    const expandableContext = useExpandable(
-      props,
-      mergedGetKey,
-      mergedGetDisabled,
-      mergedChildrenKey,
-      mergedLabelKey,
       mergedFullPath,
-      mergedDataMap,
-      selectedStateContext.selectedKeys,
+      mergedGetDisabled,
+      toRef(props, 'multiple'),
+      toRef(props, 'strategy'),
+      toRef(accessor, 'value'),
+      keys => accessor.setValue(keys),
     )
+    const { resolvedSelectedKeys, setValue } = selectedStateContext
+    const selectedData = useSelectedData(resolvedSelectedKeys, mergedDataMap)
 
     watch(overlayOpened, opened => {
       opened && focus()
@@ -105,31 +90,15 @@ export default defineComponent({
       focus()
       selectedStateContext.handleSelect(key)
     }
+    const handleClear = (evt: MouseEvent) => {
+      evt.stopPropagation()
+      setValue([])
+      callEmit(props.onClear, evt)
+    }
 
-    provide(cascaderToken, {
-      props,
-      slots,
-      config,
-      mergedPrefixCls,
-      mergedChildrenKey,
-      mergedClearIcon,
-      mergedExpandIcon,
-      mergedFullPath,
-      mergedGetKey,
-      mergedGetDisabled,
-      mergedLabelKey,
-      accessor,
-      inputValue,
-      setInputValue,
-      overlayOpened,
-      setOverlayOpened,
-      updateOverlay,
-      mergedData,
-      mergedDataMap,
-      ...activeStateContext,
+    provide(CASCADER_PANEL_DATA_TOKEN, {
+      ...dataSourceContext,
       ...selectedStateContext,
-      searchedData,
-      ...expandableContext,
     })
 
     const overlayClasses = computed(() => {
@@ -152,9 +121,9 @@ export default defineComponent({
         autofocus={props.autofocus}
         borderless={props.borderless}
         clearable={props.clearable}
-        clearIcon={props.clearIcon}
+        clearIcon={mergedClearIcon.value}
         config={config}
-        dataSource={selectedStateContext.selectedData.value}
+        dataSource={selectedData.value}
         disabled={accessor.disabled}
         maxLabel={props.maxLabel}
         multiple={props.multiple}
@@ -165,12 +134,11 @@ export default defineComponent({
         size={mergedSize.value}
         status={mergedStatus.value}
         suffix={props.suffix}
-        value={selectedStateContext.selectedKeys.value}
+        value={resolvedSelectedKeys.value}
         onBlur={handleBlur}
-        onClear={selectedStateContext.handleClear}
+        onClear={handleClear}
         onInputValueChange={setInputValue}
         onItemRemove={handleItemRemove}
-        //onKeydown={handleKeyDown}
         onOpenedChange={setOverlayOpened}
         onResize={updateOverlay}
         onSearch={props.onSearch}
@@ -178,7 +146,44 @@ export default defineComponent({
       />
     )
 
-    const renderContent = () => <OverlayContent onClick={handleOverlayClick} />
+    const panelProps = usePanelProps(props, setOverlayOpened)
+    const handleSearchInput = (evt: Event) => {
+      const { value } = evt.target as HTMLInputElement
+      setInputValue(value)
+      props.searchable && callEmit(props.onSearch, value)
+    }
+    const handleSearchClear = () => setInputValue('')
+    const renderContent = () => {
+      const { searchable, overlayRender } = props
+      const searchValue = inputValue.value
+      const prefixCls = mergedPrefixCls.value
+      const panelSlots = { empty: slots.empty, optionLabel: slots.optionLabel }
+
+      const children = [
+        <div key="__content" class={`${prefixCls}-overlay-content`}>
+          <Panel {...panelProps.value} v-slots={panelSlots} />
+        </div>,
+      ]
+
+      if (searchable === 'overlay') {
+        children.unshift(
+          <div key="__search-wrapper" class={`${prefixCls}-overlay-search-wrapper`}>
+            <ɵInput
+              clearable
+              clearIcon={mergedClearIcon.value}
+              clearVisible={!!searchValue}
+              size="sm"
+              suffix="search"
+              value={searchValue}
+              onClear={handleSearchClear}
+              onInput={handleSearchInput}
+            />
+          </div>,
+        )
+      }
+
+      return <div onClick={handleOverlayClick}>{overlayRender ? overlayRender(children) : children}</div>
+    }
 
     return () => {
       const overlayProps = {
