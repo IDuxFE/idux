@@ -12,7 +12,7 @@ import { isNil, toString } from 'lodash-es'
 import { type VKey, convertArray } from '@idux/cdk/utils'
 
 import SelectPanel from '../panel/SelectPanel'
-import { filterDataSource, getSelectDataSourceKeys } from '../utils/selectData'
+import { filterDataSource, getSelectDataSourceKeys, getSelectableCommonParams } from '../utils'
 
 const defaultSeparator = '|'
 
@@ -28,35 +28,29 @@ export function createSelectSegment(
   } = searchField
 
   const panelRenderer = (context: PanelRenderContext<VKey | VKey[] | undefined>) => {
-    const { input, value, setValue, ok, cancel, setOnKeyDown } = context
-    const panelValue = convertArray(value)
+    const { setValue, ok, cancel, setOnKeyDown } = context
     const keys = getSelectDataSourceKeys(dataSource)
-    const inputParts = input.trim().split(separator ?? defaultSeparator)
-    const lastInputPart = inputParts.length > panelValue.length ? inputParts.pop()?.trim() : ''
+    const { panelValue, searchInput, handleChange } = getSelectableCommonParams(
+      context,
+      !!multiple,
+      separator ?? defaultSeparator,
+    )
 
-    const handleChange = (value: VKey[]) => {
-      if (!multiple) {
-        setValue(value[0])
-        ok()
-      } else {
-        setValue(value.length > 0 ? value : undefined)
-      }
-    }
     const handleSelectAll = () => {
       const selectableKeys = getSelectDataSourceKeys(filterDataSource(dataSource, option => !option.disabled))
-      setValue(selectableKeys.length !== panelValue.length ? selectableKeys : undefined)
+      setValue(selectableKeys.length !== panelValue?.length ? selectableKeys : undefined)
     }
 
     return (
       <SelectPanel
         value={panelValue}
-        allSelected={panelValue.length > 0 && keys.length <= panelValue.length}
+        allSelected={panelValue && panelValue.length > 0 && keys.length <= panelValue.length}
         dataSource={dataSource}
         multiple={multiple}
         virtual={virtual}
         setOnKeyDown={setOnKeyDown}
         showSelectAll={showSelectAll}
-        searchValue={searchable ? lastInputPart : ''}
+        searchValue={searchable ? searchInput : ''}
         searchFn={searchFn}
         onChange={handleChange}
         onSelectAllClick={handleSelectAll}

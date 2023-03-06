@@ -12,6 +12,7 @@ import { isNil, toString } from 'lodash-es'
 import { type VKey, convertArray, traverseTree } from '@idux/cdk/utils'
 
 import TreeSelectPanel from '../panel/TreeSelectPanel'
+import { getSelectableCommonParams } from '../utils'
 
 const defaultSeparator = '|'
 
@@ -57,24 +58,17 @@ export function createTreeSelectSegment(
   })
 
   const panelRenderer = (context: PanelRenderContext<VKey | VKey[] | undefined>) => {
-    const { input, value, setValue, ok, cancel } = context
-    const panelValue = convertArray(value)
-    const inputParts = input.trim().split(separator ?? defaultSeparator)
-    const lastInputPart = inputParts.length > panelValue.length ? inputParts.pop()?.trim() : ''
-
-    const handleChange = (value: VKey[]) => {
-      if (!multiple) {
-        setValue(value[0])
-        ok()
-      } else {
-        setValue(value.length > 0 ? value : undefined)
-      }
-    }
+    const { ok, cancel } = context
+    const { panelValue, searchInput, handleChange } = getSelectableCommonParams(
+      context,
+      !!multiple,
+      separator ?? defaultSeparator,
+    )
 
     return (
       <TreeSelectPanel
         value={panelValue}
-        searchValue={searchable && lastInputPart ? lastInputPart : undefined}
+        searchValue={searchable && searchInput ? searchInput : undefined}
         dataSource={dataSource}
         draggable={draggable}
         draggableIcon={draggableIcon}
