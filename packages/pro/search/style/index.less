@@ -161,7 +161,7 @@
       &-invalid-tooltip {
         background-color: @pro-search-item-tag-invalid-tooltip-background-color;
         color: @pro-search-item-tag-invalid-tooltip-color;
-  
+
         .@{overlay-prefix}-arrow {
           color: @pro-search-item-tag-invalid-tooltip-background-color;
         }
@@ -210,38 +210,27 @@
     }
   }
 
-  &-select-panel {
-    &-select-all-option {
-      .select-option(@select-option-font-size, @select-option-color);
+  &-panel-footer {
+    .panel-footer();
+  }
 
-      border-bottom: @pro-search-border-width @pro-search-border-style @pro-search-border-color;
+  &-select-panel-select-all-option {
+    .select-option(@select-option-font-size, @select-option-color);
 
-      &-label {
-        margin-left: @select-option-label-margin-left;
-      }
-    }
-    &-footer {
-      .panel-footer();
+    border-bottom: @pro-search-border-width @pro-search-border-style @pro-search-border-color;
+
+    &-label {
+      margin-left: @select-option-label-margin-left;
     }
   }
-  &-tree-select-panel {
-    &-body {
-      padding: @spacing-sm 0;
-      .@{tree-node-prefix} {
-        padding: 0 @spacing-sm;
-      }
-    }
-    &-footer {
-      .panel-footer();
+  &-tree-select-panel-body {
+    padding: @spacing-sm 0;
+    .@{tree-node-prefix} {
+      padding: 0 @spacing-sm;
     }
   }
-  &-date-picker-panel {
-    &-body {
-      padding: @pro-search-date-picker-panel-body-padding;
-    }
-    &-footer {
-      .panel-footer();
-    }
+  &-date-picker-panel-body {
+    padding: @pro-search-date-picker-panel-body-padding;
   }
 
   &-name-segment-panel {
@@ -277,6 +266,10 @@
   &-tree-select-segment-input {
     min-width: @pro-search-tree-select-segment-input-min-width;
     text-align: @pro-search-tree-select-segment-input-text-align;
+  }
+  &-cascader-segment-input {
+    min-width: @pro-search-cascader-segment-input-min-width;
+    text-align: @pro-search-cascader-segment-input-text-align;
   }
   &-date-picker-segment-input {
     min-width: @pro-search-date-picker-segment-input-min-width;

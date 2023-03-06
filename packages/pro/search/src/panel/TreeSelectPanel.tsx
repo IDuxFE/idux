@@ -10,9 +10,9 @@ import { type ComputedRef, computed, defineComponent, inject, onUnmounted, watch
 import { isFunction } from 'lodash-es'
 
 import { NoopFunction, type VKey, callEmit, traverseTree, useState } from '@idux/cdk/utils'
-import { IxButton } from '@idux/components/button'
 import { IxTree, type TreeProps } from '@idux/components/tree'
 
+import PanelFooter from './PanelFooter'
 import { proSearchContext } from '../token'
 import { type ProSearchTreeSelectPanelProps, type TreeSelectPanelData, proSearchTreeSelectPanelProps } from '../types'
 
@@ -76,20 +76,18 @@ export default defineComponent({
       callEmit(props.onLoaded, loadedKeys, node)
     }
 
-    const renderFooter = (prefixCls: string) => {
+    const renderFooter = () => {
       if (!props.multiple) {
         return
       }
 
       return (
-        <div class={`${prefixCls}-footer`}>
-          <IxButton mode="primary" size="xs" onClick={handleConfirm}>
-            {locale.ok}
-          </IxButton>
-          <IxButton size="xs" onClick={handleCancel}>
-            {locale.cancel}
-          </IxButton>
-        </div>
+        <PanelFooter
+          prefixCls={mergedPrefixCls.value}
+          locale={locale}
+          onConfirm={handleConfirm}
+          onCancel={handleCancel}
+        />
       )
     }
 
@@ -159,7 +157,7 @@ export default defineComponent({
       return (
         <div class={prefixCls} tabindex={-1} onMousedown={evt => evt.preventDefault()}>
           <IxTree class={`${prefixCls}-body`} {...treeProps} />
-          {renderFooter(prefixCls)}
+          {renderFooter()}
         </div>
       )
     }

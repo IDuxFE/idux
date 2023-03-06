@@ -16,6 +16,7 @@ import {
   IxDateRangePanel,
 } from '@idux/components/date-picker'
 
+import PanelFooter from './PanelFooter'
 import { proSearchContext } from '../token'
 import { proSearchDatePanelProps } from '../types'
 
@@ -63,17 +64,18 @@ export default defineComponent({
             )}
           </div>
           <div class={`${prefixCls}-footer`}>
-            {props.type === 'datetime' && (
-              <IxButton mode="text" size="xs" onClick={handleSwitchPanelClick}>
-                {visiblePanel.value === 'datePanel' ? locale.switchToTimePanel : locale.switchToDatePanel}
-              </IxButton>
-            )}
-            <IxButton mode="primary" size="xs" onClick={handleConfirm}>
-              {locale.ok}
-            </IxButton>
-            <IxButton size="xs" onClick={handleCancel}>
-              {locale.cancel}
-            </IxButton>
+            <PanelFooter
+              prefixCls={mergedPrefixCls.value}
+              locale={locale}
+              onConfirm={handleConfirm}
+              onCancel={handleCancel}
+            >
+              {props.type === 'datetime' && (
+                <IxButton mode="text" size="xs" onClick={handleSwitchPanelClick}>
+                  {visiblePanel.value === 'datePanel' ? locale.switchToTimePanel : locale.switchToDatePanel}
+                </IxButton>
+              )}
+            </PanelFooter>
           </div>
         </div>
       )

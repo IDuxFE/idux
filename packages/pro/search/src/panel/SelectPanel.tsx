@@ -19,10 +19,10 @@ import {
 } from 'vue'
 
 import { type VKey, callEmit, useState } from '@idux/cdk/utils'
-import { IxButton } from '@idux/components/button'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { IxSelectPanel, type SelectData, type SelectPanelInstance } from '@idux/components/select'
 
+import PanelFooter from './PanelFooter'
 import { proSearchContext } from '../token'
 import { type ProSearchSelectPanelProps, type SelectPanelData, proSearchSelectPanelProps } from '../types'
 import { filterDataSource, matchRule } from '../utils/selectData'
@@ -135,14 +135,12 @@ export default defineComponent({
       }
 
       return (
-        <div class={`${mergedPrefixCls.value}-select-panel-footer`}>
-          <IxButton mode="primary" size="xs" onClick={handleConfirm}>
-            {locale.ok}
-          </IxButton>
-          <IxButton size="xs" onClick={handleCancel}>
-            {locale.cancel}
-          </IxButton>
-        </div>
+        <PanelFooter
+          prefixCls={mergedPrefixCls.value}
+          locale={locale}
+          onConfirm={handleConfirm}
+          onCancel={handleCancel}
+        />
       )
     }
 

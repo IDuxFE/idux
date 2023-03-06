@@ -8,17 +8,22 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
 import type { ExtractInnerPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
-import type { CascaderStrategy } from '@idux/components/cascader'
+import type { CascaderData, CascaderExpandTrigger, CascaderStrategy } from '@idux/components/cascader'
 import type { DatePanelProps, DateRangePanelProps } from '@idux/components/date-picker'
 import type { SelectData } from '@idux/components/select'
 import type { TreeDragDropOptions, TreeDroppable } from '@idux/components/tree'
 import type { TreeSelectNode } from '@idux/components/tree-select'
+import type { ProSearchLocale } from '@idux/pro/locales'
 import type { PropType } from 'vue'
 
 export type SelectPanelData = Required<Pick<SelectData, 'key' | 'label'>> & SelectData
 export type TreeSelectPanelData = TreeSelectNode &
   Required<Pick<TreeSelectNode, 'key' | 'label'>> & {
     children?: TreeSelectPanelData[]
+  }
+export type CascaderPanelData = CascaderData &
+  Required<Pick<CascaderData, 'key' | 'label'>> & {
+    children?: CascaderPanelData[]
   }
 
 export const proSearchSelectPanelProps = {
@@ -80,6 +85,38 @@ export const proSearchTreeSelectPanelProps = {
 } as const
 export type ProSearchTreeSelectPanelProps = ExtractInnerPropTypes<typeof proSearchTreeSelectPanelProps>
 
+export const proSearchCascaderPanelProps = {
+  value: { type: null, default: undefined },
+  dataSource: { type: Array as PropType<CascaderPanelData[]>, default: () => [] },
+  expandedKeys: { type: Array as PropType<VKey[]>, default: undefined },
+  disableData: { type: Function as PropType<(data: CascaderPanelData) => boolean> },
+  expandIcon: { type: String, default: undefined },
+  expandTrigger: { type: String as PropType<CascaderExpandTrigger>, default: 'click' },
+  fullPath: { type: Boolean, default: undefined },
+  loadChildren: {
+    type: Function as PropType<(data: CascaderPanelData) => Promise<CascaderPanelData[]>>,
+    default: undefined,
+  },
+  multiple: { type: Boolean, default: false },
+
+  searchFn: {
+    type: [Boolean, Function] as PropType<boolean | ((data: CascaderPanelData, searchValue: string) => boolean)>,
+    default: true,
+  },
+  searchValue: String,
+  separator: { type: String, default: '/' },
+  strategy: { type: String as PropType<CascaderStrategy>, default: 'all' },
+  virtual: { type: Boolean, default: false },
+
+  onChange: [Function, Array] as PropType<MaybeArray<(value: any) => void>>,
+  onConfirm: [Function, Array] as PropType<MaybeArray<() => void>>,
+  onCancel: [Function, Array] as PropType<MaybeArray<() => void>>,
+  onExpand: [Function, Array] as PropType<MaybeArray<(expanded: boolean, data: CascaderPanelData) => void>>,
+  onLoaded: [Function, Array] as PropType<MaybeArray<(loadedKeys: any[], data: CascaderPanelData) => void>>,
+  onSearch: [Function, Array] as PropType<MaybeArray<(searchValue: string) => void>>,
+} as const
+export type ProSearchCascaderPanelProps = ExtractInnerPropTypes<typeof proSearchCascaderPanelProps>
+
 export const proSearchDatePanelProps = {
   panelType: {
     type: String as PropType<'datePicker' | 'dateRangePicker'>,
@@ -101,3 +138,17 @@ export const proSearchDatePanelProps = {
   onCancel: Function as PropType<() => void>,
 } as const
 export type ProSearchDatePanelProps = ExtractInnerPropTypes<typeof proSearchDatePanelProps>
+
+export const proSearchPanelFooterProps = {
+  prefixCls: {
+    type: String,
+    required: true,
+  },
+  locale: {
+    type: Object as PropType<ProSearchLocale>,
+    required: true,
+  },
+  onConfirm: Function as PropType<() => void>,
+  onCancel: Function as PropType<() => void>,
+}
+export type ProSearchPanelFooterProps = ExtractInnerPropTypes<typeof proSearchPanelFooterProps>

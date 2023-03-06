@@ -11,6 +11,7 @@ import type { DateConfig } from '@idux/components/config'
 
 import { type ComputedRef, type Slots, computed } from 'vue'
 
+import { createCascaderSegment } from '../segments/CreateCascaderSegment'
 import { createDatePickerSegment } from '../segments/CreateDatePickerSegment'
 import { createDateRangePickerSegment } from '../segments/CreateDateRangePickerSegment'
 import { createNameSegment } from '../segments/CreateNameSegment'
@@ -73,6 +74,8 @@ function createSearchItemContentSegment(
       return createSelectSegment(prefixCls, searchField)
     case 'treeSelect':
       return createTreeSelectSegment(prefixCls, searchField)
+    case 'cascader':
+      return createCascaderSegment(prefixCls, searchField)
     case 'input':
       return createInputSegment(prefixCls, searchField)
     case 'datePicker':

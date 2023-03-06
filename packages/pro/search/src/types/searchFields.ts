@@ -7,12 +7,12 @@
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
-import type { SelectPanelData, TreeSelectPanelData } from './panels'
+import type { CascaderPanelData, SelectPanelData, TreeSelectPanelData } from './panels'
 import type { SearchItemError } from './searchItem'
 import type { SearchValue } from './searchValue'
 import type { InputFormater, InputParser, PanelRenderContext } from './segment'
 import type { MaybeArray, VKey } from '@idux/cdk/utils'
-import type { CascaderStrategy } from '@idux/components/cascader'
+import type { CascaderExpandTrigger, CascaderStrategy } from '@idux/components/cascader'
 import type { DatePanelProps, DateRangePanelProps } from '@idux/components/date-picker'
 import type { TreeDragDropOptions } from '@idux/components/tree'
 import type { VNodeChild } from 'vue'
@@ -74,6 +74,27 @@ export interface TreeSelectSearchField extends SearchFieldBase<VKey | VKey[]> {
   }
 }
 
+export interface CascaderSearchField extends SearchFieldBase<VKey | VKey[] | VKey[][]> {
+  type: 'cascader'
+  fieldConfig: {
+    dataSource: CascaderPanelData[]
+    cascaderStrategy?: CascaderStrategy
+    multiple?: boolean
+    disableData?: (data: CascaderPanelData) => boolean
+    expandIcon?: string
+    expandTrigger?: CascaderExpandTrigger
+    fullPath?: boolean
+    pathSeparator?: string
+    searchable?: boolean
+    searchFn?: (node: CascaderPanelData, searchValue?: string) => boolean
+    separator?: string
+    virtual?: boolean
+    onExpand?: MaybeArray<(expanded: boolean, data: CascaderPanelData) => void>
+    onSearch?: MaybeArray<(searchValue: string) => void>
+    onLoaded?: MaybeArray<(loadedKeys: any[], node: TreeSelectPanelData) => void>
+  }
+}
+
 export interface InputSearchField extends SearchFieldBase<string> {
   type: 'input'
   fieldConfig: {
@@ -116,10 +137,19 @@ export interface CustomSearchField extends SearchFieldBase {
 export type SearchField =
   | SelectSearchField
   | TreeSelectSearchField
+  | CascaderSearchField
   | InputSearchField
   | DatePickerSearchField
   | DateRangePickerSearchField
   | CustomSearchField
 
-export const searchDataTypes = ['select', 'treeSelect', 'input', 'datePicker', 'dateRangePicker', 'custom'] as const
+export const searchDataTypes = [
+  'select',
+  'treeSelect',
+  'cascader',
+  'input',
+  'datePicker',
+  'dateRangePicker',
+  'custom',
+] as const
 export type SearchDataTypes = (typeof searchDataTypes)[number]

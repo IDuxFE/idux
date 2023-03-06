@@ -24,6 +24,11 @@ interface TreeSelectData {
   label: string
   children?: TreeSelectData[]
 }
+interface CascaderData {
+  key: string
+  label: string
+  children?: TreeSelectData[]
+}
 
 const labels = ['Archer', 'Berserker', 'Lancer', 'Rider', 'Saber', 'Caster', 'Assassin']
 const baseSelectData: SelectData[] = Array.from(new Array(50)).map((_, idx) => {
@@ -66,6 +71,8 @@ const baseTreeSelectData: TreeSelectData[] = Array.from(new Array(20)).map((_, i
     ],
   }
 })
+const baseCascaderData = baseTreeSelectData as CascaderData[]
+
 const createSelectData = (searchValue: string) => {
   return baseSelectData.filter(item => new RegExp(searchValue.toLowerCase()).test(item.label.toLowerCase()))
 }
@@ -74,16 +81,25 @@ const createTreeSelectData = (searchValue: string) => {
     new RegExp(searchValue.toLowerCase()).test(item.label.toLowerCase()),
   )
 }
+const createCascaderData = (searchValue: string) => {
+  return filterTree(baseCascaderData, 'children', item =>
+    new RegExp(searchValue.toLowerCase()).test(item.label.toLowerCase()),
+  )
+}
 
 const value = ref<SearchValue[]>()
 const selectData = ref<SelectData[]>(createSelectData(''))
 const treeSelectData = ref<TreeSelectData[]>(createTreeSelectData(''))
+const cascaderData = ref<CascaderData[]>(createCascaderData(''))
 
 const selectOnSearch = (searchValue: string) => {
   selectData.value = createSelectData(searchValue)
 }
 const treeSelectOnSearch = (searchValue: string) => {
   treeSelectData.value = createTreeSelectData(searchValue)
+}
+const cascaderOnSearch = (searchValue: string) => {
+  cascaderData.value = createCascaderData(searchValue)
 }
 
 const searchFields = computed<SearchField[]>(() => [
@@ -111,6 +127,19 @@ const searchFields = computed<SearchField[]>(() => [
       dataSource: treeSelectData.value,
       searchFn: () => true,
       onSearch: treeSelectOnSearch,
+    },
+  },
+  {
+    type: 'cascader',
+    label: 'Cascader Data',
+    key: 'cascader_data',
+    fieldConfig: {
+      multiple: true,
+      searchable: true,
+      cascaderStrategy: 'all',
+      dataSource: cascaderData.value,
+      searchFn: () => true,
+      onSearch: cascaderOnSearch,
     },
   },
 ])

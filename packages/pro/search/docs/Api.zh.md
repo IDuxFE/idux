@@ -127,22 +127,21 @@ TreeSelectSearchFieldConfig
 | `draggable` | 是否可拖拽 | `boolean` | - | - | 详情参考[Tree](/components/tree/zh) |
 | `draggableIcon` | 拖拽图标 | `string` | - | - | 详情参考[Tree](/components/tree/zh) |
 | `showLine` | 是否展示连线 | `boolean` | - | - | 详情参考[Tree](/components/tree/zh) |
-| `searchable` | 是否支持筛选 | `boolean` | false | - | 默认不支持 |
+| `searchable` | 是否支持筛选 | `boolean` | `false` | - | 默认不支持 |
 | `searchFn` | 搜索函数 | `(node: TreeSelectPanelData, searchValue?: string) => boolean` | - | - | 默认模糊匹配 |
 | `separator` | 多选分隔符 | `string` | `'|'` | - | - |
 | `virtual` | 是否支持虚拟滚动 | `boolean` | `false` | - | 默认不支持 |
-
-| `onCheck` | 勾选回调函数 | `(checked: boolean, node: TreeSelectPanelData) => void | ((checked: boolean, node: TreeSelectPanelData) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
-| `onDragstart` | `dragstart` 触发时调用 | `(options: TreeDragDropOptions<any>) => void | ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
-| `onDragend` | `dragend` 触发时调用 | `(options: TreeDragDropOptions<any>) => void | ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
-| `onDragenter` | `dragenter` 触发时调用 | `(options: TreeDragDropOptions<any>) => void | ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
-| `onDragleave` | `dragleave` 触发时调用 | `(options: TreeDragDropOptions<any>) => void | ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
-| `onDragover` | `dragover` 触发时调用 | `(options: TreeDragDropOptions<any>) => void | ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
-| `onDrop` | `drop` 触发时调用 | `(options: TreeDragDropOptions<any>) => void | ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
-| `onExpand` | 点击展开图标时触发 | `(expanded: boolean, node: TreeSelectPanelData) => void | ((expanded: boolean, node: TreeSelectPanelData) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
-| `onSelect` | 选中状态发生变化时触发 | `(selected: boolean, node: TreeSelectPanelData) => void | ((selected: boolean, node: TreeSelectPanelData) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
-| `onSearch` | 搜索回调函数 | `(searchValue: string) => void | ((searchValue: string) => void)[]` | - | - | 在触发搜索值改变时执行 |
-| `onLoaded` | 子节点加载完毕时触发 | `(loadedKeys: any[], node: TreeSelectPanelData) => void | ((loadedKeys: any[], node: TreeSelectPanelData) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onCheck` | 勾选回调函数 | `((checked: boolean, node: TreeSelectPanelData) => void) \| ((checked: boolean, node: TreeSelectPanelData) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onDragstart` | `dragstart` 触发时调用 | `((options: TreeDragDropOptions<any>) => void) \| ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onDragend` | `dragend` 触发时调用 | `((options: TreeDragDropOptions<any>) => void) \| ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onDragenter` | `dragenter` 触发时调用 | `((options: TreeDragDropOptions<any>) => void \| ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onDragleave` | `dragleave` 触发时调用 | `((options: TreeDragDropOptions<any>) => void) \| ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onDragover` | `dragover` 触发时调用 | `((options: TreeDragDropOptions<any>) => void) \| ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onDrop` | `drop` 触发时调用 | `((options: TreeDragDropOptions<any>) => void) \| ((options: TreeDragDropOptions<any>) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onExpand` | 点击展开图标时触发 | `((expanded: boolean, node: TreeSelectPanelData) => void) \| ((expanded: boolean, node: TreeSelectPanelData) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onSelect` | 选中状态发生变化时触发 | `((selected: boolean, node: TreeSelectPanelData) => void) \| ((selected: boolean, node: TreeSelectPanelData) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `onSearch` | 搜索回调函数 | `((searchValue: string) => void) \| ((searchValue: string) => void)[]` | - | - | 在触发搜索值改变时执行 |
+| `onLoaded` | 子节点加载完毕时触发 | `((loadedKeys: any[], node: TreeSelectPanelData) => void) \| ((loadedKeys: any[], node: TreeSelectPanelData) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
 
 ```typescript
 type TreeSelectPanelData = TreeSelectNode &
@@ -150,6 +149,35 @@ type TreeSelectPanelData = TreeSelectNode &
     children?: TreeSelectPanelData[]
   }
 ```
+
+#### CascaderSearchField
+
+级联选择类型
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `type` | 类型 | `'cascader'` | - | - | 固定为 `'cascader'` |
+| `fieldConfig` | 配置 | `'CascaderSearchFieldConfig'` | - | - | - |
+
+CascaderSearchFieldConfig
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `dataSource` | 类型 | `CascaderPanelData[]` | - | - | 继承自`CascaderData`，但`key`和`label`为必填,不支持可配，且`childrenKey`固定为`'children'`，详情参考[Cascader](/components/cascader/zh) |
+| `cascaderStrategy` | 级联策略 | `CascaderStrategy` | `''` | - | 详情参考[Cascader](/components/cascader/zh) |
+| `multiple` | 是否为多选 | `boolean` | - | - | 默认为单选 |
+| `disableData` | 动态禁用某些项 | `(data: CascaderPanelData) => boolean` | - | - | 详情参考[Cascader](/components/cascader/zh) |
+| `expandIcon` | 展开图标 | `string` | - | - | 详情参考[Cascader](/components/cascader/zh) |
+| `expandTrigger` | 触发展开的方式 | ``'click' \| 'hover'` | - | - | 详情参考[Cascader](/components/cascader/zh) |
+| `fullPath` | 选中后的值是否包含全部路径 | `boolean` | - | `false` | 详情参考[Cascader](/components/cascader/zh) |
+| `pathSeparator` | 设置分割符 | `string` | - | - | 详情参考[Cascader](/components/cascader/zh) |
+| `searchable` | 是否支持筛选 | `boolean` | false | - | 默认不支持 |
+| `searchFn` | 搜索函数 | `(node: TreeSelectPanelData, searchValue?: string) => boolean` | - | - | 默认模糊匹配 |
+| `separator` | 多选分隔符 | `string` | `'|'` | - | -
+| `virtual` | 是否支持虚拟滚动 | `boolean` | `false` | - | 默认不支持 |
+| `onExpand` | 点击展开图标时触发 | `((expanded: boolean, data: CascaderPanelData) => void) \| ((expanded: boolean, data: CascaderPanelData) => void>)[]` | - | - | 详情参考[Cascader](/components/cascader/zh) |
+| `onSearch` | 开启搜索功能后，输入后的回调 | `((searchValue: string) => void) \| ((searchValue: string) => void)[]` | - | - | 详情参考[Cascader](/components/cascader/zh) |
+| `onLoaded` | 子节点加载完毕时触发 | `((loadedKeys: any[], node: TreeSelectPanelData) => void) \| ((loadedKeys: any[], node: TreeSelectPanelData) => void)[]` | - | - | 详情参考[Cascader](/components/cascader/zh) |
 
 #### DatePickerSearchField
 
