@@ -146,7 +146,7 @@ export default defineComponent({
       />
     )
 
-    const panelProps = usePanelProps(props, setOverlayOpened)
+    const panelProps = usePanelProps(props, inputValue, setOverlayOpened)
     const handleSearchInput = (evt: Event) => {
       const { value } = evt.target as HTMLInputElement
       setInputValue(value)

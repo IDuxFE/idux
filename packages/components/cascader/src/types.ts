@@ -54,7 +54,6 @@ export const cascaderPanelProps = {
   onExpandedChange: [Function, Array] as PropType<MaybeArray<(expendedKeys: any[], data: CascaderData[]) => void>>,
   onLoaded: [Function, Array] as PropType<MaybeArray<(loadedKeys: any[], data: CascaderData) => void>>,
   onSelect: [Function, Array] as PropType<MaybeArray<(option: CascaderData, isSelected: boolean) => void>>,
-  onSearch: [Function, Array] as PropType<MaybeArray<(value: string) => void>>,
 
   // private
   _virtualScrollHeight: { type: Number, default: 256 },
