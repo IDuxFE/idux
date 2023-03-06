@@ -7,30 +7,20 @@
 
 import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
-import { isObject } from 'lodash-es'
-
-import { useControlledProp } from '@idux/cdk/utils'
+import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { ɵInput } from '@idux/components/_private/input'
 import { IxButton } from '@idux/components/button'
 import { IxCheckbox } from '@idux/components/checkbox'
 
 import LayoutToolTree from './LayoutToolTree'
 import { proTableToken } from '../token'
-import { type ProTableColumn, proTableLayoutToolProps } from '../types'
+import { type ProTableColumn, proTableLayoutToolContentProps } from '../types'
 
 export default defineComponent({
-  props: proTableLayoutToolProps,
+  props: proTableLayoutToolContentProps,
   setup(props) {
-    const {
-      props: tableProps,
-      config,
-      locale,
-      mergedPrefixCls,
-      mergedColumns,
-      setMergedColumns,
-      mergedColumnMap,
-      resetColumns,
-    } = inject(proTableToken)!
+    const { locale, mergedPrefixCls, mergedColumns, setMergedColumns, mergedColumnMap, resetColumns } =
+      inject(proTableToken)!
 
     // 判断是否有子节点，处理tree展开节点样式
     const hasChildren = computed(() => mergedColumns.value.length !== mergedColumnMap.value.size)
@@ -38,16 +28,16 @@ export default defineComponent({
     // 只需要判断第一层的即可
     const hiddenColumns = computed(() => mergedColumns.value.filter(column => column.visible === false))
 
-    const mergedSearchable = computed(
-      () =>
-        props.searchable ??
-        (isObject(tableProps.layoutTool) ? tableProps.layoutTool.searchable : config.layoutTool.searchable),
-    )
     const [searchValue, setSearchValue] = useControlledProp(props, 'searchValue')
 
     const handleInput = (evt: Event) => {
       const inputValue = (evt.target as HTMLInputElement).value
       setSearchValue(inputValue)
+    }
+
+    const handleReset = (evt: MouseEvent) => {
+      const result = callEmit(props.onReset, evt)
+      result !== false && resetColumns()
     }
 
     const handleCheckAll = (checked: boolean) => {
@@ -101,7 +91,7 @@ export default defineComponent({
       const _searchValue = searchValue.value
       return (
         <div class={classes}>
-          {mergedSearchable.value && (
+          {props.searchable && (
             <div class={`${prefixCls}-search-wrapper`}>
               <ɵInput
                 placeholder={props.placeholder ?? placeholder}
@@ -114,9 +104,11 @@ export default defineComponent({
           )}
           <div class={`${prefixCls}-select-wrapper`}>
             <IxCheckbox checked={checked} indeterminate={indeterminate} label={all} onChange={handleCheckAll} />
-            <IxButton size="sm" mode="link" onClick={resetColumns}>
-              {reset}
-            </IxButton>
+            {props.resetable && (
+              <IxButton size="sm" mode="link" onClick={handleReset}>
+                {reset}
+              </IxButton>
+            )}
           </div>
           <div class={`${prefixCls}-tree-wrapper`}>
             {hasStartFixed && (

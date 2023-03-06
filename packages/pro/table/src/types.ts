@@ -42,11 +42,17 @@ export type ProTableComponent = DefineComponent<
 export type ProTableInstance = InstanceType<DefineComponent<ProTableProps, ProTableBindings>>
 
 export const proTableLayoutToolProps = {
+  changeSize: { type: Boolean, default: undefined },
+  className: { type: String, default: undefined },
   placeholder: { type: String, default: undefined },
+  resetable: { type: Boolean, default: undefined },
   searchable: { type: Boolean, default: undefined },
   searchValue: { type: String, default: undefined },
+  visible: { type: Boolean, default: undefined },
 
   'onUpdate:searchValue': [Function, Array] as PropType<MaybeArray<(searchValue: string) => void>>,
+  'onUpdate:visible': [Function, Array] as PropType<MaybeArray<(visible: boolean) => void>>,
+  onReset: [Function, Array] as PropType<MaybeArray<(evt: MouseEvent) => boolean | void>>,
 } as const
 
 export type ProTableLayoutToolProps = ExtractInnerPropTypes<typeof proTableLayoutToolProps>
@@ -101,3 +107,14 @@ export type ProTableColumnResizable = {
   minWidth?: number | string
   resizable?: boolean
 }
+
+// private
+export const proTableLayoutToolContentProps = {
+  placeholder: { type: String, default: undefined },
+  resetable: { type: Boolean, required: true },
+  searchable: { type: Boolean, required: true },
+  searchValue: { type: String, default: undefined },
+
+  'onUpdate:searchValue': [Function, Array] as PropType<MaybeArray<(searchValue: string) => void>>,
+  onReset: [Function, Array] as PropType<MaybeArray<(evt: MouseEvent) => boolean | void>>,
+} as const
