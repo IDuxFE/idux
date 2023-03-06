@@ -7,7 +7,7 @@
 
 import type { ProSearchContext } from '../token'
 
-import { type ComputedRef, type Ref, ref, watch } from 'vue'
+import { type ComputedRef, type Ref, nextTick, onUnmounted, ref, watch } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 
@@ -43,6 +43,7 @@ export function useSegmentStates(
     setInactive,
     setTempActive,
     onSearchTrigger,
+    watchSearchState,
   } = proSearchContext
   const segmentStates = ref<SegmentStates>({})
 
@@ -55,18 +56,12 @@ export function useSegmentStates(
   }
 
   // reset temp segment states
-  const initSegmentStates = (force = false) => {
+  const initSegmentStates = () => {
     const searchState = getSearchStateByKey(props.searchItem!.key)!
 
     segmentStates.value = props.searchItem!.segments.reduce((states, segment, index) => {
-      const currentSegmentState = segmentStates.value[segment.name]
       const segmentValue = searchState?.segmentValues.find(value => value.name === segment.name)
-
-      if (currentSegmentState && !force) {
-        states[segment.name] = { ...currentSegmentState, index }
-      } else {
-        states[segment.name] = _genInitSegmentState(segment, segmentValue, index)
-      }
+      states[segment.name] = _genInitSegmentState(segment, segmentValue, index)
 
       return states
     }, {} as SegmentStates)
@@ -85,22 +80,28 @@ export function useSegmentStates(
     segmentStates.value[name] = _genInitSegmentState(segment, segmentValue, segmentState.index)
   }
 
+  let searchStateWatchStop: () => void
   watch(
-    () => props.searchItem?.segments,
-    (segments, oldSegments) => {
-      if (
-        segments?.length !== oldSegments?.length ||
-        segments?.some(segment => !oldSegments?.find(oldSegment => oldSegment.name === segment.name))
-      ) {
-        initSegmentStates()
+    () => props.searchItem,
+    searchItem => {
+      searchStateWatchStop?.()
+      initSegmentStates()
+      if (searchItem?.key) {
+        searchStateWatchStop = watchSearchState(searchItem?.key, () => nextTick(initSegmentStates))
       }
     },
-    { immediate: true },
+    {
+      immediate: true,
+    },
   )
   watch([isActive, () => props.searchItem?.searchField], ([active, searchField]) => {
     if (!active || !searchField) {
-      initSegmentStates(true)
+      initSegmentStates()
     }
+  })
+
+  onUnmounted(() => {
+    searchStateWatchStop?.()
   })
 
   const setSegmentValue = (name: string, value: unknown) => {

@@ -19,6 +19,7 @@ import { useControl } from './composables/useControl'
 import { useFocusedState } from './composables/useFocusedState'
 import { useSearchItems } from './composables/useSearchItem'
 import { useSearchItemErrors } from './composables/useSearchItemErrors'
+import { useSearchStateWatcher } from './composables/useSearchStateWatcher'
 import { tempSearchStateKey, useSearchStates } from './composables/useSearchStates'
 import { useSearchTrigger } from './composables/useSearchTrigger'
 import { useSearchValues } from './composables/useSearchValues'
@@ -39,8 +40,10 @@ export default defineComponent({
     const dateConfig = useDateConfig()
     const mergedPrefixCls = computed(() => `${common.prefixCls}-search`)
 
-    const { searchValues, searchValueEmpty, setSearchValues } = useSearchValues(props)
-    const searchStateContext = useSearchStates(props, dateConfig, searchValues, setSearchValues)
+    const searchValueContext = useSearchValues(props)
+    const { searchValues, searchValueEmpty } = searchValueContext
+    const searchStateWatcherContext = useSearchStateWatcher()
+    const searchStateContext = useSearchStates(props, dateConfig, searchValueContext, searchStateWatcherContext)
     const errors = useSearchItemErrors(props, searchValues)
     const searchItems = useSearchItems(
       props,
@@ -138,6 +141,7 @@ export default defineComponent({
       focused,
 
       ...searchStateContext,
+      ...searchStateWatcherContext,
       ...activeSegmentContext,
       ...searchTriggerContext,
     })
