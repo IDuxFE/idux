@@ -535,6 +535,10 @@ export class FormArray<T = any> extends AbstractControl<T[]> {
      */
     removeAt(index: number): void;
     /**
+     * 清空数组中的所有子空间
+     */
+    clearControls(): void;
+    /**
      * 替换数组中给定 `index` 处现有的子控件
      *
      * @param index 替换控件的下标

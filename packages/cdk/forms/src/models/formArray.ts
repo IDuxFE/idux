@@ -107,6 +107,12 @@ export class FormArray<T = any> extends AbstractControl<T[]> {
     controls.splice(index, 1)
     this._controls.value = controls
   }
+  /**
+   * Empties out the controls.
+   */
+  clearControls(): void {
+    this._controls.value = []
+  }
 
   /**
    * Replace an existing control.

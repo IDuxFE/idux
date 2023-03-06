@@ -95,6 +95,16 @@ describe('formArray.ts', () => {
       expect(array.blurred.value).toEqual(false)
     })
 
+    test('clearControls work', async () => {
+      expect(array.length.value).toEqual(1)
+      expect(array.getValue()).toEqual([basicValue])
+
+      array.clearControls()
+
+      expect(array.length.value).toEqual(0)
+      expect(array.getValue()).toEqual([])
+    })
+
     test('setControl work', async () => {
       expect(array.getValue()).toEqual([basicValue])
       const group = new FormGroup<BasicGroup>({
