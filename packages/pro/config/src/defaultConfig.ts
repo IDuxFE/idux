@@ -30,8 +30,8 @@ export const defaultConfig: ProGlobalConfig = {
   },
   table: {
     layoutTool: {
-      changeSize: false,
-      resetable: false,
+      changeSize: true,
+      resetable: true,
       searchable: false,
     },
   },
