@@ -34,7 +34,7 @@ const columns: TableColumn<Data>[] = [
   {
     type: 'expandable',
     width: 160,
-    indent: 10,
+    indent: 16,
     title: 'Event Name',
     dataKey: 'eventName',
     customCell: 'name',

@@ -56,6 +56,13 @@ interface RandomUser {
 
 const columns: TableColumn<RandomUser>[] = [
   {
+    type: 'selectable',
+    align: 'center',
+    multiple: true,
+    showIndex: false,
+    onChange: console.log,
+  },
+  {
     key: 'Name',
     title: 'Name',
     children: [

@@ -90,6 +90,8 @@ export function useSelectable(
 
   // 当前页是否部分被选中
   const currentPageSomeSelected = computed(() => !currentPageAllSelected.value && countCurrentPageSelected.value > 0)
+  // 缓存已经被选中的数据，考虑到后端分页的清空，dataMap 中没有全部的数据
+  const cacheSelectedMap = new Map<VKey, MergedData>()
 
   const emitChange = (tempRowKeys: VKey[]) => {
     setSelectedRowKeys(tempRowKeys)
@@ -97,8 +99,19 @@ export function useSelectable(
     const { onChange } = selectable.value || {}
     if (onChange) {
       const selectedRecords: unknown[] = []
+      // 清理掉缓存中被取消选中的数据
+      cacheSelectedMap.forEach((_, key) => {
+        if (!tempRowKeys.includes(key)) {
+          cacheSelectedMap.delete(key)
+        }
+      })
       tempRowKeys.forEach(key => {
-        const currData = dataMap.get(key)
+        let currData = dataMap.get(key)
+        if (currData) {
+          cacheSelectedMap.set(key, currData)
+        } else {
+          currData = cacheSelectedMap.get(key)
+        }
         currData && selectedRecords.push(currData.record)
       })
       callEmit(onChange, tempRowKeys, selectedRecords)
