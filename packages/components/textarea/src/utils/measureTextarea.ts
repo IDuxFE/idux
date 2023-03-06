@@ -50,7 +50,9 @@ export function measureTextarea<V>(
 
   textarea.parentNode!.appendChild(clonedTextarea)
   const measureRes = measureFn(clonedTextarea)
-  textarea.parentNode!.removeChild(clonedTextarea)
+  if (clonedTextarea.parentNode) {
+    clonedTextarea.parentNode.removeChild(clonedTextarea)
+  }
 
   return measureRes
 }
