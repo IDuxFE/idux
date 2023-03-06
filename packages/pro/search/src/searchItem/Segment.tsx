@@ -311,7 +311,7 @@ function useInputEvents(
     switch (evt.key) {
       case 'Enter':
         evt.preventDefault()
-        if (!props.segment.panelRenderer || overlayOpened.value || props.value) {
+        if (props.input || overlayOpened.value || !props.segment.panelRenderer) {
           confirm()
         } else {
           setCurrentAsActive(true)

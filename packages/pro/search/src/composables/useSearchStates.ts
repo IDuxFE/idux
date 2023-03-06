@@ -5,6 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { SearchValueContext } from './useSearchValues'
 import type { DateConfig } from '@idux/components/config'
 
 import { type ComputedRef, computed, reactive, ref, toRaw } from 'vue'
@@ -13,6 +14,7 @@ import { isNil } from 'lodash-es'
 
 import { type VKey, callEmit } from '@idux/cdk/utils'
 
+import { SEARCH_STATE_ACTION, type SearchStateWatcherContext } from './useSearchStateWatcher'
 import {
   type ProSearchProps,
   type SearchDataTypes,
@@ -52,9 +54,11 @@ export const tempSearchStateKey = Symbol('temp')
 export function useSearchStates(
   props: ProSearchProps,
   dateConfig: DateConfig,
-  searchValues: ComputedRef<SearchValue[] | undefined>,
-  setSearchValues: (value: SearchValue[]) => void,
+  searchValueContext: SearchValueContext,
+  searchStateWatcherContext: SearchStateWatcherContext,
 ): SearchStateContext {
+  const { searchValues, setSearchValues } = searchValueContext
+  const { compareSearchStates, compareSegmentValues, notifySearchStateChange } = searchStateWatcherContext
   const getKey = createStateKeyGetter()
 
   const searchStates = ref<SearchState[]>([])
@@ -114,20 +118,35 @@ export function useSearchStates(
 
   function setSegmentValue(searchState: SearchState, name: string, value: unknown) {
     let segmentValue = searchState.segmentValues.find(state => state.name === name)
+
+    if (segmentValue?.name === 'name') {
+      searchState.fieldKey = value as VKey
+      const searchValue = searchValues.value?.find(value => value.key === searchState.key)
+      const searchFields = props.searchFields?.find(field => field.key === searchState.fieldKey)
+      const newSegmentsValues = generateSegmentValues(searchFields, searchValue, dateConfig)
+
+      const updatedSegments = compareSegmentValues(searchState.segmentValues, newSegmentsValues)
+      searchState.segmentValues = newSegmentsValues
+      return updatedSegments
+    }
+
+    let oldValue: unknown
     if (segmentValue) {
+      oldValue = segmentValue.value
       segmentValue.value = value
     } else {
       segmentValue = { name, value }
       searchState.segmentValues.push(segmentValue)
+      oldValue = undefined
     }
 
-    if (segmentValue.name === 'name') {
-      searchState.fieldKey = value as VKey
-      const searchValue = searchValues.value?.find(value => value.key === searchState.key)
-      const searchFields = props.searchFields?.find(field => field.key === searchState.fieldKey)
-
-      searchState.segmentValues = generateSegmentValues(searchFields, searchValue, dateConfig)
-    }
+    return [
+      {
+        name,
+        value,
+        oldValue,
+      },
+    ]
   }
 
   function checkSearchStateValid(searchState: SearchState, dataKeyCountMap: Map<VKey, number>, existed?: boolean) {
@@ -165,12 +184,21 @@ export function useSearchStates(
 
   const initTempSearchState = () => {
     tempSearchState.fieldKey = undefined
-    tempSearchState.segmentValues = generateSegmentValues()
+    const newSegmentValues = generateSegmentValues()
+    const updatedSegments = compareSegmentValues(tempSearchState.segmentValues, newSegmentValues)
+    tempSearchState.segmentValues = newSegmentValues
+
+    // notify temp searchState change
+    notifySearchStateChange(tempSearchStateKey, SEARCH_STATE_ACTION.UPDATED, {
+      searchState: tempSearchState,
+      updatedSegments,
+    })
   }
 
   const initSearchStates = () => {
     const dataKeyCountMap = new Map<VKey, number>()
 
+    const oldSearchStates = searchStates.value
     searchStates.value = (
       searchValues.value?.map((searchValue, index) => {
         const fieldKey = searchValue.key
@@ -192,6 +220,8 @@ export function useSearchStates(
         return searchState
       }) ?? []
     ).filter(Boolean) as SearchState[]
+
+    compareSearchStates(searchStates.value, oldSearchStates)
   }
 
   function updateSearchValue() {
@@ -221,7 +251,8 @@ export function useSearchStates(
       return
     }
 
-    setSegmentValue(searchState, name, value)
+    const updatedSegments = setSegmentValue(searchState, name, value)
+    notifySearchStateChange(key, SEARCH_STATE_ACTION.UPDATED, { searchState, updatedSegments })
   }
   const updateSearchState = (key: VKey) => {
     if (props.disabled) {
@@ -236,10 +267,14 @@ export function useSearchStates(
 
     if (searchState.key === tempSearchStateKey) {
       // create new search value
-      searchStates.value.push({
+      const newKey = getKey(searchState.fieldKey!, fieldKeyCountMap.value.get(searchState.fieldKey!) ?? 0)
+      const newSearchState = {
         ...searchState,
-        key: getKey(searchState.fieldKey!, fieldKeyCountMap.value.get(searchState.fieldKey!) ?? 0),
-      })
+        key: newKey,
+      }
+      searchStates.value.push(newSearchState)
+
+      notifySearchStateChange(newKey, SEARCH_STATE_ACTION.CREATED, { searchState: newSearchState })
 
       initTempSearchState()
     }
@@ -258,8 +293,11 @@ export function useSearchStates(
     }
 
     const searchValue = _convertStateToValue(searchStates.value[stateIndex])
+    const removedSearchState = searchStates.value[stateIndex]
     searchStates.value.splice(stateIndex, 1)
+    notifySearchStateChange(removedSearchState.key, SEARCH_STATE_ACTION.REMOVED, { searchState: removedSearchState })
     callEmit(props.onItemRemove, searchValue!)
+
     updateSearchValue()
   }
   const clearSearchState = () => {
@@ -267,6 +305,7 @@ export function useSearchStates(
       return
     }
 
+    compareSearchStates([], searchStates.value)
     searchStates.value = []
     updateSearchValue()
 
