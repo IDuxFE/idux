@@ -178,21 +178,21 @@ function renderExpandableChildren(
   expandable: ComputedRef<TableColumnMergedExpandable | undefined>,
   prefixCls: string,
 ) {
-  if (props.disabled) {
-    return undefined
-  }
-
   const { icon, customIcon, indent } = expandable.value!
   const { record, expanded, level = 0 } = props
   const style = indent ? `margin-left: ${convertCssPixel(level * indent)}` : undefined
 
-  let iconNode: VNodeChild | null
-  const iconRender = (isString(customIcon) ? slots[customIcon] : customIcon) ?? icon
-  if (isFunction(iconRender)) {
-    iconNode = iconRender({ expanded: !!expanded, record })
-  } else {
-    iconNode = isString(iconRender) ? <IxIcon name={iconRender} rotate={expanded ? 90 : 0} /> : iconRender
+  let iconNode: VNodeChild
+
+  if (!props.disabled) {
+    const iconRender = (isString(customIcon) ? slots[customIcon] : customIcon) ?? icon
+    if (isFunction(iconRender)) {
+      iconNode = iconRender({ expanded: !!expanded, record })
+    } else {
+      iconNode = isString(iconRender) ? <IxIcon name={iconRender} rotate={expanded ? 90 : 0} /> : iconRender
+    }
   }
+
   return (
     <button class={`${prefixCls}-expandable-trigger`} style={style} type="button" onClick={props.handleExpend}>
       {iconNode}
