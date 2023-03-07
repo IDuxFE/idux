@@ -35,21 +35,18 @@ export function createNameSegment(
       return
     }
 
-    const renderNameLabel = (key: VKey, renderer?: (searchField: SearchField) => VNodeChild) => {
-      if (!renderer) {
-        return undefined
-      }
-
+    const renderNameLabel = (key: VKey, renderer: (searchField: SearchField) => VNodeChild) => {
       const searchField = searchFields!.find(field => field.key === key)!
       return renderer(searchField)
     }
 
     const _customNameLabel = customNameLabel ?? 'nameLabel'
+    const customNameLabelRender = isString(_customNameLabel) ? slots[_customNameLabel] : _customNameLabel
 
     const panelSlots = {
-      optionLabel: isString(_customNameLabel)
-        ? (option: SelectPanelData) => renderNameLabel(option.key, slots[_customNameLabel])
-        : (option: SelectPanelData) => renderNameLabel(option.key, _customNameLabel),
+      optionLabel: customNameLabelRender
+        ? (option: SelectPanelData) => renderNameLabel(option.key, customNameLabelRender)
+        : undefined,
     }
 
     return (
