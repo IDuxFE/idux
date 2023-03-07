@@ -14,7 +14,10 @@ import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 const colProp = [Number, String, Object] as PropType<number | string | ColProps>
 
 export const formProps = {
-  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
+  control: {
+    type: [String, Number, Object, Array] as PropType<string | number | (string | number)[] | AbstractControl>,
+    default: undefined,
+  },
   colonless: { type: Boolean, default: undefined },
   controlCol: colProp,
   controlTooltipIcon: String,
@@ -35,7 +38,10 @@ export type FormInstance = InstanceType<DefineComponent<FormProps>>
 
 export const formItemProps = {
   colonless: { type: Boolean, default: undefined },
-  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
+  control: {
+    type: [String, Number, Object, Array] as PropType<string | number | (string | number)[] | AbstractControl>,
+    default: undefined,
+  },
   controlCol: colProp,
   controlTooltip: String,
   controlTooltipIcon: String,
@@ -62,7 +68,10 @@ export type FormItemComponent = DefineComponent<
 export type FormItemInstance = InstanceType<DefineComponent<FormItemProps>>
 
 export const formWrapperProps = {
-  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
+  control: {
+    type: [String, Number, Object, Array] as PropType<string | number | (string | number)[] | AbstractControl>,
+    default: undefined,
+  },
 } as const
 
 export type FormWrapperProps = ExtractInnerPropTypes<typeof formWrapperProps>

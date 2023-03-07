@@ -5,7 +5,7 @@
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
+| `control` | 控件控制器 | `string \| number \| (string \| number)[] \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
 | `v-model:checked` | 是否选中 | `boolean` | - | - | 使用 `control` 时，此配置无效 |
 | `autofocus` | 是否以自动聚焦 | `boolean` | `false` | - | - |
 | `buttoned` | 是否以按钮显示 | `boolean` | `false` | - | - |
@@ -34,7 +34,7 @@
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
+| `control` | 控件控制器 | `string \| number \| (string \| number)[] \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
 | `v-model:value` | 当前选中的值 | `any` | - | - | 使用 `control` 时，此配置无效 |
 | `buttoned` | 设置单选框组内 `IxRadio` 的 `buttoned` | `boolean` | - | - | - |
 | `dataSource` | 以配置形式设置子元素 | `RadioData[]`| - | 优先级高于 `default` 插槽 |  |

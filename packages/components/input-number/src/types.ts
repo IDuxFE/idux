@@ -14,7 +14,10 @@ export type InputNumberButtonPosition = 'inner' | 'outer'
 
 export const inputNumberProps = {
   value: [Number, null] as PropType<number | null>,
-  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
+  control: {
+    type: [String, Number, Object, Array] as PropType<string | number | (string | number)[] | AbstractControl>,
+    default: undefined,
+  },
   disabled: {
     type: Boolean,
     default: false,

@@ -34,7 +34,10 @@ export interface TimePanelOptions extends PickerTimePanelOptions {
 }
 
 const datePickerCommonProps = {
-  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
+  control: {
+    type: [String, Number, Object, Array] as PropType<string | number | (string | number)[] | AbstractControl>,
+    default: undefined,
+  },
   cellTooltip: Function as PropType<(cell: { value: Date; disabled: boolean }) => string | void>,
   open: {
     type: Boolean,

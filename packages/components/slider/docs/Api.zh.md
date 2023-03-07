@@ -6,7 +6,7 @@
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:value` | 绑定值 | `number \| [number, number]` | `0 \| [0, 0]` | - | 使用 `control` 时，此配置无效 |
-| `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
+| `control` | 控件控制器 | `string \| number \| (string \| number)[] \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
 | `disabled` | 设置禁用状态 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
 | `dots` | 显示间断点 | `boolean` | `false` | - | `marks` 间断点会始终显示 |
 |`marks`|刻度标记，`key` 的类型必须为 `number` 且取值在闭区间 `[min, max]` 内，每个标签可以单独设置样式|`object`|-|-|`{ number: string \| VNode } or { number: { style: object, label: string \| VNode } } or { number: () => VNode }` |

@@ -6,7 +6,7 @@
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `colonless` | 配置 `IxFormItem` 的 `colonless` 默认值 | `boolean` | `false` | ✅ | `seer` 主题默认为 `true` |
-| `control` | 表单的控制器 | `string \| number \| AbstractControl` | - | - | 通常是配合 `useFormGroup` 使用 |
+| `control` | 表单的控制器 | `string \| number \| (string \| number)[] \| AbstractControl` | - | - | 通常是配合 `useFormGroup` 使用 |
 | `controlCol` | 配置 `IxFormItem` 的 `controlCol` 默认值 | `number \| ColProps` | - | - | - |
 | `controlTooltipIcon` | 配置表单控件的提示信息icon | `string` | `'info-circle'` | ✅ | - |
 | `labelAlign` | 配置 `IxFormItem` 的 `labelAlign` 默认值 | `'start' \| 'end'` | `'end'` | ✅ | `seer` 主题默认为 `'start'` |
@@ -28,7 +28,7 @@
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `colonless` | 是否不显示 `label` 后面的冒号 | `boolean` | - | - | - |
-| `control` | 表单控件的控制器 | `string \| number \| AbstractControl` | - | - | 默认取第 1 个子输入控件的 control，如果存在多个输入控件，建议手动指定，参考示例中的 `Phone Number`|
+| `control` | 表单控件的控制器 | `string \| number \| (string \| number)[] \| AbstractControl` | - | - | 默认取第 1 个子输入控件的 control，如果存在多个输入控件，建议手动指定，参考示例中的 `Phone Number`|
 | `controlCol` | 配置表单控件的布局配置，可参考 `IxCol` 组件 | `number \| ColProps` | - | - | 传入 `string` 或者 `number` 时，为 `IxCol` 的 `span` 配置 |
 | `controlTooltip` | 配置表单控件的提示信息 | `string \| #controlTooltip` | - | - | 通常用于对输入规则的详细说明 |
 | `controlTooltipIcon` | 配置表单控件的提示信息icon | `string` | - | - | - |
@@ -52,7 +52,7 @@
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `control` | 表单控件的控制器 | `string \| number \| AbstractControl` | - | - | - |
+| `control` | 表单控件的控制器 | `string \| number \| (string \| number)[] \| AbstractControl` | - | - | - |
 
 ### useFormItemRegister
 

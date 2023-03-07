@@ -21,7 +21,10 @@ const timePickerCommonProps = {
     type: Boolean,
     default: undefined,
   },
-  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
+  control: {
+    type: [String, Number, Object, Array] as PropType<string | number | (string | number)[] | AbstractControl>,
+    default: undefined,
+  },
   allowInput: {
     type: [Boolean, String] as PropType<boolean | 'overlay'>,
     default: undefined,

@@ -10,11 +10,11 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '
 import type { FormSize } from '@idux/components/form'
 import type { DefineComponent, InputHTMLAttributes, PropType } from 'vue'
 
-export type TextareaResize = 'none' | 'both' | 'horizontal' | 'vertical'
-export type TextareaAutoRows = { minRows: number; maxRows: number }
-
 export const inputCommonProps = {
-  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
+  control: {
+    type: [String, Number, Object, Array] as PropType<string | number | (string | number)[] | AbstractControl>,
+    default: undefined,
+  },
   value: { type: String, default: undefined },
 
   clearable: { type: Boolean, default: undefined },

@@ -10,8 +10,12 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export const switchProps = {
+  control: {
+    type: [String, Number, Object, Array] as PropType<string | number | (string | number)[] | AbstractControl>,
+    default: undefined,
+  },
   checked: { type: Boolean, default: undefined },
-  control: [String, Number, Object] as PropType<string | number | AbstractControl>,
+
   autofocus: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
   labels: { type: Array as PropType<string[]>, default: () => [] },

@@ -18,7 +18,10 @@ import type { OverlayContainerType } from '@idux/components/utils'
 import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
 export const treeSelectProps = {
-  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
+  control: {
+    type: [String, Number, Object, Array] as PropType<string | number | (string | number)[] | AbstractControl>,
+    default: undefined,
+  },
   value: { type: null, default: undefined },
   open: { type: Boolean, default: undefined },
   expandedKeys: { type: Array as PropType<VKey[]>, default: undefined },

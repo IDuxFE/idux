@@ -13,7 +13,10 @@ import type { CSSProperties, DefineComponent, HTMLAttributes, PropType, VNode } 
 
 // slider
 export const sliderProps = {
-  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
+  control: {
+    type: [String, Number, Object, Array] as PropType<string | number | (string | number)[] | AbstractControl>,
+    default: undefined,
+  },
   value: { type: [Number, Array] as PropType<number | number[]>, default: undefined },
 
   disabled: { type: Boolean, default: false },
