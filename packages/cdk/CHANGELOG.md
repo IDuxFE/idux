@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/IDuxFE/idux/compare/v1.4.3...v1.5.0) (2023-03-07)
+
+### Features
+
+- **cdk:forms:** formArray supports clearControls ([#1490](https://github.com/IDuxFE/idux/issues/1490)) ([1cd4dcc](https://github.com/IDuxFE/idux/commit/1cd4dccf36df890fac95351f4714070e18333141))
+
 ## [1.4.2](https://github.com/IDuxFE/idux/compare/v1.4.1...v1.4.2) (2023-02-20)
 
 ### Bug Fixes

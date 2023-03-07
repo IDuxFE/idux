@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/IDuxFE/idux/compare/v1.4.3...v1.5.0) (2023-03-07)
+
+### Bug Fixes
+
+- **comp:cascader:** searchValue not working after CascaderPanel added ([#1487](https://github.com/IDuxFE/idux/issues/1487)) ([42b408b](https://github.com/IDuxFE/idux/commit/42b408b91d81b6fff08322902b9fa514850455bc))
+- **comp:modal:** style update and css variable support ([#1479](https://github.com/IDuxFE/idux/issues/1479)) ([f45776d](https://github.com/IDuxFE/idux/commit/f45776d3a9e35ebd1a522d4d0c8faf97fd96be4b))
+- **comp:table:** the indent not work and selected records not cached ([#1484](https://github.com/IDuxFE/idux/issues/1484)) ([a3d5bb7](https://github.com/IDuxFE/idux/commit/a3d5bb74c337d557f0d1a8baeb48949fe5bd02fd)), closes [#1482](https://github.com/IDuxFE/idux/issues/1482)
+- **comp:textarea:** measureTextarea removeChild error ([#1492](https://github.com/IDuxFE/idux/issues/1492)) ([e489e8e](https://github.com/IDuxFE/idux/commit/e489e8e40770ac3eaf805a872eb796077df19520))
+
+### Features
+
+- **comp:cascader:** add `IxCascaderPanel` component ([#1481](https://github.com/IDuxFE/idux/issues/1481)) ([e044390](https://github.com/IDuxFE/idux/commit/e044390c26c594978c8bcc0edfb72e65edd47db3))
+- **comp:desc:** add Descriptions component ([#1470](https://github.com/IDuxFE/idux/issues/1470)) ([a7faf13](https://github.com/IDuxFE/idux/commit/a7faf1365ef93a765e85fadfda4b06cf41600caf))
+- **comp:rate:** add color prop for rate ([#1420](https://github.com/IDuxFE/idux/issues/1420)) ([31c29e0](https://github.com/IDuxFE/idux/commit/31c29e03975b6d1ecd1966dfbc0abd606d36e499))
+- **comp:select:** add `loading` prop for select component ([#1439](https://github.com/IDuxFE/idux/issues/1439)) ([3289784](https://github.com/IDuxFE/idux/commit/328978436467bc8b7f59650c56809c7804096a1c))
+
 ## [1.4.3](https://github.com/IDuxFE/idux/compare/v1.4.2...v1.4.3) (2023-02-27)
 
 ### Bug Fixes
