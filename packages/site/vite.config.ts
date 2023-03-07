@@ -92,6 +92,7 @@ export default defineConfig(({ command, mode }) => {
     build: {
       outDir: resolve(__dirname, '../../dist/site'),
       emptyOutDir: true,
+      target: ['chrome79', 'edge79', 'firefox72', 'safari13'],
     },
   }
 })
