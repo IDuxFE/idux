@@ -61,7 +61,10 @@ export const cascaderPanelProps = {
 } as const
 
 export const cascaderProps = {
-  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
+  control: {
+    type: [String, Number, Object, Array] as PropType<string | number | (string | number)[] | AbstractControl>,
+    default: undefined,
+  },
   value: { type: null, default: undefined },
   expandedKeys: { type: Array as PropType<VKey[]>, default: undefined },
   loadedKeys: { type: Array as PropType<VKey[]>, default: undefined },

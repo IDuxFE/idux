@@ -6,7 +6,7 @@
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:value` | 控件值 | `string` | - | - | 使用 `control` 时，此配置无效 |
-| `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
+| `control` | 控件控制器 | `string \| number \| (string \| number)[] \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
 | `clearable` | 是否显示清除图标 | `boolean` | `false` | ✅ | - |
 | `clearIcon` | 设置清除图标 | `string \| #clearIcon` | `'close-circle'` | ✅ | - |
 | `computeCount` | 自定义计算字符数的函数 | `(value: string) => string` | - | ✅ | 优先级高于 `maxCount` |

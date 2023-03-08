@@ -5,7 +5,7 @@
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
+| `control` | 控件控制器 | `string \| number \| (string \| number)[] \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
 | `v-model:checked` | 是否开启 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
 | `autofocus` | 自动获取焦点 | `boolean` | `false` | - | - |
 | `disabled` | 是否禁止操作 | `boolean` | `false`| - | 使用 `control` 时，此配置无效 |

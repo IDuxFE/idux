@@ -6,7 +6,7 @@
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:open` | 日期面板是否展开 | `boolean` | - | - | - |
-| `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
+| `control` | 控件控制器 | `string \| number \| (string \| number)[] \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
 | `cellTooltip` | 日期节点的tooltip | `(cell: { value: Date, disabled: boolean }) => string | void` | - | - | - |
 | `allowInput` | 允许输入模式 | `boolean \| 'overlay'` | `false` | - | `'overlay'` 时在浮层内输入 |
 | `autofocus` | 默认获取焦点 | `boolean` | `false` | - | - |

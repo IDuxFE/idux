@@ -45,7 +45,10 @@ export const selectPanelProps = {
 } as const
 
 export const selectProps = {
-  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
+  control: {
+    type: [String, Number, Object, Array] as PropType<string | number | (string | number)[] | AbstractControl>,
+    default: undefined,
+  },
   value: { type: [String, Number, Symbol, Array] as PropType<MaybeArray<VKey>>, default: undefined },
   open: { type: Boolean, default: undefined },
 

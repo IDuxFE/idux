@@ -14,7 +14,10 @@ import type { SpaceProps } from '@idux/components/space'
 import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes, PropType } from 'vue'
 
 export const checkboxProps = {
-  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
+  control: {
+    type: [String, Number, Object, Array] as PropType<string | number | (string | number)[] | AbstractControl>,
+    default: undefined,
+  },
   checked: { type: [String, Number, Boolean] as PropType<CheckValue>, default: undefined },
 
   autofocus: { type: Boolean, default: false },
@@ -50,7 +53,10 @@ export type CheckboxComponent = DefineComponent<
 export type CheckboxInstance = InstanceType<DefineComponent<CheckboxProps, CheckboxBindings>>
 
 export const checkboxGroupProps = {
-  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
+  control: {
+    type: [String, Number, Object, Array] as PropType<string | number | (string | number)[] | AbstractControl>,
+    default: undefined,
+  },
   value: { type: Array, default: undefined },
 
   buttoned: { type: Boolean, default: false },

@@ -5,7 +5,7 @@
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
+| `control` | 控件控制器 | `string \| number \| (string \| number)[] \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
 | `v-model:value` | 选中节点的 `key` 数组 | `VKey[]` | - | - | 使用 `control` 时，此配置无效 |
 | `v-model:expandedKeys` | 展开节点的 `key` 数组 | `VKey[]` | - | - | - |
 | `v-model:loadedKeys` | 已经加载完毕的节点的 `key` 数组 | `VKey[]` | - | - | - |

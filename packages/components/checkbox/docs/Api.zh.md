@@ -7,7 +7,7 @@
 
 | 名称 | 说明 |  类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
+| `control` | 控件控制器 | `string \| number \| (string \| number)[] \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
 | `v-model:checked` | 指定当前勾选框是否选中 |  `boolean \| string \| number`  | - | - | 使用 `control` 时，此配置无效 |
 | `autofocus` | 是否以自动聚焦 | `boolean` | `false` | - | - |.
 | `buttoned` | 是否以按钮显示 | `boolean` | - | - | - |
@@ -36,7 +36,7 @@
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
+| `control` | 控件控制器 | `string \| number \| (string \| number)[] \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
 | `v-model:value` | 指定当前勾选框是否选中 |  `any[]`  | - | - | 使用 `control` 时，此配置无效 |
 | `buttoned` | 设置组内 `IxCheckbox` 的 `buttoned` 属性 | `boolean` | `false` | - | - |
 | `dataSource` | 勾选框组数据源 | `CheckboxData[]` | - | - | 优先级高于 `default` 插槽 |

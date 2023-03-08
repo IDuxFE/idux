@@ -8,7 +8,7 @@
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:value` | 控件值 | `number` | - | - | 使用 `control` 时，此配置无效 |
-| `control` | 控件控制器 | `string \| number \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
+| `control` | 控件控制器 | `string \| number \| (string \| number)[] \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
 | `addonAfter` | 设置后缀 | `string \| #addonAfter` | - | - | - |
 | `addonBefore` | 设置前缀 | `string \| #addonBefore` | - | - | - |
 | `disabled` | 禁用 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |

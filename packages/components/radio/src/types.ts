@@ -14,7 +14,10 @@ import type { SpaceProps } from '@idux/components/space'
 import type { DefineComponent, HTMLAttributes, LabelHTMLAttributes, PropType } from 'vue'
 
 export const radioProps = {
-  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
+  control: {
+    type: [String, Number, Object, Array] as PropType<string | number | (string | number)[] | AbstractControl>,
+    default: undefined,
+  },
   checked: { type: Boolean, default: undefined },
 
   autofocus: { type: Boolean, default: false },
@@ -46,7 +49,10 @@ export type RadioComponent = DefineComponent<
 export type RadioInstance = InstanceType<DefineComponent<RadioProps, RadioBindings>>
 
 export const radioGroupProps = {
-  control: { type: [String, Number, Object] as PropType<string | number | AbstractControl>, default: undefined },
+  control: {
+    type: [String, Number, Object, Array] as PropType<string | number | (string | number)[] | AbstractControl>,
+    default: undefined,
+  },
   value: { type: null, default: undefined },
 
   buttoned: { type: Boolean, default: false },
