@@ -14,3 +14,4 @@ export interface AppContext {
 }
 
 export const appContextToken: InjectionKey<AppContext> = Symbol('appContextToken')
+export const themeToken: InjectionKey<(theme: string) => void> = Symbol('themeToken')

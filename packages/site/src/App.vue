@@ -33,7 +33,7 @@
                       <LayoutFooter></LayoutFooter>
                     </IxCol>
                   </IxRow>
-                  <GlobalTheme @themeChange="onThemeChange" />
+                  <GlobalSetting />
                 </div>
                 <template v-else>
                   <router-view></router-view>
@@ -73,7 +73,7 @@ import { MessageProviderInstance } from '@idux/components/message'
 import { ModalProviderInstance } from '@idux/components/modal'
 import { NotificationProviderInstance } from '@idux/components/notification'
 
-import { AppContext, appContextToken } from './context'
+import { AppContext, appContextToken, themeToken } from './context'
 
 const drawerProviderRef = ref<DrawerProviderInstance>()
 const modalProviderRef = ref<ModalProviderInstance>()
@@ -127,4 +127,6 @@ const onThemeChange = (theme: string) => {
     currChange(currConfig!)
   })
 }
+
+provide(themeToken, onThemeChange)
 </script>

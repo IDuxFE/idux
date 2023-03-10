@@ -1,6 +1,6 @@
 <template>
   <div class="floatButton">
-    <IxDropdown placement="top" :offset="[0, 16]">
+    <IxDropdown placement="left" :offset="[0, 16]">
       <IxIcon name="setting" />
       <template #overlay>
         <IxMenu v-model:selectedKeys="selectedKeys" :dataSource="dataSource"></IxMenu>
@@ -10,13 +10,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { inject, ref, watch } from 'vue'
 
 import { MenuData } from '@idux/components/menu'
 
 import { themeConfig } from './themeConfig'
+import { themeToken } from '../../context'
 
-const emit = defineEmits(['themeChange'])
+const themeChange = inject(themeToken)!
 
 const dataSource: MenuData[] = [
   ...themeConfig,
@@ -29,7 +30,7 @@ const currTheme = localStorage.getItem(themeKey) || 'default'
 const selectedKeys = ref([currTheme])
 
 const loadTheme = (theme: string) => {
-  emit('themeChange', theme)
+  themeChange(theme)
   if (window.changeTheme) {
     window.changeTheme(theme)
   } else {
@@ -47,17 +48,8 @@ watch(selectedKeys, ([theme]) => {
 
 <style lang="less">
 .floatButton {
-  position: fixed;
-  right: 72px;
-  bottom: 82px;
-  z-index: 99;
-  cursor: pointer;
   // TODO need less var
-  color: #000;
-  background-color: #fff;
   padding: 6px;
-  border-radius: 50%;
-  box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
 
   display: flex;
   justify-content: center;
