@@ -83,7 +83,11 @@ export function useSegmentStates(
   let searchStateWatchStop: () => void
   watch(
     () => props.searchItem,
-    searchItem => {
+    (searchItem, oldSearchItem) => {
+      if (searchItem?.key === oldSearchItem?.key) {
+        return
+      }
+
       searchStateWatchStop?.()
       initSegmentStates()
       if (searchItem?.key) {
