@@ -15,9 +15,9 @@ import { inject, ref, watch } from 'vue'
 import { MenuData } from '@idux/components/menu'
 
 import { themeConfig } from './themeConfig'
-import { themeToken } from '../../context'
+import { appContextToken } from '../../context'
 
-const themeChange = inject(themeToken)!
+const { setTheme } = inject(appContextToken)!
 
 const dataSource: MenuData[] = [
   ...themeConfig,
@@ -30,7 +30,7 @@ const currTheme = localStorage.getItem(themeKey) || 'default'
 const selectedKeys = ref([currTheme])
 
 const loadTheme = (theme: string) => {
-  themeChange(theme)
+  setTheme(theme)
   if (window.changeTheme) {
     window.changeTheme(theme)
   } else {
@@ -49,7 +49,6 @@ watch(selectedKeys, ([theme]) => {
 <style lang="less">
 .floatButton {
   // TODO need less var
-  padding: 6px;
 
   display: flex;
   justify-content: center;

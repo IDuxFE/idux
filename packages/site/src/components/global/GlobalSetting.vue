@@ -4,7 +4,7 @@
       <GlobalTheme></GlobalTheme>
     </li>
     <li>
-      <GlobalReturnTop></GlobalReturnTop>
+      <IxBackTop></IxBackTop>
     </li>
   </ul>
 </template>
