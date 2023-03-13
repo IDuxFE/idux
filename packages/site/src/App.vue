@@ -33,7 +33,7 @@
                       <LayoutFooter></LayoutFooter>
                     </IxCol>
                   </IxRow>
-                  <GlobalTheme @themeChange="onThemeChange" />
+                  <GlobalSetting />
                 </div>
                 <template v-else>
                   <router-view></router-view>
@@ -98,17 +98,6 @@ const page = computed(() => {
 
 const breakpoints = useSharedBreakpoints()
 
-const appContext: AppContext = {
-  org: 'IDuxFE',
-  repo: 'components',
-  lang: ref('zh'),
-  path,
-  page,
-  breakpoints,
-}
-
-provide(appContextToken, appContext)
-
 const isDrawerOpen = ref(false)
 
 const configChanges = {} as Record<GlobalConfigKey, (config: Partial<GlobalConfig[GlobalConfigKey]>) => void>
@@ -118,7 +107,7 @@ compNames.forEach(compName => {
   configChanges[compName] = change
 })
 
-const onThemeChange = (theme: string) => {
+const setTheme = (theme: string) => {
   const config = theme === 'seer' ? seerConfig : defaultConfig
   const compNames = Object.keys(config) as GlobalConfigKey[]
   compNames.forEach(compName => {
@@ -127,4 +116,16 @@ const onThemeChange = (theme: string) => {
     currChange(currConfig!)
   })
 }
+
+const appContext: AppContext = {
+  org: 'IDuxFE',
+  repo: 'components',
+  lang: ref('zh'),
+  path,
+  page,
+  breakpoints,
+  setTheme,
+}
+
+provide(appContextToken, appContext)
 </script>

@@ -11,6 +11,7 @@ export interface AppContext {
   path: ComputedRef<string>
   page: ComputedRef<string>
   breakpoints: Record<BreakpointKey, boolean>
+  setTheme: (theme: string) => void
 }
 
 export const appContextToken: InjectionKey<AppContext> = Symbol('appContextToken')
