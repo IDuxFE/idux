@@ -42,7 +42,6 @@ export interface SelectSearchField extends SearchFieldBase<VKey | VKey[]> {
     virtual?: boolean
     searchFn?: (data: SelectPanelData, searchText?: string) => boolean
     onSearch?: MaybeArray<(searchValue: string) => void>
-    overlayItemWidth?: number
   }
 }
 
