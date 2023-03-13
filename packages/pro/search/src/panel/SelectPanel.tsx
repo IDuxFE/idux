@@ -153,6 +153,7 @@ export default defineComponent({
         getKey: 'key',
         labelKey: 'label',
         selectedKeys: props.value,
+        virtual: props.virtual,
         onOptionClick: handleOptionClick,
         'onUpdate:activeValue': setActiveValue,
       }
