@@ -10,6 +10,16 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.5.1(2023-03-14)
+
+### Bug Fixes
+
+- **comp:\*:** 表单组件的 control 类型声明不正确 ([#1495](https://github.com/IDuxFE/idux/issues/1495)) ([ace2a1e](https://github.com/IDuxFE/idux/commit/ace2a1ed57c2f6a3a3f5bd41a20e393d90866d60))
+- **comp:cascader:** 面板的样式异常 ([#1500](https://github.com/IDuxFE/idux/issues/1500)) ([dfb5d0b](https://github.com/IDuxFE/idux/commit/dfb5d0bd93d7af6716e79a7e5c5563357881d5d8))
+- **comp:spin:** 在抽屉中开启遮罩后依旧可以点击按钮 ([#1499](https://github.com/IDuxFE/idux/issues/1499)) ([3463cea](https://github.com/IDuxFE/idux/commit/3463cea35f83485c71ab66d0b8d1c23a79ff0935))
+- **pro:search:** 输入状态初始化时机不正确 ([#1496](https://github.com/IDuxFE/idux/issues/1496)) ([70f947c](https://github.com/IDuxFE/idux/commit/70f947cc455f2a8a2ab82ae90540997218d04b32))
+- **pro:search:** 下拉框面板启用虚拟滚动不生效 ([#1501](https://github.com/IDuxFE/idux/issues/1501)) ([5def0ab](https://github.com/IDuxFE/idux/commit/5def0abd30af0d2772ba2df3987c3b13274d3544))
+
 # 1.5.0(2023-03-07)
 
 ### Bug Fixes
