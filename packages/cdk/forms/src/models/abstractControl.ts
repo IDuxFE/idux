@@ -599,7 +599,11 @@ export abstract class AbstractControl<T = any> {
     if (this._disabledFn) {
       nextTick(() => {
         watchEffect(() => {
-          this._disabled.value = this._disabledFn!(this, false)
+          if (this._disabledFn!(this, false)) {
+            this.disable()
+          } else {
+            this.enable()
+          }
         })
       })
     }
