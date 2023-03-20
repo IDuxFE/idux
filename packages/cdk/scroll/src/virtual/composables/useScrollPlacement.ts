@@ -8,7 +8,7 @@
 import type { VirtualScrollProps } from '../types'
 import type { Ref } from 'vue'
 
-import { computed } from 'vue'
+import { computed, onActivated } from 'vue'
 
 import { isFunction } from 'lodash-es'
 
@@ -63,6 +63,13 @@ export function useScrollPlacement(
       callEmit(props.onScrolledBottom)
     }
   }
+
+  const initScrollTop = () => {
+    if (holderRef.value) {
+      syncScrollTop(scrollTop.value, true)
+    }
+  }
+  onActivated(initScrollTop)
 
   return { syncScrollTop, handleScroll }
 }
