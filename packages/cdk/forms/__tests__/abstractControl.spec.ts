@@ -334,9 +334,11 @@ describe('abstractControl.ts', () => {
 
       expect(await control.validate()).toEqual({ required: getError('required', control) })
 
-      control.setValue('disable')
+      control.setValue('enabled')
       await flushPromises()
 
+      expect(control.disabled.value).toEqual(false)
+      expect(control.valid.value).toEqual(false)
       expect(await control.validate()).toEqual({
         maxLength: getError('maxLength', control, { actual: 7, isArray: false, maxLength: 5 }),
       })
@@ -344,6 +346,8 @@ describe('abstractControl.ts', () => {
       control.setValue('disabled')
       await flushPromises()
 
+      expect(control.disabled.value).toEqual(true)
+      expect(control.valid.value).toEqual(true)
       expect(await control.validate()).toEqual(undefined)
     })
   })
