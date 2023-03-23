@@ -62,7 +62,9 @@ export default defineComponent({
     })
 
     const handleClick = (evt: MouseEvent) => {
-      if (props.disabled || props.loading) {
+      const { disabled = groupProps.disabled } = props
+
+      if (disabled || props.loading) {
         evt.preventDefault()
         evt.stopImmediatePropagation()
         return
