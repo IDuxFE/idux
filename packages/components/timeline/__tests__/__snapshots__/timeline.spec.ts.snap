@@ -7,11 +7,12 @@ exports[`Timeline > pending slot work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">0</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -19,11 +20,12 @@ exports[`Timeline > pending slot work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">1</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -31,11 +33,12 @@ exports[`Timeline > pending slot work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">2</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -43,21 +46,24 @@ exports[`Timeline > pending slot work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">3</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending\\">
     <div class=\\"ix-timeline-item-head\\">
       <div class=\\"ix-timeline-item-head-line\\"></div>
-      <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-custom ix-timeline-item-head-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"></i></div>
+      <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-custom ix-timeline-item-head-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"></i>
+        <!---->
+      </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">pendingSlotText</div>
+      <!---->
     </div>
   </li>
 </ul>"
@@ -70,11 +76,12 @@ exports[`Timeline > pending slot work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">0</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -82,11 +89,12 @@ exports[`Timeline > pending slot work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">1</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -94,11 +102,12 @@ exports[`Timeline > pending slot work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">2</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -106,21 +115,24 @@ exports[`Timeline > pending slot work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">3</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending\\">
     <div class=\\"ix-timeline-item-head\\">
       <div class=\\"ix-timeline-item-head-line\\"></div>
-      <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-custom ix-timeline-item-head-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"></i></div>
+      <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-custom ix-timeline-item-head-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"></i>
+        <!---->
+      </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">pendingSlotText</div>
+      <!---->
     </div>
   </li>
 </ul>"
@@ -133,11 +145,12 @@ exports[`Timeline > pending work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">0</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -145,11 +158,12 @@ exports[`Timeline > pending work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">1</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -157,11 +171,12 @@ exports[`Timeline > pending work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">2</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -169,11 +184,12 @@ exports[`Timeline > pending work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">3</div>
+      <!---->
     </div>
   </li>
 </ul>"
@@ -186,11 +202,12 @@ exports[`Timeline > pending work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">0</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -198,11 +215,12 @@ exports[`Timeline > pending work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">1</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -210,11 +228,12 @@ exports[`Timeline > pending work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">2</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -222,21 +241,24 @@ exports[`Timeline > pending work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">3</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending\\">
     <div class=\\"ix-timeline-item-head\\">
       <div class=\\"ix-timeline-item-head-line\\"></div>
-      <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-custom ix-timeline-item-head-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"></i></div>
+      <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-custom ix-timeline-item-head-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"></i>
+        <!---->
+      </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\"></div>
+      <!---->
     </div>
   </li>
 </ul>"
@@ -249,11 +271,12 @@ exports[`Timeline > pending work 3`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">0</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -261,11 +284,12 @@ exports[`Timeline > pending work 3`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">1</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -273,11 +297,12 @@ exports[`Timeline > pending work 3`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">2</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -285,11 +310,12 @@ exports[`Timeline > pending work 3`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">3</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending\\">
@@ -297,11 +323,13 @@ exports[`Timeline > pending work 3`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-custom ix-timeline-item-head-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"><svg viewBox=\\"0 0 1024 1024\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"loading\\">
             <path d=\\"m527.424 64.32 3.712.064a448 448 0 0 1 430.912 432.32v2.368a12.8 12.8 0 0 1-12.8 13.056h-38.336a12.8 12.8 0 0 1-12.8-13.632A384 384 0 0 0 528.64 128.384h-1.792a12.8 12.8 0 0 1-12.608-12.8V77.12a12.8 12.8 0 0 1 13.12-12.8z\\"></path>
-          </svg></i></div>
+          </svg></i>
+        <!---->
+      </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">pendingText</div>
+      <!---->
     </div>
   </li>
 </ul>"
@@ -314,11 +342,12 @@ exports[`Timeline > pendingDot work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">0</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -326,11 +355,12 @@ exports[`Timeline > pendingDot work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">1</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -338,11 +368,12 @@ exports[`Timeline > pendingDot work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">2</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -350,21 +381,24 @@ exports[`Timeline > pendingDot work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">3</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending\\">
     <div class=\\"ix-timeline-item-head\\">
       <div class=\\"ix-timeline-item-head-line\\"></div>
-      <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-custom ix-timeline-item-head-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"></i></div>
+      <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-custom ix-timeline-item-head-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"></i>
+        <!---->
+      </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\"></div>
+      <!---->
     </div>
   </li>
 </ul>"
@@ -377,11 +411,12 @@ exports[`Timeline > pendingDot work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">0</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -389,11 +424,12 @@ exports[`Timeline > pendingDot work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">1</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -401,11 +437,12 @@ exports[`Timeline > pendingDot work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">2</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -413,21 +450,24 @@ exports[`Timeline > pendingDot work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">3</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending\\">
     <div class=\\"ix-timeline-item-head\\">
       <div class=\\"ix-timeline-item-head-line\\"></div>
-      <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-custom ix-timeline-item-head-dot-primary\\">pendingDotText</div>
+      <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-custom ix-timeline-item-head-dot-primary\\">pendingDotText
+        <!---->
+      </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\"></div>
+      <!---->
     </div>
   </li>
 </ul>"
@@ -440,11 +480,12 @@ exports[`Timeline > placement with item placement work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">0</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -452,11 +493,12 @@ exports[`Timeline > placement with item placement work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">1</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -464,11 +506,12 @@ exports[`Timeline > placement with item placement work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">2</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -476,11 +519,12 @@ exports[`Timeline > placement with item placement work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">3</div>
+      <!---->
     </div>
   </li>
 </ul>"
@@ -493,11 +537,12 @@ exports[`Timeline > placement with item placement work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">0</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -505,11 +550,12 @@ exports[`Timeline > placement with item placement work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">1</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -517,11 +563,12 @@ exports[`Timeline > placement with item placement work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">2</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -529,11 +576,12 @@ exports[`Timeline > placement with item placement work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">3</div>
+      <!---->
     </div>
   </li>
 </ul>"
@@ -546,11 +594,12 @@ exports[`Timeline > placement with item placement work 3`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">0</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-start\\">
@@ -558,11 +607,12 @@ exports[`Timeline > placement with item placement work 3`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">1</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-start\\">
@@ -570,11 +620,12 @@ exports[`Timeline > placement with item placement work 3`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">2</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-start\\">
@@ -582,11 +633,12 @@ exports[`Timeline > placement with item placement work 3`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">3</div>
+      <!---->
     </div>
   </li>
 </ul>"
@@ -599,11 +651,12 @@ exports[`Timeline > placement with item placement work 4`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">0</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-start\\">
@@ -611,11 +664,12 @@ exports[`Timeline > placement with item placement work 4`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">1</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-start\\">
@@ -623,11 +677,12 @@ exports[`Timeline > placement with item placement work 4`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">2</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-start\\">
@@ -635,11 +690,12 @@ exports[`Timeline > placement with item placement work 4`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">3</div>
+      <!---->
     </div>
   </li>
 </ul>"
@@ -652,11 +708,12 @@ exports[`Timeline > placement work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">0</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -664,11 +721,12 @@ exports[`Timeline > placement work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">1</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -676,11 +734,12 @@ exports[`Timeline > placement work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">2</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -688,11 +747,12 @@ exports[`Timeline > placement work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">3</div>
+      <!---->
     </div>
   </li>
 </ul>"
@@ -705,11 +765,12 @@ exports[`Timeline > placement work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">0</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -717,11 +778,12 @@ exports[`Timeline > placement work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">1</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -729,11 +791,12 @@ exports[`Timeline > placement work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">2</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -741,11 +804,12 @@ exports[`Timeline > placement work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">3</div>
+      <!---->
     </div>
   </li>
 </ul>"
@@ -758,11 +822,12 @@ exports[`Timeline > placement work 3`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">0</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-start\\">
@@ -770,11 +835,12 @@ exports[`Timeline > placement work 3`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">1</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-start\\">
@@ -782,11 +848,12 @@ exports[`Timeline > placement work 3`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">2</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-start\\">
@@ -794,11 +861,12 @@ exports[`Timeline > placement work 3`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">3</div>
+      <!---->
     </div>
   </li>
 </ul>"
@@ -811,11 +879,12 @@ exports[`Timeline > placement work 4`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">0</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-start\\">
@@ -823,11 +892,12 @@ exports[`Timeline > placement work 4`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">1</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -835,11 +905,12 @@ exports[`Timeline > placement work 4`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">2</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-start\\">
@@ -847,11 +918,12 @@ exports[`Timeline > placement work 4`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">3</div>
+      <!---->
     </div>
   </li>
 </ul>"
@@ -864,11 +936,13 @@ exports[`Timeline > reverse with pending slot work 1`] = `
   <li class=\\"ix-timeline-item ix-timeline-item-end ix-timeline-item-pending\\">
     <div class=\\"ix-timeline-item-head\\">
       <div class=\\"ix-timeline-item-head-line\\"></div>
-      <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-custom ix-timeline-item-head-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"></i></div>
+      <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-custom ix-timeline-item-head-dot-primary\\"><i class=\\"ix-icon ix-icon-loading\\" role=\\"img\\" aria-label=\\"loading\\"></i>
+        <!---->
+      </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">pendingSlotText</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -876,11 +950,12 @@ exports[`Timeline > reverse with pending slot work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">3</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -888,11 +963,12 @@ exports[`Timeline > reverse with pending slot work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">2</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -900,11 +976,12 @@ exports[`Timeline > reverse with pending slot work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">1</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -912,11 +989,12 @@ exports[`Timeline > reverse with pending slot work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">0</div>
+      <!---->
     </div>
   </li>
 </ul>"
@@ -929,11 +1007,12 @@ exports[`Timeline > reverse work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">0</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -941,11 +1020,12 @@ exports[`Timeline > reverse work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">1</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -953,11 +1033,12 @@ exports[`Timeline > reverse work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">2</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -965,11 +1046,12 @@ exports[`Timeline > reverse work 1`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">3</div>
+      <!---->
     </div>
   </li>
 </ul>"
@@ -982,11 +1064,12 @@ exports[`Timeline > reverse work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">3</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -994,11 +1077,12 @@ exports[`Timeline > reverse work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">2</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -1006,11 +1090,12 @@ exports[`Timeline > reverse work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">1</div>
+      <!---->
     </div>
   </li>
   <li class=\\"ix-timeline-item ix-timeline-item-end\\">
@@ -1018,11 +1103,12 @@ exports[`Timeline > reverse work 2`] = `
       <div class=\\"ix-timeline-item-head-line\\"></div>
       <div class=\\"ix-timeline-item-head-dot ix-timeline-item-head-dot-primary\\">
         <!---->
+        <div class=\\"ix-timeline-item-head-dot-inner\\"></div>
       </div>
     </div>
     <div class=\\"ix-timeline-item-content\\">
-      <!---->
       <div class=\\"ix-timeline-item-content-desc\\">0</div>
+      <!---->
     </div>
   </li>
 </ul>"

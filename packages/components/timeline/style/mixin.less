@@ -1,10 +1,31 @@
-.timeline-color-classes(@colors, @i: length(@colors)) when (@i > 0) {
-  .timeline-color-classes(@colors, @i - 1);
+.timeline-first-dot-color-classes(@colors, @i: length(@colors)) when (@i > 0) {
+  .timeline-first-dot-color-classes(@colors, @i - 1);
   @color: extract(@colors, @i);
   @color-name: 'color-@{color}';
-  &-@{color} {
-    border-color: @@color-name;
+
+  .@{timeline-item-prefix}:first-child .@{timeline-item-prefix}-head-dot {
+    &-@{color} {
+      border-color: @@color-name;
+      color: @@color-name;
+    }
+  }
+}
+
+.timeline-dot-color-classes(@colors, @i: length(@colors)) when (@i > 0) {
+  .timeline-dot-color-classes(@colors, @i - 1);
+
+  @color: extract(@colors, @i);
+  @color-name: 'color-@{color}';
+  @dot-class: ~'@{timeline-item-prefix}-head-dot';
+
+  .@{timeline-item-prefix} .@{dot-class}.@{dot-class}-@{color} {
     color: @@color-name;
+    .@{dot-class}-inner {
+      background-color: @@color-name;
+    }
+  }
+  .@{timeline-item-prefix} .@{dot-class}.@{dot-class}-@{color} {
+    border-color: @@color-name;
   }
 }
 
@@ -25,7 +46,6 @@
 
 .timeline-dotted-line() {
   .@{timeline-item-prefix} {
-
     &-head-line {
       background: @timeline-dotted-line-background;
       background-size: @timeline-dotted-line-background-size;
