@@ -35,12 +35,12 @@ export default defineComponent({
     const mergedWaveless = computed(
       () => mode.value === 'text' || mode.value === 'link' || (props.waveless ?? config.waveless),
     )
+    const mergedDisabled = computed(() => props.disabled ?? groupProps.disabled)
 
     const classes = computed(() => {
       const {
         block = groupProps.block,
         danger = groupProps.danger,
-        disabled = groupProps.disabled,
         ghost = groupProps.ghost,
         loading,
         icon,
@@ -51,7 +51,7 @@ export default defineComponent({
         [prefixCls]: true,
         [`${prefixCls}-block`]: block,
         [`${prefixCls}-danger`]: danger,
-        [`${prefixCls}-disabled`]: disabled,
+        [`${prefixCls}-disabled`]: mergedDisabled.value,
         [`${prefixCls}-ghost`]: ghost,
         [`${prefixCls}-loading`]: loading,
         [`${prefixCls}-icon-only`]: !slots.default && (icon || loading || slots.icon),
@@ -62,9 +62,7 @@ export default defineComponent({
     })
 
     const handleClick = (evt: MouseEvent) => {
-      const { disabled = groupProps.disabled } = props
-
-      if (disabled || props.loading) {
+      if (mergedDisabled.value || props.loading) {
         evt.preventDefault()
         evt.stopImmediatePropagation()
         return
@@ -77,7 +75,7 @@ export default defineComponent({
     }
 
     return () => {
-      const { disabled, loading, icon, type } = props
+      const { loading, icon, type } = props
 
       const children: VNodeChild[] = []
       if (loading) {
@@ -100,7 +98,7 @@ export default defineComponent({
         )
       }
       return (
-        <button class={classes.value} disabled={disabled || loading} type={type} onClick={handleClick}>
+        <button class={classes.value} disabled={mergedDisabled.value || loading} type={type} onClick={handleClick}>
           {children}
           {!mergedWaveless.value && <ɵWave ref={waveRef} />}
         </button>
