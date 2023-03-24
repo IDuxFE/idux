@@ -30,8 +30,10 @@ export default defineComponent({
 
     const waveRef = ref<ɵWaveInstance>()
 
+    const disabled = computed(() => props.disabled ?? groupProps.disabled)
     const mode = computed(() => props.mode ?? groupProps.mode ?? 'default')
     const size = computed(() => props.size ?? groupProps.size ?? formContext?.size.value ?? config.size)
+
     const mergedWaveless = computed(
       () => mode.value === 'text' || mode.value === 'link' || (props.waveless ?? config.waveless),
     )
@@ -40,7 +42,6 @@ export default defineComponent({
       const {
         block = groupProps.block,
         danger = groupProps.danger,
-        disabled = groupProps.disabled,
         ghost = groupProps.ghost,
         loading,
         icon,
@@ -51,7 +52,7 @@ export default defineComponent({
         [prefixCls]: true,
         [`${prefixCls}-block`]: block,
         [`${prefixCls}-danger`]: danger,
-        [`${prefixCls}-disabled`]: disabled,
+        [`${prefixCls}-disabled`]: disabled.value,
         [`${prefixCls}-ghost`]: ghost,
         [`${prefixCls}-loading`]: loading,
         [`${prefixCls}-icon-only`]: !slots.default && (icon || loading || slots.icon),
@@ -62,7 +63,7 @@ export default defineComponent({
     })
 
     const handleClick = (evt: MouseEvent) => {
-      if (props.disabled || props.loading) {
+      if (disabled.value || props.loading) {
         evt.preventDefault()
         evt.stopImmediatePropagation()
         return
@@ -75,7 +76,7 @@ export default defineComponent({
     }
 
     return () => {
-      const { disabled, loading, icon, type } = props
+      const { loading, icon, type } = props
 
       const children: VNodeChild[] = []
       if (loading) {
@@ -98,7 +99,7 @@ export default defineComponent({
         )
       }
       return (
-        <button class={classes.value} disabled={disabled || loading} type={type} onClick={handleClick}>
+        <button class={classes.value} disabled={disabled.value || loading} type={type} onClick={handleClick}>
           {children}
           {!mergedWaveless.value && <ɵWave ref={waveRef} />}
         </button>
