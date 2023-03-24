@@ -57,6 +57,7 @@ export default defineComponent({
       handleCompositionEnd,
       handleInput,
       clearInput,
+      handleEnterDown,
     } = useInputState(props, mergedSearchable)
 
     const getBoundingClientRect = () => elementRef.value?.getBoundingClientRect()
@@ -137,6 +138,7 @@ export default defineComponent({
       handleCompositionStart,
       handleCompositionEnd,
       handleInput,
+      handleEnterDown,
     })
 
     const elementRef = ref<HTMLDivElement>()
