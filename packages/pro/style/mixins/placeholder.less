@@ -1,0 +1,10 @@
+.placeholder(@color: var(--ix-text-color-disabled)) {
+  &::placeholder {
+    opacity: 1; // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526
+    color: @color;
+  }
+
+  &:placeholder-shown {
+    text-overflow: ellipsis;
+  }
+}
