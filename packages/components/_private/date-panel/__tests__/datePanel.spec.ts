@@ -3,7 +3,7 @@ import { MountingOptions, VueWrapper, mount } from '@vue/test-utils'
 import { isArray } from 'lodash-es'
 
 import { renderWork } from '@tests'
-import { endOfWeek, startOfWeek } from 'date-fns'
+import { endOfWeek, isAfter, isBefore, startOfWeek } from 'date-fns'
 
 import DatePanel from '../src/DatePanel'
 import PanelCell from '../src/panel-body/PanelCell'
@@ -163,17 +163,45 @@ describe('DatePanel', () => {
         type: 'date',
         value: new Date('2021-10-01'),
         activeDate: new Date('2021-10-1'),
-        disabledDate: date => date.getMonth() === 9 && [10, 11, 12].includes(date.getDate()),
+        disabledDate: date => isBefore(date, new Date('2021-09-20')) || isAfter(date, new Date('2021-10-15')),
       },
     })
 
-    expect(findCell(wrapper, '9')?.classes()).not.toContain('ix-date-panel-cell-disabled')
-    expect(findCell(wrapper, '10')?.classes()).toContain('ix-date-panel-cell-disabled')
-    expect(findCell(wrapper, '11')?.classes()).toContain('ix-date-panel-cell-disabled')
-    expect(findCell(wrapper, '12')?.classes()).toContain('ix-date-panel-cell-disabled')
-    expect(findCell(wrapper, '13')?.classes()).not.toContain('ix-date-panel-cell-disabled')
-
     expect(wrapper.html()).toMatchSnapshot()
+
+    for (let num = 16; num <= 26; num++) {
+      expect(findCell(wrapper, `${num}`)?.classes()).toContain('ix-date-panel-cell-disabled')
+    }
+    for (let num = 1; num <= 15; num++) {
+      expect(findCell(wrapper, `${num}`)?.classes()).not.toContain('ix-date-panel-cell-disabled')
+    }
+
+    await wrapper.find('.ix-date-panel-header').findAll('button')[2].trigger('click')
+
+    expect(findCell(wrapper, '2020')?.classes()).toContain('ix-date-panel-cell-disabled')
+    expect(findCell(wrapper, '2021')?.classes()).not.toContain('ix-date-panel-cell-disabled')
+    expect(findCell(wrapper, '2022')?.classes()).toContain('ix-date-panel-cell-disabled')
+
+    await findCell(wrapper, '2021')?.trigger('click')
+
+    await wrapper.find('.ix-date-panel-header').findAll('button')[3].trigger('click')
+
+    expect(findCell(wrapper, '8月')?.classes()).toContain('ix-date-panel-cell-disabled')
+    expect(findCell(wrapper, '9月')?.classes()).not.toContain('ix-date-panel-cell-disabled')
+    expect(findCell(wrapper, '10月')?.classes()).not.toContain('ix-date-panel-cell-disabled')
+    expect(findCell(wrapper, '11月')?.classes()).toContain('ix-date-panel-cell-disabled')
+
+    await findCell(wrapper, '9月')?.trigger('click')
+    await wrapper.setProps({
+      activeDate: new Date('2021-9-1'),
+    })
+
+    for (let num = 1; num <= 19; num++) {
+      expect(findCell(wrapper, `${num}`)?.classes()).toContain('ix-date-panel-cell-disabled')
+    }
+    for (let num = 21; num <= 29; num++) {
+      expect(findCell(wrapper, `${num}`)?.classes()).not.toContain('ix-date-panel-cell-disabled')
+    }
   })
 
   test('month type disabledDate work', async () => {
