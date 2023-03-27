@@ -16,28 +16,33 @@ export function useRowCounts(
   valueRef: Ref<string | undefined>,
   lineHeight: ComputedRef<number>,
   sizingData: ComputedRef<ɵBoxSizingData>,
+  rows: number,
 ): ComputedRef<number[]> {
   const [rowCounts, setRowCounts] = useState<number[]>([])
   const calcRowCounts = () => {
     const textarea = textareaRef.value!
     const lines = valueRef.value?.split('\n') ?? []
-
     const { paddingSize } = sizingData.value
-    setRowCounts(
-      lines.map(line =>
-        ɵMeasureTextarea(
-          textarea,
-          el => {
-            el.value = line || 'x'
 
-            // trigger reflow to ensure scrollHeight is calculated when referenced
-            void el.scrollHeight
-            return Math.round((el.scrollHeight - paddingSize) / lineHeight.value)
-          },
-          true,
-        ),
+    const res = lines.map(line =>
+      ɵMeasureTextarea(
+        textarea,
+        el => {
+          el.value = line || 'x'
+
+          // trigger reflow to ensure scrollHeight is calculated when referenced
+          void el.scrollHeight
+          return Math.round((el.scrollHeight - paddingSize) / lineHeight.value)
+        },
+        true,
       ),
     )
+
+    if (rows && res.length < rows) {
+      res.push(...new Array(rows - res.length).fill(1))
+    }
+
+    setRowCounts(res)
   }
 
   watch(valueRef, calcRowCounts)
