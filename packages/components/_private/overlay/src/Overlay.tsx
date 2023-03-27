@@ -27,7 +27,7 @@ import { isFunction } from 'lodash-es'
 import { vClickOutside } from '@idux/cdk/click-outside'
 import { type PopperElement, type PopperEvents, type PopperOptions, usePopper } from '@idux/cdk/popper'
 import { CdkPortal } from '@idux/cdk/portal'
-import { Logger, callEmit, convertElement, getFirstValidNode } from '@idux/cdk/utils'
+import { Logger, callEmit, convertElement, getFirstValidNode, useState } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { useZIndex } from '@idux/components/utils'
 
@@ -88,7 +88,12 @@ export default defineComponent({
       { immediate: true },
     )
 
+    const [isAnimating, setIsAnimating] = useState(false)
+    const onBeforeEnter = () => {
+      setIsAnimating(true)
+    }
     const onAfterLeave = () => {
+      setIsAnimating(false)
       if (props.destroyOnHide) {
         destroy()
       }
@@ -131,6 +136,7 @@ export default defineComponent({
         props,
         mergedPrefixCls,
         visibility,
+        isAnimating,
         currentZIndex,
         contentNode!,
         contentArrowRef,
@@ -143,7 +149,7 @@ export default defineComponent({
         <>
           {trigger}
           <CdkPortal target={mergedContainer.value} load={visibility.value}>
-            <Transition appear name={props.transitionName} onAfterLeave={onAfterLeave}>
+            <Transition appear name={props.transitionName} onBeforeEnter={onBeforeEnter} onAfterLeave={onAfterLeave}>
               {content}
             </Transition>
           </CdkPortal>
@@ -173,6 +179,7 @@ function renderContent(
   props: OverlayProps,
   mergedPrefixCls: ComputedRef<string>,
   visibility: ComputedRef<boolean>,
+  isAnimating: ComputedRef<boolean>,
   currentZIndex: ComputedRef<number>,
   contentNode: VNode[],
   arrowRef: Ref<PopperElement | undefined>,
@@ -183,12 +190,18 @@ function renderContent(
   if (props.destroyOnHide && !visibility.value) {
     return null
   }
+
   const prefixCls = mergedPrefixCls.value
+  const classes = {
+    [prefixCls]: true,
+    [`${prefixCls}-animating`]: isAnimating.value,
+  }
+
   const { triggerId } = props
   const overlayId = triggerId != null ? `__IDUX_OVERLAY-${triggerId}` : undefined
   const style = `z-index: ${currentZIndex.value}`
   const overlay = (
-    <div ref={popperRef} id={overlayId} class={prefixCls} style={style} {...popperEvents.value} {...attrs}>
+    <div ref={popperRef} id={overlayId} class={classes} style={style} {...popperEvents.value} {...attrs}>
       {contentNode}
       {props.showArrow && <div ref={arrowRef} class={`${prefixCls}-arrow`}></div>}
     </div>
