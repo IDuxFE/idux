@@ -26,6 +26,7 @@ export interface InputStateContext {
   handleCompositionEnd: (evt: CompositionEvent) => void
   handleInput: (evt: Event) => void
   clearInput: () => void
+  handleEnterDown: (evt: KeyboardEvent) => void
 }
 
 export function useInputState(props: SelectorProps, mergedSearchable: ComputedRef<boolean>): InputStateContext {
@@ -68,6 +69,13 @@ export function useInputState(props: SelectorProps, mergedSearchable: ComputedRe
     if (isComposing.value) {
       isComposing.value = false
       handleInput(evt, false)
+    }
+  }
+
+  // 处理中文输入法下的回车无法触发 compositionEnd 事件的问题
+  const handleEnterDown = (evt: KeyboardEvent) => {
+    if (evt.code === 'Enter' && isComposing.value) {
+      handleCompositionEnd(evt as any)
     }
   }
 
@@ -116,5 +124,6 @@ export function useInputState(props: SelectorProps, mergedSearchable: ComputedRe
     handleCompositionEnd,
     handleInput,
     clearInput,
+    handleEnterDown,
   }
 }

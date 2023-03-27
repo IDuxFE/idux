@@ -22,6 +22,7 @@ export default defineComponent({
       handleCompositionStart,
       handleCompositionEnd,
       handleInput,
+      handleEnterDown,
     } = inject(selectorToken)!
 
     const inputReadonly = computed(
@@ -47,6 +48,7 @@ export default defineComponent({
             value={inputValue.value}
             onCompositionstart={handleCompositionStart}
             onCompositionend={handleCompositionEnd}
+            onKeydown={handleEnterDown}
             onInput={handleInput}
           />
           {multiple && <span ref={mirrorRef} class={`${prefixCls}-mirror`} aria-hidden></span>}

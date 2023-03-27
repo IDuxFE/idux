@@ -22,6 +22,7 @@ export interface SelectorContext {
   handleCompositionStart: (evt: CompositionEvent) => void
   handleCompositionEnd: (evt: CompositionEvent) => void
   handleInput: (evt: Event) => void
+  handleEnterDown: (evt: KeyboardEvent) => void
 }
 
 export const selectorToken: InjectionKey<SelectorContext> = Symbol('selectorToken')
