@@ -5,8 +5,6 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { CSSProperties } from 'vue'
-
 import { computed, defineComponent, getCurrentInstance, inject, normalizeClass } from 'vue'
 
 import { hasSlot } from '@idux/cdk/utils'
@@ -52,6 +50,16 @@ export default defineComponent({
       }
     })
 
+    /* eslint-disable indent */
+    const dotInnerStyle = computed(() =>
+      isPresetOrStatusColor.value
+        ? {}
+        : {
+            'background-color': props.color,
+          },
+    )
+    /* eslint-enable indent */
+
     const classes = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-item`
       const placement = itemPlacement.value
@@ -62,13 +70,15 @@ export default defineComponent({
       })
     })
 
+    const isCustomDot = computed(() => hasSlot(slots, 'dot') || !!props.dot)
+
     const dotClass = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-item-head`
-      const { dot, color } = props
+      const { color } = props
 
       return normalizeClass({
         [`${prefixCls}-dot`]: true,
-        [`${prefixCls}-dot-custom`]: hasSlot(slots, 'dot') || !!dot,
+        [`${prefixCls}-dot-custom`]: isCustomDot.value,
         [`${prefixCls}-dot-${color}`]: isPresetOrStatusColor.value,
       })
     })
@@ -83,13 +93,14 @@ export default defineComponent({
         <li class={classes.value}>
           <div class={`${prefixCls}-head`}>
             <div class={`${prefixCls}-head-line`}></div>
-            <div class={dotClass.value} style={dotStyle.value as CSSProperties}>
+            <div class={dotClass.value} style={dotStyle.value}>
               {dotNode}
+              {!isCustomDot.value && <div class={`${prefixCls}-head-dot-inner`} style={dotInnerStyle.value}></div>}
             </div>
           </div>
           <div class={`${prefixCls}-content`}>
-            {labelNode && <div class={`${prefixCls}-content-label`}>{labelNode}</div>}
             {slots.default && <div class={`${prefixCls}-content-desc`}>{slots.default()}</div>}
+            {labelNode && <div class={`${prefixCls}-content-label`}>{labelNode}</div>}
           </div>
         </li>
       )
