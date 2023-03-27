@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.2](https://github.com/IDuxFE/idux/compare/v1.5.1...v1.5.2) (2023-03-27)
+
+### Bug Fixes
+
+- **cdk:forms:** disabled according to status ([#1503](https://github.com/IDuxFE/idux/issues/1503)) ([88a6d3f](https://github.com/IDuxFE/idux/commit/88a6d3f568521eea4b39220c03f7a622695cec70))
+- **cdk:scroll:** content is blank when re-activated in keepalive mode ([#1505](https://github.com/IDuxFE/idux/issues/1505)) ([2d74862](https://github.com/IDuxFE/idux/commit/2d7486257cda29fe554572208bf516b70f33102e))
+
 # [1.5.0](https://github.com/IDuxFE/idux/compare/v1.4.3...v1.5.0) (2023-03-07)
 
 ### Features

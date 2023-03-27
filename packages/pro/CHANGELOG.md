@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.2](https://github.com/IDuxFE/idux/compare/v1.5.1...v1.5.2) (2023-03-27)
+
+### Bug Fixes
+
+- **pro:table:** triggers of last column is covered by layout tool ([#1507](https://github.com/IDuxFE/idux/issues/1507)) ([d2654f2](https://github.com/IDuxFE/idux/commit/d2654f215e07f364730b29f5aa7ebeedd405cd41))
+- **pro:textarea:** placeholder color for textarea ([#1512](https://github.com/IDuxFE/idux/issues/1512)) ([521ac8d](https://github.com/IDuxFE/idux/commit/521ac8d60a6bbf20fe2b4aad556e1a9bddd96b22))
+
 ## [1.5.1](https://github.com/IDuxFE/idux/compare/v1.5.0...v1.5.1) (2023-03-14)
 
 ### Bug Fixes

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.2](https://github.com/IDuxFE/idux/compare/v1.5.1...v1.5.2) (2023-03-27)
+
+### Bug Fixes
+
+- **comp:button:** disabled btn when group's `disabled` is true ([#1508](https://github.com/IDuxFE/idux/issues/1508)) ([6e44b98](https://github.com/IDuxFE/idux/commit/6e44b9848864df369499afe885068bdf033e4f27))
+- **comp:date-picker:** disabledDate error on year and month panel ([#1514](https://github.com/IDuxFE/idux/issues/1514)) ([06c546c](https://github.com/IDuxFE/idux/commit/06c546c5a9caf517068123fc098ec32226977451))
+- **comp:date-picker:** prevent elements with class name `ix-overlay`'s `box-sizing` set to `content-box` ([#1511](https://github.com/IDuxFE/idux/issues/1511)) ([3fe76f2](https://github.com/IDuxFE/idux/commit/3fe76f25317a0e5aeae24865d50c00a7827b8815))
+- **comp:select:** compositionEnd can't trigger ([#1513](https://github.com/IDuxFE/idux/issues/1513)) ([33a2cf6](https://github.com/IDuxFE/idux/commit/33a2cf6a7e0c8760f5e1e354a1f6c5221cfa738c))
+- **comp:timeline:** modify timeline style according to design ([#1509](https://github.com/IDuxFE/idux/issues/1509)) ([b9db622](https://github.com/IDuxFE/idux/commit/b9db622646403063993c0ba0708701b18323c32f))
+
 ## [1.5.1](https://github.com/IDuxFE/idux/compare/v1.5.0...v1.5.1) (2023-03-14)
 
 ### Bug Fixes
