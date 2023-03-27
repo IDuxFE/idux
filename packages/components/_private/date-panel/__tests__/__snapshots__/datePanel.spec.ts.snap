@@ -101,19 +101,19 @@ exports[`DatePanel > date type disabledDate work 1`] = `
               <div class=\\"ix-date-panel-cell-trigger\\">9</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">10</div>
             </div>
           </td>
         </tr>
         <tr role=\\"row\\" class=\\"ix-date-panel-row\\">
-          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">11</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">12</div>
             </div>
@@ -133,123 +133,123 @@ exports[`DatePanel > date type disabledDate work 1`] = `
               <div class=\\"ix-date-panel-cell-trigger\\">15</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">16</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">17</div>
             </div>
           </td>
         </tr>
         <tr role=\\"row\\" class=\\"ix-date-panel-row\\">
-          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">18</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">19</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">20</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">21</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">22</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">23</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">24</div>
             </div>
           </td>
         </tr>
         <tr role=\\"row\\" class=\\"ix-date-panel-row\\">
-          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">25</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">26</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">27</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">28</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">29</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">30</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">31</div>
             </div>
           </td>
         </tr>
         <tr role=\\"row\\" class=\\"ix-date-panel-row\\">
-          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">1</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">2</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">3</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">4</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">5</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">6</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">7</div>
             </div>

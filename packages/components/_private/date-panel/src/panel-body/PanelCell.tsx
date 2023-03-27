@@ -15,8 +15,8 @@ import { IxTooltip } from '@idux/components/tooltip'
 
 import { datePanelToken } from '../token'
 import { panelCellProps } from '../types'
+import { getPanelCellDisabled, getPanelCellType } from '../utils'
 
-const dayTypes: DatePanelType[] = ['date', 'week']
 const labelFormat: Record<DatePanelType, string> = {
   date: 'd',
   week: 'd',
@@ -44,30 +44,31 @@ export default defineComponent({
 
     const offsetIndex = computed(() => props.rowIndex! * maxCellIndex.value + props.cellIndex!)
     const cellDate = computed(() => {
-      const currType = activeType.value
-      const offsetUnit = dayTypes.includes(currType) ? 'day' : currType
-      return dateConfig.add(startActiveDate.value, offsetIndex.value, offsetUnit as 'day')
+      return dateConfig.add(startActiveDate.value, offsetIndex.value, getPanelCellType(activeType.value))
     })
 
     const startDate = computed(() => getDateValue(dateConfig, panelProps.value, activeType.value, true))
     const endDate = computed(() => getDateValue(dateConfig, panelProps.value, activeType.value, false))
 
-    const isDisabled = computed(() => panelProps.disabledDate?.(cellDate.value))
+    const isDisabled = computed(() => {
+      const disabledDate = panelProps.disabledDate
+      if (!disabledDate) {
+        return false
+      }
+
+      return getPanelCellDisabled(cellDate.value, activeType.value, dateConfig, disabledDate)
+    })
     const cellTooltip = computed(() =>
       panelProps.cellTooltip?.({ value: cellDate.value, disabled: !!isDisabled.value }),
     )
     const isStart = computed(() => startDate.value && dateConfig.isSame(startDate.value, cellDate.value, 'date'))
     const isEnd = computed(() => endDate.value && dateConfig.isSame(endDate.value, cellDate.value, 'date'))
     const isCurrent = computed(() =>
-      dateConfig.isSame(
-        cellDate.value,
-        dateConfig.now(),
-        dayTypes.includes(activeType.value) ? 'day' : activeType.value,
-      ),
+      dateConfig.isSame(cellDate.value, dateConfig.now(), getPanelCellType(activeType.value)),
     )
     const outView = computed(() => {
       const currType = activeType.value
-      if (dayTypes.includes(activeType.value)) {
+      if (getPanelCellType(activeType.value) === 'date') {
         return !dateConfig.isSame(cellDate.value, activeDate.value, 'month')
       }
       if (currType === 'year') {
@@ -81,7 +82,7 @@ export default defineComponent({
         return false
       }
 
-      const compareType = dayTypes.includes(activeType.value) ? 'date' : activeType.value
+      const compareType = getPanelCellType(activeType.value)
 
       if (panelProps.isSelecting) {
         return startDate.value && dateConfig.isSame(startDate.value, cellDate.value, compareType)
@@ -93,7 +94,7 @@ export default defineComponent({
       )
     })
     const isInRange = computed(() => {
-      const compareType = dayTypes.includes(activeType.value) ? 'date' : activeType.value
+      const compareType = getPanelCellType(activeType.value)
       const cellDateValue = dateConfig.startOf(cellDate.value, compareType).valueOf()
 
       return (
