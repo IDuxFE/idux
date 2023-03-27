@@ -10,6 +10,20 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.5.2(2023-03-27)
+
+### Bug Fixes
+
+- **cdk:forms:** 动态禁用不生效 ([#1503](https://github.com/IDuxFE/idux/issues/1503)) ([88a6d3f](https://github.com/IDuxFE/idux/commit/88a6d3f568521eea4b39220c03f7a622695cec70))
+- **cdk:scroll:** keepAlive 模式下滚动位置异常 ([#1505](https://github.com/IDuxFE/idux/issues/1505)) ([2d74862](https://github.com/IDuxFE/idux/commit/2d7486257cda29fe554572208bf516b70f33102e))
+- **comp:button:** ButtonGroup 的 disabled 不生效 ([#1508](https://github.com/IDuxFE/idux/issues/1508)) ([6e44b98](https://github.com/IDuxFE/idux/commit/6e44b9848864df369499afe885068bdf033e4f27))
+- **comp:date-picker:** disabledDate 在年，月等面板时工作异常 ([#1514](https://github.com/IDuxFE/idux/issues/1514)) ([06c546c](https://github.com/IDuxFE/idux/commit/06c546c5a9caf517068123fc098ec32226977451))
+- **comp:date-picker:** 重置面板的样式 ([#1511](https://github.com/IDuxFE/idux/issues/1511)) ([3fe76f2](https://github.com/IDuxFE/idux/commit/3fe76f25317a0e5aeae24865d50c00a7827b8815))
+- **comp:select:** compositionEnd 没有被正常触发 ([#1513](https://github.com/IDuxFE/idux/issues/1513)) ([33a2cf6](https://github.com/IDuxFE/idux/commit/33a2cf6a7e0c8760f5e1e354a1f6c5221cfa738c))
+- **comp:timeline:** 样式更新 ([#1509](https://github.com/IDuxFE/idux/issues/1509)) ([b9db622](https://github.com/IDuxFE/idux/commit/b9db622646403063993c0ba0708701b18323c32f))
+- **pro:table:** 最后一列表头的图标被遮挡 ([#1507](https://github.com/IDuxFE/idux/issues/1507)) ([d2654f2](https://github.com/IDuxFE/idux/commit/d2654f215e07f364730b29f5aa7ebeedd405cd41))
+- **pro:textarea:** placeholder 的颜色异常 ([#1512](https://github.com/IDuxFE/idux/issues/1512)) ([521ac8d](https://github.com/IDuxFE/idux/commit/521ac8d60a6bbf20fe2b4aad556e1a9bddd96b22))
+
 ## 1.5.1(2023-03-14)
 
 ### Bug Fixes
