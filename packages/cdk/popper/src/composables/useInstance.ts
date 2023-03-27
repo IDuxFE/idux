@@ -13,6 +13,8 @@ import { type ComputePositionConfig, type ComputePositionReturn, autoUpdate, com
 
 import { convertElement } from '@idux/cdk/utils'
 
+import { type ReferenceHiddenData, referenceHiddenMiddlewareName } from '../middlewares/refenceHidden'
+
 export interface Instance {
   update: () => Promise<void>
   destroy: () => void
@@ -21,6 +23,7 @@ export interface Instance {
 export function useInstance(
   triggerRef: Ref<PopperElement | undefined>,
   popperRef: Ref<PopperElement | undefined>,
+  visibility: Ref<boolean>,
   options: Ref<ComputePositionConfig>,
 ): Instance {
   const updatePopperPosition = (state: ComputePositionReturn) => {
@@ -44,8 +47,22 @@ export function useInstance(
       return
     }
 
-    const state = await computePosition(triggerEl, popperEl, options.value)
-    state && updatePopperPosition(state)
+    const state = (await computePosition(triggerEl, popperEl, options.value)) as ComputePositionReturn & {
+      middlewareData: {
+        [key in typeof referenceHiddenMiddlewareName]?: ReferenceHiddenData
+      }
+    }
+
+    if (
+      !visibility.value ||
+      !state ||
+      state.middlewareData[referenceHiddenMiddlewareName]?.referenceHidden ||
+      getComputedStyle(triggerEl).display === 'none'
+    ) {
+      return
+    }
+
+    updatePopperPosition(state)
   }
 
   let cleanUpHandler: (() => void) | null = null
