@@ -6,7 +6,7 @@
  */
 
 import type { ModalInstance, ModalOptions, ModalRef } from './types'
-import type { VKey } from '@idux/cdk/utils'
+import type { MaybeArray, VKey } from '@idux/cdk/utils'
 
 import { cloneVNode, defineComponent, isVNode, provide, shallowRef } from 'vue'
 
@@ -28,12 +28,19 @@ export default defineComponent({
     return () => {
       const children = modals.value.map(item => {
         // The default value for `visible`, onDestroy should not be passed in Modal
-        const { key, visible = true, destroyOnHide, onDestroy, content, contentProps, ...restProps } = item
+        const { key, visible = true, destroyOnHide, onDestroy, content, contentProps, onOk, ...restProps } = item
         const setRef = (instance: unknown) => setModalRef(key!, instance as ModalInstance | null)
         const onUpdateVisible = (visible: boolean) => update(key!, { visible })
-        const onAfterClose = destroyOnHide ? () => destroy(key!) : undefined
-        const mergedProps = { key, visible, ref: setRef, 'onUpdate:visible': onUpdateVisible, onAfterClose }
+        const _onOk: MaybeArray<(evt?: unknown) => unknown> = []
 
+        if (destroyOnHide) {
+          _onOk.push(() => destroy(key!))
+        }
+        if (onOk) {
+          Array.isArray(onOk) ? _onOk.unshift(...onOk) : _onOk.unshift(onOk)
+        }
+
+        const mergedProps = { key, visible, ref: setRef, 'onUpdate:visible': onUpdateVisible, onOk: _onOk }
         const contentNode = isVNode(content) ? cloneVNode(content, contentProps, true) : content
         return <Modal {...mergedProps} {...restProps} __content_node={contentNode} />
       })
