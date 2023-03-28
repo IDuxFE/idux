@@ -23,12 +23,14 @@ export const initContext = (targetContext?: DnDContext): DnDContext => {
   // default context is window
   if (!targetContext) {
     const root = document as unknown as HTMLElement
-    if (!_dnDContextMap.has(root)) {
-      context = useDnDContext(root)
-      _dnDContextMap.set(root, context)
-    } else {
-      context = _dnDContextMap.get(root)!
+
+    if (_dnDContextMap.has(root)) {
+      _dnDContextMap.delete(root)
     }
+
+    context = useDnDContext(root)
+    _dnDContextMap.set(root, context)
+
     return context
   }
   return targetContext
