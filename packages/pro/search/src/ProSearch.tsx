@@ -62,7 +62,7 @@ export default defineComponent({
       searchItems,
       searchStateContext.tempSearchStateAvailable,
     )
-    const commonOverlayProps = useCommonOverlayProps(props, config, mergedPrefixCls)
+    const commonOverlayProps = useCommonOverlayProps(props, config, componentCommon, mergedPrefixCls)
     const focusStateContext = useFocusedState(props, elementRef, commonOverlayProps)
     const { focused, focus, blur } = focusStateContext
 
