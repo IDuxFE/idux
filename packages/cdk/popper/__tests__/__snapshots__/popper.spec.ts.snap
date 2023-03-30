@@ -12,70 +12,70 @@ exports[`usePopper > options > autoAdjust work 2`] = `
 
 exports[`usePopper > options > offset work 1`] = `
 "<div id=\\"trigger\\">Trigger</div>
-<div id=\\"overlay\\" style=\\"position: absolute; left: 4px; top: -4px;\\" data-popper-reference-hidden=\\"\\" data-popper-placement=\\"top\\">Popper</div>"
+<div id=\\"overlay\\" style=\\"position: absolute; left: 4px; top: -4px;\\" data-popper-placement=\\"top\\">Popper</div>"
 `;
 
 exports[`usePopper > options > offset work 2`] = `
 "<div id=\\"trigger\\">Trigger</div>
-<div id=\\"overlay\\" style=\\"position: absolute; left: 8px; top: -8px;\\" data-popper-reference-hidden=\\"\\" data-popper-placement=\\"top\\">Popper</div>"
+<div id=\\"overlay\\" style=\\"position: absolute; left: 8px; top: -8px;\\" data-popper-placement=\\"top\\">Popper</div>"
 `;
 
 exports[`usePopper > options > placement work 1`] = `
 "<div id=\\"trigger\\">Trigger</div>
-<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-reference-hidden=\\"\\" data-popper-placement=\\"left-end\\">Popper</div>"
+<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-placement=\\"left-end\\">Popper</div>"
 `;
 
 exports[`usePopper > options > placement work 2`] = `
 "<div id=\\"trigger\\">Trigger</div>
-<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-reference-hidden=\\"\\" data-popper-placement=\\"left-end\\">Popper</div>"
+<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-placement=\\"left-end\\">Popper</div>"
 `;
 
 exports[`usePopper > options > placement work 3`] = `
 "<div id=\\"trigger\\">Trigger</div>
-<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-reference-hidden=\\"\\" data-popper-placement=\\"left-end\\">Popper</div>"
+<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-placement=\\"left-end\\">Popper</div>"
 `;
 
 exports[`usePopper > options > placement work 4`] = `
 "<div id=\\"trigger\\">Trigger</div>
-<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-reference-hidden=\\"\\" data-popper-placement=\\"left-end\\">Popper</div>"
+<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-placement=\\"left-end\\">Popper</div>"
 `;
 
 exports[`usePopper > options > placement work 5`] = `
 "<div id=\\"trigger\\">Trigger</div>
-<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-reference-hidden=\\"\\" data-popper-placement=\\"left-end\\">Popper</div>"
+<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-placement=\\"left-end\\">Popper</div>"
 `;
 
 exports[`usePopper > options > placement work 6`] = `
 "<div id=\\"trigger\\">Trigger</div>
-<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-reference-hidden=\\"\\" data-popper-placement=\\"left-end\\">Popper</div>"
+<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-placement=\\"left-end\\">Popper</div>"
 `;
 
 exports[`usePopper > options > placement work 7`] = `
 "<div id=\\"trigger\\">Trigger</div>
-<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-reference-hidden=\\"\\" data-popper-placement=\\"left-end\\">Popper</div>"
+<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-placement=\\"left-end\\">Popper</div>"
 `;
 
 exports[`usePopper > options > placement work 8`] = `
 "<div id=\\"trigger\\">Trigger</div>
-<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-reference-hidden=\\"\\" data-popper-placement=\\"left-end\\">Popper</div>"
+<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-placement=\\"left-end\\">Popper</div>"
 `;
 
 exports[`usePopper > options > placement work 9`] = `
 "<div id=\\"trigger\\">Trigger</div>
-<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-reference-hidden=\\"\\" data-popper-placement=\\"left-end\\">Popper</div>"
+<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-placement=\\"left-end\\">Popper</div>"
 `;
 
 exports[`usePopper > options > placement work 10`] = `
 "<div id=\\"trigger\\">Trigger</div>
-<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-reference-hidden=\\"\\" data-popper-placement=\\"left-end\\">Popper</div>"
+<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-placement=\\"left-end\\">Popper</div>"
 `;
 
 exports[`usePopper > options > placement work 11`] = `
 "<div id=\\"trigger\\">Trigger</div>
-<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-reference-hidden=\\"\\" data-popper-placement=\\"left-end\\">Popper</div>"
+<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-placement=\\"left-end\\">Popper</div>"
 `;
 
 exports[`usePopper > options > placement work 12`] = `
 "<div id=\\"trigger\\">Trigger</div>
-<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-reference-hidden=\\"\\" data-popper-placement=\\"left-end\\">Popper</div>"
+<div id=\\"overlay\\" style=\\"position: absolute; left: 0px; top: 0px;\\" data-popper-placement=\\"left-end\\">Popper</div>"
 `;

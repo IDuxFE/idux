@@ -76,7 +76,7 @@ export function usePopper<TE extends PopperElement = PopperElement, PE extends P
 
   function initialize() {
     destroy()
-    popperInstance = useInstance(triggerRef, popperRef, convertedOptions)
+    popperInstance = useInstance(triggerRef, popperRef, visibility, convertedOptions)
   }
 
   function destroy(): void {
