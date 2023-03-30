@@ -199,6 +199,7 @@ export default defineComponent({
               size="sm"
               suffix="search"
               value={value}
+              placeholder={props.placeholder}
               onClear={handleSearchClear}
               onInput={handleSearchInput}
             />
