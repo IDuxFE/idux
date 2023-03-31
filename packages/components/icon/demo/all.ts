@@ -64,6 +64,7 @@ export const allIcons = [
   'down',
   'download',
   'edit',
+  'ellipsis-vertical',
   'ellipsis',
   'empty',
   'environment',
