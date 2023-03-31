@@ -36,12 +36,15 @@
     "*.css",
     "*.less"
   ],
-  "scripts": {},
+  "scripts": {
+    "clean": "rimraf dist node_modules"
+  },
   "dependencies": {
     "@floating-ui/dom": "^1.0.10",
     "lodash-es": "^4.17.0"
   },
   "devDependencies": {
+    "rimraf": "^4.4.0",
     "vue": "^3.2.0",
     "vue-router": "^4.0.0"
   },

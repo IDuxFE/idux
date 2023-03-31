@@ -34,7 +34,9 @@
     "*.css",
     "*.less"
   ],
-  "scripts": {},
+  "scripts": {
+    "clean": "rimraf dist node_modules"
+  },
   "dependencies": {
     "@idux/cdk": "1.5.2",
     "@idux/components": "1.5.2",
@@ -43,6 +45,7 @@
     "lodash-es": "^4.17.0"
   },
   "devDependencies": {
+    "rimraf": "^4.4.0",
     "vue": "^3.2.0",
     "vue-router": "^4.0.0"
   },

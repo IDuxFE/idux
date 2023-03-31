@@ -6,6 +6,7 @@
   "license": "MIT",
   "author": "IDuxFE<idux.feteam@gmail.com>",
   "scripts": {
+    "clean": "rimraf dist node_modules",
     "start": "vite",
     "build": "vite build",
     "build:pre-version": "vite build --mode pre-version"
@@ -20,7 +21,7 @@
     "vue-router": "^4.0.0"
   },
   "devDependencies": {
-    "@types/rimraf": "^3.0.2",
-    "rimraf": "^3.0.2"
+    "@types/rimraf": "^4.0.0",
+    "rimraf": "^4.4.0"
   }
 }
