@@ -11,29 +11,37 @@ import { createSharedComposable } from '@idux/cdk/utils'
 
 import { type DnDContext, _dnDContextMap, useDragDropContext } from './composables/useDragDropContext'
 
-const useDnDContext = createSharedComposable(useDragDropContext)
+const { useComposable: useDnDContext, addSubscribers, delSubscribers } = createSharedComposable(useDragDropContext)
 
 /**
  * get context
  *
  * @param targetContext
  */
-export const initContext = (targetContext?: DnDContext): DnDContext => {
+export const initContext = (
+  targetContext?: DnDContext,
+): {
+  context: DnDContext
+  delSubscribers?: () => void
+} => {
   let context = {} as DnDContext
   // default context is window
   if (!targetContext) {
     const root = document as unknown as HTMLElement
 
-    if (_dnDContextMap.has(root)) {
-      _dnDContextMap.delete(root)
+    if (!_dnDContextMap.has(root)) {
+      context = useDnDContext(root)
+      _dnDContextMap.set(root, context)
+      return { context }
+    } else {
+      addSubscribers()
+      context = _dnDContextMap.get(root)!
+      return { context, delSubscribers }
     }
-
-    context = useDnDContext(root)
-    _dnDContextMap.set(root, context)
-
-    return context
   }
-  return targetContext
+  return {
+    context: targetContext,
+  }
 }
 
 /**

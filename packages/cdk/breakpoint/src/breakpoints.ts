@@ -43,4 +43,4 @@ export function useBreakpoints<T extends string>(value?: Record<T, string>): Rec
   return match as Record<T, boolean>
 }
 
-export const useSharedBreakpoints = createSharedComposable(() => useBreakpoints())
+export const { useComposable: useSharedBreakpoints } = createSharedComposable(() => useBreakpoints())

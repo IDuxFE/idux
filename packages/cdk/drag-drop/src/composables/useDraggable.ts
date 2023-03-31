@@ -5,13 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { DnDContext } from './useDragDropContext'
 import type { DnDEventName, DnDEventType, DnDPosition, DraggableOptions } from '../types'
 
 import { type ComputedRef, computed, ref, watch } from 'vue'
 
 import { type MaybeElementRef, convertElement, tryOnScopeDispose, useEventListener } from '@idux/cdk/utils'
 
+import { DnDContext } from './useDragDropContext'
 import { withBoundary } from './withBoundary'
 import { withDragFree } from './withDragFree'
 import { withDragHandle } from './withDragHandle'
@@ -37,7 +37,8 @@ export function useDraggable(
   reset: () => void
   stop: () => void
 } {
-  context = initContext(context)
+  const { context: _context, delSubscribers } = initContext(context)
+  context = _context
 
   const registry = context.registry!
   const stateRef = ref<DnDState>()
@@ -68,6 +69,10 @@ export function useDraggable(
   }
 
   const offDraggable = (sourceElement: HTMLElement) => {
+    if (delSubscribers) {
+      delSubscribers()
+    }
+
     registry.off(sourceElement)
     listenerStops.forEach(listenerStop => listenerStop())
 

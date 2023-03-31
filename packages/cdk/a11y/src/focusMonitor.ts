@@ -568,4 +568,4 @@ export function useFocusMonitor(options?: FocusMonitorOptions): FocusMonitor {
   return { monitor, stopMonitoring, focusVia, blurVia }
 }
 
-export const useSharedFocusMonitor = createSharedComposable(() => useFocusMonitor())
+export const { useComposable: useSharedFocusMonitor } = createSharedComposable(() => useFocusMonitor())

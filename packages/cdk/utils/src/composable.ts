@@ -13,20 +13,33 @@ import { callEmit } from './props'
 import { tryOnScopeDispose } from './tryOnScopeDispose'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function createSharedComposable<T extends (...args: any[]) => ReturnType<T>>(composable: T): T {
+export function createSharedComposable<T extends (...args: any[]) => ReturnType<T>>(
+  composable: T,
+): { useComposable: T; addSubscribers: () => void; delSubscribers: () => void } {
   let subscribers = 0
   let state: ReturnType<T> | undefined
   let scope: EffectScope | undefined
 
   const dispose = () => {
-    if (scope && --subscribers <= 0) {
+    subscribers -= 1
+
+    if (scope && subscribers <= 0) {
       scope.stop()
       state = scope = undefined
     }
   }
 
-  return ((...args) => {
+  const addSubscribers = () => {
     subscribers++
+  }
+
+  const delSubscribers = () => {
+    dispose()
+  }
+
+  const useComposable = ((...args) => {
+    subscribers++
+
     if (!state) {
       scope = effectScope(true)
       state = scope.run(() => composable(...args))
@@ -34,6 +47,8 @@ export function createSharedComposable<T extends (...args: any[]) => ReturnType<
     tryOnScopeDispose(dispose)
     return state
   }) as T
+
+  return { useComposable, addSubscribers, delSubscribers }
 }
 
 export function useState<T>(defaultOrFactory: T | (() => T), shallow = true): [ComputedRef<T>, (value: T) => void] {
