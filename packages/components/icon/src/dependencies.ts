@@ -26,11 +26,11 @@ import {
   Down,
   Ellipsis,
   Empty,
+  Exclamation,
   ExclamationCircle,
   ExclamationCircleFilled,
   FilterFilled,
   Holder,
-  Info,
   InfoCircle,
   InfoCircleFilled,
   LayoutCompact,
@@ -82,13 +82,13 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   Down, // Select Table
   Ellipsis, // Table
   Empty, // Empty
-  ExclamationCircle, // Message Result Alert Notification
-  ExclamationCircleFilled, // Modal Popconfirm
+  InfoCircle, // Message Result Alert Notification
+  InfoCircleFilled, // Modal Popconfirm
   FilterFilled, // Table
   Holder, // tree
-  Info, // Stepper
-  InfoCircle, // Message Result Alert Notification
-  InfoCircleFilled, // Modal
+  Exclamation, // Stepper
+  ExclamationCircle, // Message Result Alert Notification
+  ExclamationCircleFilled, // Modal
   LayoutCompact, // ProTable
   LayoutLarge, // ProTable
   LayoutMedium, // ProTable

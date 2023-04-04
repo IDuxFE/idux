@@ -22,10 +22,10 @@ export const defaultConfig: GlobalConfig = {
     closable: false,
     icon: {
       success: 'check-circle',
-      error: 'info-circle',
+      error: 'exclamation-circle',
       info: 'bulb',
-      warning: 'exclamation-circle',
-      offline: 'exclamation-circle',
+      warning: 'info-circle',
+      offline: 'info-circle',
     },
   },
   anchor: {
