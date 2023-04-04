@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.3](https://github.com/IDuxFE/idux/compare/v1.5.2...v1.5.3) (2023-04-04)
+
+### Bug Fixes
+
+- **pro:search:** add animation to overlay ([#1517](https://github.com/IDuxFE/idux/issues/1517)) ([a781bb9](https://github.com/IDuxFE/idux/commit/a781bb9930479b800022cc410eb8c5dca3a25a19))
+
 ## [1.5.2](https://github.com/IDuxFE/idux/compare/v1.5.1...v1.5.2) (2023-03-27)
 
 ### Bug Fixes

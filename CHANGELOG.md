@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.3](https://github.com/IDuxFE/idux/compare/v1.5.2...v1.5.3) (2023-04-04)
+
+### Bug Fixes
+
+- **cdk:popper:** reference hidden popper are no longer updated ([#1515](https://github.com/IDuxFE/idux/issues/1515)) ([9552ef3](https://github.com/IDuxFE/idux/commit/9552ef360c439e16414668d4a7bb07e0d7b5b504))
+- **comp:\*:** animating overlay are not hidden anymore ([#1516](https://github.com/IDuxFE/idux/issues/1516)) ([3d4ce98](https://github.com/IDuxFE/idux/commit/3d4ce98e103f93f72c9655dfcef0206be7208691))
+- **comp:icon:** 'info' and 'exclamation' are exchanged ([#1525](https://github.com/IDuxFE/idux/issues/1525)) ([dc98fae](https://github.com/IDuxFE/idux/commit/dc98faee2f89f86a1f2f5ee42ee2b92404c892da))
+- **comp:icon:** ellipsis icon not right ([#1522](https://github.com/IDuxFE/idux/issues/1522)) ([615f483](https://github.com/IDuxFE/idux/commit/615f48300d7f930a033385594ea42032a0f9b880))
+- **pro:search:** add animation to overlay ([#1517](https://github.com/IDuxFE/idux/issues/1517)) ([a781bb9](https://github.com/IDuxFE/idux/commit/a781bb9930479b800022cc410eb8c5dca3a25a19))
+
 ## [1.5.2](https://github.com/IDuxFE/idux/compare/v1.5.1...v1.5.2) (2023-03-27)
 
 ### Bug Fixes
