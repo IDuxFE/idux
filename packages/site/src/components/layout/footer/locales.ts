@@ -54,10 +54,10 @@ export const footerLocales = {
         },
         {
           icon: '',
-          title: '钉钉',
-          link: 'https://qr.dingtalk.com/action/joingroup?code=v1,k1,Te6pMp0TnP+9ffJNBwvWiYUD8iJH8tC8ypmdh9BijHs=&_dt_no_comment=1&origin=11',
+          title: '微信群',
+          link: '/images/QRcode.jpg',
           description: '',
-          tooltip: '钉钉交流群: 33037310',
+          tooltip: true,
         },
       ],
     },
