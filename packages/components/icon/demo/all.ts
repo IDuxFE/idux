@@ -71,6 +71,7 @@ export const allIcons = [
   'exception',
   'exclamation-circle-filled',
   'exclamation-circle',
+  'exclamation',
   'exit',
   'expand',
   'export',
