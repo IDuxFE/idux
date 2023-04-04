@@ -10,6 +10,17 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.5.3(2023-04-04)
+
+### Bug Fixes
+
+- **cdk:popper:** 隐藏后不应该再计算位置 ([#1515](https://github.com/IDuxFE/idux/issues/1515)) ([9552ef3](https://github.com/IDuxFE/idux/commit/9552ef360c439e16414668d4a7bb07e0d7b5b504))
+- **comp:\*:** 动画中的浮层不应该被 reference hidden 影响  ([#1516](https://github.com/IDuxFE/idux/issues/1516)) ([3d4ce98](https://github.com/IDuxFE/idux/commit/3d4ce98e103f93f72c9655dfcef0206be7208691))
+- **comp:icon:** 'info' 和 'exclamation' 图标互换 ([#1525](https://github.com/IDuxFE/idux/issues/1525)) ([dc98fae](https://github.com/IDuxFE/idux/commit/dc98faee2f89f86a1f2f5ee42ee2b92404c892da))
+- **comp:icon:** ellipsis 图标错误 ([#1522](https://github.com/IDuxFE/idux/issues/1522)) ([615f483](https://github.com/IDuxFE/idux/commit/615f48300d7f930a033385594ea42032a0f9b880))
+- **pro:search:** 动画不生效 ([#1517](https://github.com/IDuxFE/idux/issues/1517)) ([a781bb9](https://github.com/IDuxFE/idux/commit/a781bb9930479b800022cc410eb8c5dca3a25a19))
+
+
 ## 1.5.2(2023-03-27)
 
 ### Bug Fixes
