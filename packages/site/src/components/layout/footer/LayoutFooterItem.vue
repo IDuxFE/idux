@@ -1,6 +1,6 @@
 <template>
   <div class="footer-item">
-    <IxTooltip :title="tooltip">
+    <IxTooltip :disabled="!tooltip">
       <a :href="link" :target="link.startsWith('https') ? '_blank' : '_self'" rel="noopener">
         <span v-if="icon" class="footer-item-icon">
           <IxIcon :name="icon"></IxIcon>
@@ -11,6 +11,9 @@
       <template v-if="description">
         <span class="footer-item-separator">-</span>
         <span class="footer-item-description">{{ description }}</span>
+      </template>
+      <template #title>
+        <img width="120" height="120" :src="link" alt="QR code.jpg" />
       </template>
     </IxTooltip>
   </div>
