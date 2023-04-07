@@ -158,28 +158,30 @@ describe('Cascader', () => {
       const onChange = vi.fn()
       const wrapper = CascaderMount({
         props: {
+          value: undefined,
           open: true,
           'onUpdate:value': onUpdateValue,
           onChange,
         },
       })
 
-      expect(wrapper.find('.ix-selector-item').text()).toBe('Components/General/Button')
+      expect(wrapper.find('.ix-selector-item').exists()).toBeFalsy()
 
-      await wrapper.setProps({ value: undefined })
-
-      expect(wrapper.find('.ix-selector-item').exists()).toBe(false)
-
+      await getAllOptionGroup(wrapper)[1].find('.ix-cascader-option').trigger('click')
       await getAllOptionGroup(wrapper)[2].find('.ix-cascader-option').trigger('click')
 
-      // expect(onUpdateValue).toBeCalledWith(['components', 'general', 'button'])
-      // expect(onChange).toBeCalledWith(['components', 'general', 'button'], undefined)
+      expect(onUpdateValue).toBeCalledWith(['components', 'general', 'button'])
+      expect(onChange).toBeCalledWith(['components', 'general', 'button'], undefined)
 
       await wrapper.setProps({ value: ['components', 'general', 'button'] })
-      await getAllOptionGroup(wrapper)[2].find('.ix-cascader-option').trigger('click')
 
-      // expect(onUpdateValue).toBeCalledWith(['pro', 'pro-layout'])
-      // expect(onChange).toBeCalledWith(['pro', 'pro-layout'], ['components', 'general', 'button'])
+      expect(wrapper.find('.ix-selector-item').text()).toBe('Components/General/Button')
+
+      await await wrapper.setProps({ expandedKeys: ['pro'] })
+      await getAllOptionGroup(wrapper)[1].find('.ix-cascader-option').trigger('click')
+
+      expect(onUpdateValue).toBeCalledWith(['pro', 'pro-layout'])
+      expect(onChange).toBeCalledWith(['pro', 'pro-layout'], ['components', 'general', 'button'])
     })
 
     test('v-model:expandedKeys work', async () => {
@@ -255,31 +257,33 @@ describe('Cascader', () => {
       const onChange = vi.fn()
       const wrapper = CascaderMount({
         props: {
+          value: undefined,
           open: true,
           'onUpdate:value': onUpdateValue,
           onChange,
         },
       })
 
-      expect(wrapper.findAll('.ix-selector-item').length).toBe(2)
+      expect(wrapper.find('.ix-selector-item').exists()).toBeFalsy()
 
       await wrapper.setProps({ value: [['components', 'general', 'button']] })
 
       expect(wrapper.findAll('.ix-selector-item').length).toBe(1)
 
-      await getAllOptionGroup(wrapper)[2].find('.ix-cascader-option').trigger('click')
+      await await wrapper.setProps({ expandedKeys: ['pro'] })
+      await getAllOptionGroup(wrapper)[1].find('.ix-cascader-option').trigger('click')
 
-      // expect(onUpdateValue).toBeCalledWith([
-      //   ['components', 'general', 'button'],
-      //   ['pro', 'pro-layout'],
-      // ])
-      // expect(onChange).toBeCalledWith(
-      //   [
-      //     ['components', 'general', 'button'],
-      //     ['pro', 'pro-layout'],
-      //   ],
-      //   [['components', 'general', 'button']],
-      // )
+      expect(onUpdateValue).toBeCalledWith([
+        ['components', 'general', 'button'],
+        ['pro', 'pro-layout'],
+      ])
+      expect(onChange).toBeCalledWith(
+        [
+          ['components', 'general', 'button'],
+          ['pro', 'pro-layout'],
+        ],
+        [['components', 'general', 'button']],
+      )
     })
   })
 })
