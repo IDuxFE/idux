@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, normalizeClass, provide, ref, toRef, watch } from 'vue'
+import { computed, defineComponent, normalizeClass, provide, ref, toRaw, toRef, watch } from 'vue'
 
 import { useAccessorAndControl } from '@idux/cdk/forms'
 import { type VKey, callEmit, useState } from '@idux/cdk/utils'
@@ -69,7 +69,12 @@ export default defineComponent({
       toRef(props, 'multiple'),
       toRef(props, 'strategy'),
       toRef(accessor, 'value'),
-      keys => accessor.setValue(keys),
+      keys => {
+        const oldKeys = toRaw(accessor.value)
+        accessor.setValue(keys)
+
+        callEmit(props.onChange, keys, oldKeys)
+      },
     )
     const { resolvedSelectedKeys, setValue } = selectedStateContext
     const selectedData = useSelectedData(resolvedSelectedKeys, mergedDataMap)
