@@ -22,18 +22,19 @@ export function createSelectSegment(
 ): Segment<VKey | VKey[] | undefined> {
   const {
     fieldConfig: { dataSource, separator, searchable, showSelectAll, searchFn, multiple, virtual, onSearch },
-    defaultValue,
     inputClassName,
+    containerClassName,
     onPanelVisibleChange,
   } = searchField
 
   const panelRenderer = (context: PanelRenderContext<VKey | VKey[] | undefined>) => {
-    const { setValue, ok, cancel, setOnKeyDown } = context
+    const { setValue, ok, cancel, setOnKeyDown, renderLocation } = context
     const keys = getSelectDataSourceKeys(dataSource)
     const { panelValue, searchInput, handleChange } = getSelectableCommonParams(
       context,
       !!multiple,
-      separator ?? defaultSeparator,
+      renderLocation === 'individual' ? separator ?? defaultSeparator : undefined,
+      !multiple || renderLocation === 'quick-select-panel',
     )
 
     const handleSelectAll = () => {
@@ -48,8 +49,10 @@ export function createSelectSegment(
         dataSource={dataSource}
         multiple={multiple}
         virtual={virtual}
+        autoHeight={renderLocation === 'quick-select-panel'}
         setOnKeyDown={setOnKeyDown}
-        showSelectAll={showSelectAll}
+        showSelectAll={renderLocation === 'individual' && showSelectAll}
+        showFooter={renderLocation === 'individual'}
         searchValue={searchable ? searchInput : ''}
         searchFn={searchFn}
         onChange={handleChange}
@@ -64,8 +67,8 @@ export function createSelectSegment(
   return {
     name: searchField.type,
     inputClassName: [inputClassName, `${prefixCls}-select-segment-input`],
+    containerClassName: [containerClassName, `${prefixCls}-select-segment-container`],
     placeholder: searchField.placeholder,
-    defaultValue,
     parse: input => parseInput(input, searchField),
     format: value => formatValue(value, searchField),
     panelRenderer,

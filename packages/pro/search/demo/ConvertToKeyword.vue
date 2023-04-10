@@ -5,12 +5,13 @@
     :searchFields="searchFields"
     :onChange="onChange"
     :onSearch="onSearch"
+    :onItemCreate="onItemCreate"
     :onItemConfirm="onItemConfirm"
   ></IxProSearch>
 </template>
 
 <script setup lang="ts">
-import type { SearchField, SearchItemConfirmContext, SearchValue } from '@idux/pro/search'
+import type { SearchField, SearchItemConfirmContext, SearchItemCreateContext, SearchValue } from '@idux/pro/search'
 
 import { ref } from 'vue'
 
@@ -100,6 +101,17 @@ const onChange = (value: SearchValue[] | undefined, oldValue: SearchValue[] | un
 }
 const onSearch = () => {
   console.log('onSearch')
+}
+
+const onItemCreate = (context: SearchItemCreateContext) => {
+  const { name, nameInput } = context
+
+  if (!name && nameInput) {
+    searchValues.value.push({
+      key: 'keyword',
+      value: nameInput,
+    })
+  }
 }
 const onItemConfirm = (context: SearchItemConfirmContext) => {
   const { removed, nameInput, operatorInput, valueInput } = context

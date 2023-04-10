@@ -24,6 +24,6 @@ export function useCommonOverlayProps(
     containerFallback: `.${mergedPrefixCls.value}-overlay-container`,
     placement: 'bottomStart',
     transitionName: `${componentCommonConfig.prefixCls}-slide-auto`,
-    offset: [0, 4],
+    offset: [0, 12],
   }))
 }

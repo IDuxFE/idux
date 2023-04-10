@@ -8,7 +8,7 @@
 import type { SearchValueContext } from './useSearchValues'
 import type { DateConfig } from '@idux/components/config'
 
-import { type ComputedRef, computed, reactive, ref, toRaw } from 'vue'
+import { type Ref, computed, ref, toRaw } from 'vue'
 
 import { isNil } from 'lodash-es'
 
@@ -29,18 +29,18 @@ export interface SegmentValue {
 }
 export interface SearchState {
   key: VKey
+  name: string
   index?: number
-  fieldKey?: VKey
+  fieldKey: VKey
   segmentValues: SegmentValue[]
 }
 
 export interface SearchStateContext {
-  searchStates: ComputedRef<SearchState[]>
-  tempSearchState: SearchState
-  tempSearchStateAvailable: ComputedRef<boolean>
+  searchStates: Ref<SearchState[]>
   initSearchStates: () => void
-  initTempSearchState: () => void
+  createSearchState: (fieldKey: VKey, searchValue?: Omit<SearchValue, 'key'>) => SearchState | undefined
   getSearchStateByKey: (key: VKey) => SearchState | undefined
+  getSearchStatesByFieldKey: (fieldKey: VKey) => SearchState[]
   validateSearchState: (key: VKey) => boolean | undefined
   convertStateToValue: (key: VKey) => SearchValue | undefined
   updateSegmentValue: (value: unknown, name: string, key: VKey) => void
@@ -49,8 +49,6 @@ export interface SearchStateContext {
   clearSearchState: () => void
 }
 
-export const tempSearchStateKey = Symbol('temp')
-
 export function useSearchStates(
   props: ProSearchProps,
   dateConfig: DateConfig,
@@ -58,7 +56,7 @@ export function useSearchStates(
   searchStateWatcherContext: SearchStateWatcherContext,
 ): SearchStateContext {
   const { searchValues, setSearchValues } = searchValueContext
-  const { compareSearchStates, compareSegmentValues, notifySearchStateChange } = searchStateWatcherContext
+  const { compareSearchStates, notifySearchStateChange } = searchStateWatcherContext
   const getKey = createStateKeyGetter()
 
   const searchStates = ref<SearchState[]>([])
@@ -66,42 +64,25 @@ export function useSearchStates(
     const countMap = new Map<VKey, number>()
 
     searchStates.value.forEach(state => {
-      state.fieldKey && countMap.set(state.fieldKey, (countMap.get(state.fieldKey) ?? 0) + 1)
+      countMap.set(state.fieldKey, (countMap.get(state.fieldKey) ?? 0) + 1)
     })
 
     return countMap
   })
 
-  const tempSearchState: SearchState = reactive({
-    key: tempSearchStateKey,
-    segmentValues: generateSegmentValues(),
-  })
-  const tempSearchStateAvailable = computed(() => {
-    const searchFields = props.searchFields ?? []
-    if (searchFields.findIndex(field => field.multiple) > -1) {
-      return true
+  const findSearchField = (fieldKey?: VKey) => {
+    if (isNil(fieldKey)) {
+      return
     }
 
-    const selectedKeys = new Set(fieldKeyCountMap.value.keys())
-
-    return searchFields.some(field => !selectedKeys.has(field.key))
-  })
-
-  const mergedSearchStates = computed(() => {
-    const states = [...searchStates.value]
-    if (tempSearchStateAvailable.value) {
-      states.push(tempSearchState)
-    }
-
-    return states
-  })
+    return props.searchFields?.find(field => field.key === fieldKey)
+  }
 
   function getSearchStateByKey(key: VKey) {
-    if (key === tempSearchStateKey) {
-      return tempSearchState
-    }
-
     return searchStates.value.find(value => value.key === key)
+  }
+  function getSearchStatesByFieldKey(fieldKey: VKey) {
+    return searchStates.value.filter(value => value.fieldKey === fieldKey)
   }
 
   function _convertStateToValue<V>(state: SearchState) {
@@ -110,7 +91,7 @@ export function useSearchStates(
 
     return {
       key: state.fieldKey,
-      name: props.searchFields?.find(field => field.key === state.fieldKey)?.label,
+      name: findSearchField(state.fieldKey)?.label,
       operator: operatorSegment?.value as string,
       value: toRaw(contentSegment?.value),
     } as SearchValue<V>
@@ -118,19 +99,8 @@ export function useSearchStates(
 
   function setSegmentValue(searchState: SearchState, name: string, value: unknown) {
     let segmentValue = searchState.segmentValues.find(state => state.name === name)
-
-    if (segmentValue?.name === 'name') {
-      searchState.fieldKey = value as VKey
-      const searchValue = searchValues.value?.find(value => value.key === searchState.key)
-      const searchFields = props.searchFields?.find(field => field.key === searchState.fieldKey)
-      const newSegmentsValues = generateSegmentValues(searchFields, searchValue, dateConfig)
-
-      const updatedSegments = compareSegmentValues(searchState.segmentValues, newSegmentsValues)
-      searchState.segmentValues = newSegmentsValues
-      return updatedSegments
-    }
-
     let oldValue: unknown
+
     if (segmentValue) {
       oldValue = segmentValue.value
       segmentValue.value = value
@@ -149,7 +119,7 @@ export function useSearchStates(
     ]
   }
 
-  function checkSearchStateValid(searchState: SearchState, dataKeyCountMap: Map<VKey, number>, existed?: boolean) {
+  function checkSearchStateValid(searchState: SearchState, dataKeyCountMap: Map<VKey, number>) {
     if (!searchState.fieldKey) {
       return false
     }
@@ -164,7 +134,7 @@ export function useSearchStates(
 
     // if there are more than one searchState of the same field key
     // check whether mutiple searchState is allowed from the field config
-    if (count && count > (existed ? 1 : 0)) {
+    if (count && count > 1) {
       return !!props.searchFields?.find(field => field.key === searchState.fieldKey)?.multiple
     }
 
@@ -174,25 +144,12 @@ export function useSearchStates(
 
   const validateSearchState = (key: VKey) => {
     const searchState = getSearchStateByKey(key)
-    return searchState && checkSearchStateValid(searchState, fieldKeyCountMap.value, key !== tempSearchStateKey)
+    return searchState && checkSearchStateValid(searchState, fieldKeyCountMap.value)
   }
 
   const convertStateToValue = (key: VKey) => {
     const searchState = getSearchStateByKey(key)
     return searchState ? _convertStateToValue(searchState) : undefined
-  }
-
-  const initTempSearchState = () => {
-    tempSearchState.fieldKey = undefined
-    const newSegmentValues = generateSegmentValues()
-    const updatedSegments = compareSegmentValues(tempSearchState.segmentValues, newSegmentValues)
-    tempSearchState.segmentValues = newSegmentValues
-
-    // notify temp searchState change
-    notifySearchStateChange(tempSearchStateKey, SEARCH_STATE_ACTION.UPDATED, {
-      searchState: tempSearchState,
-      updatedSegments,
-    })
   }
 
   const initSearchStates = () => {
@@ -202,7 +159,7 @@ export function useSearchStates(
     searchStates.value = (
       searchValues.value?.map((searchValue, index) => {
         const fieldKey = searchValue.key
-        const searchField = props.searchFields?.find(field => field.key === fieldKey)
+        const searchField = findSearchField(fieldKey)
         if (!searchField) {
           return
         }
@@ -212,9 +169,9 @@ export function useSearchStates(
         const key = getKey(fieldKey, count)
 
         const searchState = { key, index, fieldKey, segmentValues } as SearchState
-        if (!checkSearchStateValid(searchState, dataKeyCountMap)) {
-          return
-        }
+        // if (!checkSearchStateValid(searchState, dataKeyCountMap)) {
+        //   return
+        // }
 
         dataKeyCountMap.set(fieldKey, count + 1)
         return searchState
@@ -222,6 +179,30 @@ export function useSearchStates(
     ).filter(Boolean) as SearchState[]
 
     compareSearchStates(searchStates.value, oldSearchStates)
+  }
+
+  const createSearchState = (fieldKey: VKey, searchValue?: Omit<SearchValue, 'key'>) => {
+    const searchField = findSearchField(fieldKey)
+    if (!searchField) {
+      return
+    }
+
+    if (!searchField.multiple && (fieldKeyCountMap.value.get(searchField.key) ?? 0) > 1) {
+      return
+    }
+
+    const newKey = getKey(fieldKey, fieldKeyCountMap.value.get(fieldKey) ?? 0)
+    const newSearchState: SearchState = {
+      key: newKey,
+      name: searchField.label,
+      fieldKey: fieldKey,
+      segmentValues: generateSegmentValues(searchField, searchValue, dateConfig),
+    }
+    searchStates.value.push(newSearchState)
+
+    notifySearchStateChange(newKey, SEARCH_STATE_ACTION.CREATED, { searchState: newSearchState })
+
+    return newSearchState
   }
 
   function updateSearchValue() {
@@ -265,20 +246,6 @@ export function useSearchStates(
       return
     }
 
-    if (searchState.key === tempSearchStateKey) {
-      // create new search value
-      const newKey = getKey(searchState.fieldKey!, fieldKeyCountMap.value.get(searchState.fieldKey!) ?? 0)
-      const newSearchState = {
-        ...searchState,
-        key: newKey,
-      }
-      searchStates.value.push(newSearchState)
-
-      notifySearchStateChange(newKey, SEARCH_STATE_ACTION.CREATED, { searchState: newSearchState })
-
-      initTempSearchState()
-    }
-
     updateSearchValue()
   }
   const removeSearchState = (key: VKey) => {
@@ -313,12 +280,11 @@ export function useSearchStates(
   }
 
   return {
-    searchStates: mergedSearchStates,
-    tempSearchState,
-    tempSearchStateAvailable,
+    searchStates: searchStates,
     initSearchStates,
-    initTempSearchState,
+    createSearchState,
     getSearchStateByKey,
+    getSearchStatesByFieldKey,
     validateSearchState,
     convertStateToValue,
     updateSegmentValue,
@@ -344,29 +310,22 @@ function createStateKeyGetter() {
 }
 
 function generateSegmentValues(
-  searchField?: SearchField,
-  searchValue?: SearchValue,
+  searchField: SearchField,
+  searchValue?: Omit<SearchValue, 'key'>,
   dateConfig?: DateConfig,
 ): SegmentValue[] {
-  const nameKey = searchField?.key
-  const hasOperators = searchField?.operators && searchField.operators.length > 0
+  const hasOperators = searchField.operators && searchField.operators.length > 0
 
   /* eslint-disable indent */
   return [
-    {
-      name: 'name',
-      value: nameKey,
+    hasOperators && {
+      name: 'operator',
+      value: searchValue?.operator ?? searchField.operators?.find(op => op === searchField.defaultOperator),
     },
-    searchField &&
-      hasOperators && {
-        name: 'operator',
-        value: searchValue?.operator,
-      },
-    searchField &&
-      dateConfig && {
-        name: searchField.type,
-        value: searchValue?.value,
-      },
+    dateConfig && {
+      name: searchField.type,
+      value: searchValue?.value ?? searchField.defaultValue,
+    },
   ].filter(Boolean) as SegmentValue[]
   /* eslint-enable indent */
 }

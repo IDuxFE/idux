@@ -54,6 +54,16 @@ export default defineComponent({
         onChange: handleChange,
       }
 
+      const renderSwitchPanelBtn = () => (
+        <IxButton mode="text" size="xs" onClick={handleSwitchPanelClick}>
+          {visiblePanel.value === 'datePanel' ? locale.switchToTimePanel : locale.switchToDatePanel}
+        </IxButton>
+      )
+      const panelFooterSlots = {
+        prepend: () => props.type === 'datetime' && renderSwitchPanelBtn(),
+        default: props.type === 'datetime' && !props.showFooter ? renderSwitchPanelBtn : null,
+      }
+
       return (
         <div class={prefixCls} tabindex={-1} onMousedown={evt => evt.preventDefault()}>
           <div class={`${prefixCls}-body`}>
@@ -63,20 +73,17 @@ export default defineComponent({
               <IxDateRangePanel {...(panelProps as DateRangePanelProps)} />
             )}
           </div>
-          <div class={`${prefixCls}-footer`}>
-            <PanelFooter
-              prefixCls={mergedPrefixCls.value}
-              locale={locale}
-              onConfirm={handleConfirm}
-              onCancel={handleCancel}
-            >
-              {props.type === 'datetime' && (
-                <IxButton mode="text" size="xs" onClick={handleSwitchPanelClick}>
-                  {visiblePanel.value === 'datePanel' ? locale.switchToTimePanel : locale.switchToDatePanel}
-                </IxButton>
-              )}
-            </PanelFooter>
-          </div>
+          {(props.type === 'datetime' || props.showFooter) && (
+            <div class={`${prefixCls}-footer`}>
+              <PanelFooter
+                prefixCls={mergedPrefixCls.value}
+                locale={locale}
+                onConfirm={handleConfirm}
+                onCancel={handleCancel}
+                v-slots={panelFooterSlots}
+              />
+            </div>
+          )}
         </div>
       )
     }

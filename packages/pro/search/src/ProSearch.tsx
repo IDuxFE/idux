@@ -5,32 +5,48 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, nextTick, normalizeClass, normalizeStyle, provide, ref, toRef, watch } from 'vue'
+import {
+  computed,
+  defineComponent,
+  nextTick,
+  normalizeClass,
+  normalizeStyle,
+  onMounted,
+  provide,
+  ref,
+  toRef,
+  watch,
+} from 'vue'
 
-import { callEmit } from '@idux/cdk/utils'
+import { callEmit, convertCssPixel } from '@idux/cdk/utils'
 import { ɵOverflow } from '@idux/components/_private/overflow'
+import { ɵOverlay, type ɵOverlayInstance } from '@idux/components/_private/overlay'
 import { useGlobalConfig as useComponentGlobalConfig, useDateConfig } from '@idux/components/config'
 import { useZIndex } from '@idux/components/utils'
 import { useGlobalConfig } from '@idux/pro/config'
 
+import SearchItemComp from './components/SearchItem'
+import QuickSelectPanel from './components/quickSelect/QuickSelectPanel'
+import NameSelectSegment from './components/segment/TempSegment'
 import { useActiveSegment } from './composables/useActiveSegment'
 import { useCommonOverlayProps } from './composables/useCommonOverlayProps'
 import { useControl } from './composables/useControl'
+import { useElementWidthMeasure } from './composables/useElementWidthMeasure'
 import { useFocusedState } from './composables/useFocusedState'
+import { useResolvedSearchFields } from './composables/useResolvedSearchFields'
 import { useSearchItems } from './composables/useSearchItem'
 import { useSearchItemErrors } from './composables/useSearchItemErrors'
 import { useSearchStateWatcher } from './composables/useSearchStateWatcher'
-import { tempSearchStateKey, useSearchStates } from './composables/useSearchStates'
+import { useSearchStates } from './composables/useSearchStates'
 import { useSearchTrigger } from './composables/useSearchTrigger'
 import { useSearchValues } from './composables/useSearchValues'
-import SearchItemComp from './searchItem/SearchItem'
-import SearchItemTagComp from './searchItem/SearchItemTag'
 import { proSearchContext } from './token'
 import { type SearchItem, proSearchProps } from './types'
 import { renderIcon } from './utils/RenderIcon'
 
 export default defineComponent({
   name: 'IxProSearch',
+  inheritAttrs: false,
   props: proSearchProps,
   setup(props, { attrs, expose, slots }) {
     const common = useGlobalConfig('common')
@@ -39,39 +55,49 @@ export default defineComponent({
     const config = useGlobalConfig('search')
     const dateConfig = useDateConfig()
     const mergedPrefixCls = computed(() => `${common.prefixCls}-search`)
+    const enableQuickSelect = computed(
+      () => !!props.searchFields?.some(field => !!field.quickSelect && !field.multiple),
+    )
+
+    const quickSelectOverlayOpened = computed(() => quickSelectActive.value && overlayOpened.value)
+
+    const elementRef = ref<HTMLElement | undefined>()
+    const quickSelectOverlayRef = ref<ɵOverlayInstance>()
+    const tempSegmentInputRef = ref<HTMLInputElement>()
 
     const searchValueContext = useSearchValues(props)
     const { searchValues, searchValueEmpty } = searchValueContext
     const searchStateWatcherContext = useSearchStateWatcher()
     const searchStateContext = useSearchStates(props, dateConfig, searchValueContext, searchStateWatcherContext)
-    const errors = useSearchItemErrors(props, searchValues)
-    const searchItems = useSearchItems(
-      props,
-      slots,
-      mergedPrefixCls,
-      searchStateContext.searchStates,
-      errors,
-      dateConfig,
-    )
-    const searchTriggerContext = useSearchTrigger()
-    const elementRef = ref<HTMLElement | undefined>()
 
-    const activeSegmentContext = useActiveSegment(
-      props,
-      elementRef,
-      searchItems,
-      searchStateContext.tempSearchStateAvailable,
-    )
+    const resolvedSearchFields = useResolvedSearchFields(props, slots, mergedPrefixCls, dateConfig)
+    const errors = useSearchItemErrors(props, searchValues)
+    const searchItems = useSearchItems(resolvedSearchFields, searchStateContext.searchStates, errors)
+    const searchTriggerContext = useSearchTrigger()
+    const elementWidth = useElementWidthMeasure(elementRef)
+
+    const activeSegmentContext = useActiveSegment(props, tempSegmentInputRef, searchItems, enableQuickSelect)
     const commonOverlayProps = useCommonOverlayProps(props, config, componentCommon, mergedPrefixCls)
-    const focusStateContext = useFocusedState(props, elementRef, commonOverlayProps)
-    const { focused, focus, blur } = focusStateContext
+    const focusStateContext = useFocusedState(props)
+    const { focused, bindMonitor, bindOverlayMonitor, focusVia, blurVia } = focusStateContext
+    const focus = () => {
+      focusVia(elementRef, 'program')
+    }
+    const blur = () => {
+      blurVia(elementRef)
+    }
+
+    onMounted(() => {
+      bindMonitor(elementRef)
+      bindOverlayMonitor(quickSelectOverlayRef, quickSelectOverlayOpened)
+    })
 
     useControl(elementRef, activeSegmentContext, searchStateContext, focusStateContext)
 
     const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(componentCommon, 'overlayZIndex'), focused)
 
-    const { initSearchStates, clearSearchState, getSearchStateByKey } = searchStateContext
-    const { activeSegment } = activeSegmentContext
+    const { initSearchStates, clearSearchState } = searchStateContext
+    const { isActive, overlayOpened, quickSelectActive } = activeSegmentContext
 
     watch(
       () => props.value,
@@ -86,6 +112,8 @@ export default defineComponent({
     const clearIcon = computed(() => props.clearIcon ?? config.clearIcon)
     const searchIcon = computed(() => props.searchIcon ?? config.searchIcon)
 
+    const allItems = computed(() => [...searchItems.value, 'name-select' as const])
+
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
@@ -99,18 +127,6 @@ export default defineComponent({
         zIndex: currentZIndex.value,
       }),
     )
-    const searchItemContainerStyle = computed(() => {
-      if (!focused.value) {
-        return normalizeStyle({
-          height: 0,
-          width: 0,
-          opacity: 0,
-          overflow: 'hidden',
-        })
-      }
-
-      return undefined
-    })
 
     expose({ focus, blur })
 
@@ -135,10 +151,14 @@ export default defineComponent({
     provide(proSearchContext, {
       props,
       locale: locale.search,
+      elementRef,
+      tempSegmentInputRef,
       mergedPrefixCls,
+      enableQuickSelect,
       commonOverlayProps,
-      focused,
+      resolvedSearchFields,
 
+      ...focusStateContext,
       ...searchStateContext,
       ...searchStateWatcherContext,
       ...activeSegmentContext,
@@ -149,18 +169,12 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
 
       const overflowSlots = {
-        item: (item: SearchItem) => {
-          const searchState = getSearchStateByKey(item.key)!
+        item: (item: SearchItem | 'name-select') => {
+          if (item === 'name-select') {
+            return <NameSelectSegment key="__NAME_SELECT__" v-slots={slots} />
+          }
 
-          const tagSegments = item.segments.map(segment => {
-            const segmentValue = searchState.segmentValues.find(sv => sv.name === segment.name)!
-            return {
-              name: segment.name,
-              input: segment.format(segmentValue?.value),
-            }
-          })
-
-          return <SearchItemTagComp key={item.key} itemKey={item.key} segments={tagSegments} error={item.error} />
+          return <SearchItemComp key={item.key} searchItem={item} v-slots={slots} />
         },
         rest: (rest: SearchItem[]) => (
           <span class={`${prefixCls}-search-item ${prefixCls}-search-item-tag`}>
@@ -169,24 +183,19 @@ export default defineComponent({
         ),
       }
 
-      return (
-        <div ref={elementRef} class={classes.value} tabindex={(attrs.tabIndex as number) ?? 0}>
+      const quickSelectOverlaySlots = {
+        default: () => (
           <div class={`${prefixCls}-input-container`} style={containerStyle.value}>
             <div class={`${prefixCls}-input-content`}>
               <ɵOverflow
-                v-show={!focused.value}
+                v-show={isActive.value || searchItems.value.length}
                 v-slots={overflowSlots}
                 prefixCls={prefixCls}
-                dataSource={searchItems.value.filter(item => item.key !== tempSearchStateKey)}
-                getKey={item => item.key}
-                maxLabel={props.maxLabel}
+                dataSource={allItems.value}
+                getKey={item => item.key ?? 'name-select'}
+                maxLabel={focused.value ? Number.MAX_SAFE_INTEGER : props.maxLabel}
               />
-              <div class={`${prefixCls}-search-item-container`} style={searchItemContainerStyle.value}>
-                {searchItems.value?.map(item => (
-                  <SearchItemComp key={item.key} v-slots={slots} searchItem={item} />
-                ))}
-              </div>
-              {searchValueEmpty.value && !activeSegment.value && (
+              {searchValueEmpty.value && !isActive.value && (
                 <span class={`${prefixCls}-placeholder`}>{placeholder.value}</span>
               )}
             </div>
@@ -200,6 +209,29 @@ export default defineComponent({
               </div>
             )}
           </div>
+        ),
+        content: () => <QuickSelectPanel v-slots={slots} />,
+      }
+
+      const quickSelectOverlayProps = {
+        ...commonOverlayProps.value,
+        class: `${mergedPrefixCls.value}-quick-select-overlay`,
+        style: {
+          width: convertCssPixel(elementWidth.value),
+        },
+        offset: [0, 4] as [number, number],
+        trigger: 'manual' as const,
+        visible: quickSelectOverlayOpened.value,
+      }
+
+      return (
+        <div ref={elementRef} class={classes.value} {...attrs} tabindex={(attrs.tabIndex as number) ?? 0}>
+          <ɵOverlay
+            ref={quickSelectOverlayRef}
+            v-slots={quickSelectOverlaySlots}
+            {...quickSelectOverlayProps}
+            tabindex={-1}
+          ></ɵOverlay>
           <div
             class={`${prefixCls}-search-button`}
             onMousedown={handleSearchBtnMouseDown}

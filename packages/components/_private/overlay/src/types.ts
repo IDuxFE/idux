@@ -68,6 +68,7 @@ export const overlayProps = {
 
 export interface OverlayBindings {
   updatePopper: (options?: Partial<PopperOptions>) => void
+  getPopperElement: () => HTMLElement | undefined | null
 }
 
 export type OverlayProps = ExtractInnerPropTypes<typeof overlayProps>

@@ -148,7 +148,6 @@ const handleUserFormKeyDown = (evt: KeyboardEvent, confirm: () => void) => {
   }
 }
 .demo-pro-search-custom-user-form-input {
-  min-width: 305px;
   color: #684545;
   text-align: center;
 }

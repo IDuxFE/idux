@@ -19,16 +19,19 @@ export function getSelectableCommonParams<T>(
   context: PanelRenderContext<T | undefined | Array<T | undefined>>,
   multiple: boolean,
   separator?: string,
+  confirmRightAway?: boolean,
 ): SearchablePanelParams<T>
 export function getSelectableCommonParams<T>(
   context: PanelRenderContext<T | T[] | undefined>,
   multiple: boolean,
   separator?: string,
+  confirmRightAway?: boolean,
 ): SearchablePanelParams<T>
 export function getSelectableCommonParams<T>(
   context: PanelRenderContext<T | T[] | undefined>,
   multiple: boolean,
   separator?: string,
+  confirmRightAway?: boolean,
 ): SearchablePanelParams<T> {
   const { value, input, setValue, ok } = context
   const panelValue = convertArray(value)
@@ -45,9 +48,12 @@ export function getSelectableCommonParams<T>(
   const handleChange = (v: T[] | undefined) => {
     if (!multiple) {
       setValue(v?.[0])
-      ok()
     } else {
       setValue(v && v.length > 0 ? v : undefined)
+    }
+
+    if (confirmRightAway) {
+      ok()
     }
   }
 

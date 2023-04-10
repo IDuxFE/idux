@@ -16,13 +16,15 @@ const PanelFooter: FunctionalComponent<ProSearchPanelFooterProps> = (props, { sl
 
   return (
     <div class={`${prefixCls}-panel-footer`}>
-      {slots.default?.()}
-      <IxButton mode="primary" size="xs" onClick={onConfirm}>
-        {locale!.ok}
-      </IxButton>
-      <IxButton size="xs" onClick={onCancel}>
-        {locale!.cancel}
-      </IxButton>
+      {slots.default?.() ?? [
+        slots.prepend?.(),
+        <IxButton mode="primary" size="xs" onClick={onConfirm}>
+          {locale!.ok}
+        </IxButton>,
+        <IxButton size="xs" onClick={onCancel}>
+          {locale!.cancel}
+        </IxButton>,
+      ]}
     </div>
   )
 }

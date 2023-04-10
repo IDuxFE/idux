@@ -20,5 +20,6 @@ export type {
   SearchField,
   SearchValue,
   SearchItemError,
+  SearchItemCreateContext,
   SearchItemConfirmContext,
 } from './src/types'

@@ -31,6 +31,8 @@ export const proSearchSelectPanelProps = {
   dataSource: { type: Array as PropType<SelectPanelData[]>, default: undefined },
   multiple: { type: Boolean, default: false },
   showSelectAll: { type: Boolean, default: true },
+  showFooter: { type: Boolean, default: true },
+  autoHeight: { type: Boolean, default: false },
   allSelected: Boolean,
   searchValue: { type: String, default: undefined },
   searchFn: Function as PropType<(data: SelectPanelData, searchValue?: string) => boolean>,
@@ -50,6 +52,7 @@ export const proSearchTreeSelectPanelProps = {
   dataSource: { type: Array as PropType<TreeSelectPanelData[]>, default: undefined },
   multiple: { type: Boolean, default: false },
   checkable: { type: Boolean, default: false },
+  autoHeight: { type: Boolean, default: false },
   expandedKeys: { type: Array as PropType<VKey[]>, default: undefined },
   cascaderStrategy: { type: String as PropType<CascaderStrategy>, default: 'off' },
   draggable: { type: Boolean, default: false },
@@ -64,6 +67,7 @@ export const proSearchTreeSelectPanelProps = {
   leafLineIcon: { type: String, default: undefined },
   showLine: { type: Boolean, default: undefined },
   searchValue: { type: String, default: undefined },
+  showFooter: { type: Boolean, default: true },
   searchFn: Function as PropType<(node: TreeSelectPanelData, searchValue?: string) => boolean>,
   virtual: { type: Boolean, default: false },
 
@@ -105,6 +109,7 @@ export const proSearchCascaderPanelProps = {
   },
   searchValue: String,
   separator: { type: String, default: '/' },
+  showFooter: { type: Boolean, default: true },
   strategy: { type: String as PropType<CascaderStrategy>, default: 'all' },
   virtual: { type: Boolean, default: false },
 
@@ -126,6 +131,7 @@ export const proSearchDatePanelProps = {
   cellTooltip: Function as PropType<(cell: { value: Date; disabled: boolean }) => string | void>,
   disabledDate: Function as PropType<(date: Date) => boolean>,
   defaultOpenValue: [Date, Array] as PropType<Date | Date[]>,
+  showFooter: { type: Boolean, default: true },
   type: {
     type: String as PropType<DatePanelProps['type']>,
     default: 'date',

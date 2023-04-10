@@ -11,6 +11,7 @@ import {
   computed,
   defineComponent,
   inject,
+  normalizeClass,
   onBeforeUnmount,
   onMounted,
   onUnmounted,
@@ -59,6 +60,12 @@ export default defineComponent({
       () => props.searchValue,
       searchValue => {
         callEmit(props.onSearch, searchValue ?? '')
+        if (!activeValue.value) {
+          setActiveValue(filteredDataSource.value?.[0]?.key)
+        }
+      },
+      {
+        flush: 'post',
       },
     )
     onUnmounted(() => {
@@ -100,6 +107,9 @@ export default defineComponent({
     const handleSelectAllClick = () => {
       callEmit(props.onSelectAllClick)
     }
+    const handleMouseLeave = () => {
+      setActiveValue(undefined)
+    }
 
     const handleKeyDown = useOnKeyDown(props, panelRef, activeValue, changeSelected, handleConfirm)
 
@@ -130,7 +140,7 @@ export default defineComponent({
       )
     }
     const renderFooter = () => {
-      if (!props.multiple) {
+      if (!props.multiple || !props.showFooter) {
         return
       }
 
@@ -146,6 +156,10 @@ export default defineComponent({
 
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-select-panel`
+      const classes = normalizeClass({
+        [prefixCls]: true,
+        [`${prefixCls}-auto-height`]: !!props.autoHeight,
+      })
       const panelProps = {
         activeValue: activeValue.value,
         dataSource: filteredDataSource.value,
@@ -154,11 +168,13 @@ export default defineComponent({
         labelKey: 'label',
         selectedKeys: props.value,
         virtual: props.virtual,
+        _virtualScrollHeight: props.autoHeight ? '100%' : 256,
         onOptionClick: handleOptionClick,
         'onUpdate:activeValue': setActiveValue,
       }
+
       return (
-        <div class={prefixCls} tabindex={-1} onMousedown={evt => evt.preventDefault()}>
+        <div class={classes} tabindex={-1} onMousedown={evt => evt.preventDefault()} onMouseleave={handleMouseLeave}>
           {renderSelectAll()}
           <IxSelectPanel ref={panelRef} class={`${prefixCls}-inner`} v-slots={slots} {...panelProps} />
           {renderFooter()}

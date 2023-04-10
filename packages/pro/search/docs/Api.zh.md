@@ -63,11 +63,14 @@ interface SearchItemConfirmContext<V = unknown> extends Partial<SearchValue<V>> 
 | `key` | 唯一的key | `VKey` | - | - | 必填 |
 | `label` | 搜索条件的词条名称 | `string` | - | - | 必填 |
 | `multiple` | 是否允许重复 | `boolean` | - | - | 为 `true` 时，该搜索条件可以被输入多次 |
+| `quickSelect` | 是否在快捷面板中展示 | `boolean` | - | - | 为 `true` 时，默认启用快捷面板, `multiple` 的搜索项该配置不生效 |
+| `quickSelectSearchable` | 是否在快捷面板中启用搜索 | `boolean` | - | - | 为 `true` 时，为该搜索项在快捷面板中增加搜索输入框 |
 | `operators` | 搜索条件的中间操作符 | `string[]` | - | - | 提供时，会在搜索词条名称中间增加一个操作符，如 `'='`, `'!='` |
 | `defaultOperator` | 默认的操作符 | `string` | - | - | 提供时，会自动填入默认的操作符 |
 | `defaultValue` | 默认值 | - | - | - | 提供时，会自动填入默认值 |
 | `customOperatorLabel` | 自定义操作符下拉选择label | `string \| ((operator: string) => VNodeChild)` | - | - | - |
 | `inputClassName` | 输入框class | `string` | - | - | 用于自定义输入框样式 |
+| `containerClassName` | 面板所在容器class | `string` | - | - | 用于自定义浮层样式或快捷面板容器样式 |
 | `placeholder` | 输入框placeholder | `string` | - | - | 搜索值输入框的占位符 |
 | `validator` | 搜索项校验函数 | `(value: SearchValue) => { message?: string } | undefined` | - | - | 返回错误信息 |
 

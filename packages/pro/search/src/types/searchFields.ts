@@ -10,7 +10,7 @@
 import type { CascaderPanelData, SelectPanelData, TreeSelectPanelData } from './panels'
 import type { SearchItemError } from './searchItem'
 import type { SearchValue } from './searchValue'
-import type { InputFormater, InputParser, PanelRenderContext } from './segment'
+import type { InputFormater, InputParser, PanelRenderContext, Segment } from './segment'
 import type { MaybeArray, VKey } from '@idux/cdk/utils'
 import type { CascaderExpandTrigger, CascaderStrategy } from '@idux/components/cascader'
 import type { DatePanelProps, DateRangePanelProps } from '@idux/components/date-picker'
@@ -20,18 +20,27 @@ import type { VNodeChild } from 'vue'
 interface SearchFieldBase<V = unknown> {
   key: VKey
   label: string
+  icon?: string
   multiple?: boolean
   operators?: string[]
+  quickSelect?: boolean
+  quickSelectSearchable?: boolean
   defaultOperator?: string
   defaultValue?: V
   inputClassName?: string
+  containerClassName?: string
   placeholder?: string
+  operatorPlaceholder?: string
   customOperatorLabel?: string | ((operator: string) => VNodeChild)
   validator?: (value: SearchValue<V>) => Omit<SearchItemError, 'index'> | undefined
   onPanelVisibleChange?: (visible: boolean) => void
 }
 
-export interface SelectSearchField extends SearchFieldBase<VKey | VKey[]> {
+interface ResolvedSearchFieldBase<V = unknown> extends SearchFieldBase<V> {
+  segments: Segment[]
+}
+
+interface SelectSearchFieldBase {
   type: 'select'
   fieldConfig: {
     dataSource: SelectPanelData[]
@@ -44,8 +53,10 @@ export interface SelectSearchField extends SearchFieldBase<VKey | VKey[]> {
     onSearch?: MaybeArray<(searchValue: string) => void>
   }
 }
+export type SelectSearchField = SearchFieldBase<VKey | VKey[]> & SelectSearchFieldBase
+export type ResolvedSelectSearchField = ResolvedSearchFieldBase<VKey | VKey[]> & SelectSearchFieldBase
 
-export interface TreeSelectSearchField extends SearchFieldBase<VKey | VKey[]> {
+interface TreeSelectSearchFieldBase {
   type: 'treeSelect'
   fieldConfig: {
     dataSource: TreeSelectPanelData[]
@@ -73,8 +84,10 @@ export interface TreeSelectSearchField extends SearchFieldBase<VKey | VKey[]> {
     onLoaded?: MaybeArray<(loadedKeys: any[], node: TreeSelectPanelData) => void>
   }
 }
+export type TreeSelectSearchField = SearchFieldBase<VKey | VKey[]> & TreeSelectSearchFieldBase
+export type ResolvedTreeSelectSearchField = ResolvedSearchFieldBase<VKey | VKey[]> & TreeSelectSearchFieldBase
 
-export interface CascaderSearchField extends SearchFieldBase<VKey | VKey[] | VKey[][]> {
+interface CascaderSearchFieldBase {
   type: 'cascader'
   fieldConfig: {
     dataSource: CascaderPanelData[]
@@ -94,15 +107,19 @@ export interface CascaderSearchField extends SearchFieldBase<VKey | VKey[] | VKe
     onLoaded?: MaybeArray<(loadedKeys: any[], node: TreeSelectPanelData) => void>
   }
 }
+export type CascaderSearchField = SearchFieldBase<VKey | VKey[] | VKey[][]> & CascaderSearchFieldBase
+export type ResolvedCascaderSearchField = ResolvedSearchFieldBase<VKey | VKey[] | VKey[][]> & CascaderSearchFieldBase
 
-export interface InputSearchField extends SearchFieldBase<string> {
+interface InputSearchFieldBase {
   type: 'input'
   fieldConfig: {
     trim?: boolean
   }
 }
+export type InputSearchField = SearchFieldBase<string> & InputSearchFieldBase
+export type ResolvedInputSearchField = ResolvedSearchFieldBase<string> & InputSearchFieldBase
 
-export interface DatePickerSearchField extends SearchFieldBase<Date> {
+interface DatePickerSearchFieldBase {
   type: 'datePicker'
   fieldConfig: {
     format?: string
@@ -112,8 +129,10 @@ export interface DatePickerSearchField extends SearchFieldBase<Date> {
     timePanelOptions?: DatePanelProps['timePanelOptions']
   }
 }
+export type DatePickerSearchField = SearchFieldBase<Date> & DatePickerSearchFieldBase
+export type ResolvedDatePickerSearchField = ResolvedSearchFieldBase<Date> & DatePickerSearchFieldBase
 
-export interface DateRangePickerSearchField extends SearchFieldBase<Date[]> {
+interface DateRangePickerSearchFieldBase {
   type: 'dateRangePicker'
   fieldConfig: {
     format?: string
@@ -124,8 +143,10 @@ export interface DateRangePickerSearchField extends SearchFieldBase<Date[]> {
     timePanelOptions?: DateRangePanelProps['timePanelOptions']
   }
 }
+export type DateRangePickerSearchField = SearchFieldBase<Date[]> & DateRangePickerSearchFieldBase
+export type ResolvedDateRangePickerSearchField = ResolvedSearchFieldBase<Date[]> & DateRangePickerSearchFieldBase
 
-export interface CustomSearchField extends SearchFieldBase {
+interface CustomSearchFieldBase {
   type: 'custom'
   fieldConfig: {
     customPanel?: string | ((context: PanelRenderContext) => VNodeChild)
@@ -133,6 +154,8 @@ export interface CustomSearchField extends SearchFieldBase {
     parse: InputParser
   }
 }
+export type CustomSearchField = SearchFieldBase & CustomSearchFieldBase
+export type ResolvedCustomSearchField = ResolvedSearchFieldBase & CustomSearchFieldBase
 
 export type SearchField =
   | SelectSearchField
@@ -142,6 +165,15 @@ export type SearchField =
   | DatePickerSearchField
   | DateRangePickerSearchField
   | CustomSearchField
+
+export type ResolvedSearchField =
+  | ResolvedSelectSearchField
+  | ResolvedTreeSelectSearchField
+  | ResolvedCascaderSearchField
+  | ResolvedInputSearchField
+  | ResolvedDatePickerSearchField
+  | ResolvedDateRangePickerSearchField
+  | ResolvedCustomSearchField
 
 export const searchDataTypes = [
   'select',

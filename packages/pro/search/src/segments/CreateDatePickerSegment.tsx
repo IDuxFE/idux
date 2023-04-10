@@ -27,13 +27,20 @@ export function createDatePickerSegment(
 ): Segment<Date | undefined> {
   const {
     fieldConfig: { type, cellTooltip, disabledDate, timePanelOptions },
-    defaultValue,
     inputClassName,
+    containerClassName,
     onPanelVisibleChange,
   } = searchField
 
   const panelRenderer = (context: PanelRenderContext<Date | undefined>) => {
-    const { value, setValue, cancel, ok } = context
+    const { value, renderLocation, setValue, cancel, ok } = context
+
+    const onChange = (value: Date | undefined) => {
+      setValue(value)
+      if (renderLocation === 'quick-select-panel') {
+        ok()
+      }
+    }
 
     return (
       <DatePickerPanel
@@ -42,8 +49,9 @@ export function createDatePickerSegment(
         cellTooltip={cellTooltip}
         disabledDate={disabledDate}
         type={type ?? defaultType}
+        showFooter={renderLocation === 'individual'}
         timePanelOptions={timePanelOptions}
-        onChange={setValue as ((value: Date | Date[] | undefined) => void) | undefined}
+        onChange={onChange as ((value: Date | Date[] | undefined) => void) | undefined}
         onConfirm={ok}
         onCancel={cancel}
       />
@@ -53,8 +61,8 @@ export function createDatePickerSegment(
   return {
     name: searchField.type,
     inputClassName: [inputClassName, `${prefixCls}-date-picker-segment-input`],
+    containerClassName: [containerClassName, `${prefixCls}-date-picker-segment-container`],
     placeholder: searchField.placeholder,
-    defaultValue,
     parse: input => parseInput(input, dateConfig, searchField),
     format: value => formatValue(value, dateConfig, searchField),
     panelRenderer,

@@ -1,15 +1,15 @@
 <template>
   <IxProSearch
-    :value="value"
+    v-model:value="value"
     style="width: 100%"
     :searchFields="searchFields"
     :onSearch="onSearch"
-    :onUpdate:value="handleValueUpdate"
+    :onItemConfirm="handleItemConfirm"
   ></IxProSearch>
 </template>
 
 <script setup lang="ts">
-import type { SearchField, SearchValue } from '@idux/pro/search'
+import type { SearchField, SearchItemConfirmContext, SearchValue } from '@idux/pro/search'
 
 import { reactive, ref } from 'vue'
 
@@ -92,22 +92,18 @@ const searchFields: SearchField[] = reactive([
   securityStateField,
 ])
 
-const handleValueUpdate = (searchValues: SearchValue[] | undefined) => {
-  const securityStateValues = searchValues?.filter(v => v.key === 'security_state') as
-    | SearchValue<string[]>[]
-    | undefined
-
-  if (!securityStateValues?.length) {
-    value.value = searchValues ?? []
+const handleItemConfirm = (item: SearchItemConfirmContext) => {
+  if (item.key !== 'security_state') {
     return
   }
 
-  const currentValue = securityStateValues.pop()!
-  value.value = !securityStateValues.length
-    ? searchValues!
-    : [...searchValues!.filter(v => v.key !== 'security_state'), currentValue]
+  const tempValue = (value.value ?? []).filter(v => v.key !== 'security_state')
+  if (!item.removed && item.value) {
+    tempValue.push({ key: 'security_state', operator: item.operator, value: item.value })
+  }
 
-  securityStateField.defaultValue = currentValue.value
+  value.value = tempValue
+  securityStateField.defaultValue = item.value
 }
 const onSearch = () => {
   console.log('onSearch')

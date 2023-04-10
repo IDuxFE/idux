@@ -118,10 +118,13 @@ export default defineComponent({
         throwError('components/_private/overflow', 'item slot must be provided')
       }
       const nodeContent = slots.item?.(item) ?? ''
+
+      const key = props.getKey(item)
       return (
         <Item
           {...itemSharedProps}
-          itemKey={props.getKey(item)}
+          key={key}
+          itemKey={key}
           display={index < displayCount.value}
           onSizeChange={(itemEl: Element, key?: VKey) => setItemWidth(key!, itemEl)}
         >

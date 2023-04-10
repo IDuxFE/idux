@@ -5,15 +5,18 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { SearchField } from './searchFields'
+import type { ResolvedSearchField } from './searchFields'
 import type { SearchValue } from './searchValue'
-import type { Segment } from './segment'
 import type { ExtractInnerPropTypes, VKey } from '@idux/cdk/utils'
 import type { PropType } from 'vue'
 
 export interface SearchItemError {
   index: number
   message?: string
+}
+
+export interface SearchItemCreateContext<V = unknown> extends Partial<SearchValue<V>> {
+  nameInput?: string
 }
 
 export interface SearchItemConfirmContext<V = unknown> extends Partial<SearchValue<V>> {
@@ -25,10 +28,10 @@ export interface SearchItemConfirmContext<V = unknown> extends Partial<SearchVal
 
 export interface SearchItem {
   key: VKey
+  name: string
   optionKey?: VKey
   error?: SearchItemError
-  searchField: SearchField
-  segments: Segment[]
+  resolvedSearchField: ResolvedSearchField
 }
 
 export const searchItemProps = {
@@ -36,7 +39,6 @@ export const searchItemProps = {
     type: Object as PropType<SearchItem>,
     required: true,
   },
-  error: Object as PropType<SearchItemError>,
 }
 export type SearchItemProps = ExtractInnerPropTypes<typeof searchItemProps>
 

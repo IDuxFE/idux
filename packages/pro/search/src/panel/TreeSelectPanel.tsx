@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, computed, defineComponent, inject, onUnmounted, watch } from 'vue'
+import { type ComputedRef, computed, defineComponent, inject, normalizeClass, onUnmounted, watch } from 'vue'
 
 import { isFunction } from 'lodash-es'
 
@@ -77,7 +77,7 @@ export default defineComponent({
     }
 
     const renderFooter = () => {
-      if (!props.multiple) {
+      if (!props.multiple || !props.showFooter) {
         return
       }
 
@@ -114,6 +114,7 @@ export default defineComponent({
       } = props
 
       const treeProps = {
+        autoHeight: props.autoHeight,
         blocked: true,
         checkOnClick: true,
         checkedKeys: props.value,
@@ -128,7 +129,7 @@ export default defineComponent({
         expandedKeys: expandedKeys.value,
         expandIcon: expandIcon,
         getKey: 'key',
-        height: 256,
+        height: props.autoHeight ? undefined : 256,
         loadChildren,
         leafLineIcon,
         virtual,
@@ -153,9 +154,13 @@ export default defineComponent({
       } as TreeProps
 
       const prefixCls = `${mergedPrefixCls.value}-tree-select-panel`
+      const classes = normalizeClass({
+        [prefixCls]: true,
+        [`${prefixCls}-auto-height`]: !!props.autoHeight,
+      })
 
       return (
-        <div class={prefixCls} tabindex={-1} onMousedown={evt => evt.preventDefault()}>
+        <div class={classes} tabindex={-1} onMousedown={evt => evt.preventDefault()}>
           <IxTree class={`${prefixCls}-body`} {...treeProps} />
           {renderFooter()}
         </div>
