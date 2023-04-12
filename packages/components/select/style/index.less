@@ -54,7 +54,6 @@
     background-color: @select-option-container-background-color;
     border-radius: @select-option-container-border-radius;
     box-shadow: @select-option-container-box-shadow;
-    overflow: auto;
 
     &-search-wrapper {
       padding: @select-overlay-search-wrapper-padding;
@@ -72,7 +71,9 @@
     .@{select-prefix}-option-grouped {
       padding-left: @select-option-grouped-padding-left;
     }
-
+  }
+  &-panel {
+    overflow: auto;
     &-multiple {
       .@{select-option-prefix} {
         &-selected:not(&-disabled) {

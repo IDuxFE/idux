@@ -7,7 +7,7 @@
 
 import type { FlattenedOption } from '../composables/useOptions'
 
-import { computed, defineComponent, inject, provide, ref } from 'vue'
+import { computed, defineComponent, inject, normalizeClass, provide, ref } from 'vue'
 
 import {
   CdkVirtualScroll,
@@ -61,6 +61,15 @@ export default defineComponent({
       ...activeStateContext,
     })
 
+    const panelClasses = computed(() => {
+      const prefixCls = `${mergedPrefixCls.value}-panel`
+
+      return normalizeClass({
+        [prefixCls]: true,
+        [`${prefixCls}-multiple`]: !!props.multiple,
+      })
+    })
+
     const handleScrolledChange = (startIndex: number, endIndex: number, visibleOptions: FlattenedOption[]) => {
       const { onScrolledChange } = props
       if (onScrolledChange) {
@@ -107,7 +116,11 @@ export default defineComponent({
         children.push(<ɵEmpty v-slots={slots} empty={props.empty} />)
       }
 
-      return <div onMousedown={handlePanelMouseDown}>{children}</div>
+      return (
+        <div class={panelClasses.value} onMousedown={handlePanelMouseDown}>
+          {children}
+        </div>
+      )
     }
   },
 })
