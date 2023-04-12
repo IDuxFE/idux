@@ -81,9 +81,9 @@ export default defineComponent({
     const { activeValue, setActiveValue } = useActiveState(props, inputValue)
 
     const handleKeyDown = useKeyboardEvents(
+      props,
       inputValue,
       selectedValue,
-      computed(() => !!props.multiple),
       activeValue,
       changeActiveIndex,
       changeSelected,
@@ -102,11 +102,10 @@ export default defineComponent({
     })
 
     const handleOptionClick = (option: SelectData) => {
+      console.log('handleOptionClick', option)
       changeSelected(getKey.value(option))
-      if (props.multiple) {
-        clearInput()
-      } else {
-        props.allowInput && clearInput()
+      props.allowInput && clearInput()
+      if (!props.multiple) {
         setOverlayOpened(false)
       }
     }
