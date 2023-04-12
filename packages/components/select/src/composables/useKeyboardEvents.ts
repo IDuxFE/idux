@@ -5,15 +5,16 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { SelectProps } from '../types'
 import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef } from 'vue'
 
 import { isNil } from 'lodash-es'
 
 export function useKeyboardEvents(
+  props: SelectProps,
   inputValue: ComputedRef<string>,
   selectedValue: ComputedRef<VKey[]>,
-  isMultiple: ComputedRef<boolean>,
   activeValue: ComputedRef<VKey>,
   changeActiveIndex: (offset: number) => void,
   changeSelected: (key: VKey) => void,
@@ -36,8 +37,8 @@ export function useKeyboardEvents(
         evt.preventDefault()
         const key = activeValue.value
         !isNil(key) && changeSelected(key)
-        clearInput()
-        if (!isMultiple.value) {
+        props.allowInput && clearInput()
+        if (!props.multiple) {
           setOverlayOpened(false)
           blur()
         }
