@@ -41,7 +41,7 @@ describe('ProTree', () => {
   }
 
   renderWork<ProTreeProps>(ProTree, {
-    props: { dataSource: defaultDataSource },
+    props: { dataSource: defaultDataSource, header: 'header' },
   })
 
   test('checkable work', async () => {
@@ -349,6 +349,11 @@ describe('ProTree', () => {
 
     expect(wrapper.find('.ix-header-title').text()).toBe('tmp')
     expect(wrapper.find('.ix-header-suffix .ix-icon-setting').exists()).toBe(true)
+
+    // 为空时，不显示 header
+    await wrapper.setProps({ header: undefined })
+
+    expect(wrapper.find('.ix-header-wrapper').exists()).toBe(false)
   })
 
   test('header slot work', async () => {

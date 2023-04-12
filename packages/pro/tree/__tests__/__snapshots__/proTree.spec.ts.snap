@@ -3,7 +3,17 @@
 exports[`ProTree > render work 1`] = `
 "<div class=\\"ix-pro-tree\\">
   <div class=\\"ix-pro-tree-header-wrapper\\">
-    <!---->
+    <div class=\\"ix-header ix-header-md\\">
+      <!---->
+      <!---->
+      <div class=\\"ix-header-content\\">
+        <div class=\\"ix-header-title-wrapper\\"><span class=\\"ix-header-title\\">header</span>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <!---->
+    </div>
     <!---->
   </div>
   <div class=\\"ix-pro-tree-search-wrapper\\"><button class=\\"ix-button ix-button-icon-only ix-button-default ix-button-square ix-button-xs\\" type=\\"button\\" title=\\"收起全部\\"><i class=\\"ix-icon ix-icon-tree-unexpand\\" role=\\"img\\" aria-label=\\"tree-unexpand\\"></i>

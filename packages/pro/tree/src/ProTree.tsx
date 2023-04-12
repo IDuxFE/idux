@@ -187,18 +187,22 @@ export default defineComponent({
         empty: slots.empty,
         expandIcon: slots.expandIcon,
       }
+      const showHeaderIcon = !isNil(collapsed.value)
+      const showHeader = props.header || slots.header || showHeaderIcon
       return (
         <div class={classes.value} style={style.value}>
-          <div class={`${prefixCls}-header-wrapper`}>
-            <ɵHeader v-slots={slots} header={props.header} />
-            {!isNil(collapsed.value) && (
-              <IxIcon
-                class={`${prefixCls}-collapsed-icon`}
-                name={collapsed.value ? mergedCollapseIcon.value[1] : mergedCollapseIcon.value[0]}
-                onClick={handleCollapsed}
-              />
-            )}
-          </div>
+          {showHeader && (
+            <div class={`${prefixCls}-header-wrapper`}>
+              <ɵHeader v-slots={slots} header={props.header} />
+              {showHeaderIcon && (
+                <IxIcon
+                  class={`${prefixCls}-collapsed-icon`}
+                  name={collapsed.value ? mergedCollapseIcon.value[1] : mergedCollapseIcon.value[0]}
+                  onClick={handleCollapsed}
+                />
+              )}
+            </div>
+          )}
           {props.searchable ? (
             <div class={`${prefixCls}-search-wrapper`}>
               <IxButton
