@@ -124,11 +124,10 @@ export default defineComponent({
 
     const panelProps = usePanelProps(props, selectedValue, activeValue, setActiveValue, handleOptionClick)
     const overlayClasses = computed(() => {
-      const { overlayClassName, multiple } = props
+      const { overlayClassName } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [`${prefixCls}-overlay`]: true,
-        [`${prefixCls}-overlay-multiple`]: multiple,
         [overlayClassName || '']: !!overlayClassName,
       })
     })
