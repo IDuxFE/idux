@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.4](https://github.com/IDuxFE/idux/compare/v1.5.3...v1.5.4) (2023-04-13)
+
+### Bug Fixes
+
+- **cdk:scroll:** the onScrolledBottom is not triggered ([#1535](https://github.com/IDuxFE/idux/issues/1535)) ([cee4685](https://github.com/IDuxFE/idux/commit/cee46854af45863a8831eb22a901f9d2f535efb4))
+
 ## [1.5.3](https://github.com/IDuxFE/idux/compare/v1.5.2...v1.5.3) (2023-04-04)
 
 ### Bug Fixes

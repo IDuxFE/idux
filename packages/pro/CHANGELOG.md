@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.4](https://github.com/IDuxFE/idux/compare/v1.5.3...v1.5.4) (2023-04-13)
+
+### Bug Fixes
+
+- **pro:tree:** the header don't render when it is empty ([#1531](https://github.com/IDuxFE/idux/issues/1531)) ([64f6e33](https://github.com/IDuxFE/idux/commit/64f6e332ba310151baac5a1e670ae3832af41faa))
+
 ## [1.5.3](https://github.com/IDuxFE/idux/compare/v1.5.2...v1.5.3) (2023-04-04)
 
 ### Bug Fixes

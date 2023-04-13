@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.4](https://github.com/IDuxFE/idux/compare/v1.5.3...v1.5.4) (2023-04-13)
+
+### Bug Fixes
+
+- **cdk:scroll:** the onScrolledBottom is not triggered ([#1535](https://github.com/IDuxFE/idux/issues/1535)) ([cee4685](https://github.com/IDuxFE/idux/commit/cee46854af45863a8831eb22a901f9d2f535efb4))
+- **comp:cascader:** onChange not working ([#1528](https://github.com/IDuxFE/idux/issues/1528)) ([c045d47](https://github.com/IDuxFE/idux/commit/c045d471719e32b288377ea17003ca98b83def7a))
+- **comp:select:** panel active value couldn't be set as undefined ([#1533](https://github.com/IDuxFE/idux/issues/1533)) ([7949a28](https://github.com/IDuxFE/idux/commit/7949a28f96557b7ff1cc12c88dbbd82e549211cd))
+- **comp:select:** searchable with multiple works abnormally ([#1530](https://github.com/IDuxFE/idux/issues/1530)) ([8240c44](https://github.com/IDuxFE/idux/commit/8240c44440e310328835e6c3938031d4edc09406))
+- **pro:tree:** the header don't render when it is empty ([#1531](https://github.com/IDuxFE/idux/issues/1531)) ([64f6e33](https://github.com/IDuxFE/idux/commit/64f6e332ba310151baac5a1e670ae3832af41faa))
+
 ## [1.5.3](https://github.com/IDuxFE/idux/compare/v1.5.2...v1.5.3) (2023-04-04)
 
 ### Bug Fixes
