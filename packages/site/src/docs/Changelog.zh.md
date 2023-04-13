@@ -10,6 +10,16 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.5.4(2023-04-13)
+
+### Bug Fixes
+
+- **cdk:scroll:** onScrolledBottom 没有被正确触发 ([#1535](https://github.com/IDuxFE/idux/issues/1535)) ([cee4685](https://github.com/IDuxFE/idux/commit/cee46854af45863a8831eb22a901f9d2f535efb4))
+- **comp:cascader:** onChange 没有被正确触发 ([#1528](https://github.com/IDuxFE/idux/issues/1528)) ([c045d47](https://github.com/IDuxFE/idux/commit/c045d471719e32b288377ea17003ca98b83def7a))
+- **comp:select:** 下拉面板的 activeValue 不能被设置为 undefined ([#1533](https://github.com/IDuxFE/idux/issues/1533)) ([7949a28](https://github.com/IDuxFE/idux/commit/7949a28f96557b7ff1cc12c88dbbd82e549211cd))
+- **comp:select:** 同时 searchable 和 multiple 工作异常 ([#1530](https://github.com/IDuxFE/idux/issues/1530)) ([8240c44](https://github.com/IDuxFE/idux/commit/8240c44440e310328835e6c3938031d4edc09406))
+- **pro:tree:** header 为空时异常渲染 ([#1531](https://github.com/IDuxFE/idux/issues/1531)) ([64f6e33](https://github.com/IDuxFE/idux/commit/64f6e332ba310151baac5a1e670ae3832af41faa))
+
 ## 1.5.3(2023-04-04)
 
 ### Bug Fixes
