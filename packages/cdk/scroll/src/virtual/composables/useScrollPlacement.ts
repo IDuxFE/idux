@@ -59,7 +59,9 @@ export function useScrollPlacement(
     }
     callEmit(props.onScroll, evt)
 
-    if (newScrollTop >= maxScrollHeight.value) {
+    // 某些情况下(例如浏览器缩放), 会导致 scrollTop 出现小数，newScrollTop 始终小于 maxScrollHeight
+    // 所以对 newScrollTop 进行了向上取整，避免此种情况的出现。
+    if (Math.ceil(newScrollTop) >= maxScrollHeight.value) {
       callEmit(props.onScrolledBottom)
     }
   }
