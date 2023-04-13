@@ -11,6 +11,8 @@ import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 
 import { type ComputedRef, type Ref, computed, onMounted, ref, watch } from 'vue'
 
+import { isNil } from 'lodash-es'
+
 import { type VKey, useControlledProp } from '@idux/cdk/utils'
 
 export interface PanelActiveStateContext {
@@ -41,12 +43,13 @@ export function usePanelActiveState(
   const setActiveIndex = (index: number) => {
     activeIndex.value = index
     const key = flattenedOptions.value[index]?.key
+
     key !== activeValue.value && setActiveValue(flattenedOptions.value[index]?.key)
   }
 
   watch([() => props.activeValue, flattenedOptions], ([value, options]) => {
-    const targetIndex = value ? keyIndexMap.value.get(value) ?? -1 : -1
-    setActiveIndex(getEnabledActiveIndex(options, targetIndex === -1 ? 0 : targetIndex, 1))
+    const targetIndex = isNil(value) ? -1 : keyIndexMap.value.get(value) ?? -1
+    setActiveIndex(targetIndex !== -1 ? getEnabledActiveIndex(options, targetIndex, 1) : -1)
   })
 
   const scrollToActivated = () => {
@@ -57,7 +60,7 @@ export function usePanelActiveState(
     const options = flattenedOptions.value
     const currValue = selectedKeys.value
     const currIndex = options.findIndex(option => currValue.some(value => option.key === value))
-    setActiveIndex(getEnabledActiveIndex(options, currIndex === -1 ? 0 : currIndex, 1))
+    setActiveIndex(currIndex !== -1 ? getEnabledActiveIndex(options, currIndex, 1) : -1)
 
     scrollToActivated()
   })
