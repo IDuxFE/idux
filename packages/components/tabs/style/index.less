@@ -57,7 +57,7 @@
 
     &&-has-scroll {
       > .@{tabs-prefix}-nav {
-        margin: 0 @tabs-nav-pre-next-width;;
+        margin: 0 @tabs-nav-pre-next-width;
       }
 
       > .@{icon-prefix} {
@@ -148,11 +148,13 @@
         &-pre-top,
         &-pre-bottom {
           left: 0;
+          box-shadow: 3px 0 8px 0 rgb(0 0 0 / 8%);
         }
 
         &-next-top,
         &-next-bottom {
           right: 0;
+          box-shadow: -3px 0 8px 0 rgb(0 0 0 / 8%);
         }
 
         &-pre-start,
@@ -244,7 +246,8 @@
         &-bar {
           position: absolute;
           background-color: @tabs-nav-bar-color;
-          transition: width @transition-duration-base @ease-in-out, height @transition-duration-base @ease-in-out, left @transition-duration-base @ease-in-out, top @transition-duration-base @ease-in-out;
+          transition: width @transition-duration-base @ease-in-out, height @transition-duration-base @ease-in-out,
+            left @transition-duration-base @ease-in-out, top @transition-duration-base @ease-in-out;
           bottom: 0;
           height: @tabs-nav-bar-height;
           border-radius: @tabs-border-radius @tabs-border-radius 0 0;
@@ -468,5 +471,14 @@
         }
       }
     }
+  }
+
+  &-nav-add-icon,
+  &-nav-close-icon {
+    font-size: var(--ix-font-size-lg);
+  }
+
+  &-nav-close-icon {
+    margin-left: 8px;
   }
 }
