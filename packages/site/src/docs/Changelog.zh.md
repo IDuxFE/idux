@@ -10,6 +10,17 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 1.6.0(2023-04-17)
+
+### Bug Fixes
+
+- **cdk:drag-drop:** 全局共享的 context 初始化不正确 ([#1537](https://github.com/IDuxFE/idux/issues/1537)) ([1a8793d](https://github.com/IDuxFE/idux/commit/1a8793d811f309324df5c63fd721f81fd1a7c466)), closes [#1436](https://github.com/IDuxFE/idux/issues/1436)
+
+### Features
+
+- **comp:tabs:** 支持 dataSource, closable, addable 动态新增关闭 ([#1536](https://github.com/IDuxFE/idux/issues/1536)) ([0dad84b](https://github.com/IDuxFE/idux/commit/0dad84b7664587553daf9d51b69cfe5c839f1cf6))
+- **pro:search:** 新增快速选择面板 ([#1529](https://github.com/IDuxFE/idux/issues/1529)) ([daa39da](https://github.com/IDuxFE/idux/commit/daa39dac438ad2fe8fd9d358f731a2e20b68b603))
+
 ## 1.5.4(2023-04-13)
 
 ### Bug Fixes
