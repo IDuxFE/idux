@@ -17,7 +17,7 @@ export function createOperatorSegment(
   prefixCls: string,
   searchField: SearchField,
 ): Segment<string | undefined> | undefined {
-  const { operators, defaultOperator, customOperatorLabel } = searchField
+  const { operators, operatorPlaceholder, customOperatorLabel } = searchField
   if (!operators || operators.length <= 0) {
     return
   }
@@ -54,7 +54,7 @@ export function createOperatorSegment(
   return {
     name: 'operator',
     inputClassName: `${prefixCls}-operator-segment-input`,
-    defaultValue: operators.find(op => op === defaultOperator),
+    placeholder: operatorPlaceholder,
     parse: input => parseInput(input, searchField),
     format: value => value ?? '',
     panelRenderer,

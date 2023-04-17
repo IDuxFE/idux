@@ -43,8 +43,8 @@ export function createCascaderSegment(
       onSearch,
       onLoaded,
     },
-    defaultValue,
     inputClassName,
+    containerClassName,
     onPanelVisibleChange,
   } = searchField
 
@@ -73,11 +73,12 @@ export function createCascaderSegment(
   )
 
   const panelRenderer = (context: PanelRenderContext<VKey | (VKey | VKey[])[] | undefined>) => {
-    const { ok, cancel } = context
+    const { ok, cancel, renderLocation } = context
     const { panelValue, searchInput, handleChange } = getSelectableCommonParams<VKey | VKey[]>(
       context,
       !!multiple,
-      separator ?? defaultSeparator,
+      renderLocation === 'individual' ? separator ?? defaultSeparator : undefined,
+      !multiple || renderLocation === 'quick-select-panel',
     )
 
     return (
@@ -90,6 +91,7 @@ export function createCascaderSegment(
         fullPath={fullPath ?? defaultFullPath}
         strategy={mergedCascaderStrategy}
         separator={pathSeparator}
+        showFooter={renderLocation === 'individual'}
         multiple={multiple}
         virtual={virtual}
         searchFn={searchFn}
@@ -106,8 +108,8 @@ export function createCascaderSegment(
   return {
     name: searchField.type,
     inputClassName: [inputClassName, `${prefixCls}-cascader-segment-input`],
+    containerClassName: [containerClassName, `${prefixCls}-cascader-segment-container`],
     placeholder: searchField.placeholder,
-    defaultValue,
     parse: input => parseInput(input, searchField, nodeLabelMap, checkedKeysResolver, parentKeyMap),
     format: value => formatValue(value, searchField, nodeKeyMap),
     panelRenderer,

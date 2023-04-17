@@ -102,6 +102,7 @@ export default defineComponent({
 
     expose({
       updatePopper: update,
+      getPopperElement: () => convertElement(popperRef),
     })
 
     const handleClickOutside = (evt: Event) => {

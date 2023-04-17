@@ -9,19 +9,29 @@ import type { ProSearchContext } from '../token'
 
 import { type ComputedRef, type Ref, nextTick, onUnmounted, ref, watch } from 'vue'
 
+import { isNil, isNumber } from 'lodash-es'
+
 import { callEmit } from '@idux/cdk/utils'
 
-import { type SegmentValue, tempSearchStateKey } from '../composables/useSearchStates'
+import { type SegmentValue } from '../composables/useSearchStates'
 import { type ProSearchProps, type SearchItemProps, Segment, searchDataTypes } from '../types'
 
-type SegmentStates = Record<string, { input: string; value: unknown; index: number }>
+interface SegmentState {
+  input: string
+  value: unknown
+  index: number
+  selectionStart: number
+}
+type SegmentStates = Record<string, SegmentState>
 export interface SegmentStatesContext {
   segmentStates: Ref<SegmentStates>
   initSegmentStates: (force?: boolean) => void
+  changeActiveAndSelect: (index: number, selectionStart: number | 'start' | 'end') => void
   handleSegmentInput: (name: string, input: string) => void
   handleSegmentChange: (name: string, value: unknown) => void
   handleSegmentConfirm: (name: string, confirmItem?: boolean) => void
   handleSegmentCancel: (name: string) => void
+  handleSegmentSelect: (name: string, selectionStart: number | undefined | null) => void
 }
 
 export function useSegmentStates(
@@ -37,21 +47,26 @@ export function useSegmentStates(
     updateSegmentValue,
     removeSearchState,
     convertStateToValue,
-    initTempSearchState,
     activeSegment,
     changeActive,
     setInactive,
     setTempActive,
+    setOverlayOpened,
     onSearchTrigger,
     watchSearchState,
   } = proSearchContext
   const segmentStates = ref<SegmentStates>({})
 
-  const _genInitSegmentState = (segment: Segment, segmentValue: SegmentValue | undefined, index: number) => {
+  const _genInitSegmentState = (
+    segment: Segment,
+    segmentValue: SegmentValue | undefined,
+    index: number,
+  ): SegmentState => {
     return {
       input: segment.format(segmentValue?.value) ?? '',
       value: segmentValue?.value,
       index: index,
+      selectionStart: 0,
     }
   }
 
@@ -59,7 +74,7 @@ export function useSegmentStates(
   const initSegmentStates = () => {
     const searchState = getSearchStateByKey(props.searchItem!.key)!
 
-    segmentStates.value = props.searchItem!.segments.reduce((states, segment, index) => {
+    segmentStates.value = props.searchItem!.resolvedSearchField.segments.reduce((states, segment, index) => {
       const segmentValue = searchState?.segmentValues.find(value => value.name === segment.name)
       states[segment.name] = _genInitSegmentState(segment, segmentValue, index)
 
@@ -75,9 +90,46 @@ export function useSegmentStates(
     }
 
     const searchState = getSearchStateByKey(props.searchItem!.key)!
-    const segment = props.searchItem!.segments[segmentState.index]
+    const segment = props.searchItem!.resolvedSearchField.segments[segmentState.index]
     const segmentValue = searchState?.segmentValues.find(value => value.name === segment.name)
     segmentStates.value[name] = _genInitSegmentState(segment, segmentValue, segmentState.index)
+  }
+
+  const changeActiveAndSelect = (offset: number, selectionStart: number | 'start' | 'end') => {
+    const currentIndex = activeSegment.value?.name ? segmentStates.value[activeSegment.value.name].index : -1
+    if (currentIndex < 0) {
+      return
+    }
+
+    const length = props.searchItem!.resolvedSearchField.segments.length
+
+    const _offset =
+      offset > 0 ? Math.min(offset, length - 1 - currentIndex) : Math.min(offset, -length + 1 + currentIndex)
+    if (_offset === 0) {
+      return
+    }
+
+    changeActive(_offset, false)
+
+    if (isNil(selectionStart)) {
+      return
+    }
+
+    const targetSegmentName = props.searchItem!.resolvedSearchField.segments[currentIndex + _offset]?.name
+    const targetSegmentState = segmentStates.value[targetSegmentName]
+    if (!targetSegmentState) {
+      return
+    }
+
+    /* eslint-disable indent */
+    const _selectionStart = isNumber(selectionStart)
+      ? selectionStart
+      : selectionStart === 'start'
+      ? 0
+      : targetSegmentState.input.length
+    /* eslint-enable indent */
+
+    targetSegmentState.selectionStart = _selectionStart
   }
 
   let searchStateWatchStop: () => void
@@ -98,7 +150,7 @@ export function useSegmentStates(
       immediate: true,
     },
   )
-  watch([isActive, () => props.searchItem?.searchField], ([active, searchField]) => {
+  watch([isActive, () => props.searchItem?.resolvedSearchField], ([active, searchField]) => {
     if (!active || !searchField) {
       initSegmentStates()
     }
@@ -113,7 +165,7 @@ export function useSegmentStates(
       return
     }
 
-    const segment = props.searchItem!.segments.find(seg => seg.name === name)!
+    const segment = props.searchItem!.resolvedSearchField.segments.find(seg => seg.name === name)!
     segmentStates.value[name].value = value
     segmentStates.value[name].input = segment.format(value)
   }
@@ -122,17 +174,24 @@ export function useSegmentStates(
       return
     }
 
-    const segment = props.searchItem!.segments.find(seg => seg.name === name)!
+    const segment = props.searchItem!.resolvedSearchField.segments.find(seg => seg.name === name)!
 
     segmentStates.value[name].input = input
     segmentStates.value[name].value = segment.parse(input)
   }
+  const setSegmentSelectionStart = (name: string, selectionStart: number | undefined | null) => {
+    if (!segmentStates.value[name]) {
+      return
+    }
+
+    segmentStates.value[name].selectionStart = selectionStart ?? 0
+  }
   const confirmSearchItem = () => {
     const key = props.searchItem!.key
     const validateRes = validateSearchState(key)
+    const searchValue = convertStateToValue(key)
 
     if (!validateRes) {
-      initTempSearchState()
       removeSearchState(key)
     } else {
       updateSearchState(key)
@@ -141,18 +200,15 @@ export function useSegmentStates(
     const valueName = searchDataTypes.find(name => !!segmentStates.value[name])
 
     callEmit(proSearchProps.onItemConfirm, {
-      ...convertStateToValue(key),
-      nameInput: segmentStates.value.name?.input,
+      ...(searchValue ?? {}),
+      nameInput: searchValue?.name ?? '',
       operatorInput: segmentStates.value.operator?.input,
       valueInput: valueName && segmentStates.value[valueName]?.input,
       removed: !validateRes,
     })
 
-    if (key !== tempSearchStateKey) {
-      setInactive()
-    } else {
-      setTempActive()
-    }
+    setTempActive()
+    setOverlayOpened(false)
   }
 
   const handleSegmentConfirm = (name: string, confirmItem?: boolean) => {
@@ -165,11 +221,7 @@ export function useSegmentStates(
 
     // only confirm searchItem when the last segment is confirmed
     // if the last segment is searchItem name, confirm the searchItem only when no searchField is selected
-    if (
-      index === props.searchItem!.segments.length - 1 &&
-      confirmItem &&
-      (name !== 'name' || !segmentStates.value[name].value)
-    ) {
+    if (index === props.searchItem!.resolvedSearchField.segments.length - 1 && confirmItem) {
       confirmSearchItem()
     } else {
       changeActive(1)
@@ -181,7 +233,7 @@ export function useSegmentStates(
 
     if (!segmentStates.value[name].value) {
       changeActive(-1, true)
-    } else if (props.searchItem?.key !== tempSearchStateKey) {
+    } else {
       setInactive()
     }
   }
@@ -201,8 +253,10 @@ export function useSegmentStates(
   return {
     segmentStates,
     initSegmentStates,
+    changeActiveAndSelect,
     handleSegmentInput: setSegmentInput,
     handleSegmentChange: setSegmentValue,
+    handleSegmentSelect: setSegmentSelectionStart,
     handleSegmentConfirm,
     handleSegmentCancel,
   }

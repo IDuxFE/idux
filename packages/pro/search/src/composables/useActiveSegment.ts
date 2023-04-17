@@ -7,33 +7,46 @@
 
 import type { ProSearchProps, SearchItem, Segment } from '../types'
 
-import { type ComputedRef, type Ref, computed } from 'vue'
+import { type ComputedRef, type Ref, computed, nextTick } from 'vue'
 
 import { type VKey, useState } from '@idux/cdk/utils'
 
-import { tempSearchStateKey } from './useSearchStates'
-
 export interface ActiveSegmentContext {
+  isActive: ComputedRef<boolean>
   activeSegment: ComputedRef<ActiveSegment | undefined>
   setActiveSegment: (segment: ActiveSegment | undefined) => void
   changeActive: (offset: number, crossItem?: boolean) => void
   setInactive: (blur?: boolean) => void
-  setTempActive: (overlayOpened?: boolean) => void
+
+  nameSelectActive: ComputedRef<boolean>
+  setNameSelectActive: () => void
+  quickSelectActive: ComputedRef<boolean>
+  setQuickSelectActive: () => void
+
+  setTempActive: () => void
+
+  overlayOpened: ComputedRef<boolean>
+  setOverlayOpened: (overlayOpened: boolean) => void
 }
 export interface ActiveSegment {
   itemKey: VKey
   name: string
-  overlayOpened: boolean
 }
 type FlattenedSegment = Segment & { itemKey: VKey }
 
 export function useActiveSegment(
   props: ProSearchProps,
-  elementRef: Ref<HTMLElement | undefined>,
+  tempSegmentInputRef: Ref<HTMLInputElement | undefined>,
   searchItems: ComputedRef<SearchItem[] | undefined>,
-  tempSearchStateAvailable: ComputedRef<boolean>,
+  enableQuickSelect: ComputedRef<boolean>,
 ): ActiveSegmentContext {
   const [activeSegment, setActiveSegment] = useState<ActiveSegment | undefined>(undefined)
+  const [nameSelectActive, _setNameSelectActive] = useState<boolean>(false)
+  const [quickSelectActive, _setQuickSelectActive] = useState<boolean>(false)
+  const [overlayOpened, setOverlayOpened] = useState<boolean>(false)
+
+  const isActive = computed(() => !!activeSegment.value || nameSelectActive.value || quickSelectActive.value)
+
   const mergedActiveSegment = computed(() => (props.disabled ? undefined : activeSegment.value))
   const flattenedSegments = computed(() => flattenSegments(searchItems.value ?? []))
   const activeItem = computed(() => searchItems.value?.find(item => item.key === activeSegment.value?.itemKey))
@@ -45,14 +58,20 @@ export function useActiveSegment(
 
   const updateActiveSegment = (segment: ActiveSegment | undefined) => {
     if (
-      activeSegment.value?.itemKey === segment?.itemKey &&
-      activeSegment.value?.name === segment?.name &&
-      activeSegment.value?.overlayOpened === segment?.overlayOpened
+      segment &&
+      activeSegment.value &&
+      activeSegment.value.itemKey === segment.itemKey &&
+      activeSegment.value.name === segment.name
     ) {
       return
     }
 
     setActiveSegment(segment)
+
+    if (segment) {
+      _setNameSelectActive(false)
+      _setQuickSelectActive(false)
+    }
   }
 
   const changeActive = (offset: number, crossItem = false) => {
@@ -67,9 +86,11 @@ export function useActiveSegment(
     if (activeItem.value && targetSegment?.itemKey !== activeSegment.value.itemKey && !crossItem) {
       updateActiveSegment({
         itemKey: activeItem.value!.key,
-        name: activeItem.value!.segments[offset < 0 ? 0 : activeItem.value!.segments.length - 1].name,
-        overlayOpened: !crossItem,
+        name: activeItem.value!.resolvedSearchField.segments[
+          offset < 0 ? 0 : activeItem.value!.resolvedSearchField.segments.length - 1
+        ].name,
       })
+      setOverlayOpened(!crossItem)
       return
     }
 
@@ -79,42 +100,63 @@ export function useActiveSegment(
         ? {
             itemKey: targetSegment.itemKey,
             name: targetSegment.name,
-            overlayOpened: !crossItem,
           }
         : undefined,
     )
+    setOverlayOpened(!crossItem)
     /* eslint-enable indent */
   }
 
   const setInactive = () => {
     setActiveSegment(undefined)
+    _setNameSelectActive(false)
+    _setQuickSelectActive(false)
+  }
+  const setNameSelectActive = () => {
+    setActiveSegment(undefined)
+    _setNameSelectActive(true)
+    _setQuickSelectActive(false)
+  }
+  const setQuickSelectActive = () => {
+    setActiveSegment(undefined)
+    _setQuickSelectActive(true)
+    _setNameSelectActive(false)
   }
 
-  const setTempActive = (overlayOpened = false) => {
-    if (!tempSearchStateAvailable.value) {
-      setInactive()
+  const setTempActive = () => {
+    if (enableQuickSelect.value) {
+      setQuickSelectActive()
     } else {
-      setActiveSegment({
-        itemKey: tempSearchStateKey,
-        name: 'name',
-        overlayOpened,
-      })
+      setNameSelectActive()
     }
+
+    nextTick(() => {
+      tempSegmentInputRef.value?.focus()
+    })
+
+    setOverlayOpened(true)
   }
 
   return {
+    isActive,
     activeSegment: mergedActiveSegment,
     setActiveSegment: updateActiveSegment,
     changeActive,
     setInactive,
+    nameSelectActive,
+    setNameSelectActive,
+    quickSelectActive,
+    setQuickSelectActive,
     setTempActive,
+    overlayOpened,
+    setOverlayOpened,
   }
 }
 
 function flattenSegments(searchItems: SearchItem[]): FlattenedSegment[] {
   const segments: FlattenedSegment[] = []
   searchItems.forEach(item => {
-    segments.push(...item.segments.map(segment => ({ ...segment, itemKey: item.key })))
+    segments.push(...item.resolvedSearchField.segments.map(segment => ({ ...segment, itemKey: item.key })))
   })
 
   return segments

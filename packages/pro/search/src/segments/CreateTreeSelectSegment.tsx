@@ -45,8 +45,8 @@ export function createTreeSelectSegment(
       onSearch,
       onLoaded,
     },
-    defaultValue,
     inputClassName,
+    containerClassName,
     onPanelVisibleChange,
   } = searchField
 
@@ -58,17 +58,19 @@ export function createTreeSelectSegment(
   })
 
   const panelRenderer = (context: PanelRenderContext<VKey | VKey[] | undefined>) => {
-    const { ok, cancel } = context
+    const { ok, cancel, renderLocation } = context
     const { panelValue, searchInput, handleChange } = getSelectableCommonParams(
       context,
       !!multiple,
-      separator ?? defaultSeparator,
+      renderLocation === 'individual' ? separator ?? defaultSeparator : undefined,
+      !multiple || renderLocation === 'quick-select-panel',
     )
 
     return (
       <TreeSelectPanel
         value={panelValue}
         searchValue={searchable && searchInput ? searchInput : undefined}
+        autoHeight={renderLocation === 'quick-select-panel'}
         dataSource={dataSource}
         draggable={draggable}
         draggableIcon={draggableIcon}
@@ -77,6 +79,7 @@ export function createTreeSelectSegment(
         multiple={multiple}
         virtual={virtual}
         showLine={showLine}
+        showFooter={renderLocation === 'individual'}
         searchFn={searchFn}
         onCheck={onCheck}
         onDragstart={onDragstart}
@@ -99,8 +102,8 @@ export function createTreeSelectSegment(
   return {
     name: searchField.type,
     inputClassName: [inputClassName, `${prefixCls}-tree-select-segment-input`],
+    containerClassName: [containerClassName, `${prefixCls}-tree-select-segment-container`],
     placeholder: searchField.placeholder,
-    defaultValue,
     parse: input => parseInput(input, searchField, nodeLabelMap),
     format: value => formatValue(value, searchField, nodeKeyMap),
     panelRenderer,

@@ -1,0 +1,85 @@
+@import '../../style/mixins/reset.less';
+@import '../../../components/select/style/index.less';
+
+@import './mixin.less';
+@import './quick-select.less';
+
+.@{pro-search-prefix} {
+  &-panel-footer {
+    .panel-footer();
+  }
+
+  &-date-picker-panel-body {
+    padding: @pro-search-date-picker-panel-body-padding;
+    display: flex;
+  }
+
+  &-name-segment-panel.@{pro-search-prefix}-select-panel {
+    min-width: @pro-search-name-segment-panel-min-width;
+  }
+  &-operator-segment-panel.@{pro-search-prefix}-select-panel {
+    min-width: @pro-search-operator-segment-panel-min-width;
+  }
+
+  &-select-panel {
+    min-width: @pro-search-select-panel-min-width;
+    display: flex;
+    flex-direction: column;
+
+    &-inner {
+      padding: 4px 0;
+    }
+
+    &-auto-height {
+      height: 100%;
+      .@{pro-search-prefix}-select-panel-inner {
+        height: 0;
+        flex: auto;
+      }
+      .cdk-virtual-scroll {
+        height: 100%;
+      }
+    }
+    &-select-all-option {
+      .select-option(@select-option-font-size, @select-option-color);
+
+      border-bottom: @pro-search-border-width @pro-search-border-style @pro-search-border-color;
+
+      &-label {
+        margin-left: @select-option-label-margin-left;
+      }
+    }
+  }
+  &-tree-select-panel {
+    min-width: @pro-search-tree-select-panel-min-width;
+    max-width: @pro-search-tree-select-panel-max-width;
+    display: flex;
+    flex-direction: column;
+    
+    &-auto-height {
+      height: 100%;
+      .@{pro-search-prefix}-tree-select-panel-body {
+        height: 0;
+        flex: auto;
+      }
+    }
+
+    &-body {
+      padding: @spacing-xs 0;
+      .@{tree-node-prefix} {
+        padding: 0 @spacing-xs;
+      }
+    }
+  }
+}
+
+.panel-footer() {
+  border-top: @pro-search-panel-footer-border-width @pro-search-panel-footer-border-style
+    @pro-search-panel-footer-border-color;
+  padding: @pro-search-panel-footer-padding-vertical @pro-search-panel-footer-padding-horizontal;
+  text-align: right;
+
+  .@{button-prefix} + .@{button-prefix} {
+    margin-left: @pro-search-panel-footer-button-margin;
+  }
+}

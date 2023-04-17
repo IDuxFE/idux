@@ -1,0 +1,139 @@
+@import '../../../components/style/mixins/ellipsis.less';
+@import './mixin.less';
+
+.@{pro-search-prefix}-quick-select {
+  &-overlay {
+    .overlay()
+  }
+
+  &-panel {
+    padding: 12px 8px 0;
+
+    &-shortcuts {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 8px;
+      margin-bottom: 8px;
+    }
+    &-items {
+      width: 100%;
+      overflow: auto hidden;
+      display: flex;
+      align-items: stretch;
+      justify-content: flex-start;
+      padding: 0 0 12px;
+    }
+    &-item-separator {
+      width: 1px;
+      background-color: @color-graphite-l30;
+      margin: 0 4px;
+      flex-shrink: 0;
+    }
+  }
+  &-shortcut {
+    margin-bottom: 8px;
+    height: 24px;
+    padding: 2px 8px;
+    display: flex;
+    align-items: center;
+    background-color: @color-graphite-l40;
+    border-radius: 2px;
+    &:not(&:first-child) {
+      margin-left: 8px;
+    }
+
+    cursor: pointer;
+  }
+  &-item {
+    min-width: 220px;
+    max-height: 345px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden auto;
+
+    &-header {
+      position: relative;
+      width: 100%;
+      height: 24px;
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &-content {
+      flex: auto;
+    }
+    &-label {
+      height: 100%;
+      max-width: calc(100% - 24px);
+      color: @color-graphite;
+      .ellipsis()
+    }
+    &-search-bar {
+      position: absolute;
+      right: 0;
+      height: 24px;
+      width: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      background-color: @pro-search-background-color;
+      border: 1px solid transparent;
+      transition: all @transition-duration-fast @ease-in-out;
+
+      &-opened {
+        width: 100%;
+        border: 1px solid @pro-search-border-color;
+        border-radius: @pro-search-border-radius;
+      }
+    }
+    &-search-bar:not(&-search-bar-opened) &-search-input {
+      padding: 0;
+    }
+    &-search-input {
+      width: 0;
+      border: 0;
+      height: 100%;
+      flex: auto;
+      transition: none;
+    }
+    &-search-icon {
+      width: 24px;
+      font-size: 16px;
+      flex-shrink: 0;
+      color: @color-graphite-d20;
+      cursor: pointer;
+    }
+
+    &.@{pro-search-prefix}-date-range-picker-segment-container {
+      min-width: 505px;
+    }
+    &.@{pro-search-prefix}-date-picker-segment-container {
+      min-width: 252px;
+    }
+    .@{pro-search-prefix}-select-panel {
+      .@{select-option-prefix} {
+        padding: 8px;
+        &-selected:not(&-disabled) {
+          border-radius: 2px;
+        }
+      }
+    }
+
+    .@{pro-search-prefix}-tree-select-panel {
+      min-height: 230px;
+    }
+    .@{pro-search-prefix}-date-picker-panel {
+      width: 493px;
+      padding: 0 8px;
+      &-body {
+        padding: 0 0 8px;
+      }
+      .@{pro-search-prefix}-panel-footer {
+        padding: 8px 0 0;
+      }
+    }
+  }
+}

@@ -28,8 +28,8 @@ export function createDateRangePickerSegment(
 ): Segment<(Date | undefined)[] | undefined> {
   const {
     fieldConfig: { type, cellTooltip, disabledDate, timePanelOptions },
-    defaultValue,
     inputClassName,
+    containerClassName,
     onPanelVisibleChange,
   } = searchField
 
@@ -43,6 +43,7 @@ export function createDateRangePickerSegment(
         cellTooltip={cellTooltip}
         disabledDate={disabledDate}
         type={type ?? defaultType}
+        showFooter={true}
         timePanelOptions={timePanelOptions}
         onChange={setValue as ((value: Date | Date[] | undefined) => void) | undefined}
         onConfirm={ok}
@@ -54,8 +55,8 @@ export function createDateRangePickerSegment(
   return {
     name: searchField.type,
     inputClassName: [inputClassName, `${prefixCls}-date-range-picker-segment-input`],
+    containerClassName: [containerClassName, `${prefixCls}-date-range-picker-segment-container`],
     placeholder: searchField.placeholder,
-    defaultValue,
     parse: input => parseInput(input, dateConfig, searchField),
     format: value => formatValue(value, dateConfig, searchField),
     panelRenderer,

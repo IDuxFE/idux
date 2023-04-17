@@ -19,28 +19,22 @@ export function useControl(
   searchStateContext: SearchStateContext,
   focusEventContext: FocusStateContext,
 ): void {
-  const { activeSegment, setInactive, setTempActive } = activeSegmentContext
-  const { searchStates, initTempSearchState } = searchStateContext
-  const { focused, focus, onFocus, onBlur } = focusEventContext
+  const { isActive, nameSelectActive, quickSelectActive, setInactive, setTempActive } = activeSegmentContext
+  const { searchStates } = searchStateContext
+  const { focused, focusVia, onFocus, onBlur } = focusEventContext
 
   onFocus(evt => {
     if (evt.target === elementRef.value) {
-      setTempActive(true)
+      setTempActive()
     }
   })
-  onFocus((evt, origin) => {
-    if (focused.value && evt.target === elementRef.value && origin !== 'program') {
-      setTempActive(true)
-    }
-  }, true)
   onBlur(() => {
     setInactive()
-    initTempSearchState()
   })
 
-  watch([activeSegment, searchStates], ([segment]) => {
-    if (!segment && focused.value) {
-      focus()
+  watch([isActive, searchStates], ([active]) => {
+    if (!active && focused.value) {
+      focusVia(elementRef)
     }
   })
 
@@ -49,14 +43,22 @@ export function useControl(
       clearHandlers.forEach(handler => handler())
     }
   })([
-    useEventListener(elementRef, 'mousedown', () => {
-      if (focused.value && !activeSegment.value) {
-        setTempActive(true)
+    useEventListener(elementRef, 'mousedown', evt => {
+      if (!focused.value) {
+        return
+      }
+
+      if (!nameSelectActive.value || !quickSelectActive.value) {
+        setTempActive()
+      }
+
+      if (!(evt.target instanceof HTMLInputElement)) {
+        evt.preventDefault()
       }
     }),
     useEventListener(elementRef, 'keydown', evt => {
-      if (focused.value && !activeSegment.value && !['Backspace', 'Escape'].includes(evt.code)) {
-        setTempActive(true)
+      if (focused.value && !isActive.value && !['Backspace', 'Escape'].includes(evt.code)) {
+        setTempActive()
       }
     }),
   ])

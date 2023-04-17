@@ -13,8 +13,8 @@ import { isFunction, isString } from 'lodash-es'
 export function createCustomSegment(prefixCls: string, searchField: CustomSearchField, slots: Slots): Segment {
   const {
     fieldConfig: { parse, format, customPanel },
-    defaultValue,
     inputClassName,
+    containerClassName,
     onPanelVisibleChange,
   } = searchField
   const panelRenderer = getPanelRenderer(customPanel, slots)
@@ -23,8 +23,8 @@ export function createCustomSegment(prefixCls: string, searchField: CustomSearch
   return {
     name: 'custom',
     inputClassName: [inputClassName, `${prefixCls}-custom-segment-input`],
+    containerClassName: [containerClassName, `${prefixCls}-custom-segment-container`],
     placeholder: searchField.placeholder,
-    defaultValue,
     parse,
     format,
     panelRenderer,

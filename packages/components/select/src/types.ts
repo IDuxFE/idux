@@ -40,7 +40,7 @@ export const selectPanelProps = {
   onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
 
   // private
-  _virtualScrollHeight: { type: Number, default: 256 },
+  _virtualScrollHeight: { type: [Number, String] as PropType<number | 'auto' | '100%'>, default: 256 },
   _virtualScrollItemHeight: { type: Number, default: 32 },
 } as const
 

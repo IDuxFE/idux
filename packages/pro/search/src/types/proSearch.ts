@@ -6,7 +6,7 @@
  */
 
 import type { SearchField } from './searchFields'
-import type { SearchItemConfirmContext, SearchItemError } from './searchItem'
+import type { SearchItemConfirmContext, SearchItemCreateContext, SearchItemError } from './searchItem'
 import type { SearchValue } from './searchValue'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { OverlayContainerType } from '@idux/components/utils'
@@ -47,6 +47,7 @@ export const proSearchProps = {
   onItemRemove: [Array, Function] as PropType<MaybeArray<(item: SearchValue) => void>>,
   onSearch: [Array, Function] as PropType<MaybeArray<(value: SearchValue[] | undefined) => void>>,
   onItemConfirm: [Array, Function] as PropType<MaybeArray<(item: SearchItemConfirmContext) => void>>,
+  onItemCreate: [Array, Function] as PropType<MaybeArray<(item: SearchItemCreateContext) => void>>,
 } as const
 
 export interface ProSearchBindings {

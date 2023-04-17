@@ -5,16 +5,19 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, VKey } from '@idux/cdk/utils'
-import type { PropType, Slots, VNodeChild } from 'vue'
+import type { ExtractInnerPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
+import type { DefineComponent, PropType, Slots, VNodeChild } from 'vue'
 
 export type InputFormater<V = unknown> = (value: V) => string
 export type InputParser<V = unknown> = (input: string) => V | null
+
+export type RenderLocation = 'individual' | 'quick-select-panel'
 
 export interface PanelRenderContext<V = unknown> {
   slots: Slots
   input: string
   value: V
+  renderLocation: RenderLocation
   ok: () => void
   cancel: () => void
   setValue: (value: V) => void
@@ -23,9 +26,9 @@ export interface PanelRenderContext<V = unknown> {
 
 export interface Segment<V = unknown> {
   name: string
-  inputClassName: string | (string | undefined)[]
+  inputClassName?: string | (string | undefined)[]
+  containerClassName?: string | (string | undefined)[]
   placeholder?: string
-  defaultValue?: V
   format: InputFormater<V>
   parse: InputParser<V>
   panelRenderer?: (context: PanelRenderContext<V>) => VNodeChild
@@ -39,6 +42,7 @@ export const segmentProps = {
   },
   input: String,
   value: null,
+  selectionStart: Number,
   disabled: Boolean,
   segment: {
     type: Object as PropType<Segment>,
@@ -46,3 +50,19 @@ export const segmentProps = {
   },
 } as const
 export type SegmentProps = ExtractInnerPropTypes<typeof segmentProps>
+
+export const segmentIputProps = {
+  value: String,
+  disabled: Boolean,
+  placeholder: String,
+  onInput: [Function, Array] as PropType<MaybeArray<(input: string) => void>>,
+  onWidthChange: [Function, Array] as PropType<MaybeArray<(width: number) => void>>,
+}
+export type SegmentInputProps = ExtractInnerPropTypes<typeof segmentIputProps>
+export type SegmentInputComponent = DefineComponent<
+  SegmentInputProps,
+  {
+    getInputElement: () => HTMLInputElement
+  }
+>
+export type SegmentInputInstance = InstanceType<SegmentInputComponent>

@@ -43,7 +43,7 @@ export default defineComponent({
     }
 
     const renderFooter = () => {
-      if (!props.multiple) {
+      if (!props.multiple || !props.showFooter) {
         return
       }
 
