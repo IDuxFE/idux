@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/IDuxFE/idux/compare/v1.5.4...v1.6.0) (2023-04-17)
+
+### Features
+
+- **pro:search:** add quick select panel support ([#1529](https://github.com/IDuxFE/idux/issues/1529)) ([daa39da](https://github.com/IDuxFE/idux/commit/daa39dac438ad2fe8fd9d358f731a2e20b68b603))
+
 ## [1.5.4](https://github.com/IDuxFE/idux/compare/v1.5.3...v1.5.4) (2023-04-13)
 
 ### Bug Fixes

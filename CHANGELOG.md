@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/IDuxFE/idux/compare/v1.5.4...v1.6.0) (2023-04-17)
+
+### Bug Fixes
+
+- **cdk:drag-drop:** the shard context was not initalized correctly ([#1537](https://github.com/IDuxFE/idux/issues/1537)) ([1a8793d](https://github.com/IDuxFE/idux/commit/1a8793d811f309324df5c63fd721f81fd1a7c466)), closes [#1436](https://github.com/IDuxFE/idux/issues/1436)
+
+### Features
+
+- **comp:tabs:** supoort dataSource, removable, onAdd ([#1536](https://github.com/IDuxFE/idux/issues/1536)) ([0dad84b](https://github.com/IDuxFE/idux/commit/0dad84b7664587553daf9d51b69cfe5c839f1cf6))
+- **pro:search:** add quick select panel support ([#1529](https://github.com/IDuxFE/idux/issues/1529)) ([daa39da](https://github.com/IDuxFE/idux/commit/daa39dac438ad2fe8fd9d358f731a2e20b68b603))
+
 ## [1.5.4](https://github.com/IDuxFE/idux/compare/v1.5.3...v1.5.4) (2023-04-13)
 
 ### Bug Fixes
