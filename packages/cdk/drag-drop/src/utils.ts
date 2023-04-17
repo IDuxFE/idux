@@ -19,15 +19,12 @@ const useDnDContext = createSharedComposable(useDragDropContext)
  * @param targetContext
  */
 export const initContext = (targetContext?: DnDContext): DnDContext => {
-  let context = {} as DnDContext
   // default context is window
   if (!targetContext) {
     const root = document as unknown as HTMLElement
+    const context = useDnDContext(root)
     if (!_dnDContextMap.has(root)) {
-      context = useDnDContext(root)
       _dnDContextMap.set(root, context)
-    } else {
-      context = _dnDContextMap.get(root)!
     }
     return context
   }
