@@ -1,37 +1,27 @@
 <template>
-  <IxSpace :size="20" vertical>
-    <IxRadioGroup v-model:value="size">
-      <IxRadio value="lg">大</IxRadio>
-      <IxRadio value="md">中</IxRadio>
-    </IxRadioGroup>
-    <IxTabs v-model:selectedKey="selectedKey" :size="size">
-      <IxTab key="tab1" title="标签1" />
-      <IxTab key="tab2" title="标签2" />
-      <IxTab key="tab3" title="标签3" />
+  <IxSpace size="lg" vertical>
+    <IxRadioGroup v-model:value="size" :dataSource="sizes"> </IxRadioGroup>
+    <IxTabs v-model:selectedKey="selectedKey" :dataSource="dataSource" :size="size">
+      <template #content="{ key }"> Content of Tab {{ key }} </template>
     </IxTabs>
-    <IxTabs v-model:selectedKey="selectedKey" type="line" :size="size">
-      <IxTab key="tab1" title="标签1" />
-      <IxTab key="tab2" title="标签2" />
-      <IxTab key="tab3" title="标签3" />
+    <IxTabs v-model:selectedKey="selectedKey" :dataSource="dataSource" :size="size" type="line">
+      <template #content="{ key }"> Content of Tab {{ key }} </template>
     </IxTabs>
-    <IxTabs v-model:selectedKey="selectedKey" type="segment" :size="size">
-      <IxTab key="tab1" title="标签1" />
-      <IxTab key="tab2" title="标签2" />
-      <IxTab key="tab3" title="标签3" />
-    </IxTabs>
-    <IxTabs v-model:selectedKey="selectedKey" type="segment" mode="primary" :size="size">
-      <IxTab key="tab1" title="标签1" />
-      <IxTab key="tab2" title="标签2" />
-      <IxTab key="tab3" title="标签3" />
+    <IxTabs v-model:selectedKey="selectedKey" :dataSource="dataSource" :size="size" type="segment">
+      <template #content="{ key }"> Content of Tab {{ key }} </template>
     </IxTabs>
   </IxSpace>
 </template>
-
 <script setup lang="ts">
 import { ref } from 'vue'
 
 import { type TabsSize } from '@idux/components/tabs'
 
 const size = ref<TabsSize>('md')
-const selectedKey = ref('tab1')
+const sizes = ['lg', 'md'].map(item => ({ key: item, label: item }))
+
+const selectedKey = ref(0)
+const dataSource = Array.from({ length: 3 }).map((_, index) => {
+  return { key: index, title: `Tab ${index}` }
+})
 </script>

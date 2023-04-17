@@ -2,7 +2,7 @@
 title:
   zh: 滑动
   en: Basic usage
-order: 6
+order: 10
 ---
 
 ## zh

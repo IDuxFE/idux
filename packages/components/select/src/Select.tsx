@@ -102,7 +102,6 @@ export default defineComponent({
     })
 
     const handleOptionClick = (option: SelectData) => {
-      console.log('handleOptionClick', option)
       changeSelected(getKey.value(option))
       props.allowInput && clearInput()
       if (!props.multiple) {

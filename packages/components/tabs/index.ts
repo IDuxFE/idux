@@ -5,23 +5,25 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TabComponent, TabsComponent } from './src/types'
+import type { TabsComponent } from './src/types'
 
-import Tab from './src/Tab'
 import Tabs from './src/Tabs'
+import { Tab } from './src/tab'
 
 const IxTabs = Tabs as unknown as TabsComponent
-const IxTab = Tab as unknown as TabComponent
+const IxTab = Tab
 
 export { IxTabs, IxTab }
 
 export type {
-  TabsInstance,
-  TabsComponent,
-  TabInstance,
-  TabComponent,
   TabsPublicProps as TabsProps,
-  TabPublicProps as TabProps,
+  TabsComponent,
+  TabsInstance,
+  TabProps,
+  TabComponent,
+  TabsMode,
   TabsPlacement,
   TabsSize,
+  TabsType,
+  TabsData,
 } from './src/types'

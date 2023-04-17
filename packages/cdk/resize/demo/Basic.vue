@@ -11,6 +11,7 @@ const textareaRef = ref()
 const text = ref('')
 
 useResizeObserver(textareaRef, entry => {
+  console.log(entry)
   const { contentRect } = entry
   text.value = `height: ${contentRect.height}`
 })

@@ -3,8 +3,8 @@ import { h } from 'vue'
 
 import { renderWork, wait } from '@tests'
 
-import Tab from '../src/Tab'
 import Tabs from '../src/Tabs'
+import { Tab } from '../src/tab'
 import { TabsProps } from '../src/types'
 
 const defaultSlots = [

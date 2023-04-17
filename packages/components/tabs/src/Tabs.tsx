@@ -5,34 +5,135 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { defineComponent } from 'vue'
+import { computed, defineComponent, normalizeClass, provide } from 'vue'
 
-import { type VKey, flattenNode, useControlledProp } from '@idux/cdk/utils'
+import { isNil, isString } from 'lodash-es'
 
-import InternalTabs from './InternalTabs'
-import { tabsProps } from './types'
+import { type VKey, callEmit, useControlledProp, useState } from '@idux/cdk/utils'
+import { useGlobalConfig } from '@idux/components/config'
+
+import { useDataSource } from './composables/useDataSource'
+import TabNavWrapper from './contents/TabNavWrapper'
+import TabPane from './contents/TabPane'
+import { tabsToken } from './tokens'
+import { type TabsData, tabsProps } from './types'
 
 export default defineComponent({
   name: 'IxTabs',
-  inheritAttrs: false,
   props: tabsProps,
-  setup(props, { attrs, slots }) {
-    return () => {
-      const tabVNodes = flattenNode(slots.default?.(), { key: '__IDUX_TAB' })
+  setup(props, { slots }) {
+    const common = useGlobalConfig('common')
+    const config = useGlobalConfig('tabs')
 
-      const [, setSelectedKey] = useControlledProp(props, 'selectedKey')
+    const mergedPrefixCls = computed(() => `${common.prefixCls}-tabs`)
+    const mergedSize = computed(() => props.size ?? config.size)
 
-      const handleChange = (key: VKey) => {
+    const mergedDataSource = useDataSource(props, slots)
+    const horizontalPlacement = ['top', 'bottom']
+    const isHorizontal = computed(() => horizontalPlacement.includes(props.placement))
+
+    const [selectedKey, setSelectedKey] = useControlledProp(props, 'selectedKey')
+    const [closedKeys, setClosedKeys] = useState<VKey[]>([])
+
+    const handleTabClick = async (key: VKey, evt: Event) => {
+      const result = await callEmit(props.onBeforeLeave, key, selectedKey.value)
+      if (result !== false) {
         setSelectedKey(key)
+        /**
+         * @deprecated
+         */
+        callEmit(props.onTabClick, key, evt)
       }
+    }
 
-      const internalTabsProps = {
-        ...props,
-        tabs: tabVNodes,
-        'onUpdate:selectedKey': handleChange,
+    const handleTabClose = async (key: VKey) => {
+      const result = await callEmit(props.onClose, key)
+      if (result !== false) {
+        const currSelectedKey = selectedKey.value
+        const currClosedKeys = closedKeys.value
+
+        if (key === selectedKey.value) {
+          setSelectedKey(getNextSelectedKey(mergedDataSource.value, currClosedKeys, currSelectedKey))
+        }
+
+        setClosedKeys([...currClosedKeys, key])
       }
+    }
 
-      return <InternalTabs {...internalTabsProps} {...attrs} v-slots={slots} />
+    provide(tabsToken, {
+      props,
+      mergedPrefixCls,
+      mergedDataSource,
+      isHorizontal,
+      closedKeys,
+      handleTabClick,
+      handleTabClose,
+    })
+
+    const classes = computed(() => {
+      const { type, placement, mode } = props
+      const prefixCls = mergedPrefixCls.value
+      const size = mergedSize.value
+      return normalizeClass({
+        [prefixCls]: true,
+        [`${prefixCls}-${size}`]: true,
+        [`${prefixCls}-${type}`]: true,
+        [`${prefixCls}-nav-${placement}`]: placement === 'top' || type === 'line',
+        [`${prefixCls}-nav-${mode}`]: type === 'segment',
+      })
+    })
+
+    return () => {
+      const dataSource = mergedDataSource.value
+      const currClosedKeys = closedKeys.value
+      const currSelectedKey = selectedKey.value ?? getNextSelectedKey(dataSource, currClosedKeys)
+      return (
+        <div class={classes.value}>
+          <TabNavWrapper selectedKey={currSelectedKey} v-slots={slots} />
+          <div class={`${mergedPrefixCls.value}-pane-wrapper`}>
+            {dataSource.map(data => {
+              const { key, content, forceRender, customContent = 'content' } = data
+              const contentSlot = isString(customContent) ? slots[customContent] : customContent
+              return (
+                <TabPane
+                  key={key}
+                  closed={currClosedKeys.includes(key)}
+                  content={content}
+                  forceRender={forceRender}
+                  selected={key === currSelectedKey}
+                  v-slots={{ content: contentSlot }}
+                />
+              )
+            })}
+          </div>
+        </div>
+      )
     }
   },
 })
+
+function getNextSelectedKey(dataSource: TabsData[], closedKeys: VKey[], currSelectedKey?: VKey) {
+  const isValidNext = (data: TabsData) => !data.disabled && !closedKeys.includes(data.key)
+
+  const currSelectedIndex = isNil(currSelectedKey) ? -1 : dataSource.findIndex(item => item.key === currSelectedKey)
+
+  if (currSelectedIndex === -1) {
+    return dataSource.find(isValidNext)?.key
+  }
+
+  for (let index = currSelectedIndex + 1; index < dataSource.length; index++) {
+    const data = dataSource[index]
+    if (isValidNext(data)) {
+      return data.key
+    }
+  }
+
+  for (let index = currSelectedIndex - 1; index > 0; index--) {
+    const data = dataSource[index]
+    if (isValidNext(data)) {
+      return data.key
+    }
+  }
+
+  return
+}
