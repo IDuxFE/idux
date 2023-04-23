@@ -2,6 +2,7 @@ export {}
 
 declare global {
   const __DEV__: boolean
+  const __TEST__: boolean
   const __VERSION_CDK__: string
   const __VERSION_COMPONENTS__: string
   const __VERSION_PRO__: string

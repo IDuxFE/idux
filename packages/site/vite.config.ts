@@ -75,6 +75,7 @@ export default defineConfig(({ command, mode }) => {
     },
     define: {
       __DEV__: !isBuild,
+      __TEST__: false,
       __VERSION_CDK__: `'${cdkPackage.version}'`,
       __VERSION_COMPONENTS__: `'${componentsPackage.version}'`,
       __VERSION_PRO__: `'${proPackage.version}'`,
