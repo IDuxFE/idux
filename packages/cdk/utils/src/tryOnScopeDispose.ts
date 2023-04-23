@@ -13,9 +13,12 @@ import { getCurrentScope, onScopeDispose } from 'vue'
  * @param fn
  */
 export function tryOnScopeDispose(fn: () => void): boolean {
-  if (getCurrentScope()) {
-    onScopeDispose(fn)
-    return true
+  // https://github.com/vuejs/core/issues/6538
+  // 导致跑 TEST 的时候，内存爆了，先关掉
+  if (__TEST__ || !getCurrentScope()) {
+    return false
   }
-  return false
+
+  onScopeDispose(fn)
+  return true
 }

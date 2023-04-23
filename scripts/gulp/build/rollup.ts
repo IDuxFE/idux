@@ -12,10 +12,10 @@ import { upperFirst } from 'lodash'
 import { Plugin, RollupOptions } from 'rollup'
 import typescript from 'rollup-plugin-typescript2'
 
+import { esbuildPlugin } from './esbuild'
 import cdkPackage from '../../../packages/cdk/package.json'
 import componentsPackage from '../../../packages/components/package.json'
 import proPackage from '../../../packages/pro/package.json'
-import { esbuildPlugin } from './esbuild'
 
 interface Options {
   targetDirname: string
@@ -28,6 +28,7 @@ interface Options {
 const externalDeps = ['vue', '@vue', '@idux', '@floating-ui/dom', 'date-fns', 'lodash-es', 'ajv']
 const replaceOptions = {
   __DEV__: "process.env.NODE_ENV !== 'production'",
+  __TEST__: false,
   __VERSION_CDK__: `'${cdkPackage.version}'`,
   __VERSION_COMPONENTS__: `'${componentsPackage.version}'`,
   __VERSION_PRO__: `'${proPackage.version}'`,

@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { Teleport, computed, defineComponent, ref, watch } from 'vue'
+import { Teleport, computed, defineComponent } from 'vue'
 
 import { isFunction, isString } from 'lodash-es'
 
@@ -17,23 +17,13 @@ export default defineComponent({
   name: 'CdkPortal',
   props: portalProps,
   setup(props, { slots }) {
-    const loaded = ref(props.load)
-    watch(
-      () => props.load,
-      load => {
-        if (!loaded.value) {
-          loaded.value = load
-        }
-      },
-    )
-
     const elementRef = computed(() => convertTargetElement(props.target))
-
+    let rendered = false
     return () => {
-      if (!loaded.value) {
+      if (!rendered && !props.load) {
         return null
       }
-
+      rendered = true
       return (
         <Teleport to={elementRef.value} disabled={props.disabled}>
           {slots.default && slots.default()}
