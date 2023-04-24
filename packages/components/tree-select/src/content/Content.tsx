@@ -105,20 +105,15 @@ export default defineComponent({
     }
 
     const onLoaded = async (loadedKeys: VKey[], node: TreeSelectNode) => {
-      const childrenNodes = node.children ?? []
-      const key = node.key!
+      const childrenKey = mergedChildrenKey.value
+      const labelKey = mergedLabelKey.value
+      const getKey = mergedGetKey.value
+      const childrenNodes = node[childrenKey] as TreeSelectNode[]
+      const key = getKey(node)
       const nodeMap = mergedNodeMap.value
       const currNode = nodeMap.get(key)
       if (childrenNodes.length && currNode) {
-        const childrenKey = mergedChildrenKey.value
-        const mergedChildren = convertMergeNodes(
-          props,
-          childrenNodes,
-          childrenKey,
-          mergedGetKey.value,
-          mergedLabelKey.value,
-          key,
-        )
+        const mergedChildren = convertMergeNodes(props, childrenNodes, childrenKey, getKey, labelKey, key)
         convertMergedNodeMap(mergedChildren, nodeMap)
         currNode.rawData[childrenKey] = childrenNodes
         currNode.children = mergedChildren
