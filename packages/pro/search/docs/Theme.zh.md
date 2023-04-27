@@ -23,7 +23,7 @@
 | `@pro-search-clear-icon-color` | `@color-graphite-d20` | - | - |
 | `@pro-search-close-icon-font-size` | `@font-size-lg` | - | - |
 | `@pro-search-close-icon-color` | `@color-graphite-d20` | - | - |
-| `@pro-search-close-icon-margin-left` | `@spacing-xs` | - | - |
+| `@pro-search-close-icon-margin-left` | `0` | - | - |
 | `@pro-search-search-button-width` | `@pro-search-min-height` | - | - |
 | `@pro-search-search-button-background-color` | `@color-primary` | - | - |
 | `@pro-search-search-button-font-size` | `@font-size-lg` | - | - |
@@ -32,13 +32,11 @@
 | `@pro-search-search-button-disabled-color` | `@disabled-bg-color` | - | - |
 | `@pro-search-item-height` | `22px` | - | - |
 | `@pro-search-item-color` | `@pro-search-color` | - | - |
-| `@pro-search-item-margin-left` | `@spacing-xs` | - | - |
 | `@pro-search-item-tag-max-width` | `160px` | - | - |
 | `@pro-search-item-tag-color` | `@pro-search-color` | - | - |
 | `@pro-search-item-tag-background-color` | `@color-graphite-l40` | - | - |
 | `@pro-search-item-tag-border-radius` | `2px` | - | - |
-| `@pro-search-item-tag-padding-horizontal` | `@spacing-sm` | - | - |
-| `@pro-search-item-tag-padding-vertical` | `2px` | - | - |
+| `@pro-search-item-tag-padding` | `2px 4px 2px 8px` | - | - |
 | `@pro-search-item-tag-margin-left` | `@spacing-xs` | - | - |
 | `@pro-search-item-tag-margin-bottom` | `@spacing-xs` | - | - |
 | `@pro-search-item-tag-disabled-border-color` | `@pro-search-border-color` | - | - |
@@ -60,7 +58,7 @@
 | `@pro-search-panel-footer-padding-vertical` | `8px` | - | - |
 | `@pro-search-panel-footer-button-margin` | `@spacing-sm` | - | - |
 | `@pro-search-date-picker-panel-body-padding` | `@spacing-lg` | - | - |
-| `@pro-search-name-segment-panel-min-width` | `100px` | - | - |
+| `@pro-search-name-segment-panel-min-width` | `160px` | - | - |
 | `@pro-search-operator-segment-panel-min-width` | `20px` | - | - |
 | `@pro-search-select-panel-min-width` | `100px` | - | - |
 | `@pro-search-tree-select-panel-min-width` | `200px` | - | - |
@@ -75,6 +73,8 @@
 | `@pro-search-select-segment-input-text-align` | `start` | - | - |
 | `@pro-search-tree-select-segment-input-min-width` | `200px` | - | - |
 | `@pro-search-tree-select-segment-input-text-align` | `start` | - | - |
+| `@pro-search-cascader-segment-input-min-width` | `200px` | - | - |
+| `@pro-search-cascader-segment-input-text-align` | `start` | - | - |
 | `@pro-search-date-picker-segment-input-min-width` | `100px` | - | - |
 | `@pro-search-date-picker-segment-input-text-align` | `start` | - | - |
 | `@pro-search-date-range-picker-segment-input-min-width` | `100px` | - | - |

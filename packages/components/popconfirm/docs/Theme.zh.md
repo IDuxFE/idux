@@ -5,7 +5,7 @@
 | `@popconfirm-background-color` | `var(--ix-background-color)` | - | - |
 | `@popconfirm-border-radius` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
 | `@popconfirm-box-shadow` | `@shadow-bottom-md` | - | - |
-| `@popconfirm-icon-size` | `var(--ix-font-size-icon)` | - | - |
+| `@popconfirm-icon-size` | `var(--ix-font-size-lg)` | - | - |
 | `@popconfirm-icon-color` | `var(--ix-color-brown)` | `var(--ix-color-brown-l10)` | - |
 | `@popconfirm-title-font-size` | `var(--ix-font-size-md)` | - | - |
 | `@popconfirm-title-font-weight` | `var(--ix-font-weight-xl)` | - | - |
