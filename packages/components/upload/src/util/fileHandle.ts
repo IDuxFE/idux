@@ -47,22 +47,22 @@ export function getFilesAcceptAllow(filesSelected: File[], accept?: string[]): F
   if (!accept || accept.length === 0) {
     return filesSelected
   }
-  return filesSelected.filter(file => {
-    const extension = file.name.indexOf('.') > -1 ? `.${file.name.split('.').pop()}` : ''
-    const baseType = file.type.replace(/\/.*$/, '')
-    return accept.some(type => {
-      if (type.startsWith('.')) {
-        return extension === type
-      }
-      if (/\/\*$/.test(type)) {
-        return baseType === type.replace(/\/\*$/, '')
-      }
-      if (/^[^/]+\/[^/]+$/.test(type)) {
-        return file.type === type
-      }
-      return false
-    })
-  })
+  const isMatch = (file: File, type: string) => {
+    const ext = `.${file.name.split('.').pop()}`.toLowerCase()
+    const baseType = file.type.replace(/\/.*$/, '').toLowerCase()
+    const _type = type.toLowerCase()
+    if (_type.startsWith('.')) {
+      return ext === _type
+    }
+    if (/\/\*$/.test(_type)) {
+      return baseType === _type.replace(/\/\*$/, '')
+    }
+    if (/^[^/]+\/[^/]+$/.test(_type)) {
+      return file.type.toLowerCase() === _type
+    }
+    return false
+  }
+  return filesSelected.filter(file => accept.some(type => isMatch(file, type)))
 }
 
 export function getFilesCountAllow(filesSelected: File[], curFilesCount: number, maxCount?: number): File[] {
