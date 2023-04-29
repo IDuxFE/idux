@@ -19,4 +19,4 @@
 | `@header-sub-title-font-size` | `var(--ix-font-size-md)` | - | - |
 | `@header-suffix-color` | `var(--ix-text-color-title-secondary)` | - | - |
 | `@header-description-color` | `var(--ix-text-color-info)` | - | - |
-| `@header-icon-font-size` | `var(--ix-font-size-icon)` | - | - |
+| `@header-icon-font-size` | `var(--ix-font-size-lg)` | - | - |

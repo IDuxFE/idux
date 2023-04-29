@@ -18,9 +18,11 @@
 | `@date-panel-header-height` | `@height-md` | - | - |
 | `@date-panel-header-item-padding` | `0 @spacing-xs` | - | - |
 | `@date-panel-header-border-bottom` | `none` | - | - |
-| `@date-panel-header-button-font-size` | `@font-size-lg` | `@font-size-sm` | - |
+| `@date-panel-header-button-font-size` | `@font-size-lg` | - | - |
 | `@date-panel-header-button-font-weight` | `@font-weight-lg` | `@font-weight-md` | - |
 | `@date-panel-header-content-spacing` | `@spacing-lg` | - | - |
+| `@date-panel-header-content-font-size` | `@font-size-lg` | `@font-size-sm` | - |
+| `@date-panel-header-content-font-weight` | `@font-weight-lg` | - | - |
 | `@date-panel-header-padding-lg` | `0 0 @spacing-2xl` | - | - |
 | `@date-panel-body-padding` | `0` | - | - |
 | `@date-panel-body-padding-lg` | `0` | - | - |
@@ -79,5 +81,5 @@
 | `@date-range-picker-panel-border-color` | `none` | - | - |
 | `@date-range-picker-panel-border-radius` | `0` | - | - |
 | `@date-range-picker-panel-separator-margin` | `0 @spacing-lg` | - | - |
-| `@date-range-picker-panel-separator-width` | `1px` | - | - |
-| `@date-range-picker-panel-separator-color` | `@date-panel-border-color` | - | - |
+| `@date-range-picker-panel-separator-width` | `0` | - | - |
+| `@date-range-picker-panel-separator-color` | `none` | - | - |

@@ -1,7 +1,7 @@
 | 名称 | default | seer | 备注 |
 | --- | --- | --- | --- |
 | `@timeline-font-size` | `@font-size-sm` | - | - |
-| `@timeline-line-height` | `1.25` | - | - |
+| `@timeline-line-height` | `1.25` | `1` | - |
 | `@timeline-item-timeline-width` | `@timeline-dot-size + @timeline-dot-border-width + 8` | - | - |
 | `@timeline-item-timeline-top` | `(@timeline-font-size * @timeline-line-height / 2 - @timeline-dot-size / 2)` | - | - |
 | `@timeline-dot-size` | `12px` | - | - |
@@ -12,6 +12,7 @@
 | `@timeline-content-gap` | `@timeline-item-timeline-width` | - | - |
 | `@timeline-content-color` | `@text-color` | - | - |
 | `@timeline-content-label-color` | `@color-graphite` | - | - |
+| `@timeline-content-label-margin-top` | `0` | `8px` | - |
 | `@timeline-line-gap` | `((@timeline-dot-size - @timeline-dot-border-width) / 2)` | - | - |
 | `@timeline-line-width` | `2px` | - | - |
 | `@timeline-line-background-color` | `@color-graphite-l30` | - | - |
