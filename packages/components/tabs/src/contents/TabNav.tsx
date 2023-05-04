@@ -5,13 +5,24 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, normalizeClass, shallowRef, watchEffect } from 'vue'
+import {
+  computed,
+  defineComponent,
+  inject,
+  normalizeClass,
+  onBeforeUnmount,
+  onMounted,
+  onUpdated,
+  shallowRef,
+  watchEffect,
+} from 'vue'
 
 import { IxIcon } from '@idux/components/icon'
 import { useKey } from '@idux/components/utils'
 
 import { tabsToken } from '../tokens'
 import { tabNavProps } from '../types'
+import { getMarginSize } from '../utils'
 
 export default defineComponent({
   name: 'IxTabNav',
@@ -19,12 +30,41 @@ export default defineComponent({
   setup(props, { slots }) {
     const key = useKey()
 
-    const { props: tabsProps, mergedPrefixCls, handleTabClick, handleTabClose } = inject(tabsToken)!
+    const {
+      props: tabsProps,
+      mergedPrefixCls,
+      handleTabClick,
+      handleTabClose,
+      navAttrMap,
+      isHorizontal,
+    } = inject(tabsToken)!
 
     const prefixCls = computed(() => `${mergedPrefixCls.value}-nav-tab`)
     const mergedClosable = computed(() => props.closable ?? tabsProps.closable)
+    const sizeProp = computed(() => (isHorizontal.value ? 'offsetWidth' : 'offsetHeight'))
+    const offsetProp = computed(() => (isHorizontal.value ? 'offsetLeft' : 'offsetTop'))
 
     const elementRef = shallowRef<HTMLElement>()
+
+    const setNavAttr = (el: HTMLElement) => {
+      navAttrMap.set(key, {
+        size: el[sizeProp.value] + getMarginSize(el, isHorizontal.value),
+        offset: el[offsetProp.value],
+      })
+    }
+
+    onUpdated(() => {
+      const target = elementRef.value as HTMLElement
+      setNavAttr(target)
+    })
+
+    onBeforeUnmount(() => {
+      navAttrMap.delete(key)
+    })
+
+    onMounted(() => {
+      elementRef.value && setNavAttr(elementRef.value)
+    })
 
     const classes = computed(() => {
       const { disabled, selected } = props
@@ -56,9 +96,6 @@ export default defineComponent({
     }
 
     return () => {
-      if (props.closed) {
-        return null
-      }
       const titleNode = slots.title
         ? slots.title({ key, disabled: props.disabled, selected: props.selected, title: props.title })
         : props.title

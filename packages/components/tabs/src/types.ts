@@ -10,6 +10,8 @@
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, FunctionalComponent, HTMLAttributes, PropType, VNodeChild } from 'vue'
 
+import { SelectData } from '@idux/components/select'
+
 export type TabsMode = 'default' | 'primary'
 export type TabsPlacement = 'top' | 'bottom' | 'start' | 'end'
 export type TabsSize = 'lg' | 'md'
@@ -34,8 +36,6 @@ export const tabsProps = {
    * @deprecated
    */
   onTabClick: [Function, Array] as PropType<MaybeArray<(key: any, evt: Event) => void>>,
-  onPreClick: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
-  onNextClick: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onBeforeLeave: [Function, Array] as PropType<
     MaybeArray<(key: any, oldKey?: any) => void | boolean | Promise<boolean>>
   >,
@@ -65,7 +65,6 @@ export interface TabsData<K = VKey> extends TabProps {
 // private
 export const tabNavProps = {
   closable: { type: Boolean, default: undefined },
-  closed: { type: Boolean, default: undefined },
   disabled: { type: Boolean, default: undefined },
   selected: { type: Boolean, default: undefined },
   title: { type: String, default: undefined },
@@ -73,8 +72,15 @@ export const tabNavProps = {
 } as const
 
 export const tabPaneProps = {
-  closed: { type: Boolean, default: undefined },
   content: { type: String, default: undefined },
   forceRender: { type: Boolean, default: undefined },
   selected: { type: Boolean, default: undefined },
+} as const
+
+export const moreSelectPaneProps = {
+  dataSource: { type: Array as PropType<SelectData[]>, default: () => [] },
+  visible: { type: Boolean, default: false },
+
+  // private
+  _virtualScrollHeight: { type: Number, default: 186 },
 } as const

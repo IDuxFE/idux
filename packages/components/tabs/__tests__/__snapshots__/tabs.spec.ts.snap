@@ -3,11 +3,17 @@
 exports[`Tabs > render work 1`] = `
 "<div class=\\"ix-tabs ix-tabs-md ix-tabs-card ix-tabs-nav-top\\">
   <div class=\\"ix-tabs-nav-wrapper\\">
-    <!---->
-    <div class=\\"ix-tabs-nav\\" style=\\"transform: translateX(-0px);\\">
+    <div class=\\"ix-tabs-nav\\">
+      <div style=\\"transform: translateX(-0px);\\" class=\\"ix-tabs-nav-list\\">
+        <!---->
+      </div>
+    </div>
+    <div class=\\"ix-tabs-nav-operations ix-tabs-nav-operations-hidden\\"><button class=\\"ix-button ix-button-icon-only ix-button-text ix-button-square ix-button-md\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-more\\" role=\\"img\\" aria-label=\\"more\\"></i>
+        <!---->
+      </button>
+      <!---->
       <!---->
     </div>
-    <!---->
     <div class=\\"ix-tabs-nav-border\\"></div>
     <!---->
   </div>

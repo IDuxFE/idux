@@ -22,7 +22,7 @@ export default defineComponent({
 
     let rendered = false
     return () => {
-      if (props.closed || !(rendered || props.selected || mergedForceRender.value)) {
+      if (!(rendered || props.selected || mergedForceRender.value)) {
         return null
       }
       rendered = true

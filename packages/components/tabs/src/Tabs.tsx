@@ -35,6 +35,9 @@ export default defineComponent({
     const [selectedKey, setSelectedKey] = useControlledProp(props, 'selectedKey')
     const [closedKeys, setClosedKeys] = useState<VKey[]>([])
 
+    // 存储每个标签的尺寸和偏移
+    const navAttrMap = new Map<VKey, { offset: number; size: number }>()
+
     const handleTabClick = async (key: VKey, evt: Event) => {
       const result = await callEmit(props.onBeforeLeave, key, selectedKey.value)
       if (result !== false) {
@@ -66,8 +69,10 @@ export default defineComponent({
       mergedDataSource,
       isHorizontal,
       closedKeys,
+      navAttrMap,
       handleTabClick,
       handleTabClose,
+      setSelectedKey,
     })
 
     const classes = computed(() => {

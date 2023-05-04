@@ -6,13 +6,16 @@
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:selectedKey` | 选中标签的`key`值 | `VKey`  | - | - | 当没有传此值时，默认选中第一个 |
+| `addable` | 显示新增按钮 | `boolean` | `false`| - | - |
+| `closable` | 显示关闭按钮 | `boolean` | `false`| - | - |
+| `dataSource` | 数据源 | `TabsData[]` | - | - | 优先级高于 `default` 插槽 |
 | `forceRender` | 内容被隐藏时是否渲染 DOM 结构 | `boolean` | `false` | - | - |
 | `mode` | 当`type`为`segment`时按钮的样式 | `'default' \| 'primary'` | `'default'` | - | - |
 | `placement` | 标签的方位 | `'top' \| 'start' \| 'end' \| 'bottom'` | `'top'` | - | 其他类型仅在type为`line`生效 |
 | `type` | 标签的类型 | `'card' \| 'line' \| 'segment'` | `'card'`| - | - |
 | `size` | 标签页的尺寸 | `'lg' \| 'md'` | `'md'` | ✅ | - |
-| `onPreClick` | 滚动状态下，Pre按钮被点击的回调 | `(evt: Event) => void`| - | - | - |
-| `onNextClick` | 滚动状态下，Next按钮被点击的回调 | `(evt: Event) => void`| - | - | - |
+| `onAdd` | 点击添加按钮后的回调 | `() => void \| boolean \| Promise<boolean>` | - | - |
+| `onClose` | 点击关闭按钮后的回调，返回 `false` 或 promise resolve `false` 或 promise reject 会阻止关闭 | `(key: any) => void \| boolean \| Promise<boolean>` | - | - |
 | `onBeforeLeave` | 切换标签之前的钩子函数，返回 `false` 或 promise resolve `false` 或 promise reject 会阻止切换 | `(key: VKey, oldKey?: VKey) => boolean \| Promise<boolean>`| - | - | - |
 
 #### IxTabProps
@@ -23,3 +26,23 @@
 | `forceRender` | 内容被隐藏时是否渲染 DOM 结构 | `boolean` | `false` | - | - |
 | `key` | 被选中时标签的`key`值 | `boolean` | `false` | - | - |
 | `title` | 标签内容 | `string \| #title` | - | - | - |
+
+#### TabsData
+
+```ts
+export interface TabsData<K = VKey> extends TabProps {
+  key: K
+  customContent?: string | ((data: { key: VKey; content?: string; selected?: boolean }) => VNodeChild)
+  customTitle?: string | ((data: { key: VKey; disabled?: boolean; selected?: boolean; title?: string }) => VNodeChild)
+  [key: string]: any
+}
+```
+
+#### IxTabsSlots
+
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| `title` | 标题插槽 | `{ key:VKey, disabled:boolean, selected:boolean, title: string }` | - |
+| `content` | 内容插槽 | `{key:VKey, content: any, selected: boolean}` | - |
+
+若是通过`dataSource`进行渲染的，可以通过设置`customTitle`和`customContent`字段，自定义插槽进行渲染，[参考](/components/tabs/zh?tab=demo#components-tabs-custom-tab)
