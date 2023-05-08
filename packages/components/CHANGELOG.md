@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://github.com/IDuxFE/idux/compare/v1.6.0...v1.6.1) (2023-05-08)
+
+### Bug Fixes
+
+- **comp:button:** fix icon not vertically centered ([#1542](https://github.com/IDuxFE/idux/issues/1542)) ([cf269a5](https://github.com/IDuxFE/idux/commit/cf269a51c55b2b35d60005efcf8c17f0b45bd849))
+- **comp:empty:** the ids in svg should be only ([#1539](https://github.com/IDuxFE/idux/issues/1539)) ([40d25f5](https://github.com/IDuxFE/idux/commit/40d25f53e640d0f31507e19e034e9f552836b8a9))
+- **comp:table:** fixed column background color error is selected ([#1543](https://github.com/IDuxFE/idux/issues/1543)) ([7448e38](https://github.com/IDuxFE/idux/commit/7448e38fd71de06ea4a2ac494091f1c9e681545f))
+- **comp:tabs:** more pane should hidden when empty data ([#1547](https://github.com/IDuxFE/idux/issues/1547)) ([13013b3](https://github.com/IDuxFE/idux/commit/13013b369daff7c7e7b82c125175c75c02f58fe2))
+- **comp:tree-select:** async loading is invalid when getKey is set ([#1541](https://github.com/IDuxFE/idux/issues/1541)) ([6cd6155](https://github.com/IDuxFE/idux/commit/6cd615566d7a6e1692c4cb914daab0b6a82345c3))
+- **comp:upload:** accept does not ignore case ([#1544](https://github.com/IDuxFE/idux/issues/1544)) ([b7e9b89](https://github.com/IDuxFE/idux/commit/b7e9b891e48b9c12b90a6ad0d2d57d0b6d65ebf2))
+
 # [1.6.0](https://github.com/IDuxFE/idux/compare/v1.5.4...v1.6.0) (2023-04-17)
 
 ### Features
