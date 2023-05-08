@@ -5,11 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, normalizeClass, shallowRef } from 'vue'
+import { computed, defineComponent, inject, normalizeClass, shallowRef, watch } from 'vue'
 
 import { isString } from 'lodash-es'
 
-import { callEmit, convertCssPixel } from '@idux/cdk/utils'
+import { callEmit, convertCssPixel, useState } from '@idux/cdk/utils'
 import { IxButton } from '@idux/components/button'
 import { IxIcon } from '@idux/components/icon'
 import { IxPopover } from '@idux/components/popover'
@@ -37,7 +37,6 @@ export default defineComponent({
     const operationsRef = shallowRef<HTMLElement>()
     const selectedNavRef = shallowRef<HTMLElement>()
     const addBtnRef = shallowRef<HTMLElement>()
-    const moreSelectPaneVisible = shallowRef(false)
 
     const {
       selectedNavSize,
@@ -59,6 +58,38 @@ export default defineComponent({
       navAttrMap,
       closedKeys,
     )
+
+    const allNavDataSource = computed(() => {
+      const currClosedKeys = closedKeys.value
+      return mergedDataSource.value.filter(data => !currClosedKeys.includes(data.key))
+    })
+
+    const moreNavDataSource = computed(() => {
+      return allNavDataSource.value.reduce((acc: SelectData[], data) => {
+        const attr = navAttrMap.get(data.key)
+        if (
+          attr &&
+          // 将没有展示完全的 nav 全部放入到moreSelectPane中
+          (attr.offset < navOffset.value ||
+            wrapperSize.value - operationsSize.value - (attr.offset - navOffset.value) < attr.size)
+        ) {
+          acc.push({
+            key: data.key,
+            label: data.title,
+            disabled: data.disabled,
+          })
+        }
+        return acc
+      }, [])
+    })
+
+    const [moreSelectPaneVisible, setMoreSelectPaneVisible] = useState(false)
+
+    watch(moreNavDataSource, dataSource => {
+      if (dataSource.length === 0) {
+        setMoreSelectPaneVisible(false)
+      }
+    })
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
@@ -88,32 +119,9 @@ export default defineComponent({
 
     const handleAdd = () => callEmit(tabsProps.onAdd)
 
-    const handleVisible = (visible: boolean) => {
-      moreSelectPaneVisible.value = visible
-    }
-
     return () => {
       const { selectedKey } = props
       const { addable, type } = tabsProps
-      const currClosedKeys = closedKeys.value
-      const dataSource = mergedDataSource.value.filter(data => !currClosedKeys.includes(data.key))
-
-      const moreSelectPaneDataSource = dataSource.reduce((acc: SelectData[], data) => {
-        const attr = navAttrMap.get(data.key)
-        if (
-          attr &&
-          // 将没有展示完全的 nav 全部放入到moreSelectPane中
-          (attr.offset < navOffset.value ||
-            wrapperSize.value - operationsSize.value - (attr.offset - navOffset.value) < attr.size)
-        ) {
-          acc.push({
-            key: data.key,
-            label: data.title,
-            disabled: data.disabled,
-          })
-        }
-        return acc
-      }, [])
 
       return (
         <div class={classes.value} ref={wrapperRef}>
@@ -125,24 +133,19 @@ export default defineComponent({
             ]}
           >
             <div ref={navRef} style={navStyle.value} class={`${mergedPrefixCls.value}-nav-list`}>
-              {dataSource
-                .filter(data => {
-                  const { key } = data
-                  return !currClosedKeys.includes(key)
-                })
-                .map(data => {
-                  const { key, content, customContent, customTitle = 'title', ...navProps } = data
-                  const titleSlot = isString(customTitle) ? slots[customTitle] : customTitle
-                  return (
-                    <TabNav
-                      {...navProps}
-                      key={key}
-                      selected={selectedKey === key}
-                      onSelected={handleSelectedNavChange}
-                      v-slots={{ title: titleSlot }}
-                    />
-                  )
-                })}
+              {allNavDataSource.value.map(data => {
+                const { key, content, customContent, customTitle = 'title', ...navProps } = data
+                const titleSlot = isString(customTitle) ? slots[customTitle] : customTitle
+                return (
+                  <TabNav
+                    {...navProps}
+                    key={key}
+                    selected={selectedKey === key}
+                    onSelected={handleSelectedNavChange}
+                    v-slots={{ title: titleSlot }}
+                  />
+                )
+              })}
               {addable && (
                 <div
                   ref={addBtnRef}
@@ -169,12 +172,12 @@ export default defineComponent({
               placement="bottomStart"
               visible={moreSelectPaneVisible.value}
               {...{
-                'onUpdate:visible': handleVisible,
+                'onUpdate:visible': setMoreSelectPaneVisible,
               }}
               class={`${mergedPrefixCls.value}-nav-operations-popover`}
               v-slots={{
                 content: () => (
-                  <MoreSelectPane visible={moreSelectPaneVisible.value} dataSource={moreSelectPaneDataSource} />
+                  <MoreSelectPane visible={moreSelectPaneVisible.value} dataSource={moreNavDataSource.value} />
                 ),
               }}
             >
