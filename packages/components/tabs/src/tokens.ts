@@ -15,8 +15,10 @@ export interface TabsContext {
   mergedDataSource: ComputedRef<TabsData[]>
   isHorizontal: ComputedRef<boolean>
   closedKeys: ComputedRef<VKey[]>
+  navAttrMap: Map<VKey, { offset: number; size: number }>
   handleTabClick: (key: VKey, evt: Event) => Promise<void>
   handleTabClose: (key: VKey) => Promise<void>
+  setSelectedKey: (value: VKey) => void
 }
 
 export const tabsToken: InjectionKey<TabsContext> = Symbol('tabsToken')

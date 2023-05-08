@@ -5,42 +5,60 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type Ref, computed, defineComponent, inject, normalizeClass, shallowRef } from 'vue'
+import { computed, defineComponent, inject, normalizeClass, shallowRef } from 'vue'
 
 import { isString } from 'lodash-es'
 
 import { callEmit, convertCssPixel } from '@idux/cdk/utils'
+import { IxButton } from '@idux/components/button'
 import { IxIcon } from '@idux/components/icon'
+import { IxPopover } from '@idux/components/popover'
+import { SelectData } from '@idux/components/select'
 
+import MoreSelectPane from './MoreSelectPane'
 import TabNav from './TabNav'
 import { useSizeObservable } from '../composables/useSizeObservable'
 import { tabsToken } from '../tokens'
-import { TabsProps } from '../types'
 
 export default defineComponent({
   props: { selectedKey: { type: [Number, String, Symbol] } },
   setup(props, { slots }) {
-    const { props: tabsProps, mergedPrefixCls, mergedDataSource, isHorizontal, closedKeys } = inject(tabsToken)!
+    const {
+      props: tabsProps,
+      mergedPrefixCls,
+      mergedDataSource,
+      isHorizontal,
+      closedKeys,
+      navAttrMap,
+    } = inject(tabsToken)!
 
     const wrapperRef = shallowRef<HTMLElement>()
-    const prevNextRef = shallowRef<HTMLElement>()
     const navRef = shallowRef<HTMLElement>()
+    const operationsRef = shallowRef<HTMLElement>()
     const selectedNavRef = shallowRef<HTMLElement>()
+    const addBtnRef = shallowRef<HTMLElement>()
+    const moreSelectPaneVisible = shallowRef(false)
 
     const {
-      wrapperSize,
-      prevNextSize,
-      navSize,
       selectedNavSize,
       navOffset,
+      wrapperSize,
+      operationsSize,
       selectedNavOffset,
       hasScroll,
-      calcPrevOffset,
-      calcNextOffset,
-    } = useSizeObservable(wrapperRef, prevNextRef, navRef, selectedNavRef, isHorizontal)
-
-    const prevNavDisabled = computed(() => navOffset.value === 0)
-    const nextNavDisabled = computed(() => navSize.value - navOffset.value <= wrapperSize.value)
+      firstShow,
+      lastShow,
+    } = useSizeObservable(
+      tabsProps,
+      wrapperRef,
+      navRef,
+      selectedNavRef,
+      addBtnRef,
+      operationsRef,
+      isHorizontal,
+      navAttrMap,
+      closedKeys,
+    )
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
@@ -50,16 +68,13 @@ export default defineComponent({
       })
     })
 
-    const preClasses = usePreNextClasses(tabsProps, mergedPrefixCls, 'pre', prevNavDisabled)
-    const nextClasses = usePreNextClasses(tabsProps, mergedPrefixCls, 'next', nextNavDisabled)
-
     const navStyle = computed(() => {
       return `transform: translate${isHorizontal.value ? 'X' : 'Y'}(-${navOffset.value}px)`
     })
 
     const navBarStyle = computed(() => {
       const size = convertCssPixel(selectedNavSize.value)
-      const offset = convertCssPixel(prevNextSize.value + selectedNavOffset.value - navOffset.value)
+      const offset = convertCssPixel(selectedNavOffset.value - navOffset.value)
       if (isHorizontal.value) {
         return { width: size, left: offset }
       } else {
@@ -67,67 +82,106 @@ export default defineComponent({
       }
     })
 
-    const handlePrevClick = (evt: Event) => {
-      if (!prevNavDisabled.value) {
-        callEmit(tabsProps.onPreClick, evt)
-        calcPrevOffset()
-      }
-    }
-
-    const handleNextClick = (evt: Event) => {
-      if (!nextNavDisabled.value) {
-        callEmit(tabsProps.onNextClick, evt)
-        calcNextOffset()
-      }
-    }
-
     const handleSelectedNavChange = (element: HTMLElement) => {
       selectedNavRef.value = element
     }
 
     const handleAdd = () => callEmit(tabsProps.onAdd)
 
+    const handleVisible = (visible: boolean) => {
+      moreSelectPaneVisible.value = visible
+    }
+
     return () => {
       const { selectedKey } = props
       const { addable, type } = tabsProps
-      const dataSource = mergedDataSource.value
       const currClosedKeys = closedKeys.value
+      const dataSource = mergedDataSource.value.filter(data => !currClosedKeys.includes(data.key))
+
+      const moreSelectPaneDataSource = dataSource.reduce((acc: SelectData[], data) => {
+        const attr = navAttrMap.get(data.key)
+        if (
+          attr &&
+          // 将没有展示完全的 nav 全部放入到moreSelectPane中
+          (attr.offset < navOffset.value ||
+            wrapperSize.value - operationsSize.value - (attr.offset - navOffset.value) < attr.size)
+        ) {
+          acc.push({
+            key: data.key,
+            label: data.title,
+            disabled: data.disabled,
+          })
+        }
+        return acc
+      }, [])
+
       return (
         <div class={classes.value} ref={wrapperRef}>
-          {hasScroll.value && (
-            <IxIcon
-              ref={prevNextRef}
-              class={preClasses.value}
-              name={isHorizontal.value ? 'left' : 'up'}
-              onClick={handlePrevClick}
-            />
-          )}
-          <div ref={navRef} class={`${mergedPrefixCls.value}-nav`} style={navStyle.value}>
-            {dataSource.map(data => {
-              const { key, content, customContent, customTitle = 'title', ...navProps } = data
-              const titleSlot = isString(customTitle) ? slots[customTitle] : customTitle
-              return (
-                <TabNav
-                  {...navProps}
-                  key={key}
-                  closed={currClosedKeys.includes(key)}
-                  selected={selectedKey === key}
-                  onSelected={handleSelectedNavChange}
-                  v-slots={{ title: titleSlot }}
-                />
-              )
-            })}
-            {addable && (
-              <div class={`${mergedPrefixCls.value}-nav-tab`} onClick={handleAdd}>
-                <span class={`${mergedPrefixCls.value}-nav-add-icon`}>
-                  <IxIcon name="plus"></IxIcon>
-                </span>
-              </div>
-            )}
+          <div
+            class={[
+              `${mergedPrefixCls.value}-nav`,
+              firstShow.value ? `${mergedPrefixCls.value}-nav-first-show` : '',
+              lastShow.value ? `${mergedPrefixCls.value}-nav-last-show` : '',
+            ]}
+          >
+            <div ref={navRef} style={navStyle.value} class={`${mergedPrefixCls.value}-nav-list`}>
+              {dataSource
+                .filter(data => {
+                  const { key } = data
+                  return !currClosedKeys.includes(key)
+                })
+                .map(data => {
+                  const { key, content, customContent, customTitle = 'title', ...navProps } = data
+                  const titleSlot = isString(customTitle) ? slots[customTitle] : customTitle
+                  return (
+                    <TabNav
+                      {...navProps}
+                      key={key}
+                      selected={selectedKey === key}
+                      onSelected={handleSelectedNavChange}
+                      v-slots={{ title: titleSlot }}
+                    />
+                  )
+                })}
+              {addable && (
+                <div
+                  ref={addBtnRef}
+                  class={[
+                    `${mergedPrefixCls.value}-nav-tab-add`,
+                    hasScroll.value && `${mergedPrefixCls.value}-nav-tab-add-hidden`,
+                  ]}
+                  onClick={handleAdd}
+                >
+                  <IxIcon name="plus" class={`${mergedPrefixCls.value}-nav-add-icon`}></IxIcon>
+                </div>
+              )}
+            </div>
           </div>
-          {hasScroll.value && (
-            <IxIcon class={nextClasses.value} name={isHorizontal.value ? 'right' : 'down'} onClick={handleNextClick} />
-          )}
+          <div
+            ref={operationsRef}
+            class={[
+              `${mergedPrefixCls.value}-nav-operations`,
+              !hasScroll.value && `${mergedPrefixCls.value}-nav-operations-hidden`,
+            ]}
+          >
+            <IxPopover
+              trigger="hover"
+              placement="bottomStart"
+              visible={moreSelectPaneVisible.value}
+              {...{
+                'onUpdate:visible': handleVisible,
+              }}
+              class={`${mergedPrefixCls.value}-nav-operations-popover`}
+              v-slots={{
+                content: () => (
+                  <MoreSelectPane visible={moreSelectPaneVisible.value} dataSource={moreSelectPaneDataSource} />
+                ),
+              }}
+            >
+              <IxButton icon="more" mode="text" shape="square"></IxButton>
+            </IxPopover>
+            {addable && <IxButton icon="plus" mode="text" shape="square" onClick={handleAdd}></IxButton>}
+          </div>
           {type !== 'segment' && <div class={`${mergedPrefixCls.value}-nav-border`}></div>}
           {type === 'line' && <div class={`${mergedPrefixCls.value}-nav-bar`} style={navBarStyle.value}></div>}
         </div>
@@ -135,20 +189,3 @@ export default defineComponent({
     }
   },
 })
-
-function usePreNextClasses(
-  tabsProps: TabsProps,
-  mergedPrefixCls: ComputedRef<string>,
-  type: 'pre' | 'next',
-  disabled: Ref<boolean>,
-) {
-  return computed(() => {
-    const { placement } = tabsProps
-    const prefixCls = mergedPrefixCls.value
-    return normalizeClass({
-      [`${prefixCls}-nav-${type}`]: true,
-      [`${prefixCls}-nav-${type}-disabled`]: disabled.value,
-      [`${prefixCls}-nav-${type}-${placement}`]: true,
-    })
-  })
-}

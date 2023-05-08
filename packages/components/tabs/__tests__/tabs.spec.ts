@@ -245,5 +245,67 @@ describe('Tabs', () => {
       await wait(1000)
       expect(onUpdateSelectedKey).toBeCalledWith('tab2')
     })
+
+    test('addable work', async () => {
+      const onAddFn = vi.fn()
+      const wrapper = TabsMount({
+        props: {
+          addable: true,
+          onAdd: onAddFn,
+        },
+      })
+
+      const addBtn = wrapper.find('.ix-tabs-nav-tab-add')
+      expect(addBtn.exists()).toBe(true)
+
+      await addBtn.trigger('click')
+      expect(onAddFn).toBeCalled()
+
+      await wrapper.setProps({
+        addable: false,
+      })
+
+      expect(wrapper.find('.ix-tabs-nav-tab-add').exists()).toBe(false)
+    })
+
+    test('closable work', async () => {
+      const wrapper = TabsMount({
+        props: {
+          closable: true,
+          onClose: key => {
+            switch (key) {
+              case 'tab1':
+                return false
+              case 'tab2':
+                return new Promise(resolve => {
+                  setTimeout(() => {
+                    resolve(true)
+                  }, 1000)
+                }) as Promise<boolean>
+              default:
+                return true
+            }
+          },
+        },
+      })
+
+      const tabs = wrapper.findAll('.ix-tabs-nav-tab')
+      const closeBtn1 = tabs[0].find('.ix-tabs-nav-close-icon')
+      const closeBtn2 = tabs[1].find('.ix-tabs-nav-close-icon')
+      const closeBtn3 = tabs[2].find('.ix-tabs-nav-close-icon')
+
+      expect(tabs.length).toBe(3)
+      expect(closeBtn1.exists()).toBe(true)
+
+      await closeBtn1.trigger('click')
+      expect(wrapper.findAll('.ix-tabs-nav-tab').length).toBe(3)
+
+      await closeBtn2.trigger('click')
+      await wait(1000)
+      expect(wrapper.findAll('.ix-tabs-nav-tab').length).toBe(2)
+
+      await closeBtn3.trigger('click')
+      expect(wrapper.findAll('.ix-tabs-nav-tab').length).toBe(1)
+    })
   })
 })
