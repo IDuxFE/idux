@@ -67,16 +67,18 @@ export default defineComponent({
     onMounted(() => initialize())
     onBeforeUnmount(() => destroy())
 
-    watch(visibility, value => callEmit(props['onUpdate:visible'], value))
+    watch(visibility, value => {
+      if (value && props.destroyOnHide) {
+        initialize()
+      }
+      callEmit(props['onUpdate:visible'], value)
+    })
     watch(placement, value => callEmit(props['onUpdate:placement'], value))
     watch(popperOptions, options => update(options))
     watch(
       () => props.visible,
       visible => {
         visible ? show() : hide()
-        if (visible && props.destroyOnHide) {
-          initialize()
-        }
       },
       { flush: 'post' },
     )
