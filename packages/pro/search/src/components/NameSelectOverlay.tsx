@@ -99,12 +99,13 @@ export default defineComponent({
       panelKeyDown = keydown
     }
     const handleKeyDown = (evt: KeyboardEvent) => {
-      if (!selectedFieldKey.value && evt.key === 'Enter') {
+      if (!filteredDataSource.value.length && evt.key === 'Enter') {
         callEmit(proSearchProps.onItemCreate, {
           name: undefined,
           nameInput: props.searchValue,
         })
         props.onChange?.(undefined)
+        return false
       }
 
       if (!overlayOpened.value || !panelKeyDown) {

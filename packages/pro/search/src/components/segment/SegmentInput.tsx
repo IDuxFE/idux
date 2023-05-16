@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, normalizeClass, onMounted, ref, watch } from 'vue'
+import { type CSSProperties, computed, defineComponent, inject, normalizeClass, onMounted, ref, watch } from 'vue'
 
 import { callEmit, convertCssPixel, useState } from '@idux/cdk/utils'
 
@@ -63,19 +63,21 @@ export default defineComponent({
 
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-segment-input`
+      const { class: className, style, ...rest } = attrs
 
       return (
-        <span class={classes.value}>
+        <span class={normalizeClass([classes.value, className])}>
           <input
             ref={segmentInputRef}
             class={`${prefixCls}-inner`}
+            style={style as CSSProperties}
             value={props.value ?? ''}
             disabled={props.disabled}
             placeholder={props.placeholder}
             onInput={handleInput}
             onCompositionstart={handleCompositionStart}
             onCompositionend={handleCompositionEnd}
-            {...attrs}
+            {...rest}
           ></input>
           <MeasureElement onWidthChange={setInputWidth}>{props.value || props.placeholder || ''}</MeasureElement>
         </span>
