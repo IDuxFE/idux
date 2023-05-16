@@ -91,7 +91,7 @@ export default defineComponent({
     )
 
     const [isAnimating, setIsAnimating] = useState(false)
-    const onBeforeEnter = () => {
+    const onBeforeLeave = () => {
       setIsAnimating(true)
     }
     const onAfterLeave = () => {
@@ -152,7 +152,7 @@ export default defineComponent({
         <>
           {trigger}
           <CdkPortal target={mergedContainer.value} load={visibility.value}>
-            <Transition appear name={props.transitionName} onBeforeEnter={onBeforeEnter} onAfterLeave={onAfterLeave}>
+            <Transition appear name={props.transitionName} onBeforeLeave={onBeforeLeave} onAfterLeave={onAfterLeave}>
               {content}
             </Transition>
           </CdkPortal>
