@@ -18,7 +18,7 @@ import { type ProSearchTreeSelectPanelProps, type TreeSelectPanelData, proSearch
 
 export default defineComponent({
   props: proSearchTreeSelectPanelProps,
-  setup(props) {
+  setup(props, { slots }) {
     const { mergedPrefixCls, locale } = inject(proSearchContext)!
 
     const mergedCheckable = computed(() => props.multiple && props.checkable)
@@ -161,7 +161,7 @@ export default defineComponent({
 
       return (
         <div class={classes} tabindex={-1} onMousedown={evt => evt.preventDefault()}>
-          <IxTree class={`${prefixCls}-body`} {...treeProps} />
+          <IxTree class={`${prefixCls}-body`} {...treeProps} v-slots={slots} />
           {renderFooter()}
         </div>
       )

@@ -65,6 +65,9 @@ interface TreeSelectSearchFieldBase {
     cascaderStrategy: CascaderStrategy
     draggable?: boolean
     draggableIcon?: string
+    customDraggableIcon?: string | (() => VNodeChild)
+    expandIcon?: string | [string, string]
+    customExpandIcon?: string | ((options: { key: VKey; expanded: boolean; node: TreeSelectPanelData }) => VNodeChild)
     showLine?: boolean
     searchable?: boolean
     separator?: string
@@ -95,6 +98,7 @@ interface CascaderSearchFieldBase {
     multiple?: boolean
     disableData?: (data: CascaderPanelData) => boolean
     expandIcon?: string
+    customExpandIcon?: string | ((options: { key: VKey; expanded: boolean; data: CascaderPanelData }) => VNodeChild)
     expandTrigger?: CascaderExpandTrigger
     fullPath?: boolean
     pathSeparator?: string
