@@ -17,7 +17,8 @@
 | `onChange` | 搜索条件改变之后的回调 | `(value: searchValue[] \| undefined, oldValue: searchValue[] \| undefined) => void` | - | - | - |
 | `onClear` | 清除搜索条件的回调 | `() => void` | - | - | - |
 | `onItemRemove` | 搜索条件删除时的回调 | `(item: SearchValue) => void` | - | - | - |
-| `onItemConfirm` | 搜索条件不合法时触发的回调 | `(item: SearchItemConfirmContext) => void` | - | - | - |
+| `onItemConfirm` | 搜索条件确认时触发的回调 | `(item: SearchItemConfirmContext) => void` | - | - | - |
+| `onItemCreate` | 搜索条件创建时触发的回调 | `(item: SearchItemCreateContext) => void` | - | - | - |
 | `onSearch` | 搜索按钮触发的回调 | `(value: searchValue[] \| undefined) => void` | - | - | - |
 | `onFocus` | 获取焦点后的回调 | `(evt: FocusEvent) => void` | - | - | - |
 | `onBlur` | 失去焦点后的回调 | `(evt: FocusEvent) => void` | - | - | - |
@@ -48,6 +49,9 @@ interface SearchItemConfirmContext<V = unknown> extends Partial<SearchValue<V>> 
   valueInput?: string // 值输入
   removed: boolean // 是否被移除
 }
+interface SearchItemCreateContext<V = unknown> extends Partial<SearchValue<V>> {
+  nameInput?: string // 搜索字段名称输入
+}
 ```
 
 ### SearchField
@@ -72,7 +76,9 @@ interface SearchItemConfirmContext<V = unknown> extends Partial<SearchValue<V>> 
 | `inputClassName` | 输入框class | `string` | - | - | 用于自定义输入框样式 |
 | `containerClassName` | 面板所在容器class | `string` | - | - | 用于自定义浮层样式或快捷面板容器样式 |
 | `placeholder` | 输入框placeholder | `string` | - | - | 搜索值输入框的占位符 |
+| `operatorPlaceholder` | 操作符输入框placeholder | `string` | - | - | 搜索值操作符输入框的占位符 |
 | `validator` | 搜索项校验函数 | `(value: SearchValue) => { message?: string } | undefined` | - | - | 返回错误信息 |
+| `onPanelVisibleChange` | 面板 | `(visible: boolean) => void` | - | - | 面板的展开与隐藏状态改变的回调函数 |
 
 #### InputSearchField
 
