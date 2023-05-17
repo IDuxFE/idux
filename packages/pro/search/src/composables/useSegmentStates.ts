@@ -191,6 +191,10 @@ export function useSegmentStates(
     const validateRes = validateSearchState(key)
     const searchValue = convertStateToValue(key)
 
+    Object.entries(segmentStates.value).forEach(([name, state]) => {
+      updateSegmentValue(state.value, name, key)
+    })
+
     if (!validateRes) {
       removeSearchState(key)
     } else {
@@ -216,8 +220,7 @@ export function useSegmentStates(
     if (!segmentState) {
       return
     }
-    const { value, index } = segmentState
-    updateSegmentValue(value, name, props.searchItem!.key)
+    const { index } = segmentState
 
     // only confirm searchItem when the last segment is confirmed
     // if the last segment is searchItem name, confirm the searchItem only when no searchField is selected
