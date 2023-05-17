@@ -143,9 +143,11 @@ export default defineComponent({
     }
     const handleSearchBtnMouseDown = (evt: MouseEvent) => {
       evt.preventDefault()
+      evt.stopImmediatePropagation()
     }
     const handleClearBtnMouseDown = (evt: MouseEvent) => {
       evt.preventDefault()
+      evt.stopImmediatePropagation()
     }
 
     provide(proSearchContext, {
