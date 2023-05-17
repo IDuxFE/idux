@@ -141,6 +141,9 @@ export default defineComponent({
       setOverlayOpened(false)
       handleSegmentCancel(props.segment.name)
     }
+    const handleMouseDown = (evt: MouseEvent) => {
+      evt.stopImmediatePropagation()
+    }
 
     const { handleInput, handleFocus, handleKeyDown, setPanelOnKeyDown } = useInputEvents(
       props,
@@ -166,6 +169,7 @@ export default defineComponent({
         onInput={handleInput}
         onFocus={handleFocus}
         onKeydown={handleKeyDown}
+        onMousedown={handleMouseDown}
         onWidthChange={triggerOverlayUpdate}
       ></SegmentInput>
     )
