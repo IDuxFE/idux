@@ -193,6 +193,7 @@ export const defaultConfig: GlobalConfig = {
     },
   },
   modal: {
+    animatable: true,
     centered: false,
     closable: true,
     closeIcon: 'dialog-close',

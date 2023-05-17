@@ -48,7 +48,10 @@ export default defineComponent({
       currentZIndex,
     } = inject(modalToken)!
     const { close, cancel, ok } = inject(MODAL_TOKEN)!
-    const { centered, closable, closeIcon, closeOnEsc, width, mask, maskClosable } = useConfig(props, config)
+    const { animatable, centered, closable, closeIcon, closeOnEsc, width, mask, maskClosable } = useConfig(
+      props,
+      config,
+    )
 
     const cancelVisible = computed(() => props.type === 'default' || props.type === 'confirm')
 
@@ -156,7 +159,7 @@ export default defineComponent({
           onKeydown={onWrapperKeydown}
         >
           <Transition
-            name={props.animatable ? `${common.prefixCls}-zoom` : undefined}
+            name={animatable.value ? `${common.prefixCls}-zoom` : undefined}
             appear
             onEnter={onEnter}
             onAfterEnter={onAfterEnter}
@@ -209,6 +212,7 @@ export default defineComponent({
 })
 
 function useConfig(props: ModalProps, config: ModalConfig) {
+  const animatable = computed(() => props.animatable ?? config.animatable)
   const centered = computed(() => props.centered ?? config.centered)
   const closable = computed(() => props.closable ?? config.closable)
   const closeIcon = computed(() => props.closeIcon ?? config.closeIcon)
@@ -224,7 +228,7 @@ function useConfig(props: ModalProps, config: ModalConfig) {
     }
   })
 
-  return { centered, closable, closeIcon, closeOnEsc, width, mask, maskClosable }
+  return { animatable, centered, closable, closeIcon, closeOnEsc, width, mask, maskClosable }
 }
 
 function watchVisibleChange(

@@ -76,7 +76,7 @@ export const modalProps = {
   },
   animatable: {
     type: Boolean,
-    default: true,
+    default: undefined,
   },
   offset: {
     type: [String, Number] as PropType<string | number>,
