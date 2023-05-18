@@ -188,12 +188,13 @@ export function useSegmentStates(
   }
   const confirmSearchItem = () => {
     const key = props.searchItem!.key
-    const validateRes = validateSearchState(key)
-    const searchValue = convertStateToValue(key)
 
     Object.entries(segmentStates.value).forEach(([name, state]) => {
       updateSegmentValue(state.value, name, key)
     })
+
+    const validateRes = validateSearchState(key)
+    const searchValue = convertStateToValue(key)
 
     if (!validateRes) {
       removeSearchState(key)
