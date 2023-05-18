@@ -317,6 +317,7 @@ export interface MessageConfig {
 }
 
 export interface ModalConfig {
+  animatable: boolean
   centered: boolean
   closable: boolean
   closeIcon: string
