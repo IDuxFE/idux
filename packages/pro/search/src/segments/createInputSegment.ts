@@ -17,7 +17,7 @@ export function createInputSegment(prefixCls: string, searchField: InputSearchFi
     name: 'input',
     inputClassName: [inputClassName, `${prefixCls}-input-segment-input`],
     placeholder: searchField.placeholder,
-    parse: input => (input ? input : undefined),
+    parse: input => (input ? (trim ? input.trim() : input) : undefined),
     format: value => (trim ? value?.trim() : value) ?? '',
   }
 }
