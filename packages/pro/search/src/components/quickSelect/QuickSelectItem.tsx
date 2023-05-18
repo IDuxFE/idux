@@ -71,9 +71,7 @@ export default defineComponent({
         updateSegmentValue(value, searchDataSegment.value.name, searchState.value.key)
       }
 
-      if (!props.searchField.operators) {
-        updateSearchState(searchStateKey!)
-      }
+      updateSearchState(searchStateKey!)
     }
     const setValue = (value: unknown) => {
       setItemValue(value)
