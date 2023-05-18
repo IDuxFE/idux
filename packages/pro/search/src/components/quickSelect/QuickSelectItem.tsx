@@ -9,7 +9,7 @@ import type { SearchState } from '../../composables/useSearchStates'
 
 import { computed, defineComponent, inject, normalizeClass, ref, watch } from 'vue'
 
-import { useState } from '@idux/cdk/utils'
+import { callEmit, useState } from '@idux/cdk/utils'
 import { type IconInstance, IxIcon } from '@idux/components/icon'
 import { IxInput } from '@idux/components/input'
 
@@ -20,7 +20,9 @@ export default defineComponent({
   props: quickSelectPanelItemProps,
   setup(props, { slots }) {
     const {
+      props: proSearchProps,
       mergedPrefixCls,
+      convertStateToValue,
       createSearchState,
       getSearchStatesByFieldKey,
       updateSegmentValue,
@@ -67,6 +69,10 @@ export default defineComponent({
         searchStateKey = createSearchState(props.searchField.key, {
           value,
         })!.key
+        callEmit(proSearchProps.onItemCreate, {
+          ...convertStateToValue(searchStateKey),
+          nameInput: props.searchField.label,
+        })
       } else if (searchDataSegment.value?.name) {
         updateSegmentValue(value, searchDataSegment.value.name, searchState.value.key)
       }

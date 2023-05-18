@@ -7,6 +7,7 @@
 
 import { defineComponent, inject } from 'vue'
 
+import { callEmit } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 
 import { proSearchContext } from '../../token'
@@ -15,14 +16,34 @@ import { quickSelectPanelShortcutProps } from '../../types'
 export default defineComponent({
   props: quickSelectPanelShortcutProps,
   setup(props) {
-    const { mergedPrefixCls, createSearchState, updateSearchState, getSearchStatesByFieldKey } =
-      inject(proSearchContext)!
+    const {
+      props: proSearchProps,
+      mergedPrefixCls,
+      convertStateToValue,
+      createSearchState,
+      updateSearchState,
+      getSearchStatesByFieldKey,
+      setActiveSegment,
+    } = inject(proSearchContext)!
 
     const handleClick = () => {
       const fieldKey = props.searchField.key
-      if (!!props.searchField.multiple || !getSearchStatesByFieldKey(fieldKey).length) {
-        const state = createSearchState(props.searchField.key)
-        state && updateSearchState(state.key)
+      if (!props.searchField.multiple && getSearchStatesByFieldKey(fieldKey).length) {
+        return
+      }
+
+      const state = createSearchState(props.searchField.key)
+
+      if (state) {
+        updateSearchState(state.key)
+        callEmit(proSearchProps.onItemCreate, {
+          ...convertStateToValue(state.key),
+          nameInput: props.searchField.label,
+        })
+        setActiveSegment({
+          itemKey: state.key,
+          name: state.segmentValues[0]?.name,
+        })
       }
     }
 
