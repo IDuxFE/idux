@@ -136,6 +136,9 @@ TreeSelectSearchFieldConfig
 | `cascaderStrategy` | 级联策略 | `CascaderStrategy` | - | - | 详情参考[Tree](/components/tree/zh) |
 | `draggable` | 是否可拖拽 | `boolean` | - | - | 详情参考[Tree](/components/tree/zh) |
 | `draggableIcon` | 拖拽图标 | `string` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `customDraggableIcon` | 拖拽图标自定义渲染 | `string \| () => VNodeChild` | - | - | 值为string时为对应名称的插槽 |
+| `expandIcon` | 展开收起图标 | `string \| [string, string]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `customExpandIcon` | 展开收起图标自定义渲染 | `string \| (options: { key: VKey, expanded: boolean, node: TreeSelectPanelData }) => VNodeChild` | - | - | 值为string时为对应名称的插槽 |
 | `showLine` | 是否展示连线 | `boolean` | - | - | 详情参考[Tree](/components/tree/zh) |
 | `searchable` | 是否支持筛选 | `boolean` | `false` | - | 默认不支持 |
 | `searchFn` | 搜索函数 | `(node: TreeSelectPanelData, searchValue?: string) => boolean` | - | - | 默认模糊匹配 |
@@ -178,6 +181,7 @@ CascaderSearchFieldConfig
 | `multiple` | 是否为多选 | `boolean` | - | - | 默认为单选 |
 | `disableData` | 动态禁用某些项 | `(data: CascaderPanelData) => boolean` | - | - | 详情参考[Cascader](/components/cascader/zh) |
 | `expandIcon` | 展开图标 | `string` | - | - | 详情参考[Cascader](/components/cascader/zh) |
+| `customExpandIcon` | 展开收起图标自定义渲染 | `string \| (options: { key: VKey, expanded: boolean, data: CascaderPanelData }) => VNodeChild` | - | - | 值为string时为对应名称的插槽 |
 | `expandTrigger` | 触发展开的方式 | ``'click' \| 'hover'` | - | - | 详情参考[Cascader](/components/cascader/zh) |
 | `fullPath` | 选中后的值是否包含全部路径 | `boolean` | - | `false` | 详情参考[Cascader](/components/cascader/zh) |
 | `pathSeparator` | 设置分割符 | `string` | - | - | 详情参考[Cascader](/components/cascader/zh) |

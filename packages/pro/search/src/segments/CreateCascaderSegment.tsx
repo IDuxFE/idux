@@ -9,7 +9,7 @@ import type { CascaderPanelData, CascaderSearchField, PanelRenderContext, Segmen
 
 import { ref } from 'vue'
 
-import { isNil, toString } from 'lodash-es'
+import { isNil, isString, toString } from 'lodash-es'
 
 import { type VKey, convertArray, traverseTree } from '@idux/cdk/utils'
 import { type TreeCheckStateResolver, useTreeCheckStateResolver } from '@idux/components/utils'
@@ -31,6 +31,7 @@ export function createCascaderSegment(
       dataSource,
       cascaderStrategy,
       expandIcon,
+      customExpandIcon,
       expandTrigger,
       fullPath,
       pathSeparator,
@@ -73,16 +74,20 @@ export function createCascaderSegment(
   )
 
   const panelRenderer = (context: PanelRenderContext<VKey | (VKey | VKey[])[] | undefined>) => {
-    const { ok, cancel, renderLocation } = context
+    const { ok, cancel, slots, renderLocation } = context
     const { panelValue, searchInput, handleChange } = getSelectableCommonParams<VKey | VKey[]>(
       context,
       !!multiple,
       renderLocation === 'individual' ? separator ?? defaultSeparator : undefined,
       !multiple || renderLocation === 'quick-select-panel',
     )
+    const cascaderPanelSlots = {
+      expandIcon: isString(customExpandIcon) ? slots[customExpandIcon] : customExpandIcon,
+    }
 
     return (
       <CascaderPanel
+        v-slots={cascaderPanelSlots}
         value={panelValue}
         searchValue={searchable && searchInput ? searchInput : undefined}
         dataSource={dataSource}

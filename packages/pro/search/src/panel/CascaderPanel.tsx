@@ -16,7 +16,7 @@ import { proSearchCascaderPanelProps } from '../types'
 
 export default defineComponent({
   props: proSearchCascaderPanelProps,
-  setup(props) {
+  setup(props, { slots }) {
     const { mergedPrefixCls, locale } = inject(proSearchContext)!
 
     watch(
@@ -101,7 +101,7 @@ export default defineComponent({
 
       return (
         <div class={prefixCls} tabindex={-1} onMousedown={evt => evt.preventDefault()}>
-          <IxCascaderPanel {...panelProps} />
+          <IxCascaderPanel {...panelProps} v-slots={slots} />
           {renderFooter()}
         </div>
       )

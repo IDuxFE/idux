@@ -7,7 +7,7 @@
 
 import type { PanelRenderContext, Segment, TreeSelectPanelData, TreeSelectSearchField } from '../types'
 
-import { isNil, toString } from 'lodash-es'
+import { isNil, isString, toString } from 'lodash-es'
 
 import { type VKey, convertArray, traverseTree } from '@idux/cdk/utils'
 
@@ -27,6 +27,9 @@ export function createTreeSelectSegment(
       cascaderStrategy,
       draggable,
       draggableIcon,
+      customDraggableIcon,
+      expandIcon,
+      customExpandIcon,
       separator,
       showLine,
       searchable,
@@ -58,7 +61,7 @@ export function createTreeSelectSegment(
   })
 
   const panelRenderer = (context: PanelRenderContext<VKey | VKey[] | undefined>) => {
-    const { ok, cancel, renderLocation } = context
+    const { ok, cancel, slots, renderLocation } = context
     const { panelValue, searchInput, handleChange } = getSelectableCommonParams(
       context,
       !!multiple,
@@ -66,8 +69,14 @@ export function createTreeSelectSegment(
       !multiple || renderLocation === 'quick-select-panel',
     )
 
+    const treeSelectPanelSlots = {
+      draggableIcon: isString(customDraggableIcon) ? slots[customDraggableIcon] : customDraggableIcon,
+      expandIcon: isString(customExpandIcon) ? slots[customExpandIcon] : customExpandIcon,
+    }
+
     return (
       <TreeSelectPanel
+        v-slots={treeSelectPanelSlots}
         value={panelValue}
         searchValue={searchable && searchInput ? searchInput : undefined}
         autoHeight={renderLocation === 'quick-select-panel'}
@@ -76,6 +85,7 @@ export function createTreeSelectSegment(
         draggableIcon={draggableIcon}
         checkable={checkable}
         cascaderStrategy={cascaderStrategy}
+        expandIcon={expandIcon}
         multiple={multiple}
         virtual={virtual}
         showLine={showLine}
