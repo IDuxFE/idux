@@ -72,7 +72,13 @@ export default defineComponent({
     }
 
     return () => {
-      const { columns, searchValue, title } = props
+      const dataSource = props.columns.filter(column => column.layoutable !== false)
+      // 不要显示空状态
+      if (dataSource.length === 0) {
+        return
+      }
+
+      const { searchValue, title } = props
       const { startPin, endPin, noPin } = locale.table.layout
 
       const treeProps: TreeProps = {
@@ -81,7 +87,7 @@ export default defineComponent({
         checkable: true,
         checkedKeys: checkedKeys.value,
         draggable: true,
-        dataSource: columns.filter(column => column.layoutable !== false),
+        dataSource,
         disabled: disableColumn,
         empty: '',
         childrenKey: 'children',
