@@ -334,28 +334,28 @@
       position: sticky;
       bottom: 0;
       z-index: 3;
-      background-color: @scrollbar-track-background-color;
-      border-radius: @scrollbar-track-border-radius;
-      box-shadow: @scrollbar-track-box-shadow;
+      background-color: var(--ix-scrollbar-track-background-color);
+      border-radius: var(--ix-scrollbar-track-border-radius);
+      box-shadow: var(--ix-scrollbar-track-box-shadow);
 
       &:hover {
         transform-origin: center bottom;
       }
 
       &-thumb {
-        height: @scrollbar-height;
+        height: var(--ix-scrollbar-height);
         background-clip: padding-box;
-        background-color: @scrollbar-thumb-background-color;
-        border: @scrollbar-thumb-border solid transparent;
-        border-radius: @scrollbar-thumb-border-radius;
-        box-shadow: @scrollbar-thumb-box-shadow;
+        background-color: var(--ix-scrollbar-thumb-background-color);
+        border: var(--ix-scrollbar-thumb-border-width) solid transparent;
+        border-radius: var(--ix-scrollbar-thumb-border-radius);
+        box-shadow: var(--ix-scrollbar-thumb-box-shadow);
 
         &:hover {
-          background-color: @scrollbar-thumb-hover-background-color;
+          background-color: var(--ix-scrollbar-thumb-background-color-hover);
         }
 
         &&-active {
-          background-color: @scrollbar-thumb-active-background-color;
+          background-color: var(--ix-scrollbar-thumb-background-color-active);
         }
       }
     }

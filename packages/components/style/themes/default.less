@@ -94,6 +94,19 @@
   --ix-spacing-xl: 24px;
   --ix-spacing-2xl: 32px;
 
+  // scroll
+  --ix-scrollbar-width: 8px;
+  --ix-scrollbar-height: 8px;
+  --ix-scrollbar-thumb-background-color: @color-grey-l30;
+  --ix-scrollbar-thumb-background-color-hover: @color-grey-l10;
+  --ix-scrollbar-thumb-background-color-active: @color-grey-d10;
+  --ix-scrollbar-thumb-border-width: 0;
+  --ix-scrollbar-thumb-border-radius: 4px;
+  --ix-scrollbar-thumb-box-shadow: none;
+  --ix-scrollbar-track-background-color: unset;
+  --ix-scrollbar-track-border-radius: 0;
+  --ix-scrollbar-track-box-shadow: unset;
+
   // Motion
   --ix-transition-duration-fast: 0.18s;
   --ix-transition-duration-medium: 0.24s;
@@ -126,6 +139,7 @@
 @border-color-inverse: @color-white;
 @border-color-split: @color-grey-l30;
 
+// 临时兼容，后面需要移除
 // Scrollbar
 @scrollbar-width: 8px;
 @scrollbar-height: 8px;
