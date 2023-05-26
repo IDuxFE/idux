@@ -217,7 +217,7 @@ export default defineComponent({
 
       const quickSelectOverlayProps = {
         ...commonOverlayProps.value,
-        class: `${mergedPrefixCls.value}-quick-select-overlay`,
+        class: `${mergedPrefixCls.value}-quick-select-overlay ${componentCommon.prefixCls}-scroll-min`,
         style: {
           width: convertCssPixel(elementWidth.value),
         },
