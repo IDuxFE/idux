@@ -179,6 +179,10 @@
   & tr&-expanded-row {
     & > td {
       background-color: @table-expandable-background-color;
+
+      > .@{table-prefix} {
+        margin: -4px 28px;
+      }
     }
     &:hover > td {
       background-color: @table-expandable-background-color-hover;
