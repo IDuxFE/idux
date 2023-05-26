@@ -99,6 +99,18 @@ export function useSizeObservable(
     })
   })
 
+  const updateSelectedNavOffset = () => {
+    nextTick(() => {
+      if (props.type !== 'line') {
+        return
+      }
+      const target = selectedNavRef.value
+      if (target) {
+        setSelectedNavOffset(target[offsetProp.value])
+      }
+    })
+  }
+
   const updateNavOffset = () => {
     if (hasScroll.value) {
       const _wrapperSize = wrapperSize.value - operationsSize.value
@@ -151,13 +163,13 @@ export function useSizeObservable(
       setNavOffset(diffOffset > 0 ? diffOffset : 0)
     }
 
-    // 需要对line类型的bar进行额外处理
-    nextTick(() => {
-      if (props.type === 'line' && selectedNavRef.value) {
-        setSelectedNavOffset(selectedNavRef.value[offsetProp.value])
-      }
-    })
+    updateSelectedNavOffset()
   })
+
+  watch(
+    () => props.dataSource,
+    () => updateSelectedNavOffset(),
+  )
 
   onMounted(() => {
     // 需要等 DOM 渲染完成后，重新计算一次，才是最准确的
