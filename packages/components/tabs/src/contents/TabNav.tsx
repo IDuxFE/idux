@@ -35,7 +35,7 @@ export default defineComponent({
       mergedPrefixCls,
       handleTabClick,
       handleTabClose,
-      navAttrMap,
+      navAttrs,
       isHorizontal,
     } = inject(tabsToken)!
 
@@ -46,25 +46,20 @@ export default defineComponent({
 
     const elementRef = shallowRef<HTMLElement>()
 
-    const setNavAttr = (el: HTMLElement) => {
-      navAttrMap.set(key, {
-        size: el[sizeProp.value] + getMarginSize(el, isHorizontal.value),
-        offset: el[offsetProp.value],
-      })
+    const setNavAttr = (el: HTMLElement | undefined) => {
+      let attr = undefined
+      if (el) {
+        attr = {
+          size: el[sizeProp.value] + getMarginSize(el, isHorizontal.value),
+          offset: el[offsetProp.value],
+        }
+      }
+      navAttrs[key] = attr
     }
 
-    onUpdated(() => {
-      const target = elementRef.value as HTMLElement
-      setNavAttr(target)
-    })
-
-    onBeforeUnmount(() => {
-      navAttrMap.delete(key)
-    })
-
-    onMounted(() => {
-      elementRef.value && setNavAttr(elementRef.value)
-    })
+    onMounted(() => setNavAttr(elementRef.value))
+    onUpdated(() => setNavAttr(elementRef.value))
+    onBeforeUnmount(() => setNavAttr(undefined))
 
     const classes = computed(() => {
       const { disabled, selected } = props

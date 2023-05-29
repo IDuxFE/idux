@@ -34,7 +34,7 @@ export function useSizeObservable(
   addBtnRef: ShallowRef<HTMLElement | undefined>,
   operationsRef: ShallowRef<HTMLElement | undefined>,
   isHorizontal: ComputedRef<boolean>,
-  navAttrMap: Map<VKey, { offset: number; size: number }>,
+  navAttrs: Record<VKey, { offset: number; size: number } | undefined>,
   closedKeys: ComputedRef<VKey[]>,
 ): SizeObservableContext {
   const [wrapperSize, setWrapperSize] = useState(0)
@@ -150,10 +150,14 @@ export function useSizeObservable(
     const oldSet = new Set(old)
     const closeTabKey = [...curSet].find(item => !oldSet.has(item))
     if (closeTabKey !== undefined) {
-      const closeTabAttr = navAttrMap.get(closeTabKey) || { size: 0, offset: 0 }
+      const closeTabAttr = navAttrs[closeTabKey] || { size: 0, offset: 0 }
       const { size: closeTabSize, offset: closeTabOffset } = closeTabAttr
       let nextTabOffset = 0
-      for (const { offset } of navAttrMap.values()) {
+      for (const attr of Object.values(navAttrs)) {
+        if (!attr) {
+          continue
+        }
+        const { offset } = attr
         if (offset > closeTabOffset) {
           nextTabOffset = offset
           break

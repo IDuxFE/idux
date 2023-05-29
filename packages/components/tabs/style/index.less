@@ -19,21 +19,21 @@
   }
 
   &-md {
-    &>.@{tabs-prefix}-nav-wrapper {
+    & > .@{tabs-prefix}-nav-wrapper {
       font-size: @tabs-nav-font-size-md;
     }
   }
 
   &-lg {
-    &>.@{tabs-prefix}-nav-wrapper {
+    & > .@{tabs-prefix}-nav-wrapper {
       font-size: @tabs-nav-font-size-lg;
     }
 
     &.@{tabs-prefix}-line {
-      &>.@{tabs-prefix}-nav-wrapper {
-        &>.@{tabs-prefix}-nav {
-          &>.@{tabs-prefix}-nav-list {
-            &>.@{tabs-prefix}-nav-tab {
+      & > .@{tabs-prefix}-nav-wrapper {
+        & > .@{tabs-prefix}-nav {
+          & > .@{tabs-prefix}-nav-list {
+            & > .@{tabs-prefix}-nav-tab {
               height: 48px;
             }
           }
@@ -42,10 +42,10 @@
     }
 
     &.@{tabs-prefix}-segment {
-      &>.@{tabs-prefix}-nav-wrapper {
-        &>.@{tabs-prefix}-nav {
-          &>.@{tabs-prefix}-nav-list {
-            &>.@{tabs-prefix}-nav-tab {
+      & > .@{tabs-prefix}-nav-wrapper {
+        & > .@{tabs-prefix}-nav {
+          & > .@{tabs-prefix}-nav-list {
+            & > .@{tabs-prefix}-nav-tab {
               min-width: 80px;
             }
           }
@@ -61,8 +61,7 @@
     align-items: center;
 
     &&-has-scroll {
-      >.@{tabs-prefix}-nav {
-
+      > .@{tabs-prefix}-nav {
         &::before,
         &::after {
           top: 0;
@@ -143,14 +142,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-width: 40px;
+            width: 40px;
             margin-left: 2px;
             padding: 0 8px;
-            background: #fafafa;
-            border: 1px solid @tabs-nav-border-color;
-            border-radius: 2px 2px 0 0;
-            outline: none;
-            cursor: pointer;
 
             &-hidden {
               visibility: hidden;
@@ -162,7 +156,7 @@
             align-items: center;
             color: @tabs-nav-tab-text-color;
 
-            >.@{icon-prefix} {
+            > .@{icon-prefix} {
               font-size: @tabs-icon-font-size;
             }
           }
@@ -216,12 +210,12 @@
   }
 
   &-card {
-    >.@{tabs-prefix}-nav-wrapper {
-      >.@{tabs-prefix}-nav {
+    > .@{tabs-prefix}-nav-wrapper {
+      > .@{tabs-prefix}-nav {
         z-index: 1;
 
-        >.@{tabs-prefix}-nav-list {
-          >.@{tabs-prefix}-nav-tab {
+        > .@{tabs-prefix}-nav-list {
+          > .@{tabs-prefix}-nav-tab {
             border-radius: @tabs-border-radius @tabs-border-radius 0 0;
             border-bottom: 1px solid @tabs-nav-border-color;
             box-sizing: border-box;
@@ -242,6 +236,12 @@
                 border-radius: @tabs-border-radius @tabs-border-radius 0 0;
               }
             }
+
+            &-add {
+              background: #fafafa;
+              border: 1px solid @tabs-nav-border-color;
+              border-radius: 2px 2px 0 0;
+            }
           }
 
           &-disabled {
@@ -255,8 +255,8 @@
   }
 
   &-line {
-    >.@{tabs-prefix}-nav-wrapper {
-      >.@{tabs-prefix}-nav {
+    > .@{tabs-prefix}-nav-wrapper {
+      > .@{tabs-prefix}-nav {
         &-bar {
           position: absolute;
           background-color: @tabs-nav-bar-color;
@@ -280,22 +280,19 @@
     }
 
     &.@{tabs-prefix} {
-
       &-nav-start,
       &-nav-end {
-        >.@{tabs-prefix} {
-
+        > .@{tabs-prefix} {
           &-nav-wrapper {
             flex-direction: column;
 
-            >.@{tabs-prefix}-nav-operations {
+            > .@{tabs-prefix}-nav-operations {
               flex-direction: column;
               width: 100%;
             }
 
             &-has-scroll {
-              >.@{tabs-prefix}-nav {
-
+              > .@{tabs-prefix}-nav {
                 &::before,
                 &::after {
                   left: 0;
@@ -315,7 +312,7 @@
               }
             }
 
-            >.@{tabs-prefix}-nav {
+            > .@{tabs-prefix}-nav {
               &-bar {
                 width: @tabs-nav-bar-height;
               }
@@ -325,11 +322,11 @@
                 width: 1px;
               }
 
-              >.@{tabs-prefix}-nav-list {
+              > .@{tabs-prefix}-nav-list {
                 transform: translateY(0);
                 flex-direction: column;
 
-                >.@{tabs-prefix}-nav-tab {
+                > .@{tabs-prefix}-nav-tab {
                   height: auto;
 
                   &:not(:first-child) {
@@ -337,7 +334,7 @@
                   }
                 }
 
-                >.@{tabs-prefix}-nav-tab-add {
+                > .@{tabs-prefix}-nav-tab-add {
                   min-height: 32px;
                 }
               }
@@ -345,7 +342,7 @@
           }
 
           &-pane-wrapper {
-            >.@{tabs-prefix}-pane {
+            > .@{tabs-prefix}-pane {
               height: 100%;
             }
           }
@@ -357,8 +354,8 @@
           flex-direction: row;
         }
 
-        >.@{tabs-prefix}-nav-wrapper {
-          >.@{tabs-prefix}-nav {
+        > .@{tabs-prefix}-nav-wrapper {
+          > .@{tabs-prefix}-nav {
             &-bar {
               right: 0;
               border-radius: @tabs-border-radius 0 0 @tabs-border-radius;
@@ -370,7 +367,7 @@
           }
         }
 
-        >.@{tabs-prefix}-pane-wrapper {
+        > .@{tabs-prefix}-pane-wrapper {
           padding: 0 0 0 @tabs-pane-padding;
         }
       }
@@ -380,8 +377,8 @@
           flex-direction: row-reverse;
         }
 
-        >.@{tabs-prefix}-nav-wrapper {
-          >.@{tabs-prefix} {
+        > .@{tabs-prefix}-nav-wrapper {
+          > .@{tabs-prefix} {
             &-nav {
               &-bar {
                 left: 0;
@@ -403,22 +400,22 @@
           }
         }
 
-        >.@{tabs-prefix}-pane-wrapper {
+        > .@{tabs-prefix}-pane-wrapper {
           padding: 0 @tabs-pane-padding 0 0;
         }
       }
 
       &-nav-top,
       &-nav-bottom {
-        >.@{tabs-prefix} {
+        > .@{tabs-prefix} {
           &-nav-wrapper {
-            >.@{tabs-prefix}-nav {
-              >.@{tabs-prefix}-nav-list {
-                >.@{tabs-prefix}-nav-tab {
+            > .@{tabs-prefix}-nav {
+              > .@{tabs-prefix}-nav-list {
+                > .@{tabs-prefix}-nav-tab {
                   padding: 0;
                   min-width: auto;
 
-                  +.@{tabs-prefix}-nav-tab {
+                  + .@{tabs-prefix}-nav-tab {
                     margin: 0 0 0 32px;
                   }
                 }
@@ -433,7 +430,7 @@
           flex-direction: column-reverse;
         }
 
-        >.@{tabs-prefix} {
+        > .@{tabs-prefix} {
           &-pane-wrapper {
             padding: 0 0 @tabs-pane-padding 0;
           }
@@ -443,10 +440,10 @@
   }
 
   &-segment {
-    >.@{tabs-prefix}-nav-wrapper {
-      >.@{tabs-prefix}-nav {
-        >.@{tabs-prefix}-nav-list {
-          >.@{tabs-prefix} {
+    > .@{tabs-prefix}-nav-wrapper {
+      > .@{tabs-prefix}-nav {
+        > .@{tabs-prefix}-nav-list {
+          > .@{tabs-prefix} {
             &-nav-tab {
               border: 1px solid @tabs-nav-border-color;
               height: @tabs-segment-nav-height;
@@ -496,8 +493,8 @@
     }
 
     &.@{tabs-prefix}-nav-primary {
-      >.@{tabs-prefix}-nav-wrapper> {
-        .@{tabs-prefix}-nav>.@{tabs-prefix}-nav-list>.@{tabs-prefix}-nav-tab {
+      > .@{tabs-prefix}-nav-wrapper > {
+        .@{tabs-prefix}-nav > .@{tabs-prefix}-nav-list > .@{tabs-prefix}-nav-tab {
           &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
             background-color: @tabs-segment-nav-primary-active-background-color;
 

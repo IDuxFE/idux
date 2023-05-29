@@ -44,5 +44,6 @@ export interface TabsData<K = VKey> extends TabProps {
 | --- | --- | --- | --- |
 | `title` | 标题插槽 | `{ key:VKey, disabled:boolean, selected:boolean, title: string }` | - |
 | `content` | 内容插槽 | `{key:VKey, content: any, selected: boolean}` | - |
+| `addIcon` | 新增图标 | - | 也可以用于自定义其他操作 |
 
 若是通过`dataSource`进行渲染的，可以通过设置`customTitle`和`customContent`字段，自定义插槽进行渲染，[参考](/components/tabs/zh?tab=demo#components-tabs-custom-tab)
