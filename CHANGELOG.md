@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/danranVm/idux/compare/v1.6.0...v1.7.0) (2023-05-29)
+
+### Bug Fixes
+
+- **comp:\*:** overlay animating cls should be set only at leaving ([#1552](https://github.com/danranVm/idux/issues/1552)) ([c0d2e9c](https://github.com/danranVm/idux/commit/c0d2e9c6d87ba072536b6709b45be545fb5c43bb))
+- **comp:button:** fix icon not vertically centered ([#1542](https://github.com/danranVm/idux/issues/1542)) ([cf269a5](https://github.com/danranVm/idux/commit/cf269a51c55b2b35d60005efcf8c17f0b45bd849))
+- **comp:empty:** the ids in svg should be only ([#1539](https://github.com/danranVm/idux/issues/1539)) ([40d25f5](https://github.com/danranVm/idux/commit/40d25f53e640d0f31507e19e034e9f552836b8a9))
+- **comp:popconfirm:** sync design ([#1565](https://github.com/danranVm/idux/issues/1565)) ([08e1821](https://github.com/danranVm/idux/commit/08e182129f041c3cc61fef4147b4db46db3835a8))
+- **comp:table:** fixed column background color error is selected ([#1543](https://github.com/danranVm/idux/issues/1543)) ([7448e38](https://github.com/danranVm/idux/commit/7448e38fd71de06ea4a2ac494091f1c9e681545f))
+- **comp:tabs:** incorrect offset of the selected bar with dynamic tabs ([#1563](https://github.com/danranVm/idux/issues/1563)) ([15be909](https://github.com/danranVm/idux/commit/15be90944959d517027b987fe85da1ef22372c73))
+- **comp:tabs:** more pane should hidden when empty data ([#1547](https://github.com/danranVm/idux/issues/1547)) ([13013b3](https://github.com/danranVm/idux/commit/13013b369daff7c7e7b82c125175c75c02f58fe2))
+- **comp:tooltip:** visible is not work when destroyOnHide is true ([#1550](https://github.com/danranVm/idux/issues/1550)) ([05fdb30](https://github.com/danranVm/idux/commit/05fdb3054ac21e217f90bac35aa097cab508730b))
+- **comp:tree-select:** async loading is invalid when getKey is set ([#1541](https://github.com/danranVm/idux/issues/1541)) ([6cd6155](https://github.com/danranVm/idux/commit/6cd615566d7a6e1692c4cb914daab0b6a82345c3))
+- **comp:upload:** accept does not ignore case ([#1544](https://github.com/danranVm/idux/issues/1544)) ([b7e9b89](https://github.com/danranVm/idux/commit/b7e9b891e48b9c12b90a6ad0d2d57d0b6d65ebf2))
+- **pro:search:** all items triggered by quickselect should be updated ([#1559](https://github.com/danranVm/idux/issues/1559)) ([2385ed8](https://github.com/danranVm/idux/commit/2385ed80289a4e1cc68f8e38618c1d8684db5f1e))
+- **pro:search:** clicking search button should trigger value change ([#1557](https://github.com/danranVm/idux/issues/1557)) ([324d74f](https://github.com/danranVm/idux/commit/324d74fbc115a05a3c564489d2e445bd22379505))
+- **pro:search:** input searchField trim not working ([#1560](https://github.com/danranVm/idux/issues/1560)) ([9f2232a](https://github.com/danranVm/idux/commit/9f2232a33e2fe76cbeded7e9faa342c31e31c1bf))
+- **pro:search:** item created by shortcut shoule be set active ([#1554](https://github.com/danranVm/idux/issues/1554)) ([31e433c](https://github.com/danranVm/idux/commit/31e433c5d27f2c7adff15ed7d1496b2ca7032dfc))
+- **pro:search:** remove name input min-width ([#1551](https://github.com/danranVm/idux/issues/1551)) ([04e2500](https://github.com/danranVm/idux/commit/04e2500bdf1d4b8df5a0d9f8030729b06040e95b))
+- **pro:search:** segment states should be reset after blur ([#1553](https://github.com/danranVm/idux/issues/1553)) ([b8cada3](https://github.com/danranVm/idux/commit/b8cada3a1247e87134fef88191e985cc0fd06765))
+- **pro:table:** the empty is not rendered in the layout tool ([#1562](https://github.com/danranVm/idux/issues/1562)) ([ea62fd1](https://github.com/danranVm/idux/commit/ea62fd18634b7c96ac446f97848a4ded2dd06c7d))
+
+### Features
+
+- **comp:modal:** add `animatable` global config ([#1558](https://github.com/danranVm/idux/issues/1558)) ([0e82271](https://github.com/danranVm/idux/commit/0e822713a001e61b86523bdf0a6ddfd81af5b61a))
+- **comp:style:** add min scroll and css variable support ([#1564](https://github.com/danranVm/idux/issues/1564)) ([d425a6f](https://github.com/danranVm/idux/commit/d425a6f75d1ffb7686c320e83f0c2c06c6756e80))
+- **comp:tabs:** support addIcon slot ([#1566](https://github.com/danranVm/idux/issues/1566)) ([dcd9c1a](https://github.com/danranVm/idux/commit/dcd9c1a9c24a7256113ed6a64518d7b0fc5d451f))
+- **pro:search:** add custom icon renderer for treeSelect and cascader ([#1556](https://github.com/danranVm/idux/issues/1556)) ([bec5772](https://github.com/danranVm/idux/commit/bec5772cc15d2a516430dff64c3b0e2d3c8637cf))
+
 ## [1.6.1](https://github.com/danranVm/idux/compare/v1.6.0...v1.6.1) (2023-05-08)
 
 ### Bug Fixes

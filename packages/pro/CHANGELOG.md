@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/IDuxFE/idux/compare/v1.6.0...v1.7.0) (2023-05-29)
+
+### Bug Fixes
+
+- **comp:table:** fixed column background color error is selected ([#1543](https://github.com/IDuxFE/idux/issues/1543)) ([7448e38](https://github.com/IDuxFE/idux/commit/7448e38fd71de06ea4a2ac494091f1c9e681545f))
+- **pro:search:** all items triggered by quickselect should be updated ([#1559](https://github.com/IDuxFE/idux/issues/1559)) ([2385ed8](https://github.com/IDuxFE/idux/commit/2385ed80289a4e1cc68f8e38618c1d8684db5f1e))
+- **pro:search:** clicking search button should trigger value change ([#1557](https://github.com/IDuxFE/idux/issues/1557)) ([324d74f](https://github.com/IDuxFE/idux/commit/324d74fbc115a05a3c564489d2e445bd22379505))
+- **pro:search:** input searchField trim not working ([#1560](https://github.com/IDuxFE/idux/issues/1560)) ([9f2232a](https://github.com/IDuxFE/idux/commit/9f2232a33e2fe76cbeded7e9faa342c31e31c1bf))
+- **pro:search:** item created by shortcut shoule be set active ([#1554](https://github.com/IDuxFE/idux/issues/1554)) ([31e433c](https://github.com/IDuxFE/idux/commit/31e433c5d27f2c7adff15ed7d1496b2ca7032dfc))
+- **pro:search:** remove name input min-width ([#1551](https://github.com/IDuxFE/idux/issues/1551)) ([04e2500](https://github.com/IDuxFE/idux/commit/04e2500bdf1d4b8df5a0d9f8030729b06040e95b))
+- **pro:search:** segment states should be reset after blur ([#1553](https://github.com/IDuxFE/idux/issues/1553)) ([b8cada3](https://github.com/IDuxFE/idux/commit/b8cada3a1247e87134fef88191e985cc0fd06765))
+- **pro:table:** the empty is not rendered in the layout tool ([#1562](https://github.com/IDuxFE/idux/issues/1562)) ([ea62fd1](https://github.com/IDuxFE/idux/commit/ea62fd18634b7c96ac446f97848a4ded2dd06c7d))
+
+### Features
+
+- **comp:style:** add min scroll and css variable support ([#1564](https://github.com/IDuxFE/idux/issues/1564)) ([d425a6f](https://github.com/IDuxFE/idux/commit/d425a6f75d1ffb7686c320e83f0c2c06c6756e80))
+- **pro:search:** add custom icon renderer for treeSelect and cascader ([#1556](https://github.com/IDuxFE/idux/issues/1556)) ([bec5772](https://github.com/IDuxFE/idux/commit/bec5772cc15d2a516430dff64c3b0e2d3c8637cf))
+
 ## [1.6.1](https://github.com/IDuxFE/idux/compare/v1.6.0...v1.6.1) (2023-05-08)
 
 ### Bug Fixes
