@@ -15,7 +15,7 @@ export interface TabsContext {
   mergedDataSource: ComputedRef<TabsData[]>
   isHorizontal: ComputedRef<boolean>
   closedKeys: ComputedRef<VKey[]>
-  navAttrMap: Map<VKey, { offset: number; size: number }>
+  navAttrs: Record<VKey, { offset: number; size: number } | undefined>
   handleTabClick: (key: VKey, evt: Event) => Promise<void>
   handleTabClose: (key: VKey) => Promise<void>
   setSelectedKey: (value: VKey) => void

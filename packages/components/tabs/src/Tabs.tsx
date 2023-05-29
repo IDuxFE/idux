@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, normalizeClass, provide } from 'vue'
+import { computed, defineComponent, normalizeClass, provide, reactive } from 'vue'
 
 import { isNil, isString } from 'lodash-es'
 
@@ -36,7 +36,7 @@ export default defineComponent({
     const [closedKeys, setClosedKeys] = useState<VKey[]>([])
 
     // 存储每个标签的尺寸和偏移
-    const navAttrMap = new Map<VKey, { offset: number; size: number }>()
+    const navAttrs = reactive<Record<VKey, { offset: number; size: number }>>({})
 
     const handleTabClick = async (key: VKey, evt: Event) => {
       const result = await callEmit(props.onBeforeLeave, key, selectedKey.value)
@@ -69,7 +69,7 @@ export default defineComponent({
       mergedDataSource,
       isHorizontal,
       closedKeys,
-      navAttrMap,
+      navAttrs,
       handleTabClick,
       handleTabClose,
       setSelectedKey,

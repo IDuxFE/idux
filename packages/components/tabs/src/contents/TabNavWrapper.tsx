@@ -29,7 +29,7 @@ export default defineComponent({
       mergedDataSource,
       isHorizontal,
       closedKeys,
-      navAttrMap,
+      navAttrs,
     } = inject(tabsToken)!
 
     const wrapperRef = shallowRef<HTMLElement>()
@@ -55,7 +55,7 @@ export default defineComponent({
       addBtnRef,
       operationsRef,
       isHorizontal,
-      navAttrMap,
+      navAttrs,
       closedKeys,
     )
 
@@ -65,8 +65,9 @@ export default defineComponent({
     })
 
     const moreNavDataSource = computed(() => {
+      // TODO: 性能优化
       return allNavDataSource.value.reduce((acc: SelectData[], data) => {
-        const attr = navAttrMap.get(data.key)
+        const attr = navAttrs[data.key]
         if (
           attr &&
           // 将没有展示完全的 nav 全部放入到moreSelectPane中
@@ -122,17 +123,18 @@ export default defineComponent({
     return () => {
       const { selectedKey } = props
       const { addable, type } = tabsProps
+      const prefixCls = mergedPrefixCls.value
 
       return (
         <div class={classes.value} ref={wrapperRef}>
           <div
             class={[
-              `${mergedPrefixCls.value}-nav`,
-              firstShow.value ? `${mergedPrefixCls.value}-nav-first-show` : '',
-              lastShow.value ? `${mergedPrefixCls.value}-nav-last-show` : '',
+              `${prefixCls}-nav`,
+              firstShow.value ? `${prefixCls}-nav-first-show` : '',
+              lastShow.value ? `${prefixCls}-nav-last-show` : '',
             ]}
           >
-            <div ref={navRef} style={navStyle.value} class={`${mergedPrefixCls.value}-nav-list`}>
+            <div ref={navRef} style={navStyle.value} class={`${prefixCls}-nav-list`}>
               {allNavDataSource.value.map(data => {
                 const { key, content, customContent, customTitle = 'title', ...navProps } = data
                 const titleSlot = isString(customTitle) ? slots[customTitle] : customTitle
@@ -147,25 +149,19 @@ export default defineComponent({
                 )
               })}
               {addable && (
-                <div
+                <button
                   ref={addBtnRef}
-                  class={[
-                    `${mergedPrefixCls.value}-nav-tab-add`,
-                    hasScroll.value && `${mergedPrefixCls.value}-nav-tab-add-hidden`,
-                  ]}
+                  class={[`${prefixCls}-nav-tab-add`, hasScroll.value && `${prefixCls}-nav-tab-add-hidden`]}
                   onClick={handleAdd}
                 >
-                  <IxIcon name="plus" class={`${mergedPrefixCls.value}-nav-add-icon`}></IxIcon>
-                </div>
+                  {slots.addIcon ? slots.addIcon() : <IxIcon name="plus" class={`${prefixCls}-nav-add-icon`} />}
+                </button>
               )}
             </div>
           </div>
           <div
             ref={operationsRef}
-            class={[
-              `${mergedPrefixCls.value}-nav-operations`,
-              !hasScroll.value && `${mergedPrefixCls.value}-nav-operations-hidden`,
-            ]}
+            class={[`${prefixCls}-nav-operations`, !hasScroll.value && `${prefixCls}-nav-operations-hidden`]}
           >
             <IxPopover
               trigger="hover"
@@ -174,19 +170,21 @@ export default defineComponent({
               {...{
                 'onUpdate:visible': setMoreSelectPaneVisible,
               }}
-              class={`${mergedPrefixCls.value}-nav-operations-popover`}
+              class={`${prefixCls}-nav-operations-popover`}
               v-slots={{
-                content: () => (
-                  <MoreSelectPane visible={moreSelectPaneVisible.value} dataSource={moreNavDataSource.value} />
-                ),
+                content: () => {
+                  return <MoreSelectPane visible={moreSelectPaneVisible.value} dataSource={moreNavDataSource.value} />
+                },
               }}
             >
               <IxButton icon="more" mode="text" shape="square"></IxButton>
             </IxPopover>
-            {addable && <IxButton icon="plus" mode="text" shape="square" onClick={handleAdd}></IxButton>}
+            {addable && (
+              <IxButton v-slots={{ icon: slots.addIcon }} icon="plus" mode="text" shape="square" onClick={handleAdd} />
+            )}
           </div>
-          {type !== 'segment' && <div class={`${mergedPrefixCls.value}-nav-border`}></div>}
-          {type === 'line' && <div class={`${mergedPrefixCls.value}-nav-bar`} style={navBarStyle.value}></div>}
+          {type !== 'segment' && <div class={`${prefixCls}-nav-border`}></div>}
+          {type === 'line' && <div class={`${prefixCls}-nav-bar`} style={navBarStyle.value}></div>}
         </div>
       )
     }
