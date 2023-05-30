@@ -164,6 +164,7 @@
           &-selected:not(&-disabled) {
             .@{tabs-prefix}-nav-tab-label {
               color: @tabs-selected-color;
+              font-weight: @font-weight-xl;
             }
           }
 
@@ -224,6 +225,7 @@
               border: 1px solid @tabs-nav-border-color;
               border-bottom-color: @tabs-card-nav-tab-selected-background-color;
               background-color: @tabs-card-nav-tab-selected-background-color;
+              font-weight: @font-weight-xl;
 
               &::after {
                 content: ' ';
@@ -328,6 +330,8 @@
 
                 > .@{tabs-prefix}-nav-tab {
                   height: auto;
+                  justify-content: flex-start;
+                  padding: 0;
 
                   &:not(:first-child) {
                     margin-top: 32px;
@@ -475,6 +479,10 @@
                 }
               }
 
+              &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
+                font-weight: @font-weight-xl;
+              }
+
               &:first-child {
                 border-radius: @tabs-border-radius 0 0 @tabs-border-radius;
               }
@@ -497,6 +505,7 @@
         .@{tabs-prefix}-nav > .@{tabs-prefix}-nav-list > .@{tabs-prefix}-nav-tab {
           &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
             background-color: @tabs-segment-nav-primary-active-background-color;
+            font-weight: @font-weight-xl;
 
             .@{tabs-prefix}-nav-tab-label {
               color: @tabs-segment-nav-primary-active-text-color;
