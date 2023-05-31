@@ -9,9 +9,9 @@ import { type PropType, Slot, computed, defineComponent, inject, normalizeClass 
 
 import { isNil } from 'lodash-es'
 
-import { callEmit } from '@idux/cdk/utils'
+import { callEmit, useKey } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
-import { convertIconVNode, useKey } from '@idux/components/utils'
+import { convertIconVNode } from '@idux/components/utils'
 
 import { type MergedData } from '../composables/useDataSource'
 import { cascaderPanelToken } from '../token'

@@ -17,8 +17,8 @@ import {
   watchEffect,
 } from 'vue'
 
+import { useKey } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
-import { useKey } from '@idux/components/utils'
 
 import { tabsToken } from '../tokens'
 import { tabNavProps } from '../types'

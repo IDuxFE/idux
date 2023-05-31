@@ -19,7 +19,7 @@ import {
 
 import { useSharedFocusMonitor } from '@idux/cdk/a11y'
 import { type AbstractControl, ValidateStatus } from '@idux/cdk/forms'
-import { useKey } from '@idux/components/utils'
+import { useKey } from '@idux/cdk/utils'
 
 import { FORM_ITEM_TOKEN, FORM_TOKEN } from '../token'
 import { type FormSize } from '../types'

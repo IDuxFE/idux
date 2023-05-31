@@ -12,11 +12,11 @@ import { type ComputedRef, type Ref, computed, defineComponent, inject, normaliz
 import { isNil } from 'lodash-es'
 
 import { useAccessorAndControl } from '@idux/cdk/forms'
-import { callEmit } from '@idux/cdk/utils'
+import { callEmit, useKey } from '@idux/cdk/utils'
 import { ɵWave, type ɵWaveInstance } from '@idux/components/_private/wave'
 import { useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN, useFormElement, useFormItemRegister } from '@idux/components/form'
-import { convertStringVNode, useKey } from '@idux/components/utils'
+import { convertStringVNode } from '@idux/components/utils'
 
 import { type RadioGroupContext, radioGroupToken } from './token'
 import { type RadioProps, radioProps } from './types'

@@ -12,11 +12,11 @@ import { type ComputedRef, Ref, computed, defineComponent, inject, normalizeClas
 import { isNil } from 'lodash-es'
 
 import { useAccessorAndControl } from '@idux/cdk/forms'
-import { callEmit } from '@idux/cdk/utils'
+import { callEmit, useKey } from '@idux/cdk/utils'
 import { ɵWave, type ɵWaveInstance } from '@idux/components/_private/wave'
 import { useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN, useFormElement, useFormItemRegister } from '@idux/components/form'
-import { convertStringVNode, useKey } from '@idux/components/utils'
+import { convertStringVNode } from '@idux/components/utils'
 
 import { type CheckboxGroupContext, checkboxGroupToken } from './token'
 import { type CheckValue, type CheckboxProps, checkboxProps } from './types'

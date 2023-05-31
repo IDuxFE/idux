@@ -13,12 +13,11 @@ import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { isString } from 'lodash-es'
 
-import { getFirstValidNode } from '@idux/cdk/utils'
+import { getFirstValidNode, useKey } from '@idux/cdk/utils'
 import { ɵCollapseTransition } from '@idux/components/_private/collapse-transition'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxHeader } from '@idux/components/header'
 import { IxIcon } from '@idux/components/icon'
-import { useKey } from '@idux/components/utils'
 
 import { collapseToken } from './token'
 import { collapsePanelProps } from './types'

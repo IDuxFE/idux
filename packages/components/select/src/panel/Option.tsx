@@ -9,9 +9,8 @@ import { computed, defineComponent, inject } from 'vue'
 
 import { isNil, toString } from 'lodash-es'
 
-import { callEmit } from '@idux/cdk/utils'
+import { callEmit, useKey } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
-import { useKey } from '@idux/components/utils'
 
 import { selectPanelContext } from '../token'
 import { optionProps } from '../types'

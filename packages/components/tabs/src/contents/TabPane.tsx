@@ -7,7 +7,7 @@
 
 import { computed, defineComponent, inject } from 'vue'
 
-import { useKey } from '@idux/components/utils'
+import { useKey } from '@idux/cdk/utils'
 
 import { tabsToken } from '../tokens'
 import { tabPaneProps } from '../types'
