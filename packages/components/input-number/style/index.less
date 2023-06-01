@@ -32,6 +32,13 @@
   }
 
   &-illegal {
+    border-color: @input-number-invalid-color;
+    box-shadow: @input-number-invalid-box-shadow;
+
+    &:hover {
+      border-color: @input-number-invalid-color;
+    }
+    
     .@{input-prefix}-inner {
       color: @input-number-invalid-color;
     }
