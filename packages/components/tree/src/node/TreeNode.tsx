@@ -10,8 +10,8 @@ import type { VKey } from '@idux/cdk/utils'
 
 import { computed, defineComponent, inject } from 'vue'
 
+import { useKey } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
-import { useKey } from '@idux/components/utils'
 
 import Checkbox from './Checkbox'
 import Content from './Content'

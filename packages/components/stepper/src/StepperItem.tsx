@@ -9,11 +9,11 @@ import { type ComputedRef, type Slots, VNodeChild, computed, defineComponent, in
 
 import { isSymbol } from 'lodash-es'
 
-import { NoopFunction, type VKey } from '@idux/cdk/utils'
+import { NoopFunction, type VKey, useKey } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { IxProgress } from '@idux/components/progress'
-import { convertStringVNode, useKey } from '@idux/components/utils'
+import { convertStringVNode } from '@idux/components/utils'
 
 import { stepperItemKey, stepperToken } from './token'
 import { type StepperItemProps, type StepperProps, type StepperStatus, stepperItemProps } from './types'

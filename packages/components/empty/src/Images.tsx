@@ -7,7 +7,7 @@
 
 import { type FunctionalComponent } from 'vue'
 
-import { useKey } from '@idux/components/utils'
+import { useKey } from '@idux/cdk/utils'
 
 export const EmptySimpleImage: FunctionalComponent = () => (
   <svg width="80" height="60" viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">

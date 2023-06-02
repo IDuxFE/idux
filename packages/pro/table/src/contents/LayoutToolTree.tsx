@@ -7,10 +7,9 @@
 
 import { type PropType, computed, defineComponent, inject } from 'vue'
 
-import { type VKey } from '@idux/cdk/utils'
+import { type VKey, useKey } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 import { IxTree, type TreeDragDropOptions, type TreeProps } from '@idux/components/tree'
-import { useKey } from '@idux/components/utils'
 
 import { proTableToken } from '../token'
 import { type ProTableColumn, type ProTableColumnBase } from '../types'

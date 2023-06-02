@@ -9,8 +9,8 @@ import type { FunctionalComponent } from 'vue'
 
 import { computed, normalizeClass } from 'vue'
 
+import { useKey } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
-import { useKey } from '@idux/components/utils'
 
 interface OprIconProps {
   disabled: boolean

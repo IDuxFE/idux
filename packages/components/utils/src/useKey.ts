@@ -7,15 +7,18 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { type ComputedRef, computed, getCurrentInstance } from 'vue'
+import { type ComputedRef, computed } from 'vue'
 
 import { isString } from 'lodash-es'
 
-import { Logger, type VKey } from '@idux/cdk/utils'
+import { Logger, type VKey, useKey as _useKey } from '@idux/cdk/utils'
 
+/**
+ * @deprecated please use `import { useKey } from '@idux/cdk/utils'` instead
+ */
 export function useKey(): VKey {
-  const { vnode, uid } = getCurrentInstance()!
-  return vnode.key ?? uid
+  __DEV__ && Logger.warn('components/utils', "please use `import { useKey } from '@idux/cdk/utils'` instead")
+  return _useKey()
 }
 
 export type GetKeyFn = (data: any) => VKey

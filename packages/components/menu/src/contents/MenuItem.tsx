@@ -9,7 +9,7 @@ import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { isString } from 'lodash-es'
 
-import { useKey } from '@idux/components/utils'
+import { useKey } from '@idux/cdk/utils'
 
 import { coverIcon } from './Utils'
 import { usePaddingLeft } from '../composables/usePaddingLeft'

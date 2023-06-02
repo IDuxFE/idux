@@ -21,9 +21,9 @@ import {
 import { debounce } from 'lodash-es'
 
 import { type VKey, useState } from '@idux/cdk/utils'
+import { useKey } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
-import { useKey } from '@idux/components/utils'
 
 import InlineContent from './InlineContent'
 import Label from './Label'
