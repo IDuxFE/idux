@@ -106,7 +106,7 @@ function createDefaultDateConfig(): DateConfig<number | Date, Date> {
   const parse = (dateString: string, format: string) => parseDate(dateString, format, now(), { locale: locale.date })
   return {
     now,
-    weekStartsOn: () => locale.date.options?.weekStartsOn || 1,
+    weekStartsOn: () => locale.date.options?.weekStartsOn ?? 1,
     get: (date, type) => {
       switch (type) {
         case 'year':
