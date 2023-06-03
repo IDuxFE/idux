@@ -193,6 +193,7 @@ export default defineComponent({
               clearable
               clearIcon={clearIcon}
               clearVisible={!!value}
+              placeholder={props.searchPlaceholder}
               size="sm"
               suffix="search"
               value={value}
