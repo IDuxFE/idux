@@ -1,9 +1,11 @@
 /* eslint-disable import/order */
 import type { App } from 'vue'
 
+import { vClickOutside } from '@idux/cdk/click-outside'
 import { createGlobalConfig } from '@idux/components/config'
 import { IDUX_ICON_DEPENDENCIES, addIconDefinitions } from '@idux/components/icon'
-import { vClickOutside } from '@idux/cdk/click-outside'
+
+//import { enUS } from '@idux/components/locales'
 
 // 静态加载: `IDUX_ICON_DEPENDENCIES` 是 `@idux` 的部分组件默认所使用到图标，建议在此时静态引入。
 addIconDefinitions(IDUX_ICON_DEPENDENCIES)
@@ -14,6 +16,7 @@ const loadIconDynamically = (iconName: string) => {
 }
 
 const globalConfig = createGlobalConfig({
+  //locale: enUS,
   icon: { loadIconDynamically },
 })
 

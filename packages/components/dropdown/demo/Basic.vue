@@ -1,6 +1,6 @@
 <template>
-  <IxDropdown>
-    <a class="ix-dropdown-trigger">Hover me <IxIcon name="down"></IxIcon></a>
+  <IxDropdown v-model:visible="visible">
+    <a class="ix-dropdown-trigger">Hover me <IxIcon :name="visible ? 'up' : 'down'"></IxIcon></a>
     <template #overlay>
       <IxMenu :dataSource="dataSource" :selectable="false" @click="onClick"></IxMenu>
     </template>
@@ -8,7 +8,11 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+
 import { MenuClickOptions, MenuData } from '@idux/components/menu'
+
+const visible = ref(false)
 
 const dataSource: MenuData[] = [
   { type: 'item', key: 'one', label: 'One' },
