@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.1](https://github.com/danranVm/idux/compare/v1.6.0...v1.7.1) (2023-06-05)
+
+### Bug Fixes
+
+- **comp:config:** the weekStartsOn does not work in the enUS locale ([#1570](https://github.com/danranVm/idux/issues/1570)) ([0ce5cf4](https://github.com/danranVm/idux/commit/0ce5cf411fc0d27f45ec9a01374428a42e82e965))
+- **comp:empty:** the ids in svg should be only ([#1539](https://github.com/danranVm/idux/issues/1539)) ([40d25f5](https://github.com/danranVm/idux/commit/40d25f53e640d0f31507e19e034e9f552836b8a9))
+
 # [1.7.0](https://github.com/danranVm/idux/compare/v1.6.0...v1.7.0) (2023-05-29)
 
 ### Bug Fixes
