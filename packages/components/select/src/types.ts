@@ -80,6 +80,7 @@ export const selectProps = {
   readonly: { type: Boolean, default: false },
   searchable: { type: [Boolean, String] as PropType<boolean | 'overlay'>, default: false },
   searchFn: { type: [Boolean, Function] as PropType<boolean | SelectSearchFn>, default: true },
+  searchPlaceholder: { type: String, default: undefined },
   size: { type: String as PropType<FormSize>, default: undefined },
   status: String as PropType<ValidateStatus>,
   suffix: { type: String, default: undefined },
