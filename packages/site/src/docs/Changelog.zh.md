@@ -10,6 +10,14 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.7.1(2023-06-05)
+
+### Bug Fixes
+
+- **comp:config:** the weekStartsOn does not work in the enUS locale ([#1570](https://github.com/IDuxFE/idux/issues/1570)) ([0ce5cf4](https://github.com/IDuxFE/idux/commit/0ce5cf411fc0d27f45ec9a01374428a42e82e965))
+- **comp:form:** the disabled color using css variable ([#1572](https://github.com/IDuxFE/idux/issues/1572)) ([850a1db](https://github.com/IDuxFE/idux/commit/850a1db5219c4836c813a7ec0f790c9eca80bfbd))
+- **comp:select:** the placeholder in overlay can't setting ([#1571](https://github.com/IDuxFE/idux/issues/1571)) ([7388dc4](https://github.com/IDuxFE/idux/commit/7388dc4bf028d18d62744596e7ad2cec193b8e08))
+
 # 1.7.0(2023-05-29)
 
 ### Bug Fixes
