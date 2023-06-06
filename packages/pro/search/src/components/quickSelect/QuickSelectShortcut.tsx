@@ -21,7 +21,7 @@ export default defineComponent({
       mergedPrefixCls,
       convertStateToValue,
       createSearchState,
-      updateSearchState,
+      updateSearchValues,
       getSearchStatesByFieldKey,
       setActiveSegment,
     } = inject(proSearchContext)!
@@ -35,14 +35,14 @@ export default defineComponent({
       const state = createSearchState(props.searchField.key)
 
       if (state) {
-        updateSearchState(state.key)
+        updateSearchValues()
         callEmit(proSearchProps.onItemCreate, {
           ...convertStateToValue(state.key),
           nameInput: props.searchField.label,
         })
         setActiveSegment({
           itemKey: state.key,
-          name: state.segmentValues[0]?.name,
+          name: state.segmentStates[0]?.name,
         })
       }
     }

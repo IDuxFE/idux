@@ -63,16 +63,15 @@ const searchFields: SearchField[] = [
     type: 'custom',
     key: 'custom_input',
     label: 'IP Input',
+    operators: ['=', '!=', 'isEmpty'],
     fieldConfig: {
-      parse: input => {
-        return input.split(',').map(ip => ip.trim())
+      extends: 'input',
+      config: {
+        trim: false,
       },
-      format: value => {
-        if (!value) {
-          return ''
-        }
-
-        return (value as string[]).join(', ')
+      visible: states => {
+        const operatorState = states.find(state => state.name === 'operator')
+        return operatorState?.value !== 'isEmpty'
       },
     },
   },

@@ -26,8 +26,8 @@ export default defineComponent({
       createSearchState,
       getSearchStatesByFieldKey,
       updateSegmentValue,
+      updateSearchValues,
       tempSegmentInputRef,
-      updateSearchState,
     } = inject(proSearchContext)!
 
     const searchInputRef = ref<HTMLInputElement>()
@@ -56,12 +56,12 @@ export default defineComponent({
     const searchDataSegment = computed(() =>
       props.searchField.segments.find(seg => searchDataTypes.includes(seg.name as SearchDataTypes)),
     )
-    const searchDataSegmentValue = computed(() =>
-      searchState.value?.segmentValues.find(seg => searchDataTypes.includes(seg.name as SearchDataTypes)),
+    const searchDataSegmentState = computed(() =>
+      searchState.value?.segmentStates.find(seg => searchDataTypes.includes(seg.name as SearchDataTypes)),
     )
 
-    const [itemValue, setItemValue] = useState<unknown>(searchDataSegmentValue.value?.value)
-    watch(() => searchDataSegmentValue.value?.value, setItemValue)
+    const [itemValue, setItemValue] = useState<unknown>(searchDataSegmentState.value?.value)
+    watch(() => searchDataSegmentState.value?.value, setItemValue)
 
     const confirmValue = (value: unknown) => {
       let searchStateKey = searchState.value?.key
@@ -74,17 +74,17 @@ export default defineComponent({
           nameInput: props.searchField.label,
         })
       } else if (searchDataSegment.value?.name) {
-        updateSegmentValue(value, searchDataSegment.value.name, searchState.value.key)
+        updateSegmentValue(searchState.value.key, searchDataSegment.value.name, value)
       }
 
-      updateSearchState(searchStateKey!)
+      updateSearchValues()
     }
     const setValue = (value: unknown) => {
       setItemValue(value)
     }
     const ok = () => confirmValue(itemValue.value)
     const cancel = () => {
-      setItemValue(searchDataSegmentValue.value?.value)
+      setItemValue(searchDataSegmentState.value?.value)
     }
     const setOnKeyDown = () => {}
 
@@ -132,6 +132,7 @@ export default defineComponent({
               slots,
               input: searchInput.value,
               value: itemValue.value,
+              states: searchState.value?.segmentStates ?? [],
               renderLocation: 'quick-select-panel',
               ok,
               cancel,

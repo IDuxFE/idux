@@ -10,7 +10,7 @@
 import type { CascaderPanelData, SelectPanelData, TreeSelectPanelData } from './panels'
 import type { SearchItemError } from './searchItem'
 import type { SearchValue } from './searchValue'
-import type { InputFormater, InputParser, PanelRenderContext, Segment } from './segment'
+import type { InputFormater, InputParser, PanelRenderContext, Segment, SegmentState } from './segment'
 import type { MaybeArray, VKey } from '@idux/cdk/utils'
 import type { CascaderExpandTrigger, CascaderStrategy } from '@idux/components/cascader'
 import type { DatePanelProps, DateRangePanelProps } from '@idux/components/date-picker'
@@ -116,7 +116,7 @@ export type ResolvedCascaderSearchField = ResolvedSearchFieldBase<VKey | VKey[] 
 
 interface InputSearchFieldBase {
   type: 'input'
-  fieldConfig: {
+  fieldConfig?: {
     trim?: boolean
   }
 }
@@ -125,7 +125,7 @@ export type ResolvedInputSearchField = ResolvedSearchFieldBase<string> & InputSe
 
 interface DatePickerSearchFieldBase {
   type: 'datePicker'
-  fieldConfig: {
+  fieldConfig?: {
     format?: string
     type?: DatePanelProps['type']
     cellTooltip?: DatePanelProps['cellTooltip']
@@ -138,7 +138,7 @@ export type ResolvedDatePickerSearchField = ResolvedSearchFieldBase<Date> & Date
 
 interface DateRangePickerSearchFieldBase {
   type: 'dateRangePicker'
-  fieldConfig: {
+  fieldConfig?: {
     format?: string
     separator?: string
     type?: DateRangePanelProps['type']
@@ -150,16 +150,38 @@ interface DateRangePickerSearchFieldBase {
 export type DateRangePickerSearchField = SearchFieldBase<Date[]> & DateRangePickerSearchFieldBase
 export type ResolvedDateRangePickerSearchField = ResolvedSearchFieldBase<Date[]> & DateRangePickerSearchFieldBase
 
+interface CustomSegmentConfigBase {
+  name?: string
+  customPanel?: string | ((context: PanelRenderContext) => VNodeChild)
+  format: InputFormater
+  parse: InputParser
+  placeholder?: string
+  visible?: (states: SegmentState[]) => boolean
+}
+export type ExtendedSegmentBase = Omit<CustomSegmentConfigBase, 'format' | 'parse'> &
+  Partial<Pick<CustomSegmentConfigBase, 'format' | 'parse'>>
+
+export type ExtendedSegment = {
+  [T in InnerSegmentTypes]: ExtendedSegmentBase & { extends: T; config: FieldConfig<T> }
+}[InnerSegmentTypes]
+
+export type CustomSegmentConfig = CustomSegmentConfigBase | ExtendedSegment
+
 interface CustomSearchFieldBase {
   type: 'custom'
-  fieldConfig: {
-    customPanel?: string | ((context: PanelRenderContext) => VNodeChild)
-    format: InputFormater
-    parse: InputParser
-  }
+  fieldConfig: CustomSegmentConfig
 }
 export type CustomSearchField = SearchFieldBase & CustomSearchFieldBase
 export type ResolvedCustomSearchField = ResolvedSearchFieldBase & CustomSearchFieldBase
+
+interface MultiSegmentSearchFieldBase {
+  type: 'multiSegment'
+  fieldConfig: {
+    segments: CustomSegmentConfig[]
+  }
+}
+export type MultiSegmentSearchField = SearchFieldBase & MultiSegmentSearchFieldBase
+export type ResolvedMultiSegmentSearchField = ResolvedSearchFieldBase & MultiSegmentSearchFieldBase
 
 export type SearchField =
   | SelectSearchField
@@ -169,6 +191,7 @@ export type SearchField =
   | DatePickerSearchField
   | DateRangePickerSearchField
   | CustomSearchField
+  | MultiSegmentSearchField
 
 export type ResolvedSearchField =
   | ResolvedSelectSearchField
@@ -178,6 +201,26 @@ export type ResolvedSearchField =
   | ResolvedDatePickerSearchField
   | ResolvedDateRangePickerSearchField
   | ResolvedCustomSearchField
+  | ResolvedMultiSegmentSearchField
+
+export type FieldConfig<T extends SearchField['type']> = T extends 'input'
+  ? InputSearchFieldBase['fieldConfig']
+  : T extends 'select'
+  ? SelectSearchFieldBase['fieldConfig']
+  : T extends 'treeSelect'
+  ? TreeSelectSearchFieldBase['fieldConfig']
+  : T extends 'datePicker'
+  ? DatePickerSearchFieldBase['fieldConfig']
+  : T extends 'dateRangePicker'
+  ? DateRangePickerSearchFieldBase['fieldConfig']
+  : T extends 'cascader'
+  ? CascaderSearchFieldBase['fieldConfig']
+  : T extends 'custom'
+  ? CustomSearchFieldBase['fieldConfig']
+  : never
+
+export const innerSegmentTypes = ['select', 'treeSelect', 'cascader', 'input', 'datePicker', 'dateRangePicker'] as const
+export type InnerSegmentTypes = (typeof innerSegmentTypes)[number]
 
 export const searchDataTypes = [
   'select',

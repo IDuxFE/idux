@@ -6,9 +6,10 @@
  */
 
 import type { ProSearchProps, ResolvedSearchField, SearchField, Segment } from '../types'
+import type { VKey } from '@idux/cdk/utils'
 import type { DateConfig } from '@idux/components/config'
 
-import { type ComputedRef, type Slots, computed } from 'vue'
+import { type ComputedRef, computed } from 'vue'
 
 import { createCascaderSegment } from '../segments/CreateCascaderSegment'
 import { createDatePickerSegment } from '../segments/CreateDatePickerSegment'
@@ -19,48 +20,82 @@ import { createTreeSelectSegment } from '../segments/CreateTreeSelectSegment'
 import { createCustomSegment } from '../segments/createCustomSegment'
 import { createInputSegment } from '../segments/createInputSegment'
 
+export interface ResolvedSearchFieldsContext {
+  resolvedSearchFields: ComputedRef<ResolvedSearchField[]>
+  fieldKeyMap: ComputedRef<Map<VKey, ResolvedSearchField>>
+}
+
 export function useResolvedSearchFields(
   props: ProSearchProps,
-  slots: Slots,
   mergedPrefixCls: ComputedRef<string>,
   dateConfig: DateConfig,
-): ComputedRef<ResolvedSearchField[]> {
-  return computed(
+): ResolvedSearchFieldsContext {
+  const resolvedSearchFields = computed(
     () =>
       props.searchFields?.map(searchField => {
         return {
           ...searchField,
           segments: [
             createOperatorSegment(mergedPrefixCls.value, searchField),
-            createSearchItemContentSegment(mergedPrefixCls.value, searchField, slots, dateConfig),
+            ...createSearchItemContentSegments(mergedPrefixCls.value, searchField, dateConfig),
           ].filter(Boolean) as Segment[],
         }
       }) ?? [],
   )
+  const fieldKeyMap = computed(() => {
+    const map = new Map<VKey, ResolvedSearchField>()
+
+    resolvedSearchFields.value.forEach(field => {
+      map.set(field.key, field)
+    })
+
+    return map
+  })
+
+  return {
+    resolvedSearchFields,
+    fieldKeyMap,
+  }
 }
 
-function createSearchItemContentSegment(
-  prefixCls: string,
-  searchField: SearchField,
-  slots: Slots,
-  dateConfig: DateConfig,
-) {
-  switch (searchField.type) {
-    case 'select':
-      return createSelectSegment(prefixCls, searchField)
-    case 'treeSelect':
-      return createTreeSelectSegment(prefixCls, searchField)
-    case 'cascader':
-      return createCascaderSegment(prefixCls, searchField)
-    case 'input':
-      return createInputSegment(prefixCls, searchField)
-    case 'datePicker':
-      return createDatePickerSegment(prefixCls, searchField, dateConfig)
-    case 'dateRangePicker':
-      return createDateRangePickerSegment(prefixCls, searchField, dateConfig)
-    case 'custom':
-      return createCustomSegment(prefixCls, searchField, slots)
-    default:
-      return
+function createSearchItemContentSegments(prefixCls: string, searchField: SearchField, dateConfig: DateConfig) {
+  if (searchField.type === 'multiSegment') {
+    return searchField.fieldConfig.segments.map(segmentConfig =>
+      createCustomSegment(prefixCls, dateConfig, segmentConfig),
+    )
   }
+
+  const segment = (() => {
+    switch (searchField.type) {
+      case 'select':
+        return createSelectSegment(prefixCls, searchField.fieldConfig)
+      case 'treeSelect':
+        return createTreeSelectSegment(prefixCls, searchField.fieldConfig)
+      case 'cascader':
+        return createCascaderSegment(prefixCls, searchField.fieldConfig)
+      case 'input':
+        return createInputSegment(prefixCls, searchField.fieldConfig)
+      case 'datePicker':
+        return createDatePickerSegment(prefixCls, searchField.fieldConfig, dateConfig)
+      case 'dateRangePicker':
+        return createDateRangePickerSegment(prefixCls, searchField.fieldConfig, dateConfig)
+      case 'custom':
+        return createCustomSegment(prefixCls, dateConfig, searchField.fieldConfig)
+      default:
+        return
+    }
+  })()
+
+  /* eslint-disable indent */
+  return segment
+    ? ([
+        {
+          ...segment,
+          inputClassName: [...(segment.inputClassName ?? []), searchField.inputClassName],
+          containerClassName: [...(segment.containerClassName ?? []), searchField.containerClassName],
+          onVisibleChange: searchField.onPanelVisibleChange,
+        },
+      ] as Segment[])
+    : []
+  /* eslint-enable indent */
 }

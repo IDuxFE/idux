@@ -6,60 +6,60 @@
  */
 
 import type { SearchValueContext } from './useSearchValues'
-import type { DateConfig } from '@idux/components/config'
+import type { ProSearchProps, ResolvedSearchField, SearchValue, Segment, SegmentState } from '../types'
 
-import { type Ref, computed, ref, toRaw } from 'vue'
+import { type ComputedRef, type Ref, computed, ref, toRaw } from 'vue'
 
-import { isNil } from 'lodash-es'
+import { isEqual, isNil } from 'lodash-es'
 
-import { type VKey, callEmit } from '@idux/cdk/utils'
+import { type VKey, callEmit, convertArray } from '@idux/cdk/utils'
 
-import { SEARCH_STATE_ACTION, type SearchStateWatcherContext } from './useSearchStateWatcher'
-import {
-  type ProSearchProps,
-  type SearchDataTypes,
-  type SearchField,
-  type SearchValue,
-  searchDataTypes,
-} from '../types'
-
-export interface SegmentValue {
-  name: string
-  value: unknown
-}
 export interface SearchState {
   key: VKey
   name: string
-  index?: number
+  index: number
   fieldKey: VKey
-  segmentValues: SegmentValue[]
+  searchValue?: SearchValue
+  segmentStates: SegmentState[]
 }
 
 export interface SearchStateContext {
   searchStates: Ref<SearchState[]>
   initSearchStates: () => void
+  initSearchState: (key: VKey, segmentName?: string) => void
   createSearchState: (fieldKey: VKey, searchValue?: Omit<SearchValue, 'key'>) => SearchState | undefined
   getSearchStateByKey: (key: VKey) => SearchState | undefined
   getSearchStatesByFieldKey: (fieldKey: VKey) => SearchState[]
   validateSearchState: (key: VKey) => boolean | undefined
   convertStateToValue: (key: VKey) => SearchValue | undefined
-  updateSegmentValue: (value: unknown, name: string, key: VKey) => void
-  updateSearchState: (key: VKey) => void
+  updateSegmentInput: (key: VKey, name: string, input: string) => void
+  updateSegmentValue: (key: VKey, name: string, value: unknown) => void
+  updateSearchValues: () => void
+  isSegmentVisible: (key: VKey, name: string) => boolean
+  getVisibleSegmentStates: (key: VKey) => SegmentState[]
   removeSearchState: (key: VKey) => void
   clearSearchState: () => void
 }
 
 export function useSearchStates(
   props: ProSearchProps,
-  dateConfig: DateConfig,
+  fieldKeyMap: ComputedRef<Map<VKey, ResolvedSearchField>>,
   searchValueContext: SearchValueContext,
-  searchStateWatcherContext: SearchStateWatcherContext,
 ): SearchStateContext {
   const { searchValues, setSearchValues } = searchValueContext
-  const { compareSearchStates, notifySearchStateChange } = searchStateWatcherContext
   const getKey = createStateKeyGetter()
+  const { isMarked, getMarks, mark, unmark, clearMarks } = useSearchStateMarks()
 
   const searchStates = ref<SearchState[]>([])
+  const searchStateKeyMap = computed(() => {
+    const map = new Map<VKey, SearchState>()
+
+    searchStates.value.forEach(state => {
+      map.set(state.key, state)
+    })
+
+    return map
+  })
   const fieldKeyCountMap = computed(() => {
     const countMap = new Map<VKey, number>()
 
@@ -69,54 +69,114 @@ export function useSearchStates(
 
     return countMap
   })
+  const lastSearchStateIndex = computed(() => searchStates.value[searchStates.value.length - 1]?.index ?? -1)
 
   const findSearchField = (fieldKey?: VKey) => {
     if (isNil(fieldKey)) {
       return
     }
 
-    return props.searchFields?.find(field => field.key === fieldKey)
+    return fieldKeyMap.value.get(fieldKey)
   }
 
   function getSearchStateByKey(key: VKey) {
-    return searchStates.value.find(value => value.key === key)
+    return searchStateKeyMap.value.get(key)
   }
   function getSearchStatesByFieldKey(fieldKey: VKey) {
     return searchStates.value.filter(value => value.fieldKey === fieldKey)
   }
 
   function _convertStateToValue<V>(state: SearchState) {
-    const operatorSegment = state.segmentValues.find(value => value.name === 'operator')
-    const contentSegment = state.segmentValues.find(value => searchDataTypes.includes(value.name as SearchDataTypes))
+    let operator
+    const valueArr: unknown[] = []
+    state.segmentStates.forEach((segmentState, idx) => {
+      if (idx === 0 && segmentState.name === 'operator') {
+        operator = toRaw(segmentState.value)
+        return
+      }
+
+      valueArr.push(isSegmentVisible(state.key, segmentState.name) ? toRaw(segmentState.value) : undefined)
+    })
 
     return {
       key: state.fieldKey,
       name: findSearchField(state.fieldKey)?.label,
-      operator: operatorSegment?.value as string,
-      value: toRaw(contentSegment?.value),
+      operator,
+      value: valueArr.length === 1 ? valueArr[0] : valueArr,
     } as SearchValue<V>
   }
 
   function setSegmentValue(searchState: SearchState, name: string, value: unknown) {
-    let segmentValue = searchState.segmentValues.find(state => state.name === name)
-    let oldValue: unknown
+    const searchField = findSearchField(searchState.fieldKey)
+    const segment = searchField?.segments.find(seg => seg.name === name)
 
-    if (segmentValue) {
-      oldValue = segmentValue.value
-      segmentValue.value = value
-    } else {
-      segmentValue = { name, value }
-      searchState.segmentValues.push(segmentValue)
-      oldValue = undefined
+    if (!segment) {
+      return
     }
 
-    return [
-      {
-        name,
-        value,
-        oldValue,
-      },
-    ]
+    const segmentState = searchState.segmentStates.find(state => state.name === name)
+    const input = segment.format(value, searchState.segmentStates)
+
+    if (!segmentState) {
+      searchState.segmentStates.push({ name, input, value })
+    } else if (segmentState.value !== value) {
+      segmentState.value = value
+      segmentState.input = input
+    }
+  }
+  function setSegmentInput(searchState: SearchState, name: string, input: string) {
+    const searchField = findSearchField(searchState.fieldKey)
+    const segment = searchField?.segments.find(seg => seg.name === name)
+
+    if (!segment) {
+      return
+    }
+
+    const segmentState = searchState.segmentStates.find(state => state.name === name)
+    const value = segment.parse(input, searchState.segmentStates)
+
+    if (segmentState) {
+      segmentState.value = value
+      segmentState.input = input
+    } else {
+      searchState.segmentStates.push({ name, input, value })
+    }
+  }
+  function _checkSegmentVisible(segment: Segment, searchState: SearchState) {
+    return segment.visible ? segment.visible(searchState.segmentStates) : true
+  }
+  function isSegmentVisible(key: VKey, name: string) {
+    const searchState = getSearchStateByKey(key)
+
+    if (!searchState) {
+      return false
+    }
+
+    const searchField = findSearchField(searchState.fieldKey)!
+    const segment = searchField.segments.find(seg => seg.name === name)
+
+    if (!segment) {
+      return false
+    }
+
+    return _checkSegmentVisible(segment, searchState)
+  }
+  function _getVisibleSegmentStates(searchState: SearchState) {
+    const searchField = findSearchField(searchState?.fieldKey)
+
+    if (!searchField) {
+      return []
+    }
+
+    return searchState.segmentStates.filter(segmentState => {
+      const segment = searchField.segments.find(seg => seg.name === segmentState.name)
+
+      return segment && _checkSegmentVisible(segment, searchState)
+    })
+  }
+  function getVisibleSegmentStates(key: VKey) {
+    const searchState = getSearchStateByKey(key)
+    return searchState ? _getVisibleSegmentStates(searchState) : []
   }
 
   function checkSearchStateValid(searchState: SearchState, dataKeyCountMap: Map<VKey, number>) {
@@ -124,9 +184,11 @@ export function useSearchStates(
       return false
     }
 
+    const visibleSegments = _getVisibleSegmentStates(searchState)
+
     // all valid segmentValue are not allowd to be undefined or null
     // when current value isn't valid, return immediatly
-    if (!searchState.segmentValues.every(segmentValue => !isNil(segmentValue.value))) {
+    if (visibleSegments.some(state => isNil(state.value))) {
       return false
     }
 
@@ -154,9 +216,7 @@ export function useSearchStates(
 
   const initSearchStates = () => {
     const dataKeyCountMap = new Map<VKey, number>()
-
-    const oldSearchStates = searchStates.value
-    searchStates.value = (
+    const newSearchStates = (
       searchValues.value?.map((searchValue, index) => {
         const fieldKey = searchValue.key
         const searchField = findSearchField(fieldKey)
@@ -164,21 +224,49 @@ export function useSearchStates(
           return
         }
 
-        const segmentValues = generateSegmentValues(searchField, searchValue, dateConfig)
+        const segmentStates = generateSegmentStates(searchField, searchValue)
         const count = dataKeyCountMap.has(fieldKey) ? dataKeyCountMap.get(fieldKey)! : 0
         const key = getKey(fieldKey, count)
 
-        const searchState = { key, index, fieldKey, segmentValues } as SearchState
-        // if (!checkSearchStateValid(searchState, dataKeyCountMap)) {
-        //   return
-        // }
+        const searchState = { key, index, fieldKey, searchValue, segmentStates } as SearchState
+        if (!checkSearchStateValid(searchState, dataKeyCountMap)) {
+          return
+        }
 
         dataKeyCountMap.set(fieldKey, count + 1)
         return searchState
       }) ?? []
     ).filter(Boolean) as SearchState[]
 
-    compareSearchStates(searchStates.value, oldSearchStates)
+    const lastIndex = newSearchStates[newSearchStates.length - 1]?.index ?? -1
+
+    const createdStates = getMarks()
+      .map(({ key, mark }) => mark === 'created' && getSearchStateByKey(key))
+      .filter(Boolean)
+      .map((state, index) => ({
+        ...state,
+        index: lastIndex + index + 1,
+      })) as SearchState[]
+
+    searchStates.value = [...newSearchStates, ...createdStates]
+  }
+
+  const initSearchState = (key: VKey, segmentName?: string) => {
+    const searchState = getSearchStateByKey(key)
+    const searchField = findSearchField(searchState?.fieldKey)
+    if (!searchState || !searchField) {
+      return
+    }
+
+    const searchValue = !isNil(searchState.index) ? searchValues.value?.[searchState.index] : undefined
+    const segmentStates = generateSegmentStates(searchField, searchValue)
+
+    if (!segmentName) {
+      searchState.segmentStates = generateSegmentStates(searchField, searchValue)
+    } else {
+      const idx = searchState.segmentStates.findIndex(state => state.name === segmentName)
+      searchState.segmentStates[idx] = segmentStates[idx]
+    }
   }
 
   const createSearchState = (fieldKey: VKey, searchValue?: Omit<SearchValue, 'key'>) => {
@@ -192,20 +280,21 @@ export function useSearchStates(
     }
 
     const newKey = getKey(fieldKey, fieldKeyCountMap.value.get(fieldKey) ?? 0)
+
     const newSearchState: SearchState = {
       key: newKey,
       name: searchField.label,
+      index: lastSearchStateIndex.value + 1,
       fieldKey: fieldKey,
-      segmentValues: generateSegmentValues(searchField, searchValue, dateConfig),
+      segmentStates: generateSegmentStates(searchField, searchValue),
     }
     searchStates.value.push(newSearchState)
-
-    notifySearchStateChange(newKey, SEARCH_STATE_ACTION.CREATED, { searchState: newSearchState })
+    mark(newKey, 'created')
 
     return newSearchState
   }
 
-  function updateSearchValue() {
+  function updateSearchValues() {
     const newSearchValues = searchStates.value
       .map(state => {
         // filters invalid searchValues
@@ -213,16 +302,24 @@ export function useSearchStates(
           return
         }
 
+        if (!isMarked(state.key) || !validateSearchState(state.key)) {
+          return state.searchValue
+        }
+
+        unmark(state.key)
         return _convertStateToValue(state)
       })
       .filter(Boolean) as SearchValue[]
 
-    const oldeSearchValue = toRaw(searchValues.value)
-    setSearchValues(newSearchValues)
-    callEmit(props.onChange, newSearchValues, oldeSearchValue)
+    const oldeSearchValue = searchValues.value
+
+    if (!compareSearchValues(newSearchValues, oldeSearchValue)) {
+      setSearchValues(newSearchValues)
+      callEmit(props.onChange, toRaw(newSearchValues), toRaw(oldeSearchValue))
+    }
   }
 
-  const updateSegmentValue = (value: unknown, name: string, key: VKey) => {
+  const updateSegmentValue = (key: VKey, name: string, value: unknown) => {
     if (props.disabled) {
       return
     }
@@ -232,21 +329,21 @@ export function useSearchStates(
       return
     }
 
-    const updatedSegments = setSegmentValue(searchState, name, value)
-    notifySearchStateChange(key, SEARCH_STATE_ACTION.UPDATED, { searchState, updatedSegments })
+    setSegmentValue(searchState, name, value)
+    mark(key, 'updated')
   }
-  const updateSearchState = (key: VKey) => {
+  const updateSegmentInput = (key: VKey, name: string, input: string) => {
     if (props.disabled) {
       return
     }
 
     const searchState = getSearchStateByKey(key)
-
     if (!searchState) {
       return
     }
 
-    updateSearchValue()
+    setSegmentInput(searchState, name, input)
+    mark(key, 'updated')
   }
   const removeSearchState = (key: VKey) => {
     if (props.disabled) {
@@ -260,21 +357,22 @@ export function useSearchStates(
     }
 
     const searchValue = _convertStateToValue(searchStates.value[stateIndex])
-    const removedSearchState = searchStates.value[stateIndex]
     searchStates.value.splice(stateIndex, 1)
-    notifySearchStateChange(removedSearchState.key, SEARCH_STATE_ACTION.REMOVED, { searchState: removedSearchState })
-    callEmit(props.onItemRemove, searchValue!)
+    unmark(key)
 
-    updateSearchValue()
+    updateSearchValues()
+
+    callEmit(props.onItemRemove, searchValue!)
   }
   const clearSearchState = () => {
     if (props.disabled) {
       return
     }
 
-    compareSearchStates([], searchStates.value)
     searchStates.value = []
-    updateSearchValue()
+    clearMarks()
+
+    updateSearchValues()
 
     callEmit(props.onClear)
   }
@@ -282,13 +380,17 @@ export function useSearchStates(
   return {
     searchStates: searchStates,
     initSearchStates,
+    initSearchState,
     createSearchState,
     getSearchStateByKey,
     getSearchStatesByFieldKey,
     validateSearchState,
     convertStateToValue,
+    updateSegmentInput,
     updateSegmentValue,
-    updateSearchState,
+    isSegmentVisible,
+    getVisibleSegmentStates,
+    updateSearchValues,
     removeSearchState,
     clearSearchState,
   }
@@ -309,23 +411,76 @@ function createStateKeyGetter() {
   }
 }
 
-function generateSegmentValues(
-  searchField: SearchField,
+function generateSegmentStates(
+  searchField: ResolvedSearchField,
   searchValue?: Omit<SearchValue, 'key'>,
-  dateConfig?: DateConfig,
-): SegmentValue[] {
+): SegmentState[] {
+  const segments = searchField.segments
   const hasOperators = searchField.operators && searchField.operators.length > 0
+  const operator = searchValue?.operator ?? searchField.operators?.find(op => op === searchField.defaultOperator)
+  const value = searchValue?.value ?? searchField.defaultValue
+  const valueArr = segments.length > (hasOperators ? 2 : 1) ? convertArray(value) : [value]
+  const segmentValues = hasOperators ? [operator, ...valueArr] : valueArr
 
-  /* eslint-disable indent */
-  return [
-    hasOperators && {
-      name: 'operator',
-      value: searchValue?.operator ?? searchField.operators?.find(op => op === searchField.defaultOperator),
-    },
-    dateConfig && {
-      name: searchField.type,
-      value: searchValue?.value ?? searchField.defaultValue,
-    },
-  ].filter(Boolean) as SegmentValue[]
-  /* eslint-enable indent */
+  return segments.map((segment, idx) => ({
+    name: segment.name,
+    value: segmentValues[idx],
+    input: segment.format(segmentValues[idx], []),
+  }))
+}
+
+function compareSearchValues(newSearchValues: SearchValue[] | undefined, oldSearchValues: SearchValue[] | undefined) {
+  if (!newSearchValues && !oldSearchValues) {
+    return true
+  }
+
+  return (
+    newSearchValues?.length === oldSearchValues?.length &&
+    newSearchValues?.every((value, idx) => {
+      const oldValue = oldSearchValues?.[idx]
+
+      return (
+        oldValue &&
+        value.key === oldValue.key &&
+        value.operator === oldValue.operator &&
+        isEqual(value.value, oldValue.value)
+      )
+    })
+  )
+}
+
+type StateMark = 'created' | 'updated'
+
+function useSearchStateMarks(): {
+  getMarks: () => { key: VKey; mark: StateMark }[]
+  getMark: (key: VKey) => StateMark | undefined
+  isMarked: (key: VKey) => boolean
+  mark: (key: VKey, stateMark: StateMark) => void
+  unmark: (key: VKey) => void
+  clearMarks: () => void
+  /* eslint-disable-next-line indent */
+} {
+  const searchStateMarks = new Map<VKey, StateMark>()
+
+  const isMarked = (key: VKey) => searchStateMarks.has(key)
+  const getMarks = () => Array.from(searchStateMarks.entries()).map(([key, mark]) => ({ key, mark }))
+  const getMark = (key: VKey) => searchStateMarks.get(key)
+  const mark = (key: VKey, stateMark: StateMark) => {
+    searchStateMarks.set(key, stateMark)
+  }
+  const unmark = (key: VKey) => {
+    searchStateMarks.delete(key)
+  }
+  const clearMarks = () => {
+    searchStateMarks.clear()
+  }
+
+  return {
+    isMarked,
+    getMarks,
+    getMark,
+    mark,
+    unmark,
+    clearMarks,
+  }
 }

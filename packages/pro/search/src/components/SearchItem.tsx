@@ -49,7 +49,7 @@ export default defineComponent({
 
     const segmentStateContext = useSegmentStates(props, proSearchProps, context, isActive)
     const segmentOverlayUpdateContext = useSegmentOverlayUpdate()
-    const { segmentStates } = segmentStateContext
+    const { searchState, segmentStates } = segmentStateContext
 
     const classes = computed(() => {
       const prefixCls = itemPrefixCls.value
@@ -74,6 +74,7 @@ export default defineComponent({
           input: segmentState?.input,
           value: segmentState?.value,
           selectionStart: segmentState?.selectionStart,
+          segmentVisible: segment.visible ? segment.visible(searchState.value?.segmentStates ?? []) : true,
         }
       })
     })
@@ -148,6 +149,7 @@ export default defineComponent({
                 <Segment
                   key={segment.name}
                   v-slots={slots}
+                  v-show={segment.segmentVisible}
                   itemKey={props.searchItem!.key}
                   input={segment.input}
                   value={segment.value}

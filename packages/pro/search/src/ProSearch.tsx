@@ -36,9 +36,7 @@ import { useFocusedState } from './composables/useFocusedState'
 import { useResolvedSearchFields } from './composables/useResolvedSearchFields'
 import { useSearchItems } from './composables/useSearchItem'
 import { useSearchItemErrors } from './composables/useSearchItemErrors'
-import { useSearchStateWatcher } from './composables/useSearchStateWatcher'
 import { useSearchStates } from './composables/useSearchStates'
-import { useSearchTrigger } from './composables/useSearchTrigger'
 import { useSearchValues } from './composables/useSearchValues'
 import { proSearchContext } from './token'
 import { type SearchItem, proSearchProps } from './types'
@@ -67,16 +65,22 @@ export default defineComponent({
 
     const searchValueContext = useSearchValues(props)
     const { searchValues, searchValueEmpty } = searchValueContext
-    const searchStateWatcherContext = useSearchStateWatcher()
-    const searchStateContext = useSearchStates(props, dateConfig, searchValueContext, searchStateWatcherContext)
+    const resolvedSearchFieldsContext = useResolvedSearchFields(props, mergedPrefixCls, dateConfig)
+    const { fieldKeyMap } = resolvedSearchFieldsContext
+    const searchStateContext = useSearchStates(props, fieldKeyMap, searchValueContext)
+    const { initSearchStates, clearSearchState, updateSearchValues, isSegmentVisible } = searchStateContext
 
-    const resolvedSearchFields = useResolvedSearchFields(props, slots, mergedPrefixCls, dateConfig)
     const errors = useSearchItemErrors(props, searchValues)
-    const searchItems = useSearchItems(resolvedSearchFields, searchStateContext.searchStates, errors)
-    const searchTriggerContext = useSearchTrigger()
+    const searchItems = useSearchItems(fieldKeyMap, searchStateContext.searchStates, errors)
     const elementWidth = useElementWidthMeasure(elementRef)
 
-    const activeSegmentContext = useActiveSegment(props, tempSegmentInputRef, searchItems, enableQuickSelect)
+    const activeSegmentContext = useActiveSegment(
+      props,
+      tempSegmentInputRef,
+      searchItems,
+      enableQuickSelect,
+      isSegmentVisible,
+    )
     const commonOverlayProps = useCommonOverlayProps(props, config, componentCommon, mergedPrefixCls)
     const focusStateContext = useFocusedState(props)
     const { focused, bindMonitor, bindOverlayMonitor, focusVia, blurVia } = focusStateContext
@@ -95,9 +99,7 @@ export default defineComponent({
     useControl(elementRef, activeSegmentContext, searchStateContext, focusStateContext)
 
     const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(componentCommon, 'overlayZIndex'), focused)
-
-    const { initSearchStates, clearSearchState } = searchStateContext
-    const { isActive, overlayOpened, quickSelectActive } = activeSegmentContext
+    const { isActive, overlayOpened, quickSelectActive, setTempActive, setOverlayOpened } = activeSegmentContext
 
     watch(
       () => props.value,
@@ -130,13 +132,12 @@ export default defineComponent({
 
     expose({ focus, blur })
 
-    const { onSearchTrigger, triggerSearch } = searchTriggerContext
-    onSearchTrigger(() => {
-      callEmit(props.onSearch, searchValues.value)
-    }, 'post')
-
     const handleSearchBtnClick = () => {
-      triggerSearch()
+      updateSearchValues()
+      callEmit(props.onSearch, searchValues.value)
+
+      setTempActive()
+      setOverlayOpened(false)
     }
     const handleClearBtnClick = () => {
       clearSearchState()
@@ -158,13 +159,11 @@ export default defineComponent({
       mergedPrefixCls,
       enableQuickSelect,
       commonOverlayProps,
-      resolvedSearchFields,
 
       ...focusStateContext,
       ...searchStateContext,
-      ...searchStateWatcherContext,
+      ...resolvedSearchFieldsContext,
       ...activeSegmentContext,
-      ...searchTriggerContext,
     })
 
     return () => {

@@ -8,8 +8,14 @@
 import type { ExtractInnerPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, PropType, Slots, VNodeChild } from 'vue'
 
-export type InputFormater<V = unknown> = (value: V) => string
-export type InputParser<V = unknown> = (input: string) => V | null
+export interface SegmentState {
+  name: string
+  input: string
+  value: unknown
+}
+
+export type InputFormater<V = unknown> = (value: V, states: SegmentState[]) => string
+export type InputParser<V = unknown> = (input: string, states: SegmentState[]) => V | null
 
 export type RenderLocation = 'individual' | 'quick-select-panel'
 
@@ -17,6 +23,7 @@ export interface PanelRenderContext<V = unknown> {
   slots: Slots
   input: string
   value: V
+  states: SegmentState[]
   renderLocation: RenderLocation
   ok: () => void
   cancel: () => void
@@ -29,6 +36,7 @@ export interface Segment<V = unknown> {
   inputClassName?: string | (string | undefined)[]
   containerClassName?: string | (string | undefined)[]
   placeholder?: string
+  visible?: (states: SegmentState[]) => boolean
   format: InputFormater<V>
   parse: InputParser<V>
   panelRenderer?: (context: PanelRenderContext<V>) => VNodeChild

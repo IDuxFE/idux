@@ -32,7 +32,7 @@ export default defineComponent({
       setActiveSegment,
       createSearchState,
       convertStateToValue,
-      updateSearchState,
+      updateSearchValues,
     } = context
 
     const overlayRef = ref<ɵOverlayInstance>()
@@ -81,10 +81,10 @@ export default defineComponent({
         return
       }
 
-      updateSearchState(searchState.key)
+      updateSearchValues()
       setActiveSegment({
         itemKey: searchState.key,
-        name: searchState.segmentValues[0].name,
+        name: searchState.segmentStates[0].name,
       })
 
       callEmit(proSearchProps.onItemCreate, {

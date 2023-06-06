@@ -22,15 +22,10 @@ const defaultType = 'date'
 
 export function createDatePickerSegment(
   prefixCls: string,
-  searchField: DatePickerSearchField,
+  config: DatePickerSearchField['fieldConfig'],
   dateConfig: DateConfig,
 ): Segment<Date | undefined> {
-  const {
-    fieldConfig: { type, cellTooltip, disabledDate, timePanelOptions },
-    inputClassName,
-    containerClassName,
-    onPanelVisibleChange,
-  } = searchField
+  const { type, cellTooltip, disabledDate, timePanelOptions } = config ?? {}
 
   const panelRenderer = (context: PanelRenderContext<Date | undefined>) => {
     const { value, renderLocation, setValue, cancel, ok } = context
@@ -59,30 +54,32 @@ export function createDatePickerSegment(
   }
 
   return {
-    name: searchField.type,
-    inputClassName: [inputClassName, `${prefixCls}-date-picker-segment-input`],
-    containerClassName: [containerClassName, `${prefixCls}-date-picker-segment-container`],
-    placeholder: searchField.placeholder,
-    parse: input => parseInput(input, dateConfig, searchField),
-    format: value => formatValue(value, dateConfig, searchField),
+    name: 'datePicker',
+    inputClassName: [`${prefixCls}-date-picker-segment-input`],
+    containerClassName: [`${prefixCls}-date-picker-segment-container`],
+    parse: input => parseInput(input, dateConfig, config),
+    format: value => formatValue(value, dateConfig, config),
     panelRenderer,
-    onVisibleChange: onPanelVisibleChange,
   }
 }
 
-function parseInput(input: string, dateConfig: DateConfig, searchField: DatePickerSearchField): Date | undefined {
-  const {
-    fieldConfig: { format, type },
-  } = searchField
+function parseInput(
+  input: string,
+  dateConfig: DateConfig,
+  config: DatePickerSearchField['fieldConfig'],
+): Date | undefined {
+  const { format, type } = config ?? {}
   const _format = format ?? defaultFormat[type ?? defaultType]
   const date = dateConfig.parse(input, _format)
   return dateConfig.isValid(date) ? date : undefined
 }
 
-function formatValue(value: Date | undefined, dateConfig: DateConfig, searchField: DatePickerSearchField): string {
-  const {
-    fieldConfig: { format, type },
-  } = searchField
+function formatValue(
+  value: Date | undefined,
+  dateConfig: DateConfig,
+  config: DatePickerSearchField['fieldConfig'],
+): string {
+  const { format, type } = config ?? {}
   const _format = format ?? defaultFormat[type ?? defaultType]
   return value ? dateConfig.format(value, _format) : ''
 }
