@@ -10,9 +10,6 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } 
 import type { ButtonProps } from '@idux/components/button'
 import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeProps } from 'vue'
 
-// 挑出部分必填的属性
-type PickRequire<T, U extends keyof T> = Pick<T, Exclude<keyof T, U>> & Required<Pick<T, U>>
-
 export interface NotificationButtonProps<K = VKey> extends ButtonProps {
   key?: K
   text?: string | VNode
@@ -69,8 +66,8 @@ export type NotificationComponent = DefineComponent<
 export type NotificationInstance = InstanceType<DefineComponent<NotificationProps>>
 
 // 通过useNotification的配置
-export interface NotificationOptions<K = VKey> extends PickRequire<NotificationProps, 'title' | 'content'> {
-  key: K
+export interface NotificationOptions<K = VKey> extends NotificationProps {
+  key?: K
   contentProps?: Record<string, unknown> | VNodeProps
   onDestroy?: (key: K) => void
 }

@@ -124,6 +124,7 @@ export default defineComponent({
       }
       evt.stopPropagation()
       callEmit(props.onClear, evt)
+      mergedSearchable.value && callEmit(props.onSearch, '')
     }
 
     provide(selectorToken, {

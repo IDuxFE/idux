@@ -185,7 +185,10 @@ export default defineComponent({
           setInputValue(value)
           props.searchable && callEmit(props.onSearch, value)
         }
-        const handleSearchClear = () => setInputValue('')
+        const handleSearchClear = () => {
+          setInputValue('')
+          props.searchable && callEmit(props.onSearch, '')
+        }
 
         children.unshift(
           <div class={`${mergedPrefixCls.value}-overlay-search-wrapper`}>
