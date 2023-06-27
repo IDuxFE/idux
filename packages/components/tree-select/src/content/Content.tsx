@@ -128,7 +128,10 @@ export default defineComponent({
       setInputValue(value)
       props.searchable && callEmit(props.onSearch, value)
     }
-    const handleClear = () => setInputValue('')
+    const handleClear = () => {
+      setInputValue('')
+      props.searchable && callEmit(props.onSearch, '')
+    }
 
     return () => {
       const {

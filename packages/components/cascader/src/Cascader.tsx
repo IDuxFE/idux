@@ -96,7 +96,6 @@ export default defineComponent({
       selectedStateContext.handleSelect(key)
     }
     const handleClear = (evt: MouseEvent) => {
-      evt.stopPropagation()
       setValue([])
       callEmit(props.onClear, evt)
     }
@@ -157,7 +156,10 @@ export default defineComponent({
       setInputValue(value)
       props.searchable && callEmit(props.onSearch, value)
     }
-    const handleSearchClear = () => setInputValue('')
+    const handleSearchClear = () => {
+      setInputValue('')
+      props.searchable && callEmit(props.onSearch, '')
+    }
     const renderContent = () => {
       const { searchable, overlayRender } = props
       const searchValue = inputValue.value
