@@ -8,8 +8,8 @@
 import { computed, defineComponent, inject } from 'vue'
 
 import { ɵEmpty } from '@idux/components/_private/empty'
-import { IxTable } from '@idux/components/table'
 import { TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN } from '@idux/components/transfer'
+import { IxProTable } from '@idux/pro/table'
 
 import { useTransferTableProps } from '../composables/useTransferTableProps'
 import { proTransferContext } from '../token'
@@ -43,7 +43,7 @@ export default defineComponent({
 
       if (dataSource && dataSource.length > 0) {
         const contentRef = props.isSource ? sourceContentRef : targetContentRef
-        return <IxTable ref={contentRef} v-slots={slots} class={prefixCls} {...tableProps.value} />
+        return <IxProTable ref={contentRef} v-slots={slots} class={prefixCls} {...tableProps.value} />
       }
 
       return (
