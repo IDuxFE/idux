@@ -293,15 +293,15 @@
 
     &-drop-parent,
     &-drop-inside {
-      box-shadow: 0 0 0 @tree-box-shadow-size @tree-box-shadow-color;
+      box-shadow: 0 0 0 @tree-box-shadow-size @tree-box-shadow-color inset;
     }
 
     &-drop-before .@{tree-node-prefix}-content {
-      box-shadow: 0 -@tree-box-shadow-size 0 0 @tree-box-shadow-color;
+      box-shadow: 0 @tree-box-shadow-size 0 0 @tree-box-shadow-color inset;
     }
 
     &-drop-after .@{tree-node-prefix}-content {
-      box-shadow: 0 @tree-box-shadow-size 0 0 @tree-box-shadow-color;
+      box-shadow: 0 -@tree-box-shadow-size 0 0 @tree-box-shadow-color inset;
     }
   }
 }
