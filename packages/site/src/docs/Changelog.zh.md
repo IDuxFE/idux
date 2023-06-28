@@ -10,6 +10,17 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.7.2(2023-06-28)
+
+### Bug Fixes
+
+- **comp:image:** 默认图标未正确加载 ([#1581](https://github.com/IDuxFE/idux/issues/1581)) ([cc81151](https://github.com/IDuxFE/idux/commit/cc811518ca04948600d16ea486e1dfa33dd5b8b8)), closes [#1580](https://github.com/IDuxFE/idux/issues/1580)
+- **comp:modal:** 按钮的默认大小应该为 'md' ([#1582](https://github.com/IDuxFE/idux/issues/1582)) ([00c7c6c](https://github.com/IDuxFE/idux/commit/00c7c6c7c1b9da47648112ce63b5f210bef45946))
+- **comp:select:** `onSearch` 应该在 input 被清除时调用 ([#1577](https://github.com/IDuxFE/idux/issues/1577)) ([ab4e4b0](https://github.com/IDuxFE/idux/commit/ab4e4b0981b1054197878f18c34543be19073a62))
+- **comp:style:** watermark 的样式没有被正确引入 ([#1575](https://github.com/IDuxFE/idux/issues/1575)) ([d8b9aed](https://github.com/IDuxFE/idux/commit/d8b9aed807c5d86ea6feefd6460e8895bd4852ff))
+- **comp:tree:** 拖拽时的阴影不正确 ([#1584](https://github.com/IDuxFE/idux/issues/1584)) ([5b73101](https://github.com/IDuxFE/idux/commit/5b73101c5375f855a34f877f79c9941d38052e75))
+- **comp:tree:** 降低样式优先级，提高浏览器兼容性 ([#1585](https://github.com/IDuxFE/idux/issues/1585)) ([9949124](https://github.com/IDuxFE/idux/commit/9949124a82f45fcdcd91b9b1bbe2d37a6945111b))
+
 ## 1.7.1(2023-06-05)
 
 ### Bug Fixes
