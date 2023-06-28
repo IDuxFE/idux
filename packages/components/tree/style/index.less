@@ -292,16 +292,30 @@
     }
 
     &-drop-parent,
-    &-drop-inside {
-      box-shadow: 0 0 0 @tree-box-shadow-size @tree-box-shadow-color inset;
-    }
-
-    &-drop-before .@{tree-node-prefix}-content {
-      box-shadow: 0 @tree-box-shadow-size 0 0 @tree-box-shadow-color inset;
-    }
-
+    &-drop-inside,
+    &-drop-before .@{tree-node-prefix}-content,
     &-drop-after .@{tree-node-prefix}-content {
-      box-shadow: 0 -@tree-box-shadow-size 0 0 @tree-box-shadow-color inset;
+      position: relative;
+      &::after {
+        content: ' ';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+      }
+    }
+    
+    &-drop-parent::after,
+    &-drop-inside::after {
+      border: @tree-box-shadow-size solid @tree-box-shadow-color;
+    }
+
+    &-drop-before .@{tree-node-prefix}-content::after {
+      border-top: @tree-box-shadow-size solid @tree-box-shadow-color;
+    }
+    &-drop-after .@{tree-node-prefix}-content::after {
+      border-bottom: @tree-box-shadow-size solid @tree-box-shadow-color;
     }
   }
 }
