@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.2](https://github.com/IDuxFE/idux/compare/v1.6.0...v1.7.2) (2023-06-28)
+
+### Bug Fixes
+
+- **comp:\*:** overlay animating cls should be set only at leaving ([#1552](https://github.com/IDuxFE/idux/issues/1552)) ([c0d2e9c](https://github.com/IDuxFE/idux/commit/c0d2e9c6d87ba072536b6709b45be545fb5c43bb))
+- **comp:button:** fix icon not vertically centered ([#1542](https://github.com/IDuxFE/idux/issues/1542)) ([cf269a5](https://github.com/IDuxFE/idux/commit/cf269a51c55b2b35d60005efcf8c17f0b45bd849))
+- **comp:config:** the weekStartsOn does not work in the enUS locale ([#1570](https://github.com/IDuxFE/idux/issues/1570)) ([0ce5cf4](https://github.com/IDuxFE/idux/commit/0ce5cf411fc0d27f45ec9a01374428a42e82e965))
+- **comp:empty:** the ids in svg should be only ([#1539](https://github.com/IDuxFE/idux/issues/1539)) ([40d25f5](https://github.com/IDuxFE/idux/commit/40d25f53e640d0f31507e19e034e9f552836b8a9))
+- **comp:form:** the disabled color using css variable ([#1572](https://github.com/IDuxFE/idux/issues/1572)) ([850a1db](https://github.com/IDuxFE/idux/commit/850a1db5219c4836c813a7ec0f790c9eca80bfbd))
+- **comp:image:** fix comp:image issue: icon [file-image] load failed ([#1581](https://github.com/IDuxFE/idux/issues/1581)) ([cc81151](https://github.com/IDuxFE/idux/commit/cc811518ca04948600d16ea486e1dfa33dd5b8b8)), closes [#1580](https://github.com/IDuxFE/idux/issues/1580)
+- **comp:modal:** the size of button should be 'md' ([#1582](https://github.com/IDuxFE/idux/issues/1582)) ([00c7c6c](https://github.com/IDuxFE/idux/commit/00c7c6c7c1b9da47648112ce63b5f210bef45946))
+- **comp:popconfirm:** sync design ([#1565](https://github.com/IDuxFE/idux/issues/1565)) ([08e1821](https://github.com/IDuxFE/idux/commit/08e182129f041c3cc61fef4147b4db46db3835a8))
+- **comp:select:** the onSearch should be called when the intput is clear ([#1577](https://github.com/IDuxFE/idux/issues/1577)) ([ab4e4b0](https://github.com/IDuxFE/idux/commit/ab4e4b0981b1054197878f18c34543be19073a62))
+- **comp:select:** the placeholder in overlay can't setting ([#1571](https://github.com/IDuxFE/idux/issues/1571)) ([7388dc4](https://github.com/IDuxFE/idux/commit/7388dc4bf028d18d62744596e7ad2cec193b8e08))
+- **comp:style:** lost the style file of the watermark component in seer.less ([#1575](https://github.com/IDuxFE/idux/issues/1575)) ([d8b9aed](https://github.com/IDuxFE/idux/commit/d8b9aed807c5d86ea6feefd6460e8895bd4852ff))
+- **comp:table:** fixed column background color error is selected ([#1543](https://github.com/IDuxFE/idux/issues/1543)) ([7448e38](https://github.com/IDuxFE/idux/commit/7448e38fd71de06ea4a2ac494091f1c9e681545f))
+- **comp:tabs:** incorrect offset of the selected bar with dynamic tabs ([#1563](https://github.com/IDuxFE/idux/issues/1563)) ([15be909](https://github.com/IDuxFE/idux/commit/15be90944959d517027b987fe85da1ef22372c73))
+- **comp:tabs:** more pane should hidden when empty data ([#1547](https://github.com/IDuxFE/idux/issues/1547)) ([13013b3](https://github.com/IDuxFE/idux/commit/13013b369daff7c7e7b82c125175c75c02f58fe2))
+- **comp:tooltip:** visible is not work when destroyOnHide is true ([#1550](https://github.com/IDuxFE/idux/issues/1550)) ([05fdb30](https://github.com/IDuxFE/idux/commit/05fdb3054ac21e217f90bac35aa097cab508730b))
+- **comp:tree-select:** async loading is invalid when getKey is set ([#1541](https://github.com/IDuxFE/idux/issues/1541)) ([6cd6155](https://github.com/IDuxFE/idux/commit/6cd615566d7a6e1692c4cb914daab0b6a82345c3))
+- **comp:tree:** change drop node box-shadow to border ([#1584](https://github.com/IDuxFE/idux/issues/1584)) ([5b73101](https://github.com/IDuxFE/idux/commit/5b73101c5375f855a34f877f79c9941d38052e75))
+- **comp:tree:** improve browser compatibility ([#1585](https://github.com/IDuxFE/idux/issues/1585)) ([9949124](https://github.com/IDuxFE/idux/commit/9949124a82f45fcdcd91b9b1bbe2d37a6945111b))
+- **comp:upload:** accept does not ignore case ([#1544](https://github.com/IDuxFE/idux/issues/1544)) ([b7e9b89](https://github.com/IDuxFE/idux/commit/b7e9b891e48b9c12b90a6ad0d2d57d0b6d65ebf2))
+- **pro:table:** the empty is not rendered in the layout tool ([#1562](https://github.com/IDuxFE/idux/issues/1562)) ([ea62fd1](https://github.com/IDuxFE/idux/commit/ea62fd18634b7c96ac446f97848a4ded2dd06c7d))
+
+### Features
+
+- **comp:modal:** add `animatable` global config ([#1558](https://github.com/IDuxFE/idux/issues/1558)) ([0e82271](https://github.com/IDuxFE/idux/commit/0e822713a001e61b86523bdf0a6ddfd81af5b61a))
+- **comp:style:** add min scroll and css variable support ([#1564](https://github.com/IDuxFE/idux/issues/1564)) ([d425a6f](https://github.com/IDuxFE/idux/commit/d425a6f75d1ffb7686c320e83f0c2c06c6756e80))
+- **comp:tabs:** support addIcon slot ([#1566](https://github.com/IDuxFE/idux/issues/1566)) ([dcd9c1a](https://github.com/IDuxFE/idux/commit/dcd9c1a9c24a7256113ed6a64518d7b0fc5d451f))
+
 ## [1.7.1](https://github.com/IDuxFE/idux/compare/v1.6.0...v1.7.1) (2023-06-05)
 
 ### Bug Fixes

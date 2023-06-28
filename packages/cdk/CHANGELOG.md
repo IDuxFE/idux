@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.2](https://github.com/IDuxFE/idux/compare/v1.6.0...v1.7.2) (2023-06-28)
+
+### Bug Fixes
+
+- **comp:empty:** the ids in svg should be only ([#1539](https://github.com/IDuxFE/idux/issues/1539)) ([40d25f5](https://github.com/IDuxFE/idux/commit/40d25f53e640d0f31507e19e034e9f552836b8a9))
+- **comp:tree:** improve browser compatibility ([#1585](https://github.com/IDuxFE/idux/issues/1585)) ([9949124](https://github.com/IDuxFE/idux/commit/9949124a82f45fcdcd91b9b1bbe2d37a6945111b))
+
 ## [1.7.1](https://github.com/IDuxFE/idux/compare/v1.6.0...v1.7.1) (2023-06-05)
 
 ### Bug Fixes
