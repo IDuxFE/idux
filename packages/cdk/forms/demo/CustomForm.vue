@@ -12,10 +12,10 @@ defineProps<{
 }>()
 
 // 通过 props.control 拿到真正的 control(AbstractControl)
-const control = useControl()
+const controlRef = useControl()
 
 // 注入 control, 以便子组件通过 key 获取对应的子 control
-provide(FORMS_CONTROL_TOKEN, control)
+provide(FORMS_CONTROL_TOKEN, controlRef)
 </script>
 
 <style scoped lang="less">
