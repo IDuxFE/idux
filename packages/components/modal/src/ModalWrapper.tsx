@@ -147,6 +147,8 @@ export default defineComponent({
 
     return () => {
       const prefixCls = mergedPrefixCls.value
+      const okButton = { size: 'md', ...props.okButton } as const
+      const cancelButton = { size: 'md', ...props.cancelButton } as const
 
       return (
         <div
@@ -191,13 +193,13 @@ export default defineComponent({
                   v-slots={slots}
                   class={`${prefixCls}-footer`}
                   cancel={handleCancel}
-                  cancelButton={props.cancelButton}
+                  cancelButton={cancelButton}
                   cancelLoading={cancelLoading.value}
                   cancelText={cancelText.value}
                   cancelVisible={cancelVisible.value}
                   footer={props.footer}
                   ok={handleOk}
-                  okButton={props.okButton}
+                  okButton={okButton}
                   okLoading={okLoading.value}
                   okText={okText.value}
                 ></ɵFooter>
