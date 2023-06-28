@@ -29,6 +29,7 @@ import {
   Exclamation,
   ExclamationCircle,
   ExclamationCircleFilled,
+  FileImage,
   FilterFilled,
   Holder,
   InfoCircle,
@@ -117,4 +118,5 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   VerticalAlignTop, // BackTop
   ZoomIn, // Image
   ZoomOut, // Image
+  FileImage, // Image
 ]
