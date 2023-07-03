@@ -41,4 +41,12 @@ export const seerConfig: DeepPartialGlobalConfig = {
       icon: ({ expanded }) => h(IxIcon, { name: expanded ? 'minus-square' : 'plus-square' }),
     },
   },
+  tree: {
+    expandIcon: ({ expanded }) =>
+      h('svg', { viewBox: '0 0 16 16', width: '14px', height: '14px' }, [
+        h('rect', { x: 1, y: 1, width: 16, height: 16, rx: 1, fill: '#EDF1F7' }),
+        h('rect', { x: 6, y: 8, width: 6, height: 2, rx: 0.2, fill: '#5E6573' }),
+        !expanded ? h('rect', { x: 8, y: 6, width: 2, height: 6, rx: 0.2, fill: '#5E6573' }) : null,
+      ]),
+  },
 }
