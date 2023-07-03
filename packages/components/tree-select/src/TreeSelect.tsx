@@ -160,6 +160,7 @@ export default defineComponent({
         status={mergedStatus.value}
         suffix={props.suffix}
         value={selectedValue.value}
+        searchPlaceholder={props.searchPlaceholder}
         onBlur={handleBlur}
         onClear={handleClear}
         onInputValueChange={setInputValue}

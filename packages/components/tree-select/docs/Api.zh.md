@@ -46,6 +46,7 @@
 | `suffix` | 设置后缀图标 | `string \| #suffix` | `down` | ✅ | - |
 | `treeDisabled` | 树的禁用节点的函数 | 参考 [Tree](/components/tree/zh#API) | - | - | - |
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | - |
+| `searchPlaceholder` | 下拉菜单中的搜索框的默认文本 | `string` | - | - |
 | `onChange` | 选择值发生变化时触发 | `(value: any, oldValue: any) => void` | - | - | - |
 | `onCheck` | 选择框勾选状态发生变化时触发 | `(checked: boolean, node: TreeSelectNode) => void` | - | - | - |
 | `onDragStart` | `dragstart` 触发时调用 | `(options: TreeDragDropOptions) => void` | - | - | - |

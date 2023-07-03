@@ -76,6 +76,7 @@ export const treeSelectProps = {
     default: undefined,
   },
   virtual: { type: Boolean, default: false },
+  searchPlaceholder: { type: String, default: undefined },
 
   // events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,
