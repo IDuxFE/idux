@@ -137,8 +137,8 @@ TreeSelectSearchFieldConfig
 | `draggable` | 是否可拖拽 | `boolean` | - | - | 详情参考[Tree](/components/tree/zh) |
 | `draggableIcon` | 拖拽图标 | `string` | - | - | 详情参考[Tree](/components/tree/zh) |
 | `customDraggableIcon` | 拖拽图标自定义渲染 | `string \| () => VNodeChild` | - | - | 值为string时为对应名称的插槽 |
-| `expandIcon` | 展开收起图标 | `string \| [string, string]` | - | - | 详情参考[Tree](/components/tree/zh) |
-| `customExpandIcon` | 展开收起图标自定义渲染 | `string \| (options: { key: VKey, expanded: boolean, node: TreeSelectPanelData }) => VNodeChild` | - | - | 值为string时为对应名称的插槽 |
+| `expandIcon` | 展开收起图标 | `string \| TreeExpandIconRenderer \| [string, string]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `customExpandIcon` | 展开收起图标自定义渲染 | `string \| TreeExpandIconRenderer` | - | - | 值为string时为对应名称的插槽 |
 | `showLine` | 是否展示连线 | `boolean` | - | - | 详情参考[Tree](/components/tree/zh) |
 | `searchable` | 是否支持筛选 | `boolean` | `false` | - | 默认不支持 |
 | `searchFn` | 搜索函数 | `(node: TreeSelectPanelData, searchValue?: string) => boolean` | - | - | 默认模糊匹配 |
@@ -157,6 +157,8 @@ TreeSelectSearchFieldConfig
 | `onLoaded` | 子节点加载完毕时触发 | `((loadedKeys: any[], node: TreeSelectPanelData) => void) \| ((loadedKeys: any[], node: TreeSelectPanelData) => void)[]` | - | - | 详情参考[Tree](/components/tree/zh) |
 
 ```typescript
+type TreeExpandIconRenderer = (data: { key: VKey; expanded: boolean; node: TreeNode<any> }) => VNodeChild | string
+
 type TreeSelectPanelData = TreeSelectNode &
   Required<Pick<TreeSelectNode, 'key' | 'label'>> & {
     children?: TreeSelectPanelData[]

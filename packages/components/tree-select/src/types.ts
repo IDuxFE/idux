@@ -13,7 +13,13 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } 
 import type { CascaderStrategy } from '@idux/components/cascader'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
-import type { TreeCustomAdditional, TreeDragDropOptions, TreeDroppable, TreeNode } from '@idux/components/tree'
+import type {
+  TreeCustomAdditional,
+  TreeDragDropOptions,
+  TreeDroppable,
+  TreeExpandIconRenderer,
+  TreeNode,
+} from '@idux/components/tree'
 import type { OverlayContainerType } from '@idux/components/utils'
 import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
@@ -42,7 +48,10 @@ export const treeSelectProps = {
   draggableIcon: { type: String, default: undefined },
   droppable: { type: Function as PropType<TreeDroppable>, default: undefined },
   empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'simple' },
-  expandIcon: { type: [String, Array] as PropType<string | [string, string]>, default: undefined },
+  expandIcon: {
+    type: [String, Function, Array] as PropType<string | TreeExpandIconRenderer | [string, string]>,
+    default: undefined,
+  },
   getKey: { type: [String, Function] as PropType<string | ((data: TreeSelectNode<any>) => any)>, default: undefined },
   labelKey: { type: String, default: undefined },
   leafLineIcon: { type: String, default: undefined },

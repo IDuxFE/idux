@@ -12,9 +12,14 @@ import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { CascaderStrategy } from '@idux/components/cascader'
 import type { EmptyProps } from '@idux/components/empty'
-import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, VNodeChild } from 'vue'
 
 export type CheckStrategy = 'all' | 'parent' | 'child'
+export type TreeExpandIconRenderer = (data: {
+  key: VKey
+  expanded: boolean
+  node: TreeNode<any>
+}) => VNodeChild | string
 
 export const treeProps = {
   autoHeight: {
@@ -54,7 +59,10 @@ export const treeProps = {
   draggableIcon: { type: String, default: undefined },
   droppable: Function as PropType<TreeDroppable>,
   empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'simple' },
-  expandIcon: { type: [String, Array] as PropType<string | [string, string]>, default: undefined },
+  expandIcon: {
+    type: [String, Object, Function, Array] as PropType<string | TreeExpandIconRenderer | [string, string]>,
+    default: undefined,
+  },
   getKey: { type: [String, Function] as PropType<string | ((data: TreeNode<any>) => any)>, default: undefined },
   height: Number,
   labelKey: String,

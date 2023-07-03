@@ -24,7 +24,7 @@ exports[`ProTree > render work 1`] = `
     <div class=\\"ix-tree-content\\">
       <div class=\\"ix-tree-content-inner\\">
         <div class=\\"ix-tree-node ix-tree-node-last\\" aria-label=\\"Node 0\\" aria-selected=\\"false\\" title=\\"Node 0\\"><span aria-hidden=\\"true\\" class=\\"ix-tree-node-indent\\"></span>
-          <!----><span class=\\"ix-tree-node-expand\\"><!----><i class=\\"ix-icon ix-icon-plus-square\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"plus-square\\"></i></span>
+          <!----><span class=\\"ix-tree-node-expand\\"><!----><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></span>
           <!----><span class=\\"ix-tree-node-content\\"><!----><span class=\\"ix-tree-node-content-label\\">Node 0</span>
           <!----></span>
         </div>
