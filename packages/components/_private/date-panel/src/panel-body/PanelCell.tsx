@@ -61,8 +61,12 @@ export default defineComponent({
     const cellTooltip = computed(() =>
       panelProps.cellTooltip?.({ value: cellDate.value, disabled: !!isDisabled.value }),
     )
-    const isStart = computed(() => startDate.value && dateConfig.isSame(startDate.value, cellDate.value, 'date'))
-    const isEnd = computed(() => endDate.value && dateConfig.isSame(endDate.value, cellDate.value, 'date'))
+    const isStart = computed(
+      () => startDate.value && dateConfig.isSame(startDate.value, cellDate.value, getPanelCellType(activeType.value)),
+    )
+    const isEnd = computed(
+      () => endDate.value && dateConfig.isSame(endDate.value, cellDate.value, getPanelCellType(activeType.value)),
+    )
     const isCurrent = computed(() =>
       dateConfig.isSame(cellDate.value, dateConfig.now(), getPanelCellType(activeType.value)),
     )
