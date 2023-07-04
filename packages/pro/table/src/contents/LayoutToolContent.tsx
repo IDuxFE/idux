@@ -15,6 +15,7 @@ import { IxCheckbox } from '@idux/components/checkbox'
 import LayoutToolTree from './LayoutToolTree'
 import { proTableToken } from '../token'
 import { type ProTableColumn, proTableLayoutToolContentProps } from '../types'
+import { loopColumns } from '../utils'
 
 export default defineComponent({
   props: proTableLayoutToolContentProps,
@@ -42,8 +43,8 @@ export default defineComponent({
 
     const handleCheckAll = (checked: boolean) => {
       loopColumns(mergedColumns.value, column => {
-        // undefined or true
-        if (column.changeVisible !== false) {
+        // use child cascaderStrategy，undefined or true
+        if (!column.children && column.changeVisible !== false) {
           column.visible = checked
         }
       })
@@ -168,16 +169,4 @@ function groupColumns(mergedColumns: ProTableColumn[]) {
   })
 
   return { startColumns, endColumns, centerColumns }
-}
-
-function loopColumns(columns: ProTableColumn[] | undefined, cb: (column: ProTableColumn) => void) {
-  if (!columns || columns.length === 0) {
-    return
-  }
-  columns.forEach(column => {
-    cb(column)
-    if ('children' in column) {
-      loopColumns(column.children!, cb)
-    }
-  })
 }

@@ -26,25 +26,19 @@ export default defineComponent({
   },
   setup(props) {
     const key = useKey()
-    const { locale, mergedPrefixCls, mergedColumnMap } = inject(proTableToken)!
+    const { locale, mergedPrefixCls } = inject(proTableToken)!
 
     const checkedKeys = computed(() => getCheckedKeys(props.columns))
 
     const onCheck = (checked: boolean, column: ProTableColumn) => {
-      column.visible = checked
-      loopColumns(column.children, child => {
-        child.visible = checked
-      })
-      if (checked) {
-        const map = mergedColumnMap.value
-        let currColumn = column
-        while (currColumn?.parentKey) {
-          const parent = map.get(currColumn.parentKey)
-          if (parent && parent.visible === false) {
-            parent.visible = undefined
+      if (!column.children) {
+        column.visible = checked
+      } else {
+        loopColumns(column.children, child => {
+          if (!child.children && child.changeVisible !== false) {
+            child.visible = checked
           }
-          currColumn = parent
-        }
+        })
       }
       props.onVisibleChange()
     }
