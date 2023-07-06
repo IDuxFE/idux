@@ -26,7 +26,7 @@
 |`spin` | 数据列表的加载状态 | `boolean \| { source: boolean, target: boolean }` | `false` | - | - |
 | `type` | 穿梭框类型 | `'table' \| 'tree'` | `'table'` | - | - |
 | `tableProps` | 表格自定义参数 | `ProTransferTableProps` | - | - | 仅在 `type` 为 `'table'` 下生效 |
-| `treeProps` | 树自定义参数 | `ProTransferTableProps` | - | - | 仅在 `type` 为 `'tree'` 下生效 |
+| `treeProps` | 树自定义参数 | `ProTransferTreeProps` | - | - | 仅在 `type` 为 `'tree'` 下生效 |
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | 需要设置 `scroll.height` |
 | `onChange` | 已选数据改变回调函数 | `(keys: VKey[], oldKeys: Vkey[]) => void` | - | - | - |
 | `onScroll` | 数据列表滚动事件 | `(isSource: boolean, evt: Event) => void` | - | - | 仅使用默认列表并开启 `virtual` 下可用 |
@@ -62,9 +62,12 @@ export interface TransferPaginationProps {
 }
 
 export type ProTransferTableProps<T = any, K = VKey> = {
-  sourceColumns: TableColumn<T, K>[]
-  targetColumns: TableColumn<T, K>[]
-} & Pick<TableProps, 'tableLayout' | 'ellipsis' | 'borderless'>
+  sourceColumns: ProTableColumn<T, K>[]
+  targetColumns: ProTableColumn<T, K>[]
+  sourceLayoutTool?: boolean | Omit<ProTableLayoutToolProps, 'changeSize'>
+  targetLayoutTool?: boolean | Omit<ProTableLayoutToolProps, 'changeSize'>
+  onColumnsChange?: (isSource: boolean, columns: ProTableColumn<T, K>[]) => void 
+} & Pick<ProTableProps, 'tableLayout' | 'ellipsis' | 'borderless'>
 
 export type ProTransferTreeProps = Pick<
   TreeProps,

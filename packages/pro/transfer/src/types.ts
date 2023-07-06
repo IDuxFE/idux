@@ -11,7 +11,6 @@ import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, TreeTypeData, VKey } from '@idux/cdk/utils'
 import type { CascaderStrategy } from '@idux/components/cascader'
 import type { EmptyProps } from '@idux/components/empty'
-import type { TableColumn, TableProps } from '@idux/components/table'
 import type {
   SearchFn,
   TransferData,
@@ -20,6 +19,7 @@ import type {
   TransferScroll,
 } from '@idux/components/transfer'
 import type { TreeProps } from '@idux/components/tree'
+import type { ProTableColumn, ProTableLayoutToolProps, ProTableProps } from '@idux/pro/table'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export type ProTransferTypes = 'table' | 'tree'
@@ -29,9 +29,12 @@ export type TreeTransferData<V extends object = Record<VKey, unknown>, C extends
   TreeTypeData<V, C>
 
 export type ProTransferTableProps<T = any, K = VKey> = {
-  sourceColumns: TableColumn<T, K>[]
-  targetColumns: TableColumn<T, K>[]
-} & Pick<TableProps, 'tableLayout' | 'ellipsis' | 'borderless'>
+  sourceColumns: ProTableColumn<T, K>[]
+  targetColumns: ProTableColumn<T, K>[]
+  sourceLayoutTool?: boolean | Omit<ProTableLayoutToolProps, 'changeSize'>
+  targetLayoutTool?: boolean | Omit<ProTableLayoutToolProps, 'changeSize'>
+  onColumnsChange?: (isSource: boolean, columns: ProTableColumn<T, K>[]) => void
+} & Pick<ProTableProps, 'tableLayout' | 'ellipsis' | 'borderless'>
 
 export type ProTransferTreeProps = Pick<
   TreeProps,

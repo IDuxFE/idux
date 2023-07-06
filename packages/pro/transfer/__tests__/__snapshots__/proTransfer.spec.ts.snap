@@ -38,14 +38,17 @@ exports[`ProTransfer > table transfer render work 1`] = `
         >
           
           <div
-            class="ix-table ix-table-auto-height ix-table-borderless ix-table-md ix-pro-transfer-table-content"
+            class="ix-table ix-table-auto-height ix-table-borderless ix-table-md ix-pro-table ix-pro-transfer-table-content"
           >
             
+            
             <!---->
+            
             <div
               class="ix-table-container ix-table-fixed-layout ix-table-scroll-vertical"
             >
               
+              <!---->
               <div
                 class="ix-table-fixed-holder"
                 style="overflow: hidden;"
@@ -1212,14 +1215,17 @@ exports[`ProTransfer > table transfer render work 1`] = `
         >
           
           <div
-            class="ix-table ix-table-auto-height ix-table-borderless ix-table-md ix-pro-transfer-table-content"
+            class="ix-table ix-table-auto-height ix-table-borderless ix-table-md ix-pro-table ix-pro-transfer-table-content"
           >
             
+            
             <!---->
+            
             <div
               class="ix-table-container ix-table-fixed-layout ix-table-scroll-vertical"
             >
               
+              <!---->
               <div
                 class="ix-table-fixed-holder"
                 style="overflow: hidden;"
