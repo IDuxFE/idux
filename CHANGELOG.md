@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/IDuxFE/idux/compare/v1.7.2...v1.8.0) (2023-07-06)
+
+### Bug Fixes
+
+- **comp:carousel:** dot clickable area is too small ([#1590](https://github.com/IDuxFE/idux/issues/1590)) ([7138b40](https://github.com/IDuxFE/idux/commit/7138b40f74adaf47960d8be73427eb92f61e0090))
+- **comp:date-picker:** start and end cell calculation error ([#1591](https://github.com/IDuxFE/idux/issues/1591)) ([d66c71b](https://github.com/IDuxFE/idux/commit/d66c71b9399083e3da16db8347547cadfc7cb1b5))
+- **pro:table:** the checkbox logic in the layout tool tree is incorrect ([#1593](https://github.com/IDuxFE/idux/issues/1593)) ([799ac59](https://github.com/IDuxFE/idux/commit/799ac5909aac314589c330d2b57f7ce91414c561))
+
+### Features
+
+- **comp:text:** add text component ([#1595](https://github.com/IDuxFE/idux/issues/1595)) ([9df3f1b](https://github.com/IDuxFE/idux/commit/9df3f1bba067130bca7f9104312d6b2ee3527b2a))
+- **comp:tree:** expandIcon prop supports render function now ([#1586](https://github.com/IDuxFE/idux/issues/1586)) ([f4b1a38](https://github.com/IDuxFE/idux/commit/f4b1a38bd3160fed17abbc2e656025611f8459e9))
+- **pro:search:** add `mutiSegment` field ([#1574](https://github.com/IDuxFE/idux/issues/1574)) ([90a1a8a](https://github.com/IDuxFE/idux/commit/90a1a8a1f5e197735aafa4fc0faac76008af0996))
+- **pro:search:** add IxProSearchShortcut comp and shortcut slots ([#1594](https://github.com/IDuxFE/idux/issues/1594)) ([c605be2](https://github.com/IDuxFE/idux/commit/c605be21e7cb3f13c87cebffd87e09d2947493cd))
+- **pro:transfer:** add layoutTool support to table transfer ([#1579](https://github.com/IDuxFE/idux/issues/1579)) ([6c6d41b](https://github.com/IDuxFE/idux/commit/6c6d41bf75a8a560c0446e27a5d1dde90bda0bcb))
+
 ## [1.7.2](https://github.com/IDuxFE/idux/compare/v1.6.0...v1.7.2) (2023-06-28)
 
 ### Bug Fixes
