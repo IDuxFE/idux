@@ -8,7 +8,7 @@
 import type { LayoutSiderTriggerComponent } from '@idux/components/layout'
 import type { ProFormComponent } from '@idux/pro/form'
 import type { ProLayoutComponent } from '@idux/pro/layout'
-import type { ProSearchComponent } from '@idux/pro/search'
+import type { ProSearchComponent, ProSearchShortcutComponent } from '@idux/pro/search'
 import type { ProTableComponent, ProTableLayoutToolComponent } from '@idux/pro/table'
 import type { ProTextareaComponent } from '@idux/pro/textarea'
 import type { ProTransferComponent } from '@idux/pro/transfer'
@@ -28,6 +28,7 @@ declare module 'vue' {
     IxProTransfer: ProTransferComponent
     IxProTree: ProTreeComponent
     IxProSearch: ProSearchComponent
+    IxProSearchShortcut: ProSearchShortcutComponent
   }
 }
 

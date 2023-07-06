@@ -9,7 +9,7 @@ import type { App, Directive } from 'vue'
 
 import { IxProForm } from '@idux/pro/form'
 import { IxProLayout, IxProLayoutSiderTrigger } from '@idux/pro/layout'
-import { IxProSearch } from '@idux/pro/search'
+import { IxProSearch, IxProSearchShortcut } from '@idux/pro/search'
 import { IxProTable, IxProTableLayoutTool } from '@idux/pro/table'
 import { IxProTextarea } from '@idux/pro/textarea'
 import { IxProTransfer } from '@idux/pro/transfer'
@@ -28,6 +28,7 @@ const components = [
   IxProTree,
   IxProTextarea,
   IxProSearch,
+  IxProSearchShortcut,
 ]
 
 const install = (app: App): void => {

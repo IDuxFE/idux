@@ -35,6 +35,10 @@
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 | `clearIcon` | 清除图标 | - | - |
+| `shortcuts` | 快捷面板快捷栏 | `SearchField[]` | 参数为默认可支持快捷创建搜索项的field数组 |
+| `shortcut` | 快捷标签 | `SearchField` | 自定义单个快捷标签 |
+| `shortcutLabel` | 快捷标签文字 | `SearchField` | 自定义单个快捷标签文字 |
+| `shortcutIcon` | 快捷标签图标 | `SearchField` | 自定义单个快捷标签图标 |
 
 ```typescript
 interface SearchValue<V = unknown> {
@@ -275,3 +279,22 @@ interface PanelRenderContext<V = unknown> {
   setOnKeyDown: (onKeyDown: ((evt: KeyboardEvent) => boolean) | undefined) => void // 设置 `keydown` 回调函数
 }
 ```
+
+### IxProSearchShortcut
+
+快捷标签组件，用于自定义快捷栏的展示，但仅可以在 `IxProSearch` 下使用。
+
+#### ProSearchShortcutProps
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `fieldKey` | 快捷标签对应的fieldKey | `VKey` | - | - | - |
+| `icon` | 快捷标签图标 | `string` | - | - | 默认为field中的`icon`属性 |
+
+#### ProSearchShortcutSlots
+
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| `default` | 快捷标签 | `SearchField` | 自定义单个快捷标签 |
+| `label` | 快捷标签文字 | `SearchField` | 自定义单个快捷标签文字 |
+| `icon` | 快捷标签图标 | `SearchField` | 自定义单个快捷标签图标 |

@@ -7,7 +7,9 @@
 
 import type { ResolvedSearchField } from '../../types'
 
-import { computed, defineComponent, inject } from 'vue'
+import { type VNodeChild, computed, defineComponent, inject } from 'vue'
+
+import { isEmptyNode } from '@idux/cdk/utils'
 
 import QuickSelectPanelItem from './QuickSelectItem'
 import QuickSelectPanelShortcut from './QuickSelectShortcut'
@@ -42,18 +44,30 @@ export default defineComponent({
       }
     }
 
+    const renderShortcuts = (prefixCls: string) => {
+      let content: VNodeChild
+      if (slots.shortcuts) {
+        content = slots.shortcuts?.(separatedFields.value.shortcutFields)
+      } else if (separatedFields.value.shortcutFields.length) {
+        const shortcutSlots = {
+          default: slots.shortcut,
+          label: slots.shortcutLabel,
+          icon: slots.shortcutIcon,
+        }
+        content = separatedFields.value.shortcutFields.map(field => (
+          <QuickSelectPanelShortcut fieldKey={field.key} icon={field.icon} v-slots={shortcutSlots} />
+        ))
+      }
+
+      return !isEmptyNode(content) ? <div class={`${prefixCls}-shortcuts`}>{content}</div> : null
+    }
+
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-quick-select-panel`
 
       return (
         <div class={prefixCls} onMousedown={handleMouseDown}>
-          {separatedFields.value.shortcutFields.length && (
-            <div class={`${prefixCls}-shortcuts`}>
-              {separatedFields.value.shortcutFields.map(field => (
-                <QuickSelectPanelShortcut searchField={field} />
-              ))}
-            </div>
-          )}
+          {renderShortcuts(prefixCls)}
           {separatedFields.value.quickSelectFields.length && (
             <div class={`${prefixCls}-items`}>
               {separatedFields.value.quickSelectFields.map((field, idx) => {
