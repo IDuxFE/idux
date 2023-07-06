@@ -10,6 +10,22 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 1.8.0(2023-07-06)
+
+### Bug Fixes
+
+- **comp:carousel:** dot 点击区域过小 ([#1590](https://github.com/IDuxFE/idux/issues/1590)) ([7138b40](https://github.com/IDuxFE/idux/commit/7138b40f74adaf47960d8be73427eb92f61e0090))
+- **comp:date-picker:** 开始和结束的单元格计算错误 ([#1591](https://github.com/IDuxFE/idux/issues/1591)) ([d66c71b](https://github.com/IDuxFE/idux/commit/d66c71b9399083e3da16db8347547cadfc7cb1b5))
+- **pro:table:** 布局设置中的树勾选逻辑错误 ([#1593](https://github.com/IDuxFE/idux/issues/1593)) ([799ac59](https://github.com/IDuxFE/idux/commit/799ac5909aac314589c330d2b57f7ce91414c561))
+
+### Features
+
+- **comp:text:** 新增文本组件 ([#1595](https://github.com/IDuxFE/idux/issues/1595)) ([9df3f1b](https://github.com/IDuxFE/idux/commit/9df3f1bba067130bca7f9104312d6b2ee3527b2a))
+- **comp:tree:** expandIcon 支持函数和全局配置 ([#1586](https://github.com/IDuxFE/idux/issues/1586)) ([f4b1a38](https://github.com/IDuxFE/idux/commit/f4b1a38bd3160fed17abbc2e656025611f8459e9))
+- **pro:search:** 新增 `mutiSegment` 配置 ([#1574](https://github.com/IDuxFE/idux/issues/1574)) ([90a1a8a](https://github.com/IDuxFE/idux/commit/90a1a8a1f5e197735aafa4fc0faac76008af0996))
+- **pro:search:** 新增 IxProSearchShortcut 组件和相关插槽 ([#1594](https://github.com/IDuxFE/idux/issues/1594)) ([c605be2](https://github.com/IDuxFE/idux/commit/c605be21e7cb3f13c87cebffd87e09d2947493cd))
+- **pro:transfer:** 表格穿梭框支持布局配置 ([#1579](https://github.com/IDuxFE/idux/issues/1579)) ([6c6d41b](https://github.com/IDuxFE/idux/commit/6c6d41bf75a8a560c0446e27a5d1dde90bda0bcb))
+
 ## 1.7.2(2023-06-28)
 
 ### Bug Fixes
