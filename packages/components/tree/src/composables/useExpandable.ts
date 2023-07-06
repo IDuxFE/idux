@@ -5,18 +5,21 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type Ref, computed, ref, watch } from 'vue'
+import { type ComputedRef, type Ref, computed, h, ref, watch } from 'vue'
+
+import { isArray, isFunction, isString } from 'lodash-es'
 
 import { VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 import { type TreeConfig } from '@idux/components/config'
+import { IxIcon } from '@idux/components/icon'
 import { type GetKeyFn } from '@idux/components/utils'
 
 import { type MergedNode, convertMergeNodes, convertMergedNodeMap } from './useDataSource'
-import { type TreeNode, type TreeProps } from '../types'
+import { type TreeExpandIconRenderer, type TreeNode, type TreeProps } from '../types'
 import { callChange, getParentKeys } from '../utils'
 
 export interface ExpandableContext {
-  expandIcon: ComputedRef<string | string[]>
+  expandIconRenderer: TreeExpandIconRenderer
   expandedKeys: ComputedRef<VKey[]>
   setExpandedKeys: (value: VKey[]) => void
   expandAll: () => void
@@ -38,6 +41,20 @@ export function useExpandable(
   const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', () => [])
   const [loadedKeys, setLoadedKeys] = useControlledProp(props, 'loadedKeys', () => [])
   const loadingKeys = ref<VKey[]>([])
+
+  const expandIconRenderer: TreeExpandIconRenderer = ({ key, expanded, node }) => {
+    if (isString(expandIcon.value)) {
+      return h(IxIcon, { name: expandIcon.value, rotate: expanded ? 90 : 0 })
+    }
+
+    if (isFunction(expandIcon.value)) {
+      return expandIcon.value({ key, expanded, node })
+    }
+
+    if (isArray(expandIcon.value)) {
+      return h(IxIcon, { name: expanded ? expandIcon.value[0] : expandIcon.value[1] })
+    }
+  }
 
   const setExpandWithSearch = (searchedKeys?: VKey[]) => {
     if (!searchedKeys || searchedKeys.length <= 0) {
@@ -132,5 +149,5 @@ export function useExpandable(
     setExpandWithSearch(searchedKeys.value)
   }
 
-  return { expandIcon, expandedKeys, setExpandedKeys, expandAll, collapseAll, handleExpand, loadingKeys }
+  return { expandIconRenderer, expandedKeys, setExpandedKeys, expandAll, collapseAll, handleExpand, loadingKeys }
 }

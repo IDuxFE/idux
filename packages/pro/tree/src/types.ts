@@ -15,6 +15,7 @@ import type {
   TreeCustomAdditional,
   TreeDragDropOptions,
   TreeDroppable,
+  TreeExpandIconRenderer,
   TreeNode,
   TreeNodeDisabled,
 } from '@idux/components/tree'
@@ -45,8 +46,8 @@ export const proTreeProps = {
   draggableIcon: { type: String, default: undefined },
   droppable: { type: Function as PropType<TreeDroppable>, default: undefined },
   expandIcon: {
-    type: [String, Array] as PropType<string | [string, string]>,
-    default: () => ['minus-square', 'plus-square'],
+    type: [String, Function, Array] as PropType<string | TreeExpandIconRenderer | [string, string]>,
+    default: undefined,
   },
   getKey: { type: [String, Function] as PropType<string | ((data: TreeNode<any>) => any)>, default: undefined },
   header: { type: [String, Object] as PropType<string | HeaderProps>, default: undefined },

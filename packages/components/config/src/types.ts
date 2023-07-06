@@ -44,7 +44,7 @@ import type {
 import type { TabsSize } from '@idux/components/tabs'
 import type { TagShape } from '@idux/components/tag'
 import type { TextareaAutoRows, TextareaResize } from '@idux/components/textarea'
-import type { TreeNode } from '@idux/components/tree'
+import type { TreeExpandIconRenderer, TreeNode } from '@idux/components/tree'
 import type { UploadFilesType, UploadIconType, UploadRequestMethod, UploadRequestOption } from '@idux/components/upload'
 import type { OverlayContainerType } from '@idux/components/utils'
 import type { VNode, VNodeChild } from 'vue'
@@ -549,7 +549,7 @@ export interface TreeConfig {
   autoHeight: boolean
   blocked: boolean
   childrenKey: string
-  expandIcon: string | [string, string]
+  expandIcon: string | TreeExpandIconRenderer | [string, string]
   draggableIcon: string
   getKey: string | ((data: TreeNode<any>) => any)
   labelKey: string
