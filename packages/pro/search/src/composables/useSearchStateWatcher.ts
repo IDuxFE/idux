@@ -5,7 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { SearchState, SegmentValue } from './useSearchStates'
+import type { SearchState } from './useSearchStates'
+import type { SegmentState } from '../types'
 import type { VKey } from '@idux/cdk/utils'
 
 export enum SEARCH_STATE_ACTION {
@@ -14,7 +15,7 @@ export enum SEARCH_STATE_ACTION {
   UPDATED,
 }
 
-export type UpdatedSegmentValue = SegmentValue & { oldValue: unknown }
+export type UpdatedSegmentValue = SegmentState & { oldValue: unknown }
 export type SearchStateWatcherPayload<Action extends SEARCH_STATE_ACTION> = Action extends SEARCH_STATE_ACTION.REMOVED
   ? { searchState: SearchState }
   : Action extends SEARCH_STATE_ACTION.CREATED
@@ -37,8 +38,8 @@ export interface SearchStateWatcherContext {
   notifySearchStateChange: SearchStateNotifier
   watchSearchState: SearchStateWatcher
   compareSegmentValues: (
-    currentSegmentValues: SegmentValue[],
-    oldSegmentValues: SegmentValue[],
+    currentSegmentValues: SegmentState[],
+    oldSegmentValues: SegmentState[],
   ) => UpdatedSegmentValue[]
   compareSearchStates: (searchStates: SearchState[], oldSearchStates: SearchState[]) => void
 }
@@ -72,8 +73,8 @@ export function useSearchStateWatcher(): SearchStateWatcherContext {
     })
   }
 
-  const compareSegmentValues = (currentSegmentValues: SegmentValue[], oldSegmentValues: SegmentValue[]) => {
-    const updatedSegments: (SegmentValue & { oldValue: unknown })[] = []
+  const compareSegmentValues = (currentSegmentValues: SegmentState[], oldSegmentValues: SegmentState[]) => {
+    const updatedSegments: (SegmentState & { oldValue: unknown })[] = []
 
     // find updated or removed segments
     oldSegmentValues.forEach(segmentValue => {
@@ -81,7 +82,12 @@ export function useSearchStateWatcher(): SearchStateWatcherContext {
       const newSegmentValue = currentSegmentValues.find(sv => sv.name === name)
 
       if (segmentValue.value !== newSegmentValue?.value) {
-        updatedSegments.push({ name, value: newSegmentValue, oldValue: segmentValue.value })
+        updatedSegments.push({
+          name,
+          input: newSegmentValue?.input ?? '',
+          value: newSegmentValue?.value,
+          oldValue: segmentValue.value,
+        })
       }
     })
     // find newly created segments
@@ -89,7 +95,12 @@ export function useSearchStateWatcher(): SearchStateWatcherContext {
       const name = currentSegmentValue.name
 
       if (oldSegmentValues.findIndex(sv => sv.name === name) < 0) {
-        updatedSegments.push({ name, value: currentSegmentValue, oldValue: undefined })
+        updatedSegments.push({
+          name,
+          input: currentSegmentValue.input,
+          value: currentSegmentValue.value,
+          oldValue: undefined,
+        })
       }
     })
 
@@ -107,7 +118,7 @@ export function useSearchStateWatcher(): SearchStateWatcherContext {
         return
       }
 
-      const updatedSegments = compareSegmentValues(newSearchState.segmentValues, searchState.segmentValues)
+      const updatedSegments = compareSegmentValues(newSearchState.segmentStates, searchState.segmentStates)
 
       // notify searchState update
       if (updatedSegments.length > 0) {

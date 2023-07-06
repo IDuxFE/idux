@@ -23,15 +23,10 @@ const defaultType = 'date'
 
 export function createDateRangePickerSegment(
   prefixCls: string,
-  searchField: DateRangePickerSearchField,
+  config: DateRangePickerSearchField['fieldConfig'],
   dateConfig: DateConfig,
 ): Segment<(Date | undefined)[] | undefined> {
-  const {
-    fieldConfig: { type, cellTooltip, disabledDate, timePanelOptions },
-    inputClassName,
-    containerClassName,
-    onPanelVisibleChange,
-  } = searchField
+  const { type, cellTooltip, disabledDate, timePanelOptions } = config ?? {}
 
   const panelRenderer = (context: PanelRenderContext<(Date | undefined)[] | undefined>) => {
     const { value, setValue, cancel, ok } = context
@@ -53,25 +48,21 @@ export function createDateRangePickerSegment(
   }
 
   return {
-    name: searchField.type,
-    inputClassName: [inputClassName, `${prefixCls}-date-range-picker-segment-input`],
-    containerClassName: [containerClassName, `${prefixCls}-date-range-picker-segment-container`],
-    placeholder: searchField.placeholder,
-    parse: input => parseInput(input, dateConfig, searchField),
-    format: value => formatValue(value, dateConfig, searchField),
+    name: 'dateRangePicker',
+    inputClassName: [`${prefixCls}-date-range-picker-segment-input`],
+    containerClassName: [`${prefixCls}-date-range-picker-segment-container`],
+    parse: input => parseInput(input, dateConfig, config),
+    format: value => formatValue(value, dateConfig, config),
     panelRenderer,
-    onVisibleChange: onPanelVisibleChange,
   }
 }
 
 function parseInput(
   input: string,
   dateConfig: DateConfig,
-  searchField: DateRangePickerSearchField,
+  config: DateRangePickerSearchField['fieldConfig'],
 ): (Date | undefined)[] | undefined {
-  const {
-    fieldConfig: { type, format, separator },
-  } = searchField
+  const { type, format, separator } = config ?? {}
   const _format = format ?? defaultFormat[type ?? defaultType]
   const _separator = separator ?? defaultSeparator
 
@@ -88,11 +79,9 @@ function parseInput(
 function formatValue(
   value: (Date | undefined)[] | undefined,
   dateConfig: DateConfig,
-  searchField: DateRangePickerSearchField,
+  config: DateRangePickerSearchField['fieldConfig'],
 ): string {
-  const {
-    fieldConfig: { type, format, separator },
-  } = searchField
+  const { type, format, separator } = config ?? {}
   const _format = format ?? defaultFormat[type ?? defaultType]
   const _separator = separator ?? defaultSeparator
 

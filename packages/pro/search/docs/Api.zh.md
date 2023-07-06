@@ -247,14 +247,28 @@ CustomSearchFieldConfig
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
+| `name` | 自定义的段名称 | `string` | - | - | - |
+| `extends` | 继承已有的类型 | `string` | - | - | 上述所有的field类型 |
 | `customPanel` | 自定义面板渲染 | `string \| (context: PanelRenderContext) => VNodeChild` | - | - | 如果有面板则需要提供，类型为`string`时指代插槽名称 |
 | `format` | 数据格式化函数 | `(value: unknown) => string` | - | - | 必填，用于将指定的类型转换成字符串输入 |
 | `parse` | 输入解析函数 | `(input: string) => unknown | null` | - | - | 必填，用于将输入的字符串解析到指定的类型 |
+| `placeholder` | 段占位符 | `string` | - | - | - |
+| `visible` | 段显示隐藏控制 | `(states: SegmentState[]) => boolean` | - | - | 当前搜索项全部段的状态，返回`true`或者`false`控制段的显示隐藏 |
+
+#### MultiSegmentSearchField
+
+多段输入类型搜索项
+
+| 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
+| --- | --- | --- | --- | --- | --- |
+| `type` | 类型 | `'multiSegment'` | - | - | 固定为 `'multiSegment'` |
+| `fieldConfig` | 配置 | `{ segments: CustomSearchFieldConfig[] }` | - | - | - |
 
 ```typescript
 interface PanelRenderContext<V = unknown> {
   input: string // 输入的字符串
   value: V // 值
+  slots: Slots // 组件插槽
   ok: () => void // 确认
   cancel: () => void // 取消
   setValue: (value: V) => void // 设置搜索值

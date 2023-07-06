@@ -18,14 +18,9 @@ const defaultSeparator = '|'
 
 export function createSelectSegment(
   prefixCls: string,
-  searchField: SelectSearchField,
+  config: SelectSearchField['fieldConfig'],
 ): Segment<VKey | VKey[] | undefined> {
-  const {
-    fieldConfig: { dataSource, separator, searchable, showSelectAll, searchFn, multiple, virtual, onSearch },
-    inputClassName,
-    containerClassName,
-    onPanelVisibleChange,
-  } = searchField
+  const { dataSource, separator, searchable, showSelectAll, searchFn, multiple, virtual, onSearch } = config
 
   const panelRenderer = (context: PanelRenderContext<VKey | VKey[] | undefined>) => {
     const { setValue, ok, cancel, setOnKeyDown, renderLocation } = context
@@ -65,19 +60,17 @@ export function createSelectSegment(
   }
 
   return {
-    name: searchField.type,
-    inputClassName: [inputClassName, `${prefixCls}-select-segment-input`],
-    containerClassName: [containerClassName, `${prefixCls}-select-segment-container`],
-    placeholder: searchField.placeholder,
-    parse: input => parseInput(input, searchField),
-    format: value => formatValue(value, searchField),
+    name: 'select',
+    inputClassName: [`${prefixCls}-select-segment-input`],
+    containerClassName: [`${prefixCls}-select-segment-container`],
+    parse: input => parseInput(input, config),
+    format: value => formatValue(value, config),
     panelRenderer,
-    onVisibleChange: onPanelVisibleChange,
   }
 }
 
-function parseInput(input: string, searchField: SelectSearchField): VKey | VKey[] | undefined {
-  const { separator, dataSource, multiple } = searchField.fieldConfig
+function parseInput(input: string, config: SelectSearchField['fieldConfig']): VKey | VKey[] | undefined {
+  const { separator, dataSource, multiple } = config
   const trimedInput = input.trim()
 
   const keys = getKeyByLabels(dataSource, trimedInput.split(separator ?? defaultSeparator))
@@ -85,8 +78,8 @@ function parseInput(input: string, searchField: SelectSearchField): VKey | VKey[
   return multiple ? (keys.length > 0 ? keys : undefined) : keys[0]
 }
 
-function formatValue(value: VKey | VKey[] | undefined, searchField: SelectSearchField): string {
-  const { dataSource, separator } = searchField.fieldConfig
+function formatValue(value: VKey | VKey[] | undefined, config: SelectSearchField['fieldConfig']): string {
+  const { dataSource, separator } = config
   if (isNil(value)) {
     return ''
   }

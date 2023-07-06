@@ -24,30 +24,25 @@ const defaultFullPath = false
 
 export function createCascaderSegment(
   prefixCls: string,
-  searchField: CascaderSearchField,
+  config: CascaderSearchField['fieldConfig'],
 ): Segment<VKey | (VKey | VKey[])[] | undefined> {
   const {
-    fieldConfig: {
-      dataSource,
-      cascaderStrategy,
-      expandIcon,
-      customExpandIcon,
-      expandTrigger,
-      fullPath,
-      pathSeparator,
-      separator,
-      searchable,
-      searchFn,
-      multiple,
-      virtual,
-      onExpand,
-      onSearch,
-      onLoaded,
-    },
-    inputClassName,
-    containerClassName,
-    onPanelVisibleChange,
-  } = searchField
+    dataSource,
+    cascaderStrategy,
+    expandIcon,
+    customExpandIcon,
+    expandTrigger,
+    fullPath,
+    pathSeparator,
+    separator,
+    searchable,
+    searchFn,
+    multiple,
+    virtual,
+    onExpand,
+    onSearch,
+    onLoaded,
+  } = config
 
   const nodeKeyMap = new Map<VKey, CascaderPanelData>()
   const parentKeyMap = new Map<VKey, VKey>()
@@ -111,25 +106,23 @@ export function createCascaderSegment(
   }
 
   return {
-    name: searchField.type,
-    inputClassName: [inputClassName, `${prefixCls}-cascader-segment-input`],
-    containerClassName: [containerClassName, `${prefixCls}-cascader-segment-container`],
-    placeholder: searchField.placeholder,
-    parse: input => parseInput(input, searchField, nodeLabelMap, checkedKeysResolver, parentKeyMap),
-    format: value => formatValue(value, searchField, nodeKeyMap),
+    name: 'cascader',
+    inputClassName: [`${prefixCls}-cascader-segment-input`],
+    containerClassName: [`${prefixCls}-cascader-segment-container`],
+    parse: input => parseInput(input, config, nodeLabelMap, checkedKeysResolver, parentKeyMap),
+    format: value => formatValue(value, config, nodeKeyMap),
     panelRenderer,
-    onVisibleChange: onPanelVisibleChange,
   }
 }
 
 function parseInput(
   input: string,
-  searchField: CascaderSearchField,
+  config: CascaderSearchField['fieldConfig'],
   nodeLabelMap: Map<string | number, CascaderPanelData[]>,
   checkedKeysResolver: TreeCheckStateResolver<CascaderPanelData, 'children'>,
   parentKeyMap: Map<VKey, VKey>,
 ): VKey | (VKey | VKey[])[] | undefined {
-  const { fullPath, separator, multiple, pathSeparator } = searchField.fieldConfig
+  const { fullPath, separator, multiple, pathSeparator } = config
   const trimedInput = input.trim()
 
   const keys = getKeyByLabels(
@@ -145,10 +138,10 @@ function parseInput(
 
 function formatValue(
   value: VKey | (VKey | VKey[])[] | undefined,
-  searchField: CascaderSearchField,
+  config: CascaderSearchField['fieldConfig'],
   nodeKeyMap: Map<VKey, CascaderPanelData>,
 ): string {
-  const { fullPath, multiple, separator, pathSeparator } = searchField.fieldConfig
+  const { fullPath, multiple, separator, pathSeparator } = config
   if (isNil(value)) {
     return ''
   }

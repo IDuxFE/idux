@@ -7,16 +7,15 @@
 
 import type { InputSearchField, Segment } from '../types'
 
-export function createInputSegment(prefixCls: string, searchField: InputSearchField): Segment<string | undefined> {
-  const {
-    fieldConfig: { trim },
-    inputClassName,
-  } = searchField
+export function createInputSegment(
+  prefixCls: string,
+  config: InputSearchField['fieldConfig'],
+): Segment<string | undefined> {
+  const { trim } = config ?? {}
 
   return {
     name: 'input',
-    inputClassName: [inputClassName, `${prefixCls}-input-segment-input`],
-    placeholder: searchField.placeholder,
+    inputClassName: [`${prefixCls}-input-segment-input`],
     parse: input => (input ? (trim ? input.trim() : input) : undefined),
     format: value => (trim ? value?.trim() : value) ?? '',
   }

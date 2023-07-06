@@ -18,40 +18,35 @@ const defaultSeparator = '|'
 
 export function createTreeSelectSegment(
   prefixCls: string,
-  searchField: TreeSelectSearchField,
+  config: TreeSelectSearchField['fieldConfig'],
 ): Segment<VKey | VKey[] | undefined> {
   const {
-    fieldConfig: {
-      dataSource,
-      checkable,
-      cascaderStrategy,
-      draggable,
-      draggableIcon,
-      customDraggableIcon,
-      expandIcon,
-      customExpandIcon,
-      separator,
-      showLine,
-      searchable,
-      searchFn,
-      multiple,
-      virtual,
-      onCheck,
-      onDragstart,
-      onDragend,
-      onDragenter,
-      onDragleave,
-      onDragover,
-      onDrop,
-      onExpand,
-      onSelect,
-      onSearch,
-      onLoaded,
-    },
-    inputClassName,
-    containerClassName,
-    onPanelVisibleChange,
-  } = searchField
+    dataSource,
+    checkable,
+    cascaderStrategy,
+    draggable,
+    draggableIcon,
+    customDraggableIcon,
+    expandIcon,
+    customExpandIcon,
+    separator,
+    showLine,
+    searchable,
+    searchFn,
+    multiple,
+    virtual,
+    onCheck,
+    onDragstart,
+    onDragend,
+    onDragenter,
+    onDragleave,
+    onDragover,
+    onDrop,
+    onExpand,
+    onSelect,
+    onSearch,
+    onLoaded,
+  } = config
 
   const nodeKeyMap = new Map<VKey, TreeSelectPanelData>()
   const nodeLabelMap = new Map<string | number, TreeSelectPanelData[]>()
@@ -110,23 +105,21 @@ export function createTreeSelectSegment(
   }
 
   return {
-    name: searchField.type,
-    inputClassName: [inputClassName, `${prefixCls}-tree-select-segment-input`],
-    containerClassName: [containerClassName, `${prefixCls}-tree-select-segment-container`],
-    placeholder: searchField.placeholder,
-    parse: input => parseInput(input, searchField, nodeLabelMap),
-    format: value => formatValue(value, searchField, nodeKeyMap),
+    name: 'treeSelect',
+    inputClassName: [`${prefixCls}-tree-select-segment-input`],
+    containerClassName: [`${prefixCls}-tree-select-segment-container`],
+    parse: input => parseInput(input, config, nodeLabelMap),
+    format: value => formatValue(value, config, nodeKeyMap),
     panelRenderer,
-    onVisibleChange: onPanelVisibleChange,
   }
 }
 
 function parseInput(
   input: string,
-  searchField: TreeSelectSearchField,
+  config: TreeSelectSearchField['fieldConfig'],
   nodeLabelMap: Map<string | number, TreeSelectPanelData[]>,
 ): VKey | VKey[] | undefined {
-  const { separator, multiple } = searchField.fieldConfig
+  const { separator, multiple } = config
   const trimedInput = input.trim()
 
   const keys = getKeyByLabels(nodeLabelMap, trimedInput.split(separator ?? defaultSeparator))
@@ -136,10 +129,10 @@ function parseInput(
 
 function formatValue(
   value: VKey | VKey[] | undefined,
-  searchField: TreeSelectSearchField,
+  config: TreeSelectSearchField['fieldConfig'],
   nodeKeyMap: Map<VKey, TreeSelectPanelData>,
 ): string {
-  const { separator } = searchField.fieldConfig
+  const { separator } = config
   if (isNil(value)) {
     return ''
   }

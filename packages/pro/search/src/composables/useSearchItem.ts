@@ -7,17 +7,18 @@
 
 import type { SearchState } from './useSearchStates'
 import type { ResolvedSearchField, SearchItem, SearchItemError } from '../types'
+import type { VKey } from '@idux/cdk/utils'
 
 import { type ComputedRef, type Ref, computed } from 'vue'
 
 export function useSearchItems(
-  resolvedSearchFields: ComputedRef<ResolvedSearchField[]>,
+  fieldKeyMap: ComputedRef<Map<VKey, ResolvedSearchField>>,
   searchStates: Ref<SearchState[]>,
   searchItemErrors: ComputedRef<SearchItemError[] | undefined>,
 ): ComputedRef<SearchItem[]> {
   return computed<SearchItem[]>(() =>
     searchStates.value?.map(searchState => {
-      const searchField = resolvedSearchFields.value?.find(field => field.key === searchState.fieldKey)
+      const searchField = fieldKeyMap.value.get(searchState.fieldKey)
 
       return {
         key: searchState.key,

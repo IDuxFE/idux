@@ -33,6 +33,7 @@ export default defineComponent({
     const {
       mergedPrefixCls,
       bindOverlayMonitor,
+      getSearchStateByKey,
       commonOverlayProps,
       focused,
       activeSegment,
@@ -63,6 +64,7 @@ export default defineComponent({
     const overlayOpened = computed(
       () => focused.value && isActive.value && _overlayOpened.value && !contentNodeEmpty.value,
     )
+    const searchState = computed(() => getSearchStateByKey(props.itemKey))
 
     const inputClasses = computed(() => convertArray(props.segment.inputClassName))
 
@@ -96,12 +98,20 @@ export default defineComponent({
       watch(
         isActive,
         active => {
+          let selectionStart = -1
           nextTick(() => {
             if (active) {
               segmentInputRef.value?.getInputElement().focus()
+              if (props.input) {
+                selectionStart = props.input.length
+              }
             } else {
-              updateSelectionStart(0)
-              handleSegmentSelect(props.segment.name, 0)
+              selectionStart = 0
+            }
+
+            if (selectionStart !== -1) {
+              updateSelectionStart(selectionStart)
+              handleSegmentSelect(props.segment.name, selectionStart)
             }
           })
         },
@@ -179,6 +189,7 @@ export default defineComponent({
         slots,
         input: props.input ?? '',
         value: props.value,
+        states: searchState.value?.segmentStates ?? [],
         renderLocation: 'individual',
         cancel: handleCancel,
         ok: handleConfirm,
