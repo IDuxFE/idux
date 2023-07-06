@@ -21,7 +21,6 @@
 | `@tabs-nav-tab-text-color` | `@color-graphite-d40` | - | - |
 | `@tabs-nav-bar-color` | `@color-primary` | - | - |
 | `@tabs-nav-bar-height` | `2px` | - | - |
-| `@tabs-nav-pre-next-width` | `20px` | - | - |
 | `@tabs-border-radius` | `2px` | - | - |
 | `@tabs-pane-min-width` | `72px` | - | - |
 | `@tabs-pane-padding` | `16px` | - | - |

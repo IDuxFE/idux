@@ -66,6 +66,7 @@ import { IxSwitch } from '@idux/components/switch'
 import { IxTable, IxTableColumn } from '@idux/components/table'
 import { IxTab, IxTabs } from '@idux/components/tabs'
 import { IxTag, IxTagGroup } from '@idux/components/tag'
+import { IxText } from '@idux/components/text'
 import { IxTextarea } from '@idux/components/textarea'
 import { IxTimePicker, IxTimeRangePicker } from '@idux/components/time-picker'
 import { IxTimeline, IxTimelineItem } from '@idux/components/timeline'
@@ -169,6 +170,7 @@ const components = [
   IxTabs,
   IxTag,
   IxTagGroup,
+  IxText,
   IxTextarea,
   IxTimePicker,
   IxTimeRangePicker,
@@ -257,6 +259,7 @@ export * from '@idux/components/switch'
 export * from '@idux/components/table'
 export * from '@idux/components/tabs'
 export * from '@idux/components/tag'
+export * from '@idux/components/text'
 export * from '@idux/components/textarea'
 export * from '@idux/components/time-picker'
 export * from '@idux/components/timeline'
