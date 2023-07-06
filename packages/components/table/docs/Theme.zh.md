@@ -24,5 +24,5 @@
 | `@table-body-row-background-color-hover` | `var(--ix-background-color-light)` | - | - |
 | `@table-body-row-background-color-selected` | `var(--ix-color-primary-l50)` | `var(--ix-background-color)` | - |
 | `@table-expandable-icon-color` | `var(--ix-text-color-secondary)` | `@color-graphite-l10` | - |
-| `@table-expandable-background-color` | `var(--ix-background-color-light)` | - | - |
-| `@table-expandable-background-color-hover` | `var(--ix-background-color-medium)` | - | - |
+| `@table-expandable-background-color` | `@table-body-row-background-color-hover` | - | - |
+| `@table-expandable-background-color-hover` | `@table-body-row-background-color-hover` | - | - |

@@ -1,0 +1,37 @@
+@import '../../style/mixins/reset.less';
+
+.@{text-prefix} {
+  .reset-component-new();
+  .reset-font-size();
+
+  overflow: hidden;
+
+  &-line-clamp {
+    display: inline-box;
+    -webkit-box-orient: vertical;
+  }
+
+  &:not(&-line-clamp) {
+    display: inline-block;
+    vertical-align: bottom;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+
+  &-copy-icon {
+    margin-left: 2px;
+    padding: 2px;
+    line-height: 1;
+    font-size: @text-copy-icon-font-size;
+    color: @text-copy-icon-color;
+    cursor: pointer;
+  }
+
+  &-wrapper {
+    .reset-component-new();
+
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+  }
+}

@@ -78,6 +78,7 @@ import type { SwitchComponent } from '@idux/components/switch'
 import type { TableColumnComponent, TableComponent } from '@idux/components/table'
 import type { TabComponent, TabsComponent } from '@idux/components/tabs'
 import type { TagComponent, TagGroupComponent } from '@idux/components/tag'
+import type { TextComponent } from '@idux/components/text'
 import type { TextareaComponent } from '@idux/components/textarea'
 import type { TimePickerComponent, TimeRangePickerComponent } from '@idux/components/time-picker'
 import type { TimelineComponent, TimelineItemComponent } from '@idux/components/timeline'
@@ -177,6 +178,7 @@ declare module 'vue' {
     IxTabs: TabsComponent
     IxTag: TagComponent
     IxTagGroup: TagGroupComponent
+    IxText: TextComponent
     IxTextarea: TextareaComponent
     IxTimeline: TimelineComponent
     IxTimelineItem: TimelineItemComponent
