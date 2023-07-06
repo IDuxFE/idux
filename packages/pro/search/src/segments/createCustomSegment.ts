@@ -19,6 +19,7 @@ import { createTreeSelectSegment } from './CreateTreeSelectSegment'
 import { createInputSegment } from './createInputSegment'
 
 export function createCustomSegment(prefixCls: string, dateConfig: DateConfig, config: CustomSegmentConfig): Segment {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let extendedSegment: Segment<any> | undefined
   if ('extends' in config) {
     extendedSegment = createExtendedSegment(prefixCls, dateConfig, config.extends, config.config)
