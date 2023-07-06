@@ -1,5 +1,5 @@
 ---
-order: 0
+order: 11
 title:
   zh: 快捷面板
   en: Quick select panel
