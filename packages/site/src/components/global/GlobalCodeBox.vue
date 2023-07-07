@@ -26,7 +26,7 @@
                 <IxIcon name="copy" @click="onCopy" />
               </IxTooltip>
               <IxTooltip :title="expandedTitle">
-                <IxIcon :name="expanded ? 'unexpand' : 'expand'" @click="onExpanded" />
+                <IxIcon :name="expanded ? 'custom:collapse' : 'custom:expand'" @click="onExpanded" />
               </IxTooltip>
             </IxSpace>
           </div>

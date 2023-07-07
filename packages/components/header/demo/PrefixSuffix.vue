@@ -18,7 +18,7 @@
         <IxButton icon="setting" @click="onSuffixClick" />
         <IxButton icon="setting" @click="onSuffixClick" />
         <IxButton icon="setting" @click="onSuffixClick" />
-        <IxButton icon="menu" @click="onSuffixClick" />
+        <IxButton icon="setting" @click="onSuffixClick" />
       </IxButtonGroup>
     </template>
   </IxHeader>

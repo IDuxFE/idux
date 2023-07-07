@@ -17,7 +17,7 @@
 | `cascaderStrategy` | 勾选策略 | `'all' \| 'parent' \| 'child'` | `'all'` | - | 设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时）；`child` 表示只显示子节点，仅当`cascade`为`true`时，`parent`和`child`才生效 |
 | `clearIcon` | 设置搜索框清除图标 | `string \| #clearIcon` | `'close-circle'` | ✅ | - |
 | `collapsedWidth` | 树收缩时的宽度 | `number` | `44` | - | - |
-| `collapseIcon` | 树展开收缩时的图标 | `[string, string]` | `['collapse', 'uncollapse']` | ✅ | [`展开时图标`,`未展开时图标`] |
+| `collapseIcon` | 树展开收缩时的图标 | `[string, string]` | `['collapse', 'expand']` | ✅ | [`展开时图标`,`未展开时图标`] |
 | `customAdditional` | 自定义节点的额外属性 | `TreeCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
 | `dataSource` | 树型数据数组,参见[TreeNode](#TreeNode) | `TreeNode[]` | `[]` | - | - |
 | `disabled` | 禁用节点的函数 | `(node: TreeNode) => boolean \| TreeNodeDisabled` | - | - | - |

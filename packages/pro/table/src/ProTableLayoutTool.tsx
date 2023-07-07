@@ -18,9 +18,9 @@ import { proTableLayoutToolProps } from './types'
 
 const defaultOffset: [number, number] = [0, 4]
 const defaultIconMap = {
-  sm: 'layout-compact',
-  md: 'layout-medium',
-  lg: 'layout-large',
+  sm: 'grid-compact',
+  md: 'grid-medium',
+  lg: 'grid-loose',
 } as const
 
 export default defineComponent({

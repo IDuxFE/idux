@@ -66,7 +66,7 @@ describe('Drawer', () => {
     const wrapper = DrawerMount({ props: { closeIcon: 'up', onClose } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
-    expect(drawerWrapper.find('.ix-icon-dialog-close').exists()).toBe(false)
+    expect(drawerWrapper.find('.ix-icon-close-filled').exists()).toBe(false)
     expect(drawerWrapper.find('.ix-icon-up').exists()).toBe(true)
 
     await drawerWrapper.find('.ix-icon-up').trigger('click')

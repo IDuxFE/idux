@@ -22,8 +22,49 @@ import { useClipboard } from '@idux/cdk/clipboard'
 
 import { allIcons } from './all'
 
+// 被移除的图标
+const removeIcons = ['left-double', 'right-double', 'unexpand']
+
+// 被重命名的图标
+const renameIcons = {
+  bars: 'view-list',
+  'book-mark': 'bookmark',
+  card: 'view-card',
+  collect: 'favourite',
+  'delivered-procedure': 'file-export',
+  'dialog-close': 'close-filled',
+  environment: 'location',
+  exception: 'file-alert',
+  'file-gif': 'gif',
+  'for-screen': 'projection',
+  insurance: 'safety',
+  'layout-large': 'grid-loose',
+  'loading-split': 'wait',
+  loose: 'layout-loose',
+  normal: 'layout-medium',
+  menu: 'layout-compact',
+  'scan-security': 'security-scan',
+  'scan-virus': 'radar',
+  success: 'check-filled',
+  transmit: 'send',
+  'tree-expand': 'expand-all',
+  'tree-unexpand': 'collapse-all',
+  uncollapse: 'expand',
+}
+
+// 被重命名，且旧名字有新图标取代
+// const renameAndReplaceIcons = {
+//   alert: 'notification',
+//   database: 'server',
+//   'layout-compact': 'grid-compact',
+//   'layout-medium': 'grid-medium',
+// }
+
 const groupedIcons = allIcons.reduce(
   (result, icon) => {
+    if (removeIcons.includes(icon) || Object.keys(renameIcons).includes(icon)) {
+      return result
+    }
     if (icon.endsWith('filled')) {
       result.filled.push(icon)
     } else {

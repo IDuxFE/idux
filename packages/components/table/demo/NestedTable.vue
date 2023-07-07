@@ -98,24 +98,28 @@ const nestedColumns: TableColumn<{
 
 const nestedData = [
   {
+    key: 1,
     name: 'This is name',
     date: '2023-01-01',
     status: 'Waiting',
     grade: 0,
   },
   {
+    key: 2,
     name: 'This is name',
     date: '2023-02-01',
     status: 'Progress',
     grade: 20,
   },
   {
+    key: 3,
     name: 'This is name',
     date: '2023-03-01',
     status: 'Progress',
     grade: 80,
   },
   {
+    key: 4,
     name: 'This is name',
     date: '2023-04-01',
     status: 'Finished',

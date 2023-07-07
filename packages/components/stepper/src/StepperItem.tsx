@@ -93,7 +93,7 @@ export default defineComponent({
 })
 
 const statusIcons: Partial<Record<StepperStatus, string>> = {
-  finish: 'success',
+  finish: 'check-filled',
   error: 'exclamation',
 }
 

@@ -1144,8 +1144,8 @@ exports[`ProTransfer > table transfer render work 1`] = `
       >
         
         <i
-          aria-label="right-double"
-          class="ix-icon ix-icon-right-double"
+          aria-label="double-right"
+          class="ix-icon ix-icon-double-right"
           role="img"
         />
         
@@ -1161,8 +1161,8 @@ exports[`ProTransfer > table transfer render work 1`] = `
       >
         
         <i
-          aria-label="left-double"
-          class="ix-icon ix-icon-left-double"
+          aria-label="double-left"
+          class="ix-icon ix-icon-double-left"
           role="img"
         />
         
@@ -3361,8 +3361,8 @@ exports[`ProTransfer > tree transfer render work 1`] = `
       >
         
         <i
-          aria-label="right-double"
-          class="ix-icon ix-icon-right-double"
+          aria-label="double-right"
+          class="ix-icon ix-icon-double-right"
           role="img"
         />
         
@@ -3378,8 +3378,8 @@ exports[`ProTransfer > tree transfer render work 1`] = `
       >
         
         <i
-          aria-label="left-double"
-          class="ix-icon ix-icon-left-double"
+          aria-label="double-left"
+          class="ix-icon ix-icon-double-left"
           role="img"
         />
         

@@ -37,7 +37,7 @@ export const defaultConfig: ProGlobalConfig = {
   },
   tree: {
     clearIcon: 'close-circle',
-    collapseIcon: ['collapse', 'uncollapse'],
+    collapseIcon: ['collapse', 'expand'],
   },
   textarea: {
     clearable: false,

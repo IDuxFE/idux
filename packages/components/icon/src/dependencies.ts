@@ -8,39 +8,93 @@
 import type { IconDefinition } from './types'
 
 import {
+  Bulb, // Alert
+  CaretDownFilled, // Table
+  CaretUpFilled, // Table
+  Check, // Progress Stepper
+  CheckCircle, // Result Message Alert Notification
+  CheckCircleFilled, // Progress Modal FormItem
+  CheckFilled, // Stopper
+  Clear, // Transfer
+  ClockCircle, // TimePicker
+  Close, // Stepper Image Message Alert Transfer
+  CloseCircle, // TimePicker TimeRangePicker Input Textarea Notification
+  CloseCircleFilled, // Modal FormItem
+  CloseFilled, // Modal Drawer
+  Collapse, // ProTree
+  CollapseAll, // TreeSelect
+  DoubleLeft, // Pagination Transfer
+  DoubleRight, // Pagination Transfer
+  Down, // Select Table
+  Ellipsis, // Table
+  Exclamation, // Stepper
+  ExclamationCircle, // Message Result Alert Notification
+  ExclamationCircleFilled, // Modal
+  Expand, // ProTree
+  ExpandAll, // TreeSelect
+  FileImage, // Image
+  FilterFilled, // Table
+  GridCompact, // ProTable
+  GridLoose, // ProTable
+  GridMedium, // ProTable
+  Holder, // Tree
+  InfoCircle, // Message Result Alert Notification
+  InfoCircleFilled, // Modal Popconfirm
+  Left, // DatePanel
+  Loading, // Message Button Spin FormItem Switch Timeline Tree
+  MenuFold, // Layout
+  MenuUnfold, // Layout
+  Minus, // Table
+  Plus, // Table
+  QuestionCircle, // FormItem
+  QuestionCircleFilled, // Modal
+  Right, // DatePanel Tree Menu Collapse
+  RotateLeft, // Image
+  RotateRight, // Image
+  Search, // Select Transfer
+  StarFilled, // Rate
+  User, // Avatar
+  VerticalAlignCenter, // ProTable
+  VerticalAlignTop, // BackTop
+  ZoomIn, // Image
+  ZoomOut, // Image
+} from './definitions'
+
+export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   Bulb,
   CaretDownFilled,
   CaretUpFilled,
   Check,
   CheckCircle,
   CheckCircleFilled,
+  CheckFilled,
   Clear,
   ClockCircle,
   Close,
   CloseCircle,
   CloseCircleFilled,
+  CloseFilled,
   Collapse,
-  DialogClose,
+  CollapseAll,
   DoubleLeft,
   DoubleRight,
   Down,
   Ellipsis,
-  Empty,
   Exclamation,
   ExclamationCircle,
   ExclamationCircleFilled,
+  Expand,
+  ExpandAll,
   FileImage,
   FilterFilled,
+  GridCompact,
+  GridLoose,
+  GridMedium,
   Holder,
   InfoCircle,
   InfoCircleFilled,
-  LayoutCompact,
-  LayoutLarge,
-  LayoutMedium,
   Left,
-  LeftDouble,
   Loading,
-  Menu,
   MenuFold,
   MenuUnfold,
   Minus,
@@ -48,75 +102,13 @@ import {
   QuestionCircle,
   QuestionCircleFilled,
   Right,
-  RightDouble,
   RotateLeft,
   RotateRight,
   Search,
   StarFilled,
-  Success,
-  TreeExpand,
-  TreeUnexpand,
-  Uncollapse,
   User,
   VerticalAlignCenter,
   VerticalAlignTop,
   ZoomIn,
   ZoomOut,
-} from './definitions'
-
-export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
-  Bulb, // Alert
-  CaretDownFilled, // Table
-  CaretUpFilled, // Table
-  Check, // Progress Stepper
-  CheckCircle, // Result Message Alert Notification
-  CheckCircleFilled, // Progress Modal FormItem
-  Clear, // Transfer
-  ClockCircle, // TimePicker
-  Close, // Stepper Image Message Alert Transfer
-  CloseCircle, // TimePicker TimeRangePicker Input Textarea Notification
-  CloseCircleFilled, // Modal FormItem
-  Collapse, // Pro Tree
-  DialogClose, // Modal Drawer
-  DoubleLeft, // Pagination
-  DoubleRight, // Pagination
-  Down, // Select Table
-  Ellipsis, // Table
-  Empty, // Empty
-  InfoCircle, // Message Result Alert Notification
-  InfoCircleFilled, // Modal Popconfirm
-  FilterFilled, // Table
-  Holder, // tree
-  Exclamation, // Stepper
-  ExclamationCircle, // Message Result Alert Notification
-  ExclamationCircleFilled, // Modal
-  LayoutCompact, // ProTable
-  LayoutLarge, // ProTable
-  LayoutMedium, // ProTable
-  Left, // date-panel
-  LeftDouble, // Transfer
-  Loading, // Message Button Spin FormItem Switch Timeline Tree
-  Menu, // Layout
-  MenuFold, // Layout
-  MenuUnfold, // Layout
-  Minus, // Table
-  Plus, // Table
-  QuestionCircle, // FormItem
-  QuestionCircleFilled, // Modal
-  Right, // Tree Menu Collapse
-  RightDouble, // Transfer
-  RotateLeft, // Image
-  RotateRight, // Image
-  Search, // Select Transfer
-  Success, // Stopper
-  StarFilled, // Rate
-  User, // Avatar
-  Uncollapse, // Pro Tree
-  TreeExpand, // TreeSelect
-  TreeUnexpand, // TreeSelect
-  VerticalAlignCenter, // ProTable
-  VerticalAlignTop, // BackTop
-  ZoomIn, // Image
-  ZoomOut, // Image
-  FileImage, // Image
 ]
