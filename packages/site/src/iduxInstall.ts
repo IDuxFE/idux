@@ -11,8 +11,13 @@ import { IDUX_ICON_DEPENDENCIES, addIconDefinitions } from '@idux/components/ico
 addIconDefinitions(IDUX_ICON_DEPENDENCIES)
 
 // 动态加载：不会被打包，可以减小包体积，需要加载的时候时候 http 请求加载
+// 自定义图标的前缀
+const customIconPrefix = 'custom:'
 const loadIconDynamically = (iconName: string) => {
-  return fetch(__BASE_URL__ + `idux-icons/${iconName}.svg`).then(res => res.text())
+  const isCustom = iconName.startsWith(customIconPrefix)
+  const iconDirname = isCustom ? 'icons' : 'idux-icons'
+  const iconFilename = isCustom ? iconName.slice(customIconPrefix.length) : iconName
+  return fetch(__BASE_URL__ + `${iconDirname}/${iconFilename}.svg`).then(res => res.text())
 }
 
 const globalConfig = createGlobalConfig({

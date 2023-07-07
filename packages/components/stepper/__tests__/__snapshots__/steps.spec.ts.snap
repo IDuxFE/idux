@@ -4,7 +4,7 @@ exports[`Stepper > percent work 1`] = `
 "<div class=\\"ix-stepper ix-stepper-label-end ix-stepper-md ix-stepper-with-percent\\">
   <div class=\\"ix-stepper-item ix-stepper-item-finish\\">
     <div class=\\"ix-stepper-item-tail\\"></div>
-    <div class=\\"ix-stepper-item-icon\\"><i class=\\"ix-icon ix-icon-success\\" role=\\"img\\" aria-label=\\"success\\"></i></div>
+    <div class=\\"ix-stepper-item-icon\\"><i class=\\"ix-icon ix-icon-check-filled\\" role=\\"img\\" aria-label=\\"check-filled\\"></i></div>
     <div class=\\"ix-stepper-item-content\\">
       <div class=\\"ix-stepper-item-title\\">Finished</div>
       <div class=\\"ix-stepper-item-description\\">This is a description.</div>
@@ -47,7 +47,7 @@ exports[`Stepper > percent work 2`] = `
 "<div class=\\"ix-stepper ix-stepper-label-end ix-stepper-md ix-stepper-with-percent\\">
   <div class=\\"ix-stepper-item ix-stepper-item-finish\\">
     <div class=\\"ix-stepper-item-tail\\"></div>
-    <div class=\\"ix-stepper-item-icon\\"><i class=\\"ix-icon ix-icon-success\\" role=\\"img\\" aria-label=\\"success\\"></i></div>
+    <div class=\\"ix-stepper-item-icon\\"><i class=\\"ix-icon ix-icon-check-filled\\" role=\\"img\\" aria-label=\\"check-filled\\"></i></div>
     <div class=\\"ix-stepper-item-content\\">
       <div class=\\"ix-stepper-item-title\\">Finished</div>
       <div class=\\"ix-stepper-item-description\\">This is a description.</div>
@@ -90,7 +90,7 @@ exports[`Stepper > percent work 3`] = `
 "<div class=\\"ix-stepper ix-stepper-label-end ix-stepper-md ix-stepper-with-percent\\">
   <div class=\\"ix-stepper-item ix-stepper-item-finish\\">
     <div class=\\"ix-stepper-item-tail\\"></div>
-    <div class=\\"ix-stepper-item-icon\\"><i class=\\"ix-icon ix-icon-success\\" role=\\"img\\" aria-label=\\"success\\"><svg viewBox=\\"0 0 1024 1024\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"success\\">
+    <div class=\\"ix-stepper-item-icon\\"><i class=\\"ix-icon ix-icon-check-filled\\" role=\\"img\\" aria-label=\\"check-filled\\"><svg viewBox=\\"0 0 1024 1024\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"check-filled\\">
           <path d=\\"M264.384 443.52a25.6 25.6 0 0 1 36.224 0L463.552 606.4 762.24 307.712a25.6 25.6 0 0 1 36.16 0l54.336 54.272a25.6 25.6 0 0 1 0 36.224L481.6 769.28a25.6 25.6 0 0 1-36.16 0L210.112 534.016a25.6 25.6 0 0 1 0-36.224l54.272-54.336z\\"></path>
         </svg></i></div>
     <div class=\\"ix-stepper-item-content\\">
@@ -135,7 +135,7 @@ exports[`Stepper > render work 1`] = `
 "<div class=\\"ix-stepper ix-stepper-label-end ix-stepper-md\\">
   <div class=\\"ix-stepper-item ix-stepper-item-finish\\">
     <div class=\\"ix-stepper-item-tail\\"></div>
-    <div class=\\"ix-stepper-item-icon\\"><i class=\\"ix-icon ix-icon-success\\" role=\\"img\\" aria-label=\\"success\\"></i></div>
+    <div class=\\"ix-stepper-item-icon\\"><i class=\\"ix-icon ix-icon-check-filled\\" role=\\"img\\" aria-label=\\"check-filled\\"></i></div>
     <div class=\\"ix-stepper-item-content\\">
       <div class=\\"ix-stepper-item-title\\">Finished</div>
       <div class=\\"ix-stepper-item-description\\">This is a description.</div>

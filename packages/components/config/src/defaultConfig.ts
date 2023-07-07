@@ -109,7 +109,7 @@ export const defaultConfig: GlobalConfig = {
   drawer: {
     closable: true,
     closeOnEsc: true,
-    closeIcon: 'dialog-close',
+    closeIcon: 'close-filled',
     height: 256,
     mask: true,
     maskClosable: true,
@@ -196,7 +196,7 @@ export const defaultConfig: GlobalConfig = {
     animatable: true,
     centered: false,
     closable: true,
-    closeIcon: 'dialog-close',
+    closeIcon: 'close-filled',
     closeOnEsc: true,
     mask: true,
     maskClosable: true,

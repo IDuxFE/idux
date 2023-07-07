@@ -237,7 +237,7 @@ export default defineComponent({
               size="xs"
               shape="square"
               title={expandAllBtnStatus.value ? locale.treeSelect.expandAll : locale.treeSelect.collapseAll}
-              icon={expandAllBtnStatus.value ? 'tree-expand' : 'tree-unexpand'}
+              icon={expandAllBtnStatus.value ? 'expand-all' : 'collapse-all'}
               onClick={handleExpandAll}
             />
             <ɵInput

@@ -295,7 +295,7 @@ describe('ProTree', () => {
 
     await wrapper.setProps({ collapsed: true })
 
-    expect(wrapper.find('.ix-icon-uncollapse').exists()).toBe(true)
+    expect(wrapper.find('.ix-icon-expand').exists()).toBe(true)
 
     await wrapper.find('.ix-pro-tree-collapsed-icon').trigger('click')
 
@@ -410,7 +410,7 @@ describe('ProTree', () => {
     })
 
     expect(wrapper.find('.ix-icon-right').exists()).toBe(true)
-    expect(wrapper.find('.ix-icon-uncollapse').exists()).toBe(false)
+    expect(wrapper.find('.ix-icon-expand').exists()).toBe(false)
   })
 
   test('searchValue.sync work', async () => {

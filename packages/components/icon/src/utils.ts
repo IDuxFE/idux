@@ -33,6 +33,20 @@ export async function loadSVGElement(
   iconName: string,
   loadIconDynamically?: (iconName: string) => Promise<string>,
 ): Promise<SVGElement | null> {
+  // TODO: 废弃了一部分图标，临时警告，2.0 移除
+  if (__DEV__) {
+    if (removeIcons.includes(iconName)) {
+      Logger.warn('components/icon', `The icon [${iconName}]  has been deprecated, please use another icon.`)
+    }
+    if (Object.keys(renameIcons).includes(iconName)) {
+      Logger.warn(
+        'components/icon',
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        `The icon [${iconName}]  has been deprecated, please use [${renameIcons[iconName]}] instead.`,
+      )
+    }
+  }
   const cached = iconCache.get(iconName)
   if (cached) {
     const svg = await cached
@@ -152,4 +166,32 @@ export function createScriptElements(urls: string[], index = 0): void {
     scriptCache.add(currentUrl)
     document.body.appendChild(scriptElement)
   }
+}
+
+const removeIcons = ['left-double', 'right-double', 'unexpand']
+
+const renameIcons = {
+  bars: 'view-list',
+  'book-mark': 'bookmark',
+  card: 'view-card',
+  collect: 'favourite',
+  'delivered-procedure': 'file-export',
+  'dialog-close': 'close-filled',
+  environment: 'location',
+  exception: 'file-alert',
+  'file-gif': 'gif',
+  'for-screen': 'projection',
+  insurance: 'safety',
+  'layout-large': 'grid-loose',
+  'loading-split': 'wait',
+  loose: 'layout-loose',
+  normal: 'layout-medium',
+  menu: 'layout-compact',
+  'scan-security': 'security-scan',
+  'scan-virus': 'radar',
+  success: 'check-filled',
+  transmit: 'send',
+  'tree-expand': 'expand-all',
+  'tree-unexpand': 'collapse-all',
+  uncollapse: 'expand',
 }

@@ -87,7 +87,7 @@ const renderCornerMark = (props: CardProps, prefixCls: string) => {
   return (
     <div class={`${prefixCls}-mark-wrap`}>
       <div class={`${prefixCls}-mark`}></div>
-      <IxIcon name="success" class={`${prefixCls}-mark-icon`} color="white" />
+      <IxIcon name="check-filled" class={`${prefixCls}-mark-icon`} color="white" />
     </div>
   )
 }

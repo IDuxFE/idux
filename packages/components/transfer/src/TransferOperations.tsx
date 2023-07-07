@@ -46,8 +46,8 @@ export default defineComponent({
 
       return (
         <div class={`${prefixCls}-inner`}>
-          {renderBtn(prefixCls, 'right-double', appendDisabled.value, handleTransferRightClick)}
-          {renderBtn(prefixCls, 'left-double', removeDisabled.value, handleTransferLeftClick)}
+          {renderBtn(prefixCls, 'double-right', appendDisabled.value, handleTransferRightClick)}
+          {renderBtn(prefixCls, 'double-left', removeDisabled.value, handleTransferLeftClick)}
         </div>
       )
     }
