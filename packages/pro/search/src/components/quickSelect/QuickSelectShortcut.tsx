@@ -14,6 +14,7 @@ import { proSearchContext } from '../../token'
 import { type SearchField, quickSelectPanelShortcutProps } from '../../types'
 
 export default defineComponent({
+  name: 'IxProSearchShortcut',
   props: quickSelectPanelShortcutProps,
   setup(props, { slots }) {
     const {
