@@ -18,10 +18,10 @@ export interface BoxSizingData {
 export function getBoxSizingData(node: HTMLElement): BoxSizingData {
   const { boxSizing, paddingBottom, paddingTop, borderBottom, borderTop } = window.getComputedStyle(node)
 
-  const _paddingTop = parseFloat(paddingTop)
-  const _paddingBottom = parseFloat(paddingBottom)
-  const _borderTop = parseFloat(borderTop)
-  const _borderBottom = parseFloat(borderBottom)
+  const _paddingTop = parseSize(paddingTop)
+  const _paddingBottom = parseSize(paddingBottom)
+  const _borderTop = parseSize(borderTop)
+  const _borderBottom = parseSize(borderBottom)
 
   return {
     boxSizing,
@@ -32,4 +32,10 @@ export function getBoxSizingData(node: HTMLElement): BoxSizingData {
     borderTop: _borderTop,
     borderBottom: _borderBottom,
   }
+}
+
+function parseSize(size: string): number {
+  const parsedSize = parseFloat(size)
+
+  return Number.isNaN(parsedSize) ? 0 : parsedSize
 }
