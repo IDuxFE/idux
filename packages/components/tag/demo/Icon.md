@@ -2,7 +2,7 @@
 title:
   zh: 图标
   en: Icon
-order: 2
+order: 4
 ---
 
 ## zh

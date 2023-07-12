@@ -1,6 +1,6 @@
 // Vitest Snapshot v1
 
 exports[`Tag > render work 1`] = `
-"<span class=\\"ix-tag\\"><!----><!----><span class=\\"ix-tag-content\\">test tag</span>
+"<span class=\\"ix-tag ix-tag-normal\\"><!----><!----><span class=\\"ix-tag-content\\">test tag</span>
 <!----></span>"
 `;

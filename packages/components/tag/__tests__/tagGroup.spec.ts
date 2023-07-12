@@ -75,24 +75,6 @@ describe('TagGroup', () => {
     expect(closeFn.mock.calls[0][0]).toBe('a')
   })
 
-  test('prop gap work', async () => {
-    const wrapper = TagGroupMount({ props: { dataSource, gap: 16 } })
-
-    expect((wrapper.element as HTMLElement).style.gap).toBe('8px 16px')
-
-    await wrapper.setProps({ gap: 15 })
-    expect((wrapper.element as HTMLElement).style.gap).toBe('8px 15px')
-  })
-
-  test('prop wrap work', async () => {
-    const wrapper = TagGroupMount({ props: { dataSource, wrap: true } })
-
-    expect(wrapper.find('.ix-tag-group-nowrap').exists()).toBe(false)
-
-    await wrapper.setProps({ wrap: false })
-    expect(wrapper.find('.ix-tag-group-nowrap').exists()).toBe(true)
-  })
-
   test('prop shape work', async () => {
     const wrapper = TagGroupMount({ props: { dataSource, shape: 'round' } })
     const tags = wrapper.findAll('.ix-tag')

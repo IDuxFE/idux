@@ -2,7 +2,7 @@
 title:
   zh: 数字标签
   en: Numeric tag
-order: 5
+order: 6
 ---
 
 ## zh

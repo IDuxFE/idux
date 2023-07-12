@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <IxTag>Default</IxTag>
-    <IxTag shape="round">Round</IxTag>
-    <IxTag shape="rect">Rect</IxTag>
-  </div>
+  <IxTag filled>Default</IxTag>
+  <IxTag filled shape="round">Round</IxTag>
+  <IxTag filled shape="rect">Rect</IxTag>
 </template>

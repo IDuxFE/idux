@@ -10,8 +10,8 @@
 | `@menu-background-color-disabled` | `var(--ix-background-color)` | - | - |
 | `@menu-horizontal-background-color-active` | `var(--ix-background-color-medium)` | - | - |
 | `@menu-border-color` | `var(--ix-border-color-secondary)` | - | - |
-| `@menu-height` | `var(--ix-height-md)` | `36px` | - |
-| `@menu-height-level-1` | `var(--ix-height-lg)` | `44px` | - |
+| `@menu-height` | `var(--ix-height-md)` | - | - |
+| `@menu-height-level-1` | `var(--ix-height-lg)` | `40px` | - |
 | `@menu-border-radius` | `var(--ix-border-radius-md)` | `0` | - |
 | `@menu-font-size` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
 | `@menu-font-size-level-1` | `var(--ix-font-size-md)` | - | - |
