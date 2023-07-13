@@ -45,6 +45,7 @@ import {
   MenuFold, // Layout
   MenuUnfold, // Layout
   Minus, // Table
+  More, // Tabs
   Plus, // Table
   QuestionCircle, // FormItem
   QuestionCircleFilled, // Modal
@@ -98,6 +99,7 @@ export const IDUX_ICON_DEPENDENCIES: IconDefinition[] = [
   MenuFold,
   MenuUnfold,
   Minus,
+  More,
   Plus,
   QuestionCircle,
   QuestionCircleFilled,
