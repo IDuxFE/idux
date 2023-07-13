@@ -4,9 +4,6 @@
 | `@textarea-font-size-md` | `@form-font-size-md` | - | - |
 | `@textarea-font-size-lg` | `@form-font-size-lg` | - | - |
 | `@textarea-line-height` | `@form-line-height` | - | - |
-| `@textarea-padding-horizontal-sm` | `@form-padding-horizontal-sm` | - | - |
-| `@textarea-padding-horizontal-md` | `@form-padding-horizontal-md` | - | - |
-| `@textarea-padding-horizontal-lg` | `@form-padding-horizontal-lg` | - | - |
 | `@textarea-padding-vertical-sm` | `@form-padding-vertical-sm` | - | - |
 | `@textarea-padding-vertical-md` | `@form-padding-vertical-md` | - | - |
 | `@textarea-padding-vertical-lg` | `@form-padding-vertical-lg` | - | - |

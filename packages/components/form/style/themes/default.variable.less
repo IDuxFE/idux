@@ -7,9 +7,9 @@
 @form-height-sm: @height-sm;
 @form-height-md: @height-md;
 @form-height-lg: @height-lg;
-@form-padding-horizontal-sm: @spacing-sm - 2px;
-@form-padding-horizontal-md: @spacing-md;
-@form-padding-horizontal-lg: @spacing-sm + 2px;
+@form-padding-horizontal-sm: 7px;
+@form-padding-horizontal-md: 11px;
+@form-padding-horizontal-lg: 11px;
 @form-padding-vertical-sm: max(
   (round(((@form-height-sm - @form-font-size-sm * @form-line-height) / 2) * 10) / 10) - @form-border-width,
   0
@@ -43,6 +43,42 @@
 @form-disabled-background-color: var(--ix-background-color-deep);
 @form-icon-color: @color-graphite-d20;
 @form-icon-hover-color: @color-graphite-d20;
+
+@form-new-height-sm: var(--ix-height-sm);
+@form-new-height-md: var(--ix-height-md);
+@form-new-height-lg: var(--ix-height-lg);
+
+@form-new-padding-horizontal-sm: 7px;
+@form-new-padding-horizontal-md: 11px;
+@form-new-padding-horizontal-lg: 11px;
+
+@form-new-font-size-sm: var(--ix-font-size-sm);
+@form-new-font-size-md: var(--ix-font-size-md);
+@form-new-font-size-lg: var(--ix-font-size-lg);
+
+@form-new-border-radius-sm: var(--ix-border-radius-sm);
+@form-new-border-radius-md: var(--ix-border-radius-md);
+@form-new-border-radius-lg: var(--ix-border-radius-lg);
+
+@form-new-placeholder-color: var(--ix-text-color-disabled);
+
+@form-new-color: var(--ix-text-color);
+@form-new-color-invalid: var(--ix-color-red);
+@form-new-color-disabled: var(--ix-text-color-disabled);
+
+@form-new-background-color: var(--ix-background-color);
+@form-new-background-color-disabled: var(--ix-background-color-deep);
+
+@form-new-border-color: var(--ix-border-color);
+@form-new-border-color-focus: var(--ix-color-primary);
+
+@form-new-box-shadow-focus: 0 0 0 2px fade(@color-primary, 20%);
+@form-new-box-shadow-invalid: 0 0 0 2px fade(@color-red, 20%);
+
+@form-new-icon-color: var(--ix-text-color-title-secondary);
+@form-new-icon-color-hover: var(--ix-color-primary);
+@form-new-icon-font-size: var(--ix-font-size-lg);
+
 // input common end
 
 @form-item-valid-color: @color-success;

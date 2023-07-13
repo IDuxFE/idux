@@ -5,9 +5,6 @@
 | `@switch-height-sm` | `@form-height-xs` | - | - |
 | `@switch-height-md` | `@form-height-sm` | - | - |
 | `@switch-height-lg` | `@form-height-md` | - | - |
-| `@switch-padding-horizontal-sm` | `@form-padding-horizontal-sm` | - | - |
-| `@switch-padding-horizontal-md` | `@form-padding-horizontal-md` | - | - |
-| `@switch-padding-horizontal-lg` | `@form-padding-horizontal-lg` | - | - |
 | `@switch-border-radius` | `@border-radius-full` | - | - |
 | `@switch-color` | `@form-background-color` | - | - |
 | `@switch-background-color` | `@form-placeholder-color` | `@color-graphite-l10` | - |

@@ -6,9 +6,6 @@
 | `@pro-textarea-font-size-sm` | `@form-font-size-sm` | - | - |
 | `@pro-textarea-font-size-md` | `@form-font-size-md` | - | - |
 | `@pro-textarea-font-size-lg` | `@form-font-size-lg` | - | - |
-| `@pro-textarea-padding-horizontal-sm` | `@form-padding-horizontal-sm` | - | - |
-| `@pro-textarea-padding-horizontal-md` | `@form-padding-horizontal-md` | - | - |
-| `@pro-textarea-padding-horizontal-lg` | `@form-padding-horizontal-lg` | - | - |
 | `@pro-textarea-padding-vertical-sm` | `@form-padding-vertical-sm` | - | - |
 | `@pro-textarea-padding-vertical-md` | `@form-padding-vertical-md` | - | - |
 | `@pro-textarea-padding-vertical-lg` | `@form-padding-vertical-lg` | - | - |

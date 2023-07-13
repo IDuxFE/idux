@@ -52,9 +52,22 @@
     overflow: hidden;
     color: @select-placeholder-color;
     position: absolute;
-    right: @select-padding-horizontal-md;
-    left: @select-padding-horizontal-md;
     .ellipsis();
+  }
+
+  &-sm &-placeholder {
+    right: @form-new-padding-horizontal-sm;
+    left: @form-new-padding-horizontal-sm;
+  }
+
+  &-md &-placeholder {
+    right: @form-new-padding-horizontal-md;
+    left: @form-new-padding-horizontal-md;
+  }
+
+  &-lg &-placeholder {
+    right: @form-new-padding-horizontal-lg;
+    left: @form-new-padding-horizontal-lg;
   }
 
   &-sm &-suffix,

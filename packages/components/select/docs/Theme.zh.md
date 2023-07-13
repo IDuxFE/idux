@@ -7,9 +7,6 @@
 | `@select-height-sm` | `@form-height-sm` | - | - |
 | `@select-height-md` | `@form-height-md` | - | - |
 | `@select-height-lg` | `@form-height-lg` | - | - |
-| `@select-padding-horizontal-sm` | `@form-padding-horizontal-sm` | `12px` | - |
-| `@select-padding-horizontal-md` | `@form-padding-horizontal-md` | `12px` | - |
-| `@select-padding-horizontal-lg` | `@form-padding-horizontal-lg` | `12px` | - |
 | `@select-padding-vertical-sm` | `@form-padding-vertical-sm` | - | - |
 | `@select-padding-vertical-md` | `@form-padding-vertical-md` | - | - |
 | `@select-padding-vertical-lg` | `@form-padding-vertical-lg` | - | - |

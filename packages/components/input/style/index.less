@@ -4,18 +4,18 @@
 
 .@{input-prefix} {
   .reset-component-new();
-  .reset-color(@input-color, @input-background-color);
+  .reset-color(@form-new-color, @form-new-background-color);
 
   &-sm {
-    .input-size(@input-height-sm, @input-font-size-sm, @input-border-radius-sm);
+    .input-size(@form-new-height-sm, @form-new-font-size-sm, @form-new-padding-horizontal-sm, @form-new-border-radius-sm);
   }
 
   &-md {
-    .input-size(@input-height-md, @input-font-size-md, @input-border-radius-md);
+    .input-size(@form-new-height-md, @form-new-font-size-md, @form-new-padding-horizontal-md, @form-new-border-radius-md);
   }
 
   &-lg {
-    .input-size(@input-height-lg, @input-font-size-lg, @input-border-radius-lg);
+    .input-size(@form-new-height-lg, @form-new-font-size-lg, @form-new-padding-horizontal-lg, @form-new-border-radius-lg);
   }
 
   &,
@@ -26,18 +26,18 @@
   &:hover,
   &-inner:hover,
   &-wrapper:hover {
-    border-color: @input-border-color-focus;
+    border-color: @form-new-border-color-focus;
   }
 
   &:focus,
   &-focused {
-    border-color: @input-border-color-focus;
-    box-shadow: @input-box-shadow-focus;
+    border-color: @form-new-border-color-focus;
+    box-shadow: @form-new-box-shadow-focus;
 
     .@{input-prefix}-inner,
     .@{input-prefix}-wrapper {
-      border-color: @input-border-color-focus;
-      box-shadow: @input-box-shadow-focus;
+      border-color: @form-new-border-color-focus;
+      box-shadow: @form-new-box-shadow-focus;
     }
   }
 
@@ -87,30 +87,6 @@
     transition: all var(--ix-transition-duration-fast) var(--ix-ease-in-out);
   }
 
-  &,
-  &-wrapper,
-  &-inner {
-    // border-width: 1px
-    padding: 0 7px 0 11px;
-  }
-
-  &-addon {
-    padding: 0 11px;
-
-    .@{selector-prefix} {
-      margin: 0 -11px;
-    }
-  }
-
-  &-clear {
-    right: 7px;
-  }
-
-  &-clearable:not(&-with-suffix) &-inner {
-    // icon-font-size + 4px
-    padding-right: 20px;
-  }
-
   &-with-addon-after,
   &-with-addon-before {
     display: inline-flex;
@@ -123,11 +99,21 @@
     }
   }
 
+  &-with-addon-before &-inner {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  &-with-addon-after &-inner {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
   &-addon {
     display: inline-block;
     text-align: center;
     background-color: @input-addon-background-color;
-    border: 1px solid @input-border-color;
+    border: 1px solid @form-new-border-color;
     white-space: nowrap;
 
     &:first-child {
@@ -163,6 +149,12 @@
         box-shadow: none;
       }
 
+      // TODO: select 那边要去掉这两个样式
+      &-item {
+        left: unset !important;
+        width: unset !important;
+      }
+
       &-item-label {
         width: 100%;
       }
@@ -189,8 +181,8 @@
   &-prefix {
     display: inline-flex;
     align-items: center;
-    color: @input-icon-color;
-    font-size: @input-icon-font-size;
+    color: @form-new-icon-color;
+    font-size: @form-new-icon-font-size;
   }
 
   &-prefix {
@@ -202,18 +194,23 @@
     cursor: pointer;
   }
 
+  &-clearable:not(&-with-suffix) &-inner {
+    padding-right: @form-new-icon-font-size;
+  }
+
   &-clear {
     position: absolute;
     z-index: 1;
-    color: @input-icon-color;
-    font-size: @input-icon-font-size;
+    right: 7px;
+    color: @form-new-icon-color;
+    font-size: @form-new-icon-font-size;
     cursor: pointer;
     opacity: 0;
-    background: @input-background-color;
+    background: @form-new-background-color;
     transition: all var(--ix-transition-duration-fast) var(--ix-ease-in-out);
 
     &:hover {
-      color: @input-icon-color-hover;
+      color: @form-new-icon-color-hover;
     }
 
     &.visible {
@@ -226,7 +223,7 @@
     display: inline-flex;
     align-items: center;
     width: 100%;
-    border: 1px solid @input-border-color;
+    border: 1px solid @form-new-border-color;
 
     .@{input-prefix}-inner {
       padding: 0;
@@ -237,25 +234,25 @@
 
   // form status
   &&-invalid {
-    border-color: @form-invalid-color;
+    border-color: @form-new-color-invalid;
 
     &:hover {
-      border-color: @form-invalid-color;
+      border-color: @form-new-color-invalid;
     }
 
     .@{input-prefix}-wrapper,
     .@{input-prefix}-inner {
-      border-color: @form-invalid-color;
+      border-color: @form-new-color-invalid;
 
       &:hover {
-        border-color: @form-invalid-color;
+        border-color: @form-new-color-invalid;
       }
     }
 
     &:focus,
     &.@{input-prefix}-focused {
-      border-color: @form-invalid-color;
-      box-shadow: @form-invalid-box-shadow;
+      border-color: @form-new-color-invalid;
+      box-shadow: @form-new-box-shadow-invalid;
 
       .@{input-prefix}-wrapper,
       .@{input-prefix}-inner {
@@ -264,8 +261,8 @@
     }
 
     .@{input-prefix}-addon {
-      color: @form-invalid-color;
-      border-color: @form-invalid-color;
+      color: @form-new-color-invalid;
+      border-color: @form-new-color-invalid;
 
       .@{selector-prefix} {
         &:hover &-content,
