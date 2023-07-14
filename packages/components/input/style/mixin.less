@@ -4,22 +4,40 @@
   width: 100%;
   min-width: 0;
   outline: 0;
-  color: @input-color;
-  border: 1px solid @input-border-color;
+  color: @form-new-color;
+  border: 1px solid @form-new-border-color;
 
   &[disabled] {
     cursor: not-allowed;
   }
 
-  .placeholder(@input-placeholder-color);
+  .placeholder(@form-new-placeholder-color);
 }
 
-.input-size(@height, @font-size, @border-radius) {
+.input-size(@height, @font-size, @padding-horizontal, @border-radius) {
   .reset-font-size(@font-size);
 
   height: @height;
 
   &,
+  .@{input-prefix}-addon,
+  .@{input-prefix}-inner,
+  .@{input-prefix}-wrapper {
+    padding: 0 @padding-horizontal;
+  }
+
+  .@{input-prefix}-suffix {
+    margin-right: calc(7px - @padding-horizontal);
+  }
+
+  .@{input-prefix}-addon {
+    .@{selector-prefix} {
+      margin: -5px -@padding-horizontal;
+    }
+  }
+
+  &,
+  .@{input-prefix}-inner,
   .@{input-prefix}-addon {
     border-radius: @border-radius;
   }
@@ -31,13 +49,13 @@
 }
 
 .input-disabled() {
-  color: @input-color-disabled;
-  background-color: @input-background-color-disabled;
-  border-color: @input-border-color;
+  color: @form-new-color-disabled;
+  background-color: @form-new-background-color-disabled;
+  border-color: @form-new-border-color;
   box-shadow: none;
   cursor: not-allowed;
 
   &:hover {
-    border-color: @input-border-color;
+    border-color: @form-new-border-color;
   }
 }

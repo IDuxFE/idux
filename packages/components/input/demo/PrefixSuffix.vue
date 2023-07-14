@@ -1,6 +1,6 @@
 <template>
   <IxSpace vertical>
-    <IxInput prefix="user" suffix="info-circle" placeholder="Prefix and suffix" />
+    <IxInput prefix="user" size="sm" clearable suffix="info-circle" placeholder="Prefix and suffix" />
     <IxInput placeholder="Prefix and suffix">
       <template #prefix><span>￥</span></template>
       <template #suffix><span>RMB</span></template>

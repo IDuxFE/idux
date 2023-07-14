@@ -65,11 +65,12 @@ export default defineComponent({
           disabled={accessor.disabled}
           focused={isFocused.value}
           prefix={prefix}
+          readonly={props.readonly}
           size={mergedSize.value}
           status={mergedStatus.value}
           suffix={suffix}
+          value={accessor.value}
           onClear={handleClear}
-          readonly={props.readonly}
           onInput={handleInput}
           onCompositionstart={handleCompositionStart}
           onCompositionend={handleCompositionEnd}

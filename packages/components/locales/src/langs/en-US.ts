@@ -67,8 +67,8 @@ const enUS: Locale = {
     totalSuffix: 'entries in total',
   },
   popconfirm: {
-    cancelText: 'No',
-    okText: 'Yes',
+    cancelText: 'Cancel',
+    okText: 'OK',
   },
   select: {
     limitMessage: 'Select ${0} or fewer items',
