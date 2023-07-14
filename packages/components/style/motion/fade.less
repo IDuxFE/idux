@@ -8,7 +8,9 @@
     transition-timing-function: linear;
   }
 
+  .@{idux-prefix}-@{className}-enter,
   .@{idux-prefix}-@{className}-enter-from,
+  .@{idux-prefix}-@{className}-leave,
   .@{idux-prefix}-@{className}-leave-to {
     opacity: 0;
   }
@@ -18,7 +20,7 @@
 .fade-motion(fade-fast, @transition-duration-fast);
 
 .@{idux-prefix}-fade-down {
-  &-enter-active{
+  &-enter-active {
     transition: opacity @transition-duration-fast @ease-in-out, transform @transition-duration-fast @ease-in-out;
   }
 
