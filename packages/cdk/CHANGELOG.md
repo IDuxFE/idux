@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.1](https://github.com/IDuxFE/idux/compare/v1.8.0...v1.8.1) (2023-07-14)
+
+### Bug Fixes
+
+- **comp:input:** sync design and update css variable ([#1602](https://github.com/IDuxFE/idux/issues/1602)) ([5a5eaea](https://github.com/IDuxFE/idux/commit/5a5eaea187b4af52e11da3135e8b4bd1ef2b2f34))
+
 ## [1.7.2](https://github.com/IDuxFE/idux/compare/v1.6.0...v1.7.2) (2023-06-28)
 
 ### Bug Fixes

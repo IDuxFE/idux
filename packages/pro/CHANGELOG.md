@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.1](https://github.com/IDuxFE/idux/compare/v1.8.0...v1.8.1) (2023-07-14)
+
+### Bug Fixes
+
+- **comp:icon:** update icon assets ([#1597](https://github.com/IDuxFE/idux/issues/1597)) ([cffe08c](https://github.com/IDuxFE/idux/commit/cffe08ceeab96144bc54523473f042b6222a5e5f))
+- **comp:input:** sync design and update css variable ([#1602](https://github.com/IDuxFE/idux/issues/1602)) ([5a5eaea](https://github.com/IDuxFE/idux/commit/5a5eaea187b4af52e11da3135e8b4bd1ef2b2f34))
+- **comp:text:** the lineClamp does not work ([#1596](https://github.com/IDuxFE/idux/issues/1596)) ([f9a33e5](https://github.com/IDuxFE/idux/commit/f9a33e5e8e2217b1db669086464ddaee92802af2))
+- **pro:search:** shortcut compont should provide comp name ([#1598](https://github.com/IDuxFE/idux/issues/1598)) ([12bf691](https://github.com/IDuxFE/idux/commit/12bf691c8eb4a83b1f0ca32fdb9d399f1929d495))
+
 # [1.8.0](https://github.com/IDuxFE/idux/compare/v1.7.2...v1.8.0) (2023-07-06)
 
 ### Bug Fixes
