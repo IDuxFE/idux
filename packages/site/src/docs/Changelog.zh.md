@@ -10,6 +10,16 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.8.1(2023-07-14)
+
+### Bug Fixes
+
+- **comp:icon:** 更新图标资源 ([#1597](https://github.com/IDuxFE/idux/issues/1597)) ([cffe08c](https://github.com/IDuxFE/idux/commit/cffe08ceeab96144bc54523473f042b6222a5e5f))
+- **comp:input:** 样式同步设计规范 ([#1602](https://github.com/IDuxFE/idux/issues/1602)) ([5a5eaea](https://github.com/IDuxFE/idux/commit/5a5eaea187b4af52e11da3135e8b4bd1ef2b2f34))
+- **comp:textarea:** firefox 下的 boxsizing 计算异常 ([#1599](https://github.com/IDuxFE/idux/issues/1599)) ([f68df61](https://github.com/IDuxFE/idux/commit/f68df6195f04f0770078e508970e839099170168))
+- **comp:text:** lineClamp 工作异常 ([#1596](https://github.com/IDuxFE/idux/issues/1596)) ([f9a33e5](https://github.com/IDuxFE/idux/commit/f9a33e5e8e2217b1db669086464ddaee92802af2))
+- **pro:search:** 未声明组件名称 ([#1598](https://github.com/IDuxFE/idux/issues/1598)) ([12bf691](https://github.com/IDuxFE/idux/commit/12bf691c8eb4a83b1f0ca32fdb9d399f1929d495))
+
 # 1.8.0(2023-07-06)
 
 ### Bug Fixes
