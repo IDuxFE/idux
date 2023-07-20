@@ -9,3 +9,6 @@
 | `@radio-border-color-hover` | `var(--ix-color-primary)` | - | - |
 | `@radio-border-color-focus` | `var(--ix-color-primary)` | - | - |
 | `@radio-label-padding` | `0 8px` | `0 4px` | - |
+| `@radio-fieldset-border-radius` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
+| `@radio-fieldset-background-color` | `var(--ix-background-color-light)` | - | - |
+| `@radio-fieldset-border-color` | `var(--ix-border-color-secondary)` | - | - |

@@ -162,4 +162,42 @@
       border-top-color: @checkbox-color-disabled;
     }
   }
+
+  &-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+
+  &-fieldset {
+    position: relative;
+    padding: 12px;
+    margin-top: 4px;
+    background-color: @checkbox-fieldset-background-color;
+    border: 1px solid @checkbox-fieldset-border-color;
+    border-radius: @checkbox-border-radius;
+
+    &-hidden {
+      display: none;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: -4px;
+      width: 7px;
+      height: 7px;
+      background-color: @checkbox-fieldset-background-color;
+      border-top: 1px solid @checkbox-fieldset-border-color;
+      border-left: 1px solid @checkbox-fieldset-border-color;
+      transform: rotate(45deg);
+    }
+
+    .@{form-prefix}-item:last-child {
+      .@{form-prefix}-item-message {
+        min-height: 0;
+      }
+    }
+  }
 }

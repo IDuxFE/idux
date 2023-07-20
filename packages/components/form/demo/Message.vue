@@ -35,10 +35,10 @@
         </IxCol>
       </IxRow>
     </IxFormItem>
-    <IxFormItem :controlCol="noLabelControlCol">
+    <IxFormItem :controlCol="noLabelControlCol" messageTooltip>
       <IxCheckbox control="agree">I have read the <a>agreement</a> </IxCheckbox>
     </IxFormItem>
-    <IxFormItem :controlCol="noLabelControlCol">
+    <IxFormItem style="margin: 8px 0" :controlCol="noLabelControlCol">
       <IxButton mode="primary" type="submit" @click="register">Register</IxButton>
     </IxFormItem>
   </IxForm>

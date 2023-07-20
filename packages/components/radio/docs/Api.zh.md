@@ -19,6 +19,12 @@
 | `onFocus` | 获取焦点后触发 | `(evt: FocusEvent) => void`| - | - | - |
 | `waveless` | 是否关闭按钮点击时波纹动画 | `boolean` | `false` | ✅ | 存在[浏览器兼容性](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Animations_API/Keyframe_Formats#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7) |
 
+#### RadioSlots
+
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| `default` | 自定义文本 | - | - |
+
 #### RadioMethods
 
 | 名称 | 说明 | 参数类型 | 备注 |
@@ -52,3 +58,9 @@ export interface RadioData extends RadioProps {
   key?: VKey
 }
 ```
+
+#### RadioGroupSlots
+
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| `fieldset` | 自定义组合控件的内容 | `{ value: any }` | - |

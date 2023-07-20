@@ -39,7 +39,7 @@
 | `@form-new-height-sm` | `var(--ix-height-sm)` | - | - |
 | `@form-new-height-md` | `var(--ix-height-md)` | - | - |
 | `@form-new-height-lg` | `var(--ix-height-lg)` | - | - |
-| `@form-new-padding-horizontal-sm` | `7px` | - | - |
+| `@form-new-padding-horizontal-sm` | `7px` | `11px` | - |
 | `@form-new-padding-horizontal-md` | `11px` | - | - |
 | `@form-new-padding-horizontal-lg` | `11px` | - | - |
 | `@form-new-font-size-sm` | `var(--ix-font-size-sm)` | `var(--ix-font-size-sm)` | - |

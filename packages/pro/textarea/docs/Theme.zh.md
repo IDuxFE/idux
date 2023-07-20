@@ -2,13 +2,13 @@
 | --- | --- | --- | --- |
 | `@pro-textarea-color` | `@form-color` | - | - |
 | `@pro-textarea-color-secondary` | `@form-color-secondary` | - | - |
-| `@pro-textarea-line-height` | `@form-line-height` | - | - |
+| `@pro-textarea-line-height` | `@form-line-height` | `20px` | - |
 | `@pro-textarea-font-size-sm` | `@form-font-size-sm` | - | - |
 | `@pro-textarea-font-size-md` | `@form-font-size-md` | - | - |
 | `@pro-textarea-font-size-lg` | `@form-font-size-lg` | - | - |
-| `@pro-textarea-padding-vertical-sm` | `@form-padding-vertical-sm` | - | - |
-| `@pro-textarea-padding-vertical-md` | `@form-padding-vertical-md` | - | - |
-| `@pro-textarea-padding-vertical-lg` | `@form-padding-vertical-lg` | - | - |
+| `@pro-textarea-padding-vertical-sm` | `@form-padding-vertical-sm` | `4px` | - |
+| `@pro-textarea-padding-vertical-md` | `@form-padding-vertical-md` | `6px` | - |
+| `@pro-textarea-padding-vertical-lg` | `@form-padding-vertical-lg` | `8px` | - |
 | `@pro-textarea-border-width` | `@form-border-width` | - | - |
 | `@pro-textarea-border-style` | `@form-border-style` | - | - |
 | `@pro-textarea-border-color` | `@form-border-color` | - | - |
@@ -32,3 +32,6 @@
 | `@pro-textarea-count-right` | `8px` | - | - |
 | `@pro-textarea-count-opacity` | `0.9` | - | - |
 | `@pro-textarea-count-color` | `@pro-textarea-placeholder-color` | - | - |
+| `@pro-textarea-padding-horizontal-sm` | - | `4px` | - |
+| `@pro-textarea-padding-horizontal-md` | - | `6px` | - |
+| `@pro-textarea-padding-horizontal-lg` | - | `8px` | - |

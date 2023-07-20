@@ -10,3 +10,5 @@
 | `@checkbox-border-color-focus` | `var(--ix-color-primary)` | - | - |
 | `@checkbox-border-radius` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
 | `@checkbox-label-padding` | `0 8px` | `0 4px` | - |
+| `@checkbox-fieldset-background-color` | `var(--ix-background-color-light)` | - | - |
+| `@checkbox-fieldset-border-color` | `var(--ix-border-color-secondary)` | - | - |

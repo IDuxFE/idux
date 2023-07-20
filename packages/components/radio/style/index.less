@@ -120,4 +120,42 @@
       background-color: var(--ix-background-color-medium);
     }
   }
+
+  &-group-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+
+  &-group-fieldset {
+    position: relative;
+    padding: 12px;
+    margin-top: 4px;
+    background-color: @radio-fieldset-background-color;
+    border: 1px solid @radio-fieldset-border-color;
+    border-radius: @radio-fieldset-border-radius;
+
+    &-hidden {
+      display: none;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: calc(var(--ix-radio-group-fieldset-arrow-offset, 0) + 4px);
+      top: -4px;
+      width: 7px;
+      height: 7px;
+      background-color: @radio-fieldset-background-color;
+      border-top: 1px solid @radio-fieldset-border-color;
+      border-left: 1px solid @radio-fieldset-border-color;
+      transform: rotate(45deg);
+    }
+
+    .@{form-prefix}-item:last-child {
+      .@{form-prefix}-item-message {
+        min-height: 0;
+      }
+    }
+  }
 }

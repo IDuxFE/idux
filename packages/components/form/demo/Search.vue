@@ -1,8 +1,8 @@
 <template>
   <IxForm class="demo-form" :control="formGroup" labelCol="8">
     <IxRow gutter="24">
-      <IxCol v-for="index in controlLength" :key="index" span="8">
-        <IxFormItem v-show="showMore || index < 7" :label="'Field ' + index">
+      <IxCol v-for="index in controlLength" v-show="showMore || index < 7" :key="index" span="8">
+        <IxFormItem :label="'Field ' + index">
           <IxInput :control="'field' + index"></IxInput>
         </IxFormItem>
       </IxCol>
