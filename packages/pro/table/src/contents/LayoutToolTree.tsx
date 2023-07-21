@@ -56,7 +56,8 @@ export default defineComponent({
       props.onDrop!(key, columns)
     }
 
-    const onFixedChange = (fixed: 'start' | 'end' | undefined, column: ProTableColumn) => {
+    const onFixedChange = (fixed: 'start' | 'end' | undefined, column: ProTableColumn, evt: MouseEvent) => {
+      evt.preventDefault()
       column.fixed = fixed
       loopColumns(column.children, child => {
         child.fixed = fixed
@@ -79,6 +80,7 @@ export default defineComponent({
         cascaderStrategy: 'all',
         checkable: true,
         checkedKeys: checkedKeys.value,
+        checkOnClick: true,
         draggable: true,
         dataSource,
         disabled: disableColumn,
@@ -101,24 +103,37 @@ export default defineComponent({
           const { fixed } = node
           if (fixed === 'start') {
             return [
-              <IxIcon name="vertical-align-center" title={noPin} onClick={() => onFixedChange(undefined, node)} />,
+              <IxIcon
+                name="vertical-align-center"
+                title={noPin}
+                onClick={evt => onFixedChange(undefined, node, evt)}
+              />,
               <IxIcon
                 name="vertical-align-top"
                 rotate={180}
                 title={endPin}
-                onClick={() => onFixedChange('end', node)}
+                onClick={evt => onFixedChange('end', node, evt)}
               />,
             ]
           }
           if (fixed === 'end') {
             return [
-              <IxIcon name="vertical-align-top" title={startPin} onClick={() => onFixedChange('start', node)} />,
-              <IxIcon name="vertical-align-center" title={noPin} onClick={() => onFixedChange(undefined, node)} />,
+              <IxIcon name="vertical-align-top" title={startPin} onClick={evt => onFixedChange('start', node, evt)} />,
+              <IxIcon
+                name="vertical-align-center"
+                title={noPin}
+                onClick={evt => onFixedChange(undefined, node, evt)}
+              />,
             ]
           }
           return [
-            <IxIcon name="vertical-align-top" title={startPin} onClick={() => onFixedChange('start', node)} />,
-            <IxIcon name="vertical-align-top" rotate={180} title={endPin} onClick={() => onFixedChange('end', node)} />,
+            <IxIcon name="vertical-align-top" title={startPin} onClick={evt => onFixedChange('start', node, evt)} />,
+            <IxIcon
+              name="vertical-align-top"
+              rotate={180}
+              title={endPin}
+              onClick={evt => onFixedChange('end', node, evt)}
+            />,
           ]
         },
       }
