@@ -98,6 +98,11 @@ const enUS: Locale = {
     separator: 'To',
     placeholder: ['Start time', 'End time'],
   },
+  tour: {
+    nextText: 'Next',
+    prevText: 'Previous',
+    finishText: 'Done',
+  },
   transfer: {
     toSelect: 'Available',
     selected: 'Selected',

@@ -71,6 +71,7 @@ import { IxTextarea } from '@idux/components/textarea'
 import { IxTimePicker, IxTimeRangePicker } from '@idux/components/time-picker'
 import { IxTimeline, IxTimelineItem } from '@idux/components/timeline'
 import { IxTooltip } from '@idux/components/tooltip'
+import { IxTour } from '@idux/components/tour'
 import { IxTransfer, IxTransferList } from '@idux/components/transfer'
 import { IxTree } from '@idux/components/tree'
 import { IxTreeSelect } from '@idux/components/tree-select'
@@ -179,6 +180,7 @@ const components = [
   IxTimeline,
   IxTimelineItem,
   IxTooltip,
+  IxTour,
   IxTree,
   IxTreeSelect,
   IxUpload,
@@ -272,3 +274,5 @@ export * from '@idux/components/upload'
 export * from '@idux/components/utils'
 export * from '@idux/components/version'
 export * from '@idux/components/watermark'
+
+export * from '@idux/components/tour'
