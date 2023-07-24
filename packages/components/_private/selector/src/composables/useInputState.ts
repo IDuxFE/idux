@@ -75,6 +75,7 @@ export function useInputState(props: SelectorProps, mergedSearchable: ComputedRe
   // 处理中文输入法下的回车无法触发 compositionEnd 事件的问题
   const handleEnterDown = (evt: KeyboardEvent) => {
     if (evt.code === 'Enter' && isComposing.value) {
+      evt.stopImmediatePropagation()
       handleCompositionEnd(evt as any)
     }
   }
