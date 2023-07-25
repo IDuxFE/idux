@@ -98,21 +98,14 @@ export default defineComponent({
       watch(
         isActive,
         active => {
-          let selectionStart = -1
           nextTick(() => {
             if (active) {
               segmentInputRef.value?.getInputElement().focus()
-              if (props.input) {
-                selectionStart = props.input.length
-              }
-            } else {
-              selectionStart = 0
             }
 
-            if (selectionStart !== -1) {
-              updateSelectionStart(selectionStart)
-              handleSegmentSelect(props.segment.name, selectionStart)
-            }
+            updateSelectionStart(
+              (props.selectionStart ?? -1) === -1 ? (active ? props.input?.length ?? 0 : 0) : props.selectionStart ?? 0,
+            )
           })
         },
         { immediate: true },
@@ -151,11 +144,8 @@ export default defineComponent({
       setOverlayOpened(false)
       handleSegmentCancel(props.segment.name)
     }
-    const handleMouseDown = (evt: MouseEvent) => {
-      evt.stopImmediatePropagation()
-    }
 
-    const { handleInput, handleFocus, handleKeyDown, setPanelOnKeyDown } = useInputEvents(
+    const { handleInput, handleFocus, handleKeyDown, handleMouseDown, setPanelOnKeyDown } = useInputEvents(
       props,
       context,
       segmentInputRef,
@@ -241,6 +231,7 @@ interface InputEventHandlers {
   handleInput: (input: string) => void
   handleFocus: (evt: FocusEvent) => void
   handleKeyDown: (evt: KeyboardEvent) => void
+  handleMouseDown: (evt: MouseEvent) => void
   setPanelOnKeyDown: (onKeyDown: ((evt: KeyboardEvent) => boolean) | undefined) => void
 }
 
@@ -285,6 +276,11 @@ function useInputEvents(
     setOverlayOpened(true)
     setSelectionStart()
   }
+  const handleMouseDown = (evt: MouseEvent) => {
+    evt.stopImmediatePropagation()
+    setSelectionStart()
+  }
+
   const handleKeyDown = (evt: KeyboardEvent) => {
     evt.stopPropagation()
     if (overlayOpened.value && panelOnKeyDown.value && !panelOnKeyDown.value(evt)) {
@@ -340,6 +336,7 @@ function useInputEvents(
     handleInput,
     handleFocus,
     handleKeyDown,
+    handleMouseDown,
     setPanelOnKeyDown,
   }
 }

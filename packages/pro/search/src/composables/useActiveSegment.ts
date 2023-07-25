@@ -81,10 +81,11 @@ export function useActiveSegment(
     }
 
     let targetIndex = activeSegmentIndex.value + offset
+
     while (
-      !flattenedSegments.value[targetIndex].segmentVisible &&
       targetIndex > 0 &&
-      targetIndex < flattenedSegments.value.length - 1
+      targetIndex < flattenedSegments.value.length - 1 &&
+      !flattenedSegments.value[targetIndex]?.segmentVisible
     ) {
       targetIndex = offset > 0 ? targetIndex + 1 : targetIndex - 1
     }
