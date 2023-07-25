@@ -6,14 +6,12 @@
  */
 
 import type { ProSearchProps, SearchValue } from '../types'
-
-import { type ComputedRef, computed } from 'vue'
+import type { ComputedRef } from 'vue'
 
 import { useControlledProp } from '@idux/cdk/utils'
 
 export interface SearchValueContext {
   searchValues: ComputedRef<SearchValue[] | undefined>
-  searchValueEmpty: ComputedRef<boolean>
   setSearchValues: (values: SearchValue[]) => void
 }
 
@@ -21,11 +19,9 @@ export const tempSearchStateKey = 'temp'
 
 export function useSearchValues(props: ProSearchProps): SearchValueContext {
   const [searchValues, setSearchValues] = useControlledProp(props, 'value')
-  const searchValueEmpty = computed(() => !searchValues.value || searchValues.value.length <= 0)
 
   return {
     searchValues,
-    searchValueEmpty,
     setSearchValues,
   }
 }
