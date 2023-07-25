@@ -5,7 +5,7 @@
     :searchFields="searchFields"
     :onChange="onChange"
     :onSearch="onSearch"
-    overlayContainer="demo-pro-search-custom"
+    overlayContainer=".demo-pro-search-custom"
   >
     <template #userForm="{ value, setValue, ok }">
       <IxSpace class="demo-pro-search-custom-user-form" vertical>

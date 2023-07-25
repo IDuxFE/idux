@@ -129,6 +129,7 @@ export default defineComponent({
         class={`${mergedPrefixCls.value}-temp-segment-input`}
         style={nameInputStyle.value}
         value={input.value}
+        ellipsis={false}
         onMousedown={handleMouseDown}
         onInput={handleInput}
         onKeydown={handleKeyDown}
