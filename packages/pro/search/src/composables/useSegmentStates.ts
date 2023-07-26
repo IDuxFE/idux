@@ -64,7 +64,7 @@ export function useSegmentStates(
         res[state.name] = {
           ...state,
           index,
-          selectionStart: segmentSelectionStarts.value[state.name] ?? 0,
+          selectionStart: segmentSelectionStarts.value[state.name] ?? -1,
         }
 
         return res
@@ -91,7 +91,7 @@ export function useSegmentStates(
       return
     }
 
-    const targetSegmentStateName = searchState.value?.segmentStates[currentIndex + _offset].name
+    const targetSegmentStateName = searchState.value?.segmentStates[currentIndex + _offset]?.name
     const targetSegmentState = targetSegmentStateName && segmentStates.value[targetSegmentStateName]
     if (!targetSegmentState) {
       return
@@ -115,7 +115,7 @@ export function useSegmentStates(
     updateSegmentValue(props.searchItem!.key, name, value)
   }
   const handleSegmentSelect = (name: string, selectionStart: number | undefined | null) => {
-    segmentSelectionStarts.value[name] = selectionStart ?? 0
+    segmentSelectionStarts.value[name] = selectionStart ?? -1
   }
   const confirmSearchItem = () => {
     const key = props.searchItem!.key
