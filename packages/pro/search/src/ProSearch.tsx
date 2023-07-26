@@ -64,11 +64,14 @@ export default defineComponent({
     const tempSegmentInputRef = ref<HTMLInputElement>()
 
     const searchValueContext = useSearchValues(props)
-    const { searchValues, searchValueEmpty } = searchValueContext
+    const { searchValues } = searchValueContext
     const resolvedSearchFieldsContext = useResolvedSearchFields(props, mergedPrefixCls, dateConfig)
     const { fieldKeyMap } = resolvedSearchFieldsContext
     const searchStateContext = useSearchStates(props, fieldKeyMap, searchValueContext)
-    const { initSearchStates, clearSearchState, updateSearchValues, isSegmentVisible } = searchStateContext
+    const { searchStates, initSearchStates, clearSearchState, updateSearchValues, isSegmentVisible } =
+      searchStateContext
+
+    const searchStateEmpty = computed(() => !searchStates.value || searchStates.value.length <= 0)
 
     const errors = useSearchItemErrors(props, searchValues)
     const searchItems = useSearchItems(fieldKeyMap, searchStateContext.searchStates, errors)
@@ -196,11 +199,11 @@ export default defineComponent({
                 getKey={item => item.key ?? 'name-select'}
                 maxLabel={focused.value ? Number.MAX_SAFE_INTEGER : props.maxLabel}
               />
-              {searchValueEmpty.value && !isActive.value && (
+              {searchStateEmpty.value && !isActive.value && (
                 <span class={`${prefixCls}-placeholder`}>{placeholder.value}</span>
               )}
             </div>
-            {!searchValueEmpty.value && clearable.value && !props.disabled && (
+            {!searchStateEmpty.value && clearable.value && !props.disabled && (
               <div
                 class={`${prefixCls}-clear-icon`}
                 onMousedown={handleClearBtnMouseDown}
