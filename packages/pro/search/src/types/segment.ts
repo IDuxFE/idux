@@ -62,6 +62,7 @@ export type SegmentProps = ExtractInnerPropTypes<typeof segmentProps>
 export const segmentIputProps = {
   value: String,
   disabled: Boolean,
+  ellipsis: Boolean,
   placeholder: String,
   onInput: [Function, Array] as PropType<MaybeArray<(input: string) => void>>,
   onWidthChange: [Function, Array] as PropType<MaybeArray<(width: number) => void>>,

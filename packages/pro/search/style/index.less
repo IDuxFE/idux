@@ -130,7 +130,7 @@
 
   &-search-item {
     display: inline-flex;
-    max-width: 250px;
+    max-width: 350px;
     align-items: center;
     height: @pro-search-item-height;
     padding: @pro-search-item-tag-padding;
@@ -146,13 +146,6 @@
       color: @color-graphite-d10;
       cursor: pointer;
       box-sizing: content-box;
-    }
-    &-segments {
-      position: relative;
-      overflow: hidden;
-      display: inline-flex;
-      align-items: center;
-      color: @color-graphite-d40;
     }
 
     &-close-icon {
@@ -180,30 +173,33 @@
       }
     }
 
-    .@{pro-search-prefix}-segment-input-inner {
+    .@{pro-search-prefix}-segment-input {
       padding-right: @pro-search-segment-margin;
       padding-left: @pro-search-segment-margin;
+      max-width: @pro-search-segment-max-width;
+
       .@{pro-search-prefix}:not(.@{pro-search-prefix}-disabled) &:hover {
         color: @color-primary;
       }
     }
   }
-  &:not(&-focused) {
-    .@{pro-search-prefix}-search-item-tag {
-      max-width: @pro-search-item-tag-max-width;
-    }
-  }
 
   &-segment-input {
+    display: flex;
     height: 100%;
-    max-width: 100%;
+    color: @color-graphite-d40;
+
+    &-ellipsis-left, &-ellipsis-right {
+      flex-shrink: 0;
+    }
 
     &-inner {
+      flex: auto;
       height: 100%;
-      max-width: 100%;
       min-width: 1px;
       outline: none;
       box-sizing: content-box;
+      color: inherit;
       .placeholder(@pro-search-placeholder-color);
     }
     &-disabled &-inner {
@@ -222,6 +218,7 @@
   }
   &-temp-segment-input {
     margin-left: 8px;
+    height: @pro-search-item-height;
   }
   &-name-segment-overlay {
     .overlay()

@@ -165,6 +165,7 @@ export default defineComponent({
         class={inputClasses.value}
         value={props.input ?? ''}
         disabled={props.disabled}
+        ellipsis={true}
         placeholder={props.segment.placeholder}
         onInput={handleInput}
         onFocus={handleFocus}

@@ -5,9 +5,22 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type CSSProperties, computed, defineComponent, inject, normalizeClass, onMounted, ref, watch } from 'vue'
+import {
+  type CSSProperties,
+  type Ref,
+  computed,
+  defineComponent,
+  inject,
+  normalizeClass,
+  onMounted,
+  onUnmounted,
+  ref,
+  watch,
+} from 'vue'
 
-import { callEmit, convertCssPixel, useState } from '@idux/cdk/utils'
+import { useResizeObserver } from '@idux/cdk/resize'
+import { getScroll, setScroll } from '@idux/cdk/scroll'
+import { callEmit, convertCssPixel, useEventListener, useState } from '@idux/cdk/utils'
 
 import { proSearchContext } from '../../token'
 import { type SegmentInputProps, segmentIputProps } from '../../types'
@@ -19,6 +32,7 @@ export default defineComponent({
   setup(props: SegmentInputProps, { attrs, expose }) {
     const { mergedPrefixCls } = inject(proSearchContext)!
 
+    const segmentWrapperRef = ref<HTMLElement>()
     const segmentInputRef = ref<HTMLInputElement>()
 
     const [inputWidth, setInputWidth] = useState(0)
@@ -60,13 +74,24 @@ export default defineComponent({
     })
 
     const { handleInput, handleCompositionStart, handleCompositionEnd } = useInputEvents(props)
+    const segmentScroll = useSegmentScroll(props, segmentInputRef)
+
+    const leftSideEllipsis = computed(() => segmentScroll.value.left > 1)
+    const rightSideEllipsis = computed(() => segmentScroll.value.right > 1)
 
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-segment-input`
       const { class: className, style, ...rest } = attrs
 
       return (
-        <span class={normalizeClass([classes.value, className])}>
+        <span ref={segmentWrapperRef} class={normalizeClass([classes.value, className])}>
+          <span
+            v-show={props.ellipsis && leftSideEllipsis.value}
+            class={`${prefixCls}-ellipsis-left`}
+            key="__ellisps_left__"
+          >
+            ...
+          </span>
           <input
             ref={segmentInputRef}
             class={`${prefixCls}-inner`}
@@ -79,6 +104,13 @@ export default defineComponent({
             onCompositionend={handleCompositionEnd}
             {...rest}
           ></input>
+          <span
+            v-show={props.ellipsis && rightSideEllipsis.value}
+            class={`${prefixCls}-ellipsis-right`}
+            key="__ellisps_right__"
+          >
+            ...
+          </span>
           <MeasureElement onWidthChange={setInputWidth}>{props.value || props.placeholder || ''}</MeasureElement>
         </span>
       )
@@ -115,4 +147,62 @@ function useInputEvents(props: SegmentInputProps): InputEventHandlers {
     handleCompositionStart,
     handleCompositionEnd,
   }
+}
+
+interface SegmentScroll {
+  left: number
+  right: number
+}
+
+function useSegmentScroll(props: SegmentInputProps, inputRef: Ref<HTMLInputElement | undefined>) {
+  const [segmentScroll, setSegmentScroll] = useState<SegmentScroll>({ left: 0, right: 0 }, true)
+  let inputWidth = 0
+  let oldSegmentScroll: SegmentScroll = { left: 0, right: 0 }
+
+  let stopScrollListen: (() => void) | undefined
+  let stopResizeListen: (() => void) | undefined
+
+  const getScrolls = (): SegmentScroll => {
+    const el = inputRef.value
+    if (!el) {
+      return { left: 0, right: 0 }
+    }
+
+    const { scrollLeft } = getScroll(el)
+    return {
+      left: scrollLeft,
+      right: Math.max(el.scrollWidth - scrollLeft - el.offsetWidth, 0),
+    }
+  }
+
+  const updateScroll = () => {
+    oldSegmentScroll = segmentScroll.value
+    setSegmentScroll(getScrolls())
+  }
+
+  onMounted(() => {
+    inputWidth = inputRef.value?.offsetWidth ?? 0
+
+    if (props.ellipsis) {
+      stopScrollListen = useEventListener(inputRef, 'scroll', updateScroll)
+      stopResizeListen = useResizeObserver(inputRef, () => {
+        const width = inputRef.value?.offsetWidth ?? 0
+        const widthOffset = inputWidth - width
+        inputWidth = width
+
+        if (widthOffset > 0 && segmentScroll.value.left > 0 && oldSegmentScroll.left <= 0) {
+          setScroll({ scrollLeft: segmentScroll.value.left + widthOffset }, inputRef.value)
+        } else {
+          updateScroll()
+        }
+      })
+    }
+  })
+
+  onUnmounted(() => {
+    stopScrollListen?.()
+    stopResizeListen?.()
+  })
+
+  return segmentScroll
 }
