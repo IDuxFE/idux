@@ -9,7 +9,20 @@
   </ul>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+
+import { useLoadingBar } from '@idux/components/loading-bar'
+const { start, finish } = useLoadingBar()
+const router = useRouter()
+router.beforeEach((_to, _from, next) => {
+  start()
+  next()
+})
+router.afterEach(() => {
+  finish()
+})
+</script>
 
 <style lang="less">
 .floatSetting {
