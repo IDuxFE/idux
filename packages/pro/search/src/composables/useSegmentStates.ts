@@ -39,7 +39,6 @@ export function useSegmentStates(
   props: SearchItemProps,
   proSearchProps: ProSearchProps,
   proSearchContext: ProSearchContext,
-  isActive: ComputedRef<boolean>,
 ): SegmentStatesContext {
   const {
     initSearchState,
@@ -173,11 +172,35 @@ export function useSegmentStates(
     }
   }
 
-  watch([isActive, () => props.searchItem?.resolvedSearchField], ([active, searchField]) => {
-    if (!active || !searchField) {
-      initSearchState(props.searchItem!.key)
-    }
-  })
+  watch(
+    [activeSegment, () => props.searchItem?.resolvedSearchField],
+    ([activeSegment, searchField], [preActiveSegment]) => {
+      if (activeSegment?.itemKey === props.searchItem?.key) {
+        return
+      }
+
+      if (!searchField) {
+        initSearchState(props.searchItem!.key)
+        return
+      }
+
+      const preSegment = props.searchItem?.resolvedSearchField.segments.find(seg => seg.name === preActiveSegment?.name)
+
+      // if current segment has no panel and the whole search item is valid after input
+      // then update search values
+      //
+      // we do this to improve user experience
+      // because always pressing `Enter` after input to trigger update could be annoying
+      if (preSegment && !preSegment.panelRenderer && validateSearchState(props.searchItem!.key)) {
+        updateSearchValues()
+      } else {
+        initSearchState(props.searchItem!.key)
+      }
+    },
+    {
+      flush: 'post',
+    },
+  )
 
   return {
     searchState,

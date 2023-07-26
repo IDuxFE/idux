@@ -47,7 +47,7 @@ export default defineComponent({
       segmentsRef.value?.scrollTo(0, 0)
     })
 
-    const segmentStateContext = useSegmentStates(props, proSearchProps, context, isActive)
+    const segmentStateContext = useSegmentStates(props, proSearchProps, context)
     const segmentOverlayUpdateContext = useSegmentOverlayUpdate()
     const { searchState, segmentStates } = segmentStateContext
 
