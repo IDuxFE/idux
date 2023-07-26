@@ -49,6 +49,7 @@ export function useSearchStates(
   const { searchValues, setSearchValues } = searchValueContext
   const getKey = createStateKeyGetter()
   const { isMarked, getMarks, mark, unmark, clearMarks } = useSearchStateMarks()
+  let queuedUpdateCnt = 0
 
   const searchStates = ref<SearchState[]>([])
   const searchStateKeyMap = computed(() => {
@@ -294,7 +295,7 @@ export function useSearchStates(
     return newSearchState
   }
 
-  function updateSearchValues() {
+  function _updateSearchValues() {
     const newSearchValues = searchStates.value
       .map(state => {
         // filters invalid searchValues
@@ -317,6 +318,29 @@ export function useSearchStates(
       setSearchValues(newSearchValues)
       callEmit(props.onChange, toRaw(newSearchValues), toRaw(oldeSearchValue))
     }
+  }
+  function updateSearchValues() {
+    queuedUpdateCnt++
+
+    if (queuedUpdateCnt > 1) {
+      return
+    }
+
+    const exec = () => {
+      _updateSearchValues()
+
+      // queue update operation until next macro task loop
+      // to prevent repeated updates
+      setTimeout(() => {
+        queuedUpdateCnt--
+
+        if (queuedUpdateCnt > 0) {
+          exec()
+        }
+      })
+    }
+
+    exec()
   }
 
   const updateSegmentValue = (key: VKey, name: string, value: unknown) => {
