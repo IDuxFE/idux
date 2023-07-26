@@ -144,6 +144,7 @@ export default defineComponent({
         multiple,
         leafLineIcon,
         virtual,
+        virtualItemHeight,
         searchable,
         showLine,
         searchPlaceholder,
@@ -203,6 +204,7 @@ export default defineComponent({
           loadChildren={loadChildren}
           leafLineIcon={leafLineIcon}
           virtual={virtual}
+          virtualItemHeight={virtualItemHeight}
           selectable={multiple ? 'multiple' : true}
           selectedKeys={selectedValue.value}
           searchValue={searchFn !== false ? inputValue.value : undefined}

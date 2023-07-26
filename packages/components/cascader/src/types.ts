@@ -45,6 +45,7 @@ export const cascaderPanelProps = {
   separator: { type: String, default: '/' },
   strategy: { type: String as PropType<CascaderStrategy>, default: 'all' },
   virtual: { type: Boolean, default: false },
+  virtualItemHeight: { type: Number, default: 32 },
 
   // events
   'onUpdate:selectedKeys': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,
@@ -57,7 +58,6 @@ export const cascaderPanelProps = {
 
   // private
   _virtualScrollHeight: { type: Number, default: 256 },
-  _virtualScrollItemHeight: { type: Number, default: 32 },
 } as const
 
 export const cascaderProps = {
@@ -104,13 +104,14 @@ export const cascaderProps = {
   readonly: { type: Boolean, default: false },
   searchable: { type: [Boolean, String] as PropType<boolean | 'overlay'>, default: false },
   searchFn: { type: [Boolean, Function] as PropType<boolean | CascaderSearchFn>, default: true },
+  searchPlaceholder: { type: String, default: undefined },
   separator: { type: String, default: '/' },
   size: { type: String as PropType<FormSize>, default: undefined },
   status: String as PropType<ValidateStatus>,
   strategy: { type: String as PropType<CascaderStrategy>, default: 'all' },
   suffix: { type: String, default: undefined },
   virtual: { type: Boolean, default: false },
-  searchPlaceholder: { type: String, default: undefined },
+  virtualItemHeight: { type: Number, default: undefined },
 
   // events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,
@@ -133,10 +134,7 @@ export type CascaderPanelComponent = DefineComponent<
 export type CascaderPanelInstance = InstanceType<DefineComponent<CascaderProps, CascaderBindings>>
 
 export type CascaderProps = ExtractInnerPropTypes<typeof cascaderProps>
-export type CascaderPublicProps = Omit<
-  ExtractPublicPropTypes<typeof cascaderProps>,
-  'overlayHeight' | 'overlayItemHeight'
->
+export type CascaderPublicProps = Omit<ExtractPublicPropTypes<typeof cascaderProps>, 'overlayHeight'>
 export interface CascaderBindings {
   blur: () => void
   focus: (options?: FocusOptions) => void

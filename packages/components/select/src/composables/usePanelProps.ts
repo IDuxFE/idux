@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { SelectData, SelectPanelProps, SelectProps } from '../types'
+import type { SelectData, SelectPanelPublicProps, SelectProps } from '../types'
 
 import { type ComputedRef, computed } from 'vue'
 
@@ -17,7 +17,7 @@ export function usePanelProps(
   activeValue: ComputedRef<VKey | undefined>,
   setActiveValue: (value: VKey | undefined) => void,
   onOptionClick: (option: SelectData, evt: Event) => void,
-): ComputedRef<SelectPanelProps> {
+): ComputedRef<SelectPanelPublicProps> {
   return computed(() => ({
     activeValue: activeValue.value,
     selectedKeys: convertArray(valueRef.value),
@@ -29,12 +29,12 @@ export function usePanelProps(
     multiple: props.multiple,
     multipleLimit: props.multipleLimit,
     virtual: props.virtual,
+    virtualItemHeight: props.virtualItemHeight,
     'onUpdate:activeValue': setActiveValue,
     onOptionClick,
     onScroll: props.onScroll,
     onScrolledChange: props.onScrolledChange,
     onScrolledBottom: props.onScrolledBottom,
     _virtualScrollHeight: props.overlayHeight,
-    _virtualScrollItemHeight: props.overlayItemHeight,
   }))
 }

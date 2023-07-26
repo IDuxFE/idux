@@ -160,14 +160,9 @@ export const transferProps = {
     type: [Boolean, Object] as PropType<boolean | { source: boolean; target: boolean }>,
     default: undefined,
   },
-  showSelectAll: {
-    type: Boolean,
-    default: undefined,
-  },
-  virtual: {
-    type: Boolean,
-    default: false,
-  },
+  showSelectAll: { type: Boolean, default: undefined },
+  virtual: { type: Boolean, default: false },
+  virtualItemHeight: { type: Number, default: undefined },
 
   //Events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
@@ -241,11 +236,10 @@ export const transferListProps = {
   disabled: Function as PropType<(item: TransferData) => boolean>,
   getKey: Function as PropType<(item: TransferData) => VKey>,
   labelKey: String,
-  virtual: {
-    type: Boolean,
-    default: false,
-  },
   scroll: Object as PropType<TransferScroll>,
+  virtual: { type: Boolean, default: false },
+  virtualItemHeight: { type: Number, default: 32 },
+
   onCheckChange: [Function, Array] as PropType<MaybeArray<(item: TransferData, checked: boolean) => void>>,
   onRemove: [Function, Array] as PropType<MaybeArray<(item: TransferData) => void>>,
   onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,

@@ -33,14 +33,14 @@ export default defineComponent({
       const { dataSource } = props
       let children: VNode
       if (dataSource.length > 0) {
-        const { _virtualScrollHeight, _virtualScrollItemHeight, virtual } = cascaderPanelProps
+        const { _virtualScrollHeight, virtualItemHeight, virtual } = cascaderPanelProps
         const itemRender: VirtualItemRenderFn<MergedData> = ({ item, index }) => <Option index={index} {...item} />
         children = (
           <CdkVirtualScroll
             dataSource={dataSource}
             getKey="key"
             height={_virtualScrollHeight}
-            itemHeight={_virtualScrollItemHeight}
+            itemHeight={virtualItemHeight}
             itemRender={itemRender}
             virtual={virtual}
           />

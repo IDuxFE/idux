@@ -98,6 +98,7 @@ export function useTransferTreeProps<V extends TreeTransferData<V, C>, C extends
       loadChildren: loadChildren.value,
       selectable: true,
       virtual: props.virtual,
+      virtualItemHeight: props.virtualItemHeight,
       onCheck: handleChecked,
       'onUpdate:checkedKeys': handleCheckedKeysUpdate,
       'onUpdate:expandedKeys': isSource ? handleSourceExpandedChange : handleTargetExpandedChange,

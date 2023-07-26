@@ -153,6 +153,7 @@ export default defineComponent({
         selectable: props.selectable,
         searchFn: props.searchFn,
         virtual: props.virtual,
+        virtualItemHeight: props.virtualItemHeight,
 
         loadChildren: props.loadChildren,
         onCheck: props.onCheck,

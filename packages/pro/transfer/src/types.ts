@@ -70,10 +70,7 @@ export const proTransferProps = {
     type: Boolean as PropType<boolean>,
     default: false,
   },
-  virtual: {
-    type: Boolean as PropType<boolean>,
-    default: false,
-  },
+
   searchable: {
     type: [Boolean, Object] as PropType<boolean | { source: boolean; target: boolean }>,
     default: false,
@@ -105,6 +102,8 @@ export const proTransferProps = {
   },
   sourceExpandedKeys: Array as PropType<VKey[]>,
   targetExpandedKeys: Array as PropType<VKey[]>,
+  virtual: { type: Boolean, default: false },
+  virtualItemHeight: { type: Number, default: undefined },
 
   //Events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
