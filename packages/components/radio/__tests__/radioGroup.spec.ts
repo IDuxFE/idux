@@ -129,4 +129,22 @@ describe('RadioGroup', () => {
 
     expect(wrapper.findAll('.ix-radio-md').length).toBe(4)
   })
+
+  test('fieldset slot work', async () => {
+    const wrapper = RadioGroupMount({
+      slots: { fieldset: ({ value }: { value: string }) => value },
+    })
+
+    expect(wrapper.classes()).toContain('ix-radio-group-wrapper')
+    expect(wrapper.find('.ix-radio-group-fieldset').classes()).toContain('ix-radio-group-fieldset-hidden')
+    expect(wrapper.find('.ix-radio-group-fieldset').text()).toBe('')
+
+    await wrapper.setProps({ value: 'a' })
+
+    expect(wrapper.find('.ix-radio-group-fieldset').classes()).not.toContain('ix-radio-group-fieldset-hidden')
+    expect(wrapper.find('.ix-radio-group-fieldset').text()).toBe('a')
+
+    await wrapper.setProps({ value: 'b' })
+    expect(wrapper.find('.ix-radio-group-fieldset').text()).toBe('b')
+  })
 })

@@ -9,10 +9,10 @@
     <IxFormItem label="Contact" required :message="getContactMessage">
       <IxInput control="contact"></IxInput>
     </IxFormItem>
-    <IxFormItem :controlCol="{ offset: 6 }">
+    <IxFormItem :controlCol="{ offset: 6 }" messageTooltip>
       <IxCheckbox control="subscribe">Subscribe notifications</IxCheckbox>
     </IxFormItem>
-    <IxFormItem :controlCol="{ offset: 6 }">
+    <IxFormItem style="margin: 8px 0" :controlCol="{ offset: 6 }">
       <IxButton mode="primary" type="submit" @click="onSubmit">Submit</IxButton>
     </IxFormItem>
   </IxForm>

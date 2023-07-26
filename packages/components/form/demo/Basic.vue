@@ -11,10 +11,10 @@
         </template>
       </IxInput>
     </IxFormItem>
-    <IxFormItem>
+    <IxFormItem messageTooltip>
       <IxCheckbox control="remember">Remember me</IxCheckbox>
     </IxFormItem>
-    <IxFormItem>
+    <IxFormItem style="margin: 8px 0" messageTooltip>
       <IxButton mode="primary" block type="submit" @click="login">Login</IxButton>
     </IxFormItem>
     <IxRow>

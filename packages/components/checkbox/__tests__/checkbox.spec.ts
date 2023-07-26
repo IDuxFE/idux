@@ -219,4 +219,19 @@ describe('Checkbox', () => {
 
     expect(wrapper.find('.ix-wave').exists()).toBeFalsy()
   })
+
+  test('fieldset slot work', async () => {
+    const fieldsetText = 'this is fieldset'
+    const wrapper = CheckboxMount({
+      slots: { fieldset: () => fieldsetText },
+    })
+
+    expect(wrapper.classes()).toContain('ix-checkbox-wrapper')
+    expect(wrapper.find('.ix-checkbox-fieldset').classes()).toContain('ix-checkbox-fieldset-hidden')
+    expect(wrapper.find('.ix-checkbox-fieldset').text()).toBe(fieldsetText)
+
+    await wrapper.setProps({ checked: true })
+
+    expect(wrapper.find('.ix-checkbox-fieldset').classes()).not.toContain('ix-checkbox-fieldset-hidden')
+  })
 })

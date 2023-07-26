@@ -67,7 +67,7 @@ export default defineComponent({
       const buttoned = isButtoned.value
       const prefixCls = mergedPrefixCls.value
       const commonPrefixCls = common.prefixCls
-      const classes = {
+      return normalizeClass({
         [prefixCls]: true,
         [`${prefixCls}-checked`]: !indeterminate && isChecked.value,
         [`${prefixCls}-disabled`]: isDisabled.value,
@@ -78,21 +78,21 @@ export default defineComponent({
         [`${commonPrefixCls}-button-default`]: buttoned,
         [`${commonPrefixCls}-button-disabled`]: buttoned && isDisabled.value,
         [`${commonPrefixCls}-button-${buttonSizeMap[size.value]}`]: buttoned,
-      }
-      return normalizeClass([classes, attrs.class])
+      })
     })
 
     return () => {
       const { autofocus, label } = props
       const { class: className, style, type, tabindex, ...restAttrs } = attrs
       const prefixCls = mergedPrefixCls.value
+      const checked = isChecked.value
       const labelNode = convertStringVNode(slots.default, label)
-      return (
+      const checkboxNode = (
         <label
-          class={classes.value}
-          style={style as string}
+          class={slots.fieldset ? classes.value : normalizeClass([classes.value, className])}
+          style={slots.fieldset ? undefined : (style as string)}
           role="checkbox"
-          aria-checked={isChecked.value}
+          aria-checked={checked}
           aria-disabled={isDisabled.value}
         >
           <span class={`${prefixCls}-input`}>
@@ -104,7 +104,7 @@ export default defineComponent({
               autofocus={autofocus}
               name={mergedName.value}
               value={mergedValue.value}
-              checked={isChecked.value}
+              checked={checked}
               disabled={isDisabled.value}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -122,6 +122,19 @@ export default defineComponent({
           {labelNode && <span class={`${prefixCls}-label`}>{labelNode}</span>}
         </label>
       )
+
+      if (slots.fieldset) {
+        return (
+          <div class={normalizeClass([`${prefixCls}-wrapper`, className])} style={style as string}>
+            {checkboxNode}
+            <div class={normalizeClass([`${prefixCls}-fieldset`, !checked ? `${prefixCls}-fieldset-hidden` : ''])}>
+              {slots.fieldset()}
+            </div>
+          </div>
+        )
+      }
+
+      return checkboxNode
     }
   },
 })
