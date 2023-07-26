@@ -1,8 +1,12 @@
 <template>
-  <div>
-    <IxTag :number="3">低危</IxTag>
-    <IxTag color="#fa721b" :number="4">中危</IxTag>
-    <IxTag color="#cf171d" :number="7">高危</IxTag>
-    <IxTag color="#82010e" :number="10">已失陷</IxTag>
-  </div>
+  <IxTag :number="3">低危</IxTag>
+  <IxTag :number="4" status="risk">中危</IxTag>
+  <IxTag :number="7" status="error">高危</IxTag>
+  <IxTag :number="10" status="fatal">已失陷</IxTag>
+  <br />
+  <br />
+  <IxTag filled :number="3">低危</IxTag>
+  <IxTag filled :number="4" status="risk">中危</IxTag>
+  <IxTag filled :number="7" status="error">高危</IxTag>
+  <IxTag filled :number="10" status="fatal">已失陷</IxTag>
 </template>

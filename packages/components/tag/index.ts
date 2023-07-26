@@ -19,9 +19,10 @@ export type {
   TagInstance,
   TagComponent,
   TagPublicProps as TagProps,
-  TagShape,
   TagGroupInstance,
   TagGroupComponent,
   TagGroupPublicProps as TagGroupProps,
   TagData,
+  TagShape,
+  TagStatus,
 } from './src/types'

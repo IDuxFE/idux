@@ -2,59 +2,81 @@
 @import './mixin.less';
 
 .@{tag-prefix} {
-  .reset-component();
+  .reset-component-new();
+  .reset-font-size();
 
-  .tag-style();
+  display: inline-flex;
+  align-items: center;
+  color: @tag-color;
+  background-color: @tag-background-color;
+  padding: 0 calc(8px - @tag-border-width);
+  line-height: @tag-line-height;
+  border: @tag-border-width solid @tag-background-color;
+  border-radius: @tag-border-radius;
+
   .make-color-classes(@preset-colors);
-  .make-color-classes(@status-colors);
 
-  min-width: @tag-rect-min-width;
+  & + & {
+    margin-left: 8px;
+  }
 
-  .@{icon-prefix} {
-    font-size: @tag-font-size;
+  > .@{icon-prefix} {
+    margin-left: -4px;
+    font-size: var(--ix-font-size-lg);
   }
 
   .@{icon-prefix} + &-content {
-    padding-left: @tag-padding;
+    padding-left: 4px;
+  }
+
+  &-bordered {
+    border-color: @tag-border-color;
   }
 
   &-has-color {
     color: @text-color-inverse;
-    border-color: transparent;
   }
 
   &-round {
-    border-radius: @tag-round-border-radius;
-    min-width: @tag-round-min-width;
+    border-radius: @tag-line-height;
+    min-width: @tag-min-width-round;
   }
 
   &-rect {
     border-radius: 0;
-    min-width: @tag-rect-min-width;
+    min-width: @tag-min-width-rect;
+  }
+
+  &-close-icon {
+    margin-left: 4px;
+    font-size: var(--ix-font-size-lg);
+    cursor: pointer;
+  }
+
+  .tag-status-color(success);
+  .tag-status-color(info);
+  .tag-status-color(warning);
+  .tag-status-color(risk);
+  .tag-status-color(error);
+  .tag-status-color(fatal);
+
+  &-filled {
+    --ix-tag-color: @tag-color-inverse;
+    --ix-tag-background-color: @tag-background-color-filled;
   }
 }
 
 .@{tag-prefix}-numeric {
-  .tag-style();
-  .make-numeric-color-classes(@preset-colors);
-  .make-numeric-color-classes(@status-colors);
+  @tag-prefix-size: calc(@tag-line-height + 4px);
 
-  .getTagPrefixSizeMixin();
-
-  // font-size * line-height + tag border width + tag prefix border width
-  @tag-prefix-inner-size: ~`getPrefixSize('@{tag-font-size}', '@{tag-line-height}') `;
-  @tag-prefix-size: calc(@tag-prefix-inner-size + 4px);
-
-  padding-left: calc(@tag-default-padding-horizontal + @tag-prefix-inner-size / 2 + 2px + @tag-padding);
   position: relative;
-  border-radius: @tag-round-border-radius;
-  min-width: @tag-numeric-min-width;
+  padding-left: calc(@tag-prefix-size + @tag-border-width);
+  min-width: @tag-min-width-numeric;
+  border-radius: @tag-line-height;
 
-  &.@{tag-prefix}-has-color {
-    color: @text-color-inverse;
-  }
+  .make-numeric-color-classes(@preset-colors);
 
-  .@{tag-prefix}-numeric-prefix {
+  &-prefix {
     position: absolute;
     left: -2px;
     top: -2px;
@@ -63,21 +85,35 @@
     justify-content: center;
     height: @tag-prefix-size;
     width: @tag-prefix-size;
+    background-color: inherit;
+    border: @tag-border-width solid @text-color-inverse;
     border-radius: @tag-prefix-size;
-    border: 1px solid @text-color-inverse;
   }
 }
 
 .@{tag-group-prefix} {
-  display: flex;
-  flex-wrap: wrap;
+  &-clickable {
+    .@{tag-prefix} {
+      cursor: pointer;
+    }
+  }
+}
 
-  &-nowrap {
-    flex-wrap: nowrap;
+.tag-status-color(@status) {
+  @color: 'tag-color-@{status}';
+  @background-color: 'tag-background-color-@{status}';
+  @background-color-filled: 'tag-background-color-@{status}-filled';
+
+  &-@{status} {
+    --ix-tag-color: @@color;
+    --ix-tag-background-color: @@background-color;
   }
 
-  &-clickable,
-  &-close-icon {
-    cursor: pointer;
+  &-@{status}&-bordered {
+    --ix-tag-border-color: @@color;
+  }
+
+  &-@{status}&-filled {
+    --ix-tag-background-color: @@background-color-filled;
   }
 }
