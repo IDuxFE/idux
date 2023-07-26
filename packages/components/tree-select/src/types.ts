@@ -13,6 +13,7 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } 
 import type { CascaderStrategy } from '@idux/components/cascader'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
+import type { SpinProps } from '@idux/components/spin'
 import type {
   TreeCustomAdditional,
   TreeDragDropOptions,
@@ -77,6 +78,7 @@ export const treeSelectProps = {
     default: true,
   },
   size: { type: String as PropType<FormSize>, default: undefined },
+  spin: { type: [Boolean, Object] as PropType<boolean | SpinProps>, default: undefined },
   showLine: { type: Boolean, default: undefined },
   status: String as PropType<ValidateStatus>,
   suffix: { type: String, default: undefined },
@@ -85,6 +87,7 @@ export const treeSelectProps = {
     default: undefined,
   },
   virtual: { type: Boolean, default: false },
+  searchPlaceholder: { type: String, default: undefined },
 
   // events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,

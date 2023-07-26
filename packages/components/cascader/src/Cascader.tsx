@@ -161,7 +161,7 @@ export default defineComponent({
       props.searchable && callEmit(props.onSearch, '')
     }
     const renderContent = () => {
-      const { searchable, overlayRender } = props
+      const { searchable, overlayRender, searchPlaceholder } = props
       const searchValue = inputValue.value
       const prefixCls = mergedPrefixCls.value
       const panelSlots = { empty: slots.empty, optionLabel: slots.optionLabel }
@@ -182,6 +182,7 @@ export default defineComponent({
               size="sm"
               suffix="search"
               value={searchValue}
+              placeholder={searchPlaceholder}
               onClear={handleSearchClear}
               onInput={handleSearchInput}
             />
