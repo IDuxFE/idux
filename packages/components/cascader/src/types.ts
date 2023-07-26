@@ -110,6 +110,7 @@ export const cascaderProps = {
   strategy: { type: String as PropType<CascaderStrategy>, default: 'all' },
   suffix: { type: String, default: undefined },
   virtual: { type: Boolean, default: false },
+  searchPlaceholder: { type: String, default: undefined },
 
   // events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,

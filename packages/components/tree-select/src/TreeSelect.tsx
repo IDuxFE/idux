@@ -7,6 +7,8 @@
 
 import { computed, defineComponent, normalizeClass, provide, ref, watch } from 'vue'
 
+import { isBoolean } from 'lodash-es'
+
 import { useAccessorAndControl } from '@idux/cdk/forms'
 import { type VirtualScrollToFn } from '@idux/cdk/scroll'
 import { type VKey, useControlledProp, useState } from '@idux/cdk/utils'
@@ -15,6 +17,7 @@ import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/s
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister, useFormSize, useFormStatus } from '@idux/components/form'
 import { ɵUseOverlayState } from '@idux/components/select'
+import { IxSpin } from '@idux/components/spin'
 import { type TreeInstance } from '@idux/components/tree'
 import { useGetKey } from '@idux/components/utils'
 
@@ -172,7 +175,13 @@ export default defineComponent({
       />
     )
 
-    const renderContent = () => <Content onClick={handleOverlayClick} />
+    const renderLoading = (children: JSX.Element) => {
+      const { spin } = props
+      const spinProps = isBoolean(spin) ? { spinning: spin } : spin
+      return spinProps ? <IxSpin {...spinProps}>{children}</IxSpin> : children
+    }
+
+    const renderContent = () => renderLoading(<Content onClick={handleOverlayClick} />)
 
     return () => {
       const overlayProps = {

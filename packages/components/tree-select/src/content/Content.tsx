@@ -146,6 +146,7 @@ export default defineComponent({
         virtual,
         searchable,
         showLine,
+        searchPlaceholder,
         onDragstart,
         onDragend,
         onDragenter,
@@ -247,6 +248,7 @@ export default defineComponent({
               size="sm"
               suffix="search"
               value={value}
+              placeholder={searchPlaceholder}
               onClear={handleClear}
               onInput={handleInput}
             />
