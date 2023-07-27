@@ -77,6 +77,7 @@ export const treeSelectProps = {
     type: [Boolean, Function] as PropType<boolean | ((node: TreeSelectNode, searchValue?: string) => boolean)>,
     default: true,
   },
+  searchPlaceholder: { type: String, default: undefined },
   size: { type: String as PropType<FormSize>, default: undefined },
   spin: { type: [Boolean, Object] as PropType<boolean | SpinProps>, default: undefined },
   showLine: { type: Boolean, default: undefined },
@@ -87,7 +88,7 @@ export const treeSelectProps = {
     default: undefined,
   },
   virtual: { type: Boolean, default: false },
-  searchPlaceholder: { type: String, default: undefined },
+  virtualItemHeight: { type: Number, default: undefined },
 
   // events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,

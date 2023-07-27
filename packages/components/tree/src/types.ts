@@ -74,14 +74,9 @@ export const treeProps = {
     type: [Boolean, String] as PropType<boolean | 'multiple'>,
     default: true,
   },
-  showLine: {
-    type: Boolean,
-    default: undefined,
-  },
-  virtual: {
-    type: Boolean,
-    default: false,
-  },
+  showLine: { type: Boolean, default: undefined },
+  virtual: { type: Boolean, default: false },
+  virtualItemHeight: { type: Number, default: 28 },
 
   // events
   'onUpdate:checkedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,

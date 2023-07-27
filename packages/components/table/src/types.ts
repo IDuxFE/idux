@@ -48,6 +48,7 @@ export const tableProps = {
   scrollToTopOnChange: { type: Boolean, default: undefined },
   tableLayout: { type: String as PropType<'auto' | 'fixed'>, default: undefined },
   virtual: { type: Boolean, default: false },
+  virtualItemHeight: { type: Number, default: undefined },
 
   // events
   'onUpdate:expandedRowKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,

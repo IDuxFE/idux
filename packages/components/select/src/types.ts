@@ -29,6 +29,7 @@ export const selectPanelProps = {
   multiple: { type: Boolean, default: false },
   multipleLimit: { type: Number, default: Number.MAX_SAFE_INTEGER },
   virtual: { type: Boolean, default: false },
+  virtualItemHeight: { type: Number, default: 32 },
 
   // events
   'onUpdate:activeValue': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,
@@ -41,7 +42,6 @@ export const selectPanelProps = {
 
   // private
   _virtualScrollHeight: { type: [Number, String] as PropType<number | 'auto' | '100%'>, default: 256 },
-  _virtualScrollItemHeight: { type: Number, default: 32 },
 } as const
 
 export const selectProps = {
@@ -86,6 +86,7 @@ export const selectProps = {
   suffix: { type: String, default: undefined },
   spin: { type: [Boolean, Object] as PropType<boolean | SpinProps>, default: undefined },
   virtual: { type: Boolean, default: false },
+  virtualItemHeight: { type: Number, default: undefined },
 
   // events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,
@@ -101,14 +102,10 @@ export const selectProps = {
 
   // private
   overlayHeight: { type: Number, default: 256 },
-  overlayItemHeight: { type: Number, default: 32 },
 } as const
 
 export type SelectPanelProps = ExtractInnerPropTypes<typeof selectPanelProps>
-export type SelectPanelPublicProps = Omit<
-  ExtractPublicPropTypes<typeof selectPanelProps>,
-  '_virtualScrollHeight' | '_virtualScrollItemHeight'
->
+export type SelectPanelPublicProps = Omit<ExtractPublicPropTypes<typeof selectPanelProps>, '_virtualScrollHeight'>
 export interface SelectPanelBindings {
   scrollTo: VirtualScrollToFn
   changeActiveIndex: (offset: number) => void
@@ -120,7 +117,7 @@ export type SelectPanelComponent = DefineComponent<
 export type SelectPanelInstance = InstanceType<DefineComponent<SelectPanelProps, SelectPanelBindings>>
 
 export type SelectProps = ExtractInnerPropTypes<typeof selectProps>
-export type SelectPublicProps = Omit<ExtractPublicPropTypes<typeof selectProps>, 'overlayHeight' | 'overlayItemHeight'>
+export type SelectPublicProps = Omit<ExtractPublicPropTypes<typeof selectProps>, 'overlayHeight'>
 export interface SelectBindings {
   blur: () => void
   focus: (options?: FocusOptions) => void

@@ -177,7 +177,7 @@ export default defineComponent({
       let children: VNodeTypes
       if (nodes.length > 0) {
         const itemRender: VirtualItemRenderFn<MergedNode> = ({ item }) => <TreeNode node={item} {...item}></TreeNode>
-        const { height, virtual, onScroll, onScrolledBottom } = props
+        const { height, virtual, virtualItemHeight, onScroll, onScrolledBottom } = props
         children = virtual ? (
           <CdkVirtualScroll
             ref={virtualScrollRef}
@@ -185,7 +185,7 @@ export default defineComponent({
             dataSource={nodes}
             getKey="key"
             height={autoHeight.value ? '100%' : height}
-            itemHeight={28}
+            itemHeight={virtualItemHeight}
             itemRender={itemRender}
             virtual
             onScroll={onScroll}

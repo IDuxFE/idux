@@ -88,7 +88,7 @@ export default defineComponent({
     }
 
     return () => {
-      const { _virtualScrollHeight, _virtualScrollItemHeight, virtual, onScroll, onScrolledBottom } = props
+      const { _virtualScrollHeight, virtualItemHeight, virtual, onScroll, onScrolledBottom } = props
       const options = flattenedOptions.value
       const children = [<ListBox />]
 
@@ -104,7 +104,7 @@ export default defineComponent({
             dataSource={options}
             getKey="key"
             height={_virtualScrollHeight}
-            itemHeight={_virtualScrollItemHeight}
+            itemHeight={virtualItemHeight}
             itemRender={itemRender}
             virtual={virtual}
             onScroll={onScroll}

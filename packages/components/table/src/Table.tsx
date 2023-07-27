@@ -48,10 +48,12 @@ export default defineComponent({
     const mergedGetKey = useGetKey(props, config, 'components/table')
     const mergedEmptyCell = computed(() => props.emptyCell ?? config.emptyCell)
     const mergedSize = computed(() => props.size ?? config.size)
-    const mergedVirtualItemHeight = computed(() =>
-      common.theme === 'seer'
-        ? virtualItemHeightForSeer[mergedSize.value]
-        : virtualItemHeightForDefault[mergedSize.value],
+    const mergedVirtualItemHeight = computed(
+      () =>
+        props.virtualItemHeight ??
+        (common.theme === 'seer'
+          ? virtualItemHeightForSeer[mergedSize.value]
+          : virtualItemHeightForDefault[mergedSize.value]),
     )
     const { mergedPagination } = usePagination(props, config, mergedSize)
 

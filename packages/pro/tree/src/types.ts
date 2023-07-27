@@ -62,6 +62,7 @@ export const proTreeProps = {
   selectable: { type: [Boolean, String] as PropType<boolean | 'multiple'>, default: true },
   placeholder: { type: String, default: undefined },
   virtual: { type: Boolean, default: false },
+  virtualItemHeight: { type: Number, default: undefined },
 
   // events
   onCheck: [Function, Array] as PropType<MaybeArray<(checked: boolean, node: TreeNode<any>) => void>>,

@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { CascaderPanelProps, CascaderProps } from '../types'
+import type { CascaderPanelPublicProps, CascaderProps } from '../types'
 
 import { type ComputedRef, computed } from 'vue'
 
@@ -15,7 +15,7 @@ export function usePanelProps(
   props: CascaderProps,
   searchValue: ComputedRef<string>,
   setOverlayOpened: (opened: boolean) => void,
-): ComputedRef<Partial<CascaderPanelProps>> {
+): ComputedRef<Partial<CascaderPanelPublicProps>> {
   const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys')
   const [loadedKeys, setLoadedKeys] = useControlledProp(props, 'loadedKeys')
   const onSelect = () => {
@@ -47,6 +47,7 @@ export function usePanelProps(
     searchValue: searchValue.value,
     strategy: props.strategy,
     virtual: props.virtual,
+    virtualItemHeight: props.virtualItemHeight,
 
     'onUpdate:expandedKeys': setExpandedKeys,
     'onUpdate:loadedKeys': setLoadedKeys,
