@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/IDuxFE/idux/compare/v1.8.1...v1.9.0) (2023-07-27)
+
+### Bug Fixes
+
+- **comp:select:** pressing enter after chinese input ([#1611](https://github.com/IDuxFE/idux/issues/1611)) ([62d53e7](https://github.com/IDuxFE/idux/commit/62d53e7e471ae11f7f2556400d26180be53ffd15))
+- **comp:table:** the customMenu of filterable add parameters ([#1619](https://github.com/IDuxFE/idux/issues/1619)) ([079df65](https://github.com/IDuxFE/idux/commit/079df65c7ac96770dc306cdce64688936dde0d1e))
+- **docs:** add loadingBar to show progress ([#1615](https://github.com/IDuxFE/idux/issues/1615)) ([9f643b2](https://github.com/IDuxFE/idux/commit/9f643b236165c361ea459ab0d3f6ce53986d4c4d)), closes [#1538](https://github.com/IDuxFE/idux/issues/1538)
+- **pro:search:** each segment should have ellipsis separately ([#1614](https://github.com/IDuxFE/idux/issues/1614)) ([ffc85a1](https://github.com/IDuxFE/idux/commit/ffc85a15be8f3c2c4c3478e24b3576c1f98a6486))
+- **pro:search:** empty state should be determined by search states ([#1613](https://github.com/IDuxFE/idux/issues/1613)) ([25e755f](https://github.com/IDuxFE/idux/commit/25e755f45e6a2d79728e3553383cc8616fbe1d27))
+- **pro:search:** segment input mousedown doesn't change selection ([#1612](https://github.com/IDuxFE/idux/issues/1612)) ([eec8158](https://github.com/IDuxFE/idux/commit/eec81580261220487022fa6b3368f60995fa323e))
+- **pro:table:** the layout tree enable checkOnClick ([#1609](https://github.com/IDuxFE/idux/issues/1609)) ([fdda882](https://github.com/IDuxFE/idux/commit/fdda882354bb7c02449ba2bf6eeae4395b9a931e))
+
+### Features
+
+- **comp:\*:** support virtualItemHeight for VirtualScroll ([#1618](https://github.com/IDuxFE/idux/issues/1618)) ([b1a5801](https://github.com/IDuxFE/idux/commit/b1a5801e943f4189b550769c5d107e80487ba097))
+- **comp:checkbox,radio:** support fieldset slot ([#1608](https://github.com/IDuxFE/idux/issues/1608)) ([53c9131](https://github.com/IDuxFE/idux/commit/53c9131ebdfde4abd8886b33d11d2dcbf85b062c))
+- **comp:tag:** support css variable and add status prop ([#1600](https://github.com/IDuxFE/idux/issues/1600)) ([4c2d506](https://github.com/IDuxFE/idux/commit/4c2d5069e745c30ad256436a4eeacd60e09afbe2))
+- **comp:tour:** add tour component ([#1610](https://github.com/IDuxFE/idux/issues/1610)) ([79335e3](https://github.com/IDuxFE/idux/commit/79335e3917daf024b64b38f6ffdb78cedc4165e4))
+- **comp:tree-select:** add searchPlaceholder prop ([#1617](https://github.com/IDuxFE/idux/issues/1617)) ([3a2687e](https://github.com/IDuxFE/idux/commit/3a2687e6cc7b9bfdd97d86da30697a35d26db3f3))
+- **pro:search:** bluring segment with no panel triggers update now ([#1616](https://github.com/IDuxFE/idux/issues/1616)) ([294884e](https://github.com/IDuxFE/idux/commit/294884e21d404a50fab27a73a5bac6e7de014cbb))
+
 ## [1.8.1](https://github.com/IDuxFE/idux/compare/v1.8.0...v1.8.1) (2023-07-14)
 
 ### Bug Fixes

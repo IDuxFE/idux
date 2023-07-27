@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/IDuxFE/idux/compare/v1.8.1...v1.9.0) (2023-07-27)
+
+### Bug Fixes
+
+- **docs:** add loadingBar to show progress ([#1615](https://github.com/IDuxFE/idux/issues/1615)) ([9f643b2](https://github.com/IDuxFE/idux/commit/9f643b236165c361ea459ab0d3f6ce53986d4c4d)), closes [#1538](https://github.com/IDuxFE/idux/issues/1538)
+
 ## [1.8.1](https://github.com/IDuxFE/idux/compare/v1.8.0...v1.8.1) (2023-07-14)
 
 ### Bug Fixes

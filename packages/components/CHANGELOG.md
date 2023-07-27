@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/IDuxFE/idux/compare/v1.8.1...v1.9.0) (2023-07-27)
+
+### Bug Fixes
+
+- **comp:select:** pressing enter after chinese input ([#1611](https://github.com/IDuxFE/idux/issues/1611)) ([62d53e7](https://github.com/IDuxFE/idux/commit/62d53e7e471ae11f7f2556400d26180be53ffd15))
+- **comp:table:** the customMenu of filterable add parameters ([#1619](https://github.com/IDuxFE/idux/issues/1619)) ([079df65](https://github.com/IDuxFE/idux/commit/079df65c7ac96770dc306cdce64688936dde0d1e))
+
+### Features
+
+- **comp:\*:** support virtualItemHeight for VirtualScroll ([#1618](https://github.com/IDuxFE/idux/issues/1618)) ([b1a5801](https://github.com/IDuxFE/idux/commit/b1a5801e943f4189b550769c5d107e80487ba097))
+- **comp:checkbox,radio:** support fieldset slot ([#1608](https://github.com/IDuxFE/idux/issues/1608)) ([53c9131](https://github.com/IDuxFE/idux/commit/53c9131ebdfde4abd8886b33d11d2dcbf85b062c))
+- **comp:tag:** support css variable and add status prop ([#1600](https://github.com/IDuxFE/idux/issues/1600)) ([4c2d506](https://github.com/IDuxFE/idux/commit/4c2d5069e745c30ad256436a4eeacd60e09afbe2))
+- **comp:tour:** add tour component ([#1610](https://github.com/IDuxFE/idux/issues/1610)) ([79335e3](https://github.com/IDuxFE/idux/commit/79335e3917daf024b64b38f6ffdb78cedc4165e4))
+- **comp:tree-select:** add searchPlaceholder prop ([#1617](https://github.com/IDuxFE/idux/issues/1617)) ([3a2687e](https://github.com/IDuxFE/idux/commit/3a2687e6cc7b9bfdd97d86da30697a35d26db3f3))
+
 ## [1.8.1](https://github.com/IDuxFE/idux/compare/v1.8.0...v1.8.1) (2023-07-14)
 
 ### Bug Fixes
