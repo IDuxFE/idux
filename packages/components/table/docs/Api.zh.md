@@ -147,8 +147,8 @@ export type TableColumn<T = any, V = any> =
 | `menus` | 删选菜单 | `MenuData[]` | - | - | - |
 | `multiple` | 是否支持多选 | `boolean` | `true` | - | - |
 | `onChange` | 筛选规则改变后的回调 | `(currFilterBy: any[]) => void` | - | - | 通常用于受控模式或服务端筛选 |
-| `customTrigger` | 自定义展开内容 | `string \| () => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
-| `customMenu` | 自定义表头标题 | `string \| () => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
+| `customTrigger` | 自定义表头标题 | `string \| () => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
+| `customMenu` | 自定义展开内容 | `string \| ((options: { selectedKeys: VKey[]; setSelectedKeys: (value: VKey[]) => void }) => VNodeChild)` | - | - | 类型为 `string` 时，对应插槽名 |
 
 #### TableCustomAdditional
 

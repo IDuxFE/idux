@@ -69,9 +69,9 @@ export default defineComponent({
       const children: VNodeChild[] = []
       const { customMenu, menus } = props.filterable
       if (isFunction(customMenu)) {
-        children.push(customMenu())
+        children.push(customMenu({ selectedKeys: selectedKeys.value, setSelectedKeys }))
       } else if (isString(customMenu) && slots[customMenu]) {
-        children.push(slots[customMenu]!())
+        children.push(slots[customMenu]!({ selectedKeys: selectedKeys.value, setSelectedKeys }))
       } else {
         children.push(renderMenu(menus, multiple, selectedKeys, setSelectedKeys, customLabel))
       }

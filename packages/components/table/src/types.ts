@@ -19,7 +19,6 @@ import type { MenuClickOptions, MenuData } from '@idux/components/menu'
 import type { PaginationProps } from '@idux/components/pagination'
 import type { SpinProps } from '@idux/components/spin'
 import type { Component, DefineComponent, FunctionalComponent, HTMLAttributes, PropType, VNodeChild } from 'vue'
-
 export const tableProps = {
   expandedRowKeys: { type: Array as PropType<VKey[]>, default: undefined },
   selectedRowKeys: { type: Array as PropType<VKey[]>, default: undefined },
@@ -208,7 +207,7 @@ export interface TableColumnFilterable<T = any> {
   onChange?: (filterBy: any[], filters: ActiveFilter[]) => void
 
   customTrigger?: string | (() => VNodeChild)
-  customMenu?: string | (() => VNodeChild)
+  customMenu?: string | ((options: { selectedKeys: VKey[]; setSelectedKeys: (value: VKey[]) => void }) => VNodeChild)
 }
 
 export interface TableSticky {
