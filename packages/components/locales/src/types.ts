@@ -104,6 +104,12 @@ export interface TimeRangePickerLocale {
   placeholder: [string, string]
 }
 
+export interface TourLocale {
+  nextText: string
+  prevText: string
+  finishText: string
+}
+
 export interface TransferLocale {
   toSelect: string
   selected: string
@@ -138,6 +144,7 @@ export interface Locale {
   table: TableLocale
   timePicker: TimePickerLocale
   timeRangePicker: TimeRangePickerLocale
+  tour: TourLocale
   transfer: TransferLocale
   treeSelect: TreeSelectLocale
   upload: UploadLocale

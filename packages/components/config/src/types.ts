@@ -44,6 +44,7 @@ import type {
 import type { TabsSize } from '@idux/components/tabs'
 import type { TagShape } from '@idux/components/tag'
 import type { TextareaAutoRows, TextareaResize } from '@idux/components/textarea'
+import type { TargetGap, TourMaskOptions } from '@idux/components/tour'
 import type { TreeExpandIconRenderer, TreeNode } from '@idux/components/tree'
 import type { UploadFilesType, UploadIconType, UploadRequestMethod, UploadRequestOption } from '@idux/components/upload'
 import type { OverlayContainerType } from '@idux/components/utils'
@@ -105,6 +106,7 @@ export interface GlobalConfig {
   timePicker: TimePickerConfig
   transfer: TransferConfig
   tooltip: TooltipConfig
+  tour: TourConfig
   tree: TreeConfig
   treeSelect: TreeSelectConfig
   upload: UploadConfig
@@ -543,6 +545,19 @@ export interface TooltipConfig {
   placement: PopperPlacement
   offset: [number, number]
   trigger: PopperTrigger
+}
+
+export interface TourConfig {
+  animatable: boolean
+  gap: TargetGap
+  mask: boolean | TourMaskOptions
+  offset: [number, number]
+  overlayContainer?: string | HTMLElement
+  placement: PopperPlacement
+  showArrow: boolean
+  scrollIntoViewOptions: boolean | ScrollIntoViewOptions
+  closeOnClick: boolean
+  closeOnEsc: boolean
 }
 
 export interface TreeConfig {

@@ -369,6 +369,17 @@ export const defaultConfig: GlobalConfig = {
     placement: 'top',
     trigger: 'hover',
   },
+  tour: {
+    animatable: true,
+    gap: { offset: 4, radius: 2 },
+    offset: [0, 4],
+    mask: true,
+    placement: 'bottomStart',
+    showArrow: true,
+    scrollIntoViewOptions: true,
+    closeOnClick: false,
+    closeOnEsc: true,
+  },
   tree: {
     autoHeight: false,
     blocked: false,

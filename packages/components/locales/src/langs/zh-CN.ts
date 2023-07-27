@@ -98,6 +98,11 @@ const zhCN: Locale = {
     separator: '至',
     placeholder: ['起始时间', '结束时间'],
   },
+  tour: {
+    nextText: '下一步',
+    prevText: '上一步',
+    finishText: '开始体验',
+  },
   transfer: {
     toSelect: '待选',
     selected: '已选',

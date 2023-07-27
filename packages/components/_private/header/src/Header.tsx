@@ -23,7 +23,7 @@ const Header: FunctionalComponent<HeaderProps> = (props, { slots }) => {
   }
 
   const headerProps = convertProps(props)
-  const headerSlots = { suffix: slots.closeIcon }
+  const headerSlots = { suffix: slots.closeIcon, default: slots.title }
 
   return <IxHeader {...headerProps} v-slots={headerSlots}></IxHeader>
 }
