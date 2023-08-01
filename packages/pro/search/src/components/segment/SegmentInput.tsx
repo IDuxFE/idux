@@ -7,6 +7,7 @@
 
 import {
   type CSSProperties,
+  type ComputedRef,
   type Ref,
   computed,
   defineComponent,
@@ -18,13 +19,15 @@ import {
   watch,
 } from 'vue'
 
+import { debounce } from 'lodash-es'
+
 import { useResizeObserver } from '@idux/cdk/resize'
 import { getScroll, setScroll } from '@idux/cdk/scroll'
 import { callEmit, convertCssPixel, useEventListener, useState } from '@idux/cdk/utils'
 
 import { proSearchContext } from '../../token'
 import { type SegmentInputProps, segmentIputProps } from '../../types'
-import MeasureElement from '../MeasureElement'
+import { measureTextWidth } from '../../utils'
 
 export default defineComponent({
   inheritAttrs: false,
@@ -35,14 +38,21 @@ export default defineComponent({
     const segmentWrapperRef = ref<HTMLElement>()
     const segmentInputRef = ref<HTMLInputElement>()
 
-    const [inputWidth, setInputWidth] = useState(0)
+    const { input, handleInput, handleCompositionStart, handleCompositionEnd } = useInputEvents(props)
+    const segmentScroll = useSegmentScroll(props, segmentInputRef, segmentWrapperRef)
+
+    const displayedText = computed(() => input.value || props.placeholder || '')
+    const [textWidth, setTextWidth] = useState<number>(0)
+
+    const leftSideEllipsis = computed(() => segmentScroll.value.left > 1)
+    const rightSideEllipsis = computed(() => segmentScroll.value.right > 1)
 
     const inputStyle = computed(() => ({
       minWidth: props.disabled ? '0' : undefined,
-      width: convertCssPixel(inputWidth.value),
+      width: convertCssPixel(textWidth.value),
     }))
 
-    watch(inputWidth, width => {
+    watch(textWidth, width => {
       callEmit(props.onWidthChange, width)
     })
 
@@ -56,6 +66,13 @@ export default defineComponent({
     })
 
     onMounted(() => {
+      watch(
+        displayedText,
+        text => {
+          setTextWidth(measureTextWidth(text, segmentWrapperRef.value))
+        },
+        { immediate: true },
+      )
       watch(
         inputStyle,
         style => {
@@ -72,12 +89,6 @@ export default defineComponent({
     expose({
       getInputElement,
     })
-
-    const { handleInput, handleCompositionStart, handleCompositionEnd } = useInputEvents(props)
-    const segmentScroll = useSegmentScroll(props, segmentInputRef)
-
-    const leftSideEllipsis = computed(() => segmentScroll.value.left > 1)
-    const rightSideEllipsis = computed(() => segmentScroll.value.right > 1)
 
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-segment-input`
@@ -96,7 +107,7 @@ export default defineComponent({
             ref={segmentInputRef}
             class={`${prefixCls}-inner`}
             style={style as CSSProperties}
-            value={props.value ?? ''}
+            value={input.value ?? ''}
             disabled={props.disabled}
             placeholder={props.placeholder}
             onInput={handleInput}
@@ -111,38 +122,50 @@ export default defineComponent({
           >
             ...
           </span>
-          <MeasureElement onWidthChange={setInputWidth}>{props.value || props.placeholder || ''}</MeasureElement>
         </span>
       )
     }
   },
 })
 
-interface InputEventHandlers {
+interface InputEventHandlerContext {
+  input: ComputedRef<string | undefined>
   handleInput: (evt: Event) => void
   handleCompositionStart: () => void
   handleCompositionEnd: (evt: CompositionEvent) => void
 }
 
-function useInputEvents(props: SegmentInputProps): InputEventHandlers {
-  const isComposing = ref(false)
+function useInputEvents(props: SegmentInputProps): InputEventHandlerContext {
+  let isComposing = false
+  const [input, setInput] = useState<string | undefined>(props.value)
+
+  watch(
+    () => props.value,
+    value => {
+      setInput(value)
+    },
+  )
 
   const handleInput = (evt: Event) => {
-    if (!isComposing.value) {
-      callEmit(props.onInput, (evt.target as HTMLInputElement).value)
+    const inputValue = (evt.target as HTMLInputElement).value
+    setInput(inputValue)
+
+    if (!isComposing) {
+      callEmit(props.onInput, inputValue)
     }
   }
   const handleCompositionStart = () => {
-    isComposing.value = true
+    isComposing = true
   }
   const handleCompositionEnd = (evt: CompositionEvent) => {
-    if (isComposing.value) {
-      isComposing.value = false
+    if (isComposing) {
+      isComposing = false
       handleInput(evt)
     }
   }
 
   return {
+    input,
     handleInput,
     handleCompositionStart,
     handleCompositionEnd,
@@ -154,13 +177,17 @@ interface SegmentScroll {
   right: number
 }
 
-function useSegmentScroll(props: SegmentInputProps, inputRef: Ref<HTMLInputElement | undefined>) {
+function useSegmentScroll(
+  props: SegmentInputProps,
+  inputRef: Ref<HTMLInputElement | undefined>,
+  wrapperRef: Ref<HTMLElement | undefined>,
+): ComputedRef<SegmentScroll> {
   const [segmentScroll, setSegmentScroll] = useState<SegmentScroll>({ left: 0, right: 0 }, true)
-  let inputWidth = 0
-  let oldSegmentScroll: SegmentScroll = { left: 0, right: 0 }
 
-  let stopScrollListen: (() => void) | undefined
-  let stopResizeListen: (() => void) | undefined
+  let listenerStops: (() => void)[]
+  const stopListen = () => {
+    listenerStops.forEach(stop => stop())
+  }
 
   const getScrolls = (): SegmentScroll => {
     const el = inputRef.value
@@ -175,33 +202,51 @@ function useSegmentScroll(props: SegmentInputProps, inputRef: Ref<HTMLInputEleme
     }
   }
 
-  const updateScroll = () => {
-    oldSegmentScroll = segmentScroll.value
+  const updateScroll = debounce(() => {
     setSegmentScroll(getScrolls())
+  }, 10)
+
+  const scrollIntoView = () => {
+    if (!inputRef.value) {
+      return
+    }
+
+    const width = inputRef.value.offsetWidth ?? 0
+    const selectionStart = inputRef.value.selectionStart
+
+    if (!width || selectionStart === null) {
+      return
+    }
+
+    const textBefore = (inputRef.value.value ?? '').slice(0, selectionStart)
+    const textBeforeWidth = measureTextWidth(textBefore, wrapperRef.value)
+    const { scrollLeft } = getScroll(inputRef.value)
+
+    if (textBeforeWidth < scrollLeft - 1) {
+      setScroll({ scrollLeft: Math.max(textBeforeWidth - 2, 0) }, inputRef.value)
+    } else if (textBeforeWidth > scrollLeft + width + 1) {
+      setScroll({ scrollLeft: textBeforeWidth - width + 2 }, inputRef.value)
+    }
   }
 
   onMounted(() => {
-    inputWidth = inputRef.value?.offsetWidth ?? 0
-
     if (props.ellipsis) {
-      stopScrollListen = useEventListener(inputRef, 'scroll', updateScroll)
-      stopResizeListen = useResizeObserver(inputRef, () => {
-        const width = inputRef.value?.offsetWidth ?? 0
-        const widthOffset = inputWidth - width
-        inputWidth = width
-
-        if (widthOffset > 0 && segmentScroll.value.left > 0 && oldSegmentScroll.left <= 0) {
-          setScroll({ scrollLeft: segmentScroll.value.left + widthOffset }, inputRef.value)
-        } else {
+      listenerStops = [
+        useEventListener(inputRef, 'scroll', updateScroll),
+        useResizeObserver(inputRef, () => {
+          if (document.activeElement === inputRef.value) {
+            scrollIntoView()
+          }
           updateScroll()
-        }
-      })
+        }),
+        useEventListener(inputRef, 'input', updateScroll),
+        useEventListener(inputRef, 'compositionend', scrollIntoView),
+      ]
     }
   })
 
   onUnmounted(() => {
-    stopScrollListen?.()
-    stopResizeListen?.()
+    stopListen()
   })
 
   return segmentScroll
