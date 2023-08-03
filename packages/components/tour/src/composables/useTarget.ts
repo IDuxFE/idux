@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { ResolvedTourStep, TargetPositionInfo, TargetPositionOrigin } from '../types'
 import type { MergedTourProps } from './useMergedProps'
-import type { ResolvedTourStep, TargetPositionInfo } from '../types'
 
 import { type ComputedRef, type Ref, onMounted, onUnmounted, shallowRef, watch } from 'vue'
 
@@ -33,7 +33,7 @@ export function useTarget(
     targetRef.value = (await activeStep.value?.target()) ?? null
   }
 
-  const updatePopsition = (scrollIntoView = false) => {
+  const updatePopsition = (scrollIntoView = false, origin: TargetPositionOrigin = 'index') => {
     const targetEl = targetRef.value
     const { offset = 0, radius = 0 } = activeStep.value?.gap ?? {}
 
@@ -46,6 +46,7 @@ export function useTarget(
         width: 0,
         height: 0,
         radius,
+        origin,
       })
       return
     }
@@ -61,7 +62,16 @@ export function useTarget(
     const { x, y, width, height } = targetEl.getBoundingClientRect()
 
     if (!offset) {
-      setPositionInfo({ windowWidth: window.innerWidth, windowHeight: window.innerHeight, x, y, width, height, radius })
+      setPositionInfo({
+        windowWidth: window.innerWidth,
+        windowHeight: window.innerHeight,
+        x,
+        y,
+        width,
+        height,
+        radius,
+        origin,
+      })
     } else {
       setPositionInfo({
         windowWidth: window.innerWidth,
@@ -71,6 +81,7 @@ export function useTarget(
         width: width + offset * 2,
         height: height + offset * 2,
         radius,
+        origin,
       })
     }
   }
@@ -79,14 +90,15 @@ export function useTarget(
   let stopScrollLisiten: (() => void) | undefined
 
   onMounted(() => {
-    watch(() => activeStep.value?.target, updateTarget, { immediate: true })
-    watch([targetRef, visible], () => updatePopsition(true), { immediate: true })
+    watch([() => activeStep.value?.target, visible], updateTarget, { immediate: true })
+    watch(targetRef, () => updatePopsition(true, 'index'), { immediate: true })
+    watch(visible, () => updatePopsition(true, 'visible'))
     watch(
       visible,
       v => {
         if (v) {
-          stopResizeLisiten = useEventListener(window, 'resize', () => updatePopsition(false))
-          stopScrollLisiten = useEventListener(window, 'scroll', () => updatePopsition(false))
+          stopResizeLisiten = useEventListener(window, 'resize', () => updatePopsition(false, 'resize'))
+          stopScrollLisiten = useEventListener(window, 'scroll', () => updatePopsition(false, 'scroll'))
         } else {
           stopResizeLisiten?.()
           stopScrollLisiten?.()

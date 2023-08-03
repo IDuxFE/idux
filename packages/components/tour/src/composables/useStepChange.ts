@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { MergedTourProps } from './useMergedProps'
 import type { ResolvedTourStep } from '../types'
+import type { MergedTourProps } from './useMergedProps'
 
 import { type ComputedRef, onUnmounted, watch } from 'vue'
 
@@ -28,6 +28,25 @@ export function useStepChange(
 ): StepChangeContext {
   const stepChangeCbs = new Set<() => void>()
   const [isStepChanging, _setIsStepChanging] = useState<boolean>(false)
+  let transitionTmr: number
+
+  const locks = {
+    stepChange: false,
+    animate: false,
+  }
+
+  const lock = () => {
+    Object.keys(locks).forEach(key => (locks[key as keyof typeof locks] = true))
+
+    setIsStepChanging(true)
+  }
+  const unlock = (lock: keyof typeof locks) => {
+    locks[lock] = false
+
+    if (Object.keys(locks).every(key => !locks[key as keyof typeof locks])) {
+      setIsStepChanging(false)
+    }
+  }
 
   const setIsStepChanging = (changing: boolean) => {
     if (isStepChanging.value === changing) {
@@ -37,20 +56,20 @@ export function useStepChange(
     _setIsStepChanging(changing)
 
     if (!changing) {
-      stepChangeCbs.forEach(cb => cb())
+      runStepChangeCbs()
     }
   }
 
   const onStepChange = (cb: () => void) => {
     stepChangeCbs.add(cb)
   }
-
-  let transitionTmr: number
+  const runStepChangeCbs = () => {
+    stepChangeCbs.forEach(cb => cb())
+  }
 
   onAnimateEnd(() => {
     if (mergedProps.value.animatable && activeStep.value?.mask) {
-      transitionTmr && clearTimeout(transitionTmr)
-      setIsStepChanging(false)
+      unlock('animate')
     }
   })
 
@@ -59,7 +78,7 @@ export function useStepChange(
     (current, pre) => {
       if (current !== pre) {
         transitionTmr && clearTimeout(transitionTmr)
-        setIsStepChanging(true)
+        lock()
       }
     },
     {
@@ -68,18 +87,26 @@ export function useStepChange(
   )
   watch(
     activeStep,
-    step => {
-      if (!mergedProps.value.animatable || !step?.mask || !visible.value) {
-        transitionTmr && clearTimeout(transitionTmr)
-        transitionTmr = setTimeout(
-          () => {
-            setIsStepChanging(false)
-          },
-          mergedProps.value.animatable ? transitionDuration : 0,
-        )
+    (step, preStep) => {
+      if (step && !preStep) {
+        runStepChangeCbs()
+        return
       }
+
+      if (!mergedProps.value.animatable || !step?.mask || !visible.value) {
+        unlock('animate')
+      }
+
+      transitionTmr && clearTimeout(transitionTmr)
+      transitionTmr = setTimeout(
+        () => {
+          unlock('stepChange')
+        },
+        mergedProps.value.animatable ? transitionDuration : 0,
+      )
     },
     {
+      immediate: true,
       flush: 'post',
     },
   )

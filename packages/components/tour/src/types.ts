@@ -12,6 +12,8 @@ import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 import { ɵOverlayPlacementDef } from '@idux/components/_private/overlay'
 
+export type TargetPositionOrigin = 'resize' | 'scroll' | 'index' | 'visible'
+
 export interface TargetPositionInfo {
   windowWidth: number
   windowHeight: number
@@ -20,6 +22,7 @@ export interface TargetPositionInfo {
   width: number
   height: number
   radius: number
+  origin: TargetPositionOrigin
 }
 
 export interface TargetGap {

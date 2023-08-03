@@ -117,6 +117,7 @@ describe('Tour', () => {
     )
 
     await wrapper.setProps({ activeIndex: 1 })
+    await wait(50)
     await flushPromises()
 
     expect(document.querySelector('.active-index-test .ix-tour-panel .ix-header .ix-header-title')?.textContent).toBe(
