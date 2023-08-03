@@ -6,6 +6,7 @@
 | --- | --- | --- | --- | --- | --- |
 | `v-model:activeIndex` | 当前激活状态的`step`索引 | `number` | - | - | - |
 | `v-model:visible` | 显示状态 | `boolean` | - | - | - |
+| `closable` | 是否可关闭 | `boolean` | `true` | ✅ | - |
 | `closeOnEsc` | 是否在按下`Esc`键时触发关闭 | `boolean` | `true` | ✅ | - |
 | `animatable` | 是否开启动画 | `boolean` | `true` | ✅ | - |
 | `gap` | 遮罩的目标位置区域的间距和圆角 | `{ offset: number, radius: number }` | `{ offset: 4, radius: 2 }` | ✅ | - |

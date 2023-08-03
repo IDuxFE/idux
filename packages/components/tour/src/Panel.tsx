@@ -46,11 +46,16 @@ export default defineComponent({
 
     const renderHeader = () => {
       const { step: { title = undefined } = {}, activeIndex = 0 } = renderData.value ?? {}
+      const { closable } = mergedProps.value
+
+      if (!title && !slots.title && !slots.header && !closable) {
+        return
+      }
 
       return (
         <ɵHeader
           size="sm"
-          closable={true}
+          closable={closable}
           closeIcon="close"
           header={title}
           onClose={handleClose}
@@ -124,10 +129,13 @@ export default defineComponent({
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-panel`
 
+      const header = renderHeader()
+      const innerCls = [`${prefixCls}-inner`, header ? undefined : `${prefixCls}-inner-no-header`]
+
       return (
         <div class={prefixCls} onClick={evt => evt.stopImmediatePropagation()}>
-          {renderHeader()}
-          <div class={`${prefixCls}-inner`}>
+          {header}
+          <div class={innerCls}>
             {renderDescription(prefixCls)}
             <div class={`${prefixCls}-footer`}>
               {renderIndicators(prefixCls)}

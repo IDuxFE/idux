@@ -74,6 +74,10 @@ export const tourProps = {
     default: undefined,
   },
 
+  closable: {
+    type: Boolean,
+    default: undefined,
+  },
   closeOnClick: {
     type: Boolean,
     default: undefined,
