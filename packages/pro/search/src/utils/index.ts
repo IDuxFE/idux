@@ -8,3 +8,4 @@
 export * from './getSelectableCommonParams'
 export * from './RenderIcon'
 export * from './selectData'
+export * from './measureTextWidth'
