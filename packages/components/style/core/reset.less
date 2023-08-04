@@ -155,6 +155,15 @@ sup {
 input {
   border-radius: 0;
 }
+input[type='password']::-ms-reveal {
+  display: none;
+}
+input[type='password']::-ms-clear {
+  display: none;
+}
+input[type='password']::-o-clear {
+  display: none;
+}
 
 /* Replace pointer cursor in disabled elements */
 [disabled] {
