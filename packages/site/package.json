@@ -18,7 +18,7 @@
     "codesandbox": "^2.2.3",
     "lodash-es": "^4.17.21",
     "vue": "^3.2.29",
-    "vue-router": "^4.0.0"
+    "vue-router": "^4.2.4"
   },
   "devDependencies": {
     "@types/rimraf": "^4.0.0",
