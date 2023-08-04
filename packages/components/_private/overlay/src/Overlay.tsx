@@ -13,6 +13,7 @@ import {
   cloneVNode,
   computed,
   defineComponent,
+  nextTick,
   onBeforeUnmount,
   onMounted,
   ref,
@@ -27,7 +28,7 @@ import { isFunction } from 'lodash-es'
 import { vClickOutside } from '@idux/cdk/click-outside'
 import { type PopperElement, type PopperEvents, type PopperOptions, usePopper } from '@idux/cdk/popper'
 import { CdkPortal } from '@idux/cdk/portal'
-import { Logger, callEmit, convertElement, getFirstValidNode } from '@idux/cdk/utils'
+import { Logger, callEmit, convertElement, getFirstValidNode, useState } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { useZIndex } from '@idux/components/utils'
 
@@ -41,7 +42,7 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-overlay`)
     const contentArrowRef = ref<HTMLElement>()
-    const popperOptions = usePopperOptions(props, contentArrowRef)
+    const { options: popperOptions, update: updateOptions } = usePopperOptions(props, contentArrowRef)
 
     const {
       arrowRef,
@@ -68,8 +69,9 @@ export default defineComponent({
     onBeforeUnmount(() => destroy())
 
     watch(visibility, value => {
-      if (value && props.destroyOnHide) {
-        initialize()
+      if (value) {
+        nextTick(updateOptions)
+        props.destroyOnHide && initialize()
       }
       callEmit(props['onUpdate:visible'], value)
     })
@@ -156,20 +158,38 @@ export default defineComponent({
   },
 })
 
-function usePopperOptions(props: OverlayProps, arrowRef: Ref<HTMLElement | undefined>): ComputedRef<PopperOptions> {
-  return computed(() => {
+function usePopperOptions(
+  props: OverlayProps,
+  arrowRef: Ref<HTMLElement | undefined>,
+): {
+  options: ComputedRef<PopperOptions>
+  update: () => void
+} {
+  const [options, setOptions] = useState<PopperOptions>({})
+
+  const updateOptions = () => {
     const { allowEnter, autoAdjust, delay, disabled, offset, placement, trigger } = props
+
     let _offset: [number, number] | undefined
     if (!arrowRef.value) {
       _offset = offset
     } else {
-      const { offsetWidth, offsetHeight } = arrowRef.value
+      const { offsetHeight, offsetWidth } = arrowRef.value
       _offset = offset ? [...offset] : [0, 0]
       _offset[1] += [offsetWidth, offsetHeight][1] / 2
     }
 
-    return { allowEnter, autoAdjust, delay, disabled, offset: _offset, placement, trigger }
+    setOptions({ allowEnter, autoAdjust, delay, disabled, offset: _offset, placement, trigger })
+  }
+
+  onMounted(() => {
+    watch([props, arrowRef], updateOptions, { immediate: true })
   })
+
+  return {
+    options,
+    update: updateOptions,
+  }
 }
 
 function renderContent(
