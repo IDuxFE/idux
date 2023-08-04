@@ -558,6 +558,7 @@ export interface TourConfig {
   scrollIntoViewOptions: boolean | ScrollIntoViewOptions
   closeOnClick: boolean
   closeOnEsc: boolean
+  closable: boolean
 }
 
 export interface TreeConfig {

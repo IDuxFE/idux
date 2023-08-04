@@ -34,7 +34,7 @@
   }
 
   &-panel {
-    width: @tour-panel-width;
+    min-width: @tour-panel-min-width;
     background-color: @tour-panel-background-color;
     border-radius: @tour-panel-border-radius;
     .reset-component();
@@ -46,6 +46,10 @@
 
     &-inner {
       padding: 0 @tour-panel-padding-right  @tour-panel-padding-bottom @tour-panel-padding-left;
+
+      &-no-header {
+        padding-top: @tour-panel-padding-top;
+      }
     }
 
     &-description {

@@ -25,5 +25,6 @@ export function useMergedProps(props: TourProps, config: TourConfig): ComputedRe
     scrollIntoViewOptions: props.scrollIntoViewOptions ?? config.scrollIntoViewOptions,
     closeOnClick: props.closeOnClick ?? config.closeOnClick,
     closeOnEsc: props.closeOnEsc ?? config.closeOnEsc,
+    closable: props.closable ?? config.closable,
   }))
 }

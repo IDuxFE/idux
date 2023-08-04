@@ -379,6 +379,7 @@ export const defaultConfig: GlobalConfig = {
     scrollIntoViewOptions: true,
     closeOnClick: false,
     closeOnEsc: true,
+    closable: true,
   },
   tree: {
     autoHeight: false,
