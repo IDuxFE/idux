@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { MergedTourProps } from './useMergedProps'
 import type { ResolvedTourStep, TargetPositionInfo } from '../types'
+import type { MergedTourProps } from './useMergedProps'
 
 import {
   type CSSProperties,
@@ -20,7 +20,7 @@ import {
 
 import { isBoolean } from 'lodash-es'
 
-import { convertCssPixel, rAF, useState } from '@idux/cdk/utils'
+import { cancelRAF, convertCssPixel, rAF, useState } from '@idux/cdk/utils'
 
 import { easeInOutQuad } from '../utils'
 
@@ -75,6 +75,13 @@ export function useMask(
     animateCbs.clear()
   })
 
+  let rAFHandle: number
+
+  const cancelAnimate = () => {
+    cancelRAF(rAFHandle)
+    setIsAnimating(false)
+  }
+
   const animate = (from: TargetPositionInfo, to: TargetPositionInfo) => {
     const start = Date.now()
     setIsAnimating(true)
@@ -95,7 +102,7 @@ export function useMask(
       )
 
       if (elapsed < animateDuration) {
-        rAF(tick)
+        rAFHandle = rAF(tick)
       } else {
         setMaskPath(getMaskPath(to))
         setIsAnimating(false)
@@ -103,7 +110,7 @@ export function useMask(
       }
     }
 
-    rAF(tick)
+    rAFHandle = rAF(tick)
   }
 
   let _tempIndex = activeIndex.value
@@ -116,10 +123,18 @@ export function useMask(
       }
 
       if (!activeStep.value?.mask) {
+        cancelAnimate()
         setMaskPath('')
-      } else if (!mergedProps.value.animatable || !prePos || !pos || _tempIndex === activeIndex.value) {
+      } else if (!mergedProps.value.animatable || pos?.origin !== 'index' || !prePos || !pos) {
         setMaskPath(getMaskPath(pos))
+
+        if (mergedProps.value.animatable && (isAnimating.value || activeIndex.value !== _tempIndex)) {
+          runAnimateCbs()
+        }
+
+        cancelAnimate()
       } else {
+        cancelAnimate()
         animate(prePos, pos)
       }
 
@@ -140,7 +155,7 @@ export function useMask(
   }
 }
 
-function getMaskPath(positionInfo: TargetPositionInfo | null): string {
+function getMaskPath(positionInfo: Omit<TargetPositionInfo, 'origin'> | null): string {
   const viewBoxRect = (width: number, height: number) => `M${width},0L0,0L0,${height}L${width},${height}L${width},0Z`
 
   if (!positionInfo) {

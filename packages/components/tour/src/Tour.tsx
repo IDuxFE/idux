@@ -29,8 +29,9 @@ import { tourProps } from './types'
 
 export default defineComponent({
   name: 'IxTour',
+  inheritAttrs: false,
   props: tourProps,
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const common = useGlobalConfig('common')
     const config = useGlobalConfig('tour')
     const locale = useGlobalConfig('locale')
@@ -52,7 +53,7 @@ export default defineComponent({
 
     useCloseTrigger(mergedProps, positionInfo, visible, setVisible)
     const stepChangeContext = useStepChange(mergedProps, activeIndex, activeStep, visible, onAnimateEnd)
-    const { isStepChanging } = stepChangeContext
+    const { isStepChanging, onStepChange } = stepChangeContext
 
     const mergedContainerFallback = computed(() => `.${mergedPrefixCls.value}-overlay-container`)
     const mergedContainer = computed(() => mergedProps.value.overlayContainer ?? mergedContainerFallback.value)
@@ -65,6 +66,7 @@ export default defineComponent({
       isStepChanging,
       visible,
       currentZIndex,
+      onStepChange,
     )
 
     const placeholderStyle = computed(() => {
@@ -108,7 +110,7 @@ export default defineComponent({
               <Mask v-show={visible.value && !!activeStep.value?.mask} />
             </Transition>
           </CdkPortal>
-          <ɵOverlay class={`${prefixCls}-overlay`} {...overlayProps.value} v-slots={overlaySlots} />
+          <ɵOverlay class={`${prefixCls}-overlay`} {...overlayProps.value} {...attrs} v-slots={overlaySlots} />
         </>
       )
     }

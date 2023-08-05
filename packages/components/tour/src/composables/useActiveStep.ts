@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { MergedTourProps } from './useMergedProps'
 import type { ResolvedTourStep } from '../types'
+import type { MergedTourProps } from './useMergedProps'
 import type { ButtonMode, ButtonSize } from '@idux/components/button'
 import type { TourLocale } from '@idux/components/locales'
 
@@ -97,6 +97,11 @@ export function useActiveStep(
   }
 
   const pushCurrentUpdate = async (index: number) => {
+    if (index < 0) {
+      setActiveStep(undefined)
+      return
+    }
+
     const promise = getActiveStep(index)
 
     destructions.push(async () => {
@@ -113,15 +118,15 @@ export function useActiveStep(
 
   watch(
     activeIndex,
-    async (current, pre) => {
-      if (current === pre) {
+    async current => {
+      if (current === activeStep.value?.index) {
         return
       }
 
       destroySteps()
       pushCurrentUpdate(current)
     },
-    { immediate: true },
+    { immediate: true, flush: 'post' },
   )
 
   return activeStep

@@ -5,12 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { MergedTourProps } from './useMergedProps'
 import type { ResolvedTourStep } from '../types'
+import type { MergedTourProps } from './useMergedProps'
 import type { ɵOverlayProps } from '@idux/components/_private/overlay'
 import type { CommonConfig } from '@idux/components/config'
 
-import { type ComputedRef, computed } from 'vue'
+import { type ComputedRef, computed, ref } from 'vue'
 
 export function useOverlayProps(
   componentCommonConfig: CommonConfig,
@@ -20,13 +20,20 @@ export function useOverlayProps(
   isStepChanging: ComputedRef<boolean>,
   visible: ComputedRef<boolean>,
   currentZIndex: ComputedRef<number>,
+  onStepChange: (cb: () => void) => void,
 ): ComputedRef<ɵOverlayProps> {
+  const currentActiveStep = ref(activeStep.value)
+
+  onStepChange(() => {
+    currentActiveStep.value = activeStep.value
+  })
+
   return computed(() => {
     const { animatable, overlayContainer, offset } = mergedProps.value
-    const { placement = 'bottomStart', showArrow } = activeStep.value ?? {}
+    const { placement = 'bottomStart', showArrow } = currentActiveStep.value ?? {}
 
     return {
-      visible: visible.value && !!activeStep.value && !isStepChanging.value,
+      visible: visible.value && !!currentActiveStep.value && !isStepChanging.value,
       container: overlayContainer,
       containerFallback: containerFallback.value,
       trigger: 'manual',
