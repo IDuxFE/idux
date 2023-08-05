@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.1](https://github.com/IDuxFE/idux/compare/v1.9.0...v1.9.1) (2023-08-05)
+
+### Bug Fixes
+
+- **comp:\*:** hide password input eye in edge with reset style ([#1626](https://github.com/IDuxFE/idux/issues/1626)) ([a0dddbd](https://github.com/IDuxFE/idux/commit/a0dddbd7d85fdceeb33cbce8b31f6fd3eb142b37))
+- **comp:\*:** overlay arrow size misculated after rendered null ([#1627](https://github.com/IDuxFE/idux/issues/1627)) ([8c36d26](https://github.com/IDuxFE/idux/commit/8c36d26e41a4a04504710e9ea3305f57fc6590ce))
+- **comp:button:** text and link should be user selectable ([#1624](https://github.com/IDuxFE/idux/issues/1624)) ([4ca9283](https://github.com/IDuxFE/idux/commit/4ca92832e7a40b6d875b26cfdeb7c9f7f74bfa1c))
+- **comp:tour:** active step incorrect when async ([#1621](https://github.com/IDuxFE/idux/issues/1621)) ([cb6d0bf](https://github.com/IDuxFE/idux/commit/cb6d0bf323b85b9b90c159025e2acca2b3b36b74))
+- **comp:tour:** tour closable should be configurable ([#1622](https://github.com/IDuxFE/idux/issues/1622)) ([409c280](https://github.com/IDuxFE/idux/commit/409c280c5f536d0b49a92eca7bd74385fac6a59f))
+
 # [1.9.0](https://github.com/IDuxFE/idux/compare/v1.8.1...v1.9.0) (2023-07-27)
 
 ### Bug Fixes

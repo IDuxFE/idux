@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.1](https://github.com/IDuxFE/idux/compare/v1.9.0...v1.9.1) (2023-08-05)
+
+**Note:** Version bump only for package @idux/site
+
 # [1.9.0](https://github.com/IDuxFE/idux/compare/v1.8.1...v1.9.0) (2023-07-27)
 
 ### Bug Fixes

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.1](https://github.com/IDuxFE/idux/compare/v1.9.0...v1.9.1) (2023-08-05)
+
+### Bug Fixes
+
+- **pro:search:** add min-height to select panel in quickselect ([#1625](https://github.com/IDuxFE/idux/issues/1625)) ([b019804](https://github.com/IDuxFE/idux/commit/b0198049809ff1f2ee8f28d9759c4bc82466cb67))
+- **pro:search:** chinese couldn't be input ([#1620](https://github.com/IDuxFE/idux/issues/1620)) ([1e4a1c7](https://github.com/IDuxFE/idux/commit/1e4a1c745b6af7174e697ffd42bfe4b1be09302f))
+
 # [1.9.0](https://github.com/IDuxFE/idux/compare/v1.8.1...v1.9.0) (2023-07-27)
 
 ### Bug Fixes
