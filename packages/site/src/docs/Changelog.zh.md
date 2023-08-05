@@ -10,6 +10,18 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 1.9.1(2023-08-05)
+
+### Bug Fixes
+
+- **comp:\*:** 修改reset样式来隐藏edge浏览器中`password`类型`input`的小眼睛图标 ([#1626](https://github.com/IDuxFE/idux/issues/1626)) ([a0dddbd](https://github.com/IDuxFE/idux/commit/a0dddbd7d85fdceeb33cbce8b31f6fd3eb142b37))
+- **comp:\*:** 浮层内容在渲染为空之后有几率由于箭头尺寸获取失败导致位置计算不正确 ([#1627](https://github.com/IDuxFE/idux/issues/1627)) ([8c36d26](https://github.com/IDuxFE/idux/commit/8c36d26e41a4a04504710e9ea3305f57fc6590ce))
+- **comp:button:** `text`和`link`类型的按钮应当可以选中复制 ([#1624](https://github.com/IDuxFE/idux/issues/1624)) ([4ca9283](https://github.com/IDuxFE/idux/commit/4ca92832e7a40b6d875b26cfdeb7c9f7f74bfa1c))
+- **comp:tour:** 异步使用场景下，滚动屏幕可能会造成当前激活状态的内容显示不正确 ([#1621](https://github.com/IDuxFE/idux/issues/1621)) ([cb6d0bf](https://github.com/IDuxFE/idux/commit/cb6d0bf323b85b9b90c159025e2acca2b3b36b74))
+- **comp:tour:** `closable`应当可以配置 ([#1622](https://github.com/IDuxFE/idux/issues/1622)) ([409c280](https://github.com/IDuxFE/idux/commit/409c280c5f536d0b49a92eca7bd74385fac6a59f))
+- **pro:search:** 增加`select`类型面板在快捷面板中的`min-height` ([#1625](https://github.com/IDuxFE/idux/issues/1625)) ([b019804](https://github.com/IDuxFE/idux/commit/b0198049809ff1f2ee8f28d9759c4bc82466cb67))
+- **pro:search:** 中文输入导致闪烁不正常 ([#1620](https://github.com/IDuxFE/idux/issues/1620)) ([1e4a1c7](https://github.com/IDuxFE/idux/commit/1e4a1c745b6af7174e697ffd42bfe4b1be09302f))
+
 # 1.9.0(2023-07-27)
 
 ### Bug Fixes
