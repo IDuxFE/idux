@@ -38,7 +38,7 @@ export interface TourMaskOptions {
 export type TargetGetter = () => MaybeElement | null | Promise<MaybeElement | null>
 
 export interface TourStep {
-  title: string
+  title?: string
   description?: string
   gap?: number | TargetGap
   mask?: boolean | TourMaskOptions
