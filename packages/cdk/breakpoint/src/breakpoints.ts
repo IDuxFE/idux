@@ -15,7 +15,7 @@ import { useMediaQuery } from './mediaQuery'
 
 export const BREAKPOINTS_KEYS = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 
-export type BreakpointKey = (typeof BREAKPOINTS_KEYS)[number]
+export type BreakpointKey = typeof BREAKPOINTS_KEYS[number]
 
 export const BREAKPOINTS: Record<BreakpointKey, string> = {
   xs: '(max-width: 599.99px)',

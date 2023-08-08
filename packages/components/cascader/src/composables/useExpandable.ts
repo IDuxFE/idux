@@ -12,9 +12,9 @@ import { isNil } from 'lodash-es'
 import { type VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 import { type GetDisabledFn, type GetKeyFn } from '@idux/components/utils'
 
-import { type MergedData, convertMergedData, convertMergedDataMap } from './useDataSource'
 import { type CascaderData, type CascaderPanelProps, type CascaderProps } from '../types'
 import { callChange, getParentKeys } from '../utils'
+import { type MergedData, convertMergedData, convertMergedDataMap } from './useDataSource'
 
 export interface ExpandableContext {
   expandedKeys: ComputedRef<VKey[]>

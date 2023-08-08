@@ -7,8 +7,8 @@
 
 import { type ComputedRef, computed, watch, watchEffect } from 'vue'
 
-import { AbstractControl } from './abstractControl'
 import { type AsyncValidatorFn, type ValidateStatus, type ValidatorFn, type ValidatorOptions } from '../types'
+import { AbstractControl } from './abstractControl'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class FormArray<T = any> extends AbstractControl<T[]> {

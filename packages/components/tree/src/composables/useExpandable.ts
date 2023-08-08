@@ -14,9 +14,9 @@ import { type TreeConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { type GetKeyFn } from '@idux/components/utils'
 
-import { type MergedNode, convertMergeNodes, convertMergedNodeMap } from './useDataSource'
 import { type TreeExpandIconRenderer, type TreeNode, type TreeProps } from '../types'
 import { callChange, getParentKeys } from '../utils'
+import { type MergedNode, convertMergeNodes, convertMergedNodeMap } from './useDataSource'
 
 export interface ExpandableContext {
   expandIconRenderer: TreeExpandIconRenderer

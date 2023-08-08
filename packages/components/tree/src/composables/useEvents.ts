@@ -5,10 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { TreeProps } from '../types'
 import type { MergedNode } from './useDataSource'
 import type { ExpandableContext } from './useExpandable'
 import type { SelectableContext } from './useSelectable'
-import type { TreeProps } from '../types'
 import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef, Ref } from 'vue'
 

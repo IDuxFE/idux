@@ -9,8 +9,8 @@ import { type ComputedRef, type Ref, computed, reactive, ref, watch } from 'vue'
 
 import { type VKey, callEmit } from '@idux/cdk/utils'
 
-import { type TableColumnMerged } from './useColumns'
 import { type TableColumnFilterable } from '../types'
+import { type TableColumnMerged } from './useColumns'
 
 export interface FilterableContext {
   activeFilters: Ref<ActiveFilter[]>

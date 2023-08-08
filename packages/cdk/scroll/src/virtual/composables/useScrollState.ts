@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { GetKey } from './useGetKey'
 import type { VirtualScrollProps } from '../types'
+import type { GetKey } from './useGetKey'
 import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef, Ref } from 'vue'
 

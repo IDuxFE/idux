@@ -12,9 +12,9 @@ import { isNil } from 'lodash-es'
 import { type VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 import { type CascaderStrategy } from '@idux/components/cascader'
 
-import { type MergedNode } from './useDataSource'
 import { type TreeNode, type TreeProps } from '../types'
 import { callChange, getChildrenKeys, getParentKeys } from '../utils'
+import { type MergedNode } from './useDataSource'
 
 export interface CheckableContext {
   checkedKeys: WritableComputedRef<VKey[]>

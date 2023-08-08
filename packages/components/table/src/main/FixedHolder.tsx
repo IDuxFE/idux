@@ -9,8 +9,8 @@ import { type CSSProperties, type Ref, computed, defineComponent, inject, onBefo
 
 import { convertCssPixel, off, on } from '@idux/cdk/utils'
 
-import ColGroup from './ColGroup'
 import { TABLE_TOKEN } from '../token'
+import ColGroup from './ColGroup'
 
 export default defineComponent({
   props: {

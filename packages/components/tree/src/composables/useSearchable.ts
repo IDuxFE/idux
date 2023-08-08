@@ -9,8 +9,8 @@ import { type ComputedRef, computed } from 'vue'
 
 import { NoopArray, type VKey } from '@idux/cdk/utils'
 
-import { type MergedNode } from './useDataSource'
 import { type TreeNode, type TreeProps } from '../types'
+import { type MergedNode } from './useDataSource'
 
 export interface SearchableContext {
   searchedKeys: ComputedRef<VKey[]>

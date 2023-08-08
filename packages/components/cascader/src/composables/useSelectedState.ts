@@ -12,9 +12,9 @@ import { isNil } from 'lodash-es'
 import { NoopArray, type VKey, convertArray } from '@idux/cdk/utils'
 import { type GetDisabledFn } from '@idux/components/utils'
 
-import { type MergedData } from './useDataSource'
 import { type CascaderStrategy } from '../types'
 import { getChildrenKeys, getParentKeys } from '../utils'
+import { type MergedData } from './useDataSource'
 
 export interface SelectedStateContext {
   resolvedSelectedKeys: ComputedRef<VKey[]>

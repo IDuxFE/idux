@@ -13,11 +13,11 @@ import { Logger } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 import { type GetKeyFn } from '@idux/components/utils'
 
+import { type MenuData } from '../types'
 import MenuDivider from './MenuDivider'
 import MenuItem from './MenuItem'
 import MenuItemGroup from './MenuItemGroup'
 import MenuSub from './menu-sub/MenuSub'
-import { type MenuData } from '../types'
 
 export function coverChildren(data: MenuData[] | undefined, getKetFn: GetKeyFn): VNode[] {
   if (!data || data.length === 0) {

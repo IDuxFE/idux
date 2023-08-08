@@ -7,8 +7,8 @@
 
 import { defineComponent, inject } from 'vue'
 
-import HeadRow from './HeadRow'
 import { TABLE_TOKEN } from '../../token'
+import HeadRow from './HeadRow'
 
 export default defineComponent({
   setup() {

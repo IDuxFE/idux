@@ -11,8 +11,8 @@ import { useResizeObserver } from '@idux/cdk/resize'
 import { type VirtualScrollInstance, type VirtualScrollToFn, getScrollBarSize, scrollToTop } from '@idux/cdk/scroll'
 import { Logger, callEmit, convertCssPixel, convertElement } from '@idux/cdk/utils'
 
-import { type StickyContext } from './useSticky'
 import { type TableProps } from '../types'
+import { type StickyContext } from './useSticky'
 
 export function useScroll(
   props: TableProps,

@@ -7,8 +7,8 @@
 
 import { watch } from 'vue'
 
-import { AbstractControl } from './abstractControl'
 import { type AsyncValidatorFn, type ValidatorFn, type ValidatorOptions } from '../types'
+import { AbstractControl } from './abstractControl'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class FormControl<T = any> extends AbstractControl<T> {

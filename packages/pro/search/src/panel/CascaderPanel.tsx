@@ -10,9 +10,9 @@ import { defineComponent, inject, onUnmounted, watch } from 'vue'
 import { type VKey, callEmit } from '@idux/cdk/utils'
 import { CascaderPanelProps, IxCascaderPanel } from '@idux/components/cascader'
 
-import PanelFooter from './PanelFooter'
 import { proSearchContext } from '../token'
 import { proSearchCascaderPanelProps } from '../types'
+import PanelFooter from './PanelFooter'
 
 export default defineComponent({
   props: proSearchCascaderPanelProps,

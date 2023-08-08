@@ -9,8 +9,8 @@ import { watch, watchEffect } from 'vue'
 
 import { hasOwnProperty } from '@idux/cdk/utils'
 
-import { AbstractControl, type GroupControls, type OptionalKeys } from './abstractControl'
 import { type AsyncValidatorFn, type ValidateStatus, type ValidatorFn, type ValidatorOptions } from '../types'
+import { AbstractControl, type GroupControls, type OptionalKeys } from './abstractControl'
 
 export class FormGroup<T extends object = object> extends AbstractControl<T> {
   constructor(

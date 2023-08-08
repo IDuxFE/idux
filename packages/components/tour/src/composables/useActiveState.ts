@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { VisibleContext } from './useVisible'
 import type { TourProps } from '../types'
+import type { VisibleContext } from './useVisible'
 
 import { type ComputedRef, computed, watch } from 'vue'
 

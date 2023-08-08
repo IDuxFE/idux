@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TransferPaginationContext } from './usePagination'
 import type { TransferData, TransferDataStrategy, TransferProps } from '../types'
+import type { TransferPaginationContext } from './usePagination'
 import type { TransferConfig } from '@idux/components/config'
 import type { PaginationProps } from '@idux/components/pagination'
 

@@ -10,9 +10,9 @@ import { type ComputedRef, type Ref, computed } from 'vue'
 import { type VKey } from '@idux/cdk/utils'
 import { type GetKeyFn } from '@idux/components/utils'
 
+import { type TablePagination, type TableProps } from '../types'
 import { type ActiveFilter } from './useFilterable'
 import { type ActiveSorter } from './useSortable'
-import { type TablePagination, type TableProps } from '../types'
 
 export function useDataSource(
   props: TableProps,

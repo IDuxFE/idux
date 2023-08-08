@@ -10,10 +10,10 @@ import { type ComputedRef, type Ref, computed, watch } from 'vue'
 import { convertArray, useState } from '@idux/cdk/utils'
 import { type DateConfig } from '@idux/components/config'
 
+import { compareDateTime, convertToDate, sortRangeValue } from '../utils'
 import { type PickerControlContext, useControl } from './useControl'
 import { type FormatContext } from './useFormat'
 import { type InputEnableStatus } from './useInputEnableStatus'
-import { compareDateTime, convertToDate, sortRangeValue } from '../utils'
 
 export interface PickerRangeControlContext {
   buffer: ComputedRef<(Date | undefined)[] | undefined>

@@ -11,7 +11,7 @@ import type { DefineComponent, PropType } from 'vue'
 
 export const STATUS_TYPE = ['loading', 'finish', 'error'] as const
 
-export type StatusType = (typeof STATUS_TYPE)[number]
+export type StatusType = typeof STATUS_TYPE[number]
 
 export interface LoadingBarOptions {
   mask?: boolean

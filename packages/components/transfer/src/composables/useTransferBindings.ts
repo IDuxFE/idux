@@ -5,11 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { TransferBindings, TransferData, TransferProps } from '../types'
 import type { TransferPaginationContext } from './usePagination'
 import type { TransferDataContext } from './useTransferData'
 import type { TransferOperationsContext } from './useTransferOperations'
 import type { TransferSelectStateContext } from './useTransferSelectState'
-import type { TransferBindings, TransferData, TransferProps } from '../types'
 import type { ComputedRef } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'

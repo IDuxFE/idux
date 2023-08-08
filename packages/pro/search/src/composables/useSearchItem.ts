@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { SearchState } from './useSearchStates'
 import type { ResolvedSearchField, SearchItem, SearchItemError } from '../types'
+import type { SearchState } from './useSearchStates'
 import type { VKey } from '@idux/cdk/utils'
 
 import { type ComputedRef, type Ref, computed } from 'vue'
