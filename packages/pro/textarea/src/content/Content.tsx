@@ -11,8 +11,8 @@ import { type CSSProperties, defineComponent, inject } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 
-import ErrorLine from './ErrorLine'
 import { proTextareaContext } from '../token'
+import ErrorLine from './ErrorLine'
 
 export default defineComponent({
   setup() {

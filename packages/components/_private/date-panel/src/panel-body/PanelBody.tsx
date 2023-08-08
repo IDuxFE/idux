@@ -11,8 +11,8 @@ import type { ComputedRef, VNode } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
 
-import PanelRow from './PanelRow'
 import { datePanelToken } from '../token'
+import PanelRow from './PanelRow'
 
 export default defineComponent({
   setup() {

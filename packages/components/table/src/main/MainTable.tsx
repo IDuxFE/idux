@@ -24,6 +24,8 @@ import { offResize, onResize } from '@idux/cdk/resize'
 import { CdkVirtualScroll, type VirtualContentRenderFn, type VirtualItemRenderFn } from '@idux/cdk/scroll'
 import { Logger, type VKey, callEmit, convertElement, isVisibleElement } from '@idux/cdk/utils'
 
+import { type FlattedData } from '../composables/useDataSource'
+import { TABLE_TOKEN, tableBodyToken } from '../token'
 import ColGroup from './ColGroup'
 import FixedHolder from './FixedHolder'
 import StickyScroll from './StickyScroll'
@@ -31,8 +33,6 @@ import Body from './body/Body'
 import { renderBodyRow } from './body/RenderBodyRow'
 import Head from './head/Head'
 import Foot from './tfoot/Foot'
-import { type FlattedData } from '../composables/useDataSource'
-import { TABLE_TOKEN, tableBodyToken } from '../token'
 
 export default defineComponent({
   setup() {

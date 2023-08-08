@@ -5,9 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { TablePagination, TableProps } from '../types'
 import type { ActiveFilter } from './useFilterable'
 import type { ActiveSorter } from './useSortable'
-import type { TablePagination, TableProps } from '../types'
 import type { TableConfig } from '@idux/components/config'
 
 import { type ComputedRef, type Ref, type WatchStopHandle, computed, watch } from 'vue'

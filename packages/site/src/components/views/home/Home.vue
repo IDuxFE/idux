@@ -32,8 +32,8 @@ import { computed, defineComponent, inject } from 'vue'
 
 import { useRouter } from 'vue-router'
 
-import { homeLocales } from './locales'
 import { appContextToken } from '../../../context'
+import { homeLocales } from './locales'
 
 export default defineComponent({
   setup() {

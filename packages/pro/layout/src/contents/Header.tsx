@@ -13,9 +13,9 @@ import { callEmit } from '@idux/cdk/utils'
 import { IxLayoutHeader } from '@idux/components/layout'
 import { IxMenu, type MenuClickOptions, type MenuProps } from '@idux/components/menu'
 
-import Logo from './Logo'
 import { proLayoutToken } from '../token'
 import { getDefaultPaths } from '../utils/menu'
+import Logo from './Logo'
 
 export default defineComponent({
   name: 'IxProLayoutHeader',

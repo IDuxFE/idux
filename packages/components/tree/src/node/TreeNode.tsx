@@ -13,14 +13,14 @@ import { computed, defineComponent, inject } from 'vue'
 import { useKey } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 
+import { treeToken } from '../token'
+import { treeNodeProps } from '../types'
+import { getParentKeys } from '../utils'
 import Checkbox from './Checkbox'
 import Content from './Content'
 import Expand from './Expand'
 import Indent from './Indent'
 import LeafLine from './LeafLine'
-import { treeToken } from '../token'
-import { treeNodeProps } from '../types'
-import { getParentKeys } from '../utils'
 
 export default defineComponent({
   props: treeNodeProps,

@@ -9,7 +9,6 @@ import { type ComputedRef, Ref, type VNodeTypes, computed, defineComponent, inje
 
 import { type VKey } from '@idux/cdk/utils'
 
-import BodyCell from './BodyCell'
 import {
   type TableColumnMerged,
   type TableColumnMergedExpandable,
@@ -18,6 +17,7 @@ import {
 import { FlattedData } from '../../composables/useDataSource'
 import { TABLE_TOKEN } from '../../token'
 import { type TableBodyRowProps, tableBodyRowProps } from '../../types'
+import BodyCell from './BodyCell'
 
 export default defineComponent({
   props: tableBodyRowProps,

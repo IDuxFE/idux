@@ -15,10 +15,10 @@ import { IxIcon } from '@idux/components/icon'
 import { IxPopover } from '@idux/components/popover'
 import { SelectData } from '@idux/components/select'
 
-import MoreSelectPane from './MoreSelectPane'
-import TabNav from './TabNav'
 import { useSizeObservable } from '../composables/useSizeObservable'
 import { tabsToken } from '../tokens'
+import MoreSelectPane from './MoreSelectPane'
+import TabNav from './TabNav'
 
 export default defineComponent({
   props: { selectedKey: { type: [Number, String, Symbol] } },

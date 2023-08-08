@@ -7,8 +7,8 @@
 
 import { addClass, removeClass } from '@idux/cdk/utils'
 
-import { ScrollStrategy } from './scrollStrategy'
 import { getScrollBarSize } from '../utils'
+import { ScrollStrategy } from './scrollStrategy'
 
 export interface BlockScrollStrategyOptions {
   target?: HTMLElement

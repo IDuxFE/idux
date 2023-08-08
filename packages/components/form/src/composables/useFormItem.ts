@@ -23,9 +23,9 @@ import { type VKey, hasOwnProperty } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { type Locale } from '@idux/components/locales'
 
-import { useFormStatus } from './public'
 import { FORM_ITEM_TOKEN } from '../token'
 import { type FormItemProps } from '../types'
+import { useFormStatus } from './public'
 
 export function useFormItem(props: FormItemProps): {
   status: ComputedRef<ValidateStatus | undefined>

@@ -12,9 +12,9 @@ import { isFunction } from 'lodash-es'
 import { NoopFunction, type VKey, callEmit, traverseTree, useState } from '@idux/cdk/utils'
 import { IxTree, type TreeProps } from '@idux/components/tree'
 
-import PanelFooter from './PanelFooter'
 import { proSearchContext } from '../token'
 import { type ProSearchTreeSelectPanelProps, type TreeSelectPanelData, proSearchTreeSelectPanelProps } from '../types'
+import PanelFooter from './PanelFooter'
 
 export default defineComponent({
   props: proSearchTreeSelectPanelProps,

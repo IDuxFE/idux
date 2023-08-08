@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { MergedNode } from './useDataSource'
 import type { TreeNode, TreeProps } from '../types'
+import type { MergedNode } from './useDataSource'
 import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef, Ref } from 'vue'
 

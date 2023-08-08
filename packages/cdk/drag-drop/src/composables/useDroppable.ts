@@ -11,8 +11,8 @@ import { watch } from 'vue'
 
 import { type MaybeElementRef, convertElement, tryOnScopeDispose } from '@idux/cdk/utils'
 
-import { type DnDContext } from './useDragDropContext'
 import { initContext } from '../utils'
+import { type DnDContext } from './useDragDropContext'
 
 /**
  * make a element droppable as a container and accept draggable element

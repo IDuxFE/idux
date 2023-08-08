@@ -16,8 +16,8 @@
 <script lang="ts">
 import { computed, defineComponent, inject } from 'vue'
 
-import { footerLocales } from './locales'
 import { appContextToken } from '../../../context'
+import { footerLocales } from './locales'
 
 export default defineComponent({
   setup() {

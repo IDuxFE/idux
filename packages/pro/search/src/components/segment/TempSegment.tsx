@@ -11,9 +11,9 @@ import { computed, defineComponent, inject, onMounted, ref, watch } from 'vue'
 
 import { type VKey, useState } from '@idux/cdk/utils'
 
-import SegmentInput from './SegmentInput'
 import { proSearchContext } from '../../token'
 import NameSelectOverlay from '../NameSelectOverlay'
+import SegmentInput from './SegmentInput'
 
 export default defineComponent({
   setup(_, { slots }) {

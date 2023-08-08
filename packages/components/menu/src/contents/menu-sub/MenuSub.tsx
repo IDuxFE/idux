@@ -20,17 +20,16 @@ import {
 
 import { debounce } from 'lodash-es'
 
-import { type VKey, useState } from '@idux/cdk/utils'
-import { useKey } from '@idux/cdk/utils'
+import { type VKey, useKey, useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
 
-import InlineContent from './InlineContent'
-import Label from './Label'
-import OverlayContent from './OverlayContent'
 import { usePaddingLeft } from '../../composables/usePaddingLeft'
 import { type MenuSubContext, menuItemGroupToken, menuSubToken, menuToken } from '../../token'
 import { type MenuData, type MenuProps, type MenuSubProps, menuSubProps } from '../../types'
+import InlineContent from './InlineContent'
+import Label from './Label'
+import OverlayContent from './OverlayContent'
 
 export default defineComponent({
   name: 'MenuSub',

@@ -7,9 +7,9 @@
 
 import { defineComponent, inject } from 'vue'
 
-import HeadCell from './HeadCell'
 import { TABLE_TOKEN } from '../../token'
 import { tableHeadRowProps } from '../../types'
+import HeadCell from './HeadCell'
 
 export default defineComponent({
   props: tableHeadRowProps,

@@ -12,10 +12,10 @@ import { isNil } from 'lodash-es'
 import { type VKey, callEmit } from '@idux/cdk/utils'
 import { TreeConfig } from '@idux/components/config'
 
-import { type MergedNode } from './useDataSource'
-import { type ExpandableContext } from './useExpandable'
 import { type TreeDropType, type TreeDroppable, type TreeProps } from '../types'
 import { getChildrenKeys } from '../utils'
+import { type MergedNode } from './useDataSource'
+import { type ExpandableContext } from './useExpandable'
 
 export interface DragDropContext {
   draggableIcon: ComputedRef<string>

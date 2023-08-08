@@ -20,9 +20,6 @@ import { isFunction, isObject, isString } from 'lodash-es'
 
 import { NoopArray, type VKey, convertCssPixel } from '@idux/cdk/utils'
 
-import FilterableTrigger from './triggers/FilterableTrigger'
-import SelectableTrigger from './triggers/SelectableTrigger'
-import SortableTrigger from './triggers/SortableTrigger'
 import { type TableColumnMergedExtra } from '../../composables/useColumns'
 import { TABLE_TOKEN } from '../../token'
 import {
@@ -32,6 +29,9 @@ import {
   tableHeadCellProps,
 } from '../../types'
 import { getColTitle } from '../../utils'
+import FilterableTrigger from './triggers/FilterableTrigger'
+import SelectableTrigger from './triggers/SelectableTrigger'
+import SortableTrigger from './triggers/SortableTrigger'
 
 type HeadColumn = TableColumnMergedExtra & {
   type: 'selectable' | 'expandable' | 'scroll-bar' | undefined

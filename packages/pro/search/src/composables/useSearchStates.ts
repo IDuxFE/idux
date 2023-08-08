@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { SearchValueContext } from './useSearchValues'
 import type { ProSearchProps, ResolvedSearchField, SearchValue, Segment, SegmentState } from '../types'
+import type { SearchValueContext } from './useSearchValues'
 
 import { type ComputedRef, type Ref, computed, ref, toRaw } from 'vue'
 

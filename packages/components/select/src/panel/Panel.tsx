@@ -19,15 +19,15 @@ import { callEmit } from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
 import { type SelectConfig, useGlobalConfig } from '@idux/components/config'
 
-import ListBox from './ListBox'
-import Option from './Option'
-import OptionGroup from './OptionGroup'
 import { usePanelGetOptionKey } from '../composables/useGetOptionKey'
 import { useFlattenedOptions } from '../composables/useOptions'
 import { usePanelActiveState } from '../composables/usePanelActiveState'
 import { useSelectedState } from '../composables/usePanelSelectedState'
 import { SELECT_PANEL_DATA_TOKEN, selectPanelContext } from '../token'
 import { type SelectPanelProps, selectPanelProps } from '../types'
+import ListBox from './ListBox'
+import Option from './Option'
+import OptionGroup from './OptionGroup'
 
 export default defineComponent({
   name: 'IxSelectPanel',

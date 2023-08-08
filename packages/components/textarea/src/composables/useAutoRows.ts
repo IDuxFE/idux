@@ -14,9 +14,9 @@ import { isBoolean, isNumber, isObject, throttle } from 'lodash-es'
 import { useResizeObserver } from '@idux/cdk/resize'
 import { rAF } from '@idux/cdk/utils'
 
-import { useLineHeight } from './useLineHeight'
 import { type BoxSizingData, getBoxSizingData } from '../utils/getBoxSizingData'
 import { measureTextarea } from '../utils/measureTextarea'
+import { useLineHeight } from './useLineHeight'
 
 export interface AutoRowsContext {
   resizeToFitContent: (force?: boolean) => void

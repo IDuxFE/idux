@@ -5,18 +5,18 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { DnDContext } from './useDragDropContext'
 import type { DnDEventName, DnDEventType, DnDPosition, DraggableOptions } from '../types'
+import type { DnDContext } from './useDragDropContext'
 
 import { type ComputedRef, computed, ref, watch } from 'vue'
 
 import { type MaybeElementRef, convertElement, tryOnScopeDispose, useEventListener } from '@idux/cdk/utils'
 
+import { DnDState } from '../state'
+import { extraMove, initContext, reMoveElement } from '../utils'
 import { withBoundary } from './withBoundary'
 import { withDragFree } from './withDragFree'
 import { withDragHandle } from './withDragHandle'
-import { DnDState } from '../state'
-import { extraMove, initContext, reMoveElement } from '../utils'
 
 /**
  * make a element draggable

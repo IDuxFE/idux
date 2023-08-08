@@ -10,9 +10,9 @@ import { type PropType, type VNode, computed, defineComponent, inject, normalize
 import { CdkVirtualScroll, type VirtualItemRenderFn } from '@idux/cdk/scroll'
 import { ɵEmpty } from '@idux/components/_private/empty'
 
-import Option from './Option'
 import { type MergedData } from '../composables/useDataSource'
 import { cascaderPanelToken } from '../token'
+import Option from './Option'
 
 export default defineComponent({
   props: {

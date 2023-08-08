@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { SearchState } from './useSearchStates'
 import type { ProSearchContext } from '../token'
+import type { SearchState } from './useSearchStates'
 
 import { type ComputedRef, computed, ref, watch } from 'vue'
 
