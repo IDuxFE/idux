@@ -50,10 +50,13 @@
       &-content {
         flex: auto;
 
-        button:not(:first-child) {
-          margin-left: @date-panel-header-content-spacing;
+        button {
           font-size: @date-panel-header-content-font-size;
           font-weight: @date-panel-header-content-font-weight;
+
+          &:not(:first-child) {
+            margin-left: @date-panel-header-content-spacing;
+          }
         }
       }
     }
