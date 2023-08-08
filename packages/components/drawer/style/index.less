@@ -19,13 +19,14 @@
     }
   }
 
-  &-opened&-push {
-    transition: transform var(--ix-transition-duration-medium) var(--ix-ease-out);
-    transition-delay: var(--ix-transition-duration-fast);
-  }
-
-  &-opened&-pull {
-    transition: transform var(--ix-transition-duration-medium) var(--ix-ease-in);
+  &-opened {
+    &.@{drawer-prefix}-push {
+      transition: transform var(--ix-transition-duration-medium) var(--ix-ease-out);
+      transition-delay: var(--ix-transition-duration-fast);
+    }
+    &.@{drawer-prefix}-pull {
+      transition: transform var(--ix-transition-duration-medium) var(--ix-ease-in);
+    }
   }
 
   &-sentinel {

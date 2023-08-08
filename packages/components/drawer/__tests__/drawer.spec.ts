@@ -1,5 +1,5 @@
 import { MountingOptions, VueWrapper, flushPromises, mount } from '@vue/test-utils'
-import { h } from 'vue'
+import { h, nextTick } from 'vue'
 
 import { isElementVisible, renderWork } from '@tests'
 
@@ -40,6 +40,8 @@ describe('Drawer', () => {
     expect(isElementVisible(document.querySelector('.ix-drawer-wrapper'))).toBe(false)
 
     await wrapper.setProps({ visible: true })
+    await nextTick()
+    await flushPromises()
 
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
@@ -195,17 +197,17 @@ describe('Drawer', () => {
   test('height work', async () => {
     const wrapper = DrawerMount({ props: { height: 400 } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
-    const contentDom = drawerWrapper.find('.ix-drawer').element as HTMLElement
+    const getDom = () => drawerWrapper.find('.ix-drawer').element as HTMLElement
 
-    expect(contentDom.style.height).toBe('400px')
+    expect(getDom().style.height).toBe('400px')
 
     await wrapper.setProps({ height: '200px' })
 
-    expect(contentDom.style.height).toBe('200px')
+    expect(getDom().style.height).toBe('200px')
 
     await wrapper.setProps({ height: '20%' })
 
-    expect(contentDom.style.height).toBe('20%')
+    expect(getDom().style.height).toBe('20%')
   })
 
   test('mask work', async () => {
@@ -237,13 +239,13 @@ describe('Drawer', () => {
     const wrapper = DrawerMount({ props: { offset: 256 } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
-    const contentDom = drawerWrapper.find('.ix-drawer').element as HTMLElement
+    const getDom = () => drawerWrapper.find('.ix-drawer').element as HTMLElement
 
-    expect(contentDom.style.top).toBe('256px')
+    expect(getDom().style.top).toBe('256px')
 
     await wrapper.setProps({ offset: '30%' })
 
-    expect(contentDom.style.top).toBe('30%')
+    expect(getDom().style.top).toBe('30%')
   })
 
   test('placement work', async () => {
@@ -274,17 +276,17 @@ describe('Drawer', () => {
   test('width work', async () => {
     const wrapper = DrawerMount({ props: { width: 400 } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
-    const contentDom = drawerWrapper.find('.ix-drawer').element as HTMLElement
+    const getDom = () => drawerWrapper.find('.ix-drawer').element as HTMLElement
 
-    expect(contentDom.style.width).toBe('400px')
+    expect(getDom().style.width).toBe('400px')
 
     await wrapper.setProps({ width: '200px' })
 
-    expect(contentDom.style.width).toBe('200px')
+    expect(getDom().style.width).toBe('200px')
 
     await wrapper.setProps({ width: '20%' })
 
-    expect(contentDom.style.width).toBe('20%')
+    expect(getDom().style.width).toBe('20%')
   })
 
   test('zIndex work', async () => {

@@ -15,7 +15,7 @@ export interface DrawerContext {
   common: CommonConfig
   config: DrawerConfig
   mergedPrefixCls: ComputedRef<string>
-  visible: ComputedRef<boolean>
+  visible: Ref<boolean>
   animatedVisible: Ref<boolean | undefined>
   mergedVisible: ComputedRef<boolean>
   currentZIndex: ComputedRef<number>
