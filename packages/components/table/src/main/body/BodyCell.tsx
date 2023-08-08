@@ -9,7 +9,7 @@ import { type ComputedRef, type Slots, type VNodeChild, computed, defineComponen
 
 import { isFunction, isNil, isString } from 'lodash-es'
 
-import { Logger, convertArray, convertCssPixel } from '@idux/cdk/utils'
+import { Logger, convertArray, convertCssPixel, isEmptyNode } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { TableConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
@@ -137,6 +137,9 @@ export default defineComponent({
       return (
         <Tag class={classes.value} style={style.value} title={title} {...customAdditional}>
           {type === 'expandable' && renderExpandableChildren(props, slots, expandable, mergedPrefixCls.value)}
+          {type === 'expandable' && !isEmptyNode(children) && (
+            <span class={`${mergedPrefixCls.value}-expandable-trigger-gap`}></span>
+          )}
           {children}
         </Tag>
       )
