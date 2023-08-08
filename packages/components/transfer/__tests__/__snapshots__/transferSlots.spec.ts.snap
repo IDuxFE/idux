@@ -1180,8 +1180,8 @@ exports[`Transfer > default slot work 1`] = `
           class="ix-transfer-header-clear-icon ix-transfer-header-clear-icon-disabled"
         >
           <i
-            aria-label="clear"
-            class="ix-icon ix-icon-clear"
+            aria-label="delete"
+            class="ix-icon ix-icon-delete"
             role="img"
           />
         </span>
@@ -2131,8 +2131,8 @@ exports[`Transfer > empty slot work 1`] = `
           class="ix-transfer-header-clear-icon ix-transfer-header-clear-icon-disabled"
         >
           <i
-            aria-label="clear"
-            class="ix-icon ix-icon-clear"
+            aria-label="delete"
+            class="ix-icon ix-icon-delete"
             role="img"
           />
         </span>
@@ -3114,8 +3114,8 @@ exports[`Transfer > footer slot work 1`] = `
           class="ix-transfer-header-clear-icon ix-transfer-header-clear-icon-disabled"
         >
           <i
-            aria-label="clear"
-            class="ix-icon ix-icon-clear"
+            aria-label="delete"
+            class="ix-icon ix-icon-delete"
             role="img"
           />
         </span>
@@ -4141,8 +4141,8 @@ exports[`Transfer > headerLabel slot work 1`] = `
           class="ix-transfer-header-clear-icon ix-transfer-header-clear-icon-disabled"
         >
           <i
-            aria-label="clear"
-            class="ix-icon ix-icon-clear"
+            aria-label="delete"
+            class="ix-icon ix-icon-delete"
             role="img"
           />
         </span>
@@ -5222,8 +5222,8 @@ exports[`Transfer > label slot work 1`] = `
           class="ix-transfer-header-clear-icon ix-transfer-header-clear-icon-disabled"
         >
           <i
-            aria-label="clear"
-            class="ix-icon ix-icon-clear"
+            aria-label="delete"
+            class="ix-icon ix-icon-delete"
             role="img"
           />
         </span>

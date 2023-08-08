@@ -1202,8 +1202,8 @@ exports[`ProTransfer > table transfer render work 1`] = `
               class="ix-transfer-header-clear-icon"
             >
               <i
-                aria-label="clear"
-                class="ix-icon ix-icon-clear"
+                aria-label="delete"
+                class="ix-icon ix-icon-delete"
                 role="img"
               />
             </span>
@@ -3447,8 +3447,8 @@ exports[`ProTransfer > tree transfer render work 1`] = `
               class="ix-transfer-header-clear-icon"
             >
               <i
-                aria-label="clear"
-                class="ix-icon ix-icon-clear"
+                aria-label="delete"
+                class="ix-icon ix-icon-delete"
                 role="img"
               />
             </span>
