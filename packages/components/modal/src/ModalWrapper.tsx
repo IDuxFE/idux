@@ -150,6 +150,11 @@ export default defineComponent({
       const okButton = { size: 'md', ...props.okButton } as const
       const cancelButton = { size: 'md', ...props.cancelButton } as const
 
+      const headerSlots = {
+        header: slots.header,
+        closeIcon: slots.closeIcon,
+      }
+
       return (
         <div
           v-show={mergedVisible.value}
@@ -181,11 +186,11 @@ export default defineComponent({
               <div ref={contentRef} class={`${prefixCls}-content`}>
                 <ɵHeader
                   ref={headerRef}
-                  v-slots={slots}
+                  v-slots={headerSlots}
                   closable={closable.value}
                   closeIcon={closeIcon.value}
                   header={props.header}
-                  size={props.type === 'default' ? 'md' : 'sm'}
+                  size={props.header ? 'md' : 'sm'}
                   onClose={close}
                 />
                 <ModalBody></ModalBody>
