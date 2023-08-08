@@ -63,14 +63,6 @@
         color: @select-icon-color;
       }
     }
-
-    .@{select-prefix}-option-group:not(:first-child) {
-      border-top: @select-option-group-border;
-    }
-
-    .@{select-prefix}-option-grouped {
-      padding-left: @select-option-grouped-padding-left;
-    }
   }
   &-panel {
     overflow: auto;
@@ -84,6 +76,20 @@
         &-active:not(&-disabled) {
           background-color: @select-option-active-background-color;
         }
+      }
+
+      .@{select-prefix}-option-grouped {
+        padding-left: @select-multiple-option-grouped-padding-left;
+      }
+    }
+
+    .@{select-prefix}-option-group:not(:first-child) {
+      border-top: @select-option-group-border;
+    }
+
+    &:not(&-multiple) {
+      .@{select-prefix}-option-grouped {
+        padding-left: @select-option-grouped-padding-left;
       }
     }
   }

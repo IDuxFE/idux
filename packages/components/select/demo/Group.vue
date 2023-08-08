@@ -1,6 +1,6 @@
 <template>
   <IxSpace>
-    <IxSelect v-model:value="value" :dataSource="dataSource"> </IxSelect>
+    <IxSelect v-model:value="value" multiple :dataSource="dataSource"> </IxSelect>
     <IxSelect v-model:value="value">
       <IxSelectOptionGroup key="manager" label="Manager">
         <IxSelectOption key="tom" label="Tom"></IxSelectOption>
