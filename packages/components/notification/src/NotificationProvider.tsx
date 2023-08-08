@@ -14,14 +14,25 @@ import type {
 } from './types'
 import type { CommonConfig, NotificationConfig } from '@idux/components/config'
 
-import { ComputedRef, Ref, TransitionGroup, cloneVNode, computed, defineComponent, isVNode, provide, ref } from 'vue'
+import {
+  ComputedRef,
+  Ref,
+  TransitionGroup,
+  cloneVNode,
+  computed,
+  defineComponent,
+  isVNode,
+  provide,
+  ref,
+  toRef,
+} from 'vue'
 
-import { isArray, isUndefined, pickBy } from 'lodash-es'
+import { isArray, isNil, isUndefined, pickBy } from 'lodash-es'
 
 import { CdkPortal } from '@idux/cdk/portal'
 import { VKey, callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { usePortalTarget } from '@idux/components/utils'
+import { usePortalTarget, useZIndex } from '@idux/components/utils'
 
 import Notification from './Notification'
 import { NOTIFICATION_PROVIDER_TOKEN } from './token'
@@ -50,6 +61,12 @@ export default defineComponent({
     const apis = { open, info, success, warning, error, update, destroy, destroyAll }
     const placementNotifications = usePlacementNotifications(props, config, notifications)
 
+    const notificationVisible = computed(
+      () => !!notifications.value.length && notifications.value.some(item => !!item.visible || isNil(item.visible)),
+    )
+
+    const zIndex = useZIndex(ref(undefined), toRef(commonCfg, 'overlayZIndex'), notificationVisible)
+
     provide(NOTIFICATION_PROVIDER_TOKEN, apis)
     expose(apis)
 
@@ -73,6 +90,12 @@ export default defineComponent({
         const child = getChild(notificationsRecord)
         const moveName = getMoveName(placement, commonCfg)
         const position = getGroupPosition(props, config, placement)
+
+        const wrapperStyle = {
+          ...position,
+          zIndex: zIndex.value,
+        }
+
         return (
           <TransitionGroup
             key={placement}
@@ -80,7 +103,7 @@ export default defineComponent({
             appear
             name={moveName}
             class={[`${mergedPrefixCls.value}-wrapper`, `${mergedPrefixCls.value}-wrapper-${placement}`]}
-            style={position}
+            style={wrapperStyle}
           >
             {child}
           </TransitionGroup>
