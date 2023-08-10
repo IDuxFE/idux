@@ -5,7 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type Middleware, type Side, type SideObject, hide } from '@floating-ui/dom'
+import { type Middleware, type ReferenceElement, type Side, type SideObject, hide } from '@floating-ui/dom'
+
+import { isVisibleElement } from '@idux/cdk/utils'
 
 export const referenceHiddenMiddlewareName = 'IDUX_referenceHidden'
 export interface ReferenceHiddenData {
@@ -23,19 +25,26 @@ export function referenceHidden(): Middleware {
     name: referenceHiddenMiddlewareName,
     async fn(middlewareArguments) {
       const {
-        elements: { floating },
+        elements: { floating, reference },
       } = middlewareArguments
 
       const res = (await hideFn(middlewareArguments)) as {
         data: ReferenceHiddenData
       }
       const {
-        data: { referenceHiddenOffsets },
+        data: { referenceHidden, referenceHiddenOffsets },
       } = res
 
-      const referenceHidden = sides.some(side => referenceHiddenOffsets[side] > 0)
+      const shouldHideReference =
+        referenceHidden &&
+        !(
+          reference instanceof HTMLElement &&
+          getComputedStyle(reference).display === 'none' &&
+          sides.some(side => referenceHiddenOffsets[side] === 0) &&
+          checkParentsVisible(reference)
+        )
 
-      if (sides.some(side => referenceHiddenOffsets[side] > 0)) {
+      if (shouldHideReference) {
         floating.setAttribute('data-popper-reference-hidden', '')
       } else {
         floating.removeAttribute('data-popper-reference-hidden')
@@ -45,9 +54,26 @@ export function referenceHidden(): Middleware {
         ...res,
         data: {
           ...res.data,
-          referenceHidden,
+          referenceHidden: shouldHideReference,
         },
       }
     },
   }
+}
+
+function checkParentsVisible(el: ReferenceElement): boolean {
+  if (!(el instanceof HTMLElement)) {
+    return true
+  }
+
+  let parent = el.parentElement
+  while (parent) {
+    if (!isVisibleElement(parent)) {
+      return false
+    }
+
+    parent = parent.parentElement
+  }
+
+  return true
 }
