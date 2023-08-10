@@ -29,7 +29,7 @@ export const overflowItemProps = {
     required: true,
   },
   data: Object as PropType<ItemData>,
-  onSizeChange: Function as PropType<(itemEl: Element, key?: VKey) => void>,
+  onSizeChange: Function as PropType<(entry: ResizeObserverEntry, key?: VKey) => void>,
 } as const
 
 export const overflowProps = {

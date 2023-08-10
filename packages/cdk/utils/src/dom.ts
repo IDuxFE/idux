@@ -13,6 +13,18 @@ export type EventTarget = HTMLElement | Document | Window | null | undefined
 
 export type Dimensions = { [key in 'width' | 'height']: number }
 
+export interface BoxSizingData {
+  boxSizing: 'border-box' | 'padding-box' | 'content-box'
+  paddingTop: number
+  paddingBottom: number
+  paddingLeft: number
+  paddingRight: number
+  borderTop: number
+  borderBottom: number
+  borderLeft: number
+  borderRight: number
+}
+
 export function on<K extends keyof HTMLElementEventMap>(
   el: EventTarget,
   type: K | undefined,
@@ -155,10 +167,16 @@ export function getMouseClientXY(evt: MouseEvent | TouchEvent): { clientX: numbe
   return { clientX, clientY }
 }
 
+function parseSize(size: string): number {
+  const parsedSize = parseFloat(size)
+
+  return Number.isNaN(parsedSize) ? 0 : parsedSize
+}
+
 export function getCssDimensions(element: HTMLElement): Dimensions & { fallback: boolean } {
   const css = getComputedStyle(element)
-  let width = parseFloat(css.width)
-  let height = parseFloat(css.height)
+  let width = parseSize(css.width)
+  let height = parseSize(css.height)
   const offsetWidth = element.offsetWidth
   const offsetHeight = element.offsetHeight
   const shouldFallback = Math.round(width) !== offsetWidth || Math.round(height) !== offsetHeight
@@ -173,4 +191,28 @@ export function getCssDimensions(element: HTMLElement): Dimensions & { fallback:
     height,
     fallback: shouldFallback,
   }
+}
+
+export function getBoxSizingData(node: HTMLElement): BoxSizingData {
+  const css = window.getComputedStyle(node)
+
+  return (
+    [
+      'paddingTop',
+      'paddingBottom',
+      'paddingLeft',
+      'paddingRight',
+      'borderTop',
+      'borderBottom',
+      'borderLeft',
+      'borderRight',
+    ] as const
+  ).reduce(
+    (data, key) => {
+      data[key] = parseSize(css[key])
+
+      return data
+    },
+    { boxSizing: css.boxSizing } as BoxSizingData,
+  )
 }

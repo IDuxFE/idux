@@ -5,37 +5,20 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-export interface BoxSizingData {
-  boxSizing: string
+import { type BoxSizingData as IBoxSizingData, getBoxSizingData as _getBoxSizingData } from '@idux/cdk/utils'
+
+export interface BoxSizingData extends IBoxSizingData {
   paddingSize: number
   borderSize: number
-  paddingTop: number
-  paddingBottom: number
-  borderTop: number
-  borderBottom: number
 }
 
 export function getBoxSizingData(node: HTMLElement): BoxSizingData {
-  const { boxSizing, paddingBottom, paddingTop, borderBottom, borderTop } = window.getComputedStyle(node)
-
-  const _paddingTop = parseSize(paddingTop)
-  const _paddingBottom = parseSize(paddingBottom)
-  const _borderTop = parseSize(borderTop)
-  const _borderBottom = parseSize(borderBottom)
+  const data = _getBoxSizingData(node)
+  const { paddingBottom, paddingTop, borderBottom, borderTop } = data
 
   return {
-    boxSizing,
-    paddingSize: _paddingTop + _paddingBottom,
-    borderSize: _borderTop + _borderBottom,
-    paddingTop: _paddingTop,
-    paddingBottom: _paddingBottom,
-    borderTop: _borderTop,
-    borderBottom: _borderBottom,
+    ...data,
+    paddingSize: paddingTop + paddingBottom,
+    borderSize: borderTop + borderBottom,
   }
-}
-
-function parseSize(size: string): number {
-  const parsedSize = parseFloat(size)
-
-  return Number.isNaN(parsedSize) ? 0 : parsedSize
 }

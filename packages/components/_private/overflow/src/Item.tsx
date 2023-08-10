@@ -17,7 +17,7 @@ export default defineComponent({
   props: overflowItemProps,
   setup(props, { slots }) {
     const itemElRef = ref<HTMLElement | undefined>()
-    const handleResize = (entry: ResizeObserverEntry) => callEmit(props.onSizeChange, entry.target, props.itemKey ?? '')
+    const handleResize = (entry: ResizeObserverEntry) => callEmit(props.onSizeChange, entry, props.itemKey ?? '')
     useResizeObserver(itemElRef, handleResize)
 
     return () => {
