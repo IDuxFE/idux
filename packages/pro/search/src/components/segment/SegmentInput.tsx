@@ -184,9 +184,9 @@ function useSegmentScroll(
 ): ComputedRef<SegmentScroll> {
   const [segmentScroll, setSegmentScroll] = useState<SegmentScroll>({ left: 0, right: 0 }, true)
 
-  let listenerStops: (() => void)[]
+  let listenerStops: (() => void)[] | undefined
   const stopListen = () => {
-    listenerStops.forEach(stop => stop())
+    listenerStops?.forEach(stop => stop())
   }
 
   const getScrolls = (): SegmentScroll => {
