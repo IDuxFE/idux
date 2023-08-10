@@ -250,14 +250,18 @@
   &-sortable-trigger,
   &-filterable-trigger {
     display: flex;
-    margin: 0 -8px 0 4px;
     align-items: center;
     justify-content: center;
+    margin-left: 4px;
     user-select: none;
     border-radius: @table-border-radius;
     color: @table-head-icon-color;
     transition: color var(--ix-transition-duration-fast), background var(--ix-transition-duration-fast);
     cursor: pointer;
+
+    & + & {
+      margin-left: 0;
+    }
 
     &:hover {
       background-color: @table-head-icon-background-color-hover;

@@ -19,6 +19,10 @@
     .@{table-prefix}-sortable-trigger,
     .@{table-prefix}-filterable-trigger {
       height: @head-height;
+
+      &:last-child {
+        margin-right: calc(4px - @padding-horizontal);
+      }
     }
 
     &:not(:last-child)::before {
