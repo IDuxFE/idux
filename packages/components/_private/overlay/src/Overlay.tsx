@@ -182,9 +182,8 @@ function usePopperOptions(
     setOptions({ allowEnter, autoAdjust, delay, disabled, offset: _offset, placement, trigger })
   }
 
-  onMounted(() => {
-    watch([props, arrowRef], updateOptions, { immediate: true })
-  })
+  watch(props, updateOptions, { immediate: true, deep: true })
+  watch(arrowRef, updateOptions)
 
   return {
     options,
