@@ -11,6 +11,7 @@ import {
   computed,
   defineComponent,
   inject,
+  nextTick,
   onBeforeUnmount,
   onDeactivated,
   onMounted,
@@ -43,7 +44,7 @@ export default defineComponent({
 
     const mask = computed(() => props.mask ?? config.mask)
 
-    const { visible, setVisible, animatedVisible, mergedVisible } = useVisible(props)
+    const { loaded, visible, setVisible, animatedVisible, mergedVisible } = useVisible(props)
     const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visible)
 
     const { open, close } = useTrigger(props, setVisible)
@@ -76,7 +77,7 @@ export default defineComponent({
         return null
       }
       return (
-        <CdkPortal target={mergedPortalTarget.value} load={visible.value}>
+        <CdkPortal target={mergedPortalTarget.value} load={loaded.value}>
           <ɵMask
             class={`${mergedPrefixCls.value}-mask`}
             mask={mask.value}
@@ -92,6 +93,29 @@ export default defineComponent({
 
 function useVisible(props: DrawerProps) {
   const [visible, setVisible] = useControlledProp(props, 'visible', false)
+
+  // because portal is lazy loaded, actual visible at the first time should be delayed
+  // or else transition animation will behave unexpectedly
+  const loaded = ref<boolean>(false)
+  const delayedVisible = ref<boolean>(false)
+  watch(
+    visible,
+    v => {
+      if (v && !loaded.value) {
+        loaded.value = true
+
+        nextTick(() => {
+          delayedVisible.value = true
+        })
+      } else {
+        delayedVisible.value = v
+      }
+    },
+    {
+      immediate: true,
+    },
+  )
+
   const animatedVisible = ref<boolean>()
 
   const mergedVisible = computed(() => {
@@ -109,7 +133,7 @@ function useVisible(props: DrawerProps) {
     }
   })
 
-  return { visible, setVisible, animatedVisible, mergedVisible }
+  return { loaded, visible: delayedVisible, setVisible, animatedVisible, mergedVisible }
 }
 
 function useScrollStrategy(props: DrawerProps, mask: ComputedRef<boolean>, mergedVisible: ComputedRef<boolean>) {
