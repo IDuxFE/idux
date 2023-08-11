@@ -26,6 +26,7 @@ export interface FlattenedOption {
   disabled?: boolean
   rawData: SelectData
   type: 'group' | 'item'
+  parentKey?: VKey
 }
 
 export function useConvertedOptions(props: SelectProps, slots: Slots): ComputedRef<SelectData[]> {
@@ -57,7 +58,7 @@ export function useFlattenedOptions(
 
 const filterKeys = [optionKey, optionGroupKey]
 
-function convertOptions(nodes: VNode[] | undefined): SelectData[] {
+function convertOptions(nodes: VNode[] | undefined, parentKey?: VKey): SelectData[] {
   const convertedOptions: Array<SelectData> = []
 
   flattenNode(nodes, { key: filterKeys }).forEach((node, index) => {
@@ -75,6 +76,7 @@ function convertOptions(nodes: VNode[] | undefined): SelectData[] {
         disabled: _disabled,
         label,
         value,
+        parentKey,
         customLabel: customLabel ?? customLabel2,
       }
 
@@ -82,7 +84,7 @@ function convertOptions(nodes: VNode[] | undefined): SelectData[] {
     } else {
       const { key = index, label, children } = props
       const { label: customLabel, default: defaultSlot } = slots
-      const _children = children ?? convertOptions(defaultSlot?.())
+      const _children = children ?? convertOptions(defaultSlot?.(), key)
 
       convertedOptions.push({ key, label, children: _children, customLabel })
     }
@@ -133,17 +135,21 @@ function filterOptions(
 
 function flattenOptions(options: SelectData[] | undefined, childrenKey: string, getKeyFn: GetKeyFn, labelKey: string) {
   const mergedOptions: FlattenedOption[] = []
-  const appendOption = (item: SelectData, index?: number) =>
-    mergedOptions.push(parseOption(item, item => getKeyFn(item) ?? index, childrenKey, labelKey))
+  const appendOption = (item: SelectData, index: number | undefined, parentKey?: VKey) => {
+    const parsedOption = parseOption(item, item => getKeyFn(item) ?? index, childrenKey, labelKey, parentKey)
+    mergedOptions.push(parsedOption)
+
+    return parsedOption.key
+  }
 
   options?.forEach((item, index) => {
     const children = item[childrenKey] as SelectData[]
 
-    appendOption(item, index)
+    const optionKey = appendOption(item, index)
 
     if (children && children.length > 0) {
       children.forEach(child => {
-        appendOption(child)
+        appendOption(child, undefined, optionKey)
       })
     }
   })
@@ -151,10 +157,17 @@ function flattenOptions(options: SelectData[] | undefined, childrenKey: string, 
   return mergedOptions
 }
 
-function parseOption(option: SelectData, getKey: GetKeyFn, childrenKey: string, labelKey: string): FlattenedOption {
+function parseOption(
+  option: SelectData,
+  getKey: GetKeyFn,
+  childrenKey: string,
+  labelKey: string,
+  parentKey?: VKey,
+): FlattenedOption {
   const children = option[childrenKey] as SelectData[] | undefined
   return {
     key: getKey(option),
+    parentKey,
     label: option[labelKey],
     disabled: !!option.disabled,
     type: children && children.length > 0 ? 'group' : 'item',
