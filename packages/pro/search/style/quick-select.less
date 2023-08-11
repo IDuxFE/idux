@@ -9,12 +9,24 @@
   &-panel {
     padding: 12px 8px 0;
 
+    @shortcust-padding: 8px;
     &-shortcuts {
+      position: relative;
       width: 100%;
       display: flex;
       flex-wrap: wrap;
-      padding: 0 8px;
+      padding: 0 @shortcust-padding 4px @shortcust-padding;
       margin-bottom: 8px;
+      
+      &::after {
+        content: ' ';
+        position: absolute;
+        bottom: 0;
+        left: @shortcust-padding;
+        width: calc(100% - @shortcust-padding * 2);
+        height: 1px;
+        background-color: var(--ix-border-color-secondary);
+      }
     }
     &-items {
       width: 100%;
@@ -26,7 +38,6 @@
     }
     &-item-separator {
       width: 1px;
-      background-color: @color-graphite-l30;
       margin: 0 4px;
       flex-shrink: 0;
     }
@@ -37,7 +48,7 @@
     padding: 2px 8px;
     display: flex;
     align-items: center;
-    background-color: @color-graphite-l40;
+    border: 1px solid var(--ix-border-color);
     border-radius: 2px;
     cursor: pointer;
     &:not(&:last-child) {
