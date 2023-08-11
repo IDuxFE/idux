@@ -11,7 +11,7 @@
 | `v-model:sourceSearchValue` | 源数据列表搜索值 | `string` | - | - | - |
 | `v-model:targetSearchValue` | 目标数据列表搜索值 | `string` | - | - | - |
 | `clearable` | 是否可清除 | `boolean` | `true` | ✅ | - |
-| `clearIcon` | 清除图标 | `string \| #clearIcon` | `clear` | ✅ | - |
+| `clearIcon` | 清除图标 | `string \| #clearIcon` | `delete` | ✅ | - |
 | `customAdditional` | 自定义选项的额外属性 | `TransferCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
 | `dataSource` | 源数据数组 | `TransferData[]` | `[]` | - | - |
 | `defaultTargetData` | 初始默认目标列表数据 | `TransferData` | - | - | 仅用于设置初始数据，不可响应式变更 |

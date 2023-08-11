@@ -136,7 +136,7 @@ exports[`Transfer > render work 1`] = `
           <!---->
           <!---->
         </label><span class=\\"ix-transfer-header-label\\">已选 (0)</span>
-        <!----><span class=\\"ix-transfer-header-clear-icon ix-transfer-header-clear-icon-disabled\\"><i class=\\"ix-icon ix-icon-clear\\" role=\\"img\\" aria-label=\\"clear\\"></i></span>
+        <!----><span class=\\"ix-transfer-header-clear-icon ix-transfer-header-clear-icon-disabled\\"><i class=\\"ix-icon ix-icon-delete\\" role=\\"img\\" aria-label=\\"delete\\"></i></span>
         <!---->
       </div>
     </div>

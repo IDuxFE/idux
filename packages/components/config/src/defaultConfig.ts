@@ -358,7 +358,7 @@ export const defaultConfig: GlobalConfig = {
   transfer: {
     getKey: 'key',
     clearable: true,
-    clearIcon: 'clear',
+    clearIcon: 'delete',
     showSelectAll: true,
   },
   tooltip: {
