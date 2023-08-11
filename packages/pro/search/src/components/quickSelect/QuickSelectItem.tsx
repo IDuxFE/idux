@@ -25,6 +25,7 @@ export default defineComponent({
       convertStateToValue,
       createSearchState,
       getSearchStatesByFieldKey,
+      removeSearchState,
       updateSegmentValue,
       updateSearchValues,
       tempSegmentInputRef,
@@ -65,6 +66,12 @@ export default defineComponent({
 
     const confirmValue = (value: unknown) => {
       let searchStateKey = searchState.value?.key
+
+      if (!value && searchStateKey) {
+        removeSearchState(searchStateKey)
+        return
+      }
+
       if (!searchState.value) {
         searchStateKey = createSearchState(props.searchField.key, {
           value,
