@@ -55,7 +55,7 @@ export function useAutoRows(
   const cachedLineHeight = useLineHeight(textareaRef)
   const boxSizingData = computed(() => {
     if (!textareaRef.value) {
-      return { paddingSize: 0, borderSize: 0, boxSizing: '' } as BoxSizingData
+      return { paddingSize: 0, borderSize: 0, boxSizing: '' } as unknown as BoxSizingData
     }
 
     return getBoxSizingData(textareaRef.value)

@@ -12,7 +12,7 @@ import { Ref, computed, defineComponent, ref, watch } from 'vue'
 import { isNumber } from 'lodash-es'
 
 import { useResizeObserver } from '@idux/cdk/resize'
-import { throwError } from '@idux/cdk/utils'
+import { getBoxSizingData, throwError } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
 import Item from './Item'
@@ -73,9 +73,10 @@ export default defineComponent({
           return
         }
 
+        const internalContainerWidth = containerWidth.value - suffixWidth.value
+
         for (let i = 0; i < len; i++) {
           const getItemWidth = (index: number) => itemsWidthMap.value.get(props.getKey(data[index])) ?? 0
-          const internalContainerWidth = containerWidth.value - suffixWidth.value
           const curItemWidth = getItemWidth(i)
 
           // break when item is not ready
@@ -126,7 +127,7 @@ export default defineComponent({
           key={key}
           itemKey={key}
           display={index < displayCount.value}
-          onSizeChange={(itemEl: Element, key?: VKey) => setItemWidth(key!, itemEl)}
+          onSizeChange={(entry, key) => setItemWidth(key!, entry)}
         >
           {nodeContent}
         </Item>
@@ -141,7 +142,7 @@ export default defineComponent({
           class={`${mergedPrefixCls.value}-rest`}
           itemKey={restNodeKey}
           display={displayRest.value}
-          onSizeChange={(itemEl: Element) => (restWidth.value = itemEl.clientWidth ?? 0)}
+          onSizeChange={({ contentRect }) => (restWidth.value = contentRect.width ?? 0)}
         >
           {nodeContent}
         </Item>
@@ -155,7 +156,7 @@ export default defineComponent({
           {...itemSharedProps}
           class={`${mergedPrefixCls.value}-suffix`}
           itemKey={suffixNodeKey}
-          onSizeChange={(itemEl: Element) => (suffixWidth.value = itemEl.clientWidth ?? 0)}
+          onSizeChange={({ contentRect }) => (suffixWidth.value = contentRect.width ?? 0)}
         >
           {nodeContent}
         </Item>
@@ -175,8 +176,19 @@ export default defineComponent({
 
 const useContainerSize = (containerElRef: Ref<HTMLElement | undefined>) => {
   const containerWidth = ref(0)
+  const _getContainerWidth = () => {
+    const containerEl = containerElRef.value
+    if (!containerEl) {
+      return 0
+    }
+
+    const { width } = containerEl.getBoundingClientRect()
+    const { paddingLeft, paddingRight } = getBoxSizingData(containerEl)
+
+    return width - paddingLeft - paddingRight
+  }
   const setContainerWidth = () => {
-    containerWidth.value = containerElRef.value?.clientWidth ?? 0
+    containerWidth.value = _getContainerWidth()
   }
 
   return {
@@ -187,11 +199,15 @@ const useContainerSize = (containerElRef: Ref<HTMLElement | undefined>) => {
 
 const useItemSize = () => {
   const itemsWidthMap = ref<Map<VKey, number>>(new Map())
-  const setItemWidth = (key: VKey, itemEl?: Element) => {
-    if (!itemEl && itemsWidthMap.value.get(key)) {
+  const setItemWidth = (key: VKey, entry: ResizeObserverEntry) => {
+    const {
+      contentRect: { width },
+      target,
+    } = entry
+    if (!target && itemsWidthMap.value.get(key)) {
       itemsWidthMap.value.delete(key)
-    } else {
-      itemEl?.clientWidth && itemsWidthMap.value.set(key, itemEl?.clientWidth ?? 0)
+    } else if (width) {
+      itemsWidthMap.value.set(key, width)
     }
   }
 
