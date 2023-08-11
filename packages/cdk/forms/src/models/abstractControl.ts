@@ -539,6 +539,7 @@ export abstract class AbstractControl<T = any> {
       }
     }
     this.setErrors(newErrors)
+    this._status.value = newErrors ? 'invalid' : 'valid'
     return newErrors
   }
 
