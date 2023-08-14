@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.2](https://github.com/IDuxFE/idux/compare/v1.9.1...v1.9.2) (2023-08-14)
+
+### Bug Fixes
+
+- **comp:\*:** overlay options update should watch deep ([#1652](https://github.com/IDuxFE/idux/issues/1652)) ([e6f5fa2](https://github.com/IDuxFE/idux/commit/e6f5fa2cfac1d869ff6b4279456e44308b3c72b9))
+- **comp:date-picker:** panel header font-size not right ([#1640](https://github.com/IDuxFE/idux/issues/1640)) ([e7895a1](https://github.com/IDuxFE/idux/commit/e7895a10874e609141ab33a6a033510dc0605ffe))
+- **comp:drawer:** translate transition error when container is set ([#1642](https://github.com/IDuxFE/idux/issues/1642)) ([a4dc760](https://github.com/IDuxFE/idux/commit/a4dc760fef2eb9e1e119073f663e13fb07f561ab))
+- **comp:dropdown:** dropdown border-radius not working ([#1632](https://github.com/IDuxFE/idux/issues/1632)) ([4817f09](https://github.com/IDuxFE/idux/commit/4817f09ca5e5f5b23fe1bb76c1c64c366cfcf6b6))
+- **comp:modal:** header size should be sm when header has no content ([#1634](https://github.com/IDuxFE/idux/issues/1634)) ([ca74b62](https://github.com/IDuxFE/idux/commit/ca74b62d49990f8c8ef6dfed0e77ffb14f2f7ebe))
+- **comp:select:** responsive maxLabel size calculation error ([#1647](https://github.com/IDuxFE/idux/issues/1647)) ([468a749](https://github.com/IDuxFE/idux/commit/468a749d17a80ecaedaef32f3afd5ca5f02506fe))
+- **comp:select:** select grouped options indent not working ([#1636](https://github.com/IDuxFE/idux/issues/1636)) ([8807a31](https://github.com/IDuxFE/idux/commit/8807a3199ef00c4401631e6ed5bd75c4b9bd806f))
+- **comp:table:** gap between expand trigger and text not working ([#1637](https://github.com/IDuxFE/idux/issues/1637)) ([0183341](https://github.com/IDuxFE/idux/commit/0183341f3c03814c29d37a1e086937738bf13f93))
+- **comp:table:** header sort and filter trigger size not right ([#1649](https://github.com/IDuxFE/idux/issues/1649)) ([2697bb8](https://github.com/IDuxFE/idux/commit/2697bb8b3e5db3e460c76f985650b27487500b87))
+- **comp:tag:** tag content not aligned center ([#1650](https://github.com/IDuxFE/idux/issues/1650)) ([02c5043](https://github.com/IDuxFE/idux/commit/02c50439918438b25e10676528d68bbfc9ce0601))
+- **comp:tour:** step title should be optional ([#1628](https://github.com/IDuxFE/idux/issues/1628)) ([ecd1b7c](https://github.com/IDuxFE/idux/commit/ecd1b7c596f03fb02b8e76caa8863ab83b129453))
+- **comp:transfer:** transfer header clear icon error ([#1633](https://github.com/IDuxFE/idux/issues/1633)) ([73eab86](https://github.com/IDuxFE/idux/commit/73eab866397277034cbac4c97645817ed2bc4763))
+
 ## [1.9.1](https://github.com/IDuxFE/idux/compare/v1.9.0...v1.9.1) (2023-08-05)
 
 ### Bug Fixes

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.2](https://github.com/IDuxFE/idux/compare/v1.9.1...v1.9.2) (2023-08-14)
+
+### Bug Fixes
+
+- **comp:table:** gap between expand trigger and text not working ([#1637](https://github.com/IDuxFE/idux/issues/1637)) ([0183341](https://github.com/IDuxFE/idux/commit/0183341f3c03814c29d37a1e086937738bf13f93))
+- **comp:transfer:** transfer header clear icon error ([#1633](https://github.com/IDuxFE/idux/issues/1633)) ([73eab86](https://github.com/IDuxFE/idux/commit/73eab866397277034cbac4c97645817ed2bc4763))
+- **pro:search:** empty value set by quick select should be removed ([#1646](https://github.com/IDuxFE/idux/issues/1646)) ([eab7c44](https://github.com/IDuxFE/idux/commit/eab7c444cc86a4e0dd5a30258f0c2fd8a3103da2))
+
 ## [1.9.1](https://github.com/IDuxFE/idux/compare/v1.9.0...v1.9.1) (2023-08-05)
 
 ### Bug Fixes

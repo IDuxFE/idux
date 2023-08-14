@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.2](https://github.com/IDuxFE/idux/compare/v1.9.1...v1.9.2) (2023-08-14)
+
+### Bug Fixes
+
+- **cdk:forms:** the status of control is incorrect with async validators ([#1645](https://github.com/IDuxFE/idux/issues/1645)) ([fa591b5](https://github.com/IDuxFE/idux/commit/fa591b5d8b7655971e1e2accbd2fb921a50319df))
+- **cdk:popper:** popper shouldn't update if reference is display none ([#1653](https://github.com/IDuxFE/idux/issues/1653)) ([cf83513](https://github.com/IDuxFE/idux/commit/cf835133dae5ddfa58a2daac1a3e3e4e397feebd))
+- **cdk:popper:** reference is hidden when ancestors are not visible ([#1648](https://github.com/IDuxFE/idux/issues/1648)) ([db00adb](https://github.com/IDuxFE/idux/commit/db00adbed7b2afcce6406239b59e8576cefd4d87))
+- **comp:select:** responsive maxLabel size calculation error ([#1647](https://github.com/IDuxFE/idux/issues/1647)) ([468a749](https://github.com/IDuxFE/idux/commit/468a749d17a80ecaedaef32f3afd5ca5f02506fe))
+
 ## [1.8.1](https://github.com/IDuxFE/idux/compare/v1.8.0...v1.8.1) (2023-07-14)
 
 ### Bug Fixes
