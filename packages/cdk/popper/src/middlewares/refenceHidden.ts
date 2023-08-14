@@ -68,7 +68,7 @@ function checkParentsVisible(el: ReferenceElement): boolean {
 
   let parent = el.parentElement
   while (parent) {
-    if (!isVisibleElement(parent)) {
+    if (getComputedStyle(parent).display !== 'contents' && !isVisibleElement(parent)) {
       return false
     }
 
