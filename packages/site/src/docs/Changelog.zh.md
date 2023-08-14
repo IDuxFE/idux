@@ -10,6 +10,27 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.9.2(2023-08-14)
+
+### Bug Fixes
+
+- **cdk:forms:** 使用异步校验器时control的状态不正确 ([#1645](https://github.com/IDuxFE/idux/issues/1645)) ([fa591b5](https://github.com/IDuxFE/idux/commit/fa591b5d8b7655971e1e2accbd2fb921a50319df))
+- **cdk:popper:** 当reference是display none隐藏时，不应更新箭头状态等 ([#1653](https://github.com/IDuxFE/idux/issues/1653)) ([cf83513](https://github.com/IDuxFE/idux/commit/cf835133dae5ddfa58a2daac1a3e3e4e397feebd))
+- **cdk:popper:** 当reference的祖先节点被隐藏时，reference将被视为隐藏 ([#1648](https://github.com/IDuxFE/idux/issues/1648)) ([db00adb](https://github.com/IDuxFE/idux/commit/db00adbed7b2afcce6406239b59e8576cefd4d87))
+- **comp:\*:** overlay的popper选项在更新时应当深度watch ([#1652](https://github.com/IDuxFE/idux/issues/1652)) ([e6f5fa2](https://github.com/IDuxFE/idux/commit/e6f5fa2cfac1d869ff6b4279456e44308b3c72b9))
+- **comp:date-picker:** 面板头部的年月按钮字体大小不正确 ([#1640](https://github.com/IDuxFE/idux/issues/1640)) ([e7895a1](https://github.com/IDuxFE/idux/commit/e7895a10874e609141ab33a6a033510dc0605ffe))
+- **comp:drawer:** 使用自定义容器时，初始的出现动画不正常 ([#1642](https://github.com/IDuxFE/idux/issues/1642)) ([a4dc760](https://github.com/IDuxFE/idux/commit/a4dc760fef2eb9e1e119073f663e13fb07f561ab))
+- **comp:dropdown:** dropdown面板的border-radius不生效，增加overflow:hidden ([#1632](https://github.com/IDuxFE/idux/issues/1632)) ([4817f09](https://github.com/IDuxFE/idux/commit/4817f09ca5e5f5b23fe1bb76c1c64c366cfcf6b6))
+- **comp:modal:** header的尺寸在没有header内容时为sm ([#1634](https://github.com/IDuxFE/idux/issues/1634)) ([ca74b62](https://github.com/IDuxFE/idux/commit/ca74b62d49990f8c8ef6dfed0e77ffb14f2f7ebe))
+- **comp:select:** maxLabel 配置 resposive时，几率出现换行 ([#1647](https://github.com/IDuxFE/idux/issues/1647)) ([468a749](https://github.com/IDuxFE/idux/commit/468a749d17a80ecaedaef32f3afd5ca5f02506fe))
+- **comp:select:** 分组选项的缩进不生效 ([#1636](https://github.com/IDuxFE/idux/issues/1636)) ([8807a31](https://github.com/IDuxFE/idux/commit/8807a3199ef00c4401631e6ed5bd75c4b9bd806f))
+- **comp:table:** 文字节点与展开收起按钮之间的间距不生效 ([#1637](https://github.com/IDuxFE/idux/issues/1637)) ([0183341](https://github.com/IDuxFE/idux/commit/0183341f3c03814c29d37a1e086937738bf13f93))
+- **comp:table:** 表头的筛选和排序按钮大小不正确 ([#1649](https://github.com/IDuxFE/idux/issues/1649)) ([2697bb8](https://github.com/IDuxFE/idux/commit/2697bb8b3e5db3e460c76f985650b27487500b87))
+- **comp:tag:** tag内容没有水平居中 ([#1650](https://github.com/IDuxFE/idux/issues/1650)) ([02c5043](https://github.com/IDuxFE/idux/commit/02c50439918438b25e10676528d68bbfc9ce0601))
+- **comp:tour:** step的title选项应当是可选的 ([#1628](https://github.com/IDuxFE/idux/issues/1628)) ([ecd1b7c](https://github.com/IDuxFE/idux/commit/ecd1b7c596f03fb02b8e76caa8863ab83b129453))
+- **comp:transfer:** 清除按钮不正确 ([#1633](https://github.com/IDuxFE/idux/issues/1633)) ([73eab86](https://github.com/IDuxFE/idux/commit/73eab866397277034cbac4c97645817ed2bc4763))
+- **pro:search:** 通过快捷面板取消所有所选的选项选中，应当删除该搜索项 ([#1646](https://github.com/IDuxFE/idux/issues/1646)) ([eab7c44](https://github.com/IDuxFE/idux/commit/eab7c444cc86a4e0dd5a30258f0c2fd8a3103da2))
+
 # 1.9.1(2023-08-05)
 
 ### Bug Fixes
