@@ -16,11 +16,14 @@ export function updatePlacement(updatePlacement: (value: PopperPlacement) => voi
     fn(middlewareArguments) {
       const {
         placement,
-        elements: { floating },
+        elements: { floating, reference },
       } = middlewareArguments
-      updatePlacement(camelCase(placement) as PopperPlacement)
 
-      floating.setAttribute('data-popper-placement', placement)
+      if (reference instanceof HTMLElement && getComputedStyle(reference).display !== 'none') {
+        updatePlacement(camelCase(placement) as PopperPlacement)
+        floating.setAttribute('data-popper-placement', placement)
+      }
+
       return middlewareArguments
     },
   }

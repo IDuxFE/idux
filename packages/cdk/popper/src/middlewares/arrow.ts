@@ -14,11 +14,17 @@ export function arrow(arrowElement: HTMLElement): Middleware {
     ...rest,
     name: 'IDUX_arrow',
     async fn(middlewareArguments) {
+      const { reference } = middlewareArguments.elements
+
+      if (!(reference instanceof HTMLElement) || getComputedStyle(reference).display === 'none') {
+        return middlewareArguments
+      }
+
       const res = (await arrowFn(middlewareArguments)) as { data: { x: number; y: number; centerOffset: number } }
+
       const {
         data: { x, y },
       } = res
-
       Object.assign(arrowElement.style, {
         left: x != null ? `${x}px` : '',
         top: y != null ? `${y}px` : '',
