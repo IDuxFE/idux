@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.3](https://github.com/IDuxFE/idux/compare/v1.9.2...v1.9.3) (2023-08-21)
+
+### Bug Fixes
+
+- **cdk:popper:** `display: none` reference is not treat as hidden ([#1659](https://github.com/IDuxFE/idux/issues/1659)) ([830be33](https://github.com/IDuxFE/idux/commit/830be33d41b4271c65107b15557ea91253ce90e2))
+
 ## [1.9.2](https://github.com/IDuxFE/idux/compare/v1.9.1...v1.9.2) (2023-08-14)
 
 ### Bug Fixes

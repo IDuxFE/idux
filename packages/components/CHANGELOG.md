@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.3](https://github.com/IDuxFE/idux/compare/v1.9.2...v1.9.3) (2023-08-21)
+
+### Bug Fixes
+
+- **comp:alert:** alert content not aligined with pagination ([#1658](https://github.com/IDuxFE/idux/issues/1658)) ([f691999](https://github.com/IDuxFE/idux/commit/f6919999f20ba36c0618945c437e3f22537a62f4))
+- **comp:card:** add css class to footer button ([#1660](https://github.com/IDuxFE/idux/issues/1660)) ([54f2c7f](https://github.com/IDuxFE/idux/commit/54f2c7fafe6cad925b2a80a37a146b0cb733b41e))
+- **comp:drawer:** content first render should be delayed till visible ([#1657](https://github.com/IDuxFE/idux/issues/1657)) ([4e4542b](https://github.com/IDuxFE/idux/commit/4e4542bad43c90749d49309f873b8c804c5ce102))
+
 ## [1.9.2](https://github.com/IDuxFE/idux/compare/v1.9.1...v1.9.2) (2023-08-14)
 
 ### Bug Fixes

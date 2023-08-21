@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.3](https://github.com/IDuxFE/idux/compare/v1.9.2...v1.9.3) (2023-08-21)
+
+### Bug Fixes
+
+- **cdk:popper:** `display: none` reference is not treat as hidden ([#1659](https://github.com/IDuxFE/idux/issues/1659)) ([830be33](https://github.com/IDuxFE/idux/commit/830be33d41b4271c65107b15557ea91253ce90e2))
+- **comp:alert:** alert content not aligined with pagination ([#1658](https://github.com/IDuxFE/idux/issues/1658)) ([f691999](https://github.com/IDuxFE/idux/commit/f6919999f20ba36c0618945c437e3f22537a62f4))
+- **comp:card:** add css class to footer button ([#1660](https://github.com/IDuxFE/idux/issues/1660)) ([54f2c7f](https://github.com/IDuxFE/idux/commit/54f2c7fafe6cad925b2a80a37a146b0cb733b41e))
+- **comp:drawer:** content first render should be delayed till visible ([#1657](https://github.com/IDuxFE/idux/issues/1657)) ([4e4542b](https://github.com/IDuxFE/idux/commit/4e4542bad43c90749d49309f873b8c804c5ce102))
+- **pro:search:** onItemConfirm value is empty when item is removed ([#1661](https://github.com/IDuxFE/idux/issues/1661)) ([84f95d1](https://github.com/IDuxFE/idux/commit/84f95d1e2b0f4f3a64fcfc322f40ddbc81153fa9))
+- **pro:search:** segment should init only when it's set inactive ([#1656](https://github.com/IDuxFE/idux/issues/1656)) ([6ae11ea](https://github.com/IDuxFE/idux/commit/6ae11ea0cc591beac35d9bff64fe6aa9e59ea65c))
+- **pro:search:** segment with default value shouldn't be set active ([#1655](https://github.com/IDuxFE/idux/issues/1655)) ([97a40d6](https://github.com/IDuxFE/idux/commit/97a40d64db0d0a1c7e8f553b4adfd7fe071f8997))
+
 ## [1.9.2](https://github.com/IDuxFE/idux/compare/v1.9.1...v1.9.2) (2023-08-14)
 
 ### Bug Fixes
