@@ -10,6 +10,18 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.9.3(2023-08-21)
+
+### Bug Fixes
+
+- **cdk:popper:** `display: none`的 reference 对应的浮层不应被隐藏 ([#1659](https://github.com/IDuxFE/idux/issues/1659)) ([830be33](https://github.com/IDuxFE/idux/commit/830be33d41b4271c65107b15557ea91253ce90e2))
+- **comp:alert:** Alert内容文字与分页不对齐 ([#1658](https://github.com/IDuxFE/idux/issues/1658)) ([f691999](https://github.com/IDuxFE/idux/commit/f6919999f20ba36c0618945c437e3f22537a62f4))
+- **comp:card:** 给footer的按钮加上class，避免影响自定义按钮样式 ([#1660](https://github.com/IDuxFE/idux/issues/1660)) ([54f2c7f](https://github.com/IDuxFE/idux/commit/54f2c7fafe6cad925b2a80a37a146b0cb733b41e))
+- **comp:drawer:** 抽屉内容的第一次渲染应当等到第一次显示之后 ([#1657](https://github.com/IDuxFE/idux/issues/1657)) ([4e4542b](https://github.com/IDuxFE/idux/commit/4e4542bad43c90749d49309f873b8c804c5ce102))
+- **pro:search:** 当搜索项在确认时被删除，onItemConfirm事件的参数不正确 ([#1661](https://github.com/IDuxFE/idux/issues/1661)) ([84f95d1](https://github.com/IDuxFE/idux/commit/84f95d1e2b0f4f3a64fcfc322f40ddbc81153fa9))
+- **pro:search:** 新创建未确认的搜索项在其他搜索项确认后被异常更新 ([#1656](https://github.com/IDuxFE/idux/issues/1656)) ([6ae11ea](https://github.com/IDuxFE/idux/commit/6ae11ea0cc591beac35d9bff64fe6aa9e59ea65c))
+- **pro:search:** 有默认值的输入段不应当在创建时被置于激活状态 ([#1655](https://github.com/IDuxFE/idux/issues/1655)) ([97a40d6](https://github.com/IDuxFE/idux/commit/97a40d64db0d0a1c7e8f553b4adfd7fe071f8997))
+
 ## 1.9.2(2023-08-14)
 
 ### Bug Fixes
