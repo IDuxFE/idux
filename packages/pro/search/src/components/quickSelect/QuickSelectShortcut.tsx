@@ -7,6 +7,8 @@
 
 import { type Slot, computed, defineComponent, inject } from 'vue'
 
+import { isNil } from 'lodash-es'
+
 import { callEmit, isEmptyNode } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 
@@ -43,9 +45,11 @@ export default defineComponent({
           ...convertStateToValue(state.key),
           nameInput: searchField.value?.label,
         })
+
+        const segmentStates = state.segmentStates
         setActiveSegment({
           itemKey: state.key,
-          name: state.segmentStates[0]?.name,
+          name: segmentStates.find(state => isNil(state.value))?.name ?? segmentStates[segmentStates.length - 1].name,
         })
       }
     }

@@ -7,7 +7,7 @@
 
 import { type ComputedRef, type VNodeChild, computed, defineComponent, inject, onMounted, ref, watch } from 'vue'
 
-import { isString } from 'lodash-es'
+import { isNil, isString } from 'lodash-es'
 
 import { type VKey, callEmit, convertArray, useState } from '@idux/cdk/utils'
 import { ɵOverlay, type ɵOverlayInstance, type ɵOverlayProps } from '@idux/components/_private/overlay'
@@ -81,10 +81,12 @@ export default defineComponent({
         return
       }
 
+      const segmentStates = searchState.segmentStates
+
       updateSearchValues()
       setActiveSegment({
         itemKey: searchState.key,
-        name: searchState.segmentStates[0].name,
+        name: segmentStates.find(state => isNil(state.value))?.name ?? segmentStates[segmentStates.length - 1].name,
       })
 
       callEmit(proSearchProps.onItemCreate, {
