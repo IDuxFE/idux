@@ -5,18 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import {
-  computed,
-  defineComponent,
-  nextTick,
-  normalizeClass,
-  normalizeStyle,
-  onMounted,
-  provide,
-  ref,
-  toRef,
-  watch,
-} from 'vue'
+import { computed, defineComponent, normalizeClass, normalizeStyle, onMounted, provide, ref, toRef, watch } from 'vue'
 
 import { callEmit, convertCssPixel } from '@idux/cdk/utils'
 import { ɵOverflow } from '@idux/components/_private/overflow'
@@ -107,7 +96,7 @@ export default defineComponent({
     watch(
       () => props.value,
       () => {
-        nextTick(initSearchStates)
+        initSearchStates()
       },
       { immediate: true, deep: true },
     )

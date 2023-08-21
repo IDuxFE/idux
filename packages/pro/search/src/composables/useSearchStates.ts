@@ -263,7 +263,7 @@ export function useSearchStates(
     const segmentStates = generateSegmentStates(searchField, searchValue)
 
     if (!segmentName) {
-      searchState.segmentStates = generateSegmentStates(searchField, searchValue)
+      searchState.segmentStates = segmentStates
     } else {
       const idx = searchState.segmentStates.findIndex(state => state.name === segmentName)
       searchState.segmentStates[idx] = segmentStates[idx]

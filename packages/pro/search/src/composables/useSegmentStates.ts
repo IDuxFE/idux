@@ -175,7 +175,7 @@ export function useSegmentStates(
   watch(
     [activeSegment, () => props.searchItem?.resolvedSearchField],
     ([activeSegment, searchField], [preActiveSegment]) => {
-      if (activeSegment?.itemKey === props.searchItem?.key) {
+      if (activeSegment?.itemKey === props.searchItem?.key || preActiveSegment?.itemKey !== props.searchItem?.key) {
         return
       }
 
