@@ -120,20 +120,21 @@ export function useSegmentStates(
     const key = props.searchItem!.key
     const validateRes = validateSearchState(key)
 
+    const valueName = searchDataTypes.find(name => !!segmentStates.value[name])
+    const searchValue = convertStateToValue(key)
+    const _segmentStates = segmentStates.value
+
     if (!validateRes) {
       removeSearchState(key)
     } else {
       updateSearchValues()
     }
 
-    const valueName = searchDataTypes.find(name => !!segmentStates.value[name])
-    const searchValue = convertStateToValue(key)
-
     callEmit(proSearchProps.onItemConfirm, {
       ...(searchValue ?? {}),
       nameInput: searchValue?.name ?? '',
-      operatorInput: segmentStates.value.operator?.input,
-      valueInput: valueName && segmentStates.value[valueName]?.input,
+      operatorInput: _segmentStates.operator?.input,
+      valueInput: valueName && _segmentStates[valueName]?.input,
       removed: !validateRes,
     })
 
