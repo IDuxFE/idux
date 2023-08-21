@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type Middleware, type ReferenceElement, type Side, type SideObject, hide } from '@floating-ui/dom'
+import { type Middleware, type SideObject, hide } from '@floating-ui/dom'
 
 import { isVisibleElement } from '@idux/cdk/utils'
 
@@ -14,8 +14,6 @@ export interface ReferenceHiddenData {
   referenceHidden: boolean
   referenceHiddenOffsets: SideObject
 }
-
-const sides: Side[] = ['top', 'bottom', 'left', 'right']
 
 export function referenceHidden(): Middleware {
   const { fn: hideFn, ...rest } = hide({ elementContext: 'reference' })
@@ -32,17 +30,12 @@ export function referenceHidden(): Middleware {
         data: ReferenceHiddenData
       }
       const {
-        data: { referenceHidden, referenceHiddenOffsets },
+        data: { referenceHidden },
       } = res
 
       const shouldHideReference =
         referenceHidden &&
-        !(
-          reference instanceof HTMLElement &&
-          getComputedStyle(reference).display === 'none' &&
-          sides.some(side => referenceHiddenOffsets[side] === 0) &&
-          checkParentsVisible(reference)
-        )
+        !(reference instanceof HTMLElement && isReferenceDispalyNone(reference) && checkParentsVisible(reference))
 
       if (shouldHideReference) {
         floating.setAttribute('data-popper-reference-hidden', '')
@@ -61,11 +54,21 @@ export function referenceHidden(): Middleware {
   }
 }
 
-function checkParentsVisible(el: ReferenceElement): boolean {
-  if (!(el instanceof HTMLElement)) {
+function isReferenceDispalyNone(reference: HTMLElement): boolean {
+  const referenceDisplay = getComputedStyle(reference).display
+
+  if (referenceDisplay === 'none') {
     return true
   }
 
+  if (referenceDisplay === 'contents') {
+    return !!reference.firstElementChild && getComputedStyle(reference.firstElementChild).display === 'none'
+  }
+
+  return false
+}
+
+function checkParentsVisible(el: HTMLElement): boolean {
   let parent = el.parentElement
   while (parent) {
     if (getComputedStyle(parent).display !== 'contents' && !isVisibleElement(parent)) {
