@@ -13,7 +13,7 @@ import { DrawerButtonProps, DrawerInstance, DrawerProps } from '../src/types'
 
 describe('Drawer', () => {
   const content = [h('p', 'Some contents...')]
-  const DrawerMount = (options?: MountingOptions<Partial<DrawerProps>>) => {
+  const DrawerMount = async (options?: MountingOptions<Partial<DrawerProps>>) => {
     const { props, slots, ...rest } = options || {}
     const _options = {
       props: { visible: true, ...props },
@@ -21,7 +21,12 @@ describe('Drawer', () => {
       attachTo: 'body',
       ...rest,
     } as MountingOptions<DrawerProps>
-    return mount(Drawer, _options) as VueWrapper<DrawerInstance>
+    const wrapper = mount(Drawer, _options) as VueWrapper<DrawerInstance>
+
+    await nextTick()
+    await flushPromises()
+
+    return wrapper
   }
 
   afterEach(() => {
@@ -36,7 +41,9 @@ describe('Drawer', () => {
 
   test('v-model:visible work', async () => {
     const onUpdateVisible = vi.fn()
-    const wrapper = DrawerMount({ props: { closeIcon: 'close', visible: false, 'onUpdate:visible': onUpdateVisible } })
+    const wrapper = await DrawerMount({
+      props: { closeIcon: 'close', visible: false, 'onUpdate:visible': onUpdateVisible },
+    })
     expect(isElementVisible(document.querySelector('.ix-drawer-wrapper'))).toBe(false)
 
     await wrapper.setProps({ visible: true })
@@ -53,7 +60,7 @@ describe('Drawer', () => {
   })
 
   test('closable work', async () => {
-    const wrapper = DrawerMount({ props: { closable: false, closeIcon: 'close' } })
+    const wrapper = await DrawerMount({ props: { closable: false, closeIcon: 'close' } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
     expect(drawerWrapper.find('.ix-icon-close').exists()).toBe(false)
@@ -65,7 +72,7 @@ describe('Drawer', () => {
 
   test('closeIcon work', async () => {
     const onClose = vi.fn()
-    const wrapper = DrawerMount({ props: { closeIcon: 'up', onClose } })
+    const wrapper = await DrawerMount({ props: { closeIcon: 'up', onClose } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
     expect(drawerWrapper.find('.ix-icon-close-filled').exists()).toBe(false)
@@ -87,7 +94,7 @@ describe('Drawer', () => {
   })
 
   test('closeIcon slot work', async () => {
-    const wrapper = DrawerMount({
+    const wrapper = await DrawerMount({
       props: { closeIcon: 'up' },
       slots: {
         closeIcon: () => h(IxIcon, { name: 'close' }),
@@ -101,7 +108,7 @@ describe('Drawer', () => {
 
   test('closeOnEsc work', async () => {
     const onUpdateVisible = vi.fn()
-    const wrapper = DrawerMount({ props: { closeOnEsc: false, 'onUpdate:visible': onUpdateVisible } })
+    const wrapper = await DrawerMount({ props: { closeOnEsc: false, 'onUpdate:visible': onUpdateVisible } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
     await drawerWrapper.trigger('keydown', { code: 'Escape' })
@@ -116,7 +123,7 @@ describe('Drawer', () => {
   })
 
   test('destroyOnHide work', async () => {
-    const wrapper = DrawerMount({ props: { destroyOnHide: true } })
+    const wrapper = await DrawerMount({ props: { destroyOnHide: true } })
     let drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
     expect(drawerWrapper.find('.ix-drawer').exists()).toBe(true)
@@ -138,7 +145,7 @@ describe('Drawer', () => {
 
   test('footer buttons work', async () => {
     let footer: DrawerButtonProps[] = [{ text: 'button1' }]
-    const wrapper = DrawerMount({ props: { footer } })
+    const wrapper = await DrawerMount({ props: { footer } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
     expect(drawerWrapper.findAll('.ix-button').length).toBe(1)
@@ -151,7 +158,7 @@ describe('Drawer', () => {
 
   test('footer slot work', async () => {
     const footer: DrawerButtonProps[] = [{ text: 'button1' }]
-    const wrapper = DrawerMount({
+    const wrapper = await DrawerMount({
       props: { footer },
       slots: { footer: () => h(IxButton, {}, { default: () => 'button slot' }) },
     })
@@ -163,7 +170,7 @@ describe('Drawer', () => {
 
   test('header work', async () => {
     let header: string | HeaderProps = 'This is header'
-    const wrapper = DrawerMount({ props: { header } })
+    const wrapper = await DrawerMount({ props: { header } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
     expect(drawerWrapper.find('.ix-header').text()).toBe(header)
@@ -183,7 +190,7 @@ describe('Drawer', () => {
 
   test('header slot work', async () => {
     const header = 'This is header'
-    const wrapper = DrawerMount({
+    const wrapper = await DrawerMount({
       props: { header },
       slots: {
         header: () => h(IxHeader, { title: 'this is header2' }),
@@ -195,7 +202,7 @@ describe('Drawer', () => {
   })
 
   test('height work', async () => {
-    const wrapper = DrawerMount({ props: { height: 400 } })
+    const wrapper = await DrawerMount({ props: { height: 400 } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
     const getDom = () => drawerWrapper.find('.ix-drawer').element as HTMLElement
 
@@ -211,7 +218,7 @@ describe('Drawer', () => {
   })
 
   test('mask work', async () => {
-    const wrapper = DrawerMount({ props: { mask: false } })
+    const wrapper = await DrawerMount({ props: { mask: false } })
 
     expect(isElementVisible(document.querySelector('.ix-mask'))).toBe(false)
 
@@ -222,7 +229,7 @@ describe('Drawer', () => {
 
   test('maskClosable work', async () => {
     const onUpdateVisible = vi.fn()
-    const wrapper = DrawerMount({ props: { maskClosable: false, 'onUpdate:visible': onUpdateVisible } })
+    const wrapper = await DrawerMount({ props: { maskClosable: false, 'onUpdate:visible': onUpdateVisible } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
     await drawerWrapper.trigger('click')
@@ -236,7 +243,7 @@ describe('Drawer', () => {
   })
 
   test('offset work', async () => {
-    const wrapper = DrawerMount({ props: { offset: 256 } })
+    const wrapper = await DrawerMount({ props: { offset: 256 } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
     const getDom = () => drawerWrapper.find('.ix-drawer').element as HTMLElement
@@ -249,7 +256,7 @@ describe('Drawer', () => {
   })
 
   test('placement work', async () => {
-    const wrapper = DrawerMount({ props: { placement: 'start' } })
+    const wrapper = await DrawerMount({ props: { placement: 'start' } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
 
     expect(drawerWrapper.classes()).toContain('ix-drawer-start')
@@ -260,7 +267,7 @@ describe('Drawer', () => {
   })
 
   test('container work', async () => {
-    const wrapper = DrawerMount({ props: { container: '.ix-test-container' } })
+    const wrapper = await DrawerMount({ props: { container: '.ix-test-container' } })
 
     expect(document.querySelector('.ix-test-container')!.querySelector('.ix-drawer')).not.toBeNull()
 
@@ -274,7 +281,7 @@ describe('Drawer', () => {
   })
 
   test('width work', async () => {
-    const wrapper = DrawerMount({ props: { width: 400 } })
+    const wrapper = await DrawerMount({ props: { width: 400 } })
     const drawerWrapper = wrapper.getComponent(DrawerWrapper)
     const getDom = () => drawerWrapper.find('.ix-drawer').element as HTMLElement
 
@@ -290,7 +297,7 @@ describe('Drawer', () => {
   })
 
   test('zIndex work', async () => {
-    const wrapper = DrawerMount({ props: { zIndex: 1001 } })
+    const wrapper = await DrawerMount({ props: { zIndex: 1001 } })
     expect(document.querySelector('.ix-drawer-wrapper')!.getAttribute('style')).toContain('z-index: 1001')
 
     await wrapper.setProps({ zIndex: 1002 })
@@ -303,7 +310,7 @@ describe('Drawer', () => {
       const onClose = vi.fn()
       const onBeforeClose = vi.fn()
       const onUpdateVisible = vi.fn()
-      const wrapper = DrawerMount({ props: { onClose, onBeforeClose, 'onUpdate:visible': onUpdateVisible } })
+      const wrapper = await DrawerMount({ props: { onClose, onBeforeClose, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.close()
       await flushPromises()
@@ -316,7 +323,7 @@ describe('Drawer', () => {
     test('onBeforeClose with result work', async () => {
       const onBeforeClose = vi.fn().mockImplementation((evt: unknown) => evt === 'close')
       const onUpdateVisible = vi.fn()
-      const wrapper = DrawerMount({ props: { onBeforeClose, 'onUpdate:visible': onUpdateVisible } })
+      const wrapper = await DrawerMount({ props: { onBeforeClose, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.close(1)
       await flushPromises()
@@ -334,7 +341,7 @@ describe('Drawer', () => {
     test('onBeforeClose with promise work', async () => {
       const onBeforeClose = vi.fn().mockImplementation((evt: unknown) => Promise.resolve(evt === 'close'))
       const onUpdateVisible = vi.fn()
-      const wrapper = DrawerMount({ props: { onBeforeClose, 'onUpdate:visible': onUpdateVisible } })
+      const wrapper = await DrawerMount({ props: { onBeforeClose, 'onUpdate:visible': onUpdateVisible } })
 
       wrapper.vm.close(1)
       await flushPromises()

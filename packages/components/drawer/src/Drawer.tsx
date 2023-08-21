@@ -44,7 +44,7 @@ export default defineComponent({
 
     const mask = computed(() => props.mask ?? config.mask)
 
-    const { loaded, visible, setVisible, animatedVisible, mergedVisible } = useVisible(props)
+    const { loaded, delayedLoaded, visible, setVisible, animatedVisible, mergedVisible } = useVisible(props)
     const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visible)
 
     const { open, close } = useTrigger(props, setVisible)
@@ -57,6 +57,7 @@ export default defineComponent({
       config,
       mergedPrefixCls,
       visible,
+      delayedLoaded,
       animatedVisible,
       mergedVisible,
       currentZIndex,
@@ -97,6 +98,7 @@ function useVisible(props: DrawerProps) {
   // because portal is lazy loaded, actual visible at the first time should be delayed
   // or else transition animation will behave unexpectedly
   const loaded = ref<boolean>(false)
+  const delayedLoaded = ref<boolean>(false)
   const delayedVisible = ref<boolean>(false)
   watch(
     visible,
@@ -105,6 +107,7 @@ function useVisible(props: DrawerProps) {
         loaded.value = true
 
         nextTick(() => {
+          delayedLoaded.value = true
           delayedVisible.value = true
         })
       } else {
@@ -133,7 +136,7 @@ function useVisible(props: DrawerProps) {
     }
   })
 
-  return { loaded, visible: delayedVisible, setVisible, animatedVisible, mergedVisible }
+  return { loaded, delayedLoaded, visible: delayedVisible, setVisible, animatedVisible, mergedVisible }
 }
 
 function useScrollStrategy(props: DrawerProps, mask: ComputedRef<boolean>, mergedVisible: ComputedRef<boolean>) {
