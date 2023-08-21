@@ -48,6 +48,7 @@ export default defineComponent({
       config,
       mergedPrefixCls,
       visible,
+      delayedLoaded,
       animatedVisible,
       mergedVisible,
       currentZIndex,
@@ -150,29 +151,31 @@ export default defineComponent({
             onAfterEnter={onAfterEnter}
             onAfterLeave={onAfterLeave}
           >
-            <div
-              v-show={visible.value}
-              role="document"
-              class={prefixCls}
-              style={contentStyle.value}
-              onMousedown={onContentMousedown}
-              onMouseup={onContentMouseup}
-              {...attrs}
-            >
-              <div ref={sentinelStartRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
-              <div class={`${prefixCls}-content`}>
-                <ɵHeader
-                  v-slots={slots}
-                  closable={closable.value}
-                  closeIcon={closeIcon.value}
-                  header={props.header}
-                  onClose={close}
-                />
-                <div class={`${prefixCls}-body`}>{slots.default?.()}</div>
-                <ɵFooter v-slots={slots} class={`${prefixCls}-footer`} footer={props.footer}></ɵFooter>
+            {delayedLoaded.value && (
+              <div
+                v-show={visible.value}
+                role="document"
+                class={prefixCls}
+                style={contentStyle.value}
+                onMousedown={onContentMousedown}
+                onMouseup={onContentMouseup}
+                {...attrs}
+              >
+                <div ref={sentinelStartRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
+                <div class={`${prefixCls}-content`}>
+                  <ɵHeader
+                    v-slots={slots}
+                    closable={closable.value}
+                    closeIcon={closeIcon.value}
+                    header={props.header}
+                    onClose={close}
+                  />
+                  <div class={`${prefixCls}-body`}>{slots.default?.()}</div>
+                  <ɵFooter v-slots={slots} class={`${prefixCls}-footer`} footer={props.footer}></ɵFooter>
+                </div>
+                <div ref={sentinelEndRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
               </div>
-              <div ref={sentinelEndRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
-            </div>
+            )}
           </Transition>
         </div>
       )
