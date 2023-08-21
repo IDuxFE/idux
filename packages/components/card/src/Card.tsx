@@ -144,7 +144,7 @@ const renderFooter = (props: CardProps, slots: Slots, prefixCls: string) => {
       } else {
         const { text, ...rest } = item
         itemChild = (
-          <IxButton waveless={true} {...rest}>
+          <IxButton class={`${prefixCls}-footer-button`} waveless={true} {...rest}>
             {text}
           </IxButton>
         )
