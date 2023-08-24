@@ -174,18 +174,26 @@ export function useSegmentStates(
   }
 
   watch(
-    [activeSegment, () => props.searchItem?.resolvedSearchField],
-    ([activeSegment, searchField], [preActiveSegment]) => {
+    () => props.searchItem?.resolvedSearchField,
+    () => {
+      initSearchState(props.searchItem!.key)
+    },
+  )
+  watch(
+    activeSegment,
+    (activeSegment, preActiveSegment) => {
       if (activeSegment?.itemKey === props.searchItem?.key || preActiveSegment?.itemKey !== props.searchItem?.key) {
         return
       }
+
+      const searchField = props.searchItem?.resolvedSearchField
 
       if (!searchField) {
         initSearchState(props.searchItem!.key)
         return
       }
 
-      const preSegment = props.searchItem?.resolvedSearchField.segments.find(seg => seg.name === preActiveSegment?.name)
+      const preSegment = searchField.segments.find(seg => seg.name === preActiveSegment?.name)
 
       // if current segment has no panel and the whole search item is valid after input
       // then update search values
