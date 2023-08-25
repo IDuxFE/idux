@@ -146,7 +146,6 @@
       &-content {
         background-color: inherit;
         border-color: transparent;
-        box-shadow: none;
       }
 
       // TODO: select 那边要去掉这两个样式
@@ -270,7 +269,7 @@
           border-color: transparent;
         }
 
-        &&-active &-content {
+        &.@{selector-prefix}-focused .@{selector-prefix}-content {
           border-color: transparent;
           // todo remove
           box-shadow: none;
