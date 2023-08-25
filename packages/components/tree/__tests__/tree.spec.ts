@@ -300,10 +300,14 @@ describe('Tree', () => {
       })
 
       const allNodes = wrapper.findAll('.ix-tree-node')
+
+      expect(allNodes[0].classes()).toContain('ix-tree-node-disabled')
+      expect(allNodes[0].find('.ix-checkbox').classes()).toContain('ix-checkbox-disabled')
+
       //0, checked
       await allNodes[0].find('input').setValue(true)
 
-      expect(onUpdateCheckedKeys).toBeCalledWith([])
+      expect(onUpdateCheckedKeys).not.toBeCalled()
     })
   })
 

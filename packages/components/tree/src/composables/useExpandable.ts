@@ -100,6 +100,12 @@ export function useExpandable(
           mergedLabelKey.value,
           key,
           level,
+          {
+            check: !!currNode.checkDisabled,
+            drag: !!currNode.dragDisabled,
+            drop: !!currNode.dropDisabled,
+            select: !!currNode.selectDisabled,
+          },
         )
         convertMergedNodeMap(mergedChildren, nodeMap)
         currNode.rawNode[childrenKey] = childrenNodes

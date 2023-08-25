@@ -1726,6 +1726,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -1787,6 +1788,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -1848,6 +1850,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -1911,6 +1914,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -1972,6 +1976,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -2038,6 +2043,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -2102,6 +2108,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -2229,6 +2236,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -2292,6 +2300,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -2353,6 +2362,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -2419,6 +2429,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -2483,6 +2494,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -2610,6 +2622,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -2673,6 +2686,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -2734,6 +2748,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -2800,6 +2815,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -2864,6 +2880,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -2991,6 +3008,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -3054,6 +3072,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -3115,6 +3134,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -3181,6 +3201,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -3245,6 +3266,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -3372,6 +3394,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -3575,6 +3598,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -3641,6 +3665,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
@@ -3705,6 +3730,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   </span>
                   <label
                     aria-checked="false"
+                    aria-disabled="false"
                     class="ix-checkbox ix-tree-node-checkbox"
                     role="checkbox"
                   >
