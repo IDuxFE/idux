@@ -10,10 +10,10 @@ import { VNodeChild, computed, defineComponent, inject } from 'vue'
 import { convertArray } from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
 
-import { TABLE_TOKEN } from '../../token'
 import BodyRowSingle from './BodyRowSingle'
 import MeasureRow from './MeasureRow'
 import { renderBodyRow } from './RenderBodyRow'
+import { TABLE_TOKEN } from '../../token'
 
 export default defineComponent({
   setup(_, { slots }) {

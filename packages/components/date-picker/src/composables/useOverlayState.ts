@@ -5,9 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { DatePickerProps, DateRangePickerProps } from '../types'
 import type { PickerControlContext } from './useControl'
 import type { PickerRangeControlContext } from './useRangeControl'
+import type { DatePickerProps, DateRangePickerProps } from '../types'
 import type { ComputedRef } from 'vue'
 
 import { onMounted, watch } from 'vue'

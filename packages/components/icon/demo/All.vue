@@ -119,7 +119,9 @@ const onCopy = (evt: MouseEvent, name: string) => {
     text-align: center;
     border-radius: 4px;
     cursor: pointer;
-    transition: color @transition-duration-base @ease-in-out, background-color @transition-duration-base @ease-in-out;
+    transition:
+      color @transition-duration-base @ease-in-out,
+      background-color @transition-duration-base @ease-in-out;
 
     &::after {
       position: absolute;

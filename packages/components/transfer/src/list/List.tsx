@@ -11,9 +11,9 @@ import { CdkVirtualScroll, type VirtualItemRenderFn, type VirtualScrollInstance 
 import { callEmit, convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
+import ListItem from './ListItem'
 import { transferListContext } from '../token'
 import { type TransferData, type TransferListApi, transferListProps } from '../types'
-import ListItem from './ListItem'
 
 export default defineComponent({
   name: 'IxTransferList',

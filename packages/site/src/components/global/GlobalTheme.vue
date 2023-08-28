@@ -14,8 +14,8 @@ import { inject, ref, watch } from 'vue'
 
 import { MenuData } from '@idux/components/menu'
 
-import { appContextToken } from '../../context'
 import { themeConfig } from './themeConfig'
+import { appContextToken } from '../../context'
 
 const { setTheme } = inject(appContextToken)!
 

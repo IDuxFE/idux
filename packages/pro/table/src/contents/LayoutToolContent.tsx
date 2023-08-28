@@ -12,10 +12,10 @@ import { ɵInput } from '@idux/components/_private/input'
 import { IxButton } from '@idux/components/button'
 import { IxCheckbox } from '@idux/components/checkbox'
 
+import LayoutToolTree from './LayoutToolTree'
 import { proTableToken } from '../token'
 import { type ProTableColumn, proTableLayoutToolContentProps } from '../types'
 import { loopColumns } from '../utils'
-import LayoutToolTree from './LayoutToolTree'
 
 export default defineComponent({
   props: proTableLayoutToolContentProps,

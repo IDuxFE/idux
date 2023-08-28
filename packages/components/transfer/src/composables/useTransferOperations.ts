@@ -5,9 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TransferData, TransferProps } from '../types'
 import type { TransferDataContext } from './useTransferData'
 import type { TransferSelectStateContext } from './useTransferSelectState'
+import type { TransferData, TransferProps } from '../types'
 
 import { type ComputedRef, computed } from 'vue'
 

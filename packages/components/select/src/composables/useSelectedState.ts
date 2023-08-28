@@ -12,9 +12,9 @@ import { type ComputedRef, computed, toRaw } from 'vue'
 import { type FormAccessor } from '@idux/cdk/forms'
 import { type VKey, callEmit, convertArray } from '@idux/cdk/utils'
 
+import { type FlattenedOption } from './useOptions'
 import { type SelectProps } from '../types'
 import { generateOption } from '../utils/generateOption'
-import { type FlattenedOption } from './useOptions'
 
 export interface SelectedStateContext {
   selectedValue: ComputedRef<VKey[]>

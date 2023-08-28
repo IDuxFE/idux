@@ -100,6 +100,7 @@ const breakpoints = useSharedBreakpoints()
 
 const isDrawerOpen = ref(false)
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const configChanges = {} as Record<GlobalConfigKey, (config: Partial<GlobalConfig[GlobalConfigKey]>) => void>
 const compNames = Object.keys(defaultConfig) as GlobalConfigKey[]
 compNames.forEach(compName => {

@@ -12,8 +12,8 @@ import { isFunction } from 'lodash-es'
 import { NoopArray, type VKey } from '@idux/cdk/utils'
 import { type GetDisabledFn } from '@idux/components/utils'
 
-import { type CascaderData, type CascaderPanelProps, type CascaderSearchFn } from '../types'
 import { type MergedData } from './useDataSource'
+import { type CascaderData, type CascaderPanelProps, type CascaderSearchFn } from '../types'
 
 export interface SearchableContext {
   searchedData: ComputedRef<MergedData[]>

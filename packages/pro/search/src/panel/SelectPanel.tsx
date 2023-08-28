@@ -23,10 +23,10 @@ import { type VKey, callEmit, useState } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { IxSelectPanel, type SelectData, type SelectPanelInstance } from '@idux/components/select'
 
+import PanelFooter from './PanelFooter'
 import { proSearchContext } from '../token'
 import { type ProSearchSelectPanelProps, type SelectPanelData, proSearchSelectPanelProps } from '../types'
 import { filterDataSource, matchRule } from '../utils/selectData'
-import PanelFooter from './PanelFooter'
 
 export default defineComponent({
   props: proSearchSelectPanelProps,

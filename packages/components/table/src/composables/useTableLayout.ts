@@ -7,9 +7,9 @@
 
 import { type ComputedRef, computed } from 'vue'
 
-import { type TableProps } from '../types'
 import { type ColumnsContext } from './useColumns'
 import { type ScrollContext } from './useScroll'
+import { type TableProps } from '../types'
 
 export function useTableLayout(
   props: TableProps,

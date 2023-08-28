@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TreeNode, TreeNodeDisabled, TreeProps } from '../types'
 import type { ExpandableContext } from './useExpandable'
+import type { TreeNode, TreeNodeDisabled, TreeProps } from '../types'
 import type { VKey } from '@idux/cdk/utils'
 import type { CascaderStrategy } from '@idux/components/cascader'
 import type { GetKeyFn } from '@idux/components/utils'

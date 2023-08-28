@@ -12,10 +12,10 @@ import { ɵEmpty } from '@idux/components/_private/empty'
 import { TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN, type TransferBindings } from '@idux/components/transfer'
 import { IxTree } from '@idux/components/tree'
 
+import { renderRemoveIcon } from './RenderRemovableLabel'
 import { useTransferTreeProps } from '../composables/useTransferTreeProps'
 import { proTransferContext, treeTransferContext } from '../token'
 import { type TreeTransferData, proTransferTreeContentProps } from '../types'
-import { renderRemoveIcon } from './RenderRemovableLabel'
 
 export default defineComponent({
   props: proTransferTreeContentProps,

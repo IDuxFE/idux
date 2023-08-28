@@ -16,9 +16,9 @@ import {
   IxDateRangePanel,
 } from '@idux/components/date-picker'
 
+import PanelFooter from './PanelFooter'
 import { proSearchContext } from '../token'
 import { proSearchDatePanelProps } from '../types'
-import PanelFooter from './PanelFooter'
 
 export default defineComponent({
   props: proSearchDatePanelProps,

@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TransferDataStrategy, TransferProps } from '../types'
 import type { TransferDataContext } from './useTransferData'
+import type { TransferDataStrategy, TransferProps } from '../types'
 
 import { type ComputedRef, computed, nextTick, watch } from 'vue'
 

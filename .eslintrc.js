@@ -151,7 +151,6 @@ module.exports = {
     'vue/require-default-prop': 'off',
     'vue/require-explicit-emits': 'error',
 
-    'jsdoc/newline-after-description': 1,
     'import/no-duplicates': 'error',
     'import/no-unused-modules': 'error',
     'import/no-unassigned-import': 'error',

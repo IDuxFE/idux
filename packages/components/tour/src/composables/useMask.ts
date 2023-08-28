@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ResolvedTourStep, TargetPositionInfo } from '../types'
 import type { MergedTourProps } from './useMergedProps'
+import type { ResolvedTourStep, TargetPositionInfo } from '../types'
 
 import {
   type CSSProperties,
@@ -181,9 +181,9 @@ function getMaskPath(positionInfo: Omit<TargetPositionInfo, 'origin'> | null): s
   /* eslint-disable indent */
   return `${viewBoxRect(windowWidth, windowHeight)}
     M${boxX},${boxY} h${boxWidth} ${arch(1, 1)} v${boxHeight} ${arch(-1, 1)} h-${boxWidth} ${arch(
-    -1,
-    -1,
-  )} v-${boxHeight} ${arch(1, -1)} z`
+      -1,
+      -1,
+    )} v-${boxHeight} ${arch(1, -1)} z`
   /* eslint-enable indent */
 }
 

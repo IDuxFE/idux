@@ -12,8 +12,8 @@ import { type ComputedRef, computed, toRaw } from 'vue'
 import { type FormAccessor } from '@idux/cdk/forms'
 import { type VKey, callEmit, convertArray } from '@idux/cdk/utils'
 
-import { type TreeSelectNode, type TreeSelectProps } from '../types'
 import { type MergedNode } from './useDataSource'
+import { type TreeSelectNode, type TreeSelectProps } from '../types'
 
 //import { generateOption } from '../utils/generateOption'
 

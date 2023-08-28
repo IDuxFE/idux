@@ -96,11 +96,12 @@ function useDir(props: UploadProps, config: UploadConfig) {
 }
 
 function useAccept(props: UploadProps) {
-  return computed(() =>
-    props.accept
-      ?.split(',')
-      .map(type => type.trim())
-      .filter(type => type),
+  return computed(
+    () =>
+      props.accept
+        ?.split(',')
+        .map(type => type.trim())
+        .filter(type => type),
   )
 }
 

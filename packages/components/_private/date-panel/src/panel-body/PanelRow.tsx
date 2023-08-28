@@ -7,9 +7,9 @@
 
 import { computed, defineComponent, inject } from 'vue'
 
+import PanelCell from './PanelCell'
 import { datePanelToken } from '../token'
 import { panelRowProps } from '../types'
-import PanelCell from './PanelCell'
 
 interface TbodyCell {
   key: string
