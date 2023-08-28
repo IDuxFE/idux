@@ -10,6 +10,19 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.9.4(2023-08-28)
+
+### Bug Fixes
+
+* **comp:dropdown:** 给demo中的图标增加展开时的旋转动画 ([#1671](https://github.com/IDuxFE/idux/issues/1671)) ([d81b1c5](https://github.com/IDuxFE/idux/commit/d81b1c5981365c245c5a88616d3f3b952790d49d))
+* **comp:divider:** 标题在placement为`start`或`end`时，将与文字顶行对齐，去除左右缩进和边距 ([#1668](https://github.com/IDuxFE/idux/issues/1668)) ([f488830](https://github.com/IDuxFE/idux/commit/f488830a5151a441c779d79d7791f14b8b19138e))
+* **comp:tree:** 在级联模式下，树节点的禁用状态有应当级联计算 ([#1666](https://github.com/IDuxFE/idux/issues/1666)) ([c57dfb3](https://github.com/IDuxFE/idux/commit/c57dfb3d5a7b5b4140e5c54b981574d7c364eec8))
+* **comp:input:** 当检验不通过时，前置或后置的select不应当出现蓝色的box-shadow ([#1665](https://github.com/IDuxFE/idux/issues/1665)) ([bb26dbb](https://github.com/IDuxFE/idux/commit/bb26dbbccc4987399e65f802395f0c3620c10b3b))
+* **comp:date-picker:** 新增快捷选择示例 ([#1664](https://github.com/IDuxFE/idux/issues/1664)) ([485e9ae](https://github.com/IDuxFE/idux/commit/485e9aea77ece91a4aa05cc5322c743067043928))
+* **comp:pagination:** sizeChanger 在简洁模式下应当支持显示 ([#1663](https://github.com/IDuxFE/idux/issues/1663)) ([23178ed](https://github.com/IDuxFE/idux/commit/23178edca00e566a811fd148c5d2560654bf78f9))
+* **pro:table:** 修改layouTool面板中复选框与文字的间距为4px ([#1669](https://github.com/IDuxFE/idux/issues/1669)) ([5c72c47](https://github.com/IDuxFE/idux/commit/5c72c47513c357401683884826af1af41664b61a))
+* **pro:search:** 在searchField变化时，对应的搜索项应当更新 ([#1662](https://github.com/IDuxFE/idux/issues/1662)) ([a564dd3](https://github.com/IDuxFE/idux/commit/a564dd30a3a73961c0b7f6d8d17949c156bc41b6))
+
 ## 1.9.3(2023-08-21)
 
 ### Bug Fixes
