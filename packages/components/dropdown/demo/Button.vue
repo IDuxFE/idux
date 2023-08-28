@@ -11,16 +11,21 @@
     </IxButtonGroup>
     <IxButtonGroup>
       <IxButton @click="onClick">Button</IxButton>
-      <IxDropdown>
-        <IxButton icon="setting" shape="square"></IxButton>
+      <IxDropdown v-model:visible="settingDropdownVisible">
+        <IxButton shape="square">
+          <IxIcon name="setting" :rotate="settingDropdownVisible ? 0 : -180" size="16px" />
+        </IxButton>
         <template #overlay>
           <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
         </template>
       </IxDropdown>
     </IxButtonGroup>
 
-    <IxDropdown>
-      <IxButton>Button <IxIcon name="down" size="16px" style="margin-left: 4px"></IxIcon></IxButton>
+    <IxDropdown v-model:visible="arrowDropdownVisible">
+      <IxButton>
+        Button
+        <IxIcon name="down" :rotate="arrowDropdownVisible ? 0 : -180" size="16px" style="margin-left: 4px"></IxIcon>
+      </IxButton>
       <template #overlay>
         <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
       </template>
@@ -29,7 +34,12 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+
 import { MenuData } from '@idux/components/menu'
+
+const settingDropdownVisible = ref(false)
+const arrowDropdownVisible = ref(false)
 
 const dataSource: MenuData[] = [
   { type: 'item', key: 'one', label: 'One' },
