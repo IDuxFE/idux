@@ -12,6 +12,7 @@ import { type Locale } from '@idux/components/locales'
 import { IxProgress } from '@idux/components/progress'
 import { IxTooltip } from '@idux/components/tooltip'
 
+import FileSelector from './Selector'
 import {
   UseThumb,
   useCmpClasses,
@@ -25,7 +26,6 @@ import { uploadToken } from '../token'
 import { UploadFile, type UploadFileStatus, type UploadProps, uploadFilesProps } from '../types'
 import { type IconsMap, renderOprIcon } from '../util/icon'
 import { showDownload, showErrorTip, showPreview, showProgress, showRetry } from '../util/visible'
-import FileSelector from './Selector'
 
 export default defineComponent({
   name: 'IxUploadImageCardList',

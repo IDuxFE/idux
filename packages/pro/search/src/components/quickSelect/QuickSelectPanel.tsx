@@ -11,9 +11,9 @@ import { type VNodeChild, computed, defineComponent, inject } from 'vue'
 
 import { isEmptyNode } from '@idux/cdk/utils'
 
-import { proSearchContext } from '../../token'
 import QuickSelectPanelItem from './QuickSelectItem'
 import QuickSelectPanelShortcut from './QuickSelectShortcut'
+import { proSearchContext } from '../../token'
 
 export default defineComponent({
   setup(_, { slots }) {

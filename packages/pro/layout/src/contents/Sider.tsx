@@ -13,9 +13,9 @@ import { type VKey, callEmit, useState } from '@idux/cdk/utils'
 import { IxLayoutSider, type LayoutSiderProps } from '@idux/components/layout'
 import { IxMenu, type MenuClickOptions, type MenuData, type MenuProps } from '@idux/components/menu'
 
+import Logo from './Logo'
 import { proLayoutToken } from '../token'
 import { getTargetPaths } from '../utils/menu'
-import Logo from './Logo'
 
 export default defineComponent({
   name: 'IxProLayoutSider',

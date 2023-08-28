@@ -7,8 +7,8 @@
 
 import { defineComponent, inject } from 'vue'
 
-import { TABLE_TOKEN, tableBodyToken } from '../../token'
 import MeasureCell from './MeasureCell'
+import { TABLE_TOKEN, tableBodyToken } from '../../token'
 
 export default defineComponent({
   setup() {

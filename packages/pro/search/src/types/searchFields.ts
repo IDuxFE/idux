@@ -220,7 +220,7 @@ export type FieldConfig<T extends SearchField['type']> = T extends 'input'
   : never
 
 export const innerSegmentTypes = ['select', 'treeSelect', 'cascader', 'input', 'datePicker', 'dateRangePicker'] as const
-export type InnerSegmentTypes = typeof innerSegmentTypes[number]
+export type InnerSegmentTypes = (typeof innerSegmentTypes)[number]
 
 export const searchDataTypes = [
   'select',
@@ -231,4 +231,4 @@ export const searchDataTypes = [
   'dateRangePicker',
   'custom',
 ] as const
-export type SearchDataTypes = typeof searchDataTypes[number]
+export type SearchDataTypes = (typeof searchDataTypes)[number]

@@ -15,6 +15,7 @@ import { type VKey, useControlledProp } from '@idux/cdk/utils'
 import { type CascaderConfig, useGlobalConfig } from '@idux/components/config'
 import { useGetDisabled, useGetKey } from '@idux/components/utils'
 
+import OverlayOptionGroup from './OptionGroup'
 import { useActiveState } from '../composables/useActiveState'
 import { useDataSource } from '../composables/useDataSource'
 import { useExpandable } from '../composables/useExpandable'
@@ -24,7 +25,6 @@ import { useSelectedLimit } from '../composables/useSelectedLimit'
 import { useSelectedState } from '../composables/useSelectedState'
 import { CASCADER_PANEL_DATA_TOKEN, type CascaderPanelContext, cascaderPanelToken } from '../token'
 import { cascaderPanelProps } from '../types'
-import OverlayOptionGroup from './OptionGroup'
 
 export default defineComponent({
   props: cascaderPanelProps,

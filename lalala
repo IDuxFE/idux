@@ -1,0 +1,1 @@
+@typescript-eslint/eslint-plugin @typescript-eslint/parser @vue/eslint-config-prettier @vue/eslint-config-typescript eslint eslint-import-resolver-custom-alias eslint-plugin-header eslint-plugin-import eslint-plugin-jsdoc eslint-plugin-prettier eslint-plugin-vue prettier

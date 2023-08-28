@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ResolvedTourStep, TargetPositionInfo, TargetPositionOrigin } from '../types'
 import type { MergedTourProps } from './useMergedProps'
+import type { ResolvedTourStep, TargetPositionInfo, TargetPositionOrigin } from '../types'
 
 import { type ComputedRef, type Ref, onMounted, onUnmounted, shallowRef, watch } from 'vue'
 

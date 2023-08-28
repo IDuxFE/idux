@@ -229,11 +229,14 @@ function getRealObj<T>(obj: Record<string, T>) {
 }
 
 function getPlacementInitValue<T>(initValueFn: () => T) {
-  return notificationPlacement.reduce((acc, item) => {
-    const cloneValue = initValueFn()
-    return {
-      ...acc,
-      [item]: cloneValue,
-    }
-  }, {} as Record<NotificationPlacement, T>)
+  return notificationPlacement.reduce(
+    (acc, item) => {
+      const cloneValue = initValueFn()
+      return {
+        ...acc,
+        [item]: cloneValue,
+      }
+    },
+    {} as Record<NotificationPlacement, T>,
+  )
 }

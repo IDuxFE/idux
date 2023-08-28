@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TargetPositionInfo } from '../types'
 import type { MergedTourProps } from './useMergedProps'
+import type { TargetPositionInfo } from '../types'
 
 import { type ComputedRef, watch } from 'vue'
 

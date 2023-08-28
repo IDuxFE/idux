@@ -12,11 +12,11 @@ import { isBoolean, isNil, isObject } from 'lodash-es'
 import { convertCssPixel } from '@idux/cdk/utils'
 import { IxSpin, type SpinProps } from '@idux/components/spin'
 
-import { transferContext } from '../token'
-import { transferContentProps } from '../types'
 import Body from './Body'
 import Footer from './Footer'
 import Header from './Header'
+import { transferContext } from '../token'
+import { transferContentProps } from '../types'
 
 export default defineComponent({
   props: transferContentProps,

@@ -7,8 +7,8 @@
 
 import type { DnDEventType } from '../types'
 
-import { moveElement } from '../utils'
 import { type DnDContext } from './useDragDropContext'
+import { moveElement } from '../utils'
 
 export const withDragFree = (sourceEl: HTMLElement, context: DnDContext): void => {
   const registry = context.registry

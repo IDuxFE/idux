@@ -9,8 +9,8 @@ import { type ComputedRef, type Ref, computed, reactive, ref, watch } from 'vue'
 
 import { type VKey, callEmit } from '@idux/cdk/utils'
 
-import { type TableColumnSortOrder, type TableColumnSortable } from '../types'
 import { type TableColumnMerged } from './useColumns'
+import { type TableColumnSortOrder, type TableColumnSortable } from '../types'
 
 export interface SortableContext {
   activeSorters: Ref<ActiveSorter[]>

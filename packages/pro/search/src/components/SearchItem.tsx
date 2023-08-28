@@ -9,12 +9,12 @@ import { computed, defineComponent, inject, normalizeClass, provide, ref, watch 
 
 import { IxTooltip } from '@idux/components/tooltip'
 
+import Segment from './segment/Segment'
 import { useSegmentOverlayUpdate } from '../composables/useSegmentOverlayUpdate'
 import { useSegmentStates } from '../composables/useSegmentStates'
 import { proSearchContext, searchItemContext } from '../token'
 import { searchItemProps } from '../types'
 import { renderIcon } from '../utils/RenderIcon'
-import Segment from './segment/Segment'
 
 export default defineComponent({
   props: searchItemProps,

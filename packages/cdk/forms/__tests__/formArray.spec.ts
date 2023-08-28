@@ -184,7 +184,7 @@ describe('formArray.ts', () => {
     test('validate work', async () => {
       expect(await array.validate()).toBeUndefined()
 
-      const _validator = (_: unknown) => ({ test: {} } as ValidateErrors)
+      const _validator = (_: unknown) => ({ test: {} }) as ValidateErrors
 
       array.setValidators(_validator)
 

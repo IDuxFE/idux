@@ -122,7 +122,7 @@ export function useOptions(
           selectedValue: selectedValue.value && getColumnValue(selectedValue.value, type),
           options: getOptions(type),
           onActiveChange: getOnActiveChange(type),
-        } as TimePanelColumnProps),
+        }) as TimePanelColumnProps,
     )
   }
 
