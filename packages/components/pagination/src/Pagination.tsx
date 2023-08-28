@@ -90,6 +90,7 @@ export default defineComponent({
           </li>,
         )
         children.push(<Item disabled={_activeIndex === _lastIndex} type="next" />)
+        showSizeChanger.value && children.push(<Sizes />)
       } else {
         items.value.forEach(item => children.push(<Item key={item.type + '-' + item.index} {...item} />))
         showSizeChanger.value && children.push(<Sizes />)
