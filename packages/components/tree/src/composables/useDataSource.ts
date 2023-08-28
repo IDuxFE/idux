@@ -8,6 +8,7 @@
 import type { TreeNode, TreeNodeDisabled, TreeProps } from '../types'
 import type { ExpandableContext } from './useExpandable'
 import type { VKey } from '@idux/cdk/utils'
+import type { CascaderStrategy } from '@idux/components/cascader'
 import type { GetKeyFn } from '@idux/components/utils'
 import type { ComputedRef } from 'vue'
 
@@ -87,10 +88,11 @@ export function convertMergeNodes(
   labelKey: string,
   parentKey?: VKey,
   parentLevel?: number,
+  parentDisabled?: TreeNodeDisabled,
 ): MergedNode[] {
-  const { disabled, loadChildren } = props
-
+  const { cascaderStrategy, disabled, loadChildren } = props
   const level = isNil(parentLevel) ? -1 : parentLevel
+
   return nodes.map((node, index) =>
     convertMergeNode(
       node,
@@ -102,6 +104,8 @@ export function convertMergeNodes(
       index === 0,
       index === nodes.length - 1,
       level,
+      cascaderStrategy,
+      parentDisabled ? [parentDisabled] : [],
       parentKey,
     ),
   )
@@ -117,10 +121,12 @@ function convertMergeNode(
   isFirst: boolean,
   isLast: boolean,
   level: number,
+  cascaderStrategy: CascaderStrategy,
+  parentsDisabled: TreeNodeDisabled[],
   parentKey?: VKey,
 ): MergedNode {
   const key = getKey(rawNode)
-  const { check, drag, drop, select } = convertDisabled(rawNode, disabled)
+  const nodeDisabled = convertDisabled(rawNode, disabled)
   const subNodes = (rawNode as Record<string, unknown>)[childrenKey] as TreeNode[] | undefined
   const label = rawNode[labelKey] as string
 
@@ -137,24 +143,39 @@ function convertMergeNode(
       index === 0,
       index === subNodes.length - 1,
       level,
+      cascaderStrategy,
+      [nodeDisabled, ...parentsDisabled],
       key,
     ),
   )
+
+  const mergedDisabled = mergeDisabled(
+    nodeDisabled,
+    parentsDisabled,
+    children?.map(child => ({
+      check: child.checkDisabled,
+      drag: child.dragDisabled,
+      drop: child.dropDisabled,
+      select: child.selectDisabled,
+    })) ?? [],
+    cascaderStrategy !== 'off',
+  )
+
   return {
-    children,
     label,
     key,
+    children,
     isFirst,
-    isLeaf: rawNode.isLeaf ?? !(children?.length || hasLoad),
+    isLeaf: rawNode.isLeaf ?? !(subNodes?.length || hasLoad),
     isLast,
     parentKey,
     expanded: false,
     level,
     rawNode,
-    checkDisabled: check,
-    dragDisabled: drag,
-    dropDisabled: drop,
-    selectDisabled: select,
+    checkDisabled: mergedDisabled.check,
+    dragDisabled: mergedDisabled.drag,
+    dropDisabled: mergedDisabled.drop,
+    selectDisabled: mergedDisabled.select,
   }
 }
 
@@ -175,6 +196,28 @@ function convertDisabled(node: TreeNode, disabled?: (node: TreeNode) => boolean 
     select = select || treeDisabled.select
   }
   return { check, drag, drop, select }
+}
+function mergeDisabled(
+  nodeDisabled: TreeNodeDisabled,
+  parentsDisabled: TreeNodeDisabled[],
+  childrenDisabled: TreeNodeDisabled[],
+  cascade: boolean,
+): TreeNodeDisabled {
+  const _mergeDisabled = (name: keyof TreeNodeDisabled) => {
+    return (
+      nodeDisabled[name] ||
+      (cascade &&
+        (parentsDisabled.some(disabled => !!disabled[name]) ||
+          (!!childrenDisabled.length && childrenDisabled.every(disabled => !!disabled[name]))))
+    )
+  }
+
+  return {
+    check: _mergeDisabled('check'),
+    drag: _mergeDisabled('drag'),
+    drop: _mergeDisabled('drop'),
+    select: _mergeDisabled('drag'),
+  }
 }
 
 export function convertMergedNodeMap(mergedNodes: MergedNode[], map: Map<VKey, MergedNode>): void {
