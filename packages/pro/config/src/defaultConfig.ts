@@ -51,5 +51,6 @@ export const defaultConfig: ProGlobalConfig = {
     clearable: true,
     clearIcon: 'close-circle',
     searchIcon: 'search',
+    size: 'md',
   },
 }

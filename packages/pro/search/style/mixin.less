@@ -5,3 +5,32 @@
   border-radius: @pro-search-overlay-border-radius;
   box-shadow: @pro-search-overlay-box-shadow;
 }
+
+.pro-search-size(@height; @container-padding; @item-height; @item-gap; @quick-select-padding) {
+  height: @height;
+  .@{pro-search-prefix}-input-container::after {
+    height: @height;
+  }
+  .@{pro-search-prefix}-clear-icon {
+    height: @height - @pro-search-border-width * 2;
+  }
+
+  .@{pro-search-prefix}-input-content {
+    margin-left: -@item-gap;
+    margin-bottom: -@item-gap;
+    padding: @container-padding - @pro-search-border-width;
+  }
+  .@{pro-search-prefix}-search-item {
+    height: @item-height;
+    margin-bottom: @item-gap;
+    margin-left: @item-gap;
+  }
+  .@{pro-search-prefix}-temp-segment-input {
+    height: @item-height;
+    margin-left: @item-gap;
+    margin-bottom: @item-gap;
+  }
+  .@{pro-search-prefix}-quick-select-panel {
+    padding: @quick-select-padding;
+  }
+}

@@ -11,6 +11,7 @@ import type { PortalTargetType } from '@idux/cdk/portal'
 import type { FormSize } from '@idux/components/form'
 import type { ProFormSchemaFormatter } from '@idux/pro/form'
 import type { ProLocale } from '@idux/pro/locales'
+import type { ProSearchSize } from '@idux/pro/search'
 import type { ProTableColumnIndexable } from '@idux/pro/table'
 import type { TextareaResize } from '@idux/pro/textarea'
 import type { Options as AjvOptions } from 'ajv'
@@ -88,6 +89,7 @@ export interface ProSearchConfig {
   clearable: boolean
   clearIcon: string | VNode
   searchIcon: string | VNode
+  size: ProSearchSize
   overlayContainer?: PortalTargetType
 }
 
