@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.4](https://github.com/IDuxFE/idux/compare/v1.9.3...v1.9.4) (2023-08-28)
+
+
+### Bug Fixes
+
+* **comp:input:** addon select should remove box-shadow when invalid ([#1665](https://github.com/IDuxFE/idux/issues/1665)) ([bb26dbb](https://github.com/IDuxFE/idux/commit/bb26dbbccc4987399e65f802395f0c3620c10b3b))
+* **comp:pagination:** sizeChanger should be supported for simple mode ([#1663](https://github.com/IDuxFE/idux/issues/1663)) ([23178ed](https://github.com/IDuxFE/idux/commit/23178edca00e566a811fd148c5d2560654bf78f9))
+* **comp:tree:** tree node disabled should be cascade ([#1666](https://github.com/IDuxFE/idux/issues/1666)) ([c57dfb3](https://github.com/IDuxFE/idux/commit/c57dfb3d5a7b5b4140e5c54b981574d7c364eec8))
+
+
+
+
+
 ## [1.9.3](https://github.com/IDuxFE/idux/compare/v1.9.2...v1.9.3) (2023-08-21)
 
 ### Bug Fixes
