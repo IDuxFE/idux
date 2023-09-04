@@ -6,14 +6,14 @@
  */
 
 import type { UploadFile, UploadFilesProps, UploadFilesType, UploadProps } from '../types'
-import type { IconsMap } from '../util/icon'
+import type { IconsMap } from '../utils/icon'
 import type { ComputedRef, ShallowRef, VNode } from 'vue'
 
 import { computed, h, isProxy, normalizeClass, shallowRef } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
 
-import { isImage } from '../util/fileHandle'
+import { isImage } from '../utils/files'
 
 export function useCmpClasses(): ComputedRef<string> {
   const commonPrefix = useGlobalConfig('common')

@@ -6,22 +6,20 @@
  */
 
 import type { UploadProps } from '../types'
-import type { ComputedRef, Ref, ShallowRef } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 
-import { computed, ref, shallowRef } from 'vue'
+import { computed, ref } from 'vue'
 
 export interface UploadDrag {
   allowDrag: ComputedRef<boolean>
-  dragOver: Ref<boolean>
-  filesSelected: ShallowRef<File[]>
+  isDraggingOver: Ref<boolean>
   onDrop: (e: DragEvent) => void
   onDragOver: (e: DragEvent) => void
   onDragLeave: (e: DragEvent) => void
 }
 
-export function useDrag(props: UploadProps): UploadDrag {
-  const dragOver = ref(false)
-  const filesSelected: ShallowRef<File[]> = shallowRef([])
+export function useDrag(props: UploadProps, selectFiles: (files: File[]) => Promise<void>): UploadDrag {
+  const isDraggingOver = ref(false)
   const allowDrag = computed(() => !!props.dragable && !props.disabled)
 
   function onDrop(e: DragEvent) {
@@ -29,8 +27,8 @@ export function useDrag(props: UploadProps): UploadDrag {
     if (!allowDrag.value) {
       return
     }
-    dragOver.value = false
-    filesSelected.value = Array.prototype.slice.call(e.dataTransfer?.files ?? []) as File[]
+    isDraggingOver.value = false
+    selectFiles(Array.prototype.slice.call(e.dataTransfer?.files ?? []) as File[])
   }
 
   function onDragOver(e: DragEvent) {
@@ -38,7 +36,7 @@ export function useDrag(props: UploadProps): UploadDrag {
     if (!allowDrag.value) {
       return
     }
-    dragOver.value = true
+    isDraggingOver.value = true
   }
 
   function onDragLeave(e: DragEvent) {
@@ -46,13 +44,12 @@ export function useDrag(props: UploadProps): UploadDrag {
     if (!allowDrag.value) {
       return
     }
-    dragOver.value = false
+    isDraggingOver.value = false
   }
 
   return {
     allowDrag,
-    dragOver,
-    filesSelected,
+    isDraggingOver,
     onDrop,
     onDragOver,
     onDragLeave,

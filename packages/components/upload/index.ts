@@ -31,4 +31,5 @@ export type {
   UploadFilesInstance,
   UploadFilesComponent,
   UploadFilesPublicProps as UploadFilesProps,
+  FilteredFile,
 } from './src/types'

@@ -7,7 +7,7 @@
 
 import type { FileOperation } from '../composables/useOperation'
 import type { UploadFile, UploadProps } from '../types'
-import type { IconsMap } from '../util/icon'
+import type { IconsMap } from '../utils/icon'
 import type { Locale } from '@idux/components/locales'
 import type { ComputedRef } from 'vue'
 
@@ -20,28 +20,24 @@ import { useCmpClasses, useIcon, useListClasses } from '../composables/useDispla
 import { useOperation } from '../composables/useOperation'
 import { uploadToken } from '../token'
 import { uploadFilesProps } from '../types'
-import { renderIcon, renderOprIcon } from '../util/icon'
-import { showDownload, showErrorTip, showPreview, showProgress, showRetry } from '../util/visible'
+import { renderIcon, renderOprIcon } from '../utils/icon'
+import { showDownload, showErrorTip, showPreview, showProgress, showRetry } from '../utils/visible'
 
 export default defineComponent({
   name: 'IxUploadTextList',
   props: uploadFilesProps,
   setup(listProps) {
-    const { props: uploadProps, locale, files, upload, abort, onUpdateFiles, setViewerVisible } = inject(uploadToken)!
+    const uploadContext = inject(uploadToken)!
+    const { props: uploadProps, locale, fileList } = uploadContext
     const icons = useIcon(listProps)
     const cpmClasses = useCmpClasses()
     const listClasses = useListClasses(uploadProps, 'text')
-    const fileOperation = useOperation(files, listProps, uploadProps, {
-      abort,
-      upload,
-      onUpdateFiles,
-      setViewerVisible,
-    })
+    const fileOperation = useOperation(listProps, uploadContext)
 
     return () =>
-      files.value.length > 0 && (
+      fileList.value.length > 0 && (
         <ul class={listClasses.value}>
-          {files.value.map(file => renderItem(uploadProps, file, icons, cpmClasses, fileOperation, locale))}
+          {fileList.value.map(file => renderItem(uploadProps, file, icons, cpmClasses, fileOperation, locale))}
         </ul>
       )
   },
