@@ -1,6 +1,6 @@
 <template>
   <IxDropdown v-model:visible="visible">
-    <a class="ix-dropdown-trigger">Hover me <IxIcon name="down" :rotate="visible ? 0 : -180"></IxIcon></a>
+    <a class="ix-dropdown-trigger">Hover me <IxIcon name="down" :rotate="visible ? -180 : 0"></IxIcon></a>
     <template #overlay>
       <IxMenu :dataSource="dataSource" :selectable="false" @click="onClick"></IxMenu>
     </template>
