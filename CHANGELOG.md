@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.5](https://github.com/IDuxFE/idux/compare/v1.9.4...v1.9.5) (2023-09-04)
+
+
+### Bug Fixes
+
+* **comp:alert:** modify warning icon to `'exclamation-circle'` ([#1676](https://github.com/IDuxFE/idux/issues/1676)) ([3d9c265](https://github.com/IDuxFE/idux/commit/3d9c2657dfdecbd3185f90efd9d042540343fa8b))
+* **comp:card:** footer button style should use class but not button ([#1677](https://github.com/IDuxFE/idux/issues/1677)) ([cf91774](https://github.com/IDuxFE/idux/commit/cf91774662bb84bd50ddfba77db4ff65df2e3a59))
+* **comp:tree:** tree select disabled not right ([#1675](https://github.com/IDuxFE/idux/issues/1675)) ([c6b1bb3](https://github.com/IDuxFE/idux/commit/c6b1bb321f9a2eb698c9d5c02c18a67eb9af6f74))
+* **comp:upload:** default icon config not right ([#1674](https://github.com/IDuxFE/idux/issues/1674)) ([0bf4f6b](https://github.com/IDuxFE/idux/commit/0bf4f6be6d812506d7848b58fd30044b9563722a))
+
+
+
+
+
 ## [1.9.4](https://github.com/IDuxFE/idux/compare/v1.9.3...v1.9.4) (2023-08-28)
 
 
