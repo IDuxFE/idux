@@ -216,7 +216,7 @@ function mergeDisabled(
     check: _mergeDisabled('check'),
     drag: _mergeDisabled('drag'),
     drop: _mergeDisabled('drop'),
-    select: _mergeDisabled('drag'),
+    select: _mergeDisabled('select'),
   }
 }
 
