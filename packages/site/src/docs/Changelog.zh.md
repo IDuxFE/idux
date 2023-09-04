@@ -10,6 +10,15 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.9.5(2023-09-04)
+
+### Bug Fixes
+
+* **comp:alert:** 将 `warning` 类型的 alert 图标修改为 `'exclamation-circle'` ([#1676](https://github.com/IDuxFE/idux/issues/1676)) ([3d9c265](https://github.com/IDuxFE/idux/commit/3d9c2657dfdecbd3185f90efd9d042540343fa8b))
+* **comp:card:** footer 中的 button 样式定义不再直接使用button，改用class ([#1677](https://github.com/IDuxFE/idux/issues/1677)) ([cf91774](https://github.com/IDuxFE/idux/commit/cf91774662bb84bd50ddfba77db4ff65df2e3a59))
+* **comp:tree:** 树的 `select` 禁用配置不生效 ([#1675](https://github.com/IDuxFE/idux/issues/1675)) ([c6b1bb3](https://github.com/IDuxFE/idux/commit/c6b1bb321f9a2eb698c9d5c02c18a67eb9af6f74))
+* **comp:upload:** 默认的图标配置不正确，没有预览图标 ([#1674](https://github.com/IDuxFE/idux/issues/1674)) ([0bf4f6b](https://github.com/IDuxFE/idux/commit/0bf4f6be6d812506d7848b58fd30044b9563722a))
+
 ## 1.9.4(2023-08-28)
 
 ### Bug Fixes
