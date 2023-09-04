@@ -413,8 +413,9 @@ export const defaultConfig: GlobalConfig = {
   uploadFiles: {
     type: 'text',
     icon: {
+      preview: 'zoom-in',
       file: 'paper-clip',
-      remove: 'close',
+      remove: 'delete',
       retry: 'edit',
     },
   },
