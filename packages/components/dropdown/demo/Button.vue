@@ -13,7 +13,7 @@
       <IxButton @click="onClick">Button</IxButton>
       <IxDropdown v-model:visible="settingDropdownVisible">
         <IxButton shape="square">
-          <IxIcon name="setting" :rotate="settingDropdownVisible ? 0 : -180" size="16px" />
+          <IxIcon name="setting" :rotate="settingDropdownVisible ? -180 : 0" size="16px" />
         </IxButton>
         <template #overlay>
           <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
@@ -24,7 +24,7 @@
     <IxDropdown v-model:visible="arrowDropdownVisible">
       <IxButton>
         Button
-        <IxIcon name="down" :rotate="arrowDropdownVisible ? 0 : -180" size="16px" style="margin-left: 4px"></IxIcon>
+        <IxIcon name="down" :rotate="arrowDropdownVisible ? -180 : 0" size="16px" style="margin-left: 4px"></IxIcon>
       </IxButton>
       <template #overlay>
         <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
