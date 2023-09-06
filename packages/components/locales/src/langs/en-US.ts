@@ -89,6 +89,9 @@ const enUS: Locale = {
     sortAsc: 'Sort ascending',
     sortCancel: 'Cancel sort',
   },
+  text: {
+    copyText: ['Copy', 'Copy Success'],
+  },
   timePicker: {
     okText: 'OK',
     placeholder: 'Select time',

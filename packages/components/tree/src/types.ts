@@ -60,7 +60,7 @@ export const treeProps = {
   droppable: Function as PropType<TreeDroppable>,
   empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'simple' },
   expandIcon: {
-    type: [String, Object, Function, Array] as PropType<string | TreeExpandIconRenderer | [string, string]>,
+    type: [String, Function, Array] as PropType<string | TreeExpandIconRenderer | [string, string]>,
     default: undefined,
   },
   getKey: { type: [String, Function] as PropType<string | ((data: TreeNode<any>) => any)>, default: undefined },

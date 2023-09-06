@@ -1,6 +1,7 @@
 import { MountingOptions, mount } from '@vue/test-utils'
+import { h } from 'vue'
 
-import { renderWork } from '@tests'
+import { renderWork, wait } from '@tests'
 
 import Text from '../src/Text'
 import { TextProps } from '../src/types'
@@ -20,56 +21,107 @@ describe('Text', () => {
   })
 
   test('copyable work', async () => {
-    const wrapper = TextMount({ props: { copyable: true } })
+    const onCopy = vi.fn()
+    const wrapper = TextMount({ props: { copyable: true, onCopy } })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.classes()).toContain('ix-text-wrapper')
 
     document.execCommand = vi.fn().mockReturnValue(true)
     await wrapper.find('.ix-text-copy-icon').trigger('click')
 
     expect(document.execCommand).toHaveBeenCalledWith('copy')
+    expect(onCopy).toBeCalledWith(true, defaultSlot())
 
     await wrapper.setProps({ copyable: false })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.classes()).not.toContain('ix-text-wrapper')
-    expect(wrapper.classes()).toContain('ix-text')
+  })
+
+  test('copyIcon work', async () => {
+    const wrapper = TextMount({ props: { copyable: true, copyIcon: 'left' } })
+
+    expect(wrapper.find('.ix-text-copy-icon .ix-icon').classes()).toContain('ix-icon-left')
+
+    await wrapper.setProps({ copyIcon: ['left', 'right'] })
+
+    expect(wrapper.find('.ix-text-copy-icon .ix-icon').classes()).toContain('ix-icon-left')
+    await wrapper.find('.ix-text-copy-icon').trigger('click')
+
+    expect(wrapper.find('.ix-text-copy-icon .ix-icon').classes()).toContain('ix-icon-right')
+
+    await wrapper.setProps({
+      copyIcon: ({ copied }: { copied: boolean }) => h('span', { class: `custom-${copied ? 'copied' : 'copy'}` }),
+    })
+    await wait(3000)
+
+    expect(wrapper.find('.ix-text-copy-icon .custom-copy').exists()).toBeTruthy()
+    await wrapper.find('.ix-text-copy-icon').trigger('click')
+
+    expect(wrapper.find('.ix-text-copy-icon .custom-copied').exists()).toBeTruthy()
   })
 
   // 需要 E2E 测试
   test('expandable work', async () => {
-    const wrapper = TextMount({ props: { lineClamp: 2, expandable: true } })
+    const onUpdateExpanded = vi.fn()
+    const wrapper = TextMount({
+      props: { ellipsis: { rows: 2, expandable: true }, 'onUpdate:expanded': onUpdateExpanded },
+    })
 
     expect(wrapper.html()).toMatchSnapshot()
 
-    await wrapper.trigger('click')
+    await wrapper.find('.ix-text-inner').trigger('click')
 
     expect(wrapper.html()).toMatchSnapshot()
+    expect(onUpdateExpanded).toBeCalledWith(true)
   })
 
-  test('lineClamp work', async () => {
-    const wrapper = TextMount({ props: { lineClamp: 2 } })
+  test('expandIcon work', async () => {
+    const wrapper = TextMount({
+      props: { ellipsis: { rows: 2, expandable: true }, expandIcon: 'left', expanded: false },
+    })
+
+    expect(wrapper.find('.ix-text-expand-icon .ix-icon').classes()).toContain('ix-icon-left')
+
+    await wrapper.setProps({ expandIcon: ['left', 'right'] })
+
+    expect(wrapper.find('.ix-text-expand-icon .ix-icon').classes()).toContain('ix-icon-left')
+    await wrapper.setProps({ expanded: true })
+
+    expect(wrapper.find('.ix-text-expand-icon .ix-icon').classes()).toContain('ix-icon-right')
+
+    await wrapper.setProps({
+      expanded: false,
+      expandIcon: ({ expanded }: { expanded: boolean }) =>
+        h('span', { class: `custom-${expanded ? 'expanded' : 'expand'}` }),
+    })
+
+    expect(wrapper.find('.ix-text-expand-icon .custom-expand').exists()).toBeTruthy()
+    await wrapper.setProps({ expanded: true })
+
+    expect(wrapper.find('.ix-text-expand-icon .custom-expanded').exists()).toBeTruthy()
+  })
+
+  // 需要 E2E 测试
+  test('ellipsis work', async () => {
+    const wrapper = TextMount({ props: { ellipsis: { rows: 2 } } })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.classes()).toContain('ix-text-line-clamp')
 
-    await wrapper.setProps({ lineClamp: undefined })
+    await wrapper.setProps({ ellipsis: undefined })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.classes()).not.toContain('ix-text-line-clamp')
   })
 
   test('tag work', async () => {
     const wrapper = TextMount({ props: { tag: 'div' } })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.element.tagName).toBe('DIV')
+    expect(wrapper.find('.ix-text-inner').element.tagName).toBe('DIV')
 
     await wrapper.setProps({ tag: undefined })
 
     expect(wrapper.html()).toMatchSnapshot()
-    expect(wrapper.element.tagName).toBe('SPAN')
+    expect(wrapper.find('.ix-text-inner').element.tagName).toBe('SPAN')
   })
 
   test('tooltip work', async () => {

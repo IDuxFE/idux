@@ -11,4 +11,4 @@ title:
 
 ## en
 
-The simplest usage.
+Copyable.

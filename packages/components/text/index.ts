@@ -13,4 +13,10 @@ const IxText = Text as unknown as TextComponent
 
 export { IxText }
 
-export type { TextInstance, TextComponent, TextPublicProps as TextProps } from './src/types'
+export type {
+  TextInstance,
+  TextComponent,
+  TextPublicProps as TextProps,
+  TextExpandIconRenderer,
+  TextCopyIconRenderer,
+} from './src/types'

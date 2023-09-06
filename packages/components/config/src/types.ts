@@ -43,6 +43,7 @@ import type {
 } from '@idux/components/table'
 import type { TabsSize } from '@idux/components/tabs'
 import type { TagShape } from '@idux/components/tag'
+import type { TextCopyIconRenderer, TextExpandIconRenderer } from '@idux/components/text'
 import type { TextareaAutoRows, TextareaResize } from '@idux/components/textarea'
 import type { TargetGap, TourMaskOptions } from '@idux/components/tour'
 import type { TreeExpandIconRenderer, TreeNode } from '@idux/components/tree'
@@ -103,6 +104,7 @@ export interface GlobalConfig {
   tag: TagConfig
   tagGroup: TagGroupConfig
   textarea: TextareaConfig
+  text: TextConfig
   timePicker: TimePickerConfig
   transfer: TransferConfig
   tooltip: TooltipConfig
@@ -516,6 +518,11 @@ export interface TextareaConfig {
   size: FormSize
   showCount: boolean
   trim: boolean
+}
+
+export interface TextConfig {
+  copyIcon: string | TextCopyIconRenderer | [string, string]
+  expandIcon?: string | TextExpandIconRenderer | [string, string]
 }
 
 export interface TimePickerConfig {

@@ -7,8 +7,8 @@ title:
 
 ## zh
 
-搭配 `lineClamp` 使用时，可以通过点击展开全部文本。
+通过 `ellipsis.expandable` 配置实现展开收起功能。
 
 ## en
 
-The simplest usage.
+Make text expandable via `ellipsis.expandable`.

@@ -89,6 +89,9 @@ const zhCN: Locale = {
     sortAsc: '点击升序',
     sortCancel: '取消排序',
   },
+  text: {
+    copyText: ['点击复制', '复制成功'],
+  },
   timePicker: {
     okText: '确定',
     placeholder: '请选择时间',
