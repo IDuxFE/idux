@@ -7,13 +7,16 @@
 
 import { type Ref, defineComponent, provide, ref, shallowRef } from 'vue'
 
-import { useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxImageViewer } from '@idux/components/image'
 
 import FileSelector from './component/Selector'
 import { useCmpClasses } from './composables/useDisplay'
+import { useDrag } from './composables/useDrag'
+import { useFileSelect } from './composables/useFileSelect'
+import { useFilesData } from './composables/useFilesData'
 import { useRequest } from './composables/useRequest'
+import { useUploadControl } from './composables/useUploadControl'
 import { uploadToken } from './token'
 import { uploadProps } from './types'
 
@@ -24,20 +27,25 @@ export default defineComponent({
     const locale = useGlobalConfig('locale')
     const cpmClasses = useCmpClasses()
     const [showSelector, setSelectorVisible] = useShowSelector()
-    const [files, onUpdateFiles] = useControlledProp(props, 'files', [])
-    const { fileUploading, abort, startUpload, upload } = useRequest(props, files)
+    const filesDataContext = useFilesData(props)
+    const selectFiles = useFileSelect(props, filesDataContext)
+    const dragContext = useDrag(props, selectFiles)
+
+    const uploadRequest = useRequest(props, filesDataContext)
+    const { abort, upload } = uploadRequest
     const { viewerVisible, images, setViewerVisible } = useImageViewer()
+
+    useUploadControl(filesDataContext.fileList, uploadRequest)
+
     provide(uploadToken, {
       props,
       locale,
-      files,
-      fileUploading,
-      onUpdateFiles,
-      abort,
-      startUpload,
-      upload,
+      selectFiles,
       setViewerVisible,
       setSelectorVisible,
+      ...uploadRequest,
+      ...filesDataContext,
+      ...dragContext,
     })
 
     return () => (

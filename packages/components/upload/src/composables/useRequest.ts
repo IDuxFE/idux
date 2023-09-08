@@ -5,9 +5,17 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { UploadFile, UploadProgressEvent, UploadProps, UploadRequestError, UploadRequestOption } from '../types'
+import type { FilesDataContext } from '../composables/useFilesData'
+import type {
+  UploadFile,
+  UploadFileStatus,
+  UploadProgressEvent,
+  UploadProps,
+  UploadRequestError,
+  UploadRequestOption,
+} from '../types'
 import type { VKey } from '@idux/cdk/utils'
-import type { ComputedRef, Ref } from 'vue'
+import type { Ref } from 'vue'
 
 import { ref } from 'vue'
 
@@ -16,8 +24,8 @@ import { isFunction, isUndefined } from 'lodash-es'
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
-import { getTargetFile, getTargetFileIndex, setFileStatus } from '../util/fileHandle'
-import defaultUpload from '../util/request'
+import { getTargetFile, getTargetFileIndex } from '../utils/files'
+import defaultUpload from '../utils/request'
 
 export interface UploadRequest {
   fileUploading: Ref<UploadFile[]>
@@ -26,19 +34,25 @@ export interface UploadRequest {
   upload: (file: UploadFile) => void
 }
 
-export function useRequest(props: UploadProps, files: ComputedRef<UploadFile[]>): UploadRequest {
+export function useRequest(props: UploadProps, filesDataContext: FilesDataContext): UploadRequest {
   const fileUploading: Ref<UploadFile[]> = ref([])
   const aborts = new Map<VKey, () => void>([])
   const config = useGlobalConfig('upload')
 
+  const { fileList, updateFiles } = filesDataContext
+
+  const updateFileStatus = (file: UploadFile, status: UploadFileStatus) => {
+    updateFiles([{ ...file, status }])
+  }
+
   function abort(file: UploadFile): void {
-    const curFile = getTargetFile(file, files.value)
+    const curFile = getTargetFile(file, fileList.value)
     if (!curFile) {
       return
     }
     const curAbort = aborts.get(curFile.key)
     curAbort?.()
-    setFileStatus(curFile, 'abort', props.onFileStatusChange)
+    updateFileStatus(curFile, 'abort')
     fileUploading.value.splice(getTargetFileIndex(curFile, fileUploading.value), 1)
     aborts.delete(curFile.key)
     props.onRequestChange &&
@@ -65,21 +79,21 @@ export function useRequest(props: UploadProps, files: ComputedRef<UploadFile[]>)
           await upload(result)
         }
       } catch (e) {
-        setFileStatus(file, 'error', props.onFileStatusChange)
+        updateFileStatus(file, 'error')
       }
     } else if (before === true) {
       await upload(file)
     } else if (typeof before === 'object') {
       await upload(before)
     } else {
-      setFileStatus(file, 'cancel', props.onFileStatusChange)
+      updateFileStatus(file, 'cancel')
     }
   }
 
   async function upload(file: UploadFile) {
     if (!file.raw) {
       file.error = new Error('file error')
-      setFileStatus(file, 'error', props.onFileStatusChange)
+      updateFileStatus(file, 'error')
     }
     const action = await getAction(props, file)
     const requestData = await getRequestData(props, file)
@@ -103,7 +117,7 @@ export function useRequest(props: UploadProps, files: ComputedRef<UploadFile[]>)
         status: 'loadstart',
         file: { ...file },
       })
-    setFileStatus(file, 'uploading', props.onFileStatusChange)
+    updateFileStatus(file, 'uploading')
     file.percent = 0
     const requestHandler = await uploadHttpRequest(requestOption)
     aborts.set(file.key, requestHandler?.abort ?? (() => {}))
@@ -111,7 +125,7 @@ export function useRequest(props: UploadProps, files: ComputedRef<UploadFile[]>)
   }
 
   function _onProgress(event: UploadProgressEvent, file: UploadFile): void {
-    const curFile = getTargetFile(file, files.value)
+    const curFile = getTargetFile(file, fileList.value)
     if (!curFile) {
       return
     }
@@ -125,7 +139,7 @@ export function useRequest(props: UploadProps, files: ComputedRef<UploadFile[]>)
   }
 
   function _onError(error: UploadRequestError, file: UploadFile): void {
-    const curFile = getTargetFile(file, files.value)
+    const curFile = getTargetFile(file, fileList.value)
     if (!curFile) {
       return
     }
@@ -137,12 +151,12 @@ export function useRequest(props: UploadProps, files: ComputedRef<UploadFile[]>)
         status: 'error',
         error,
       })
-    setFileStatus(curFile, 'error', props.onFileStatusChange)
+    updateFileStatus(curFile, 'error')
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function _onSuccess(res: any, file: UploadFile): void {
-    const curFile = getTargetFile(file, files.value)
+    const curFile = getTargetFile(file, fileList.value)
     if (!curFile) {
       return
     }
@@ -153,7 +167,7 @@ export function useRequest(props: UploadProps, files: ComputedRef<UploadFile[]>)
         file: { ...curFile },
         response: res,
       })
-    setFileStatus(curFile, 'success', props.onFileStatusChange)
+    updateFileStatus(curFile, 'success')
     fileUploading.value.splice(getTargetFileIndex(curFile, fileUploading.value), 1)
   }
 

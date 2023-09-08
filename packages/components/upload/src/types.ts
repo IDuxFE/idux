@@ -18,6 +18,12 @@ export type UploadRequestStatus = 'loadstart' | 'progress' | 'abort' | 'error' |
 export type UploadFileStatus = 'selected' | 'cancel' | 'uploading' | 'error' | 'success' | 'abort'
 export type UploadFilesType = 'text' | 'image' | 'imageCard'
 export type UploadIconType = 'file' | 'preview' | 'download' | 'remove' | 'retry'
+
+export interface FilteredFile {
+  file: File
+  reason: 'acceptNotMatch' | 'maxCountExceeded'
+}
+
 export interface UploadRequestHandler {
   abort?: () => void
 }
@@ -102,7 +108,10 @@ export const uploadProps = {
   requestHeaders: Object as PropType<UploadRequestHeader>,
   requestMethod: String as PropType<'POST' | 'PUT' | 'PATCH' | 'post' | 'put' | 'patch'>,
   'onUpdate:files': [Function, Array] as PropType<MaybeArray<(fileList: UploadFile<any>[]) => void>>,
-  onSelect: [Function, Array] as PropType<MaybeArray<(file: File[]) => boolean | File[] | Promise<boolean | File[]>>>,
+  onSelect: [Function, Array] as PropType<
+    MaybeArray<(files: File[], filteredFiles: FilteredFile[]) => boolean | File[] | Promise<boolean | File[]> | void>
+  >,
+  onMaxCountExceeded: [Function, Array] as PropType<MaybeArray<() => void>>,
   onBeforeUpload: [Function, Array] as PropType<
     MaybeArray<(file: UploadFile<any>) => boolean | UploadFile<any> | Promise<boolean | UploadFile<any>>>
   >,

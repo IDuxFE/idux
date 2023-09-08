@@ -5,13 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { UploadToken } from '../token'
-import type { UploadFile, UploadFilesProps, UploadProps } from '../types'
-import type { ComputedRef } from 'vue'
+import type { UploadContext } from '../token'
+import type { UploadFile, UploadFilesProps } from '../types'
 
 import { callEmit } from '@idux/cdk/utils'
 
-import { getTargetFile, getTargetFileIndex } from '../util/fileHandle'
+import { getTargetFile, getTargetFileIndex } from '../utils/files'
 
 export interface FileOperation {
   abort: (file: UploadFile) => void
@@ -21,21 +20,17 @@ export interface FileOperation {
   remove: (file: UploadFile) => void
 }
 
-export function useOperation(
-  files: ComputedRef<UploadFile[]>,
-  listProps: UploadFilesProps,
-  uploadProps: UploadProps,
-  opr: Pick<UploadToken, 'abort' | 'upload' | 'onUpdateFiles' | 'setViewerVisible'>,
-): FileOperation {
+export function useOperation(listProps: UploadFilesProps, context: UploadContext): FileOperation {
+  const { fileList, props: uploadProps, abort: _abort, upload, setViewerVisible, updateFiles } = context
   const abort = (file: UploadFile) => {
-    opr.abort(file)
+    _abort(file)
   }
 
   const retry = (file: UploadFile) => {
     if (uploadProps.disabled) {
       return
     }
-    opr.upload(file)
+    upload(file)
     callEmit(listProps.onRetry, file)
   }
 
@@ -51,7 +46,7 @@ export function useOperation(
       return
     }
     if (!listProps.onPreview && file.thumbUrl) {
-      opr.setViewerVisible(true, file.thumbUrl)
+      setViewerVisible(true, file.thumbUrl)
       return
     }
     callEmit(listProps.onPreview, file)
@@ -61,7 +56,7 @@ export function useOperation(
     if (uploadProps.disabled) {
       return
     }
-    const curFile = getTargetFile(file, files.value)
+    const curFile = getTargetFile(file, fileList.value)
     if (!curFile) {
       return
     }
@@ -78,9 +73,9 @@ export function useOperation(
     if (curFile.status === 'uploading') {
       abort(curFile)
     }
-    const preFiles = [...files.value]
-    preFiles.splice(getTargetFileIndex(curFile, files.value), 1)
-    opr.onUpdateFiles(preFiles)
+    const preFiles = [...fileList.value]
+    preFiles.splice(getTargetFileIndex(curFile, fileList.value), 1)
+    updateFiles(preFiles, true)
   }
 
   return {

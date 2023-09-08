@@ -5,18 +5,19 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { UploadDrag } from './composables/useDrag'
+import type { FilesDataContext } from './composables/useFilesData'
 import type { UploadRequest } from './composables/useRequest'
-import type { UploadFile, UploadProps } from './types'
+import type { UploadProps } from './types'
 import type { Locale } from '@idux/components/locales'
-import type { ComputedRef, InjectionKey } from 'vue'
+import type { InjectionKey } from 'vue'
 
-export type UploadToken = {
+export interface UploadContext extends UploadRequest, UploadDrag, FilesDataContext {
   props: UploadProps
   locale: Locale
-  files: ComputedRef<UploadFile[]>
+  selectFiles: (files: File[]) => Promise<void>
   setViewerVisible: (visible: boolean, imageSrc?: string) => void
-  onUpdateFiles: (file: UploadFile[]) => void
   setSelectorVisible: (isShow: boolean) => void
-} & UploadRequest
+}
 
-export const uploadToken: InjectionKey<UploadToken> = Symbol('UploadToken')
+export const uploadToken: InjectionKey<UploadContext> = Symbol('UploadToken')

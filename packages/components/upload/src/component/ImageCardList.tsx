@@ -24,26 +24,22 @@ import {
 import { type FileOperation, useOperation } from '../composables/useOperation'
 import { uploadToken } from '../token'
 import { UploadFile, type UploadFileStatus, type UploadProps, uploadFilesProps } from '../types'
-import { type IconsMap, renderOprIcon } from '../util/icon'
-import { showDownload, showErrorTip, showPreview, showProgress, showRetry } from '../util/visible'
+import { type IconsMap, renderOprIcon } from '../utils/icon'
+import { showDownload, showErrorTip, showPreview, showProgress, showRetry } from '../utils/visible'
 
 export default defineComponent({
   name: 'IxUploadImageCardList',
   props: uploadFilesProps,
   setup(listProps) {
-    const { props: uploadProps, locale, files, upload, abort, onUpdateFiles, setViewerVisible } = inject(uploadToken)!
+    const uploadContext = inject(uploadToken)!
+    const { props: uploadProps, locale, fileList } = uploadContext
     const icons = useIcon(listProps)
     const cpmClasses = useCmpClasses()
     const listClasses = useListClasses(uploadProps, 'imageCard')
     const [, imageCardVisible] = useSelectorVisible(uploadProps, 'imageCard')
-    const showSelector = useShowSelector(uploadProps, files, imageCardVisible)
+    const showSelector = useShowSelector(uploadProps, fileList, imageCardVisible)
     const { getThumbNode, revokeAll } = useThumb()
-    const fileOperation = useOperation(files, listProps, uploadProps, {
-      abort,
-      upload,
-      onUpdateFiles,
-      setViewerVisible,
-    })
+    const fileOperation = useOperation(listProps, uploadContext)
     const selectorNode = renderSelector(cpmClasses)
 
     onBeforeUnmount(revokeAll)
@@ -51,7 +47,9 @@ export default defineComponent({
     return () => (
       <ul class={listClasses.value}>
         {showSelector.value && selectorNode}
-        {files.value.map(file => renderItem(uploadProps, file, icons, cpmClasses, fileOperation, locale, getThumbNode))}
+        {fileList.value.map(file =>
+          renderItem(uploadProps, file, icons, cpmClasses, fileOperation, locale, getThumbNode),
+        )}
       </ul>
     )
   },
