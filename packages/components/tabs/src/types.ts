@@ -58,7 +58,9 @@ export type TabComponent = FunctionalComponent<Omit<HTMLAttributes, keyof TabPro
 export interface TabsData<K = VKey> extends TabProps {
   key: K
   customContent?: string | ((data: { key: VKey; content?: string; selected?: boolean }) => VNodeChild)
-  customTitle?: string | ((data: { key: VKey; disabled?: boolean; selected?: boolean; title?: string }) => VNodeChild)
+  customTitle?:
+    | string
+    | ((data: { key: VKey; disabled?: boolean; selected?: boolean; title?: string; overflowed: boolean }) => VNodeChild)
   [key: string]: any
 }
 

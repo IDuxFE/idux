@@ -91,9 +91,17 @@ export default defineComponent({
     }
 
     return () => {
+      /* eslint-disable indent */
       const titleNode = slots.title
-        ? slots.title({ key, disabled: props.disabled, selected: props.selected, title: props.title })
+        ? slots.title({
+            key,
+            disabled: props.disabled,
+            selected: props.selected,
+            title: props.title,
+            overflowed: false,
+          })
         : props.title
+      /* eslint-enable indent */
       return (
         <div ref={elementRef} class={classes.value} onClick={handleClick}>
           <span class={`${prefixCls.value}-label`}>{titleNode}</span>

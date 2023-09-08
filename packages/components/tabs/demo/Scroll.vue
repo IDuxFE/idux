@@ -8,6 +8,7 @@
     </IxTabs>
     <IxTabs v-model:selectedKey="selectedKey" :dataSource="dataSource" type="segment">
       <template #content="{ key }"> Content of Tab {{ key }} </template>
+      <template #title="{ title, overflowed }"> {{ title }}{{ overflowed ? '(overflowed)' : '' }} </template>
     </IxTabs>
     <IxSpace align="center">
       <IxInputNumber v-model:value="selectedKey" :max="98" :min="0"></IxInputNumber>
