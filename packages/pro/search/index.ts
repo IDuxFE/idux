@@ -16,6 +16,7 @@ const IxProSearchShortcut = ProSearchShortcut as unknown as ProSearchShortcutCom
 export { IxProSearch, IxProSearchShortcut }
 
 export type {
+  ProSearchSize,
   ProSearchInstance,
   ProSearchComponent,
   ProSearchPublicProps as ProSearchProps,

@@ -105,6 +105,7 @@ export default defineComponent({
     const clearable = computed(() => props.clearable ?? config.clearable)
     const clearIcon = computed(() => props.clearIcon ?? config.clearIcon)
     const searchIcon = computed(() => props.searchIcon ?? config.searchIcon)
+    const size = computed(() => props.size ?? config.size)
 
     const allItems = computed(() => [...searchItems.value, 'name-select' as const])
 
@@ -112,6 +113,7 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
+        [`${prefixCls}-${size.value}`]: size.value,
         [`${prefixCls}-focused`]: focused.value,
         [`${prefixCls}-disabled`]: !!props.disabled,
       })

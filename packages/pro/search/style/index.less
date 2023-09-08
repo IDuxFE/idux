@@ -12,10 +12,19 @@
 
   display: flex;
   font-size: @pro-search-font-size;
-  height: @pro-search-min-height;
   overflow: visible;
   outline: none;
 
+  &-md {
+    .pro-search-size(32px, 4px, 24px, 4px, 12px);
+  }
+  &-sm {
+    .pro-search-size(24px, 2px, 20px, 2px, 8px);
+  }
+
+  .@{overflow-prefix} {
+    line-height: 1;
+  }
   .@{overflow-prefix}-item {
     height: auto;
   }
@@ -40,7 +49,6 @@
       content: '';
       background-color: @pro-search-search-button-background-color;
       width: @pro-search-border-width;
-      height: @pro-search-min-height;
       position: absolute;
       right: -1px;
       top: -1px;
@@ -52,9 +60,6 @@
     flex-wrap: wrap;
     width: 100%;
     height: auto;
-    padding: @pro-search-content-padding-vertical @pro-search-content-padding-horizontal;
-    margin-left: -@pro-search-item-tag-margin-left;
-    margin-bottom: -@pro-search-item-tag-margin-bottom;
   }
   &-placeholder {
     color: @pro-search-placeholder-color;
@@ -69,7 +74,6 @@
     align-items: center;
     justify-content: center;
     width: @pro-search-clear-icon-width;
-    height: @pro-search-min-height - @pro-search-border-width * 2;
     margin-right: @pro-search-clear-icon-margin-right;
     font-size: @pro-search-clear-icon-font-size;
     color: @pro-search-clear-icon-color;
@@ -81,8 +85,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: @pro-search-search-button-width;
-    height: @pro-search-min-height;
+    width: 32px;
+    height: 100%;
     background-color: @pro-search-search-button-background-color;
     color: @pro-search-search-button-color;
     font-size: @pro-search-search-button-font-size;
@@ -130,12 +134,8 @@
 
   &-search-item {
     display: inline-flex;
-    max-width: 350px;
     align-items: center;
-    height: @pro-search-item-height;
     padding: @pro-search-item-tag-padding;
-    margin-bottom: @pro-search-item-tag-margin-bottom;
-    margin-left: @pro-search-item-tag-margin-left;
     color: @pro-search-item-tag-color;
     background-color: @pro-search-item-tag-background-color;
     border-radius: @pro-search-item-tag-border-radius;
@@ -208,18 +208,13 @@
     }
   }
   &-segment {
-    height: @pro-search-item-height;
-    max-width: 100%;
     display: inline-block;
 
     &-overlay {
       .overlay()
     }
   }
-  &-temp-segment-input {
-    margin-left: 8px;
-    height: @pro-search-item-height;
-  }
+
   &-name-segment-overlay {
     .overlay()
   }

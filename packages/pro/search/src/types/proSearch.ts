@@ -12,6 +12,8 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '
 import type { OverlayContainerType } from '@idux/components/utils'
 import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
+export type ProSearchSize = 'sm' | 'md'
+
 export const proSearchProps = {
   value: Array as PropType<SearchValue[]>,
   clearable: {
@@ -33,6 +35,7 @@ export const proSearchProps = {
   },
   placeholder: String,
   searchFields: Array as PropType<SearchField[]>,
+  size: String as PropType<ProSearchSize>,
   zIndex: Number,
 
   //events
