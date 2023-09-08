@@ -7,6 +7,8 @@
 
 import { defineComponent, inject, shallowRef, watch } from 'vue'
 
+import { isString } from 'lodash-es'
+
 import { VKey, useState } from '@idux/cdk/utils'
 import { IxCol, IxRow } from '@idux/components/grid'
 import { IxIcon } from '@idux/components/icon'
@@ -18,7 +20,7 @@ import { moreSelectPaneProps } from '../types'
 
 export default defineComponent({
   props: moreSelectPaneProps,
-  setup(props) {
+  setup(props, { slots }) {
     const { props: tabsProps, mergedPrefixCls, handleTabClose, setSelectedKey } = inject(tabsToken)!
 
     const [searchValue, setSearchValue] = useState('')
@@ -45,11 +47,14 @@ export default defineComponent({
     }
 
     const optionLabelRender = (data: SelectData) => {
-      const { key, label, disabled } = data
+      const { key, label, disabled, customTitle } = data
+      const titleSlot = isString(customTitle) ? slots[customTitle] : customTitle
 
       return (
         <IxRow>
-          <IxCol flex="auto">{label}</IxCol>
+          <IxCol flex="auto">
+            {titleSlot?.({ key, disabled, selected: false, title: label, overflowed: true }) ?? label}
+          </IxCol>
           {tabsProps.closable && (
             <IxCol flex="none">
               <IxIcon

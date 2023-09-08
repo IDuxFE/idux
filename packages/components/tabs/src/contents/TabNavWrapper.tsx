@@ -78,6 +78,7 @@ export default defineComponent({
             key: data.key,
             label: data.title,
             disabled: data.disabled,
+            customTitle: data.customTitle ?? 'title',
           })
         }
         return acc
@@ -173,7 +174,13 @@ export default defineComponent({
               class={`${prefixCls}-nav-operations-popover`}
               v-slots={{
                 content: () => {
-                  return <MoreSelectPane visible={moreSelectPaneVisible.value} dataSource={moreNavDataSource.value} />
+                  return (
+                    <MoreSelectPane
+                      visible={moreSelectPaneVisible.value}
+                      dataSource={moreNavDataSource.value}
+                      v-slots={slots}
+                    />
+                  )
                 },
               }}
             >

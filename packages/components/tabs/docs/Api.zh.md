@@ -33,7 +33,7 @@
 export interface TabsData<K = VKey> extends TabProps {
   key: K
   customContent?: string | ((data: { key: VKey; content?: string; selected?: boolean }) => VNodeChild)
-  customTitle?: string | ((data: { key: VKey; disabled?: boolean; selected?: boolean; title?: string }) => VNodeChild)
+  customTitle?: string | ((data: { key: VKey; disabled?: boolean; selected?: boolean; title?: string; overflowed: boolean }) => VNodeChild)
   [key: string]: any
 }
 ```
@@ -42,7 +42,7 @@ export interface TabsData<K = VKey> extends TabProps {
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
-| `title` | 标题插槽 | `{ key:VKey, disabled:boolean, selected:boolean, title: string }` | - |
+| `title` | 标题插槽 | `{ key:VKey, disabled:boolean, selected:boolean, title: string, overflowed: boolean }` | `overflowed`代表tab溢出且展示在更多tab的浮层中 |
 | `content` | 内容插槽 | `{key:VKey, content: any, selected: boolean}` | - |
 | `addIcon` | 新增图标 | - | 也可以用于自定义其他操作 |
 
