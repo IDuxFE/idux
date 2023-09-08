@@ -1,6 +1,6 @@
 <template>
   <IxRadioGroup v-model:value="tooltip" :dataSource="radios"></IxRadioGroup>
-  <div style="width: 200px; margin-top: 16px">
+  <div style="width: 280px; margin-top: 16px">
     <IxText :tooltip="tooltip">
       @idux是一套企业级中后台UI组件库, 致力于提供高效愉悦的开发体验。
       <template #title>

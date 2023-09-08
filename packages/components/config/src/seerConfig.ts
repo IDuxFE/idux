@@ -49,4 +49,8 @@ export const seerConfig: DeepPartialGlobalConfig = {
         !expanded ? h('rect', { x: 8, y: 6, width: 2, height: 6, rx: 0.2, fill: '#5E6573' }) : null,
       ]),
   },
+  text: {
+    copyIcon: ({ copied }) =>
+      h(IxIcon, { name: !copied ? 'copy' : 'check-circle-filled', style: copied ? { color: '#20CC94' } : undefined }),
+  },
 }

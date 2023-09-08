@@ -7,15 +7,30 @@
 
 import { type Slot, computed, defineComponent, normalizeClass, shallowRef } from 'vue'
 
-import { isObject, isString, throttle } from 'lodash-es'
+import { isObject, isString } from 'lodash-es'
 
-import { useClipboard } from '@idux/cdk/clipboard'
-import { getFirstValidNode, useState } from '@idux/cdk/utils'
+import { getFirstValidNode } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { IxIcon } from '@idux/components/icon'
 import { IxTooltip } from '@idux/components/tooltip'
 
+import { useCopyTooltip } from './composables/useCopyTooltip'
+import { useCopyable } from './composables/useCopyable'
+import { useEllipsis } from './composables/useEllipsis'
+import { useExpandable } from './composables/useExpandable'
 import { textProps } from './types'
+
+const measureElementStyle = {
+  display: 'block',
+  position: 'absolute',
+  visibility: 'hidden',
+  top: '-100px',
+  left: '-100px',
+} as const
+const rowMeasureElementStyle = {
+  ...measureElementStyle,
+  wordBreak: 'keep-all',
+  whiteSpace: 'nowrap',
+}
 
 export default defineComponent({
   name: 'IxText',
@@ -23,102 +38,105 @@ export default defineComponent({
   props: textProps,
   setup(props, { attrs, slots }) {
     const common = useGlobalConfig('common')
+    const config = useGlobalConfig('text')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-text`)
 
-    const elementRef = shallowRef<HTMLElement>()
-    const [mergedDisabled, setDisabled] = useState(true)
-    const [mergedEntered, setEntered] = useState(false)
-    const [mergedExpanded, setExpanded] = useState(false)
-    const [mergedCopied, setCopied] = useState(false)
+    const contentRef = shallowRef<HTMLElement>()
+    const measureRef = shallowRef<HTMLElement>()
+    const rowMeasureRef = shallowRef<HTMLElement>()
 
-    const { copy } = useClipboard()
+    const { expanded, expandable, setExpanded, expandIconRenderer } = useExpandable(props, config)
+    const { copied, copy, copyIconRenderer } = useCopyable(props, config)
+    const copyTooltip = useCopyTooltip(props)
+    const { isEllipsis, measureStatus, onRender, onMeasureRender, renderClampedContent } = useEllipsis(
+      props,
+      contentRef,
+      measureRef,
+      rowMeasureRef,
+    )
 
-    const checkDisabled = () => {
-      const element = elementRef.value
-      if (mergedExpanded.value || !element) {
-        return true
-      }
-
-      const { lineClamp } = props
-      if (lineClamp !== undefined) {
-        return element.scrollHeight <= element.offsetHeight
-      } else {
-        const currOverflow = element.style.overflow
-        if (!currOverflow || currOverflow === 'visible') {
-          element.style.overflow = 'hidden'
-        }
-        const isOverflowing = element.clientWidth < element.scrollWidth || element.clientHeight < element.scrollHeight
-        element.style.overflow = currOverflow
-        return !isOverflowing
-      }
-    }
-
-    const onClick = () => {
-      const nextExpanded = !mergedExpanded.value
+    const toggleExpanded = () => {
+      const nextExpanded = !expanded.value
       setExpanded(nextExpanded)
-      setDisabled(nextExpanded)
     }
 
-    const onMouseEnter = () => {
-      setEntered(true)
-      setDisabled(checkDisabled())
+    const renderEllipsisNode = () => {
+      return <span class={`${mergedPrefixCls.value}-ellipsis`}>{slots.ellipsis?.() ?? '...'}</span>
     }
 
-    const onCopy = throttle((text: string) => {
-      if (!text || mergedCopied.value) {
+    const renderCopyNode = () => {
+      if (!props.copyable) {
         return
       }
-      copy(text).then(success => {
-        if (success) {
-          setCopied(true)
-          setTimeout(() => setCopied(false), 3000)
-        }
-      })
-    }, 300)
 
-    const classes = computed(() => {
-      const prefixCls = mergedPrefixCls.value
-      const { lineClamp } = props
-      return normalizeClass({
-        [prefixCls]: true,
-        [`${prefixCls}-line-clamp`]: lineClamp !== undefined,
-      })
-    })
+      const node = (
+        <span class={`${mergedPrefixCls.value}-copy-icon`} onClick={() => copy(getStringBySlot(slots.default))}>
+          {(slots.copyIcon ?? copyIconRenderer)({ copied: copied.value })}
+        </span>
+      )
 
-    const style = computed(() => {
-      const { expandable, lineClamp } = props
-      const expanded = mergedExpanded.value
-      return {
-        cursor: expandable ? 'pointer' : '',
-        'text-overflow': !expanded && lineClamp === undefined ? 'ellipsis' : '',
-        '-webkit-line-clamp': !expanded && lineClamp !== undefined ? lineClamp : '',
+      if (!copyTooltip.value) {
+        return node
       }
-    })
 
-    return () => {
-      const { tag: Tag, tooltip, expandable, copyable } = props
-      const prefixCls = mergedPrefixCls.value
-      const disabled = mergedDisabled.value
-      const entered = mergedEntered.value
-      const isNative = tooltip === 'native'
-      const titleSlot = slots.title || slots.default
+      return <IxTooltip {...(copied.value ? copyTooltip.value[1] : copyTooltip.value[0])}>{node}</IxTooltip>
+    }
 
-      let node = (
-        <Tag
-          ref={elementRef}
-          class={classes.value}
-          style={style.value}
-          title={isNative && !disabled ? getStringBySlot(titleSlot) : undefined}
-          onClick={expandable ? onClick : undefined}
-          onMouseenter={onMouseEnter}
-          {...attrs}
-        >
+    const renderMeasureElement = () => {
+      const { tag: Tag } = props
+      const nodes = slots.default?.()
+
+      return (
+        <Tag ref={measureRef} class={`${mergedPrefixCls.value}-inner`} style={measureElementStyle}>
+          {renderClampedContent(nodes, true)}
+          {renderEllipsisNode()}
+          {slots.suffix?.()}
+          {renderCopyNode()}
+        </Tag>
+      )
+    }
+    const renderRowMeasureElement = () => {
+      const { tag: Tag } = props
+
+      return (
+        <Tag ref={rowMeasureRef} class={`${mergedPrefixCls.value}-inner`} style={rowMeasureElementStyle}>
           {slots.default?.()}
         </Tag>
       )
+    }
 
-      if (!disabled && entered && tooltip && !isNative) {
-        const tooltipProps = isObject(tooltip) ? { ...tooltip, disabled } : { disabled }
+    return () => {
+      const { tag: Tag, tooltip } = props
+      const prefixCls = mergedPrefixCls.value
+      const isNative = tooltip === 'native'
+      const titleSlot = slots.title || slots.default
+
+      const hasExpandIcon = !!slots.expandIcon || !!expandIconRenderer.value
+      const expandNode =
+        expandable.value && hasExpandIcon ? (
+          <div class={`${prefixCls}-expand-icon`} onClick={toggleExpanded}>
+            {(slots.expandIcon ?? expandIconRenderer.value)!({ expanded: expanded.value })}
+          </div>
+        ) : undefined
+
+      const contentNodes = slots.default?.()
+
+      let node = (
+        <Tag
+          class={`${prefixCls}-inner`}
+          title={isNative ? getStringBySlot(titleSlot) : undefined}
+          onClick={expandable.value && !hasExpandIcon ? toggleExpanded : undefined}
+          {...attrs}
+        >
+          {isEllipsis.value && !expanded.value && measureStatus.value === 'none'
+            ? renderClampedContent(contentNodes)
+            : contentNodes}
+          {isEllipsis.value && !expanded.value && renderEllipsisNode()}
+        </Tag>
+      )
+
+      if (tooltip && !isNative) {
+        const tooltipProps = isObject(tooltip) ? tooltip : {}
         node = (
           <IxTooltip {...tooltipProps} v-slots={{ title: titleSlot }}>
             {node}
@@ -126,20 +144,28 @@ export default defineComponent({
         )
       }
 
-      if (copyable) {
-        const copied = mergedCopied.value
-        const copyIcon = slots.copyIcon ? slots.copyIcon({ copied }) : <IxIcon name={copied ? 'check' : 'copy'} />
-        node = (
-          <div class={`${prefixCls}-wrapper`}>
-            {node}
-            <span class={`${prefixCls}-copy-icon`} onClick={() => onCopy(getStringBySlot(slots.default))}>
-              {copyIcon}
-            </span>
-          </div>
-        )
+      const classes = normalizeClass({
+        [prefixCls]: true,
+        [`${prefixCls}-expandable`]: expandable.value,
+        [`${prefixCls}-has-expand-icon`]: hasExpandIcon,
+      })
+
+      onRender(contentNodes)
+
+      if (measureStatus.value !== 'none') {
+        onMeasureRender()
       }
 
-      return node
+      return (
+        <div ref={contentRef} class={classes}>
+          {node}
+          {slots.suffix?.()}
+          {renderCopyNode()}
+          {expandNode}
+          {measureStatus.value !== 'none' && renderMeasureElement()}
+          {measureStatus.value === 'preparing' && renderRowMeasureElement()}
+        </div>
+      )
     }
   },
 })

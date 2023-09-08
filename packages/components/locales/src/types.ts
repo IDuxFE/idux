@@ -93,6 +93,10 @@ export interface TableLocale {
   sortCancel: string
 }
 
+export interface TextLocale {
+  copyText: [string, string]
+}
+
 export interface TimePickerLocale {
   okText: string
   placeholder: string
@@ -142,6 +146,7 @@ export interface Locale {
   pagination: PaginationLocale
   select: SelectLocale
   table: TableLocale
+  text: TextLocale
   timePicker: TimePickerLocale
   timeRangePicker: TimeRangePickerLocale
   tour: TourLocale
