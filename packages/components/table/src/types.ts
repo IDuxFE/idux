@@ -140,6 +140,8 @@ export interface TableColumnSelectable<T = any, K = VKey> extends TableColumnCom
         checked: boolean
         disabled: boolean
         indeterminate?: boolean
+        record: T
+        rowIndex: number
         onChange: () => void
         onClick: () => void
       }) => VNodeChild)

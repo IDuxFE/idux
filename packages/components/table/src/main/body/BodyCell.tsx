@@ -210,7 +210,7 @@ function renderSelectableChildren(
   config: TableConfig,
   mergedPagination: ComputedRef<TablePagination | null>,
 ) {
-  const { selected: checked, indeterminate, disabled, isHover, handleSelect: onChange } = props
+  const { record, rowIndex, selected: checked, indeterminate, disabled, isHover, handleSelect: onChange } = props
   const { showIndex, multiple, customCell } = selectable.value!
   const onClick = (evt: Event) => {
     // see https://github.com/IDuxFE/idux/issues/547
@@ -228,10 +228,14 @@ function renderSelectableChildren(
   const customRender = isString(customCell) ? slots[customCell] : customCell
   if (multiple) {
     const checkboxProps = { checked, disabled, indeterminate, onChange, onClick }
-    return customRender ? customRender(checkboxProps) : <IxCheckbox {...checkboxProps}></IxCheckbox>
+    return customRender ? (
+      customRender({ ...checkboxProps, record, rowIndex })
+    ) : (
+      <IxCheckbox {...checkboxProps}></IxCheckbox>
+    )
   } else {
     const radioProps = { checked, disabled, onChange, onClick }
-    return customRender ? customRender(radioProps) : <IxRadio {...radioProps}></IxRadio>
+    return customRender ? customRender({ ...radioProps, record, rowIndex }) : <IxRadio {...radioProps}></IxRadio>
   }
 }
 
