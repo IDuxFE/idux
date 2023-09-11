@@ -10,6 +10,25 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 1.10.0(2023-09-11)
+
+
+
+### Features
+
+* **comp:table:** `selectable` 列的 `customCell` 支持 `record` 和 `rowIndex` 参数方便自定义 ([#1681](https://github.com/IDuxFE/idux/issues/1681)) ([b80ba68](https://github.com/IDuxFE/idux/commit/b80ba6802cf0e1dfa520565c38c816eb7c9c5af1))
+* **comp:tabs:** `customTitle` 支持 `overflowed` 参数，代表tab是否滚动溢出 ([#1682](https://github.com/IDuxFE/idux/issues/1682)) ([5da8900](https://github.com/IDuxFE/idux/commit/5da8900279c8ce81c7e871029b3b47503fa33816))
+* **comp:text:** 重写组件以提供更好的 `ellipsis` 相关支持 ([#1680](https://github.com/IDuxFE/idux/issues/1680)) ([fb1adb2](https://github.com/IDuxFE/idux/commit/fb1adb27657e21a1eddff253fb5c0137d44df281))
+  - 不再基于 `line-clamp` 实现多行省略
+  - 新增 `ellipsis` 选项代替之前的 `lineClamp` 以及 `exandable` 属性
+  - 新增 `ellipsis` 插槽
+  - 新增 `suffix` 插槽
+  - 新增 `copyIcon` 选项以及插槽，并支持全局配置
+  - 新增 `expandIcon` 选项以及插槽，并支持全局配置
+* **comp:upload:** 新增 `onMaxCountExceeded` 事件 ([#1673](https://github.com/IDuxFE/idux/issues/1673)) ([8faddc1](https://github.com/IDuxFE/idux/commit/8faddc1388ddc8dae97814ece2ac3eef69c5c53f))
+  - 组件重构以支持完整的受控使用方式，不再支持直接修改回调传递的 `file` 的属性，需要修改源数据
+* **pro:search:** add `size` prop ([#1667](https://github.com/IDuxFE/idux/issues/1667)) ([e8068bd](https://github.com/IDuxFE/idux/commit/e8068bdc5f0136ad9c5057fe90f50546515d31da))
+
 ## 1.9.5(2023-09-04)
 
 ### Bug Fixes
