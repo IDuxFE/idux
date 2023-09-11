@@ -14,6 +14,7 @@
 | `overlayContainer` | 自定义浮层容器节点  | `string \| HTMLElement \| (trigger?: Element) => string \| HTMLElement` | - | ✅ | - |
 | `placeholder` | 默认文本 | `string` | - | - | - |
 | `searchFields` | 搜索选项 | `SearchField[]` | - | - | 用于配置支持那些搜索条件 |
+| `size` | 尺寸 | `'md' \| 'sm'` | `'md'` | ✅ | - |
 | `onChange` | 搜索条件改变之后的回调 | `(value: searchValue[] \| undefined, oldValue: searchValue[] \| undefined) => void` | - | - | - |
 | `onClear` | 清除搜索条件的回调 | `() => void` | - | - | - |
 | `onItemRemove` | 搜索条件删除时的回调 | `(item: SearchValue) => void` | - | - | - |
