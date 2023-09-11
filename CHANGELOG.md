@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/IDuxFE/idux/compare/v1.9.5...v1.10.0) (2023-09-11)
+
+
+### Features
+
+* **comp:table:** supports record for customCell of selectable column ([#1681](https://github.com/IDuxFE/idux/issues/1681)) ([b80ba68](https://github.com/IDuxFE/idux/commit/b80ba6802cf0e1dfa520565c38c816eb7c9c5af1))
+* **comp:tabs:** customTitle supports `overflowed` paramater ([#1682](https://github.com/IDuxFE/idux/issues/1682)) ([5da8900](https://github.com/IDuxFE/idux/commit/5da8900279c8ce81c7e871029b3b47503fa33816))
+* **comp:text:** rewrite component to provide better ellipsis support ([#1680](https://github.com/IDuxFE/idux/issues/1680)) ([fb1adb2](https://github.com/IDuxFE/idux/commit/fb1adb27657e21a1eddff253fb5c0137d44df281))
+* **comp:upload:** add `onMaxCountExceeded` ([#1673](https://github.com/IDuxFE/idux/issues/1673)) ([8faddc1](https://github.com/IDuxFE/idux/commit/8faddc1388ddc8dae97814ece2ac3eef69c5c53f))
+* **pro:search:** add `size` prop ([#1667](https://github.com/IDuxFE/idux/issues/1667)) ([e8068bd](https://github.com/IDuxFE/idux/commit/e8068bdc5f0136ad9c5057fe90f50546515d31da))
+
+
+
+
+
 ## [1.9.5](https://github.com/IDuxFE/idux/compare/v1.9.4...v1.9.5) (2023-09-04)
 
 

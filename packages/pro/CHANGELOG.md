@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/IDuxFE/idux/compare/v1.9.5...v1.10.0) (2023-09-11)
+
+
+### Features
+
+* **pro:search:** add `size` prop ([#1667](https://github.com/IDuxFE/idux/issues/1667)) ([e8068bd](https://github.com/IDuxFE/idux/commit/e8068bdc5f0136ad9c5057fe90f50546515d31da))
+
+
+
+
+
 ## [1.9.5](https://github.com/IDuxFE/idux/compare/v1.9.4...v1.9.5) (2023-09-04)
 
 **Note:** Version bump only for package @idux/pro
