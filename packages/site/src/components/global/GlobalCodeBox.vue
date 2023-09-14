@@ -114,7 +114,7 @@ export default defineComponent({
 
   &-content {
     padding: 8px;
-    border-radius: @border-radius-md;
+    border-radius: @border-radius-sm;
     background: @color-graphite-l50;
     box-shadow: inset 0 0 4px 0 rgba(0, 0, 0, 0.1);
 
@@ -124,8 +124,9 @@ export default defineComponent({
       padding: 8px;
       background-color: @background-color-component;
       border: 1px @border-style @border-color-split;
-      border-radius: @border-radius-md;
+      border-radius: @border-radius-sm;
       transition: @transition-all-base;
+      border-color: #edf1f7;
     }
   }
 
