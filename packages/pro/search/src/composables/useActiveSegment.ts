@@ -144,6 +144,10 @@ export function useActiveSegment(
   }
 
   const setTempActive = () => {
+    if (quickSelectActive.value || nameSelectActive.value) {
+      return
+    }
+
     if (enableQuickSelect.value) {
       setQuickSelectActive()
     } else {
