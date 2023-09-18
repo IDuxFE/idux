@@ -10,6 +10,21 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.10.1(2023-09-18)
+
+
+### Bug Fixes
+
+* **comp:config:** 修改seer全局配置 ([#1695](https://github.com/IDuxFE/idux/issues/1695)) ([63878a5](https://github.com/IDuxFE/idux/commit/63878a5dbf15b28115d03f21b4cc6c1e0bb0b10d))
+* **comp:icon:** 增加三个图标（thumbnail、fit-to-view、select） ([#1685](https://github.com/IDuxFE/idux/issues/1685)) ([bdb7ba1](https://github.com/IDuxFE/idux/commit/bdb7ba199dd914823bb04ec3a7cfa6a7869f6d2e))
+* **comp:radio:** 移除不必要的console.log ([#1691](https://github.com/IDuxFE/idux/issues/1691)) ([f779ea2](https://github.com/IDuxFE/idux/commit/f779ea2f885e1c737de5444433446f096a112c66))
+* **comp:stepper:** 更改seer下的全局配置，修改`size`为`sm` ([#1694](https://github.com/IDuxFE/idux/issues/1694)) ([51ae0b2](https://github.com/IDuxFE/idux/commit/51ae0b24365736f319862e4f86197bcdba355c73))
+* **comp:tree:** 修改内容区域水平padding为 `0` ([#1686](https://github.com/IDuxFE/idux/issues/1686)) ([231a6ee](https://github.com/IDuxFE/idux/commit/231a6ee957145e02d20c3287e5e2747657f438f0))
+* **pro:search:** 搜索项名称输入最大宽度不应当溢出容器 ([#1693](https://github.com/IDuxFE/idux/issues/1693)) ([fe42021](https://github.com/IDuxFE/idux/commit/fe4202104300b63d2ac3fde2df84a15e76b8832d))
+* **pro:search:** 名称选择浮窗在有过滤的前提下，关闭会导致数据闪烁 ([#1692](https://github.com/IDuxFE/idux/issues/1692)) ([34034a3](https://github.com/IDuxFE/idux/commit/34034a3cf842c4d7f54c1207ba29022a1be3458b))
+* **pro:search:** safari下搜索框不应该自动聚焦 ([#1689](https://github.com/IDuxFE/idux/issues/1689)) ([e211465](https://github.com/IDuxFE/idux/commit/e211465f23f76c2e08a60d27ed424546109eb533))
+* **pro:search:** safari下搜索项输入段的横向滚动事件不生效，导致省略号的显示隐藏异常 ([#1690](https://github.com/IDuxFE/idux/issues/1690)) ([1caabb8](https://github.com/IDuxFE/idux/commit/1caabb892f4b8bd543a92773cbb9717f6d4d0a20))
+
 # 1.10.0(2023-09-11)
 
 
