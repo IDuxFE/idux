@@ -26,12 +26,18 @@ export const seerConfig: DeepPartialGlobalConfig = {
     colonless: true,
     labelAlign: 'start',
   },
+  card: {
+    size: 'sm',
+  },
   menu: {
     offset: [0, 4],
   },
   modal: {
-    centered: true,
     maskClosable: false,
+    centered: true,
+  },
+  pagination: {
+    size: 'sm',
   },
   progress: {
     strokeLinecap: 'square',
@@ -43,6 +49,9 @@ export const seerConfig: DeepPartialGlobalConfig = {
     columnExpandable: {
       icon: ({ expanded }) => h(IxIcon, { name: expanded ? 'minus-square' : 'plus-square' }),
     },
+  },
+  timePicker: {
+    allowInput: true,
   },
   tree: {
     expandIcon: ({ expanded }) =>
