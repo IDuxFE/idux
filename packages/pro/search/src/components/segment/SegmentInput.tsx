@@ -21,6 +21,7 @@ import {
 
 import { debounce } from 'lodash-es'
 
+import { isSafari } from '@idux/cdk/platform'
 import { useResizeObserver } from '@idux/cdk/resize'
 import { getScroll, setScroll } from '@idux/cdk/scroll'
 import { callEmit, convertCssPixel, useEventListener, useState } from '@idux/cdk/utils'
@@ -231,8 +232,8 @@ function useSegmentScroll(
 
   onMounted(() => {
     if (props.ellipsis) {
+      /* eslint-disable indent */
       listenerStops = [
-        useEventListener(inputRef, 'scroll', updateScroll),
         useResizeObserver(inputRef, () => {
           if (document.activeElement === inputRef.value) {
             scrollIntoView()
@@ -241,7 +242,15 @@ function useSegmentScroll(
         }),
         useEventListener(inputRef, 'input', updateScroll),
         useEventListener(inputRef, 'compositionend', scrollIntoView),
-      ]
+        ...(isSafari
+          ? [
+              useEventListener(inputRef, 'keydown', updateScroll),
+              useEventListener(inputRef, 'wheel', updateScroll),
+              useEventListener(inputRef, 'select', updateScroll),
+            ]
+          : [useEventListener(inputRef, 'scroll', updateScroll)]),
+      ].filter(Boolean)
+      /* eslint-enable indent */
     }
   })
 
