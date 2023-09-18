@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.1](https://github.com/IDuxFE/idux/compare/v1.10.0...v1.10.1) (2023-09-18)
+
+
+### Bug Fixes
+
+* **comp:config:** modify seer global config ([#1695](https://github.com/IDuxFE/idux/issues/1695)) ([63878a5](https://github.com/IDuxFE/idux/commit/63878a5dbf15b28115d03f21b4cc6c1e0bb0b10d))
+* **comp:icon:** three icon are added ([#1685](https://github.com/IDuxFE/idux/issues/1685)) ([bdb7ba1](https://github.com/IDuxFE/idux/commit/bdb7ba199dd914823bb04ec3a7cfa6a7869f6d2e))
+* **comp:radio:** remove unnecessory console statement ([#1691](https://github.com/IDuxFE/idux/issues/1691)) ([f779ea2](https://github.com/IDuxFE/idux/commit/f779ea2f885e1c737de5444433446f096a112c66))
+* **comp:stepper:** modify size config to `'sm'` for seer theme ([#1694](https://github.com/IDuxFE/idux/issues/1694)) ([51ae0b2](https://github.com/IDuxFE/idux/commit/51ae0b24365736f319862e4f86197bcdba355c73))
+
+
+
+
+
 # [1.10.0](https://github.com/IDuxFE/idux/compare/v1.9.5...v1.10.0) (2023-09-11)
 
 

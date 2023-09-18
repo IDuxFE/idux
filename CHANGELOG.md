@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.1](https://github.com/IDuxFE/idux/compare/v1.10.0...v1.10.1) (2023-09-18)
+
+
+### Bug Fixes
+
+* **comp:config:** modify seer global config ([#1695](https://github.com/IDuxFE/idux/issues/1695)) ([63878a5](https://github.com/IDuxFE/idux/commit/63878a5dbf15b28115d03f21b4cc6c1e0bb0b10d))
+* **comp:icon:** three icon are added ([#1685](https://github.com/IDuxFE/idux/issues/1685)) ([bdb7ba1](https://github.com/IDuxFE/idux/commit/bdb7ba199dd914823bb04ec3a7cfa6a7869f6d2e))
+* **comp:radio:** remove unnecessory console statement ([#1691](https://github.com/IDuxFE/idux/issues/1691)) ([f779ea2](https://github.com/IDuxFE/idux/commit/f779ea2f885e1c737de5444433446f096a112c66))
+* **comp:stepper:** modify size config to `'sm'` for seer theme ([#1694](https://github.com/IDuxFE/idux/issues/1694)) ([51ae0b2](https://github.com/IDuxFE/idux/commit/51ae0b24365736f319862e4f86197bcdba355c73))
+* **comp:tree:** change content horizontal padding to `0` ([#1686](https://github.com/IDuxFE/idux/issues/1686)) ([231a6ee](https://github.com/IDuxFE/idux/commit/231a6ee957145e02d20c3287e5e2747657f438f0))
+* **pro:search:** name input width shouldn't exceeds container ([#1693](https://github.com/IDuxFE/idux/issues/1693)) ([fe42021](https://github.com/IDuxFE/idux/commit/fe4202104300b63d2ac3fde2df84a15e76b8832d))
+* **pro:search:** name select overlay data blinks after closed ([#1692](https://github.com/IDuxFE/idux/issues/1692)) ([34034a3](https://github.com/IDuxFE/idux/commit/34034a3cf842c4d7f54c1207ba29022a1be3458b))
+* **pro:search:** proSearch input shouldn't be auto focused in safari ([#1689](https://github.com/IDuxFE/idux/issues/1689)) ([e211465](https://github.com/IDuxFE/idux/commit/e211465f23f76c2e08a60d27ed424546109eb533))
+* **pro:search:** segment input scroll event doesn't work in safari ([#1690](https://github.com/IDuxFE/idux/issues/1690)) ([1caabb8](https://github.com/IDuxFE/idux/commit/1caabb892f4b8bd543a92773cbb9717f6d4d0a20))
+
+
+
+
+
 # [1.10.0](https://github.com/IDuxFE/idux/compare/v1.9.5...v1.10.0) (2023-09-11)
 
 
