@@ -51,7 +51,6 @@ export default defineComponent({
       const checkedCls = `.${common.prefixCls}-radio-checked`
       const checkedRadio = element.querySelector(checkedCls) as HTMLDivElement | null
       if (checkedRadio) {
-        console.log(checkedRadio.offsetLeft)
         element.style.setProperty('--ix-radio-group-fieldset-arrow-offset', `${checkedRadio.offsetLeft}px`)
       }
     }
