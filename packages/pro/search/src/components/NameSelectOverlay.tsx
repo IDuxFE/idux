@@ -5,16 +5,33 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type VNodeChild, computed, defineComponent, inject, onMounted, ref, watch } from 'vue'
+import {
+  type ComputedRef,
+  type Ref,
+  type VNodeChild,
+  computed,
+  defineComponent,
+  inject,
+  onMounted,
+  ref,
+  watch,
+} from 'vue'
 
 import { isNil, isString } from 'lodash-es'
 
 import { type VKey, callEmit, convertArray, useState } from '@idux/cdk/utils'
 import { ɵOverlay, type ɵOverlayInstance, type ɵOverlayProps } from '@idux/components/_private/overlay'
 
+import { SearchState } from '../composables/useSearchStates'
 import SelectPanel from '../panel/SelectPanel'
 import { proSearchContext } from '../token'
-import { type SearchField, type SelectPanelData, nameSelectOverlayProps } from '../types'
+import {
+  type NameSelectOverlayProps,
+  type ProSearchProps,
+  type SearchField,
+  type SelectPanelData,
+  nameSelectOverlayProps,
+} from '../types'
 import { filterDataSource, matchRule } from '../utils/selectData'
 
 export default defineComponent({
@@ -39,18 +56,10 @@ export default defineComponent({
 
     const [selectedFieldKey, setSelectedFieldKey] = useState<VKey | undefined>(undefined)
 
-    const searchStatesKeys = computed(() => new Set(searchStates.value?.map(state => state.fieldKey)))
-    const dataSource = computed(() => {
-      const searchFields = proSearchProps.searchFields?.filter(
-        field => field.key === props.selectedFieldKey || field.multiple || !searchStatesKeys.value.has(field.key),
-      )
-      return searchFields?.map(field => ({ key: field.key, label: field.label })) ?? []
-    })
-    const filteredDataSource = computed(() =>
-      filterDataSource(dataSource.value, nameOption => matchRule(nameOption.label, props.searchValue)),
-    )
     const isActive = computed(() => nameSelectActive.value)
     const nameSelectOverlayOpened = computed(() => overlayOpened.value && nameSelectActive.value)
+
+    const { filteredDataSource } = useDataSource(props, proSearchProps, searchStates, nameSelectOverlayOpened)
 
     const updateOverlay = () => {
       setTimeout(() => {
@@ -120,13 +129,7 @@ export default defineComponent({
     onMounted(() => {
       bindOverlayMonitor(overlayRef, nameSelectOverlayOpened)
       props.setOnKeyDown(handleKeyDown)
-      watch(isActive, active => {
-        if (!active) {
-          props.onChange?.(undefined)
-        }
-
-        updateOverlay()
-      })
+      watch(isActive, updateOverlay)
     })
 
     const renderNameLabel = (key: VKey, renderer: (searchField: SearchField) => VNodeChild) => {
@@ -180,4 +183,34 @@ function useOverlayAttrs(
     trigger: 'manual',
     visible: overlayOpened.value,
   }))
+}
+
+function useDataSource(
+  props: NameSelectOverlayProps,
+  proSearchProps: ProSearchProps,
+  searchStates: Ref<SearchState[]>,
+  overlayOpened: ComputedRef<boolean>,
+): {
+  dataSource: ComputedRef<SelectPanelData[]>
+  filteredDataSource: ComputedRef<SelectPanelData[]>
+} {
+  const searchStatesKeys = computed(() => new Set(searchStates.value?.map(state => state.fieldKey)))
+  const dataSource = computed(() => {
+    const searchFields = proSearchProps.searchFields?.filter(
+      field => field.multiple || !searchStatesKeys.value.has(field.key),
+    )
+    return searchFields?.map(field => ({ key: field.key, label: field.label })) ?? []
+  })
+
+  const [filteredDataSource, setFilteredDataSource] = useState<SelectPanelData[]>([])
+  watch([dataSource, () => props.searchValue, overlayOpened], ([dataSource, searchValue, overlayOpened]) => {
+    if (overlayOpened) {
+      setFilteredDataSource(filterDataSource(dataSource, nameOption => matchRule(nameOption.label, searchValue)))
+    }
+  })
+
+  return {
+    dataSource,
+    filteredDataSource,
+  }
 }

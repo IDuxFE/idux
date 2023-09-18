@@ -19,7 +19,8 @@ export function useControl(
   searchStateContext: SearchStateContext,
   focusEventContext: FocusStateContext,
 ): void {
-  const { isActive, nameSelectActive, quickSelectActive, setInactive, setTempActive } = activeSegmentContext
+  const { isActive, nameSelectActive, quickSelectActive, setOverlayOpened, setInactive, setTempActive } =
+    activeSegmentContext
   const { searchStates } = searchStateContext
   const { focused, focusVia, onFocus, onBlur } = focusEventContext
 
@@ -48,8 +49,10 @@ export function useControl(
         return
       }
 
-      if (!nameSelectActive.value || !quickSelectActive.value) {
+      if (!nameSelectActive.value && !quickSelectActive.value) {
         setTempActive()
+      } else {
+        setOverlayOpened(true)
       }
 
       if (!(evt.target instanceof HTMLInputElement)) {

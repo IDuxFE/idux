@@ -74,6 +74,11 @@ export default defineComponent({
     onMounted(() => {
       tempSegmentInputRef.value = segmentInputRef.value?.getInputElement()
       watch(() => searchStates.value.length, updateOverlay)
+      watch(isActive, active => {
+        if (!active) {
+          setInput('')
+        }
+      })
     })
 
     let panelKeyDown: (evt: KeyboardEvent) => boolean | undefined = () => true
