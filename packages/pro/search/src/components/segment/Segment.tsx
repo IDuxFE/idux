@@ -101,23 +101,13 @@ export default defineComponent({
           nextTick(() => {
             if (active) {
               segmentInputRef.value?.getInputElement().focus()
+              updateSelectionStart(
+                (props.selectionStart ?? -1) === -1 ? props.input?.length ?? 0 : props.selectionStart ?? 0,
+              )
             }
-
-            updateSelectionStart(
-              (props.selectionStart ?? -1) === -1 ? (active ? props.input?.length ?? 0 : 0) : props.selectionStart ?? 0,
-            )
           })
         },
         { immediate: true },
-      )
-      watch(
-        () => props.selectionStart,
-        selectionStart => {
-          updateSelectionStart(selectionStart ?? 0)
-        },
-        {
-          immediate: true,
-        },
       )
       watch(
         overlayOpened,
