@@ -36,6 +36,9 @@ export const seerConfig: DeepPartialGlobalConfig = {
   progress: {
     strokeLinecap: 'square',
   },
+  stepper: {
+    size: 'sm',
+  },
   table: {
     columnExpandable: {
       icon: ({ expanded }) => h(IxIcon, { name: expanded ? 'minus-square' : 'plus-square' }),
