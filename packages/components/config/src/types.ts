@@ -163,6 +163,7 @@ export interface CardConfig {
   size: CardSize
   borderless: boolean
   hoverable: boolean
+  shadow: boolean
 }
 
 export interface CarouselConfig {

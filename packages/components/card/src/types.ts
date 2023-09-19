@@ -37,7 +37,7 @@ export const cardProps = {
   },
   shadow: {
     type: Boolean,
-    default: true,
+    default: undefined,
   },
   loading: {
     type: Boolean,

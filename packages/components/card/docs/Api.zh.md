@@ -9,7 +9,7 @@
 | `cover` | 卡片封面图片 | `string \| CardCover \| #cover` | - | - | - |
 | `header` | 对话框标题 | `string \| HeaderProps \| #header` | - | - | - |
 | `hoverable` | 鼠标 hover 时，是否悬浮 | `boolean` | `false` | ✅ | - |
-| `shadow` | 是否有阴影 | `boolean` | `true` | - | - |
+| `shadow` | 是否有阴影 | `boolean` | `true` | ✅ | - |
 | `loading` | 是否加载中状态 | `boolean` | `false` | - | 当卡片内容还在加载中时，显示占位图 |
 | `size` | 设置卡片大小 | `'sm' \| 'md' \| 'lg'` | `'md'` | ✅ | - |
 | `footer` | 自定义底部按钮 | `CardButtonProps[] \| #footer` | - | - | - |
