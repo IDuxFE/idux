@@ -396,8 +396,7 @@ const searchFields = computed<SearchField[]>(() => [
     type: 'select',
     label: 'Remote Select',
     key: 'remote_select_data',
-    quickSelect: true,
-    quickSelectSearchable: true,
+    quickSelect: { searchable: true },
     placeholder: 'please select',
     fieldConfig: {
       multiple: true,
@@ -412,8 +411,7 @@ const searchFields = computed<SearchField[]>(() => [
     type: 'treeSelect',
     label: 'Remote Tree',
     key: 'remote_tree_data',
-    quickSelect: true,
-    quickSelectSearchable: true,
+    quickSelect: { searchable: true },
     fieldConfig: {
       multiple: true,
       searchable: true,
