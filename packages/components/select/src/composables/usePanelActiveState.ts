@@ -47,26 +47,26 @@ export function usePanelActiveState(
     key !== activeValue.value && setActiveValue(flattenedOptions.value[index]?.key)
   }
 
-  watch(
-    [() => props.activeValue, flattenedOptions],
-    ([value, options]) => {
-      const targetIndex = isNil(value) ? -1 : keyIndexMap.value.get(value) ?? -1
-      setActiveIndex(targetIndex !== -1 ? getEnabledActiveIndex(options, targetIndex, 1) : -1)
-    },
-    {
-      flush: 'post',
-    },
-  )
-
   const scrollToActivated = () => {
     scrollTo({ index: activeIndex.value })
   }
 
   onMounted(() => {
     const options = flattenedOptions.value
-    const currValue = selectedKeys.value
+    const currValue = selectedKeys.value.length ? selectedKeys.value : [activeValue.value]
     const currIndex = options.findIndex(option => currValue.some(value => option.key === value))
     setActiveIndex(currIndex !== -1 ? getEnabledActiveIndex(options, currIndex, 1) : -1)
+
+    watch(
+      [() => props.activeValue, flattenedOptions],
+      ([value, options]) => {
+        const targetIndex = isNil(value) ? -1 : keyIndexMap.value.get(value) ?? -1
+        setActiveIndex(targetIndex !== -1 ? getEnabledActiveIndex(options, targetIndex, 1) : -1)
+      },
+      {
+        flush: 'post',
+      },
+    )
 
     scrollToActivated()
   })

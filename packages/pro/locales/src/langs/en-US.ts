@@ -37,6 +37,7 @@ const enUS: ProLocale = {
   },
   search: {
     keyword: 'Search',
+    keywordFallbackLabel: 'Search with "${0}: ${1}"',
     ok: 'OK',
     cancel: 'Cancel',
     selectAll: 'Select All',

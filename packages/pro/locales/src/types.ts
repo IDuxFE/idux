@@ -33,6 +33,7 @@ export interface ProTreeLocale {
 
 export interface ProSearchLocale {
   keyword: string
+  keywordFallbackLabel: string
   ok: string
   cancel: string
   selectAll: string

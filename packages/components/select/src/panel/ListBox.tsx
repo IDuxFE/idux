@@ -15,8 +15,8 @@ import { renderOptionLabel } from '../utils/renderOptionLabel'
 
 const defaultStyle = { height: 0, width: 0, overflow: 'hidden' }
 
-const ListBox: FunctionalComponent = () => {
-  const { slots, selectedKeys, activeIndex, flattenedOptions } = inject(selectPanelContext)!
+const ListBox: FunctionalComponent = (_, { slots }) => {
+  const { selectedKeys, activeIndex, flattenedOptions } = inject(selectPanelContext)!
   const currSelectedKeys = selectedKeys.value
 
   return (
