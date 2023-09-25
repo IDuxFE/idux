@@ -10,6 +10,14 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.10.2(2023-09-25)
+
+
+### Bug Fixes
+
+* **comp:text:** 复制图标的默认全局配置不正确 ([#1700](https://github.com/IDuxFE/idux/issues/1700)) ([7c26c81](https://github.com/IDuxFE/idux/commit/7c26c818ec581a4c1b4de7b79af0734fab0448a5))
+* **comp:text:** 展开收起图标再文字内容没有出现省略和折叠的情况下不应当显示 ([#1699](https://github.com/IDuxFE/idux/issues/1699)) ([43d489b](https://github.com/IDuxFE/idux/commit/43d489b0692e05cd7d3e3e0cd030a10751f7f781))
+
 ## 1.10.1(2023-09-18)
 
 
