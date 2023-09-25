@@ -61,6 +61,7 @@ export default defineComponent({
             ref={textareaRef}
             class={`${prefixCls}-textarea`}
             disabled={accessor.disabled}
+            readonly={props.readonly}
             placeholder={props.placeholder}
             onInput={handleInput}
             onCompositionstart={handleCompositionStart}
