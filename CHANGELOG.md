@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.2](https://github.com/IDuxFE/idux/compare/v1.10.1...v1.10.2) (2023-09-25)
+
+
+### Bug Fixes
+
+* **comp:text:** copy icon of default global config error ([#1700](https://github.com/IDuxFE/idux/issues/1700)) ([7c26c81](https://github.com/IDuxFE/idux/commit/7c26c818ec581a4c1b4de7b79af0734fab0448a5))
+* **comp:text:** expand icon shouldn't render when not ellipsised ([#1699](https://github.com/IDuxFE/idux/issues/1699)) ([43d489b](https://github.com/IDuxFE/idux/commit/43d489b0692e05cd7d3e3e0cd030a10751f7f781))
+
+
+
+
+
 ## [1.10.1](https://github.com/IDuxFE/idux/compare/v1.10.0...v1.10.1) (2023-09-18)
 
 
