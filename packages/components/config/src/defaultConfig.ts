@@ -347,7 +347,7 @@ export const defaultConfig: GlobalConfig = {
     trim: false,
   },
   text: {
-    copyIcon: ['check', 'copy'],
+    copyIcon: ['copy', 'check'],
   },
   timePicker: {
     borderless: false,
