@@ -161,7 +161,7 @@ export default defineComponent({
           {node}
           {slots.suffix?.()}
           {renderCopyNode()}
-          {expandNode}
+          {isEllipsis.value && expandNode}
           {measureStatus.value !== 'none' && renderMeasureElement()}
           {measureStatus.value === 'preparing' && renderRowMeasureElement()}
         </div>

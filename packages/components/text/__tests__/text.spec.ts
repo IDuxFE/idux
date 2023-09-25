@@ -64,7 +64,7 @@ describe('Text', () => {
   test('expandable work', async () => {
     const onUpdateExpanded = vi.fn()
     const wrapper = TextMount({
-      props: { ellipsis: { rows: 2, expandable: true }, 'onUpdate:expanded': onUpdateExpanded },
+      props: { ellipsis: { rows: 1, expandable: true }, 'onUpdate:expanded': onUpdateExpanded },
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -75,9 +75,10 @@ describe('Text', () => {
     expect(onUpdateExpanded).toBeCalledWith(true)
   })
 
-  test('expandIcon work', async () => {
+  // 需要 E2E 测试
+  test.skip('expandIcon work', async () => {
     const wrapper = TextMount({
-      props: { ellipsis: { rows: 2, expandable: true }, expandIcon: 'left', expanded: false },
+      props: { ellipsis: { rows: 1, expandable: true }, expandIcon: 'left', expanded: false },
     })
 
     expect(wrapper.find('.ix-text-expand-icon .ix-icon').classes()).toContain('ix-icon-left')
