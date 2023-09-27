@@ -20,6 +20,7 @@ export type MeasureStatus = 'preparing' | 'measuring' | 'none'
 
 export interface EllipsisContext {
   isEllipsis: ComputedRef<boolean>
+  isSimple: ComputedRef<boolean>
   measureStatus: ComputedRef<MeasureStatus>
   onRender: (nodes: VNode[] | undefined) => void
   onMeasureRender: () => void
@@ -28,7 +29,9 @@ export interface EllipsisContext {
 
 export function useEllipsis(
   props: TextProps,
+  expandable: ComputedRef<boolean>,
   contentRef: Ref<HTMLElement | undefined>,
+  innerRef: Ref<HTMLElement | undefined>,
   measureRef: Ref<HTMLElement | undefined>,
   rowMeasureRef: Ref<HTMLElement | undefined>,
 ): EllipsisContext {
@@ -62,6 +65,7 @@ export function useEllipsis(
 
     return 0
   })
+  const isSimple = computed(() => rows.value === 1 && !expandable.value)
 
   const onRender = (nodes: VNode[] | undefined) => {
     setContentNodesLength(getNodesLength(nodes))
@@ -154,6 +158,11 @@ export function useEllipsis(
       return
     }
 
+    if (isSimple.value) {
+      setIsEllipsis(!!innerRef.value && innerRef.value.scrollWidth > innerRef.value.clientWidth)
+      return
+    }
+
     calculate()
   }
 
@@ -174,6 +183,7 @@ export function useEllipsis(
 
   return {
     isEllipsis,
+    isSimple,
     measureStatus,
     onRender,
     onMeasureRender,

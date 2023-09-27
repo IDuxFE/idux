@@ -3,7 +3,6 @@
 exports[`Text > copyable work 1`] = `
 "<div class=\\"ix-text\\"><span class=\\"ix-text-inner\\">@idux 是一套企业级中后台 UI 组件库, 致力于提供高效愉悦的开发体验。 基于 Vue 3.x + TypeScript 开发,
       全部代码开源并遵循 MIT 协议，任何企业、组织及个人均可免费使用。<!----></span>
-  <!---->
   <!----><span class=\\"ix-text-copy-icon\\"><i class=\\"ix-icon ix-icon-copy\\" role=\\"img\\" aria-label=\\"copy\\"></i></span>
   <!---->
   <!---->
@@ -20,14 +19,12 @@ exports[`Text > copyable work 2`] = `
   <!---->
   <!---->
   <!---->
-  <!---->
 </div>"
 `;
 
 exports[`Text > ellipsis work 1`] = `
 "<div class=\\"ix-text\\"><span class=\\"ix-text-inner\\">@idux 是一套企业级中后台 UI 组件库, 致力于提供高效愉悦的开发体验。 基于 Vue 3.x + TypeScript 开发,
       全部代码开源并遵循 MIT 协议，任何企业、组织及个人均可免费使用。<!----></span>
-  <!---->
   <!---->
   <!---->
   <!---->
@@ -44,14 +41,12 @@ exports[`Text > ellipsis work 2`] = `
   <!---->
   <!---->
   <!---->
-  <!---->
 </div>"
 `;
 
 exports[`Text > expandable work 1`] = `
 "<div class=\\"ix-text ix-text-expandable\\"><span class=\\"ix-text-inner\\">@idux 是一套企业级中后台 UI 组件库, 致力于提供高效愉悦的开发体验。 基于 Vue 3.x + TypeScript 开发,
       全部代码开源并遵循 MIT 协议，任何企业、组织及个人均可免费使用。<!----></span>
-  <!---->
   <!---->
   <!---->
   <!---->
@@ -68,14 +63,12 @@ exports[`Text > expandable work 2`] = `
   <!---->
   <!---->
   <!---->
-  <!---->
 </div>"
 `;
 
 exports[`Text > render work 1`] = `
 "<div class=\\"ix-text\\"><span class=\\"ix-text-inner\\">@idux 是一套企业级中后台 UI 组件库, 致力于提供高效愉悦的开发体验。 基于 Vue 3.x + TypeScript 开发,
       全部代码开源并遵循 MIT 协议，任何企业、组织及个人均可免费使用。<!----></span>
-  <!---->
   <!---->
   <!---->
   <!---->
@@ -95,14 +88,12 @@ exports[`Text > tag work 1`] = `
   <!---->
   <!---->
   <!---->
-  <!---->
 </div>"
 `;
 
 exports[`Text > tag work 2`] = `
 "<div class=\\"ix-text\\"><span class=\\"ix-text-inner\\">@idux 是一套企业级中后台 UI 组件库, 致力于提供高效愉悦的开发体验。 基于 Vue 3.x + TypeScript 开发,
       全部代码开源并遵循 MIT 协议，任何企业、组织及个人均可免费使用。<!----></span>
-  <!---->
   <!---->
   <!---->
   <!---->
@@ -126,7 +117,6 @@ exports[`Text > tooltip work 1`] = `
 exports[`Text > tooltip work 2`] = `
 "<div class=\\"ix-text\\"><span class=\\"ix-text-inner\\">@idux 是一套企业级中后台 UI 组件库, 致力于提供高效愉悦的开发体验。 基于 Vue 3.x + TypeScript 开发,
       全部代码开源并遵循 MIT 协议，任何企业、组织及个人均可免费使用。<!----></span>
-  <!---->
   <!---->
   <!---->
   <!---->

@@ -42,15 +42,18 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-text`)
 
     const contentRef = shallowRef<HTMLElement>()
+    const innerRef = shallowRef<HTMLElement>()
     const measureRef = shallowRef<HTMLElement>()
     const rowMeasureRef = shallowRef<HTMLElement>()
 
     const { expanded, expandable, setExpanded, expandIconRenderer } = useExpandable(props, config)
     const { copied, copy, copyIconRenderer } = useCopyable(props, config)
     const copyTooltip = useCopyTooltip(props)
-    const { isEllipsis, measureStatus, onRender, onMeasureRender, renderClampedContent } = useEllipsis(
+    const { isSimple, isEllipsis, measureStatus, onRender, onMeasureRender, renderClampedContent } = useEllipsis(
       props,
+      expandable,
       contentRef,
+      innerRef,
       measureRef,
       rowMeasureRef,
     )
@@ -123,19 +126,20 @@ export default defineComponent({
 
       let node = (
         <Tag
+          ref={innerRef}
           class={`${prefixCls}-inner`}
           title={isNative ? getStringBySlot(titleSlot) : undefined}
           onClick={expandable.value && !hasExpandIcon ? toggleExpanded : undefined}
           {...attrs}
         >
-          {isEllipsis.value && !expanded.value && measureStatus.value === 'none'
+          {!isSimple.value && isEllipsis.value && !expanded.value && measureStatus.value === 'none'
             ? renderClampedContent(contentNodes)
             : contentNodes}
-          {isEllipsis.value && !expanded.value && renderEllipsisNode()}
+          {!isSimple.value && isEllipsis.value && !expanded.value && renderEllipsisNode()}
         </Tag>
       )
 
-      if (tooltip && !isNative) {
+      if (isEllipsis.value && !expanded.value && tooltip && !isNative) {
         const tooltipProps = isObject(tooltip) ? tooltip : {}
         node = (
           <IxTooltip {...tooltipProps} v-slots={{ title: titleSlot }}>
@@ -146,6 +150,8 @@ export default defineComponent({
 
       const classes = normalizeClass({
         [prefixCls]: true,
+        [`${prefixCls}-simple`]: isSimple.value,
+        [`${prefixCls}-ellipsis`]: isEllipsis.value,
         [`${prefixCls}-expandable`]: expandable.value,
         [`${prefixCls}-has-expand-icon`]: hasExpandIcon,
       })
