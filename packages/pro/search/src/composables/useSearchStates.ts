@@ -244,10 +244,18 @@ export function useSearchStates(
     const createdStates = getMarks()
       .map(({ key, mark }) => mark === 'created' && getSearchStateByKey(key))
       .filter(Boolean)
-      .map((state, index) => ({
-        ...state,
-        index: lastIndex + index + 1,
-      })) as SearchState[]
+      .map((state, index) => {
+        // recreate the state key again to avoid key duplication
+        const fieldKey = (state as SearchState).fieldKey
+        const count = dataKeyCountMap.has(fieldKey) ? dataKeyCountMap.get(fieldKey)! : 0
+        const key = getKey(fieldKey, count)
+
+        return {
+          ...state,
+          key,
+          index: lastIndex + index + 1,
+        }
+      }) as SearchState[]
 
     searchStates.value = [...newSearchStates, ...createdStates]
   }
