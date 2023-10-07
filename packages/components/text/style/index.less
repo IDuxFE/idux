@@ -1,4 +1,5 @@
 @import '../../style/mixins/reset.less';
+@import '../../style//mixins/ellipsis.less';
 
 .@{text-prefix} {
   .reset-component-new();
@@ -7,6 +8,7 @@
   position: relative;
   display: inline-block;
   vertical-align: bottom;
+  max-width: 100%;
 
   > .@{text-prefix}-expand-icon {
     flex-shrink: 0;
@@ -14,6 +16,16 @@
   }
 
   overflow: hidden;
+
+  &.@{text-prefix}-simple {
+    display: inline-flex;
+    align-items: center;
+    .@{text-prefix}-inner {
+      display: inline-block;
+      flex: auto;
+      .ellipsis();
+    }
+  }
 
   &-expandable:not(&-has-expand-icon) &-inner {
     cursor: pointer;
