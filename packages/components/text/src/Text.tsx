@@ -128,7 +128,7 @@ export default defineComponent({
         <Tag
           ref={innerRef}
           class={`${prefixCls}-inner`}
-          title={isNative ? getStringBySlot(titleSlot) : undefined}
+          title={isNative && isEllipsis.value ? getStringBySlot(titleSlot) : undefined}
           onClick={expandable.value && !hasExpandIcon ? toggleExpanded : undefined}
           {...attrs}
         >
