@@ -104,6 +104,7 @@ export function useEllipsis(
 
     const walk = () => {
       const measureHeight = measureRef.value?.offsetHeight ?? 0
+      const conentHeight = contentRef.value?.offsetHeight ?? 0
 
       if (measureStatus.value === 'preparing') {
         if (!rowMeasureRef.value) {
@@ -112,8 +113,7 @@ export function useEllipsis(
 
         rowHeight = rowMeasureRef.value?.offsetHeight ?? 0
         maxHeight = rows.value * rowHeight
-
-        if (measureHeight <= maxHeight) {
+        if (conentHeight <= maxHeight || measureHeight <= maxHeight) {
           setIsEllipsis(false)
           setLastRenderIndex(contentNodesLength.value)
           currentWalk = undefined
@@ -172,6 +172,10 @@ export function useEllipsis(
       immediate: true,
     })
     useResizeObserver(contentRef, () => {
+      if (measureStatus.value !== 'none') {
+        return
+      }
+
       const width = contentRef.value?.offsetWidth ?? 0
 
       if (width !== contentWidth.value) {
