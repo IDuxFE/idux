@@ -47,7 +47,7 @@ export default defineComponent({
 
     return () => {
       const prefixCls = mergedPrefixCls.value
-      const { borderless = config.borderless, loading, size = config.size, shadow } = props
+      const { borderless = config.borderless, loading, size = config.size, shadow = config.shadow } = props
 
       const children = slots.default?.() ?? []
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

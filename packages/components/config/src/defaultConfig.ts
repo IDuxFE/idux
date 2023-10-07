@@ -55,6 +55,7 @@ export const defaultConfig: GlobalConfig = {
     borderless: false,
     hoverable: false,
     size: 'md',
+    shadow: true,
   },
   carousel: {
     autoplayTime: 0,
