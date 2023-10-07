@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/IDuxFE/idux/compare/v1.10.2...v1.11.0) (2023-10-07)
+
+
+### Bug Fixes
+
+* **pro:search:** key duplication after controlled value change ([#1708](https://github.com/IDuxFE/idux/issues/1708)) ([3ae8dd2](https://github.com/IDuxFE/idux/commit/3ae8dd2a825483ce530abbf57a24cfb6fa99fa29))
+* **pro:textarea:** readonly not working ([#1704](https://github.com/IDuxFE/idux/issues/1704)) ([6e82eb4](https://github.com/IDuxFE/idux/commit/6e82eb4cbc5a8a2b20f5d7315b8c0cedbfd96110))
+
+
+### Features
+
+* **pro:search:** quickSelect prop supports object option ([#1697](https://github.com/IDuxFE/idux/issues/1697)) ([5259671](https://github.com/IDuxFE/idux/commit/52596710afee111bc5d98d145f4af5c3a516cd15))
+* **pro:search:** searchField supports `keywordFallback` option ([#1698](https://github.com/IDuxFE/idux/issues/1698)) ([430c740](https://github.com/IDuxFE/idux/commit/430c74094cae6d99e27517d4060839f0d24a3670))
+
+
+
+
+
 ## [1.10.2](https://github.com/IDuxFE/idux/compare/v1.10.1...v1.10.2) (2023-09-25)
 
 **Note:** Version bump only for package @idux/pro

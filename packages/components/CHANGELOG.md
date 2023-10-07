@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/IDuxFE/idux/compare/v1.10.2...v1.11.0) (2023-10-07)
+
+
+### Bug Fixes
+
+* **comp:radio:** radio dot size and position shouldn't be constant ([#1707](https://github.com/IDuxFE/idux/issues/1707)) ([840eefe](https://github.com/IDuxFE/idux/commit/840eefef03633b2ecf5c9a481ddb36f63888cc8e))
+* **comp:text:** native tooltip should show when not ellipsised ([#1709](https://github.com/IDuxFE/idux/issues/1709)) ([8513cd9](https://github.com/IDuxFE/idux/commit/8513cd92aad47081dd9ef160897bd388a88ffa68))
+* **comp:text:** text blinks when content doesn't exceed one row ([#1706](https://github.com/IDuxFE/idux/issues/1706)) ([5afea2f](https://github.com/IDuxFE/idux/commit/5afea2f36f6a3a53c1d72fa37804f58a8f134a62))
+* **comp:text:** use css ellipsis at one row to improve performance ([#1705](https://github.com/IDuxFE/idux/issues/1705)) ([271ef83](https://github.com/IDuxFE/idux/commit/271ef83dd5d88afff84e8007439e9b5a8d5546b0))
+
+
+### Features
+
+* **comp:card:** `shadow` supports global config now ([#1696](https://github.com/IDuxFE/idux/issues/1696)) ([d3672cc](https://github.com/IDuxFE/idux/commit/d3672ccd8ba53f126b6ce7643fa3141e25b88c0e))
+* **pro:search:** searchField supports `keywordFallback` option ([#1698](https://github.com/IDuxFE/idux/issues/1698)) ([430c740](https://github.com/IDuxFE/idux/commit/430c74094cae6d99e27517d4060839f0d24a3670))
+
+
+
+
+
 ## [1.10.2](https://github.com/IDuxFE/idux/compare/v1.10.1...v1.10.2) (2023-09-25)
 
 
