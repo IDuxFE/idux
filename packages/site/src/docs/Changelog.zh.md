@@ -10,6 +10,24 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 1.11.0(2023-10-07)
+
+
+### Bug Fixes
+
+* **comp:radio:** radio选中的圆点位置不应当固定写死，导致大尺寸下位置异常 ([#1707](https://github.com/IDuxFE/idux/issues/1707)) ([840eefe](https://github.com/IDuxFE/idux/commit/840eefef03633b2ecf5c9a481ddb36f63888cc8e))
+* **comp:text:** 原生 tooltip 在没有省略的时候不应当显示 ([#1709](https://github.com/IDuxFE/idux/issues/1709)) ([8513cd9](https://github.com/IDuxFE/idux/commit/8513cd92aad47081dd9ef160897bd388a88ffa68))
+* **comp:text:** 当文字只有一行且没有省略并配置了ellipsis时，显示出现闪烁 ([#1706](https://github.com/IDuxFE/idux/issues/1706)) ([5afea2f](https://github.com/IDuxFE/idux/commit/5afea2f36f6a3a53c1d72fa37804f58a8f134a62))
+* **comp:text:** 当文字的省略的行数为1时，使用原生css的ellipsis实现以提升性能 ([#1705](https://github.com/IDuxFE/idux/issues/1705)) ([271ef83](https://github.com/IDuxFE/idux/commit/271ef83dd5d88afff84e8007439e9b5a8d5546b0))
+* **pro:search:** 在以受控方式修改value后，未确认的搜索项会出现key重复的问题 ([#1708](https://github.com/IDuxFE/idux/issues/1708)) ([3ae8dd2](https://github.com/IDuxFE/idux/commit/3ae8dd2a825483ce530abbf57a24cfb6fa99fa29))
+* **pro:textarea:** readonly不生效 ([#1704](https://github.com/IDuxFE/idux/issues/1704)) ([6e82eb4](https://github.com/IDuxFE/idux/commit/6e82eb4cbc5a8a2b20f5d7315b8c0cedbfd96110))
+
+### Features
+
+* **comp:card:** `shadow` 属性现在支持全局配置 ([#1696](https://github.com/IDuxFE/idux/issues/1696)) ([d3672cc](https://github.com/IDuxFE/idux/commit/d3672ccd8ba53f126b6ce7643fa3141e25b88c0e))
+* **pro:search:** quickSelect 属性支持对象配置 ([#1697](https://github.com/IDuxFE/idux/issues/1697)) ([5259671](https://github.com/IDuxFE/idux/commit/52596710afee111bc5d98d145f4af5c3a516cd15))
+* **pro:search:** searchField 支持 `keywordFallback` 配置实现自由输入转关键字功能 ([#1698](https://github.com/IDuxFE/idux/issues/1698)) ([430c740](https://github.com/IDuxFE/idux/commit/430c74094cae6d99e27517d4060839f0d24a3670))
+
 ## 1.10.2(2023-09-25)
 
 
