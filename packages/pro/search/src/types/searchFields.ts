@@ -33,6 +33,7 @@ interface SearchFieldBase<V = unknown> {
    * @deprecated please use quickSelect.searchable instead
    */
   quickSelectSearchable?: boolean
+  keywordFallback?: boolean | { parse?: (input: string) => V }
   defaultOperator?: string
   defaultValue?: V
   inputClassName?: string

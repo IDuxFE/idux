@@ -18,11 +18,10 @@ import { renderOptionLabel } from '../utils/renderOptionLabel'
 
 export default defineComponent({
   props: optionProps,
-  setup(props) {
+  setup(props, { slots }) {
     const key = useKey()
     const {
       props: selectPanelProps,
-      slots,
       mergedPrefixCls,
       selectedKeys,
       selectedLimit,

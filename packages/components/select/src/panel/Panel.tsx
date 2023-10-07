@@ -54,7 +54,6 @@ export default defineComponent({
 
     provide(selectPanelContext, {
       props,
-      slots,
       mergedPrefixCls,
       flattenedOptions,
       ...selectedStateContext,
@@ -90,12 +89,16 @@ export default defineComponent({
     return () => {
       const { _virtualScrollHeight, virtualItemHeight, virtual, onScroll, onScrolledBottom } = props
       const options = flattenedOptions.value
-      const children = [<ListBox />]
+      const children = [<ListBox v-slots={slots} />]
 
       if (options.length > 0) {
         const itemRender: VirtualItemRenderFn<FlattenedOption> = ({ item, index }) => {
           const { type, ...rest } = item
-          return type === 'group' ? <OptionGroup index={index} {...rest} /> : <Option index={index} {...rest} />
+          return type === 'group' ? (
+            <OptionGroup v-slots={slots} index={index} {...rest} />
+          ) : (
+            <Option v-slots={slots} index={index} {...rest} />
+          )
         }
 
         children.push(

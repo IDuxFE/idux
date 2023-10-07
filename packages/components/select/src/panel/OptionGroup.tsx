@@ -14,8 +14,8 @@ import { optionGroupProps } from '../types'
 
 export default defineComponent({
   props: optionGroupProps,
-  setup(props) {
-    const { props: selectProps, slots, mergedPrefixCls } = inject(selectPanelContext)!
+  setup(props, { slots }) {
+    const { props: selectProps, mergedPrefixCls } = inject(selectPanelContext)!
 
     return () => {
       const { label, rawData } = props

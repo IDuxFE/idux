@@ -73,6 +73,7 @@ interface SearchItemCreateContext<V = unknown> extends Partial<SearchValue<V>> {
 | `label` | 搜索条件的词条名称 | `string` | - | - | 必填 |
 | `multiple` | 是否允许重复 | `boolean` | - | - | 为 `true` 时，该搜索条件可以被输入多次 |
 | `quickSelect` | 是否在快捷面板中展示 | `boolean \| SearchFieldQuickSelect` | - | - | 是否启用快捷面板, `multiple` 的搜索项该配置不生效。 |
+| `keywordFallback` | 在搜索项名称输入过滤结果为空时支持以该搜索项进行搜索 | `boolean` | - | - | - |
 | `operators` | 搜索条件的中间操作符 | `string[]` | - | - | 提供时，会在搜索词条名称中间增加一个操作符，如 `'='`, `'!='` |
 | `defaultOperator` | 默认的操作符 | `string` | - | - | 提供时，会自动填入默认的操作符 |
 | `defaultValue` | 默认值 | - | - | - | 提供时，会自动填入默认值 |

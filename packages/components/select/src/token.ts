@@ -11,7 +11,7 @@ import type { FlattenedOption } from './composables/useOptions'
 import type { PanelActiveStateContext } from './composables/usePanelActiveState'
 import type { SelectPanelProps } from './types'
 import type { VKey } from '@idux/cdk/utils'
-import type { ComputedRef, InjectionKey, Slots } from 'vue'
+import type { ComputedRef, InjectionKey } from 'vue'
 
 export interface SelectPanelDataContext {
   flattenedOptions: ComputedRef<FlattenedOption[]>
@@ -19,7 +19,6 @@ export interface SelectPanelDataContext {
 
 export interface SelectPanelContext extends PanelActiveStateContext {
   props: SelectPanelProps
-  slots: Slots
   mergedPrefixCls: ComputedRef<string>
   flattenedOptions: ComputedRef<FlattenedOption[]>
   selectedKeys: ComputedRef<VKey[]>

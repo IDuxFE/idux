@@ -37,6 +37,7 @@ const zhCN: ProLocale = {
   },
   search: {
     keyword: '关键字',
+    keywordFallbackLabel: '以"${0}: ${1}"搜索',
     ok: '确定',
     cancel: '取消',
     selectAll: '全选',

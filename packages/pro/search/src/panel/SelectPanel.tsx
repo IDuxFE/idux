@@ -32,7 +32,7 @@ export default defineComponent({
   props: proSearchSelectPanelProps,
   setup(props, { slots }) {
     const { locale, mergedPrefixCls } = inject(proSearchContext)!
-    const [activeValue, setActiveValue] = useState<VKey | undefined>(undefined)
+    const [activeValue, _setActiveValue] = useState<VKey | undefined>(undefined)
     const partiallySelected = computed(() => props.value && props.value.length > 0 && !props.allSelected)
     const filteredDataSource = computed(() => {
       const { dataSource, searchValue, searchFn } = props
@@ -48,11 +48,20 @@ export default defineComponent({
       return filterDataSource(dataSource ?? [], mergedSearchFn)
     })
 
+    const setActiveValue = (value: VKey | undefined) => {
+      _setActiveValue(value)
+    }
+
     watch(
-      () => props.value,
-      value => {
+      [() => props.value, filteredDataSource],
+      ([value, _filteredDataSource]) => {
         const key = value?.[value.length - 1]
-        key && setActiveValue(key)
+
+        if (key) {
+          setActiveValue(key)
+        } else if (_filteredDataSource && _filteredDataSource.findIndex(item => item.key === activeValue.value) < 0) {
+          setActiveValue(_filteredDataSource[0]?.key)
+        }
       },
       { immediate: true },
     )
@@ -60,9 +69,6 @@ export default defineComponent({
       () => props.searchValue,
       searchValue => {
         callEmit(props.onSearch, searchValue ?? '')
-        if (!activeValue.value) {
-          setActiveValue(filteredDataSource.value?.[0]?.key)
-        }
       },
       {
         flush: 'post',
@@ -111,7 +117,7 @@ export default defineComponent({
       setActiveValue(undefined)
     }
 
-    const handleKeyDown = useOnKeyDown(props, panelRef, activeValue, changeSelected, handleConfirm)
+    const handleKeyDown = useOnKeyDown(props, panelRef, activeValue, filteredDataSource, changeSelected, handleConfirm)
 
     onMounted(() => {
       props.setOnKeyDown?.(handleKeyDown)
@@ -188,6 +194,7 @@ function useOnKeyDown(
   props: ProSearchSelectPanelProps,
   panelRef: Ref<SelectPanelInstance | undefined>,
   activeValue: ComputedRef<VKey | undefined>,
+  filteredDataSource: ComputedRef<SelectPanelData[] | undefined>,
   changeSelected: (key: VKey) => void,
   handleConfirm: () => void,
 ) {
@@ -206,7 +213,7 @@ function useOnKeyDown(
         panelRef.value.changeActiveIndex(1)
         break
       case 'Enter': {
-        if (!props.dataSource || props.dataSource.length <= 0) {
+        if (!filteredDataSource.value || filteredDataSource.value.length <= 0) {
           return true
         }
 

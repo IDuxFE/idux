@@ -5,21 +5,20 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { NameSelectOverlayInstance, ResolvedSearchField, SegmentInputInstance } from '../../types'
+import type { NameSelectOverlayInstance, SegmentInputInstance } from '../../types'
 
 import { computed, defineComponent, inject, onMounted, ref, watch } from 'vue'
 
-import { type VKey, useState } from '@idux/cdk/utils'
+import { useState } from '@idux/cdk/utils'
 
 import SegmentInput from './SegmentInput'
 import { proSearchContext } from '../../token'
-import NameSelectOverlay from '../NameSelectOverlay'
+import NameSelectOverlay from '../nameSelectOverlay/NameSelectOverlay'
 
 export default defineComponent({
   setup(_, { slots }) {
     const context = inject(proSearchContext)!
     const {
-      resolvedSearchFields,
       mergedPrefixCls,
       enableQuickSelect,
       nameSelectActive,
@@ -124,8 +123,8 @@ export default defineComponent({
     const handleInput = (input: string) => {
       setInput(input)
     }
-    const handleChange = (value: VKey | undefined) => {
-      setInput(formatValue(value, resolvedSearchFields.value))
+    const handleChange = () => {
+      setInput('')
     }
 
     const renderTrigger = () => (
@@ -153,11 +152,3 @@ export default defineComponent({
     )
   },
 })
-
-function formatValue(value: VKey | undefined, searchFields: ResolvedSearchField[]): string {
-  if (!value) {
-    return ''
-  }
-
-  return searchFields.find(field => field.key === value)?.label ?? ''
-}
