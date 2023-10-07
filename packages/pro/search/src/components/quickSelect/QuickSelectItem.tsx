@@ -9,7 +9,9 @@ import type { SearchState } from '../../composables/useSearchStates'
 
 import { computed, defineComponent, inject, normalizeClass, ref, watch } from 'vue'
 
-import { callEmit, useState } from '@idux/cdk/utils'
+import { isObject } from 'lodash-es'
+
+import { Logger, callEmit, useState } from '@idux/cdk/utils'
 import { type IconInstance, IxIcon } from '@idux/components/icon'
 import { IxInput } from '@idux/components/input'
 
@@ -45,6 +47,18 @@ export default defineComponent({
       }
     }
 
+    const quickSelectSearchable = computed(() => {
+      if (isObject(props.searchField.quickSelect)) {
+        return props.searchField.quickSelect.searchable
+      }
+
+      if (props.searchField.quickSelectSearchable) {
+        Logger.warn('pro/search', '`quickSelectSearchable` is deprecated, use `quickSelect.searchable` instead')
+        return true
+      }
+
+      return false
+    })
     const searchBarCls = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-quick-select-item-search-bar`
       return normalizeClass({
@@ -114,7 +128,7 @@ export default defineComponent({
         <div class={classes}>
           <div class={`${prefixCls}-header`}>
             <label class={`${prefixCls}-label`}>{props.searchField.label}</label>
-            {props.searchField.quickSelectSearchable && (
+            {quickSelectSearchable.value && (
               <div class={searchBarCls.value}>
                 <IxInput
                   ref={searchInputRef}

@@ -17,13 +17,21 @@ import type { DatePanelProps, DateRangePanelProps } from '@idux/components/date-
 import type { TreeDragDropOptions } from '@idux/components/tree'
 import type { VNodeChild } from 'vue'
 
+interface SearchFieldQuickSelect {
+  searchable?: boolean
+}
+
 interface SearchFieldBase<V = unknown> {
   key: VKey
   label: string
   icon?: string
   multiple?: boolean
   operators?: string[]
-  quickSelect?: boolean
+  quickSelect?: boolean | SearchFieldQuickSelect
+
+  /**
+   * @deprecated please use quickSelect.searchable instead
+   */
   quickSelectSearchable?: boolean
   defaultOperator?: string
   defaultValue?: V
