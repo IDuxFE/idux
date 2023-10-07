@@ -50,12 +50,13 @@
       border-radius: 50%;
       transition: all var(--ix-transition-duration-fast) var(--ix-ease-in-out);
 
+      @dot-size: 8px;
       &::after {
         position: absolute;
-        top: 3px;
-        left: 3px;
-        width: 8px;
-        height: 8px;
+        top: calc(50% - @dot-size / 2);
+        left: calc(50% - @dot-size / 2);
+        width: @dot-size;
+        height: @dot-size;
         border-radius: 50%;
         transform: scale(0);
         opacity: 0;
