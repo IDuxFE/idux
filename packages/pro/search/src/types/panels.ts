@@ -33,6 +33,7 @@ export const proSearchSelectPanelProps = {
   showSelectAll: { type: Boolean, default: true },
   showFooter: { type: Boolean, default: true },
   autoHeight: { type: Boolean, default: false },
+  setInactiveOnMouseLeave: { type: Boolean, default: false },
   allSelected: Boolean,
   searchValue: { type: String, default: undefined },
   searchFn: Function as PropType<(data: SelectPanelData, searchValue?: string) => boolean>,
