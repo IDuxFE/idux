@@ -124,7 +124,12 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const header = <ɵHeader v-slots={slots} header={props.header} />
       const footer = renderFooter(slots, prefixCls)
-      const [paginationTop, paginationBottom] = renderPagination(mergedPagination.value, filteredData.value, prefixCls)
+      const [paginationTop, paginationBottom] = renderPagination(
+        slots,
+        mergedPagination.value,
+        filteredData.value,
+        prefixCls,
+      )
       const children = [header]
       const resetChildren = [paginationTop, <MainTable />, footer, paginationBottom].filter(Boolean) as VNode[]
       const spinProps = convertSpinProps(props.spin)
