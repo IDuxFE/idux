@@ -5,13 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, normalizeClass, provide, ref, watch } from 'vue'
+import { computed, defineComponent, normalizeClass, onMounted, provide, ref, watch } from 'vue'
 
 import { isBoolean } from 'lodash-es'
 
 import { useAccessorAndControl } from '@idux/cdk/forms'
 import { type VirtualScrollToFn } from '@idux/cdk/scroll'
-import { type VKey, useControlledProp, useState } from '@idux/cdk/utils'
+import { type VKey, callEmit, useControlledProp, useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { useGlobalConfig } from '@idux/components/config'
@@ -19,7 +19,7 @@ import { useFormItemRegister, useFormSize, useFormStatus } from '@idux/component
 import { ɵUseOverlayState } from '@idux/components/select'
 import { IxSpin } from '@idux/components/spin'
 import { type TreeInstance } from '@idux/components/tree'
-import { useGetKey } from '@idux/components/utils'
+import { useGetKey, useOverlayFocusMonitor } from '@idux/components/utils'
 
 import { useMergeNodes } from './composables/useDataSource'
 import { useSelectedState } from './composables/useSelectedState'
@@ -88,7 +88,7 @@ export default defineComponent({
 
     const handleOverlayClick = () => {
       if (props.searchable !== 'overlay') {
-        focus()
+        setTimeout(focus)
       }
     }
 
@@ -100,7 +100,19 @@ export default defineComponent({
       }
     }
 
-    const handleBlur = () => accessor.markAsBlurred()
+    const onFocus = (evt: FocusEvent) => {
+      callEmit(props.onFocus, evt)
+    }
+    const onBlur = (evt: FocusEvent) => {
+      accessor.markAsBlurred()
+      setOverlayOpened(false)
+      callEmit(props.onBlur, evt)
+    }
+    const { focused, bindOverlayMonitor, handleFocus, handleBlur } = useOverlayFocusMonitor(onFocus, onBlur)
+    onMounted(() => {
+      bindOverlayMonitor(overlayRef, overlayOpened)
+    })
+
     const handleItemRemove = (key: VKey) => {
       focus()
       handleRemove(key)
@@ -153,6 +165,7 @@ export default defineComponent({
         config={config}
         dataSource={selectedNodes.value}
         disabled={accessor.disabled}
+        focused={focused.value}
         maxLabel={props.maxLabel}
         multiple={props.multiple}
         opened={overlayOpened.value}
@@ -163,6 +176,7 @@ export default defineComponent({
         status={mergedStatus.value}
         suffix={props.suffix}
         value={selectedValue.value}
+        onFocus={handleFocus}
         onBlur={handleBlur}
         onClear={handleClear}
         onInputValueChange={setInputValue}
@@ -181,13 +195,13 @@ export default defineComponent({
       return spinProps ? <IxSpin {...spinProps}>{children}</IxSpin> : children
     }
 
-    const renderContent = () => renderLoading(<Content onClick={handleOverlayClick} />)
+    const renderContent = () => renderLoading(<Content onMousedown={handleOverlayClick} />)
 
     return () => {
       const overlayProps = {
         class: overlayClasses.value,
         style: overlayStyle.value,
-        clickOutside: true,
+        clickOutside: false,
         container: props.overlayContainer ?? config.overlayContainer,
         containerFallback: `.${mergedPrefixCls.value}-overlay-container`,
         disabled: accessor.disabled || props.readonly,

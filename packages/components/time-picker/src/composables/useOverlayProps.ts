@@ -17,7 +17,7 @@ export function useOverlayProps(context: TimePickerContext | TimeRangePickerCont
 
   return computed(() => {
     return {
-      clickOutside: true,
+      clickOutside: false,
       container: props.overlayContainer ?? config.overlayContainer,
       containerFallback: `.${mergedPrefixCls.value}-overlay-container`,
       disabled: accessor.disabled || props.readonly,

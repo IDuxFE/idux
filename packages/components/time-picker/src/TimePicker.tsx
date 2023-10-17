@@ -5,11 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, normalizeClass, provide, toRef, watch } from 'vue'
+import { computed, defineComponent, normalizeClass, onMounted, provide, ref, toRef, watch } from 'vue'
 
-import { ɵOverlay } from '@idux/components/_private/overlay'
+import { ɵOverlay, ɵOverlayInstance } from '@idux/components/_private/overlay'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
 import { useFormElement } from '@idux/components/form'
+import { useOverlayFocusMonitor } from '@idux/components/utils'
 
 import { usePickerControl } from './composables/useControl'
 import { useInputEnableStatus } from './composables/useInputEnableStatus'
@@ -33,16 +34,24 @@ export default defineComponent({
     const config = useGlobalConfig('timePicker')
     const dateConfig = useDateConfig()
 
+    const overlayRef = ref<ɵOverlayInstance>()
+    const triggerRef = ref<{ focus: () => void }>()
+
     const { elementRef: inputRef, focus, blur } = useFormElement<HTMLInputElement>()
 
     const formatRef = computed(() => props.format ?? config.format)
-    const pickerState = usePickerState(props, config, dateConfig, formatRef)
-    const { accessor, handleChange } = pickerState
+    const { overlayOpened, setOverlayOpened } = useOverlayState(props, focus)
+    const pickerState = usePickerState(props, config, dateConfig, formatRef, setOverlayOpened)
+    const { accessor, handleFocus: _handleFocus, handleBlur: _handleBlur, handleChange } = pickerState
     const pickerControl = usePickerControl(dateConfig, formatRef, handleChange, toRef(accessor, 'value'))
-    const { overlayOpened, setOverlayOpened } = useOverlayState(props, pickerControl)
 
     const inputEnableStatus = useInputEnableStatus(props, config)
-    const handleKeyDown = useKeyboardEvents(setOverlayOpened)
+    const handleKeyDown = useKeyboardEvents(overlayOpened, setOverlayOpened)
+
+    const { focused, handleFocus, handleBlur, bindOverlayMonitor } = useOverlayFocusMonitor(_handleFocus, _handleBlur)
+    onMounted(() => {
+      bindOverlayMonitor(overlayRef, overlayOpened)
+    })
 
     const context = {
       props,
@@ -53,6 +62,7 @@ export default defineComponent({
       config,
       mergedPrefixCls,
       formatRef,
+      focused,
       handleKeyDown,
       inputRef,
       inputEnableStatus,
@@ -60,24 +70,28 @@ export default defineComponent({
       setOverlayOpened,
       controlContext: pickerControl,
       ...pickerState,
+      handleFocus,
+      handleBlur,
     }
     provide(timePickerContext, context)
 
     expose({ focus, blur })
 
     watch(overlayOpened, opened => {
-      setTimeout(() => {
-        if (opened) {
-          focus()
-          inputRef.value?.dispatchEvent(new FocusEvent('focus'))
-        } else {
-          blur()
-          inputRef.value?.dispatchEvent(new FocusEvent('blur'))
+      if (opened) {
+        setTimeout(() => {
+          inputRef.value?.focus()
+        })
+      } else {
+        pickerControl.init(true)
+
+        if (focused.value) {
+          triggerRef.value?.focus()
         }
-      })
+      }
     })
 
-    const renderTrigger = () => <Trigger {...attrs} />
+    const renderTrigger = () => <Trigger ref={triggerRef} {...attrs} />
     const renderContent = () => <Content />
 
     const overlayProps = useOverlayProps(context)
@@ -85,6 +99,7 @@ export default defineComponent({
 
     return () => (
       <ɵOverlay
+        ref={overlayRef}
         {...overlayProps.value}
         class={overlayClass.value}
         triggerId={attrs.id}

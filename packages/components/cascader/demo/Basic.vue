@@ -1,6 +1,12 @@
 <template>
   <IxSpace vertical>
-    <IxCascader v-model:value="fullPathValue" :dataSource="dataSource" @change="onChange" />
+    <IxCascader
+      v-model:value="fullPathValue"
+      :dataSource="dataSource"
+      @focus="onFocus"
+      @blur="onBlur"
+      @change="onChange"
+    />
     <IxCascader v-model:value="singlePathValue" :dataSource="dataSource" :fullPath="false" @change="onChange" />
   </IxSpace>
 </template>
@@ -14,6 +20,12 @@ const fullPathValue = ref(['components', 'general', 'button'])
 const singlePathValue = ref('button')
 
 const onChange = console.log
+const onFocus = (evt: FocusEvent) => {
+  console.log('focus', evt)
+}
+const onBlur = (evt: FocusEvent) => {
+  console.log('blur', evt)
+}
 
 const dataSource: CascaderData[] = [
   {

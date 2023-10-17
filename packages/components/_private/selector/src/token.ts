@@ -18,7 +18,6 @@ export interface SelectorContext {
   inputRef: Ref<HTMLInputElement | undefined>
   inputValue: Ref<string>
   isComposing: Ref<boolean>
-  isFocused: Ref<boolean>
   handleCompositionStart: (evt: CompositionEvent) => void
   handleCompositionEnd: (evt: CompositionEvent) => void
   handleInput: (evt: Event) => void

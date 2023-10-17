@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent, inject, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 import { ɵTrigger } from '@idux/components/_private/trigger'
@@ -15,9 +15,10 @@ import { datePickerToken } from '../token'
 
 export default defineComponent({
   inheritAttrs: false,
-  setup(_, { attrs }) {
+  setup(_, { attrs, expose }) {
     const context = inject(datePickerToken)!
     const {
+      accessor,
       props,
       slots,
       locale,
@@ -28,10 +29,18 @@ export default defineComponent({
       inputRef,
     } = context
 
+    const triggerInputRef = ref<HTMLInputElement>()
+
     const placeholder = computed(() => props.placeholder ?? locale.datePicker[`${props.type}Placeholder`])
     const inputSize = computed(() => Math.max(10, formatRef.value.length) + 2)
 
     const triggerProps = useTriggerProps(context)
+
+    const focus = () => {
+      ;(inputEnableStatus.value.allowInput === 'overlay' ? triggerInputRef : inputRef).value?.focus()
+    }
+
+    expose({ focus })
 
     const handleInput = (evt: Event) => {
       _handleInput(evt)
@@ -39,17 +48,15 @@ export default defineComponent({
     }
 
     const renderContent = (prefixCls: string) => {
-      const { readonly, disabled } = triggerProps.value
-
       return (
         <div class={`${prefixCls}-input`}>
           <input
-            ref={inputEnableStatus.value.allowInput === true ? inputRef : undefined}
+            ref={inputEnableStatus.value.allowInput === 'overlay' ? triggerInputRef : inputRef}
             class={`${prefixCls}-input-inner`}
             autocomplete="off"
-            disabled={disabled}
+            disabled={accessor.disabled}
             placeholder={placeholder.value}
-            readonly={readonly}
+            readonly={props.readonly || inputEnableStatus.value.enableInput === false}
             size={inputSize.value}
             value={inputValue.value}
             onInput={handleInput}

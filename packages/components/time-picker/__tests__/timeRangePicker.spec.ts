@@ -1,6 +1,6 @@
 import { MountingOptions, VueWrapper, mount } from '@vue/test-utils'
 
-import { renderWork } from '@tests'
+import { renderWork, wait } from '@tests'
 import { parse } from 'date-fns'
 
 import { ɵTimePanel, ɵTimePanelInstance } from '@idux/components/_private/time-panel'
@@ -28,13 +28,16 @@ describe('TimePicker', () => {
   const findCell = (wrapper: VueWrapper<ɵTimePanelInstance>, idx: number, value: string | number) =>
     findCellWithValue(findColumn(wrapper, idx), value)
 
-  const triggerConfirm = (wrapper: ReturnType<typeof TimeRangePickerMount>) =>
+  const triggerConfirm = async (wrapper: ReturnType<typeof TimeRangePickerMount>) => {
     wrapper
       .findComponent(RangeContent)
       .findAll('.ix-time-range-picker-overlay-footer .ix-button')
       .find(btn => btn.text() === '确定')
       ?.trigger('click')
 
+    await wrapper.setProps({ open: false })
+    await wrapper.setProps({ open: true })
+  }
   renderWork<TimeRangePickerProps>(IxTimeRangePicker, { props: { open: true } })
 
   test('v-model:value work', async () => {
@@ -236,9 +239,11 @@ describe('TimePicker', () => {
     })
 
     await wrapper.find('.ix-time-range-picker').find('input').trigger('focus')
+    await wait(100)
     expect(onFocus).toBeCalled()
 
     await wrapper.find('.ix-time-range-picker').find('input').trigger('blur')
+    await wait(100)
     expect(onBlur).toBeCalled()
   })
 

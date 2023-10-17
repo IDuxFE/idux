@@ -8,7 +8,13 @@
       </IxRadioGroup>
     </IxSpace>
     <IxSpace vertical>
-      <IxDatePicker v-model:value="dateValue" :allow-input="allowInput" clearable></IxDatePicker>
+      <IxDatePicker
+        v-model:value="dateValue"
+        :allow-input="allowInput"
+        clearable
+        @focus="onFocus"
+        @blur="onBlur"
+      ></IxDatePicker>
       <IxDatePicker v-model:value="weekValue" :allow-input="allowInput" type="week" clearable></IxDatePicker>
       <IxDatePicker v-model:value="monthValue" :allow-input="allowInput" type="month" clearable></IxDatePicker>
       <IxDatePicker v-model:value="quarterValue" :allow-input="allowInput" type="quarter" clearable></IxDatePicker>
@@ -27,4 +33,11 @@ const quarterValue = ref('2022-Q1')
 const yearValue = ref('2022')
 
 const allowInput = ref(true)
+
+const onFocus = (evt: FocusEvent) => {
+  console.log('focus', evt)
+}
+const onBlur = (evt: FocusEvent) => {
+  console.log('blur', evt)
+}
 </script>

@@ -5,11 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, normalizeClass, provide, toRef, watch } from 'vue'
+import { computed, defineComponent, normalizeClass, onMounted, provide, ref, toRef, watch } from 'vue'
 
-import { ɵOverlay } from '@idux/components/_private/overlay'
+import { ɵOverlay, ɵOverlayInstance } from '@idux/components/_private/overlay'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
 import { useFormElement } from '@idux/components/form'
+import { useOverlayFocusMonitor } from '@idux/components/utils'
 
 import { useFormat } from './composables/useFormat'
 import { useInputEnableStatus } from './composables/useInputEnableStatus'
@@ -34,22 +35,27 @@ export default defineComponent({
     const config = useGlobalConfig('datePicker')
     const dateConfig = useDateConfig()
 
+    const overlayRef = ref<ɵOverlayInstance>()
+    const triggerRef = ref<{ focus: () => void }>()
+
     const { elementRef: inputRef, focus, blur } = useFormElement<HTMLInputElement>()
 
     expose({ focus, blur })
 
+    const { overlayOpened, overlayVisible, onAfterLeave, setOverlayOpened } = useOverlayState(props)
     const inputEnableStatus = useInputEnableStatus(props, config)
     const formatContext = useFormat(props, config)
-    const pickerStateContext = usePickerState(props, config, dateConfig, formatContext.formatRef)
+    const pickerStateContext = usePickerState(props, config, dateConfig, formatContext.formatRef, setOverlayOpened)
 
-    const { accessor, handleChange } = pickerStateContext
+    const { accessor, handleFocus: _handleFocus, handleBlur: _handleBlur, handleChange } = pickerStateContext
 
     const rangeControlContext = useRangeControl(dateConfig, formatContext, inputEnableStatus, toRef(accessor, 'value'))
-    const { overlayOpened, overlayVisible, onAfterLeave, setOverlayOpened } = useOverlayState(
-      props,
-      rangeControlContext,
-    )
-    const handleKeyDown = useRangeKeyboardEvents(rangeControlContext, setOverlayOpened, handleChange)
+    const handleKeyDown = useRangeKeyboardEvents(rangeControlContext, overlayOpened, setOverlayOpened, handleChange)
+
+    const { focused, handleFocus, handleBlur, bindOverlayMonitor } = useOverlayFocusMonitor(_handleFocus, _handleBlur)
+    onMounted(() => {
+      bindOverlayMonitor(overlayRef, overlayOpened)
+    })
 
     const renderSeparator = () => slots.separator?.() ?? props.separator ?? locale.dateRangePicker.separator
 
@@ -59,6 +65,7 @@ export default defineComponent({
       common,
       locale,
       config,
+      focused,
       mergedPrefixCls,
       dateConfig,
       inputRef,
@@ -72,23 +79,27 @@ export default defineComponent({
       handleKeyDown,
       ...formatContext,
       ...pickerStateContext,
+      handleFocus,
+      handleBlur,
     }
 
     provide(dateRangePickerToken, context)
 
     watch(overlayOpened, opened => {
-      setTimeout(() => {
-        if (opened) {
-          focus()
-          inputRef.value?.dispatchEvent(new FocusEvent('focus'))
-        } else {
-          blur()
-          inputRef.value?.dispatchEvent(new FocusEvent('blur'))
+      if (opened) {
+        setTimeout(() => {
+          inputRef.value?.focus()
+        })
+      } else {
+        rangeControlContext.init(true)
+
+        if (focused.value) {
+          triggerRef.value?.focus()
         }
-      })
+      }
     })
 
-    const renderTrigger = () => <RangeTrigger {...attrs}></RangeTrigger>
+    const renderTrigger = () => <RangeTrigger ref={triggerRef} {...attrs}></RangeTrigger>
     const renderContent = () => <RangeContent></RangeContent>
     const overlayProps = useOverlayProps(context)
     const overlayClass = computed(() => normalizeClass([`${mergedPrefixCls.value}-overlay`, props.overlayClassName]))
@@ -96,6 +107,7 @@ export default defineComponent({
     return () => {
       return (
         <ɵOverlay
+          ref={overlayRef}
           {...overlayProps.value}
           class={overlayClass.value}
           v-slots={{ default: renderTrigger, content: renderContent }}

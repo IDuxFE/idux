@@ -1,7 +1,13 @@
 <template>
   <div class="title">allowInput: true</div>
   <IxSpace>
-    <IxTimePicker v-model:value="time" v-model:open="open" :allow-input="true"></IxTimePicker>
+    <IxTimePicker
+      v-model:value="time"
+      v-model:open="open"
+      :allow-input="true"
+      @focus="onFocus"
+      @blur="onBlur"
+    ></IxTimePicker>
     <IxButton @click="changeToNow">now</IxButton>
   </IxSpace>
   <div class="title">allowInput: 'overlay'</div>
@@ -29,6 +35,13 @@ function changeToNow() {
 
 function changeOverlayedPickerToNow() {
   overlayedPickerTime.value = new Date()
+}
+
+const onFocus = (evt: FocusEvent) => {
+  console.log('focus', evt)
+}
+const onBlur = (evt: FocusEvent) => {
+  console.log('blur', evt)
 }
 </script>
 <style scoped lang="less">

@@ -16,32 +16,50 @@ export function useKeyboardEvents(
   inputValue: ComputedRef<string>,
   selectedValue: ComputedRef<VKey[]>,
   activeValue: ComputedRef<VKey>,
+  overlayOpened: ComputedRef<boolean>,
   changeActiveIndex: (offset: number) => void,
   changeSelected: (key: VKey) => void,
   handleRemove: (key: VKey) => void,
   clearInput: () => void,
   setOverlayOpened: (opened: boolean) => void,
-  blur: () => void | undefined,
 ): (evt: KeyboardEvent) => void {
   return (evt: KeyboardEvent) => {
+    const ensureOverlayOpened = () => {
+      if (['Backspace', 'Tab'].includes(evt.code)) {
+        return
+      }
+
+      if (!overlayOpened.value) {
+        setOverlayOpened(true)
+      }
+    }
+
     switch (evt.code) {
       case 'ArrowUp':
         evt.preventDefault()
         changeActiveIndex(-1)
+        ensureOverlayOpened()
         break
       case 'ArrowDown':
         evt.preventDefault()
         changeActiveIndex(1)
+        ensureOverlayOpened()
         break
       case 'Enter': {
         evt.preventDefault()
         const key = activeValue.value
-        !isNil(key) && changeSelected(key)
-        props.allowInput && clearInput()
-        if (!props.multiple) {
-          setOverlayOpened(false)
-          blur()
+
+        if (!isNil(key) && ((props.allowInput && inputValue.value) || overlayOpened.value)) {
+          changeSelected(key)
         }
+
+        if (!overlayOpened.value && (!props.allowInput || !inputValue.value)) {
+          ensureOverlayOpened()
+        } else if (!props.multiple) {
+          setOverlayOpened(false)
+        }
+
+        props.allowInput && clearInput()
         break
       }
       case 'Backspace': {
@@ -51,10 +69,15 @@ export function useKeyboardEvents(
         }
         break
       }
-      case 'Escape':
+      case 'Escape': {
         evt.preventDefault()
         setOverlayOpened(false)
         break
+      }
+
+      default: {
+        ensureOverlayOpened()
+      }
     }
   }
 }
