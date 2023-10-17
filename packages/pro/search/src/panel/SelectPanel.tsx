@@ -114,7 +114,9 @@ export default defineComponent({
       callEmit(props.onSelectAllClick)
     }
     const handleMouseLeave = () => {
-      setActiveValue(undefined)
+      if (props.setInactiveOnMouseLeave) {
+        setActiveValue(undefined)
+      }
     }
 
     const handleKeyDown = useOnKeyDown(props, panelRef, activeValue, filteredDataSource, changeSelected, handleConfirm)
