@@ -1,6 +1,6 @@
 {
   "name": "@idux/pro",
-  "version": "1.11.0",
+  "version": "1.11.1",
   "description": "A higher level of abstraction UI component library for Vue 3.x",
   "keywords": [
     "vue",

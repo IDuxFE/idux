@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.1](https://github.com/IDuxFE/idux/compare/v1.11.0...v1.11.1) (2023-10-17)
+
+
+### Bug Fixes
+
+* **pro:search:** placeholder not vertially centered ([#1713](https://github.com/IDuxFE/idux/issues/1713)) ([f05cc48](https://github.com/IDuxFE/idux/commit/f05cc4851a003f3bec4a9bf61657860701fa1efd))
+* **pro:search:** select activeValue shouldn't change on mouse leave ([#1712](https://github.com/IDuxFE/idux/issues/1712)) ([a6d539a](https://github.com/IDuxFE/idux/commit/a6d539a576c0df230729dd79f07edf13d02f6bb3))
+
+
+
+
+
 # [1.11.0](https://github.com/IDuxFE/idux/compare/v1.10.2...v1.11.0) (2023-10-07)
 
 
