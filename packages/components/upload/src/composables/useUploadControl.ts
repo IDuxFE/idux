@@ -10,26 +10,48 @@ import type { UploadFile } from '../types'
 
 import { type ComputedRef, watch } from 'vue'
 
+import { useState } from '@idux/cdk/utils'
+
 import { getTargetFile } from '../utils/files'
 
 export function useUploadControl(fileList: ComputedRef<UploadFile[]>, uploadRequest: UploadRequest): void {
   const { startUpload, abort } = uploadRequest
 
-  watch(fileList, (currentFileList, preFileList) => {
-    currentFileList.forEach(file => {
-      const preFile = getTargetFile(file, preFileList)
+  const [proxyedFileList, setProxyedFileList] = useState<UploadFile[]>([...fileList.value])
 
-      if (!preFile && file.status === 'selected') {
-        startUpload(file)
+  watch(
+    fileList,
+    _fileList => {
+      setProxyedFileList([..._fileList])
+    },
+    {
+      deep: true,
+    },
+  )
+
+  watch(
+    [proxyedFileList, () => proxyedFileList.value.length],
+    ([currentFileList, currentLength], [preFileList, preLength]) => {
+      if (currentLength === preLength) {
+        return
       }
-    })
 
-    preFileList.forEach(file => {
-      const currentFile = getTargetFile(file, currentFileList)
+      currentFileList.forEach(file => {
+        const preFile = getTargetFile(file, preFileList)
+        console.log(preFile, file, currentFileList === preFileList)
 
-      if (!currentFile && file.status === 'uploading') {
-        abort(file)
-      }
-    })
-  })
+        if (!preFile && file.status === 'selected') {
+          startUpload(file)
+        }
+      })
+
+      preFileList.forEach(file => {
+        const currentFile = getTargetFile(file, currentFileList)
+
+        if (!currentFile && file.status === 'uploading') {
+          abort(file)
+        }
+      })
+    },
+  )
 }

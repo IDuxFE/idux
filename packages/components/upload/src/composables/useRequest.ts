@@ -46,20 +46,20 @@ export function useRequest(props: UploadProps, filesDataContext: FilesDataContex
   }
 
   function abort(file: UploadFile): void {
-    const curFile = getTargetFile(file, fileList.value)
-    if (!curFile) {
-      return
-    }
-    const curAbort = aborts.get(curFile.key)
-    curAbort?.()
-    updateFileStatus(curFile, 'abort')
-    fileUploading.value.splice(getTargetFileIndex(curFile, fileUploading.value), 1)
-    aborts.delete(curFile.key)
+    aborts.get(file.key)?.()
+
     props.onRequestChange &&
       callEmit(props.onRequestChange, {
         status: 'abort',
-        file: { ...curFile },
+        file: { ...file },
       })
+    fileUploading.value.splice(getTargetFileIndex(file, fileUploading.value), 1)
+    aborts.delete(file.key)
+
+    const curFile = getTargetFile(file, fileList.value)
+    if (curFile) {
+      updateFileStatus(curFile, 'abort')
+    }
   }
 
   async function startUpload(file: UploadFile): Promise<void> {
