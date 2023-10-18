@@ -20,13 +20,13 @@ const openStringFooter = () =>
     footer: 'system message',
   })
 
-const footerVNode = h('div', { style: { color: 'red' } }, 'system message')
+const renderFooter = () => h('div', { style: { color: 'red' } }, 'system message')
 
 const oenVNodeFooter = () =>
   info({
     title: 'VNode',
     content: 'The bottom area is configured as VNode',
-    footer: footerVNode,
+    footer: renderFooter,
   })
 
 const openIxButton = () => {

@@ -5,19 +5,19 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { NotificationNodePropKey, NotificationProps, SlotProps } from './types'
+import type { NotificationProps, SlotProps } from './types'
 import type { NotificationConfig } from '@idux/components/config'
 import type { ComputedRef, Slots } from 'vue'
 
 import { computed, defineComponent, onBeforeUnmount, onMounted, watchEffect } from 'vue'
 
-import { isArray, isString } from 'lodash-es'
+import { isArray, isFunction } from 'lodash-es'
 
 import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { IxButton } from '@idux/components/button'
 import { useGlobalConfig } from '@idux/components/config'
-import { IxIcon } from '@idux/components/icon'
 import { IxSpace } from '@idux/components/space'
+import { convertIconVNode, convertStringVNode } from '@idux/components/utils'
 
 import { notificationProps } from './types'
 
@@ -43,11 +43,12 @@ export default defineComponent({
     const { visible, close, onMouseEnter, onMouseLeave } = useVisible(props, config)
 
     return () => {
-      const iconNode = icon.value && getIconNode(icon.value)
-      const closeIconNode = getIconNode(closeIcon.value)
+      const iconNode = convertIconVNode(undefined, icon.value)
+      const closeIconNode = convertIconVNode(undefined, closeIcon.value)
 
-      const contentNode = getNode(props, slots, 'content')
-      const footerNode = getNode(props, slots, 'footer', {
+      const titleNode = convertStringVNode(slots, props, 'title')
+      const contentNode = convertStringVNode(slots.default, props.content)
+      const footerNode = getFooterNode(slots, props.footer, {
         visible: visible.value,
         close,
       })
@@ -67,7 +68,7 @@ export default defineComponent({
               {closeIconNode}
             </span>
             <div class={mainCls}>
-              <div class={`${comPrefix.value}-title`}>{getNode(props, slots, 'title')}</div>
+              <div class={`${comPrefix.value}-title`}>{titleNode}</div>
               {contentNode && <div class={`${comPrefix.value}-content`}>{contentNode}</div>}
             </div>
             <div class={`${comPrefix.value}-footer`}>
@@ -146,39 +147,26 @@ function useVisible(props: NotificationProps, config: NotificationConfig) {
   return { visible, close, onMouseEnter, onMouseLeave }
 }
 
-function getIconNode(icon: NotificationProps['icon']) {
-  return isString(icon) ? <IxIcon name={icon}></IxIcon> : icon
-}
+function getFooterNode(slots: Slots, footer: NotificationProps['footer'] | undefined, params: SlotProps) {
+  if (slots.footer) {
+    return slots.footer(params)
+  }
 
-function getNode<T extends NotificationProps, K extends NotificationNodePropKey>(
-  props: T,
-  slots: Slots,
-  nodeKey: K,
-  slotProps?: SlotProps,
-) {
-  const slotMap = {
-    title: 'title',
-    content: 'default',
-    footer: 'footer',
-  } as const
-  const getHandlePropsMap = {
-    title: (propsValue: NotificationProps[K]) => propsValue,
-    content: (propsValue: NotificationProps[K]) => propsValue,
-    footer: (propsValue: NotificationProps[K]) => getFooterNode(propsValue),
-  } as const
-  return slots[slotMap[nodeKey]]?.(slotProps) ?? getHandlePropsMap[nodeKey]?.(props[nodeKey])
-}
-
-function getFooterNode(footer?: NotificationProps['footer']) {
   if (!footer) {
     return ''
   }
-  if (!isArray(footer)) {
-    return footer
+
+  if (isFunction(footer)) {
+    return footer(params)
   }
-  const footerButtons = footer.map(item => {
-    const { text, ...rest } = item
-    return <IxButton {...rest}>{text}</IxButton>
-  })
-  return <IxSpace>{footerButtons}</IxSpace>
+
+  if (isArray(footer)) {
+    const footerButtons = footer.map(item => {
+      const { text, ...rest } = item
+      return <IxButton {...rest}>{text}</IxButton>
+    })
+    return <IxSpace>{footerButtons}</IxSpace>
+  }
+
+  return footer
 }

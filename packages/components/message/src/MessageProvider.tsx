@@ -5,12 +5,21 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, TransitionGroup, type VNode, computed, defineComponent, provide, ref } from 'vue'
+import {
+  type ComputedRef,
+  TransitionGroup,
+  type VNode,
+  type VNodeChild,
+  computed,
+  defineComponent,
+  provide,
+  ref,
+} from 'vue'
 
 import { CdkPortal } from '@idux/cdk/portal'
 import { VKey, callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { usePortalTarget } from '@idux/components/utils'
+import { convertStringVNode, usePortalTarget } from '@idux/components/utils'
 
 import Message from './Message'
 import { MESSAGE_PROVIDER_TOKEN } from './token'
@@ -42,9 +51,10 @@ export default defineComponent({
         const { key, content, visible = true, onDestroy, ...restProps } = item
         const onClose = () => destroy(key!)
         const mergedProps = { key, visible, onClose }
+        const contentNode = convertStringVNode(undefined, content)
         return (
           <Message {...mergedProps} {...restProps}>
-            {content}
+            {contentNode}
           </Message>
         )
       })
@@ -133,7 +143,7 @@ const useMessage = (maxCount: ComputedRef<number>) => {
 
   const messageTypes = ['info', 'success', 'warning', 'error', 'loading'] as const
   const [info, success, warning, error, loading] = messageTypes.map(type => {
-    return (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) =>
+    return (content: string | VNode | (() => VNodeChild), options?: Omit<MessageOptions, 'type' | 'content'>) =>
       open({ ...options, content, type })
   })
 

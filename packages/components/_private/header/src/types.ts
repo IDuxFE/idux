@@ -6,11 +6,11 @@
  */
 
 import type { HeaderProps as IxHeaderProps } from '@idux/components/header'
-import type { VNode } from 'vue'
+import type { VNode, VNodeChild } from 'vue'
 
 export interface HeaderProps {
   closable?: boolean
-  closeIcon?: string | VNode
+  closeIcon?: string | VNode | (() => VNodeChild)
   header?: string | IxHeaderProps
   size?: 'lg' | 'md' | 'sm'
   onClose?: (evt: Event) => void
