@@ -10,7 +10,7 @@
       </IxButtonGroup>
     </template>
     <template #expand="{ record }">
-      <IxTable :columns="nestedColumns" :dataSource="record.children" :pagination="false">
+      <IxTable :columns="nestedColumns" :dataSource="record.nestedData" :pagination="false">
         <template #action>
           <IxButtonGroup :gap="8" mode="link" separator="|">
             <IxButton>OK</IxButton>
@@ -32,7 +32,7 @@ interface Data {
   name: string
   age: number
   address: string
-  children: Array<{
+  nestedData: Array<{
     name: string
     date: string
     status: string
@@ -133,28 +133,28 @@ const data: Data[] = [
     name: 'John Brown',
     age: 32,
     address: 'New York No. 1 Lake Park',
-    children: nestedData,
+    nestedData,
   },
   {
     key: 2,
     name: 'Jim Green',
     age: 42,
     address: 'London No. 1 Lake Park',
-    children: nestedData,
+    nestedData,
   },
   {
     key: 3,
     name: 'Joe Black',
     age: 32,
     address: 'Sidney No. 1 Lake Park',
-    children: nestedData,
+    nestedData,
   },
   {
     key: 4,
     name: 'Disabled User',
     age: 99,
     address: 'Sidney No. 1 Lake Park',
-    children: nestedData,
+    nestedData,
   },
 ]
 </script>
