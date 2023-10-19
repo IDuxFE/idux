@@ -323,6 +323,7 @@ export const defaultConfig: GlobalConfig = {
       },
     },
     columnExpandable: {
+      showLine: false,
       icon: 'right',
     },
     columnSelectable: {

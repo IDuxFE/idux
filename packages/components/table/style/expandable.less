@@ -1,0 +1,95 @@
+.@{table-prefix} {
+  &-expandable-trigger {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    line-height: 1;
+    align-items: center;
+    vertical-align: middle;
+    color: @table-expandable-icon-color;
+    background-color: transparent;
+    border-style: none;
+    outline: none;
+    cursor: pointer;
+
+    &-button {
+      z-index: 1;
+      padding: 1px;
+      background-color: var(--ix-background-color);
+      transition: background var(--ix-transition-duration-fast);
+    }
+    &-disabled &-button {
+      cursor: unset;
+      visibility: hidden;
+    }
+
+    &-gap {
+      position: relative;
+      display: inline-block;
+      margin-right: 1px;
+      width: @spacing-xs;
+      vertical-align: middle;
+    }
+    &-show-line + &-gap::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 1px;
+      background-color: @table-tree-line-color;
+    }
+
+    &-line-right {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 50%;
+      height: 1px;
+      background-color: @table-tree-line-color;
+    }
+    &-line-top {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 1px;
+      height: 50%;
+      background-color: @table-tree-line-color;
+    }
+    &-line-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      height: 50%;
+      background-color: @table-tree-line-color;
+    }
+  }
+  &-expandable-indent {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      height: 100%;
+      width: 1px;
+      background-color: @table-tree-line-color;
+    }
+  }
+
+  & tr&-expanded-row {
+    & > td {
+      background-color: @table-expandable-background-color;
+
+      > .@{table-prefix} {
+        margin: -4px 28px;
+      }
+    }
+    &:hover > td {
+      background-color: @table-expandable-background-color-hover;
+    }
+  }
+}

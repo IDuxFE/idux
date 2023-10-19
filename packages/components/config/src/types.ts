@@ -493,6 +493,7 @@ export interface TableColumnBaseConfig {
 }
 
 export interface TableColumnExpandableConfig {
+  showLine: boolean
   icon: string | VNodeChild | ((options: { expanded: boolean; record: any }) => string | VNodeChild)
 }
 

@@ -55,6 +55,7 @@ export const seerConfig: DeepPartialGlobalConfig = {
   table: {
     columnExpandable: {
       icon: expandIconRenderer,
+      showLine: true,
     },
   },
   timePicker: {

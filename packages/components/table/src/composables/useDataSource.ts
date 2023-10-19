@@ -26,7 +26,9 @@ export function useDataSource(
   const mergedData = computed(() => {
     const childrenKey = mergedChildrenKey.value
     const getKey = mergedGetKey.value
-    return props.dataSource.map(record => convertMergeData(record, getKey, childrenKey))
+    return props.dataSource.map((record, idx) =>
+      convertMergeData(record, getKey, childrenKey, idx, props.dataSource.length),
+    )
   })
 
   const mergedMap = computed(() => {
@@ -66,10 +68,13 @@ export function useDataSource(
     return paginatedData.value
   })
 
-  return { filteredData, flattedData, mergedMap, paginatedMap }
+  const isTreeData = computed(() => mergedData.value.some(data => data.children?.length))
+
+  return { isTreeData, filteredData, flattedData, mergedMap, paginatedMap }
 }
 
 export interface DataSourceContext {
+  isTreeData: ComputedRef<boolean>
   filteredData: ComputedRef<MergedData[]>
   flattedData: ComputedRef<FlattedData[]>
   mergedMap: ComputedRef<Map<VKey, MergedData>>
@@ -81,6 +86,8 @@ export interface MergedData {
   parentKey?: VKey
   record: unknown
   rowKey: VKey
+  hasPrevSibling: boolean
+  hasNextSibling: boolean
 }
 
 export interface FlattedData extends MergedData {
@@ -88,13 +95,22 @@ export interface FlattedData extends MergedData {
   level?: number
 }
 
-function convertMergeData(record: unknown, getRowKey: GetKeyFn, childrenKey: string, parentKey?: VKey) {
+function convertMergeData(
+  record: unknown,
+  getRowKey: GetKeyFn,
+  childrenKey: string,
+  index: number,
+  total: number,
+  parentKey?: VKey,
+) {
   const rowKey = getRowKey(record)
-  const result: MergedData = { record, rowKey, parentKey }
+  const result: MergedData = { record, rowKey, parentKey, hasPrevSibling: index > 0, hasNextSibling: index < total - 1 }
 
   const subData = (record as Record<string, unknown>)[childrenKey] as unknown[]
   if (subData) {
-    result.children = subData.map(subRecord => convertMergeData(subRecord, getRowKey, childrenKey, rowKey))
+    result.children = subData.map((subRecord, idx) =>
+      convertMergeData(subRecord, getRowKey, childrenKey, idx, subData.length, rowKey),
+    )
   }
   return result
 }
@@ -162,10 +178,10 @@ function filterData(mergedData: MergedData[], activeFilters: ActiveFilter[], exp
 // when virtual scrolling is enabled, this do not need to traverse all nodes
 function flatData(mergedData: MergedData[], expandedRowKeys: VKey[], level: number) {
   return mergedData.reduce((result, item) => {
-    const { children, parentKey, record, rowKey } = item
+    const { children, parentKey, record, rowKey, hasPrevSibling, hasNextSibling } = item
     const expanded = expandedRowKeys.includes(rowKey)
 
-    result.push({ children, parentKey, record, rowKey, level, expanded })
+    result.push({ children, parentKey, record, rowKey, level, expanded, hasPrevSibling, hasNextSibling })
 
     if (expanded && item.children) {
       const childrenFlatData = flatData(item.children, expandedRowKeys, level + 1)

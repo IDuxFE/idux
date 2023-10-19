@@ -46,6 +46,7 @@ export default defineComponent({
       fixedColumnKeys,
       columnOffsets,
       isSticky,
+      isTreeData,
       expandable,
       selectable,
       mergedPagination,
@@ -136,7 +137,8 @@ export default defineComponent({
       const Tag = (tableProps.customTag?.bodyCell ?? 'td') as any
       return (
         <Tag class={classes.value} style={style.value} title={title} {...customAdditional}>
-          {type === 'expandable' && renderExpandableChildren(props, slots, expandable, mergedPrefixCls.value)}
+          {type === 'expandable' &&
+            renderExpandableChildren(props, slots, expandable, isTreeData, mergedPrefixCls.value)}
           {type === 'expandable' && !isEmptyNode(children) && (
             <span class={`${mergedPrefixCls.value}-expandable-trigger-gap`}></span>
           )}
@@ -179,28 +181,51 @@ function renderExpandableChildren(
   props: TableBodyCellProps,
   slots: Slots,
   expandable: ComputedRef<TableColumnMergedExpandable | undefined>,
+  isTreeData: ComputedRef<boolean>,
   prefixCls: string,
 ) {
-  const { icon, customIcon, indent } = expandable.value!
-  const { record, expanded, level = 0 } = props
-  const style = indent ? `margin-left: ${convertCssPixel(level * indent)}` : undefined
+  const { icon, customIcon, indent, showLine } = expandable.value!
+  const { record, expanded, level = 0, hasPrevSibling, hasNextSibling } = props
+  const hasParent = level > 0
+  const mergedShowLine = isTreeData.value && showLine
 
   let iconNode: VNodeChild
 
-  if (!props.disabled) {
-    const iconRender = (isString(customIcon) ? slots[customIcon] : customIcon) ?? icon
-    if (isFunction(iconRender)) {
-      iconNode = iconRender({ expanded: !!expanded, record })
-    } else {
-      iconNode = isString(iconRender) ? <IxIcon name={iconRender} rotate={expanded ? 90 : 0} /> : iconRender
-    }
+  const iconRender = (isString(customIcon) ? slots[customIcon] : customIcon) ?? icon
+  if (isFunction(iconRender)) {
+    iconNode = iconRender({ expanded: !!expanded, record })
+  } else {
+    iconNode = isString(iconRender) ? <IxIcon name={iconRender} rotate={expanded ? 90 : 0} /> : iconRender
   }
 
-  return (
-    <button class={`${prefixCls}-expandable-trigger`} style={style} type="button" onClick={props.handleExpend}>
-      {iconNode}
-    </button>
-  )
+  const indentStyle = indent ? `width: ${convertCssPixel(indent)}` : undefined
+  const triggerCls = {
+    [`${prefixCls}-expandable-trigger`]: true,
+    [`${prefixCls}-expandable-trigger-show-line`]: mergedShowLine,
+    [`${prefixCls}-expandable-trigger-disabled`]: props.disabled,
+  }
+  const indents = []
+  for (let i = 0; i < level; i++) {
+    indents.push(<div class={`${prefixCls}-expandable-indent`} style={indentStyle}></div>)
+  }
+
+  return [
+    ...indents,
+    <span class={triggerCls} style={indentStyle}>
+      <button
+        class={`${prefixCls}-expandable-trigger-button`}
+        type="button"
+        onClick={props.disabled ? undefined : props.handleExpend}
+      >
+        {iconNode}
+      </button>
+      {mergedShowLine && [
+        <span class={`${prefixCls}-expandable-trigger-line-right`}></span>,
+        (hasPrevSibling || hasParent) && <span class={`${prefixCls}-expandable-trigger-line-top`}></span>,
+        hasNextSibling && <span class={`${prefixCls}-expandable-trigger-line-bottom`}></span>,
+      ]}
+    </span>,
+  ].filter(Boolean)
 }
 
 function renderSelectableChildren(
