@@ -46,6 +46,7 @@ export default defineComponent({
       () => !!props.searchFields?.some(field => !!field.quickSelect && !field.multiple),
     )
 
+    const searchFields = computed(() => props.searchFields ?? [])
     const quickSelectOverlayOpened = computed(() => quickSelectActive.value && overlayOpened.value)
 
     const elementRef = ref<HTMLElement | undefined>()
@@ -54,7 +55,7 @@ export default defineComponent({
 
     const searchValueContext = useSearchValues(props)
     const { searchValues } = searchValueContext
-    const resolvedSearchFieldsContext = useResolvedSearchFields(props, mergedPrefixCls, dateConfig)
+    const resolvedSearchFieldsContext = useResolvedSearchFields(searchFields, mergedPrefixCls, dateConfig)
     const { fieldKeyMap } = resolvedSearchFieldsContext
     const searchStateContext = useSearchStates(props, fieldKeyMap, searchValueContext)
     const { searchStates, initSearchStates, clearSearchState, updateSearchValues, isSegmentVisible } =

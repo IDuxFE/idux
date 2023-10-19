@@ -12,7 +12,9 @@ import { type ComputedRef, type Ref, computed, ref, toRaw } from 'vue'
 
 import { isEqual, isNil } from 'lodash-es'
 
-import { type VKey, callEmit, convertArray } from '@idux/cdk/utils'
+import { type VKey, callEmit } from '@idux/cdk/utils'
+
+import { generateSegmentStates } from '../utils'
 
 export interface SearchState {
   key: VKey
@@ -441,24 +443,6 @@ function createStateKeyGetter() {
 
     return `${keyMap.get(key)}-${index}`
   }
-}
-
-function generateSegmentStates(
-  searchField: ResolvedSearchField,
-  searchValue?: Omit<SearchValue, 'key'>,
-): SegmentState[] {
-  const segments = searchField.segments
-  const hasOperators = searchField.operators && searchField.operators.length > 0
-  const operator = searchValue?.operator ?? searchField.operators?.find(op => op === searchField.defaultOperator)
-  const value = searchValue?.value ?? searchField.defaultValue
-  const valueArr = segments.length > (hasOperators ? 2 : 1) ? convertArray(value) : [value]
-  const segmentValues = hasOperators ? [operator, ...valueArr] : valueArr
-
-  return segments.map((segment, idx) => ({
-    name: segment.name,
-    value: segmentValues[idx],
-    input: segment.format(segmentValues[idx], []),
-  }))
 }
 
 function compareSearchValues(newSearchValues: SearchValue[] | undefined, oldSearchValues: SearchValue[] | undefined) {

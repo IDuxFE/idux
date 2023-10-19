@@ -14,6 +14,7 @@ const IxProSearch = ProSearch as unknown as ProSearchComponent
 const IxProSearchShortcut = ProSearchShortcut as unknown as ProSearchShortcutComponent
 
 export { IxProSearch, IxProSearchShortcut }
+export { useParser } from './src/useParser'
 
 export type {
   ProSearchSize,
@@ -29,3 +30,5 @@ export type {
   SearchItemCreateContext,
   SearchItemConfirmContext,
 } from './src/types'
+
+export type { ParserContext, ParseResult } from './src/useParser'
