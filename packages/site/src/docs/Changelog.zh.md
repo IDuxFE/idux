@@ -10,6 +10,15 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.11.2(2023-10-23)
+
+
+### Bug Fixes
+
+* **comp:upload:** 通过受控属性files的增删，应当可以触发文件的自动上传和终止 ([#1715](https://github.com/IDuxFE/idux/issues/1715)) ([c068cd4](https://github.com/IDuxFE/idux/commit/c068cd48b081c8f1a3b0c03e9f78151537d6781f))
+* **comp:table:** 修改seer主题的展开收起按钮全局配置，和tree保持一致 ([#1715](https://github.com/IDuxFE/idux/issues/1715)) ([1a77228](https://github.com/IDuxFE/idux/commit/60143dd158547f6570fe6c4c098e68b4f1a77228))
+* **pro:search:** 在全选段输入的内容之后，退格键失效 ([#1722](https://github.com/IDuxFE/idux/issues/1722)) ([1a34c13](https://github.com/IDuxFE/idux/commit/1a34c13dbee9596dc69e8ed6204d19b11524493e))
+
 ## 1.11.1(2023-10-17)
 
 ### Bug Fixes
