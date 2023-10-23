@@ -71,7 +71,7 @@ export interface UploadRequestChangeOption<K = VKey> {
 export const uploadProps = {
   files: {
     type: Array as PropType<UploadFile[]>,
-    default: [],
+    default: () => [],
   },
   accept: String,
   action: {

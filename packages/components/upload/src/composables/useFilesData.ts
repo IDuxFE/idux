@@ -6,7 +6,8 @@
  */
 
 import type { UploadFile, UploadProps } from '../types'
-import type { ComputedRef } from 'vue'
+
+import { type ComputedRef, toRaw } from 'vue'
 
 import { callEmit, useControlledProp } from '@idux/cdk/utils'
 
@@ -47,7 +48,7 @@ export function useFilesData(props: UploadProps): FilesDataContext {
       }
     })
 
-    setFileList(newFileList)
+    setFileList(toRaw(newFileList))
 
     statusChangeFiles.forEach(file => {
       callEmit(props.onFileStatusChange, file)
