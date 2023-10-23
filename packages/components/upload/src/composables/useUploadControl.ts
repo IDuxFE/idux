@@ -38,7 +38,6 @@ export function useUploadControl(fileList: ComputedRef<UploadFile[]>, uploadRequ
 
       currentFileList.forEach(file => {
         const preFile = getTargetFile(file, preFileList)
-        console.log(preFile, file, currentFileList === preFileList)
 
         if (!preFile && file.status === 'selected') {
           startUpload(file)
