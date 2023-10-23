@@ -5,12 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, TransitionGroup, type VNode, computed, defineComponent, provide, ref } from 'vue'
+import { type ComputedRef, TransitionGroup, type VNode, computed, defineComponent, provide, ref, toRef } from 'vue'
+
+import { isNil } from 'lodash-es'
 
 import { CdkPortal } from '@idux/cdk/portal'
 import { VKey, callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { usePortalTarget } from '@idux/components/utils'
+import { usePortalTarget, useZIndex } from '@idux/components/utils'
 
 import Message from './Message'
 import { MESSAGE_PROVIDER_TOKEN } from './token'
@@ -26,10 +28,21 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-message`)
     const mergedPortalTarget = usePortalTarget(props, config, common, mergedPrefixCls)
 
-    const style = computed(() => ({ top: convertCssPixel(props.top ?? config.top) }))
     const maxCount = computed(() => props.maxCount ?? config.maxCount)
+
     const { messages, loadContainer, open, info, success, warning, error, loading, update, destroy, destroyAll } =
       useMessage(maxCount)
+
+    const messageVisible = computed(
+      () => !!messages.value.length && messages.value.some(item => !!item.visible || isNil(item.visible)),
+    )
+
+    const zIndex = useZIndex(ref(undefined), toRef(common, 'overlayZIndex'), messageVisible)
+
+    const style = computed(() => ({
+      top: convertCssPixel(props.top ?? config.top),
+      zIndex: zIndex.value,
+    }))
 
     const apis = { open, info, success, warning, error, loading, update, destroy, destroyAll }
 
