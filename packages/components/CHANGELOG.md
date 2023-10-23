@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.2](https://github.com/IDuxFE/idux/compare/v1.11.1...v1.11.2) (2023-10-23)
+
+
+### Bug Fixes
+
+* **comp:upload:** controlled update should trigger upload and abort ([#1715](https://github.com/IDuxFE/idux/issues/1715)) ([c068cd4](https://github.com/IDuxFE/idux/commit/c068cd48b081c8f1a3b0c03e9f78151537d6781f))
+* **comp:upload:** remove unecessary console log statement ([#1723](https://github.com/IDuxFE/idux/issues/1723)) ([c7b4c1f](https://github.com/IDuxFE/idux/commit/c7b4c1f74d92b8a51ef22bf5b09dc666bffc73b7))
+
+
+
+
+
 # [1.11.0](https://github.com/IDuxFE/idux/compare/v1.10.2...v1.11.0) (2023-10-07)
 
 
