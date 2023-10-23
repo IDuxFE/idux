@@ -77,7 +77,8 @@ export default defineComponent({
     }
     const updateSelectionStart = (selectionStart: number) => {
       const inputEl = segmentInputRef.value?.getInputElement()
-      if (inputEl && selectionStart !== inputEl.selectionStart) {
+
+      if (inputEl && (selectionStart !== inputEl.selectionStart || selectionStart !== inputEl.selectionEnd)) {
         inputEl.setSelectionRange(selectionStart, selectionStart)
       }
     }
@@ -135,17 +136,18 @@ export default defineComponent({
       handleSegmentCancel(props.segment.name)
     }
 
-    const { handleInput, handleFocus, handleKeyDown, handleMouseDown, setPanelOnKeyDown } = useInputEvents(
-      props,
-      context,
-      segmentInputRef,
-      overlayOpened,
-      handleSegmentInput,
-      handleSegmentSelect,
-      setOverlayOpened,
-      changeActiveAndSelect,
-      handleConfirm,
-    )
+    const { handleInput, handleFocus, handleKeyDown, handleMouseDown, handleSelect, setPanelOnKeyDown } =
+      useInputEvents(
+        props,
+        context,
+        segmentInputRef,
+        overlayOpened,
+        handleSegmentInput,
+        handleSegmentSelect,
+        setOverlayOpened,
+        changeActiveAndSelect,
+        handleConfirm,
+      )
 
     const overlayProps = useOverlayAttrs(props, mergedPrefixCls, commonOverlayProps, overlayOpened)
 
@@ -161,6 +163,7 @@ export default defineComponent({
         onFocus={handleFocus}
         onKeydown={handleKeyDown}
         onMousedown={handleMouseDown}
+        onSelect={handleSelect}
         onWidthChange={triggerOverlayUpdate}
       ></SegmentInput>
     )
@@ -223,6 +226,7 @@ interface InputEventHandlers {
   handleFocus: (evt: FocusEvent) => void
   handleKeyDown: (evt: KeyboardEvent) => void
   handleMouseDown: (evt: MouseEvent) => void
+  handleSelect: () => void
   setPanelOnKeyDown: (onKeyDown: ((evt: KeyboardEvent) => boolean) | undefined) => void
 }
 
@@ -251,7 +255,11 @@ function useInputEvents(
   }
   function setSelectionStart() {
     setTimeout(() => {
-      handleSegmentSelect(props.segment.name, getInputElement()?.selectionStart)
+      const inputEl = getInputElement()
+      handleSegmentSelect(
+        props.segment.name,
+        inputEl?.selectionDirection === 'backward' ? inputEl?.selectionStart : inputEl?.selectionEnd,
+      )
     })
   }
 
@@ -271,12 +279,17 @@ function useInputEvents(
     evt.stopImmediatePropagation()
     setSelectionStart()
   }
+  const handleSelect = () => {
+    setSelectionStart()
+  }
 
   const handleKeyDown = (evt: KeyboardEvent) => {
     evt.stopPropagation()
     if (overlayOpened.value && panelOnKeyDown.value && !panelOnKeyDown.value(evt)) {
       return
     }
+
+    const inputEl = getInputElement()
 
     switch (evt.key) {
       case 'Enter':
@@ -289,7 +302,7 @@ function useInputEvents(
 
         break
       case 'Backspace':
-        if (props.selectionStart === 0) {
+        if ((inputEl?.selectionStart ?? 0) <= 0 && (inputEl?.selectionEnd ?? 0) <= 0) {
           evt.preventDefault()
 
           changeActiveAndSelect(-1, 'end')
@@ -299,7 +312,7 @@ function useInputEvents(
         setOverlayOpened(false)
         break
       case 'ArrowLeft':
-        if ((getInputElement()?.selectionStart ?? 0) <= 0) {
+        if ((inputEl?.selectionStart ?? 0) <= 0) {
           evt.preventDefault()
           changeActiveAndSelect(-1, 'end')
         } else {
@@ -308,7 +321,7 @@ function useInputEvents(
         }
         break
       case 'ArrowRight':
-        if ((getInputElement()?.selectionStart ?? 0) >= (props.input?.length ?? 0)) {
+        if ((inputEl?.selectionStart ?? 0) >= (props.input?.length ?? 0)) {
           evt.preventDefault()
           changeActiveAndSelect(1, 'start')
         } else {
@@ -328,6 +341,7 @@ function useInputEvents(
     handleFocus,
     handleKeyDown,
     handleMouseDown,
+    handleSelect,
     setPanelOnKeyDown,
   }
 }
