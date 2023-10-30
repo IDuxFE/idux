@@ -91,6 +91,7 @@ function createSearchItemContentSegments(prefixCls: string, searchField: SearchF
     ? ([
         {
           ...segment,
+          placeholder: segment.placeholder ?? searchField.placeholder,
           inputClassName: [...(segment.inputClassName ?? []), searchField.inputClassName],
           containerClassName: [...(segment.containerClassName ?? []), searchField.containerClassName],
           onVisibleChange: searchField.onPanelVisibleChange,

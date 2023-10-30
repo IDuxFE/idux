@@ -111,6 +111,7 @@ export default defineComponent({
             value={input.value ?? ''}
             disabled={props.disabled}
             placeholder={props.placeholder}
+            title={input.value ? undefined : props.placeholder}
             onInput={handleInput}
             onCompositionstart={handleCompositionStart}
             onCompositionend={handleCompositionEnd}
