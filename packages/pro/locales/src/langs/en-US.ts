@@ -41,6 +41,7 @@ const enUS: ProLocale = {
     ok: 'OK',
     cancel: 'Cancel',
     selectAll: 'Select All',
+    allSelected: 'All',
     placeholder: 'Select filters and press Enter',
     switchToDatePanel: 'Select Date',
     switchToTimePanel: 'Select Time',

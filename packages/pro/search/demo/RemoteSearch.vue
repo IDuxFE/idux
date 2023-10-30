@@ -110,6 +110,8 @@ const searchFields = computed<SearchField[]>(() => [
     fieldConfig: {
       multiple: true,
       searchable: true,
+      showSelectAll: true,
+      concludeAllSelected: true,
       dataSource: selectData.value,
       virtual: true,
       searchFn: () => true,

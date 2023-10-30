@@ -52,6 +52,7 @@ interface ResolvedSearchFieldBase<V = unknown> extends SearchFieldBase<V> {
 interface SelectSearchFieldBase {
   type: 'select'
   fieldConfig: {
+    concludeAllSelected?: boolean
     dataSource: SelectPanelData[]
     multiple?: boolean
     searchable?: boolean

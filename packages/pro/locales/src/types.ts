@@ -37,6 +37,7 @@ export interface ProSearchLocale {
   ok: string
   cancel: string
   selectAll: string
+  allSelected: string
   placeholder: string
   switchToTimePanel: string
   switchToDatePanel: string

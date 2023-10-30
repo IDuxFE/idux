@@ -8,6 +8,7 @@
 import type { ResolvedSearchField, SearchField, Segment } from '../types'
 import type { VKey } from '@idux/cdk/utils'
 import type { DateConfig } from '@idux/components/config'
+import type { ProSearchLocale } from '@idux/pro/locales'
 
 import { type ComputedRef, computed } from 'vue'
 
@@ -29,6 +30,7 @@ export function useResolvedSearchFields(
   searchFields: ComputedRef<SearchField[]>,
   mergedPrefixCls: ComputedRef<string>,
   dateConfig: DateConfig,
+  locale: ProSearchLocale,
 ): ResolvedSearchFieldsContext {
   const resolvedSearchFields = computed(
     () =>
@@ -37,7 +39,7 @@ export function useResolvedSearchFields(
           ...searchField,
           segments: [
             createOperatorSegment(mergedPrefixCls.value, searchField),
-            ...createSearchItemContentSegments(mergedPrefixCls.value, searchField, dateConfig),
+            ...createSearchItemContentSegments(mergedPrefixCls.value, searchField, dateConfig, locale),
           ].filter(Boolean) as Segment[],
         }
       }) ?? [],
@@ -58,7 +60,12 @@ export function useResolvedSearchFields(
   }
 }
 
-function createSearchItemContentSegments(prefixCls: string, searchField: SearchField, dateConfig: DateConfig) {
+function createSearchItemContentSegments(
+  prefixCls: string,
+  searchField: SearchField,
+  dateConfig: DateConfig,
+  locale: ProSearchLocale,
+) {
   if (searchField.type === 'multiSegment') {
     return searchField.fieldConfig.segments.map(segmentConfig =>
       createCustomSegment(prefixCls, dateConfig, segmentConfig),
@@ -68,7 +75,7 @@ function createSearchItemContentSegments(prefixCls: string, searchField: SearchF
   const segment = (() => {
     switch (searchField.type) {
       case 'select':
-        return createSelectSegment(prefixCls, searchField.fieldConfig)
+        return createSelectSegment(prefixCls, searchField.fieldConfig, locale)
       case 'treeSelect':
         return createTreeSelectSegment(prefixCls, searchField.fieldConfig)
       case 'cascader':

@@ -11,6 +11,7 @@ import type { VKey } from '@idux/cdk/utils'
 import { type Ref, computed } from 'vue'
 
 import { useDateConfig } from '@idux/components/config'
+import { useGlobalConfig } from '@idux/pro/config'
 
 import { useResolvedSearchFields } from './composables/useResolvedSearchFields'
 import { generateSegmentStates } from './utils'
@@ -27,10 +28,12 @@ export interface ParserContext {
 
 export function useParser(searchFields: Ref<SearchField[]> | SearchField[]): ParserContext {
   const dateConfig = useDateConfig()
+  const locales = useGlobalConfig('locale')
   const { fieldKeyMap } = useResolvedSearchFields(
     computed(() => ('value' in searchFields ? searchFields.value : searchFields)),
     computed(() => '__pro-search-parser__'),
     dateConfig,
+    locales.search,
   )
 
   const parse = (searchValues: SearchValue[]) => {
