@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ProSearchProps, ResolvedSearchField, SearchField, Segment } from '../types'
+import type { ResolvedSearchField, SearchField, Segment } from '../types'
 import type { VKey } from '@idux/cdk/utils'
 import type { DateConfig } from '@idux/components/config'
 
@@ -26,13 +26,13 @@ export interface ResolvedSearchFieldsContext {
 }
 
 export function useResolvedSearchFields(
-  props: ProSearchProps,
+  searchFields: ComputedRef<SearchField[]>,
   mergedPrefixCls: ComputedRef<string>,
   dateConfig: DateConfig,
 ): ResolvedSearchFieldsContext {
   const resolvedSearchFields = computed(
     () =>
-      props.searchFields?.map(searchField => {
+      searchFields.value.map(searchField => {
         return {
           ...searchField,
           segments: [
