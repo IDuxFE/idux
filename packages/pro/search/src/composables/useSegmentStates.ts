@@ -162,7 +162,7 @@ export function useSegmentStates(
   }
   const handleSegmentCancel = (name: string) => {
     // init the canceled segment state
-    initSearchState(props.searchItem!.key, name)
+    initSearchState(props.searchItem!.key, name, true)
 
     const segmentState = segmentStates.value[name]
 
@@ -189,7 +189,7 @@ export function useSegmentStates(
       const searchField = props.searchItem?.resolvedSearchField
 
       if (!searchField) {
-        initSearchState(props.searchItem!.key)
+        initSearchState(props.searchItem!.key, true)
         return
       }
 
@@ -203,7 +203,7 @@ export function useSegmentStates(
       if (preSegment && !preSegment.panelRenderer && validateSearchState(props.searchItem!.key)) {
         updateSearchValues()
       } else {
-        initSearchState(props.searchItem!.key)
+        initSearchState(props.searchItem!.key, true)
       }
     },
     {

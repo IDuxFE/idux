@@ -10,7 +10,7 @@ import type { ProSearchProps, ResolvedSearchField, SearchValue, Segment, Segment
 
 import { type ComputedRef, type Ref, computed, ref, toRaw } from 'vue'
 
-import { isEqual, isNil } from 'lodash-es'
+import { isEqual, isNil, isString } from 'lodash-es'
 
 import { type VKey, callEmit } from '@idux/cdk/utils'
 
@@ -25,10 +25,17 @@ export interface SearchState {
   segmentStates: SegmentState[]
 }
 
+interface InitSearchState {
+  (key: VKey): void
+  (key: VKey, force: boolean): void
+  (key: VKey, segmentName: string): void
+  (key: VKey, segmentName: string, force: boolean): void
+}
+
 export interface SearchStateContext {
   searchStates: Ref<SearchState[]>
   initSearchStates: () => void
-  initSearchState: (key: VKey, segmentName?: string) => void
+  initSearchState: InitSearchState
   createSearchState: (fieldKey: VKey, searchValue?: Omit<SearchValue, 'key'>) => SearchState | undefined
   getSearchStateByKey: (key: VKey) => SearchState | undefined
   getSearchStatesByFieldKey: (fieldKey: VKey) => SearchState[]
@@ -291,20 +298,23 @@ export function useSearchStates(
     searchStates.value = newStates
   }
 
-  const initSearchState = (key: VKey, segmentName?: string) => {
+  const initSearchState: InitSearchState = (key: VKey, segmentNameOrForce?: string | boolean, force?: boolean) => {
+    const _force = isString(segmentNameOrForce) ? force : segmentNameOrForce
+    const _segmentName = isString(segmentNameOrForce) ? segmentNameOrForce : undefined
+
     const searchState = getSearchStateByKey(key)
     const searchField = findSearchField(searchState?.fieldKey)
-    if (!searchState || !searchField) {
+    if (!searchState || !searchField || (isMarked(key) && !_force)) {
       return
     }
 
     const searchValue = searchState.searchValue
     const segmentStates = generateSegmentStates(searchField, searchValue)
 
-    if (!segmentName) {
+    if (!_segmentName) {
       searchState.segmentStates = segmentStates
     } else {
-      const idx = searchState.segmentStates.findIndex(state => state.name === segmentName)
+      const idx = searchState.segmentStates.findIndex(state => state.name === _segmentName)
       searchState.segmentStates[idx] = segmentStates[idx]
     }
   }
