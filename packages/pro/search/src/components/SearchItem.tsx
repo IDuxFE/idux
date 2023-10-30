@@ -67,7 +67,7 @@ export default defineComponent({
       () => `${props.searchItem!.name}${props.searchItem!.resolvedSearchField.segments.length > 1 ? '' : ':'}`,
     )
     const searchItemTitle = computed(
-      () => searchItemName.value + ' ' + segmentRenderDatas.value.map(data => data.input).join(' '),
+      () => searchItemName.value + ' ' + segmentRenderDatas.value.map(data => data.input || data.placeholder).join(' '),
     )
 
     const handleNameMouseDown = (evt: MouseEvent) => {
@@ -90,6 +90,7 @@ export default defineComponent({
 
     return () => {
       const prefixCls = itemPrefixCls.value
+
       return (
         <IxTooltip
           class={`${prefixCls}-invalid-tooltip`}
