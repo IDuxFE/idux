@@ -12,7 +12,7 @@ import { useNotification } from '@idux/components/notification'
 
 const { info, destroyAll, destroy } = useNotification()
 let count = 0
-let notificationKey: string
+let notificationKey: string | number | symbol
 const open = () => {
   const content = `click count: ${count++}`
   if (!notificationKey) {

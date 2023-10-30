@@ -10,11 +10,9 @@ import type { MessageConfig } from '@idux/components/config'
 
 import { computed, defineComponent, onBeforeUnmount, onMounted, watchEffect } from 'vue'
 
-import { isString } from 'lodash-es'
-
 import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
-import { IxIcon } from '@idux/components/icon'
+import { convertIconVNode } from '@idux/components/utils'
 
 import { messageProps } from './types'
 
@@ -40,7 +38,7 @@ export default defineComponent({
 
     return () => {
       const icon = mergedIcon.value
-      const iconNode = isString(icon) ? <IxIcon name={icon}></IxIcon> : icon
+      const iconNode = convertIconVNode(slots.icon, icon)
       const prefixCls = mergedPrefixCls.value
       return (
         <div v-show={visible.value} class={classes.value} onMouseenter={onMouseEnter} onMouseleave={onMouseLeave}>

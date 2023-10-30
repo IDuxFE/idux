@@ -11,13 +11,13 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } 
 import type { ɵFooterButtonProps } from '@idux/components/_private/footer'
 import type { ButtonProps } from '@idux/components/button'
 import type { HeaderProps } from '@idux/components/header'
-import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeProps } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild, VNodeProps } from 'vue'
 
 export type ModalType = 'default' | 'confirm' | 'info' | 'success' | 'warning' | 'error'
 export type ModalButtonProps = ɵFooterButtonProps
 export interface ModalOptions<K = VKey> extends ModalPublicProps {
   key?: K
-  content?: string | VNode
+  content?: string | VNode | (() => VNodeChild)
   contentProps?: Record<string, unknown> | VNodeProps
   onDestroy?: (key: K) => void
 }
@@ -42,7 +42,7 @@ export const modalProps = {
     type: Boolean,
     default: undefined,
   },
-  closeIcon: [String, Object] as PropType<string | VNode>,
+  closeIcon: [String, Object, Function] as PropType<string | VNode | (() => VNodeChild)>,
   closeOnDeactivated: {
     type: Boolean,
     default: true,
@@ -61,11 +61,11 @@ export const modalProps = {
   },
   draggable: { type: Boolean, default: false },
   footer: {
-    type: [Boolean, Array, Object] as PropType<boolean | ModalButtonProps[] | VNode>,
+    type: [Boolean, Array, Object, Function] as PropType<boolean | ModalButtonProps[] | VNode | (() => VNodeChild)>,
     default: true,
   },
   header: [String, Object] as PropType<string | HeaderProps>,
-  icon: [String, Object] as PropType<string | VNode>,
+  icon: [String, Object, Function] as PropType<string | VNode | (() => VNodeChild)>,
   mask: {
     type: Boolean,
     default: undefined,
@@ -85,7 +85,7 @@ export const modalProps = {
   okButton: Object as PropType<ButtonProps>,
   okText: String,
   scrollStrategy: Object as PropType<ScrollStrategy>,
-  title: [String, Object] as PropType<string | VNode>,
+  title: [String, Object, Function] as PropType<string | VNode | (() => VNodeChild)>,
   type: {
     type: String as PropType<ModalType>,
     default: 'default',
@@ -105,7 +105,7 @@ export const modalProps = {
   onOk: [Function, Array] as PropType<MaybeArray<(evt?: Event | unknown) => unknown>>,
 
   // private
-  __content_node: [String, Object] as PropType<string | VNode>,
+  __content_node: [String, Object] as PropType<string | VNodeChild>,
 } as const
 
 export type ModalProps = ExtractInnerPropTypes<typeof modalProps>

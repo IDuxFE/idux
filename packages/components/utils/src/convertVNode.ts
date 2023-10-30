@@ -7,13 +7,13 @@
 
 import { type Slot, type Slots, type VNode, type VNodeChild, createVNode } from 'vue'
 
-import { isString } from 'lodash-es'
+import { isFunction, isString } from 'lodash-es'
 
 import { IxIcon } from '@idux/components/icon'
 
 export function convertIconVNode(
   slot: Slot | undefined,
-  prop: string | VNode | undefined,
+  prop: string | VNode | ((params: Record<string, unknown> | undefined) => VNodeChild) | undefined,
   slotParams?: Record<string, unknown>,
 ): VNodeChild
 export function convertIconVNode(
@@ -29,7 +29,7 @@ export function convertIconVNode(
   slotParams?: Record<string, unknown>,
 ): VNodeChild {
   let iconSlot: Slot | undefined
-  let iconName: string | VNode | undefined
+  let iconName: string | VNode | ((params: Record<string, unknown> | undefined) => VNodeChild) | undefined
   const isKey = isString(keyOrParams)
   const params = isKey ? slotParams : keyOrParams
   if (isKey) {
@@ -40,19 +40,23 @@ export function convertIconVNode(
     }
   } else {
     iconSlot = slots as Slot | undefined
-    iconName = props as string | VNode | undefined
+    iconName = props as string | VNode | ((params: Record<string, unknown> | undefined) => VNodeChild) | undefined
   }
 
   if (iconSlot) {
     return iconSlot(params)
   }
 
-  return isString(iconName) && iconName !== '' ? createVNode(IxIcon, { name: iconName }, null) : iconName
+  return isString(iconName) && iconName !== ''
+    ? createVNode(IxIcon, { name: iconName }, null)
+    : isFunction(iconName)
+    ? iconName(params)
+    : iconName
 }
 
 export function convertStringVNode(
   slot: Slot | undefined,
-  prop: string | VNode | undefined,
+  prop: string | VNode | ((params: Record<string, unknown> | undefined) => VNodeChild) | undefined,
   slotParams?: Record<string, unknown>,
 ): VNodeChild
 export function convertStringVNode(
@@ -68,7 +72,7 @@ export function convertStringVNode(
   slotParams?: Record<string, unknown>,
 ): VNodeChild {
   let labelSlot: Slot | undefined
-  let label: string | VNode | undefined
+  let label: string | VNode | ((params: Record<string, unknown> | undefined) => VNodeChild) | undefined
   const isKey = isString(keyOrParams)
   const params = isKey ? slotParams : keyOrParams
   if (isKey) {
@@ -79,8 +83,8 @@ export function convertStringVNode(
     }
   } else {
     labelSlot = slots as Slot | undefined
-    label = props as string | VNode | undefined
+    label = props as string | VNode | ((params: Record<string, unknown> | undefined) => VNodeChild) | undefined
   }
 
-  return labelSlot ? labelSlot(params) : label
+  return labelSlot ? labelSlot(params) : isFunction(label) ? label(params) : label
 }
