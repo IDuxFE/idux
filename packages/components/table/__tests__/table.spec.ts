@@ -122,12 +122,12 @@ describe('Table', () => {
       expect(wrapper.find('tbody').findAll('tr')[0].classes()).not.toContain('ix-table-row-expanded')
       expect(wrapper.find('tbody').findAll('tr')[3].classes()).toContain('ix-table-row-expanded')
 
-      await wrapper.find('tbody').findAll('tr')[3].find('.ix-table-expandable-trigger').trigger('click')
+      await wrapper.find('tbody').findAll('tr')[3].find('.ix-table-expandable-trigger-button').trigger('click')
 
       expect(onUpdateExpandedRowKeys).toBeCalledWith([])
       await wrapper.setProps({ expandedRowKeys: [] })
 
-      await wrapper.find('tbody').findAll('tr')[3].find('.ix-table-expandable-trigger').trigger('click')
+      await wrapper.find('tbody').findAll('tr')[3].find('.ix-table-expandable-trigger-button').trigger('click')
 
       expect(onUpdateExpandedRowKeys).toBeCalledWith([3])
     })

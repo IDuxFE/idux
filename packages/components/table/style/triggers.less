@@ -1,0 +1,72 @@
+.@{table-prefix} {
+  &-cell-sortable {
+    cursor: pointer;
+  }
+
+  &-sortable-trigger {
+    display: inline-flex;
+    flex-direction: column;
+    font-size: 10px;
+    padding: 0 4px;
+
+    .@{icon-prefix} + .@{icon-prefix} {
+      margin-top: -0.2em;
+    }
+  }
+
+  &-filterable-trigger {
+    font-size: 16px;
+    padding: 0 1px;
+
+    &-footer {
+      padding: 8px 16px;
+      text-align: right;
+
+      .@{button-prefix} + .@{button-prefix} {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  &-filterable-menu-label {
+    display: inline-flex;
+
+    &-content {
+      margin-left: 8px;
+    }
+  }
+
+  &-sortable-trigger,
+  &-filterable-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4px;
+    user-select: none;
+    border-radius: @table-border-radius;
+    color: @table-head-icon-color;
+    transition: color var(--ix-transition-duration-fast), background var(--ix-transition-duration-fast);
+    cursor: pointer;
+
+    & + & {
+      margin-left: 0;
+    }
+
+    &:hover {
+      background-color: @table-head-icon-background-color-hover;
+    }
+
+    &-active {
+      color: @table-head-icon-color-active;
+    }
+  }
+
+  &-cell-triggers {
+    display: flex;
+    align-items: center;
+
+    .@{table-prefix}-cell-title {
+      flex: auto;
+    }
+  }
+}

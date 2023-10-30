@@ -87,6 +87,7 @@ export type TableColumn<T = any, V = any> =
 | `disabled` |  设置是否允许行展开 | `(record:T) => boolean` | - | - | - |
 | `icon` | 展开按钮图标 | `string \| VNode \| ((data: { expanded: boolean; record: T }) => string \| VNodeChild)` | `'right'` | ✅ | - |
 | `indent` | 展示树形数据时，每层缩进的宽度 | `number` | - | - | - |
+| `showLine` | 展示树形数据时，是否展示连线 | `boolean` | `false` | ✅ | - |
 | `trigger` | 不通过图标，触发行展开的方式 | `'click' \| 'doubleClick'` | - | - | - |
 | `onChange` | 展开状态发生变化时触发 | `(expendedRowKeys: (string \| number)[], expendedRecords: T[]) => void` | - | - | - |
 | `onExpand` | 点击展开图标，或通过 `trigger` 触发 | `(expanded: boolean, record: T) => void` | - | - | - |

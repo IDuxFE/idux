@@ -185,8 +185,8 @@ function convertColumn(column: TableColumn, config: TableConfig): TableColumnMer
   if ('type' in column) {
     const { type } = column
     if (type === 'expandable') {
-      const { icon = columnExpandable.icon } = column
-      return { ...column, key, align, icon }
+      const { showLine = columnExpandable.showLine, icon = columnExpandable.icon } = column
+      return { ...column, key, align, icon, showLine }
     }
     if (type === 'selectable') {
       // The default value for `multiple` is true

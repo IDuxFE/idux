@@ -109,6 +109,7 @@ export interface TableColumnExpandable<T = any, K = VKey> extends TableColumnBas
   icon?: string | VNodeChild | ((options: { expanded: boolean; record: T }) => string | VNodeChild)
   indent?: number
   trigger?: 'click' | 'dblclick'
+  showLine?: boolean
 
   onChange?: (expendedRowKeys: K[]) => void
   onExpand?: (expanded: boolean, record: T) => void
@@ -242,6 +243,9 @@ export const tableBodyRowProps = {
   expanded: { type: Boolean, default: undefined },
   rowIndex: { type: Number, required: true },
   level: { type: Number, default: undefined },
+  hasPrevSibling: { type: Boolean, default: undefined },
+  hasNextSibling: { type: Boolean, default: undefined },
+  hasChildren: { type: Boolean, default: undefined },
   record: { type: Object as PropType<any>, required: true },
   rowData: { type: Object as PropType<FlattedData>, required: true },
   rowKey: { type: [String, Number, Symbol] as PropType<VKey>, required: true },
@@ -257,6 +261,8 @@ export const tableBodyCellProps = {
   rowIndex: { type: Number, required: true },
   disabled: { type: Boolean, default: undefined },
   expanded: { type: Boolean, default: undefined },
+  hasPrevSibling: { type: Boolean, default: undefined },
+  hasNextSibling: { type: Boolean, default: undefined },
   handleExpend: { type: Function as PropType<() => void>, default: undefined },
   isHover: { type: Boolean, default: undefined },
   selected: { type: Boolean, default: undefined },

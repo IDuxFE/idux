@@ -22,8 +22,19 @@ export function renderBodyRow(
   expandable: TableColumnMergedExpandable | undefined,
   prefixCls: string,
 ): VNodeChild {
-  const { expanded, level, record, rowKey } = item
-  const rowProps = { key: rowKey, expanded, level, record, rowData: item, rowIndex, rowKey }
+  const { children, expanded, level, hasPrevSibling, hasNextSibling, record, rowKey } = item
+  const rowProps = {
+    key: rowKey,
+    expanded,
+    level,
+    hasPrevSibling,
+    hasNextSibling,
+    hasChildren: !!children?.length,
+    record,
+    rowData: item,
+    rowIndex,
+    rowKey,
+  }
   const rowNode = <BodyRow {...rowProps} />
 
   const expandedNode = expanded && renderExpandedContext(rowProps, slots, expandable, prefixCls)
