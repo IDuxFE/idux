@@ -103,6 +103,7 @@ const searchFields: SearchField[] = [
       searchable: true,
       checkable: true,
       cascaderStrategy: 'all',
+      defaultExpandedKeys: ['0'],
       dataSource: [
         {
           label: 'Node 0',

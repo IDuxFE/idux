@@ -59,6 +59,7 @@ export const proSearchTreeSelectPanelProps = {
   draggable: { type: Boolean, default: false },
   draggableIcon: { type: String, default: undefined },
   droppable: { type: Function as PropType<TreeDroppable>, default: undefined },
+  defaultExpandedKeys: { type: Array as PropType<VKey[]>, default: undefined },
 
   expandIcon: { type: [String, Array] as PropType<string | [string, string]>, default: undefined },
   loadChildren: {
