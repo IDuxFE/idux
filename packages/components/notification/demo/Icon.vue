@@ -20,10 +20,10 @@ const openCustomIconByName = () =>
     title: 'icon',
     content: 'This is a custom icon by name',
   })
-const iconVNode = h(IxIcon, { name: 'star', style: { color: 'red' } })
+const renderIcon = () => h(IxIcon, { name: 'star', style: { color: 'red' } })
 const openCustomIconByVNode = () =>
   info({
-    icon: iconVNode,
+    icon: renderIcon,
     title: 'icon',
     content: 'This is a custom icon by VNode',
   })
@@ -34,10 +34,10 @@ const openCustomCloseIconByName = () =>
     title: 'close icon',
     content: 'This is a custom close icon by name',
   })
-const closeIconVNode = h(IxIcon, { name: 'right', style: { color: 'red' } })
+const renderCloseIcon = () => h(IxIcon, { name: 'right', style: { color: 'red' } })
 const openCustomCloseIconByVNode = () =>
   info({
-    closeIcon: closeIconVNode,
+    closeIcon: renderCloseIcon,
     title: 'close icon',
     content: 'This is a custom close icon by VNode',
   })

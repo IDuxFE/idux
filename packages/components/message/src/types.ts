@@ -7,13 +7,13 @@
 
 import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
-import type { DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
 export type MessageType = 'info' | 'success' | 'warning' | 'error' | 'loading'
 
 export interface MessageOptions<K = VKey> extends MessagePublicProps {
   key?: K
-  content?: string | VNode
+  content?: string | VNode | (() => VNodeChild)
   onDestroy?: (key: K) => void
 }
 export interface MessageRef<K = VKey> {
@@ -32,7 +32,7 @@ export const messageProps = {
     default: undefined,
   },
   duration: Number,
-  icon: [String, Object] as PropType<string | VNode>,
+  icon: [String, Object, Function] as PropType<string | VNode | (() => VNodeChild)>,
   type: {
     type: String as PropType<MessageType>,
     default: 'info',
@@ -58,11 +58,26 @@ export const messageProviderProps = {
 } as const
 export interface MessageProviderRef<K = VKey> {
   open: (options: MessageOptions<K>) => MessageRef
-  info: (content: string | VNode, options?: Omit<MessageOptions<K>, 'type' | 'content'>) => MessageRef<K>
-  success: (content: string | VNode, options?: Omit<MessageOptions<K>, 'type' | 'content'>) => MessageRef<K>
-  warning: (content: string | VNode, options?: Omit<MessageOptions<K>, 'type' | 'content'>) => MessageRef<K>
-  error: (content: string | VNode, options?: Omit<MessageOptions<K>, 'type' | 'content'>) => MessageRef<K>
-  loading: (content: string | VNode, options?: Omit<MessageOptions<K>, 'type' | 'content'>) => MessageRef<K>
+  info: (
+    content: string | VNode | (() => VNodeChild),
+    options?: Omit<MessageOptions<K>, 'type' | 'content'>,
+  ) => MessageRef<K>
+  success: (
+    content: string | VNode | (() => VNodeChild),
+    options?: Omit<MessageOptions<K>, 'type' | 'content'>,
+  ) => MessageRef<K>
+  warning: (
+    content: string | VNode | (() => VNodeChild),
+    options?: Omit<MessageOptions<K>, 'type' | 'content'>,
+  ) => MessageRef<K>
+  error: (
+    content: string | VNode | (() => VNodeChild),
+    options?: Omit<MessageOptions<K>, 'type' | 'content'>,
+  ) => MessageRef<K>
+  loading: (
+    content: string | VNode | (() => VNodeChild),
+    options?: Omit<MessageOptions<K>, 'type' | 'content'>,
+  ) => MessageRef<K>
   update: (key: K, options: MessageOptions<K>) => void
   destroy: (key: K | K[]) => void
   destroyAll: () => void

@@ -8,8 +8,8 @@
 | `maxCount` | 同一时间可展示的最大提示数量 | `number` | `5` | - |
 | `destroyOnHover` | 鼠标悬浮时是否允许销毁 | `boolean` | `false` | - |
 | `duration` | 自动销毁的延时，单位毫秒 | `number` | `4500` | - |
-| `icon` | 自定义通知图标映射表 | `Partial<Record<NotificationType, string \| VNode>>` | `{ success: 'check-circle', error: 'close-circle', info: 'info-circle', warning: 'exclamation-circle' }` | - |
-| `closeIcon` | 自定义关闭图标 | `string \| VNode` | `close` | - |
+| `icon` | 自定义通知图标映射表 | `Partial<Record<NotificationType, string \| VNode \| (() => VNodeChild)>>` | `{ success: 'check-circle', error: 'close-circle', info: 'info-circle', warning: 'exclamation-circle' }` | - |
+| `closeIcon` | 自定义关闭图标 | `string \| VNode \| (() => VNodeChild)` | `close` | - |
 | `offset` | 通知消息弹出时，距离边缘的位置 | `number \| string \|[number \| string, number \| string]` | `24` | number时：单位为px；<br/>string时：可为`vh` \ `vw` \| `%` \| `px`；<br/>array时：[上下边缘，左右边缘]；<br />设置为非array时上下边缘和左右边缘相等 |
 | `placement` | 弹出的位置 | `'topStart' \| 'topEnd' \| 'bottomStart' \| 'bottomEnd'` | `'topEnd'` | - |
 
@@ -57,14 +57,14 @@ const openNotification = ()=> notification.info({
 | --- | --- | --- | --- | --- | --- |
 | `destroyOnHover` | 鼠标悬浮时是否允许销毁 | `boolean` | `false` | ☑️ | - |
 | `duration` | 自动销毁的延时，单位毫秒 | `number` | 4500 | ☑️ | - |
-| `icon` | 自定义通知图标 | `string \| VNode` | - | - | - |
-| `closeIcon` | 自定义关闭图标 | `string \| VNode` | - | - | - |
+| `icon` | 自定义通知图标 | `string \| VNode \| (() => VNodeChild)` | - | - | - |
+| `closeIcon` | 自定义关闭图标 | `string \| VNode \| (() => VNodeChild)` | - | - | - |
 | `type` | 通知类型 | `'info' \| 'success' \| 'warning' \| 'error'` | - | - | - |
 | `key` | 唯一标识 | `string \| number \| symbol` | - | - | - |
 | `placement` | 弹出的位置 | `'topStart' \| 'topEnd' \| 'bottomStart' \| 'bottomEnd'` | `'topEnd'` | ☑️ | - |
-| `title` | 通知的标题 | `string \| VNode` | - | - | 必填 |
-| `content` | 通知的内容 | `string \| VNode` | - | - | 必填 |
-| `footer` | 自定义底部按钮 | `string \| VNode \| ButtonProps[]` | - | - | 底部区域flex布局 |
+| `title` | 通知的标题 | `string \| VNode \| (() => VNodeChild)` | - | - | 必填 |
+| `content` | 通知的内容 | `string \| VNode \| (() => VNodeChild)` | - | - | 必填 |
+| `footer` | 自定义底部按钮 | `string \| VNode \| (() => VNodeChild) \| ButtonProps[]` | - | - | 底部区域flex布局 |
 | `onDestroy` | 关闭通知时触发的回调 | `(key: VKey) => void` | - | - | - |
 
 ```ts
@@ -114,8 +114,7 @@ const contentRef = ref()
 
 const openNotification = () => open({ 
  title: 'Basic Notification', 
- content: h('div', 'Some contents...'),
- contentProps: { ref: contentRef }
+ content: () => h('div', { ref: contentRef }, 'Some contents...'),
 })
 </script>
 ```

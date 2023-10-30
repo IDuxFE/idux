@@ -10,7 +10,7 @@ import type { ScrollStrategy } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { ɵFooterButtonProps } from '@idux/components/_private/footer'
 import type { HeaderProps } from '@idux/components/header'
-import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeProps } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild, VNodeProps } from 'vue'
 
 export type DrawerPlacement = 'top' | 'bottom' | 'start' | 'end'
 
@@ -18,7 +18,7 @@ export type DrawerButtonProps = ɵFooterButtonProps
 
 export interface DrawerOptions<K = VKey> extends DrawerPublicProps {
   key?: K
-  content?: string | VNode
+  content?: string | VNode | (() => VNodeChild)
   contentProps?: Record<string, unknown> | VNodeProps
   onDestroy?: (key: K) => void
 }
@@ -41,7 +41,7 @@ export const drawerProps = {
     type: Boolean,
     default: undefined,
   },
-  closeIcon: [String, Object] as PropType<string | VNode>,
+  closeIcon: [String, Object, Function] as PropType<string | VNode | (() => VNodeChild)>,
   closeOnDeactivated: {
     type: Boolean,
     default: true,
@@ -58,7 +58,7 @@ export const drawerProps = {
     type: Boolean,
     default: false,
   },
-  footer: [Array, Object] as PropType<DrawerButtonProps[] | VNode>,
+  footer: [Array, Object, Function] as PropType<DrawerButtonProps[] | VNode | (() => VNodeChild)>,
   header: [String, Object] as PropType<string | HeaderProps>,
   height: [String, Number] as PropType<string | number>,
   mask: {

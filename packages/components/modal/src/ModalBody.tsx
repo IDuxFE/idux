@@ -5,11 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { Slot, VNode, VNodeTypes } from 'vue'
+import type { Slot, VNode, VNodeChild } from 'vue'
 
 import { computed, defineComponent, inject } from 'vue'
 
-import { isString } from 'lodash-es'
+import { isFunction, isString } from 'lodash-es'
 
 import { IxIcon } from '@idux/components/icon'
 
@@ -44,6 +44,7 @@ export default defineComponent({
       const classes = `${prefixCls} ${prefixCls}-${props.type}`
       const iconNode = renderIcon(prefixCls, slots.icon, iconName.value)
       const titleNode = renderTitle(prefixCls, slots.title, props.title)
+
       return (
         <div class={classes}>
           {iconNode}
@@ -57,23 +58,42 @@ export default defineComponent({
   },
 })
 
-const renderIcon = (prefixCls: string, iconSlot: Slot | undefined, icon: string | VNode | undefined) => {
+const renderIcon = (
+  prefixCls: string,
+  iconSlot: Slot | undefined,
+  icon: string | VNode | (() => VNodeChild) | undefined,
+) => {
   if (!iconSlot && !icon) {
     return null
   }
-  let children: VNodeTypes
+  let children: VNodeChild
   if (iconSlot) {
     children = iconSlot()
+  } else if (isFunction(icon)) {
+    children = icon()
   } else {
     children = isString(icon) ? <IxIcon name={icon}></IxIcon> : icon!
   }
   return <div class={`${prefixCls}-icon`}>{children}</div>
 }
 
-const renderTitle = (prefixCls: string, titleSlot: Slot | undefined, title: string | VNode | undefined) => {
+const renderTitle = (
+  prefixCls: string,
+  titleSlot: Slot | undefined,
+  title: string | VNode | (() => VNodeChild) | undefined,
+) => {
   if (!titleSlot && !title) {
     return null
   }
-  const children = titleSlot ? titleSlot() : title
+
+  let children: VNodeChild
+  if (titleSlot) {
+    children = titleSlot()
+  } else if (isFunction(title)) {
+    children = title()
+  } else {
+    children = title
+  }
+
   return <div class={`${prefixCls}-title`}>{children}</div>
 }

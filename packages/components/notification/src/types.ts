@@ -8,11 +8,11 @@
 import type { PortalTargetType } from '@idux/cdk/portal'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { ButtonProps } from '@idux/components/button'
-import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeProps } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild, VNodeProps } from 'vue'
 
 export interface NotificationButtonProps<K = VKey> extends ButtonProps {
   key?: K
-  text?: string | VNode
+  text?: string | VNode | (() => VNodeChild)
   onClick?: (evt: Event) => void
 }
 
@@ -33,12 +33,14 @@ export const notificationProps = {
     default: undefined,
   },
   duration: Number,
-  icon: [String, Object] as PropType<string | VNode>,
-  closeIcon: [String, Object] as PropType<string | VNode>,
+  icon: [String, Object, Function] as PropType<string | VNode | (() => VNodeChild)>,
+  closeIcon: [String, Object, Function] as PropType<string | VNode | (() => VNodeChild)>,
   type: String as PropType<NotificationType>,
-  title: [String, Object] as PropType<string | VNode>,
-  content: [String, Object] as PropType<string | VNode>,
-  footer: [String, Array, Object] as PropType<string | NotificationButtonProps[] | VNode>,
+  title: [String, Object, Function] as PropType<string | VNode | (() => VNodeChild)>,
+  content: [String, Object, Function] as PropType<string | VNode | (() => VNodeChild)>,
+  footer: [String, Array, Object] as PropType<
+    string | NotificationButtonProps[] | VNode | ((options: SlotProps) => VNodeChild)
+  >,
   placement: String as PropType<NotificationPlacement>,
 
   // event

@@ -10,6 +10,8 @@ import type { VKey } from '@idux/cdk/utils'
 
 import { cloneVNode, defineComponent, isVNode, provide, shallowRef } from 'vue'
 
+import { isFunction } from 'lodash-es'
+
 import { NoopFunction, callEmit, convertArray, uniqueId } from '@idux/cdk/utils'
 
 import Drawer from './Drawer'
@@ -33,7 +35,11 @@ export default defineComponent({
         const onAfterClose = destroyOnHide ? () => destroy(key!) : undefined
         const mergedProps = { key, visible, ref: setRef, 'onUpdate:visible': onUpdateVisible, onAfterClose }
 
-        const contentNode = isVNode(content) ? cloneVNode(content, contentProps, true) : content
+        const contentNode = isFunction(content)
+          ? content()
+          : isVNode(content)
+          ? cloneVNode(content, contentProps, true)
+          : content
         return (
           <Drawer {...mergedProps} {...rest}>
             {contentNode}

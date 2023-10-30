@@ -316,7 +316,7 @@ export interface MessageConfig {
   container?: PortalTargetType
   destroyOnHover: boolean
   duration: number
-  icon: Partial<Record<MessageType, string | VNode>>
+  icon: Partial<Record<MessageType, string | VNode | (() => VNodeChild)>>
   maxCount: number
   top?: number | string
 }
@@ -328,7 +328,7 @@ export interface ModalConfig {
   closeIcon: string
   closeOnEsc: boolean
   container?: PortalTargetType
-  icon?: Partial<Record<ModalType, string | VNode>>
+  icon?: Partial<Record<ModalType, string | VNode | (() => VNodeChild)>>
   mask: boolean
   maskClosable: boolean
   /**
@@ -341,7 +341,7 @@ export interface NotificationConfig {
   container?: PortalTargetType
   destroyOnHover: boolean
   duration: number
-  icon?: Partial<Record<NotificationType, string | VNode>>
+  icon?: Partial<Record<NotificationType, string | VNode | (() => VNodeChild)>>
   closeIcon?: string | VNode
   maxCount: number
   offset: number | string | (string | number)[]

@@ -10,22 +10,22 @@
 | `cancelText` | 取消按钮的文本 | `string` | `取消` | - | - |
 | `centered` | 垂直居中展示 | `boolean` | `false` | ✅ | `seer` 主题默认为 `true` |
 | `closable` | 是否显示右上角的关闭按钮 | `boolean` | `true` | ✅ | - |
-| `closeIcon` | 自定义关闭图标 | `string \| VNode \| #closeIcon` | `close` | ✅ | - |
+| `closeIcon` | 自定义关闭图标 | `string \| VNode \| (() => VNodeChild) \| #closeIcon` | `close` | ✅ | - |
 | `closeOnDeactivated` | 是否在 [onDeactivated](https://cn.vuejs.org/api/composition-api-lifecycle.html#ondeactivated) 时关闭 | `boolean` | `true` | - | - |
 | `closeOnEsc` | 是否支持键盘 `esc` 关闭 | `boolean` | `true` | ✅ | - |
 | `container` | 自定义对话框挂载的容器节点  | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
 | `destroyOnHide` | 关闭时销毁子元素 | `boolean` | `false` | - | - |
 | `draggable` | 是否支持拖放| `boolean\| 'native'\| 'pointer'` | `false` | - | 当置为`true`时默认激活 `pointer`模式 |
-| `footer` | 自定义底部按钮 | `boolean \| ModalButtonProps[] \| VNode \| #footer` | `true` | - | 默认会根据 `type` 的不同渲染相应的按钮，如果传入 `false` 则不显示 |
+| `footer` | 自定义底部按钮 | `boolean \| ModalButtonProps[] \| VNode \| (() => VNodeChild) \| #footer` | `true` | - | 默认会根据 `type` 的不同渲染相应的按钮，如果传入 `false` 则不显示 |
 | `header` | 对话框标题 | `string \| HeaderProps \| #header={closable, closeIcon, onClose}` | - | - | - |
-| `icon` | 自定义图标 | `string \| VNode \| #icon` | - | ✅ | 当 `type` 不为 `default` 时有效 |
+| `icon` | 自定义图标 | `string \| VNode \| (() => VNodeChild) \| #icon` | - | ✅ | 当 `type` 不为 `default` 时有效 |
 | `mask` | 是否展示蒙层 | `boolean` | `true` | ✅ | - |
 | `maskClosable` | 点击蒙层是否允许关闭 | `boolean` | `true` | ✅ |  `seer` 主题默认为 `false` |
 | `animatable` | 是否开启弹窗动画效果 | `boolean` | `true` | - | - |
 | `offset` | 对话框偏移量 | `number \| string` | `128` | - |  为顶部偏移量，仅在`centered=false` 时生效 |
 | `okButton` | 确认按钮的属性 | `ButtonProps` | - | - | - |
 | `okText` | 确认按钮的文本 | `string` | `确定` | - | - |
-| `title` | 对话框次标题 | `string  \| VNode \| #title` | - | - | 当 `type` 不为 `default` 时有效 |
+| `title` | 对话框次标题 | `string  \| VNode \| (() => VNodeChild) \| #title` | - | - | 当 `type` 不为 `default` 时有效 |
 | `type` | 对话框类型 | `'default' \| 'confirm' \| 'info' \| 'success' \| 'warning' \| 'error'` | `default` | - | - |
 | `width` | 对话框宽度 | `string \| number` | - | - | `default` 类型默认宽度 `480px`, 其他类型默认宽度 `400` |
 | `zIndex` | 设置对话框的 `z-index` | `number` | - | - | - |
@@ -107,7 +107,7 @@ export interface ModalProviderRef {
 export interface ModalOptions extends ModalProps {
   key?: VKey
   // 对话框的内容
-  content?: string | VNode
+  content?: string | VNode | (() => VNodeChild)
   // 当 content 为 VNode 时, 可以传递 props 或者绑定 ref
   contentProps?: Record<string, unknown> | VNodeProps
   // 对话框销毁后的回调

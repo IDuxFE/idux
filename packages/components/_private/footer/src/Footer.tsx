@@ -6,9 +6,11 @@
  */
 
 import type { FooterButtonProps } from './types'
-import type { VNodeTypes } from 'vue'
+import type { VNodeChild } from 'vue'
 
 import { computed, defineComponent, isVNode } from 'vue'
+
+import { isFunction } from 'lodash-es'
 
 import { IxButton } from '@idux/components/button'
 
@@ -54,9 +56,11 @@ export default defineComponent({
         return undefined
       }
 
-      let children: VNodeTypes
+      let children: VNodeChild
       if (footerSlot) {
         children = footerSlot(props)
+      } else if (isFunction(footerProp)) {
+        children = footerProp()
       } else if (isVNode(footerProp)) {
         children = footerProp
       } else {
@@ -70,7 +74,8 @@ export default defineComponent({
         }
         children = buttonProps.map(item => {
           const { text, ...rest } = item
-          return <IxButton {...rest}>{text}</IxButton>
+          const _text = isFunction(text) ? text() : text
+          return <IxButton {...rest}>{_text}</IxButton>
         })
       }
 

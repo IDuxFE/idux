@@ -8,7 +8,7 @@
 | `v-model:visible` | 是否可见 | `boolean` | - | - | - |
 | `destroyOnHover` | 鼠标悬浮时自动销毁 | `boolean` | `false` | ✅ | - |
 | `duration` | 自动销毁的延时，单位毫秒 | `number` | - | - | 传入 `0` 表示不自动销毁 |
-| `icon` | 自定义图标 | `string \| VNode` | - | ✅ | - |
+| `icon` | 自定义图标 | `string \| VNode \| (() => VNodeChild)` | - | ✅ | - |
 | `type` | 提示类型 | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading'`  | `info` | - | - |
 | `onClose` | 提示框关闭的回调 | `() => void` | - | - | - |
 
@@ -55,11 +55,11 @@ export const useMessage: () => MessageProviderRef;
 export interface MessageProviderRef {
   // 打开提示框
   open: (options: MessageOptions) => MessageRef
-  info: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
-  success: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
-  warning: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
-  error: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
-  loading: (content: string | VNode, options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
+  info: (content: string | VNode | (() => VNodeChild), options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
+  success: (content: string | VNode | (() => VNodeChild), options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
+  warning: (content: string | VNode | (() => VNodeChild), options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
+  error: (content: string | VNode | (() => VNodeChild), options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
+  loading: (content: string | VNode | (() => VNodeChild), options?: Omit<MessageOptions, 'type' | 'content'>) => MessageRef
   // 更新指定 key 的提示框的配置信息
   update: (key: VKey, options: MessageOptions) => void
   // 销毁指定 key 的提示框
@@ -71,7 +71,7 @@ export interface MessageProviderRef {
 export interface MessageOptions extends MessageProps {
   key?: string
   // 提示框的内容
-  content?: string | VNode
+  content?: string | VNode | (() => VNodeChild)
   // 提示框销毁后的回调
   onDestroy?: (key: VKey) => void
 }

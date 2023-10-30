@@ -7,12 +7,12 @@
 
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, VKey } from '@idux/cdk/utils'
 import type { ButtonProps } from '@idux/components/button'
-import type { ButtonHTMLAttributes, DefineComponent, HTMLAttributes, PropType, VNode } from 'vue'
+import type { ButtonHTMLAttributes, DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
 export interface FooterButtonProps extends ButtonHTMLAttributes, ButtonProps {
   disabled?: boolean
   key?: VKey
-  text?: string | VNode
+  text?: string | VNode | (() => VNodeChild)
   onClick?: (evt: Event) => void
 }
 
@@ -25,7 +25,7 @@ export const footerProps = {
     type: Boolean,
     default: true,
   },
-  footer: [Boolean, Array, Object] as PropType<boolean | FooterButtonProps[] | VNode>,
+  footer: [Boolean, Array, Object, Function] as PropType<boolean | FooterButtonProps[] | VNode | (() => VNodeChild)>,
   ok: Function as PropType<(evt?: Event | unknown) => Promise<void> | void>,
   okButton: Object as PropType<ButtonProps>,
   okLoading: Boolean,

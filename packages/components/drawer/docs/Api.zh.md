@@ -7,12 +7,12 @@
 | --- | --- | --- | --- | --- | --- |
 | `v-model:visible` | 是否可见 | `boolean` | - | - | - |
 | `closable` | 是否显示右上角的关闭按钮 | `boolean` | `true` | ✅ | - |
-| `closeIcon` | 自定义关闭图标 | `string \| VNode \| #closeIcon` | `close` | ✅ | - |
+| `closeIcon` | 自定义关闭图标 | `string \| VNode \| (() => VNodeChild) \| #closeIcon` | `close` | ✅ | - |
 | `closeOnDeactivated` | 是否在 [onDeactivated](https://cn.vuejs.org/api/composition-api-lifecycle.html#ondeactivated) 时关闭 | `boolean` | `true` | - | - |
 | `closeOnEsc` | 是否支持键盘 `esc` 关闭 | `boolean` | `true` | ✅ | - |
 | `container` | 自定义抽屉挂载的容器节点  | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
 | `destroyOnHide` | 关闭时销毁子元素 | `boolean` | `false` | - | - |
-| `footer` | 自定义底部按钮 | `DrawerButtonProps[] \| VNode \| #footer` | - | - | - |
+| `footer` | 自定义底部按钮 | `DrawerButtonProps[] \| VNode \| (() => VNodeChild) \| #footer` | - | - | - |
 | `header` | 抽屉的标题 | `string \| HeaderProps \| #header={closable, closeIcon, onClose}` | - | - | - |
 | `height` | 抽屉高度 | `string \| number` | `'256'` | ✅ | 默认值仅在 `placement为` 为 `top/bottom` 时生效，其他情况默认为 `100%` |
 | `mask` | 是否展示蒙层 | `boolean` | `true` | ✅ | - |
@@ -90,7 +90,7 @@ export interface DrawerProviderRef {
 export interface DrawerOptions extends DrawerProps {
   key?: VKey
   // 抽屉的内容
-  content?: string | VNode
+  content?: string | VNode | (() => VNodeChild)
   // 当 content 为 VNode 时, 可以传递 props 或者绑定 ref
   contentProps?: Record<string, unknown> | VNodeProps
   // 抽屉销毁后的回调

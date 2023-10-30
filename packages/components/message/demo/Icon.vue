@@ -16,8 +16,8 @@ export default defineComponent({
     const { info } = useMessage()
     const open = () => info('This is a star message', { icon: 'star' })
 
-    const iconVNode = h(IxIcon, { name: 'star', style: { color: 'red' } })
-    const openVNode = () => info('This is a star message', { icon: iconVNode })
+    const renderIcon = () => h(IxIcon, { name: 'star', style: { color: 'red' } })
+    const openVNode = () => info('This is a star message', { icon: renderIcon })
 
     return { open, openVNode }
   },

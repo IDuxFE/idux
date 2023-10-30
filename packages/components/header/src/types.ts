@@ -15,11 +15,17 @@ export const headerProps = {
   avatar: { type: [String, Object] as PropType<string | AvatarProps>, default: undefined },
   description: { type: String, default: undefined },
   disabled: { type: Boolean, default: false },
-  prefix: { type: [String, Object] as PropType<string | VNodeChild>, default: undefined },
+  prefix: {
+    type: [String, Object, Function] as PropType<string | VNodeChild | (() => VNodeChild)>,
+    default: undefined,
+  },
   size: { type: String as PropType<HeaderSize>, default: 'md' },
   showBar: { type: Boolean, default: false },
   subTitle: { type: String, default: undefined },
-  suffix: { type: [String, Object] as PropType<string | VNodeChild>, default: undefined },
+  suffix: {
+    type: [String, Object, Function] as PropType<string | VNodeChild | (() => VNodeChild)>,
+    default: undefined,
+  },
   title: { type: String, default: undefined },
 
   // events

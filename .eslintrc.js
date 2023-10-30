@@ -99,7 +99,7 @@ module.exports = {
     'comma-style': ['error', 'last'],
     'comma-dangle': ['error', 'always-multiline'],
     'eol-last': 'error',
-    indent: ['error', 2, { SwitchCase: 1 }],
+    indent: 'off',
     'no-trailing-spaces': 'error',
     'object-curly-spacing': ['error', 'always'],
     quotes: ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
