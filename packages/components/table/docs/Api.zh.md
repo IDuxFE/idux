@@ -189,7 +189,7 @@ export type TablePaginationPosition = 'topStart' | 'top' | 'topEnd' | 'bottomSta
 | `empty` | 自定义空状态 | - | - |
 | `footer` | 表格尾部 | - | - |
 | `header` | 表格头部 | - | - |
-| `summary` | 表格总结栏 | - | - |
+| `pagination` | 表格分页条 | `PaginationProps` | - |
 
 #### TableMethods
 

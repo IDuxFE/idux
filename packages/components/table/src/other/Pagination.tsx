@@ -7,26 +7,29 @@
 
 import type { MergedData } from '../composables/useDataSource'
 import type { TablePagination } from '../types'
-import type { VNode } from 'vue'
+import type { Slots, VNodeChild } from 'vue'
 
 import { kebabCase } from 'lodash-es'
 
 import { IxPagination } from '@idux/components/pagination'
 
 export function renderPagination(
+  slots: Slots,
   mergedPagination: TablePagination | null,
   filteredData: MergedData[],
   prefixCls: string,
-): [VNode | null, VNode | null] {
-  let top: VNode | null = null
-  let bottom: VNode | null = null
+): [VNodeChild | null, VNodeChild | null] {
+  let top: VNodeChild | null = null
+  let bottom: VNodeChild | null = null
 
   if (mergedPagination !== null) {
     const { position } = mergedPagination
     const [vertical, horizontal] = kebabCase(position).split('-')
     const className = `${prefixCls}-pagination ${prefixCls}-pagination-${horizontal}`
 
-    const node = <IxPagination class={className} total={filteredData.length} {...mergedPagination} />
+    const node = slots.pagination?.({ total: filteredData.length, ...mergedPagination }) ?? (
+      <IxPagination class={className} total={filteredData.length} {...mergedPagination} />
+    )
 
     top = vertical === 'top' ? node : null
     bottom = vertical === 'bottom' ? node : null
