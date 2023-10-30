@@ -70,7 +70,6 @@ export function useSearchStates(
 
     return countMap
   })
-  const lastSearchStateIndex = computed(() => searchStates.value[searchStates.value.length - 1]?.index ?? -1)
 
   const findSearchField = (fieldKey?: VKey) => {
     if (isNil(fieldKey)) {
@@ -217,47 +216,77 @@ export function useSearchStates(
 
   const initSearchStates = () => {
     const dataKeyCountMap = new Map<VKey, number>()
-    const newSearchStates = (
-      searchValues.value?.map((searchValue, index) => {
-        const fieldKey = searchValue.key
-        const searchField = findSearchField(fieldKey)
-        if (!searchField) {
-          return
-        }
+    const newStates: SearchState[] = []
 
-        const segmentStates = generateSegmentStates(searchField, searchValue)
-        const count = dataKeyCountMap.has(fieldKey) ? dataKeyCountMap.get(fieldKey)! : 0
-        const key = getKey(fieldKey, count)
-
-        const searchState = { key, index, fieldKey, searchValue, segmentStates } as SearchState
-        if (!checkSearchStateValid(searchState, dataKeyCountMap)) {
-          return
-        }
-
-        dataKeyCountMap.set(fieldKey, count + 1)
-        return searchState
-      }) ?? []
-    ).filter(Boolean) as SearchState[]
-
-    const lastIndex = newSearchStates[newSearchStates.length - 1]?.index ?? -1
+    const _getKey = (fieldKey: VKey) => {
+      const count = dataKeyCountMap.has(fieldKey) ? dataKeyCountMap.get(fieldKey)! : 0
+      return getKey(fieldKey, count)
+    }
+    const _incrementCount = (fieldKey: VKey) => {
+      const count = dataKeyCountMap.get(fieldKey)
+      dataKeyCountMap.set(fieldKey, (count ?? 0) + 1)
+    }
 
     const createdStates = getMarks()
       .map(({ key, mark }) => mark === 'created' && getSearchStateByKey(key))
-      .filter(Boolean)
-      .map((state, index) => {
-        // recreate the state key again to avoid key duplication
-        const fieldKey = (state as SearchState).fieldKey
-        const count = dataKeyCountMap.has(fieldKey) ? dataKeyCountMap.get(fieldKey)! : 0
-        const key = getKey(fieldKey, count)
+      .filter(Boolean) as SearchState[]
 
-        return {
-          ...state,
-          key,
-          index: lastIndex + index + 1,
-        }
-      }) as SearchState[]
+    let newStateIndex = 0
+    let createStateIndex = 0
 
-    searchStates.value = [...newSearchStates, ...createdStates]
+    const addCreatedState = (state: SearchState) => {
+      const fieldKey = state.fieldKey
+      const key = _getKey(fieldKey)
+
+      newStates.push({
+        ...state,
+        key,
+      })
+
+      _incrementCount(fieldKey)
+    }
+    const addNewState = (searchValue: SearchValue | undefined) => {
+      if (!searchValue) {
+        return
+      }
+
+      const fieldKey = searchValue.key
+      const searchField = findSearchField(fieldKey)
+      if (!searchField) {
+        return
+      }
+
+      const key = _getKey(fieldKey)
+      const segmentStates = generateSegmentStates(searchField, searchValue)
+      const searchState = { key, index: newStates.length, fieldKey, searchValue, segmentStates } as SearchState
+      if (!checkSearchStateValid(searchState, dataKeyCountMap)) {
+        return
+      }
+
+      newStates.push(searchState)
+      _incrementCount(fieldKey)
+    }
+
+    while (newStateIndex < (searchValues.value?.length ?? -1) || createStateIndex < createdStates.length) {
+      let createdState = createdStates[createStateIndex]
+      const value = searchValues.value?.[newStateIndex]
+
+      if (value && createdState?.index !== newStateIndex) {
+        addNewState(value)
+        newStateIndex++
+      } else if (createdState) {
+        let lastIndex: number
+
+        do {
+          addCreatedState(createdState)
+          lastIndex = createdStates[createStateIndex].index
+          createStateIndex++
+          createdState = createdStates[createStateIndex]
+        } while (createdState && createdStates[createStateIndex].index === lastIndex + 1)
+      }
+    }
+
+    searchStates.value = newStates
   }
 
   const initSearchState = (key: VKey, segmentName?: string) => {
@@ -267,7 +296,7 @@ export function useSearchStates(
       return
     }
 
-    const searchValue = !isNil(searchState.index) ? searchValues.value?.[searchState.index] : undefined
+    const searchValue = searchState.searchValue
     const segmentStates = generateSegmentStates(searchField, searchValue)
 
     if (!segmentName) {
@@ -293,7 +322,7 @@ export function useSearchStates(
     const newSearchState: SearchState = {
       key: newKey,
       name: searchField.label,
-      index: lastSearchStateIndex.value + 1,
+      index: searchStates.value.length,
       fieldKey: fieldKey,
       segmentStates: generateSegmentStates(searchField, searchValue),
     }
