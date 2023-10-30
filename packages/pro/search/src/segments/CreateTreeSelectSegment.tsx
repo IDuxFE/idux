@@ -26,6 +26,7 @@ export function createTreeSelectSegment(
     cascaderStrategy,
     draggable,
     draggableIcon,
+    defaultExpandedKeys,
     customDraggableIcon,
     expandIcon,
     customExpandIcon,
@@ -78,6 +79,7 @@ export function createTreeSelectSegment(
         dataSource={dataSource}
         draggable={draggable}
         draggableIcon={draggableIcon}
+        defaultExpandedKeys={defaultExpandedKeys}
         checkable={checkable}
         cascaderStrategy={cascaderStrategy}
         expandIcon={expandIcon}

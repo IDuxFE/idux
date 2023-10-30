@@ -173,7 +173,7 @@ function useExpandedKeys(props: ProSearchTreeSelectPanelProps): {
   expandedKeys: ComputedRef<VKey[]>
   setExpandedKeys: (keys: VKey[]) => void
 } {
-  const initialExpandedKeySet = new Set<VKey>()
+  const initialExpandedKeySet = new Set<VKey>(props.defaultExpandedKeys ?? [])
   props.dataSource &&
     traverseTree(props.dataSource, 'children', (item, parents) => {
       if (props.value?.includes(item.key)) {

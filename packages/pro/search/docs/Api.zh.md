@@ -149,6 +149,7 @@ TreeSelectSearchFieldConfig
 | `draggableIcon` | 拖拽图标 | `string` | - | - | 详情参考[Tree](/components/tree/zh) |
 | `customDraggableIcon` | 拖拽图标自定义渲染 | `string \| () => VNodeChild` | - | - | 值为string时为对应名称的插槽 |
 | `expandIcon` | 展开收起图标 | `string \| TreeExpandIconRenderer \| [string, string]` | - | - | 详情参考[Tree](/components/tree/zh) |
+| `defaultExpandedKeys` | 默认展开的节点Key | `VKey[]` | - | - | - |
 | `customExpandIcon` | 展开收起图标自定义渲染 | `string \| TreeExpandIconRenderer` | - | - | 值为string时为对应名称的插槽 |
 | `showLine` | 是否展示连线 | `boolean` | - | - | 详情参考[Tree](/components/tree/zh) |
 | `searchable` | 是否支持筛选 | `boolean` | `false` | - | 默认不支持 |

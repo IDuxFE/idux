@@ -76,6 +76,7 @@ interface TreeSelectSearchFieldBase {
     draggableIcon?: string
     customDraggableIcon?: string | (() => VNodeChild)
     expandIcon?: string | [string, string]
+    defaultExpandedKeys?: VKey[]
     customExpandIcon?: string | ((options: { key: VKey; expanded: boolean; node: TreeSelectPanelData }) => VNodeChild)
     showLine?: boolean
     searchable?: boolean
