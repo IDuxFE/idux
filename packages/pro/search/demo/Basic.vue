@@ -74,6 +74,8 @@ const searchFields: SearchField[] = [
     fieldConfig: {
       multiple: true,
       searchable: true,
+      showSelectAll: true,
+      concludeAllSelected: true,
       dataSource: [
         {
           key: 'fatal',

@@ -55,7 +55,12 @@ export default defineComponent({
 
     const searchValueContext = useSearchValues(props)
     const { searchValues } = searchValueContext
-    const resolvedSearchFieldsContext = useResolvedSearchFields(searchFields, mergedPrefixCls, dateConfig)
+    const resolvedSearchFieldsContext = useResolvedSearchFields(
+      searchFields,
+      mergedPrefixCls,
+      dateConfig,
+      locale.search,
+    )
     const { fieldKeyMap } = resolvedSearchFieldsContext
     const searchStateContext = useSearchStates(props, fieldKeyMap, searchValueContext)
     const { searchStates, initSearchStates, clearSearchState, updateSearchValues, isSegmentVisible } =

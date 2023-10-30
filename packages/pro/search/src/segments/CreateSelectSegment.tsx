@@ -6,6 +6,7 @@
  */
 
 import type { PanelRenderContext, Segment, SelectPanelData, SelectSearchField } from '../types'
+import type { ProSearchLocale } from '@idux/pro/locales'
 
 import { isNil, toString } from 'lodash-es'
 
@@ -19,6 +20,7 @@ const defaultSeparator = '|'
 export function createSelectSegment(
   prefixCls: string,
   config: SelectSearchField['fieldConfig'],
+  locale: ProSearchLocale,
 ): Segment<VKey | VKey[] | undefined> {
   const { dataSource, separator, searchable, showSelectAll, searchFn, multiple, virtual, onSearch } = config
 
@@ -64,25 +66,42 @@ export function createSelectSegment(
     name: 'select',
     inputClassName: [`${prefixCls}-select-segment-input`],
     containerClassName: [`${prefixCls}-select-segment-container`],
-    parse: input => parseInput(input, config),
-    format: value => formatValue(value, config),
+    parse: input => parseInput(input, config, locale.allSelected),
+    format: value => formatValue(value, config, locale.allSelected),
     panelRenderer,
   }
 }
 
-function parseInput(input: string, config: SelectSearchField['fieldConfig']): VKey | VKey[] | undefined {
-  const { separator, dataSource, multiple } = config
+function parseInput(
+  input: string,
+  config: SelectSearchField['fieldConfig'],
+  allSelected: string,
+): VKey | VKey[] | undefined {
+  const { concludeAllSelected, separator, dataSource, multiple } = config
   const trimedInput = input.trim()
 
-  const keys = getKeyByLabels(dataSource, trimedInput.split(separator ?? defaultSeparator))
+  const keys =
+    concludeAllSelected && trimedInput === allSelected
+      ? dataSource.map(data => data.key)
+      : getKeyByLabels(dataSource, trimedInput.split(separator ?? defaultSeparator))
 
   return multiple ? (keys.length > 0 ? keys : undefined) : keys[0]
 }
 
-function formatValue(value: VKey | VKey[] | undefined, config: SelectSearchField['fieldConfig']): string {
-  const { dataSource, separator } = config
+function formatValue(
+  value: VKey | VKey[] | undefined,
+  config: SelectSearchField['fieldConfig'],
+  allSelected: string,
+): string {
+  const { concludeAllSelected, dataSource, separator } = config
   if (isNil(value)) {
     return ''
+  }
+
+  const values = convertArray(value)
+
+  if (concludeAllSelected && values.length > 0 && values.length >= dataSource.length) {
+    return allSelected
   }
 
   return getLabelByKeys(dataSource, convertArray(value)).join(` ${separator ?? defaultSeparator} `)

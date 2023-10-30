@@ -119,6 +119,7 @@ SelectSearchFieldConfig
 | `searchFn` | 搜索函数 | `(data: SelectPanelData, searchText: string) => boolean` | - | - | 默认模糊匹配 |
 | `separator` | 多选分隔符 | `string` | `'|'` | - | - |
 | `showSelectAll` | 是否支持全选 | `boolean` | `true` | - | - |
+| `concludeAllSelected` | 是否在值被全选时显示 "全部" | `boolean` | - | - | - |
 | `virtual` | 是否支持虚拟滚动 | `boolean` | `false` | - | 默认不支持 |
 | `onSearch` | 搜索回调函数 | `(searchValue: string) => void | ((searchValue: string) => void)[]` | - | - | 在触发搜索值改变时执行 |
 
