@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/IDuxFE/idux/compare/v1.11.2...v1.12.0) (2023-10-30)
+
+
+### Features
+
+* **comp:*:** all input components with overlay support focus and blur event ([#1714](https://github.com/IDuxFE/idux/issues/1714)) ([7b739aa](https://github.com/IDuxFE/idux/commit/7b739aaca85bfb0cfc675b88de06426579dc3b76))
+* **comp:drawer,header,message,modal,notification:** all VNode props support render function now ([#1717](https://github.com/IDuxFE/idux/issues/1717)) ([69013e8](https://github.com/IDuxFE/idux/commit/69013e8ebb1a8cf3f5a409e7b4463c280b83f815))
+* **comp:table:** add `pagination` slot ([#1716](https://github.com/IDuxFE/idux/issues/1716)) ([b653faf](https://github.com/IDuxFE/idux/commit/b653faff81ac5509c6de5b7795a45a4261743b21))
+* **comp:table:** support `expandable.showLine` for tree data ([#1718](https://github.com/IDuxFE/idux/issues/1718)) ([4504c0f](https://github.com/IDuxFE/idux/commit/4504c0f4fcb1ff24f32f419c4364d80dc070d357))
+
+
+
+
+
 ## [1.11.2](https://github.com/IDuxFE/idux/compare/v1.11.1...v1.11.2) (2023-10-23)
 
 

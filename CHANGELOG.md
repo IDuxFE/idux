@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/IDuxFE/idux/compare/v1.11.2...v1.12.0) (2023-10-30)
+
+
+### Bug Fixes
+
+* **pro:search:** remote search not working ([#1727](https://github.com/IDuxFE/idux/issues/1727)) ([0d306ac](https://github.com/IDuxFE/idux/commit/0d306accc006171bcafac2c39228be32c79de530))
+* **pro:search:** segment input title should be placeholder when empty ([#1724](https://github.com/IDuxFE/idux/issues/1724)) ([8902bb9](https://github.com/IDuxFE/idux/commit/8902bb982ce2539793631af1feca6ee7046b6485))
+* **pro:search:** unconfirmed item sequence should change when update ([#1725](https://github.com/IDuxFE/idux/issues/1725)) ([34f9669](https://github.com/IDuxFE/idux/commit/34f9669bb274a7cc340e825c8a23f76e82ef8fb3))
+
+
+### Features
+
+* **comp:*:** all input components with overlay support focus and blur event ([#1714](https://github.com/IDuxFE/idux/issues/1714)) ([7b739aa](https://github.com/IDuxFE/idux/commit/7b739aaca85bfb0cfc675b88de06426579dc3b76))
+* **comp:drawer,header,message,modal,notification:** all VNode props support render function now ([#1717](https://github.com/IDuxFE/idux/issues/1717)) ([69013e8](https://github.com/IDuxFE/idux/commit/69013e8ebb1a8cf3f5a409e7b4463c280b83f815))
+* **comp:table:** add `pagination` slot ([#1716](https://github.com/IDuxFE/idux/issues/1716)) ([b653faf](https://github.com/IDuxFE/idux/commit/b653faff81ac5509c6de5b7795a45a4261743b21))
+* **comp:table:** support `expandable.showLine` for tree data ([#1718](https://github.com/IDuxFE/idux/issues/1718)) ([4504c0f](https://github.com/IDuxFE/idux/commit/4504c0f4fcb1ff24f32f419c4364d80dc070d357))
+* **pro:search:** add `useParser` api for value parsing ([#1721](https://github.com/IDuxFE/idux/issues/1721)) ([d96bed4](https://github.com/IDuxFE/idux/commit/d96bed4927ef98ab68b0010cfe8777450fd2da57))
+* **pro:search:** support `concludeAllSelected` for select field ([#1726](https://github.com/IDuxFE/idux/issues/1726)) ([5e4c7e1](https://github.com/IDuxFE/idux/commit/5e4c7e14b85029623f33ce4ad42f0b17a2a606cc))
+* **pro:search:** tree field supports `defaultExpandedKeys` ([#1728](https://github.com/IDuxFE/idux/issues/1728)) ([8120fdf](https://github.com/IDuxFE/idux/commit/8120fdfc0c266baa89622d7823ee99b37ac627b2))
+
+
+
+
+
 ## [1.11.2](https://github.com/IDuxFE/idux/compare/v1.11.1...v1.11.2) (2023-10-23)
 
 
