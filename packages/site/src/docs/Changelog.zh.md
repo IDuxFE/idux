@@ -10,6 +10,27 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 1.12.0(2023-10-30)
+
+
+### Bug Fixes
+
+* **pro:search:** 服务端搜索不生效 ([#1727](https://github.com/IDuxFE/idux/issues/1727)) ([0d306ac](https://github.com/IDuxFE/idux/commit/0d306accc006171bcafac2c39228be32c79de530))
+* **pro:search:** 搜索输入段的input应当在空值时悬浮显示placeholder ([#1724](https://github.com/IDuxFE/idux/issues/1724)) ([8902bb9](https://github.com/IDuxFE/idux/commit/8902bb982ce2539793631af1feca6ee7046b6485))
+* **pro:search:** 创建但未确认的搜索项，在数据更新后不应当改变排列顺序 ([#1725](https://github.com/IDuxFE/idux/issues/1725)) ([34f9669](https://github.com/IDuxFE/idux/commit/34f9669bb274a7cc340e825c8a23f76e82ef8fb3))
+
+
+### Features
+
+* **comp:*:** 为所有带有浮层的输入类型组件增加 `onFocus`, `onBlur` 事件，并优化键盘操作 ([#1714](https://github.com/IDuxFE/idux/issues/1714)) ([7b739aa](https://github.com/IDuxFE/idux/commit/7b739aaca85bfb0cfc675b88de06426579dc3b76))
+  - 注：浮层不会再通过点击组件外部收起，而是会在组件失焦时收起
+* **comp:drawer,header,message,modal,notification:** 所有通过`usexxx`使用的实例创建方法，例如 `useModal`，其需要传入`VNode`参数的属性现在均支持传入渲染函数 ([#1717](https://github.com/IDuxFE/idux/issues/1717)) ([69013e8](https://github.com/IDuxFE/idux/commit/69013e8ebb1a8cf3f5a409e7b4463c280b83f815))
+* **comp:table:** 新增 `pagination` 插槽 ([#1716](https://github.com/IDuxFE/idux/issues/1716)) ([b653faf](https://github.com/IDuxFE/idux/commit/b653faff81ac5509c6de5b7795a45a4261743b21))
+* **comp:table:** 针对树型数据，`TableExpandableColumn` 新增 `expandable.showLine` 配置，用于展示树连线 ([#1718](https://github.com/IDuxFE/idux/issues/1718)) ([4504c0f](https://github.com/IDuxFE/idux/commit/4504c0f4fcb1ff24f32f419c4364d80dc070d357))
+* **pro:search:** 新增 `useParser` API，方便用户解析搜索值到更友好的数据类型 ([#1721](https://github.com/IDuxFE/idux/issues/1721)) ([d96bed4](https://github.com/IDuxFE/idux/commit/d96bed4927ef98ab68b0010cfe8777450fd2da57))
+* **pro:search:** `select` 类型的搜索项新增 `concludeAllSelected` 配置，可以在全选所有选项后展示 `"全部"` ([#1726](https://github.com/IDuxFE/idux/issues/1726)) ([5e4c7e1](https://github.com/IDuxFE/idux/commit/5e4c7e14b85029623f33ce4ad42f0b17a2a606cc))
+* **pro:search:** `treeSelect` 类型的搜索项新增 `defaultExpandedKeys` 配置，可以指定初始展开的节点 ([#1728](https://github.com/IDuxFE/idux/issues/1728)) ([8120fdf](https://github.com/IDuxFE/idux/commit/8120fdfc0c266baa89622d7823ee99b37ac627b2))
+
 ## 1.11.2(2023-10-23)
 
 
