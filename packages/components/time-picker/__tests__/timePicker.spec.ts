@@ -1,6 +1,6 @@
 import { MountingOptions, mount } from '@vue/test-utils'
 
-import { renderWork } from '@tests'
+import { renderWork, wait } from '@tests'
 import { parse } from 'date-fns'
 
 import { ɵTimePanel } from '@idux/components/_private/time-panel'
@@ -190,9 +190,11 @@ describe('TimePicker', () => {
     })
 
     await wrapper.find('.ix-time-picker').find('input').trigger('focus')
+    await wait(100)
     expect(onFocus).toBeCalled()
 
     await wrapper.find('.ix-time-picker').find('input').trigger('blur')
+    await wait(100)
     expect(onBlur).toBeCalled()
   })
 

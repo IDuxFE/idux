@@ -10,7 +10,7 @@ import { type ComputedRef, toRaw } from 'vue'
 import { isArray } from 'lodash-es'
 
 import { type FormAccessor, ValidateStatus, useAccessorAndControl } from '@idux/cdk/forms'
-import { callEmit, convertArray, useState } from '@idux/cdk/utils'
+import { callEmit, convertArray } from '@idux/cdk/utils'
 import { type DateConfig } from '@idux/components/config'
 import { FormSize, useFormItemRegister, useFormSize, useFormStatus } from '@idux/components/form'
 
@@ -25,7 +25,6 @@ export interface PickerStateContext<T extends DatePickerProps | DateRangePickerP
   accessor: FormAccessor<T['value']>
   mergedSize: ComputedRef<FormSize>
   mergedStatus: ComputedRef<ValidateStatus | undefined>
-  isFocused: ComputedRef<boolean>
   handleChange: (value: StateValueType<T>) => void
   handleClear: (evt: MouseEvent) => void
   handleFocus: (evt: FocusEvent) => void
@@ -37,13 +36,12 @@ export function usePickerState<T extends DatePickerProps | DateRangePickerProps>
   config: { size: FormSize },
   dateConfig: DateConfig,
   formatRef: ComputedRef<string>,
+  setOverlayOpened: (overlayOpened: boolean) => void,
 ): PickerStateContext<T> {
   const { accessor, control } = useAccessorAndControl<T['value']>()
   useFormItemRegister(control)
   const mergedSize = useFormSize(props, config)
   const mergedStatus = useFormStatus(props, control)
-
-  const [isFocused, setFocused] = useState(false)
 
   function handleChange(value: StateValueType<T>) {
     const newValue = (isArray(value) ? sortRangeValue(dateConfig, value) : value) as StateValueType<T>
@@ -68,13 +66,12 @@ export function usePickerState<T extends DatePickerProps | DateRangePickerProps>
   }
 
   function handleFocus(evt: FocusEvent) {
-    setFocused(true)
     callEmit(props.onFocus, evt)
   }
 
   function handleBlur(evt: FocusEvent) {
-    setFocused(false)
     accessor.markAsBlurred()
+    setOverlayOpened(false)
     callEmit(props.onBlur, evt)
   }
 
@@ -82,7 +79,6 @@ export function usePickerState<T extends DatePickerProps | DateRangePickerProps>
     accessor,
     mergedSize,
     mergedStatus,
-    isFocused,
     handleChange,
     handleClear,
     handleFocus,

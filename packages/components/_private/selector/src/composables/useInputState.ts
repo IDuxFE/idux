@@ -19,7 +19,6 @@ export interface InputStateContext {
   inputRef: Ref<HTMLInputElement | undefined>
   inputValue: Ref<string>
   isComposing: Ref<boolean>
-  isFocused: Ref<boolean>
   focus: (options?: FocusOptions) => void
   blur: () => void
   handleCompositionStart: (evt: CompositionEvent) => void
@@ -33,15 +32,12 @@ export function useInputState(props: SelectorProps, mergedSearchable: ComputedRe
   const mirrorRef = ref<HTMLSpanElement>()
   const inputValue = ref('')
   const isComposing = ref(false)
-  const isFocused = ref(false)
 
   const handleFocus = (evt: FocusEvent) => {
-    isFocused.value = true
     callEmit(props.onFocus, evt)
   }
 
   const handleBlur = (evt: FocusEvent) => {
-    isFocused.value = false
     callEmit(props.onBlur, evt)
   }
 
@@ -120,7 +116,6 @@ export function useInputState(props: SelectorProps, mergedSearchable: ComputedRe
     mirrorRef,
     inputValue,
     isComposing,
-    isFocused,
     handleCompositionStart,
     handleCompositionEnd,
     handleInput,

@@ -19,19 +19,18 @@ export function useTriggerProps(context: DatePickerContext | DateRangePickerCont
     accessor,
     mergedSize,
     mergedStatus,
-    isFocused,
+    focused,
     handleFocus,
     handleBlur,
     handleClear,
     handleKeyDown,
     overlayOpened,
     setOverlayOpened,
-    inputEnableStatus,
   } = context
 
   const handleClick = () => {
     const currOpened = overlayOpened.value
-    if (currOpened || accessor.disabled) {
+    if (accessor.disabled) {
       return
     }
 
@@ -48,8 +47,8 @@ export function useTriggerProps(context: DatePickerContext | DateRangePickerCont
         (isArray(accessor.value) ? !!accessor.value.length : !!accessor.value),
       clearIcon: props.clearIcon ?? config.clearIcon,
       disabled: accessor.disabled,
-      focused: isFocused.value,
-      readonly: props.readonly || inputEnableStatus.value.enableInput === false,
+      focused: focused.value,
+      readonly: props.readonly,
       size: mergedSize.value,
       status: mergedStatus.value,
       suffix: props.suffix ?? config.suffix,

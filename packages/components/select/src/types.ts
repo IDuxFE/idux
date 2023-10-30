@@ -93,6 +93,8 @@ export const selectProps = {
   'onUpdate:open': [Function, Array] as PropType<MaybeArray<(opened: boolean) => void>>,
   onChange: [Function, Array] as PropType<MaybeArray<(value: any, oldValue: any) => void>>,
   onClear: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
+  onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
+  onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
   onSearch: [Function, Array] as PropType<MaybeArray<(searchText: string) => void>>,
   onScroll: [Function, Array] as PropType<MaybeArray<(evt: Event) => void>>,
   onScrolledChange: [Function, Array] as PropType<

@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, computed, defineComponent, inject } from 'vue'
+import { type ComputedRef, computed, defineComponent, inject, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 import { ɵTrigger } from '@idux/components/_private/trigger'
@@ -15,9 +15,10 @@ import { timeRangePickerContext } from '../tokens'
 
 export default defineComponent({
   inheritAttrs: false,
-  setup(_, { attrs }) {
+  setup(_, { attrs, expose }) {
     const context = inject(timeRangePickerContext)!
     const {
+      accessor,
       props,
       slots,
       locale,
@@ -28,10 +29,17 @@ export default defineComponent({
       rangeControlContext: { fromControl, toControl },
     } = context
 
+    const triggerInputRef = ref<HTMLInputElement>()
+
     const placeholders: ComputedRef<[string, string]> = computed(() => [
       props.placeholder?.[0] ?? locale.timeRangePicker.placeholder[0],
       props.placeholder?.[1] ?? locale.timeRangePicker.placeholder[1],
     ])
+
+    const focus = () => {
+      ;(inputEnableStatus.value.enableExternalInput ? inputRef : triggerInputRef).value?.focus()
+    }
+    expose({ focus })
 
     const handleFromInput = (evt: Event) => {
       fromControl.handleInput(evt)
@@ -44,19 +52,18 @@ export default defineComponent({
 
     function renderSide(prefixCls: string, isFrom: boolean) {
       const { inputValue } = isFrom ? fromControl : toControl
-      const { disabled, readonly } = triggerProps.value
       const placeholder = placeholders.value[isFrom ? 0 : 1]
       const handleInput = isFrom ? handleFromInput : handleToInput
 
       return (
         <input
-          ref={isFrom && inputEnableStatus.value.enableExternalInput ? inputRef : undefined}
+          ref={isFrom ? (inputEnableStatus.value.enableExternalInput ? inputRef : triggerInputRef) : undefined}
           class={`${prefixCls}-input-inner`}
           autocomplete="off"
-          disabled={disabled}
+          disabled={accessor.disabled}
           value={inputValue.value}
           placeholder={placeholder}
-          readonly={readonly}
+          readonly={props.readonly || !inputEnableStatus.value.enableExternalInput}
           onInput={handleInput}
         />
       )

@@ -1,6 +1,12 @@
 <template>
   <IxSpace>
-    <IxSelect v-model:value="value" :dataSource="dataSource" @change="onChange"></IxSelect>
+    <IxSelect
+      v-model:value="value"
+      :dataSource="dataSource"
+      @change="onChange"
+      @focus="onFocus"
+      @blur="onBlur"
+    ></IxSelect>
     <IxSelect v-model:value="value" :dataSource="dataSource" disabled></IxSelect>
     <IxSelect v-model:value="value" :dataSource="dataSource" clearable></IxSelect>
     <IxSelect v-model:value="value" :dataSource="dataSource">
@@ -26,5 +32,11 @@ const value = ref('tom')
 
 const onChange = (value: string, oldValue: string) => {
   console.log('selected change: ', value, oldValue)
+}
+const onFocus = () => {
+  console.log('focus')
+}
+const onBlur = () => {
+  console.log('blur')
 }
 </script>

@@ -258,7 +258,7 @@ export default defineComponent({
         )
       }
 
-      return <div>{overlayRender ? overlayRender(children) : children}</div>
+      return <div tabindex={-1}>{overlayRender ? overlayRender(children) : children}</div>
     }
   },
 })

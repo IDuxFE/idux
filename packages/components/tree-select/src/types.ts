@@ -104,6 +104,8 @@ export const treeSelectProps = {
   onDragleave: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions<any>) => void>>,
   onDragover: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions<any>) => void>>,
   onDrop: [Function, Array] as PropType<MaybeArray<(options: TreeDragDropOptions<any>) => void>>,
+  onFocus: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
+  onBlur: [Function, Array] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
   onExpand: [Function, Array] as PropType<MaybeArray<(expanded: boolean, node: TreeSelectNode<any>) => void>>,
   onExpandedChange: [Function, Array] as PropType<
     MaybeArray<(expendedKeys: any[], expendedNodes: TreeSelectNode<any>[]) => void>

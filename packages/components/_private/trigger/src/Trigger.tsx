@@ -59,6 +59,16 @@ export default defineComponent({
 
       callEmit(props.onClick, evt)
     }
+    const handleMouseDown = (evt: MouseEvent) => {
+      if (evt.target instanceof HTMLInputElement) {
+        return
+      }
+
+      const { disabled, readonly } = props
+      if (disabled || readonly || props.focused) {
+        evt.preventDefault()
+      }
+    }
 
     const handleKeyDown = (evt: KeyboardEvent) => {
       if (props.disabled) {
@@ -100,7 +110,14 @@ export default defineComponent({
     }
 
     return () => (
-      <div ref={triggerRef} class={classes.value} onClick={handleClick} onKeydown={handleKeyDown}>
+      <div
+        ref={triggerRef}
+        class={classes.value}
+        tabindex={-1}
+        onClick={handleClick}
+        onMousedown={handleMouseDown}
+        onKeydown={handleKeyDown}
+      >
         {slots.default?.()}
         {renderSuffix()}
         {renderClearIcon()}

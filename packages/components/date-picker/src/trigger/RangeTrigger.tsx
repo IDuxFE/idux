@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent, inject, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 import { ɵTrigger } from '@idux/components/_private/trigger'
@@ -15,9 +15,10 @@ import { dateRangePickerToken } from '../token'
 
 export default defineComponent({
   inheritAttrs: false,
-  setup(_, { attrs }) {
+  setup(_, { attrs, expose }) {
     const context = inject(dateRangePickerToken)!
     const {
+      accessor,
       props,
       slots,
       locale,
@@ -28,6 +29,8 @@ export default defineComponent({
       inputEnableStatus,
       renderSeparator,
     } = context
+
+    const triggerInputRef = ref<HTMLInputElement>()
 
     const placeholders = computed(() => [
       props.placeholder?.[0] ?? locale.dateRangePicker[`${props.type}Placeholder`][0],
@@ -45,22 +48,25 @@ export default defineComponent({
       callEmit(props.onInput, false, evt)
     }
 
+    const focus = () => {
+      ;(inputEnableStatus.value.allowInput === 'overlay' ? triggerInputRef : inputRef).value?.focus()
+    }
+    expose({ focus })
+
     const renderSide = (isFrom: boolean) => {
       const prefixCls = mergedPrefixCls.value
       const { inputValue } = isFrom ? fromControl : toControl
       const placeholder = placeholders.value[isFrom ? 0 : 1]
       const handleInput = isFrom ? handleFromInput : handleToInput
 
-      const { disabled, readonly } = triggerProps.value
-
       return (
         <input
-          ref={isFrom && inputEnableStatus.value.allowInput === true ? inputRef : undefined}
+          ref={isFrom ? (inputEnableStatus.value.allowInput === 'overlay' ? triggerInputRef : inputRef) : undefined}
           class={`${prefixCls}-input-inner`}
           autocomplete="off"
-          disabled={disabled}
+          disabled={accessor.disabled}
           placeholder={placeholder}
-          readonly={readonly}
+          readonly={props.readonly || inputEnableStatus.value.enableInput === false}
           size={inputSize.value}
           value={inputValue.value}
           onInput={handleInput}

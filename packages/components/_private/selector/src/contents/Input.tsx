@@ -18,7 +18,6 @@ export default defineComponent({
       mirrorRef,
       inputRef,
       inputValue,
-      isFocused,
       handleCompositionStart,
       handleCompositionEnd,
       handleInput,
@@ -26,7 +25,7 @@ export default defineComponent({
     } = inject(selectorToken)!
 
     const inputReadonly = computed(
-      () => props.readonly || !isFocused.value || !(props.allowInput || mergedSearchable.value),
+      () => props.readonly || !props.focused || !(props.allowInput || mergedSearchable.value),
     )
     const innerStyle = computed(() => {
       return { opacity: inputReadonly.value ? 0 : undefined }

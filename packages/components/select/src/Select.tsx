@@ -7,7 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { type ComputedRef, Slots, computed, defineComponent, normalizeClass, provide, ref, watch } from 'vue'
+import { type ComputedRef, Slots, computed, defineComponent, normalizeClass, onMounted, provide, ref, watch } from 'vue'
 
 import { isBoolean } from 'lodash-es'
 
@@ -20,6 +20,7 @@ import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/s
 import { type SelectConfig, useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister, useFormSize, useFormStatus } from '@idux/components/form'
 import { IxSpin } from '@idux/components/spin'
+import { useOverlayFocusMonitor } from '@idux/components/utils'
 
 import { useActiveState } from './composables/useActiveState'
 import { GetKeyFn, useGetOptionKey } from './composables/useGetOptionKey'
@@ -85,20 +86,18 @@ export default defineComponent({
       inputValue,
       selectedValue,
       activeValue,
+      overlayOpened,
       changeActiveIndex,
       changeSelected,
       handleRemove,
       clearInput,
       setOverlayOpened,
-      blur,
     )
 
     watch(overlayOpened, opened => {
-      if (!opened && props.allowInput && inputValue.value) {
-        changeSelected(inputValue.value)
+      if (opened) {
+        focus()
       }
-      opened && focus()
-      clearInput()
     })
 
     const handleOptionClick = (option: SelectData) => {
@@ -109,13 +108,23 @@ export default defineComponent({
       }
     }
 
-    const handleBlur = () => {
+    const onFocus = (evt: FocusEvent) => {
+      callEmit(props.onFocus, evt)
+    }
+    const onBlur = (evt: FocusEvent) => {
       if (props.allowInput && inputValue.value) {
         changeSelected(inputValue.value)
         clearInput()
       }
       accessor.markAsBlurred()
+      setOverlayOpened(false)
+      callEmit(props.onBlur, evt)
     }
+    const { focused, bindOverlayMonitor, handleFocus, handleBlur } = useOverlayFocusMonitor(onFocus, onBlur)
+    onMounted(() => {
+      bindOverlayMonitor(overlayRef, overlayOpened)
+    })
+
     const handleItemRemove = (value: VKey) => {
       focus()
       handleRemove(value)
@@ -145,6 +154,7 @@ export default defineComponent({
         config={config}
         dataSource={selectedOptions.value}
         disabled={accessor.disabled}
+        focused={focused.value}
         maxLabel={props.maxLabel}
         multiple={props.multiple}
         opened={overlayOpened.value}
@@ -155,6 +165,7 @@ export default defineComponent({
         status={mergedStatus.value}
         suffix={props.suffix}
         value={selectedValue.value}
+        onFocus={handleFocus}
         onBlur={handleBlur}
         onClear={handleClear}
         onInputValueChange={setInputValue}
@@ -214,7 +225,7 @@ export default defineComponent({
       const overlayProps = {
         class: overlayClasses.value,
         style: overlayStyle.value,
-        clickOutside: true,
+        clickOutside: false,
         container: props.overlayContainer ?? config.overlayContainer,
         containerFallback: `.${mergedPrefixCls.value}-overlay-container`,
         disabled: accessor.disabled || props.readonly,

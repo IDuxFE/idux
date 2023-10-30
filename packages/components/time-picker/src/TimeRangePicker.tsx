@@ -5,11 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, normalizeClass, provide, toRef, watch } from 'vue'
+import { computed, defineComponent, normalizeClass, onMounted, provide, ref, toRef, watch } from 'vue'
 
-import { ɵOverlay } from '@idux/components/_private/overlay'
+import { ɵOverlay, ɵOverlayInstance } from '@idux/components/_private/overlay'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
 import { useFormElement } from '@idux/components/form'
+import { useOverlayFocusMonitor } from '@idux/components/utils'
 
 import { useInputEnableStatus } from './composables/useInputEnableStatus'
 import { useRangeKeyboardEvents } from './composables/useKeyboardEvents'
@@ -33,18 +34,26 @@ export default defineComponent({
     const config = useGlobalConfig('timePicker')
     const dateConfig = useDateConfig()
 
+    const overlayRef = ref<ɵOverlayInstance>()
+    const triggerRef = ref<{ focus: () => void }>()
+
     const { elementRef: inputRef, focus, blur } = useFormElement<HTMLInputElement>()
 
     const formatRef = computed(() => props.format ?? config.format)
 
-    const pickerState = usePickerState(props, config, dateConfig, formatRef)
-    const { accessor, handleChange } = pickerState
+    const { overlayOpened, setOverlayOpened } = useOverlayState(props, focus)
+    const pickerState = usePickerState(props, config, dateConfig, formatRef, setOverlayOpened)
+    const { accessor, handleFocus: _handleFocus, handleBlur: _handleBlur, handleChange } = pickerState
 
     const rangePickerControl = useRangePickerControl(dateConfig, formatRef, toRef(accessor, 'value'))
-    const { overlayOpened, setOverlayOpened } = useOverlayState(props, rangePickerControl)
     const inputEnableStatus = useInputEnableStatus(props, config)
 
-    const handleKeyDown = useRangeKeyboardEvents(rangePickerControl, setOverlayOpened, handleChange)
+    const handleKeyDown = useRangeKeyboardEvents(rangePickerControl, overlayOpened, setOverlayOpened, handleChange)
+
+    const { focused, handleFocus, handleBlur, bindOverlayMonitor } = useOverlayFocusMonitor(_handleFocus, _handleBlur)
+    onMounted(() => {
+      bindOverlayMonitor(overlayRef, overlayOpened)
+    })
 
     const renderSeparator = () => slots.separator?.() ?? props.separator ?? locale.timeRangePicker.separator
 
@@ -55,6 +64,7 @@ export default defineComponent({
       common,
       locale,
       config,
+      focused,
       mergedPrefixCls,
       formatRef,
       handleKeyDown,
@@ -65,24 +75,28 @@ export default defineComponent({
       renderSeparator,
       rangeControlContext: rangePickerControl,
       ...pickerState,
+      handleFocus,
+      handleBlur,
     }
     provide(timeRangePickerContext, context)
 
     expose({ focus, blur })
 
     watch(overlayOpened, opened => {
-      setTimeout(() => {
-        if (opened) {
-          focus()
-          inputRef.value?.dispatchEvent(new FocusEvent('focus'))
-        } else {
-          blur()
-          inputRef.value?.dispatchEvent(new FocusEvent('blur'))
+      if (opened) {
+        setTimeout(() => {
+          inputRef.value?.focus()
+        })
+      } else {
+        rangePickerControl.init(true)
+
+        if (focused.value) {
+          triggerRef.value?.focus()
         }
-      })
+      }
     })
 
-    const renderTrigger = () => <RangeTrigger {...attrs} />
+    const renderTrigger = () => <RangeTrigger ref={triggerRef} {...attrs} />
     const renderContent = () => <RangeOverlay />
 
     const overlayProps = useOverlayProps(context)
@@ -90,6 +104,7 @@ export default defineComponent({
 
     return () => (
       <ɵOverlay
+        ref={overlayRef}
         {...overlayProps.value}
         class={overlayClass.value}
         triggerId={attrs.id}

@@ -20,23 +20,21 @@ export function useTriggerProps(context: TimePickerContext | TimeRangePickerCont
     accessor,
     mergedSize,
     mergedStatus,
-    isFocused,
+    focused,
     handleBlur,
     handleFocus,
     handleClear,
     handleKeyDown,
     overlayOpened,
     setOverlayOpened,
-    inputEnableStatus,
   } = context
 
   const handleClick = () => {
-    const currOpened = overlayOpened.value
-    if (currOpened || accessor.disabled) {
+    if (accessor.disabled) {
       return
     }
 
-    setOverlayOpened(!currOpened)
+    setOverlayOpened(!overlayOpened.value)
   }
 
   return computed(() => ({
@@ -48,8 +46,8 @@ export function useTriggerProps(context: TimePickerContext | TimeRangePickerCont
       (isArray(accessor.value) ? !!accessor.value.length : !!accessor.value),
     clearIcon: props.clearIcon ?? config.clearIcon,
     disabled: accessor.disabled,
-    focused: isFocused.value,
-    readonly: props.readonly || !inputEnableStatus.value.enableExternalInput,
+    focused: focused.value,
+    readonly: props.readonly,
     size: mergedSize.value,
     status: mergedStatus.value,
     suffix: props.suffix ?? config.suffix,

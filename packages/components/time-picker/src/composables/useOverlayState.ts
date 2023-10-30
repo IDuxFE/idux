@@ -5,8 +5,6 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { PickerControlContext } from './useControl'
-import type { PickerRangeControlContext } from './useRangeControl'
 import type { TimePickerProps, TimeRangePickerProps } from '../types'
 
 import { type ComputedRef, onMounted } from 'vue'
@@ -18,24 +16,14 @@ export interface OverlayStateContext {
   setOverlayOpened: (open: boolean) => void
 }
 
-export function useOverlayState(
-  props: TimePickerProps | TimeRangePickerProps,
-  control: PickerControlContext | PickerRangeControlContext,
-): OverlayStateContext {
+export function useOverlayState(props: TimePickerProps | TimeRangePickerProps, focus: () => void): OverlayStateContext {
   const [overlayOpened, setOverlayOpened] = useControlledProp(props, 'open', false)
-
-  const changeOpenedState = (open: boolean) => {
-    setOverlayOpened(open)
-    if (!open) {
-      control.init(true)
-    }
-  }
 
   onMounted(() => {
     if (props.autofocus) {
-      setOverlayOpened(true)
+      focus()
     }
   })
 
-  return { overlayOpened, setOverlayOpened: changeOpenedState }
+  return { overlayOpened, setOverlayOpened }
 }

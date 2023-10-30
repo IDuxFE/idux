@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent, inject, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 import { ɵTrigger } from '@idux/components/_private/trigger'
@@ -15,9 +15,10 @@ import { timePickerContext } from '../tokens'
 
 export default defineComponent({
   inheritAttrs: false,
-  setup(_, { attrs }) {
+  setup(_, { expose, attrs }) {
     const context = inject(timePickerContext)!
     const {
+      accessor,
       props,
       slots,
       locale,
@@ -28,6 +29,8 @@ export default defineComponent({
       controlContext: { inputValue, handleInput: _handleInput },
     } = context
 
+    const triggerInputRef = ref<HTMLInputElement>()
+
     const placeholder = computed(() => props.placeholder ?? locale.timePicker.placeholder)
     const inputSize = computed(() => Math.max(10, formatRef.value.length) + 2)
 
@@ -36,18 +39,21 @@ export default defineComponent({
       callEmit(props.onInput, evt)
     }
 
+    const focus = () => {
+      ;(inputEnableStatus.value.enableExternalInput ? inputRef : triggerInputRef).value?.focus()
+    }
+    expose({ focus })
+
     const triggerProps = useTriggerProps(context)
     const renderContent = (prefixCls: string) => {
-      const { readonly, disabled } = triggerProps.value
-
       return (
         <input
-          ref={inputEnableStatus.value.enableExternalInput ? inputRef : undefined}
+          ref={inputEnableStatus.value.enableExternalInput ? inputRef : triggerInputRef}
           class={`${prefixCls}-input`}
           autocomplete="off"
-          disabled={disabled}
+          disabled={accessor.disabled}
           placeholder={placeholder.value}
-          readonly={readonly}
+          readonly={props.readonly || !inputEnableStatus.value.enableExternalInput}
           size={inputSize.value}
           value={inputValue.value}
           onInput={handleInput}

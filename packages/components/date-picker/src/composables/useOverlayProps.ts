@@ -16,7 +16,7 @@ export function useOverlayProps(context: DatePickerContext | DateRangePickerCont
   const { props, common, config, accessor, mergedPrefixCls, overlayOpened, setOverlayOpened, onAfterLeave } = context
   return computed(() => {
     return {
-      clickOutside: true,
+      clickOutside: false,
       container: props.overlayContainer ?? config.overlayContainer,
       containerFallback: `.${mergedPrefixCls.value}-overlay-container`,
       disabled: accessor.disabled || props.readonly,

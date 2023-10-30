@@ -39,7 +39,7 @@ export default defineComponent({
     })
     const mergedSize = useFormSize(props, props.config)
     const mergedSuffix = computed(() => {
-      return props.suffix ?? (mergedSearchable.value && isFocused.value ? 'search' : props.config.suffix)
+      return props.suffix ?? (mergedSearchable.value && props.focused ? 'search' : props.config.suffix)
     })
     const showPlaceholder = computed(() => {
       return props.value.length === 0 && !isComposing.value && !inputValue.value
@@ -50,7 +50,6 @@ export default defineComponent({
       inputRef,
       inputValue,
       isComposing,
-      isFocused,
       blur,
       focus,
       handleCompositionStart,
@@ -77,7 +76,7 @@ export default defineComponent({
         [`${prefixCls}-borderless`]: borderless,
         [`${prefixCls}-clearable`]: mergedClearable.value,
         [`${prefixCls}-disabled`]: props.disabled,
-        [`${prefixCls}-focused`]: isFocused.value,
+        [`${prefixCls}-focused`]: props.focused,
         [`${prefixCls}-multiple`]: multiple,
         [`${prefixCls}-opened`]: props.opened,
         [`${prefixCls}-readonly`]: props.readonly,
@@ -100,7 +99,7 @@ export default defineComponent({
       }
 
       const { disabled, readonly } = props
-      if (disabled || readonly || isFocused.value) {
+      if (disabled || readonly || props.focused) {
         evt.preventDefault()
       }
     }
@@ -135,7 +134,6 @@ export default defineComponent({
       inputRef,
       inputValue,
       isComposing,
-      isFocused,
       handleCompositionStart,
       handleCompositionEnd,
       handleInput,
@@ -246,7 +244,7 @@ export default defineComponent({
 
       return (
         <div ref={elementRef} class={classes.value} onClick={handleClick}>
-          {isFocused.value && !opened && (
+          {props.focused && !opened && (
             <span style={hiddenBoxStyle} aria-live="polite">
               {value.join(', ')}
             </span>

@@ -7,6 +7,8 @@
     :dataSource="treeData"
     :onExpand="onExpand"
     :onSelect="onSelect"
+    :onFocus="onFocus"
+    :onBlur="onBlur"
   >
   </IxTreeSelect>
 </template>
@@ -52,4 +54,10 @@ const expandedKeys = ref(['0'])
 
 const onExpand = (expanded: boolean, node: TreeSelectNode) => console.log('expanded', expanded, node)
 const onSelect = (selected: boolean, node: TreeSelectNode) => console.log('select', selected, node)
+const onFocus = (evt: FocusEvent) => {
+  console.log('focus', evt)
+}
+const onBlur = (evt: FocusEvent) => {
+  console.log('blur', evt)
+}
 </script>

@@ -1,7 +1,7 @@
 // Vitest Snapshot v1
 
 exports[`TimePicker > render work 1`] = `
-"<div class=\\"ix-time-range-picker ix-trigger ix-trigger-md ix-trigger-readonly\\"><span class=\\"ix-time-range-picker-input\\"><input class=\\"ix-time-range-picker-input-inner\\" autocomplete=\\"off\\" placeholder=\\"起始时间\\" readonly=\\"\\"><span class=\\"ix-time-range-picker-input-separator\\">至</span><input class=\\"ix-time-range-picker-input-inner\\" autocomplete=\\"off\\" placeholder=\\"结束时间\\" readonly=\\"\\"></span>
+"<div class=\\"ix-time-range-picker ix-trigger ix-trigger-md\\" tabindex=\\"-1\\"><span class=\\"ix-time-range-picker-input\\"><input class=\\"ix-time-range-picker-input-inner\\" autocomplete=\\"off\\" placeholder=\\"起始时间\\" readonly=\\"\\"><span class=\\"ix-time-range-picker-input-separator\\">至</span><input class=\\"ix-time-range-picker-input-inner\\" autocomplete=\\"off\\" placeholder=\\"结束时间\\" readonly=\\"\\"></span>
   <div class=\\"ix-trigger-suffix\\"><i class=\\"ix-icon ix-icon-clock-circle\\" role=\\"img\\" aria-label=\\"clock-circle\\"></i></div>
   <!---->
 </div>

@@ -25,6 +25,7 @@ export const selectorProps = {
   dataSource: { type: Array, required: true },
   defaultLabelSlotName: { type: String, default: undefined },
   disabled: { type: Boolean, required: true },
+  focused: { type: Boolean, required: true },
   maxLabel: { type: [Number, String] as PropType<number | 'responsive'>, required: true },
   multiple: { type: Boolean, required: true },
   opened: { type: Boolean, required: true },

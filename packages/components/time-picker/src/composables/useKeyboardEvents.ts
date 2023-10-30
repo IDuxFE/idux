@@ -6,10 +6,25 @@
  */
 
 import type { PickerRangeControlContext } from './useRangeControl'
+import type { ComputedRef } from 'vue'
 
-export function useKeyboardEvents(setOverlayOpened: (opened: boolean) => void): (evt: KeyboardEvent) => void {
+export function useKeyboardEvents(
+  overlayOpened: ComputedRef<boolean>,
+  setOverlayOpened: (opened: boolean) => void,
+): (evt: KeyboardEvent) => void {
   return (evt: KeyboardEvent) => {
-    if (evt.code === 'Escape' || evt.code === 'Enter') {
+    if (evt.code === 'Escape') {
+      setOverlayOpened(false)
+      return
+    }
+
+    if (!overlayOpened.value && !['Backspace', 'Tab'].includes(evt.code)) {
+      evt.preventDefault()
+      setOverlayOpened(true)
+      return
+    }
+
+    if (evt.code === 'Enter') {
       setOverlayOpened(false)
     }
   }
@@ -17,16 +32,24 @@ export function useKeyboardEvents(setOverlayOpened: (opened: boolean) => void): 
 
 export function useRangeKeyboardEvents(
   rangeControl: PickerRangeControlContext,
+  overlayOpened: ComputedRef<boolean>,
   setOverlayOpened: (opened: boolean) => void,
   handleChange: (value: (Date | undefined)[] | undefined) => void,
 ): (evt: KeyboardEvent) => void {
   const { bufferUpdated, buffer } = rangeControl
   return (evt: KeyboardEvent) => {
-    switch (evt.code) {
-      case 'Escape':
-        setOverlayOpened(false)
-        break
+    if (evt.code === 'Escape') {
+      setOverlayOpened(false)
+      return
+    }
 
+    if (!overlayOpened.value && !['Backspace', 'Tab'].includes(evt.code)) {
+      evt.preventDefault()
+      setOverlayOpened(true)
+      return
+    }
+
+    switch (evt.code) {
       case 'Enter':
         if (bufferUpdated.value) {
           handleChange(buffer.value)
