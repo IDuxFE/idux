@@ -31,6 +31,8 @@ import { proSearchContext } from './token'
 import { type SearchItem, proSearchProps } from './types'
 import { renderIcon } from './utils/RenderIcon'
 
+const nameSelectOverflowItemKey = 'name-select'
+
 export default defineComponent({
   name: 'IxProSearch',
   inheritAttrs: false,
@@ -113,7 +115,7 @@ export default defineComponent({
     const searchIcon = computed(() => props.searchIcon ?? config.searchIcon)
     const size = computed(() => props.size ?? config.size)
 
-    const allItems = computed(() => [...searchItems.value, 'name-select' as const])
+    const allItems = computed(() => [...searchItems.value, nameSelectOverflowItemKey])
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
@@ -170,18 +172,22 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
 
       const overflowSlots = {
-        item: (item: SearchItem | 'name-select') => {
-          if (item === 'name-select') {
+        item: (item: SearchItem | typeof nameSelectOverflowItemKey) => {
+          if (item === nameSelectOverflowItemKey) {
             return <NameSelectSegment key="__NAME_SELECT__" v-slots={slots} />
           }
 
           return <SearchItemComp key={item.key} searchItem={item} v-slots={slots} />
         },
-        rest: (rest: SearchItem[]) => (
-          <span class={`${prefixCls}-search-item ${prefixCls}-search-item-tag`}>
-            {slots.overflowedLabel?.(rest) ?? `+ ${rest.length}`}
-          </span>
-        ),
+        rest: (rest: (SearchItem | typeof nameSelectOverflowItemKey)[]) => {
+          const restItems = rest.filter(item => item !== nameSelectOverflowItemKey)
+
+          return (
+            <span class={`${prefixCls}-search-item ${prefixCls}-search-item-tag`}>
+              {slots.overflowedLabel?.(restItems) ?? `+ ${restItems.length}`}
+            </span>
+          )
+        },
       }
 
       const quickSelectOverlaySlots = {
@@ -193,7 +199,7 @@ export default defineComponent({
                 v-slots={overflowSlots}
                 prefixCls={prefixCls}
                 dataSource={allItems.value}
-                getKey={item => item.key ?? 'name-select'}
+                getKey={item => item.key ?? nameSelectOverflowItemKey}
                 maxLabel={focused.value ? Number.MAX_SAFE_INTEGER : props.maxLabel}
               />
               {searchStateEmpty.value && !isActive.value && (
