@@ -5,11 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type Slot, computed, defineComponent, normalizeClass, shallowRef } from 'vue'
+import { type Slot, VNode, computed, defineComponent, normalizeClass, shallowRef } from 'vue'
 
 import { isObject, isString } from 'lodash-es'
 
-import { getFirstValidNode } from '@idux/cdk/utils'
+import { flattenNode, getFirstValidNode } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxTooltip } from '@idux/components/tooltip'
 
@@ -85,9 +85,8 @@ export default defineComponent({
       return <IxTooltip {...(copied.value ? copyTooltip.value[1] : copyTooltip.value[0])}>{node}</IxTooltip>
     }
 
-    const renderMeasureElement = () => {
+    const renderMeasureElement = (nodes: VNode[] | undefined) => {
       const { tag: Tag } = props
-      const nodes = slots.default?.()
 
       return (
         <Tag ref={measureRef} class={`${mergedPrefixCls.value}-inner`} style={measureElementStyle}>
@@ -103,7 +102,7 @@ export default defineComponent({
 
       return (
         <Tag ref={rowMeasureRef} class={`${mergedPrefixCls.value}-inner`} style={rowMeasureElementStyle}>
-          {slots.default?.()}
+          lg
         </Tag>
       )
     }
@@ -122,7 +121,7 @@ export default defineComponent({
           </div>
         ) : undefined
 
-      const contentNodes = slots.default?.()
+      const contentNodes = flattenNode(slots.default?.())
 
       let node = (
         <Tag
@@ -168,7 +167,7 @@ export default defineComponent({
           {slots.suffix?.()}
           {renderCopyNode()}
           {isEllipsis.value && expandNode}
-          {measureStatus.value !== 'none' && renderMeasureElement()}
+          {measureStatus.value !== 'none' && renderMeasureElement(contentNodes)}
           {measureStatus.value === 'preparing' && renderRowMeasureElement()}
         </div>
       )
