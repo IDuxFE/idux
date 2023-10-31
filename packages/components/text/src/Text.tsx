@@ -34,9 +34,8 @@ const rowMeasureElementStyle = {
 
 export default defineComponent({
   name: 'IxText',
-  inheritAttrs: false,
   props: textProps,
-  setup(props, { attrs, slots }) {
+  setup(props, { slots }) {
     const common = useGlobalConfig('common')
     const config = useGlobalConfig('text')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-text`)
@@ -130,7 +129,6 @@ export default defineComponent({
           class={`${prefixCls}-inner`}
           title={isNative && isEllipsis.value ? getStringBySlot(titleSlot) : undefined}
           onClick={expandable.value && !hasExpandIcon ? toggleExpanded : undefined}
-          {...attrs}
         >
           {!isSimple.value && isEllipsis.value && !expanded.value && measureStatus.value === 'none'
             ? renderClampedContent(contentNodes)
