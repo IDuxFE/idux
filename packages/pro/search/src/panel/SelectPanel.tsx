@@ -60,7 +60,7 @@ export default defineComponent({
         if (key) {
           setActiveValue(key)
         } else if (_filteredDataSource && _filteredDataSource.findIndex(item => item.key === activeValue.value) < 0) {
-          setActiveValue(_filteredDataSource[0]?.key)
+          setActiveValue(props.setDefaultActiveValue ? _filteredDataSource[0]?.key : undefined)
         }
       },
       { immediate: true },
