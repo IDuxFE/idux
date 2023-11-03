@@ -135,14 +135,21 @@ export default defineComponent({
         : undefined
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const Tag = (tableProps.customTag?.bodyCell ?? 'td') as any
+
+      const contentNode =
+        type === 'expandable' ? (
+          <div class={`${mergedPrefixCls.value}-expandable-wrapper`}>
+            {renderExpandableChildren(props, slots, expandable, isTreeData, mergedPrefixCls.value)}
+            {!isEmptyNode(children) && <span class={`${mergedPrefixCls.value}-expandable-trigger-gap`}></span>}
+            {children}
+          </div>
+        ) : (
+          children
+        )
+
       return (
         <Tag class={classes.value} style={style.value} title={title} {...customAdditional}>
-          {type === 'expandable' &&
-            renderExpandableChildren(props, slots, expandable, isTreeData, mergedPrefixCls.value)}
-          {type === 'expandable' && !isEmptyNode(children) && (
-            <span class={`${mergedPrefixCls.value}-expandable-trigger-gap`}></span>
-          )}
-          {children}
+          {contentNode}
         </Tag>
       )
     }
@@ -187,7 +194,7 @@ function renderExpandableChildren(
   const { icon, customIcon, indent, showLine } = expandable.value!
   const { record, expanded, level = 0, hasPrevSibling, hasNextSibling } = props
   const hasParent = level > 0
-  const mergedShowLine = isTreeData.value && showLine
+  const mergedShowLine = isTreeData.value && showLine && indent
 
   let iconNode: VNodeChild
 
@@ -205,8 +212,11 @@ function renderExpandableChildren(
     [`${prefixCls}-expandable-trigger-disabled`]: props.disabled,
   }
   const indents = []
-  for (let i = 0; i < level; i++) {
-    indents.push(<div class={`${prefixCls}-expandable-indent`} style={indentStyle}></div>)
+
+  if (mergedShowLine) {
+    for (let i = 0; i < level; i++) {
+      indents.push(<div class={`${prefixCls}-expandable-indent`} style={indentStyle}></div>)
+    }
   }
 
   return [

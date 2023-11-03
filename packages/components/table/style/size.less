@@ -11,10 +11,9 @@
   .@{table-prefix}-expandable-trigger {
     font-size: calc(@font-size + 2px);
   }
-  .@{table-prefix}-expandable-trigger,
-  .@{table-prefix}-expandable-trigger-gap,
-  .@{table-prefix}-expandable-indent {
-    height: calc(100% + 7px);
+  .@{table-prefix}-expandable-wrapper {
+    height: calc(100% + 7px); // cell height + padding
+    margin-top: -1px; // cell border bottom
   }
 
   th.@{table-prefix}-cell {

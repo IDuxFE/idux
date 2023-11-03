@@ -1,5 +1,7 @@
 .@{table-prefix} {
   &-expandable-trigger {
+    height: 100%;
+    flex-shrink: 0;
     position: relative;
     display: inline-flex;
     justify-content: center;
@@ -24,6 +26,8 @@
     }
 
     &-gap {
+      height: 100%;
+      flex-shrink: 0;
       position: relative;
       display: inline-block;
       margin-right: 1px;
@@ -66,6 +70,8 @@
     }
   }
   &-expandable-indent {
+    height: 100%;
+    flex-shrink: 0;
     display: inline-block;
     vertical-align: middle;
     position: relative;
@@ -78,6 +84,10 @@
       width: 1px;
       background-color: @table-tree-line-color;
     }
+  }
+  &-expandable-wrapper {
+    display: flex;
+    align-items: center;
   }
 
   & tr&-expanded-row {
