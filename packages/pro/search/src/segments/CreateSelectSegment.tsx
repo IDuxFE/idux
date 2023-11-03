@@ -50,6 +50,7 @@ export function createSelectSegment(
         setOnKeyDown={setOnKeyDown}
         showSelectAll={renderLocation === 'individual' && showSelectAll}
         showFooter={renderLocation === 'individual'}
+        setDefaultActiveValue={renderLocation === 'individual'}
         setInactiveOnMouseLeave={renderLocation === 'quick-select-panel'}
         searchValue={searchable ? searchInput : ''}
         searchFn={searchFn}
