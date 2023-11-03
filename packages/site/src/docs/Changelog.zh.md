@@ -10,6 +10,17 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.12.1(2023-11-03)
+
+
+### Bug Fixes
+
+* **comp:table:** 表格展开收起列的单元格布局改为flex，解决垂直居中以及文字超长连线显示不正确的问题 ([#1729](https://github.com/IDuxFE/idux/issues/1729)) ([4589e83](https://github.com/IDuxFE/idux/commit/4589e83b8eb95712189f040ed28761807ac5e844))
+* **comp:text:** 当文字中有换行，或者文字有多行（例如IP）组成时，ellipsis不生效 ([#1730](https://github.com/IDuxFE/idux/issues/1730)) ([ed78fe3](https://github.com/IDuxFE/idux/commit/ed78fe38b169d3413ff436fc06babc053421aa9c))
+* **comp:text:** IxText组件根节点应当继承外部传递的attrs属性 ([#1731](https://github.com/IDuxFE/idux/issues/1731)) ([75b49bf](https://github.com/IDuxFE/idux/commit/75b49bf09e9d780ff7ef6ff225198640e90c485e))
+* **pro:search:** 溢出的搜索项数量显示不正确 ([#1732](https://github.com/IDuxFE/idux/issues/1732)) ([2e8fc95](https://github.com/IDuxFE/idux/commit/2e8fc9500ed741cb297ea428bf0c0b346607767a))
+* **pro:search:** 在快捷选择面板中的 select 不应当有初始的激活选项 ([#1733](https://github.com/IDuxFE/idux/issues/1733)) ([a967f9b](https://github.com/IDuxFE/idux/commit/a967f9b64276592d4d1173112f8b0992abea03db))
+
 # 1.12.0(2023-10-30)
 
 
