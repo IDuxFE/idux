@@ -82,7 +82,7 @@ interface SearchItemCreateContext<V = unknown> extends Partial<SearchValue<V>> {
 | `containerClassName` | 面板所在容器class | `string` | - | - | 用于自定义浮层样式或快捷面板容器样式 |
 | `placeholder` | 输入框placeholder | `string` | - | - | 搜索值输入框的占位符 |
 | `operatorPlaceholder` | 操作符输入框placeholder | `string` | - | - | 搜索值操作符输入框的占位符 |
-| `validator` | 搜索项校验函数 | `(value: SearchValue) => { message?: string } | undefined` | - | - | 返回错误信息 |
+| `validator` | 搜索项校验函数 | `(value: SearchValue) => { message?: string } \| undefined` | - | - | 返回错误信息 |
 | `onPanelVisibleChange` | 面板 | `(visible: boolean) => void` | - | - | 面板的展开与隐藏状态改变的回调函数 |
 
 ```ts
@@ -121,7 +121,7 @@ SelectSearchFieldConfig
 | `showSelectAll` | 是否支持全选 | `boolean` | `true` | - | - |
 | `concludeAllSelected` | 是否在值被全选时显示 "全部" | `boolean` | - | - | - |
 | `virtual` | 是否支持虚拟滚动 | `boolean` | `false` | - | 默认不支持 |
-| `onSearch` | 搜索回调函数 | `(searchValue: string) => void | ((searchValue: string) => void)[]` | - | - | 在触发搜索值改变时执行 |
+| `onSearch` | 搜索回调函数 | `(searchValue: string) => void \| ((searchValue: string) => void)[]` | - | - | 在触发搜索值改变时执行 |
 
 > 注：使用 `Ctrl + Enter` 在多选下切换面板中选项选中状态
 
@@ -223,7 +223,7 @@ DatePickerSearchFieldConfig
 | --- | --- | --- | --- | --- | --- |
 | `format` | 日期输入格式 | `'格式'` | - | ✅ | 详见[DatePicker](/components/date-picker/zh) |
 | `type` | 日期选择类型 | `DatePickerType` | `'date'` | - | 同`DatePicker`的`type`， 详见[DatePicker](/components/date-picker/zh) |
-| `cellTooltip` | 日期禁用的悬浮提示 | `(cell: { value: Date, disabled: boolean}) => string | void` | - | - | 详见[DatePicker](/components/date-picker/zh) |
+| `cellTooltip` | 日期禁用的悬浮提示 | `(cell: { value: Date, disabled: boolean}) => string \| void` | - | - | 详见[DatePicker](/components/date-picker/zh) |
 | `disabledDate` | 日期禁用判断 | `(date: Date) => boolean` | - | - | 详见[DatePicker](/components/date-picker/zh) |
 | `timePanelOptions` | 时间面板配置 | `TimePanelOptions` | - | - | 详见[DatePicker](/components/date-picker/zh) |
 
@@ -243,7 +243,7 @@ DateRangePickerSearchFieldConfig
 | `format` | 日期输入格式 | `'格式'` | - | ✅ | 详见[DatePicker](/components/date-picker/zh) |
 | `separator` | 日期范围之间的分隔符 | `string` | `'~'` | - | - |
 | `type` | 日期选择类型 | `DatePickerType` | `'date'` | - | 同`DatePicker`的`type`， 详见[DatePicker](/components/date-picker/zh) |
-| `cellTooltip` | 日期禁用的悬浮提示 | `(cell: { value: Date, disabled: boolean}) => string | void` | - | - | 详见[DatePicker](/components/date-picker/zh) |
+| `cellTooltip` | 日期禁用的悬浮提示 | `(cell: { value: Date, disabled: boolean}) => string \| void` | - | - | 详见[DatePicker](/components/date-picker/zh) |
 | `disabledDate` | 日期禁用判断 | `(date: Date) => boolean` | - | - | 详见[DatePicker](/components/date-picker/zh) |
 | `timePanelOptions` | 时间面板配置 | `TimePanelOptions` | - | - | 详见[DatePicker](/components/date-picker/zh) |
 
@@ -264,7 +264,7 @@ CustomSearchFieldConfig
 | `extends` | 继承已有的类型 | `string` | - | - | 上述所有的field类型 |
 | `customPanel` | 自定义面板渲染 | `string \| (context: PanelRenderContext) => VNodeChild` | - | - | 如果有面板则需要提供，类型为`string`时指代插槽名称 |
 | `format` | 数据格式化函数 | `(value: unknown) => string` | - | - | 必填，用于将指定的类型转换成字符串输入 |
-| `parse` | 输入解析函数 | `(input: string) => unknown | null` | - | - | 必填，用于将输入的字符串解析到指定的类型 |
+| `parse` | 输入解析函数 | `(input: string) => unknown \| null` | - | - | 必填，用于将输入的字符串解析到指定的类型 |
 | `placeholder` | 段占位符 | `string` | - | - | - |
 | `visible` | 段显示隐藏控制 | `(states: SegmentState[]) => boolean` | - | - | 当前搜索项全部段的状态，返回`true`或者`false`控制段的显示隐藏 |
 
@@ -307,3 +307,21 @@ interface PanelRenderContext<V = unknown> {
 | `default` | 快捷标签 | `SearchField` | 自定义单个快捷标签 |
 | `label` | 快捷标签文字 | `SearchField` | 自定义单个快捷标签文字 |
 | `icon` | 快捷标签图标 | `SearchField` | 自定义单个快捷标签图标 |
+
+### UseParser
+
+高级搜索提供了 `useParser` API，用于结合所有 `searchField` 将搜索值解析成多段的值和实际展示的字符串
+
+```ts
+interface ParseResult {
+  key: VKey
+  label?: string
+  segments: SegmentState[]
+}
+
+interface ParserContext {
+  parse: (searchValues: SearchValue[]) => ParseResult[]
+}
+
+function useParser(searchFields: Ref<SearchField[]> | SearchField[]): ParserContext
+```
