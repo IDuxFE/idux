@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.1](https://github.com/IDuxFE/idux/compare/v1.12.0...v1.12.1) (2023-11-03)
+
+
+### Bug Fixes
+
+* **comp:table:** expandable cell text not vertial aligned ([#1729](https://github.com/IDuxFE/idux/issues/1729)) ([4589e83](https://github.com/IDuxFE/idux/commit/4589e83b8eb95712189f040ed28761807ac5e844))
+* **comp:text:** ellipsis doesn't work when there're line breaks ([#1730](https://github.com/IDuxFE/idux/issues/1730)) ([ed78fe3](https://github.com/IDuxFE/idux/commit/ed78fe38b169d3413ff436fc06babc053421aa9c))
+* **comp:text:** text component should inherit attrs ([#1731](https://github.com/IDuxFE/idux/issues/1731)) ([75b49bf](https://github.com/IDuxFE/idux/commit/75b49bf09e9d780ff7ef6ff225198640e90c485e))
+* **pro:search:** overflowd item count is incorrect ([#1732](https://github.com/IDuxFE/idux/issues/1732)) ([2e8fc95](https://github.com/IDuxFE/idux/commit/2e8fc9500ed741cb297ea428bf0c0b346607767a))
+* **pro:search:** select in quickselect panel shouldn't have active value ([#1733](https://github.com/IDuxFE/idux/issues/1733)) ([a967f9b](https://github.com/IDuxFE/idux/commit/a967f9b64276592d4d1173112f8b0992abea03db))
+
+
+
+
+
 # [1.12.0](https://github.com/IDuxFE/idux/compare/v1.11.2...v1.12.0) (2023-10-30)
 
 
