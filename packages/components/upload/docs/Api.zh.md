@@ -20,10 +20,18 @@
 | `requestData` | 上传附加的参数  | `Record<string, unknown> \| ((file: UploadFile) => Record<string, unknown> \| Promise<Record<string, unknown>>)` | - | - | - |
 | `requestHeaders` | 设置上传请求的请求头  | `UploadRequestHeader` | -  | -  | -  |
 | `requestMethod` | 上传请求的http method | `UploadRequestMethod` | `post` | ✅ | - |
-| `onSelect` | 选中文件时钩子 | `(file: File[]) => boolean \| File[] \| Promise<boolean \| File[]>` | - | - | - |
+| `onSelect` | 选中文件时钩子 | `(file: File[], filteredFiles: FilteredFile[]) => boolean \| File[] \| Promise<boolean \| File[]>` | - | - | 第二个参数代表选择后由于最大数量或者文件类型被过滤掉的文件 |
+| `onMaxCountExceeded` | 当选中上传的数量超过最大数量是触发 | `() => void` | - | - | - |
 | `onFileStatusChange` | 上传文件改变时的状态 | `(file: UploadFile) => void` | - | - | - |
 | `onBeforeUpload`   | 文件上传前的钩子，根据返回结果是否上传<br />返回`false`阻止上传<br />返回`Promise`对象`reject`时停止上传<br />返回`Promise`对象`resolve`时开始上传 | `(file: UploadFile) => boolean \| UploadFile \| Promise<boolean \| UploadFile>` | - | - | -  |
 | `onRequestChange` | 请求状态改变的钩子 | `(option: UploadRequestChangeOption) => void` | - | - | - |
+
+```ts
+interface FilteredFile {
+  file: File
+  reason: 'acceptNotMatch' | 'maxCountExceeded'
+}
+```
 
 ### IxUploadFiles
 

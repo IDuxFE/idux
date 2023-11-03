@@ -7,7 +7,7 @@
 | --- | --- | --- | --- | --- | --- |
 | `v-model:open` | 日期面板是否展开 | `boolean` | - | - | - |
 | `control` | 控件控制器 | `string \| number \| (string \| number)[] \| AbstractControl` | - | - | 配合 `@idux/cdk/forms` 使用, 参考 [Form](/components/form/zh) |
-| `cellTooltip` | 日期节点的tooltip | `(cell: { value: Date, disabled: boolean }) => string | void` | - | - | - |
+| `cellTooltip` | 日期节点的tooltip | `(cell: { value: Date, disabled: boolean }) => string \| void` | - | - | - |
 | `allowInput` | 允许输入模式 | `boolean \| 'overlay'` | `false` | - | `'overlay'` 时在浮层内输入 |
 | `autofocus` | 默认获取焦点 | `boolean` | `false` | - | - |
 | `borderless` | 是否无边框 | `boolean` | `false` | ✅ | - |
@@ -72,9 +72,9 @@ const defaultFormat = {
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `disabledHours` | 禁用部分小时选项 | `(selectedAmPm: string | undefined) => number[]` | ``() => []`` | - | - |
-| `disabledMinutes` | 禁用部分分钟选项 | `(selectedHour: number | undefined, selectedAmPm: string | undefined) => number[]` | `() => []` | - | - |
-| `disabledSeconds` | 禁用部分秒选项 | `(selectedHour: number | undefined, selectedMinute: number | undefined, selectedAmPm: string | undefined)=>number[]` | `() => []` | - | - |
+| `disabledHours` | 禁用部分小时选项 | `(selectedAmPm: string \| undefined) => number[]` | ``() => []`` | - | - |
+| `disabledMinutes` | 禁用部分分钟选项 | `(selectedHour: number \| undefined, selectedAmPm: string \| undefined) => number[]` | `() => []` | - | - |
+| `disabledSeconds` | 禁用部分秒选项 | `(selectedHour: number \| undefined, selectedMinute: number \| undefined, selectedAmPm: string \| undefined)=>number[]` | `() => []` | - | - |
 | `hideDisabledOptions` | 隐藏禁止选择的options |`boolean` |`false` | - | - |
 | `hourStep` | 小时选项的间隔 | `number` | `1` | - | - |
 | `minuteStep` | 分钟选项的间隔 | `number` | `1` | - | - |
@@ -93,7 +93,7 @@ const defaultFormat = {
 | `timePanelOptions` | 时间选择面板配置 | `PickerTimePanelOptions \| PickerTimePanelOptions[]` | - | - | 如果需要对前后的时间选择器使用不同配置，可以传入一个数组 |
 | `onChange` | 选中的日期范围值改变后的回调 | `(value: Date[], oldValue: Date[]) => void` | - | - | - |
 | `onInput` | 输入后的回调 | `(isFrom: boolean, evt: Event) => void` | - | - | - |
-| `onSelect` | 面板选择的日期范围值改变的回调 | `(dates: (Date | undefined)[] | undefined) => void` | - | - | 仅选中起点或终点时也会触发 |
+| `onSelect` | 面板选择的日期范围值改变的回调 | `(dates: (Date \| undefined)[] \| undefined) => void` | - | - | 仅选中起点或终点时也会触发 |
 
 ### IxDatePickerPanel
 
@@ -102,12 +102,12 @@ const defaultFormat = {
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:activeValue` | 当前激活状态的日期 | `Date` | - | - | 配合键盘操作使用 |
-| `cellTooltip` | 日期节点的tooltip | `(cell: { value: Date, disabled: boolean }) => string | void` | - | - | - |
+| `cellTooltip` | 日期节点的tooltip | `(cell: { value: Date, disabled: boolean }) => string \| void` | - | - | - |
 | `disabledDate` | 不可选择的日期 | `(date: Date) => boolean` | - | - | - |
 | `type` | 设置选择器面板类型 | `'date' \| 'week' \| 'month' \| 'quarter' \| 'year' \| 'datetime'` | `'date'` | - | - |
 | `timePanelOptions` | 时间选择面板配置 | `TimePanelOptions` | - | - | - |
 | `visible` | 当前可见的面板 | `'datePanel' \| 'timePanel' \| visible` | - | - | 在非 `datetime` 类型时，`timepanel` 无效 |
-| `onChange` | 值改变后的回调 | `(value: Date | undefined) => void` | - | - | - |
+| `onChange` | 值改变后的回调 | `(value: Date \| undefined) => void` | - | - | - |
 
 ### IxDateRangePickerPanel
 
@@ -116,21 +116,21 @@ const defaultFormat = {
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `v-model:activeValue` | 当前激活状态的日期 | `Date[]` | - | - | 配合键盘操作使用 |
-| `cellTooltip` | 日期节点的tooltip | `(cell: { value: Date, disabled: boolean }) => string | void` | - | - | - |
+| `cellTooltip` | 日期节点的tooltip | `(cell: { value: Date, disabled: boolean }) => string \| void` | - | - | - |
 | `disabledDate` | 不可选择的日期 | `(date: Date) => boolean` | - | - | - |
 | `type` | 设置选择器面板类型 | `'date' \| 'week' \| 'month' \| 'quarter' \| 'year' \| 'datetime'` | `'date'` | - | - |
 | `timePanelOptions` | 时间选择面板配置 | `TimePanelOptions \| TimePanelOptions[]` | - | - | 如果需要对前后的时间选择器使用不同配置，可以传入一个数组 |
 | `visible` | 当前可见的面板 | `'datePanel' \| 'timePanel' \| boolean` | - | - | 在非 `datetime` 类型时，`timepanel` 无效 |
-| `onChange` | 值改变后的回调 | `(value: Date[] | undefined) => void` | - | - | - |
-| `onSelect` | 面板选择的日期范围值改变的回调 | `(dates: (Date | undefined)[] | undefined) => void` | - | - | 仅选中起点或终点时也会触发 |
+| `onChange` | 值改变后的回调 | `(value: Date[] \| undefined) => void` | - | - | - |
+| `onSelect` | 面板选择的日期范围值改变的回调 | `(dates: (Date \| undefined)[] \| undefined) => void` | - | - | 仅选中起点或终点时也会触发 |
 
 #### TimePanelOptions
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `disabledHours` | 禁用部分小时选项 | `(selectedAmPm: string | undefined) => number[]` | ``() => []`` | - | - |
-| `disabledMinutes` | 禁用部分分钟选项 | `(selectedHour: number | undefined, selectedAmPm: string | undefined) => number[]` | `() => []` | - | - |
-| `disabledSeconds` | 禁用部分秒选项 | `(selectedHour: number | undefined, selectedMinute: number | undefined, selectedAmPm: string | undefined)=>number[]` | `() => []` | - | - |
+| `disabledHours` | 禁用部分小时选项 | `(selectedAmPm: string \| undefined) => number[]` | ``() => []`` | - | - |
+| `disabledMinutes` | 禁用部分分钟选项 | `(selectedHour: number \| undefined, selectedAmPm: string \| undefined) => number[]` | `() => []` | - | - |
+| `disabledSeconds` | 禁用部分秒选项 | `(selectedHour: number \| undefined, selectedMinute: number \| undefined, selectedAmPm: string \| undefined)=>number[]` | `() => []` | - | - |
 | `hideDisabledOptions` | 隐藏禁止选择的options |`boolean` |`false` | - | - |
 | `hourStep` | 小时选项的间隔 | `number` | `1` | - | - |
 | `minuteStep` | 分钟选项的间隔 | `number` | `1` | - | - |
