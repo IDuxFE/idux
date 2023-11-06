@@ -182,6 +182,10 @@ export default defineComponent({
         rest: (rest: (SearchItem | typeof nameSelectOverflowItemKey)[]) => {
           const restItems = rest.filter(item => item !== nameSelectOverflowItemKey)
 
+          if (!restItems.length) {
+            return
+          }
+
           return (
             <span class={`${prefixCls}-search-item ${prefixCls}-search-item-tag`}>
               {slots.overflowedLabel?.(restItems) ?? `+ ${restItems.length}`}

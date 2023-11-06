@@ -142,7 +142,7 @@ export default defineComponent({
           class={`${mergedPrefixCls.value}-rest`}
           itemKey={restNodeKey}
           display={displayRest.value}
-          onSizeChange={({ contentRect }) => (restWidth.value = contentRect.width ?? 0)}
+          onSizeChange={entry => (restWidth.value = entry?.contentRect.width ?? 0)}
         >
           {nodeContent}
         </Item>
@@ -156,7 +156,7 @@ export default defineComponent({
           {...itemSharedProps}
           class={`${mergedPrefixCls.value}-suffix`}
           itemKey={suffixNodeKey}
-          onSizeChange={({ contentRect }) => (suffixWidth.value = contentRect.width ?? 0)}
+          onSizeChange={entry => (suffixWidth.value = entry?.contentRect.width ?? 0)}
         >
           {nodeContent}
         </Item>
@@ -199,15 +199,11 @@ const useContainerSize = (containerElRef: Ref<HTMLElement | undefined>) => {
 
 const useItemSize = () => {
   const itemsWidthMap = ref<Map<VKey, number>>(new Map())
-  const setItemWidth = (key: VKey, entry: ResizeObserverEntry) => {
-    const {
-      contentRect: { width },
-      target,
-    } = entry
-    if (!target && itemsWidthMap.value.get(key)) {
+  const setItemWidth = (key: VKey, entry?: ResizeObserverEntry) => {
+    if (!entry?.target && itemsWidthMap.value.get(key)) {
       itemsWidthMap.value.delete(key)
-    } else if (width) {
-      itemsWidthMap.value.set(key, width)
+    } else if (entry?.contentRect.width) {
+      itemsWidthMap.value.set(key, entry.contentRect.width)
     }
   }
 

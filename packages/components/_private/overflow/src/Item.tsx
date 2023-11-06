@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { defineComponent, ref } from 'vue'
+import { defineComponent, onUnmounted, ref } from 'vue'
 
 import { useResizeObserver } from '@idux/cdk/resize'
 import { callEmit } from '@idux/cdk/utils'
@@ -19,6 +19,9 @@ export default defineComponent({
     const itemElRef = ref<HTMLElement | undefined>()
     const handleResize = (entry: ResizeObserverEntry) => callEmit(props.onSizeChange, entry, props.itemKey ?? '')
     useResizeObserver(itemElRef, handleResize)
+    onUnmounted(() => {
+      callEmit(props.onSizeChange, undefined, props.itemKey ?? '')
+    })
 
     return () => {
       return (

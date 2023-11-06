@@ -96,7 +96,7 @@ export default defineComponent({
       const { class: className, style, ...rest } = attrs
 
       return (
-        <span ref={segmentWrapperRef} class={normalizeClass([classes.value, className])}>
+        <span ref={segmentWrapperRef} class={normalizeClass([classes.value, className])} style={style as CSSProperties}>
           <span
             v-show={props.ellipsis && leftSideEllipsis.value}
             class={`${prefixCls}-ellipsis-left`}
@@ -107,7 +107,6 @@ export default defineComponent({
           <input
             ref={segmentInputRef}
             class={`${prefixCls}-inner`}
-            style={style as CSSProperties}
             value={input.value ?? ''}
             disabled={props.disabled}
             placeholder={props.placeholder}
