@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.2](https://github.com/IDuxFE/idux/compare/v1.12.1...v1.12.2) (2023-11-06)
+
+
+### Bug Fixes
+
+* **pro:search:** rest count should hide when no item is overflowed ([#1736](https://github.com/IDuxFE/idux/issues/1736)) ([a436e92](https://github.com/IDuxFE/idux/commit/a436e921ded880b9e2eecc88efef63d2d27e90aa))
+
+
+
+
+
 ## [1.12.1](https://github.com/IDuxFE/idux/compare/v1.12.0...v1.12.1) (2023-11-03)
 
 
