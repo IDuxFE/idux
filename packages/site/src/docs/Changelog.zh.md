@@ -10,6 +10,14 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.12.2(2023-11-06)
+
+
+### Bug Fixes
+
+* **comp:table:** 没有相邻的下一个兄弟节点的树节点，不应当在节点下面展示连线 ([#1735](https://github.com/IDuxFE/idux/issues/1735)) ([bb75c13](https://github.com/IDuxFE/idux/commit/bb75c1337fe91c2372d07fb96b6c13b4d1734f7a))
+* **pro:search:** 在没有任何搜索项溢出时，不应当显示溢出的数量 ([#1736](https://github.com/IDuxFE/idux/issues/1736)) ([a436e92](https://github.com/IDuxFE/idux/commit/a436e921ded880b9e2eecc88efef63d2d27e90aa))
+
 ## 1.12.1(2023-11-03)
 
 
