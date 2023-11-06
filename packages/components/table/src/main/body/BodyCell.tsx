@@ -192,7 +192,7 @@ function renderExpandableChildren(
   prefixCls: string,
 ) {
   const { icon, customIcon, indent, showLine } = expandable.value!
-  const { record, expanded, level = 0, hasPrevSibling, hasNextSibling } = props
+  const { record, expanded, level = 0, hasPrevSibling, hasNextSibling, showLineIndentIndexList } = props
   const hasParent = level > 0
   const mergedShowLine = isTreeData.value && showLine && indent
 
@@ -211,11 +211,20 @@ function renderExpandableChildren(
     [`${prefixCls}-expandable-trigger-show-line`]: mergedShowLine,
     [`${prefixCls}-expandable-trigger-disabled`]: props.disabled,
   }
+
   const indents = []
 
-  if (mergedShowLine) {
+  if (indent) {
     for (let i = 0; i < level; i++) {
-      indents.push(<div class={`${prefixCls}-expandable-indent`} style={indentStyle}></div>)
+      indents.push(
+        <div
+          class={{
+            [`${prefixCls}-expandable-indent`]: true,
+            [`${prefixCls}-expandable-indent-show-line`]: mergedShowLine && showLineIndentIndexList.includes(i),
+          }}
+          style={indentStyle}
+        ></div>,
+      )
     }
   }
 
