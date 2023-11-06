@@ -169,7 +169,7 @@ function renderChildren(
   isHover: Ref<boolean>,
 ) {
   const children: VNodeTypes[] = []
-  const { rowIndex, record, level, hasNextSibling, hasPrevSibling } = props
+  const { rowIndex, record, level, hasNextSibling, hasPrevSibling, showLineIndentIndexList } = props
   flattedColumns.value.forEach((column, colIndex) => {
     const { type, colSpan: getColSpan, rowSpan: getRowSpan, key } = column
     const colSpan = getColSpan?.(record, rowIndex)
@@ -188,6 +188,7 @@ function renderChildren(
       level,
       hasNextSibling,
       hasPrevSibling,
+      showLineIndentIndexList,
       key,
     }
     if (type === 'expandable') {

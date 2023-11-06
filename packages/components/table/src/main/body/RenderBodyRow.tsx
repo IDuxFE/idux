@@ -22,13 +22,14 @@ export function renderBodyRow(
   expandable: TableColumnMergedExpandable | undefined,
   prefixCls: string,
 ): VNodeChild {
-  const { children, expanded, level, hasPrevSibling, hasNextSibling, record, rowKey } = item
+  const { children, expanded, level, hasPrevSibling, hasNextSibling, showLineIndentIndexList, record, rowKey } = item
   const rowProps = {
     key: rowKey,
     expanded,
     level,
     hasPrevSibling,
     hasNextSibling,
+    showLineIndentIndexList,
     hasChildren: !!children?.length,
     record,
     rowData: item,

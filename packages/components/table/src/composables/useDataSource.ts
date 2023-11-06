@@ -88,6 +88,7 @@ export interface MergedData {
   rowKey: VKey
   hasPrevSibling: boolean
   hasNextSibling: boolean
+  showLineIndentIndexList: number[]
 }
 
 export interface FlattedData extends MergedData {
@@ -101,15 +102,28 @@ function convertMergeData(
   childrenKey: string,
   index: number,
   total: number,
-  parentKey?: VKey,
+  parents?: Omit<MergedData, 'children'>[],
 ) {
   const rowKey = getRowKey(record)
-  const result: MergedData = { record, rowKey, parentKey, hasPrevSibling: index > 0, hasNextSibling: index < total - 1 }
+  const result: MergedData = {
+    record,
+    rowKey,
+    parentKey: parents?.[0].rowKey,
+    showLineIndentIndexList: [...(parents ?? [])].reverse()?.reduce((res, parent, index) => {
+      if (parent.hasNextSibling) {
+        res.push(index)
+      }
+
+      return res
+    }, [] as number[]),
+    hasPrevSibling: index > 0,
+    hasNextSibling: index < total - 1,
+  }
 
   const subData = (record as Record<string, unknown>)[childrenKey] as unknown[]
   if (subData) {
     result.children = subData.map((subRecord, idx) =>
-      convertMergeData(subRecord, getRowKey, childrenKey, idx, subData.length, rowKey),
+      convertMergeData(subRecord, getRowKey, childrenKey, idx, subData.length, [result, ...(parents ?? [])]),
     )
   }
   return result
@@ -178,10 +192,20 @@ function filterData(mergedData: MergedData[], activeFilters: ActiveFilter[], exp
 // when virtual scrolling is enabled, this do not need to traverse all nodes
 function flatData(mergedData: MergedData[], expandedRowKeys: VKey[], level: number) {
   return mergedData.reduce((result, item) => {
-    const { children, parentKey, record, rowKey, hasPrevSibling, hasNextSibling } = item
+    const { children, parentKey, record, rowKey, hasPrevSibling, hasNextSibling, showLineIndentIndexList } = item
     const expanded = expandedRowKeys.includes(rowKey)
 
-    result.push({ children, parentKey, record, rowKey, level, expanded, hasPrevSibling, hasNextSibling })
+    result.push({
+      children,
+      parentKey,
+      record,
+      rowKey,
+      level,
+      expanded,
+      hasPrevSibling,
+      hasNextSibling,
+      showLineIndentIndexList,
+    })
 
     if (expanded && item.children) {
       const childrenFlatData = flatData(item.children, expandedRowKeys, level + 1)
