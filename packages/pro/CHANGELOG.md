@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+
+# [2.0.0-beta.0](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0-beta.0) (2023-11-23)
+
+
+### Features
+
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([ea22a8f](https://github.com/IDuxFE/idux/commit/ea22a8fa8fb863a4c546b9af62025718779d3463))
+
+
+### BREAKING CHANGES
+
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
 ## [1.12.4](https://github.com/IDuxFE/idux/compare/v1.12.2...v1.12.4) (2024-01-02)
 
 
@@ -12,10 +27,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **pro:search:** non-multiple field created state should be overwritten by new state ([#1778](https://github.com/IDuxFE/idux/issues/1778)) ([617c192](https://github.com/IDuxFE/idux/commit/617c192e190ef902e591b4fb3e1de6227ee50946))
 * **pro:table:** layoutool checkbox shouldn't be checkable when disabled ([#1741](https://github.com/IDuxFE/idux/issues/1741)) ([0905872](https://github.com/IDuxFE/idux/commit/0905872941527f73d5acf56e0dc18d4768c2ad11))
 
-
-
-
-
 ## [1.12.3](https://github.com/IDuxFE/idux/compare/v1.12.2...v1.12.3) (2023-12-05)
 
 
@@ -23,9 +34,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * **pro:search:** click is correct when key is zero ([#1748](https://github.com/IDuxFE/idux/issues/1748)) ([9d996ce](https://github.com/IDuxFE/idux/commit/9d996cedbfb1c6748911ae6e6e3e263177444737))
 * **pro:table:** layoutool checkbox shouldn't be checkable when disabled ([#1741](https://github.com/IDuxFE/idux/issues/1741)) ([0905872](https://github.com/IDuxFE/idux/commit/0905872941527f73d5acf56e0dc18d4768c2ad11))
-
-
-
 
 
 ## [1.12.2](https://github.com/IDuxFE/idux/compare/v1.12.1...v1.12.2) (2023-11-06)
