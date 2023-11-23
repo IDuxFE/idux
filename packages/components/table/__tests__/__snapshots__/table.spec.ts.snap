@@ -37,7 +37,7 @@ exports[`Table > basic work > render work 1`] = `
           <!---->
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell\\">
-              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
+              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><svg viewBox=\\"0 0 16 16\\" width=\\"14px\\" height=\\"14px\\"><rect x=\\"0\\" y=\\"0\\" width=\\"16\\" height=\\"16\\" rx=\\"1\\" fill=\\"#EDF1F7\\"></rect><rect x=\\"5\\" y=\\"7\\" width=\\"6\\" height=\\"2\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect><rect x=\\"7\\" y=\\"5\\" width=\\"2\\" height=\\"6\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect></svg></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
             </td>
             <td class=\\"ix-table-cell\\"><label class=\\"ix-checkbox ix-checkbox-disabled\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
                 <!---->
@@ -47,15 +47,15 @@ exports[`Table > basic work > render work 1`] = `
             <td class=\\"ix-table-cell\\">Edrward 0</td>
             <td class=\\"ix-table-cell\\">18</td>
             <td class=\\"ix-table-cell\\">London Park no. 0</td>
-            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
-              <!----></span><span class=\\"ix-tag ix-tag-normal ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal\\" color=\\"success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 0</a><a>Delete</a></td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell\\">
-              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger ix-table-expandable-trigger-disabled\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
+              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger ix-table-expandable-trigger-disabled\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><svg viewBox=\\"0 0 16 16\\" width=\\"14px\\" height=\\"14px\\"><rect x=\\"0\\" y=\\"0\\" width=\\"16\\" height=\\"16\\" rx=\\"1\\" fill=\\"#EDF1F7\\"></rect><rect x=\\"5\\" y=\\"7\\" width=\\"6\\" height=\\"2\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect><rect x=\\"7\\" y=\\"5\\" width=\\"2\\" height=\\"6\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect></svg></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
             </td>
             <td class=\\"ix-table-cell\\"><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
                 <!---->
@@ -65,15 +65,15 @@ exports[`Table > basic work > render work 1`] = `
             <td class=\\"ix-table-cell\\">Edrward 1</td>
             <td class=\\"ix-table-cell\\">19</td>
             <td class=\\"ix-table-cell\\">London Park no. 1</td>
-            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
-              <!----></span><span class=\\"ix-tag ix-tag-normal ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal\\" color=\\"success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 1</a><a>Delete</a></td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell\\">
-              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger ix-table-expandable-trigger-disabled\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
+              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger ix-table-expandable-trigger-disabled\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><svg viewBox=\\"0 0 16 16\\" width=\\"14px\\" height=\\"14px\\"><rect x=\\"0\\" y=\\"0\\" width=\\"16\\" height=\\"16\\" rx=\\"1\\" fill=\\"#EDF1F7\\"></rect><rect x=\\"5\\" y=\\"7\\" width=\\"6\\" height=\\"2\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect><rect x=\\"7\\" y=\\"5\\" width=\\"2\\" height=\\"6\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect></svg></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
             </td>
             <td class=\\"ix-table-cell\\"><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
                 <!---->
@@ -83,15 +83,15 @@ exports[`Table > basic work > render work 1`] = `
             <td class=\\"ix-table-cell\\">Edrward 2</td>
             <td class=\\"ix-table-cell\\">20</td>
             <td class=\\"ix-table-cell\\">London Park no. 2</td>
-            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
-              <!----></span><span class=\\"ix-tag ix-tag-normal ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal\\" color=\\"success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 2</a><a>Delete</a></td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell\\">
-              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
+              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><svg viewBox=\\"0 0 16 16\\" width=\\"14px\\" height=\\"14px\\"><rect x=\\"0\\" y=\\"0\\" width=\\"16\\" height=\\"16\\" rx=\\"1\\" fill=\\"#EDF1F7\\"></rect><rect x=\\"5\\" y=\\"7\\" width=\\"6\\" height=\\"2\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect><rect x=\\"7\\" y=\\"5\\" width=\\"2\\" height=\\"6\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect></svg></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
             </td>
             <td class=\\"ix-table-cell\\"><label class=\\"ix-checkbox ix-checkbox-disabled\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
                 <!---->
@@ -101,15 +101,15 @@ exports[`Table > basic work > render work 1`] = `
             <td class=\\"ix-table-cell\\">Edrward 3</td>
             <td class=\\"ix-table-cell\\">21</td>
             <td class=\\"ix-table-cell\\">London Park no. 3</td>
-            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
-              <!----></span><span class=\\"ix-tag ix-tag-normal ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal\\" color=\\"success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 3</a><a>Delete</a></td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell\\">
-              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger ix-table-expandable-trigger-disabled\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
+              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger ix-table-expandable-trigger-disabled\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><svg viewBox=\\"0 0 16 16\\" width=\\"14px\\" height=\\"14px\\"><rect x=\\"0\\" y=\\"0\\" width=\\"16\\" height=\\"16\\" rx=\\"1\\" fill=\\"#EDF1F7\\"></rect><rect x=\\"5\\" y=\\"7\\" width=\\"6\\" height=\\"2\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect><rect x=\\"7\\" y=\\"5\\" width=\\"2\\" height=\\"6\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect></svg></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
             </td>
             <td class=\\"ix-table-cell\\"><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
                 <!---->
@@ -119,15 +119,15 @@ exports[`Table > basic work > render work 1`] = `
             <td class=\\"ix-table-cell\\">Edrward 4</td>
             <td class=\\"ix-table-cell\\">22</td>
             <td class=\\"ix-table-cell\\">London Park no. 4</td>
-            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
-              <!----></span><span class=\\"ix-tag ix-tag-normal ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal\\" color=\\"success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 4</a><a>Delete</a></td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell\\">
-              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger ix-table-expandable-trigger-disabled\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
+              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger ix-table-expandable-trigger-disabled\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><svg viewBox=\\"0 0 16 16\\" width=\\"14px\\" height=\\"14px\\"><rect x=\\"0\\" y=\\"0\\" width=\\"16\\" height=\\"16\\" rx=\\"1\\" fill=\\"#EDF1F7\\"></rect><rect x=\\"5\\" y=\\"7\\" width=\\"6\\" height=\\"2\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect><rect x=\\"7\\" y=\\"5\\" width=\\"2\\" height=\\"6\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect></svg></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
             </td>
             <td class=\\"ix-table-cell\\"><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
                 <!---->
@@ -137,15 +137,15 @@ exports[`Table > basic work > render work 1`] = `
             <td class=\\"ix-table-cell\\">Edrward 5</td>
             <td class=\\"ix-table-cell\\">23</td>
             <td class=\\"ix-table-cell\\">London Park no. 5</td>
-            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
-              <!----></span><span class=\\"ix-tag ix-tag-normal ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal\\" color=\\"success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 5</a><a>Delete</a></td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell\\">
-              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
+              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><svg viewBox=\\"0 0 16 16\\" width=\\"14px\\" height=\\"14px\\"><rect x=\\"0\\" y=\\"0\\" width=\\"16\\" height=\\"16\\" rx=\\"1\\" fill=\\"#EDF1F7\\"></rect><rect x=\\"5\\" y=\\"7\\" width=\\"6\\" height=\\"2\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect><rect x=\\"7\\" y=\\"5\\" width=\\"2\\" height=\\"6\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect></svg></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
             </td>
             <td class=\\"ix-table-cell\\"><label class=\\"ix-checkbox ix-checkbox-disabled\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
                 <!---->
@@ -155,15 +155,15 @@ exports[`Table > basic work > render work 1`] = `
             <td class=\\"ix-table-cell\\">Edrward 6</td>
             <td class=\\"ix-table-cell\\">24</td>
             <td class=\\"ix-table-cell\\">London Park no. 6</td>
-            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
-              <!----></span><span class=\\"ix-tag ix-tag-normal ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal\\" color=\\"success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 6</a><a>Delete</a></td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell\\">
-              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger ix-table-expandable-trigger-disabled\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
+              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger ix-table-expandable-trigger-disabled\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><svg viewBox=\\"0 0 16 16\\" width=\\"14px\\" height=\\"14px\\"><rect x=\\"0\\" y=\\"0\\" width=\\"16\\" height=\\"16\\" rx=\\"1\\" fill=\\"#EDF1F7\\"></rect><rect x=\\"5\\" y=\\"7\\" width=\\"6\\" height=\\"2\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect><rect x=\\"7\\" y=\\"5\\" width=\\"2\\" height=\\"6\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect></svg></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
             </td>
             <td class=\\"ix-table-cell\\"><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
                 <!---->
@@ -173,15 +173,15 @@ exports[`Table > basic work > render work 1`] = `
             <td class=\\"ix-table-cell\\">Edrward 7</td>
             <td class=\\"ix-table-cell\\">25</td>
             <td class=\\"ix-table-cell\\">London Park no. 7</td>
-            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
-              <!----></span><span class=\\"ix-tag ix-tag-normal ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal\\" color=\\"success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 7</a><a>Delete</a></td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell\\">
-              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger ix-table-expandable-trigger-disabled\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
+              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger ix-table-expandable-trigger-disabled\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><svg viewBox=\\"0 0 16 16\\" width=\\"14px\\" height=\\"14px\\"><rect x=\\"0\\" y=\\"0\\" width=\\"16\\" height=\\"16\\" rx=\\"1\\" fill=\\"#EDF1F7\\"></rect><rect x=\\"5\\" y=\\"7\\" width=\\"6\\" height=\\"2\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect><rect x=\\"7\\" y=\\"5\\" width=\\"2\\" height=\\"6\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect></svg></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
             </td>
             <td class=\\"ix-table-cell\\"><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
                 <!---->
@@ -191,15 +191,15 @@ exports[`Table > basic work > render work 1`] = `
             <td class=\\"ix-table-cell\\">Edrward 8</td>
             <td class=\\"ix-table-cell\\">26</td>
             <td class=\\"ix-table-cell\\">London Park no. 8</td>
-            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
-              <!----></span><span class=\\"ix-tag ix-tag-normal ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal\\" color=\\"success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 8</a><a>Delete</a></td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell\\">
-              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
+              <div class=\\"ix-table-expandable-wrapper\\"><span class=\\"ix-table-expandable-trigger\\"><button class=\\"ix-table-expandable-trigger-button\\" type=\\"button\\"><svg viewBox=\\"0 0 16 16\\" width=\\"14px\\" height=\\"14px\\"><rect x=\\"0\\" y=\\"0\\" width=\\"16\\" height=\\"16\\" rx=\\"1\\" fill=\\"#EDF1F7\\"></rect><rect x=\\"5\\" y=\\"7\\" width=\\"6\\" height=\\"2\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect><rect x=\\"7\\" y=\\"5\\" width=\\"2\\" height=\\"6\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect></svg></button><!----></span><span class=\\"ix-table-expandable-trigger-gap\\"></span><a>expandable</a></div>
             </td>
             <td class=\\"ix-table-cell\\"><label class=\\"ix-checkbox ix-checkbox-disabled\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
                 <!---->
@@ -209,8 +209,8 @@ exports[`Table > basic work > render work 1`] = `
             <td class=\\"ix-table-cell\\">Edrward 9</td>
             <td class=\\"ix-table-cell\\">27</td>
             <td class=\\"ix-table-cell\\">London Park no. 9</td>
-            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal ix-tag-success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
-              <!----></span><span class=\\"ix-tag ix-tag-normal ix-tag-warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
+            <td class=\\"ix-table-cell\\"><span class=\\"ix-tag ix-tag-normal\\" color=\\"success\\"><!----><!----><span class=\\"ix-tag-content\\">NICE</span>
+              <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
             <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 9</a><a>Delete</a></td>

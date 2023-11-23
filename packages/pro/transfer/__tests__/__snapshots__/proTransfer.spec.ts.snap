@@ -1074,7 +1074,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
       class="ix-transfer-operations-inner"
     >
       <button
-        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
+        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-sm ix-transfer-operations-btn"
         disabled=""
         type="button"
       >
@@ -1091,7 +1091,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
         />
       </button>
       <button
-        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
+        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-sm ix-transfer-operations-btn"
         disabled=""
         type="button"
       >
@@ -1573,12 +1573,29 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                     class="ix-tree-node-expand"
                   >
                     <!---->
-                    <i
-                      aria-label="right"
-                      class="ix-icon ix-icon-right"
-                      role="img"
-                      style="transform: rotate(90deg);"
-                    />
+                    <svg
+                      height="14px"
+                      viewBox="0 0 16 16"
+                      width="14px"
+                    >
+                      <rect
+                        fill="#EDF1F7"
+                        height="16"
+                        rx="1"
+                        width="16"
+                        x="0"
+                        y="0"
+                      />
+                      <rect
+                        fill="#5E6573"
+                        height="2"
+                        rx="0.2"
+                        width="6"
+                        x="5"
+                        y="7"
+                      />
+                      <!---->
+                    </svg>
                   </span>
                   <label
                     aria-checked="false"
@@ -1761,12 +1778,29 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                     class="ix-tree-node-expand"
                   >
                     <!---->
-                    <i
-                      aria-label="right"
-                      class="ix-icon ix-icon-right"
-                      role="img"
-                      style="transform: rotate(90deg);"
-                    />
+                    <svg
+                      height="14px"
+                      viewBox="0 0 16 16"
+                      width="14px"
+                    >
+                      <rect
+                        fill="#EDF1F7"
+                        height="16"
+                        rx="1"
+                        width="16"
+                        x="0"
+                        y="0"
+                      />
+                      <rect
+                        fill="#5E6573"
+                        height="2"
+                        rx="0.2"
+                        width="6"
+                        x="5"
+                        y="7"
+                      />
+                      <!---->
+                    </svg>
                   </span>
                   <label
                     aria-checked="false"
@@ -1890,12 +1924,29 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                     class="ix-tree-node-expand"
                   >
                     <!---->
-                    <i
-                      aria-label="right"
-                      class="ix-icon ix-icon-right"
-                      role="img"
-                      style="transform: rotate(90deg);"
-                    />
+                    <svg
+                      height="14px"
+                      viewBox="0 0 16 16"
+                      width="14px"
+                    >
+                      <rect
+                        fill="#EDF1F7"
+                        height="16"
+                        rx="1"
+                        width="16"
+                        x="0"
+                        y="0"
+                      />
+                      <rect
+                        fill="#5E6573"
+                        height="2"
+                        rx="0.2"
+                        width="6"
+                        x="5"
+                        y="7"
+                      />
+                      <!---->
+                    </svg>
                   </span>
                   <label
                     aria-checked="false"
@@ -2147,12 +2198,29 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                     class="ix-tree-node-expand"
                   >
                     <!---->
-                    <i
-                      aria-label="right"
-                      class="ix-icon ix-icon-right"
-                      role="img"
-                      style="transform: rotate(90deg);"
-                    />
+                    <svg
+                      height="14px"
+                      viewBox="0 0 16 16"
+                      width="14px"
+                    >
+                      <rect
+                        fill="#EDF1F7"
+                        height="16"
+                        rx="1"
+                        width="16"
+                        x="0"
+                        y="0"
+                      />
+                      <rect
+                        fill="#5E6573"
+                        height="2"
+                        rx="0.2"
+                        width="6"
+                        x="5"
+                        y="7"
+                      />
+                      <!---->
+                    </svg>
                   </span>
                   <label
                     aria-checked="false"
@@ -2276,12 +2344,29 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                     class="ix-tree-node-expand"
                   >
                     <!---->
-                    <i
-                      aria-label="right"
-                      class="ix-icon ix-icon-right"
-                      role="img"
-                      style="transform: rotate(90deg);"
-                    />
+                    <svg
+                      height="14px"
+                      viewBox="0 0 16 16"
+                      width="14px"
+                    >
+                      <rect
+                        fill="#EDF1F7"
+                        height="16"
+                        rx="1"
+                        width="16"
+                        x="0"
+                        y="0"
+                      />
+                      <rect
+                        fill="#5E6573"
+                        height="2"
+                        rx="0.2"
+                        width="6"
+                        x="5"
+                        y="7"
+                      />
+                      <!---->
+                    </svg>
                   </span>
                   <label
                     aria-checked="false"
@@ -2533,12 +2618,29 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                     class="ix-tree-node-expand"
                   >
                     <!---->
-                    <i
-                      aria-label="right"
-                      class="ix-icon ix-icon-right"
-                      role="img"
-                      style="transform: rotate(90deg);"
-                    />
+                    <svg
+                      height="14px"
+                      viewBox="0 0 16 16"
+                      width="14px"
+                    >
+                      <rect
+                        fill="#EDF1F7"
+                        height="16"
+                        rx="1"
+                        width="16"
+                        x="0"
+                        y="0"
+                      />
+                      <rect
+                        fill="#5E6573"
+                        height="2"
+                        rx="0.2"
+                        width="6"
+                        x="5"
+                        y="7"
+                      />
+                      <!---->
+                    </svg>
                   </span>
                   <label
                     aria-checked="false"
@@ -2662,12 +2764,29 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                     class="ix-tree-node-expand"
                   >
                     <!---->
-                    <i
-                      aria-label="right"
-                      class="ix-icon ix-icon-right"
-                      role="img"
-                      style="transform: rotate(90deg);"
-                    />
+                    <svg
+                      height="14px"
+                      viewBox="0 0 16 16"
+                      width="14px"
+                    >
+                      <rect
+                        fill="#EDF1F7"
+                        height="16"
+                        rx="1"
+                        width="16"
+                        x="0"
+                        y="0"
+                      />
+                      <rect
+                        fill="#5E6573"
+                        height="2"
+                        rx="0.2"
+                        width="6"
+                        x="5"
+                        y="7"
+                      />
+                      <!---->
+                    </svg>
                   </span>
                   <label
                     aria-checked="false"
@@ -2919,12 +3038,29 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                     class="ix-tree-node-expand"
                   >
                     <!---->
-                    <i
-                      aria-label="right"
-                      class="ix-icon ix-icon-right"
-                      role="img"
-                      style="transform: rotate(90deg);"
-                    />
+                    <svg
+                      height="14px"
+                      viewBox="0 0 16 16"
+                      width="14px"
+                    >
+                      <rect
+                        fill="#EDF1F7"
+                        height="16"
+                        rx="1"
+                        width="16"
+                        x="0"
+                        y="0"
+                      />
+                      <rect
+                        fill="#5E6573"
+                        height="2"
+                        rx="0.2"
+                        width="6"
+                        x="5"
+                        y="7"
+                      />
+                      <!---->
+                    </svg>
                   </span>
                   <label
                     aria-checked="false"
@@ -3048,12 +3184,29 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                     class="ix-tree-node-expand"
                   >
                     <!---->
-                    <i
-                      aria-label="right"
-                      class="ix-icon ix-icon-right"
-                      role="img"
-                      style="transform: rotate(90deg);"
-                    />
+                    <svg
+                      height="14px"
+                      viewBox="0 0 16 16"
+                      width="14px"
+                    >
+                      <rect
+                        fill="#EDF1F7"
+                        height="16"
+                        rx="1"
+                        width="16"
+                        x="0"
+                        y="0"
+                      />
+                      <rect
+                        fill="#5E6573"
+                        height="2"
+                        rx="0.2"
+                        width="6"
+                        x="5"
+                        y="7"
+                      />
+                      <!---->
+                    </svg>
                   </span>
                   <label
                     aria-checked="false"
@@ -3306,7 +3459,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
       class="ix-transfer-operations-inner"
     >
       <button
-        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
+        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-sm ix-transfer-operations-btn"
         disabled=""
         type="button"
       >
@@ -3323,7 +3476,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
         />
       </button>
       <button
-        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn"
+        class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-sm ix-transfer-operations-btn"
         disabled=""
         type="button"
       >
@@ -3445,12 +3598,29 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                     class="ix-tree-node-expand"
                   >
                     <!---->
-                    <i
-                      aria-label="right"
-                      class="ix-icon ix-icon-right"
-                      role="img"
-                      style="transform: rotate(90deg);"
-                    />
+                    <svg
+                      height="14px"
+                      viewBox="0 0 16 16"
+                      width="14px"
+                    >
+                      <rect
+                        fill="#EDF1F7"
+                        height="16"
+                        rx="1"
+                        width="16"
+                        x="0"
+                        y="0"
+                      />
+                      <rect
+                        fill="#5E6573"
+                        height="2"
+                        rx="0.2"
+                        width="6"
+                        x="5"
+                        y="7"
+                      />
+                      <!---->
+                    </svg>
                   </span>
                   <label
                     aria-checked="false"
@@ -3512,12 +3682,29 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                     class="ix-tree-node-expand"
                   >
                     <!---->
-                    <i
-                      aria-label="right"
-                      class="ix-icon ix-icon-right"
-                      role="img"
-                      style="transform: rotate(90deg);"
-                    />
+                    <svg
+                      height="14px"
+                      viewBox="0 0 16 16"
+                      width="14px"
+                    >
+                      <rect
+                        fill="#EDF1F7"
+                        height="16"
+                        rx="1"
+                        width="16"
+                        x="0"
+                        y="0"
+                      />
+                      <rect
+                        fill="#5E6573"
+                        height="2"
+                        rx="0.2"
+                        width="6"
+                        x="5"
+                        y="7"
+                      />
+                      <!---->
+                    </svg>
                   </span>
                   <label
                     aria-checked="false"

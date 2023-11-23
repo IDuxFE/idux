@@ -3,7 +3,7 @@
 exports[`Form > basic work > render work 1`] = `
 "<form class=\\"ix-form ix-form-horizontal ix-form-md\\">
   <div class=\\"ix-row ix-form-item\\">
-    <div class=\\"ix-col ix-form-item-label ix-form-item-label-colon\\"><label>Username
+    <div class=\\"ix-col ix-form-item-label ix-form-item-label-start\\"><label>Username
         <!---->
       </label></div>
     <div class=\\"ix-col ix-form-item-control\\">
@@ -19,7 +19,7 @@ exports[`Form > basic work > render work 1`] = `
     </div>
   </div>
   <div class=\\"ix-row ix-form-item\\">
-    <div class=\\"ix-col ix-form-item-label ix-form-item-label-colon\\"><label>Password
+    <div class=\\"ix-col ix-form-item-label ix-form-item-label-start\\"><label>Password
         <!---->
       </label></div>
     <div class=\\"ix-col ix-form-item-control\\">
@@ -35,7 +35,7 @@ exports[`Form > basic work > render work 1`] = `
     </div>
   </div>
   <div class=\\"ix-row ix-form-item\\">
-    <div class=\\"ix-col ix-form-item-label ix-form-item-label-colon\\"><label>Remember
+    <div class=\\"ix-col ix-form-item-label ix-form-item-label-start\\"><label>Remember
         <!---->
       </label></div>
     <div class=\\"ix-col ix-form-item-control\\">
