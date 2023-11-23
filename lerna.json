@@ -1,6 +1,6 @@
 {
   "packages": ["packages/*"],
-  "version": "1.12.2",
+  "version": "2.0.0-beta",
   "command": {
     "publish": {
       "allowBranch": ["main", "release", "next", "hotfix"],
