@@ -15,10 +15,6 @@ export type TagStatus = 'normal' | 'success' | 'info' | 'warning' | 'risk' | 'er
 
 export const tagProps = {
   bordered: { type: Boolean, default: undefined },
-  /**
-   * @deprecated please use `status` or `--ix-tag-color, --ix-tag-background-color` instead
-   */
-  color: String,
   filled: { type: Boolean, default: undefined },
   icon: String,
   number: Number,

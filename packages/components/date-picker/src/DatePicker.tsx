@@ -10,6 +10,7 @@ import { computed, defineComponent, normalizeClass, onMounted, provide, ref, toR
 import { ɵOverlay, ɵOverlayInstance } from '@idux/components/_private/overlay'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
 import { useFormElement } from '@idux/components/form'
+import { useThemeToken } from '@idux/components/theme'
 import { useOverlayFocusMonitor } from '@idux/components/utils'
 
 import { useControl } from './composables/useControl'
@@ -23,6 +24,7 @@ import Content from './content/Content'
 import { datePickerToken } from './token'
 import Trigger from './trigger/Trigger'
 import { datePickerProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxDatePicker',
@@ -31,6 +33,9 @@ export default defineComponent({
   setup(props, { attrs, expose, slots }) {
     const common = useGlobalConfig('common')
     const locale = useGlobalConfig('locale')
+    const { globalHashId, hashId, registerToken } = useThemeToken('datePicker')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-date-picker`)
     const config = useGlobalConfig('datePicker')
     const dateConfig = useDateConfig()
@@ -105,7 +110,9 @@ export default defineComponent({
     const renderTrigger = () => <Trigger ref={triggerRef} {...attrs}></Trigger>
     const renderContent = () => <Content></Content>
     const overlayProps = useOverlayProps(context)
-    const overlayClass = computed(() => normalizeClass([`${mergedPrefixCls.value}-overlay`, props.overlayClassName]))
+    const overlayClass = computed(() =>
+      normalizeClass([`${mergedPrefixCls.value}-overlay`, globalHashId.value, hashId.value, props.overlayClassName]),
+    )
 
     return () => (
       <ɵOverlay

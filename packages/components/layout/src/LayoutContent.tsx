@@ -8,6 +8,7 @@
 import { computed, defineComponent } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import { layoutContentProps } from './types'
 
@@ -16,10 +17,11 @@ export default defineComponent({
   props: layoutContentProps,
   setup(_, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId } = useThemeToken('layout')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-layout-content`)
     return () => {
       const prefixCls = mergedPrefixCls.value
-      return <main class={`${prefixCls}`}>{slots.default?.()}</main>
+      return <main class={[prefixCls, globalHashId.value, hashId.value]}>{slots.default?.()}</main>
     }
   },
 })

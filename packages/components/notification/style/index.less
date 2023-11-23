@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 @import '../../style/motion/move.less';
 @import './mixin.less';
@@ -12,36 +13,36 @@
     'footer footer';
   grid-template-columns: auto 1fr;
   position: relative;
-  padding: @notification-padding;
-  margin: @notification-margin;
-  width: @notification-width;
-  max-width: @notification-max-width;
-  font-size: @notification-font-size;
-  line-height: @notification-line-height;
-  background-color: @notification-background-color;
-  border-radius: @notification-border-radius;
-  box-shadow: @notification-box-shadow;
+  padding: var(--ix-notification-padding);
+  margin: var(--ix-notification-margin);
+  width: var(--ix-notification-width);
+  max-width: var(--ix-notification-max-width);
+  font-size: var(--ix-notification-font-size);
+  line-height: calc(var(--ix-notification-font-size) + var(--ix-line-height-gutter));
+  background-color: var(--ix-notification-bg-color);
+  border-radius: var(--ix-notification-border-radius);
+  box-shadow: var(--ix-box-shadow-md);
 
   &-icon {
     grid-area: icon;
-    font-size: @notification-icon-font-size;
+    font-size: var(--ix-font-size-icon);
     display: flex;
-    flex-direction: @notification-icon-flex-direction;
-    margin: @notification-icon-margin;
+    flex-direction: row;
+    margin: var(--ix-notification-icon-margin);
   }
 
   &-close-icon {
     display: inline-block;
     position: absolute;
     cursor: pointer;
-    width: @notification-close-width;
-    font-size: @notification-close-font-size;
-    color: @notification-close-color;
-    top: @notification-close-top;
-    right: @notification-close-right;
+    width: var(--ix-font-size-icon);
+    font-size: var(--ix-font-size-icon);
+    color: var(--ix-color-icon);
+    top: var(--ix-notification-close-icon-top);
+    right: var(--ix-notification-close-icon-right);
 
     &:hover {
-      color: @notification-close-hover-color;
+      color: var(--ix-color-icon-hover);
     }
   }
 
@@ -50,27 +51,27 @@
 
     &-with-content {
       .@{notification-prefix}-title {
-        margin: @notification-title-margin;
+        margin: var(--ix-notification-title-margin);
       }
     }
   }
 
   &-title {
-    font-size: @notification-title-font-size;
-    line-height: @notification-title-line-height;
+    font-size: var(--ix-notification-title-font-size);
+    line-height: var(--ix-notification-title-line-height);
   }
 
   &-content {
-    font-size: @notification-content-font-size;
-    color: @notification-content-color;
-    margin: @notification-content-margin;
+    font-size: var(--ix-notification-content-font-size);
+    color: var(--ix-notification-content-color);
+    margin: var(--ix-notification-content-margin);
   }
 
   &-footer {
     display: flex;
     justify-content: flex-end;
     grid-area: footer;
-    margin: @notification-footer-margin;
+    margin: var(--ix-notification-footer-margin);
   }
 
   &-wrapper {
@@ -78,8 +79,8 @@
     z-index: 9998;
   }
 
-  .notification-icon-color(info, @notification-icon-info-color);
-  .notification-icon-color(success, @notification-icon-success-color);
-  .notification-icon-color( warning, @notification-icon-warning-color);
-  .notification-icon-color(error, @notification-icon-error-color);
+  .notification-icon-color(info, var(--ix-color-info-icon));
+  .notification-icon-color(success, var(--ix-color-success-icon));
+  .notification-icon-color(warning, var(--ix-color-warning-icon));
+  .notification-icon-color(error, var(--ix-color-error-icon));
 }

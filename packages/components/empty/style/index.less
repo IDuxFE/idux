@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 
 .@{empty-prefix} {
@@ -9,8 +10,8 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: @empty-color;
-  margin: var(--ix-spacing-xl) var(--ix-spacing-lg);
+  color: var(--ix-empty-color);
+  margin: var(--ix-margin-size-xl) var(--ix-margin-size-lg);
 
   &-image {
     svg {
@@ -24,8 +25,8 @@
   }
 
   &-description {
-    color: @empty-description-color;
-    .reset-font-size(@empty-description-font-size);
+    color: var(--ix-empty-desc-color);
+    .reset-font-size(var(--ix-desc-font-size));
   }
 
   &-content {

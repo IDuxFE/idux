@@ -17,7 +17,7 @@ import { MenuData } from '@idux/components/menu'
 import { themeConfig } from './themeConfig'
 import { appContextToken } from '../../context'
 
-const { setTheme } = inject(appContextToken)!
+const { theme, setTheme } = inject(appContextToken)!
 
 const dataSource: MenuData[] = [
   ...themeConfig,
@@ -25,24 +25,10 @@ const dataSource: MenuData[] = [
   { key: 'title', label: 'Theme', disabled: true },
 ]
 
-const themeKey = 'idux_theme'
-const currTheme = localStorage.getItem(themeKey) || 'default'
-const selectedKeys = ref([currTheme])
+const selectedKeys = ref([theme.value])
 
-const loadTheme = (theme: string) => {
-  setTheme(theme)
-  if (window.changeTheme) {
-    window.changeTheme(theme)
-  } else {
-    fetch(`/themes/s/${theme}`)
-  }
-}
-
-loadTheme(currTheme)
-
-watch(selectedKeys, ([theme]) => {
-  localStorage.setItem(themeKey, theme)
-  loadTheme(theme)
+watch(selectedKeys, ([selectedTheme]) => {
+  setTheme(selectedTheme)
 })
 </script>
 
@@ -55,7 +41,7 @@ watch(selectedKeys, ([theme]) => {
   align-items: center;
 
   &:hover {
-    color: #1c6eff;
+    color: var(--ix-color-primary);
   }
 
   .ix-icon {

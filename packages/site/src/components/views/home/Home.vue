@@ -203,7 +203,7 @@ export default defineComponent({
           margin-bottom: 8px;
 
           strong {
-            color: @color-primary;
+            color: var(--ix-color-primary-text);
           }
         }
 

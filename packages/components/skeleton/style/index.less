@@ -1,17 +1,18 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 @import './mixin.less';
 
 .@{skeleton-prefix} {
   .reset-component-new();
 
-  margin-bottom: @skeleton-margin-bottom;
+  margin-bottom: var(--ix-skeleton-margin-bottom);
 
   &-loader {
     width: 100%;
-    background: linear-gradient(90deg, @skeleton-start-color 25%, @skeleton-end-color 36%, @skeleton-start-color 62%);
+    background: linear-gradient(90deg, var(--ix-skeleton-start-color) 25%, var(--ix-skeleton-end-color) 36%, var(--ix-skeleton-start-color) 62%);
 
     & + & {
-      margin-top: @skeleton-loader-margin-bottom;
+      margin-top: var(--ix-skeleton-loader-margin-bottom);
     }
   }
 

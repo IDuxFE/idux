@@ -25,6 +25,7 @@ import { callEmit, convertCssPixel, getOffset } from '@idux/cdk/utils'
 import { ɵFooter } from '@idux/components/_private/footer'
 import { ɵHeader } from '@idux/components/_private/header'
 import { type ModalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import ModalBody from './ModalBody'
 import { MODAL_TOKEN, modalToken } from './token'
@@ -33,6 +34,7 @@ import { type ModalProps } from './types'
 export default defineComponent({
   inheritAttrs: false,
   setup(_, { attrs }) {
+    const { globalHashId, hashId } = useThemeToken('modal')
     const {
       props,
       slots,
@@ -72,6 +74,8 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
 
       return {
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [`${prefixCls}-wrapper`]: true,
         [`${prefixCls}-centered`]: centered.value,
         [`${prefixCls}-with-mask`]: mask.value,

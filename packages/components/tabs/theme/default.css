@@ -1,0 +1,12 @@
+/* ------ tabs css variables ------ */
+:root {
+  --ix-tabs-nav-font-size-md: 12px;
+  --ix-tabs-nav-font-size-lg: 14px;
+  --ix-tabs-nav-tab-padding: 0 16px;
+  --ix-tabs-nav-tab-min-width: 72px;
+  --ix-tabs-nav-tab-height: 40px;
+  --ix-tabs-nav-bar-height: 2px;
+  --ix-tabs-segment-nav-height: 32px;
+  --ix-tabs-border-radius: 2px;
+  --ix-tabs-panel-padding-size: 16px;
+}

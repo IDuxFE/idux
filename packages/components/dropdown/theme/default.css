@@ -1,0 +1,5 @@
+/* ------ dropdown css variables ------ */
+:root {
+  --ix-dropdown-min-width: 128px;
+  --ix-dropdown-menu-container-padding: 4px 0;
+}

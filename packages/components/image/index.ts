@@ -24,3 +24,7 @@ export type {
   ImageViewerComponent,
   ImageViewerPublicProps as ImageViewerProps,
 } from './src/types'
+
+export { getThemeTokens as getImageThemeTokens } from './theme'
+
+export type { ImageThemeTokens } from './theme'

@@ -22,6 +22,7 @@ import {
 import { type VKey, callEmit, useState } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { IxSelectPanel, type SelectData, type SelectPanelInstance } from '@idux/components/select'
+import { useThemeToken } from '@idux/pro/theme'
 
 import PanelFooter from './PanelFooter'
 import { proSearchContext } from '../token'
@@ -31,6 +32,7 @@ import { filterDataSource, matchRule } from '../utils/selectData'
 export default defineComponent({
   props: proSearchSelectPanelProps,
   setup(props, { slots }) {
+    const { hashId: selectHashId } = useThemeToken('select')
     const { locale, mergedPrefixCls } = inject(proSearchContext)!
     const [activeValue, _setActiveValue] = useState<VKey | undefined>(undefined)
     const partiallySelected = computed(() => props.value && props.value.length > 0 && !props.allSelected)
@@ -165,6 +167,7 @@ export default defineComponent({
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-select-panel`
       const classes = normalizeClass({
+        [selectHashId.value]: !!selectHashId.value,
         [prefixCls]: true,
         [`${prefixCls}-auto-height`]: !!props.autoHeight,
       })

@@ -14,6 +14,7 @@ import { isNumber } from 'lodash-es'
 import { useResizeObserver } from '@idux/cdk/resize'
 import { getBoxSizingData, throwError } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import Item from './Item'
 import { overflowProps } from './types'
@@ -30,6 +31,8 @@ export default defineComponent({
   props: overflowProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId } = useThemeToken()
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-overflow`)
     const containerElRef = ref<HTMLElement | undefined>()
 
@@ -164,7 +167,7 @@ export default defineComponent({
     }
     return () => {
       return (
-        <div class={`${mergedPrefixCls.value} ${props.prefixCls}-overflow`} ref={containerElRef}>
+        <div class={`${mergedPrefixCls.value} ${props.prefixCls}-overflow ${globalHashId.value}`} ref={containerElRef}>
           {mergedData.value.map(internalRenderItem)}
           {showRest.value && internalRenderRest(restData.value)}
           {internalRenderSuffix()}

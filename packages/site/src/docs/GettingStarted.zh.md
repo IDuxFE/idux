@@ -218,7 +218,7 @@ module.exports = {
 ```ts
 // App.vue or other components
 import { IxButton } from "@idux/components/button"
-import "@idux/components/button/style/themes/default_css"
+import "@idux/components/button/style_css"
 ```
 
 ## 其他

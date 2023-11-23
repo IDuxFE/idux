@@ -12,21 +12,26 @@ import { computed, defineComponent, onBeforeUnmount, onMounted, watchEffect } fr
 
 import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { convertIconVNode } from '@idux/components/utils'
 
 import { messageProps } from './types'
+import { getThemeTokens, transforms } from '../theme'
 
 export default defineComponent({
   name: 'IxMessage',
   props: messageProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('message')
+    registerToken(getThemeTokens, transforms)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-message`)
     const config = useGlobalConfig('message')
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
-      return [prefixCls, `${prefixCls}-${props.type}`]
+      return [prefixCls, globalHashId.value, hashId.value, `${prefixCls}-${props.type}`]
     })
 
     const mergedIcon = computed(() => {

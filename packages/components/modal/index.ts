@@ -30,3 +30,7 @@ export type {
   ModalRef,
   ModalBindings,
 } from './src/types'
+
+export { getThemeTokens as getModalThemeTokens } from './theme'
+
+export type { ModalThemeTokens } from './theme'

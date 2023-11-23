@@ -11,6 +11,7 @@ import { CdkPortal } from '@idux/cdk/portal'
 import { cancelRAF, rAF } from '@idux/cdk/utils'
 import { ɵMask } from '@idux/components/_private/mask'
 import { LoadingBarConfig, useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { usePortalTarget } from '@idux/components/utils'
 
 import { LOADING_BAR_PROVIDER_TOKEN } from './token'
@@ -21,6 +22,7 @@ import {
   StatusType,
   loadingBarProviderProps,
 } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxLoadingBarProvider',
@@ -28,6 +30,9 @@ export default defineComponent({
   props: loadingBarProviderProps,
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('loadingBar')
+    registerToken(getThemeTokens)
+
     const config = useGlobalConfig('loadingBar')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-loading-bar`)
     const mergedPortalTarget = usePortalTarget(props, config, common, mergedPrefixCls)
@@ -37,6 +42,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [`${prefixCls}`]: true,
         [`${prefixCls}--${status.value}`]: !!status.value,
       })

@@ -14,3 +14,6 @@ const IxComment = Comment as unknown as CommentComponent
 export { IxComment }
 
 export type { CommentInstance, CommentComponent, CommentPublicProps as CommentProps, CommentAvatar } from './src/types'
+
+export { getThemeTokens as getCommentThemeTokens } from './theme'
+export type { CommentThemeTokens } from './theme'

@@ -8,6 +8,7 @@
 import { Transition, computed, defineComponent } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import { maskProps } from './types'
 
@@ -16,6 +17,7 @@ export default defineComponent({
   props: maskProps,
   setup(props) {
     const common = useGlobalConfig('common')
+    const { globalHashId } = useThemeToken()
     const mergedPrefixCls = computed(() => `${common.prefixCls}-mask`)
 
     return () => {
@@ -25,7 +27,7 @@ export default defineComponent({
       }
       return (
         <Transition appear name={transitionName ?? `${common.prefixCls}-fade`}>
-          <div v-show={visible} class={mergedPrefixCls.value} style={{ zIndex }}></div>
+          <div v-show={visible} class={[mergedPrefixCls.value, globalHashId.value]} style={{ zIndex }}></div>
         </Transition>
       )
     }

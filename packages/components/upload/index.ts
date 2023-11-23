@@ -33,3 +33,7 @@ export type {
   UploadFilesPublicProps as UploadFilesProps,
   FilteredFile,
 } from './src/types'
+
+export { getThemeTokens as getUploadThemeTokens } from './theme'
+
+export type { UploadThemeTokens } from './theme'

@@ -11,6 +11,7 @@ import { computed, defineComponent, normalizeClass, ref } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
+import { useThemeToken } from '@idux/components/theme'
 
 import { inputProps } from './types'
 
@@ -20,6 +21,8 @@ export default defineComponent({
   props: inputProps,
   setup(props, { attrs, slots, expose }) {
     const common = useGlobalConfig('common')
+    const { globalHashId } = useThemeToken()
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-input`)
     const inputRef = ref<HTMLInputElement>()
     const getInputElement = () => inputRef.value
@@ -62,7 +65,7 @@ export default defineComponent({
       }
 
       const { class: className, style, ...rest } = attrs
-      const classNames = normalizeClass([classes.value, className])
+      const classNames = normalizeClass([classes.value, className, globalHashId.value])
       const inputNode = <input ref={inputRef} class={`${prefixCls}-inner`} disabled={disabled} {...rest} />
 
       if (!(addonBeforeNode || addonAfterNode)) {

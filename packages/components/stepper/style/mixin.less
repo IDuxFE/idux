@@ -1,3 +1,20 @@
+@stepper-item-process-tail-color: var(--ix-color-text-disabled);
+@stepper-item-process-icon-color: var(--ix-color-primary-icon);
+@stepper-item-process-title-color: var(--ix-color-text-title);
+@stepper-item-process-description-color: var(--ix-color-text-info);
+@stepper-item-finish-tail-color: var(--ix-color-primary-icon);
+@stepper-item-finish-icon-color: var(--ix-color-primary-icon);
+@stepper-item-finish-title-color: var(--ix-color-text-title);
+@stepper-item-finish-description-color: var(--ix-color-text-info);
+@stepper-item-wait-tail-color: var(--ix-color-text-disabled);
+@stepper-item-wait-icon-color: var(--ix-color-text-disabled);
+@stepper-item-wait-title-color: var(--ix-color-text-info);
+@stepper-item-wait-description-color: var(--ix-color-text-info);
+@stepper-item-error-tail-color: @stepper-item-wait-tail-color;
+@stepper-item-error-icon-color: var(--ix-color-error-icon);
+@stepper-item-error-title-color: var(--ix-color-text);
+@stepper-item-error-description-color: var(--ix-color-text);
+
 .stepper-item-status(@status) {
   @tail-color: 'stepper-item-@{status}-tail-color';
   @icon-color: 'stepper-item-@{status}-icon-color';

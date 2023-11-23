@@ -18,15 +18,20 @@ import { ɵCollapseTransition } from '@idux/components/_private/collapse-transit
 import { useGlobalConfig } from '@idux/components/config'
 import { IxHeader } from '@idux/components/header'
 import { IxIcon } from '@idux/components/icon'
+import { useThemeToken } from '@idux/components/theme'
 
 import { collapseToken } from './token'
 import { collapsePanelProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxCollapsePanel',
   props: collapsePanelProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('collapse')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-collapse-panel`)
     const { slots: collapseSlots, mergedSize, expandedKeys, expandIcon, handleExpand } = inject(collapseToken)!
 
@@ -35,6 +40,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [`${prefixCls}`]: true,
         [`${prefixCls}-disabled`]: props.disabled,
         [`${prefixCls}-expanded`]: isExpanded.value,

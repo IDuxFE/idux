@@ -8,6 +8,7 @@
 import { computed, defineComponent, normalizeClass, provide, ref } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import TransferOperations from './TransferOperations'
 import { usePagination } from './composables/usePagination'
@@ -21,6 +22,7 @@ import { useTransferSelectState } from './composables/useTransferSelectState'
 import TransferList from './content/Content'
 import { TRANSFER_OPERATIONS_TOKEN, TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN, transferContext } from './token'
 import { type TransferApis, type TransferListInstance, transferProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxTransfer',
@@ -29,6 +31,9 @@ export default defineComponent({
     const common = useGlobalConfig('common')
     const config = useGlobalConfig('transfer')
     const locale = useGlobalConfig('locale').transfer
+    const { globalHashId, hashId, registerToken } = useThemeToken('transfer')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-transfer`)
 
     const showSelectAll = computed(() => props.showSelectAll ?? config.showSelectAll)
@@ -81,6 +86,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-fit-content`]: !!props.scroll?.height,
       })

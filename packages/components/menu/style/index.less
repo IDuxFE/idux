@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/motion/fade.less';
 @import '../../style/mixins/clearfix.less';
 @import '../../style/mixins/ellipsis.less';
@@ -14,10 +15,12 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  font-size: @menu-font-size;
-  line-height: calc(@menu-font-size + var(--ix-line-height-gutter));
+  font-size: var(--ix-menu-font-size);
+  line-height: calc(var(--ix-menu-font-size) + var(--ix-line-height-gutter));
   z-index: 9;
-  transition: background-color var(--ix-transition-duration-slow), width var(--ix-transition-duration-medium);
+  transition:
+    background-color var(--ix-motion-duration-slow),
+    width var(--ix-motion-duration-medium);
 
   .clearfix();
 
@@ -42,13 +45,13 @@
     position: relative;
     display: flex;
     align-items: center;
-    height: @menu-height;
+    height: var(--ix-menu-height);
     padding-left: 16px;
-    padding-right: calc(@menu-icon-font-size + 12px);
+    padding-right: calc(var(--ix-font-size-icon) + 12px);
     .ellipsis();
 
     .@{icon-prefix} {
-      font-size: @menu-icon-font-size;
+      font-size: var(--ix-font-size-icon);
     }
 
     .@{icon-prefix} + span {
@@ -59,9 +62,10 @@
   &-item,
   &-sub-label {
     cursor: pointer;
-    transition: color var(--ix-transition-duration-fast) var(--ix-ease-in-out),
-      background-color var(--ix-transition-duration-fast) var(--ix-ease-in-out),
-      border-color var(--ix-transition-duration-fast) var(--ix-ease-in-out);
+    transition:
+      color var(--ix-motion-duration-fast) var(--ix-motion-ease-in-out),
+      background-color var(--ix-motion-duration-fast) var(--ix-motion-ease-in-out),
+      border-color var(--ix-motion-duration-fast) var(--ix-motion-ease-in-out);
   }
 
   &-item&-item-disabled,
@@ -70,10 +74,8 @@
   }
 
   &-overlay {
-    min-width: @menu-overlay-min-width;
-    background-color: @menu-background-color;
-    border-radius: @menu-overlay-border-radius;
-    box-shadow: @menu-overlay-box-shadow;
+    min-width: var(--ix-menu-overlay-min-width);
+    background-color: var(--ix-color-container-bg);
 
     .@{menu-prefix} {
       box-shadow: none;

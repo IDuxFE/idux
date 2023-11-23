@@ -1,21 +1,22 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/placeholder.less';
 @import '../../style/mixins/reset.less';
 @import './mixin.less';
 
 .@{input-prefix} {
   .reset-component-new();
-  .reset-color(@form-new-color, @form-new-background-color);
+  .reset-color();
 
   &-sm {
-    .input-size(@form-new-height-sm, @form-new-font-size-sm, @form-new-padding-horizontal-sm, @form-new-border-radius-sm);
+    .input-size(var(--ix-control-height-sm), var(--ix-control-font-size-sm), var(--ix-control-padding-size-horizontal-sm), var(--ix-control-border-radius-sm));
   }
 
   &-md {
-    .input-size(@form-new-height-md, @form-new-font-size-md, @form-new-padding-horizontal-md, @form-new-border-radius-md);
+    .input-size(var(--ix-control-height-md), var(--ix-control-font-size-md), var(--ix-control-padding-size-horizontal-md), var(--ix-control-border-radius-md));
   }
 
   &-lg {
-    .input-size(@form-new-height-lg, @form-new-font-size-lg, @form-new-padding-horizontal-lg, @form-new-border-radius-lg);
+    .input-size(var(--ix-control-height-lg), var(--ix-control-font-size-lg), var(--ix-control-padding-size-horizontal-lg), var(--ix-control-border-radius-lg));
   }
 
   &,
@@ -26,18 +27,18 @@
   &:hover,
   &-inner:hover,
   &-wrapper:hover {
-    border-color: @form-new-border-color-focus;
+    border-color: var(--ix-control-border-color-hover);
   }
 
   &:focus,
   &-focused {
-    border-color: @form-new-border-color-focus;
-    box-shadow: @form-new-box-shadow-focus;
+    border-color: var(--ix-control-border-color-active);
+    box-shadow: var(--ix-control-box-shadow-focus);
 
     .@{input-prefix}-inner,
     .@{input-prefix}-wrapper {
-      border-color: @form-new-border-color-focus;
-      box-shadow: @form-new-box-shadow-focus;
+      border-color: var(--ix-control-border-color-active);
+      box-shadow: var(--ix-control-box-shadow-focus);
     }
   }
 
@@ -84,7 +85,7 @@
   &-wrapper,
   &-inner,
   &-addon {
-    transition: all var(--ix-transition-duration-fast) var(--ix-ease-in-out);
+    transition: all var(--ix-motion-duration-fast) var(--ix-motion-ease-in-out);
   }
 
   &-with-addon-after,
@@ -112,8 +113,8 @@
   &-addon {
     display: inline-block;
     text-align: center;
-    background-color: @input-addon-background-color;
-    border: 1px solid @form-new-border-color;
+    background-color: var(--ix-color-addon-container-bg);
+    border: 1px solid var(--ix-color-border);
     white-space: nowrap;
 
     &:first-child {
@@ -180,8 +181,8 @@
   &-prefix {
     display: inline-flex;
     align-items: center;
-    color: @form-new-icon-color;
-    font-size: @form-new-icon-font-size;
+    color: var(--ix-color-icon);
+    font-size: var(--ix-font-size-icon);
   }
 
   &-prefix {
@@ -194,23 +195,23 @@
   }
 
   &-clearable:not(&-with-suffix) &-inner {
-    padding-right: @form-new-icon-font-size;
+    padding-right: var(--ix-font-size-icon);
   }
 
   &-clear {
     position: absolute;
     z-index: 1;
     right: 7px;
-    color: @form-new-icon-color;
-    font-size: @form-new-icon-font-size;
+    color: var(--ix-color-icon);
+    font-size: var(--ix-font-size-icon);
     cursor: pointer;
     opacity: 0;
     pointer-events: none;
-    background: @form-new-background-color;
-    transition: all var(--ix-transition-duration-fast) var(--ix-ease-in-out);
+    background-color: var(--ix-control-bg-color);
+    transition: all var(--ix-motion-duration-fast) var(--ix-ease-in-out);
 
     &:hover {
-      color: @form-new-icon-color-hover;
+      color: var(--ix-color-icon-hover);
     }
 
     &.visible {
@@ -224,7 +225,7 @@
     display: inline-flex;
     align-items: center;
     width: 100%;
-    border: 1px solid @form-new-border-color;
+    border: var(--ix-control-line-width) var(--ix-control-line-type) var(--ix-color-border);
 
     .@{input-prefix}-inner {
       padding: 0;
@@ -235,25 +236,25 @@
 
   // form status
   &&-invalid {
-    border-color: @form-new-color-invalid;
+    border-color: var(--ix-color-error-border);
 
     &:hover {
-      border-color: @form-new-color-invalid;
+      border-color: var(--ix-color-error-border);
     }
 
     .@{input-prefix}-wrapper,
     .@{input-prefix}-inner {
-      border-color: @form-new-color-invalid;
+      border-color: var(--ix-color-error-border);
 
       &:hover {
-        border-color: @form-new-color-invalid;
+        border-color: var(--ix-color-error-border);
       }
     }
 
     &:focus,
     &.@{input-prefix}-focused {
-      border-color: @form-new-color-invalid;
-      box-shadow: @form-new-box-shadow-invalid;
+      border-color: var(--ix-color-error-border);
+      box-shadow: var(--ix-control-box-shadow-invalid);
 
       .@{input-prefix}-wrapper,
       .@{input-prefix}-inner {
@@ -262,8 +263,8 @@
     }
 
     .@{input-prefix}-addon {
-      color: @form-new-color-invalid;
-      border-color: @form-new-color-invalid;
+      color: var(--ix-color-error-text);
+      border-color: var(--ix-color-error-border);
 
       .@{selector-prefix} {
         &:hover &-content,

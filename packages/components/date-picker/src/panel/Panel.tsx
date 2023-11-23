@@ -11,7 +11,10 @@ import { callEmit } from '@idux/cdk/utils'
 import { ɵDatePanel } from '@idux/components/_private/date-panel'
 import { ɵTimePanel } from '@idux/components/_private/time-panel'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
+import { getTimePickerThemeTokens } from '@idux/components/time-picker'
 
+import { getThemeTokens } from '../../theme'
 import { useActiveValue } from '../composables/useActiveValue'
 import { datePanelProps } from '../types'
 import { applyDateTime } from '../utils'
@@ -21,6 +24,11 @@ export default defineComponent({
   props: datePanelProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('datePicker')
+    const { registerToken: registerTimePickerToken } = useThemeToken('timePicker')
+    registerToken(getThemeTokens)
+    registerTimePickerToken(getTimePickerThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-date-picker-panel`)
     const dateConfig = useDateConfig()
 
@@ -69,7 +77,11 @@ export default defineComponent({
       }
 
       return (
-        <div class={mergedPrefixCls.value} tabindex={-1} onMousedown={handleMouseDown}>
+        <div
+          class={[mergedPrefixCls.value, globalHashId.value, hashId.value]}
+          tabindex={-1}
+          onMousedown={handleMouseDown}
+        >
           <ɵDatePanel v-show={props.visible !== 'timePanel'} v-slots={slots} {...datePanelProps} />
           {props.type === 'datetime' && <ɵTimePanel v-show={props.visible === 'timePanel'} {..._timePanelProps} />}
         </div>

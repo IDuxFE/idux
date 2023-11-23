@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 
 .@{checkbox-prefix} {
@@ -8,7 +9,7 @@
     align-items: center;
     line-height: unset;
     cursor: pointer;
-    color: @checkbox-color;
+    color: var(--ix-color-text);
 
     &::after {
       display: inline-block;
@@ -20,7 +21,7 @@
     .@{checkbox-prefix}-label {
       .reset-font-size();
 
-      padding: @checkbox-label-padding;
+      padding: var(--ix-checkbox-label-padding);
     }
   }
 
@@ -45,10 +46,10 @@
       display: block;
       width: 16px;
       height: 16px;
-      background-color: @checkbox-background-color;
-      border: 1px solid @checkbox-border-color;
-      border-radius: @checkbox-border-radius;
-      transition: all var(--ix-transition-duration-fast) var(--ix-ease-in-out);
+      background-color: var(--ix-control-bg-color);
+      border: 1px solid var(--ix-color-border);
+      border-radius: var(--ix-control-border-radius-md);
+      transition: all var(--ix-motion-duration-fast) var(--ix-motion-ease-in-out);
 
       &::after {
         position: absolute;
@@ -56,11 +57,11 @@
         left: 4px;
         width: 5px;
         height: 9px;
-        border: 2px solid @checkbox-background-color;
+        border: 2px solid var(--ix-control-bg-color);
         border-top: 0;
         border-left: 0;
         transform: rotate(45deg) scale(0) translate(-50%, -50%);
-        transition: all var(--ix-transition-duration-fast) var(--ix-ease-in-out);
+        transition: all var(--ix-motion-duration-fast) var(--ix-motion-ease-in-out);
         opacity: 0;
         content: ' ';
       }
@@ -72,23 +73,23 @@
       right: 0;
       border-top: 8px solid transparent;
       border-left: 8px solid transparent;
-      transition: all var(--ix-transition-duration-fast) var(--ix-ease-in-out);
+      transition: all var(--ix-motion-duration-fast) var(--ix-motion-ease-in-out);
     }
   }
 
   &:hover &-input-box {
-    border-color: @checkbox-border-color-hover;
+    border-color: var(--ix-control-border-color-hover);
   }
 
   &-focused &-input-box {
-    border-color: @checkbox-border-color-focus;
+    border-color: var(--ix-control-border-color-active);
   }
 
   &-checked {
     .@{checkbox-prefix}-input {
       &-box {
-        background-color: @checkbox-color-active;
-        border-color: @checkbox-color-active;
+        background-color: var(--ix-color-primary);
+        border-color: var(--ix-color-primary-border);
 
         &::after {
           opacity: 1;
@@ -97,27 +98,27 @@
       }
 
       &-tick {
-        border-top-color: @checkbox-color-active;
+        border-top-color: var(--ix-color-primary);
       }
     }
 
     &.@{button-prefix} {
       z-index: 1;
-      color: @checkbox-color-active;
-      border-color: @checkbox-color-active;
+      color: var(--ix-color-primary-text);
+      border-color: var(--ix-color-primary-border);
     }
   }
 
   &-indeterminate &-input-box {
-    background-color: @checkbox-color-active;
-    border-color: @checkbox-color-active;
+    background-color: var(--ix-color-primary);
+    border-color: var(--ix-color-primary-border);
 
     &::after {
       left: 50%;
       width: 8px;
       height: 2px;
       border: 0;
-      background-color: @checkbox-background-color;
+      background-color: var(--ix-control-bg-color);
       transform: translate(-50%, -50%) scale(1);
       opacity: 1;
       content: ' ';
@@ -126,7 +127,7 @@
 
   &&-disabled {
     cursor: not-allowed;
-    color: @checkbox-color-disabled;
+    color: var(--ix-color-text-disabled);
 
     .@{checkbox-prefix}-input {
       &-inner {
@@ -134,32 +135,32 @@
       }
 
       &-box {
-        background-color: @checkbox-background-color-disabled;
-        border-color: @checkbox-border-color;
+        background-color: var(--ix-control-bg-color-disabled);
+        border-color: var(--ix-color-border);
 
         &::after {
-          border-color: @checkbox-color-disabled;
+          border-color: var(--ix-color-text-disabled);
         }
       }
     }
 
     &.@{checkbox-prefix}-indeterminate .@{checkbox-prefix}-input-box {
       &::after {
-        background-color: @checkbox-color-disabled;
+        background-color: var(--ix-color-text-disabled);
       }
     }
 
     &.@{button-prefix} {
       z-index: 0;
-      border-color: @checkbox-border-color;
+      border-color: var(--ix-color-border);
     }
 
     &.@{button-prefix}:not(.@{checkbox-prefix}-checked) {
-      background-color: var(--ix-background-color-medium);
+      background-color: var(--ix-control-bg-color-disabled);
     }
 
     &.@{button-prefix}.@{checkbox-prefix}-checked .@{checkbox-prefix}-input-tick {
-      border-top-color: @checkbox-color-disabled;
+      border-top-color: var(--ix-color-text-disabled);
     }
   }
 
@@ -173,9 +174,9 @@
     position: relative;
     padding: 12px;
     margin-top: 4px;
-    background-color: @checkbox-fieldset-background-color;
-    border: 1px solid @checkbox-fieldset-border-color;
-    border-radius: @checkbox-border-radius;
+    background-color: var(--ix-checkbox-fieldset-bg-color);
+    border: 1px solid var(--ix-checkbox-fieldset-border-color);
+    border-radius: var(--ix-control-border-radius-md);
 
     &-hidden {
       display: none;
@@ -188,9 +189,9 @@
       top: -4px;
       width: 7px;
       height: 7px;
-      background-color: @checkbox-fieldset-background-color;
-      border-top: 1px solid @checkbox-fieldset-border-color;
-      border-left: 1px solid @checkbox-fieldset-border-color;
+      background-color: var(--ix-checkbox-fieldset-bg-color);
+      border-top: 1px solid var(--ix-checkbox-fieldset-border-color);
+      border-left: 1px solid var(--ix-checkbox-fieldset-border-color);
       transform: rotate(45deg);
     }
 

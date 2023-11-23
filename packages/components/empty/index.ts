@@ -14,3 +14,6 @@ const IxEmpty = Empty as unknown as EmptyComponent
 export { IxEmpty }
 
 export type { EmptyInstance, EmptyComponent, EmptyPublicProps as EmptyProps } from './src/types'
+
+export { getThemeTokens as getEmptyThemeTokens } from './theme'
+export type { EmptyThemeTokens } from './theme'

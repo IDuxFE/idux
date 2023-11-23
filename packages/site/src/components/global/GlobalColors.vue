@@ -127,7 +127,7 @@ export default defineComponent({
 
 .global-color-grey {
   color: @color-white;
-  background-color: @color-grey;
+  background-color: #a3a3a3;
 }
 .global-color-level(grey);
 

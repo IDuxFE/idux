@@ -49,8 +49,8 @@ export default defineComponent({
 <style lang="less" scoped>
 .popper {
   padding: 8px;
-  color: @color-white;
-  background: @color-purple;
+  color: #fff;
+  background: #7824ff;
 }
 
 .ix-radio-group {

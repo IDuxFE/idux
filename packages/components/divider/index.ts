@@ -14,3 +14,6 @@ const IxDivider = Divider as unknown as DividerComponent
 export { IxDivider }
 
 export type { DividerInstance, DividerComponent, DividerPublicProps as DividerProps } from './src/types'
+
+export { getThemeTokens as getDividerThemeTokens } from './theme'
+export type { DividerThemeTokens } from './theme'

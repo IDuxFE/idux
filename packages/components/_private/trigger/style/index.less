@@ -1,13 +1,15 @@
+@import '../../../style/variable/index.less';
 @import '../../../style/mixins/reset.less';
 @import '../../../style/mixins/borderless.less';
 @import '../../../style/mixins/placeholder.less';
 
-.trigger-size(@height, @vertical-padding, @horizontal-padding, @font-size) {
-  @icon-padding: @trigger-icon-margin-left + @trigger-icon-margin-right;
-
+.trigger-size(@height, @vertical-padding, @horizontal-padding, @font-size, @border-radius) {
   height: @height;
-  padding: @vertical-padding (@icon-padding + @font-size) @vertical-padding @horizontal-padding;
+  padding: @vertical-padding calc(var(--ix-padding-size-xs) + var(--ix-padding-size-sm)) @vertical-padding
+    @horizontal-padding;
   font-size: @font-size;
+  line-height: calc(@font-size + var(--ix-line-height-gutter));
+  border-radius: @border-radius;
 }
 
 .@{trigger-prefix} {
@@ -15,41 +17,37 @@
 
   position: relative;
   width: 100%;
-  line-height: @trigger-line-height;
-  color: @trigger-color;
-  border: @trigger-border-width @trigger-border-style @trigger-border-color;
-  border-radius: @trigger-border-radius;
-  background-color: @trigger-background-color;
+  color: var(--ix-color-text);
+  border: var(--ix-control-line-width) var(--ix-control-line-type) var(--ix-color-border);
+  background-color: var(--ix-control-bg-color);
   cursor: pointer;
-  transition: all @transition-duration-base @ease-in-out;
-
-  @icon-padding: @trigger-icon-margin-left + @trigger-icon-margin-right;
+  transition: all var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out);
 
   &-sm {
-    .trigger-size(@trigger-height-sm, @trigger-padding-vertical-sm, @form-new-padding-horizontal-sm, @trigger-font-size-sm);
+    .trigger-size(var(--ix-control-height-sm), var(--ix-control-padding-size-vertical-sm), var(--ix-control-padding-size-horizontal-sm), var(--ix-control-font-size-sm), var(--ix-control-border-radius-sm));
   }
 
   &-md {
-    .trigger-size(@trigger-height-md, @trigger-padding-vertical-md, @form-new-padding-horizontal-md, @trigger-font-size-md);
+    .trigger-size(var(--ix-control-height-md), var(--ix-control-padding-size-vertical-md), var(--ix-control-padding-size-horizontal-md), var(--ix-control-font-size-md), var(--ix-control-border-radius-md));
   }
 
   &-lg {
-    .trigger-size(@trigger-height-lg, @trigger-padding-vertical-lg, @form-new-padding-horizontal-lg, @trigger-font-size-lg);
+    .trigger-size(var(--ix-control-height-lg), var(--ix-control-padding-size-vertical-lg), var(--ix-control-padding-size-horizontal-lg), var(--ix-control-font-size-lg), var(--ix-control-border-radius-lg));
   }
 
   &:hover:not(&-disabled):not(&-borderless) {
-    border-color: @trigger-hover-color;
+    border-color: var(--ix-control-border-color-hover);
   }
 
   &-opened:not(&-disabled):not(&-borderless),
   &-focused:not(&-disabled):not(&-borderless) {
-    border-color: @trigger-active-color;
-    box-shadow: @trigger-active-box-shadow;
+    border-color: var(--ix-control-border-color-active);
+    box-shadow: var(--ix-control-box-shadow-focus);
   }
 
   &-disabled {
-    color: @trigger-disabled-color;
-    background-color: @trigger-disabled-background-color;
+    color: var(--ix-color-text-disabled);
+    background-color: var(--ix-control-bg-color-disabled);
     cursor: not-allowed;
   }
 
@@ -62,32 +60,32 @@
   }
 
   &-placeholder {
-    color: @trigger-placeholder-color;
+    color: var(--ix-color-text-placeholder);
   }
 
   &-suffix,
   &-clear-icon {
     position: absolute;
     top: 0;
-    right: @trigger-icon-margin-right;
+    right: var(--ix-margin-size-sm);
     display: flex;
     align-items: center;
     height: 100%;
-    transition: @transition-all-base;
-    font-size: @trigger-icon-font-size;
+    transition: all var(--ix-motion-duration-medium);
+    font-size: var(--ix-font-size-icon);
   }
 
   &-suffix {
-    color: @trigger-icon-color;
+    color: var(--ix-color-icon);
   }
 
   &-clear-icon {
     cursor: pointer;
-    color: @trigger-clear-icon-color;
-    background-color: @trigger-background-color;
+    color: var(--ix-color-icon);
+    background-color: var(--ix-control-bg-color);
     opacity: 0;
     &:hover {
-      color: @trigger-clear-icon-hover-color;
+      color: var(--ix-color-icon-hover);
     }
   }
 
@@ -105,20 +103,20 @@
     appearance: none;
     color: inherit;
     font-size: inherit;
-    .placeholder(@trigger-placeholder-color);
+    .placeholder();
   }
 
   // form status
   &&-invalid {
-    border-color: @form-item-invalid-color;
+    border-color: var(--ix-color-error-border);
 
     &:hover {
-      border-color: @form-item-invalid-color;
+      border-color: var(--ix-color-error-border-hover);
     }
 
     &.@{idux-prefix}-trigger-focused {
-      border-color: @form-item-invalid-color;
-      box-shadow: @form-item-invalid-box-shadow;
+      border-color: var(--ix-color-error-border-active);
+      box-shadow: var(--ix-control-box-shadow-invalid);
     }
   }
 }

@@ -1,0 +1,12 @@
+/* ------ cascader css variables ------ */
+:root {
+  --ix-cascader-option-font-size: 12px;
+  --ix-cascader-option-height: 32px;
+  --ix-cascader-option-padding: 8px 12px;
+  --ix-cascader-option-label-highlight-color: #1c6eff;
+  --ix-cascader-option-group-min-width: 120px;
+  --ix-cascader-option-group-min-height: 180px;
+  --ix-cascader-option-label-margin-left: 8px;
+  --ix-cascader-option-container-padding: 4px 0;
+  --ix-cascader-overlay-search-wrapper-padding: 4px 12px 8px;
+}

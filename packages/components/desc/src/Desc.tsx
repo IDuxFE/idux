@@ -10,15 +10,20 @@ import { computed, defineComponent, normalizeClass, provide } from 'vue'
 import { ɵHeader } from '@idux/components/_private/header'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxRow } from '@idux/components/grid'
+import { useThemeToken } from '@idux/components/theme'
 
 import { descToken } from './token'
 import { descProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxDesc',
   props: descProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('desc')
+    registerToken(getThemeTokens)
+
     const config = useGlobalConfig('desc')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-desc`)
     const mergedCol = computed(() => props.col ?? config.col)
@@ -33,6 +38,8 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const { layout = config.layout } = props
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-${mergedSize.value}`]: true,
         [`${prefixCls}-vertical`]: layout === 'vertical',

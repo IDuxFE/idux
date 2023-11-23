@@ -116,6 +116,7 @@ module.exports = {
     'prettier/prettier': ['error', prettierConfig],
 
     // ts
+    '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/brace-style': ['error', '1tbs'],
     '@typescript-eslint/explicit-module-boundary-types': 'error',
     '@typescript-eslint/member-delimiter-style': [

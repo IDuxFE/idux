@@ -17,9 +17,11 @@ import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { IxButton } from '@idux/components/button'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxSpace } from '@idux/components/space'
+import { useThemeToken } from '@idux/components/theme'
 import { convertIconVNode, convertStringVNode } from '@idux/components/utils'
 
 import { notificationProps } from './types'
+import { getThemeTokens, transforms } from '../theme'
 
 const defaultCloseIcon = 'close'
 
@@ -35,9 +37,12 @@ export default defineComponent({
   props: notificationProps,
   setup(props, { slots }) {
     const commonCfg = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('notification')
+    registerToken(getThemeTokens, transforms)
+
     const comPrefix = computed(() => `${commonCfg.prefixCls}-notification`)
     const config = useGlobalConfig('notification')
-    const wrapCls = useClasses(props, comPrefix)
+    const wrapCls = useClasses(props, comPrefix, globalHashId, hashId)
     const icon = useIcon(props, config)
     const closeIcon = useCloseIcon(props, config)
     const { visible, close, onMouseEnter, onMouseLeave } = useVisible(props, config)
@@ -81,8 +86,18 @@ export default defineComponent({
   },
 })
 
-function useClasses(props: NotificationProps, comPrefix: ComputedRef<string>) {
-  return computed(() => [comPrefix.value, { [`${comPrefix.value}-${props.type}`]: props.type }])
+function useClasses(
+  props: NotificationProps,
+  comPrefix: ComputedRef<string>,
+  globalHashId: ComputedRef<string>,
+  hashId: ComputedRef<string>,
+) {
+  return computed(() => [
+    comPrefix.value,
+    globalHashId.value,
+    hashId.value,
+    { [`${comPrefix.value}-${props.type}`]: props.type },
+  ])
 }
 
 function useIcon(props: NotificationProps, config: NotificationConfig) {

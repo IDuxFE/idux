@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 @import '../../style/motion/move.less';
 @import './mixin.less';
@@ -6,18 +7,18 @@
   .reset-component();
 
   text-align: center;
-  margin: @message-margin;
-  font-size: @font-size-md;
-  line-height: @message-line-height;
+  margin: var(--ix-message-margin);
+  font-size: var(--ix-message-font-size);
+  line-height: calc(var(--ix-message-font-size) + var(--ix-line-height-gutter));
 
   &-content {
     display: inline-block;
-    min-width: @message-content-min-width;
-    max-width: @message-content-max-width;
-    padding: @message-content-padding-vertical @message-content-padding-horizontal;
-    background: @message-content-bg-color;
-    border-radius: @message-content-border-radius;
-    box-shadow: @message-content-box-shadow;
+    min-width: var(--ix-message-content-min-width);
+    max-width: var(--ix-message-content-max-width);
+    padding: var(--ix-message-content-padding-vertical) var(--ix-message-content-padding-horizontal);
+    background: var(--ix-message-bg-color);
+    border-radius: var(--ix-message-border-radius);
+    box-shadow: var(--ix-box-shadow-md);
     pointer-events: all;
 
     &-icon {
@@ -25,21 +26,21 @@
       position: relative;
       top: 1px;
       line-height: 0;
-      margin-right: @message-icon-margin-right;
-      font-size: @font-size-lg;
+      margin-right: var(--ix-message-icon-margin-right);
+      font-size: var(--ix-font-size-icon);
     }
   }
 
-  .message-icon-color(info, @message-icon-info-color);
-  .message-icon-color(success, @message-icon-success-color);
-  .message-icon-color( warning, @message-icon-warning-color);
-  .message-icon-color(error, @message-icon-error-color);
-  .message-icon-color(loading, @message-icon-loading-color);
+  .message-icon-color(info, var(--ix-color-info-icon));
+  .message-icon-color(success, var(--ix-color-success-icon));
+  .message-icon-color(warning, var(--ix-color-warning-icon));
+  .message-icon-color(error, var(--ix-color-error-icon));
+  .message-icon-color(loading, var(--ix-color-primary-icon));
 
   &-wrapper {
     position: fixed;
     left: 0;
-    top: @message-wrapper-top;
+    top: var(--ix-message-wrapper-top);
     width: 100%;
     z-index: 9999;
     pointer-events: none;

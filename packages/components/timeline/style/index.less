@@ -1,13 +1,20 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 @import './mixin.less';
 
 .@{timeline-prefix} {
   .reset-component();
 
-  font-size: @timeline-font-size;
-  line-height: @timeline-line-height;
+  font-size: var(--ix-timeline-font-size);
+  line-height: 1;
   display: flex;
   flex-direction: column;
+
+  @timeline-item-timeline-width: calc(var(--ix-timeline-dot-size) + var(--ix-timeline-dot-border-width) + 8px);
+  @timeline-line-gap: calc((var(--ix-timeline-dot-size) - var(--ix-timeline-dot-border-width)) / 2);
+  @timeline-custom-dot-gap: calc(var(--ix-timeline-dot-size) / 2);
+  @timeline-content-gap: @timeline-item-timeline-width;
+  @status-colors: primary, info, pending, success, warning, error;
 
   .@{timeline-item-prefix} {
     position: relative;
@@ -15,38 +22,38 @@
     &-head {
       position: absolute;
       width: @timeline-item-timeline-width;
-      top: @timeline-item-timeline-top;
+      top: calc(var(--ix-timeline-font-size) / 2 - var(--ix-timeline-dot-size) / 2);
       height: 100%;
 
       &-line {
         position: absolute;
         left: @timeline-line-gap;
-        top: @timeline-dot-size;
+        top: var(--ix-timeline-dot-size);
         bottom: 0;
-        width: @timeline-line-width;
-        background-color: @timeline-line-background-color;
+        width: var(--ix-timeline-line-width);
+        background-color: var(--ix-timeline-line-bg-color);
       }
 
       &-dot {
         border: none;
-        background-color: @color-white;
+        background-color: var(--ix-color-bg);
         display: flex;
         align-items: center;
         justify-content: center;
-        width: @timeline-dot-size;
-        height: @timeline-dot-size;
-        font-size: @timeline-dot-font-size;
+        width: var(--ix-timeline-dot-size);
+        height: var(--ix-timeline-dot-size);
+        font-size: calc(var(--ix-timeline-dot-size) + var(--ix-timeline-dot-border-width));
 
         &-inner {
           width: 50%;
           height: 50%;
-          background-color: @color-primary;
+          background-color: var(--ix-color-primary);
           border-radius: 50%;
         }
 
         &-custom {
           position: absolute;
-          background-color: @color-white;
+          background-color: var(--ix-color-bg);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -55,7 +62,7 @@
     }
 
     &:first-child .@{timeline-item-prefix}-head-dot {
-      border: @timeline-dot-border;
+      border: var(--ix-timeline-dot-border-width) solid transparent;
       border-radius: 50%;
       background: transparent;
 
@@ -76,17 +83,16 @@
 
     &-content {
       position: relative;
-      color: @timeline-content-color;
-      margin-bottom: @timeline-content-margin-bottom;
+      color: var(--ix-color-text);
+      margin-bottom: var(--ix-timeline-content-margin-bottom);
 
       &-label {
-        color: @timeline-content-label-color;
-        margin-top: @timeline-content-label-margin-top;
+        color: var(--ix-color-text-info);
+        margin-top: var(--ix-timeline-content-label-margin-top);
       }
     }
   }
 
-  .timeline-dot-color-classes(@preset-colors);
   .timeline-dot-color-classes(@status-colors);
 
   &-pending:not(&-reverse) {
@@ -106,7 +112,7 @@
   &-end {
     .@{timeline-item-prefix} {
       &-content {
-        margin-left: @timeline-content-gap;
+        margin-left: @timeline-item-timeline-width;
       }
     }
   }
@@ -115,7 +121,7 @@
     .@{timeline-item-prefix} {
       &-head {
         right: 0;
-        width: @timeline-dot-size;
+        width: var(--ix-timeline-dot-size);
 
         &-line {
           left: unset;
@@ -161,7 +167,7 @@
 
       &-head {
         left: 50%;
-        width: @timeline-dot-size;
+        width: var(--ix-timeline-dot-size);
         transform: translateX(-50%);
 
         &-line {
@@ -190,7 +196,7 @@
             width: calc(50% - @timeline-content-gap);
             &-label {
               transform: translateX(100%);
-              right: -@timeline-content-gap * 2;
+              right: calc(@timeline-content-gap * -2);
             }
           }
         }
@@ -202,7 +208,7 @@
             width: 50%;
             margin-left: calc(50% + @timeline-content-gap);
             &-label {
-              left: -@timeline-content-gap * 2;
+              left: calc(@timeline-content-gap * -2);
               transform: translateX(-100%);
             }
           }

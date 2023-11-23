@@ -1,6 +1,7 @@
 /* eslint-disable import/order */
 
-import { createApp } from 'vue'
+import { createApp, h } from 'vue'
+import { IxThemeProvider } from '@idux/components/theme'
 
 import { createRouter, createWebHistory } from 'vue-router'
 import IduxInstall from './iduxInstall'
@@ -40,4 +41,9 @@ router.beforeEach(route => {
   return
 })
 
-createApp(App).use(router).use(IduxInstall).mount('#app')
+createApp({
+  render: () => h(IxThemeProvider, () => h(App)),
+})
+  .use(router)
+  .use(IduxInstall)
+  .mount('#app')

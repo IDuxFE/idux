@@ -11,9 +11,11 @@ import { type FormAccessor } from '@idux/cdk/forms'
 import { type TextareaConfig, useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { ɵUseInput } from '@idux/components/input'
+import { useThemeToken } from '@idux/components/theme'
 
 import { useAutoRows } from './composables/useAutoRows'
 import { type TextareaProps, textareaProps } from './types'
+import { getThemeTokens, transforms } from '../theme'
 
 export default defineComponent({
   name: 'IxTextarea',
@@ -21,6 +23,9 @@ export default defineComponent({
   props: textareaProps,
   setup(props, { slots, expose, attrs }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('textarea')
+    registerToken(getThemeTokens, transforms)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-textarea`)
     const config = useGlobalConfig('textarea')
 
@@ -52,6 +57,8 @@ export default defineComponent({
       const status = mergedStatus.value
       const prefixCls = mergedPrefixCls.value
       const classes = {
+        [globalHashId.value]: globalHashId.value,
+        [hashId.value]: hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-${mergedSize.value}`]: true,
         [`${prefixCls}-${status}`]: !!status,

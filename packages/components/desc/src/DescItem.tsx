@@ -26,6 +26,7 @@ export default defineComponent({
       __DEV__ && Logger.warn('components/desc', 'The IxDescItem must be within IxDesc component')
       return
     }
+
     const { mergedPrefixCls, mergedCol, mergedColonless, mergedLabelAlign, mergedLabelWidth } = descContext
 
     const mergedColSpan = useMergedColSpan(props, mergedCol)

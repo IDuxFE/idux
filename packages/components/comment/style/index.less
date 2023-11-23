@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 
 .@{comment-prefix} {
@@ -5,13 +6,13 @@
 
   &-inner {
     display: flex;
-    padding: @comment-padding-md;
+    padding: var(--ix-padding-size-md) 0;
   }
 
   &-avatar {
     position: relative;
     flex-shrink: 0;
-    margin-right: @comment-margin-right;
+    margin-right: var(--ix-margin-size-md);
     cursor: pointer;
 
     img {
@@ -25,76 +26,75 @@
     position: relative;
     flex: 1 1 auto;
     min-width: 1px;
-    font-size: @comment-font-size-md;
+    font-size: var(--ix-font-size-md);
     word-wrap: break-word;
 
     &-author {
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-start;
-      margin-bottom: @comment-author-margin-bottom;
-      font-size: @comment-font-size-md;
+      margin-bottom: var(--ix-margin-size-xs);
+      font-size: var(--ix-font-size-md);
 
       & > a,
       & > span {
-        padding-right: @comment-content-padding-right;
-        font-size: @comment-font-size-sm;
+        padding-right: var(--ix-padding-size-sm);
+        font-size: var(--ix-font-size-sm);
         line-height: 18px;
       }
 
       &-name {
-        color: @comment-author-name-color;
-        font-size: @comment-font-size-md;
+        color: var(--ix-comment-author-name-color);
+        font-size: var(--ix-font-size-md);
         transition: color 0.3s;
 
         > * {
-          color: @comment-author-name-color;
+          color: var(--ix-comment-author-name-color);
 
           &:hover {
-            color: @comment-author-name-color;
+            color: var(--ix-comment-author-name-color);
           }
         }
       }
 
       &-time {
-        color: @comment-author-time-color;
+        color: var(--ix-comment-author-time-color);
         white-space: nowrap;
         cursor: auto;
       }
     }
 
     &-actions {
-      margin-top: @comment-actions-margin-top;
-      margin-bottom: @comment-actions-margin-bottom;
+      margin-top: var(--ix-margin-size-md);
+      margin-bottom: inherit;
       padding-left: 0;
-  
+
       > li {
         display: inline-block;
-        color: @comment-action-color;
-  
+        color: var(--ix-comment-action-color);
+
         > span {
           margin-right: 10px;
-          color: @comment-action-color;
-          font-size: @comment-font-size-sm;
+          color: var(--ix-comment-action-color);
+          font-size: var(--ix-font-size-sm);
           cursor: pointer;
           transition: color 0.3s;
           user-select: none;
-  
+
           &:hover {
-            color: @comment-action-hover-color;
+            color: var(--ix-comment-action-color-hover);
           }
         }
       }
     }
 
     &-detail p {
-      margin-bottom: @comment-content-detail-p-margin-bottom;
+      margin-bottom: inherit;
       white-space: pre-wrap;
     }
   }
 
-  
   &-nested {
-    margin-left: @comment-nest-indent;
+    margin-left: var(--ix-comment-nest-indent);
   }
 }

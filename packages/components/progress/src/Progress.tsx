@@ -8,17 +8,22 @@
 import { computed, defineComponent, provide } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import Circle from './Circle'
 import Line from './Line'
 import { progressContext } from './tokens'
 import { progressProps, progressStatus } from './types'
 import { convertPercent, fullPercent } from './util'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxProgress',
   props: progressProps,
   setup(props, { slots }) {
+    const { globalHashId, hashId, registerToken } = useThemeToken('progress')
+    registerToken(getThemeTokens)
+
     const config = useGlobalConfig('progress')
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-progress`)
@@ -42,6 +47,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return {
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-${status.value}`]: !!status.value,
       }

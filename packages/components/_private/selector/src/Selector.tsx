@@ -15,6 +15,7 @@ import { ɵOverflow } from '@idux/components/_private/overflow'
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormSize } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
+import { useThemeToken } from '@idux/components/theme'
 
 import { useInputState } from './composables/useInputState'
 import Input from './contents/Input'
@@ -29,6 +30,7 @@ export default defineComponent({
   props: selectorProps,
   setup(props, { expose, slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId } = useThemeToken()
     const mergedPrefixCls = computed(() => `${common.prefixCls}-selector`)
     const mergedClearable = computed(() => {
       return !props.disabled && !props.readonly && props.clearable && props.value.length > 0
@@ -68,6 +70,7 @@ export default defineComponent({
       const { allowInput, className, borderless = config.borderless, multiple, status } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
         [className]: true,
         [prefixCls]: true,
         [`${prefixCls}-${mergedSize.value}`]: true,

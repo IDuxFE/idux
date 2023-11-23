@@ -1,10 +1,10 @@
 // https://www.zhangxinxu.com/study/201710/css3-linear-gradient-dashed-generate.html
 .horizontal-line() {
-  height: @tree-node-line-size;
+  height: var(--ix-line-width);
   background: linear-gradient(
     to right,
-    @tree-node-line-color,
-    @tree-node-line-color 2.25px,
+    var(--ix-color-border),
+    var(--ix-color-border) 2.25px,
     transparent 2.25px,
     transparent
   );
@@ -12,11 +12,11 @@
 }
 
 .vertical-line() {
-  width: @tree-node-line-size;
+  width: var(--ix-line-width);
   background: linear-gradient(
     to bottom,
-    @tree-node-line-color,
-    @tree-node-line-color 2.25px,
+    var(--ix-color-border),
+    var(--ix-color-border) 2.25px,
     transparent 2.25px,
     transparent
   );

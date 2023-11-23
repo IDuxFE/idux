@@ -15,7 +15,7 @@
         border-radius: 16px;
 
         &.ix-radio-checked {
-          background: @color-primary;
+          background: var(--ix-color-primary);
           box-shadow: @shadow-bottom-sm;
         }
       }
@@ -35,7 +35,7 @@
 
       td {
         & code {
-          color: @color-magenta;
+          color: #d619be;
         }
       }
 
@@ -55,7 +55,7 @@
 
       td {
         & code {
-          color: @color-magenta;
+          color: #d619be;
         }
       }
 
@@ -68,7 +68,7 @@
 
 .site-anchor {
   position: absolute;
-  top: @spacing-sm;
+  top: var(--ix-margin-size-sm);
   right: 0;
 
   .ix-anchor {
@@ -90,7 +90,7 @@
   display: block;
   width: max-content;
   max-width: 100%;
-  line-height: @line-height-base;
+  line-height: 1.5;
   overflow: auto;
 
   td {

@@ -20,3 +20,6 @@ export type {
   CarouselDotPlacement,
   CarouselDotTrigger,
 } from './src/types'
+
+export { getThemeTokens as getCarouselThemeTokens } from './theme'
+export type { CarouselThemeTokens } from './theme'

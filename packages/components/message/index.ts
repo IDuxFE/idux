@@ -29,3 +29,7 @@ export type {
   MessageOptions,
   MessageRef,
 } from './src/types'
+
+export { getThemeTokens as getMessageThemeTokens } from './theme'
+
+export type { MessageThemeTokens } from './theme'

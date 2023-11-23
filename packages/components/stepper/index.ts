@@ -26,3 +26,7 @@ export type {
   StepperSize,
   StepperStatus,
 } from './src/types'
+
+export { getThemeTokens as getStepperThemeTokens } from './theme'
+
+export type { StepperThemeTokens } from './theme'

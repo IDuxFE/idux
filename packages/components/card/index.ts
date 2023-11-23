@@ -26,3 +26,6 @@ export type {
   CardCover,
   CardButtonProps,
 } from './src/types'
+
+export { getThemeTokens as getCardThemeTokens } from './theme'
+export type { CardThemeTokens } from './theme'

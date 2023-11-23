@@ -1,31 +1,18 @@
-.timeline-first-dot-color-classes(@colors, @i: length(@colors)) when (@i > 0) {
-  .timeline-first-dot-color-classes(@colors, @i - 1);
-  @color: extract(@colors, @i);
-  @color-name: 'color-@{color}';
-
-  .@{timeline-item-prefix}:first-child .@{timeline-item-prefix}-head-dot {
-    &-@{color} {
-      border-color: @@color-name;
-      color: @@color-name;
-    }
-  }
-}
-
 .timeline-dot-color-classes(@colors, @i: length(@colors)) when (@i > 0) {
   .timeline-dot-color-classes(@colors, @i - 1);
 
   @color: extract(@colors, @i);
-  @color-name: 'color-@{color}';
+  @color-name: '--ix-color-@{color}';
   @dot-class: ~'@{timeline-item-prefix}-head-dot';
 
   .@{timeline-item-prefix} .@{dot-class}.@{dot-class}-@{color} {
-    color: @@color-name;
+    color: ~'var(@{color-name})';
     .@{dot-class}-inner {
-      background-color: @@color-name;
+      background-color: ~'var(@{color-name})';
     }
   }
   .@{timeline-item-prefix} .@{dot-class}.@{dot-class}-@{color} {
-    border-color: @@color-name;
+    border-color: ~'var(@{color-name})';
   }
 }
 
@@ -33,7 +20,7 @@
   .@{timeline-item-prefix} {
     &-head {
       left: 50%;
-      width: @timeline-dot-size;
+      width: var(--ix-timeline-dot-size);
       transform: translateX(-50%);
 
       &-line {
@@ -47,12 +34,18 @@
 .timeline-dotted-line() {
   .@{timeline-item-prefix} {
     &-head-line {
-      background: @timeline-dotted-line-background;
-      background-size: @timeline-dotted-line-background-size;
+      background: linear-gradient(
+        to bottom,
+        var(--ix-timeline-line-bg-color),
+        var(--ix-timeline-line-bg-color) 50%,
+        transparent 50%,
+        transparent
+      );
+      background-size: 100% 10px;
     }
 
     &-content {
-      margin-bottom: @timeline-pending-item-content-min-height;
+      margin-bottom: var(--ix-timeline-pending-item-content-min-width);
     }
   }
 }

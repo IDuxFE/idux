@@ -17,15 +17,20 @@ import { IxButton } from '@idux/components/button'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxCol, IxRow } from '@idux/components/grid'
 import { IxIcon } from '@idux/components/icon'
+import { useThemeToken } from '@idux/components/theme'
 
 import { cardToken } from './token'
 import { cardProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxCard',
   props: cardProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('card')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-card`)
     const config = useGlobalConfig('card')
     const hoverable = computed(() => props.hoverable ?? config.hoverable)
@@ -54,6 +59,8 @@ export default defineComponent({
       const hasGrid = children.some(node => node.type && (node.type as any).name === 'IxCardGrid')
 
       const classes = normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-borderless`]: borderless,
         [`${prefixCls}-hoverable`]: !hasGrid && hoverable.value,

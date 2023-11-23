@@ -1,0 +1,114 @@
+.@{time-panel-prefix} {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: var(--ix-time-picker-panel-height);
+  padding: var(--ix-time-picker-panel-padding-vertical) var(--ix-time-picker-panel-padding-horizontal);
+  font-size: var(--ix-time-picker-panel-font-size);
+  background-color: var(--ix-color-container-bg);
+
+  ::-webkit-scrollbar {
+    width: var(--ix-time-picker-panel-scrollbar-width);
+    height: var(--ix-time-picker-panel-scrollbar-width);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: var(--ix-time-picker-panel-scrollbar-thumb-border-radius);
+    background-color: var(--ix-time-picker-panel-scrollbar-thumb-bg-color);
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 0;
+    background: var(--ix-time-picker-panel-scrollbar-track-bg-color);
+    transition: all var(--ix-motion-duration-medium);
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 50%;
+    width: calc(100% - var(--ix-time-picker-panel-padding-horizontal) * 2);
+    margin-top: calc(var(--ix-time-picker-panel-cell-height) / 2 * -1);
+    height: var(--ix-time-picker-panel-cell-height);
+    border-top: var(--ix-line-width) solid var(--ix-color-border);
+    border-bottom: var(--ix-line-width) solid var(--ix-color-border);
+    pointer-events: none;
+  }
+
+  &-column {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    margin-right: calc(var(--ix-time-picker-panel-cell-padding-horizontal) * -1);
+    cursor: pointer;
+
+    &-inner {
+      height: 100%;
+      flex-shrink: 0;
+      margin: 0;
+      list-style-type: none;
+      overflow: hidden;
+
+      &::before,
+      &::after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: calc(50% - (var(--ix-time-picker-panel-cell-height) / 2));
+        flex-shrink: 0;
+      }
+    }
+
+    &:hover .@{time-panel-prefix}-column-inner {
+      overflow-y: scroll;
+      margin-right: calc(var(--ix-time-picker-panel-scrollbar-width) * -1);
+    }
+
+    &:first-child {
+      align-items: flex-start;
+      margin-left: calc(var(--ix-time-picker-panel-cell-padding-horizontal) * -1);
+    }
+    &:last-child {
+      align-items: flex-end;
+    }
+  }
+
+  &-cell {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 var(--ix-time-picker-panel-cell-padding-horizontal);
+    height: var(--ix-time-picker-panel-cell-height);
+    margin: 0;
+    color: var(--ix-time-picker-panel-cell-color);
+
+    &:not(&-selected):hover {
+      background-color: var(--ix-time-picker-panel-cell-bg-color-hover);
+    }
+
+    &-disabled {
+      cursor: not-allowed;
+      color: var(--ix-color-text-disabled);
+    }
+
+    &-selected {
+      color: var(--ix-time-picker-panel-cell-color-active);
+      background-color: var(--ix-time-picker-panel-cell-bg-color-active);
+      font-weight: var(--ix-time-picker-panel-cell-font-weight-active);
+    }
+  }
+}
