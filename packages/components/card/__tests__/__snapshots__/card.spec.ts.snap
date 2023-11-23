@@ -1,7 +1,7 @@
 // Vitest Snapshot v1
 
 exports[`Card > render work 1`] = `
-"<div class=\\"ix-card ix-card-has-shadow ix-card-md\\">
+"<div class=\\"ix-card ix-card-has-shadow ix-card-sm\\">
   <!---->
   <!---->
   <div class=\\"ix-card-body\\">

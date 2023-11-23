@@ -4,7 +4,7 @@ exports[`Cascader > multiple work > render work 1`] = `
 "<div class=\\"ix-cascader ix-selector ix-selector-md ix-selector-multiple ix-selector-opened\\">
   <!---->
   <div class=\\"ix-selector-content\\">
-    <div class=\\"ix-overflow ix-selector-overflow\\">
+    <div class=\\"ix-overflow ix-selector-overflow \\">
       <div class=\\"ix-overflow-item\\">
         <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Components/General/Button</span><span class=\\"ix-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
       </div>

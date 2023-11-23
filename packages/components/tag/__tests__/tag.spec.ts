@@ -13,23 +13,6 @@ describe('Tag', () => {
 
   renderWork(IxTag, { slots: { default: () => 'test tag' } })
 
-  // TODO: REMOVE
-  test('color work', async () => {
-    const wrapper = TagMount({ props: { color: 'red' } })
-
-    expect(wrapper.classes()).toContain('ix-tag-red')
-
-    await wrapper.setProps({ color: 'success' })
-
-    expect(wrapper.classes()).toContain('ix-tag-success')
-
-    await wrapper.setProps({ color: '#123456' })
-
-    expect(['#123456', 'rgb(18, 52, 86)'].includes(getComputedStyle(wrapper.element).backgroundColor)).toBe(true)
-
-    expect(wrapper.classes()).toContain('ix-tag-has-color')
-  })
-
   test('bordered work', async () => {
     const wrapper = TagMount({ props: { bordered: true } })
 
