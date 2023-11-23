@@ -11,6 +11,7 @@ import { isObject, isString } from 'lodash-es'
 
 import { flattenNode, getFirstValidNode } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { IxTooltip } from '@idux/components/tooltip'
 
 import { useCopyTooltip } from './composables/useCopyTooltip'
@@ -37,6 +38,7 @@ export default defineComponent({
   props: textProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId } = useThemeToken()
     const config = useGlobalConfig('text')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-text`)
 
@@ -146,6 +148,7 @@ export default defineComponent({
       }
 
       const classes = normalizeClass({
+        [globalHashId.value]: globalHashId.value,
         [prefixCls]: true,
         [`${prefixCls}-simple`]: isSimple.value,
         [`${prefixCls}-ellipsis`]: isEllipsis.value,

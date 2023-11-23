@@ -11,18 +11,23 @@ import { isNil, isString } from 'lodash-es'
 
 import { type VKey, callEmit, useControlledProp, useState } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import { useDataSource } from './composables/useDataSource'
 import TabNavWrapper from './contents/TabNavWrapper'
 import TabPane from './contents/TabPane'
 import { tabsToken } from './tokens'
 import { type TabsData, tabsProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxTabs',
   props: tabsProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('tabs')
+    registerToken(getThemeTokens)
+
     const config = useGlobalConfig('tabs')
 
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tabs`)
@@ -80,6 +85,8 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const size = mergedSize.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-${size}`]: true,
         [`${prefixCls}-${type}`]: true,

@@ -17,3 +17,7 @@ export type { TooltipInstance, TooltipComponent, TooltipPublicProps as TooltipPr
 
 export { tooltipProps as ɵTooltipProps } from './src/types'
 export { useTooltipOverlay as ɵUseTooltipOverlay } from './src/useTooltipOverlay'
+
+export { getThemeTokens as getTooltipThemeTokens } from './theme'
+
+export type { TooltipThemeTokens } from './theme'

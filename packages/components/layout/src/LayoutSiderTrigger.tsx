@@ -11,6 +11,7 @@ import { isString } from 'lodash-es'
 
 import { IxButton } from '@idux/components/button'
 import { IxIcon } from '@idux/components/icon'
+import { useThemeToken } from '@idux/components/theme'
 
 import { layoutSiderToken } from './token'
 import { layoutSiderTriggerProps } from './types'
@@ -20,6 +21,7 @@ export default defineComponent({
   props: layoutSiderTriggerProps,
   setup(props, { slots }) {
     const { mergedPrefixCls, collapsed, setCollapsed } = inject(layoutSiderToken)!
+    const { globalHashId, hashId } = useThemeToken('layout')
 
     const mergedIcon = computed(() => {
       const { icon } = props
@@ -30,6 +32,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-trigger`
       return {
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-collapsed`]: collapsed.value,
       }

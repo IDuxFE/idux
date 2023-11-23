@@ -1,0 +1,11 @@
+.select-option(@font-size; @text-color) {
+  display: flex;
+  align-items: center;
+  height: var(--ix-select-option-height);
+  line-height: 1;
+  padding: var(--ix-select-option-padding);
+  font-size: @font-size;
+  color: @text-color;
+  transition: background var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out);
+  cursor: pointer;
+}

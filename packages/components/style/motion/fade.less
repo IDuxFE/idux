@@ -1,6 +1,6 @@
 @import '../variable/animation.less';
 
-.fade-motion(@className, @duration: @transition-duration-base) {
+.fade-motion(@className, @duration: var(--ix-motion-duration-medium)) {
   .@{idux-prefix}-@{className}-enter-active,
   .@{idux-prefix}-@{className}-leave-active {
     transition-property: opacity;
@@ -17,15 +17,19 @@
 }
 
 .fade-motion(fade);
-.fade-motion(fade-fast, @transition-duration-fast);
+.fade-motion(fade-fast, var(--ix-motion-duration-fast));
 
 .@{idux-prefix}-fade-down {
   &-enter-active {
-    transition: opacity @transition-duration-fast @ease-in-out, transform @transition-duration-fast @ease-in-out;
+    transition:
+      opacity var(--ix-motion-duration-fast) var(--ix-motion-ease-in-out),
+      transform var(--ix-motion-duration-fast) var(--ix-motion-ease-in-out);
   }
 
   &-leave-active {
-    transition: opacity @transition-duration-fast @ease-in-out, transform @transition-duration-fast @ease-in-out;
+    transition:
+      opacity var(--ix-motion-duration-fast) var(--ix-motion-ease-in-out),
+      transform var(--ix-motion-duration-fast) var(--ix-motion-ease-in-out);
   }
 
   &-enter-from,

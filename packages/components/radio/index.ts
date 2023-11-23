@@ -25,3 +25,7 @@ export type {
   RadioMode,
   RadioData,
 } from './src/types'
+
+export { getThemeTokens as getRadioThemeTokens } from './theme'
+
+export type { RadioThemeTokens } from './theme'

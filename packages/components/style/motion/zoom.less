@@ -1,6 +1,6 @@
 @import '../variable/animation.less';
 
-.zoom-motion(@className, @duration: @transition-duration-base) {
+.zoom-motion(@className) {
   .@{idux-prefix}-@{className}-enter-active,
   .@{idux-prefix}-@{className}-leave-active {
     transform-origin: 50% 50%;
@@ -8,12 +8,12 @@
   }
 
   .@{idux-prefix}-@{className}-enter-active {
-    transition-duration: var(--ix-transition-duration-slow);
+    transition-duration: var(--ix-motion-duration-slow);
     transition-timing-function: var(--ix-ease-out-circ);
   }
 
   .@{idux-prefix}-@{className}-leave-active {
-    transition-duration: var(--ix-transition-duration-medium);
+    transition-duration: var(--ix-motion-duration-medium);
     transition-timing-function: var(--ix-ease-in-circ);
   }
 

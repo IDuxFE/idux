@@ -10,4 +10,3 @@ export * from './src/globalConfig'
 export * from './src/types'
 
 export { defaultConfig } from './src/defaultConfig'
-export { seerConfig } from './src/seerConfig'

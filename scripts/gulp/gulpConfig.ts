@@ -26,6 +26,6 @@ export const gulpConfig = {
     componentsDirname: componentsDirname,
     proDirname: join(packageRoot, 'pro'),
     distDirname: join(packageRoot, '../dist'),
-    themes: ['default', 'seer'],
+    themes: ['default'],
   },
 } as const

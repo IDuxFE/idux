@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 .@{icon-prefix} {
   box-sizing: border-box;
   display: inline-block;
@@ -10,7 +11,7 @@
   text-align: center;
   text-transform: none;
   text-rendering: optimizelegibility;
-  transition: transform @transition-duration-base @ease-out;
+  transition: transform var(--ix-motion-duration-medium) var(--ix-motion-ease-out);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   > svg {

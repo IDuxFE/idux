@@ -1,3 +1,5 @@
+@import '../../style/variable/index.less';
+@import "./variable.less";
 @import "./list.less";
 @import "./mixin.less";
 
@@ -10,16 +12,16 @@
 
     &-drag {
       border-radius: @upload-border-radius;
-      border: @upload-selector-drag-border;
+      border: var(--ix-upload-selector-dragable-border);
       .base-transition();
 
       &:hover {
-        border: @upload-selector-dragover-border;
+        border: var(--ix-upload-selector-dragable-border-dragover);
       }
     }
 
     &-dragover {
-      border: @upload-selector-dragover-border;
+      border: var(--ix-upload-selector-dragable-border-dragover);
     }
 
     &-disabled {

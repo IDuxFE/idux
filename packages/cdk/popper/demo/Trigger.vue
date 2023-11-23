@@ -73,22 +73,22 @@ export default defineComponent({
 <style lang="less" scoped>
 .popper {
   padding: 8px 16px;
-  color: @color-white;
+  color: #fff;
 
   &-hover {
-    background: @color-red;
+    background: #f52727;
   }
   &-click {
-    background: @color-orange;
+    background: #fa721b;
   }
   &-focus {
-    background: @color-brown;
+    background: #fdaa1d;
   }
   &-contextmenu {
-    background: @color-yellow;
+    background: #f8d81a;
   }
   &-manual {
-    background: @color-primary;
+    background: var(--ix-color-primary);
   }
 }
 </style>

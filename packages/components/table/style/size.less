@@ -47,7 +47,7 @@
 }
 
 .@{table-prefix}-sm {
-  .table-size(@table-font-size-sm, @table-head-row-height-sm, @table-body-row-height-sm, @table-row-padding-horizontal-sm);
+  .table-size(var(--ix-table-font-size-sm), var(--ix-table-head-row-height-sm), var(--ix-table-body-row-height-sm), var(--ix-table-row-padding-horizontal-sm));
 
   .@{table-prefix}-col-expandable,
   .@{table-prefix}-col-selectable {
@@ -55,7 +55,7 @@
   }
 
   .@{table-prefix}-col-indexable {
-    width: if(@theme = seer, 48px, 40px);
+    width: 48px;
   }
 
   .@{table-prefix}-col-selectable&-col-with-dropdown {
@@ -68,7 +68,7 @@
 }
 
 .@{table-prefix}-md {
-  .table-size(@table-font-size-md, @table-head-row-height-md, @table-body-row-height-md, @table-row-padding-horizontal-md);
+  .table-size(var(--ix-table-font-size-md), var(--ix-table-head-row-height-md), var(--ix-table-body-row-height-md), var(--ix-table-row-padding-horizontal-md));
 
   .@{table-prefix}-col-expandable,
   .@{table-prefix}-col-selectable {
@@ -76,7 +76,7 @@
   }
 
   .@{table-prefix}-col-indexable {
-    width: if(@theme = seer, 48px, 40px);
+    width: 48px;
   }
 
   .@{table-prefix}-col-selectable.@{table-prefix}-col-with-dropdown {
@@ -85,7 +85,7 @@
 }
 
 .@{table-prefix}-lg {
-  .table-size(@table-font-size-lg, @table-head-row-height-lg, @table-body-row-height-lg, @table-row-padding-horizontal-lg);
+  .table-size(var(--ix-table-font-size-lg), var(--ix-table-head-row-height-lg), var(--ix-table-body-row-height-lg), var(--ix-table-row-padding-horizontal-lg));
 
   .@{table-prefix}-col-expandable,
   .@{table-prefix}-col-selectable {
@@ -93,7 +93,7 @@
   }
 
   .@{table-prefix}-col-indexable {
-    width: if(@theme = seer, 60px, 48px);
+    width: 60px;
   }
 
   .@{table-prefix}-col-selectable.@{table-prefix}-col-with-dropdown {

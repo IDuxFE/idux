@@ -13,15 +13,20 @@ import { getScroll, scrollToTop } from '@idux/cdk/scroll'
 import { callEmit, off, on } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
+import { useThemeToken } from '@idux/components/theme'
 import { convertTarget } from '@idux/components/utils'
 
 import { backTopProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxBackTop',
   props: backTopProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('backTop')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-back-top`)
     const config = useGlobalConfig('backTop')
     const eventType = 'scroll'
@@ -56,7 +61,11 @@ export default defineComponent({
     return () => {
       return (
         <Transition name={`${common.prefixCls}-fade`}>
-          <div v-show={visible.value} class={mergedPrefixCls.value} onClick={handleClick}>
+          <div
+            v-show={visible.value}
+            class={[mergedPrefixCls.value, globalHashId.value, hashId.value]}
+            onClick={handleClick}
+          >
             {slots.default ? slots.default() : <IxIcon name="arrow-up" />}
           </div>
         </Transition>

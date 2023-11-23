@@ -37,11 +37,13 @@
     "clean": "rimraf dist node_modules"
   },
   "dependencies": {
+    "@emotion/hash": "^0.9.1",
     "@idux/cdk": "1.9.4",
     "date-fns": "^2.27.0",
     "lodash-es": "^4.17.0"
   },
   "devDependencies": {
+    "@ctrl/tinycolor": "^4.0.2",
     "rimraf": "^4.4.0",
     "vue": "^3.2.0",
     "vue-router": "^4.0.0"

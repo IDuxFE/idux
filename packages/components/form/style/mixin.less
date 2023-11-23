@@ -1,10 +1,7 @@
 .form-vertical-layout-label() {
-  & when (@form-item-vertical-label-margin > 0) {
-    margin: @form-item-vertical-label-margin;
-  }
-
-  padding: @form-item-vertical-label-padding;
-  line-height: @form-line-height;
+  margin: var(--ix-form-vertical-item-label-margin);
+  padding: var(--ix-form-vertical-item-label-padding);
+  line-height: calc(var(--ix-form-label-font-size) + var(--ix-line-height-gutter));
   white-space: initial;
   text-align: start;
 

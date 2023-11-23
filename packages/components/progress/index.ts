@@ -26,3 +26,7 @@ export type {
   ProgressGradient,
   ProgressStrokeLinecap,
 } from './src/types'
+
+export { getThemeTokens as getProgressThemeTokens } from './theme'
+
+export type { ProgressThemeTokens } from './theme'

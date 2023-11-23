@@ -1,14 +1,26 @@
+@import '../../../style/variable/index.less';
 @import '../../../style/mixins/reset.less';
 
 .@{overlay-prefix} {
   .reset-component-new();
 
+  border: var(--ix-overlay-border-width) var(--ix-overlay-border-type) var(--ix-overlay-border-color);
+  border-radius: var(--ix-overlay-border-radius);
+  background-color: var(--ix-overlay-bg-color);
+  box-shadow: var(--ix-box-shadow-md);
+  z-index: 1000;
+
+  @arrow-offset: var(--ix-overlay-border-width);
+  @arrow-size: var(--ix-overlay-arrow-size);
+  @border-arrow-size: calc(@arrow-size + var(--ix-overlay-border-width));
+
   &-arrow {
     position: absolute;
-    width: @overlay-arrow-size * 2;
-    height: @overlay-arrow-size * 2;
+    width: calc(@arrow-size * 2);
+    height: calc(@arrow-size * 2);
 
-    &::before {
+    &::before,
+    &::after {
       content: '';
       position: absolute;
       border-color: transparent;
@@ -18,12 +30,18 @@
 
   &[data-popper-placement^='top'] {
     .@{overlay-prefix}-arrow {
-      bottom: -@overlay-arrow-size * 2;
+      bottom: calc(@arrow-size * -2);
 
       &::before {
         left: 0;
-        border-width: @overlay-arrow-size @overlay-arrow-size 0;
-        border-top-color: initial;
+        border-width: @border-arrow-size @border-arrow-size 0;
+        border-top-color: var(--ix-overlay-border-color);
+        transform-origin: center top;
+      }
+      &::after {
+        left: @arrow-offset;
+        border-width: @arrow-size @arrow-size 0;
+        border-top-color: var(--ix-overlay-bg-color);
         transform-origin: center top;
       }
     }
@@ -31,12 +49,20 @@
 
   &[data-popper-placement^='bottom'] {
     .@{overlay-prefix}-arrow {
-      top: -@overlay-arrow-size;
+      top: calc(@arrow-size * -1);
 
       &::before {
         left: 0;
-        border-width: 0 @overlay-arrow-size @overlay-arrow-size;
-        border-bottom-color: initial;
+        top: 0;
+        border-width: 0 @border-arrow-size @border-arrow-size;
+        border-bottom-color: var(--ix-overlay-border-color);
+        transform-origin: center bottom;
+      }
+      &::after {
+        left: @arrow-offset;
+        top: @arrow-offset;
+        border-width: 0 @arrow-size @arrow-size;
+        border-bottom-color: var(--ix-overlay-bg-color);
         transform-origin: center bottom;
       }
     }
@@ -44,11 +70,18 @@
 
   &[data-popper-placement^='left'] {
     .@{overlay-prefix}-arrow {
-      right: -@overlay-arrow-size * 2;
+      right: calc(@arrow-size * -2);
 
       &::before {
-        border-width: @overlay-arrow-size 0 @overlay-arrow-size @overlay-arrow-size;
-        border-left-color: initial;
+        top: 0;
+        border-width: @border-arrow-size 0 @border-arrow-size @border-arrow-size;
+        border-bottom-color: var(--ix-overlay-border-color);
+        transform-origin: center left;
+      }
+      &::after {
+        top: @arrow-offset;
+        border-width: @arrow-size 0 @arrow-size @arrow-size;
+        border-left-color: var(--ix-overlay-bg-color);
         transform-origin: center left;
       }
     }
@@ -56,11 +89,18 @@
 
   &[data-popper-placement^='right'] {
     .@{overlay-prefix}-arrow {
-      left: -@overlay-arrow-size;
+      left: calc(@arrow-size * -1);
 
       &::before {
-        border-width: @overlay-arrow-size @overlay-arrow-size @overlay-arrow-size 0;
-        border-right-color: initial;
+        top: 0;
+        border-width: @border-arrow-size 0 @border-arrow-size @border-arrow-size;
+        border-bottom-color: var(--ix-overlay-border-color);
+        transform-origin: center right;
+      }
+      &::after {
+        left: calc(@arrow-offset * -1);
+        border-width: @arrow-size @arrow-size @arrow-size 0;
+        border-right-color: var(--ix-overlay-bg-color);
         transform-origin: center right;
       }
     }

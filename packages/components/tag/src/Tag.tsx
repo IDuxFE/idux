@@ -12,16 +12,20 @@ import { isNil } from 'lodash-es'
 import { useKey } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
-import { isPresetColor, isStatusColor } from '@idux/components/utils'
+import { useThemeToken } from '@idux/components/theme'
 
 import { type TagContext, tagToken } from './token'
 import { tagProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxTag',
   props: tagProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('tag')
+    registerToken(getThemeTokens)
+
     const config = useGlobalConfig('tag')
     const key = useKey()
 
@@ -33,14 +37,6 @@ export default defineComponent({
     } = inject<Partial<TagContext>>(tagToken, {})
 
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tag`)
-
-    const isPresetOrStatusColor = computed(() => {
-      const color = props.color
-      if (!color) {
-        return false
-      }
-      return isPresetColor(color) || isStatusColor(color)
-    })
 
     const handleClick = (evt: MouseEvent) => {
       if (groupProps?.clickable) {
@@ -59,29 +55,24 @@ export default defineComponent({
       const {
         shape = groupProps?.shape || config.shape,
         bordered = groupProps?.bordered,
-        color,
         filled = groupProps?.filled,
         number,
         status,
       } = props
       const prefixCls = mergedPrefixCls.value
-      const isPreset = isPresetOrStatusColor.value
       const isNumeric = !isNil(number)
 
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [`${prefixCls}`]: true,
         [`${prefixCls}-${status}`]: true,
         [`${prefixCls}-${shape}`]: !isNumeric && shape,
-        [`${prefixCls}-${color}`]: isPreset,
         [`${prefixCls}-bordered`]: bordered,
         [`${prefixCls}-filled`]: filled,
         [`${prefixCls}-numeric`]: isNumeric,
-        [`${prefixCls}-has-color`]: !isPreset && color,
       })
     })
-    const style = computed(() => ({
-      backgroundColor: isPresetOrStatusColor.value ? undefined : props.color,
-    }))
 
     return () => {
       if (mergedClosedKeys?.value.includes(key)) {
@@ -100,7 +91,7 @@ export default defineComponent({
         )
       }
       return (
-        <span class={classes.value} style={style.value} onClick={handleClick}>
+        <span class={classes.value} onClick={handleClick}>
           {renderNumericPrefix(prefixCls, number)}
           {icoNode}
           <span class={`${prefixCls}-content`}>{slots.default?.()}</span>

@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 @import './mixin.less';
 
@@ -8,36 +9,36 @@
   display: inline-flex;
   align-items: center;
   cursor: pointer;
-  font-size: @switch-font-size;
-  color: @switch-color;
-  background-color: @switch-background-color;
+  font-size: var(--ix-control-font-size-sm);
+  color: var(--ix-color-text-inverse);
+  background-color: var(--ix-color-fill-container-bg);
   border-style: none;
-  border-radius: @switch-border-radius;
-  transition: all @transition-duration-base @ease-in-out;
+  border-radius: 9999px;
+  transition: all var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out);
   outline: none;
 
   &::after {
     position: absolute;
     cursor: pointer;
-    left: @switch-box-size-padding;
-    border-radius: @switch-border-radius;
-    background-color: @switch-box-background-color;
-    box-shadow: @switch-box-box-shadow;
-    transition: all @transition-duration-base @ease-in-out;
+    left: var(--ix-switch-handle-padding);
+    border-radius: 9999px;
+    background-color: var(--ix-switch-handle-bg-color);
+    box-shadow: var(--ix-switch-handle-box-shadow);
+    transition: all var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out);
     content: ' ';
   }
 
   &-loading-icon {
     position: absolute;
     z-index: 1;
-    color: @switch-disabled-color;
+    color: var(--ix-color-text-inverse-disabled);
   }
 
   &-checked {
-    background-color: @switch-active-color;
+    background-color: var(--ix-color-primary);
 
     .@{switch-prefix}-loading-icon {
-      color: @switch-active-disabled-color;
+      color: var(--ix-switch-active-disabled-color);
     }
   }
 
@@ -46,9 +47,9 @@
     cursor: not-allowed;
 
     &.@{switch-prefix} {
-      background-color: @switch-disabled-color;
+      background-color: var(--ix-color-container-bg-disabled);
       &-checked {
-        background-color: @switch-active-disabled-color;
+        background-color: var(--ix-switch-active-disabled-color);
       }
 
       &::after {
@@ -58,14 +59,14 @@
   }
 
   &-sm {
-    .switch-size(@switch-height-sm, @switch-icon-font-size-sm, @switch-box-size-sm, @switch-box-size-padding, 0px, @form-new-padding-horizontal-sm);
+    .switch-size(var(--ix-switch-height-sm), var(--ix-switch-icon-font-size-sm), var(--ix-switch-handle-size-sm), var(--ix-switch-handle-padding), 0px, var(--ix-control-padding-size-horizontal-sm));
   }
 
   &-md {
-    .switch-size(@switch-height-md, @switch-icon-font-size-md, @switch-box-size-md, @switch-box-size-padding, 1px, @form-new-padding-horizontal-md);
+    .switch-size(var(--ix-switch-height-md), var(--ix-switch-icon-font-size-md), var(--ix-switch-handle-size-md), var(--ix-switch-handle-padding), 1px, var(--ix-control-padding-size-horizontal-md));
   }
 
   &-lg {
-    .switch-size(@switch-height-lg, @switch-icon-font-size-lg, @switch-box-size-lg, @switch-box-size-padding, 1px, @form-new-padding-horizontal-lg);
+    .switch-size(var(--ix-switch-height-lg), var(--ix-switch-icon-font-size-lg), var(--ix-switch-handle-size-lg), var(--ix-switch-handle-padding), 1px, var(--ix-control-padding-size-horizontal-lg));
   }
 }

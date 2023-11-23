@@ -12,9 +12,11 @@ import { ɵWave, type ɵWaveInstance } from '@idux/components/_private/wave'
 import { useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
+import { useThemeToken } from '@idux/components/theme'
 
 import { buttonToken } from './token'
 import { type ButtonGroupProps, buttonProps } from './types'
+import { getThemeTokens } from '../theme'
 
 const aProps = ['href', 'target', 'rel', 'download', 'hreflang', 'ping']
 
@@ -22,6 +24,9 @@ export default defineComponent({
   name: 'IxButton',
   props: buttonProps,
   setup(props, { slots, attrs }) {
+    const { globalHashId, hashId, registerToken } = useThemeToken('button')
+    registerToken(getThemeTokens)
+
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-button`)
     const config = useGlobalConfig('button')
@@ -48,6 +53,8 @@ export default defineComponent({
       } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-block`]: block,
         [`${prefixCls}-danger`]: danger,

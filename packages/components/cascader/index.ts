@@ -27,3 +27,6 @@ export type {
   CascaderSearchFn,
   CascaderStrategy,
 } from './src/types'
+
+export { getThemeTokens as getCascaderThemeTokens } from './theme'
+export type { CascaderThemeTokens } from './theme'

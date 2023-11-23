@@ -23,11 +23,13 @@ import { BlockScrollStrategy, type ScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit, isPromise, useControlledProp } from '@idux/cdk/utils'
 import { ɵMask } from '@idux/components/_private/mask'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { usePortalTarget, useZIndex } from '@idux/components/utils'
 
 import ModalWrapper from './ModalWrapper'
 import { MODAL_TOKEN, modalToken } from './token'
 import { type ModalProps, modalProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxModal',
@@ -35,6 +37,9 @@ export default defineComponent({
   props: modalProps,
   setup(props, { slots, expose, attrs }) {
     const common = useGlobalConfig('common')
+    const { registerToken } = useThemeToken('modal')
+    registerToken(getThemeTokens)
+
     const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('modal')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-modal`)

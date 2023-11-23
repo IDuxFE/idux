@@ -9,15 +9,20 @@ import { computed, defineComponent, normalizeClass, provide } from 'vue'
 
 import { type VKey, useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import { collapseToken } from './token'
 import { collapseProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxCollapse',
   props: collapseProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('collapse')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-collapse`)
     const config = useGlobalConfig('collapse')
     const accordion = computed(() => props.accordion ?? config.accordion)
@@ -45,6 +50,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-${mergedSize.value}`]: true,
         [`${prefixCls}-borderless`]: borderless.value,

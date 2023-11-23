@@ -1,0 +1,6 @@
+/* ------ checkbox css variables ------ */
+:root {
+  --ix-checkbox-label-padding: 0 4px;
+  --ix-checkbox-fieldset-bg-color: #f7f9fc;
+  --ix-checkbox-fieldset-border-color: #e1e5eb;
+}

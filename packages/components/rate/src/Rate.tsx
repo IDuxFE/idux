@@ -12,15 +12,20 @@ import { callEmit, convertNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormElement, useFormItemRegister, useFormSize } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
+import { useThemeToken } from '@idux/components/theme'
 
 import RateItem from './RateItem'
 import { rateProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxRate',
   props: rateProps,
   setup(props, { attrs, expose, slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('rate')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-rate`)
     const config = useGlobalConfig('rate')
     const mergedSize = useFormSize(props, config)
@@ -111,6 +116,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-disabled`]: isDisabled.value,
         [`${prefixCls}-focused`]: isFocused.value,

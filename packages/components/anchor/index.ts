@@ -23,3 +23,6 @@ export type {
   AnchorLinkComponent,
   AnchorLinkPublicProps as AnchorLinkProps,
 } from './src/types'
+
+export { getThemeTokens as getAnchorThemeTokens } from './theme'
+export type { AnchorThemeTokens } from './theme'

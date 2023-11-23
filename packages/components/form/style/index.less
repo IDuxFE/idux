@@ -1,5 +1,5 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
-@import '../../style/motion/fade.less';
 
 @import './mixin.less';
 @import './status.less';
@@ -9,15 +9,15 @@
   .reset-component();
 
   &-sm {
-    .form-size(@form-height-sm);
+    .form-size(var(--ix-control-height-sm));
   }
 
   &-md {
-    .form-size(@form-height-md);
+    .form-size(var(--ix-control-height-md));
   }
 
   &-lg {
-    .form-size(@form-height-lg);
+    .form-size(var(--ix-control-height-lg));
   }
 }
 
@@ -25,12 +25,9 @@
   .reset-component();
 
   &-message-tooltip.@{tooltip-prefix} {
-    background-color: fade(@form-item-invalid-color, 80%);
-    color: @color-white;
+    --ix-overlay-bg-color: var(--ix-form-message-tooltip-bg-color);
 
-    .@{overlay-prefix}-arrow {
-      color: fade(@form-item-invalid-color, 80%);
-    }
+    color: var(--ix-color-text-inverse);
   }
 
   &-label {
@@ -49,25 +46,25 @@
       position: relative;
       display: inline-flex;
       align-items: center;
-      color: @form-item-label-color;
-      font-size: @form-item-font-size;
-      margin-left: @form-item-label-margin-left;
+      color: var(--ix-form-label-color);
+      font-size: var(--ix-form-label-font-size);
+      margin-left: var(--ix-form-label-colon-margin-right);
     }
 
     &-colon > label::after {
       position: relative;
       top: -0.5px;
-      margin: 0 @form-item-label-colon-margin-right 0 @form-item-label-colon-margin-left;
+      margin: 0 var(--ix-form-label-colon-margin-right) 0 var(--ix-form-label-colon-margin-left);
       content: ':';
     }
 
     &-required > label::before {
       display: inline-block;
       position: absolute;
-      left: @form-item-label-before-content-left;
-      margin-right: @spacing-xs;
-      color: @form-item-label-required-color;
-      font-size: @form-item-font-size;
+      left: calc(var(--ix-form-label-colon-margin-right) * -1);
+      margin-right: var(--ix-margin-size-xs);
+      color: var(--ix-form-label-required-color);
+      font-size: var(--ix-form-label-font-size);
       font-family: SimSun, sans-serif;
       line-height: 1;
       content: '*';
@@ -76,10 +73,10 @@
     &-tooltip {
       cursor: help;
       writing-mode: horizontal-tb;
-      margin-inline-start: @spacing-xs;
+      margin-inline-start: var(--ix-margin-size-xs);
       .@{icon-prefix} {
-        font-size: @form-item-tooltip-icon-font-size;
-        color: @form-item-tooltip-icon-color;
+        font-size: var(--ix-font-size-icon);
+        color: var(--ix-color-info-icon);
       }
     }
   }
@@ -103,13 +100,13 @@
 
     &-tooltip {
       position: absolute;
-      right: @form-item-control-tooltip-right;
+      right: calc((var(--ix-font-size-icon) + 4px) * -1);
       top: 50%;
       transform: translateY(-50%);
       writing-mode: horizontal-tb;
       .@{icon-prefix} {
-        font-size: @form-item-tooltip-icon-font-size;
-        color: @form-item-tooltip-icon-color;
+        font-size: var(--ix-font-size-icon);
+        color: var(--ix-color-info-icon);
       }
     }
   }
@@ -117,9 +114,9 @@
   &-message,
   &-description {
     clear: both;
-    min-height: @form-item-margin-bottom;
-    color: @form-color-secondary;
-    font-size: @form-item-font-size;
-    line-height: calc(@form-item-font-size + var(--ix-line-height-gutter));
+    min-height: var(--ix-form-item-margin-bottom);
+    color: var(--ix-color-text-info);
+    font-size: var(--ix-form-label-font-size);
+    line-height: calc(var(--ix-form-label-font-size) + var(--ix-line-height-gutter));
   }
 }

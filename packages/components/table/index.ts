@@ -44,3 +44,7 @@ export type {
 // private
 export { tableProps as ɵTableProps } from './src/types'
 export { getColumnKey as ɵGetColumnKey } from './src/utils'
+
+export { getThemeTokens as getTableThemeTokens } from './theme'
+
+export type { TableThemeTokens } from './theme'

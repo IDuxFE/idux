@@ -13,4 +13,8 @@ const IxHeader = Header as unknown as HeaderComponent
 
 export { IxHeader }
 
+export { getThemeTokens as getHeaderThemeTokens } from './theme'
+
 export type { HeaderInstance, HeaderComponent, HeaderPublicProps as HeaderProps } from './src/types'
+
+export type { HeaderThemeTokens } from './theme'

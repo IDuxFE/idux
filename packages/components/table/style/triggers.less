@@ -43,9 +43,9 @@
     justify-content: center;
     margin-left: 4px;
     user-select: none;
-    border-radius: @table-border-radius;
-    color: @table-head-icon-color;
-    transition: color var(--ix-transition-duration-fast), background var(--ix-transition-duration-fast);
+    border-radius: var(--ix-border-radius-sm);
+    color: var(--ix-table-head-icon-color);
+    transition: color var(--ix-motion-duration-fast), background var(--ix-motion-duration-fast);
     cursor: pointer;
 
     & + & {
@@ -53,11 +53,11 @@
     }
 
     &:hover {
-      background-color: @table-head-icon-background-color-hover;
+      background-color: var(--ix-table-head-icon-bg-color-hover);
     }
 
     &-active {
-      color: @table-head-icon-color-active;
+      color: var(--ix-table-head-icon-color-active);
     }
   }
 

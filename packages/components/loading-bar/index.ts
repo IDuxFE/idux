@@ -24,3 +24,7 @@ export type {
   LoadingBarProviderComponent,
   LoadingBarProviderRef,
 } from './src/types'
+
+export { getThemeTokens as getLoadingBarThemeTokens } from './theme'
+
+export type { LoadingBarThemeTokens } from './theme'

@@ -12,7 +12,10 @@ import { isArray } from 'lodash-es'
 import { ɵDatePanel } from '@idux/components/_private/date-panel'
 import { ɵTimePanel } from '@idux/components/_private/time-panel'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
+import { getTimePickerThemeTokens } from '@idux/components/time-picker'
 
+import { getThemeTokens } from '../../theme'
 import { useRangeActiveValue } from '../composables/useActiveValue'
 import { useRangePanelState } from '../composables/useRangePanelState'
 import { dateRangePanelProps } from '../types'
@@ -23,6 +26,11 @@ export default defineComponent({
   props: dateRangePanelProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('datePicker')
+    const { registerToken: registerTimePickerToken } = useThemeToken('timePicker')
+    registerToken(getThemeTokens)
+    registerTimePickerToken(getTimePickerThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-date-range-picker-panel`)
     const dateConfig = useDateConfig()
 
@@ -87,7 +95,7 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
 
       return (
-        <div class={prefixCls} tabindex={-1} onMousedown={handleMouseDown}>
+        <div class={[prefixCls, globalHashId.value, hashId.value]} tabindex={-1} onMousedown={handleMouseDown}>
           {renderSide(true)}
           {slots.separator?.() ?? <div class={`${prefixCls}-separator`}></div>}
           {renderSide(false)}

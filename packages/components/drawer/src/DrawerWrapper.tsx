@@ -26,6 +26,7 @@ import { isFunction } from 'lodash-es'
 import { callEmit, convertCssPixel } from '@idux/cdk/utils'
 import { ɵFooter } from '@idux/components/_private/footer'
 import { ɵHeader } from '@idux/components/_private/header'
+import { useThemeToken } from '@idux/components/theme'
 
 import { DRAWER_TOKEN, drawerToken } from './token'
 
@@ -41,6 +42,7 @@ const defaultDistance = 160
 export default defineComponent({
   inheritAttrs: false,
   setup(_, { attrs }) {
+    const { globalHashId, hashId } = useThemeToken('drawer')
     const {
       props,
       slots,
@@ -95,6 +97,8 @@ export default defineComponent({
       const action = levelAction.value
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [`${prefixCls}-wrapper`]: true,
         [`${prefixCls}-${props.placement}`]: true,
         [`${prefixCls}-opened`]: animatedVisible.value,

@@ -10,13 +10,13 @@
 
     &-item {
       left: @select-padding-horizontal;
-      width: calc(100% - @select-padding-horizontal - @select-icon-font-size);
+      width: calc(100% - @select-padding-horizontal - var(--ix-font-size-icon));
     }
 
     &-item,
     &-placeholder,
     &-input-inner {
-      line-height: @selector-height - 2 * @select-border-width;
+      line-height: calc(@selector-height - 2 * var(--ix-control-line-width));
     }
   }
 }
@@ -31,7 +31,7 @@
     &-input {
       flex: auto;
       width: 0;
-      margin-right: (@select-icon-font-size / 2) + @select-icon-margin-right;
+      margin-right: calc((var(--ix-font-size-icon) / 2) + var(--ix-margin-size-sm));
     }
 
     &-item {
@@ -40,18 +40,18 @@
   }
 
   &.@{selector-prefix}-opened .@{selector-prefix}-item {
-    color: @select-placeholder-color;
+    color: var(--ix-color-text-placeholder);
   }
 
   &.@{selector-prefix}-sm {
-    .select-size(@select-height-sm, @form-new-padding-horizontal-sm, @select-font-size-sm);
+    .select-size(var(--ix-control-height-sm), var(--ix-control-padding-size-horizontal-sm), var(--ix-control-font-size-sm));
   }
 
   &.@{selector-prefix}-md {
-    .select-size(@select-height-md, @form-new-padding-horizontal-md, @select-font-size-md);
+    .select-size(var(--ix-control-height-md), var(--ix-control-padding-size-horizontal-md), var(--ix-control-font-size-md));
   }
 
   &.@{selector-prefix}-lg {
-    .select-size(@select-height-lg, @form-new-padding-horizontal-lg, @select-font-size-lg);
+    .select-size(var(--ix-control-height-lg), var(--ix-control-padding-size-horizontal-lg), var(--ix-control-font-size-lg));
   }
 }

@@ -19,11 +19,11 @@ html {
 
 body {
   // 2
-  color: var(--ix-text-color);
-  background-color: var(--ix-background-color);
-  font-family: var(--ix-font-family);
-  font-size: if((@theme = seer), var(--ix-font-size-sm), var(--ix-font-size-md));
-  font-weight: var(--ix-font-weight-md);
+  color: var(--ix-reset-color-text);
+  background-color: var(--ix-reset-color-bg);
+  font-family: var(--ix-reset-font-family);
+  font-size: var(--ix-reset-font-size);
+  font-weight: var(--ix-reset-font-weight);
   font-variant: tabular-nums;
   font-feature-settings: 'tnum';
 }
@@ -55,8 +55,8 @@ h6 {
   // 3
   margin-top: 0;
   margin-bottom: 0.5em;
-  color: var(--ix-text-color-title);
-  font-weight: var(--ix-font-weight-lg);
+  color: var(--ix-reset-color-text-title);
+  font-weight: var(--ix-reset-font-weight-header);
 }
 
 /* # =================================================================
@@ -99,7 +99,7 @@ p {
 }
 
 a {
-  color: var(--ix-color-primary); // 5
+  color: var(--ix-reset-color-link); // 5
   background-color: transparent; /* Remove the gray background on active links in IE 10 */
 }
 
@@ -119,7 +119,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: var(--ix-font-family-code); // 7 /* Specify the font family of code elements */
+  font-family: var(--ix-reset-font-family-code); // 7 /* Specify the font family of code elements */
 }
 
 pre {

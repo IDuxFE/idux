@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/placeholder.less';
 @import '../../style/mixins/reset.less';
 @import './mixin.less';
@@ -8,59 +9,57 @@
   position: relative;
   display: inline-block;
   width: 100%;
-  line-height: @textarea-line-height;
 
   &-inner {
     display: block;
     width: 100%;
     min-width: 0;
     outline: 0;
-    background-color: @textarea-background-color;
-    border: @textarea-border-width @textarea-border-style @textarea-border-color;
-    border-radius: @textarea-border-radius;
-    transition: all @transition-duration-base @ease-in-out, height 0s, width 0s;
+    background-color: var(--ix-control-bg-color);
+    border: var(--ix-control-line-width) var(--ix-control-line-type) var(--ix-color-border);
+    transition: all var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out), height 0s, width 0s;
 
     &[disabled] {
       cursor: not-allowed;
     }
 
-    .placeholder(@textarea-placeholder-color);
+    .placeholder();
 
     &:hover {
-      border-color: @textarea-hover-color;
+      border-color: var(--ix-control-border-color-hover);
     }
   }
 
   &-sm {
-    .textarea-size(@textarea-font-size-sm, @textarea-padding-vertical-sm, @form-new-padding-horizontal-sm);
+    .textarea-size(var(--ix-control-font-size-sm), var(--ix-control-padding-size-vertical-sm), var(--ix-control-padding-size-horizontal-sm), var(--ix-control-border-radius-sm));
   }
 
   &-md {
-    .textarea-size(@textarea-font-size-md, @textarea-padding-vertical-md, @form-new-padding-horizontal-md);
+    .textarea-size(var(--ix-control-font-size-md), var(--ix-control-padding-size-vertical-md), var(--ix-control-padding-size-horizontal-md), var(--ix-control-border-radius-md));
   }
 
   &-lg {
-    .textarea-size(@textarea-font-size-lg, @textarea-padding-vertical-lg, @form-new-padding-horizontal-lg);
+    .textarea-size(var(--ix-control-font-size-lg), var(--ix-control-padding-size-vertical-lg), var(--ix-control-padding-size-horizontal-lg), var(--ix-control-border-radius-lg));
   }
 
   &-focused {
     .@{textarea-prefix}-inner {
-      border-color: @textarea-active-color;
-      box-shadow: @textarea-active-box-shadow;
+      border-color: var(--ix-control-border-color-active);
+      box-shadow: var(--ix-control-box-shadow-focus);
     }
   }
 
   &-disabled {
     .@{textarea-prefix}-inner {
-      color: @textarea-disabled-color;
-      background-color: @textarea-disabled-background-color;
+      color: var(--ix-color-text-disabled);
+      background-color: var(--ix-control-bg-color-disabled);
       cursor: not-allowed;
       opacity: 1;
     }
 
     &:hover {
       .@{textarea-prefix}-inner {
-        border-color: @textarea-border-color;
+        border-color: var(--ix-color-border);
       }
     }
   }
@@ -70,11 +69,11 @@
     z-index: 1;
     cursor: pointer;
     opacity: 0;
-    color: @textarea-placeholder-color;
-    transition: @transition-all-base;
+    color: var(--ix-color-icon);
+    transition: all var(--ix-motion-duration-medium);
 
     &:hover {
-      color: @textarea-color-secondary;
+      color: var(--ix-color-icon-hover);
     }
   }
 
@@ -86,40 +85,40 @@
 
   &-with-count::after {
     position: absolute;
-    bottom: @textarea-count-bottom;
-    right: @textarea-count-right;
+    bottom: var(--ix-textarea-count-bottom);
+    right: var(--ix-textarea-count-right);
     text-align: right;
-    color: @textarea-count-color;
-    background-color: #fff;
-    opacity: @textarea-count-opacity;
+    color: var(--ix-textarea-count-color);
+    background-color: var(--ix-control-bg-color);
+    opacity: var(--ix-textarea-count-opacity);
     content: attr(data-count);
   }
 
   // form status
   &&-invalid {
     &::after {
-      color: @form-item-invalid-color;
+      color: var(--ix-color-error-text);
     }
 
     .@{textarea-prefix}-inner {
-      border-color: @form-item-invalid-color;
+      border-color: var(--ix-color-error-border);
 
       &:hover {
-        border-color: @form-item-invalid-color;
+        border-color: var(--ix-color-error-border);
       }
     }
 
     .@{textarea-prefix}-suffix {
-      color: @form-item-invalid-color;
+      color: var(--ix-color-error-text);
 
       &:hover {
-        color: @form-item-invalid-color;
+        color: var(--ix-color-error-text);
       }
     }
 
     &.@{textarea-prefix}-focused .@{textarea-prefix}-inner {
-      border-color: @form-item-invalid-color;
-      box-shadow: @form-item-invalid-box-shadow;
+      border-color: var(--ix-color-error-border);
+      box-shadow: var(--ix-control-box-shadow-invalid);
     }
   }
 }

@@ -1,0 +1,13 @@
+/* ------ message css variables ------ */
+:root {
+  --ix-message-margin: 8px;
+  --ix-message-font-size: 14px;
+  --ix-message-content-min-width: 128px;
+  --ix-message-content-max-width: 480px;
+  --ix-message-content-padding-vertical: 8px;
+  --ix-message-content-padding-horizontal: 16px;
+  --ix-message-bg-color: #ffffff;
+  --ix-message-border-radius: 4px;
+  --ix-message-icon-margin-right: 8px;
+  --ix-message-wrapper-top: 15%;
+}

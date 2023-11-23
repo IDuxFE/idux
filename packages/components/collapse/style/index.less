@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 
 .@{collapse-prefix} {
@@ -5,46 +6,46 @@
   .reset-color();
 
   &-sm {
-    .collapse-size(@collapse-font-size-sm, @collapse-expand-icon-font-size-sm, @collapse-padding-horizontal-sm);
+    .collapse-size(var(--ix-collapse-font-size-sm), var(--ix-collapse-expand-icon-size-sm), var(--ix-collapse-padding-horizontal-sm));
 
     .@{collapse-prefix}-panel {
       border-bottom: none;
     }
 
     .@{collapse-prefix}-panel:first-child {
-      border-radius: @collapse-border-radius @collapse-border-radius 0 0;
+      border-radius: var(--ix-component-border-radius) var(--ix-component-border-radius) 0 0;
     }
 
     .@{collapse-prefix}-panel:last-child {
-      border-bottom: @collapse-border;
-      border-radius: 0 0 @collapse-border-radius @collapse-border-radius;
+      border-bottom: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border);
+      border-radius: 0 0 var(--ix-component-border-radius) var(--ix-component-border-radius);
     }
   }
 
   &-md {
-    .collapse-size(@collapse-font-size-md, @collapse-expand-icon-font-size-md, @collapse-padding-horizontal-md);
+    .collapse-size(var(--ix-collapse-font-size-md), var(--ix-collapse-expand-icon-size-md), var(--ix-collapse-padding-horizontal-md));
 
     .@{collapse-prefix}-panel + .@{collapse-prefix}-panel {
       margin-top: var(--ix-spacing-sm);
     }
 
     .@{collapse-prefix}-panel {
-      border-radius: @collapse-border-radius;
+      border-radius: var(--ix-component-border-radius);
     }
   }
 
   &-panel {
-    border: @collapse-border;
+    border: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border);
 
     .@{header-prefix} {
       cursor: pointer;
-      border-radius: @collapse-border-radius;
+      border-radius: var(--ix-component-border-radius);
     }
 
     &-content {
-      background-color: @collapse-content-background-color;
-      border-top: @collapse-border;
-      border-radius: 0 0 @collapse-border-radius @collapse-border-radius;
+      background-color: var(--ix-color-info-container-bg);
+      border-top: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border);
+      border-radius: 0 0 var(--ix-component-border-radius) var(--ix-component-border-radius);
     }
 
     &-disabled {
@@ -55,6 +56,17 @@
 
     & &-expand-icon {
       display: block;
+      color: var(--ix-color-icon);
+
+      &:hover {
+        color: var(--ix-color-icon-hover);
+      }
+      &:active {
+        color: var(--ix-color-icon-active);
+      }
+    }
+    & .@{header-prefix}-disabled &-expand-icon {
+      color: var(--ix-color-icon-disabled);
     }
   }
 

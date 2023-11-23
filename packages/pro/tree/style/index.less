@@ -1,4 +1,7 @@
+@import '../../style/variable/index.less';
+@import '../../../components/style/variable/index.less';
 @import '../../style/mixins/reset.less';
+@import './variables.less';
 
 .@{pro-tree-prefix} {
   .reset-component();
@@ -9,7 +12,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: width var(--ix-transition-duration-medium) var(--ix-ease-in-out);
+  transition: width var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out);
 
   &-header-wrapper,
   &-search-wrapper {

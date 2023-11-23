@@ -52,23 +52,23 @@ onBeforeUnmount(() => {
 
 <style scoped lang="less">
 .example-focus-monitor {
-  background-color: @color-grey;
+  background-color: #a3a3a3;
   padding: 20px;
 
   .cdk-mouse-focused {
-    background: @color-blue;
+    background: #1c6eff;
   }
 
   .cdk-keyboard-focused {
-    background: @color-green;
+    background: #39c317;
   }
 
   .cdk-touch-focused {
-    background: @color-magenta;
+    background: #d619be;
   }
 
   .cdk-program-focused {
-    background: @color-red;
+    background: #f52727;
   }
 
   .ix-button {

@@ -1,20 +1,20 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
-@import './mixin.less';
+
+@tag-line-height: calc(var(--ix-font-size-sm) + var(--ix-line-height-gutter) - var(--ix-tag-border-width) * 2);
 
 .@{tag-prefix} {
   .reset-component-new();
-  .reset-font-size();
+  .reset-font-size(var(--ix-font-size-sm));
 
   display: inline-flex;
   align-items: center;
-  color: @tag-color;
-  background-color: @tag-background-color;
-  padding: 0 calc(8px - @tag-border-width);
+  color: var(--ix-tag-color, var(--ix-color-text-info));
+  background-color: var(--ix-tag-background-color, var(--ix-color-emphasized-container-bg));
+  padding: 0 calc(8px - var(--ix-tag-border-width));
   line-height: @tag-line-height;
-  border: @tag-border-width solid @tag-background-color;
-  border-radius: @tag-border-radius;
-
-  .make-color-classes(@preset-colors);
+  border: var(--ix-tag-border-width) solid var(--ix-tag-background-color, var(--ix-color-emphasized-container-bg));
+  border-radius: var(--ix-tag-border-radius);
 
   & + & {
     margin-left: 8px;
@@ -22,7 +22,7 @@
 
   > .@{icon-prefix} {
     margin-left: -4px;
-    font-size: var(--ix-font-size-lg);
+    font-size: var(--ix-font-size-icon);
   }
 
   .@{icon-prefix} + &-content {
@@ -35,26 +35,22 @@
   }
 
   &-bordered {
-    border-color: @tag-border-color;
-  }
-
-  &-has-color {
-    color: @text-color-inverse;
+    border-color: var(--ix-tag-border-color, var(--ix-color-border));
   }
 
   &-round {
     border-radius: @tag-line-height;
-    min-width: @tag-min-width-round;
+    min-width: var(--ix-tag-min-width-round);
   }
 
   &-rect {
     border-radius: 0;
-    min-width: @tag-min-width-rect;
+    min-width: var(--ix-tag-min-width-rect);
   }
 
   &-close-icon {
     margin-left: 4px;
-    font-size: var(--ix-font-size-lg);
+    font-size: var(--ix-font-size-icon);
     cursor: pointer;
   }
 
@@ -66,8 +62,8 @@
   .tag-status-color(fatal);
 
   &-filled {
-    --ix-tag-color: @tag-color-inverse;
-    --ix-tag-background-color: @tag-background-color-filled;
+    --ix-tag-color: var(--ix-color-text-inverse);
+    --ix-tag-background-color: var(--ix-tag-bg-color-filled);
   }
 }
 
@@ -75,11 +71,9 @@
   @tag-prefix-size: calc(@tag-line-height + 4px);
 
   position: relative;
-  padding-left: calc(@tag-prefix-size + @tag-border-width);
-  min-width: @tag-min-width-numeric;
+  padding-left: calc(@tag-prefix-size + var(--ix-tag-border-width));
+  min-width: var(--ix-tag-min-width-numeric);
   border-radius: @tag-line-height;
-
-  .make-numeric-color-classes(@preset-colors);
 
   &-prefix {
     position: absolute;
@@ -91,7 +85,7 @@
     height: @tag-prefix-size;
     width: @tag-prefix-size;
     background-color: inherit;
-    border: @tag-border-width solid @text-color-inverse;
+    border: var(--ix-tag-border-width) solid var(--ix-color-text-inverse);
     border-radius: @tag-prefix-size;
   }
 }
@@ -105,20 +99,20 @@
 }
 
 .tag-status-color(@status) {
-  @color: 'tag-color-@{status}';
-  @background-color: 'tag-background-color-@{status}';
-  @background-color-filled: 'tag-background-color-@{status}-filled';
+  @color: '--ix-color-@{status}';
+  @background-color: '--ix-tag-@{status}-bg-color';
+  @background-color-filled: '--ix-color-@{status}-bg';
 
   &-@{status} {
-    --ix-tag-color: @@color;
-    --ix-tag-background-color: @@background-color;
+    --ix-tag-color: ~'var(@{color})';
+    --ix-tag-background-color: ~'var(@{background-color})';
   }
 
   &-@{status}&-bordered {
-    --ix-tag-border-color: @@color;
+    --ix-tag-border-color: ~'var(@{color})';
   }
 
   &-@{status}&-filled {
-    --ix-tag-background-color: @@background-color-filled;
+    --ix-tag-background-color: ~'var(@{background-color-filled})';
   }
 }

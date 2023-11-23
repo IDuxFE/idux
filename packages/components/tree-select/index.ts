@@ -19,3 +19,7 @@ export type {
   TreeSelectNode,
   TreeSelectCustomAdditional,
 } from './src/types'
+
+export { getThemeTokens as getTreeSelectThemeTokens } from './theme'
+
+export type { TreeSelectThemeTokens } from './theme'

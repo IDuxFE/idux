@@ -20,3 +20,6 @@ export type {
   AlertType,
   AlertPagination,
 } from './src/types'
+
+export { getThemeTokens as getAlertThemeTokens } from './theme'
+export type { AlertThemeTokens } from './theme'

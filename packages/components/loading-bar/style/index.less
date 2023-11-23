@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 
 .@{loading-bar-prefix} {
@@ -7,18 +8,18 @@
   left: 0;
   top: 0;
   right: 0;
-  height: @loading-bar-height;
+  height: var(--ix-loading-bar-height);
   width: 100%;
   z-index: 10000;
   transition: none;
 
   &.@{loading-bar-prefix}--loading,
   &.@{loading-bar-prefix}--finish {
-    background: @loading-bar-loading-color;
+    background: var(--ix-loading-bar-loading-color);
   }
 
   &.@{loading-bar-prefix}--error {
-    background: @color-error;
+    background: var(--ix-color-error);
   }
   &-mask {
     z-index: 9999;

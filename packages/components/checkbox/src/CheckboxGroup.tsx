@@ -11,6 +11,7 @@ import { useAccessorAndControl } from '@idux/cdk/forms'
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister } from '@idux/components/form'
 import { IxSpace } from '@idux/components/space'
+import { useThemeToken } from '@idux/components/theme'
 
 import Checkbox from './Checkbox'
 import { checkboxGroupToken } from './token'
@@ -21,6 +22,7 @@ export default defineComponent({
   props: checkboxGroupProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId } = useThemeToken('checkbox')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-checkbox-group`)
     const { accessor, control } = useAccessorAndControl()
     useFormItemRegister(control)
@@ -35,6 +37,8 @@ export default defineComponent({
       const gap = mergedGap.value
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${common.prefixCls}-button-group`]: buttoned,
         [`${common.prefixCls}-button-group-compact`]: buttoned && (!gap || gap === '0'),

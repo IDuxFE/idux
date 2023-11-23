@@ -1,0 +1,10 @@
+/* ------ back-top css variables ------ */
+:root {
+  --ix-back-top-size-lg: 64px;
+  --ix-back-top-size-md: 48px;
+  --ix-back-top-size-sm: 40px;
+  --ix-back-top-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05);
+  --ix-back-top-color: #96c7ff;
+  --ix-back-top-color-hover: #1c6eff;
+  --ix-back-top-bg-color: #ffffff;
+}

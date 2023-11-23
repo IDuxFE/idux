@@ -1,19 +1,19 @@
 .footer {
   position: relative;
-  padding: @spacing-4xl @spacing-4xl @spacing-2xl;
-  font-size: @font-size-md;
-  line-height: @line-height-base;
-  color: @color-grey;
+  padding: 64px 64px 32px;
+  font-size: var(--ix-font-size-md);
+  line-height: calc(var(--ix-line-height-gutter) + var(--ix-font-size-md));
+  color: var(--ix-color-text);
   background-color: #1F284C;
 
   & a {
     transition: @transition-all-base;
     font-family: PingFangSC-Regular;
     font-size: 14px;
-    color: #FFFFFF;
+    color: #FFF;
     text-decoration: none;
     &:hover {
-      color: @color-grey-l20;
+      color: var(--ix-color-text-info);
     }
   }
 
@@ -25,39 +25,39 @@
   }
 
   &-column {
-    margin-bottom: @spacing-2xl;
+    margin-bottom: var(--ix-margin-size-2xl);
 
     h3 {
       opacity: 0.5;
       font-family: PingFangSC-Regular;
       font-size: 14px;
-      color: #FFFFFF;
+      color: #FFF;
     }
 
     &-icon {
-      margin-right: @spacing-sm;
-      font-size: @font-size-2xl;
+      margin-right: var(--ix-margin-size-sm);
+      font-size: 24px;
     }
   }
 
   &-item {
-    margin: @spacing-md 0;
+    margin: var(--ix-margin-size-md) 0;
 
     &-icon {
-      margin-right: @spacing-sm;
-      font-size: @font-size-lg;
+      margin-right: var(--ix-margin-size-sm);
+      font-size: var(--ix-font-size-icon);
     }
 
     &-separator {
-      margin: 0 @spacing-xs;
+      margin: 0 var(--ix-margin-size-xs);
     }
   }
 
   &-bottom {
     text-align: center;
-    padding-top: @spacing-lg;
-    font-size: @font-size-lg;
-    border-top: @border-width-sm @border-style @color-grey;
+    padding-top: var(--ix-margin-size-lg);
+    font-size: var(--ix-font-size-lg);
+    border-top: var(--ix-line-width) var(--ix-line-type) var(--ix-color-separator);
   }
 
   &-logo {
@@ -79,7 +79,7 @@
 @media only screen and (max-width: @screen-xs-max) {
   .footer {
     text-align: center;
-    padding: @spacing-2xl 0;
+    padding: var(--ix-margin-size-2xl) 0;
 
     &-columns {
       display: block;

@@ -1,0 +1,14 @@
+/* ------ divider css variables ------ */
+:root {
+  --ix-divider-line-width: 1px;
+  --ix-divider-line-color: #d3d7de;
+  --ix-divider-font-size-sm: 12px;
+  --ix-divider-font-size-md: 14px;
+  --ix-divider-font-size-lg: 16px;
+  --ix-divider-margin-vertical-sm: 12px;
+  --ix-divider-margin-vertical-md: 16px;
+  --ix-divider-margin-vertical-lg: 24px;
+  --ix-divider-margin-horizontal-sm: 4px;
+  --ix-divider-margin-horizontal-md: 8px;
+  --ix-divider-margin-horizontal-lg: 12px;
+}

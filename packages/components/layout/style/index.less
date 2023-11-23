@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 
 .@{layout-prefix} {
@@ -22,9 +23,9 @@
   &-sider {
     position: relative;
     grid-area: sider;
-    width: @layout-sider-width;
+    width: var(--ix-layout-sider-width);
     height: 100%;
-    transition: width var(--ix-transition-duration-medium);
+    transition: width var(--ix-motion-duration-medium);
 
     &-trigger {
       display: flex;
@@ -34,7 +35,7 @@
       justify-content: space-between;
 
       > span {
-        animation: ix-layout-sider-text-hidden var(--ix-transition-duration-medium);
+        animation: ix-layout-sider-text-hidden var(--ix-motion-duration-medium);
       }
 
       > .@{button-prefix} {
@@ -43,7 +44,7 @@
     }
 
     &-collapsed {
-      width: @layout-sider-collapsed-width;
+      width: var(--ix-layout-sider-collapsed-width);
 
       .@{layout-prefix}-sider-trigger {
         justify-content: center;
@@ -92,8 +93,8 @@
     }
 
     .@{layout-prefix}-content {
-      margin-left: @layout-sider-collapsed-width;
-      width: calc(100% - @layout-sider-collapsed-width);
+      margin-left: var(--ix-layout-sider-collapsed-width);
+      width: calc(100% - var(--ix-layout-sider-collapsed-width));
     }
   }
 }

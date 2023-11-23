@@ -26,3 +26,7 @@ export type {
   TextareaResize,
 } from './src/types'
 export type { BoxSizingData as ɵBoxSizingData } from './src/utils/getBoxSizingData'
+
+export { getThemeTokens as getTextareaThemeTokens } from './theme'
+
+export type { TextareaThemeTokens } from './theme'

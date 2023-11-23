@@ -10,6 +10,7 @@ import { computed, defineComponent, normalizeClass, onMounted, provide, ref, toR
 import { ɵOverlay, ɵOverlayInstance } from '@idux/components/_private/overlay'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
 import { useFormElement } from '@idux/components/form'
+import { useThemeToken } from '@idux/components/theme'
 import { useOverlayFocusMonitor } from '@idux/components/utils'
 
 import { useInputEnableStatus } from './composables/useInputEnableStatus'
@@ -22,6 +23,7 @@ import RangeOverlay from './content/RangeContent'
 import { timeRangePickerContext } from './tokens'
 import RangeTrigger from './trigger/RangeTrigger'
 import { timeRangePickerProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxTimeRangePicker',
@@ -29,6 +31,9 @@ export default defineComponent({
   props: timeRangePickerProps,
   setup(props, { attrs, expose, slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('timePicker')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-time-range-picker`)
     const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('timePicker')
@@ -100,7 +105,9 @@ export default defineComponent({
     const renderContent = () => <RangeOverlay />
 
     const overlayProps = useOverlayProps(context)
-    const overlayClass = computed(() => normalizeClass([`${mergedPrefixCls.value}-overlay`, props.overlayClassName]))
+    const overlayClass = computed(() =>
+      normalizeClass([`${mergedPrefixCls.value}-overlay`, globalHashId.value, hashId.value, props.overlayClassName]),
+    )
 
     return () => (
       <ɵOverlay

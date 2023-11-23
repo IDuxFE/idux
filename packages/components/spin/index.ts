@@ -31,3 +31,7 @@ export type {
   SpinTipAlignType,
   SpinSize,
 } from './src/types'
+
+export { getThemeTokens as getSpinThemeTokens } from './theme'
+
+export type { SpinThemeTokens } from './theme'

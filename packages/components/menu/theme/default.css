@@ -1,0 +1,39 @@
+/* ------ menu css variables ------ */
+:root {
+  --ix-menu-border-radius: 0;
+  --ix-menu-height: 32px;
+  --ix-menu-height-level-1: 40px;
+  --ix-menu-font-size: 12px;
+  --ix-menu-font-size-level-1: 14px;
+  --ix-menu-overlay-min-width: 128px;
+  --ix-menu-collapsed-width: 44px;
+  --ix-menu-item-color: #2f3540;
+  --ix-menu-item-color-hover: #2f3540;
+  --ix-menu-item-color-active: #1c6eff;
+  --ix-menu-item-color-disabled: #bec3cc;
+  --ix-menu-item-group-color: #6f7785;
+  --ix-menu-item-bg: #ffffff;
+  --ix-menu-item-bg-hover: #f7f9fc;
+  --ix-menu-item-bg-active: #e8f4ff;
+  --ix-menu-item-bg-disabled: #ffffff;
+  --ix-menu-item-group-bg: #ffffff;
+  --ix-menu-horizontal-item-color-hover: #2f3540;
+  --ix-menu-horizontal-item-color-active: #1c6eff;
+  --ix-menu-horizontal-item-bg-hover: #f7f9fc;
+  --ix-menu-horizontal-item-bg-active: #e8f4ff;
+  --ix-menu-dark-item-color: #ffffff;
+  --ix-menu-dark-item-color-hover: #ffffff;
+  --ix-menu-dark-item-color-active: #ffffff;
+  --ix-menu-dark-item-color-disabled: #bec3cc;
+  --ix-menu-dark-item-group-color: #6f7785;
+  --ix-menu-dark-item-font-weight-active: 600;
+  --ix-menu-dark-item-bg: #2f3540;
+  --ix-menu-dark-item-bg-hover: #1e232b;
+  --ix-menu-dark-item-bg-active: #1c6eff;
+  --ix-menu-dark-item-bg-disabled: #2f3540;
+  --ix-menu-dark-item-group-bg: #2f3540;
+  --ix-menu-dark-horizontal-item-color-hover: #ffffff;
+  --ix-menu-dark-horizontal-item-color-active: #ffffff;
+  --ix-menu-dark-horizontal-item-bg-hover: #1e232b;
+  --ix-menu-dark-horizontal-item-bg-active: #454c59;
+}
