@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { App, Directive } from 'vue'
+import type { App } from 'vue'
 
 import { IxAffix } from '@idux/components/affix'
 import { IxAlert } from '@idux/components/alert'
@@ -75,7 +75,6 @@ import { IxTour } from '@idux/components/tour'
 import { IxTransfer, IxTransferList } from '@idux/components/transfer'
 import { IxTree } from '@idux/components/tree'
 import { IxTreeSelect } from '@idux/components/tree-select'
-import { IxTypography } from '@idux/components/typography'
 import { IxUpload, IxUploadFiles } from '@idux/components/upload'
 import { version } from '@idux/components/version'
 import { IxWatermark } from '@idux/components/watermark'
@@ -188,17 +187,9 @@ const components = [
   IxWatermark,
 ]
 
-const directives: Record<string, Directive> = {
-  typography: IxTypography,
-}
-
 const install = (app: App): void => {
   components.forEach(component => {
     app.component(component.displayName ?? component.name, component)
-  })
-
-  Object.keys(directives).forEach(key => {
-    app.directive(key, directives[key])
   })
 }
 
@@ -269,7 +260,6 @@ export * from '@idux/components/tooltip'
 export * from '@idux/components/transfer'
 export * from '@idux/components/tree'
 export * from '@idux/components/tree-select'
-export * from '@idux/components/typography'
 export * from '@idux/components/upload'
 export * from '@idux/components/utils'
 export * from '@idux/components/version'

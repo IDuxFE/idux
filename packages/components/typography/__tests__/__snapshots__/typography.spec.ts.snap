@@ -1,3 +1,0 @@
-// Vitest Snapshot v1
-
-exports[`typography.ts > render work 1`] = `"<p class=\\"ix-typography\\">Paragraph</p>"`;
