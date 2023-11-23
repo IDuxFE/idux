@@ -10,6 +10,23 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 2.0.0-beta.0(2023-11-23)
+
+
+### Features
+
+* **cdk:theme:** 新增 cdk `useTheme` API ([#1739](https://github.com/sallerli1/idux/issues/1739)) ([f34f0e5](https://github.com/sallerli1/idux/commit/f34f0e573d294719abe216dd2f3fbf196bcd021b))
+* 新增基于design token实现的动态主题支持 ([#1737](https://github.com/sallerli1/idux/issues/1737)) ([ea22a8f](https://github.com/sallerli1/idux/commit/ea22a8fa8fb863a4c546b9af62025718779d3463))
+* 移除 typography 组件和指令 ([#1738](https://github.com/sallerli1/idux/issues/1738)) ([ed6462a](https://github.com/sallerli1/idux/commit/ed6462ac516a8aaec6cc9774f9ee7210e593ffc0))
+
+
+### BREAKING CHANGES
+
+* typography 已经被移除
+* 原有的css变量和less变量被移除，现全部修改为token变量
+* 原有的默认主题被移除，seer主题现在被作为默认主题 default
+* 原有的样式入口被移除，现在的入口是 index.less、index.css、index.full.css
+
 ## 1.12.3(2023-12-05)
 
 
@@ -23,7 +40,6 @@ order: 13
 * **comp:radio:** gap 在配置 0px 时表现异常 ([#1740](https://github.com/IDuxFE/idux/issues/1740)) ([9ecd14a](https://github.com/IDuxFE/idux/commit/9ecd14aa5663399f1e3c92d3f40d8f5f05ad9dee))
 * **pro:search:** 当key是0的时候表现不正常 ([#1748](https://github.com/IDuxFE/idux/issues/1748)) ([9d996ce](https://github.com/IDuxFE/idux/commit/9d996cedbfb1c6748911ae6e6e3e263177444737))
 * **pro:table:** layoutool checkbox在禁用时不应当可点击 ([#1741](https://github.com/IDuxFE/idux/issues/1741)) ([0905872](https://github.com/IDuxFE/idux/commit/0905872941527f73d5acf56e0dc18d4768c2ad11))
-
 
 ## 1.12.2(2023-11-06)
 
