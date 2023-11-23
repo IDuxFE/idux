@@ -13,9 +13,11 @@ import { computed, defineComponent, inject, provide, toRef } from 'vue'
 
 import { type VKey, useControlledProp } from '@idux/cdk/utils'
 import { type CascaderConfig, useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { useGetDisabled, useGetKey } from '@idux/components/utils'
 
 import OverlayOptionGroup from './OptionGroup'
+import { getThemeTokens } from '../../theme'
 import { useActiveState } from '../composables/useActiveState'
 import { useDataSource } from '../composables/useDataSource'
 import { useExpandable } from '../composables/useExpandable'
@@ -30,6 +32,9 @@ export default defineComponent({
   props: cascaderPanelProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('cascader')
+    registerToken(getThemeTokens)
+
     const config = useGlobalConfig('cascader')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-cascader`)
 
@@ -58,7 +63,7 @@ export default defineComponent({
     })
 
     return () => (
-      <div class={`${mergedPrefixCls.value}-panel`}>
+      <div class={[`${mergedPrefixCls.value}-panel`, globalHashId.value, hashId.value]}>
         {props.searchValue ? (
           <OverlayOptionGroup dataSource={searchedData.value} />
         ) : (

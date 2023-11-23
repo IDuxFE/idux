@@ -14,3 +14,7 @@ const IxPopover = Popover as unknown as PopoverComponent
 export { IxPopover }
 
 export type { PopoverInstance, PopoverComponent, PopoverPublicProps as PopoverProps } from './src/types'
+
+export { getThemeTokens as getPopoverThemeTokens } from './theme'
+
+export type { PopoverThemeTokens } from './theme'

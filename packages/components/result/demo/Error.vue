@@ -8,7 +8,6 @@
       <IxButton mode="primary">Go console</IxButton>
       <IxButton>Bug again</IxButton>
     </template>
-    <!-- TODO use Typography -->
     The content you submitted has the following error:
     <ul>
       <li>Your account has been frozen.</li>

@@ -21,3 +21,7 @@ export type {
   SpaceDirection,
   SpaceSize,
 } from './src/types'
+
+export { getThemeTokens as getSpaceThemeTokens } from './theme'
+
+export type { SpaceThemeTokens } from './theme'

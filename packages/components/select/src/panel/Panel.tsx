@@ -18,10 +18,12 @@ import {
 import { callEmit } from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
 import { type SelectConfig, useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import ListBox from './ListBox'
 import Option from './Option'
 import OptionGroup from './OptionGroup'
+import { getThemeTokens } from '../../theme'
 import { usePanelGetOptionKey } from '../composables/useGetOptionKey'
 import { useFlattenedOptions } from '../composables/useOptions'
 import { usePanelActiveState } from '../composables/usePanelActiveState'
@@ -34,6 +36,9 @@ export default defineComponent({
   props: selectPanelProps,
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('select')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-select`)
     const config = useGlobalConfig('select')
     const locale = useGlobalConfig('locale')
@@ -64,6 +69,8 @@ export default defineComponent({
       const prefixCls = `${mergedPrefixCls.value}-panel`
 
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-multiple`]: !!props.multiple,
       })

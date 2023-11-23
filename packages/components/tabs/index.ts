@@ -27,3 +27,7 @@ export type {
   TabsType,
   TabsData,
 } from './src/types'
+
+export { getThemeTokens as getTabsThemeTokens } from './theme'
+
+export type { TabsThemeTokens } from './theme'

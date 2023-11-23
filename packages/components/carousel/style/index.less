@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 @import '../../style/mixins/clearfix.less';
 
@@ -71,24 +72,24 @@
   }
 
   &-arrow {
-    font-size: @carousel-arrow-size;
-    color: @carousel-arrow-color;
-    opacity: @carousel-icon-opacity;
+    font-size: var(--ix-carousel-arrow-size);
+    color: var(--ix-carousel-arrow-color);
+    opacity: var(--ix-carousel-icon-opacity);
     cursor: pointer;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
 
     &:hover {
-      opacity: @carousel-icon-hover-opacity;
+      opacity: var(--ix-carousel-icon-hover-opacity);
     }
 
     &-prev {
-      left: @carousel-arrow-spacing;
+      left: var(--ix-margin-size-sm);
     }
 
     &-next {
-      right: @carousel-arrow-spacing;
+      right: var(--ix-margin-size-sm);
     }
   }
 
@@ -96,19 +97,19 @@
     display: flex;
 
     &-start {
-      left: @carousel-dot-spacing;
+      left: var(--ix-margin-size-sm);
     }
 
     &-end {
-      right: @carousel-dot-spacing;
+      right: var(--ix-margin-size-sm);
     }
 
     &-top {
-      top: @carousel-dot-spacing;
+      top: var(--ix-margin-size-sm);
     }
 
     &-bottom {
-      bottom: @carousel-dot-spacing;
+      bottom: var(--ix-margin-size-sm);
     }
   }
 
@@ -117,7 +118,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: @carousel-icon-opacity;
+    opacity: var(--ix-carousel-icon-opacity);
     cursor: pointer;
     font-size: 0; // 消除幽灵高度，避免影响间距计算
 
@@ -133,14 +134,14 @@
 
     &:hover,
     &-active {
-      opacity: @carousel-icon-active-opacity;
+      opacity: var(--ix-carousel-icon-active-opacity);
     }
 
     > button {
-      width: @carousel-dot-horizontal-width;
-      height: @carousel-dot-horizontal-height;
-      border-radius: @carousel-dot-border-radius;
-      background-color: @carousel-dot-background-color;
+      width: var(--ix-carousel-horizontal-dot-width);
+      height: var(--ix-carousel-horizontal-dot-height);
+      border-radius: var(--ix-carousel-dot-border-radius);
+      background-color: var(--ix-carousel-dot-bg-color);
       outline: none;
       border-style: none;
     }
@@ -161,8 +162,8 @@
 
   &-vertical &-dot {
     > button {
-      width: @carousel-dot-vertical-width;
-      height: @carousel-dot-vertical-height;
+      width: var(--ix-carousel-vertical-dot-width);
+      height: var(--ix-carousel-vertical-dot-height);
     }
 
     &::after {
@@ -174,10 +175,10 @@
   }
 
   &-horizontal &-dot + &-dot {
-    margin-left: @carousel-dot-gap;
+    margin-left: var(--ix-margin-size-sm);
   }
 
   &-vertical &-dot + &-dot {
-    margin-top: @carousel-dot-gap;
+    margin-top: var(--ix-margin-size-sm);
   }
 }

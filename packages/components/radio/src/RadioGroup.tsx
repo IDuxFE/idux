@@ -22,6 +22,7 @@ import { useAccessorAndControl } from '@idux/cdk/forms'
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister } from '@idux/components/form'
 import { IxSpace } from '@idux/components/space'
+import { useThemeToken } from '@idux/components/theme'
 
 import Radio from './Radio'
 import { radioGroupToken } from './token'
@@ -33,6 +34,7 @@ export default defineComponent({
   props: radioGroupProps,
   setup(props, { attrs, slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId } = useThemeToken('radio')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-radio-group`)
     const { accessor, control } = useAccessorAndControl()
     useFormItemRegister(control)
@@ -95,7 +97,11 @@ export default defineComponent({
       if (slots.fieldset) {
         const value = accessor.value
         return (
-          <div ref={elementRef} class={`${prefixCls}-wrapper`} style={style as string}>
+          <div
+            ref={elementRef}
+            class={[`${prefixCls}-wrapper`, globalHashId.value, hashId.value]}
+            style={style as string}
+          >
             {radioGroupNode}
             <div class={normalizeClass([`${prefixCls}-fieldset`, isNil(value) ? `${prefixCls}-fieldset-hidden` : ''])}>
               {slots.fieldset({ value })}

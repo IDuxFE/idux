@@ -1,24 +1,23 @@
 .overlay() {
   z-index: 1000;
   padding: @pro-search-overlay-padding;
-  background-color: @pro-search-overlay-background-color;
-  border-radius: @pro-search-overlay-border-radius;
-  box-shadow: @pro-search-overlay-box-shadow;
 }
 
-.pro-search-size(@height; @container-padding; @item-height; @item-gap; @quick-select-padding) {
+.pro-search-size(@height; @container-padding; @item-gap; @quick-select-padding) {
+  @item-height: calc(@height - @container-padding * 2);
+
   height: @height;
   .@{pro-search-prefix}-input-container::after {
     height: @height;
   }
   .@{pro-search-prefix}-clear-icon {
-    height: @height - @pro-search-border-width * 2;
+    height: calc(@height - @pro-search-border-width * 2);
   }
 
   .@{pro-search-prefix}-input-content {
-    margin-left: -@item-gap;
-    margin-bottom: -@item-gap;
-    padding: @container-padding - @pro-search-border-width;
+    margin-left: calc(@item-gap * -1);
+    margin-bottom: calc(@item-gap * -1);
+    padding: calc(@container-padding - @pro-search-border-width);
   }
   .@{pro-search-prefix}-placeholder {
     height: @item-height;

@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/clearfix.less';
 @import '../../style/mixins/ellipsis.less';
 @import '../../style/mixins/reset.less';
@@ -27,7 +28,7 @@
       bottom: 0;
       z-index: 1;
       width: 30px;
-      transition: box-shadow var(--ix-transition-duration-fast);
+      transition: box-shadow var(--ix-motion-duration-fast);
       content: '';
       pointer-events: none;
     }
@@ -52,16 +53,16 @@
   }
 
   th {
-    color: @table-head-color;
-    background-color: @table-head-background-color;
-    font-weight: @table-head-font-weight;
+    color: var(--ix-table-head-color);
+    background-color: var(--ix-table-head-bg-color);
+    font-weight: var(--ix-font-weight-md);
 
     &:not(:last-child)::before {
       position: absolute;
       top: 50%;
       right: 0;
       width: 1px;
-      background-color: @table-head-separator-color;
+      background-color: var(--ix-table-head-separator-color);
       transform: translateY(-50%);
       content: '';
     }
@@ -72,7 +73,7 @@
   }
 
   td {
-    transition: background var(--ix-transition-duration-fast);
+    transition: background var(--ix-motion-duration-fast);
 
     // TODO: Nest Table
   }
@@ -80,10 +81,10 @@
   tr {
     &:hover {
       > td {
-        background-color: @table-body-row-background-color-hover;
+        background-color: var(--ix-table-body-row-bg-color-hover);
       }
       .@{table-prefix}-expandable-trigger-button {
-        background-color: @table-body-row-background-color-hover;
+        background-color: var(--ix-table-body-row-bg-color-hover);
       }
     }
 
@@ -91,7 +92,7 @@
     &.@{table-prefix}-empty-row {
       &:hover {
         > td {
-          background-color: var(--ix-background-color);
+          background-color: var(--ix-color-container-bg);
         }
       }
     }
@@ -140,7 +141,7 @@
   }
 
   &-cell-scroll-bar {
-    box-shadow: 0 1px 0 1px @table-head-background-color;
+    box-shadow: 0 1px 0 1px var(--ix-table-head-bg-color);
   }
 
   &-pagination {
@@ -216,7 +217,7 @@
     &-holder {
       position: sticky;
       z-index: 3;
-      background-color: var(--ix-background-color);
+      background-color: var(--ix-color-container-bg);
     }
 
     &-scrollbar {

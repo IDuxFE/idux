@@ -18,6 +18,7 @@ import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister, useFormSize, useFormStatus } from '@idux/components/form'
 import { ɵUseOverlayState } from '@idux/components/select'
 import { IxSpin } from '@idux/components/spin'
+import { useThemeToken } from '@idux/components/theme'
 import { type TreeInstance } from '@idux/components/tree'
 import { useGetKey, useOverlayFocusMonitor } from '@idux/components/utils'
 
@@ -26,6 +27,7 @@ import { useSelectedState } from './composables/useSelectedState'
 import Content from './content/Content'
 import { treeSelectToken } from './token'
 import { treeSelectProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxTreeSelect',
@@ -33,6 +35,9 @@ export default defineComponent({
   props: treeSelectProps,
   setup(props, { attrs, expose, slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('treeSelect')
+    registerToken(getThemeTokens)
+
     const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('treeSelect')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tree-select`)
@@ -145,6 +150,8 @@ export default defineComponent({
       const { overlayClassName, multiple } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [`${prefixCls}-overlay`]: true,
         [`${prefixCls}-overlay-multiple`]: multiple,
         [overlayClassName || '']: !!overlayClassName,

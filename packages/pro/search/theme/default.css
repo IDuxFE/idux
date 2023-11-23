@@ -1,0 +1,23 @@
+/* ------ search css variables ------ */
+:root {
+  --ix-pro-search-height-sm: 24px;
+  --ix-pro-search-height-md: 32px;
+  --ix-pro-search-container-padding-sm: 2px;
+  --ix-pro-search-container-padding-md: 4px;
+  --ix-pro-search-tag-gap-sm: 2px;
+  --ix-pro-search-tag-gap-md: 4px;
+  --ix-pro-search-quick-select-padding-sm: 8px;
+  --ix-pro-search-quick-select-padding-md: 12px;
+  --ix-pro-search-tag-color: #2f3540;
+  --ix-pro-search-tag-bg-color: #edf1f7;
+  --ix-pro-search-tag-color-disabled: #bec3cc;
+  --ix-pro-search-tag-bg-color-disabled: #edf1f7;
+  --ix-pro-search-tag-name-color: #6f7785;
+  --ix-pro-search-segment-padding-horizontal: 4px;
+  --ix-pro-search-segment-max-width: 150px;
+  --ix-pro-search-name-panel-min-width: 160px;
+  --ix-pro-search-operator-panel-min-width: 20px;
+  --ix-pro-search-select-panel-min-width: 100px;
+  --ix-pro-search-tree-select-panel-min-width: 200px;
+  --ix-pro-search-tree-select-panel-max-width: 400px;
+}

@@ -4,7 +4,7 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: @transfer-background-color;
+  background-color: var(--ix-color-container-bg);
 
   &.@{transfer-list-prefix}-virtual {
     height: auto;
@@ -20,19 +20,22 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    min-height: @transfer-list-item-min-height;
-    padding: @transfer-list-item-padding;
-    line-height: @transfer-list-item-line-height;
-    font-size: @transfer-list-item-font-size;
+    min-height: var(--ix-transfer-list-item-min-height);
+    padding: var(--ix-transfer-content-padding);
+    line-height: 1;
+    font-size: var(--ix-font-size-sm);
     flex-shrink: 0;
     white-space: nowrap;
 
     &-disabled {
-      color: @transfer-disabled-color;
+      color: var(--ix-color-text-disabled);
       cursor: not-allowed;
     }
     &-disabled &-label {
       cursor: not-allowed;
+    }
+    &&-disabled &-close-icon {
+      color: var(--ix-color-icon-disabled);
     }
 
     &-checkbox {
@@ -46,26 +49,26 @@
       align-items: center;
       align-self: stretch;
       margin-left: auto;
-      padding: @transfer-list-close-icon-padding;
-      background: linear-gradient(to right, transparent, @transfer-background-color 30%);
-      font-size: @transfer-list-close-icon-font-size;
-      color: @transfer-list-close-icon-color;
+      padding: var(--ix-transfer-close-icon-padding);
+      background: linear-gradient(to right, transparent, var(--ix-color-container-bg) 30%);
+      font-size: var(--ix-font-size-icon);
+      color: var(--ix-color-icon);
       
       &:hover {
-        color: @transfer-list-close-icon-hover-color;
+        color: var(--ix-color-icon-hover);
       }
       &:focus,
       &:active {
-        color: @transfer-list-close-icon-active-color;
+        color: var(--ix-color-icon-active);
       }
 
       cursor: pointer;
     }
 
-    &:hover {
-      background-color: @transfer-list-item-hover-color;
+    &:not(&-disabled):hover {
+      background-color: var(--ix-color-container-bg-hover);
       .@{transfer-list-prefix}-item-close-icon {
-        background: linear-gradient(to right, transparent, @transfer-list-item-hover-color 50%);
+        background: linear-gradient(to right, transparent, var(--ix-color-container-bg-hover) 50%);
       }
     }
   }

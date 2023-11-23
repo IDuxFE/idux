@@ -1,6 +1,6 @@
 .switch-size(@height, @icon-size, @box-size, @box-padding, @icon-padding, @label-padding) {
   height: @height;
-  min-width: @height * 2;
+  min-width: calc(@height * 2);
 
   &::after {
     width: @box-size;
@@ -14,7 +14,7 @@
     }
 
     &-label {
-      padding-left: @box-size + @label-padding;
+      padding-left: calc(@box-size + @label-padding);
       padding-right: @label-padding;
     }
   }
@@ -33,7 +33,7 @@
 
       &-label {
         padding-left: @label-padding;
-        padding-right: @box-size + @label-padding;
+        padding-right: calc(@box-size + @label-padding);
       }
     }
   }

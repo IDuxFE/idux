@@ -1,0 +1,9 @@
+/* ------ drawer css variables ------ */
+:root {
+  --ix-drawer-box-shadow-start: 6px 0 16px -8px rgba(0, 0, 0, 0.08),
+    9px 0 28px 0 rgba(0, 0, 0, 0.05), 12px 0 48px 16px rgba(0, 0, 0, 0.03);
+  --ix-drawer-box-shadow-end: -6px 0 16px -8px rgba(0, 0, 0, 0.08),
+    -9px 0 28px 0 rgba(0, 0, 0, 0.05), -12px 0 48px 16px rgba(0, 0, 0, 0.03);
+  --ix-drawer-box-shadow-top: 0 -6px 16px -8px rgba(0, 0, 0, 0.08),
+    0 -9px 28px 0 rgba(0, 0, 0, 0.05), 0 -12px 48px 16px rgba(0, 0, 0, 0.03);
+}

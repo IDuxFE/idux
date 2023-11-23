@@ -1,9 +1,10 @@
+@import '../../../style/variable/index.less';
 @import '../../../style/mixins/box.less';
 
 .@{mask-prefix} {
   .box(fixed);
 
   height: 100%;
-  background-color: @mask-background-color;
+  background-color: var(--ix-color-mask);
   z-index: 1000;
 }

@@ -18,6 +18,7 @@ import {
 import { type VKey, callEmit, convertCssPixel } from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { useGetKey } from '@idux/components/utils'
 
 import { useCheckable } from './composables/useCheckable'
@@ -30,6 +31,7 @@ import { useSelectable } from './composables/useSelectable'
 import TreeNode from './node/TreeNode'
 import { treeToken } from './token'
 import { treeProps } from './types'
+import { getThemeTokens } from '../theme'
 
 const hiddenStyle: CSSProperties = {
   width: 0,
@@ -47,6 +49,9 @@ export default defineComponent({
   props: treeProps,
   setup(props, { attrs, expose, slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('tree')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tree`)
     const config = useGlobalConfig('tree')
 
@@ -106,6 +111,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return {
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-active`]: !isNil(activeKey.value),
         [`${prefixCls}-blocked`]: mergedBlocked.value,

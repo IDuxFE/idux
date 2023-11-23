@@ -27,3 +27,7 @@ export type {
   TreeExpandIconRenderer,
   CheckStrategy as TreeCheckStrategy,
 } from './src/types'
+
+export { getThemeTokens as getTreeThemeTokens } from './theme'
+
+export type { TreeThemeTokens } from './theme'

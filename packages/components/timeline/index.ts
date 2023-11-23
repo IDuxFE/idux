@@ -25,3 +25,7 @@ export type {
   TimelineItemPlacement,
   TimelineItemPublicProps as TimelineItemProps,
 } from './src/types'
+
+export { getThemeTokens as getTimelineThemeTokens } from './theme'
+
+export type { TimelineThemeTokens } from './theme'

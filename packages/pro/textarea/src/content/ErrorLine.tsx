@@ -8,6 +8,7 @@
 import { defineComponent, inject } from 'vue'
 
 import { IxTooltip } from '@idux/components/tooltip'
+import { useThemeToken } from '@idux/pro/theme'
 
 import { proTextareaContext } from '../token'
 import { errorLineProps } from '../types'
@@ -16,6 +17,7 @@ export default defineComponent({
   props: errorLineProps,
   setup(props) {
     const { mergedPrefixCls } = inject(proTextareaContext)!
+    const { hashId } = useThemeToken('proTextarea')
 
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-error-line`
@@ -24,7 +26,7 @@ export default defineComponent({
         <div class={prefixCls}>
           {props.message && (
             <IxTooltip
-              class={`${prefixCls}-tooltip`}
+              class={[`${prefixCls}-tooltip`, hashId.value]}
               title={props.message}
               visible={props.visible}
               trigger="manual"

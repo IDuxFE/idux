@@ -1,8 +1,8 @@
 .@{pro-layout-prefix}-header {
   display: flex;
   align-items: center;
-  height: if((@theme = seer), @menu-height-level-1, calc(@menu-height-level-1 + 8px));
-  line-height: if((@theme = seer), @menu-height-level-1, calc(@menu-height-level-1 + 8px));
+  height: var(--ix-menu-height-level-1);
+  line-height: var(--ix-menu-height-level-1);
   padding: 0 16px;
   z-index: 99;
 
@@ -23,7 +23,7 @@
     overflow: hidden;
 
     .@{button-prefix}-text {
-      height: if((@theme = seer), @menu-height-level-1, calc(@menu-height-level-1 + 8px));
+      height: var(--ix-menu-height-level-1);
       padding: 0 12px;
     }
   }

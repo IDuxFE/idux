@@ -14,3 +14,7 @@ const IxSkeleton = Skeleton as unknown as SkeletonComponent
 export { IxSkeleton }
 
 export type { SkeletonInstance, SkeletonComponent, SkeletonPublicProps as SkeletonProps } from './src/types'
+
+export { getThemeTokens as getSkeletonThemeTokens } from './theme'
+
+export type { SkeletonThemeTokens } from './theme'

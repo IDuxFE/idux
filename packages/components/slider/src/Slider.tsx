@@ -15,6 +15,7 @@ import { isUndefined } from 'lodash-es'
 
 import { NoopFunction } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import IxSliderMarks from './Marks'
 import IxSliderSteps from './Steps'
@@ -22,12 +23,16 @@ import IxSliderThumb from './Thumb'
 import { sliderToken } from './token'
 import { sliderProps } from './types'
 import { useSlider } from './useSlider'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxSlider',
   props: sliderProps,
   setup(props, { expose }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('slider')
+    registerToken(getThemeTokens)
+
     const {
       direction,
       isDisabled,
@@ -56,6 +61,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return {
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-disabled`]: isDisabled.value,
         [`${prefixCls}-vertical`]: props.vertical,

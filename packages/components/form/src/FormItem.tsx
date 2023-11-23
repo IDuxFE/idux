@@ -23,17 +23,22 @@ import { ValidateStatus } from '@idux/cdk/forms'
 import { CommonConfig, useGlobalConfig } from '@idux/components/config'
 import { type ColProps, IxCol, IxRow } from '@idux/components/grid'
 import { IxIcon } from '@idux/components/icon'
+import { useThemeToken } from '@idux/components/theme'
 import { IxTooltip, TooltipProps } from '@idux/components/tooltip'
 
 import { useFormItem } from './composables/useFormItem'
 import { formToken } from './token'
 import { type FormItemProps, formItemProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxFormItem',
   props: formItemProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('form')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-form-item`)
     const { props: formProps, config } = inject(formToken, null) || {}
 
@@ -55,6 +60,8 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const currStatus = status.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-${currStatus}`]: !!currStatus,
       })
@@ -74,7 +81,7 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       return (
         <IxRow class={classes.value}>
-          {renderLabel(props, slots, labelClasses, labelColConfig, labelTooltipIcon, prefixCls)}
+          {renderLabel(props, slots, labelClasses, labelColConfig, labelTooltipIcon, prefixCls, hashId.value)}
           {renderControl(
             props,
             slots,
@@ -85,6 +92,7 @@ export default defineComponent({
             message,
             mergedMessageTooltip,
             prefixCls,
+            hashId.value,
           )}
         </IxRow>
       )
@@ -103,13 +111,14 @@ function renderLabel(
   labelColConfig: ComputedRef<ColProps | undefined>,
   labelTooltipIcon: ComputedRef<string | undefined>,
   prefixCls: string,
+  hashId: string,
 ) {
   const { label, labelFor, labelTooltip } = props
   const { label: labelSlot, labelTooltip: labelTooltipSlot } = slots
   if (!(label || labelSlot)) {
     return undefined
   }
-  const tooltipNode = renderTooltip(labelTooltipSlot, labelTooltip, labelTooltipIcon.value)
+  const tooltipNode = renderTooltip(labelTooltipSlot, labelTooltip, labelTooltipIcon.value, hashId)
   return (
     <IxCol class={classes.value} {...labelColConfig.value}>
       <label for={labelFor as string}>
@@ -131,18 +140,19 @@ function renderControl(
   message: ComputedRef<string | undefined>,
   mergedMessageTooltip: ComputedRef<boolean | TooltipProps | undefined>,
   prefixCls: string,
+  hashId: string,
 ) {
   const { controlTooltip, description } = props
   const { controlTooltip: controlTooltipSlot, description: descriptionSlot, message: messageSlot } = slots
 
-  const tooltipNode = renderTooltip(controlTooltipSlot, controlTooltip, controlTooltipIcon.value)
+  const tooltipNode = renderTooltip(controlTooltipSlot, controlTooltip, controlTooltipIcon.value, hashId)
   const inputNode = (
     <div class={`${prefixCls}-control-input`}>
       <div class={`${prefixCls}-control-input-content`}>{slots.default && slots.default()}</div>
       {tooltipNode && <span class={`${prefixCls}-control-tooltip`}>{tooltipNode}</span>}
     </div>
   )
-  const tooltipProps = convertTooltipProps(mergedMessageTooltip.value, message.value, prefixCls)
+  const tooltipProps = convertTooltipProps(mergedMessageTooltip.value, message.value, prefixCls, hashId)
   const descriptionNode = descriptionSlot ? descriptionSlot() : description
 
   const children: VNodeChild[] = []
@@ -181,12 +191,13 @@ function convertTooltipProps(
   messageTooltip: boolean | TooltipProps | undefined,
   title: string | undefined,
   prefixCls: string,
-): (TooltipProps & { class: string }) | undefined {
+  hashId: string,
+): (TooltipProps & { class: string[] }) | undefined {
   if (!messageTooltip) {
     return undefined
   }
-  const tooltipProps: TooltipProps & { class: string } = {
-    class: `${prefixCls}-message-tooltip`,
+  const tooltipProps: TooltipProps & { class: string[] } = {
+    class: [`${prefixCls}-message-tooltip`, hashId],
     offset: [0, 6],
     placement: 'bottomStart',
     title,
@@ -194,13 +205,18 @@ function convertTooltipProps(
   return isBoolean(messageTooltip) ? tooltipProps : { ...tooltipProps, ...messageTooltip }
 }
 
-function renderTooltip(slot: Slot | undefined, tooltip: string | undefined, iconName: string | undefined) {
+function renderTooltip(
+  slot: Slot | undefined,
+  tooltip: string | undefined,
+  iconName: string | undefined,
+  hashId: string,
+) {
   if (slot) {
     return slot()
   }
   return (
     tooltip && (
-      <IxTooltip title={tooltip}>
+      <IxTooltip class={hashId} title={tooltip}>
         <IxIcon name={iconName} />
       </IxTooltip>
     )

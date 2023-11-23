@@ -1,8 +1,10 @@
+@import '../variable/font.less';
+
 .reset-component() {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: var(--ix-text-color);
+  color: var(--ix-color-text);
   .reset-font-size();
 
   font-variant: @font-variant-base;
@@ -16,52 +18,52 @@
   padding: 0;
 }
 
-.reset-font-size(@font-size: var(--ix-font-size)) {
+.reset-font-size(@font-size: var(--ix-font-size-sm)) {
   font-size: @font-size;
   line-height: calc(@font-size + var(--ix-line-height-gutter));
 }
 
-.reset-color(@text-color: var(--ix-text-color), @background-color: var(--ix-background-color)) {
+.reset-color(@text-color: var(--ix-color-text), @background-color: var(--ix-color-container-bg)) {
   color: @text-color;
   background-color: @background-color;
 }
 
 .reset-scroll() {
   ::-webkit-scrollbar {
-    width: var(--ix-scrollbar-width);
-    height: var(--ix-scrollbar-height);
+    width: var(--ix-reset-scrollbar-width);
+    height: var(--ix-reset-scrollbar-height);
   }
 
   ::-webkit-scrollbar-thumb {
     background-clip: padding-box;
-    background-color: var(--ix-scrollbar-thumb-background-color);
-    border: var(--ix-scrollbar-thumb-border-width) solid transparent;
-    border-radius: var(--ix-scrollbar-thumb-border-radius);
-    box-shadow: var(--ix-scrollbar-thumb-box-shadow);
+    background-color: var(--ix-reset-scrollbar-thumb-bg);
+    border: var(--ix-reset-scrollbar-thumb-border-width) solid transparent;
+    border-radius: var(--ix-reset-scrollbar-thumb-border-radius);
+    box-shadow: var(--ix-reset-scrollbar-thumb-box-shadow);
 
     &:hover {
-      background-color: var(--ix-scrollbar-thumb-background-color-hover);
+      background-color: var(--ix-reset-scrollbar-thumb-bg-hover);
     }
 
     &:active {
-      background-color: var(--ix-scrollbar-thumb-background-color-active);
+      background-color: var(--ix-reset-scrollbar-thumb-bg-active);
     }
   }
 
   ::-webkit-scrollbar-track,
   ::-webkit-scrollbar-corner {
-    background-color: var(--ix-scrollbar-track-background-color);
-    border-radius: var(--ix-scrollbar-track-border-radius);
-    box-shadow: var(--ix-scrollbar-track-box-shadow);
+    background-color: var(--ix-reset-scrollbar-track-bg);
+    border-radius: var(--ix-reset-scrollbar-track-border-radius);
+    box-shadow: var(--ix-reset-scrollbar-track-box-shadow);
   }
 
   .@{idux-prefix}-scroll-min {
     ::-webkit-scrollbar-thumb {
-      border-width: calc(var(--ix-scrollbar-thumb-border-width) * 2);
+      border-width: calc(var(--ix-reset-scrollbar-thumb-border-width) * 2);
 
       &:hover,
       &:active {
-        border-width: var(--ix-scrollbar-thumb-border-width);
+        border-width: var(--ix-reset-scrollbar-thumb-border-width);
       }
     }
   }

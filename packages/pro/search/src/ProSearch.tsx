@@ -13,6 +13,7 @@ import { ɵOverlay, type ɵOverlayInstance } from '@idux/components/_private/ove
 import { useGlobalConfig as useComponentGlobalConfig, useDateConfig } from '@idux/components/config'
 import { useZIndex } from '@idux/components/utils'
 import { useGlobalConfig } from '@idux/pro/config'
+import { useThemeToken } from '@idux/pro/theme'
 
 import SearchItemComp from './components/SearchItem'
 import QuickSelectPanel from './components/quickSelect/QuickSelectPanel'
@@ -30,6 +31,7 @@ import { useSearchValues } from './composables/useSearchValues'
 import { proSearchContext } from './token'
 import { type SearchItem, proSearchProps } from './types'
 import { renderIcon } from './utils/RenderIcon'
+import { getThemeTokens } from '../theme'
 
 const nameSelectOverflowItemKey = 'name-select'
 
@@ -39,6 +41,9 @@ export default defineComponent({
   props: proSearchProps,
   setup(props, { attrs, expose, slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('proSearch')
+    registerToken(getThemeTokens)
+
     const componentCommon = useComponentGlobalConfig('common')
     const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('search')
@@ -120,6 +125,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-${size.value}`]: size.value,
         [`${prefixCls}-focused`]: focused.value,
@@ -226,7 +233,12 @@ export default defineComponent({
 
       const quickSelectOverlayProps = {
         ...commonOverlayProps.value,
-        class: `${mergedPrefixCls.value}-quick-select-overlay ${componentCommon.prefixCls}-scroll-min`,
+        class: [
+          `${mergedPrefixCls.value}-quick-select-overlay`,
+          `${componentCommon.prefixCls}-scroll-min`,
+          globalHashId.value,
+          hashId.value,
+        ],
         style: {
           width: convertCssPixel(elementWidth.value),
         },

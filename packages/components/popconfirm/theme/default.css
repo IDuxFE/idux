@@ -1,0 +1,8 @@
+/* ------ popconfirm css variables ------ */
+:root {
+  --ix-popconfirm-font-size: 12px;
+  --ix-popconfirm-title-font-size: 14px;
+  --ix-popconfirm-color: #2f3540;
+  --ix-popconfirm-icon-color: #fdaa1d;
+  --ix-popconfirm-min-width: 240px;
+}

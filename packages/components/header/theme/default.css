@@ -1,0 +1,18 @@
+/* ------ header css variables ------ */
+:root {
+  --ix-header-height-sm: 40px;
+  --ix-header-height-md: 48px;
+  --ix-header-height-lg: 48px;
+  --ix-header-height-xl: 56px;
+  --ix-header-bar-width: 4px;
+  --ix-header-bar-bg-color: #1c6eff;
+  --ix-header-prefix-color: #2f3540;
+  --ix-header-prefix-color-hover: #1c6eff;
+  --ix-header-prefix-color-active: #1c6eff;
+  --ix-header-prefix-color-disabled: #bec3cc;
+  --ix-header-suffix-color: #5e6573;
+  --ix-header-suffix-color-hover: #1c6eff;
+  --ix-header-suffix-color-active: #0d51d9;
+  --ix-header-suffix-color-disabled: #bec3cc;
+  --ix-header-sub-title-font-size: 14px;
+}

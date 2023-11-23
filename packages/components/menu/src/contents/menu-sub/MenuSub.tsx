@@ -23,6 +23,7 @@ import { debounce } from 'lodash-es'
 import { type VKey, useKey, useState } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import InlineContent from './InlineContent'
 import Label from './Label'
@@ -36,6 +37,7 @@ export default defineComponent({
   props: menuSubProps,
   setup(props) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId } = useThemeToken('menu')
 
     // menuContext must exist
     const {
@@ -94,6 +96,8 @@ export default defineComponent({
     const overlayClasses = computed(() => {
       const { overlayClassName } = menuProps
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [`${mergedPrefixCls.value}-overlay`]: true,
         [overlayClassName || '']: !!overlayClassName,
       })

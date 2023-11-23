@@ -7,16 +7,26 @@
 
 import type { ResultProps } from './types'
 import type { ResultConfig } from '@idux/components/config'
-import type { Ref, SetupContext, Slot, VNode, VNodeTypes } from 'vue'
 
-import { computed, defineComponent } from 'vue'
+import {
+  type ComputedRef,
+  type Ref,
+  type SetupContext,
+  type Slot,
+  type VNode,
+  type VNodeTypes,
+  computed,
+  defineComponent,
+} from 'vue'
 
 import { isString } from 'lodash-es'
 
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
+import { useThemeToken } from '@idux/components/theme'
 
 import { resultProps } from './types'
+import { getThemeTokens } from '../theme'
 
 const defaultIconMap = {
   success: 'check-circle-filled',
@@ -31,9 +41,12 @@ export default defineComponent({
   props: resultProps,
   setup(props, { slots }: SetupContext) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('result')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-result`)
     const resultConfig = useGlobalConfig('result')
-    const className = useClassName(props, mergedPrefixCls, resultConfig)
+    const className = useClassName(props, mergedPrefixCls, globalHashId, hashId, resultConfig)
     const currentIcon = useIcon(props, resultConfig)
 
     return () => {
@@ -67,12 +80,20 @@ function renderIcon(prefixCls: string, iconSlot: Slot | undefined, icon: string 
   return renderSlottedNode(`${prefixCls}-icon`, iconSlot, content)
 }
 
-function useClassName(props: ResultProps, mergedPrefixCls: Ref<string>, config: ResultConfig) {
+function useClassName(
+  props: ResultProps,
+  mergedPrefixCls: Ref<string>,
+  globalHashId: ComputedRef<string>,
+  hashId: ComputedRef<string>,
+  config: ResultConfig,
+) {
   return computed(() => {
     const prefixCls = mergedPrefixCls.value
     const status = props.status ?? config.status
 
     return {
+      [globalHashId.value]: !!globalHashId.value,
+      [hashId.value]: !!hashId.value,
       [prefixCls]: true,
       [`${prefixCls}-${status}`]: !!status,
     }

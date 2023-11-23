@@ -1,9 +1,10 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 @import '../../style/mixins/ellipsis.less';
 
 .@{anchor-prefix} {
   position: relative;
-  padding: 4px 0 4px @anchor-ink-ball-width;
+  padding: 4px 0 4px var(--ix-anchor-ink-ball-width);
 
   &-wrapper {
     .reset-component-new();
@@ -27,18 +28,18 @@
       width: 1px;
       height: 100%;
       margin: 0 auto;
-      background-color: var(--ix-border-color);
+      background-color: var(--ix-color-separator);
       content: ' ';
     }
 
     &-ball {
       position: absolute;
       display: none;
-      width: @anchor-ink-ball-width;
-      height: @anchor-ink-ball-height;
-      border-radius: @anchor-ink-ball-width;
-      background-color: @anchor-color-active;
-      transition: top var(--ix-transition-duration-fast) var(--ix-ease-in-out);
+      width: var(--ix-anchor-ink-ball-width);
+      height: var(--ix-anchor-ink-ball-height);
+      border-radius: var(--ix-anchor-ink-ball-width);
+      background-color: var(--ix-color-link);
+      transition: top var(--ix-motion-duration-fast) var(--ix-motion-ease-in-out);
 
       &-visible {
         display: inline-block;
@@ -66,12 +67,12 @@
       position: relative;
       display: block;
       text-decoration: none;
-      color: var(--ix-text-color);
-      transition: color var(--ix-transition-duration-fast);
+      color: var(--ix-color-text);
+      transition: color var(--ix-motion-duration-fast);
 
       &:hover,
       &-active {
-        color: @anchor-color-active;
+        color: var(--ix-color-link);
       }
     }
   }

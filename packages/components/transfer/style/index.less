@@ -1,38 +1,39 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 
 .@{transfer-prefix} {
   .reset-component();
 
-  height: @transfer-height;
+  height: var(--ix-transfer-height);
   display: flex;
   align-items: stretch;
-  font-size: @transfer-font-size;
-  color: @transfer-color;
+  font-size: var(--ix-font-size-sm);
+  color: var(--ix-color-text);
 
   &-fit-content {
     height: auto;
   }
 
   &-operations {
-    min-width: @transfer-operations-min-width;
     flex-shrink: 0;
+    min-width: var(--ix-transfer-opr-min-width);
     &-inner {
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: @transfer-operations-padding;
+      padding: var(--ix-transfer-opr-padding);
     }
 
     & &-btn {
-      width: @transfer-operations-btn-width;
-      height: @transfer-operations-btn-height;
+      width: var(--ix-transfer-opr-button-width);
+      height: var(--ix-transfer-opr-button-height);
       padding: 0;
     }
 
     &-btn + &-btn {
-      margin-top: @transfer-operations-btn-gap;
+      margin-top: var(--ix-transfer-opr-button-gap);
     }
   }
 }

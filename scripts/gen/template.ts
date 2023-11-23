@@ -1,3 +1,7 @@
+// @ts-nocheck
+// eslint-disable-next-line import/no-unresolved
+import { camelCase, upperFirst } from 'lodash'
+
 export function getThemesTemplate(isPrivate: boolean): string {
   return `@import '${isPrivate ? '../../../../' : '../../../'}style/themes/default.less';
 @import './default.variable.less';
@@ -24,6 +28,35 @@ export function getThemesIndexTemplate(category: 'cdk' | 'components' | 'pro'): 
 import '@idux/${category}/style/core/default'
 
 import './default.less'
+`
+}
+
+export function getNewThemesDefaultTemplate(category: 'components', compName: string): string {
+  return `import type { CertainThemeTokens, GlobalThemeTokens } from '@idux/${category}/theme'
+export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTokens<'${camelCase(compName)}'> {
+  const {} = tokens
+
+  return {
+    
+  }
+}
+`
+}
+export function getNewThemesTokensTemplate(compName: string): string {
+  return `export interface ${upperFirst(camelCase(compName))}ThemeTokens {
+  // add theme token definitions here
+}`
+}
+export function getNewThemesIndexTemplate(category: 'components', compName: string): string {
+  return `import type { TokenGetter } from '@idux/${category}/theme'
+
+import { getDefaultThemeTokens } from './default'
+  
+export const getThemeTokens: TokenGetter<'${camelCase(compName)}'> = (tokens, presetTheme) => {
+  return presetTheme === 'default' ? getDefaultThemeTokens(tokens) : getDefaultThemeTokens(tokens)
+}
+  
+export type { ${upperFirst(camelCase(compName))}ThemeTokens } from './tokens'
 `
 }
 

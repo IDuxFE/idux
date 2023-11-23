@@ -29,7 +29,7 @@ html {
 
 .main-wrapper {
   position: relative;
-  padding-top: @spacing-lg;
+  padding-top: var(--ix-padding-size-lg);
 }
 
 .main-menu {
@@ -39,35 +39,35 @@ html {
 .main-content {
   position: relative;
   min-height: 600px;
-  padding-bottom: @spacing-2xl;
-  padding-left: @spacing-4xl;
-  padding-right: (@spacing-4xl / 2) + @spacing-sm + @toc-width;
+  padding-bottom: var(--ix-padding-size-2xl);
+  padding-left: 64px;
+  padding-right: calc((64px / 2) + var(--ix-padding-size-sm) + @toc-width);
 }
 
 @media (max-width: @screen-lg-max) {
   .main-content {
-    padding-left: @spacing-3xl;
-    padding-right: (@spacing-3xl / 2) + @spacing-sm + @toc-width;
+    padding-left: 48px;
+    padding-right: calc((48px / 2) + var(--ix-padding-size-sm) + @toc-width);
   }
 }
 
 @media (max-width: @screen-md-max) {
   .main-content {
-    padding-left: @spacing-2xl;
-    padding-right: (@spacing-2xl / 2) + @spacing-sm + @toc-width;
+    padding-left: var(--ix-padding-size-2xl);
+    padding-right: calc((var(--ix-padding-size-2xl) / 2) + var(--ix-padding-size-sm) + @toc-width);
   }
 }
 
 @media (max-width: @screen-sm-max) {
   .main-content {
-    padding-left: @spacing-xl;
-    padding-right: (@spacing-xl / 2) + @spacing-sm + @toc-width;
+    padding-left: var(--ix-padding-size-xl);
+    padding-right: calc((var(--ix-padding-size-xl) / 2) + var(--ix-padding-size-sm) + @toc-width);
   }
 }
 
 @media (max-width: @screen-xs-max) {
   .main-content {
-    padding-left: @spacing-lg;
-    padding-right: @spacing-lg;
+    padding-left: var(--ix-padding-size-lg);
+    padding-right: var(--ix-padding-size-lg);
   }
 }

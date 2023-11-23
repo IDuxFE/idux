@@ -24,3 +24,6 @@ export type {
   CheckboxGroupPublicProps as CheckboxGroupProps,
   CheckboxData,
 } from './src/types'
+
+export { getThemeTokens as getCheckboxThemeTokens } from './theme'
+export type { CheckboxThemeTokens } from './theme'

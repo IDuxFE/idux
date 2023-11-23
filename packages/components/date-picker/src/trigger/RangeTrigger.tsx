@@ -9,6 +9,7 @@ import { computed, defineComponent, inject, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 import { ɵTrigger } from '@idux/components/_private/trigger'
+import { useThemeToken } from '@idux/components/theme'
 
 import { useTriggerProps } from '../composables/useTriggerProps'
 import { dateRangePickerToken } from '../token'
@@ -17,6 +18,7 @@ export default defineComponent({
   inheritAttrs: false,
   setup(_, { attrs, expose }) {
     const context = inject(dateRangePickerToken)!
+    const { globalHashId, hashId } = useThemeToken('datePicker')
     const {
       accessor,
       props,
@@ -90,7 +92,14 @@ export default defineComponent({
         clearIcon: slots.clearIcon,
       }
 
-      return <ɵTrigger className={prefixCls} v-slots={triggerSlots} {...triggerProps.value} {...attrs} />
+      return (
+        <ɵTrigger
+          className={`${prefixCls} ${globalHashId.value} ${hashId.value}`}
+          v-slots={triggerSlots}
+          {...triggerProps.value}
+          {...attrs}
+        />
+      )
     }
   },
 })

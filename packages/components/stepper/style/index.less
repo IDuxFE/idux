@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 @import './mixin.less';
 @import './size.less';
@@ -10,7 +11,7 @@
 
   display: flex;
   width: 100%;
-  background: @stepper-background;
+  background: var(--ix-color-container-bg);
   text-align: start;
 }
 
@@ -22,6 +23,8 @@
   vertical-align: top;
   white-space: nowrap;
   outline: none;
+
+  @stepper-line-border: var(--ix-line-width) var(--ix-stepper-line-type) transparent;
 
   &:first-child {
     padding-left: 0;
@@ -52,7 +55,7 @@
       height: 100%;
       border-top: @stepper-line-border;
       border-right: @stepper-line-border;
-      transition: border-color @transition-duration-base;
+      transition: border-color var(--ix-motion-duration-medium);
       content: '';
     }
   }
@@ -73,8 +76,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: @border-width-md @border-style @stepper-item-wait-icon-color;
-    transition: background-color @transition-duration-base, border-color @transition-duration-base;
+    border-style: solid;
+    transition: background-color var(--ix-motion-duration-medium), border-color var(--ix-motion-duration-medium);
   }
 
   &-content {
@@ -85,7 +88,7 @@
   &-title {
     position: relative;
     display: inline-block;
-    font-weight: @stepper-item-font-weight;
+    font-weight: var(--ix-font-weight-md);
 
     &::after {
       display: block;
@@ -107,10 +110,10 @@
   .stepper-item-status(error);
 
   &-process &-icon {
-    background: @stepper-item-process-icon-color;
+    background: var(--ix-color-primary-icon);
 
     > * {
-      color: @color-white;
+      color: var(--ix-color-text-inverse);
     }
   }
 

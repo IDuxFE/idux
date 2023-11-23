@@ -1,9 +1,10 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 @import './mixin.less';
 
 .@{button-prefix} {
   .reset-component-new();
-  .reset-color(@button-color, @button-background-color);
+  .reset-color(var(--ix-button-color), var(--ix-button-bg-color));
 
   position: relative;
   display: inline-flex;
@@ -15,9 +16,9 @@
   touch-action: manipulation;
   outline: none;
   text-decoration: none;
-  border: 1px solid @button-border-color;
-  border-radius: @button-border-radius;
-  transition: all var(--ix-transition-duration-fast) var(--ix-ease-in-out);
+  border: 1px solid var(--ix-button-border-color);
+  border-radius: var(--ix-button-border-radius);
+  transition: all var(--ix-motion-duration-fast) var(--ix-motion-ease-in-out);
 
   &::before {
     display: none;
@@ -27,10 +28,10 @@
     bottom: -1px;
     left: -1px;
     z-index: 1;
-    background: @button-background-color;
+    background: var(--ix-button-bg-color);
     border-radius: inherit;
     opacity: 0.35;
-    transition: opacity @transition-duration-base;
+    transition: opacity var(--ix-motion-duration-medium);
     content: '';
     pointer-events: none;
   }
@@ -43,8 +44,8 @@
   }
 
   > .@{icon-prefix} {
-    color: @button-icon-color;
-    font-size: @button-icon-font-size;
+    color: var(--ix-button-icon-color);
+    font-size: var(--ix-button-icon-font-size);
   }
 
   &:hover,
@@ -64,67 +65,67 @@
   }
 
   > .@{icon-prefix} + span {
-    margin-left: @spacing-xs;
+    margin-left: var(--ix-margin-size-xs);
   }
 
   &-xs {
-    .button-size(@button-height-xs, @button-font-size-xs, @button-min-width-xs, @button-padding-horizontal-xs);
+    .button-size(var(--ix-button-height-xs), var(--ix-button-font-size-xs), var(--ix-button-min-width-xs), var(--ix-button-padding-size-horizontal-xs));
   }
 
   &-sm {
-    .button-size(@button-height-sm, @button-font-size-sm, @button-min-width-sm, @button-padding-horizontal-sm);
+    .button-size(var(--ix-button-height-sm), var(--ix-button-font-size-sm), var(--ix-button-min-width-sm), var(--ix-button-padding-size-horizontal-sm));
   }
 
   &-md {
-    .button-size(@button-height-md, @button-font-size-md, @button-min-width-md, @button-padding-horizontal-md);
+    .button-size(var(--ix-button-height-md), var(--ix-button-font-size-md), var(--ix-button-min-width-md), var(--ix-button-padding-size-horizontal-md));
   }
 
   &-lg {
-    .button-size(@button-height-lg, @button-font-size-lg, @button-min-width-lg, @button-padding-horizontal-lg);
+    .button-size(var(--ix-button-height-lg), var(--ix-button-font-size-lg), var(--ix-button-min-width-lg), var(--ix-button-padding-size-horizontal-lg));
 
     &.@{button-prefix}-icon-only {
       > .@{icon-prefix} {
-        font-size: calc(@button-icon-font-size + 2px);
+        font-size: calc(var(--ix-button-icon-font-size) + 2px);
       }
     }
   }
 
   &-xl {
-    .button-size(@button-height-xl, @button-font-size-xl, @button-min-width-xl, @button-padding-horizontal-xl);
+    .button-size(var(--ix-button-height-xl), var(--ix-button-font-size-xl), var(--ix-button-min-width-xl), var(--ix-button-padding-size-horizontal-xl));
 
     &.@{button-prefix}-icon-only {
       > .@{icon-prefix} {
-        font-size: calc(@button-icon-font-size + 4px);
+        font-size: calc(var(--ix-button-icon-font-size) + 4px);
       }
     }
   }
 
   &-primary {
-    color: @button-primary-color;
-    background-color: @button-primary-background-color;
-    border-color: @button-primary-background-color;
+    color: var(--ix-button-primary-color);
+    background-color: var(--ix-button-primary-bg-color);
+    border-color: var(--ix-button-primary-bg-color);
 
     &:hover {
-      background-color: @button-primary-background-color-hover;
-      border-color: @button-primary-background-color-hover;
+      background-color: var(--ix-button-primary-bg-color-hover);
+      border-color: var(--ix-button-primary-bg-color-hover);
     }
 
     &:active {
-      background-color: @button-primary-background-color-active;
-      border-color: @button-primary-background-color-active;
+      background-color: var(--ix-button-primary-bg-color-active);
+      border-color: var(--ix-button-primary-bg-color-active);
     }
   }
 
   &-default,
   &-dashed {
     &:hover {
-      color: @button-primary-background-color-hover;
-      border-color: @button-primary-background-color-hover;
+      color: var(--ix-button-primary-bg-color-hover);
+      border-color: var(--ix-button-primary-bg-color-hover);
     }
 
     &:active {
-      color: @button-primary-background-color-active;
-      border-color: @button-primary-background-color-active;
+      color: var(--ix-button-primary-bg-color-active);
+      border-color: var(--ix-button-primary-bg-color-active);
     }
   }
 
@@ -142,60 +143,60 @@
     user-select: text;
 
     &:hover {
-      color: @button-primary-background-color-hover;
+      color: var(--ix-button-primary-bg-color-hover);
     }
 
     &:active {
-      color: @button-primary-background-color-active;
+      color: var(--ix-button-primary-bg-color-active);
     }
   }
 
   &-link {
-    color: @button-primary-background-color;
+    color: var(--ix-color-link);
   }
 
   &-danger {
-    color: @button-danger-color;
-    border-color: @button-danger-color;
+    color: var(--ix-button-danger-color);
+    border-color: var(--ix-button-danger-color);
 
     &:hover {
-      color: @button-danger-color-hover;
-      border-color: @button-danger-color-hover;
+      color: var(--ix-button-danger-color-hover);
+      border-color: var(--ix-button-danger-color-hover);
     }
 
     &:active {
-      color: @button-danger-color-active;
-      border-color: @button-danger-color-active;
+      color: var(--ix-button-danger-color-active);
+      border-color: var(--ix-button-danger-color-active);
     }
   }
 
   &-danger&-primary {
-    color: @button-primary-color;
-    background-color: @button-danger-color;
+    color: var(--ix-button-primary-color);
+    background-color: var(--ix-button-danger-bg-color);
 
     &:hover {
-      color: @button-primary-color;
-      background-color: @button-danger-color-hover;
+      color: var(--ix-button-primary-color);
+      background-color: var(--ix-button-danger-bg-color-hover);
     }
 
     &:active {
-      color: @button-primary-color;
-      background-color: @button-danger-color-active;
+      color: var(--ix-button-primary-color);
+      background-color: var(--ix-button-danger-bg-color-active);
     }
   }
 
   &-ghost {
-    color: @button-primary-color;
-    border-color: @button-ghost-border-color;
+    color: var(--ix-button-primary-color);
+    border-color: var(--ix-button-ghost-border-color);
 
     &:hover {
-      color: @button-primary-color;
-      border-color: @button-ghost-border-color;
+      color: var(--ix-button-primary-color);
+      border-color: var(--ix-button-ghost-border-color);
     }
 
     &:active {
-      color: @button-color;
-      border-color: @button-ghost-border-color;
+      color: var(--ix-button-color);
+      border-color: var(--ix-button-ghost-border-color);
     }
   }
 
@@ -205,41 +206,41 @@
     background-color: transparent;
 
     &:hover {
-      background-color: @button-ghost-background-color-hover;
+      background-color: var(--ix-button-ghost-bg-color-hover);
     }
 
     &:active {
-      background-color: @button-ghost-background-color-active;
+      background-color: var(--ix-button-ghost-bg-color-active);
     }
   }
 
   &-ghost&-primary {
-    color: @button-primary-background-color;
-    border-color: @button-primary-background-color;
+    color: var(--ix-button-primary-bg-color);
+    border-color: var(--ix-button-primary-bg-color);
 
     &:hover {
-      color: @button-primary-background-color-hover;
-      border-color: @button-primary-background-color-hover;
+      color: var(--ix-button-primary-bg-color-hover);
+      border-color: var(--ix-button-primary-bg-color-hover);
     }
 
     &:active {
-      color: @button-primary-background-color-active;
-      border-color: @button-primary-background-color-active;
+      color: var(--ix-button-primary-bg-color-active);
+      border-color: var(--ix-button-primary-bg-color-active);
     }
   }
 
   &-ghost&-danger {
-    color: @button-danger-color;
-    border-color: @button-danger-color;
+    color: var(--ix-button-danger-color);
+    border-color: var(--ix-button-danger-color);
 
     &:hover {
-      color: @button-danger-color-hover;
-      border-color: @button-danger-color-hover;
+      color: var(--ix-button-danger-color-hover);
+      border-color: var(--ix-button-danger-color-hover);
     }
 
     &:active {
-      color: @button-danger-color-active;
-      border-color: @button-danger-color-active;
+      color: var(--ix-button-danger-color-active);
+      border-color: var(--ix-button-danger-color-active);
     }
   }
 
@@ -250,9 +251,9 @@
     &,
     &:hover,
     &:active {
-      color: @button-color-disabled;
-      background-color: @button-background-color-disabled;
-      border-color: @button-border-color;
+      color: var(--ix-button-color-disabled);
+      background-color: var(--ix-button-bg-color-disabled);
+      border-color: var(--ix-button-border-color);
     }
   }
 
@@ -269,7 +270,7 @@
     &,
     &:hover,
     &:active {
-      background-color: @button-ghost-background-color-disabled;
+      background-color: var(--ix-button-ghost-bg-color-disabled);
     }
   }
 
@@ -318,8 +319,9 @@
 
   &-compact {
     .@{button-prefix} {
-      transition: color var(--ix-transition-duration-fast) var(--ix-ease-in-out),
-        background-color var(--ix-transition-duration-fast) var(--ix-ease-in-out);
+      transition:
+        color var(--ix-motion-duration-fast) var(--ix-ease-in-out),
+        background-color var(--ix-motion-duration-fast) var(--ix-ease-in-out);
     }
 
     &:not(.@{space-prefix}-vertical) {

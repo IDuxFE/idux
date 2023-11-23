@@ -8,15 +8,20 @@
 import { computed, defineComponent, normalizeClass } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { convertStringVNode } from '@idux/components/utils'
 
 import { dividerProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxDivider',
   props: dividerProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('divider')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-divider`)
     const config = useGlobalConfig('divider')
 
@@ -33,6 +38,8 @@ export default defineComponent({
       const withLabel = !!label || !!slots.default
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [`${prefixCls}`]: true,
         [`${prefixCls}-${size}`]: true,
         [`${prefixCls}-dashed`]: dashed,

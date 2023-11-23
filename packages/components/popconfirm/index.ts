@@ -19,3 +19,7 @@ export type {
   PopconfirmPublicProps as PopconfirmProps,
   PopconfirmButtonProps,
 } from './src/types'
+
+export { getThemeTokens as getPopconfirmThemeTokens } from './theme'
+
+export type { PopconfirmThemeTokens } from './theme'

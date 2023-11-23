@@ -1,0 +1,10 @@
+/* ------ breadcrumb css variables ------ */
+:root {
+  --ix-breadcrumb-item-color: #a1a7b3;
+  --ix-breadcrumb-link-color: #a1a7b3;
+  --ix-breadcrumb-link-color-hover: #1c6eff;
+  --ix-breadcrumb-separator-color: #bec3cc;
+  --ix-breadcrumb-separator-font-size: 16px;
+  --ix-breadcrumb-last-item-color: #2f3540;
+  --ix-breadcrumb-separator-margin: 0 4px;
+}

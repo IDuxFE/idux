@@ -2,14 +2,14 @@
 [id^='components-grid-'] {
   .ix-row:not(.gutter-row) {
     .ix-col {
-      background: @color-primary;
-      color: @color-white;
+      background: var(--ix-color-primary);
+      color: var(--ix-color-white);
       text-align: center;
-      padding: @spacing-sm;
+      padding: var(--ix-padding-size-sm);
     }
 
     .ix-col:nth-child(even) {
-      background: @color-primary-l10;
+      background: var(--ix-color-primary-hover);
     }
   }
 }
@@ -21,16 +21,16 @@
 
     &-footer,
     &-header {
-      background-color: @color-blue-l20;
+      background-color: var(--ix-color-primary-active);
     }
 
     &-sider {
-      background-color: @color-blue-l10;
+      background-color: var(--ix-color-primary-hover);
       line-height: 120px;
     }
 
     &-content {
-      background-color: @color-blue;
+      background-color: var(--ix-color-primary);
       height: 120px;
       line-height: 120px;
     }

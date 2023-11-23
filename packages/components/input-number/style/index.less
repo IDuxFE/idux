@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 
 .@{input-number-prefix} {
@@ -15,15 +16,15 @@
     z-index: 1;
     user-select: none;
     cursor: pointer;
-    transition: color var(--ix-transition-duration-fast);
+    transition: color var(--ix-motion-duration-fast);
 
     &:hover {
-      color: @form-new-icon-color-hover;
+      color: var(--ix-color-icon-hover);
     }
 
     &&-disabled {
       cursor: not-allowed;
-      color: @form-new-color-disabled;
+      color: var(--ix-color-text-disabled);
     }
   }
 
@@ -33,7 +34,7 @@
 
   &-illegal {
     .@{input-prefix}-inner {
-      color: @form-new-color-invalid;
+      color: var(--ix-color-error-text);
     }
   }
 
@@ -46,7 +47,7 @@
     justify-content: center;
     flex-direction: column;
     opacity: 0;
-    transition: opacity var(--ix-transition-duration-medium) var(--ix-ease-in-out);
+    transition: opacity var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out);
   }
 
   &:hover:not(.@{input-prefix}-disabled) {

@@ -1,0 +1,7 @@
+/* ------ textarea css variables ------ */
+:root {
+  --ix-textarea-count-bottom: 1px;
+  --ix-textarea-count-right: 8px;
+  --ix-textarea-count-opacity: 0.9;
+  --ix-textarea-count-color: #a1a7b3;
+}

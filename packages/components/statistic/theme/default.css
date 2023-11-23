@@ -1,0 +1,8 @@
+/* ------ statistic css variables ------ */
+:root {
+  --ix-statistic-font-size-sm: 14px;
+  --ix-statistic-font-size-md: 14px;
+  --ix-statistic-font-size-lg: 24px;
+  --ix-statistic-font-size-xl: 30px;
+  --ix-statistic-color: #2f3540;
+}

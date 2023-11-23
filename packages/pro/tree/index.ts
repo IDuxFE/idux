@@ -14,3 +14,7 @@ const IxProTree = ProTree as unknown as ProTreeComponent
 export { IxProTree }
 
 export type { ProTreeInstance, ProTreeComponent, ProTreePublicProps as ProTreeProps } from './src/types'
+
+export { getThemeTokens as getProTreeThemeTokens } from './theme'
+
+export type { ProTreeThemeTokens } from './theme'

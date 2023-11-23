@@ -1,12 +1,13 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 @import './mixin.less';
 
 .@{tree-prefix} {
   .reset-component();
 
-  font-size: @tree-font-size;
-  background-color: @tree-background-color;
-  border-radius: @border-radius-sm;
+  font-size: var(--ix-font-size-sm);
+  background-color: var(--ix-tree-bg-color);
+  border-radius: var(--ix-border-radius-sm);
 
   &-content-inner {
     display: flex;
@@ -14,7 +15,7 @@
   }
 
   &-focused:not(:hover):not(&-active) {
-    background-color: @tree-background-color-focused;
+    background-color: var(--ix-color-container-bg-active);
   }
 
   &-auto-height {
@@ -27,22 +28,22 @@
 
   &-blocked {
     .@{tree-node-prefix} {
-      transition: background-color @transition-duration-base;
+      transition: background-color var(--ix-motion-duration-medium);
 
       &-active:not(&-disabled),
       &-selected:not(&-disabled) {
-        background-color: @tree-node-selected-background-color;
+        background-color: var(--ix-tree-node-bg-color-selected);
 
         &:hover {
-          background-color: @tree-node-hover-background-color;
+          background-color: var(--ix-tree-node-bg-color-hover);
           .@{tree-node-prefix}-content {
-            background-color: @tree-node-hover-background-color;
+            background-color: var(--ix-tree-node-bg-color-hover);
           }
         }
       }
 
       &:hover {
-        background-color: @tree-node-hover-background-color;
+        background-color: var(--ix-tree-node-bg-color-hover);
 
         .@{tree-node-prefix} {
           &-draggable-icon {
@@ -50,7 +51,7 @@
           }
 
           &-content {
-            background-color: @tree-node-hover-background-color;
+            background-color: var(--ix-tree-node-bg-color-hover);
           }
         }
       }
@@ -73,22 +74,22 @@
 
       &-expand {
         position: relative;
-        color: @tree-expand-icon-color;
+        color: var(--ix-tree-expand-icon-color);
 
         &-top-line {
           position: absolute;
-          height: (@tree-node-content-height / 2 - 4);
+          height: calc(var(--ix-tree-node-content-height) / 2 - 4px);
           /* stylelint-disable function-no-unknown */
-          top: -(@tree-node-content-height / 4 - 4);
+          top: calc((var(--ix-tree-node-content-height) / 4 - 4px) * -1);
           right: 50%;
           .vertical-line();
         }
 
         &::after {
           position: absolute;
-          top: calc(50% - @tree-node-line-size / 2);
+          top: calc(50% - var(--ix-line-width) / 2);
           right: -2px;
-          width: (@tree-node-icon-width / 4);
+          width: calc(var(--ix-tree-node-icon-width) / 4);
           z-index: 1;
           .horizontal-line();
 
@@ -100,9 +101,9 @@
         .@{tree-node-prefix}-expand {
           &::before {
             position: absolute;
-            top: (@tree-node-content-height - 6);
+            top: calc(var(--ix-tree-node-content-height) - 6px);
             right: 50%;
-            height: (@tree-node-content-height / 2 - 4);
+            height: calc(var(--ix-tree-node-content-height) / 2 - 4px);
             z-index: 1;
             .vertical-line();
 
@@ -122,9 +123,9 @@
 
         &::before {
           position: absolute;
-          top: -@tree-node-padding-vertical;
-          right: (@tree-node-icon-width / 2);
-          bottom: -@tree-node-padding-vertical + 1;
+          top: calc(var(--ix-tree-node-padding-vertical) * -1);
+          right: calc(var(--ix-tree-node-icon-width) / 2);
+          bottom: calc(var(--ix-tree-node-padding-vertical) * -1 + 1px);
           .vertical-line();
 
           content: '';
@@ -148,39 +149,39 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: @tree-node-padding-vertical 0;
+  padding: var(--ix-tree-node-padding-vertical) 0;
   white-space: nowrap;
 
   .@{icon-prefix} {
-    font-size: @tree-icon-font-size;
+    font-size: var(--ix-font-size-icon);
   }
 
   &-indent {
     &-noop-unit,
     &-unit {
       display: inline-block;
-      width: @tree-node-icon-width;
+      width: var(--ix-tree-node-icon-width);
     }
   }
 
   &-draggable-icon {
     cursor: pointer;
     opacity: 0.4;
-    transition: opacity @transition-duration-base @ease-in-out;
-    width: @tree-node-icon-width;
-    height: @tree-node-content-height;
+    transition: opacity var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out);
+    width: var(--ix-tree-node-icon-width);
+    height: var(--ix-tree-node-content-height);
     display: flex;
     align-items: center;
     justify-content: center;
 
     &-noop {
-      width: @tree-node-icon-width;
+      width: var(--ix-tree-node-icon-width);
     }
   }
 
   &-expand {
-    width: @tree-node-icon-width;
-    height: @tree-node-content-height;
+    width: var(--ix-tree-node-icon-width);
+    height: var(--ix-tree-node-content-height);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -192,11 +193,11 @@
   }
 
   &-checkbox {
-    margin: @tree-node-checkbox-margin;
+    margin: var(--ix-tree-node-checkbox-margin);
   }
 
   &-leaf {
-    width: @tree-node-icon-width;
+    width: var(--ix-tree-node-icon-width);
     align-self: stretch;
     text-align: center;
     display: flex;
@@ -213,9 +214,9 @@
 
       &::before {
         position: absolute;
-        top: -@tree-node-padding-vertical;
-        right: (@tree-node-icon-width / 2);
-        bottom: -@tree-node-padding-vertical + 1;
+        top: calc(var(--ix-tree-node-padding-vertical) * -1);
+        right: calc(var(--ix-tree-node-icon-width) / 2);
+        bottom: calc(var(--ix-tree-node-padding-vertical) * -1 + 1px);
         .vertical-line();
 
         content: ' ';
@@ -238,13 +239,13 @@
     position: relative;
     display: inline-flex;
     cursor: pointer;
-    min-height: @tree-node-content-height;
-    line-height: @tree-node-content-height;
-    transition: background-color @transition-duration-base;
-    padding: @tree-node-content-padding;
+    min-height: var(--ix-tree-node-content-height);
+    line-height: var(--ix-tree-node-content-height);
+    transition: background-color var(--ix-motion-duration-medium);
+    padding: var(--ix-tree-node-content-padding);
 
     &:hover {
-      background-color: @tree-node-hover-background-color;
+      background-color: var(--ix-tree-node-bg-color-hover);
     }
 
     &-prefix,
@@ -257,29 +258,29 @@
     &-label {
       display: inline-block;
       flex-grow: 1;
-      padding: @tree-node-content-label-padding;
+      padding: var(--ix-tree-node-content-label-padding);
 
       &-highlight {
-        color: @tree-node-content-label-highlight-color;
+        color: var(--ix-tree-node-content-label-highlight-color);
       }
     }
   }
 
   &-active:not(&-disabled) .@{tree-node-prefix}-content {
-    background-color: @tree-node-hover-background-color;
+    background-color: var(--ix-tree-node-bg-color-hover);
   }
 
   &-selected:not(&-disabled) .@{tree-node-prefix}-content {
-    background-color: @tree-node-selected-background-color;
-    color: @tree-node-selected-color;
+    background-color: var(--ix-tree-node-bg-color-selected);
+    color: var(--ix-tree-node-color-selected);
 
     &:hover {
-      background-color: @tree-node-hover-background-color;
+      background-color: var(--ix-tree-node-bg-color-hover);
     }
   }
 
   &-disabled .@{tree-node-prefix}-content {
-    color: @tree-node-disabled-color;
+    color: var(--ix-color-text-disabled);
     cursor: not-allowed;
 
     &:hover {
@@ -304,13 +305,13 @@
 
   &-drop-parent::after,
   &-drop-inside::after {
-    border: @tree-box-shadow-size solid @tree-box-shadow-color;
+    border: var(--ix-tree-drop-line-width) solid var(--ix-tree-drop-line-color);
   }
 
   &-drop-before .@{tree-node-prefix}-content::after {
-    border-top: @tree-box-shadow-size solid @tree-box-shadow-color;
+    border-top: var(--ix-tree-drop-line-width) solid var(--ix-tree-drop-line-color);
   }
   &-drop-after .@{tree-node-prefix}-content::after {
-    border-bottom: @tree-box-shadow-size solid @tree-box-shadow-color;
+    border-bottom: var(--ix-tree-drop-line-width) solid var(--ix-tree-drop-line-color);
   }
 }

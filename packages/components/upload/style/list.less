@@ -1,8 +1,8 @@
 @import '../../style/mixins/ellipsis.less';
 
 .list-card() {
-  height: @upload-list-image-card-height;
-  width: @upload-list-image-card-width;
+  height: var(--ix-upload-list-img-card-height);
+  width: var(--ix-upload-list-img-card-width);
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -15,7 +15,7 @@
 
   .@{upload-prefix}-icon {
     &-error {
-      color: @color-error;
+      color: var(--ix-color-error-icon);
     }
   }
 
@@ -41,18 +41,18 @@
       }
 
       &:hover {
-        background-color: @color-graphite-l50;
+        background-color: var(--ix-color-container-bg-hover);
       }
 
       &-error {
         .@{upload-prefix}-name {
-          color: @color-error;
+          color: var(--ix-color-error-text);
         }
       }
 
       &-success {
         .@{upload-prefix}-name {
-          color: @color-blue-base;
+          color: var(--ix-color-info-text);
         }
       }
 
@@ -63,14 +63,14 @@
         .@{upload-prefix}-icon-opr {
           cursor: pointer;
           margin: @upload-icon-margin;
-          color: if((@theme = seer), @color-graphite-d20, @color-graphite-base);
+          color: var(--ix-color-icon);
 
           &:first-child {
             margin: 0;
           }
 
           &:hover {
-            color: @color-graphite-d10;
+            color: var(--ix-color-icon-hover);
           }
         }
       }
@@ -95,7 +95,7 @@
       .@{upload-prefix}-text-info {
         flex: 1;
         display: inline-flex;
-        max-width: @upload-list-name-max-width;
+        max-width: var(--ix-upload-list-name-max-width);
         align-items: center;
 
         .@{upload-prefix}-name {
@@ -113,6 +113,7 @@
     .@{upload-prefix}-icon-file {
       margin: @upload-icon-file-margin;
       font-size: @upload-icon-font-size;
+      color: var(--ix-color-icon);
     }
   }
 
@@ -131,7 +132,7 @@
       display: inline-flex;
       align-items: center;
       flex: 1;
-      max-width: @upload-list-name-max-width;
+      max-width: var(--ix-upload-list-name-max-width);
 
       .@{upload-prefix}-name {
         display: inline-block;
@@ -141,8 +142,8 @@
 
       .@{upload-prefix}-thumb {
         display: inline-block;
-        height: @upload-list-image-thumb-height;
-        width: @upload-list-image-thumb-width;
+        height: var(--ix-upload-list-img-thumb-height);
+        width: var(--ix-upload-list-img-thumb-width);
         margin: @upload-list-image-thumb-margin;
       }
     }
@@ -156,10 +157,10 @@
       .list-card();
 
       font-size: @upload-list-image-card-selector-font-size;
-      color: @color-graphite-l20;
-      border: 1px dashed @color-graphite-l30;
+      color: var(--ix-color-text-placeholder);
+      border: var(--ix-line-width) dashed var(--ix-color-border-secondary);
       border-radius: 2px;
-      background-color: @color-graphite-l50;
+      background-color: var(--ix-color-info-container-bg);
 
       &:hover {
         color: @upload-list-image-card-selector-color-hover;
@@ -174,13 +175,13 @@
       .list-card();
 
       border-radius: @upload-border-radius;
-      border: 1px solid @color-graphite-l30;
-      background-color: @color-graphite-l50;
+      border: var(--ix-line-width) solid var(--ix-color-border-secondary);
+      background-color: var(--ix-color-info-container-bg);
 
       .@{upload-prefix}-status {
-        color: @color-graphite-base;
+        color: var(--ix-color-text);
         text-align: center;
-        padding: @spacing-xs;
+        padding: var(--ix-padding-size-xs);
         min-width: @upload-list-image-card-status-min-width;
 
         .@{idux-prefix}-progress {
@@ -191,7 +192,7 @@
 
       &-error {
         .@{upload-prefix}-status {
-          color: @color-error;
+          color: var(--ix-color-error-text);
         }
       }
 
@@ -204,7 +205,7 @@
         position: absolute;
         z-index: 2;
         opacity: 0;
-        color: @color-white;
+        color: var(--ix-color-text-inverse);
 
         &-opr {
           cursor: pointer;

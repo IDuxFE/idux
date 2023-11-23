@@ -14,3 +14,6 @@ const IxBackTop = BackTop as unknown as BackTopComponent
 export { IxBackTop }
 
 export type { BackTopInstance, BackTopComponent, BackTopPublicProps as BackTopProps } from './src/types'
+
+export { getThemeTokens as getBackTopThemeTokens } from './theme'
+export type { BackTopThemeTokens } from './theme'

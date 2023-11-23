@@ -30,6 +30,7 @@ import { type PopperElement, type PopperEvents, type PopperOptions, usePopper } 
 import { CdkPortal } from '@idux/cdk/portal'
 import { Logger, callEmit, convertElement, getFirstValidNode, useState } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { useZIndex } from '@idux/components/utils'
 
 import { type OverlayProps, overlayProps } from './types'
@@ -40,6 +41,8 @@ export default defineComponent({
   props: overlayProps,
   setup(props, { slots, attrs, expose }) {
     const common = useGlobalConfig('common')
+    const { globalHashId } = useThemeToken()
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-overlay`)
     const contentArrowRef = ref<HTMLElement>()
     const { options: popperOptions, update: updateOptions } = usePopperOptions(props, contentArrowRef)
@@ -134,6 +137,7 @@ export default defineComponent({
 
       const content = renderContent(
         props,
+        globalHashId,
         mergedPrefixCls,
         visibility,
         currentZIndex,
@@ -193,6 +197,7 @@ function usePopperOptions(
 
 function renderContent(
   props: OverlayProps,
+  globalHashId: ComputedRef<string>,
   mergedPrefixCls: ComputedRef<string>,
   visibility: ComputedRef<boolean>,
   currentZIndex: ComputedRef<number>,
@@ -212,7 +217,14 @@ function renderContent(
   const overlayId = triggerId != null ? `__IDUX_OVERLAY-${triggerId}` : undefined
   const style = `z-index: ${currentZIndex.value}`
   const overlay = (
-    <div ref={popperRef} id={overlayId} class={prefixCls} style={style} {...popperEvents.value} {...attrs}>
+    <div
+      ref={popperRef}
+      id={overlayId}
+      class={[prefixCls, globalHashId.value]}
+      style={style}
+      {...popperEvents.value}
+      {...attrs}
+    >
       {contentNode}
       {props.showArrow && <div ref={arrowRef} class={`${prefixCls}-arrow`}></div>}
     </div>

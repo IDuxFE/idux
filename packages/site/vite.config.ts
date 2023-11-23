@@ -15,7 +15,6 @@ import componentsPackage from '@idux/components/package.json'
 import proPackage from '@idux/pro/package.json'
 
 import { mdPlugin } from './plugins/mdPlugin'
-import { themePlugin } from './plugins/themePlugin'
 import { transformIndexPlugin } from './plugins/transformIndexPlugin'
 
 const componentPath: Record<string, string> = {
@@ -49,12 +48,6 @@ export default defineConfig(({ command, mode }) => {
         ],
       }),
       transformIndexPlugin(),
-      themePlugin({
-        themes: [
-          { key: 'default', label: 'Default' },
-          { key: 'seer', label: 'Seer' },
-        ],
-      }),
       viteStaticCopy({
         targets: [
           {

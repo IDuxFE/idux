@@ -11,9 +11,11 @@ import { supportsFlexGap } from '@idux/cdk/platform'
 import { convertCssPixel, flattenNode } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { type FormSize } from '@idux/components/form'
+import { useThemeToken } from '@idux/components/theme'
 import { convertStringVNode } from '@idux/components/utils'
 
 import { spaceProps } from './types'
+import { getThemeTokens } from '../theme'
 
 const flexGapSupported = supportsFlexGap()
 
@@ -28,6 +30,9 @@ export default defineComponent({
   props: spaceProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('space')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-space`)
     const config = useGlobalConfig('space')
 
@@ -42,6 +47,8 @@ export default defineComponent({
       const { align, justify, block, vertical } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-align-${align}`]: align,
         [`${prefixCls}-block`]: block,

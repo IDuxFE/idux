@@ -1,53 +1,59 @@
 .@{menu-prefix} {
   &-dark {
-    color: @menu-dark-color;
-    background-color: @menu-dark-background-color;
+    color: var(--ix-menu-dark-item-color);
+    background: var(--ix-menu-dark-item-bg);
 
     .@{menu-prefix}-item-group-label {
-      color: @menu-dark-item-group-text-color;
+      color: var(--ix-menu-dark-item-group-color);
+      background: var(--ix-menu-dark-item-group-bg);
     }
 
     .@{menu-prefix}-item:hover,
     .@{menu-prefix}-sub-label:hover {
-      color: @menu-dark-color-hover;
+      color: var(--ix-menu-dark-item-color-hover);
     }
 
     .@{menu-prefix}-item:hover,
     .@{menu-prefix}-sub-label:hover,
     &:not(.@{menu-prefix}-inline) .@{menu-prefix}-sub-expanded > .@{menu-prefix}-sub-label {
-      background-color: @menu-dark-background-color-hover;
+      background: var(--ix-menu-dark-item-bg-hover);
     }
 
     .@{menu-prefix}-item.@{menu-prefix}-item-selected,
     &.@{menu-prefix}-vertical.@{menu-prefix}-collapsed .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label {
-      background-color: @menu-dark-background-color-active;
+      background: var(--ix-menu-dark-item-bg-active);
     }
 
     .@{menu-prefix}-item.@{menu-prefix}-item-selected,
     .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label {
-      color: @menu-dark-color-active;
-      font-weight: var(--ix-font-weight-lg);
+      color: var(--ix-menu-dark-item-color-active);
+      font-weight: var(--ix-menu-dark-item-font-weight-active);
     }
 
     & .@{menu-prefix}-item.@{menu-prefix}-item-disabled,
     & .@{menu-prefix}-sub.@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-label {
-      color: @menu-dark-color-disabled;
-      background-color: @menu-dark-background-color-disabled;
+      color: var(--ix-menu-dark-item-color-disabled);
+      background: var(--ix-menu-dark-item-bg-disabled);
     }
   }
 
   &-dark&-horizontal {
     .@{menu-prefix}-item:hover,
-    .@{menu-prefix}-sub-label:hover,
+    .@{menu-prefix}-sub-label:hover {
+      color: var(--ix-menu-dark-horizontal-item-color-hover);
+      background: var(--ix-menu-dark-horizontal-item-bg-hover);
+    }
+
     .@{menu-prefix}-item.@{menu-prefix}-item-selected,
     .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label,
     .@{menu-prefix}-sub-expanded > .@{menu-prefix}-sub-label {
-      background-color: @menu-dark-horizontal-background-color-active;
+      color: var(--ix-menu-dark-horizontal-item-color-active);
+      background: var(--ix-menu-dark-horizontal-item-bg-active);
     }
 
     .@{menu-prefix}-item.@{menu-prefix}-item-disabled,
     .@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-label {
-      background-color: @menu-dark-background-color;
+      background-color: var(--ix-menu-dark-item-bg-disabled);
       border-bottom-color: transparent;
     }
   }

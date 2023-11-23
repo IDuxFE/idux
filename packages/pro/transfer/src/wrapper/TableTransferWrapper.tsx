@@ -8,6 +8,7 @@
 import { defineComponent, inject } from 'vue'
 
 import { IxTransfer, type TransferListSlotParams } from '@idux/components/transfer'
+import { useThemeToken } from '@idux/pro/theme'
 
 import ProTransferTable from '../content/ProTransferTable'
 import { proTransferContext } from '../token'
@@ -15,6 +16,7 @@ import { proTransferContext } from '../token'
 export default defineComponent({
   setup() {
     const { mergedPrefixCls, props, slots, getKey } = inject(proTransferContext)!
+    const { globalHashId, hashId } = useThemeToken('proTransfer')
     const renderTransferListBody = ({ isSource }: TransferListSlotParams) => <ProTransferTable isSource={isSource} />
 
     return () => {
@@ -54,7 +56,13 @@ export default defineComponent({
         clearIcon: slots.clearIcon,
         operations: slots.operations,
       }
-      return <IxTransfer class={mergedPrefixCls.value} v-slots={transferSlots} {...transferProps} />
+      return (
+        <IxTransfer
+          class={[mergedPrefixCls.value, globalHashId.value, hashId.value]}
+          v-slots={transferSlots}
+          {...transferProps}
+        />
+      )
     }
   },
 })

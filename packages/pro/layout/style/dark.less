@@ -2,29 +2,29 @@
   &-header-dark,
   &-sider-dark {
     .@{pro-layout-prefix}-logo > a > h1 {
-      color: @menu-dark-color;
+      color: var(--ix-pro-layout-dark-menu-item-color);
     }
   }
 
   &-header-dark {
-    color: @menu-dark-color;
-    background-color: @menu-dark-background-color;
+    color: var(--ix-pro-layout-dark-menu-item-color);
+    background-color: var(--ix-pro-layout-dark-menu-item-bg);
     box-shadow: none;
   }
 
   &-sider-dark {
-    color: @menu-dark-color;
-    background-color: @menu-dark-background-color;
+    color: var(--ix-pro-layout-dark-menu-item-color);
+    background-color: var(--ix-pro-layout-dark-menu-item-bg);
     box-shadow: none;
 
     .@{layout-prefix}-sider-trigger {
       > .@{button-prefix} {
-        color: @menu-dark-color;
-        background-color: if(@theme = seer, @color-graphite-d30, @color-grey-d30);
+        color: var(--ix-pro-layout-dark-menu-item-color);
+        background-color: var(--ix-pro-layout-dark-sider-trigger-bg);
 
         &:hover {
-          color: @menu-dark-color-hover;
-          background-color: @menu-dark-background-color-hover;
+          color: var(--ix-pro-layout-dark-menu-item-color-hover);
+          background-color: var(--ix-pro-layout-dark-sider-trigger-bg-hover);
         }
       }
     }

@@ -4,7 +4,7 @@
     width: 100%;
     // https://github.com/IDuxFE/idux/issues/1013
     padding: 0.02px 0;
-    box-shadow: 1px 0 0 @menu-border-color;
+    box-shadow: 1px 0 0 var(--ix-color-border-secondary);
 
     // nest menu
     .@{menu-prefix}-vertical,
@@ -14,26 +14,26 @@
 
     .@{menu-prefix}-item,
     .@{menu-prefix}-sub-label {
-      margin: if((@theme = seer), 0, 4px);
-      border-radius: @menu-border-radius;
+      margin: 0;
+      border-radius: var(--ix-menu-border-radius);
     }
 
     .@{menu-prefix}-item-suffix,
     .@{menu-prefix}-sub-label-suffix {
       position: absolute;
-      right: if((@theme = seer), 8px, 4px);
+      right: 8px;
     }
 
     .@{menu-prefix}-divider {
       width: 100%;
-      border-top: 1px solid @menu-border-color;
+      border-top: 1px solid var(--ix-color-border-secondary);
     }
   }
 
   &-horizontal {
     display: flex;
     align-items: center;
-    box-shadow: 0 1px 0 @menu-border-color;
+    box-shadow: 0 1px 0 var(--ix-color-border-secondary);
 
     .@{menu-prefix}-item-suffix,
     .@{menu-prefix}-sub-label-suffix {
@@ -43,8 +43,8 @@
 
     .@{menu-prefix}-item,
     .@{menu-prefix}-sub-label {
-      margin: if((@theme = seer), 0, 0 4px);
-      padding: if((@theme = seer), 0 20px, 0 16px);
+      margin: 0;
+      padding: 0 20px;
       border-top: 2px solid transparent;
       border-bottom: 2px solid transparent;
     }
@@ -52,8 +52,8 @@
     .@{menu-prefix}-divider {
       display: inline-block;
       vertical-align: bottom;
-      height: calc(@menu-height - 8px);
-      border-right: 1px solid @menu-border-color;
+      height: calc(var(--ix-menu-height) - 8px);
+      border-right: 1px solid var(--ix-color-border-secondary);
     }
   }
 

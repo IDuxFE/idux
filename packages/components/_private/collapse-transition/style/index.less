@@ -1,3 +1,4 @@
+@import '../../../style/variable/index.less';
 .@{collapse-transition-prefix} {
   &-enter-active,
   &-leave-active {
@@ -6,12 +7,12 @@
   }
 
   &-enter-active {
-    transition-duration: var(--ix-transition-duration-slow);
-    transition-timing-function: var(--ix-ease-out-quint);
+    transition-duration: var(--ix-motion-duration-slow);
+    transition-timing-function: var(--ix-motion-ease-out-quint);
   }
 
   &-leave-active {
-    transition-duration: var(--ix-transition-duration-medium);
-    transition-timing-function: var(--ix-ease-out-quint);
+    transition-duration: var(--ix-motion-duration-medium);
+    transition-timing-function: var(--ix-motion-ease-out-quint);
   }
 }

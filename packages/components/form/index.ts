@@ -26,6 +26,8 @@ export {
   useFormStatus,
 } from './src/composables/public'
 
+export { getThemeTokens as getFormThemeTokens } from './theme'
+
 export type {
   FormInstance,
   FormComponent,
@@ -41,6 +43,7 @@ export type {
   FormLayout,
   FormSize,
 } from './src/types'
+export type { FormThemeTokens } from './theme'
 
 export type { FormContext } from './src/token'
 export type { FormElementContext, FormFocusMonitor } from './src/composables/public'

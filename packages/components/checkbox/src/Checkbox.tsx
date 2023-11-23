@@ -16,10 +16,12 @@ import { callEmit, useKey } from '@idux/cdk/utils'
 import { ɵWave, type ɵWaveInstance } from '@idux/components/_private/wave'
 import { useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN, useFormElement, useFormItemRegister } from '@idux/components/form'
+import { useThemeToken } from '@idux/components/theme'
 import { convertStringVNode } from '@idux/components/utils'
 
 import { type CheckboxGroupContext, checkboxGroupToken } from './token'
 import { type CheckValue, type CheckboxProps, checkboxProps } from './types'
+import { getThemeTokens } from '../theme'
 
 const buttonSizeMap = {
   sm: 'xs',
@@ -34,6 +36,10 @@ export default defineComponent({
   setup(props, { attrs, expose, slots }) {
     const key = useKey()
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('checkbox')
+    const { hashId: buttonHashId } = useThemeToken('button')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-checkbox`)
     const config = useGlobalConfig('checkbox')
 
@@ -68,6 +74,9 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const commonPrefixCls = common.prefixCls
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [buttonHashId.value]: !!buttonHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-checked`]: !indeterminate && isChecked.value,
         [`${prefixCls}-disabled`]: isDisabled.value,
@@ -125,7 +134,16 @@ export default defineComponent({
 
       if (slots.fieldset) {
         return (
-          <div class={normalizeClass([`${prefixCls}-wrapper`, className])} style={style as string}>
+          <div
+            class={normalizeClass([
+              `${prefixCls}-wrapper`,
+              className,
+              globalHashId.value,
+              hashId.value,
+              buttonHashId.value,
+            ])}
+            style={style as string}
+          >
             {checkboxNode}
             <div class={normalizeClass([`${prefixCls}-fieldset`, !checked ? `${prefixCls}-fieldset-hidden` : ''])}>
               {slots.fieldset()}

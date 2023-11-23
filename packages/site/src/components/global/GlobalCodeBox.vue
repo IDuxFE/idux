@@ -114,17 +114,17 @@ export default defineComponent({
 
   &-content {
     padding: 8px;
-    border-radius: @border-radius-md;
-    background: @color-graphite-l50;
+    border-radius: var(--ix-border-radius-sm);
+    background: var(--ix-color-info-container-bg);
     box-shadow: inset 0 0 4px 0 rgba(0, 0, 0, 0.1);
 
     &-border {
       position: relative;
       width: 100%;
       padding: 8px;
-      background-color: @background-color-component;
-      border: 1px @border-style @border-color-split;
-      border-radius: @border-radius-md;
+      background-color: var(--ix-color-container-bg);
+      border: 1px var(--ix-line-type) var(--ix-color-separator);
+      border-radius: var(--ix-border-radius-sm);
       transition: @transition-all-base;
     }
   }
@@ -137,7 +137,7 @@ export default defineComponent({
 
   &-highlight-code {
     padding: 8px;
-    border-radius: 0 0 @border-radius-md @border-radius-md;
+    border-radius: 0 0 var(--ix-border-radius-md) var(--ix-border-radius-md);
 
     pre {
       margin: 0;
@@ -156,10 +156,11 @@ export default defineComponent({
     cursor: pointer;
 
     .ix-icon {
-      color: @text-color-secondary;
+      font-size: var(--ix-font-size-icon);
+      color: var(--ix-color-icon);
 
       &:hover {
-        color: @text-color;
+        color: var(--ix-color-icon-hover);
       }
     }
   }

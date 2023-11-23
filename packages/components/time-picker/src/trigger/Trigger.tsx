@@ -9,6 +9,7 @@ import { computed, defineComponent, inject, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 import { ɵTrigger } from '@idux/components/_private/trigger'
+import { useThemeToken } from '@idux/components/theme'
 
 import { useTriggerProps } from '../composables/useTriggerProps'
 import { timePickerContext } from '../tokens'
@@ -16,6 +17,7 @@ import { timePickerContext } from '../tokens'
 export default defineComponent({
   inheritAttrs: false,
   setup(_, { expose, attrs }) {
+    const { globalHashId, hashId } = useThemeToken('timePicker')
     const context = inject(timePickerContext)!
     const {
       accessor,
@@ -69,7 +71,14 @@ export default defineComponent({
         clearIcon: slots.clearIcon,
       }
 
-      return <ɵTrigger className={prefixCls} v-slots={triggerSlots} {...triggerProps.value} {...attrs} />
+      return (
+        <ɵTrigger
+          className={`${prefixCls} ${globalHashId.value} ${hashId.value}`}
+          v-slots={triggerSlots}
+          {...triggerProps.value}
+          {...attrs}
+        />
+      )
     }
   },
 })

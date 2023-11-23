@@ -14,6 +14,7 @@ import { type ComputedRef, type Ref, computed, defineComponent, inject, provide 
 import { type VKey, useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig as useComponentGlobalConfig } from '@idux/components/config'
 import { IxTransfer, type TransferDataStrategyProp, type TransferListSlotParams } from '@idux/components/transfer'
+import { useThemeToken } from '@idux/pro/theme'
 
 import { useTransferData } from '../composables/useTransferData'
 import { useTreeDataStrategies } from '../composables/useTreeDataStrategy'
@@ -27,6 +28,7 @@ export default defineComponent({
   props: proTransferProps,
   setup() {
     const { mergedPrefixCls, props, slots, getKey } = inject(proTransferContext)!
+    const { globalHashId, hashId } = useThemeToken('proTransfer')
     const transferLocale = useComponentGlobalConfig('locale').transfer
 
     const [targetKeys, setTargetKeys] = useControlledProp(props, 'value')
@@ -119,7 +121,13 @@ export default defineComponent({
         clearIcon: slots.clearIcon,
         operations: slots.operations,
       }
-      return <IxTransfer class={mergedPrefixCls.value} v-slots={transferSlots} {...transferProps} />
+      return (
+        <IxTransfer
+          class={[mergedPrefixCls.value, globalHashId.value, hashId.value]}
+          v-slots={transferSlots}
+          {...transferProps}
+        />
+      )
     }
   },
 })

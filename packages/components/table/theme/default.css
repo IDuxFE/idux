@@ -1,0 +1,24 @@
+/* ------ table css variables ------ */
+:root {
+  --ix-table-font-size-sm: 12px;
+  --ix-table-font-size-md: 12px;
+  --ix-table-font-size-lg: 12px;
+  --ix-table-head-row-height-sm: 32px;
+  --ix-table-head-row-height-md: 32px;
+  --ix-table-head-row-height-lg: 32px;
+  --ix-table-body-row-height-sm: 32px;
+  --ix-table-body-row-height-md: 40px;
+  --ix-table-body-row-height-lg: 56px;
+  --ix-table-row-padding-horizontal-sm: 8px;
+  --ix-table-row-padding-horizontal-md: 12px;
+  --ix-table-row-padding-horizontal-lg: 16px;
+  --ix-table-head-color: #454c59;
+  --ix-table-head-bg-color: #edf1f7;
+  --ix-table-head-separator-color: #d3d7de;
+  --ix-table-head-icon-color: #bec3cc;
+  --ix-table-head-icon-color-active: #1c6eff;
+  --ix-table-head-icon-bg-color-hover: #e1e5eb;
+  --ix-table-body-row-bg-color-hover: #f7f9fc;
+  --ix-table-body-row-bg-color-selected: #ffffff;
+  --ix-table-expandable-icon-color: #bec3cc;
+}

@@ -7,36 +7,36 @@
 pre code {
   display: block;
   padding: 16px 24px;
-  color: @text-color;
-  font-size: @font-size-md;
+  color: var(--ix-color-text);
+  font-size: var(--ix-font-size-md);
   font-family: 'Lucida Console', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  line-height: @line-height-base;
+  line-height: 1.5;
   white-space: pre;
-  border-radius: @border-radius-sm;
+  border-radius: 2px;
 }
 
 code[class*='language-'],
 pre[class*='language-'] {
-  color: @text-color;
+  color: var(--ix-color-text);
   font-family: 'Lucida Console', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  line-height: @line-height-base;
+  line-height: 1.5;
   direction: ltr;
   white-space: pre;
   text-align: left;
   word-wrap: normal;
   word-break: normal;
   word-spacing: normal;
-  -moz-tab-size: 4;
-  -o-tab-size: 4;
   tab-size: 4;
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
+  tab-size: 4;
+  tab-size: 4;
+  hyphens: none;
+  hyphens: none;
+  hyphens: none;
   hyphens: none;
   background: none;
 }
 
-pre[class*='language-']::-moz-selection,
+pre[class*='language-']::selection,
 pre[class*='language-'] ::-moz-selection,
 code[class*='language-']::-moz-selection,
 code[class*='language-'] ::-moz-selection {

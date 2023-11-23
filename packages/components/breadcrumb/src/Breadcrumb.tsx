@@ -8,15 +8,20 @@
 import { computed, defineComponent, provide, toRef } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import { breadcrumbToken } from './token'
 import { breadcrumbProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxBreadcrumb',
   props: breadcrumbProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('breadcrumb')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-breadcrumb`)
 
     provide(breadcrumbToken, {
@@ -25,7 +30,7 @@ export default defineComponent({
     })
 
     return () => (
-      <nav class={mergedPrefixCls.value} aria-label="Breadcrumb">
+      <nav class={[mergedPrefixCls.value, globalHashId.value, hashId.value]} aria-label="Breadcrumb">
         <ol>{slots.default?.()}</ol>
       </nav>
     )

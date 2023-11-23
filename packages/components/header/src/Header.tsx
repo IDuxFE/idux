@@ -12,20 +12,27 @@ import { isString } from 'lodash-es'
 import { callEmit } from '@idux/cdk/utils'
 import { type AvatarProps, IxAvatar } from '@idux/components/avatar'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { convertIconVNode, convertStringVNode } from '@idux/components/utils'
 
 import { type HeaderSize, headerProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxHeader',
   props: headerProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('header')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-header`)
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-${props.size}`]: true,
         [`${prefixCls}-disabled`]: props.disabled,

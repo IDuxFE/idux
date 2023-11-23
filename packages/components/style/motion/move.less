@@ -1,6 +1,6 @@
 @import '../variable/animation.less';
 
-.move-motion(@className, @translate, @duration: @transition-duration-base) {
+.move-motion(@className, @translate, @duration: var(--ix-motion-duration-medium)) {
   .@{idux-prefix}-@{className}-enter-active,
   .@{idux-prefix}-@{className}-leave-active {
     transition-property: transform, opacity;
@@ -8,11 +8,11 @@
   }
 
   .@{idux-prefix}-@{className}-enter-active {
-    transition-timing-function: @ease-out-circ;
+    transition-timing-function: var(--ix-motion-ease-in-circ);
   }
 
   .@{idux-prefix}-@{className}-leave-active {
-    transition-timing-function: @ease-in-circ;
+    transition-timing-function: var(--ix-motion-ease-in-circ);
   }
 
   .@{idux-prefix}-@{className}-enter,

@@ -21,3 +21,7 @@ export type {
   TourMaskOptions,
   TourStep,
 } from './src/types'
+
+export { getThemeTokens as getTourThemeTokens } from './theme'
+
+export type { TourThemeTokens } from './theme'
