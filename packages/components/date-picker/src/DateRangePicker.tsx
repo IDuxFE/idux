@@ -10,6 +10,7 @@ import { computed, defineComponent, normalizeClass, onMounted, provide, ref, toR
 import { ɵOverlay, ɵOverlayInstance } from '@idux/components/_private/overlay'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
 import { useFormElement } from '@idux/components/form'
+import { useThemeToken } from '@idux/components/theme'
 import { useOverlayFocusMonitor } from '@idux/components/utils'
 
 import { useFormat } from './composables/useFormat'
@@ -23,6 +24,7 @@ import RangeContent from './content/RangeContent'
 import { dateRangePickerToken } from './token'
 import RangeTrigger from './trigger/RangeTrigger'
 import { dateRangePickerProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxDateRangePicker',
@@ -31,6 +33,9 @@ export default defineComponent({
   setup(props, { attrs, expose, slots }) {
     const common = useGlobalConfig('common')
     const locale = useGlobalConfig('locale')
+    const { globalHashId, hashId, registerToken } = useThemeToken('datePicker')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-date-range-picker`)
     const config = useGlobalConfig('datePicker')
     const dateConfig = useDateConfig()
@@ -102,7 +107,9 @@ export default defineComponent({
     const renderTrigger = () => <RangeTrigger ref={triggerRef} {...attrs}></RangeTrigger>
     const renderContent = () => <RangeContent></RangeContent>
     const overlayProps = useOverlayProps(context)
-    const overlayClass = computed(() => normalizeClass([`${mergedPrefixCls.value}-overlay`, props.overlayClassName]))
+    const overlayClass = computed(() =>
+      normalizeClass([`${mergedPrefixCls.value}-overlay`, globalHashId.value, hashId.value, props.overlayClassName]),
+    )
 
     return () => {
       return (

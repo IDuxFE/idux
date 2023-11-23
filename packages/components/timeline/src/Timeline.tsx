@@ -15,17 +15,22 @@ import { isBoolean } from 'lodash-es'
 import { flattenNode, hasSlot } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
+import { useThemeToken } from '@idux/components/theme'
 import { convertStringVNode } from '@idux/components/utils'
 
 import IxTimelineItem from './TimelineItem'
 import { timelineItemKey, timelineToken } from './token'
 import { timelineProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxTimeline',
   props: timelineProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('timeline')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-timeline`)
 
     const hasPendingNode = computed(() => props.pending !== false || hasSlot(slots, 'pending'))
@@ -34,6 +39,8 @@ export default defineComponent({
       const { placement, reverse, both } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [`${prefixCls}`]: true,
         [`${prefixCls}-${placement}`]: true,
         [`${prefixCls}-reverse`]: reverse,

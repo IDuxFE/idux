@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 @import '../../style/motion/fade.less';
 @import '../../style/motion/slide.less';
@@ -5,9 +6,7 @@
 .@{dropdown-prefix} {
   .reset-component-new();
 
-  box-shadow: @dropdown-box-shadow;
-  border-radius: @dropdown-border-radius;
-  min-width: @dropdown-min-width;
+  min-width: var(--ix-dropdown-min-width);
   overflow: hidden;
 
   &,
@@ -24,6 +23,6 @@
 
   .@{menu-prefix}-dropdown {
     box-shadow: none;
-    padding: @dropdown-menu-container-padding;
+    padding: var(--ix-dropdown-menu-container-padding);
   }
 }

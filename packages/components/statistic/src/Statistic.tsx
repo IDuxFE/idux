@@ -11,14 +11,19 @@ import type { StatisticConfig } from '@idux/components/config'
 import { computed, defineComponent } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import { statisticProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxStatistic',
   props: statisticProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('statistic')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-statistic`)
     const statisticConfig = useGlobalConfig('statistic')
     const formatedValue = useFomat(props, statisticConfig)
@@ -34,7 +39,7 @@ export default defineComponent({
         <span class={`${prefixCls}-content-suffix`}>{slots.suffix?.() ?? suffix}</span>
       )
       return (
-        <div class={prefixCls}>
+        <div class={[prefixCls, globalHashId.value, hashId.value]}>
           {titleNode}
           <div class={`${prefixCls}-content`}>
             {prefixNode}

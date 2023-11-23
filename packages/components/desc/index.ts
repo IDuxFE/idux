@@ -26,3 +26,6 @@ export type {
   DescLayout,
   DescSize,
 } from './src/types'
+
+export { getThemeTokens as getDescThemeTokens } from './theme'
+export type { DescThemeTokens } from './theme'

@@ -10,17 +10,22 @@ import { computed, defineComponent, provide, ref } from 'vue'
 import { callEmit, isPromise } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { ɵUseTooltipOverlay } from '@idux/components/tooltip'
 
 import PopconfirmContent from './PopconfirmContent'
 import { popconfirmToken } from './token'
 import { type PopconfirmProps, popconfirmProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxPopconfirm',
   props: popconfirmProps,
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('popconfirm')
+    registerToken(getThemeTokens)
+
     const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('popconfirm')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-popconfirm`)
@@ -52,7 +57,7 @@ export default defineComponent({
         <ɵOverlay
           ref={overlayRef}
           v-slots={{ default: defaultSlot, content: () => <PopconfirmContent v-slots={restSlots} /> }}
-          class={prefixCls}
+          class={[prefixCls, globalHashId.value, hashId.value]}
           transitionName={`${common.prefixCls}-fade`}
           {...overlayProps.value}
         />

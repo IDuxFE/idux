@@ -1,0 +1,7 @@
+/* ------ avatar css variables ------ */
+:root {
+  --ix-avatar-size-sm: 24px;
+  --ix-avatar-size-md: 32px;
+  --ix-avatar-size-lg: 40px;
+  --ix-avatar-border-radius-square: 2px;
+}

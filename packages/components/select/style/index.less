@@ -1,66 +1,66 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/ellipsis.less';
 @import '../../style/mixins/reset.less';
 @import '../../style/motion/slide.less';
+@import './mixin.less';
 
 .@{select-prefix} {
+  @option-line-height: calc(var(--ix-select-font-size) + var(--ix-line-height-gutter));
   &-option {
     .reset-component();
-    .select-option(@select-option-font-size, @select-option-color);
+    .select-option(var(--ix-select-font-size), var(--ix-color-text));
 
     &-disabled {
-      color: @select-option-disabled-color;
+      color: var(--ix-color-text-disabled);
       cursor: not-allowed;
     }
 
     &-active:not(&-disabled) {
-      background-color: @select-option-active-background-color;
+      background-color: var(--ix-color-container-bg-hover);
     }
 
     &-selected:not(&-disabled) {
-      color: @select-option-selected-color;
-      background-color: @select-option-selected-background-color;
-      font-weight: @select-option-selected-font-weight;
+      color: var(--ix-color-primary-text);
+      background-color: var(--ix-color-container-bg-active);
     }
 
     &-label {
       .ellipsis();
 
-      line-height: @select-line-height;
+      line-height: @option-line-height;
     }
 
     .@{checkbox-prefix} + &-label {
-      margin-left: @select-option-label-margin-left;
+      margin-left: var(--ix-select-option-label-margin-left);
     }
   }
 
   &-option-group {
     .reset-component();
-    .select-option(var(--ix-font-size-sm), @select-option-group-color);
+    .select-option(var(--ix-select-font-size), var(--ix-color-text-info));
 
     display: block;
-    margin: @select-option-group-margin;
-    padding-left: @select-option-group-padding-left;
+    margin: var(--ix-select-option-group-margin);
+    padding-left: var(--ix-select-option-group-padding-left);
 
     &-label {
       .ellipsis();
 
-      line-height: @select-line-height;
+      line-height: @option-line-height;
     }
   }
 
   &-overlay {
     z-index: 1000;
-    padding: @select-option-container-padding;
-    background-color: @select-option-container-background-color;
-    border-radius: @select-option-container-border-radius;
-    box-shadow: @select-option-container-box-shadow;
+    padding: var(--ix-select-option-container-padding);
+    background-color: var(--ix-color-container-bg);
 
     &-search-wrapper {
-      padding: @select-overlay-search-wrapper-padding;
+      padding: var(--ix-select-overlay-search-wrapper-padding);
 
       .@{input-prefix}-clear,
       .@{input-prefix}-suffix {
-        color: @select-icon-color;
+        color: var(--ix-color-icon);
       }
     }
   }
@@ -69,40 +69,28 @@
     &-multiple {
       .@{select-option-prefix} {
         &-selected:not(&-disabled) {
-          background-color: @color-white;
-          color: @select-color;
+          background-color: var(--ix-color-container-bg);
+          color: var(--ix-color-text);
         }
 
         &-active:not(&-disabled) {
-          background-color: @select-option-active-background-color;
+          background-color: var(--ix-color-container-bg-active);
         }
       }
 
       .@{select-prefix}-option-grouped {
-        padding-left: @select-multiple-option-grouped-padding-left;
+        padding-left: var(--ix-select-multiple-option-grouped-padding-left);
       }
     }
 
     .@{select-prefix}-option-group:not(:first-child) {
-      border-top: @select-option-group-border;
+      border-top: var(--ix-line-width) var(--ix-line-type) var(--ix-color-separator);
     }
 
     &:not(&-multiple) {
       .@{select-prefix}-option-grouped {
-        padding-left: @select-option-grouped-padding-left;
+        padding-left: var(--ix-select-option-grouped-padding-left);
       }
     }
   }
-}
-
-.select-option(@font-size; @text-color) {
-  display: flex;
-  align-items: center;
-  height: @select-option-height;
-  line-height: 1;
-  padding: @select-option-padding;
-  font-size: @font-size;
-  color: @text-color;
-  transition: background @transition-duration-base @ease-in-out;
-  cursor: pointer;
 }

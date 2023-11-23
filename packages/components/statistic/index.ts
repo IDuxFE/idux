@@ -14,3 +14,7 @@ const IxStatistic = Statistic as unknown as StatisticComponent
 export { IxStatistic }
 
 export type { StatisticInstance, StatisticComponent, StatisticPublicProps as StatisticProps } from './src/types'
+
+export { getThemeTokens as getStatisticThemeTokens } from './theme'
+
+export type { StatisticThemeTokens } from './theme'

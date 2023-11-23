@@ -10,6 +10,7 @@ import { computed, defineComponent, normalizeClass, onMounted, provide, ref, toR
 import { ɵOverlay, ɵOverlayInstance } from '@idux/components/_private/overlay'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
 import { useFormElement } from '@idux/components/form'
+import { useThemeToken } from '@idux/components/theme'
 import { useOverlayFocusMonitor } from '@idux/components/utils'
 
 import { usePickerControl } from './composables/useControl'
@@ -22,6 +23,7 @@ import Content from './content/Content'
 import { timePickerContext } from './tokens'
 import Trigger from './trigger/Trigger'
 import { timePickerProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxTimePicker',
@@ -29,6 +31,9 @@ export default defineComponent({
   props: timePickerProps,
   setup(props, { attrs, expose, slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('timePicker')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-time-picker`)
     const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('timePicker')
@@ -95,7 +100,9 @@ export default defineComponent({
     const renderContent = () => <Content />
 
     const overlayProps = useOverlayProps(context)
-    const overlayClass = computed(() => normalizeClass([`${mergedPrefixCls.value}-overlay`, props.overlayClassName]))
+    const overlayClass = computed(() =>
+      normalizeClass([`${mergedPrefixCls.value}-overlay`, globalHashId.value, hashId.value, props.overlayClassName]),
+    )
 
     return () => (
       <ɵOverlay

@@ -11,15 +11,20 @@ import { isString } from 'lodash-es'
 
 import { type EmptyConfig, useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
+import { useThemeToken } from '@idux/components/theme'
 
 import { EmptyDefaultImage, EmptySimpleImage } from './Images'
 import { type EmptyProps, emptyProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxEmpty',
   props: emptyProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('empty')
+    registerToken(getThemeTokens)
+
     const locale = useGlobalConfig('locale')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-empty`)
     const config = useGlobalConfig('empty')
@@ -28,6 +33,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-simple`]: props.simple,
       })

@@ -1,5 +1,5 @@
 <template>
-  <div style="border: 1px solid var(--ix-border-color); height: 300px">
+  <div style="border: 1px solid var(--ix-color-border); height: 300px">
     <IxProLayout v-model:activeKey="activeKey" :logo="logo" :menus="dataSource" :fixed="mergedFixed">
       <template #itemLabel="item">
         <router-link to="#pro-layout-demo-theme">{{ item.label }}</router-link>

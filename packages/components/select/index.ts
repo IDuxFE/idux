@@ -35,3 +35,7 @@ export type {
   SelectData,
   SelectSearchFn,
 } from './src/types'
+
+export { getThemeTokens as getSelectThemeTokens } from './theme'
+
+export type { SelectThemeTokens } from './theme'

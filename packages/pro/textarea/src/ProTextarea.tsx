@@ -23,6 +23,7 @@ import { IxIcon } from '@idux/components/icon'
 import { ɵUseInput } from '@idux/components/input'
 import { ɵUseAutoRows } from '@idux/components/textarea'
 import { type ProTextareaConfig, useGlobalConfig } from '@idux/pro/config'
+import { useThemeToken } from '@idux/pro/theme'
 
 import IndexColumn from './IndexColumn'
 import { useErrorLines } from './composables/useErrorLines'
@@ -30,12 +31,16 @@ import { useRowCounts } from './composables/useRowsCounts'
 import Content from './content/Content'
 import { proTextareaContext } from './token'
 import { ProTextareaProps, proTextareaProps } from './types'
+import { getThemeTokens, transforms } from '../theme'
 
 export default defineComponent({
   name: 'IxProTextarea',
   props: proTextareaProps,
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('proTextarea')
+    registerToken(getThemeTokens, transforms)
+
     const config = useGlobalConfig('textarea')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-textarea`)
 
@@ -97,6 +102,8 @@ export default defineComponent({
       const size = props.size ?? config.size
 
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-disabled`]: accessor.disabled,
         [`${prefixCls}-focused`]: isFocused.value,

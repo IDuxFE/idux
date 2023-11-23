@@ -11,22 +11,27 @@ import { isString } from 'lodash-es'
 
 import { IxAvatar } from '@idux/components/avatar'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { convertStringVNode } from '@idux/components/utils'
 
 import { CommentProps, commentProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxComment',
   props: commentProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('comment')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-comment`)
 
     return () => {
       const prefixCls = mergedPrefixCls.value
 
       return (
-        <div class={prefixCls}>
+        <div class={[prefixCls, globalHashId.value, hashId.value]}>
           <div class={`${prefixCls}-inner`}>
             {renderAvatar(props, slots, prefixCls)}
             {renderContent(props, slots, prefixCls)}

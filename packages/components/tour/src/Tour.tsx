@@ -11,6 +11,7 @@ import { CdkPortal } from '@idux/cdk/portal'
 import { convertCssPixel } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { useZIndex } from '@idux/components/utils'
 
 import Mask from './Mask'
@@ -26,6 +27,7 @@ import { useTarget } from './composables/useTarget'
 import { useVisible } from './composables/useVisible'
 import { tourToken } from './token'
 import { tourProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxTour',
@@ -33,6 +35,9 @@ export default defineComponent({
   props: tourProps,
   setup(props, { slots, attrs }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('tour')
+    registerToken(getThemeTokens)
+
     const config = useGlobalConfig('tour')
     const locale = useGlobalConfig('locale')
 
@@ -110,7 +115,12 @@ export default defineComponent({
               <Mask v-show={visible.value && !!activeStep.value?.mask} />
             </Transition>
           </CdkPortal>
-          <ɵOverlay class={`${prefixCls}-overlay`} {...overlayProps.value} {...attrs} v-slots={overlaySlots} />
+          <ɵOverlay
+            class={[`${prefixCls}-overlay`, globalHashId.value, hashId.value]}
+            {...overlayProps.value}
+            {...attrs}
+            v-slots={overlaySlots}
+          />
         </>
       )
     }

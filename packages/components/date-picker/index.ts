@@ -39,3 +39,6 @@ export type {
   DateRangePanelPublicProps as DateRangePanelProps,
   DatePickerType,
 } from './src/types'
+
+export { getThemeTokens as getDatePickerThemeTokens } from './theme'
+export type { DatePickerThemeTokens } from './theme'

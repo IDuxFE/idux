@@ -1,0 +1,17 @@
+/* ------ transfer css variables ------ */
+:root {
+  --ix-transfer-height: 290px;
+  --ix-transfer-content-width: 260px;
+  --ix-transfer-header-height: 40px;
+  --ix-transfer-suffix-margin-left: 12px;
+  --ix-transfer-footer-height: 40px;
+  --ix-transfer-content-padding: 0 8px 0 12px;
+  --ix-transfer-opr-min-width: 4px;
+  --ix-transfer-opr-padding: 8px;
+  --ix-transfer-opr-button-width: 24px;
+  --ix-transfer-opr-button-height: 32px;
+  --ix-transfer-opr-button-gap: 8px;
+  --ix-transfer-search-width: 110px;
+  --ix-transfer-list-item-min-height: 32px;
+  --ix-transfer-close-icon-padding: 0 12px;
+}

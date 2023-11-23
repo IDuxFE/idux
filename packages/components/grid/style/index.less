@@ -1,4 +1,7 @@
+@import '../../style/variable/index.less';
 @import './mixin.less';
+
+@grid-columns: 24;
 
 .@{row-prefix} {
   display: flex;
@@ -80,3 +83,20 @@
 @media (min-width: @screen-xl-min) {
   .make-grid(-xl);
 }
+
+
+// @media (min-width: var(--ix-screen-sm-min)) {
+//   .make-grid(-sm);
+// }
+
+// @media (min-width: var(--ix-screen-md-min)) {
+//   .make-grid(-md);
+// }
+
+// @media (min-width: var(--ix-screen-lg-min)) {
+//   .make-grid(-lg);
+// }
+
+// @media (min-width: var(--ix-screen-xl-min)) {
+//   .make-grid(-xl);
+// }

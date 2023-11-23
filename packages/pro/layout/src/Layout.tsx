@@ -9,7 +9,9 @@ import { computed, defineComponent, normalizeClass, provide } from 'vue'
 
 import { useControlledProp } from '@idux/cdk/utils'
 import { IxLayout, IxLayoutContent, IxLayoutFooter } from '@idux/components/layout'
+import { getMenuThemeTokens } from '@idux/components/menu'
 import { useGlobalConfig } from '@idux/pro/config'
+import { useThemeToken } from '@idux/pro/theme'
 
 import { useActiveHeaderKey, useActiveKey } from './composables/useActiveKey'
 import { useHeaderMenus, useSiderMenus } from './composables/useMenu'
@@ -18,11 +20,19 @@ import Sider from './contents/Sider'
 import { proLayoutToken } from './token'
 import { proLayoutProps } from './types'
 import { getTargetPaths } from './utils/menu'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxProLayout',
   props: proLayoutProps,
   setup(props, { slots }) {
+    const { globalHashId, hashId: menuHashId, registerToken: registerMenuTokens } = useThemeToken('menu')
+    const { hashId, registerToken } = useThemeToken('proLayout')
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    registerMenuTokens(getMenuThemeTokens as any)
+    registerToken(getThemeTokens)
+
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-layout`)
 
@@ -53,6 +63,9 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [menuHashId.value]: !!menuHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-is-${props.type}`]: true,
       })

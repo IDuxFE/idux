@@ -38,6 +38,7 @@ export function initSite(): void {
   const filterComponentName = [
     '_private',
     'config',
+    'theme',
     'locales',
     'node_modules',
     'style',

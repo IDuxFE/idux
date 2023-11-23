@@ -25,7 +25,7 @@ interface Options {
   minify?: boolean
 }
 
-const externalDeps = ['vue', '@vue', '@idux', '@floating-ui/dom', 'date-fns', 'lodash-es', 'ajv']
+const externalDeps = ['vue', '@vue', '@idux', '@floating-ui/dom', '@emotion/hash', 'date-fns', 'lodash-es', 'ajv']
 const replaceOptions = {
   __DEV__: "process.env.NODE_ENV !== 'production'",
   __TEST__: false,

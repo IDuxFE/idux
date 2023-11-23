@@ -1,0 +1,14 @@
+/* ------ carousel css variables ------ */
+:root {
+  --ix-carousel-arrow-size: 32px;
+  --ix-carousel-arrow-color: #ffffff;
+  --ix-carousel-horizontal-dot-width: 32px;
+  --ix-carousel-horizontal-dot-height: 2px;
+  --ix-carousel-vertical-dot-width: 2px;
+  --ix-carousel-vertical-dot-height: 16px;
+  --ix-carousel-dot-bg-color: #ffffff;
+  --ix-carousel-dot-border-radius: 2px;
+  --ix-carousel-icon-opacity: 0.3;
+  --ix-carousel-icon-opacity-hover: 0.6;
+  --ix-carousel-icon-opacity-active: 0.8;
+}

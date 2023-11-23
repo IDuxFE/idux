@@ -10,6 +10,7 @@ import type { TimePanelColumnProps } from './types'
 import { computed, defineComponent, provide } from 'vue'
 
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import PanelColumn from './TimePanelColumn'
 import { useOptions } from './composables/useOptions'
@@ -21,6 +22,8 @@ export default defineComponent({
   props: timePanelProps,
   setup(props) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId } = useThemeToken('timePicker')
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-time-panel`)
     const dateConfig = useDateConfig()
     const { hourOptionsProps, minuteOptionsProps, secondOptionsProps, amPmOptionsProps } = useOptions(props, dateConfig)
@@ -37,7 +40,7 @@ export default defineComponent({
     })
 
     return () => (
-      <div class={`${mergedPrefixCls.value}`}>
+      <div class={[mergedPrefixCls.value, globalHashId.value, hashId.value]}>
         {columns.value.map((item, index) => (
           <PanelColumn key={index} {...item} visible={props.visible} />
         ))}

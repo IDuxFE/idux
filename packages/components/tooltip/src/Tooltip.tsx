@@ -12,15 +12,20 @@ import { computed, defineComponent } from 'vue'
 
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import { tooltipProps } from './types'
 import { useTooltipOverlay } from './useTooltipOverlay'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxTooltip',
   props: tooltipProps,
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('tooltip')
+    registerToken(getThemeTokens)
+
     const config = useGlobalConfig('tooltip')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tooltip`)
     const { overlayRef, updatePopper, overlayProps } = useTooltipOverlay(props, config, mergedPrefixCls)
@@ -33,7 +38,7 @@ export default defineComponent({
         <ɵOverlay
           ref={overlayRef}
           v-slots={{ default: slots.default, content: () => renderContent(props, slots, prefixCls) }}
-          class={prefixCls}
+          class={[prefixCls, globalHashId.value, hashId.value]}
           transitionName={`${common.prefixCls}-fade-fast`}
           {...overlayProps.value}
         />

@@ -11,8 +11,10 @@ import { hasSlot } from '@idux/cdk/utils'
 import { ɵLoading } from '@idux/components/_private/loading'
 import { type SpinConfig, useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
+import { useThemeToken } from '@idux/components/theme'
 
 import { type SpinProps, type SpinSize, spinProps } from './types'
+import { getThemeTokens } from '../theme'
 
 const defaultStrokeWidth: Record<SpinSize, number> = {
   sm: 3,
@@ -30,6 +32,9 @@ export default defineComponent({
   props: spinProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('spin')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-spin`)
     const spinConfig = useGlobalConfig('spin')
 
@@ -99,7 +104,7 @@ export default defineComponent({
     }
 
     return () => (
-      <div class={mergedPrefixCls.value}>
+      <div class={[mergedPrefixCls.value, globalHashId.value, hashId.value]}>
         {renderSpinner()}
         {renderContent()}
       </div>

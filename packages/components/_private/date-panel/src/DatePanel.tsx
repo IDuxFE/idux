@@ -8,6 +8,7 @@
 import { computed, defineComponent, provide } from 'vue'
 
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import { useActiveDate } from './composables/useActiveDate'
 import { useActiveType } from './composables/useActiveType'
@@ -22,6 +23,8 @@ export default defineComponent({
   props: datePanelProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId } = useThemeToken()
+
     const locale = useGlobalConfig('locale')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-date-panel`)
     const dateConfig = useDateConfig()
@@ -47,7 +50,7 @@ export default defineComponent({
     return () => {
       const prefixCls = mergedPrefixCls.value
       return (
-        <div class={`${prefixCls} ${prefixCls}-${activeType.value}`}>
+        <div class={`${prefixCls} ${prefixCls}-${activeType.value} ${globalHashId.value}`}>
           <PanelHeader />
           <PanelBody />
         </div>

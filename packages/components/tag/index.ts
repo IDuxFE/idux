@@ -26,3 +26,7 @@ export type {
   TagShape,
   TagStatus,
 } from './src/types'
+
+export { getThemeTokens as getTagThemeTokens } from './theme'
+
+export type { TagThemeTokens } from './theme'

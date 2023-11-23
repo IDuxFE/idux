@@ -19,14 +19,19 @@ import { useResizeObserver } from '@idux/cdk/resize'
 import { callEmit, convertCssPixel, hasSlot } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
+import { useThemeToken } from '@idux/components/theme'
 
 import { avatarProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxAvatar',
   props: avatarProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('avatar')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-avatar`)
     const config = useGlobalConfig('avatar')
 
@@ -44,7 +49,7 @@ export default defineComponent({
 
     const { avatarRef, textRef, size, avatarStyle, textStyle } = useSize(props, config)
 
-    const classes = useClasses(props, config, size, showText, showIcon, mergedPrefixCls)
+    const classes = useClasses(props, config, size, showText, showIcon, mergedPrefixCls, globalHashId, hashId)
 
     const handleError = (evt: Event) => {
       const result = callEmit(props.onError, evt)
@@ -91,12 +96,16 @@ const useClasses = (
   showText: Ref<boolean>,
   showIcon: Ref<boolean>,
   mergedPrefixCls: ComputedRef<string>,
+  globalHashId: ComputedRef<string>,
+  hashId: ComputedRef<string>,
 ) => {
   return computed(() => {
     const shape = props.shape ?? config.shape
     const sizeValue = size.value
     const prefixCls = mergedPrefixCls.value
     return {
+      [globalHashId.value]: !!globalHashId.value,
+      [hashId.value]: !!hashId.value,
       [`${prefixCls}`]: true,
       [`${prefixCls}-image`]: !!props.src && !showText.value && !showIcon.value,
       [`${prefixCls}-${shape}`]: true,

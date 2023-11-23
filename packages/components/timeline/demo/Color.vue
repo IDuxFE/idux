@@ -1,8 +1,13 @@
 <template>
   <IxTimeline>
-    <IxTimelineItem color="red">Set red color</IxTimelineItem>
-    <IxTimelineItem color="yellow">Set yellow color</IxTimelineItem>
-    <IxTimelineItem color="black">Set black color</IxTimelineItem>
+    <IxTimelineItem color="error">Set error color</IxTimelineItem>
+    <IxTimelineItem color="warning">Set warning color</IxTimelineItem>
+    <IxTimelineItem color="success">
+      Set success color
+      <template #dot>
+        <IxIcon name="check" />
+      </template>
+    </IxTimelineItem>
     <IxTimelineItem>The default color</IxTimelineItem>
   </IxTimeline>
 </template>

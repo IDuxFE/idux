@@ -14,3 +14,7 @@ const IxSwitch = Switch as unknown as SwitchComponent
 export { IxSwitch }
 
 export type { SwitchInstance, SwitchComponent, SwitchPublicProps as SwitchProps } from './src/types'
+
+export { getThemeTokens as getSwitchThemeTokens } from './theme'
+
+export type { SwitchThemeTokens } from './theme'

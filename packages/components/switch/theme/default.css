@@ -1,0 +1,16 @@
+/* ------ switch css variables ------ */
+:root {
+  --ix-switch-active-disabled-color: #96c7ff;
+  --ix-switch-height-sm: 16px;
+  --ix-switch-height-md: 24px;
+  --ix-switch-height-lg: 32px;
+  --ix-switch-handle-size-sm: 12px;
+  --ix-switch-handle-size-md: 20px;
+  --ix-switch-handle-size-lg: 28px;
+  --ix-switch-icon-font-size-sm: 9px;
+  --ix-switch-icon-font-size-md: 14px;
+  --ix-switch-icon-font-size-lg: 14px;
+  --ix-switch-handle-padding: 2px;
+  --ix-switch-handle-bg-color: #ffffff;
+  --ix-switch-handle-box-shadow: none;
+}

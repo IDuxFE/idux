@@ -32,3 +32,7 @@ export type {
 } from './src/types'
 
 export type { ParserContext, ParseResult } from './src/useParser'
+
+export { getThemeTokens as getProSearchThemeTokens } from './theme'
+
+export type { ProSearchThemeTokens } from './theme'

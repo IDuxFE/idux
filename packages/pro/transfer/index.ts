@@ -20,3 +20,7 @@ export type {
   ProTransferComponent,
   ProTransferPublicProps as ProTransferProps,
 } from './src/types'
+
+export { getThemeTokens as getProTransferThemeTokens } from './theme'
+
+export type { ProTransferThemeTokens } from './theme'

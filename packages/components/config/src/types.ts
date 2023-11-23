@@ -45,6 +45,7 @@ import type { TabsSize } from '@idux/components/tabs'
 import type { TagShape } from '@idux/components/tag'
 import type { TextCopyIconRenderer, TextExpandIconRenderer } from '@idux/components/text'
 import type { TextareaAutoRows, TextareaResize } from '@idux/components/textarea'
+import type { DeepPartialThemeTokens, PresetTheme, ThemeProviderAttachTo } from '@idux/components/theme'
 import type { TargetGap, TourMaskOptions } from '@idux/components/tour'
 import type { TreeExpandIconRenderer, TreeNode } from '@idux/components/tree'
 import type { UploadFilesType, UploadIconType, UploadRequestMethod, UploadRequestOption } from '@idux/components/upload'
@@ -54,6 +55,7 @@ import type { VNode, VNodeChild } from 'vue'
 export interface GlobalConfig {
   common: CommonConfig
   locale: Locale
+  theme: ThemeConfig
 
   alert: AlertConfig
   anchor: AnchorConfig
@@ -120,7 +122,11 @@ export interface CommonConfig {
   prefixCls: string
   overlayContainer?: OverlayContainerType
   overlayZIndex: number | (() => number)
-  theme: 'default' | 'seer'
+}
+export interface ThemeConfig extends DeepPartialThemeTokens {
+  presetTheme: PresetTheme
+  hashed: boolean
+  attachTo?: ThemeProviderAttachTo
 }
 
 export interface AlertConfig {

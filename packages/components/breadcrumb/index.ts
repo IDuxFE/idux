@@ -23,3 +23,6 @@ export type {
   BreadcrumbItemComponent,
   BreadcrumbItemPublicProps as BreadcrumbItemProps,
 } from './src/types'
+
+export { getThemeTokens as getBreadcrumbThemeTokens } from './theme'
+export type { BreadcrumbThemeTokens } from './theme'

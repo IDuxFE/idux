@@ -17,14 +17,19 @@ import { IxDivider } from '@idux/components/divider'
 import { IxIcon } from '@idux/components/icon'
 import { IxTree, type TreeInstance } from '@idux/components/tree'
 import { useGlobalConfig } from '@idux/pro/config'
+import { useThemeToken } from '@idux/pro/theme'
 
 import { proTreeProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxProTree',
   props: proTreeProps,
   setup(props, { expose, slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('proTree')
+    registerToken(getThemeTokens)
+
     const config = useGlobalConfig('tree')
     const locale = useGlobalConfig('locale')
 
@@ -60,6 +65,8 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
 
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-collapsed`]: collapsed.value,
       })

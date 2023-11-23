@@ -23,3 +23,7 @@ export type {
   TimeRangePickerComponent,
   TimeRangePickerPublicProps as TimeRangePickerProps,
 } from './src/types'
+
+export { getThemeTokens as getTimePickerThemeTokens } from './theme'
+
+export type { TimePickerThemeTokens } from './theme'

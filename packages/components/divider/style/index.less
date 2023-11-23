@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 
 .@{divider-prefix} {
@@ -8,7 +9,7 @@
     clear: both;
     width: 100%;
     min-width: 100%;
-    border-top: @divider-border-width solid @divider-border-color;
+    border-top: var(--ix-divider-line-width) solid var(--ix-divider-line-color);
   }
 
   &-vertical {
@@ -17,7 +18,7 @@
     top: -0.06em;
     height: 0.9em;
     vertical-align: middle;
-    border-left: @divider-border-width solid @divider-border-color;
+    border-left: var(--ix-divider-line-width) solid var(--ix-divider-line-color);
   }
 
   &-dashed {
@@ -26,20 +27,20 @@
   }
 
   &-dashed&-horizontal {
-    border-width: @divider-border-width 0 0;
+    border-width: var(--ix-divider-line-width) 0 0;
   }
 
   &-dashed&-vertical {
-    border-width: 0 0 0 @divider-border-width;
+    border-width: 0 0 0 var(--ix-divider-line-width);
   }
 
   &-label {
     position: absolute;
     display: inline-block;
     padding: 0 1em;
-    color: @color-black;
-    font-weight: @font-weight-lg;
-    background: @color-white;
+    color: var(--ix-color-text-title);
+    font-weight: var(--ix-font-weight-lg);
+    background: var(--ix-color-container-bg);
     top: 50%;
     transform: translateY(-50%);
   }
@@ -73,42 +74,42 @@
 
   &-plain {
     .@{divider-prefix}-label {
-      font-weight: @font-weight-md;
+      font-weight: var(--ix-font-weight-md);
     }
   }
 
   &-sm {
-    .divider-size(@divider-horizontal-margin-sm; @divider-vertical-margin-sm; @divider-font-size-sm);
+    .divider-size(var(--ix-divider-margin-horizontal-sm); var(--ix-divider-margin-vertical-sm); var(--ix-divider-font-size-sm));
 
     &.@{divider-prefix}-plain .@{divider-prefix}-label {
-      font-size: @divider-font-size-sm - 2px;
+      font-size: max(calc(var(--ix-divider-font-size-sm) - 2px), var(--ix-font-size-xs));
     }
   }
 
   &-md {
-    .divider-size(@divider-horizontal-margin-md; @divider-vertical-margin-md; @divider-font-size-md);
+    .divider-size(var(--ix-divider-margin-horizontal-md); var(--ix-divider-margin-vertical-md); var(--ix-divider-font-size-md));
 
     &.@{divider-prefix}-plain .@{divider-prefix}-label {
-      font-size: @divider-font-size-md - 4px;
+      font-size: max(calc(var(--ix-divider-font-size-md) - 4px), var(--ix-font-size-xs));
     }
   }
 
   &-lg {
-    .divider-size(@divider-horizontal-margin-lg; @divider-vertical-margin-lg; @divider-font-size-lg);
+    .divider-size(var(--ix-divider-margin-horizontal-lg); var(--ix-divider-margin-vertical-lg); var(--ix-divider-font-size-lg));
 
     &.@{divider-prefix}-plain .@{divider-prefix}-label {
-      font-size: @divider-font-size-lg - 4px;
+      font-size: max(calc(var(--ix-divider-font-size-lg) - 4px), var(--ix-font-size-xs));
     }
   }
 }
 
 .divider-size(@horizontal-margin; @vertical-margin; @font-size) {
   &.@{divider-prefix}-horizontal {
-    margin: @horizontal-margin;
+    margin: @vertical-margin 0;
   }
 
   &.@{divider-prefix}-vertical {
-    margin: @vertical-margin;
+    margin: 0 @horizontal-margin;
   }
 
   .@{divider-prefix}-label {

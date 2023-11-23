@@ -1,6 +1,6 @@
 .header {
   z-index: 10;
-  background: @background-color-component;
+  background: var(--ix-color-container-bg);
   box-shadow: @header-box-shadow;
   transition: @transition-all-base;
 
@@ -8,14 +8,14 @@
     display: flex;
     align-items: center;
     height: 100%;
-    padding-left: @spacing-3xl;
+    padding-left: 48px;
     text-align: center;
     text-decoration: none;
 
     img {
       position: relative;
       width: 36px;
-      margin-right: @spacing-lg;
+      margin-right: var(--ix-margin-size-lg);
     }
 
     h2 {
@@ -29,14 +29,14 @@
     align-items: center;
 
     > * {
-      margin-right: @spacing-lg;
+      margin-right: var(--ix-margin-size-lg);
     }
   }
 
   &-search-box {
     margin-right: auto;
-    padding-left: @spacing-xl;
-    border-left: @border-width-sm @border-style @border-color-split;
+    padding-left: var(--ix-padding-size-xl);
+    border-left: var(--ix-line-width) var(--ix-line-type) var(--ix-color-separator);
 
     .ix-input {
       max-width: 200px;
@@ -57,7 +57,7 @@
       & > .ix-menu-sub .ix-menu-sub-title,
       & > .ix-menu-item {
         height: @header-height;
-        line-height: @header-height - 2px * 2;
+        line-height: calc(@header-height - 2px * 2);
         border-top: 2px solid transparent;
       }
 
@@ -66,16 +66,16 @@
       & > .ix-menu-sub-selected,
       & > .ix-menu-item:hover,
       & > .ix-menu-item-selected {
-        border-top: 2px solid @menu-color-active;
+        border-top: 2px solid var(--ix-color-primary);
         border-bottom: 2px solid transparent;
       }
     }
   }
 
   .ix-dropdown {
-    padding: @spacing-sm;
-    font-size: @font-size-lg;
-    color: @text-color;
+    padding: var(--ix-padding-size-sm);
+    font-size: var(--ix-font-size-lg);
+    color: var(--ix-color-text);
   }
 
   &.home-header {
@@ -106,7 +106,7 @@
 @media (max-width: @screen-sm-max) {
   .header {
     &-search-box {
-      padding-left: @spacing-sm;
+      padding-left: var(--ix-padding-size-sm);
 
       .ix-input {
         max-width: 140px;

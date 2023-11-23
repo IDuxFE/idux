@@ -26,11 +26,13 @@ import { BlockScrollStrategy, type ScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { ɵMask } from '@idux/components/_private/mask'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { usePortalTarget, useZIndex } from '@idux/components/utils'
 
 import DrawerWrapper from './DrawerWrapper'
 import { DRAWER_TOKEN, drawerToken } from './token'
 import { type DrawerProps, drawerProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxDrawer',
@@ -38,6 +40,9 @@ export default defineComponent({
   props: drawerProps,
   setup(props, { slots, expose, attrs }) {
     const common = useGlobalConfig('common')
+    const { registerToken } = useThemeToken('drawer')
+    registerToken(getThemeTokens)
+
     const config = useGlobalConfig('drawer')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-drawer`)
     const mergedPortalTarget = usePortalTarget(props, config, common, mergedPrefixCls)

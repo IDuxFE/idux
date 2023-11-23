@@ -28,3 +28,7 @@ export type {
   NotificationProviderInstance,
   NotificationProviderComponent,
 } from './src/types'
+
+export { getThemeTokens as getNotificationThemeTokens } from './theme'
+
+export type { NotificationThemeTokens } from './theme'

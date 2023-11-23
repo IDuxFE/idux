@@ -20,3 +20,6 @@ export type {
   AvatarShape,
   AvatarSize,
 } from './src/types'
+
+export { getThemeTokens as getAvatarThemeTokens } from './theme'
+export type { AvatarThemeTokens } from './theme'

@@ -1,51 +1,58 @@
 .@{menu-prefix} {
-  color: @menu-color;
-  background-color: @menu-background-color;
+  color: var(--ix-menu-item-color);
+  background: var(--ix-menu-item-bg);
 
   &-item-group-label {
-    color: @menu-item-group-text-color;
+    color: var(--ix-menu-item-group-color);
+    background: var(--ix-menu-item-group-bg);
   }
 
   &-item:hover,
   &-sub-label:hover {
-    color: @menu-color-hover;
+    color: var(--ix-menu-item-color-hover);
   }
 
   &-item:hover,
   &-sub-label:hover,
   &:not(&-inline) &-sub-expanded > &-sub-label {
-    background-color: @menu-background-color-hover;
+    background: var(--ix-menu-item-bg-hover);
   }
 
   &-item&-item-selected,
   &-vertical&-collapsed &-sub-selected > &-sub-label {
-    background-color: @menu-background-color-active;
+    background: var(--ix-menu-item-bg-active);
   }
 
   &-item&-item-selected,
   &-sub-selected > &-sub-label {
-    color: @menu-color-active;
+    color: var(--ix-menu-item-color-active);
   }
 
   & &-item&-item-disabled,
   & &-sub&-sub-disabled > &-sub-label {
-    color: @menu-color-disabled;
-    background-color: @menu-background-color-disabled;
+    color: var(--ix-menu-item-color-disabled);
+    background: var(--ix-menu-item-bg-disabled);
   }
 
   &-horizontal {
     .@{menu-prefix}-item:hover,
-    .@{menu-prefix}-sub-label:hover,
+    .@{menu-prefix}-sub-label:hover {
+      color: var(--ix-menu-horizontal-item-color-hover);
+      background: var(--ix-menu-horizontal-item-bg-hover);
+      border-bottom-color: var(--ix-menu-item-color-active);
+    }
+
     .@{menu-prefix}-item.@{menu-prefix}-item-selected,
     .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label,
     .@{menu-prefix}-sub-expanded > .@{menu-prefix}-sub-label {
-      background-color: @menu-horizontal-background-color-active;
-      border-bottom-color: @menu-color-active;
+      color: var(--ix-menu-horizontal-item-color-active);
+      background: var(--ix-menu-horizontal-item-bg-active);
+      border-bottom-color: var(--ix-menu-item-color-active);
     }
 
     .@{menu-prefix}-item.@{menu-prefix}-item-disabled,
     .@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-label {
-      background-color: @menu-background-color;
+      background: var(--ix-menu-item-bg-disabled);
       border-bottom-color: transparent;
     }
   }

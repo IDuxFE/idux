@@ -8,44 +8,44 @@
 .markdown h4,
 .markdown h5,
 .markdown h6 {
-  margin: @spacing-sm 0;
-  color: @color-black;
-  font-family: Avenir, @font-family, sans-serif;
+  margin: var(--ix-margin-size-sm) 0;
+  color: var(--ix-color-text-title);
+  font-family: Avenir, var(--ix-font-family), sans-serif;
 }
 
 .markdown h1 {
-  margin-bottom: @spacing-lg;
-  font-size: @font-size-3xl;
+  margin-bottom: var(--ix-margin-size-lg);
+  font-size: var(--ix-font-size-3xl);
 
   .subtitle {
-    margin-left: @spacing-md;
+    margin-left: var(--ix-margin-size-md);
   }
 }
 
 .markdown h2 {
-  margin-bottom: @spacing-md;
-  font-size: @font-size-2xl;
+  margin-bottom: var(--ix-margin-size-md);
+  font-size: var(--ix-font-size-2xl);
 }
 
 .markdown h3 {
-  margin-bottom: @spacing-md;
-  font-size: @font-size-xl;
+  margin-bottom: var(--ix-margin-size-md);
+  font-size: var(--ix-font-size-xl);
 }
 
 .markdown h4 {
-  font-size: @font-size-lg;
+  font-size: var(--ix-font-size-lg);
 }
 
 .markdown h5 {
-  font-size: @font-size-md;
+  font-size: var(--ix-font-size-md);
 }
 
 .markdown h6 {
-  font-size: @font-size-sm;
+  font-size: var(--ix-font-size-sm);
 }
 
 .markdown .anchor {
-  margin-left: @spacing-sm;
+  margin-left: var(--ix-margin-size-sm);
   opacity: 0;
   transition: opacity @transition-duration-base;
 }
@@ -63,23 +63,23 @@
 .markdown hr {
   clear: both;
   height: 1px;
-  margin: (@spacing-xl * 2) 0;
-  background: @border-color-split;
+  margin: calc(var(--ix-margin-size-xl) * 2) 0;
+  background: var(--ix-color-separator);
   border: 0;
 }
 
 .markdown p,
 .markdown pre {
-  margin: @spacing-md 0;
+  margin: var(--ix-margin-size-md) 0;
 }
 
 .markdown ol > li {
-  margin-left: @spacing-xl;
+  margin-left: var(--ix-margin-size-xl);
   list-style-type: decimal;
 }
 
 .markdown ul > li {
-  margin-left: @spacing-xl;
+  margin-left: var(--ix-margin-size-xl);
   list-style-type: circle;
 
   &:empty {
@@ -93,54 +93,54 @@
 
 .markdown ul > li > p,
 .markdown ol > li > p {
-  margin: @spacing-xs 0;
+  margin: var(--ix-margin-size-xs) 0;
 }
 
 .markdown pre,
 .markdown code {
   margin: 0;
-  padding: (@spacing-sm / 4) @spacing-xs;
+  padding: calc(var(--ix-margin-size-sm) / 4) var(--ix-margin-size-xs);
   overflow: auto;
-  color: @text-color;
+  color: var(--ix-color-text);
   background: @markdown-code-bg;
   border: none;
-  border-radius: @border-radius-md;
+  border-radius: var(--ix-border-radius-md);
 }
 
 .markdown strong,
 .markdown b {
-  font-weight: @font-weight-lg;
+  font-weight: var(--ix-font-weight-xl);
 }
 
 .markdown > table {
   width: 100%;
-  margin: @spacing-sm 0 @spacing-lg;
+  margin: var(--ix-margin-size-sm) 0 var(--ix-margin-size-lg);
   empty-cells: show;
-  border: @border-width-sm @border-style @border-color-split;
+  border: var(--ix-line-width) var(--ix-line-type) var(--ix-color-separator);
   border-collapse: collapse;
   border-spacing: 0;
 }
 
 .markdown > table th {
   color: #5c6b77;
-  font-weight: @font-weight-lg;
+  font-weight: var(--ix-font-weight-xl);
   white-space: nowrap;
   background: rgb(0 0 0 / 2%);
 }
 
 .markdown > table th,
 .markdown > table td {
-  padding: @spacing-sm @spacing-md;
+  padding: var(--ix-margin-size-sm) var(--ix-margin-size-md);
   text-align: left;
-  border: @border-width-sm @border-style @border-color-split;
+  border: var(--ix-line-width) var(--ix-line-type) var(--ix-color-separator);
 }
 
 .markdown blockquote {
-  margin: @spacing-lg 0;
-  padding-left: @spacing-md;
+  margin: var(--ix-margin-size-lg) 0;
+  padding-left: var(--ix-margin-size-md);
   color: rgb(0 0 0 / 45%);
-  font-size: @font-size-md - 1px;
-  border-left: @border-width-lg @border-style @border-color-split;
+  font-size: calc(var(--ix-font-size-md) - 1px);
+  border-left: 3px var(--ix-line-type) var(--ix-color-separator);
 }
 
 .markdown > br,

@@ -14,3 +14,7 @@ const IxSlider = Slider as unknown as SliderComponent
 export { IxSlider }
 
 export type { SliderInstance, SliderComponent, SliderPublicProps as SliderProps } from './src/types'
+
+export { getThemeTokens as getSliderThemeTokens } from './theme'
+
+export type { SliderThemeTokens } from './theme'

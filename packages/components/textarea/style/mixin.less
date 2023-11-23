@@ -1,7 +1,9 @@
-.textarea-size(@font-size, @padding-vertical, @padding-horizontal) {
+.textarea-size(@font-size, @padding-vertical, @padding-horizontal, @border-radius) {
   font-size: @font-size;
+  line-height: calc(@font-size + var(--ix-line-height-gutter));
   .@{textarea-prefix}-inner {
     padding: @padding-vertical @padding-horizontal;
+    border-radius: @border-radius;
   }
   .@{textarea-prefix}-clear {
     top: @padding-vertical;
@@ -10,7 +12,7 @@
 
   &.@{textarea-prefix}-clearable {
     .@{textarea-prefix}-inner {
-      padding-right: @padding-horizontal + @font-size;
+      padding-right: calc(@padding-horizontal + @font-size);
     }
   }
 }

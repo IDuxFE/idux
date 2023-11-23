@@ -12,6 +12,7 @@ import { isBoolean } from 'lodash-es'
 import { ɵHeader } from '@idux/components/_private/header'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxSpin, type SpinProps } from '@idux/components/spin'
+import { useThemeToken } from '@idux/components/theme'
 import { useGetKey } from '@idux/components/utils'
 
 import { useColumns } from './composables/useColumns'
@@ -30,15 +31,18 @@ import { renderFooter } from './other/Footer'
 import { renderPagination } from './other/Pagination'
 import { TABLE_TOKEN } from './token'
 import { tableProps } from './types'
+import { getThemeTokens } from '../theme'
 
-const virtualItemHeightForSeer = { sm: 32, md: 40, lg: 56 } as const
-const virtualItemHeightForDefault = { sm: 40, md: 48, lg: 56 } as const
+const virtualItemHeight = { sm: 32, md: 40, lg: 56 } as const
 
 export default defineComponent({
   name: 'IxTable',
   props: tableProps,
   setup(props, { expose, slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('table')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-table`)
     const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('table')
@@ -48,13 +52,7 @@ export default defineComponent({
     const mergedGetKey = useGetKey(props, config, 'components/table')
     const mergedEmptyCell = computed(() => props.emptyCell ?? config.emptyCell)
     const mergedSize = computed(() => props.size ?? config.size)
-    const mergedVirtualItemHeight = computed(
-      () =>
-        props.virtualItemHeight ??
-        (common.theme === 'seer'
-          ? virtualItemHeightForSeer[mergedSize.value]
-          : virtualItemHeightForDefault[mergedSize.value]),
-    )
+    const mergedVirtualItemHeight = computed(() => props.virtualItemHeight ?? virtualItemHeight[mergedSize.value])
     const { mergedPagination } = usePagination(props, config, mergedSize)
 
     const stickyContext = useSticky(props)
@@ -111,6 +109,8 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const { borderless = config.borderless, scroll } = props
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-auto-height`]: mergedAutoHeight.value,
         [`${prefixCls}-borderless`]: borderless,

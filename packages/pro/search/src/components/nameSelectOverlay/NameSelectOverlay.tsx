@@ -9,6 +9,7 @@ import { type ComputedRef, computed, defineComponent, inject, onMounted, ref, wa
 
 import { useState } from '@idux/cdk/utils'
 import { ɵOverlay, type ɵOverlayInstance, type ɵOverlayProps } from '@idux/components/_private/overlay'
+import { useThemeToken } from '@idux/pro/theme'
 
 import KeywordFallbackPanel from './KeywordFallbackPanel'
 import NameSelectPanel from './NameSelectPanel'
@@ -20,6 +21,7 @@ export default defineComponent({
   props: nameSelectOverlayProps,
   setup(props, { slots, expose }) {
     const context = inject(proSearchContext)!
+    const { globalHashId, hashId } = useThemeToken('proSearch')
     const { mergedPrefixCls, bindOverlayMonitor, commonOverlayProps, nameSelectActive, overlayOpened } = context
 
     const overlayRef = ref<ɵOverlayInstance>()
@@ -46,7 +48,13 @@ export default defineComponent({
       watch(isActive, updateOverlay)
     })
 
-    const overlayProps = useOverlayAttrs(mergedPrefixCls, commonOverlayProps, nameSelectOverlayOpened)
+    const overlayProps = useOverlayAttrs(
+      mergedPrefixCls,
+      commonOverlayProps,
+      nameSelectOverlayOpened,
+      globalHashId,
+      hashId,
+    )
 
     const renderContent = () => {
       return filteredData.value.length ? (
@@ -82,10 +90,12 @@ function useOverlayAttrs(
   mergedPrefixCls: ComputedRef<string>,
   commonOverlayProps: ComputedRef<ɵOverlayProps>,
   overlayOpened: ComputedRef<boolean>,
+  globalHashId: ComputedRef<string>,
+  hashId: ComputedRef<string>,
 ): ComputedRef<ɵOverlayProps> {
   return computed(() => ({
     ...commonOverlayProps.value,
-    class: `${mergedPrefixCls.value}-name-segment-overlay`,
+    class: [`${mergedPrefixCls.value}-name-segment-overlay`, globalHashId.value, hashId.value],
     trigger: 'manual',
     visible: overlayOpened.value,
   }))

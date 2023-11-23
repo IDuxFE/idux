@@ -10,6 +10,7 @@ import { computed, defineComponent, inject, normalizeClass, provide } from 'vue'
 import { type VKey, callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { ɵDropdownToken } from '@idux/components/dropdown'
+import { useThemeToken } from '@idux/components/theme'
 import { useGetKey } from '@idux/components/utils'
 
 import { useDataSource } from './composables/useDataSource'
@@ -18,12 +19,16 @@ import { useSelected } from './composables/useSelected'
 import { coverChildren } from './contents/Utils'
 import { menuToken } from './token'
 import { menuProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxMenu',
   props: menuProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('menu')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-menu`)
     const config = useGlobalConfig('menu')
     const mergedGetKey = useGetKey(props, config, 'components/menu')
@@ -58,6 +63,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-${theme.value}`]: true,
         [`${prefixCls}-${mode.value}`]: true,

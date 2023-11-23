@@ -20,3 +20,7 @@ export type {
   TextareaResize,
   TextareaError,
 } from './src/types'
+
+export { getThemeTokens as getProTextareaThemeTokens } from './theme'
+
+export type { ProTextareaThemeTokens } from './theme'

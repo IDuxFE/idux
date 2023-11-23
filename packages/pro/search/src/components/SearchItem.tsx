@@ -8,6 +8,7 @@
 import { computed, defineComponent, inject, normalizeClass, provide, ref, watch } from 'vue'
 
 import { IxTooltip } from '@idux/components/tooltip'
+import { useThemeToken } from '@idux/pro/theme'
 
 import Segment from './segment/Segment'
 import { useSegmentOverlayUpdate } from '../composables/useSegmentOverlayUpdate'
@@ -20,6 +21,7 @@ export default defineComponent({
   props: searchItemProps,
   setup(props, { slots }) {
     const context = inject(proSearchContext)!
+    const { globalHashId, hashId } = useThemeToken('proSearch')
     const { props: proSearchProps, mergedPrefixCls, activeSegment, setActiveSegment, removeSearchState } = context
 
     const itemPrefixCls = computed(() => `${mergedPrefixCls.value}-search-item`)
@@ -93,7 +95,7 @@ export default defineComponent({
 
       return (
         <IxTooltip
-          class={`${prefixCls}-invalid-tooltip`}
+          class={[`${prefixCls}-invalid-tooltip`, globalHashId.value, hashId.value]}
           title={props.searchItem?.error?.message}
           placement="topStart"
           offset={[0, 15]}

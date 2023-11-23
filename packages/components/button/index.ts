@@ -26,3 +26,6 @@ export type {
   ButtonGroupComponent,
   ButtonGroupPublicProps as ButtonGroupProps,
 } from './src/types'
+
+export { getThemeTokens as getButtonThemeTokens } from './theme'
+export type { ButtonThemeTokens } from './theme'
