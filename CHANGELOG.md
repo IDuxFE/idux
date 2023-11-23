@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.0](https://github.com/sallerli1/idux/compare/v1.12.2...v2.0.0-beta.0) (2023-11-23)
+
+
+### Features
+
+* **cdk:theme:** add cdk theme support ([#1739](https://github.com/sallerli1/idux/issues/1739)) ([f34f0e5](https://github.com/sallerli1/idux/commit/f34f0e573d294719abe216dd2f3fbf196bcd021b))
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/sallerli1/idux/issues/1737)) ([ea22a8f](https://github.com/sallerli1/idux/commit/ea22a8fa8fb863a4c546b9af62025718779d3463))
+* remove typography support ([#1738](https://github.com/sallerli1/idux/issues/1738)) ([ed6462a](https://github.com/sallerli1/idux/commit/ed6462ac516a8aaec6cc9774f9ee7210e593ffc0))
+
+
+### BREAKING CHANGES
+
+* typography is removed
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
+
 ## [1.12.3](https://github.com/IDuxFE/idux/compare/v1.12.2...v1.12.3) (2023-12-05)
 
 
@@ -16,9 +34,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **comp:radio:** gap behaves abnormally when configured without 0px ([#1740](https://github.com/IDuxFE/idux/issues/1740)) ([9ecd14a](https://github.com/IDuxFE/idux/commit/9ecd14aa5663399f1e3c92d3f40d8f5f05ad9dee))
 * **pro:search:** click is correct when key is zero ([#1748](https://github.com/IDuxFE/idux/issues/1748)) ([9d996ce](https://github.com/IDuxFE/idux/commit/9d996cedbfb1c6748911ae6e6e3e263177444737))
 * **pro:table:** layoutool checkbox shouldn't be checkable when disabled ([#1741](https://github.com/IDuxFE/idux/issues/1741)) ([0905872](https://github.com/IDuxFE/idux/commit/0905872941527f73d5acf56e0dc18d4768c2ad11))
-
-
-
 
 
 ## [1.12.2](https://github.com/IDuxFE/idux/compare/v1.12.1...v1.12.2) (2023-11-06)
