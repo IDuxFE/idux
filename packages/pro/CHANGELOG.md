@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.0](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0-beta.0) (2023-11-23)
+
+
+### Features
+
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([ea22a8f](https://github.com/IDuxFE/idux/commit/ea22a8fa8fb863a4c546b9af62025718779d3463))
+
+
+### BREAKING CHANGES
+
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
+
+
+
+
 ## [1.12.2](https://github.com/IDuxFE/idux/compare/v1.12.1...v1.12.2) (2023-11-06)
 
 
