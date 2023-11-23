@@ -294,7 +294,7 @@ describe('Modal', () => {
   })
 
   test('offset work', async () => {
-    const wrapper = ModalMount({ props: { offset: 256 } })
+    const wrapper = ModalMount({ props: { centered: false, offset: 256 } })
     const modalWrapper = wrapper.getComponent(ModalWrapper)
 
     const contentDom = modalWrapper.find('.ix-modal').element as HTMLElement

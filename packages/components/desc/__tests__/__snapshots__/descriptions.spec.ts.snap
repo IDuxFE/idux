@@ -4,27 +4,27 @@ exports[`Desc > render work 1`] = `
 "<div class=\\"ix-row ix-desc ix-desc-md\\">
   <!---->
   <div class=\\"ix-col ix-col-span-8 ix-desc-item\\">
-    <div class=\\"ix-desc-item-label ix-desc-item-label-colon\\"><label>A</label></div>
+    <div class=\\"ix-desc-item-label ix-desc-item-label-start\\"><label>A</label></div>
     <div class=\\"ix-desc-content\\"><span>aaa</span></div>
   </div>
   <div class=\\"ix-col ix-col-span-8 ix-desc-item\\">
-    <div class=\\"ix-desc-item-label ix-desc-item-label-colon\\"><label>B</label></div>
+    <div class=\\"ix-desc-item-label ix-desc-item-label-start\\"><label>B</label></div>
     <div class=\\"ix-desc-content\\"><span>bbb</span></div>
   </div>
   <div class=\\"ix-col ix-col-span-8 ix-desc-item\\">
-    <div class=\\"ix-desc-item-label ix-desc-item-label-colon\\"><label>C</label></div>
+    <div class=\\"ix-desc-item-label ix-desc-item-label-start\\"><label>C</label></div>
     <div class=\\"ix-desc-content\\"><span>ccc</span></div>
   </div>
   <div class=\\"ix-col ix-col-span-8 ix-desc-item\\">
-    <div class=\\"ix-desc-item-label ix-desc-item-label-colon\\"><label>D</label></div>
+    <div class=\\"ix-desc-item-label ix-desc-item-label-start\\"><label>D</label></div>
     <div class=\\"ix-desc-content\\"><span>ddd</span></div>
   </div>
   <div class=\\"ix-col ix-col-span-8 ix-desc-item\\">
-    <div class=\\"ix-desc-item-label ix-desc-item-label-colon\\"><label>E</label></div>
+    <div class=\\"ix-desc-item-label ix-desc-item-label-start\\"><label>E</label></div>
     <div class=\\"ix-desc-content\\"><span>eee</span></div>
   </div>
   <div class=\\"ix-col ix-col-span-8 ix-desc-item\\">
-    <div class=\\"ix-desc-item-label ix-desc-item-label-colon\\"><label>F</label></div>
+    <div class=\\"ix-desc-item-label ix-desc-item-label-start\\"><label>F</label></div>
     <div class=\\"ix-desc-content\\"><span>fff</span></div>
   </div>
   <div class=\\"ix-col ix-col-span-16 ix-desc-item\\">

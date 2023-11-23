@@ -147,7 +147,7 @@ describe('Card', () => {
 
     expect(wrapper.classes()).toContain('ix-card-lg')
 
-    await wrapper.setProps({ size: undefined })
+    await wrapper.setProps({ size: 'md' })
 
     expect(wrapper.classes()).toContain('ix-card-md')
   })

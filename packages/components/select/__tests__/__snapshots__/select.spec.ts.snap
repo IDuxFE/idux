@@ -4,7 +4,7 @@ exports[`Select > multiple work > maxLabel responsive work 1`] = `
 "<div class=\\"ix-select ix-selector ix-selector-md ix-selector-multiple\\">
   <!---->
   <div class=\\"ix-selector-content\\">
-    <div class=\\"ix-overflow ix-selector-overflow\\">
+    <div class=\\"ix-overflow ix-selector-overflow \\">
       <div class=\\"ix-overflow-item\\">
         <div class=\\"ix-selector-item ix-selector-item-disabled\\"><span class=\\"ix-selector-item-label\\">A0</span>
           <!---->
@@ -40,7 +40,7 @@ exports[`Select > multiple work > maxLabel responsive work 2`] = `
 "<div class=\\"ix-select ix-selector ix-selector-md ix-selector-multiple\\">
   <!---->
   <div class=\\"ix-selector-content\\">
-    <div class=\\"ix-overflow ix-selector-overflow\\">
+    <div class=\\"ix-overflow ix-selector-overflow \\">
       <div class=\\"ix-overflow-item\\">
         <div class=\\"ix-selector-item ix-selector-item-disabled\\"><span class=\\"ix-selector-item-label\\">A0</span>
           <!---->
@@ -67,7 +67,7 @@ exports[`Select > multiple work > render work 1`] = `
 "<div class=\\"ix-select ix-selector ix-selector-md ix-selector-multiple\\">
   <!---->
   <div class=\\"ix-selector-content\\">
-    <div class=\\"ix-overflow ix-selector-overflow\\">
+    <div class=\\"ix-overflow ix-selector-overflow \\">
       <div class=\\"ix-overflow-item\\">
         <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">0</span><span class=\\"ix-selector-item-remove\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span></div>
       </div>

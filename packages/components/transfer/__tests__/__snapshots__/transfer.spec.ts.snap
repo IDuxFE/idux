@@ -123,9 +123,9 @@ exports[`Transfer > render work 1`] = `
     <!---->
   </div>
   <div class=\\"ix-transfer-operations\\">
-    <div class=\\"ix-transfer-operations-inner\\"><button class=\\"ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn\\" disabled=\\"\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-double-right\\" role=\\"img\\" aria-label=\\"double-right\\"></i>
+    <div class=\\"ix-transfer-operations-inner\\"><button class=\\"ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-sm ix-transfer-operations-btn\\" disabled=\\"\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-double-right\\" role=\\"img\\" aria-label=\\"double-right\\"></i>
         <div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div>
-      </button><button class=\\"ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-md ix-transfer-operations-btn\\" disabled=\\"\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-double-left\\" role=\\"img\\" aria-label=\\"double-left\\"></i>
+      </button><button class=\\"ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-sm ix-transfer-operations-btn\\" disabled=\\"\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-double-left\\" role=\\"img\\" aria-label=\\"double-left\\"></i>
         <div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div>
       </button></div>
   </div>

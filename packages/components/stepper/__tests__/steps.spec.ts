@@ -89,7 +89,7 @@ describe('Stepper', () => {
   })
 
   test('size work', async () => {
-    const wrapper = StepperMount({ props: { percent: 10 } })
+    const wrapper = StepperMount({ props: { size: 'md', percent: 10 } })
 
     const processWrapper = wrapper.find('.ix-progress-circle')
 

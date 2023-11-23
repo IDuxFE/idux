@@ -59,7 +59,7 @@ describe('ButtonGroup', () => {
     const wrapper = ButtonGroupMount()
 
     expect(wrapper.findAll('.ix-button-lg').length).toBe(1)
-    expect(wrapper.findAll('.ix-button-md').length).toBe(3)
+    expect(wrapper.findAll('.ix-button-sm').length).toBe(3)
 
     await wrapper.setProps({ size: 'xl' })
 
