@@ -14,4 +14,7 @@ export interface CollapseThemeTokens {
 
   paddingHorizontalSm: number
   paddingHorizontalMd: number
+
+  panelHeaderBgColor: string
+  panelContentBgColor: string
 }

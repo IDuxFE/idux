@@ -82,8 +82,8 @@ export function useEllipsis(
     !measure
       ? sliceNodes(nodes, 0, lastRenderIndex.value)
       : measureStatus.value === 'preparing'
-      ? nodes
-      : sliceNodes(nodes, 0, measureLastRenderIndex.value)
+        ? nodes
+        : sliceNodes(nodes, 0, measureLastRenderIndex.value)
   /* eslint-enable indent */
 
   const calculate = () => {

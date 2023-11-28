@@ -5,8 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type CertainThemeTokens, type GlobalThemeTokens, getBaseColors, getColorPalette } from '@idux/components/theme'
-export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTokens<'rate'> {
+import type { CertainThemeTokens, GlobalThemeTokens, ThemeTokenAlgorithms } from '@idux/components/theme'
+export function getDefaultThemeTokens(
+  tokens: GlobalThemeTokens,
+  algorithms: ThemeTokenAlgorithms,
+): CertainThemeTokens<'rate'> {
+  const { getColorPalette, getBaseColors } = algorithms
   const { marginSizeSm } = tokens
 
   const activeColor = getColorPalette(getBaseColors().brown).l10

@@ -11,6 +11,10 @@ export interface NotificationThemeTokens {
   width: number
   maxWidth: string | number
 
+  borderWidth: number
+  borderType: string
+  borderColor: string
+
   fontSize: number
   bgColor: string
   borderRadius: number

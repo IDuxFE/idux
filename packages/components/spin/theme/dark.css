@@ -1,0 +1,14 @@
+/* ------ spin css variables ------ */
+:root {
+  --ix-spin-tip-color: #4083e8;
+  --ix-spin-icon-color: #4083e8;
+  --ix-spin-font-size-sm: 12px;
+  --ix-spin-font-size-md: 14px;
+  --ix-spin-font-size-lg: 16px;
+  --ix-spin-icon-size-sm: 20px;
+  --ix-spin-icon-size-md: 28px;
+  --ix-spin-icon-size-lg: 48px;
+  --ix-spin-bg-circle-stroke: #4083e8;
+  --ix-spin-fst-arch-stroke: #40c695;
+  --ix-spin-snd-arch-stroke: #3c424d;
+}

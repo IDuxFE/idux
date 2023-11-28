@@ -1,0 +1,13 @@
+/* ------ result css variables ------ */
+:root {
+  --ix-result-padding: 48px 32px;
+  --ix-result-icon-size: 48px;
+  --ix-result-title-font-size: 20px;
+  --ix-result-title-line-height: 32px;
+  --ix-result-subtitle-font-size: 12px;
+  --ix-result-subtitle-line-height: 18px;
+  --ix-result-subtitle-margin-top: 4px;
+  --ix-result-extra-margin-top: 24px;
+  --ix-result-content-margin-top: 24px;
+  --ix-result-content-padding: 24px 40px;
+}

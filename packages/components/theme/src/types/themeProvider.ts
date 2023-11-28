@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { DeepPartialThemeTokens, ThemeKeys } from './themeTokens'
+import type { DeepPartialThemeTokens, ThemeKeys, ThemeTokenAlgorithms } from './themeTokens'
 import type { UseThemeTokenContext } from '../useThemeToken'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/utils'
 import type { DefineComponent, EffectScope, HTMLAttributes, PropType } from 'vue'
@@ -36,6 +36,7 @@ export const themeProviderProps = {
   },
   attachTo: [String, Object, Function] as PropType<ThemeProviderAttachTo>,
   tokens: Object as PropType<DeepPartialThemeTokens>,
+  algorithm: Object as PropType<Partial<ThemeTokenAlgorithms>>,
 } as const
 
 export type ThemeProviderProps = ExtractInnerPropTypes<typeof themeProviderProps>

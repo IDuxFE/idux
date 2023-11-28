@@ -11,6 +11,6 @@ import { getDefaultThemeTokens } from './default'
 
 export type { SpinThemeTokens } from './tokens'
 
-export const getThemeTokens: TokenGetter<'spin'> = tokens => {
-  return getDefaultThemeTokens(tokens)
+export const getThemeTokens: TokenGetter<'spin'> = (tokens, _, algorithms) => {
+  return getDefaultThemeTokens(tokens, algorithms)
 }

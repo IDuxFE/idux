@@ -56,10 +56,10 @@ export function useFileSelect(
       isNil(onSelectResult) || onSelectResult === true
         ? allowdFiles
         : onSelectResult === false
-        ? []
-        : isArray(onSelectResult)
-        ? onSelectResult
-        : []
+          ? []
+          : isArray(onSelectResult)
+            ? onSelectResult
+            : []
     /* eslint-enable indent */
 
     const uploadFiles = resolvedAllowedFiles.map(file => createUploadFile(file, { status: 'selected' }))

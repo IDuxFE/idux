@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-type BaseColorKeys =
+export type BaseColorKeys =
   | 'red'
   | 'orange'
   | 'brown'
@@ -25,7 +25,7 @@ type BaseColorKeys =
   | 'white'
   | 'black'
 
-type BaseColors = {
+export type BaseColors = {
   [key in BaseColorKeys]: string
 }
 

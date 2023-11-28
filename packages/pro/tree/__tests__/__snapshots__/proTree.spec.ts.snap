@@ -24,7 +24,7 @@ exports[`ProTree > render work 1`] = `
     <div class=\\"ix-tree-content\\">
       <div class=\\"ix-tree-content-inner\\">
         <div class=\\"ix-tree-node ix-tree-node-last\\" aria-label=\\"Node 0\\" aria-selected=\\"false\\" title=\\"Node 0\\"><span aria-hidden=\\"true\\" class=\\"ix-tree-node-indent\\"></span>
-          <!----><span class=\\"ix-tree-node-expand\\"><!----><svg viewBox=\\"0 0 16 16\\" width=\\"14px\\" height=\\"14px\\"><rect x=\\"0\\" y=\\"0\\" width=\\"16\\" height=\\"16\\" rx=\\"1\\" fill=\\"#EDF1F7\\"></rect><rect x=\\"5\\" y=\\"7\\" width=\\"6\\" height=\\"2\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect><rect x=\\"7\\" y=\\"5\\" width=\\"2\\" height=\\"6\\" rx=\\"0.2\\" fill=\\"#5E6573\\"></rect></svg></span>
+          <!----><span class=\\"ix-tree-node-expand\\"><!----><svg viewBox=\\"0 0 16 16\\" width=\\"14px\\" height=\\"14px\\"><rect x=\\"0\\" y=\\"0\\" width=\\"16\\" height=\\"16\\" rx=\\"1\\" style=\\"fill: var(--ix-color-emphasized-container-bg);\\"></rect><rect x=\\"5\\" y=\\"7\\" width=\\"6\\" height=\\"2\\" rx=\\"0.2\\" style=\\"fill: var(--ix-color-icon);\\"></rect><rect x=\\"7\\" y=\\"5\\" width=\\"2\\" height=\\"6\\" rx=\\"0.2\\" style=\\"fill: var(--ix-color-icon);\\"></rect></svg></span>
           <!----><span class=\\"ix-tree-node-content\\"><!----><span class=\\"ix-tree-node-content-label\\">Node 0</span>
           <!----></span>
         </div>

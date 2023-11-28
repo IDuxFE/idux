@@ -10,8 +10,10 @@ import type { ProTokenGetter } from '@idux/pro/theme'
 import { getDefaultThemeTokens } from './default'
 export { transforms } from './transforms'
 
-export const getThemeTokens: ProTokenGetter<'proTextarea'> = (tokens, presetTheme) => {
-  return presetTheme === 'default' ? getDefaultThemeTokens(tokens) : getDefaultThemeTokens(tokens)
+export const getThemeTokens: ProTokenGetter<'proTextarea'> = (tokens, presetTheme, algorithms) => {
+  return presetTheme === 'default'
+    ? getDefaultThemeTokens(tokens, algorithms)
+    : getDefaultThemeTokens(tokens, algorithms)
 }
 
 export type { ProTextareaThemeTokens } from './tokens'

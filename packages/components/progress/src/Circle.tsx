@@ -60,7 +60,7 @@ export default defineComponent({
     const strokePath = useCirclePath(calcSharedProperties, circleMergedPrefixCls, props, percent, successPercent)
 
     const trailPathAttr = computed(() => ({
-      stroke: props.trailColor ?? '#f5f5f5',
+      stroke: props.trailColor,
       'fill-opacity': '0',
       'stroke-linecap': mergedStrokeLinecap.value,
       'stroke-width': strokeWidth.value,

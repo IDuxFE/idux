@@ -62,12 +62,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide, ref, watch } from 'vue'
+import { inject, ref } from 'vue'
 
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 
-import { useSharedBreakpoints } from '@idux/cdk/breakpoint'
-import { useTheme } from '@idux/cdk/theme'
 // import { GlobalConfig, GlobalConfigKey, defaultConfig, useGlobalConfig } from '@idux/components/config'
 import { DrawerProviderInstance } from '@idux/components/drawer'
 import { MessageProviderInstance } from '@idux/components/message'
@@ -77,7 +75,11 @@ import { useThemeToken } from '@idux/components/theme'
 
 const { globalHashId } = useThemeToken()
 
-import { AppContext, AppTheme, appContextToken } from './context'
+import { appContextToken } from './context'
+
+const { breakpoints, page } = inject(appContextToken)!
+
+const isDrawerOpen = ref(false)
 
 const drawerProviderRef = ref<DrawerProviderInstance>()
 const modalProviderRef = ref<ModalProviderInstance>()
@@ -91,62 +93,4 @@ router.afterEach(() => {
   notificationProviderRef.value?.destroyAll()
   messageProviderRef.value?.destroyAll()
 })
-
-const route = useRoute()
-
-const path = computed(() => route.path)
-const page = computed(() => {
-  const match = route.path.match(/\/(\w+)/)
-  return match?.[1] ?? 'home'
-})
-
-const breakpoints = useSharedBreakpoints()
-const themeKey = 'idux_theme'
-const { theme, changeTheme } = useTheme<AppTheme>({
-  defaultTheme: (localStorage.getItem(themeKey) || 'default') as AppTheme,
-})
-
-const isDrawerOpen = ref(false)
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// const configChanges = {} as Record<GlobalConfigKey, (config: Partial<GlobalConfig[GlobalConfigKey]>) => void>
-// const compNames = Object.keys(defaultConfig) as GlobalConfigKey[]
-// compNames.forEach(compName => {
-//   const [, change] = useGlobalConfig(compName, {})
-//   configChanges[compName] = change
-// })
-
-const setTheme = (theme: AppTheme) => {
-  changeTheme(theme)
-  localStorage.setItem(themeKey, theme)
-}
-
-watch(
-  theme,
-  () => {
-    // const config = theme.value === 'seer' ? seerConfig : defaultConfig
-    // const compNames = Object.keys(config) as GlobalConfigKey[]
-    // compNames.forEach(compName => {
-    //   const currConfig = config[compName]
-    //   const currChange = configChanges[compName]
-    //   currChange(currConfig!)
-    // })
-  },
-  {
-    immediate: true,
-  },
-)
-
-const appContext: AppContext = {
-  org: 'IDuxFE',
-  repo: 'components',
-  lang: ref('zh'),
-  path,
-  page,
-  breakpoints,
-  theme,
-  setTheme,
-}
-
-provide(appContextToken, appContext)
 </script>

@@ -5,14 +5,20 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type CertainThemeTokens, type GlobalThemeTokens, getColorPalette, getGreyColors } from '@idux/components/theme'
-export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTokens<'datePicker'> {
+import type { CertainThemeTokens, GlobalThemeTokens, ThemeTokenAlgorithms } from '@idux/components/theme'
+export function getDefaultThemeTokens(
+  tokens: GlobalThemeTokens,
+  algorithms: ThemeTokenAlgorithms,
+): CertainThemeTokens<'datePicker'> {
+  const { getColorPalette } = algorithms
   const {
     colorPrimary,
     colorPrimaryTextHover,
     colorText,
     colorTextInverse,
     colorTextDisabled,
+    colorContainerBgHover,
+    colorInfoContainerBg,
     marginSizeLg,
     paddingSizeSm,
     paddingSizeLg,
@@ -22,7 +28,6 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
   } = tokens
 
   const primaryColorPalette = getColorPalette(colorPrimary)
-  const greyColors = getGreyColors('graphite')
 
   return {
     separatorMarginHorizontal: marginSizeLg,
@@ -51,10 +56,10 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     panelCellColorActive: colorTextInverse,
     panelCellColorHover: colorPrimaryTextHover,
     panelCellColorDisabled: colorTextDisabled,
-    panelCellBgColorHover: greyColors.l50,
+    panelCellBgColorHover: colorContainerBgHover,
     panelCellBgColorActive: colorPrimary,
     panelCellBgColorInRange: primaryColorPalette.l50,
-    panelCellBgColorDisabled: greyColors.l50,
+    panelCellBgColorDisabled: colorInfoContainerBg,
 
     panelCellTriggerWidth: 20,
     panelCellTriggerHeight: 20,
@@ -70,6 +75,6 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     panelHeaderFontWeight: fontWeightMd,
     panelHeaderSpacing: marginSizeLg,
 
-    panelBodyHeaderBgColor: greyColors.l50,
+    panelBodyHeaderBgColor: colorInfoContainerBg,
   }
 }

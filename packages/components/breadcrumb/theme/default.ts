@@ -7,14 +7,15 @@
 
 import type { CertainThemeTokens, GlobalThemeTokens } from '@idux/components/theme'
 export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTokens<'breadcrumb'> {
-  const { fontSizeLg, colorTextPlaceholder, colorLink, colorIconInfo, colorTextTitle, marginSizeXs } = tokens
+  const { fontSizeSm, colorTextInfo, colorLink, colorTextDisabled, colorTextTitle, marginSizeXs } = tokens
 
   return {
-    itemColor: colorTextPlaceholder,
-    linkColor: colorTextPlaceholder,
+    fontSize: fontSizeSm,
+    itemColor: colorTextInfo,
+    linkColor: colorTextInfo,
     linkColorHover: colorLink,
-    separatorColor: colorIconInfo,
-    separatorFontSize: fontSizeLg,
+    separatorColor: colorTextDisabled,
+    separatorFontSize: fontSizeSm,
     lastItemColor: colorTextTitle,
     separatorMargin: `0 ${marginSizeXs}px`,
   }

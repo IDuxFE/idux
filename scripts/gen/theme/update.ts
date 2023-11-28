@@ -19,9 +19,11 @@ async function generateThemeVariables(theme: PresetTheme) {
   const proComponentDirPath = resolve(__dirname, '../../../packages/pro')
 
   /* @vite-ignore */
-  const { getThemeTokens, getResetTokens } = await import('@idux/components/theme/src/themeTokens')
+  const { getThemeTokens, getPresetAlgorithms, getResetTokens } = await import('@idux/components/theme/src/themeTokens')
   /* @vite-ignore */
   const { tokenToCss } = await import('@idux/components/theme/src/utils')
+
+  const algorithms = getPresetAlgorithms(theme)
 
   const globalTokens = getThemeTokens(theme)
 
@@ -42,7 +44,7 @@ async function generateThemeVariables(theme: PresetTheme) {
       resolve(dirPath, `${compName}/theme/index.ts`)
     )
 
-    const tokens = getThemeTokens(globalTokens, theme)
+    const tokens = getThemeTokens(globalTokens, theme, algorithms)
     const cssContent =
       `/* ------ ${compName} css variables ------ */\n` +
       tokenToCss(
@@ -92,7 +94,7 @@ async function generateThemeVariables(theme: PresetTheme) {
     const spin = ora()
     spin.start(`[Theme: ${theme}] generating ${scope} full variables...\n`)
 
-    let cssContent = globalVariablesContent
+    let cssContent = scope === 'components' ? globalVariablesContent : ''
 
     for (const comp of compVariables.filter(comp => comp.scope === scope).sort()) {
       cssContent += `\n` + comp.content
@@ -128,4 +130,4 @@ async function generateThemeVariables(theme: PresetTheme) {
   destroyDomEnv()
 }
 
-await generateThemeVariables('default')
+await Promise.all([generateThemeVariables('default'), generateThemeVariables('dark')])

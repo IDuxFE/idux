@@ -5,10 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type CertainThemeTokens, type GlobalThemeTokens, getColorPalette } from '@idux/components/theme'
+import type { CertainThemeTokens, GlobalThemeTokens, ThemeTokenAlgorithms } from '@idux/components/theme'
 
-export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTokens<'switch'> {
-  const { controlHeightXs, controlHeightSm, controlHeightMd, colorContainerBg, paddingSize2Xs, colorPrimary } = tokens
+export function getDefaultThemeTokens(
+  tokens: GlobalThemeTokens,
+  algorithms: ThemeTokenAlgorithms,
+): CertainThemeTokens<'switch'> {
+  const { getColorPalette } = algorithms
+  const { colorWhite, controlHeightXs, controlHeightSm, controlHeightMd, paddingSize2Xs, colorPrimary } = tokens
 
   const primaryColorPalette = getColorPalette(colorPrimary)
 
@@ -28,7 +32,7 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     iconFontSizeLg: 14,
 
     handlePadding: paddingSize2Xs,
-    handleBgColor: colorContainerBg,
+    handleBgColor: colorWhite,
     handleBoxShadow: `none`,
   }
 }

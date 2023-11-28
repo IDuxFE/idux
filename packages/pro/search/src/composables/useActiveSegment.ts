@@ -111,8 +111,8 @@ export function useActiveSegment(
         targetIndex === 0
           ? visibleSegments[0]
           : targetIndex === flattenedSegments.value.length - 1
-          ? visibleSegments[visibleSegments.length - 1]
-          : targetSegment
+            ? visibleSegments[visibleSegments.length - 1]
+            : targetSegment
     }
 
     updateActiveSegment(

@@ -5,8 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type CertainThemeTokens, type GlobalThemeTokens, getColorPalette } from '@idux/components/theme'
-export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTokens<'pagination'> {
+import type { CertainThemeTokens, GlobalThemeTokens, ThemeTokenAlgorithms } from '@idux/components/theme'
+export function getDefaultThemeTokens(
+  tokens: GlobalThemeTokens,
+  algorithms: ThemeTokenAlgorithms,
+): CertainThemeTokens<'pagination'> {
+  const { getColorPalette } = algorithms
   const { colorPrimary, fontSizeSm, fontSizeMd, paddingSizeXs, heightSm, heightMd } = tokens
 
   const primaryColorPalette = getColorPalette(colorPrimary)

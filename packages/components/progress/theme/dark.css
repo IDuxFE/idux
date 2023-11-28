@@ -1,0 +1,15 @@
+/* ------ progress css variables ------ */
+:root {
+  --ix-progress-trail-bg-color: #1f2329;
+  --ix-progress-text-width: 36px;
+  --ix-progress-border-radius: 100px;
+  --ix-progress-line-size-sm: 2px;
+  --ix-progress-line-size-md: 6px;
+  --ix-progress-line-size-lg: 8px;
+  --ix-progress-line-font-size-sm: 12px;
+  --ix-progress-line-font-size-md: 12px;
+  --ix-progress-line-font-size-lg: 14px;
+  --ix-progress-line-text-padding: 0 0 0 8px;
+  --ix-progress-circle-width: 120px;
+  --ix-progress-circle-font-size: 24px;
+}

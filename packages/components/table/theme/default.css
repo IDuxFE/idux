@@ -20,5 +20,7 @@
   --ix-table-head-icon-bg-color-hover: #e1e5eb;
   --ix-table-body-row-bg-color-hover: #f7f9fc;
   --ix-table-body-row-bg-color-selected: #ffffff;
+  --ix-table-body-row-bg-color-expanded: #f7f9fc;
+  --ix-table-body-row-bg-color-tree-expanded: #f7f9fc;
   --ix-table-expandable-icon-color: #bec3cc;
 }

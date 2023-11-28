@@ -12,7 +12,7 @@ import { type ComputedRef, computed } from 'vue'
 
 import { merge } from 'lodash-es'
 
-import { getThemeTokens } from '../themeTokens'
+import { getPresetAlgorithms, getThemeTokens } from '../themeTokens'
 import {
   type CertainThemeTokens,
   type GlobalThemeTokens,
@@ -20,11 +20,13 @@ import {
   type ResetTokenKey,
   type ThemeKeys,
   type ThemeProviderProps,
+  type ThemeTokenAlgorithms,
   type ThemeTokens,
   globalTokenKey,
 } from '../types'
 
 export interface TokenMergeContext {
+  mergedAlgorithms: ComputedRef<ThemeTokenAlgorithms>
   mergedTokens: ComputedRef<Omit<ThemeTokens, ResetTokenKey>>
   getMergedTokens: <K extends ThemeKeys>(key: K, tokens: CertainThemeTokens<K>) => CertainThemeTokens<K>
 }
@@ -35,6 +37,17 @@ export function useTokenMerge(
   supperContext: ThemeProviderContext | null,
   mergedPresetTheme: ComputedRef<PresetTheme>,
 ): TokenMergeContext {
+  const mergedAlgorithms = computed(() => {
+    const presetAlgorithms = getPresetAlgorithms(mergedPresetTheme.value)
+    const { getBaseColors, getColorPalette, getGreyColors } = props.algorithm ?? {}
+
+    return {
+      getBaseColors: getBaseColors ?? presetAlgorithms.getBaseColors,
+      getColorPalette: getColorPalette ?? presetAlgorithms.getColorPalette,
+      getGreyColors: getGreyColors ?? presetAlgorithms.getGreyColors,
+    }
+  })
+
   const mergedTokens = computed(() => {
     const configGlobalTokens = config.global
     const configComponentTokens = config.components
@@ -44,7 +57,7 @@ export function useTokenMerge(
       { ...configGlobalTokens },
       props.tokens?.global,
     ) as GlobalThemeTokens
-    const mergedGlobalTokens = getThemeTokens(mergedPresetTheme.value, globalTokens)
+    const mergedGlobalTokens = getThemeTokens(mergedPresetTheme.value, globalTokens, mergedAlgorithms.value)
 
     const mergedComponentTokens = merge(
       { ...(props.inherit ? supperContext?.mergedTokens.value.components ?? {} : {}) },
@@ -67,6 +80,7 @@ export function useTokenMerge(
   }
 
   return {
+    mergedAlgorithms,
     mergedTokens: mergedTokens as ComputedRef<Omit<ThemeTokens, ResetTokenKey>>,
     getMergedTokens,
   }

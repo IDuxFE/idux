@@ -7,10 +7,11 @@
 
 import type { TokenGetter } from '@idux/components/theme'
 
+import { getDarkThemeTokens } from './dark'
 import { getDefaultThemeTokens } from './default'
 
 export const getThemeTokens: TokenGetter<'collapse'> = (tokens, presetTheme) => {
-  return presetTheme === 'default' ? getDefaultThemeTokens(tokens) : getDefaultThemeTokens(tokens)
+  return presetTheme === 'default' ? getDefaultThemeTokens(tokens) : getDarkThemeTokens(tokens)
 }
 
 export type { CollapseThemeTokens } from './tokens'

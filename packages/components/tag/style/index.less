@@ -13,7 +13,7 @@
   background-color: var(--ix-tag-background-color, var(--ix-color-emphasized-container-bg));
   padding: 0 calc(8px - var(--ix-tag-border-width));
   line-height: @tag-line-height;
-  border: var(--ix-tag-border-width) solid var(--ix-tag-background-color, var(--ix-color-emphasized-container-bg));
+  border: var(--ix-tag-border-width) solid transparent;
   border-radius: var(--ix-tag-border-radius);
 
   & + & {
@@ -85,7 +85,7 @@
     height: @tag-prefix-size;
     width: @tag-prefix-size;
     background-color: inherit;
-    border: var(--ix-tag-border-width) solid var(--ix-color-text-inverse);
+    border: var(--ix-tag-border-width) solid var(--ix-color-container-bg);
     border-radius: @tag-prefix-size;
   }
 }

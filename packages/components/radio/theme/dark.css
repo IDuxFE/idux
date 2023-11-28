@@ -1,0 +1,7 @@
+/* ------ radio css variables ------ */
+:root {
+  --ix-radio-label-padding: 0 4px;
+  --ix-radio-fieldset-border-radius: 2px;
+  --ix-radio-fieldset-bg-color: #171a1f;
+  --ix-radio-fieldset-border-color: #1f2329;
+}

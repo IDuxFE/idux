@@ -1,9 +1,13 @@
 /* eslint-disable import/order */
 
-import { createApp, h } from 'vue'
+import { computed, createApp, h, provide, ref } from 'vue'
 import { IxThemeProvider } from '@idux/components/theme'
+import { useSharedBreakpoints } from '@idux/cdk/breakpoint'
+import { useTheme } from '@idux/cdk/theme'
 
-import { createRouter, createWebHistory } from 'vue-router'
+import { AppContext, AppTheme, appContextToken } from './context'
+
+import { createRouter, createWebHistory, useRoute } from 'vue-router'
 import IduxInstall from './iduxInstall'
 import App from './App.vue'
 
@@ -42,7 +46,49 @@ router.beforeEach(route => {
 })
 
 createApp({
-  render: () => h(IxThemeProvider, () => h(App)),
+  setup() {
+    const route = useRoute()
+
+    const path = computed(() => route.path)
+    const page = computed(() => {
+      const match = route.path.match(/\/(\w+)/)
+      return match?.[1] ?? 'home'
+    })
+
+    const breakpoints = useSharedBreakpoints()
+    const themeKey = 'idux_theme'
+    const { theme, changeTheme } = useTheme<AppTheme>({
+      defaultTheme: (localStorage.getItem(themeKey) || 'default') as AppTheme,
+    })
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // const configChanges = {} as Record<GlobalConfigKey, (config: Partial<GlobalConfig[GlobalConfigKey]>) => void>
+    // const compNames = Object.keys(defaultConfig) as GlobalConfigKey[]
+    // compNames.forEach(compName => {
+    //   const [, change] = useGlobalConfig(compName, {})
+    //   configChanges[compName] = change
+    // })
+
+    const setTheme = (theme: AppTheme) => {
+      changeTheme(theme)
+      localStorage.setItem(themeKey, theme)
+    }
+
+    const appContext: AppContext = {
+      org: 'IDuxFE',
+      repo: 'components',
+      lang: ref('zh'),
+      path,
+      page,
+      breakpoints,
+      theme,
+      setTheme,
+    }
+
+    provide(appContextToken, appContext)
+
+    return () => h(IxThemeProvider, { presetTheme: theme.value }, () => h(App))
+  },
 })
   .use(router)
   .use(IduxInstall)

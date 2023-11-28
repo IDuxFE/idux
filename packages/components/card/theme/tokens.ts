@@ -23,6 +23,8 @@ export interface CardThemeTokens {
   loadingSpacing: number
   loadingHeight: number
   loadingBgSize: string | number
+  loadingStartColor: string
+  loadingEndColor: string
 
   gridWidth: string | number
 }
