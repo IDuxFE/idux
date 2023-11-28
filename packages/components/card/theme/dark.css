@@ -1,0 +1,19 @@
+/* ------ card css variables ------ */
+:root {
+  --ix-card-font-size-sm: 12px;
+  --ix-card-font-size-md: 12px;
+  --ix-card-font-size-lg: 14px;
+  --ix-card-padding-size-sm: 16px;
+  --ix-card-padding-size-md: 16px;
+  --ix-card-padding-size-lg: 24px;
+  --ix-card-show-shadow-border-width: 1px;
+  --ix-card-mark-width: 20px;
+  --ix-card-mark-height: 16px;
+  --ix-card-header-padding: 8px;
+  --ix-card-loading-spacing: 4px;
+  --ix-card-loading-height: 14px;
+  --ix-card-loading-bg-size: 600%;
+  --ix-card-loading-start-color: #171a1f;
+  --ix-card-loading-end-color: #1f2329;
+  --ix-card-grid-width: 25%;
+}

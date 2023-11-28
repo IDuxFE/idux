@@ -11,9 +11,9 @@ import { isString } from 'lodash-es'
 
 import { type EmptyConfig, useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
-import { useThemeToken } from '@idux/components/theme'
+import { type PresetTheme, useThemeToken } from '@idux/components/theme'
 
-import { EmptyDefaultImage, EmptySimpleImage } from './Images'
+import { EmptyDefaultImage, EmptyDefaultImageDark, EmptySimpleImage, EmptySimpleImageDark } from './Images'
 import { type EmptyProps, emptyProps } from './types'
 import { getThemeTokens } from '../theme'
 
@@ -22,7 +22,7 @@ export default defineComponent({
   props: emptyProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
-    const { globalHashId, hashId, registerToken } = useThemeToken('empty')
+    const { presetTheme, globalHashId, hashId, registerToken } = useThemeToken('empty')
     registerToken(getThemeTokens)
 
     const locale = useGlobalConfig('locale')
@@ -45,7 +45,7 @@ export default defineComponent({
       const descriptionNode = slots.description ? slots.description() : mergedDescription.value
       return (
         <div class={classes.value}>
-          <div class={`${prefixCls}-image`}>{renderImage(props, slots, config)}</div>
+          <div class={`${prefixCls}-image`}>{renderImage(props, slots, config, presetTheme.value)}</div>
           {descriptionNode && <div class={`${prefixCls}-description`}>{descriptionNode}</div>}
           {slots.default && <div class={`${prefixCls}-content`}>{slots.default()}</div>}
         </div>
@@ -54,7 +54,7 @@ export default defineComponent({
   },
 })
 
-function renderImage(props: EmptyProps, slots: Slots, config: EmptyConfig) {
+function renderImage(props: EmptyProps, slots: Slots, config: EmptyConfig, presetTheme: PresetTheme) {
   if (slots.image) {
     return slots.image(props)
   }
@@ -71,5 +71,8 @@ function renderImage(props: EmptyProps, slots: Slots, config: EmptyConfig) {
     return isString(icon) ? <IxIcon name={icon} /> : icon
   }
 
-  return props.simple ? <EmptySimpleImage /> : <EmptyDefaultImage />
+  const SimpleImg = presetTheme === 'dark' ? EmptySimpleImageDark : EmptySimpleImage
+  const DefaultImg = presetTheme === 'dark' ? EmptyDefaultImageDark : EmptyDefaultImage
+
+  return props.simple ? <SimpleImg /> : <DefaultImg />
 }

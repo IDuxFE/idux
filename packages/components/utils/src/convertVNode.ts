@@ -50,8 +50,8 @@ export function convertIconVNode(
   return isString(iconName) && iconName !== ''
     ? createVNode(IxIcon, { name: iconName }, null)
     : isFunction(iconName)
-    ? iconName(params)
-    : iconName
+      ? iconName(params)
+      : iconName
 }
 
 export function convertStringVNode(

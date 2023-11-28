@@ -50,7 +50,12 @@ export interface ButtonThemeTokens {
   dangerBgColorHover: string
   dangerBgColorActive: string
 
+  ghostColor: string
+  ghostColorHover: string
+  ghostColorActive: string
   ghostBorderColor: string
+  ghostBorderColorHover: string
+  ghostBorderColorActive: string
   ghostBgColorHover: string
   ghostBgColorActive: string
   ghostBgColorDisabled: string

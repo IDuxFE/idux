@@ -20,6 +20,8 @@
   --ix-pro-layout-menu-item-bg-active: #e8f4ff;
   --ix-pro-layout-menu-item-bg-disabled: #ffffff;
   --ix-pro-layout-menu-item-group-bg: #ffffff;
+  --ix-pro-layout-menu-sub-expanded-bg: #ffffff;
+  --ix-pro-layout-menu-sub-expanded-bg-active: #ffffff;
   --ix-pro-layout-menu-horizontal-item-color-hover: #2f3540;
   --ix-pro-layout-menu-horizontal-item-color-active: #1c6eff;
   --ix-pro-layout-menu-horizontal-item-bg-hover: #f7f9fc;
@@ -35,6 +37,8 @@
   --ix-pro-layout-dark-menu-item-bg-active: #1c6eff;
   --ix-pro-layout-dark-menu-item-bg-disabled: #2f3540;
   --ix-pro-layout-dark-menu-item-group-bg: #2f3540;
+  --ix-pro-layout-dark-menu-sub-expanded-bg: #2f3540;
+  --ix-pro-layout-dark-menu-sub-expanded-bg-active: #2f3540;
   --ix-pro-layout-dark-menu-horizontal-item-color-hover: #ffffff;
   --ix-pro-layout-dark-menu-horizontal-item-color-active: #ffffff;
   --ix-pro-layout-dark-menu-horizontal-item-bg-hover: #1e232b;

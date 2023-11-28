@@ -217,18 +217,18 @@ export type ResolvedSearchField =
 export type FieldConfig<T extends SearchField['type']> = T extends 'input'
   ? InputSearchFieldBase['fieldConfig']
   : T extends 'select'
-  ? SelectSearchFieldBase['fieldConfig']
-  : T extends 'treeSelect'
-  ? TreeSelectSearchFieldBase['fieldConfig']
-  : T extends 'datePicker'
-  ? DatePickerSearchFieldBase['fieldConfig']
-  : T extends 'dateRangePicker'
-  ? DateRangePickerSearchFieldBase['fieldConfig']
-  : T extends 'cascader'
-  ? CascaderSearchFieldBase['fieldConfig']
-  : T extends 'custom'
-  ? CustomSearchFieldBase['fieldConfig']
-  : never
+    ? SelectSearchFieldBase['fieldConfig']
+    : T extends 'treeSelect'
+      ? TreeSelectSearchFieldBase['fieldConfig']
+      : T extends 'datePicker'
+        ? DatePickerSearchFieldBase['fieldConfig']
+        : T extends 'dateRangePicker'
+          ? DateRangePickerSearchFieldBase['fieldConfig']
+          : T extends 'cascader'
+            ? CascaderSearchFieldBase['fieldConfig']
+            : T extends 'custom'
+              ? CustomSearchFieldBase['fieldConfig']
+              : never
 
 export const innerSegmentTypes = ['select', 'treeSelect', 'cascader', 'input', 'datePicker', 'dateRangePicker'] as const
 export type InnerSegmentTypes = (typeof innerSegmentTypes)[number]

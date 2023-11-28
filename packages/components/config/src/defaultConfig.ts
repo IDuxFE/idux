@@ -15,9 +15,9 @@ import { type GlobalConfig } from './types'
 
 const expandIconRenderer = ({ expanded }: { expanded: boolean }): VNodeChild =>
   h('svg', { viewBox: '0 0 16 16', width: '14px', height: '14px' }, [
-    h('rect', { x: 0, y: 0, width: 16, height: 16, rx: 1, fill: '#EDF1F7' }),
-    h('rect', { x: 5, y: 7, width: 6, height: 2, rx: 0.2, fill: '#5E6573' }),
-    !expanded ? h('rect', { x: 7, y: 5, width: 2, height: 6, rx: 0.2, fill: '#5E6573' }) : null,
+    h('rect', { x: 0, y: 0, width: 16, height: 16, rx: 1, style: { fill: 'var(--ix-color-emphasized-container-bg)' } }),
+    h('rect', { x: 5, y: 7, width: 6, height: 2, rx: 0.2, style: { fill: 'var(--ix-color-icon)' } }),
+    !expanded ? h('rect', { x: 7, y: 5, width: 2, height: 6, rx: 0.2, style: { fill: 'var(--ix-color-icon)' } }) : null,
   ])
 
 export const defaultConfig: GlobalConfig = {

@@ -5,9 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type CertainThemeTokens, type GlobalThemeTokens, getColorPalette } from '@idux/components/theme'
-export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTokens<'backTop'> {
-  const { colorPrimary, colorContainerBg } = tokens
+import type { CertainThemeTokens, GlobalThemeTokens, ThemeTokenAlgorithms } from '@idux/components/theme'
+export function getDefaultThemeTokens(
+  tokens: GlobalThemeTokens,
+  algorithms: ThemeTokenAlgorithms,
+): CertainThemeTokens<'backTop'> {
+  const { getColorPalette } = algorithms
+  const { overlayBorderWidth, overlayBorderType, overlayBorderColor, colorPrimary, colorContainerBg } = tokens
 
   const primaryColorPalette = getColorPalette(colorPrimary)
 
@@ -19,5 +23,8 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     color: primaryColorPalette.l30,
     colorHover: colorPrimary,
     bgColor: colorContainerBg,
+    borderWidth: overlayBorderWidth,
+    borderType: overlayBorderType,
+    borderColor: overlayBorderColor,
   }
 }

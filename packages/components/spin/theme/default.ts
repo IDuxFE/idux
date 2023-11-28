@@ -5,11 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type CertainThemeTokens, type GlobalThemeTokens, getBaseColors, getColorPalette } from '@idux/components/theme'
+import type { CertainThemeTokens, GlobalThemeTokens, ThemeTokenAlgorithms } from '@idux/components/theme'
 
-export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTokens<'spin'> {
-  const baseColors = getBaseColors()
-  const graphiteColorPalette = getColorPalette(baseColors.graphite)
+export function getDefaultThemeTokens(
+  tokens: GlobalThemeTokens,
+  algorithms: ThemeTokenAlgorithms,
+): CertainThemeTokens<'spin'> {
+  const { getBaseColors, getGreyColors } = algorithms
 
   const { colorPrimary, fontSizeSm, fontSizeMd, fontSizeLg } = tokens
 
@@ -26,7 +28,7 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     iconSizeLg: 48,
 
     bgCircleStroke: colorPrimary,
-    fstArchStroke: baseColors.turquoise,
-    sndArchStroke: graphiteColorPalette.l20,
+    fstArchStroke: getBaseColors().turquoise,
+    sndArchStroke: getGreyColors().l20,
   }
 }

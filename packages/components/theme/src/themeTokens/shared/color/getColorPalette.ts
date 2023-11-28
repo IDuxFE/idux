@@ -29,19 +29,19 @@ export interface ColorPalette {
   d50: string
 }
 
-interface HsvObject {
+export interface HsvObject {
   h: number
   s: number
   v: number
 }
 
-interface RgbObject {
+export interface RgbObject {
   r: number
   g: number
   b: number
 }
 
-interface ColorPaletteOptions {
+export interface ColorPaletteOptions {
   hueStep?: number
   brightnessStepLight?: number
   brightnessStepDark?: number
@@ -51,18 +51,18 @@ interface ColorPaletteOptions {
 
 // Wrapper function ported from TinyColor.prototype.toHsv
 // Keep it here because of `hsv.h * 360`
-function toHsv({ r, g, b }: RgbObject): HsvObject {
+export function toHsv({ r, g, b }: RgbObject): HsvObject {
   const hsv = rgbToHsv(r, g, b)
   return { h: hsv.h * 360, s: hsv.s, v: hsv.v }
 }
 
 // Wrapper function ported from TinyColor.prototype.toHexString
 // Keep it here because of the prefix `#`
-function toHex({ r, g, b }: RgbObject): string {
+export function toHex({ r, g, b }: RgbObject): string {
   return `#${rgbToHex(r, g, b, false)}`
 }
 
-function getHue(hsv: HsvObject, i: number, hueStep: number, light?: boolean): number {
+export function getHue(hsv: HsvObject, i: number, hueStep: number, light?: boolean): number {
   let hue: number
   // 根据色相不同，色相转向不同
   if (Math.round(hsv.h) >= 60 && Math.round(hsv.h) <= 240) {
@@ -78,7 +78,7 @@ function getHue(hsv: HsvObject, i: number, hueStep: number, light?: boolean): nu
   return hue
 }
 
-function getSaturation(
+export function getSaturation(
   hsv: HsvObject,
   i: number,
   saturationStepLight: number,
@@ -111,7 +111,7 @@ function getSaturation(
   return Number(saturation.toFixed(2))
 }
 
-function getValue(hsv: HsvObject, i: number, brightnessStep: number, light?: boolean): number {
+export function getValue(hsv: HsvObject, i: number, brightnessStep: number, light?: boolean): number {
   let value: number
   if (light) {
     value = hsv.v + brightnessStep * i

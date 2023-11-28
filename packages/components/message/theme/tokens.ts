@@ -8,6 +8,9 @@
 export interface MessageThemeTokens {
   margin: string | number
   fontSize: number
+  borderWidth: number
+  borderType: string
+  borderColor: string
 
   contentMinWidth: number
   contentMaxWidth: number

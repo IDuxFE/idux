@@ -38,7 +38,6 @@ export interface ExtendedColorTokens {
   colorWarningOutline: string // 警告状态的组件边框颜色，用于表单控件
   colorErrorOutline: string // 错误状态的组件边框颜色，用于表单控件
 
-  colorBgDisabled: string // 禁用背景颜色
   colorBgInverse: string // 反向背景颜色，用于有背景颜色的容器中，如幽灵按钮
   colorBgInverseDisabled: string // 反向禁用背景颜色，用于有背景颜色的容器中，如幽灵按钮
 

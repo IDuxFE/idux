@@ -15,6 +15,7 @@ import { THEME_PROVIDER_TOKEN, type ThemeProviderContext } from './token'
 import {
   type CertainThemeTokens,
   type GlobalTokenKey,
+  type PresetTheme,
   type ThemeKeys,
   type TokenTransforms,
   type UsetThemeProviderStates,
@@ -22,6 +23,7 @@ import {
 } from './types'
 
 export interface FullUseThemeTokenContext<K extends ThemeKeys | keyof Ext, Ext extends object = object> {
+  presetTheme: ComputedRef<PresetTheme>
   globalHashId: ComputedRef<string>
   hashId: ComputedRef<string>
   themeTokens: ComputedRef<CertainThemeTokens<K, Ext>>
@@ -30,6 +32,7 @@ export interface FullUseThemeTokenContext<K extends ThemeKeys | keyof Ext, Ext e
 
 export interface NullUseThemeTokenContext {
   globalHashId: ComputedRef<string>
+  presetTheme: ComputedRef<PresetTheme>
 }
 
 export type UseThemeTokenContext<K extends ThemeKeys | keyof Ext | undefined, Ext extends object = object> = K extends
@@ -57,6 +60,7 @@ export function useThemeToken<K extends ThemeKeys | keyof Ext, Ext extends objec
         globalHashId: computed(() => ''),
         hashId: computed(() => ''),
         themeTokens: computed(() => ({})),
+        presetTheme: computed(() => 'default'),
         registerToken: (() => {}) as unknown as UseThemeTokenContext<ThemeKeys>['registerToken'],
       } as UseThemeTokenContext<ThemeKeys>
     }
@@ -66,6 +70,7 @@ export function useThemeToken<K extends ThemeKeys | keyof Ext, Ext extends objec
 
   const {
     useThemeTokenContextMap,
+    presetTheme,
     globalHashId: _globalHashId,
     hashed,
     getThemeTokens,
@@ -78,6 +83,7 @@ export function useThemeToken<K extends ThemeKeys | keyof Ext, Ext extends objec
     useThemeTokenContextMap,
     () =>
       ({
+        presetTheme,
         globalHashId: computed(() => (hashed.value ? _globalHashId.value : '')),
       }) as UseThemeTokenContext<GlobalTokenKey, Ext>,
   )
@@ -96,6 +102,7 @@ export function useThemeToken<K extends ThemeKeys | keyof Ext, Ext extends objec
     }
 
     return {
+      presetTheme,
       globalHashId,
       hashId,
       themeTokens,

@@ -59,9 +59,14 @@ export default defineComponent({
         return document.querySelector(attachTo) ?? undefined
       })
 
-      const { mergedTokens, getMergedTokens } = useTokenMerge(props, themeConfig, supperContext, mergedPresetTheme)
+      const { mergedAlgorithms, mergedTokens, getMergedTokens } = useTokenMerge(
+        props,
+        themeConfig,
+        supperContext,
+        mergedPresetTheme,
+      )
       const { globalHashId, registerToken, updateToken, getThemeTokens, getThemeHashId, isTokensRegistered } =
-        useTokenRegister(mergedPresetTheme, mergedAttachTo, mergedHashed, getMergedTokens)
+        useTokenRegister(mergedPresetTheme, mergedAlgorithms, mergedAttachTo, mergedHashed, getMergedTokens)
 
       watch(
         () => mergedTokens.value.global,

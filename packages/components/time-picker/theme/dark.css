@@ -1,0 +1,28 @@
+/* ------ time-picker css variables ------ */
+:root {
+  --ix-time-picker-separator-margin-horizontal: 24px;
+  --ix-time-picker-overlay-width: 200px;
+  --ix-time-picker-overlay-padding: 8px 8px 0 8px;
+  --ix-time-picker-overlay-footer-padding: 8px 16px;
+  --ix-time-picker-range-board-width: 184px;
+  --ix-time-picker-range-board-border: none;
+  --ix-time-picker-range-overlay-padding: 16px 16px 0 16px;
+  --ix-time-picker-range-overlay-footer-padding: 8px 0;
+  --ix-time-picker-range-overlay-separator-padding: 2px 10px;
+  --ix-time-picker-range-overlay-separator-font-size: 12px;
+  --ix-time-picker-panel-height: 224px;
+  --ix-time-picker-panel-padding-horizontal: 8px;
+  --ix-time-picker-panel-padding-vertical: 8px;
+  --ix-time-picker-panel-font-size: 12px;
+  --ix-time-picker-panel-cell-height: 32px;
+  --ix-time-picker-panel-cell-padding-horizontal: 8px;
+  --ix-time-picker-panel-cell-color: #808999;
+  --ix-time-picker-panel-cell-color-active: #f4f8ff;
+  --ix-time-picker-panel-cell-bg-color-hover: transparent;
+  --ix-time-picker-panel-cell-bg-color-active: transparent;
+  --ix-time-picker-panel-cell-font-weight-active: 600;
+  --ix-time-picker-panel-scrollbar-width: 6px;
+  --ix-time-picker-panel-scrollbar-thumb-bg-color: #1f2329;
+  --ix-time-picker-panel-scrollbar-thumb-border-radius: 10px;
+  --ix-time-picker-panel-scrollbar-track-bg-color: unset;
+}

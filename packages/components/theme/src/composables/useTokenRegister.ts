@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { BaseColors, ColorPalette } from '../themeTokens'
+
 import { type ComputedRef, reactive } from 'vue'
 
 import { useState } from '@idux/cdk/utils'
@@ -15,6 +17,7 @@ import {
   type GlobalThemeTokens,
   type PresetTheme,
   type ThemeKeys,
+  type ThemeTokenAlgorithms,
   type TokenRecord,
   type TokenTransforms,
   globalTokenKey,
@@ -24,6 +27,11 @@ import { createTokensHash, tokenToCss } from '../utils'
 export type TokenGetter<K extends ThemeKeys | keyof Ext, Ext extends object = object> = (
   globalTokens: GlobalThemeTokens,
   presetTheme: PresetTheme,
+  algorithms: {
+    getColorPalette: (color: string) => ColorPalette
+    getGreyColors: () => ColorPalette
+    getBaseColors: () => BaseColors
+  },
 ) => CertainThemeTokens<K, Ext>
 
 export type RegisterToken<K extends ThemeKeys | keyof Ext, Ext extends object = object> = (
@@ -49,6 +57,7 @@ export interface TokenRegisterContext<Ext extends object = object> {
 
 export function useTokenRegister(
   mergedPresetTheme: ComputedRef<PresetTheme>,
+  mergedAlgorithms: ComputedRef<ThemeTokenAlgorithms>,
   mergedAttachTo: ComputedRef<Element | undefined>,
   mergedHashed: ComputedRef<boolean>,
   getMergedTokens: <K extends ThemeKeys>(key: K, tokens: CertainThemeTokens<K>) => CertainThemeTokens<K>,
@@ -84,7 +93,7 @@ export function useTokenRegister(
       return
     }
 
-    const tokens = getTokens(globalTokens, mergedPresetTheme.value)
+    const tokens = getTokens(globalTokens, mergedPresetTheme.value, mergedAlgorithms.value)
 
     if (!tokens) {
       return
