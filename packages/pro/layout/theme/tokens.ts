@@ -32,6 +32,9 @@ export interface ProLayoutThemeTokens {
   menuItemBgDisabled: string
   menuItemGroupBg: string
 
+  menuSubExpandedBg: string
+  menuSubExpandedBgActive: string
+
   menuHorizontalItemColorHover: string
   menuHorizontalItemColorActive: string
   menuHorizontalItemBgHover: string
@@ -49,6 +52,9 @@ export interface ProLayoutThemeTokens {
   darkMenuItemBgActive: string
   darkMenuItemBgDisabled: string
   darkMenuItemGroupBg: string
+
+  darkMenuSubExpandedBg: string
+  darkMenuSubExpandedBgActive: string
 
   darkMenuHorizontalItemColorHover: string
   darkMenuHorizontalItemColorActive: string

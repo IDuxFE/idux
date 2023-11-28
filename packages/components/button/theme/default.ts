@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { CertainThemeTokens, GlobalThemeTokens } from '@idux/components/theme'
+import { type CertainThemeTokens, type GlobalThemeTokens, getAlphaColor, getSolidColor } from '@idux/components/theme'
 
 export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTokens<'button'> {
   const {
@@ -32,8 +32,8 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     colorErrorTextHover,
     colorErrorTextActive,
     colorText,
-    colorTextDisabled,
     colorTextInverse,
+    colorTextDisabled,
     colorContainerBg,
     colorContainerBgDisabled,
     colorBorder,
@@ -86,10 +86,16 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     dangerBgColorHover: colorErrorBgHover,
     dangerBgColorActive: colorErrorBgActive,
 
-    ghostBorderColor: colorContainerBg,
-    ghostBgColorHover: 'rgba(255, 255, 255, 0.2)',
-    ghostBgColorActive: colorContainerBg,
-    ghostBgColorDisabled: 'rgba(255, 255, 255, 0.4)',
+    ghostColor: colorTextInverse,
+    ghostColorHover: colorTextInverse,
+    ghostColorActive: getSolidColor(colorTextInverse, 65),
+    ghostBorderColorHover: colorTextInverse,
+    ghostBorderColorActive: colorTextInverse,
+
+    ghostBorderColor: colorTextInverse,
+    ghostBgColorHover: getAlphaColor(colorTextInverse, 0.2),
+    ghostBgColorActive: colorTextInverse,
+    ghostBgColorDisabled: getAlphaColor(colorTextInverse, 0.4),
 
     iconColor: 'inherit',
     iconFontSize: fontSizeIcon,

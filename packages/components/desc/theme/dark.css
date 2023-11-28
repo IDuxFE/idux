@@ -1,0 +1,10 @@
+/* ------ desc css variables ------ */
+:root {
+  --ix-desc-item-height-sm: 24px;
+  --ix-desc-item-height-md: 32px;
+  --ix-desc-item-height-lg: 40px;
+  --ix-desc-font-size-sm: 12px;
+  --ix-desc-font-size-md: 12px;
+  --ix-desc-font-size-lg: 12px;
+  --ix-desc-label-color: #808999;
+}

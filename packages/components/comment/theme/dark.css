@@ -1,0 +1,8 @@
+/* ------ comment css variables ------ */
+:root {
+  --ix-comment-nest-indent: 44px;
+  --ix-comment-author-name-color: #525966;
+  --ix-comment-author-time-color: #808999;
+  --ix-comment-action-color: #808999;
+  --ix-comment-action-color-hover: #f4f8ff;
+}

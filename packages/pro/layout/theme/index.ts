@@ -7,10 +7,11 @@
 
 import type { ProTokenGetter } from '@idux/pro/theme'
 
+import { getDarkThemeTokens } from './dark'
 import { getDefaultThemeTokens } from './default'
 
-export const getThemeTokens: ProTokenGetter<'proLayout'> = (tokens, presetTheme) => {
-  return presetTheme === 'default' ? getDefaultThemeTokens(tokens) : getDefaultThemeTokens(tokens)
+export const getThemeTokens: ProTokenGetter<'proLayout'> = (tokens, presetTheme, algorithms) => {
+  return presetTheme === 'default' ? getDefaultThemeTokens(tokens, algorithms) : getDarkThemeTokens(tokens)
 }
 
 export type { ProLayoutThemeTokens } from './tokens'

@@ -1,0 +1,15 @@
+/* ------ tag css variables ------ */
+:root {
+  --ix-tag-bg-color-filled: #99acd1;
+  --ix-tag-border-width: 1px;
+  --ix-tag-border-radius: 2px;
+  --ix-tag-min-width-rect: 40px;
+  --ix-tag-min-width-round: 48px;
+  --ix-tag-min-width-numeric: 64px;
+  --ix-tag-success-bg-color: rgba(64, 198, 149, 0.2);
+  --ix-tag-info-bg-color: rgba(64, 131, 232, 0.2);
+  --ix-tag-warning-bg-color: rgba(253, 170, 29, 0.2);
+  --ix-tag-risk-bg-color: rgba(232, 134, 65, 0.2);
+  --ix-tag-error-bg-color: rgba(232, 81, 76, 0.2);
+  --ix-tag-fatal-bg-color: rgba(143, 30, 31, 0.2);
+}

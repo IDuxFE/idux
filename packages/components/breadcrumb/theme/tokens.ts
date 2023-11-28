@@ -6,6 +6,7 @@
  */
 
 export interface BreadcrumbThemeTokens {
+  fontSize: number
   itemColor: string
   linkColor: string
   linkColorHover: string

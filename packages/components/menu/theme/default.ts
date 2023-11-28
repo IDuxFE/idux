@@ -5,8 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type CertainThemeTokens, type GlobalThemeTokens, getGreyColors } from '@idux/components/theme'
-export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTokens<'menu'> {
+import type { CertainThemeTokens, GlobalThemeTokens, ThemeTokenAlgorithms } from '@idux/components/theme'
+export function getDefaultThemeTokens(
+  tokens: GlobalThemeTokens,
+  algorithms: ThemeTokenAlgorithms,
+): CertainThemeTokens<'menu'> {
+  const { getGreyColors } = algorithms
   const {
     heightMd,
     heightLg,
@@ -26,7 +30,7 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     colorBgInverse,
   } = tokens
 
-  const greyColors = getGreyColors('graphite')
+  const greyColors = getGreyColors()
 
   return {
     borderRadius: 0,

@@ -97,7 +97,7 @@
         bottom: 0;
         content: '';
         border-radius: var(--ix-progress-border-radius);
-        background: var(--ix-color-container-bg);
+        background: var(--ix-color-white);
         animation: @progress-animated-key var(--ix-motion-ease-in-quint) 2.4s infinite;
       }
     }
@@ -125,6 +125,9 @@
     height: var(--ix-progress-circle-width);
     font-size: var(--ix-progress-circle-font-size-md);
 
+    &-trail {
+      stroke: var(--ix-progress-trail-bg-color);
+    }
     &-bg {
       stroke: var(--ix-color-success);
     }

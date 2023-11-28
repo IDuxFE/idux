@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-export * from './getBaseColors'
-export * from './getColorPalette'
-export * from './getGreyColors'
-export * from './getAlphaColor'
-export * from './getSolidColor'
+export * from './color'
+export * from './derivedTokens'
+export * from './extendedTokens'
+export * from './getBasicTokens'
+export * from './getResetTokens'

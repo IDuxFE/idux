@@ -1,0 +1,10 @@
+/* ------ alert css variables ------ */
+:root {
+  --ix-alert-height: 32px;
+  --ix-alert-border-radius: 2px;
+  --ix-alert-success-bg-color: rgba(64, 198, 149, 0.2);
+  --ix-alert-info-bg-color: rgba(64, 131, 232, 0.2);
+  --ix-alert-warning-bg-color: rgba(253, 170, 29, 0.2);
+  --ix-alert-error-bg-color: rgba(232, 81, 76, 0.2);
+  --ix-alert-offline-bg-color: rgba(128, 137, 153, 0.2);
+}

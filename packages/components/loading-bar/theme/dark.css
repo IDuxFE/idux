@@ -1,0 +1,5 @@
+/* ------ loading-bar css variables ------ */
+:root {
+  --ix-loading-bar-height: 2px;
+  --ix-loading-bar-loading-color: #4083e8;
+}

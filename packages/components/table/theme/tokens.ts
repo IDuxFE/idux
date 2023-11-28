@@ -31,6 +31,8 @@ export interface TableThemeTokens {
 
   bodyRowBgColorHover: string
   bodyRowBgColorSelected: string
+  bodyRowBgColorExpanded: string
+  bodyRowBgColorTreeExpanded: string
 
   expandableIconColor: string
 }

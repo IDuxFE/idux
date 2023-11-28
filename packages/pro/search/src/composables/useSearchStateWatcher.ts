@@ -19,10 +19,10 @@ export type UpdatedSegmentValue = SegmentState & { oldValue: unknown }
 export type SearchStateWatcherPayload<Action extends SEARCH_STATE_ACTION> = Action extends SEARCH_STATE_ACTION.REMOVED
   ? { searchState: SearchState }
   : Action extends SEARCH_STATE_ACTION.CREATED
-  ? { searchState: SearchState }
-  : Action extends SEARCH_STATE_ACTION.UPDATED
-  ? { searchState: SearchState; updatedSegments: UpdatedSegmentValue[] }
-  : never
+    ? { searchState: SearchState }
+    : Action extends SEARCH_STATE_ACTION.UPDATED
+      ? { searchState: SearchState; updatedSegments: UpdatedSegmentValue[] }
+      : never
 export type SearchStateWatchHandler = <Action extends SEARCH_STATE_ACTION>(
   action: Action,
   payload: SearchStateWatcherPayload<Action>,

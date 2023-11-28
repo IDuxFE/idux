@@ -13,4 +13,7 @@ export interface BackTopThemeTokens {
   color: string
   colorHover: string
   bgColor: string
+  borderWidth: number
+  borderType: string
+  borderColor: string
 }

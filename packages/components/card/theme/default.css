@@ -13,5 +13,7 @@
   --ix-card-loading-spacing: 4px;
   --ix-card-loading-height: 14px;
   --ix-card-loading-bg-size: 600%;
+  --ix-card-loading-start-color: #edf1f7;
+  --ix-card-loading-end-color: #e1e5eb;
   --ix-card-grid-width: 25%;
 }

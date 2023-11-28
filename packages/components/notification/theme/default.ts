@@ -18,6 +18,9 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     colorContainerBg,
     colorTextInfo,
     borderRadiusSm,
+    overlayBorderWidth,
+    overlayBorderType,
+    overlayBorderColor,
   } = tokens
 
   return {
@@ -25,6 +28,10 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     margin: `0 0 ${marginSizeSm}px 0`,
     width: 384,
     maxWidth: `calc(100vw - 48px)`,
+
+    borderWidth: overlayBorderWidth,
+    borderType: overlayBorderType,
+    borderColor: overlayBorderColor,
 
     fontSize: fontSizeMd,
     bgColor: colorContainerBg,

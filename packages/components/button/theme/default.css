@@ -36,6 +36,11 @@
   --ix-button-danger-bg-color: #ff5752;
   --ix-button-danger-bg-color-hover: #ff837a;
   --ix-button-danger-bg-color-active: #cf171d;
+  --ix-button-ghost-color: #ffffff;
+  --ix-button-ghost-color-hover: #ffffff;
+  --ix-button-ghost-color-active: #595959;
+  --ix-button-ghost-border-color-hover: #ffffff;
+  --ix-button-ghost-border-color-active: #ffffff;
   --ix-button-ghost-border-color: #ffffff;
   --ix-button-ghost-bg-color-hover: rgba(255, 255, 255, 0.2);
   --ix-button-ghost-bg-color-active: #ffffff;

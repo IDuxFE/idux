@@ -1579,17 +1579,17 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       width="14px"
                     >
                       <rect
-                        fill="#EDF1F7"
                         height="16"
                         rx="1"
+                        style="fill: var(--ix-color-emphasized-container-bg);"
                         width="16"
                         x="0"
                         y="0"
                       />
                       <rect
-                        fill="#5E6573"
                         height="2"
                         rx="0.2"
+                        style="fill: var(--ix-color-icon);"
                         width="6"
                         x="5"
                         y="7"
@@ -1784,17 +1784,17 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       width="14px"
                     >
                       <rect
-                        fill="#EDF1F7"
                         height="16"
                         rx="1"
+                        style="fill: var(--ix-color-emphasized-container-bg);"
                         width="16"
                         x="0"
                         y="0"
                       />
                       <rect
-                        fill="#5E6573"
                         height="2"
                         rx="0.2"
+                        style="fill: var(--ix-color-icon);"
                         width="6"
                         x="5"
                         y="7"
@@ -1930,17 +1930,17 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       width="14px"
                     >
                       <rect
-                        fill="#EDF1F7"
                         height="16"
                         rx="1"
+                        style="fill: var(--ix-color-emphasized-container-bg);"
                         width="16"
                         x="0"
                         y="0"
                       />
                       <rect
-                        fill="#5E6573"
                         height="2"
                         rx="0.2"
+                        style="fill: var(--ix-color-icon);"
                         width="6"
                         x="5"
                         y="7"
@@ -2204,17 +2204,17 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       width="14px"
                     >
                       <rect
-                        fill="#EDF1F7"
                         height="16"
                         rx="1"
+                        style="fill: var(--ix-color-emphasized-container-bg);"
                         width="16"
                         x="0"
                         y="0"
                       />
                       <rect
-                        fill="#5E6573"
                         height="2"
                         rx="0.2"
+                        style="fill: var(--ix-color-icon);"
                         width="6"
                         x="5"
                         y="7"
@@ -2350,17 +2350,17 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       width="14px"
                     >
                       <rect
-                        fill="#EDF1F7"
                         height="16"
                         rx="1"
+                        style="fill: var(--ix-color-emphasized-container-bg);"
                         width="16"
                         x="0"
                         y="0"
                       />
                       <rect
-                        fill="#5E6573"
                         height="2"
                         rx="0.2"
+                        style="fill: var(--ix-color-icon);"
                         width="6"
                         x="5"
                         y="7"
@@ -2624,17 +2624,17 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       width="14px"
                     >
                       <rect
-                        fill="#EDF1F7"
                         height="16"
                         rx="1"
+                        style="fill: var(--ix-color-emphasized-container-bg);"
                         width="16"
                         x="0"
                         y="0"
                       />
                       <rect
-                        fill="#5E6573"
                         height="2"
                         rx="0.2"
+                        style="fill: var(--ix-color-icon);"
                         width="6"
                         x="5"
                         y="7"
@@ -2770,17 +2770,17 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       width="14px"
                     >
                       <rect
-                        fill="#EDF1F7"
                         height="16"
                         rx="1"
+                        style="fill: var(--ix-color-emphasized-container-bg);"
                         width="16"
                         x="0"
                         y="0"
                       />
                       <rect
-                        fill="#5E6573"
                         height="2"
                         rx="0.2"
+                        style="fill: var(--ix-color-icon);"
                         width="6"
                         x="5"
                         y="7"
@@ -3044,17 +3044,17 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       width="14px"
                     >
                       <rect
-                        fill="#EDF1F7"
                         height="16"
                         rx="1"
+                        style="fill: var(--ix-color-emphasized-container-bg);"
                         width="16"
                         x="0"
                         y="0"
                       />
                       <rect
-                        fill="#5E6573"
                         height="2"
                         rx="0.2"
+                        style="fill: var(--ix-color-icon);"
                         width="6"
                         x="5"
                         y="7"
@@ -3190,17 +3190,17 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       width="14px"
                     >
                       <rect
-                        fill="#EDF1F7"
                         height="16"
                         rx="1"
+                        style="fill: var(--ix-color-emphasized-container-bg);"
                         width="16"
                         x="0"
                         y="0"
                       />
                       <rect
-                        fill="#5E6573"
                         height="2"
                         rx="0.2"
+                        style="fill: var(--ix-color-icon);"
                         width="6"
                         x="5"
                         y="7"
@@ -3604,17 +3604,17 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       width="14px"
                     >
                       <rect
-                        fill="#EDF1F7"
                         height="16"
                         rx="1"
+                        style="fill: var(--ix-color-emphasized-container-bg);"
                         width="16"
                         x="0"
                         y="0"
                       />
                       <rect
-                        fill="#5E6573"
                         height="2"
                         rx="0.2"
+                        style="fill: var(--ix-color-icon);"
                         width="6"
                         x="5"
                         y="7"
@@ -3688,17 +3688,17 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       width="14px"
                     >
                       <rect
-                        fill="#EDF1F7"
                         height="16"
                         rx="1"
+                        style="fill: var(--ix-color-emphasized-container-bg);"
                         width="16"
                         x="0"
                         y="0"
                       />
                       <rect
-                        fill="#5E6573"
                         height="2"
                         rx="0.2"
+                        style="fill: var(--ix-color-icon);"
                         width="6"
                         x="5"
                         y="7"

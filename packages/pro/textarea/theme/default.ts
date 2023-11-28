@@ -5,10 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { GlobalThemeTokens, ThemeTokenAlgorithms } from '@idux/components/theme'
 import type { ProCertainThemeTokens } from '@idux/pro/theme'
 
-import { type GlobalThemeTokens, getColorPalette } from '@idux/components/theme'
-export function getDefaultThemeTokens(tokens: GlobalThemeTokens): ProCertainThemeTokens<'proTextarea'> {
+export function getDefaultThemeTokens(
+  tokens: GlobalThemeTokens,
+  algorithms: ThemeTokenAlgorithms,
+): ProCertainThemeTokens<'proTextarea'> {
+  const { getColorPalette } = algorithms
   const { colorText, colorTextPlaceholder, paddingSizeXs, colorInfoContainerBg, colorError } = tokens
 
   const errorColorPalette = getColorPalette(colorError)

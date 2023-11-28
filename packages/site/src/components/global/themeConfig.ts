@@ -1,1 +1,1 @@
-export const themeConfig = [{"key":"default","label":"Default"}]
+export const themeConfig = [{"key":"default","label":"Default"}, {"key":"dark","label":"Dark"}]

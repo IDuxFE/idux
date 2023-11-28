@@ -115,7 +115,7 @@ export default defineComponent({
   &-content {
     padding: 8px;
     border-radius: var(--ix-border-radius-sm);
-    background: var(--ix-color-info-container-bg);
+    background: var(--ix-color-emphasized-container-bg);
     box-shadow: inset 0 0 4px 0 rgba(0, 0, 0, 0.1);
 
     &-border {
@@ -123,7 +123,7 @@ export default defineComponent({
       width: 100%;
       padding: 8px;
       background-color: var(--ix-color-container-bg);
-      border: 1px var(--ix-line-type) var(--ix-color-separator);
+      border: 1px var(--ix-line-type) var(--ix-color-border-secondary);
       border-radius: var(--ix-border-radius-sm);
       transition: @transition-all-base;
     }

@@ -1,0 +1,41 @@
+/* ------ date-picker css variables ------ */
+:root {
+  --ix-date-picker-separator-margin-horizontal: 16px;
+  --ix-date-picker-overlay-width: 252px;
+  --ix-date-picker-overlay-padding: 16px;
+  --ix-date-picker-overlay-footer-padding: 8px 16px;
+  --ix-date-picker-overlay-date-input-width: 120px;
+  --ix-date-picker-overlay-time-input-width: 96px;
+  --ix-date-picker-board-width: 220px;
+  --ix-date-picker-board-max-height: 260px;
+  --ix-date-picker-range-board-border: none;
+  --ix-date-picker-range-overlay-padding: 16px 16px 0 16px;
+  --ix-date-picker-range-overlay-footer-padding: 8px 0;
+  --ix-date-picker-range-overlay-separator-width: 32px;
+  --ix-date-picker-range-overlay-separator-font-size: 12px;
+  --ix-date-picker-panel-font-size: 12px;
+  --ix-date-picker-panel-color: #f4f8ff;
+  --ix-date-picker-panel-cell-width: 28px;
+  --ix-date-picker-panel-cell-height: 28px;
+  --ix-date-picker-panel-cell-width-lg: 52px;
+  --ix-date-picker-panel-cell-height-lg: 24px;
+  --ix-date-picker-panel-cell-color-active: #fff;
+  --ix-date-picker-panel-cell-color-hover: #1b61dd;
+  --ix-date-picker-panel-cell-color-disabled: #687080;
+  --ix-date-picker-panel-cell-bg-color-hover: #171a1f;
+  --ix-date-picker-panel-cell-bg-color-active: #4083e8;
+  --ix-date-picker-panel-cell-bg-color-in-range: #151d33;
+  --ix-date-picker-panel-cell-bg-color-disabled: #171a1f;
+  --ix-date-picker-panel-cell-trigger-width: 20px;
+  --ix-date-picker-panel-cell-trigger-height: 20px;
+  --ix-date-picker-panel-cell-trigger-width-lg: 52px;
+  --ix-date-picker-panel-cell-trigger-height-lg: 24px;
+  --ix-date-picker-panel-cell-current-color: #4083e8;
+  --ix-date-picker-panel-cell-current-border-color: #16274a;
+  --ix-date-picker-panel-cell-current-bg-color: #4083e8;
+  --ix-date-picker-panel-heaer-height: 32px;
+  --ix-date-picker-panel-header-font-size: 12px;
+  --ix-date-picker-panel-header-font-weight: 400;
+  --ix-date-picker-panel-header-spacing: 16px;
+  --ix-date-picker-panel-body-header-bg-color: #171a1f;
+}

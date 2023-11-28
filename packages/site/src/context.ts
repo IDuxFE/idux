@@ -4,7 +4,7 @@ import { BreakpointKey } from '@idux/cdk/breakpoint'
 
 export const isDevMode = process.env.NODE_ENV !== 'production'
 
-export type AppTheme = 'seer' | 'default'
+export type AppTheme = 'default' | 'dark'
 
 export interface AppContext {
   org: string

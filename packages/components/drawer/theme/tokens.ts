@@ -9,4 +9,8 @@ export interface DrawerThemeTokens {
   boxShadowStart: string
   boxShadowEnd: string
   boxShadowTop: string
+
+  borderWidth: number
+  borderType: string
+  borderColor: string
 }

@@ -1,7 +1,7 @@
 import { writeFileSync } from 'fs'
 import { resolve } from 'path'
 
-import { getBaseColors, getColorPalette } from '@idux/components/theme/src/themeTokens'
+import { getBaseColors, getDarkColorPalette } from '@idux/components/theme/src/themeTokens'
 
 function generateColors(): Record<string, string> {
   const baseColors = getBaseColors()
@@ -9,7 +9,7 @@ function generateColors(): Record<string, string> {
   const res: Record<string, string> = {}
 
   Object.entries(baseColors).forEach(([name, color]) => {
-    const colorPalette = getColorPalette(color)
+    const colorPalette = getDarkColorPalette(color)
 
     Object.entries(colorPalette).forEach(([level, levelColor]) => {
       res[`@color-${name}-${level}`] = levelColor

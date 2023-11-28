@@ -32,8 +32,10 @@ router.afterEach(() => {
   z-index: 99;
   cursor: pointer;
   // TODO need less var
-  color: #000;
-  background-color: #fff;
+  color: var(--ix-color-icon);
+  border: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border);
+  border-right: 0;
+  background-color: var(--ix-color-container-bg);
   padding: 6px;
   border-radius: 5px 0 0 5px;
 

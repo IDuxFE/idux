@@ -14,7 +14,15 @@ const IxThemeProvider = ThemeProvider as unknown as ThemeProviderComponent
 export { IxThemeProvider }
 export { useThemeToken } from './src/useThemeToken'
 export { numUnitTransform } from './src/utils'
-export { getAlphaColor, getBaseColors, getThemeTokens, getColorPalette, getGreyColors } from './src/themeTokens'
+export {
+  getAlphaColor,
+  getSolidColor,
+  getBaseColors,
+  getThemeTokens,
+  getColorPalette,
+  getDarkColorPalette,
+  getGreyColors,
+} from './src/themeTokens'
 
 export type {
   ThemeProviderInstance,
@@ -24,6 +32,7 @@ export type {
   ThemeTokenKey,
   ThemeTokens,
   ThemeKeys,
+  ThemeTokenAlgorithms,
   TokenTransforms,
   GlobalThemeTokens,
   CertainThemeTokens,
