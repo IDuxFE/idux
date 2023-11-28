@@ -155,7 +155,11 @@ function disableColumn(column: ProTableColumn) {
   if (changeIndex !== false && changeVisible !== false) {
     return false
   }
-  return { check: changeVisible === false, drag: changeIndex === false }
+  return {
+    check: changeVisible === false,
+    select: changeVisible === false,
+    drag: changeIndex === false,
+  }
 }
 
 function getCheckedKeys(columns: ProTableColumn[]) {
