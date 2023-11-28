@@ -10,6 +10,7 @@ import { computed, defineComponent, normalizeClass, provide } from 'vue'
 import { ɵHeader } from '@idux/components/_private/header'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxRow } from '@idux/components/grid'
+import { IxHeader } from '@idux/components/header'
 
 import { descToken } from './token'
 import { descProps } from './types'
@@ -42,11 +43,18 @@ export default defineComponent({
     return () => {
       return (
         <IxRow class={classes.value}>
-          <ɵHeader
-            v-slots={{ header: slots.header, closeIcon: slots.suffix }}
-            header={props.header}
-            size={mergedSize.value === 'lg' ? 'md' : 'sm'}
-          />
+          {slots.header ? (
+            <IxHeader
+              v-slots={{ default: slots.header, closeIcon: slots.suffix }}
+              size={mergedSize.value === 'lg' ? 'md' : 'sm'}
+            />
+          ) : (
+            <ɵHeader
+              v-slots={{ header: slots.header, closeIcon: slots.suffix }}
+              header={props.header}
+              size={mergedSize.value === 'lg' ? 'md' : 'sm'}
+            />
+          )}
           {slots.default && slots.default()}
         </IxRow>
       )
