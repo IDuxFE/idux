@@ -67,8 +67,8 @@ export function useTransferTableProps(
     const mergedLayoutTool = !layoutTool
       ? false
       : layoutTool === true
-      ? { changeSize: false }
-      : { ...layoutTool, changeSize: false }
+        ? { changeSize: false }
+        : { ...layoutTool, changeSize: false }
 
     return {
       autoHeight: !scroll,

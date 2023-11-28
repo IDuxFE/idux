@@ -71,12 +71,12 @@ export type CertainThemeTokens<
 > = key extends typeof globalTokenKey
   ? GlobalThemeTokens
   : key extends typeof resetTokenKey
-  ? ResetTokens
-  : key extends keyof ComponentThemeTokens
-  ? ComponentThemeTokens[key]
-  : key extends keyof Ext
-  ? Ext[key]
-  : Record<string, string | number>
+    ? ResetTokens
+    : key extends keyof ComponentThemeTokens
+      ? ComponentThemeTokens[key]
+      : key extends keyof Ext
+        ? Ext[key]
+        : Record<string, string | number>
 
 export type ThemeTokenKey<
   key extends ThemeKeys | keyof Ext,
@@ -84,10 +84,10 @@ export type ThemeTokenKey<
 > = key extends typeof globalTokenKey
   ? keyof GlobalThemeTokens
   : key extends keyof ComponentThemeTokens
-  ? keyof ComponentThemeTokens[key]
-  : key extends keyof Ext
-  ? keyof Ext[key]
-  : string
+    ? keyof ComponentThemeTokens[key]
+    : key extends keyof Ext
+      ? keyof Ext[key]
+      : string
 
 export type GetColorPalette = (color: string) => ColorPalette
 export type GetGreyColors = () => ColorPalette

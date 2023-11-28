@@ -51,8 +51,8 @@ export function defaultTokenTransform(key: string, value: string | number): stri
   ])
     ? 'px'
     : checkKeyWithSearch(lowerCasedKey, ['duration'])
-    ? 's'
-    : undefined
+      ? 's'
+      : undefined
 
   return numUnitTransform(value, unit)
 }

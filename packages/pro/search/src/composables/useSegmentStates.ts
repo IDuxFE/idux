@@ -100,8 +100,8 @@ export function useSegmentStates(
     const _selectionStart = isNumber(selectionStart)
       ? selectionStart
       : selectionStart === 'start'
-      ? 0
-      : targetSegmentState.input.length
+        ? 0
+        : targetSegmentState.input.length
     /* eslint-enable indent */
 
     handleSegmentSelect(targetSegmentStateName, _selectionStart)
