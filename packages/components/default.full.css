@@ -194,7 +194,6 @@
   --ix-color-icon-disabled: #bec3cc;
   --ix-color-warning-outline: #fdaa1d;
   --ix-color-error-outline: #f52727;
-  --ix-color-bg-disabled: #e1e5eb;
   --ix-color-bg-inverse: #2f3540;
   --ix-color-bg-inverse-disabled: #1e232b;
   --ix-color-border-inverse: #ffffff;
@@ -276,12 +275,6 @@
   --ix-reset-scrollbar-track-box-shadow: unset;
 }
 
-/* ------ anchor css variables ------ */
-:root {
-  --ix-anchor-ink-ball-width: 2px;
-  --ix-anchor-ink-ball-height: 16px;
-}
-
 /* ------ avatar css variables ------ */
 :root {
   --ix-avatar-size-sm: 24px;
@@ -290,15 +283,24 @@
   --ix-avatar-border-radius-square: 2px;
 }
 
-/* ------ breadcrumb css variables ------ */
+/* ------ anchor css variables ------ */
 :root {
-  --ix-breadcrumb-item-color: #a1a7b3;
-  --ix-breadcrumb-link-color: #a1a7b3;
-  --ix-breadcrumb-link-color-hover: #1c6eff;
-  --ix-breadcrumb-separator-color: #bec3cc;
-  --ix-breadcrumb-separator-font-size: 16px;
-  --ix-breadcrumb-last-item-color: #2f3540;
-  --ix-breadcrumb-separator-margin: 0 4px;
+  --ix-anchor-ink-ball-width: 2px;
+  --ix-anchor-ink-ball-height: 16px;
+}
+
+/* ------ back-top css variables ------ */
+:root {
+  --ix-back-top-size-lg: 64px;
+  --ix-back-top-size-md: 48px;
+  --ix-back-top-size-sm: 40px;
+  --ix-back-top-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05);
+  --ix-back-top-color: #96c7ff;
+  --ix-back-top-color-hover: #1c6eff;
+  --ix-back-top-bg-color: #ffffff;
+  --ix-back-top-border-width: 0;
+  --ix-back-top-border-type: solid;
+  --ix-back-top-border-color: none;
 }
 
 /* ------ badge css variables ------ */
@@ -307,67 +309,31 @@
   --ix-badge-count-size: 16px;
 }
 
-/* ------ button css variables ------ */
+/* ------ carousel css variables ------ */
 :root {
-  --ix-button-font-size-xs: 12px;
-  --ix-button-font-size-sm: 12px;
-  --ix-button-font-size-md: 14px;
-  --ix-button-font-size-lg: 16px;
-  --ix-button-font-size-xl: 16px;
-  --ix-button-min-width-xs: 56px;
-  --ix-button-min-width-sm: 64px;
-  --ix-button-min-width-md: 72px;
-  --ix-button-min-width-lg: 120px;
-  --ix-button-min-width-xl: 160px;
-  --ix-button-height-xs: 24px;
-  --ix-button-height-sm: 32px;
-  --ix-button-height-md: 32px;
-  --ix-button-height-lg: 40px;
-  --ix-button-height-xl: 48px;
-  --ix-button-padding-size-horizontal-xs: 8px;
-  --ix-button-padding-size-horizontal-sm: 12px;
-  --ix-button-padding-size-horizontal-md: 16px;
-  --ix-button-padding-size-horizontal-lg: 24px;
-  --ix-button-padding-size-horizontal-xl: 32px;
-  --ix-button-color: #2f3540;
-  --ix-button-color-disabled: #bec3cc;
-  --ix-button-bg-color: #ffffff;
-  --ix-button-bg-color-disabled: #e1e5eb;
-  --ix-button-border-color: #d3d7de;
-  --ix-button-border-radius: 2px;
-  --ix-button-primary-color: #ffffff;
-  --ix-button-primary-bg-color: #1c6eff;
-  --ix-button-primary-bg-color-hover: #458fff;
-  --ix-button-primary-bg-color-active: #0d51d9;
-  --ix-button-danger-color: #cf171d;
-  --ix-button-danger-color-hover: #f52727;
-  --ix-button-danger-color-active: #cf171d;
-  --ix-button-danger-bg-color: #ff5752;
-  --ix-button-danger-bg-color-hover: #ff837a;
-  --ix-button-danger-bg-color-active: #cf171d;
-  --ix-button-ghost-border-color: #ffffff;
-  --ix-button-ghost-bg-color-hover: rgba(255, 255, 255, 0.2);
-  --ix-button-ghost-bg-color-active: #ffffff;
-  --ix-button-ghost-bg-color-disabled: rgba(255, 255, 255, 0.4);
-  --ix-button-icon-color: inherit;
-  --ix-button-icon-font-size: 16px;
+  --ix-carousel-arrow-size: 32px;
+  --ix-carousel-arrow-color: #ffffff;
+  --ix-carousel-horizontal-dot-width: 32px;
+  --ix-carousel-horizontal-dot-height: 2px;
+  --ix-carousel-vertical-dot-width: 2px;
+  --ix-carousel-vertical-dot-height: 16px;
+  --ix-carousel-dot-bg-color: #ffffff;
+  --ix-carousel-dot-border-radius: 2px;
+  --ix-carousel-icon-opacity: 0.3;
+  --ix-carousel-icon-opacity-hover: 0.6;
+  --ix-carousel-icon-opacity-active: 0.8;
 }
 
-/* ------ collapse css variables ------ */
+/* ------ breadcrumb css variables ------ */
 :root {
-  --ix-collapse-font-size-sm: 12px;
-  --ix-collapse-font-size-md: 12px;
-  --ix-collapse-expand-icon-size-sm: 20px;
-  --ix-collapse-expand-icon-size-md: 24px;
-  --ix-collapse-padding-horizontal-sm: 12px;
-  --ix-collapse-padding-horizontal-md: 16px;
-}
-
-/* ------ checkbox css variables ------ */
-:root {
-  --ix-checkbox-label-padding: 0 4px;
-  --ix-checkbox-fieldset-bg-color: #f7f9fc;
-  --ix-checkbox-fieldset-border-color: #e1e5eb;
+  --ix-breadcrumb-font-size: 12px;
+  --ix-breadcrumb-item-color: #6f7785;
+  --ix-breadcrumb-link-color: #6f7785;
+  --ix-breadcrumb-link-color-hover: #1c6eff;
+  --ix-breadcrumb-separator-color: #bec3cc;
+  --ix-breadcrumb-separator-font-size: 12px;
+  --ix-breadcrumb-last-item-color: #2f3540;
+  --ix-breadcrumb-separator-margin: 0 4px;
 }
 
 /* ------ cascader css variables ------ */
@@ -383,28 +349,131 @@
   --ix-cascader-overlay-search-wrapper-padding: 4px 12px 8px;
 }
 
-/* ------ loading-bar css variables ------ */
+/* ------ checkbox css variables ------ */
 :root {
-  --ix-loading-bar-height: 2px;
-  --ix-loading-bar-loading-color: #1c6eff;
+  --ix-checkbox-label-padding: 0 4px;
+  --ix-checkbox-fieldset-bg-color: #f7f9fc;
+  --ix-checkbox-fieldset-border-color: #e1e5eb;
 }
 
-/* ------ card css variables ------ */
+/* ------ comment css variables ------ */
 :root {
-  --ix-card-font-size-sm: 12px;
-  --ix-card-font-size-md: 12px;
-  --ix-card-font-size-lg: 14px;
-  --ix-card-padding-size-sm: 16px;
-  --ix-card-padding-size-md: 16px;
-  --ix-card-padding-size-lg: 24px;
-  --ix-card-show-shadow-border-width: 0;
-  --ix-card-mark-width: 20px;
-  --ix-card-mark-height: 16px;
-  --ix-card-header-padding: 8px;
-  --ix-card-loading-spacing: 4px;
-  --ix-card-loading-height: 14px;
-  --ix-card-loading-bg-size: 600%;
-  --ix-card-grid-width: 25%;
+  --ix-comment-nest-indent: 44px;
+  --ix-comment-author-name-color: #a1a7b3;
+  --ix-comment-author-time-color: #6f7785;
+  --ix-comment-action-color: #6f7785;
+  --ix-comment-action-color-hover: #2f3540;
+}
+
+/* ------ form css variables ------ */
+:root {
+  --ix-form-label-color: #6f7785;
+  --ix-form-label-required-color: #cf171d;
+  --ix-form-label-font-size: 12px;
+  --ix-form-label-colon-margin-left: 2px;
+  --ix-form-label-colon-margin-right: 8px;
+  --ix-form-message-tooltip-bg-color: #ff5752;
+  --ix-form-item-margin-bottom: 8px;
+  --ix-form-vertical-item-label-padding: 0 0 8px;
+  --ix-form-vertical-item-label-margin: 0;
+}
+
+/* ------ drawer css variables ------ */
+:root {
+  --ix-drawer-box-shadow-start: 6px 0 16px -8px rgba(0, 0, 0, 0.08),
+    9px 0 28px 0 rgba(0, 0, 0, 0.05), 12px 0 48px 16px rgba(0, 0, 0, 0.03);
+  --ix-drawer-box-shadow-end: -6px 0 16px -8px rgba(0, 0, 0, 0.08),
+    -9px 0 28px 0 rgba(0, 0, 0, 0.05), -12px 0 48px 16px rgba(0, 0, 0, 0.03);
+  --ix-drawer-box-shadow-top: 0 -6px 16px -8px rgba(0, 0, 0, 0.08),
+    0 -9px 28px 0 rgba(0, 0, 0, 0.05), 0 -12px 48px 16px rgba(0, 0, 0, 0.03);
+  --ix-drawer-border-width: 0;
+  --ix-drawer-border-type: solid;
+  --ix-drawer-border-color: none;
+}
+
+/* ------ dropdown css variables ------ */
+:root {
+  --ix-dropdown-min-width: 128px;
+  --ix-dropdown-menu-container-padding: 4px 0;
+}
+
+/* ------ divider css variables ------ */
+:root {
+  --ix-divider-line-width: 1px;
+  --ix-divider-line-color: #d3d7de;
+  --ix-divider-font-size-sm: 12px;
+  --ix-divider-font-size-md: 14px;
+  --ix-divider-font-size-lg: 16px;
+  --ix-divider-margin-vertical-sm: 12px;
+  --ix-divider-margin-vertical-md: 16px;
+  --ix-divider-margin-vertical-lg: 24px;
+  --ix-divider-margin-horizontal-sm: 4px;
+  --ix-divider-margin-horizontal-md: 8px;
+  --ix-divider-margin-horizontal-lg: 12px;
+}
+
+/* ------ empty css variables ------ */
+:root {
+  --ix-empty-color: #a1a7b3;
+  --ix-empty-desc-color: #6f7785;
+  --ix-empty-desc-font-size: 16px;
+}
+
+/* ------ desc css variables ------ */
+:root {
+  --ix-desc-item-height-sm: 24px;
+  --ix-desc-item-height-md: 32px;
+  --ix-desc-item-height-lg: 40px;
+  --ix-desc-font-size-sm: 12px;
+  --ix-desc-font-size-md: 12px;
+  --ix-desc-font-size-lg: 12px;
+  --ix-desc-label-color: #6f7785;
+}
+
+/* ------ layout css variables ------ */
+:root {
+  --ix-layout-sider-width: 224px;
+  --ix-layout-sider-collapsed-width: 44px;
+}
+
+/* ------ menu css variables ------ */
+:root {
+  --ix-menu-border-radius: 0;
+  --ix-menu-height: 32px;
+  --ix-menu-height-level-1: 40px;
+  --ix-menu-font-size: 12px;
+  --ix-menu-font-size-level-1: 14px;
+  --ix-menu-overlay-min-width: 128px;
+  --ix-menu-collapsed-width: 44px;
+  --ix-menu-item-color: #2f3540;
+  --ix-menu-item-color-hover: #2f3540;
+  --ix-menu-item-color-active: #1c6eff;
+  --ix-menu-item-color-disabled: #bec3cc;
+  --ix-menu-item-group-color: #6f7785;
+  --ix-menu-item-bg: #ffffff;
+  --ix-menu-item-bg-hover: #f7f9fc;
+  --ix-menu-item-bg-active: #e8f4ff;
+  --ix-menu-item-bg-disabled: #ffffff;
+  --ix-menu-item-group-bg: #ffffff;
+  --ix-menu-horizontal-item-color-hover: #2f3540;
+  --ix-menu-horizontal-item-color-active: #1c6eff;
+  --ix-menu-horizontal-item-bg-hover: #f7f9fc;
+  --ix-menu-horizontal-item-bg-active: #e8f4ff;
+  --ix-menu-dark-item-color: #ffffff;
+  --ix-menu-dark-item-color-hover: #ffffff;
+  --ix-menu-dark-item-color-active: #ffffff;
+  --ix-menu-dark-item-color-disabled: #bec3cc;
+  --ix-menu-dark-item-group-color: #6f7785;
+  --ix-menu-dark-item-font-weight-active: 600;
+  --ix-menu-dark-item-bg: #2f3540;
+  --ix-menu-dark-item-bg-hover: #1e232b;
+  --ix-menu-dark-item-bg-active: #1c6eff;
+  --ix-menu-dark-item-bg-disabled: #2f3540;
+  --ix-menu-dark-item-group-bg: #2f3540;
+  --ix-menu-dark-horizontal-item-color-hover: #ffffff;
+  --ix-menu-dark-horizontal-item-color-active: #ffffff;
+  --ix-menu-dark-horizontal-item-bg-hover: #1e232b;
+  --ix-menu-dark-horizontal-item-bg-active: #454c59;
 }
 
 /* ------ image css variables ------ */
@@ -425,168 +494,11 @@
   --ix-image-viewer-opr-item-margin: 0 24px;
 }
 
-/* ------ header css variables ------ */
+/* ------ popover css variables ------ */
 :root {
-  --ix-header-height-sm: 40px;
-  --ix-header-height-md: 48px;
-  --ix-header-height-lg: 48px;
-  --ix-header-height-xl: 56px;
-  --ix-header-bar-width: 4px;
-  --ix-header-bar-bg-color: #1c6eff;
-  --ix-header-prefix-color: #2f3540;
-  --ix-header-prefix-color-hover: #1c6eff;
-  --ix-header-prefix-color-active: #1c6eff;
-  --ix-header-prefix-color-disabled: #bec3cc;
-  --ix-header-suffix-color: #5e6573;
-  --ix-header-suffix-color-hover: #1c6eff;
-  --ix-header-suffix-color-active: #0d51d9;
-  --ix-header-suffix-color-disabled: #bec3cc;
-  --ix-header-sub-title-font-size: 14px;
-}
-
-/* ------ comment css variables ------ */
-:root {
-  --ix-comment-nest-indent: 44px;
-  --ix-comment-author-name-color: #a1a7b3;
-  --ix-comment-author-time-color: #6f7785;
-  --ix-comment-action-color: #6f7785;
-  --ix-comment-action-color-hover: #2f3540;
-}
-
-/* ------ transfer css variables ------ */
-:root {
-  --ix-transfer-height: 290px;
-  --ix-transfer-content-width: 260px;
-  --ix-transfer-header-height: 40px;
-  --ix-transfer-suffix-margin-left: 12px;
-  --ix-transfer-footer-height: 40px;
-  --ix-transfer-content-padding: 0 8px 0 12px;
-  --ix-transfer-opr-min-width: 4px;
-  --ix-transfer-opr-padding: 8px;
-  --ix-transfer-opr-button-width: 24px;
-  --ix-transfer-opr-button-height: 32px;
-  --ix-transfer-opr-button-gap: 8px;
-  --ix-transfer-search-width: 110px;
-  --ix-transfer-list-item-min-height: 32px;
-  --ix-transfer-close-icon-padding: 0 12px;
-}
-
-/* ------ tabs css variables ------ */
-:root {
-  --ix-tabs-nav-font-size-md: 12px;
-  --ix-tabs-nav-font-size-lg: 14px;
-  --ix-tabs-nav-tab-padding: 0 16px;
-  --ix-tabs-nav-tab-min-width: 72px;
-  --ix-tabs-nav-tab-height: 40px;
-  --ix-tabs-nav-bar-height: 2px;
-  --ix-tabs-segment-nav-height: 32px;
-  --ix-tabs-border-radius: 2px;
-  --ix-tabs-panel-padding-size: 16px;
-}
-
-/* ------ result css variables ------ */
-:root {
-  --ix-result-padding: 48px 32px;
-  --ix-result-icon-size: 48px;
-  --ix-result-title-font-size: 20px;
-  --ix-result-title-line-height: 32px;
-  --ix-result-subtitle-font-size: 12px;
-  --ix-result-subtitle-line-height: 18px;
-  --ix-result-subtitle-margin-top: 4px;
-  --ix-result-extra-margin-top: 24px;
-  --ix-result-content-margin-top: 24px;
-  --ix-result-content-padding: 24px 40px;
-}
-
-/* ------ progress css variables ------ */
-:root {
-  --ix-progress-trail-bg-color: #edf1f7;
-  --ix-progress-text-width: 36px;
-  --ix-progress-border-radius: 100px;
-  --ix-progress-line-size-sm: 2px;
-  --ix-progress-line-size-md: 6px;
-  --ix-progress-line-size-lg: 8px;
-  --ix-progress-line-font-size-sm: 12px;
-  --ix-progress-line-font-size-md: 12px;
-  --ix-progress-line-font-size-lg: 14px;
-  --ix-progress-line-text-padding: 0 0 0 8px;
-  --ix-progress-circle-width: 120px;
-  --ix-progress-circle-font-size: 24px;
-}
-
-/* ------ tour css variables ------ */
-:root {
-  --ix-tour-bg-color: #ffffff;
-  --ix-tour-description-color: #2f3540;
-  --ix-tour-indicators-color: #6f7785;
-  --ix-tour-border-radius: 4px;
-  --ix-tour-min-width: 250px;
-  --ix-tour-padding-top: 16px;
-  --ix-tour-padding-left: 16px;
-  --ix-tour-padding-right: 16px;
-  --ix-tour-padding-bottom: 16px;
-  --ix-tour-description-font-size: 12px;
-  --ix-tour-indicators-font-size: 12px;
-  --ix-tour-footer-btn-gap: 4px;
-}
-
-/* ------ desc css variables ------ */
-:root {
-  --ix-desc-item-height-sm: 24px;
-  --ix-desc-item-height-md: 32px;
-  --ix-desc-item-height-lg: 40px;
-  --ix-desc-font-size-sm: 12px;
-  --ix-desc-font-size-md: 12px;
-  --ix-desc-font-size-lg: 12px;
-  --ix-desc-label-color: #6f7785;
-}
-
-/* ------ dropdown css variables ------ */
-:root {
-  --ix-dropdown-min-width: 128px;
-  --ix-dropdown-menu-container-padding: 4px 0;
-}
-
-/* ------ select css variables ------ */
-:root {
-  --ix-select-option-font-size: 12px;
-  --ix-select-option-height: 32px;
-  --ix-select-option-padding: 8px 12px;
-  --ix-select-option-label-margin-left: 8px;
-  --ix-select-option-container-padding: 4px 0;
-  --ix-select-option-group-margin: 0 12;
-  --ix-select-option-group-padding-left: 0;
-  --ix-select-multiple-option-grouped-padding-left: 12px;
-  --ix-select-option-grouped-padding-left: 24px;
-  --ix-select-overlay-search-wrapper-padding: 4px 12px 8px;
-}
-
-/* ------ popconfirm css variables ------ */
-:root {
-  --ix-popconfirm-font-size: 12px;
-  --ix-popconfirm-title-font-size: 14px;
-  --ix-popconfirm-color: #2f3540;
-  --ix-popconfirm-icon-color: #fdaa1d;
-  --ix-popconfirm-min-width: 240px;
-}
-
-/* ------ tree-select css variables ------ */
-:root {
-  --ix-tree-select-option-font-size: 12px;
-  --ix-tree-select-option-height: 32px;
-  --ix-tree-select-option-padding: 8px 12px;
-  --ix-tree-select-option-margin-left: 8px;
-  --ix-tree-select-option-container-padding: 4px 0;
-  --ix-tree-select-option-container-tree-node-padding: 0 0 0 8px;
-  --ix-tree-select-overlay-search-wrapper-padding: 4px 12px 8px;
-}
-
-/* ------ skeleton css variables ------ */
-:root {
-  --ix-skeleton-margin-bottom: 8px;
-  --ix-skeleton-loader-margin-bottom: 4px;
-  --ix-skeleton-start-color: #edf1f7;
-  --ix-skeleton-end-color: #e1e5eb;
+  --ix-popover-font-size: 12px;
+  --ix-popover-color: #6f7785;
+  --ix-popover-min-width: 240px;
 }
 
 /* ------ modal css variables ------ */
@@ -596,158 +508,6 @@
   --ix-modal-title-color: #2f3540;
   --ix-modal-content-color: #6f7785;
   --ix-modal-icon-size: 40px;
-}
-
-/* ------ tooltip css variables ------ */
-:root {
-  --ix-tooltip-font-size: 12px;
-  --ix-tooltip-color: #6f7785;
-  --ix-tooltip-min-width: 32px;
-  --ix-tooltip-max-width: 400px;
-}
-
-/* ------ drawer css variables ------ */
-:root {
-  --ix-drawer-box-shadow-start: 6px 0 16px -8px rgba(0, 0, 0, 0.08),
-    9px 0 28px 0 rgba(0, 0, 0, 0.05), 12px 0 48px 16px rgba(0, 0, 0, 0.03);
-  --ix-drawer-box-shadow-end: -6px 0 16px -8px rgba(0, 0, 0, 0.08),
-    -9px 0 28px 0 rgba(0, 0, 0, 0.05), -12px 0 48px 16px rgba(0, 0, 0, 0.03);
-  --ix-drawer-box-shadow-top: 0 -6px 16px -8px rgba(0, 0, 0, 0.08),
-    0 -9px 28px 0 rgba(0, 0, 0, 0.05), 0 -12px 48px 16px rgba(0, 0, 0, 0.03);
-}
-
-/* ------ radio css variables ------ */
-:root {
-  --ix-radio-label-padding: 0 4px;
-  --ix-radio-fieldset-border-radius: 2px;
-  --ix-radio-fieldset-bg-color: #f7f9fc;
-  --ix-radio-fieldset-border-color: #e1e5eb;
-}
-
-/* ------ timeline css variables ------ */
-:root {
-  --ix-timeline-font-size: 12px;
-  --ix-timeline-dot-size: 12px;
-  --ix-timeline-dot-border-width: 2px;
-  --ix-timeline-content-label-margin-top: 8px;
-  --ix-timeline-line-width: 2px;
-  --ix-timeline-line-bg-color: #e1e5eb;
-  --ix-timeline-pending-item-content-min-width: 40px;
-  --ix-timeline-content-margin-bottom: 20px;
-}
-
-/* ------ form css variables ------ */
-:root {
-  --ix-form-label-color: #6f7785;
-  --ix-form-label-required-color: #cf171d;
-  --ix-form-label-font-size: 12px;
-  --ix-form-label-colon-margin-left: 2px;
-  --ix-form-label-colon-margin-right: 8px;
-  --ix-form-message-tooltip-bg-color: #ff5752;
-  --ix-form-item-margin-bottom: 8px;
-  --ix-form-vertical-item-label-padding: 0 0 8px;
-  --ix-form-vertical-item-label-margin: 0;
-}
-
-/* ------ carousel css variables ------ */
-:root {
-  --ix-carousel-arrow-size: 32px;
-  --ix-carousel-arrow-color: #ffffff;
-  --ix-carousel-horizontal-dot-width: 32px;
-  --ix-carousel-horizontal-dot-height: 2px;
-  --ix-carousel-vertical-dot-width: 2px;
-  --ix-carousel-vertical-dot-height: 16px;
-  --ix-carousel-dot-bg-color: #ffffff;
-  --ix-carousel-dot-border-radius: 2px;
-  --ix-carousel-icon-opacity: 0.3;
-  --ix-carousel-icon-opacity-hover: 0.6;
-  --ix-carousel-icon-opacity-active: 0.8;
-}
-
-/* ------ empty css variables ------ */
-:root {
-  --ix-empty-color: #a1a7b3;
-  --ix-empty-desc-color: #6f7785;
-  --ix-empty-desc-font-size: 16px;
-}
-
-/* ------ stepper css variables ------ */
-:root {
-  --ix-stepper-icon-size-sm: 24px;
-  --ix-stepper-icon-size-md: 32px;
-  --ix-stepper-icon-font-size-sm: 14px;
-  --ix-stepper-icon-font-size-md: 16px;
-  --ix-stepper-icon-border-width-sm: 2px;
-  --ix-stepper-icon-border-width-md: 2px;
-  --ix-stepper-icon-margin-sm: 0 8px 0 0;
-  --ix-stepper-icon-margin-md: 0 8px 0 0;
-  --ix-stepper-title-font-size-sm: 14px;
-  --ix-stepper-title-font-size-md: 16px;
-  --ix-stepper-description-font-size-sm: 12px;
-  --ix-stepper-description-font-size-md: 14px;
-  --ix-stepper-content-min-height-sm: 60px;
-  --ix-stepper-content-min-height-md: 80px;
-  --ix-stepper-line-type: dashed;
-}
-
-/* ------ popover css variables ------ */
-:root {
-  --ix-popover-font-size: 12px;
-  --ix-popover-color: #6f7785;
-  --ix-popover-min-width: 240px;
-}
-
-/* ------ divider css variables ------ */
-:root {
-  --ix-divider-line-width: 1px;
-  --ix-divider-line-color: #d3d7de;
-  --ix-divider-font-size-sm: 12px;
-  --ix-divider-font-size-md: 14px;
-  --ix-divider-font-size-lg: 16px;
-  --ix-divider-margin-vertical-sm: 12px;
-  --ix-divider-margin-vertical-md: 16px;
-  --ix-divider-margin-vertical-lg: 24px;
-  --ix-divider-margin-horizontal-sm: 4px;
-  --ix-divider-margin-horizontal-md: 8px;
-  --ix-divider-margin-horizontal-lg: 12px;
-}
-
-/* ------ statistic css variables ------ */
-:root {
-  --ix-statistic-font-size-sm: 14px;
-  --ix-statistic-font-size-md: 14px;
-  --ix-statistic-font-size-lg: 24px;
-  --ix-statistic-font-size-xl: 30px;
-  --ix-statistic-color: #2f3540;
-}
-
-/* ------ tree css variables ------ */
-:root {
-  --ix-tree-drop-line-width: 2px;
-  --ix-tree-drop-line-color: #458fff;
-  --ix-tree-bg-color: #ffffff;
-  --ix-tree-node-bg-color-hover: #f7f9fc;
-  --ix-tree-node-bg-color-selected: #ffffff;
-  --ix-tree-node-color-selected: #1c6eff;
-  --ix-tree-node-padding-vertical: 0px;
-  --ix-tree-node-content-height: 32px;
-  --ix-tree-node-content-padding: 0 8px 0 4px;
-  --ix-tree-node-content-label-padding: 0 4px;
-  --ix-tree-node-content-label-highlight-color: #1c6eff;
-  --ix-tree-node-checkbox-margin: 0 4px 0 4px;
-  --ix-tree-node-icon-width: 24px;
-  --ix-tree-expand-icon-color: #bec3cc;
-}
-
-/* ------ layout css variables ------ */
-:root {
-  --ix-layout-sider-width: 224px;
-  --ix-layout-sider-collapsed-width: 44px;
-}
-
-/* ------ space css variables ------ */
-:root {
-  --ix-space-separator-color: #e1e5eb;
 }
 
 /* ------ time-picker css variables ------ */
@@ -779,66 +539,44 @@
   --ix-time-picker-panel-scrollbar-track-bg-color: unset;
 }
 
-/* ------ table css variables ------ */
+/* ------ collapse css variables ------ */
 :root {
-  --ix-table-font-size-sm: 12px;
-  --ix-table-font-size-md: 12px;
-  --ix-table-font-size-lg: 12px;
-  --ix-table-head-row-height-sm: 32px;
-  --ix-table-head-row-height-md: 32px;
-  --ix-table-head-row-height-lg: 32px;
-  --ix-table-body-row-height-sm: 32px;
-  --ix-table-body-row-height-md: 40px;
-  --ix-table-body-row-height-lg: 56px;
-  --ix-table-row-padding-horizontal-sm: 8px;
-  --ix-table-row-padding-horizontal-md: 12px;
-  --ix-table-row-padding-horizontal-lg: 16px;
-  --ix-table-head-color: #454c59;
-  --ix-table-head-bg-color: #edf1f7;
-  --ix-table-head-separator-color: #d3d7de;
-  --ix-table-head-icon-color: #bec3cc;
-  --ix-table-head-icon-color-active: #1c6eff;
-  --ix-table-head-icon-bg-color-hover: #e1e5eb;
-  --ix-table-body-row-bg-color-hover: #f7f9fc;
-  --ix-table-body-row-bg-color-selected: #ffffff;
-  --ix-table-expandable-icon-color: #bec3cc;
+  --ix-collapse-font-size-sm: 12px;
+  --ix-collapse-font-size-md: 12px;
+  --ix-collapse-expand-icon-size-sm: 20px;
+  --ix-collapse-expand-icon-size-md: 24px;
+  --ix-collapse-padding-horizontal-sm: 12px;
+  --ix-collapse-padding-horizontal-md: 16px;
+  --ix-collapse-panel-header-bg-color: #ffffff;
+  --ix-collapse-panel-content-bg-color: #f7f9fc;
 }
 
-/* ------ upload css variables ------ */
+/* ------ card css variables ------ */
 :root {
-  --ix-upload-selector-dragable-border: 1px dashed #d3d7de;
-  --ix-upload-selector-dragable-border-dragover: 1px dashed #1c6eff;
-  --ix-upload-list-name-max-width: calc(100% - 74px);
-  --ix-upload-list-img-thumb-width: 48px;
-  --ix-upload-list-img-thumb-height: 48px;
-  --ix-upload-list-img-card-height: 96px;
-  --ix-upload-list-img-card-width: 96px;
+  --ix-card-font-size-sm: 12px;
+  --ix-card-font-size-md: 12px;
+  --ix-card-font-size-lg: 14px;
+  --ix-card-padding-size-sm: 16px;
+  --ix-card-padding-size-md: 16px;
+  --ix-card-padding-size-lg: 24px;
+  --ix-card-show-shadow-border-width: 0;
+  --ix-card-mark-width: 20px;
+  --ix-card-mark-height: 16px;
+  --ix-card-header-padding: 8px;
+  --ix-card-loading-spacing: 4px;
+  --ix-card-loading-height: 14px;
+  --ix-card-loading-bg-size: 600%;
+  --ix-card-loading-start-color: #edf1f7;
+  --ix-card-loading-end-color: #e1e5eb;
+  --ix-card-grid-width: 25%;
 }
 
-/* ------ back-top css variables ------ */
+/* ------ skeleton css variables ------ */
 :root {
-  --ix-back-top-size-lg: 64px;
-  --ix-back-top-size-md: 48px;
-  --ix-back-top-size-sm: 40px;
-  --ix-back-top-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05);
-  --ix-back-top-color: #96c7ff;
-  --ix-back-top-color-hover: #1c6eff;
-  --ix-back-top-bg-color: #ffffff;
-}
-
-/* ------ spin css variables ------ */
-:root {
-  --ix-spin-tip-color: #1c6eff;
-  --ix-spin-icon-color: #1c6eff;
-  --ix-spin-font-size-sm: 12px;
-  --ix-spin-font-size-md: 14px;
-  --ix-spin-font-size-lg: 16px;
-  --ix-spin-icon-size-sm: 20px;
-  --ix-spin-icon-size-md: 28px;
-  --ix-spin-icon-size-lg: 48px;
-  --ix-spin-bg-circle-stroke: #1c6eff;
-  --ix-spin-fst-arch-stroke: #12a679;
-  --ix-spin-snd-arch-stroke: #c0c5cc;
+  --ix-skeleton-margin-bottom: 8px;
+  --ix-skeleton-loader-margin-bottom: 4px;
+  --ix-skeleton-start-color: #edf1f7;
+  --ix-skeleton-end-color: #e1e5eb;
 }
 
 /* ------ date-picker css variables ------ */
@@ -883,6 +621,316 @@
   --ix-date-picker-panel-body-header-bg-color: #f7f9fc;
 }
 
+/* ------ rate css variables ------ */
+:root {
+  --ix-rate-active-color: #ffc145;
+  --ix-rate-size-sm: 14px;
+  --ix-rate-size-md: 20px;
+  --ix-rate-size-lg: 28px;
+  --ix-rate-item-margin-right: 8px;
+  --ix-rate-item-scale-hover: 1.1;
+  --ix-rate-item-outline-focus: 1px dashed #ffc145;
+}
+
+/* ------ popconfirm css variables ------ */
+:root {
+  --ix-popconfirm-font-size: 12px;
+  --ix-popconfirm-title-font-size: 14px;
+  --ix-popconfirm-color: #2f3540;
+  --ix-popconfirm-icon-color: #fdaa1d;
+  --ix-popconfirm-min-width: 240px;
+}
+
+/* ------ timeline css variables ------ */
+:root {
+  --ix-timeline-font-size: 12px;
+  --ix-timeline-dot-size: 12px;
+  --ix-timeline-dot-border-width: 2px;
+  --ix-timeline-content-label-margin-top: 8px;
+  --ix-timeline-line-width: 2px;
+  --ix-timeline-line-bg-color: #e1e5eb;
+  --ix-timeline-pending-item-content-min-width: 40px;
+  --ix-timeline-content-margin-bottom: 20px;
+}
+
+/* ------ tree css variables ------ */
+:root {
+  --ix-tree-drop-line-width: 2px;
+  --ix-tree-drop-line-color: #458fff;
+  --ix-tree-bg-color: #ffffff;
+  --ix-tree-node-bg-color-hover: #f7f9fc;
+  --ix-tree-node-bg-color-selected: #ffffff;
+  --ix-tree-node-color-selected: #1c6eff;
+  --ix-tree-node-padding-vertical: 0px;
+  --ix-tree-node-content-height: 32px;
+  --ix-tree-node-content-padding: 0 8px 0 4px;
+  --ix-tree-node-content-label-padding: 0 4px;
+  --ix-tree-node-content-label-highlight-color: #1c6eff;
+  --ix-tree-node-checkbox-margin: 0 4px 0 4px;
+  --ix-tree-node-icon-width: 24px;
+  --ix-tree-expand-icon-color: #bec3cc;
+}
+
+/* ------ pagination css variables ------ */
+:root {
+  --ix-pagination-font-size-sm: 12px;
+  --ix-pagination-font-size-md: 12px;
+  --ix-pagination-font-size-lg: 14px;
+  --ix-pagination-itme-padding-sm: 0;
+  --ix-pagination-item-padding-md: 4px;
+  --ix-pagination-item-padding-lg: 4px;
+  --ix-pagination-item-content-size-sm: 24px;
+  --ix-pagination-item-content-size-md: 24px;
+  --ix-pagination-item-content-size-lg: 32px;
+  --ix-pagination-out-line-color: #458fff;
+}
+
+/* ------ tour css variables ------ */
+:root {
+  --ix-tour-bg-color: #ffffff;
+  --ix-tour-description-color: #2f3540;
+  --ix-tour-indicators-color: #6f7785;
+  --ix-tour-border-radius: 4px;
+  --ix-tour-min-width: 250px;
+  --ix-tour-padding-top: 16px;
+  --ix-tour-padding-left: 16px;
+  --ix-tour-padding-right: 16px;
+  --ix-tour-padding-bottom: 16px;
+  --ix-tour-description-font-size: 12px;
+  --ix-tour-indicators-font-size: 12px;
+  --ix-tour-footer-btn-gap: 4px;
+}
+
+/* ------ transfer css variables ------ */
+:root {
+  --ix-transfer-height: 290px;
+  --ix-transfer-content-width: 260px;
+  --ix-transfer-header-height: 40px;
+  --ix-transfer-suffix-margin-left: 12px;
+  --ix-transfer-footer-height: 40px;
+  --ix-transfer-content-padding: 0 8px 0 12px;
+  --ix-transfer-opr-min-width: 4px;
+  --ix-transfer-opr-padding: 8px;
+  --ix-transfer-opr-button-width: 24px;
+  --ix-transfer-opr-button-height: 32px;
+  --ix-transfer-opr-button-gap: 8px;
+  --ix-transfer-search-width: 110px;
+  --ix-transfer-list-item-min-height: 32px;
+  --ix-transfer-close-icon-padding: 0 12px;
+}
+
+/* ------ radio css variables ------ */
+:root {
+  --ix-radio-label-padding: 0 4px;
+  --ix-radio-fieldset-border-radius: 2px;
+  --ix-radio-fieldset-bg-color: #f7f9fc;
+  --ix-radio-fieldset-border-color: #e1e5eb;
+}
+
+/* ------ loading-bar css variables ------ */
+:root {
+  --ix-loading-bar-height: 2px;
+  --ix-loading-bar-loading-color: #1c6eff;
+}
+
+/* ------ stepper css variables ------ */
+:root {
+  --ix-stepper-icon-size-sm: 24px;
+  --ix-stepper-icon-size-md: 32px;
+  --ix-stepper-icon-font-size-sm: 14px;
+  --ix-stepper-icon-font-size-md: 16px;
+  --ix-stepper-icon-border-width-sm: 2px;
+  --ix-stepper-icon-border-width-md: 2px;
+  --ix-stepper-icon-margin-sm: 0 8px 0 0;
+  --ix-stepper-icon-margin-md: 0 8px 0 0;
+  --ix-stepper-title-font-size-sm: 14px;
+  --ix-stepper-title-font-size-md: 16px;
+  --ix-stepper-description-font-size-sm: 12px;
+  --ix-stepper-description-font-size-md: 14px;
+  --ix-stepper-content-min-height-sm: 60px;
+  --ix-stepper-content-min-height-md: 80px;
+  --ix-stepper-line-type: dashed;
+}
+
+/* ------ table css variables ------ */
+:root {
+  --ix-table-font-size-sm: 12px;
+  --ix-table-font-size-md: 12px;
+  --ix-table-font-size-lg: 12px;
+  --ix-table-head-row-height-sm: 32px;
+  --ix-table-head-row-height-md: 32px;
+  --ix-table-head-row-height-lg: 32px;
+  --ix-table-body-row-height-sm: 32px;
+  --ix-table-body-row-height-md: 40px;
+  --ix-table-body-row-height-lg: 56px;
+  --ix-table-row-padding-horizontal-sm: 8px;
+  --ix-table-row-padding-horizontal-md: 12px;
+  --ix-table-row-padding-horizontal-lg: 16px;
+  --ix-table-head-color: #454c59;
+  --ix-table-head-bg-color: #edf1f7;
+  --ix-table-head-separator-color: #d3d7de;
+  --ix-table-head-icon-color: #bec3cc;
+  --ix-table-head-icon-color-active: #1c6eff;
+  --ix-table-head-icon-bg-color-hover: #e1e5eb;
+  --ix-table-body-row-bg-color-hover: #f7f9fc;
+  --ix-table-body-row-bg-color-selected: #ffffff;
+  --ix-table-body-row-bg-color-expanded: #f7f9fc;
+  --ix-table-body-row-bg-color-tree-expanded: #f7f9fc;
+  --ix-table-expandable-icon-color: #bec3cc;
+}
+
+/* ------ tabs css variables ------ */
+:root {
+  --ix-tabs-nav-font-size-md: 12px;
+  --ix-tabs-nav-font-size-lg: 14px;
+  --ix-tabs-nav-tab-padding: 0 16px;
+  --ix-tabs-nav-tab-min-width: 72px;
+  --ix-tabs-nav-tab-height: 40px;
+  --ix-tabs-nav-bar-height: 2px;
+  --ix-tabs-segment-nav-height: 32px;
+  --ix-tabs-border-radius: 2px;
+  --ix-tabs-panel-padding-size: 16px;
+}
+
+/* ------ progress css variables ------ */
+:root {
+  --ix-progress-trail-bg-color: #edf1f7;
+  --ix-progress-text-width: 36px;
+  --ix-progress-border-radius: 100px;
+  --ix-progress-line-size-sm: 2px;
+  --ix-progress-line-size-md: 6px;
+  --ix-progress-line-size-lg: 8px;
+  --ix-progress-line-font-size-sm: 12px;
+  --ix-progress-line-font-size-md: 12px;
+  --ix-progress-line-font-size-lg: 14px;
+  --ix-progress-line-text-padding: 0 0 0 8px;
+  --ix-progress-circle-width: 120px;
+  --ix-progress-circle-font-size: 24px;
+}
+
+/* ------ select css variables ------ */
+:root {
+  --ix-select-option-font-size: 12px;
+  --ix-select-option-height: 32px;
+  --ix-select-option-padding: 8px 12px;
+  --ix-select-option-label-margin-left: 8px;
+  --ix-select-option-container-padding: 4px 0;
+  --ix-select-option-group-margin: 0 12;
+  --ix-select-option-group-padding-left: 0;
+  --ix-select-multiple-option-grouped-padding-left: 12px;
+  --ix-select-option-grouped-padding-left: 24px;
+  --ix-select-overlay-search-wrapper-padding: 4px 12px 8px;
+}
+
+/* ------ statistic css variables ------ */
+:root {
+  --ix-statistic-font-size-sm: 14px;
+  --ix-statistic-font-size-md: 14px;
+  --ix-statistic-font-size-lg: 24px;
+  --ix-statistic-font-size-xl: 30px;
+  --ix-statistic-color: #2f3540;
+}
+
+/* ------ space css variables ------ */
+:root {
+  --ix-space-separator-color: #e1e5eb;
+}
+
+/* ------ tree-select css variables ------ */
+:root {
+  --ix-tree-select-option-font-size: 12px;
+  --ix-tree-select-option-height: 32px;
+  --ix-tree-select-option-padding: 8px 12px;
+  --ix-tree-select-option-margin-left: 8px;
+  --ix-tree-select-option-container-padding: 4px 0;
+  --ix-tree-select-option-container-tree-node-padding: 0 0 0 8px;
+  --ix-tree-select-overlay-search-wrapper-padding: 4px 12px 8px;
+}
+
+/* ------ result css variables ------ */
+:root {
+  --ix-result-padding: 48px 32px;
+  --ix-result-icon-size: 48px;
+  --ix-result-title-font-size: 20px;
+  --ix-result-title-line-height: 32px;
+  --ix-result-subtitle-font-size: 12px;
+  --ix-result-subtitle-line-height: 18px;
+  --ix-result-subtitle-margin-top: 4px;
+  --ix-result-extra-margin-top: 24px;
+  --ix-result-content-margin-top: 24px;
+  --ix-result-content-padding: 24px 40px;
+}
+
+/* ------ header css variables ------ */
+:root {
+  --ix-header-height-sm: 40px;
+  --ix-header-height-md: 48px;
+  --ix-header-height-lg: 48px;
+  --ix-header-height-xl: 56px;
+  --ix-header-bar-width: 4px;
+  --ix-header-bar-bg-color: #1c6eff;
+  --ix-header-prefix-color: #2f3540;
+  --ix-header-prefix-color-hover: #1c6eff;
+  --ix-header-prefix-color-active: #1c6eff;
+  --ix-header-prefix-color-disabled: #bec3cc;
+  --ix-header-suffix-color: #5e6573;
+  --ix-header-suffix-color-hover: #1c6eff;
+  --ix-header-suffix-color-active: #0d51d9;
+  --ix-header-suffix-color-disabled: #bec3cc;
+  --ix-header-sub-title-font-size: 14px;
+}
+
+/* ------ tooltip css variables ------ */
+:root {
+  --ix-tooltip-font-size: 12px;
+  --ix-tooltip-color: #6f7785;
+  --ix-tooltip-min-width: 32px;
+  --ix-tooltip-max-width: 400px;
+}
+
+/* ------ upload css variables ------ */
+:root {
+  --ix-upload-selector-dragable-border: 1px dashed #d3d7de;
+  --ix-upload-selector-dragable-border-dragover: 1px dashed #1c6eff;
+  --ix-upload-list-name-max-width: calc(100% - 74px);
+  --ix-upload-list-img-thumb-width: 48px;
+  --ix-upload-list-img-thumb-height: 48px;
+  --ix-upload-list-img-card-height: 96px;
+  --ix-upload-list-img-card-width: 96px;
+}
+
+/* ------ switch css variables ------ */
+:root {
+  --ix-switch-active-disabled-color: #96c7ff;
+  --ix-switch-height-sm: 16px;
+  --ix-switch-height-md: 24px;
+  --ix-switch-height-lg: 32px;
+  --ix-switch-handle-size-sm: 12px;
+  --ix-switch-handle-size-md: 20px;
+  --ix-switch-handle-size-lg: 28px;
+  --ix-switch-icon-font-size-sm: 9px;
+  --ix-switch-icon-font-size-md: 14px;
+  --ix-switch-icon-font-size-lg: 14px;
+  --ix-switch-handle-padding: 2px;
+  --ix-switch-handle-bg-color: #ffffff;
+  --ix-switch-handle-box-shadow: none;
+}
+
+/* ------ spin css variables ------ */
+:root {
+  --ix-spin-tip-color: #1c6eff;
+  --ix-spin-icon-color: #1c6eff;
+  --ix-spin-font-size-sm: 12px;
+  --ix-spin-font-size-md: 14px;
+  --ix-spin-font-size-lg: 16px;
+  --ix-spin-icon-size-sm: 20px;
+  --ix-spin-icon-size-md: 28px;
+  --ix-spin-icon-size-lg: 48px;
+  --ix-spin-bg-circle-stroke: #1c6eff;
+  --ix-spin-fst-arch-stroke: #12a679;
+  --ix-spin-snd-arch-stroke: #d3d7de;
+}
+
 /* ------ alert css variables ------ */
 :root {
   --ix-alert-height: 32px;
@@ -894,44 +942,72 @@
   --ix-alert-offline-bg-color: rgba(111, 119, 133, 0.1);
 }
 
-/* ------ menu css variables ------ */
+/* ------ button css variables ------ */
 :root {
-  --ix-menu-border-radius: 0;
-  --ix-menu-height: 32px;
-  --ix-menu-height-level-1: 40px;
-  --ix-menu-font-size: 12px;
-  --ix-menu-font-size-level-1: 14px;
-  --ix-menu-overlay-min-width: 128px;
-  --ix-menu-collapsed-width: 44px;
-  --ix-menu-item-color: #2f3540;
-  --ix-menu-item-color-hover: #2f3540;
-  --ix-menu-item-color-active: #1c6eff;
-  --ix-menu-item-color-disabled: #bec3cc;
-  --ix-menu-item-group-color: #6f7785;
-  --ix-menu-item-bg: #ffffff;
-  --ix-menu-item-bg-hover: #f7f9fc;
-  --ix-menu-item-bg-active: #e8f4ff;
-  --ix-menu-item-bg-disabled: #ffffff;
-  --ix-menu-item-group-bg: #ffffff;
-  --ix-menu-horizontal-item-color-hover: #2f3540;
-  --ix-menu-horizontal-item-color-active: #1c6eff;
-  --ix-menu-horizontal-item-bg-hover: #f7f9fc;
-  --ix-menu-horizontal-item-bg-active: #e8f4ff;
-  --ix-menu-dark-item-color: #ffffff;
-  --ix-menu-dark-item-color-hover: #ffffff;
-  --ix-menu-dark-item-color-active: #ffffff;
-  --ix-menu-dark-item-color-disabled: #bec3cc;
-  --ix-menu-dark-item-group-color: #6f7785;
-  --ix-menu-dark-item-font-weight-active: 600;
-  --ix-menu-dark-item-bg: #2f3540;
-  --ix-menu-dark-item-bg-hover: #1e232b;
-  --ix-menu-dark-item-bg-active: #1c6eff;
-  --ix-menu-dark-item-bg-disabled: #2f3540;
-  --ix-menu-dark-item-group-bg: #2f3540;
-  --ix-menu-dark-horizontal-item-color-hover: #ffffff;
-  --ix-menu-dark-horizontal-item-color-active: #ffffff;
-  --ix-menu-dark-horizontal-item-bg-hover: #1e232b;
-  --ix-menu-dark-horizontal-item-bg-active: #454c59;
+  --ix-button-font-size-xs: 12px;
+  --ix-button-font-size-sm: 12px;
+  --ix-button-font-size-md: 14px;
+  --ix-button-font-size-lg: 16px;
+  --ix-button-font-size-xl: 16px;
+  --ix-button-min-width-xs: 56px;
+  --ix-button-min-width-sm: 64px;
+  --ix-button-min-width-md: 72px;
+  --ix-button-min-width-lg: 120px;
+  --ix-button-min-width-xl: 160px;
+  --ix-button-height-xs: 24px;
+  --ix-button-height-sm: 32px;
+  --ix-button-height-md: 32px;
+  --ix-button-height-lg: 40px;
+  --ix-button-height-xl: 48px;
+  --ix-button-padding-size-horizontal-xs: 8px;
+  --ix-button-padding-size-horizontal-sm: 12px;
+  --ix-button-padding-size-horizontal-md: 16px;
+  --ix-button-padding-size-horizontal-lg: 24px;
+  --ix-button-padding-size-horizontal-xl: 32px;
+  --ix-button-color: #2f3540;
+  --ix-button-color-disabled: #bec3cc;
+  --ix-button-bg-color: #ffffff;
+  --ix-button-bg-color-disabled: #e1e5eb;
+  --ix-button-border-color: #d3d7de;
+  --ix-button-border-radius: 2px;
+  --ix-button-primary-color: #ffffff;
+  --ix-button-primary-bg-color: #1c6eff;
+  --ix-button-primary-bg-color-hover: #458fff;
+  --ix-button-primary-bg-color-active: #0d51d9;
+  --ix-button-danger-color: #cf171d;
+  --ix-button-danger-color-hover: #f52727;
+  --ix-button-danger-color-active: #cf171d;
+  --ix-button-danger-bg-color: #ff5752;
+  --ix-button-danger-bg-color-hover: #ff837a;
+  --ix-button-danger-bg-color-active: #cf171d;
+  --ix-button-ghost-color: #ffffff;
+  --ix-button-ghost-color-hover: #ffffff;
+  --ix-button-ghost-color-active: #595959;
+  --ix-button-ghost-border-color-hover: #ffffff;
+  --ix-button-ghost-border-color-active: #ffffff;
+  --ix-button-ghost-border-color: #ffffff;
+  --ix-button-ghost-bg-color-hover: rgba(255, 255, 255, 0.2);
+  --ix-button-ghost-bg-color-active: #ffffff;
+  --ix-button-ghost-bg-color-disabled: rgba(255, 255, 255, 0.4);
+  --ix-button-icon-color: inherit;
+  --ix-button-icon-font-size: 16px;
+}
+
+/* ------ message css variables ------ */
+:root {
+  --ix-message-margin: 8px;
+  --ix-message-font-size: 14px;
+  --ix-message-border-width: 0;
+  --ix-message-border-type: solid;
+  --ix-message-border-color: none;
+  --ix-message-content-min-width: 128px;
+  --ix-message-content-max-width: 480px;
+  --ix-message-content-padding-vertical: 8px;
+  --ix-message-content-padding-horizontal: 16px;
+  --ix-message-bg-color: #ffffff;
+  --ix-message-border-radius: 4px;
+  --ix-message-icon-margin-right: 8px;
+  --ix-message-wrapper-top: 15%;
 }
 
 /* ------ slider css variables ------ */
@@ -958,53 +1034,6 @@
   --ix-slider-thumb-size: 10px;
 }
 
-/* ------ rate css variables ------ */
-:root {
-  --ix-rate-active-color: #ffc145;
-  --ix-rate-size-sm: 14px;
-  --ix-rate-size-md: 20px;
-  --ix-rate-size-lg: 28px;
-  --ix-rate-item-margin-right: 8px;
-  --ix-rate-item-scale-hover: 1.1;
-  --ix-rate-item-outline-focus: 1px dashed #ffc145;
-}
-
-/* ------ message css variables ------ */
-:root {
-  --ix-message-margin: 8px;
-  --ix-message-font-size: 14px;
-  --ix-message-content-min-width: 128px;
-  --ix-message-content-max-width: 480px;
-  --ix-message-content-padding-vertical: 8px;
-  --ix-message-content-padding-horizontal: 16px;
-  --ix-message-bg-color: #ffffff;
-  --ix-message-border-radius: 4px;
-  --ix-message-icon-margin-right: 8px;
-  --ix-message-wrapper-top: 15%;
-}
-
-/* ------ pagination css variables ------ */
-:root {
-  --ix-pagination-font-size-sm: 12px;
-  --ix-pagination-font-size-md: 12px;
-  --ix-pagination-font-size-lg: 14px;
-  --ix-pagination-itme-padding-sm: 0;
-  --ix-pagination-item-padding-md: 4px;
-  --ix-pagination-item-padding-lg: 4px;
-  --ix-pagination-item-content-size-sm: 24px;
-  --ix-pagination-item-content-size-md: 24px;
-  --ix-pagination-item-content-size-lg: 32px;
-  --ix-pagination-out-line-color: #458fff;
-}
-
-/* ------ textarea css variables ------ */
-:root {
-  --ix-textarea-count-bottom: 1px;
-  --ix-textarea-count-right: 8px;
-  --ix-textarea-count-opacity: 0.9;
-  --ix-textarea-count-color: #a1a7b3;
-}
-
 /* ------ tag css variables ------ */
 :root {
   --ix-tag-bg-color-filled: #99acd1;
@@ -1021,29 +1050,15 @@
   --ix-tag-fatal-bg-color: rgba(130, 1, 14, 0.1);
 }
 
-/* ------ switch css variables ------ */
-:root {
-  --ix-switch-active-disabled-color: #96c7ff;
-  --ix-switch-height-sm: 16px;
-  --ix-switch-height-md: 24px;
-  --ix-switch-height-lg: 32px;
-  --ix-switch-handle-size-sm: 12px;
-  --ix-switch-handle-size-md: 20px;
-  --ix-switch-handle-size-lg: 28px;
-  --ix-switch-icon-font-size-sm: 9px;
-  --ix-switch-icon-font-size-md: 14px;
-  --ix-switch-icon-font-size-lg: 14px;
-  --ix-switch-handle-padding: 2px;
-  --ix-switch-handle-bg-color: #ffffff;
-  --ix-switch-handle-box-shadow: none;
-}
-
 /* ------ notification css variables ------ */
 :root {
   --ix-notification-padding: 8px 8px 8px 16px;
   --ix-notification-margin: 0 0 8px 0;
   --ix-notification-width: 384px;
   --ix-notification-max-width: calc(100vw - 48px);
+  --ix-notification-border-width: 0;
+  --ix-notification-border-type: solid;
+  --ix-notification-border-color: none;
   --ix-notification-font-size: 14px;
   --ix-notification-bg-color: #ffffff;
   --ix-notification-border-radius: 2px;
@@ -1058,4 +1073,12 @@
   --ix-notification-close-icon-top: 8px;
   --ix-notification-close-icon-right: 8px;
   --ix-notification-footer-margin: 8px 0 0 0;
+}
+
+/* ------ textarea css variables ------ */
+:root {
+  --ix-textarea-count-bottom: 1px;
+  --ix-textarea-count-right: 8px;
+  --ix-textarea-count-opacity: 0.9;
+  --ix-textarea-count-color: #a1a7b3;
 }

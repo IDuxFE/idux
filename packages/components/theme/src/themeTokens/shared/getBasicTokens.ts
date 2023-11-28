@@ -5,13 +5,16 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { BasicTokens } from '../../types'
-import { getBaseColors, getColorPalette, getGreyColors } from '../shared'
+import { BasicTokens, GetBaseColors, GetColorPalette, GetGreyColors } from '../../types'
 
-export function getBasicTokens(): BasicTokens {
+export function getBasicTokens(
+  getBaseColors: GetBaseColors,
+  getColorPalette: GetColorPalette,
+  getGreyColors: GetGreyColors,
+): BasicTokens {
   const baseColors = getBaseColors()
   const redColorPalette = getColorPalette(baseColors.red)
-  const greyColors = getGreyColors('graphite')
+  const greyColors = getGreyColors()
 
   return {
     colorPrimary: baseColors.blue,

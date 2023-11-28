@@ -4,7 +4,8 @@
     margin-bottom: 8px;
 
     > .ix-radio-group {
-      background-color: #eceff3;
+      background-color: var(--ix-color-emphasized-container-bg);
+      border: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border);
       border-radius: 20px;
       padding: 4px;
 
@@ -76,6 +77,10 @@
       &-title {
         width: @toc-width;
       }
+    }
+
+    &-wrapper {
+      background-color: var(--ix-color-info-container-bg);
     }
   }
 }

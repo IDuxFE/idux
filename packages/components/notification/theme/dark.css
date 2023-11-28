@@ -1,0 +1,24 @@
+/* ------ notification css variables ------ */
+:root {
+  --ix-notification-padding: 8px 8px 8px 16px;
+  --ix-notification-margin: 0 0 8px 0;
+  --ix-notification-width: 384px;
+  --ix-notification-max-width: calc(100vw - 48px);
+  --ix-notification-border-width: 1px;
+  --ix-notification-border-type: solid;
+  --ix-notification-border-color: #1f2329;
+  --ix-notification-font-size: 14px;
+  --ix-notification-bg-color: #0a0c0f;
+  --ix-notification-border-radius: 2px;
+  --ix-notification-icon-margin: 4px 8px;
+  --ix-notification-icon-wrapper-width: 44px;
+  --ix-notification-title-font-size: 14px;
+  --ix-notification-title-line-height: 24px;
+  --ix-notification-title-margin: 0 24px 8px 0;
+  --ix-notification-content-font-size: 12px;
+  --ix-notification-content-color: #808999;
+  --ix-notification-content-margin: 0 16px 0 0;
+  --ix-notification-close-icon-top: 8px;
+  --ix-notification-close-icon-right: 8px;
+  --ix-notification-footer-margin: 8px 0 0 0;
+}

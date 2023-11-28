@@ -1,0 +1,18 @@
+/* ------ stepper css variables ------ */
+:root {
+  --ix-stepper-icon-size-sm: 24px;
+  --ix-stepper-icon-size-md: 32px;
+  --ix-stepper-icon-font-size-sm: 14px;
+  --ix-stepper-icon-font-size-md: 16px;
+  --ix-stepper-icon-border-width-sm: 2px;
+  --ix-stepper-icon-border-width-md: 2px;
+  --ix-stepper-icon-margin-sm: 0 8px 0 0;
+  --ix-stepper-icon-margin-md: 0 8px 0 0;
+  --ix-stepper-title-font-size-sm: 14px;
+  --ix-stepper-title-font-size-md: 16px;
+  --ix-stepper-description-font-size-sm: 12px;
+  --ix-stepper-description-font-size-md: 14px;
+  --ix-stepper-content-min-height-sm: 60px;
+  --ix-stepper-content-min-height-md: 80px;
+  --ix-stepper-line-type: dashed;
+}

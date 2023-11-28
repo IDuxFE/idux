@@ -17,7 +17,7 @@
     }
 
     .@{collapse-prefix}-panel:last-child {
-      border-bottom: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border);
+      border-bottom: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border-secondary);
       border-radius: 0 0 var(--ix-component-border-radius) var(--ix-component-border-radius);
     }
   }
@@ -35,16 +35,17 @@
   }
 
   &-panel {
-    border: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border);
+    border: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border-secondary);
 
     .@{header-prefix} {
       cursor: pointer;
       border-radius: var(--ix-component-border-radius);
+      background-color: var(--ix-collapse-panel-header-bg-color);
     }
 
     &-content {
-      background-color: var(--ix-color-info-container-bg);
-      border-top: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border);
+      background-color: var(--ix-collapse-panel-content-bg-color);
+      border-top: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border-secondary);
       border-radius: 0 0 var(--ix-component-border-radius) var(--ix-component-border-radius);
     }
 

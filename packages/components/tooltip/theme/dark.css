@@ -1,0 +1,7 @@
+/* ------ tooltip css variables ------ */
+:root {
+  --ix-tooltip-font-size: 12px;
+  --ix-tooltip-color: #808999;
+  --ix-tooltip-min-width: 32px;
+  --ix-tooltip-max-width: 400px;
+}

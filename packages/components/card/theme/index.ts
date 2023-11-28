@@ -7,10 +7,11 @@
 
 import type { TokenGetter } from '@idux/components/theme'
 
+import { getDarkThemeTokens } from './dark'
 import { getDefaultThemeTokens } from './default'
 
-export const getThemeTokens: TokenGetter<'card'> = (tokens, presetTheme) => {
-  return presetTheme === 'default' ? getDefaultThemeTokens(tokens) : getDefaultThemeTokens(tokens)
+export const getThemeTokens: TokenGetter<'card'> = (tokens, presetTheme, algorithms) => {
+  return presetTheme === 'default' ? getDefaultThemeTokens(tokens, algorithms) : getDarkThemeTokens(tokens, algorithms)
 }
 
 export type { CardThemeTokens } from './tokens'

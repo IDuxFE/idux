@@ -10,6 +10,7 @@ import type { ComponentThemeKeys, ComponentThemeTokens } from './componentTokens
 import type { DerivedTokens } from './derived'
 import type { ExtendedTokens } from './extended'
 import type { ResetTokens } from './reset'
+import type { BaseColors, ColorPalette } from '../../themeTokens'
 
 export type { BasicTokens } from './basicToken'
 export type {
@@ -87,3 +88,13 @@ export type ThemeTokenKey<
   : key extends keyof Ext
   ? keyof Ext[key]
   : string
+
+export type GetColorPalette = (color: string) => ColorPalette
+export type GetGreyColors = () => ColorPalette
+export type GetBaseColors = () => BaseColors
+
+export interface ThemeTokenAlgorithms {
+  getColorPalette: GetColorPalette
+  getGreyColors: GetGreyColors
+  getBaseColors: GetBaseColors
+}

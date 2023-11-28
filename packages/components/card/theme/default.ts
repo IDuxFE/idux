@@ -5,10 +5,16 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { CertainThemeTokens, GlobalThemeTokens } from '@idux/components/theme'
-export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTokens<'card'> {
+import type { CertainThemeTokens, GlobalThemeTokens, ThemeTokenAlgorithms } from '@idux/components/theme'
+export function getDefaultThemeTokens(
+  tokens: GlobalThemeTokens,
+  algorithms: ThemeTokenAlgorithms,
+): CertainThemeTokens<'card'> {
+  const { getGreyColors } = algorithms
   const { fontSizeSm, fontSizeMd, fontSizeXl, fontSizeLg, marginSizeXs, paddingSizeSm, paddingSizeLg, paddingSizeXl } =
     tokens
+
+  const greyColors = getGreyColors()
 
   return {
     fontSizeSm: fontSizeSm,
@@ -28,6 +34,9 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     loadingSpacing: marginSizeXs,
     loadingHeight: fontSizeMd,
     loadingBgSize: `600%`,
+
+    loadingStartColor: greyColors.l40,
+    loadingEndColor: greyColors.l30,
 
     gridWidth: `25%`,
   }

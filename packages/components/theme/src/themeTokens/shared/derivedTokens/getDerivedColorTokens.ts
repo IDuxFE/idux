@@ -5,19 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type {
-  BasicTokens,
-  DerivedColorTokens,
-  DerivedFontTokens,
-  DerivedMotionTokens,
-  DerivedSizeTokens,
-  DerivedTokens,
-  ShadowTokens,
-} from '../../types'
+import type { BasicTokens, DerivedColorTokens, GetColorPalette, GetGreyColors } from '../../../types'
 
-import { getAlphaColor, getColorPalette, getGreyColors } from '../shared'
-
-function getDerivedColorTokens(basicTokens: BasicTokens): DerivedColorTokens {
+export function getDerivedColorTokens(
+  basicTokens: BasicTokens,
+  getColorPalette: GetColorPalette,
+  getGreyColors: GetGreyColors,
+): DerivedColorTokens {
   const primaryColorPalette = getColorPalette(basicTokens.colorPrimary)
   const successColorPalette = getColorPalette(basicTokens.colorSuccess)
   const errorColorPalette = getColorPalette(basicTokens.colorError)
@@ -126,7 +120,7 @@ function getDerivedColorTokens(basicTokens: BasicTokens): DerivedColorTokens {
     colorInfoIcon: infoColorPalette.l10,
   }
 
-  const greyColors = getGreyColors('graphite')
+  const greyColors = getGreyColors()
 
   return {
     ...primaryColors,
@@ -140,121 +134,4 @@ function getDerivedColorTokens(basicTokens: BasicTokens): DerivedColorTokens {
     colorOfflineBg: greyColors.d10,
     colorOfflineText: greyColors.d10,
   } as DerivedColorTokens
-}
-
-function getDerivedFontTokens(basicTokens: BasicTokens): DerivedFontTokens {
-  const { fontSize, fontWeight } = basicTokens
-
-  const fontSizeUnit = 2
-  const minFontSize = 10
-  const fontWeightUnit = 100
-
-  const fontSizeMap = {
-    fontSizeXs: Math.max(fontSize - fontSizeUnit * 2, minFontSize),
-    fontSizeSm: Math.max(fontSize - fontSizeUnit, minFontSize),
-    fontSizeMd: Math.max(fontSize, minFontSize),
-    fontSizeLg: Math.max(fontSize + fontSizeUnit, minFontSize),
-    fontSizeXl: Math.max(fontSize + fontSizeUnit * 3, minFontSize),
-    fontSize2xl: Math.max(fontSize + fontSizeUnit * 5, minFontSize),
-    fontSize3xl: Math.max(fontSize + fontSizeUnit * 8, minFontSize),
-  }
-
-  return {
-    ...fontSizeMap,
-    fontSizeHeaderSm: fontSizeMap.fontSizeMd,
-    fontSizeHeaderMd: fontSizeMap.fontSizeLg,
-    fontSizeHeaderLg: fontSizeMap.fontSizeXl,
-    fontSizeHeaderXl: fontSizeMap.fontSize2xl,
-
-    fontWeightXs: fontWeight - fontWeightUnit * 2,
-    fontWeightSm: fontWeight - fontWeightUnit,
-    fontWeightMd: fontWeight,
-    fontWeightLg: fontWeight + fontWeightUnit,
-    fontWeightXl: fontWeight + fontWeightUnit * 2,
-  }
-}
-
-function getDerivedSizeTokens(basicTokens: BasicTokens): DerivedSizeTokens {
-  const { spacing, height, borderRadius, screenSm, screenMd, screenLg, screenXl } = basicTokens
-
-  const spacingSizes = {
-    xxs: Math.ceil(spacing * 0.25),
-    xs: Math.ceil(spacing * 0.5),
-    sm: spacing,
-    md: Math.ceil(spacing * 1.5),
-    lg: Math.ceil(spacing * 2),
-    xl: spacing * 3,
-    xxl: Math.ceil(spacing * 4),
-  }
-
-  return {
-    paddingSize2Xs: spacingSizes.xxs,
-    paddingSizeXs: spacingSizes.xs,
-    paddingSizeSm: spacingSizes.sm,
-    paddingSizeMd: spacingSizes.md,
-    paddingSizeLg: spacingSizes.lg,
-    paddingSizeXl: spacingSizes.xl,
-    paddingSize2Xl: spacingSizes.xxl,
-
-    marginSize2Xs: spacingSizes.xxs,
-    marginSizeXs: spacingSizes.xs,
-    marginSizeSm: spacingSizes.sm,
-    marginSizeMd: spacingSizes.md,
-    marginSizeLg: spacingSizes.lg,
-    marginSizeXl: spacingSizes.xl,
-    marginSize2Xl: spacingSizes.xxl,
-
-    heightXs: height * 0.5,
-    heightSm: height * 0.75,
-    heightMd: height,
-    heightLg: height * 1.25,
-    heightXl: height * 1.5,
-    height2xl: height * 1.75,
-    height3xl: height * 2,
-
-    borderRadiusXs: Math.max(2, Math.floor(borderRadius / 4)),
-    borderRadiusSm: Math.max(2, Math.floor(borderRadius / 2)),
-    borderRadiusMd: borderRadius,
-    borderRadiusLg: Math.min(8, borderRadius * 2),
-
-    lineWidthBold: 2,
-    arrowSize: 6,
-
-    screenXsMax: screenSm - 0.01,
-    screenSmMin: screenSm,
-    screenSmMax: screenMd - 0.01,
-    screenMdMin: screenMd,
-    screenMdMax: screenLg - 0.01,
-    screenLgMin: screenLg,
-    screenLgMax: screenXl - 0.01,
-    screenXlMin: screenXl,
-  }
-}
-
-function getDerivedMotionTokens(basicTokens: BasicTokens): DerivedMotionTokens {
-  const { motionDuration } = basicTokens
-  return {
-    motionDurationFast: 0.18,
-    motionDurationMedium: motionDuration,
-    motionDurationSlow: 0.3,
-  }
-}
-
-function getShadowTokens(): ShadowTokens {
-  const greyColors = getGreyColors('graphite')
-  return {
-    boxShadowSm: `0 2px 10px 0px ${getAlphaColor(greyColors.d50, 0.16)}`,
-    boxShadowMd: `0 4px 16px 0px ${getAlphaColor(greyColors.d50, 0.14)}`,
-    boxShadowLg: `0 8px 22px 0px ${getAlphaColor(greyColors.d50, 0.12)}`,
-  }
-}
-
-export function getDerivedTokens(basicTokens: BasicTokens): DerivedTokens {
-  return {
-    ...getDerivedColorTokens(basicTokens),
-    ...getDerivedFontTokens(basicTokens),
-    ...getDerivedSizeTokens(basicTokens),
-    ...getDerivedMotionTokens(basicTokens),
-    ...getShadowTokens(),
-  }
 }

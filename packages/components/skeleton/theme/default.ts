@@ -7,12 +7,12 @@
 
 import type { CertainThemeTokens, GlobalThemeTokens } from '@idux/components/theme'
 export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTokens<'skeleton'> {
-  const { marginSizeSm, marginSizeXs, colorEmphasizedContainerBg, colorBgDisabled } = tokens
+  const { marginSizeSm, marginSizeXs, colorEmphasizedContainerBg, colorContainerBgDisabled } = tokens
 
   return {
     marginBottom: marginSizeSm,
     loaderMarginBottom: marginSizeXs,
     startColor: colorEmphasizedContainerBg,
-    endColor: colorBgDisabled,
+    endColor: colorContainerBgDisabled,
   }
 }

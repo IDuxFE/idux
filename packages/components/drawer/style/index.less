@@ -47,6 +47,7 @@
     height: 100%;
     pointer-events: auto;
     overflow: hidden;
+    border: var(--ix-drawer-border-width) var(--ix-drawer-border-type) var(--ix-drawer-border-color);
 
     > .@{header-prefix} {
       padding-left: 16px;
@@ -72,18 +73,26 @@
   &-start {
     .@{drawer-prefix}-content {
       box-shadow: var(--ix-drawer-box-shadow-start);
+      border-left: none;
     }
   }
 
   &-end {
     .@{drawer-prefix}-content {
       box-shadow: var(--ix-drawer-box-shadow-end);
+      border-right: none;
     }
   }
 
   &-top {
     .@{drawer-prefix}-content {
       box-shadow: var(--ix-drawer-box-shadow-top);
+      border-top: none;
+    }
+  }
+  &-bottom {
+    .@{drawer-prefix}-content {
+      border-bottom: none;
     }
   }
 }

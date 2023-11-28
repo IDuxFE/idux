@@ -111,7 +111,7 @@ const handleValueUpdate = (value: Date[] | undefined) => {
     height: 32px;
     display: flex;
     align-items: center;
-    background: #fff;
+    background: var(--ix-control-bg-color);
     &-select {
       width: 90px;
       height: 100%;
@@ -120,10 +120,10 @@ const handleValueUpdate = (value: Date[] | undefined) => {
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid #d3d7de;
-      background-color: #f7f9fc;
+      border: 1px solid var(--ix-color-border);
+      background-color: var(--ix-color-addon-container-bg);
       &:hover {
-        border: 1px solid #1c6eff;
+        border: 1px solid var(--ix-control-border-color-hover);
 
         & + .shortcut-date-picker-divider {
           display: none;
@@ -131,7 +131,7 @@ const handleValueUpdate = (value: Date[] | undefined) => {
       }
 
       &-opened {
-        border: 1px solid #1c6eff;
+        border: 1px solid var(--ix-control-border-color-active);
 
         & + .shortcut-date-picker-divider {
           display: none;
@@ -144,7 +144,7 @@ const handleValueUpdate = (value: Date[] | undefined) => {
     }
     &-picker {
       flex: auto;
-      border: 1px solid #d3d7de;
+      border: 1px solid var(--ix-color-border);
       border-left: 0;
       border-radius: 0 2px 2px 0;
     }

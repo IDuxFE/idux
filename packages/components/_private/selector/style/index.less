@@ -122,9 +122,11 @@
 
   &-searchable &-content,
   &-allow-input &-content {
+    color: var(--ix-color-text);
     cursor: text;
 
     .@{selector-prefix}-input-inner {
+      color: var(--ix-color-text);
       cursor: auto;
     }
   }
@@ -135,6 +137,7 @@
     cursor: not-allowed;
 
     .@{selector-prefix}-input-inner {
+      color: var(--ix-color-text-disabled);
       cursor: not-allowed;
     }
   }

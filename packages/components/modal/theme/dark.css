@@ -1,0 +1,8 @@
+/* ------ modal css variables ------ */
+:root {
+  --ix-modal-title-font-size: 14px;
+  --ix-modal-title-font-weight: 400;
+  --ix-modal-title-color: #f4f8ff;
+  --ix-modal-content-color: #808999;
+  --ix-modal-icon-size: 40px;
+}

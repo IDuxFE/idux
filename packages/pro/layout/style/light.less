@@ -10,6 +10,16 @@
     color: var(--ix-text-color-title);
   }
 
+  .@{menu-prefix}-inline {
+    .@{menu-prefix}-sub-expanded {
+      background: var(--ix-pro-layout-menu-sub-expanded-bg);
+
+      &.@{menu-prefix}-sub-selected {
+        background: var(--ix-pro-layout-menu-sub-expanded-bg-active);
+      }
+    }
+  }
+
   &-header {
     background-color: var(--ix-menu-item-bg);
     box-shadow: var(--ix-pro-layout-header-box-shadow);
@@ -35,7 +45,9 @@
   &-sider {
     background-color: var(--ix-menu-item-bg);
     box-shadow: var(--ix-pro-layout-sider-box-shadow);
-    transition: background-color var(--ix-motion-duration-slow), width var(--ix-motion-duration-medium);
+    transition:
+      background-color var(--ix-motion-duration-slow),
+      width var(--ix-motion-duration-medium);
 
     .@{layout-prefix}-sider-trigger {
       > .@{button-prefix} {

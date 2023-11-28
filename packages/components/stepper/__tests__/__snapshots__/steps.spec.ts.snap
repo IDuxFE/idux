@@ -15,7 +15,7 @@ exports[`Stepper > percent work 1`] = `
     <div class=\\"ix-stepper-item-icon\\">
       <div class=\\"ix-progress-circle ix-progress ix-progress-normal\\" style=\\"width: 32px; height: 32px; font-size: 10.8px;\\"><svg viewBox=\\"0 0 100 100\\">
           <!---->
-          <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 301.59289474462014px 301.59289474462014px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"4\\" d=\\"M 50,50 m 0,-48
+          <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 301.59289474462014px 301.59289474462014px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"4\\" d=\\"M 50,50 m 0,-48
        a 48,48 0 1 1 0,96
        a 48,48 0 1 1 0,-96\\"></path>
           <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 30.159289474462014px 301.59289474462014px; stroke-dashoffset: -0px;\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"4\\" d=\\"M 50,50 m 0,-48
@@ -58,7 +58,7 @@ exports[`Stepper > percent work 2`] = `
     <div class=\\"ix-stepper-item-icon\\">
       <div class=\\"ix-progress-circle ix-progress ix-progress-normal\\" style=\\"width: 32px; height: 32px; font-size: 10.8px;\\"><svg viewBox=\\"0 0 100 100\\">
           <!---->
-          <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 301.59289474462014px 301.59289474462014px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"4\\" d=\\"M 50,50 m 0,-48
+          <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 301.59289474462014px 301.59289474462014px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"4\\" d=\\"M 50,50 m 0,-48
        a 48,48 0 1 1 0,96
        a 48,48 0 1 1 0,-96\\"></path>
           <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 150.79644737231007px 301.59289474462014px; stroke-dashoffset: -0px;\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"4\\" d=\\"M 50,50 m 0,-48
@@ -103,7 +103,7 @@ exports[`Stepper > percent work 3`] = `
     <div class=\\"ix-stepper-item-icon\\">
       <div class=\\"ix-progress-circle ix-progress ix-progress-success\\" style=\\"width: 32px; height: 32px; font-size: 10.8px;\\"><svg viewBox=\\"0 0 100 100\\">
           <!---->
-          <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 301.59289474462014px 301.59289474462014px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"4\\" d=\\"M 50,50 m 0,-48
+          <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 301.59289474462014px 301.59289474462014px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"4\\" d=\\"M 50,50 m 0,-48
        a 48,48 0 1 1 0,96
        a 48,48 0 1 1 0,-96\\"></path>
           <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 301.59289474462014px 301.59289474462014px; stroke-dashoffset: -0px;\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"4\\" d=\\"M 50,50 m 0,-48

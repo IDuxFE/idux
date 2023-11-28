@@ -1,0 +1,10 @@
+/* ------ rate css variables ------ */
+:root {
+  --ix-rate-active-color: #db941d;
+  --ix-rate-size-sm: 14px;
+  --ix-rate-size-md: 20px;
+  --ix-rate-size-lg: 28px;
+  --ix-rate-item-margin-right: 8px;
+  --ix-rate-item-scale-hover: 1.1;
+  --ix-rate-item-outline-focus: 1px dashed #db941d;
+}

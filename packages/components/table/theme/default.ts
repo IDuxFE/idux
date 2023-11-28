@@ -21,6 +21,7 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     colorIconInfo,
     colorPrimary,
     colorContainerBg,
+    colorContainerBgHover,
     colorContainerBgDisabled,
     colorInfoContainerBg,
   } = tokens
@@ -49,8 +50,10 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     headIconColorActive: colorPrimary,
     headIconBgColorHover: colorContainerBgDisabled,
 
-    bodyRowBgColorHover: colorInfoContainerBg,
+    bodyRowBgColorHover: colorContainerBgHover,
     bodyRowBgColorSelected: colorContainerBg,
+    bodyRowBgColorExpanded: colorInfoContainerBg,
+    bodyRowBgColorTreeExpanded: colorInfoContainerBg,
 
     expandableIconColor: colorIconInfo,
   }
