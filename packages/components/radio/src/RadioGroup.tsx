@@ -64,7 +64,7 @@ export default defineComponent({
       return normalizeClass({
         [prefixCls]: true,
         [`${common.prefixCls}-button-group`]: buttoned,
-        [`${common.prefixCls}-button-group-compact`]: buttoned && (!gap || gap === '0'),
+        [`${common.prefixCls}-button-group-compact`]: buttoned && (!gap || gap === '0' || gap === '0px'),
       })
     })
 
