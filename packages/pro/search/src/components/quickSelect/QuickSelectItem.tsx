@@ -9,7 +9,7 @@ import type { SearchState } from '../../composables/useSearchStates'
 
 import { computed, defineComponent, inject, normalizeClass, ref, watch } from 'vue'
 
-import { isObject } from 'lodash-es'
+import { isNil, isObject } from 'lodash-es'
 
 import { Logger, callEmit, useState } from '@idux/cdk/utils'
 import { type IconInstance, IxIcon } from '@idux/components/icon'
@@ -81,7 +81,7 @@ export default defineComponent({
     const confirmValue = (value: unknown) => {
       let searchStateKey = searchState.value?.key
 
-      if (!value && searchStateKey) {
+      if (isNil(value) && searchStateKey) {
         removeSearchState(searchStateKey)
         return
       }
