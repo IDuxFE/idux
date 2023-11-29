@@ -33,8 +33,7 @@ export default defineComponent({
       const themeConfig = useGlobalConfig('theme')
       const mergedPresetTheme = computed(
         () =>
-          (props.inherit ? supperContext?.presetTheme.value : undefined) ??
-          props.presetTheme ??
+          (props.inherit && !props.presetTheme ? supperContext?.presetTheme.value : props.presetTheme) ??
           themeConfig.presetTheme,
       )
       const mergedHashed = computed(
@@ -82,6 +81,11 @@ export default defineComponent({
             )
           } else {
             updateToken(globalTokenKey, useSupper ? supperContext!.getThemeHashId(globalTokenKey) : undefined)
+          }
+
+          // sub providers don't register reset styles
+          if (props.inherit && !!supperContext) {
+            return
           }
 
           if (!isTokensRegistered(resetTokenKey)) {

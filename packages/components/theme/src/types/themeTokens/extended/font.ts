@@ -6,6 +6,12 @@
  */
 
 export interface ExtendedFontTokens {
-  fontSizeIcon: number // 图标尺寸，字体大小
-  fontWeightHeader: number // 头部字体粗度
+  /**
+   * @desc 图标尺寸，字体大小
+   */
+  fontSizeIcon: number
+  /**
+   * @desc 头部字体粗度
+   */
+  fontWeightHeader: number
 }

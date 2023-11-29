@@ -9,180 +9,158 @@ export interface BasicTokens {
   //  ----------   color   ---------- //
 
   /**
-   * Brand color
-   * 主题色
+   * @desc 主题色
    */
   colorPrimary: string
 
   /**
-   * Success color
-   * 成功信息色
+   * @desc 成功信息色
    */
   colorSuccess: string
 
   /**
-   * Warning color
-   * 警告信息色
+   * @desc 警告信息色
    */
   colorWarning: string
 
   /**
-   * Error color
-   * 错误信息色
+   * @desc 错误信息色
    */
   colorError: string
 
   /**
-   * Risk color
-   * 风险信息色
+   * @desc 风险信息色
    */
   colorRisk: string
 
   /**
-   * Fatal color
-   * 失陷信息色
+   * @desc 失陷信息色
    */
   colorFatal: string
 
   /**
-   * Info color
-   * 信息颜色
+   * @desc 信息颜色
    */
   colorInfo: string
 
   /**
-   * White color
-   * 白色
+   * @desc 白色
    */
   colorWhite: string
 
   /**
-   * Text color
-   * 文字颜色
+   * @desc 文字颜色
    */
   colorText: string
 
   /**
-   * Background color base
-   * 基础背景颜色
+   * @desc 基础背景颜色
    */
   colorBg: string
 
   /**
-   * Border color
-   * 基础边框颜色
+   * @desc 基础边框颜色
    */
   colorBorder: string
 
   /**
-   * Border color secondary
-   * 次级边框颜色，比基础边框颜色要浅一阶段， 通常用于表格、卡片等不需要边框特别突出的组件
+   * @desc 次级边框颜色，比基础边框颜色要浅一阶段， 通常用于表格、卡片等不需要边框特别突出的组件
    */
   colorBorderSecondary: string
 
   /**
-   * Hyperlink color
-   * 链接颜色
+   * @desc 链接颜色
    */
   colorLink: string
 
   //  ----------   font   ---------- //
 
   /**
-   * Font size base
-   * 基础字体大小
+   * @desc 基础字体大小, 默认解析为中号字体，正文字体使用sm
    */
   fontSize: number
 
   /**
-   * Font family
+   * @desc Font family
    */
   fontFamily: string
 
   /**
-   * Font family code
+   * @desc Font family code
    */
   fontFamilyCode: string
 
   /**
-   * Font weight base
-   * 基础字体粗度
+   * @desc 基础字重
    */
   fontWeight: number
 
   //  ----------   size   ---------- //
 
   /**
-   * Border radius base
-   * 边框圆角
+   * @desc 边框圆角
    */
   borderRadius: number
 
   /**
-   * Height size base
-   * 基础高度尺寸
+   * @desc 基础高度尺寸
    */
   height: number
 
   /**
-   * Line height gutter
-   * 行高gutter，fontSize + gutter = 行高
+   * @desc 行高gutter，fontSize + gutter = 行高
    */
   lineHeightGutter: number
 
   /**
-   * Spacing base of padding or margin
-   * 基础间距
+   * @desc 基础间距
    */
   spacing: number
 
   /**
-   * width of component border or separator
-   * 边框，分割线的宽度
+   * @desc 边框，分割线的宽度
    */
   lineWidth: number
 
   /**
-   * type of component border or separator
-   * 边框，分割线的线条样式
+   * @desc 边框，分割线的线条样式
    */
   lineType: string
 
   //  ----------   motion   ---------- //
 
   /**
-   * Motion duration base
-   * 过渡动画时间
+   * @desc 过渡动画时间
    */
   motionDuration: number
 
   /**
-   * Preset motion curve
+   * @desc 预设动效曲率
    */
   motionEaseIn: string
 
   /**
-   * Preset motion curve
+   * @desc 预设动效曲率
    */
   motionEaseOut: string
 
   /**
-   * Preset motion curve
+   * @desc 预设动效曲率
    */
   motionEaseInOut: string
 
   /**
-   * Preset motion curve
+   * @desc 预设动效曲率
    */
   motionEaseInBack: string
 
   /**
-   * Preset motion curve
+   * @desc 预设动效曲率
    */
   motionEaseOutBack: string
 
   /**
-   * Preset motion curve
+   * @desc 预设动效曲率
    */
   motionEaseInCirc: string
 
@@ -192,34 +170,34 @@ export interface BasicTokens {
   motionEaseOutCirc: string
 
   /**
-   * Preset motion curve
+   * @desc 预设动效曲率
    */
   motionEaseInQuint: string
 
   /**
-   * Preset motion curve
+   * @desc 预设动效曲率
    */
   motionEaseOutQuint: string
 
   //  ----------   screen   ---------- //
 
   /**
-   * 屏幕尺寸SM
+   * @desc 屏幕尺寸Sm
    */
   screenSm: number
 
   /**
-   * 屏幕尺寸MD
+   * @desc 屏幕尺寸Md
    */
   screenMd: number
 
   /**
-   * 屏幕尺寸LG
+   * @desc 屏幕尺寸Lg
    */
   screenLg: number
 
   /**
-   * 屏幕尺寸XL
+   * @desc 屏幕尺寸Xl
    */
   screenXl: number
 }

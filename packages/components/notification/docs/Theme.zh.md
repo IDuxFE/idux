@@ -1,32 +1,23 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@notification-padding` | `8px 8px 8px 16px` | `8px 8px 8px 16px` | - |
-| `@notification-margin` | `0 0 16px 0` | `0 0 8px 0` | - |
-| `@notification-width` | `384px` | - | - |
-| `@notification-max-width` | `calc(100vw - 48px)` | - | - |
-| `@notification-font-size` | `@font-size-md` | - | - |
-| `@notification-line-height` | `@line-height-base` | - | - |
-| `@notification-background-color` | `@background-color-component` | - | - |
-| `@notification-border-radius` | `@border-radius-sm` | - | - |
-| `@notification-box-shadow` | `@shadow-bottom-md` | - | - |
-| `@notification-icon-font-size` | `@font-size-lg` | - | - |
-| `@notification-icon-margin` | `4px 8px 0 0` | - | - |
-| `@notification-icon-flex-direction` | `row` | - | - |
-| `@notification-icon-wrap-width` | `44px` | - | - |
-| `@notification-icon-info-color` | `@color-info-l10` | - | - |
-| `@notification-icon-success-color` | `@color-success` | - | - |
-| `@notification-icon-warning-color` | `@color-warning-l10` | - | - |
-| `@notification-icon-error-color` | `@color-error-l10` | - | - |
-| `@notification-close-width` | `14px` | - | - |
-| `@notification-close-font-size` | `@font-size-sm` | `@font-size-lg` | - |
-| `@notification-close-color` | `@color-graphite-d20` | - | - |
-| `@notification-close-hover-color` | `@color-graphite-d20` | `@color-primary` | - |
-| `@notification-close-right` | `8px` | `8px` | - |
-| `@notification-close-top` | `8px` | `8px` | - |
-| `@notification-title-font-size` | `@font-size-lg` | `@font-size-md` | - |
-| `@notification-title-line-height` | `@line-height-base` | `24px` | - |
-| `@notification-title-margin` | `0 16px 8px 0` | `0 24px 8px 0` | - |
-| `@notification-content-font-size` | `@font-size-md` | `@font-size-sm` | - |
-| `@notification-content-color` | `@color-graphite-d10` | - | - |
-| `@notification-content-margin` | `0 16px 0 0` | - | - |
-| `@notification-footer-margin` | `8px 0 0 0` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `bgColor` |  | `string` | `#ffffff` | `#0A0C0F` |
+| `borderColor` |  | `string` | `none` | `#1F2329` |
+| `borderRadius` |  | `number` | `2` | `2` |
+| `borderType` |  | `string` | `solid` | `solid` |
+| `borderWidth` |  | `number` | `0` | `1` |
+| `closeIconRight` |  | `string | number` | `8` | `8` |
+| `closeIconTop` |  | `string | number` | `8` | `8` |
+| `contentColor` |  | `string` | `#6f7785` | `#808999` |
+| `contentFontSize` |  | `number` | `12` | `12` |
+| `contentMargin` |  | `string | number` | `0 16px 0 0` | `0 16px 0 0` |
+| `fontSize` |  | `number` | `14` | `14` |
+| `footerMargin` |  | `string | number` | `8px 0 0 0` | `8px 0 0 0` |
+| `iconMargin` |  | `string | number` | `4px 8px` | `4px 8px` |
+| `iconWrapperWidth` |  | `number` | `44` | `44` |
+| `margin` |  | `string | number` | `0 0 8px 0` | `0 0 8px 0` |
+| `maxWidth` |  | `string | number` | `calc(100vw - 48px)` | `calc(100vw - 48px)` |
+| `padding` |  | `string | number` | `8px 8px 8px 16px` | `8px 8px 8px 16px` |
+| `titleFontSize` |  | `number` | `14` | `14` |
+| `titleLineHeight` |  | `number` | `24` | `24` |
+| `titleMargin` |  | `string | number` | `0 24px 8px 0` | `0 24px 8px 0` |
+| `width` |  | `number` | `384` | `384` |

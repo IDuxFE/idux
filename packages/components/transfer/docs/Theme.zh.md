@@ -1,37 +1,16 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@transfer-height` | `290px` | - | - |
-| `@transfer-content-width` | `260px` | - | - |
-| `@transfer-border-color` | `@form-border-color` | `@color-graphite-l30` | - |
-| `@transfer-border-radius` | `2px` | - | - |
-| `@transfer-background-color` | `@form-background-color` | - | - |
-| `@transfer-font-size` | `@font-size-md` | `@font-size-sm` | - |
-| `@transfer-color` | `@text-color` | - | - |
-| `@transfer-disabled-color` | `@text-color-disabled` | - | - |
-| `@transfer-header-height` | `@height-lg` | - | - |
-| `@transfer-header-suffix-margin-left` | `@spacing-md` | `@spacing-sm` | - |
-| `@transfer-footer-height` | `@height-lg` | - | - |
-| `@transfer-header-padding` | `0 @spacing-md` | `0 @spacing-sm 0 @spacing-md` | - |
-| `@transfer-footer-padding` | `0 @spacing-sm` | - | - |
-| `@transfer-operations-min-width` | `@spacing-xs` | - | - |
-| `@transfer-operations-padding` | `@spacing-sm` | - | - |
-| `@transfer-operations-btn-width` | `24px` | - | - |
-| `@transfer-operations-btn-height` | `32px` | - | - |
-| `@transfer-operations-btn-gap` | `@spacing-sm` | - | - |
-| `@transer-search-width` | `110px` | - | - |
-| `@transfer-clear-icon-font-size` | `@font-size-lg` | - | - |
-| `@transfer-clear-icon-color` | `@color-graphite-d20` | - | - |
-| `@transfer-clear-icon-hover-color` | `@color-primary` | - | - |
-| `@transfer-clear-icon-active-color` | `@color-primary` | - | - |
-| `@transfer-search-icon-font-size` | `@font-size-lg` | - | - |
-| `@transfer-search-icon-color` | `@color-graphite` | - | - |
-| `@transfer-list-item-font-size` | `@font-size-md` | `@font-size-sm` | - |
-| `@transfer-list-item-min-height` | `@height-md` | - | - |
-| `@transfer-list-item-padding` | `@spacing-xs 0 @spacing-xs @spacing-md` | `0 @spacing-sm 0 @spacing-md` | - |
-| `@transfer-list-item-line-height` | `@line-height-base` | - | - |
-| `@transfer-list-item-hover-color` | `@color-graphite-l50` | - | - |
-| `@transfer-list-close-icon-padding` | `0 @spacing-md` | - | - |
-| `@transfer-list-close-icon-font-size` | `@font-size-lg` | `@font-size-lg` | - |
-| `@transfer-list-close-icon-color` | `@color-graphite-d20` | - | - |
-| `@transfer-list-close-icon-hover-color` | `@color-primary` | - | - |
-| `@transfer-list-close-icon-active-color` | `@color-primary` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `closeIconPadding` |  | `string | number` | `0 12px` | `0 12px` |
+| `contentPadding` |  | `string | number` | `0 8px 0 12px` | `0 8px 0 12px` |
+| `contentWidth` |  | `number` | `260` | `260` |
+| `footerHeight` |  | `number` | `40` | `40` |
+| `headerHeight` |  | `number` | `40` | `40` |
+| `height` |  | `number` | `290` | `290` |
+| `listItemMinHeight` |  | `number` | `32` | `32` |
+| `oprButtonGap` |  | `number` | `8` | `8` |
+| `oprButtonHeight` |  | `number` | `32` | `32` |
+| `oprButtonWidth` |  | `number` | `24` | `24` |
+| `oprMinWidth` |  | `number` | `4` | `4` |
+| `oprPadding` |  | `string | number` | `8` | `8` |
+| `searchWidth` |  | `number` | `110` | `110` |
+| `suffixMarginLeft` |  | `number` | `12` | `12` |

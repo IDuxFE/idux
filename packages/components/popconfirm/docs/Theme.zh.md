@@ -1,13 +1,7 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@popconfirm-font-size` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
-| `@popconfirm-color` | `var(--ix-text-color)` | - | - |
-| `@popconfirm-background-color` | `var(--ix-background-color)` | - | - |
-| `@popconfirm-border-radius` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
-| `@popconfirm-box-shadow` | `@shadow-bottom-md` | - | - |
-| `@popconfirm-icon-size` | `var(--ix-font-size-lg)` | - | - |
-| `@popconfirm-icon-color` | `var(--ix-color-brown)` | `var(--ix-color-brown-l10)` | - |
-| `@popconfirm-title-font-size` | `var(--ix-font-size-md)` | - | - |
-| `@popconfirm-title-font-weight` | `var(--ix-font-weight-xl)` | - | - |
-| `@popconfirm-title-color` | `var(--ix-text-color-title)` | - | - |
-| `@popconfirm-min-width` | `240px` | `320px` | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `color` |  | `string` | `#2f3540` | `#F4F8FF` |
+| `fontSize` |  | `number` | `12` | `12` |
+| `iconColor` |  | `string` | `#fdaa1d` | `#FDAA1D` |
+| `minWidth` |  | `number` | `240` | `240` |
+| `titleFontSize` |  | `number` | `14` | `14` |

@@ -20,7 +20,7 @@ export function parseIndexDocs(id: string, raw: string): string {
   const apiDocName = getDocCompName(id, 'Api')
   const overviewDocName = getDocCompName(id, 'Overview')
   const designDocName = getDocCompName(id, 'Design')
-  const themeDocName = indexMeta.theme ? getDocCompName(id, 'Theme') : ''
+  const themeDocName = getDocCompName(id, 'Theme')
 
   return (
     generaComponentScript(

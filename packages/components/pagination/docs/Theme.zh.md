@@ -1,25 +1,12 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@pagination-font-size-sm` | `var(--ix-font-size-sm)` | - | - |
-| `@pagination-font-size-md` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
-| `@pagination-font-size-lg` | `var(--ix-font-size-lg)` | `var(--ix-font-size-md)` | - |
-| `@pagination-item-padding-sm` | `0` | - | - |
-| `@pagination-item-padding-md` | `var(--ix-spacing-xs)` | - | - |
-| `@pagination-item-padding-lg` | `var(--ix-spacing-xs)` | - | - |
-| `@pagination-item-content-size-sm` | `24px` | - | - |
-| `@pagination-item-content-size-md` | `24px` | - | - |
-| `@pagination-item-content-size-lg` | `32px` | - | - |
-| `@pagination-item-content-border-radius` | `50%` | - | - |
-| `@pagination-item-content-icon-font-size` | `var(--ix-font-size-lg)` | - | - |
-| `@pagination-color` | `var(--ix-text-color)` | - | - |
-| `@pagination-color-hover` | `var(--ix-text-color)` | `var(--ix-color-primary)` | - |
-| `@pagination-color-active` | `var(--ix-text-color-inverse)` | `var(--ix-color-primary)` | - |
-| `@pagination-color-disabled` | `var(--ix-text-color-disabled)` | - | - |
-| `@pagination-background-color` | `var(--ix-background-color)` | - | - |
-| `@pagination-background-color-hover` | `var(--ix-background-color-deep)` | `var(--ix-background-color-light)` | - |
-| `@pagination-background-color-active` | `var(--ix-color-primary)` | `var(--ix-color-primary-l50)` | - |
-| `@pagination-background-color-disabled` | `var(--ix-background-color-deep)` | - | - |
-| `@pagination-outline-color` | `var(--ix-color-primary-l10)` | - | - |
-| `@pagination-total-color` | `var(--ix-text-color)` | `var(--ix-text-color-info)` | - |
-| `@pagination-sizes-color` | `var(--ix-text-color)` | `var(--ix-text-color-info)` | - |
-| `@pagination-jumper-color` | `var(--ix-text-color)` | `var(--ix-text-color-info)` | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `fontSizeLg` |  | `number` | `14` | `14` |
+| `fontSizeMd` |  | `number` | `12` | `12` |
+| `fontSizeSm` |  | `number` | `12` | `12` |
+| `itemContentSizeLg` |  | `number` | `32` | `32` |
+| `itemContentSizeMd` |  | `number` | `24` | `24` |
+| `itemContentSizeSm` |  | `number` | `24` | `24` |
+| `itemPaddingLg` |  | `string | number` | `4` | `4` |
+| `itemPaddingMd` |  | `string | number` | `4` | `4` |
+| `itmePaddingSm` |  | `string | number` | `0` | `0` |
+| `outLineColor` |  | `string` | `#458fff` | `#1B61DD` |
