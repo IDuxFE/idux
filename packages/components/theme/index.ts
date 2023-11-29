@@ -19,6 +19,7 @@ export {
   getSolidColor,
   getBaseColors,
   getThemeTokens,
+  getPresetAlgorithms,
   getColorPalette,
   getDarkColorPalette,
   getGreyColors,
@@ -39,5 +40,10 @@ export type {
   DeepPartialThemeTokens,
   PresetTheme,
 } from './src/types'
-export type { UseThemeTokenContext, FullUseThemeTokenContext, NullUseThemeTokenContext } from './src/useThemeToken'
+export type {
+  UseThemeTokenScope,
+  UseThemeTokenContext,
+  GlobalUseThemeTokenContext,
+  ScopedUseThemeTokenContext,
+} from './src/useThemeToken'
 export type { TokenGetter } from './src/composables/useTokenRegister'

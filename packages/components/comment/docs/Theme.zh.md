@@ -1,16 +1,7 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@comment-padding-md` | `@spacing-md 0` | - | - |
-| `@comment-margin-right` | `@spacing-md` | - | - |
-| `@comment-font-size-md` | `@font-size-md` | - | - |
-| `@comment-font-size-sm` | `@font-size-sm` | - | - |
-| `@comment-author-margin-bottom` | `@spacing-xs` | - | - |
-| `@comment-content-padding-right` | `@spacing-sm` | - | - |
-| `@comment-author-name-color` | `@text-color-secondary` | - | - |
-| `@comment-author-time-color` | `#ccc` | - | - |
-| `@comment-actions-margin-top` | `@margin-md` | - | - |
-| `@comment-actions-margin-bottom` | `inherit` | - | - |
-| `@comment-action-color` | `@text-color-secondary` | - | - |
-| `@comment-action-hover-color` | `#595959` | - | - |
-| `@comment-content-detail-p-margin-bottom` | `inherit` | - | - |
-| `@comment-nest-indent` | `44px` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `actionColor` |  | `string` | `#6f7785` | `#808999` |
+| `actionColorHover` |  | `string` | `#2f3540` | `#F4F8FF` |
+| `authorNameColor` |  | `string` | `#a1a7b3` | `#525966` |
+| `authorTimeColor` |  | `string` | `#6f7785` | `#808999` |
+| `nestIndent` |  | `number` | `44` | `44` |

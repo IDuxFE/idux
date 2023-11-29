@@ -1,16 +1,13 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@carousel-arrow-size` | `32px` | - | - |
-| `@carousel-arrow-color` | `@color-white` | - | - |
-| `@carousel-arrow-spacing` | `@spacing-gutter` | - | - |
-| `@carousel-dot-horizontal-width` | `32px` | - | - |
-| `@carousel-dot-horizontal-height` | `2px` | - | - |
-| `@carousel-dot-vertical-width` | `2px` | - | - |
-| `@carousel-dot-vertical-height` | `16px` | - | - |
-| `@carousel-dot-background-color` | `@color-white` | - | - |
-| `@carousel-dot-gap` | `@spacing-sm` | - | - |
-| `@carousel-dot-spacing` | `@spacing-sm` | - | - |
-| `@carousel-dot-border-radius` | `2px` | - | - |
-| `@carousel-icon-opacity` | `0.3` | - | - |
-| `@carousel-icon-hover-opacity` | `0.6` | - | - |
-| `@carousel-icon-active-opacity` | `0.8` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `arrowColor` |  | `string` | `#ffffff` | `#fff` |
+| `arrowSize` |  | `number` | `32` | `32` |
+| `dotBgColor` |  | `string` | `#ffffff` | `#fff` |
+| `dotBorderRadius` |  | `number` | `2` | `2` |
+| `horizontalDotHeight` |  | `number` | `2` | `2` |
+| `horizontalDotWidth` |  | `number` | `32` | `32` |
+| `iconOpacity` |  | `number` | `0.3` | `0.3` |
+| `iconOpacityActive` |  | `number` | `0.8` | `0.8` |
+| `iconOpacityHover` |  | `number` | `0.6` | `0.6` |
+| `verticalDotHeight` |  | `number` | `16` | `16` |
+| `verticalDotWidth` |  | `number` | `2` | `2` |

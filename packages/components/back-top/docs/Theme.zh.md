@@ -1,10 +1,12 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@back-top-size-lg` | `64px` | - | - |
-| `@back-top-size-md` | `48px` | - | - |
-| `@back-top-size-sm` | `40px` | - | - |
-| `@back-top-border-radius` | `50%` | - | - |
-| `@back-top-box-shadow` | `0 2px 8px 0 rgba(0, 0, 0, 0.05)` | - | - |
-| `@back-top-color` | `var(--ix-color-primary-l30)` | - | - |
-| `@back-top-color-hover` | `var(--ix-color-primary)` | - | - |
-| `@back-top-background-color` | `var(--ix-background-color)` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `bgColor` |  | `string` | `#ffffff` | `#0A0C0F` |
+| `borderColor` |  | `string` | `none` | `#1F2329` |
+| `borderType` |  | `string` | `solid` | `solid` |
+| `borderWidth` |  | `number` | `0` | `1` |
+| `boxShadow` |  | `string` | `0 2px 8px 0 rgba(0, 0, 0, 0.05)` | `0 2px 8px 0 rgba(0, 0, 0, 0.05)` |
+| `color` |  | `string` | `#96c7ff` | `#173B7A` |
+| `colorHover` |  | `string` | `#1c6eff` | `#4083E8` |
+| `sizeLg` |  | `number` | `64` | `64` |
+| `sizeMd` |  | `number` | `48` | `48` |
+| `sizeSm` |  | `number` | `40` | `40` |

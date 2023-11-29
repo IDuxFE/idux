@@ -1,7 +1,4 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@dropdown-background-color` | `@menu-background-color` | - | - |
-| `@dropdown-border-radius` | `@menu-overlay-border-radius` | - | - |
-| `@dropdown-box-shadow` | `@menu-overlay-box-shadow` | - | - |
-| `@dropdown-min-width` | `@menu-overlay-min-width` | - | - |
-| `@dropdown-menu-container-padding` | `@spacing-sm 0` | `@spacing-xs 0` | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `menuContainerPadding` |  | `string | number` | `4px 0` | `4px 0` |
+| `minWidth` |  | `number` | `128` | `128` |

@@ -1,10 +1,13 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@spin-tip-color` | `@color-primary` | - | - |
-| `@spin-icon-color` | `@color-primary` | - | - |
-| `@spin-font-size-sm` | `@font-size-sm` | - | - |
-| `@spin-font-size-md` | `@font-size-md` | - | - |
-| `@spin-font-size-lg` | `@font-size-lg` | - | - |
-| `@spin-icon-size-sm` | `20px` | - | - |
-| `@spin-icon-size-md` | `28px` | - | - |
-| `@spin-icon-size-lg` | `48px` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `bgCircleStroke` |  | `string` | `#1c6eff` | `#4083E8` |
+| `fontSizeLg` |  | `number` | `16` | `16` |
+| `fontSizeMd` |  | `number` | `14` | `14` |
+| `fontSizeSm` |  | `number` | `12` | `12` |
+| `fstArchStroke` |  | `string` | `#12a679` | `#40C695` |
+| `iconColor` |  | `string` | `#1c6eff` | `#4083E8` |
+| `iconSizeLg` |  | `number` | `48` | `48` |
+| `iconSizeMd` |  | `number` | `28` | `28` |
+| `iconSizeSm` |  | `number` | `20` | `20` |
+| `sndArchStroke` |  | `string` | `#d3d7de` | `#3C424D` |
+| `tipColor` |  | `string` | `#1c6eff` | `#4083E8` |

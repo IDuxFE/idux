@@ -1,8 +1,5 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@popover-font-size` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
-| `@popover-color` | `var(--ix-text-color)` | `var(--ix-text-color-info)` | - |
-| `@popover-background-color` | `var(--ix-background-color)` | - | - |
-| `@popover-border-radius` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
-| `@popover-box-shadow` | `@shadow-bottom-md` | - | - |
-| `@popover-min-width` | `240px` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `color` |  | `string` | `#6f7785` | `#808999` |
+| `fontSize` |  | `number` | `12` | `12` |
+| `minWidth` |  | `number` | `240` | `240` |

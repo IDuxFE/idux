@@ -1,33 +1,38 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@menu-color` | `var(--ix-text-color)` | - | - |
-| `@menu-color-hover` | `var(--ix-text-color)` | - | - |
-| `@menu-color-active` | `var(--ix-color-primary)` | - | - |
-| `@menu-color-disabled` | `var(--ix-text-color-disabled)` | - | - |
-| `@menu-background-color` | `var(--ix-background-color)` | - | - |
-| `@menu-background-color-hover` | `var(--ix-background-color-light)` | - | - |
-| `@menu-background-color-active` | `var(--ix-color-primary-l50)` | - | - |
-| `@menu-background-color-disabled` | `var(--ix-background-color)` | - | - |
-| `@menu-horizontal-background-color-active` | `var(--ix-background-color-medium)` | - | - |
-| `@menu-border-color` | `var(--ix-border-color-secondary)` | - | - |
-| `@menu-height` | `var(--ix-height-md)` | - | - |
-| `@menu-height-level-1` | `var(--ix-height-lg)` | `40px` | - |
-| `@menu-border-radius` | `var(--ix-border-radius-md)` | `0` | - |
-| `@menu-font-size` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
-| `@menu-font-size-level-1` | `var(--ix-font-size-md)` | - | - |
-| `@menu-icon-font-size` | `var(--ix-font-size-lg)` | - | - |
-| `@menu-item-group-text-color` | `var(--ix-text-color-info)` | - | - |
-| `@menu-overlay-min-width` | `128px` | - | - |
-| `@menu-overlay-border-radius` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
-| `@menu-overlay-box-shadow` | `@shadow-bottom-md` | - | - |
-| `@menu-collapsed-width` | `48px` | `44px` | - |
-| `@menu-dark-color` | `var(--ix-text-color-inverse)` | - | - |
-| `@menu-dark-color-hover` | `var(--ix-text-color-inverse)` | - | - |
-| `@menu-dark-color-active` | `var(--ix-text-color-inverse)` | - | - |
-| `@menu-dark-color-disabled` | `var(--ix-text-color-inverse-disabled)` | - | - |
-| `@menu-dark-background-color` | `var(--ix-background-color-inverse)` | - | - |
-| `@menu-dark-background-color-hover` | `var(--ix-text-color-title-secondary)` | `@color-graphite-d50` | - |
-| `@menu-dark-background-color-active` | `var(--ix-color-primary)` | `var(--ix-color-primary)` | - |
-| `@menu-dark-background-color-disabled` | `transparent` | - | - |
-| `@menu-dark-horizontal-background-color-active` | `@color-grey-d30` | `@color-graphite-d30` | - |
-| `@menu-dark-item-group-text-color` | `@color-grey-d10` | `@color-graphite-d10` | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `borderRadius` |  | `number` | `0` | `0` |
+| `collapsedWidth` |  | `number` | `44` | `44` |
+| `darkHorizontalItemBgActive` |  | `string` | `#454c59` | `#C2C7D1` |
+| `darkHorizontalItemBgHover` |  | `string` | `#1e232b` | `#FFFFFF` |
+| `darkHorizontalItemColorActive` |  | `string` | `#ffffff` | `#fff` |
+| `darkHorizontalItemColorHover` |  | `string` | `#ffffff` | `#fff` |
+| `darkItemBg` |  | `string` | `#2f3540` | `#fff` |
+| `darkItemBgActive` |  | `string` | `#1c6eff` | `#4083E8` |
+| `darkItemBgDisabled` |  | `string` | `#2f3540` | `#fff` |
+| `darkItemBgHover` |  | `string` | `#1e232b` | `#FFFFFF` |
+| `darkItemColor` |  | `string` | `#ffffff` | `#fff` |
+| `darkItemColorActive` |  | `string` | `#ffffff` | `#fff` |
+| `darkItemColorDisabled` |  | `string` | `#bec3cc` | `#687080` |
+| `darkItemColorHover` |  | `string` | `#ffffff` | `#fff` |
+| `darkItemFontWeightActive` |  | `number` | `600` | `600` |
+| `darkItemGroupBg` |  | `string` | `#2f3540` | `#fff` |
+| `darkItemGroupColor` |  | `string` | `#6f7785` | `#808999` |
+| `fontSize` |  | `number` | `12` | `12` |
+| `fontSizeLevel1` |  | `number` | `14` | `14` |
+| `height` |  | `number` | `32` | `32` |
+| `heightLevel1` |  | `number` | `40` | `40` |
+| `horizontalItemBgActive` |  | `string` | `#e8f4ff` | `#151D33` |
+| `horizontalItemBgHover` |  | `string` | `#f7f9fc` | `#171A1F` |
+| `horizontalItemColorActive` |  | `string` | `#1c6eff` | `#4083E8` |
+| `horizontalItemColorHover` |  | `string` | `#2f3540` | `#F4F8FF` |
+| `itemBg` |  | `string` | `#ffffff` | `#0A0C0F` |
+| `itemBgActive` |  | `string` | `#e8f4ff` | `#151D33` |
+| `itemBgDisabled` |  | `string` | `#ffffff` | `#0A0C0F` |
+| `itemBgHover` |  | `string` | `#f7f9fc` | `#171A1F` |
+| `itemColor` |  | `string` | `#2f3540` | `#F4F8FF` |
+| `itemColorActive` |  | `string` | `#1c6eff` | `#4083E8` |
+| `itemColorDisabled` |  | `string` | `#bec3cc` | `#687080` |
+| `itemColorHover` |  | `string` | `#2f3540` | `#F4F8FF` |
+| `itemGroupBg` |  | `string` | `#ffffff` | `#0A0C0F` |
+| `itemGroupColor` |  | `string` | `#6f7785` | `#808999` |
+| `overlayMinWidth` |  | `number` | `128` | `128` |

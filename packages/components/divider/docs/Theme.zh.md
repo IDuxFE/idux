@@ -1,13 +1,13 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@divider-border-width` | `@border-width-sm` | - | - |
-| `@divider-border-color` | `@border-color` | - | - |
-| `@divider-font-size-sm` | `@font-size-lg` | `@font-size-sm` | - |
-| `@divider-font-size-md` | `@font-size-xl` | `@font-size-md` | - |
-| `@divider-font-size-lg` | `@font-size-xl` | `@font-size-lg` | - |
-| `@divider-horizontal-margin-sm` | `@spacing-md 0` | - | - |
-| `@divider-horizontal-margin-md` | `@spacing-lg 0` | - | - |
-| `@divider-horizontal-margin-lg` | `@spacing-xl 0` | - | - |
-| `@divider-vertical-margin-sm` | `0 @spacing-xs` | - | - |
-| `@divider-vertical-margin-md` | `0 @spacing-sm` | - | - |
-| `@divider-vertical-margin-lg` | `0 @spacing-md` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `fontSizeLg` |  | `number` | `16` | `16` |
+| `fontSizeMd` |  | `number` | `14` | `14` |
+| `fontSizeSm` |  | `number` | `12` | `12` |
+| `lineColor` |  | `string` | `#d3d7de` | `#3C424D` |
+| `lineWidth` |  | `number` | `1` | `1` |
+| `marginHorizontalLg` |  | `number` | `12` | `12` |
+| `marginHorizontalMd` |  | `number` | `8` | `8` |
+| `marginHorizontalSm` |  | `number` | `4` | `4` |
+| `marginVerticalLg` |  | `number` | `24` | `24` |
+| `marginVerticalMd` |  | `number` | `16` | `16` |
+| `marginVerticalSm` |  | `number` | `12` | `12` |

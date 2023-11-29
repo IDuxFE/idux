@@ -6,15 +6,48 @@
  */
 
 export interface ScrollbarTokens {
-  scrollbarWidth: number // 滚动条宽度
-  scrollbarHeight: number // 滚动条高度
-  scrollbarThumbBg: string // 滚动条滑块背景颜色
-  scrollbarThumbBgHover: string // 滚动条滑块悬浮背景颜色
-  scrollbarThumbBgActive: string // 滚动条滑块激活背景颜色
-  scrollbarThumbBorderWidth: number // 滚动条滑块边框颜色
-  scrollbarThumbBorderRadius: number // 滚动条滑块边框圆角
-  scrollbarThumbBoxShadow: string // 滚动条滑块阴影
-  scrollbarTrackBg: string // 滚动条轨道背景颜色
-  scrollbarTrackBorderRadius: number // 滚动条轨道边框圆角
-  scrollbarTrackBoxShadow: string // 滚动条轨道阴影
+  /**
+   * @desc 滚动条宽度
+   */
+  scrollbarWidth: number
+  /**
+   * @desc 滚动条高度
+   */
+  scrollbarHeight: number
+  /**
+   * @desc 滚动条滑块背景颜色
+   */
+  scrollbarThumbBg: string
+  /**
+   * @desc 滚动条滑块悬浮背景颜色
+   */
+  scrollbarThumbBgHover: string
+  /**
+   * @desc 滚动条滑块激活背景颜色
+   */
+  scrollbarThumbBgActive: string
+  /**
+   * @desc 滚动条滑块边框颜色
+   */
+  scrollbarThumbBorderWidth: number
+  /**
+   * @desc 滚动条滑块边框圆角
+   */
+  scrollbarThumbBorderRadius: number
+  /**
+   * @desc 滚动条滑块阴影
+   */
+  scrollbarThumbBoxShadow: string
+  /**
+   * @desc 滚动条轨道背景颜色
+   */
+  scrollbarTrackBg: string
+  /**
+   * @desc 滚动条轨道边框圆角
+   */
+  scrollbarTrackBorderRadius: number
+  /**
+   * @desc 滚动条轨道阴影
+   */
+  scrollbarTrackBoxShadow: string
 }

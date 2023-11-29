@@ -6,5 +6,8 @@
  */
 
 export interface ExtendedSizeTokens {
-  componentBorderRadius: number // 组件边框圆角
+  /**
+   * @desc 组件边框圆角
+   */
+  componentBorderRadius: number
 }
