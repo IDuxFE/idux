@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.1](https://github.com/sallerli1/idux/compare/v2.0.0-beta.0...v2.0.0-beta.1) (2023-11-29)
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/sallerli1/idux/issues/1751)) ([411ed2b](https://github.com/sallerli1/idux/commit/411ed2b90f15e3b8c7f1989429fa023065304143))
+
+
+
+
 
 # [2.0.0-beta.0](https://github.com/sallerli1/idux/compare/v1.12.2...v2.0.0-beta.0) (2023-11-23)
 
