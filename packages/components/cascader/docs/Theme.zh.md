@@ -1,27 +1,11 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@cascader-option-padding` | `@spacing-xs @spacing-xs @spacing-xs @spacing-md` | - | - |
-| `@cascader-option-height` | `@select-option-height` | - | - |
-| `@cascader-option-color` | `@select-option-color` | - | - |
-| `@cascader-option-font-size` | `@select-option-font-size` | - | - |
-| `@cascader-option-disabled-color` | `@select-option-disabled-color` | - | - |
-| `@cascader-option-active-background-color` | `@select-option-active-background-color` | - | - |
-| `@cascader-option-selected-color` | `@select-option-selected-color` | `@cascader-option-color` | - |
-| `@cascader-option-selected-background-color` | `@select-option-selected-background-color` | - | - |
-| `@cascader-option-selected-font-weight` | `@select-option-selected-font-weight` | `@font-weight-lg` | - |
-| `@cascader-option-expanded-color` | `@cascader-option-selected-color` | - | - |
-| `@cascader-option-expanded-background-color` | `@cascader-option-selected-background-color` | - | - |
-| `@cascader-option-expanded-font-weight` | `@cascader-option-selected-font-weight` | - | - |
-| `@cascader-option-label-margin-left` | `@select-option-label-margin-left` | - | - |
-| `@cascader-option-label-highlight-color` | `@color-primary` | - | - |
-| `@cascader-option-expanded-margin-left` | `@spacing-xs` | - | - |
-| `@cascader-option-expanded-icon-color` | `@text-color-secondary` | `@color-graphite-d20` | - |
-| `@cascader-option-expanded-icon-font-size` | `@select-icon-font-size` | - | - |
-| `@cascader-option-group-min-width` | `120px` | - | - |
-| `@cascader-option-group-min-height` | `180px` | - | - |
-| `@cascader-option-group-border` | `@border-width-sm solid @border-color-split` | - | - |
-| `@cascader-overlay-padding` | `@select-option-container-padding` | - | - |
-| `@cascader-overlay-background-color` | `@select-option-container-background-color` | - | - |
-| `@cascader-overlay-border-radius` | `@select-option-container-border-radius` | - | - |
-| `@cascader-overlay-box-shadow` | `@select-option-container-box-shadow` | - | - |
-| `@cascader-overlay-search-wrapper-padding` | `@select-overlay-search-wrapper-padding` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `optionContainerPadding` |  | `string | number` | `4px 0` | `4px 0` |
+| `optionFontSize` |  | `number` | `12` | `12` |
+| `optionGroupMinHeight` |  | `number` | `180` | `180` |
+| `optionGroupMinWidth` |  | `number` | `120` | `120` |
+| `optionHeight` |  | `number` | `32` | `32` |
+| `optionLabelHighlightColor` |  | `string` | `#1c6eff` | `#4083E8` |
+| `optionLabelMarginLeft` |  | `number` | `8` | `8` |
+| `optionPadding` |  | `string | number` | `8px 12px` | `8px 12px` |
+| `overlaySearchWrapperPadding` |  | `string | number` | `4px 12px 8px` | `4px 12px 8px` |

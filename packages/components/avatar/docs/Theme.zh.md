@@ -1,9 +1,6 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@avatar-size-sm` | `var(--ix-height-sm)` | - | - |
-| `@avatar-size-md` | `var(--ix-height-md)` | - | - |
-| `@avatar-size-lg` | `var(--ix-height-lg)` | - | - |
-| `@avatar-color` | `var(--ix-text-color-inverse)` | - | - |
-| `@avatar-background-color` | `var(--ix-background-color-deep)` | - | - |
-| `@avatar-border-radius-circle` | `50%` | - | - |
-| `@avatar-border-radius-square` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `borderRadiusSquare` |  | `number` | `2` | `2` |
+| `sizeLg` |  | `number` | `40` | `40` |
+| `sizeMd` |  | `number` | `32` | `32` |
+| `sizeSm` |  | `number` | `24` | `24` |

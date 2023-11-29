@@ -1,22 +1,17 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@header-height-sm` | `var(--ix-height-lg)` | - | - |
-| `@header-height-md` | `var(--ix-height-xl)` | - | - |
-| `@header-height-lg` | `var(--ix-height-xl)` | - | - |
-| `@header-height-xl` | `var(--ix-height-2xl)` | - | - |
-| `@header-font-size-sm` | `var(--ix-font-size-md)` | - | - |
-| `@header-font-size-md` | `var(--ix-font-size-lg)` | - | - |
-| `@header-font-size-lg` | `var(--ix-font-size-xl)` | - | - |
-| `@header-font-size-xl` | `var(--ix-font-size-2xl)` | - | - |
-| `@header-color` | `var(--ix-text-color-title)` | - | - |
-| `@header-color-hover` | `var(--ix-color-primary-l10)` | - | - |
-| `@header-color-active` | `var(--ix-color-primary-d10)` | - | - |
-| `@header-color-disabled` | `var(--ix-text-color-disabled)` | - | - |
-| `@header-bar-width` | `4px` | - | - |
-| `@header-bar-background-color` | `var(--ix-color-primary)` | - | - |
-| `@header-title-font-weight` | `var(--ix-font-weight-xl)` | - | - |
-| `@header-sub-title-color` | `var(--ix-text-color-title-secondary)` | - | - |
-| `@header-sub-title-font-size` | `var(--ix-font-size-md)` | - | - |
-| `@header-suffix-color` | `var(--ix-text-color-title-secondary)` | - | - |
-| `@header-description-color` | `var(--ix-text-color-info)` | - | - |
-| `@header-icon-font-size` | `var(--ix-font-size-lg)` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `barBgColor` |  | `string` | `#1c6eff` | `#4083E8` |
+| `barWidth` |  | `number` | `4` | `4` |
+| `heightLg` |  | `number` | `48` | `48` |
+| `heightMd` |  | `number` | `48` | `48` |
+| `heightSm` |  | `number` | `40` | `40` |
+| `heightXl` |  | `number` | `56` | `56` |
+| `prefixColor` |  | `string` | `#2f3540` | `#F4F8FF` |
+| `prefixColorActive` |  | `string` | `#1c6eff` | `#4083E8` |
+| `prefixColorDisabled` |  | `string` | `#bec3cc` | `#687080` |
+| `prefixColorHover` |  | `string` | `#1c6eff` | `#4083E8` |
+| `subTitleFontSize` |  | `number` | `14` | `14` |
+| `suffixColor` |  | `string` | `#5e6573` | `#A1A7B3` |
+| `suffixColorActive` |  | `string` | `#0d51d9` | `#6AA6F4` |
+| `suffixColorDisabled` |  | `string` | `#bec3cc` | `#687080` |
+| `suffixColorHover` |  | `string` | `#1c6eff` | `#4083E8` |

@@ -14,6 +14,7 @@ import { Logger, tryOnScopeDispose } from '@idux/cdk/utils'
 import { THEME_PROVIDER_TOKEN, type ThemeProviderContext } from './token'
 import {
   type CertainThemeTokens,
+  type GlobalThemeTokens,
   type GlobalTokenKey,
   type PresetTheme,
   type ThemeKeys,
@@ -22,7 +23,9 @@ import {
   globalTokenKey,
 } from './types'
 
-export interface FullUseThemeTokenContext<K extends ThemeKeys | keyof Ext, Ext extends object = object> {
+export type UseThemeTokenScope = Exclude<ThemeKeys, GlobalTokenKey>
+
+export interface ScopedUseThemeTokenContext<K extends UseThemeTokenScope | keyof Ext, Ext extends object = object> {
   presetTheme: ComputedRef<PresetTheme>
   globalHashId: ComputedRef<string>
   hashId: ComputedRef<string>
@@ -30,24 +33,28 @@ export interface FullUseThemeTokenContext<K extends ThemeKeys | keyof Ext, Ext e
   registerToken: (getTokens: TokenGetter<K, Ext>, transforms?: TokenTransforms<K, Ext>) => string
 }
 
-export interface NullUseThemeTokenContext {
+export interface GlobalUseThemeTokenContext {
   globalHashId: ComputedRef<string>
+  themeTokens: ComputedRef<GlobalThemeTokens>
   presetTheme: ComputedRef<PresetTheme>
 }
 
-export type UseThemeTokenContext<K extends ThemeKeys | keyof Ext | undefined, Ext extends object = object> = K extends
-  | ThemeKeys
-  | keyof Ext
-  ? FullUseThemeTokenContext<K, Ext>
-  : NullUseThemeTokenContext
+export type UseThemeTokenContext<
+  K extends UseThemeTokenScope | keyof Ext | undefined,
+  Ext extends object = object,
+> = K extends undefined
+  ? GlobalUseThemeTokenContext
+  : K extends UseThemeTokenScope | keyof Ext
+    ? ScopedUseThemeTokenContext<K, Ext>
+    : never
 
-let emptyContext: UseThemeTokenContext<ThemeKeys>
+let emptyContext: UseThemeTokenContext<UseThemeTokenScope>
 
-export function useThemeToken(): NullUseThemeTokenContext
-export function useThemeToken<K extends ThemeKeys | keyof Ext, Ext extends object = object>(
+export function useThemeToken(): GlobalUseThemeTokenContext
+export function useThemeToken<Ext extends object, K extends UseThemeTokenScope | keyof Ext | undefined>(
   key: K,
-): FullUseThemeTokenContext<K, Ext>
-export function useThemeToken<K extends ThemeKeys | keyof Ext, Ext extends object = object>(
+): UseThemeTokenContext<K, Ext>
+export function useThemeToken<Ext extends object, K extends UseThemeTokenScope | keyof Ext | undefined>(
   key?: K,
 ): UseThemeTokenContext<K, Ext> {
   const themeProviderContext = inject(THEME_PROVIDER_TOKEN, null)
@@ -61,8 +68,8 @@ export function useThemeToken<K extends ThemeKeys | keyof Ext, Ext extends objec
         hashId: computed(() => ''),
         themeTokens: computed(() => ({})),
         presetTheme: computed(() => 'default'),
-        registerToken: (() => {}) as unknown as UseThemeTokenContext<ThemeKeys>['registerToken'],
-      } as UseThemeTokenContext<ThemeKeys>
+        registerToken: (() => {}) as unknown as UseThemeTokenContext<UseThemeTokenScope>['registerToken'],
+      } as UseThemeTokenContext<UseThemeTokenScope>
     }
 
     return emptyContext as unknown as UseThemeTokenContext<K, Ext>
@@ -85,6 +92,7 @@ export function useThemeToken<K extends ThemeKeys | keyof Ext, Ext extends objec
       ({
         presetTheme,
         globalHashId: computed(() => (hashed.value ? _globalHashId.value : '')),
+        themeTokens: computed(() => getThemeTokens(globalTokenKey)),
       }) as UseThemeTokenContext<GlobalTokenKey, Ext>,
   )
 
@@ -92,12 +100,14 @@ export function useThemeToken<K extends ThemeKeys | keyof Ext, Ext extends objec
     return globalContext as unknown as UseThemeTokenContext<K, Ext>
   }
 
+  type NotNullKey = NonNullable<K>
+
   const context = getSharedContext(key, useThemeTokenContextMap, () => {
     const globalHashId = globalContext.globalHashId
     const hashId = computed(() => (hashed.value ? getThemeHashId(key) ?? '' : ''))
     const themeTokens = computed(() => getThemeTokens(key))
 
-    const registerToken = (getTokens: TokenGetter<K, Ext>, transforms?: TokenTransforms<K, Ext>) => {
+    const registerToken = (getTokens: TokenGetter<NotNullKey, Ext>, transforms?: TokenTransforms<NotNullKey, Ext>) => {
       return _registerToken(key, getTokens, transforms as TokenTransforms<ThemeKeys | keyof Ext, Ext>) ?? ''
     }
 
@@ -107,7 +117,7 @@ export function useThemeToken<K extends ThemeKeys | keyof Ext, Ext extends objec
       hashId,
       themeTokens,
       registerToken,
-    } as UseThemeTokenContext<K, Ext>
+    } as UseThemeTokenContext<NotNullKey, Ext>
   })
 
   return context as unknown as UseThemeTokenContext<K, Ext>

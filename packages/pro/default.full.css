@@ -1,42 +1,5 @@
 
-/* ------ search css variables ------ */
-:root {
-  --ix-pro-search-height-sm: 24px;
-  --ix-pro-search-height-md: 32px;
-  --ix-pro-search-container-padding-sm: 2px;
-  --ix-pro-search-container-padding-md: 4px;
-  --ix-pro-search-tag-gap-sm: 2px;
-  --ix-pro-search-tag-gap-md: 4px;
-  --ix-pro-search-quick-select-padding-sm: 8px;
-  --ix-pro-search-quick-select-padding-md: 12px;
-  --ix-pro-search-tag-color: #2f3540;
-  --ix-pro-search-tag-bg-color: #edf1f7;
-  --ix-pro-search-tag-color-disabled: #bec3cc;
-  --ix-pro-search-tag-bg-color-disabled: #edf1f7;
-  --ix-pro-search-tag-name-color: #6f7785;
-  --ix-pro-search-segment-padding-horizontal: 4px;
-  --ix-pro-search-segment-max-width: 150px;
-  --ix-pro-search-name-panel-min-width: 160px;
-  --ix-pro-search-operator-panel-min-width: 20px;
-  --ix-pro-search-select-panel-min-width: 100px;
-  --ix-pro-search-tree-select-panel-min-width: 200px;
-  --ix-pro-search-tree-select-panel-max-width: 400px;
-}
-
-/* ------ transfer css variables ------ */
-:root {
-  --ix-pro-transfer-list-min-width: 260px;
-  --ix-pro-transfer-list-min-height: 290px;
-  --ix-pro-transfer-table-close-icon-padding: 0 0 0 12px;
-  --ix-pro-transfer-tree-close-icon-padding: 0 8px;
-}
-
-/* ------ tree css variables ------ */
-:root {
-  --ix-pro-tree-header-height: 38px;
-}
-
-/* ------ layout css variables ------ */
+/* ------ pro-layout css variables ------ */
 :root {
   --ix-pro-layout-content-bg-color: #f7f9fc;
   --ix-pro-layout-header-box-shadow: 0 1px 0 0 #e1e5eb;
@@ -83,7 +46,31 @@
   --ix-pro-layout-dark-menu-horizontal-item-bg-active: #454c59;
 }
 
-/* ------ textarea css variables ------ */
+/* ------ pro-search css variables ------ */
+:root {
+  --ix-pro-search-height-sm: 24px;
+  --ix-pro-search-height-md: 32px;
+  --ix-pro-search-container-padding-sm: 2px;
+  --ix-pro-search-container-padding-md: 4px;
+  --ix-pro-search-tag-gap-sm: 2px;
+  --ix-pro-search-tag-gap-md: 4px;
+  --ix-pro-search-quick-select-padding-sm: 8px;
+  --ix-pro-search-quick-select-padding-md: 12px;
+  --ix-pro-search-tag-color: #2f3540;
+  --ix-pro-search-tag-bg-color: #edf1f7;
+  --ix-pro-search-tag-color-disabled: #bec3cc;
+  --ix-pro-search-tag-bg-color-disabled: #edf1f7;
+  --ix-pro-search-tag-name-color: #6f7785;
+  --ix-pro-search-segment-padding-horizontal: 4px;
+  --ix-pro-search-segment-max-width: 150px;
+  --ix-pro-search-name-panel-min-width: 160px;
+  --ix-pro-search-operator-panel-min-width: 20px;
+  --ix-pro-search-select-panel-min-width: 100px;
+  --ix-pro-search-tree-select-panel-min-width: 200px;
+  --ix-pro-search-tree-select-panel-max-width: 400px;
+}
+
+/* ------ pro-textarea css variables ------ */
 :root {
   --ix-pro-textarea-index-col-color: #2f3540;
   --ix-pro-textarea-index-col-min-width: 32px;
@@ -95,4 +82,17 @@
   --ix-pro-textarea-count-right: 8px;
   --ix-pro-textarea-count-opacity: 0.9;
   --ix-pro-textarea-count-color: #a1a7b3;
+}
+
+/* ------ pro-transfer css variables ------ */
+:root {
+  --ix-pro-transfer-list-min-width: 260px;
+  --ix-pro-transfer-list-min-height: 290px;
+  --ix-pro-transfer-table-close-icon-padding: 0 0 0 12px;
+  --ix-pro-transfer-tree-close-icon-padding: 0 8px;
+}
+
+/* ------ pro-tree css variables ------ */
+:root {
+  --ix-pro-tree-header-height: 38px;
 }

@@ -6,21 +6,19 @@
  */
 
 import {
-  type FullUseThemeTokenContext,
-  NullUseThemeTokenContext,
-  type ThemeKeys,
   type UseThemeTokenContext,
+  type UseThemeTokenScope,
   useThemeToken as _useThemeToken,
 } from '@idux/components/theme'
 
 import { ProComponentThemeTokens } from './types'
 
-export function useThemeToken(): NullUseThemeTokenContext
-export function useThemeToken<K extends ThemeKeys | keyof ProComponentThemeTokens>(
+export function useThemeToken(): UseThemeTokenContext<undefined>
+export function useThemeToken<K extends UseThemeTokenScope | keyof ProComponentThemeTokens | undefined>(
   key: K,
-): FullUseThemeTokenContext<K, ProComponentThemeTokens>
-export function useThemeToken<K extends ThemeKeys | keyof ProComponentThemeTokens>(
+): UseThemeTokenContext<K, ProComponentThemeTokens>
+export function useThemeToken<K extends UseThemeTokenScope | keyof ProComponentThemeTokens | undefined>(
   key?: K,
-): UseThemeTokenContext<K | undefined, ProComponentThemeTokens> {
-  return _useThemeToken<K, ProComponentThemeTokens>(key as K)
+): UseThemeTokenContext<K, ProComponentThemeTokens> {
+  return _useThemeToken<ProComponentThemeTokens, K>(key as K)
 }

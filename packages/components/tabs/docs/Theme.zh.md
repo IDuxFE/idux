@@ -1,28 +1,11 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@tabs-selected-color` | `@color-primary` | - | - |
-| `@tabs-hover-color` | `@color-primary-l10` | - | - |
-| `@tabs-active-color` | `@color-primary-d10` | - | - |
-| `@tabs-disabled-color` | `@color-graphite-l10` | - | - |
-| `@tabs-nav-font-size-md` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
-| `@tabs-nav-font-size-lg` | `var(--ix-font-size-lg)` | `var(--ix-font-size-md)` | - |
-| `@tabs-nav-background-color` | `@color-white` | - | - |
-| `@tabs-nav-border-color` | `@color-graphite-l30` | - | - |
-| `@tabs-nav-bottom-color` | `@color-graphite-l30` | - | - |
-| `@tabs-card-nav-font-size` | `@font-size-md` | - | - |
-| `@tabs-segment-nav-disabled-background-color` | `@color-graphite-l40` | - | - |
-| `@tabs-segment-nav-primary-active-background-color` | `@color-primary` | - | - |
-| `@tabs-segment-nav-primary-active-text-color` | `@color-white` | - | - |
-| `@tabs-segment-nav-height` | `32px` | - | - |
-| `@tabs-card-nav-tab-background-color` | `@color-graphite-l50` | - | - |
-| `@tabs-card-nav-tab-selected-background-color` | `@color-white` | - | - |
-| `@tabs-nav-tab-padding` | `0 16px` | - | - |
-| `@tabs-nav-tab-height` | `40px` | - | - |
-| `@tabs-nav-tab-text-color` | `@color-graphite-d40` | - | - |
-| `@tabs-nav-bar-color` | `@color-primary` | - | - |
-| `@tabs-nav-bar-height` | `2px` | - | - |
-| `@tabs-border-radius` | `2px` | - | - |
-| `@tabs-pane-min-width` | `72px` | - | - |
-| `@tabs-pane-padding` | `16px` | - | - |
-| `@tabs-icon-font-size` | `@font-size-lg` | - | - |
-| `@tabs-icon-color` | `@color-graphite-d20` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `borderRadius` |  | `number` | `2` | `2` |
+| `navBarHeight` |  | `number` | `2` | `2` |
+| `navFontSizeLg` |  | `number` | `14` | `14` |
+| `navFontSizeMd` |  | `number` | `12` | `12` |
+| `navTabHeight` |  | `number` | `40` | `40` |
+| `navTabMinWidth` |  | `number` | `72` | `72` |
+| `navTabPadding` |  | `string | number` | `0 16px` | `0 16px` |
+| `panelPaddingSize` |  | `number` | `16` | `16` |
+| `segmentNavHeight` |  | `number` | `32` | `32` |

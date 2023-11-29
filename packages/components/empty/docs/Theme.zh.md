@@ -1,5 +1,5 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@empty-color` | `var(--ix-text-color-disabled)` | - | - |
-| `@empty-description-color` | `var(--ix-text-color-info)` | - | - |
-| `@empty-description-font-size` | `var(--ix-font-size-lg)` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `color` |  | `string` | `#a1a7b3` | `#525966` |
+| `descColor` |  | `string` | `#6f7785` | `#808999` |
+| `descFontSize` |  | `number` | `16` | `16` |

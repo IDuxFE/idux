@@ -168,9 +168,6 @@ export function useTokenRegister(
     return tokenRecordMap.get(key)!.tokens as CertainThemeTokens<K>
   }
   const getThemeHashId = (key: ThemeKeys) => {
-    if (key === 'timePicker') {
-      console.log('getThemeHashId', tokenRecordMap.get(key))
-    }
     return tokenRecordMap.get(key)?.hashId
   }
 

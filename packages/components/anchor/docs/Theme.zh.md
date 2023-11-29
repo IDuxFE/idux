@@ -1,5 +1,4 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@anchor-color-active` | `var(--ix-color-primary)` | - | - |
-| `@anchor-ink-ball-width` | `2px` | - | - |
-| `@anchor-ink-ball-height` | `16px` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `inkBallHeight` |  | `number` | `16` | `16` |
+| `inkBallWidth` |  | `number` | `2` | `2` |

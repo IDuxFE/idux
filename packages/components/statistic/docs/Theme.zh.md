@@ -1,11 +1,7 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@statistic-font-size-sm` | `@font-size-md` | - | - |
-| `@statistic-font-size-md` | `@font-size-md` | - | - |
-| `@statistic-font-size-lg` | `@font-size-xl` | - | - |
-| `@statistic-font-size-xl` | `@font-size-2xl` | - | - |
-| `@statistic-line-height` | `@line-height-base` | - | - |
-| `@statistic-color` | `@color-black` | `@color-graphite-d40` | - |
-| `@statistic-title-margin` | `@spacing-xl` | - | - |
-| `@statistic-prefix-margin` | `@spacing-xs` | - | - |
-| `@statistic-suffix-margin` | `@spacing-xs` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `color` |  | `string` | `#2f3540` | `#F4F8FF` |
+| `fontSizeLg` |  | `number` | `24` | `24` |
+| `fontSizeMd` |  | `number` | `14` | `14` |
+| `fontSizeSm` |  | `number` | `14` | `14` |
+| `fontSizeXl` |  | `number` | `30` | `30` |

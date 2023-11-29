@@ -1,9 +1,9 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@desc-item-height-sm` | `var(--ix-height-sm)` | - | - |
-| `@desc-item-height-md` | `var(--ix-height-md)` | - | - |
-| `@desc-item-height-lg` | `var(--ix-height-lg)` | - | - |
-| `@desc-item-font-size-sm` | `var(--ix-font-size-sm)` | - | - |
-| `@desc-item-font-size-md` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
-| `@desc-item-font-size-lg` | `var(--ix-font-size-lg)` | `var(--ix-font-size-sm)` | - |
-| `@desc-item-label-color` | `var(--ix-text-color-info)` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `fontSizeLg` |  | `number` | `12` | `12` |
+| `fontSizeMd` |  | `number` | `12` | `12` |
+| `fontSizeSm` |  | `number` | `12` | `12` |
+| `itemHeightLg` |  | `number` | `40` | `40` |
+| `itemHeightMd` |  | `number` | `32` | `32` |
+| `itemHeightSm` |  | `number` | `24` | `24` |
+| `labelColor` |  | `string` | `#6f7785` | `#808999` |

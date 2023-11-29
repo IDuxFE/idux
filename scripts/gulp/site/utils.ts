@@ -5,7 +5,7 @@ import { readFileSync, readdirSync, statSync, writeFileSync } from 'fs-extra'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
-import { kebabCase, lowerFirst } from 'lodash'
+import { isString, kebabCase, lowerFirst } from 'lodash'
 import { loadFront } from 'yaml-front-matter'
 
 import { gulpConfig } from '../gulpConfig'
@@ -38,13 +38,13 @@ export function initSite(): void {
   const filterComponentName = [
     '_private',
     'config',
-    'theme',
     'locales',
     'node_modules',
     'style',
     `typography`,
     'utils',
     'version',
+    ['pro', 'theme'],
   ]
   readdirSync(packageRoot).forEach(packageName => {
     if (filterPackageName.includes(packageName)) {
@@ -57,7 +57,11 @@ export function initSite(): void {
     }
     docsMeta[packageName] = {}
     readdirSync(packageDirname).forEach(componentName => {
-      if (filterComponentName.includes(componentName)) {
+      if (
+        filterComponentName.some(filter =>
+          isString(filter) ? componentName === filter : filter[0] === packageName && filter[1] === componentName,
+        )
+      ) {
         return
       }
 

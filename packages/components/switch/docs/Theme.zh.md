@@ -1,22 +1,15 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@switch-font-size` | `@form-font-size-xs` | - | - |
-| `@switch-line-height` | `@form-line-height` | - | - |
-| `@switch-height-sm` | `@form-height-xs` | - | - |
-| `@switch-height-md` | `@form-height-sm` | - | - |
-| `@switch-height-lg` | `@form-height-md` | - | - |
-| `@switch-border-radius` | `@border-radius-full` | - | - |
-| `@switch-color` | `@form-background-color` | - | - |
-| `@switch-background-color` | `@form-placeholder-color` | `@color-graphite-l10` | - |
-| `@switch-active-color` | `@form-active-color` | - | - |
-| `@switch-active-disabled-color` | `@color-primary-l30` | - | - |
-| `@switch-disabled-color` | `@color-graphite-l30` | - | - |
-| `@switch-box-size-sm` | `12px` | - | - |
-| `@switch-box-size-md` | `20px` | - | - |
-| `@switch-box-size-lg` | `28px` | - | - |
-| `@switch-box-size-padding` | `2px` | - | - |
-| `@switch-box-background-color` | `@switch-color` | - | - |
-| `@switch-box-box-shadow` | `0 2px 4px rgba(0, 0, 0, 0.25)` | `none` | - |
-| `@switch-icon-font-size-sm` | `9px` | - | - |
-| `@switch-icon-font-size-md` | `@font-size-md` | - | - |
-| `@switch-icon-font-size-lg` | `@font-size-md` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `activeDisabledColor` |  | `string` | `#96c7ff` | `#173B7A` |
+| `handleBgColor` |  | `string` | `#ffffff` | `#fff` |
+| `handleBoxShadow` |  | `string` | `none` | `none` |
+| `handlePadding` |  | `number` | `2` | `2` |
+| `handleSizeLg` |  | `number` | `28` | `28` |
+| `handleSizeMd` |  | `number` | `20` | `20` |
+| `handleSizeSm` |  | `number` | `12` | `12` |
+| `heightLg` |  | `number` | `32` | `32` |
+| `heightMd` |  | `number` | `24` | `24` |
+| `heightSm` |  | `number` | `16` | `16` |
+| `iconFontSizeLg` |  | `number` | `14` | `14` |
+| `iconFontSizeMd` |  | `number` | `14` | `14` |
+| `iconFontSizeSm` |  | `number` | `9` | `9` |

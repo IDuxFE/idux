@@ -1,83 +1,22 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@pro-search-font-size` | `@form-font-size-md` | - | - |
-| `@pro-search-min-height` | `@height-md` | - | - |
-| `@pro-search-content-padding-horizontal` | `@spacing-xs` | - | - |
-| `@pro-search-content-padding-vertical` | `@spacing-xs` | - | - |
-| `@pro-search-border-width` | `@form-border-width` | - | - |
-| `@pro-search-border-style` | `@form-border-style` | - | - |
-| `@pro-search-border-color` | `@form-border-color` | - | - |
-| `@pro-search-border-radius` | `@border-radius-sm` | - | - |
-| `@pro-search-color` | `@form-color` | - | - |
-| `@pro-search-background-color` | `@form-background-color` | - | - |
-| `@pro-search-placeholder-color` | `@color-graphite` | - | - |
-| `@pro-search-hover-color` | `@form-hover-color` | - | - |
-| `@pro-search-active-color` | `@form-active-color` | - | - |
-| `@pro-search-active-box-shadow` | `@form-active-box-shadow` | - | - |
-| `@pro-search-disabled-color` | `@form-disabled-color` | - | - |
-| `@pro-search-disabled-background-color` | `@form-disabled-background-color` | - | - |
-| `@pro-search-placeholder-padding-horizontal` | `12px` | - | - |
-| `@pro-search-clear-icon-font-size` | `@font-size-lg` | - | - |
-| `@pro-search-clear-icon-width` | `@font-size-lg` | - | - |
-| `@pro-search-clear-icon-margin-right` | `@spacing-sm` | - | - |
-| `@pro-search-clear-icon-color` | `@color-graphite-d20` | - | - |
-| `@pro-search-close-icon-font-size` | `@font-size-lg` | - | - |
-| `@pro-search-close-icon-color` | `@color-graphite-d20` | - | - |
-| `@pro-search-close-icon-margin-left` | `0` | - | - |
-| `@pro-search-search-button-width` | `@pro-search-min-height` | - | - |
-| `@pro-search-search-button-background-color` | `@color-primary` | - | - |
-| `@pro-search-search-button-font-size` | `@font-size-lg` | - | - |
-| `@pro-search-search-button-color` | `@color-white` | - | - |
-| `@pro-search-search-button-disabled-background-color` | `@disabled-color` | - | - |
-| `@pro-search-search-button-disabled-color` | `@disabled-bg-color` | - | - |
-| `@pro-search-item-height` | `22px` | - | - |
-| `@pro-search-item-color` | `@pro-search-color` | - | - |
-| `@pro-search-item-tag-max-width` | `160px` | - | - |
-| `@pro-search-item-tag-color` | `@pro-search-color` | - | - |
-| `@pro-search-item-tag-background-color` | `@color-graphite-l40` | - | - |
-| `@pro-search-item-tag-border-radius` | `2px` | - | - |
-| `@pro-search-item-tag-padding` | `2px 4px 2px 8px` | - | - |
-| `@pro-search-item-tag-margin-left` | `@spacing-xs` | - | - |
-| `@pro-search-item-tag-margin-bottom` | `@spacing-xs` | - | - |
-| `@pro-search-item-tag-disabled-border-color` | `@pro-search-border-color` | - | - |
-| `@pro-search-item-tag-disabled-background-color` | `@color-graphite-l40` | - | - |
-| `@pro-search-item-tag-invalid-border-color` | `@color-error-d10` | - | - |
-| `@pro-search-item-tag-invalid-tooltip-background-color` | `@form-item-invalid-color` | - | - |
-| `@pro-search-item-tag-invalid-tooltip-color` | `@color-white` | - | - |
-| `@pro-search-segment-padding-horizontal` | `@spacing-xs` | - | - |
-| `@pro-search-segment-margin` | `@spacing-xs` | - | - |
-| `@pro-search-segment-border-bottom` | `1px solid @color-primary` | - | - |
-| `@pro-search-overlay-padding` | `0` | - | - |
-| `@pro-search-overlay-background-color` | `@background-color-component` | - | - |
-| `@pro-search-overlay-border-radius` | `@border-radius-sm` | - | - |
-| `@pro-search-overlay-box-shadow` | `@shadow-bottom-md` | - | - |
-| `@pro-search-panel-footer-border-width` | `1px` | - | - |
-| `@pro-search-panel-footer-border-style` | `solid` | - | - |
-| `@pro-search-panel-footer-border-color` | `@color-graphite-l30` | - | - |
-| `@pro-search-panel-footer-padding-horizontal` | `12px` | - | - |
-| `@pro-search-panel-footer-padding-vertical` | `8px` | - | - |
-| `@pro-search-panel-footer-button-margin` | `@spacing-sm` | - | - |
-| `@pro-search-date-picker-panel-body-padding` | `@spacing-lg` | - | - |
-| `@pro-search-name-segment-panel-min-width` | `160px` | - | - |
-| `@pro-search-operator-segment-panel-min-width` | `20px` | - | - |
-| `@pro-search-select-panel-min-width` | `100px` | - | - |
-| `@pro-search-tree-select-panel-min-width` | `200px` | - | - |
-| `@pro-search-tree-select-panel-max-width` | `400px` | - | - |
-| `@pro-search-name-segment-input-min-width` | `60px` | - | - |
-| `@pro-search-name-segment-input-text-align` | `start` | - | - |
-| `@pro-search-operator-segment-input-min-width` | `20px` | - | - |
-| `@pro-search-operator-segment-input-text-align` | `center` | - | - |
-| `@pro-search-input-segment-input-min-width` | `100px` | - | - |
-| `@pro-search-input-segment-input-text-align` | `start` | - | - |
-| `@pro-search-select-segment-input-min-width` | `100px` | - | - |
-| `@pro-search-select-segment-input-text-align` | `start` | - | - |
-| `@pro-search-tree-select-segment-input-min-width` | `200px` | - | - |
-| `@pro-search-tree-select-segment-input-text-align` | `start` | - | - |
-| `@pro-search-cascader-segment-input-min-width` | `200px` | - | - |
-| `@pro-search-cascader-segment-input-text-align` | `start` | - | - |
-| `@pro-search-date-picker-segment-input-min-width` | `100px` | - | - |
-| `@pro-search-date-picker-segment-input-text-align` | `start` | - | - |
-| `@pro-search-date-range-picker-segment-input-min-width` | `100px` | - | - |
-| `@pro-search-date-range-picker-segment-input-text-align` | `start` | - | - |
-| `@pro-search-custom-segment-input-min-width` | `100px` | - | - |
-| `@pro-search-custom-segment-input-text-align` | `start` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `containerPaddingMd` |  | `number` | `4` | `4` |
+| `containerPaddingSm` |  | `number` | `2` | `2` |
+| `heightMd` |  | `number` | `32` | `32` |
+| `heightSm` |  | `number` | `24` | `24` |
+| `namePanelMinWidth` |  | `number` | `160` | `160` |
+| `operatorPanelMinWidth` |  | `number` | `20` | `20` |
+| `quickSelectPaddingMd` |  | `string | number` | `12` | `12` |
+| `quickSelectPaddingSm` |  | `string | number` | `8` | `8` |
+| `segmentMaxWidth` |  | `number` | `150` | `150` |
+| `segmentPaddingHorizontal` |  | `number` | `4` | `4` |
+| `selectPanelMinWidth` |  | `number` | `100` | `100` |
+| `tagBgColor` |  | `string` | `#edf1f7` | `#1F2329` |
+| `tagBgColorDisabled` |  | `string` | `#edf1f7` | `#1F2329` |
+| `tagColor` |  | `string` | `#2f3540` | `#F4F8FF` |
+| `tagColorDisabled` |  | `string` | `#bec3cc` | `#687080` |
+| `tagGapMd` |  | `number` | `4` | `4` |
+| `tagGapSm` |  | `number` | `2` | `2` |
+| `tagNameColor` |  | `string` | `#6f7785` | `#808999` |
+| `treeSelectPanelMaxWidth` |  | `number` | `400` | `400` |
+| `treeSelectPanelMinWidth` |  | `number` | `200` | `200` |

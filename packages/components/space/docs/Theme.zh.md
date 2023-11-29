@@ -1,3 +1,3 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@space-separator-color` | `var(--ix-border-color-secondary)` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `separatorColor` |  | `string` | `#e1e5eb` | `#1F2329` |
