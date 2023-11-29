@@ -10,6 +10,12 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 2.0.0-beta.1(2023-11-29)
+
+### Features
+
+* 新增暗黑主题 ([#1751](https://github.com/sallerli1/idux/issues/1751)) ([411ed2b](https://github.com/sallerli1/idux/commit/411ed2b90f15e3b8c7f1989429fa023065304143))
+
 # 2.0.0-beta.0(2023-11-23)
 
 
