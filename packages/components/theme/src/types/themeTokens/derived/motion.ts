@@ -6,7 +6,16 @@
  */
 
 export interface DerivedMotionTokens {
+  /**
+   * @desc 过渡动画时间 快速
+   */
   motionDurationFast: number
+  /**
+   * @desc 过渡动画时间 中等
+   */
   motionDurationMedium: number
+  /**
+   * @desc 过渡动画时间 缓慢
+   */
   motionDurationSlow: number
 }

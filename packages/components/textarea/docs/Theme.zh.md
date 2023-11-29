@@ -1,26 +1,6 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@textarea-font-size-sm` | `@form-font-size-sm` | - | - |
-| `@textarea-font-size-md` | `@form-font-size-md` | - | - |
-| `@textarea-font-size-lg` | `@form-font-size-lg` | - | - |
-| `@textarea-line-height` | `@form-line-height` | - | - |
-| `@textarea-padding-vertical-sm` | `@form-padding-vertical-sm` | - | - |
-| `@textarea-padding-vertical-md` | `@form-padding-vertical-md` | - | - |
-| `@textarea-padding-vertical-lg` | `@form-padding-vertical-lg` | - | - |
-| `@textarea-border-width` | `@form-border-width` | - | - |
-| `@textarea-border-style` | `@form-border-style` | - | - |
-| `@textarea-border-color` | `@form-border-color` | - | - |
-| `@textarea-border-radius` | `@border-radius-md` | `@border-radius-sm` | - |
-| `@textarea-color` | `@form-color` | - | - |
-| `@textarea-color-secondary` | `@form-color-secondary` | - | - |
-| `@textarea-background-color` | `@form-background-color` | - | - |
-| `@textarea-placeholder-color` | `@form-placeholder-color` | - | - |
-| `@textarea-hover-color` | `@form-hover-color` | - | - |
-| `@textarea-active-color` | `@form-active-color` | - | - |
-| `@textarea-active-box-shadow` | `@form-active-box-shadow` | - | - |
-| `@textarea-disabled-color` | `@form-disabled-color` | - | - |
-| `@textarea-disabled-background-color` | `@form-disabled-background-color` | - | - |
-| `@textarea-count-bottom` | `1px` | - | - |
-| `@textarea-count-right` | `8px` | - | - |
-| `@textarea-count-opacity` | `0.9` | - | - |
-| `@textarea-count-color` | `@textarea-placeholder-color` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `countBottom` |  | `number` | `1` | `1` |
+| `countColor` |  | `string` | `#a1a7b3` | `#525966` |
+| `countOpacity` |  | `number` | `0.9` | `0.9` |
+| `countRight` |  | `number` | `8` | `8` |

@@ -80,6 +80,7 @@ import type { TabComponent, TabsComponent } from '@idux/components/tabs'
 import type { TagComponent, TagGroupComponent } from '@idux/components/tag'
 import type { TextComponent } from '@idux/components/text'
 import type { TextareaComponent } from '@idux/components/textarea'
+import type { ThemeProviderComponent } from '@idux/components/theme'
 import type { TimePickerComponent, TimeRangePickerComponent } from '@idux/components/time-picker'
 import type { TimelineComponent, TimelineItemComponent } from '@idux/components/timeline'
 import type { TooltipComponent } from '@idux/components/tooltip'
@@ -181,6 +182,7 @@ declare module 'vue' {
     IxTagGroup: TagGroupComponent
     IxText: TextComponent
     IxTextarea: TextareaComponent
+    IxThemeProvider: ThemeProviderComponent
     IxTimeline: TimelineComponent
     IxTimelineItem: TimelineItemComponent
     IxTimePicker: TimePickerComponent

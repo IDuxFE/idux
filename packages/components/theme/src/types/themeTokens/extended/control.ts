@@ -6,38 +6,123 @@
  */
 
 export interface ControlTokens {
-  controlHeightXs: number // 控件尺寸Xs
-  controlHeightSm: number // 控件尺寸Sm
-  controlHeightMd: number // 控件尺寸Md
-  controlHeightLg: number // 控件尺寸Lg
+  /**
+   * @desc 控件尺寸Xs
+   */
+  controlHeightXs: number
+  /**
+   * @desc 控件尺寸Sm
+   */
+  controlHeightSm: number
+  /**
+   * @desc 控件尺寸Md
+   */
+  controlHeightMd: number
+  /**
+   * @desc 控件尺寸Lg
+   */
+  controlHeightLg: number
 
-  controlLineWidth: number // 控件的线框宽度
-  controlLineType: string // 控件的线框类型
+  /**
+   * @desc 控件的线框宽度
+   */
+  controlLineWidth: number
+  /**
+   * @desc 控件的线框类型
+   */
+  controlLineType: string
 
-  controlFontSizeXs: number // 控件字体大小Xs
-  controlFontSizeSm: number // 控件字体大小Sm
-  controlFontSizeMd: number // 控件字体大小Md
-  controlFontSizeLg: number // 控件字体大小Lg
+  /**
+   * @desc 控件字体大小Xs
+   */
+  controlFontSizeXs: number
+  /**
+   * @desc 控件字体大小Sm
+   */
+  controlFontSizeSm: number
+  /**
+   * @desc 控件字体大小Md
+   */
+  controlFontSizeMd: number
+  /**
+   * @desc 控件字体大小Lg
+   */
+  controlFontSizeLg: number
 
-  controlBoxShadowFocus: string // 控件聚焦，激活时的阴影
-  controlBoxShadowInvalid: string // 控件校验非法时的阴影
+  /**
+   * @desc 控件聚焦，激活时的阴影
+   */
+  controlBoxShadowFocus: string
+  /**
+   * @desc 控件校验非法时的阴影
+   */
+  controlBoxShadowInvalid: string
 
-  controlBgColor: string // 控件背景颜色
-  controlBgColorDisabled: string // 控件禁用颜色
-  controlBorderColorHover: string // 控件悬浮边框颜色
-  controlBorderColorActive: string // 控件激活态边框颜色
+  /**
+   * @desc 控件背景颜色
+   */
+  controlBgColor: string
+  /**
+   * @desc 控件禁用颜色
+   */
+  controlBgColorDisabled: string
+  /**
+   * @desc 控件悬浮边框颜色
+   */
+  controlBorderColorHover: string
+  /**
+   * @desc 控件激活态边框颜色
 
-  controlPaddingSizeHorizontalXs: number // 控件横向内间距Xs
-  controlPaddingSizeHorizontalSm: number // 控件横向内间距Sm
-  controlPaddingSizeHorizontalMd: number // 控件横向内间距Md
-  controlPaddingSizeHorizontalLg: number // 控件横向内间距Lg
-  controlPaddingSizeVerticalXs: number // 控件竖向内间距Xs
-  controlPaddingSizeVerticalSm: number // 控件竖向内间距Sm
-  controlPaddingSizeVerticalMd: number // 控件竖向内间距Md
-  controlPaddingSizeVerticalLg: number // 控件竖向内间距Lg
+   */
+  controlBorderColorActive: string
 
-  controlBorderRadiusXs: number // 控件边框圆角Xs
-  controlBorderRadiusSm: number // 控件边框圆角Sm
-  controlBorderRadiusMd: number // 控件边框圆角Md
-  controlBorderRadiusLg: number // 控件边框圆角Lg
+  /**
+   * @desc 控件横向内间距Xs
+   */
+  controlPaddingSizeHorizontalXs: number
+  /**
+   * @desc 控件横向内间距Sm
+   */
+  controlPaddingSizeHorizontalSm: number
+  /**
+   * @desc 控件横向内间距Md
+   */
+  controlPaddingSizeHorizontalMd: number
+  /**
+   * @desc 控件横向内间距Lg
+   */
+  controlPaddingSizeHorizontalLg: number
+  /**
+   * @desc 控件竖向内间距Xs
+   */
+  controlPaddingSizeVerticalXs: number
+  /**
+   * @desc 控件竖向内间距Sm
+   */
+  controlPaddingSizeVerticalSm: number
+  /**
+   * @desc 控件竖向内间距Md
+   */
+  controlPaddingSizeVerticalMd: number
+  /**
+   * @desc 控件竖向内间距Lg
+   */
+  controlPaddingSizeVerticalLg: number
+
+  /**
+   * @desc 控件边框圆角Xs
+   */
+  controlBorderRadiusXs: number
+  /**
+   * @desc 控件边框圆角Sm
+   */
+  controlBorderRadiusSm: number
+  /**
+   * @desc 控件边框圆角Md
+   */
+  controlBorderRadiusMd: number
+  /**
+   * @desc 控件边框圆角Lg
+   */
+  controlBorderRadiusLg: number
 }

@@ -25,6 +25,7 @@ const componentPath: Record<string, string> = {
   CdkResizeObserver: '@idux/cdk/resize',
   IxLoadingBar: '@idux/components/loading-bar',
   IxLoadingBarProvider: '@idux/components/loading-bar',
+  IxThemeProvider: '@idux/components/theme',
 }
 
 export default defineConfig(({ command, mode }) => {

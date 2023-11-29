@@ -1,28 +1,25 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@table-font-size-sm` | `var(--ix-font-size-sm)` | - | - |
-| `@table-font-size-md` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
-| `@table-font-size-lg` | `var(--ix-font-size-lg)` | `var(--ix-font-size-sm)` | - |
-| `@table-head-row-height-sm` | `var(--ix-height-md)` | `var(--ix-height-md)` | - |
-| `@table-head-row-height-md` | `var(--ix-height-lg)` | `var(--ix-height-md)` | - |
-| `@table-head-row-height-lg` | `var(--ix-height-xl)` | `var(--ix-height-md)` | - |
-| `@table-body-row-height-sm` | `var(--ix-height-lg)` | `var(--ix-height-md)` | - |
-| `@table-body-row-height-md` | `var(--ix-height-xl)` | `var(--ix-height-lg)` | - |
-| `@table-body-row-height-lg` | `var(--ix-height-2xl)` | - | - |
-| `@table-row-padding-horizontal-sm` | `var(--ix-spacing-sm)` | - | - |
-| `@table-row-padding-horizontal-md` | `var(--ix-spacing-md)` | - | - |
-| `@table-row-padding-horizontal-lg` | `var(--ix-spacing-lg)` | - | - |
-| `@table-border-color` | `var(--ix-border-color-secondary)` | - | - |
-| `@table-border-radius` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
-| `@table-head-color` | `var(--ix-text-color-title-secondary)` | - | - |
-| `@table-head-background-color` | `var(--ix-background-color-medium)` | - | - |
-| `@table-head-separator-color` | `var(--ix-border-color)` | - | - |
-| `@table-head-icon-color` | `inherit` | `@color-graphite-l10` | - |
-| `@table-head-icon-color-active` | `var(--ix-color-primary)` | - | - |
-| `@table-head-icon-background-color-hover` | `var(--ix-background-color-deep)` | - | - |
-| `@table-head-font-weight` | `var(--ix-font-weight-lg)` | `var(--ix-font-weight-md)` | - |
-| `@table-body-row-background-color-hover` | `var(--ix-background-color-light)` | - | - |
-| `@table-body-row-background-color-selected` | `var(--ix-color-primary-l50)` | `var(--ix-background-color)` | - |
-| `@table-expandable-icon-color` | `var(--ix-text-color-secondary)` | `@color-graphite-l10` | - |
-| `@table-expandable-background-color` | `@table-body-row-background-color-hover` | - | - |
-| `@table-expandable-background-color-hover` | `@table-body-row-background-color-hover` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `bodyRowBgColorExpanded` |  | `string` | `#f7f9fc` | `#171A1F` |
+| `bodyRowBgColorHover` |  | `string` | `#f7f9fc` | `#171A1F` |
+| `bodyRowBgColorSelected` |  | `string` | `#ffffff` | `#0A0C0F` |
+| `bodyRowBgColorTreeExpanded` |  | `string` | `#f7f9fc` | `#171A1F` |
+| `bodyRowHeightLg` |  | `number` | `56` | `56` |
+| `bodyRowHeightMd` |  | `number` | `40` | `40` |
+| `bodyRowHeightSm` |  | `number` | `32` | `32` |
+| `expandableIconColor` |  | `string` | `#bec3cc` | `#687080` |
+| `fontSizeLg` |  | `number` | `12` | `12` |
+| `fontSizeMd` |  | `number` | `12` | `12` |
+| `fontSizeSm` |  | `number` | `12` | `12` |
+| `headBgColor` |  | `string` | `#edf1f7` | `#1F2329` |
+| `headColor` |  | `string` | `#454c59` | `#C2C7D1` |
+| `headIconBgColorHover` |  | `string` | `#e1e5eb` | `#1F2329` |
+| `headIconColor` |  | `string` | `#bec3cc` | `#687080` |
+| `headIconColorActive` |  | `string` | `#1c6eff` | `#4083E8` |
+| `headRowHeightLg` |  | `number` | `32` | `32` |
+| `headRowHeightMd` |  | `number` | `32` | `32` |
+| `headRowHeightSm` |  | `number` | `32` | `32` |
+| `headSeparatorColor` |  | `string` | `#d3d7de` | `#3C424D` |
+| `rowPaddingHorizontalLg` |  | `number` | `16` | `16` |
+| `rowPaddingHorizontalMd` |  | `number` | `12` | `12` |
+| `rowPaddingHorizontalSm` |  | `number` | `8` | `8` |

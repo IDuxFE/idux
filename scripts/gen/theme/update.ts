@@ -1,19 +1,21 @@
 // @ts-nocheck
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { PresetTheme, ThemeKeys } from '@idux/components/theme/src/types'
 
 import { resolve } from 'path'
 
-import { camelCase } from 'lodash-es'
+import { kebabCase } from 'lodash-es'
 
 import chalk from 'chalk'
-import { existsSync, readdirSync, statSync, writeFile } from 'fs-extra'
+import { writeFile } from 'fs-extra'
 import ora from 'ora'
 import { format } from 'prettier'
 
+import { type TokenMeta, getTokenMeta, updateCompThemeDoc, updateGlobalThemeDoc } from './updateDoc'
 import { createDomEnv } from '../../vite'
 
-async function generateThemeVariables(theme: PresetTheme) {
+async function generateThemeVariables(theme: PresetTheme, tokenMeta: TokenMeta) {
   const { destroy: destroyDomEnv } = createDomEnv()
   const componentsDirPath = resolve(__dirname, '../../../packages/components')
   const proComponentDirPath = resolve(__dirname, '../../../packages/pro')
@@ -25,23 +27,22 @@ async function generateThemeVariables(theme: PresetTheme) {
 
   const algorithms = getPresetAlgorithms(theme)
 
-  const globalTokens = getThemeTokens(theme)
+  const globalTokens = getThemeTokens(theme, undefined, undefined)
 
+  const compTokens: Record<string, any> = {}
   const compVariables: { comp: string; scope: 'components' | 'pro'; content: string }[] = []
 
-  async function updateComponentTokenVariables(
-    dirPath: string,
-    scope: 'components' | 'pro',
-    compName: string,
-    themeKey: ThemeKeys,
-  ) {
+  async function updateComponentTokenVariables(themeKey: ThemeKeys, compPath: string) {
     const spin = ora()
-    spin.start(`[Theme: ${theme}] generating component ${compName} variables...\n`)
+    spin.start(`[Theme: ${theme}] generating component ${themeKey} variables...\n`)
+
+    const compName = kebabCase(themeKey)
+    const scope = /components/.test(compPath) ? 'components' : 'pro'
 
     /* @vite-ignore */
     const { getThemeTokens, transforms } = await import(
       /* @vite-ignore */
-      resolve(dirPath, `${compName}/theme/index.ts`)
+      resolve(compPath, `theme/index.ts`)
     )
 
     const tokens = getThemeTokens(globalTokens, theme, algorithms)
@@ -59,7 +60,8 @@ async function generateThemeVariables(theme: PresetTheme) {
     const formattedCssContent = await format(cssContent, { parser: 'css' })
 
     compVariables.push({ comp: compName, scope, content: formattedCssContent })
-    await writeFile(resolve(dirPath, `${compName}/theme/${theme}.css`), formattedCssContent)
+    compTokens[themeKey] = tokens
+    await writeFile(resolve(compPath, `theme/${theme}.css`), formattedCssContent)
 
     spin.succeed(chalk.greenBright(`[Theme: ${theme}] component ${compName} variables generated\n`))
   }
@@ -96,7 +98,18 @@ async function generateThemeVariables(theme: PresetTheme) {
 
     let cssContent = scope === 'components' ? globalVariablesContent : ''
 
-    for (const comp of compVariables.filter(comp => comp.scope === scope).sort()) {
+    for (const comp of compVariables
+      .sort((comp1, comp2) => {
+        if (comp1.comp < comp2.comp) {
+          return -1
+        }
+        if (comp1.comp > comp2.comp) {
+          return 1
+        }
+        return 0
+      })
+      .filter(comp => comp.scope === scope)
+      .sort()) {
       cssContent += `\n` + comp.content
     }
 
@@ -108,26 +121,66 @@ async function generateThemeVariables(theme: PresetTheme) {
     spin.succeed(chalk.greenBright(`[Theme: ${theme}] ${scope} full variables generated\n`))
   }
 
-  const getCompUpdates = (scope: 'components' | 'pro') => {
-    const dirPath = scope === 'components' ? componentsDirPath : proComponentDirPath
+  const getCompUpdates = () => {
+    // const dirPath = scope === 'components' ? componentsDirPath : proComponentDirPath
 
-    return readdirSync(dirPath)
-      .filter(
-        comp =>
-          comp !== '_private' &&
-          statSync(resolve(dirPath, comp)).isDirectory() &&
-          existsSync(resolve(dirPath, `${comp}/theme/index.ts`)),
-      )
-      .map(comp =>
-        updateComponentTokenVariables(dirPath, scope, comp, camelCase(scope === 'components' ? comp : 'pro-' + comp)),
-      )
+    // return readdirSync(dirPath)
+    //   .filter(
+    //     comp =>
+    //       comp !== '_private' &&
+    //       statSync(resolve(dirPath, comp)).isDirectory() &&
+    //       existsSync(resolve(dirPath, `${comp}/theme/index.ts`)),
+    //   )
+    //   .map(comp =>
+    //     updateComponentTokenVariables(dirPath, scope, comp, camelCase(scope === 'components' ? comp : 'pro-' + comp)),
+    //   )
+
+    return Object.entries(tokenMeta?.components ?? {}).map(([themeKey, { compPath }]) =>
+      updateComponentTokenVariables(themeKey, compPath),
+    )
   }
 
-  await Promise.all([updateGlobalTokenVariables(), ...getCompUpdates('components'), ...getCompUpdates('pro')])
+  await Promise.all([updateGlobalTokenVariables(), ...getCompUpdates()])
 
   await Promise.all([updateGlobalFullVariables('components'), updateGlobalFullVariables('pro')])
 
   destroyDomEnv()
+
+  return [globalTokens, compTokens] as const
 }
 
-await Promise.all([generateThemeVariables('default'), generateThemeVariables('dark')])
+const tokenMeta = (await getTokenMeta())!
+
+const [[defaultGlobalTokens, defaultCompTokens], [darkGlobalTokens, darkCompTokens]] = await Promise.all([
+  generateThemeVariables('default', tokenMeta),
+  generateThemeVariables('dark', tokenMeta),
+])
+
+await Promise.all([
+  updateGlobalThemeDoc(tokenMeta, [
+    {
+      theme: 'default',
+      tokens: defaultGlobalTokens,
+    },
+    {
+      theme: 'dark',
+      tokens: darkGlobalTokens,
+    },
+  ]),
+  Object.keys(tokenMeta?.components ?? {}).map(themeKey => {
+    return updateCompThemeDoc(
+      tokenMeta,
+      [
+        {
+          theme: 'default',
+          tokens: defaultCompTokens[themeKey],
+        },
+        {
+          theme: 'dark',
+          tokens: darkCompTokens[themeKey],
+        },
+      ],
+      themeKey,
+    )
+  }),
+])
