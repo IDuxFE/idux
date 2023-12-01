@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.2](https://github.com/IDuxFE/idux/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2023-12-01)
+
+
+### Bug Fixes
+
+* style dependencies missing in on-demand import entries ([#1755](https://github.com/IDuxFE/idux/issues/1755)) ([48b7e73](https://github.com/IDuxFE/idux/commit/48b7e736963436ff4527d81af7dd89765c4aec93))
+
+
+
+
+
 # [2.0.0-beta.1](https://github.com/IDuxFE/idux/compare/v2.0.0-beta.0...v2.0.0-beta.1) (2023-11-29)
 
 
