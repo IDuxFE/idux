@@ -11,11 +11,13 @@ import { isFirefox } from '@idux/cdk/platform'
 import { CdkPortal } from '@idux/cdk/portal'
 import { useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { usePortalTarget, useZIndex } from '@idux/components/utils'
 
 import { useImgStyleOpr, useImgSwitch, useOprList } from './composables/useOpr'
 import OprIcon from './contents/OprIcon'
 import { imageViewerProps } from './types'
+import { getThemeTokens } from '../theme'
 
 const mousewheelEventName = isFirefox ? 'DOMMouseScroll' : 'mousewheel'
 
@@ -27,6 +29,8 @@ export default defineComponent({
   props: imageViewerProps,
   setup(props) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('image')
+    registerToken(getThemeTokens)
     const config = useGlobalConfig('imageViewer')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-image-viewer`)
     const mergedPortalTarget = usePortalTarget(props, config, common, mergedPrefixCls)
@@ -79,7 +83,7 @@ export default defineComponent({
         <CdkPortal target={mergedPortalTarget.value} load={visible.value}>
           <Transition name={`${common.prefixCls}-zoom`} appear>
             {visible.value && (
-              <div class={prefixCls} style={style.value}>
+              <div class={[prefixCls, globalHashId.value, hashId.value]} style={style.value}>
                 <div class={`${prefixCls}-opr`}>
                   {oprList.value
                     .filter(item => item.visible)

@@ -21,11 +21,13 @@ import { isArray, isUndefined, pickBy } from 'lodash-es'
 import { CdkPortal } from '@idux/cdk/portal'
 import { VKey, callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { usePortalTarget } from '@idux/components/utils'
 
 import Notification from './Notification'
 import { NOTIFICATION_PROVIDER_TOKEN } from './token'
 import { notificationPlacement, notificationProviderProps, notificationType } from './types'
+import { getThemeTokens, transforms } from '../theme'
 
 const groupPositions = {
   topStart: ['top', 'left'],
@@ -40,6 +42,9 @@ export default defineComponent({
   props: notificationProviderProps,
   setup(props, { slots, expose }) {
     const commonCfg = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('notification')
+    registerToken(getThemeTokens, transforms)
+
     const config = useGlobalConfig('notification')
     const mergedPrefixCls = computed(() => `${commonCfg.prefixCls}-notification`)
     const mergedPortalTarget = usePortalTarget(props, config, commonCfg, mergedPrefixCls)
@@ -79,7 +84,12 @@ export default defineComponent({
             tag="div"
             appear
             name={moveName}
-            class={[`${mergedPrefixCls.value}-wrapper`, `${mergedPrefixCls.value}-wrapper-${placement}`]}
+            class={[
+              `${mergedPrefixCls.value}-wrapper`,
+              `${mergedPrefixCls.value}-wrapper-${placement}`,
+              globalHashId.value,
+              hashId.value,
+            ]}
             style={position}
           >
             {child}
