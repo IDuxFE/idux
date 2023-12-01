@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.2](https://github.com/sallerli1/idux/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2023-12-01)
+
+
+### Bug Fixes
+
+* **comp:checkbox:** button theme not registered ([#1758](https://github.com/sallerli1/idux/issues/1758)) ([64bb7a3](https://github.com/sallerli1/idux/commit/64bb7a36d4656ac35119d0daed559073e3a4a8ba))
+* style dependencies missing in on-demand import entries ([#1755](https://github.com/sallerli1/idux/issues/1755)) ([48b7e73](https://github.com/sallerli1/idux/commit/48b7e736963436ff4527d81af7dd89765c4aec93))
+
+
+### Features
+
+* add theme entries for on-demand import ([#1756](https://github.com/sallerli1/idux/issues/1756)) ([67173bf](https://github.com/sallerli1/idux/commit/67173bf7e39371f7d039ada1d6aeab95e32ab6b9))
+
+
+
+
+
 # [2.0.0-beta.1](https://github.com/sallerli1/idux/compare/v2.0.0-beta.0...v2.0.0-beta.1) (2023-11-29)
 
 
