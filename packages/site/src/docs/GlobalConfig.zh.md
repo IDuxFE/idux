@@ -20,15 +20,13 @@ order: 3
 // main.ts
 import { createApp } from 'vue'
 import { merge } from 'lodash-es'
-import { createGlobalConfig, seerConfig } from '@idux/components/config'
+import { createGlobalConfig } from '@idux/components/config'
 
 const loadIconDynamically = (iconName: string) => {
   return fetch(`/idux-icons/${iconName}.svg`).then(res => res.text())
 }
 
 const customConfig = { icon: { loadIconDynamically } }
-// 如果是 seer 主题
-// customConfig = merge(seerConfig, { icon: { loadIconDynamically } })
 const globalConfig = createGlobalConfig(customConfig)
 
 createApp(App).use(globalConfig)
