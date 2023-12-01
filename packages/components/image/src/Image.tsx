@@ -14,9 +14,11 @@ import { computed, defineComponent, normalizeClass, ref, watch } from 'vue'
 import { callEmit } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
+import { useThemeToken } from '@idux/components/theme'
 
 import ImageViewer from './ImageViewer'
 import { imageProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxImage',
@@ -25,6 +27,9 @@ export default defineComponent({
   setup(props, { attrs, slots }) {
     const { class: className, style, ...rest } = attrs
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('image')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-image`)
     const config = useGlobalConfig('image')
     const preview = usePreview(props, config)
@@ -32,6 +37,8 @@ export default defineComponent({
     const [viewerVisible, setVisible] = useViewerVisible()
     const { outerClasses, overLayerClasses, imageClasses } = useClasses(
       mergedPrefixCls,
+      globalHashId,
+      hashId,
       className as string,
       status,
       preview,
@@ -102,6 +109,8 @@ function useViewerVisible(): [Ref<boolean>, (visible: boolean) => void] {
 
 function useClasses(
   mergedPrefixCls: ComputedRef<string>,
+  globalHashId: ComputedRef<string>,
+  hashId: ComputedRef<string>,
   className: string,
   status: Ref<ImageStatus>,
   preview: ComputedRef<boolean>,
@@ -109,6 +118,8 @@ function useClasses(
   const outerClasses = computed(() =>
     normalizeClass([
       mergedPrefixCls.value,
+      globalHashId.value,
+      hashId.value,
       className,
       `${mergedPrefixCls.value}-${status.value}`,
       { [`${mergedPrefixCls.value}-preview`]: preview.value },
