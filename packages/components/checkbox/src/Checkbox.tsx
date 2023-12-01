@@ -14,6 +14,7 @@ import { isNil } from 'lodash-es'
 import { useAccessorAndControl } from '@idux/cdk/forms'
 import { callEmit, useKey } from '@idux/cdk/utils'
 import { ɵWave, type ɵWaveInstance } from '@idux/components/_private/wave'
+import { getButtonThemeTokens } from '@idux/components/button'
 import { useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN, useFormElement, useFormItemRegister } from '@idux/components/form'
 import { useThemeToken } from '@idux/components/theme'
@@ -37,8 +38,9 @@ export default defineComponent({
     const key = useKey()
     const common = useGlobalConfig('common')
     const { globalHashId, hashId, registerToken } = useThemeToken('checkbox')
-    const { hashId: buttonHashId } = useThemeToken('button')
+    const { hashId: buttonHashId, registerToken: registerButtonToken } = useThemeToken('button')
     registerToken(getThemeTokens)
+    registerButtonToken(getButtonThemeTokens)
 
     const mergedPrefixCls = computed(() => `${common.prefixCls}-checkbox`)
     const config = useGlobalConfig('checkbox')
