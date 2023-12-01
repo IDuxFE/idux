@@ -2,7 +2,9 @@
 
 exports[`Desc > render work 1`] = `
 "<div class=\\"ix-row ix-desc ix-desc-md\\">
-  <!---->
+  <div class=\\"ix-desc-header\\">
+    <!---->
+  </div>
   <div class=\\"ix-col ix-col-span-8 ix-desc-item\\">
     <div class=\\"ix-desc-item-label ix-desc-item-label-colon\\"><label>A</label></div>
     <div class=\\"ix-desc-content\\"><span>aaa</span></div>
