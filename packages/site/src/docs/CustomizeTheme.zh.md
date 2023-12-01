@@ -295,7 +295,7 @@ token `getter` 只会在第一次注册成功的时候实际执行，因此不�
 
 ### IxThemeProvider
 
-详情请参考 [Tooltip](/components/theme/zh).
+详情请参考 [ThemeProvider](/components/theme/zh).
 
 ### 基础Token
 
@@ -572,22 +572,75 @@ token `getter` 只会在第一次注册成功的时候实际执行，因此不�
 
 如果由于某些限制无法使用 IxThemeProvider，我们在打包产物中增加了不同主题下的全部 `css` 变量，可以直接在项目中引入这些变量并针对性覆盖。
 
+可以将全量的变量直接引入到项目中：
+
 ```ts
-// 引入默认主题全局变量
-import '@idux/components/default.css'
-
-// 引入暗黑主题全局变量
-import '@idux/components/dark.css'
-
 // 引入默认主题全量变量
 import '@idux/components/default.full.css'
 
 // 引入暗黑主题全量变量
 import '@idux/components/dark.full.css'
 
+// 引入pro组件默认主题全量变量
+import '@idux/pro/default.full.css'
+
+// 引入pro组件暗黑主题全量变量
+import '@idux/pro/dark.full.css'
+```
+
+在按需引入的场景中，需要首先引入全局token对应的变量：
+
+```ts
+// 引入默认主题全局变量
+import '@idux/components/default.css'
+
+// 引入暗黑主题全局变量
+import '@idux/components/dark.css'
+```
+
+然后，可以选择使用 `unplugin-vue-components` 来按需引入主题变量：
+
+- Vite:
+
+```ts
+// vite.config
+import { IduxResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    /* ... */
+    Components({
+      resolvers: [IduxResolver({ importStyle: 'css', importStyleTheme: 'default' })],
+    }),
+  ]
+})
+```
+
+- Webpack:
+
+```ts
+// webpack.config
+import { IduxResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/webpack'
+
+module.exports = {
+  plugins: [
+    /* ... */
+    Components({
+      resolvers: [IduxResolver({ importStyle: 'css', importStyleTheme: 'default' })],
+    }),
+  ]
+}
+```
+
+或者可以手动引入组件的css变量
+
+```ts
 // 引入默认主题组件变量
-import '@idux/components/button/theme/default.css'
+import '@idux/components/button/theme/default'
 
 // 引入暗黑主题组件变量
-import '@idux/components/button/theme/default.css'
+import '@idux/components/button/theme/dark'
 ```
