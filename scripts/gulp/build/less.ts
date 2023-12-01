@@ -40,6 +40,55 @@ function compileEntry(content: string, saveDirname: string) {
   ]
 }
 
+async function compileThemeEntry(themes: string, targetDirname: string, distDirname: string) {
+  const entryPath = `${targetDirname}/style/index.ts`
+  if (!(await pathExists(entryPath))) {
+    return
+  }
+
+  const outputThemeDirname = `${distDirname}/theme`
+
+  if (!(await pathExists(outputThemeDirname))) {
+    await mkdir(outputThemeDirname)
+  }
+
+  const entryContent = await readFile(entryPath, { encoding: 'utf8' })
+
+  const compile = async (theme: string) => {
+    const themePath = `${targetDirname}/theme/${theme}.css`
+    const outputThemePath = `${distDirname}/theme/${theme}.css`
+    if (await pathExists(themePath)) {
+      await copy(themePath, outputThemePath)
+    } else {
+      await writeFile(outputThemePath, '\n')
+    }
+
+    const lines = entryContent.split('\n').map(line => line.trim())
+    const content = lines
+      .map(line => {
+        if (/^\/\//.test(line)) {
+          return line
+        }
+
+        if (/_private/.test(line)) {
+          return
+        }
+
+        if (/\.\/index.less/.test(line)) {
+          return `import './${theme}.css'`
+        }
+
+        return line.replace(/\/style/, `/theme/${theme}`)
+      })
+      .filter(Boolean)
+      .join('\n')
+
+    await writeFile(`${distDirname}/theme/${theme}.js`, content)
+  }
+
+  await Promise.all(themes.map(theme => compile(theme)))
+}
+
 export async function compileLess(
   targetDirname: string,
   distDirname: string,
@@ -87,24 +136,12 @@ export async function compileLess(
     } else {
       const styleDirname = `${targetDirname}/${componentDirname}/style`
       const outputDirname = `${distDirname}/${componentDirname}/style`
-      const themeDirname = `${targetDirname}/${componentDirname}/theme`
-      const outputThemeDirname = `${distDirname}/${componentDirname}/theme`
 
       await copyAndCompile(styleDirname, outputDirname)
 
-      if (!(await pathExists(outputThemeDirname)) && (await pathExists(outputDirname))) {
-        await mkdir(outputThemeDirname)
-      }
-
-      for (const theme of themes) {
-        const themePath = `${themeDirname}/${theme}.css`
-        const outputThemePath = `${outputThemeDirname}/${theme}.css`
-        if (await pathExists(themePath)) {
-          await copy(themePath, outputThemePath)
-        } else if (await pathExists(outputDirname)) {
-          await writeFile(outputThemePath, '\n')
-        }
-      }
+      promiseList.push(
+        compileThemeEntry(themes, `${targetDirname}/${componentDirname}`, `${distDirname}/${componentDirname}`),
+      )
     }
   }
 
