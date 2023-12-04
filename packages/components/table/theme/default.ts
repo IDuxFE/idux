@@ -10,8 +10,6 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
   const {
     fontSizeSm,
     heightMd,
-    heightLg,
-    height2xl,
     paddingSizeSm,
     paddingSizeMd,
     paddingSizeLg,
@@ -35,13 +33,13 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     headRowHeightMd: heightMd,
     headRowHeightLg: heightMd,
 
-    bodyRowHeightSm: heightMd,
-    bodyRowHeightMd: heightLg,
-    bodyRowHeightLg: height2xl,
+    cellPaddingHorizontalSm: paddingSizeSm,
+    cellPaddingHorizontalMd: paddingSizeMd,
+    cellPaddingHorizontalLg: paddingSizeLg,
 
-    rowPaddingHorizontalSm: paddingSizeSm,
-    rowPaddingHorizontalMd: paddingSizeMd,
-    rowPaddingHorizontalLg: paddingSizeLg,
+    cellPaddingVerticalSm: 6,
+    cellPaddingVerticalMd: 10,
+    cellPaddingVerticalLg: 18,
 
     headColor: colorTextTitleSecondary,
     headBgColor: colorEmphasizedContainerBg,
@@ -54,6 +52,8 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     bodyRowBgColorSelected: colorContainerBg,
     bodyRowBgColorExpanded: colorInfoContainerBg,
     bodyRowBgColorTreeExpanded: colorInfoContainerBg,
+
+    bodyCellVerticalAlign: 'middle',
 
     expandableIconColor: colorIconInfo,
   }

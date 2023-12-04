@@ -6,12 +6,12 @@
   --ix-table-head-row-height-sm: 32px;
   --ix-table-head-row-height-md: 32px;
   --ix-table-head-row-height-lg: 32px;
-  --ix-table-body-row-height-sm: 32px;
-  --ix-table-body-row-height-md: 40px;
-  --ix-table-body-row-height-lg: 56px;
-  --ix-table-row-padding-horizontal-sm: 8px;
-  --ix-table-row-padding-horizontal-md: 12px;
-  --ix-table-row-padding-horizontal-lg: 16px;
+  --ix-table-cell-padding-horizontal-sm: 8px;
+  --ix-table-cell-padding-horizontal-md: 12px;
+  --ix-table-cell-padding-horizontal-lg: 16px;
+  --ix-table-cell-padding-vertical-sm: 6px;
+  --ix-table-cell-padding-vertical-md: 10px;
+  --ix-table-cell-padding-vertical-lg: 18px;
   --ix-table-head-color: #454c59;
   --ix-table-head-bg-color: #edf1f7;
   --ix-table-head-separator-color: #d3d7de;
@@ -22,5 +22,6 @@
   --ix-table-body-row-bg-color-selected: #ffffff;
   --ix-table-body-row-bg-color-expanded: #f7f9fc;
   --ix-table-body-row-bg-color-tree-expanded: #f7f9fc;
+  --ix-table-body-cell-vertical-align: middle;
   --ix-table-expandable-icon-color: #bec3cc;
 }
