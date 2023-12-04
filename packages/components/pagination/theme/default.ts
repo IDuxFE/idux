@@ -11,14 +11,14 @@ export function getDefaultThemeTokens(
   algorithms: ThemeTokenAlgorithms,
 ): CertainThemeTokens<'pagination'> {
   const { getColorPalette } = algorithms
-  const { colorPrimary, fontSizeSm, fontSizeMd, paddingSizeXs, heightSm, heightMd } = tokens
+  const { colorPrimary, fontSizeSm, paddingSizeXs, heightSm, heightMd } = tokens
 
   const primaryColorPalette = getColorPalette(colorPrimary)
 
   return {
     fontSizeSm: fontSizeSm,
     fontSizeMd: fontSizeSm,
-    fontSizeLg: fontSizeMd,
+    fontSizeLg: fontSizeSm,
 
     itmePaddingSm: 0,
     itemPaddingMd: paddingSizeXs,
