@@ -18,7 +18,7 @@ import { modalToken } from './token'
 // staticIcons.ts
 const defaultIconTypes = {
   default: '',
-  confirm: 'question-circle-filled',
+  confirm: 'exclamation-circle-filled',
   info: 'info-circle-filled',
   success: 'check-circle-filled',
   warning: 'exclamation-circle-filled',
