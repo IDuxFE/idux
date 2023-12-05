@@ -56,6 +56,7 @@ export interface TokenRegisterContext<Ext extends object = object> {
 }
 
 export function useTokenRegister(
+  injectThemeStyle: ComputedRef<boolean>,
   mergedPresetTheme: ComputedRef<PresetTheme>,
   mergedAlgorithms: ComputedRef<ThemeTokenAlgorithms>,
   mergedAttachTo: ComputedRef<Element | undefined>,
@@ -121,7 +122,7 @@ export function useTokenRegister(
     tokenHashedMap.set(key, hashed)
 
     // if hashId is already provided, we consider the style injected already, no need to inject it again
-    if (!existedHashId) {
+    if (injectThemeStyle.value && !existedHashId) {
       const cssContent = tokenToCss(
         { ...record, hashId: hashed ?? mergedHashed.value ? record.hashId : '' } as TokenRecord<string>,
         transforms,
