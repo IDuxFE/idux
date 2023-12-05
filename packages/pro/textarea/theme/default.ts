@@ -13,7 +13,14 @@ export function getDefaultThemeTokens(
   algorithms: ThemeTokenAlgorithms,
 ): ProCertainThemeTokens<'proTextarea'> {
   const { getColorPalette } = algorithms
-  const { colorText, colorTextPlaceholder, paddingSizeXs, colorInfoContainerBg, colorError } = tokens
+  const {
+    colorText,
+    colorTextPlaceholder,
+    paddingSizeXs,
+    colorInfoContainerBg,
+    colorInfoContainerBgDisabled,
+    colorError,
+  } = tokens
 
   const errorColorPalette = getColorPalette(colorError)
 
@@ -22,6 +29,7 @@ export function getDefaultThemeTokens(
     indexColMinWidth: 32,
     indexColPaddingHorizontal: paddingSizeXs,
     indexColBgColor: colorInfoContainerBg,
+    indexColBgColorDisabled: colorInfoContainerBgDisabled,
     indexColCellErrorBgColor: errorColorPalette.l30,
 
     errorLineBgColor: errorColorPalette.l50,

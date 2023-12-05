@@ -1,11 +1,22 @@
 <template>
-  <IxProTextarea v-model:value="value" :onChange="onChange" placeholder="Basic usage"></IxProTextarea>
+  <div>
+    <IxSpace vertical>
+      <IxProTextarea
+        v-model:value="value"
+        :disabled="disabled"
+        :onChange="onChange"
+        placeholder="Basic usage"
+      ></IxProTextarea>
+      <IxSwitch v-model:checked="disabled">disabled</IxSwitch>
+    </IxSpace>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 
 const value = ref('')
+const disabled = ref(false)
 const onChange = (value: string, oldValue: string) => {
   console.log(value, oldValue)
 }

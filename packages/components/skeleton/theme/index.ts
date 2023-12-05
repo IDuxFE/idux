@@ -9,8 +9,10 @@ import type { TokenGetter } from '@idux/components/theme'
 
 import { getDefaultThemeTokens } from './default'
 
-export const getThemeTokens: TokenGetter<'skeleton'> = (tokens, presetTheme) => {
-  return presetTheme === 'default' ? getDefaultThemeTokens(tokens) : getDefaultThemeTokens(tokens)
+export const getThemeTokens: TokenGetter<'skeleton'> = (tokens, presetTheme, algorithms) => {
+  return presetTheme === 'default'
+    ? getDefaultThemeTokens(tokens, algorithms)
+    : getDefaultThemeTokens(tokens, algorithms)
 }
 
 export type { SkeletonThemeTokens } from './tokens'
