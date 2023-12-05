@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.3](https://github.com/IDuxFE/idux/compare/v1.12.2...v1.12.3) (2023-12-05)
+
+
+### Bug Fixes
+
+* **cdk:drag-drop:** remove user-select none style ([#1743](https://github.com/IDuxFE/idux/issues/1743)) ([d76dcda](https://github.com/IDuxFE/idux/commit/d76dcdabf443c1aa3399d82271fbbcbee79e260f))
+
+
+
+
+
 ## [1.9.4](https://github.com/IDuxFE/idux/compare/v1.9.3...v1.9.4) (2023-08-28)
 
 **Note:** Version bump only for package @idux/cdk
