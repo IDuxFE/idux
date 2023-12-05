@@ -96,6 +96,16 @@
     .@{pro-textarea-prefix}-content {
       color: var(--ix-color-text-disabled);
       background-color: var(--ix-control-bg-color-disabled);
+      &-textarea {
+        color: var(--ix-color-text-disabled);
+      }
+    }
+    .@{pro-textarea-prefix}-index-column {
+      color: var(--ix-color-text-disabled);
+      background-color: var(--ix-pro-textarea-index-col-bg-color-disabled);
+      &-bg {
+        background-color: var(--ix-pro-textarea-index-col-bg-color-disabled);
+      }
     }
   }
 
@@ -124,6 +134,10 @@
     color: var(--ix-color-text);
     background-color: var(--ix-control-bg-color);
     cursor: text;
+    transition:
+      all var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out),
+      height 0s,
+      width 0s;
 
     &-textarea {
       position: relative;

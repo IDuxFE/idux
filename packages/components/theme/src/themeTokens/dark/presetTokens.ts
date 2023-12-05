@@ -40,13 +40,13 @@ export function getPresetTokens(): Partial<GlobalThemeTokens> {
 
     colorEmphasizedContainerBg: greyColors.l30,
     colorEmphasizedContainerBgHover: greyColors.l30,
-    colorEmphasizedContainerBgDisabled: greyColors.l30,
+    colorEmphasizedContainerBgDisabled: greyColors.l10,
 
     colorAddonContainerBg: greyColors.l40,
 
     colorInfoContainerBg: greyColors.l40,
     colorInfoContainerBgHover: greyColors.l40,
-    colorInfoContainerBgDisabled: greyColors.l40,
+    colorInfoContainerBgDisabled: greyColors.l30,
 
     colorTextInverse: baseColors.white,
     colorBgInverse: baseColors.white,
