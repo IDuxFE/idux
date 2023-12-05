@@ -339,6 +339,7 @@ token `getter` 只会在第一次注册成功的时候实际执行，因此不�
 | `screenSm` | 屏幕尺寸Sm | `number` | `600` | `600` |
 | `screenXl` | 屏幕尺寸Xl | `number` | `1720` | `1720` |
 | `spacing` | 基础间距 | `number` | `8` | `8` |
+
 <!-- insert basicTokens end -->
 
 ### 派生Token
@@ -475,6 +476,7 @@ token `getter` 只会在第一次注册成功的时候实际执行，因此不�
 | `screenSmMin` |  | `number` | `600` | `600` |
 | `screenXlMin` |  | `number` | `1720` | `1720` |
 | `screenXsMax` |  | `number` | `599.99` | `599.99` |
+
 <!-- insert derivedTokens end -->
 
 ### 扩展Token
@@ -564,6 +566,7 @@ token `getter` 只会在第一次注册成功的时候实际执行，因此不�
 | `scrollbarTrackBoxShadow` | 滚动条轨道阴影 | `string` | `unset` | `unset` |
 | `scrollbarWidth` | 滚动条宽度 | `number` | `12` | `12` |
 | `tagCompColorAlpha` | IxTag 组件的颜色Alpha值，仅用于这一个组件 | `number` | `0.1` | `0.2` |
+
 <!-- insert extendedTokens end -->
 
 ## FAQ
