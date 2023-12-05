@@ -10,6 +10,21 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.12.3(2023-12-05)
+
+
+### Bug Fixes
+
+* **cdk:drag-drop:** 去掉user-select none ([#1743](https://github.com/IDuxFE/idux/issues/1743)) ([d76dcda](https://github.com/IDuxFE/idux/commit/d76dcdabf443c1aa3399d82271fbbcbee79e260f))
+* **comp:button:** 禁用时应该设置pointer events none([#1744](https://github.com/IDuxFE/idux/issues/1744)) ([2ca124d](https://github.com/IDuxFE/idux/commit/2ca124d5b8ee8a20496e67970d0e563fe2e8dba1))
+* **comp:desc:** header插槽显示不正常 ([#1742](https://github.com/IDuxFE/idux/issues/1742)) ([dd1aab8](https://github.com/IDuxFE/idux/commit/dd1aab86dc429858d8919ff9c438839d7f688e32))
+* **comp:desc:** 使用div包裹header解决布局问题 ([#1752](https://github.com/IDuxFE/idux/issues/1752)) ([dd31ee4](https://github.com/IDuxFE/idux/commit/dd31ee4aee432327eab90356625bbd8ed91c01af))
+* **comp:input:** sufix 在有清除按钮时无法点击 ([#1745](https://github.com/IDuxFE/idux/issues/1745)) ([4769dcd](https://github.com/IDuxFE/idux/commit/4769dcd7f58f56662b6098e77ad9009aa2eafdea))
+* **comp:radio:** gap 在配置 0px 时表现异常 ([#1740](https://github.com/IDuxFE/idux/issues/1740)) ([9ecd14a](https://github.com/IDuxFE/idux/commit/9ecd14aa5663399f1e3c92d3f40d8f5f05ad9dee))
+* **pro:search:** 当key是0的时候表现不正常 ([#1748](https://github.com/IDuxFE/idux/issues/1748)) ([9d996ce](https://github.com/IDuxFE/idux/commit/9d996cedbfb1c6748911ae6e6e3e263177444737))
+* **pro:table:** layoutool checkbox在禁用时不应当可点击 ([#1741](https://github.com/IDuxFE/idux/issues/1741)) ([0905872](https://github.com/IDuxFE/idux/commit/0905872941527f73d5acf56e0dc18d4768c2ad11))
+
+
 ## 1.12.2(2023-11-06)
 
 
