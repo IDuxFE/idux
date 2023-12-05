@@ -1,4 +1,4 @@
-.table-size( @font-size, @head-height, @body-height, @padding-horizontal) {
+.table-size( @font-size, @head-height, @padding-horizontal, @padding-vertical) {
   .reset-font-size(@font-size);
 
   &:not(.@{table-prefix}-borderless) {
@@ -38,16 +38,14 @@
   .@{table-prefix}-alert-row > td,
   .@{table-prefix}-expanded-row > td,
   .@{table-prefix}-footer {
-    height: @body-height;
-    // border-bottom: 1px
-    padding: 4px @padding-horizontal 3px;
+    padding: @padding-vertical @padding-horizontal;
   }
 
   // TODO: Nest Table
 }
 
 .@{table-prefix}-sm {
-  .table-size(var(--ix-table-font-size-sm), var(--ix-table-head-row-height-sm), var(--ix-table-body-row-height-sm), var(--ix-table-row-padding-horizontal-sm));
+  .table-size(var(--ix-table-font-size-sm), var(--ix-table-head-row-height-sm), var(--ix-table-cell-padding-horizontal-sm), var(--ix-table-cell-padding-vertical-sm));
 
   .@{table-prefix}-col-expandable,
   .@{table-prefix}-col-selectable {
@@ -68,7 +66,7 @@
 }
 
 .@{table-prefix}-md {
-  .table-size(var(--ix-table-font-size-md), var(--ix-table-head-row-height-md), var(--ix-table-body-row-height-md), var(--ix-table-row-padding-horizontal-md));
+  .table-size(var(--ix-table-font-size-md), var(--ix-table-head-row-height-md), var(--ix-table-cell-padding-horizontal-md), var(--ix-table-cell-padding-vertical-md));
 
   .@{table-prefix}-col-expandable,
   .@{table-prefix}-col-selectable {
@@ -85,7 +83,7 @@
 }
 
 .@{table-prefix}-lg {
-  .table-size(var(--ix-table-font-size-lg), var(--ix-table-head-row-height-lg), var(--ix-table-body-row-height-lg), var(--ix-table-row-padding-horizontal-lg));
+  .table-size(var(--ix-table-font-size-lg), var(--ix-table-head-row-height-lg), var(--ix-table-cell-padding-horizontal-lg), var(--ix-table-cell-padding-vertical-lg));
 
   .@{table-prefix}-col-expandable,
   .@{table-prefix}-col-selectable {
