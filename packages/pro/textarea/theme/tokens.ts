@@ -10,6 +10,7 @@ export interface ProTextareaThemeTokens {
   indexColMinWidth: number
   indexColPaddingHorizontal: number
   indexColBgColor: string
+  indexColBgColorDisabled: string
   indexColCellErrorBgColor: string
 
   errorLineBgColor: string

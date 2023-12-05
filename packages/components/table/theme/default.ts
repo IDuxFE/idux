@@ -5,8 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { CertainThemeTokens, GlobalThemeTokens } from '@idux/components/theme'
-export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTokens<'table'> {
+import type { CertainThemeTokens, GlobalThemeTokens, ThemeTokenAlgorithms } from '@idux/components/theme'
+export function getDefaultThemeTokens(
+  tokens: GlobalThemeTokens,
+  algorithms: ThemeTokenAlgorithms,
+): CertainThemeTokens<'table'> {
+  const { getGreyColors } = algorithms
   const {
     fontSizeSm,
     heightMd,
@@ -20,7 +24,6 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     colorPrimary,
     colorContainerBg,
     colorContainerBgHover,
-    colorContainerBgDisabled,
     colorInfoContainerBg,
   } = tokens
 
@@ -46,7 +49,7 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     headSeparatorColor: colorBorder,
     headIconColor: colorIconInfo,
     headIconColorActive: colorPrimary,
-    headIconBgColorHover: colorContainerBgDisabled,
+    headIconBgColorHover: getGreyColors().l30,
 
     bodyRowBgColorHover: colorContainerBgHover,
     bodyRowBgColorSelected: colorContainerBg,
