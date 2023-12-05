@@ -12,7 +12,11 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): ProCertainThem
     colorText,
     colorTextDisabled,
     colorTextInfo,
+    colorTextInverse,
     colorEmphasizedContainerBg,
+    colorPrimary,
+    colorPrimaryHover,
+    colorEmphasizedContainerBgDisabled,
     controlHeightSm,
     controlHeightMd,
     paddingSize2Xs,
@@ -40,6 +44,13 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): ProCertainThem
 
     segmentPaddingHorizontal: paddingSizeXs,
     segmentMaxWidth: 150,
+
+    searchBtnColor: colorTextInverse,
+    searchBtnColorHover: colorTextInverse,
+    searchBtnColorDisabled: colorTextInverse,
+    searchBtnBgColor: colorPrimary,
+    searchBtnBgColorHover: colorPrimaryHover,
+    searchBtnBgColorDisabled: colorEmphasizedContainerBgDisabled,
 
     namePanelMinWidth: 160,
     operatorPanelMinWidth: 20,

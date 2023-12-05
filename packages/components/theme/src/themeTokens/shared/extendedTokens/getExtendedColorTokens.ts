@@ -22,14 +22,14 @@ export function getExtendedColorTokens(
     colorContainerBg: colorBg, // 一级背景
     colorContainerBgHover: greyColors.l50,
     colorContainerBgActive: primaryColorPalette.l50,
-    colorContainerBgDisabled: greyColors.l30,
+    colorContainerBgDisabled: greyColors.l40,
     colorAddonContainerBg: greyColors.l50,
     colorEmphasizedContainerBg: greyColors.l40,
     colorEmphasizedContainerBgHover: greyColors.l30,
-    colorEmphasizedContainerBgDisabled: greyColors.l20,
+    colorEmphasizedContainerBgDisabled: greyColors.l10,
     colorInfoContainerBg: greyColors.l50,
     colorInfoContainerBgHover: greyColors.l50,
-    colorInfoContainerBgDisabled: greyColors.l50,
+    colorInfoContainerBgDisabled: greyColors.l30,
     colorFillContainerBg: greyColors.l10,
 
     colorSeparator: greyColors.l30,
