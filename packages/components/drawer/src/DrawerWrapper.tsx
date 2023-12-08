@@ -37,7 +37,6 @@ const drawerTransitionMap = {
   end: 'move-end',
 }
 const horizontalPlacement = ['start', 'end']
-const defaultDistance = 160
 
 export default defineComponent({
   inheritAttrs: false,
@@ -49,13 +48,14 @@ export default defineComponent({
       common,
       config,
       mergedPrefixCls,
+      drawerElRef,
       visible,
       delayedLoaded,
       animatedVisible,
       mergedVisible,
       currentZIndex,
-      level,
       levelAction,
+      distance,
     } = inject(drawerToken)!
     const { close } = inject(DRAWER_TOKEN)!
     const { closable, closeIcon, closeOnEsc, mask, maskClosable } = useConfig(props, config)
@@ -83,12 +83,13 @@ export default defineComponent({
     const transformStyle = computed(() => {
       const { placement } = props
       const horizontal = isHorizontal.value
-      const distance = level.value * defaultDistance
       let transform
       if (horizontal) {
-        transform = distance > 0 ? `translateX(${placement === 'start' ? distance : -distance}px)` : undefined
+        transform =
+          distance.value > 0 ? `translateX(${placement === 'start' ? distance.value : -distance.value}px)` : undefined
       } else {
-        transform = distance > 0 ? `translateY(${placement === 'top' ? distance : -distance}px)` : undefined
+        transform =
+          distance.value > 0 ? `translateY(${placement === 'top' ? distance.value : -distance.value}px)` : undefined
       }
       return transform
     })
@@ -158,6 +159,7 @@ export default defineComponent({
             {delayedLoaded.value && (
               <div
                 v-show={visible.value}
+                ref={drawerElRef}
                 role="document"
                 class={prefixCls}
                 style={contentStyle.value}
