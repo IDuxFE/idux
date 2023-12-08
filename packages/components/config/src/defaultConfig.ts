@@ -323,6 +323,7 @@ export const defaultConfig: GlobalConfig = {
     getKey: 'key',
     size: 'md',
     scrollToTopOnChange: true,
+    insetShadow: true,
     pagination: {
       position: 'bottomEnd',
     },

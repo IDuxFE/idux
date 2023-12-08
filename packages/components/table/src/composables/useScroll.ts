@@ -170,8 +170,8 @@ function useScrollRef(
 
     if (currentTarget) {
       const { scrollWidth, clientWidth } = currentTarget
-      pingedStart.value = mergedScrollLeft > 0
-      pingedEnd.value = mergedScrollLeft < scrollWidth - clientWidth
+      pingedStart.value = mergedScrollLeft > 1
+      pingedEnd.value = scrollWidth - clientWidth - mergedScrollLeft > 1
     }
 
     if (evt?.type === 'scroll') {
