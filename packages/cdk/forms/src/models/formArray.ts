@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, computed, watch, watchEffect } from 'vue'
+import { type ComputedRef, computed, watchEffect } from 'vue'
 
 import { AbstractControl } from './abstractControl'
 import { type AsyncValidatorFn, type ValidateStatus, type ValidatorFn, type ValidatorOptions } from '../types'
@@ -29,7 +29,6 @@ export class FormArray<T = any> extends AbstractControl<T[]> {
 
     this.length = computed(() => this._controls.value.length)
 
-    this._watchValid()
     this._watchValue()
     this._watchStatus()
     this._watchBlurred()
@@ -125,14 +124,6 @@ export class FormArray<T = any> extends AbstractControl<T[]> {
     const controls = [...this._controls.value]
     controls.splice(index, 1, control)
     this._controls.value = controls
-  }
-
-  private _watchValid() {
-    watch(this._valueRef, () => {
-      if (this.trigger === 'change') {
-        this._validate()
-      }
-    })
   }
 
   private _watchValue() {

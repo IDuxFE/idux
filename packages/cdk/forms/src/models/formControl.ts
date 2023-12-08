@@ -19,7 +19,6 @@ export class FormControl<T = any> extends AbstractControl<T> {
   ) {
     super(undefined, validatorOrOptions, asyncValidator, _initValue)
 
-    this._watchValid()
     this._watchStatus()
   }
 
@@ -45,14 +44,6 @@ export class FormControl<T = any> extends AbstractControl<T> {
 
   protected _find(_: string | number): AbstractControl<T> | undefined {
     return undefined
-  }
-
-  private _watchValid() {
-    watch(this._valueRef, () => {
-      if (this.trigger === 'change') {
-        this._validate()
-      }
-    })
   }
 
   private _watchStatus() {

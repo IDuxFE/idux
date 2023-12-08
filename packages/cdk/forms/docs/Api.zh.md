@@ -84,7 +84,7 @@ export function useFormControl<T>(
 | `disabled` | 默认禁用当前控件 | `boolean \| (control: AbstractControl, initializing: boolean) => boolean` | - | `initializing` 为 `true` 时，表示处于初始化中，此时 `control` 的部分属性还不能访问。 |
 | `name` | 控件的名称 | `string` | - | 通常用于自定义提示信息 |
 | `example` | 控件的示例 | `string` | - | 通常用于自定义提示信息 |
-| `trigger` | 验证器触发的时机 | `'change' \| 'blur' \| 'submit'` | `change` | - |
+| `trigger` | 验证器触发的时机 | `'change' \| 'blur' \| 'submit' \| 'interactions'` | `change` | - |
 | `validators` | 一个同步验证器函数或数组 | `ValidatorFn \| ValidatorFn[]` | - | - |
 | `asyncValidators` | 一个异步验证器函数或数组 | `AsyncValidatorFn \| AsyncValidatorFn[]` | - | - |
 
@@ -232,6 +232,10 @@ export abstract class AbstractControl<T = any> {
      */
     readonly pristine: ComputedRef<boolean>;
     /**
+     * 如果控件被执行过校验，则 `validated` 为 `true`
+     */
+    readonly validated: ComputedRef<boolean>;
+    /**
      * 此控件的父级控制器, 如果不存在则为 `undefined`
      */
     get parent(): AbstractControl | undefined;
@@ -244,7 +248,7 @@ export abstract class AbstractControl<T = any> {
      * 可选值: `'change'` | `'blur'` | `'submit'`
      * 默认值: `'change'`
      */
-    get trigger(): 'change' | 'blur' | 'submit';
+    get trigger(): 'change' | 'blur' | 'submit' | 'interactions';
     /**
      * 此控件的名称，通常用于验证提示信息
      */
