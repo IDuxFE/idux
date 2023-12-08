@@ -25,6 +25,10 @@ export const themeProviderProps = {
     type: String as PropType<PresetTheme>,
     default: undefined,
   },
+  injectThemeStyle: {
+    type: Boolean,
+    default: undefined,
+  },
   hashed: {
     type: Boolean,
     default: undefined,

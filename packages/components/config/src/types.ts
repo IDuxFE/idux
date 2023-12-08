@@ -125,6 +125,7 @@ export interface CommonConfig {
 }
 export interface ThemeConfig extends DeepPartialThemeTokens {
   presetTheme: PresetTheme
+  injectThemeStyle: boolean
   hashed: boolean
   attachTo?: ThemeProviderAttachTo
 }
