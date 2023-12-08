@@ -22,6 +22,7 @@ import {
 } from 'vue'
 
 import { CdkPortal } from '@idux/cdk/portal'
+import { useResizeObserver } from '@idux/cdk/resize'
 import { BlockScrollStrategy, type ScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { ɵMask } from '@idux/components/_private/mask'
@@ -48,12 +49,15 @@ export default defineComponent({
     const mergedPortalTarget = usePortalTarget(props, config, common, mergedPrefixCls)
 
     const mask = computed(() => props.mask ?? config.mask)
+    const mergedDistance = computed(() => props.distance ?? config.distance)
 
     const { loaded, delayedLoaded, visible, setVisible, animatedVisible, mergedVisible } = useVisible(props)
     const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visible)
 
+    const drawerElRef = ref<HTMLElement>()
+
     const { open, close } = useTrigger(props, setVisible)
-    const { level, levelAction, push, pull } = useLevel(visible)
+    const { levelAction, distance, push, pull } = useLevel(props, visible, mergedDistance, drawerElRef)
 
     provide(drawerToken, {
       props,
@@ -61,13 +65,14 @@ export default defineComponent({
       common,
       config,
       mergedPrefixCls,
+      drawerElRef,
       visible,
       delayedLoaded,
       animatedVisible,
       mergedVisible,
       currentZIndex,
-      level,
       levelAction,
+      distance,
       push,
       pull,
     })
@@ -181,27 +186,78 @@ function useTrigger(props: DrawerProps, setVisible: (visible: boolean) => void) 
   return { open, close }
 }
 
-function useLevel(visible: Ref<boolean>) {
+function useLevel(
+  props: DrawerProps,
+  visible: Ref<boolean>,
+  mergedDistance: ComputedRef<number>,
+  drawerElRef: Ref<HTMLElement | undefined>,
+) {
   const parentContext = inject(drawerToken, null)
 
   const level = ref(0)
+  const distance = ref(0)
   const levelAction = ref<'push' | 'pull'>()
+  const drawerSize = ref(0)
+  const sizeAttrName = computed(() => (['top', 'bottom'].includes(props.placement) ? 'height' : 'width'))
 
-  const push = () => {
-    level.value++
-    parentContext?.push()
+  let sizeUpdateCb: (() => void) | undefined
+
+  useResizeObserver(drawerElRef, ({ contentRect }) => {
+    drawerSize.value = contentRect[sizeAttrName.value] ?? 0
+
+    sizeUpdateCb?.()
+  })
+
+  const onSizeUpdate = (cb: () => void) => {
+    sizeUpdateCb = () => {
+      cb()
+      sizeUpdateCb = undefined
+    }
   }
 
-  const pull = () => {
+  const updateDistance = (childSize: number) => {
+    const minDisatance = Math.min(drawerSize.value, mergedDistance.value)
+    if (!drawerSize.value || !childSize || drawerSize.value - childSize >= minDisatance) {
+      distance.value = 0
+    } else {
+      distance.value = minDisatance - (drawerSize.value - childSize)
+    }
+  }
+
+  const push = (childSize: number) => {
+    level.value++
+
+    updateDistance(childSize)
+    pushParent()
+  }
+
+  const pull = (childSize: number) => {
     level.value--
-    parentContext?.pull()
+
+    updateDistance(childSize)
+    pullParent()
+  }
+
+  const pushParent = () => {
+    if (parentContext?.props.placement !== props.placement) {
+      return
+    }
+
+    parentContext?.push(drawerSize.value + distance.value)
+  }
+  const pullParent = () => {
+    if (parentContext?.props.placement !== props.placement) {
+      return
+    }
+
+    parentContext?.pull(visible.value ? drawerSize.value + distance.value : 0)
   }
 
   watch(visible, value => {
     if (value) {
-      parentContext?.push()
+      onSizeUpdate(pushParent)
     } else {
-      parentContext?.pull()
+      pullParent()
       levelAction.value = undefined
     }
   })
@@ -212,15 +268,15 @@ function useLevel(visible: Ref<boolean>) {
 
   onMounted(() => {
     if (visible.value) {
-      parentContext?.push()
+      pushParent()
     }
   })
 
   onBeforeUnmount(() => {
     if (visible.value) {
-      parentContext?.pull()
+      pullParent()
     }
   })
 
-  return { level, levelAction, push, pull }
+  return { levelAction, distance, push, pull }
 }
