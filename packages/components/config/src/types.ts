@@ -237,6 +237,7 @@ export interface DrawerConfig {
   closeIcon: string
   closeOnEsc: boolean
   container?: PortalTargetType
+  distance: number
   height: string | number
   mask: boolean
   maskClosable: boolean

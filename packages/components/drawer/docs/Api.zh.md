@@ -19,6 +19,7 @@
 | `maskClosable` | 点击蒙层是否允许关闭 | `boolean` | `true` | ✅ | - |
 | `offset` | 抽屉偏移量 | `number \| string` | `0` | - |  `placement` 为`start/end` 时, 为顶部偏移量，`top/bottom` 时, 为左边偏移量 |
 | `placement` | 抽屉打开方向 | `'top' \| 'bottom' \| 'start' \| 'end'` | `'end'` | - | - |
+| `distance` | 多层抽屉场景与子抽屉的距离 | `number` | `160` | ✅ | 如果大于抽屉的宽度，则以抽屉的宽度为距离 |
 | `width` | 抽屉宽度 | `string \| number` | `'480'` | ✅ | 默认值仅在 `placement为` 为 `start/end` 时生效，其他情况默认为 `100%` |
 | `zIndex` | 设置抽屉的 `z-index` | `number` | - | - | - |
 | `onAfterOpen` | 打开后的回调 | `() => void` | - | - | - |
