@@ -33,6 +33,7 @@ import {
   type ValidateStatus,
   type ValidatorFn,
   type ValidatorOptions,
+  type ValidatorTrigger,
 } from '../types'
 import { Validators, addValidators, hasValidator, removeValidators } from '../validators'
 
@@ -127,6 +128,11 @@ export abstract class AbstractControl<T = any> {
   readonly pristine!: ComputedRef<boolean>
 
   /**
+   * A control has been `validated`
+   */
+  readonly validated!: ComputedRef<boolean>
+
+  /**
    * The parent control.
    */
   get parent(): AbstractControl | undefined {
@@ -151,7 +157,7 @@ export abstract class AbstractControl<T = any> {
    * Possible values: `'change'` | `'blur'` | `'submit'`
    * Default value: `'change'`
    */
-  get trigger(): 'change' | 'blur' | 'submit' {
+  get trigger(): ValidatorTrigger {
     return this._trigger ?? this._parent?.trigger ?? 'change'
   }
 
@@ -168,13 +174,15 @@ export abstract class AbstractControl<T = any> {
   protected _blurred = ref(false)
   protected _dirty = ref(false)
   protected _initializing = ref(true)
+  protected _validated = ref(false)
 
   private _validators: ValidatorFn | ValidatorFn[] | undefined
   private _composedValidators: ValidatorFn | undefined
   private _asyncValidators: AsyncValidatorFn | AsyncValidatorFn[] | undefined
   private _composedAsyncValidators: AsyncValidatorFn | undefined
   private _parent: AbstractControl<T> | undefined
-  private _trigger?: 'change' | 'blur' | 'submit'
+  private _trigger?: ValidatorTrigger
+  private _blurMarkedCb?: () => void
 
   constructor(
     controls?: GroupControls<T> | AbstractControl<ArrayElement<T>>[],
@@ -284,9 +292,7 @@ export abstract class AbstractControl<T = any> {
       this._blurred.value = true
     }
 
-    if (this.trigger === 'blur') {
-      this._validate()
-    }
+    this._blurMarkedCb?.()
   }
 
   /**
@@ -320,6 +326,8 @@ export abstract class AbstractControl<T = any> {
     } else {
       this._dirty.value = false
     }
+
+    this._validated.value = false
   }
 
   /**
@@ -524,8 +532,8 @@ export abstract class AbstractControl<T = any> {
 
   protected async _validate(): Promise<ValidateErrors | undefined> {
     let newErrors = undefined
+    let value = undefined
     if (!this._disabled.value) {
-      let value = undefined
       if (this._composedValidators) {
         value = this.getValue()
         newErrors = this._composedValidators(value, this)
@@ -538,8 +546,10 @@ export abstract class AbstractControl<T = any> {
         newErrors = await this._composedAsyncValidators(value, this)
       }
     }
+    this._validated.value = true
     this.setErrors(newErrors)
     this._status.value = newErrors ? 'invalid' : 'valid'
+
     return newErrors
   }
 
@@ -596,6 +606,7 @@ export abstract class AbstractControl<T = any> {
     current.unblurred = computed(() => !this._blurred.value)
     current.dirty = computed(() => this._dirty.value)
     current.pristine = computed(() => !this._dirty.value)
+    current.validated = computed(() => this._validated.value)
 
     if (this._disabledFn) {
       nextTick(() => {
@@ -608,6 +619,8 @@ export abstract class AbstractControl<T = any> {
         })
       })
     }
+
+    this._watchValid()
   }
 
   private _initErrorsAndStatus() {
@@ -646,5 +659,41 @@ export abstract class AbstractControl<T = any> {
         this._status.value = asyncErrors ? 'invalid' : 'valid'
       })
     }
+  }
+
+  private _watchValid() {
+    let isChangeValidating = false
+    let isChanging = false
+
+    this._blurMarkedCb = () => {
+      if (
+        this.trigger === 'blur' ||
+        (this.trigger === 'interactions' && (!this.validated.value || !isChangeValidating))
+      ) {
+        this._validate()
+      }
+
+      isChangeValidating = false
+      isChanging = false
+    }
+
+    watch(this._valueRef, (_, oldValue) => {
+      if (this.trigger === 'change') {
+        this._validate()
+        return
+      }
+
+      if (this.trigger === 'interactions') {
+        if ((!this.valid.value || !!oldValue) && !isChanging) {
+          isChangeValidating = true
+        }
+
+        if (isChangeValidating) {
+          this._validate()
+        }
+      }
+
+      isChanging = true
+    })
   }
 }

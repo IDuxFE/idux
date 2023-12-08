@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { watch, watchEffect } from 'vue'
+import { watchEffect } from 'vue'
 
 import { hasOwnProperty } from '@idux/cdk/utils'
 
@@ -23,7 +23,6 @@ export class FormGroup<T extends object = object> extends AbstractControl<T> {
   ) {
     super(controls, validatorOrOptions, asyncValidator)
 
-    this._watchValid()
     this._watchValue()
     this._watchStatus()
     this._watchBlurred()
@@ -104,14 +103,6 @@ export class FormGroup<T extends object = object> extends AbstractControl<T> {
     const controls = { ...this._controls.value }
     controls[key] = control
     this._controls.value = controls
-  }
-
-  private _watchValid() {
-    watch(this._valueRef, () => {
-      if (this.trigger === 'change') {
-        this._validate()
-      }
-    })
   }
 
   private _watchValue() {

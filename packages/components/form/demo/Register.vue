@@ -1,6 +1,6 @@
 <template>
   <IxForm class="demo-form" :control="formGroup" :labelCol="labelCol" :controlCol="controlCol">
-    <IxFormItem label="E-mail" labelFor="email" required message="Please input a valid E-mail!">
+    <IxFormItem label="E-mail" labelFor="email" message="Please input a valid E-mail!">
       <IxInput id="email" control="email"></IxInput>
     </IxFormItem>
     <IxFormItem label="Password" labelFor="password" required message="Please input your password!">
@@ -84,7 +84,7 @@ const noLabelControlCol = { sm: { offset: 8, span: 16 }, xs: 24 }
 const { required, email } = Validators
 
 const formGroup = useFormGroup({
-  email: ['', [required, email]],
+  email: ['', email],
   password: ['', required],
   confirmPassword: [
     '',
