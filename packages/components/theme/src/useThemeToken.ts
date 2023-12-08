@@ -9,8 +9,9 @@ import type { TokenGetter } from './composables/useTokenRegister'
 
 import { type ComputedRef, computed, effectScope, inject } from 'vue'
 
-import { Logger, tryOnScopeDispose } from '@idux/cdk/utils'
+import { tryOnScopeDispose } from '@idux/cdk/utils'
 
+import { useSharedThemeProvider } from './composables/useThemeProvider'
 import { THEME_PROVIDER_TOKEN, type ThemeProviderContext } from './token'
 import {
   type CertainThemeTokens,
@@ -48,8 +49,6 @@ export type UseThemeTokenContext<
     ? ScopedUseThemeTokenContext<K, Ext>
     : never
 
-let emptyContext: UseThemeTokenContext<UseThemeTokenScope>
-
 export function useThemeToken(): GlobalUseThemeTokenContext
 export function useThemeToken<Ext extends object, K extends UseThemeTokenScope | keyof Ext | undefined>(
   key: K,
@@ -57,22 +56,10 @@ export function useThemeToken<Ext extends object, K extends UseThemeTokenScope |
 export function useThemeToken<Ext extends object, K extends UseThemeTokenScope | keyof Ext | undefined>(
   key?: K,
 ): UseThemeTokenContext<K, Ext> {
-  const themeProviderContext = inject(THEME_PROVIDER_TOKEN, null)
+  let themeProviderContext = inject(THEME_PROVIDER_TOKEN, null)
 
   if (!themeProviderContext) {
-    Logger.warn('components/theme', '<IxThemeProvider> not found.')
-
-    if (!emptyContext) {
-      emptyContext = {
-        globalHashId: computed(() => ''),
-        hashId: computed(() => ''),
-        themeTokens: computed(() => ({})),
-        presetTheme: computed(() => 'default'),
-        registerToken: (() => {}) as unknown as UseThemeTokenContext<UseThemeTokenScope>['registerToken'],
-      } as UseThemeTokenContext<UseThemeTokenScope>
-    }
-
-    return emptyContext as unknown as UseThemeTokenContext<K, Ext>
+    themeProviderContext = useSharedThemeProvider()
   }
 
   const {

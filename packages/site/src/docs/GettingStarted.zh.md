@@ -125,7 +125,7 @@ export default defineConfig({
 
 #### IxThemeProvider
 
-在 Idux v2 版本中，我们增加了 `IxThemeProvider` 来管理主题配置并动态插入主题css变量，因此需要在 `vue` 应用的最外围包裹使用 `IxThemeProvider`。
+在 Idux v2 版本中，我们增加了 `IxThemeProvider` 来管理主题配置并动态插入主题css变量，如果需要使用动态主题或者主题覆盖功能，要在 `vue` 应用的最外围包裹使用 `IxThemeProvider`。
 
 例如，可以在 App.vue 中这样写：
 

@@ -9,16 +9,30 @@ import hash from '@emotion/hash'
 
 import { themeTokenPrefix } from '../types'
 
+const sequenceCache = new Map<string, string[]>()
 export function createTokensHash(key: string, tokens: Record<string, string | number>): string {
-  return `${themeTokenPrefix}-${key}-${hash(flattenTokens(tokens))}`
+  let sequence = sequenceCache.get(key)
+
+  if (!sequence) {
+    sequence = getTokenSequence(tokens)
+    sequenceCache.set(key, sequence)
+  }
+
+  return `${themeTokenPrefix}-${key}-${hash(flattenTokens(tokens, sequence))}`
 }
 
-function flattenTokens(tokens: Record<string, string | number>) {
+function flattenTokens(tokens: Record<string, string | number>, sequence: string[]): string {
   let str = ''
+  sequence
 
-  Object.entries(tokens).forEach(([key, value]) => {
-    str += `${key}${value}`
+  sequence.forEach(key => {
+    const value = tokens[key]
+    str += `${key}${value || ''}`
   })
 
   return str
+}
+
+function getTokenSequence(tokens: Record<string, string | number>): string[] {
+  return Object.keys(tokens).sort()
 }

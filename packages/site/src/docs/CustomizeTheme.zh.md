@@ -103,6 +103,12 @@ import { IxThemeProvider } from '@idux/components/theme'
 
 > 注：即使不使用 `hash`，组件库内部仍然会计算 `hash`，通过比对两次的计算结果来判断是否有组件或全局的主题变更
 
+### 是否注入主题变量样式
+
+在某些场景下，如果希望通过引入组件的全量预生成的css变量文件而不希望动态注入样式，可以配置 `injectThemeStyle` 为 `false` 来关闭动态注入。
+
+> 注：关闭之后将不再注入样式，但仍然会计算`hash`和注入主题js变量。
+
 ### 主题嵌套
 
 可以通过 `IxThemeProvider` 的嵌套使用来实现主题嵌套
@@ -573,9 +579,11 @@ token `getter` 只会在第一次注册成功的时候实际执行，因此不�
 
 ### 可不可以不使用 IxThemeProvider？
 
-如果由于某些限制无法使用 IxThemeProvider，我们在打包产物中增加了不同主题下的全部 `css` 变量，可以直接在项目中引入这些变量并针对性覆盖。
+如果由于某些限制无法使用 `IxThemeProvider`，我们在打包产物中增加了不同主题下的全部 `css` 变量，可以直接在项目中引入这些变量并针对性覆盖。
 
-可以将全量的变量直接引入到项目中：
+首先，通过全局配置或者 `IxThemeProvider` 的 `props` 配置 `injectThemeStyle` 为 `false`
+
+之后，可以将全量的变量直接引入到项目中：
 
 ```ts
 // 引入默认主题全量变量
