@@ -116,10 +116,16 @@ export function useFormStatus(
     if (!currControl || currControl.disabled.value) {
       return undefined
     }
-    const { trigger, dirty, blurred, status } = currControl
-    if ((trigger === 'change' && dirty.value) || (trigger === 'blur' && blurred.value)) {
-      return status.value
+    const { trigger, dirty, blurred, status, validated } = currControl
+
+    if (trigger === 'change') {
+      return dirty.value ? status.value : undefined
     }
-    return undefined
+
+    if (trigger === 'blur') {
+      return blurred.value ? status.value : undefined
+    }
+
+    return validated.value ? status.value : undefined
   })
 }
