@@ -27,6 +27,7 @@ export const defaultConfig: GlobalConfig = {
   },
   locale: zhCN,
   theme: {
+    injectThemeStyle: true,
     presetTheme: 'default',
     hashed: true,
   },

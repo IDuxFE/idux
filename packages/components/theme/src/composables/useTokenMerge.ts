@@ -32,14 +32,14 @@ export interface TokenMergeContext {
 }
 
 export function useTokenMerge(
-  props: ThemeProviderProps,
+  props: ThemeProviderProps | undefined,
   config: ThemeConfig,
   supperContext: ThemeProviderContext | null,
   mergedPresetTheme: ComputedRef<PresetTheme>,
 ): TokenMergeContext {
   const mergedAlgorithms = computed(() => {
     const presetAlgorithms = getPresetAlgorithms(mergedPresetTheme.value)
-    const { getBaseColors, getColorPalette, getGreyColors } = props.algorithm ?? {}
+    const { getBaseColors, getColorPalette, getGreyColors } = props?.algorithm ?? {}
 
     return {
       getBaseColors: getBaseColors ?? presetAlgorithms.getBaseColors,
@@ -53,17 +53,17 @@ export function useTokenMerge(
     const configComponentTokens = config.components
 
     const overwrittenTokens = merge(
-      { ...(props.inherit && !props.presetTheme ? supperContext?.mergedTokens.value.global ?? {} : {}) },
+      { ...(props?.inherit && !props.presetTheme ? supperContext?.mergedTokens.value.global ?? {} : {}) },
       { ...configGlobalTokens },
-      props.tokens?.global,
+      props?.tokens?.global,
     ) as GlobalThemeTokens
 
     const mergedGlobalTokens = getThemeTokens(mergedPresetTheme.value, overwrittenTokens, mergedAlgorithms.value)
 
     const mergedComponentTokens = merge(
-      { ...(props.inherit ? supperContext?.mergedTokens.value.components ?? {} : {}) },
+      { ...(props?.inherit ? supperContext?.mergedTokens.value.components ?? {} : {}) },
       { ...configComponentTokens },
-      props.tokens?.components,
+      props?.tokens?.components,
     )
 
     return {

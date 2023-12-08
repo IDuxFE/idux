@@ -5,6 +5,7 @@
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `presetTheme` | 预设的主题 | `PresetTheme` | `'default'` | ✅ |  |
+| `injectThemeStyle` | 是否注入主题变量样式 | `boolean` | `true` | ✅ |  |
 | `hashed` | 是否开始 `hash` 功能 | `boolean` | `true` | ✅ |  |
 | `tag` | 配置 `IxThemeProvider` 渲染时使用的标签 | `string` | - | - | - |
 | `inherit` | 是否继承上层Provider的token和配置 | `boolean \| 'all'` | `true` | - | 配置为true仅继承，配置为`'all'`则必须有上层的provider才会启用主题功能，用于组件封装时覆盖变量的场景 |
