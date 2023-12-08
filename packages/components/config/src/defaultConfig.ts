@@ -125,6 +125,7 @@ export const defaultConfig: GlobalConfig = {
     closable: true,
     closeOnEsc: true,
     closeIcon: 'close-filled',
+    distance: 160,
     height: 256,
     mask: true,
     maskClosable: true,

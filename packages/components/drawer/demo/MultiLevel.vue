@@ -3,7 +3,7 @@
   <IxDrawer v-model:visible="visible" header="Parent drawer">
     <p>This is parent drawer</p>
     <IxButton @click="showChildDrawer">Open Child Drawer</IxButton>
-    <IxDrawer v-model:visible="childVisible" header="Child drawer">
+    <IxDrawer v-model:visible="childVisible" :width="800" header="Child drawer">
       <p>This is child drawer</p>
       <IxButton @click="showGrandchildDrawer">Open Grandchild Drawer</IxButton>
       <IxDrawer v-model:visible="grandchildVisible" header="Grandchild drawer">
