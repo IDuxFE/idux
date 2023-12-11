@@ -684,7 +684,7 @@ export abstract class AbstractControl<T = any> {
       }
 
       if (this.trigger === 'interactions') {
-        if ((!this.valid.value || !!oldValue) && !isChanging) {
+        if (((this.validated.value && !this.valid.value) || !!oldValue) && !isChanging) {
           isChangeValidating = true
         }
 
@@ -693,7 +693,9 @@ export abstract class AbstractControl<T = any> {
         }
       }
 
-      isChanging = true
+      if (this.dirty.value) {
+        isChanging = true
+      }
     })
   }
 }
