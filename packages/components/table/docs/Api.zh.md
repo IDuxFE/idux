@@ -18,6 +18,7 @@
 | `emptyCell` | 单元格数据为空时默认渲染的内容 | `string \| ((options: TableEmptyCellOptions) => VNodeChild) \| #emptyCell='TableEmptyCellOptions'` | - | ✅ | 仅支持普通列，且数据为 `undefined \| null \| ''` 时生效 |
 | `getKey` | 获取数据的唯一标识 | `string \| (record: any) => VKey` | `key` | ✅ | - |
 | `headless` | 是否隐藏表头 | `boolean` | `false` | - |- |
+| `insetShadow` | 横向滚动溢出后是否展示内嵌的阴影 | `boolean` | `true` | ✅ |- |
 | `pagination` | 配置分页器, 参见[TablePagination](#TablePagination) | `boolean \| TablePagination` | - | ✅ | 设置 `false` 时表示不显示分页 |
 | `scroll` | 表格滚动配置项，可以指定滚动区域的宽、高, 参见[TableScroll](#TableScroll) | `TableScroll` | - | - | - |
 | `scrollToTopOnChange` | 是否在表格的分页、筛选、排序信息改变后滚动到顶部 | `boolean` | `true` | ✅ | - |

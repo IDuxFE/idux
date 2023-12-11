@@ -45,7 +45,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
             <!---->
             
             <div
-              class="ix-table-container ix-table-fixed-layout ix-table-scroll-vertical"
+              class="ix-table-container ix-table-fixed-layout ix-table-inset-shadow ix-table-scroll-vertical"
             >
               
               <!---->
@@ -1158,7 +1158,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
             <!---->
             
             <div
-              class="ix-table-container ix-table-fixed-layout ix-table-scroll-vertical"
+              class="ix-table-container ix-table-fixed-layout ix-table-inset-shadow ix-table-scroll-vertical"
             >
               
               <!---->

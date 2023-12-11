@@ -39,6 +39,7 @@ export const tableProps = {
   getKey: { type: [String, Function] as PropType<string | ((record: any) => any)>, default: undefined },
   header: { type: [String, Object] as PropType<string | HeaderProps>, default: undefined },
   headless: { type: Boolean, default: undefined },
+  insetShadow: { type: Boolean, default: undefined },
   pagination: { type: [Boolean, Object] as PropType<boolean | TablePagination>, default: true },
   scroll: { type: Object as PropType<TableScroll>, default: undefined },
   size: { type: String as PropType<TableSize>, default: undefined },

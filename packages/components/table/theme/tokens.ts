@@ -84,6 +84,15 @@ export interface TableThemeTokens {
   headIconBgColorHover: string
 
   /**
+   * @desc 位于左侧固定列以及横向滚动条溢出的边缘阴影
+   */
+  insetShadowStart: string
+  /**
+   * @desc 位于右侧固定列以及横向滚动条溢出的边缘阴影
+   */
+  insetShadowEnd: string
+
+  /**
    * @desc 表格内容行悬浮背景颜色
    */
   bodyRowBgColorHover: string

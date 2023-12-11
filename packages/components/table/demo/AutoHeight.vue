@@ -38,14 +38,12 @@ const columns: TableColumn<Data>[] = [
     title: 'Name',
     dataKey: 'name',
     width: 100,
-    fixed: 'start',
     customCell: 'name',
   },
   {
     title: 'Age',
     dataKey: 'age',
     width: 100,
-    fixed: 'start',
   },
   {
     title: 'Column 1',
@@ -97,7 +95,6 @@ const columns: TableColumn<Data>[] = [
   {
     title: 'Action',
     key: 'action',
-    fixed: 'end',
     width: 100,
     customCell: 'action',
   },
