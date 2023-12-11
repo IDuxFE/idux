@@ -10,6 +10,27 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 2.0.0-beta.3(2023-12-11)
+
+
+### Bug Fixes
+
+* **cdk:forms:** `interactions` trigger 表现异常 ([#1770](https://github.com/IDuxFE/idux/issues/1770)) ([c099b1a](https://github.com/IDuxFE/idux/commit/c099b1a50545ecc28c40a7610320614dbf23866e))
+* **comp:pagination:** 修改 lg 尺寸下的字体大小为 fontSizeSm ([#1761](https://github.com/IDuxFE/idux/issues/1761)) ([076d924](https://github.com/IDuxFE/idux/commit/076d9242092735b71dc52d283b33c094ff592b5c))
+* **pro:layout:** dark模式下的菜单浮层样式异常 ([#1771](https://github.com/IDuxFE/idux/issues/1771)) ([98c6d98](https://github.com/IDuxFE/idux/commit/98c6d98a30ae24c99913de4b3aafcd2ebe5ec595))
+* **pro:layout:** logo的title文字颜色主题token引用不正确 ([#1759](https://github.com/IDuxFE/idux/issues/1759)) ([f44039d](https://github.com/IDuxFE/idux/commit/f44039d1dac65480ddde1a3b7afbaf3e9fefa6ba))
+* **pro:layout:** 主题css没有配置自动注入时，样式异常 ([#1769](https://github.com/IDuxFE/idux/issues/1769)) ([f7bbf20](https://github.com/IDuxFE/idux/commit/f7bbf2072fdc1b84486882659a1e3c1515bd81f8))
+
+
+### Features
+
+* **cdk:forms:** 新增 `interactions` 的校验触发方式 ([#1766](https://github.com/IDuxFE/idux/issues/1766)) ([dcdbfb3](https://github.com/IDuxFE/idux/commit/dcdbfb3effa0461edb0806fe4b08b59c78e45833))
+* **comp:drawer:** distance（多浮层的间距） 可以配置，并且会根据浮层的尺寸差自动计算 ([#1767](https://github.com/IDuxFE/idux/issues/1767)) ([949e855](https://github.com/IDuxFE/idux/commit/949e855c4d19caab5f174f96816a88f3203818f9))
+* **comp:table:** 给表格容器的水平方向溢出的侧边加上内嵌阴影 ([#1768](https://github.com/IDuxFE/idux/issues/1768)) ([65a1aca](https://github.com/IDuxFE/idux/commit/65a1acac6de4c3cfc1116af54f45ceb4ac0562e6))
+* **comp:table:** 修改 rowHeight 主题token为 padding，表格行不再指定高度，而是通过padding撑开 ([#1760](https://github.com/IDuxFE/idux/issues/1760)) ([48f0394](https://github.com/IDuxFE/idux/commit/48f03943b5adb6a3fb731d14077bc84fb0526884))
+* **comp:theme:** 最外层的 IxThemeProvider 不再是必须的 ([#1765](https://github.com/IDuxFE/idux/issues/1765)) ([3565d49](https://github.com/IDuxFE/idux/commit/3565d49edc951dabfd6ea25150923be70d1777ff))
+* 修改禁用背景颜色相关的主题token ([#1764](https://github.com/IDuxFE/idux/issues/1764)) ([29566d5](https://github.com/IDuxFE/idux/commit/29566d5867ea08db3d5a9efa902ebe5d29328d7d))
+
 # 2.0.0-beta.2(2023-12-01)
 
 
