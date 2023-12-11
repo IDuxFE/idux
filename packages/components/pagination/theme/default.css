@@ -2,8 +2,8 @@
 :root {
   --ix-pagination-font-size-sm: 12px;
   --ix-pagination-font-size-md: 12px;
-  --ix-pagination-font-size-lg: 14px;
-  --ix-pagination-itme-padding-sm: 0;
+  --ix-pagination-font-size-lg: 12px;
+  --ix-pagination-item-padding-sm: 0;
   --ix-pagination-item-padding-md: 4px;
   --ix-pagination-item-padding-lg: 4px;
   --ix-pagination-item-content-size-sm: 24px;

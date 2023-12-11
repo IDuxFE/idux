@@ -18,6 +18,8 @@
   --ix-table-head-icon-color: #bec3cc;
   --ix-table-head-icon-color-active: #1c6eff;
   --ix-table-head-icon-bg-color-hover: #e1e5eb;
+  --ix-table-inset-shadow-start: inset 10px 0 8px -8px rgba(30, 35, 43, 0.12);
+  --ix-table-inset-shadow-end: inset -10px 0 8px -8px rgba(30, 35, 43, 0.12);
   --ix-table-body-row-bg-color-hover: #f7f9fc;
   --ix-table-body-row-bg-color-selected: #ffffff;
   --ix-table-body-row-bg-color-expanded: #f7f9fc;

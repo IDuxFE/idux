@@ -170,14 +170,14 @@
   --ix-color-container-bg: #ffffff;
   --ix-color-container-bg-hover: #f7f9fc;
   --ix-color-container-bg-active: #e8f4ff;
-  --ix-color-container-bg-disabled: #e1e5eb;
+  --ix-color-container-bg-disabled: #edf1f7;
   --ix-color-addon-container-bg: #f7f9fc;
   --ix-color-emphasized-container-bg: #edf1f7;
   --ix-color-emphasized-container-bg-hover: #e1e5eb;
-  --ix-color-emphasized-container-bg-disabled: #d3d7de;
+  --ix-color-emphasized-container-bg-disabled: #bec3cc;
   --ix-color-info-container-bg: #f7f9fc;
   --ix-color-info-container-bg-hover: #f7f9fc;
-  --ix-color-info-container-bg-disabled: #f7f9fc;
+  --ix-color-info-container-bg-disabled: #e1e5eb;
   --ix-color-fill-container-bg: #bec3cc;
   --ix-color-separator: #e1e5eb;
   --ix-color-text-placeholder: #a1a7b3;
@@ -227,7 +227,7 @@
   --ix-control-box-shadow-focus: 0 0 0 2px rgba(28, 110, 255, 0.2);
   --ix-control-box-shadow-invalid: 0 0 0 2px rgba(245, 39, 39, 0.2);
   --ix-control-bg-color: #ffffff;
-  --ix-control-bg-color-disabled: #e1e5eb;
+  --ix-control-bg-color-disabled: #edf1f7;
   --ix-control-border-color-hover: #458fff;
   --ix-control-border-color-active: #0d51d9;
   --ix-control-padding-size-horizontal-xs: 7px;
@@ -357,7 +357,7 @@
   --ix-button-color: #2f3540;
   --ix-button-color-disabled: #bec3cc;
   --ix-button-bg-color: #ffffff;
-  --ix-button-bg-color-disabled: #e1e5eb;
+  --ix-button-bg-color-disabled: #edf1f7;
   --ix-button-border-color: #d3d7de;
   --ix-button-border-radius: 2px;
   --ix-button-primary-color: #ffffff;
@@ -710,8 +710,8 @@
 :root {
   --ix-pagination-font-size-sm: 12px;
   --ix-pagination-font-size-md: 12px;
-  --ix-pagination-font-size-lg: 14px;
-  --ix-pagination-itme-padding-sm: 0;
+  --ix-pagination-font-size-lg: 12px;
+  --ix-pagination-item-padding-sm: 0;
   --ix-pagination-item-padding-md: 4px;
   --ix-pagination-item-padding-lg: 4px;
   --ix-pagination-item-content-size-sm: 24px;
@@ -813,17 +813,17 @@
   --ix-slider-mark-label-color: #a1a7b3;
   --ix-slider-mark-label-color-active: #2f3540;
   --ix-slider-dot-bg-color: #e1e5eb;
-  --ix-slider-dot-bg-color-disabled: #e1e5eb;
+  --ix-slider-dot-bg-color-disabled: #edf1f7;
   --ix-slider-dot-bg-color-active: #1c6eff;
   --ix-slider-rail-bg-color: #e1e5eb;
   --ix-slider-rail-bg-color-hover: #e1e5eb;
   --ix-slider-track-bg-color: #1c6eff;
   --ix-slider-track-bg-color-hover: #1c6eff;
-  --ix-slider-track-bg-color-disabled: #e1e5eb;
+  --ix-slider-track-bg-color-disabled: #edf1f7;
   --ix-slider-thumb-bg-color: #ffffff;
   --ix-slider-thumb-border-color: #1c6eff;
   --ix-slider-thumb-border-color-hover: #1c6eff;
-  --ix-slider-thumb-border-color-disabled: #e1e5eb;
+  --ix-slider-thumb-border-color-disabled: #edf1f7;
   --ix-slider-thumb-border-width: 2px;
   --ix-slider-thumb-border-type: solid;
   --ix-slider-thumb-border-color-focus: #1c6eff;
@@ -916,6 +916,8 @@
   --ix-table-head-icon-color: #bec3cc;
   --ix-table-head-icon-color-active: #1c6eff;
   --ix-table-head-icon-bg-color-hover: #e1e5eb;
+  --ix-table-inset-shadow-start: inset 10px 0 8px -8px rgba(30, 35, 43, 0.12);
+  --ix-table-inset-shadow-end: inset -10px 0 8px -8px rgba(30, 35, 43, 0.12);
   --ix-table-body-row-bg-color-hover: #f7f9fc;
   --ix-table-body-row-bg-color-selected: #ffffff;
   --ix-table-body-row-bg-color-expanded: #f7f9fc;

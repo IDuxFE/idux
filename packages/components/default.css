@@ -170,14 +170,14 @@
   --ix-color-container-bg: #ffffff;
   --ix-color-container-bg-hover: #f7f9fc;
   --ix-color-container-bg-active: #e8f4ff;
-  --ix-color-container-bg-disabled: #e1e5eb;
+  --ix-color-container-bg-disabled: #edf1f7;
   --ix-color-addon-container-bg: #f7f9fc;
   --ix-color-emphasized-container-bg: #edf1f7;
   --ix-color-emphasized-container-bg-hover: #e1e5eb;
-  --ix-color-emphasized-container-bg-disabled: #d3d7de;
+  --ix-color-emphasized-container-bg-disabled: #bec3cc;
   --ix-color-info-container-bg: #f7f9fc;
   --ix-color-info-container-bg-hover: #f7f9fc;
-  --ix-color-info-container-bg-disabled: #f7f9fc;
+  --ix-color-info-container-bg-disabled: #e1e5eb;
   --ix-color-fill-container-bg: #bec3cc;
   --ix-color-separator: #e1e5eb;
   --ix-color-text-placeholder: #a1a7b3;
@@ -227,7 +227,7 @@
   --ix-control-box-shadow-focus: 0 0 0 2px rgba(28, 110, 255, 0.2);
   --ix-control-box-shadow-invalid: 0 0 0 2px rgba(245, 39, 39, 0.2);
   --ix-control-bg-color: #ffffff;
-  --ix-control-bg-color-disabled: #e1e5eb;
+  --ix-control-bg-color-disabled: #edf1f7;
   --ix-control-border-color-hover: #458fff;
   --ix-control-border-color-active: #0d51d9;
   --ix-control-padding-size-horizontal-xs: 7px;

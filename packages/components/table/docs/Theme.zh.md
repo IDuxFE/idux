@@ -24,3 +24,5 @@
 | `headRowHeightMd` | md 尺寸下表格表头高度 | `number` | `32` | `32` |
 | `headRowHeightSm` | sm 尺寸下表格表头高度 | `number` | `32` | `32` |
 | `headSeparatorColor` | 表头分割线颜色 | `string` | `#d3d7de` | `#3C424D` |
+| `insetShadowEnd` | 位于右侧固定列以及横向滚动条溢出的边缘阴影 | `string` | `inset -10px 0 8px -8px rgba(30, 35, 43, 0.12)` | `inset -10px 0 8px -8px #0A0C0F` |
+| `insetShadowStart` | 位于左侧固定列以及横向滚动条溢出的边缘阴影 | `string` | `inset 10px 0 8px -8px rgba(30, 35, 43, 0.12)` | `inset 10px 0 8px -8px #0A0C0F` |
