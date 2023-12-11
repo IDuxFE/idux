@@ -14,7 +14,6 @@ import { IxLayoutHeader } from '@idux/components/layout'
 import { IxMenu, type MenuClickOptions, type MenuProps } from '@idux/components/menu'
 
 import Logo from './Logo'
-import MenuThemeProvider from './MenuThemeProvider'
 import { proLayoutToken } from '../token'
 import { getDefaultPaths } from '../utils/menu'
 
@@ -75,7 +74,7 @@ export default defineComponent({
       return (
         <IxLayoutHeader class={classes.value}>
           {<Logo v-slots={slots} />}
-          <MenuThemeProvider class={`${prefixCls}-content`}>{contentNode}</MenuThemeProvider>
+          <div class={`${prefixCls}-content`}>{contentNode}</div>
           {slots.headerExtra && <div class={`${prefixCls}-extra`}>{slots.headerExtra()}</div>}
         </IxLayoutHeader>
       )

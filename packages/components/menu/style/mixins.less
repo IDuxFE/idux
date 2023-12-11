@@ -1,0 +1,130 @@
+.menuThemeStyle(@tokens) {
+  .@{menu-prefix} {
+    color: @tokens[itemColor];
+    background: @tokens[itemBg];
+
+    &-item-group-label {
+      color: @tokens[itemGroupColor];
+      background: @tokens[itemGroupBg];
+    }
+
+    &-item:hover,
+    &-sub-label:hover {
+      color: @tokens[itemColorHover];
+    }
+
+    &-item:hover,
+    &-sub-label:hover,
+    &:not(&-inline) &-sub-expanded > &-sub-label {
+      background: @tokens[itemBgHover];
+    }
+
+    &-item.@{menu-prefix}-item-selected,
+    &-vertical.@{menu-prefix}-collapsed &-sub-selected > &-sub-label {
+      background: @tokens[itemBgActive];
+    }
+
+    &-item.@{menu-prefix}-item-selected,
+    &-sub-selected > &-sub-label {
+      color: @tokens[itemColorActive];
+    }
+
+    & &-item.@{menu-prefix}-item-disabled,
+    & &-sub.@{menu-prefix}-sub-disabled > &-sub-label {
+      color: @tokens[itemColorDisabled];
+      background: @tokens[itemBgDisabled];
+    }
+
+    &-horizontal {
+      .@{menu-prefix}-item:hover,
+      .@{menu-prefix}-sub-label:hover {
+        color: @tokens[horizontalItemColorHover];
+        background: @tokens[horizontalItemBgHover];
+        border-bottom-color: @tokens[itemColorActive];
+      }
+
+      .@{menu-prefix}-item.@{menu-prefix}-item-selected,
+      .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label,
+      .@{menu-prefix}-sub-expanded > .@{menu-prefix}-sub-label {
+        color: @tokens[horizontalItemColorActive];
+        background: @tokens[horizontalItemBgActive];
+        border-bottom-color: @tokens[itemColorActive];
+      }
+
+      .@{menu-prefix}-item.@{menu-prefix}-item-disabled,
+      .@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-label {
+        background: @tokens[itemBgDisabled];
+        border-bottom-color: transparent;
+      }
+    }
+  }
+}
+
+.darkMenuThemeStyle(@tokens) {
+  .@{menu-prefix} {
+    &-dark {
+      color: @tokens[darkItemColor];
+      background: @tokens[darkItemBg];
+
+      .@{menu-prefix}-item-group-label {
+        color: @tokens[darkItemGroupColor];
+        background: @tokens[darkItemGroupBg];
+      }
+
+      .@{menu-prefix}-item:hover,
+      .@{menu-prefix}-sub-label:hover {
+        color: @tokens[darkItemColorHover];
+      }
+
+      .@{menu-prefix}-item:hover,
+      .@{menu-prefix}-sub-label:hover,
+      &:not(.@{menu-prefix}-inline) .@{menu-prefix}-sub-expanded > .@{menu-prefix}-sub-label {
+        background: @tokens[darkItemBgHover];
+      }
+
+      .@{menu-prefix}-item.@{menu-prefix}-item-selected,
+      &.@{menu-prefix}-vertical.@{menu-prefix}-collapsed .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label {
+        background: @tokens[darkItemBgActive];
+      }
+
+      .@{menu-prefix}-item.@{menu-prefix}-item-selected,
+      .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label {
+        color: @tokens[darkItemColorActive];
+        font-weight: @tokens[darkItemFontWeightActive];
+      }
+
+      & .@{menu-prefix}-item.@{menu-prefix}-item-disabled,
+      & .@{menu-prefix}-sub.@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-label {
+        color: @tokens[darkItemColorDisabled];
+        background: @tokens[darkItemBgDisabled];
+      }
+    }
+
+    &-dark.@{menu-prefix}-horizontal {
+      .@{menu-prefix}-item:hover,
+      .@{menu-prefix}-sub-label:hover {
+        color: @tokens[darkHorizontalItemColorHover];
+        background: @tokens[darkHorizontalItemBgHover];
+      }
+
+      .@{menu-prefix}-item.@{menu-prefix}-item-selected,
+      .@{menu-prefix}-sub-selected > .@{menu-prefix}-sub-label,
+      .@{menu-prefix}-sub-expanded > .@{menu-prefix}-sub-label {
+        color: @tokens[darkHorizontalItemColorActive];
+        background: @tokens[darkHorizontalItemBgActive];
+      }
+
+      .@{menu-prefix}-item.@{menu-prefix}-item-disabled,
+      .@{menu-prefix}-sub-disabled > .@{menu-prefix}-sub-label {
+        background-color: @tokens[darkItemBgDisabled];
+        border-bottom-color: transparent;
+      }
+    }
+
+    &-dark.@{menu-prefix}-inline,
+    &-dark.@{menu-prefix}-vertical,
+    &-dark.@{menu-prefix}-horizontal {
+      box-shadow: none;
+    }
+  }
+}
