@@ -18,6 +18,8 @@
   --ix-table-head-icon-color: #687080;
   --ix-table-head-icon-color-active: #4083e8;
   --ix-table-head-icon-bg-color-hover: #1f2329;
+  --ix-table-inset-shadow-start: inset 10px 0 8px -8px #0a0c0f;
+  --ix-table-inset-shadow-end: inset -10px 0 8px -8px #0a0c0f;
   --ix-table-body-row-bg-color-hover: #171a1f;
   --ix-table-body-row-bg-color-selected: #0a0c0f;
   --ix-table-body-row-bg-color-expanded: #171a1f;

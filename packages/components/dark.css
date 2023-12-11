@@ -170,14 +170,14 @@
   --ix-color-container-bg: #0a0c0f;
   --ix-color-container-bg-hover: #171a1f;
   --ix-color-container-bg-active: #151d33;
-  --ix-color-container-bg-disabled: #1f2329;
+  --ix-color-container-bg-disabled: #171a1f;
   --ix-color-addon-container-bg: #171a1f;
   --ix-color-emphasized-container-bg: #1f2329;
   --ix-color-emphasized-container-bg-hover: #1f2329;
-  --ix-color-emphasized-container-bg-disabled: #1f2329;
+  --ix-color-emphasized-container-bg-disabled: #687080;
   --ix-color-info-container-bg: #171a1f;
   --ix-color-info-container-bg-hover: #171a1f;
-  --ix-color-info-container-bg-disabled: #171a1f;
+  --ix-color-info-container-bg-disabled: #1f2329;
   --ix-color-fill-container-bg: #687080;
   --ix-color-separator: #1f2329;
   --ix-color-text-placeholder: #525966;
@@ -227,7 +227,7 @@
   --ix-control-box-shadow-focus: 0 0 0 2px rgba(64, 131, 232, 0.2);
   --ix-control-box-shadow-invalid: 0 0 0 2px rgba(232, 81, 76, 0.2);
   --ix-control-bg-color: #0a0c0f;
-  --ix-control-bg-color-disabled: #1f2329;
+  --ix-control-bg-color-disabled: #171a1f;
   --ix-control-border-color-hover: #1b61dd;
   --ix-control-border-color-active: #6aa6f4;
   --ix-control-padding-size-horizontal-xs: 7px;

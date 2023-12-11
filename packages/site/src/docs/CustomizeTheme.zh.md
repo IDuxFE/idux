@@ -498,10 +498,10 @@ token `getter` 只会在第一次注册成功的时候实际执行，因此不�
 | `colorBorderSecondary` | 次级边框颜色，用于组件内容区域分割 | `string` | `#e1e5eb` | `#1F2329` |
 | `colorContainerBg` | 组件容器背景颜色 | `string` | `#ffffff` | `#0A0C0F` |
 | `colorContainerBgActive` | 组件容器激活状态背景颜色，用于menu、select、tree-select等 | `string` | `#e8f4ff` | `#151D33` |
-| `colorContainerBgDisabled` | 组件容器禁用背景颜色 | `string` | `#e1e5eb` | `#1F2329` |
+| `colorContainerBgDisabled` | 组件容器禁用背景颜色 | `string` | `#edf1f7` | `#171A1F` |
 | `colorContainerBgHover` | 组件容器悬浮背景颜色 | `string` | `#f7f9fc` | `#171A1F` |
 | `colorEmphasizedContainerBg` | 需要突出显示的容器背景颜色，例如表头 | `string` | `#edf1f7` | `#1F2329` |
-| `colorEmphasizedContainerBgDisabled` | 需要突出显示的容器背景颜色，例如表头 | `string` | `#d3d7de` | `#1F2329` |
+| `colorEmphasizedContainerBgDisabled` | 需要突出显示的容器背景颜色，例如表头 | `string` | `#bec3cc` | `#687080` |
 | `colorEmphasizedContainerBgHover` | 需要突出显示的容器背景颜色，例如表头 | `string` | `#e1e5eb` | `#1F2329` |
 | `colorErrorOutline` | 错误状态的组件边框颜色，用于表单控件 | `string` | `#f52727` | `#E8514C` |
 | `colorFillContainerBg` | 控件组件容器在未选中时的填充颜色 | `string` | `#bec3cc` | `#687080` |
@@ -511,7 +511,7 @@ token `getter` 只会在第一次注册成功的时候实际执行，因此不�
 | `colorIconHover` | 图标悬浮颜色 | `string` | `#1c6eff` | `#4083E8` |
 | `colorIconInfo` | 信息图标颜色，这种图标不可操作，仅展示 | `string` | `#bec3cc` | `#687080` |
 | `colorInfoContainerBg` | 信息容器背景颜色，用于组件内容承载的容器， 比如fieldset | `string` | `#f7f9fc` | `#171A1F` |
-| `colorInfoContainerBgDisabled` | 信息容器禁用背景颜色，用于组件内有信息承载的容器， 比如fieldset | `string` | `#f7f9fc` | `#171A1F` |
+| `colorInfoContainerBgDisabled` | 信息容器禁用背景颜色，用于组件内有信息承载的容器， 比如fieldset | `string` | `#e1e5eb` | `#1F2329` |
 | `colorInfoContainerBgHover` | 信息容器悬浮背景颜色，用于组件内容承载的容器， 比如fieldset | `string` | `#f7f9fc` | `#171A1F` |
 | `colorMask` | 遮罩颜色 | `string` | `rgba(0, 0, 0, 0.45)` | `rgba(23, 26, 31, 0.88)` |
 | `colorSeparator` | 分割线颜色 | `string` | `#e1e5eb` | `#1F2329` |
@@ -525,7 +525,7 @@ token `getter` 只会在第一次注册成功的时候实际执行，因此不�
 | `colorWarningOutline` | 警告状态的组件边框颜色，用于表单控件 | `string` | `#fdaa1d` | `#FDAA1D` |
 | `componentBorderRadius` | 组件边框圆角 | `number` | `2` | `2` |
 | `controlBgColor` | 控件背景颜色 | `string` | `#ffffff` | `#0A0C0F` |
-| `controlBgColorDisabled` | 控件禁用颜色 | `string` | `#e1e5eb` | `#1F2329` |
+| `controlBgColorDisabled` | 控件禁用颜色 | `string` | `#edf1f7` | `#171A1F` |
 | `controlBorderColorActive` | 控件激活态边框颜色 | `string` | `#0d51d9` | `#6AA6F4` |
 | `controlBorderColorHover` | 控件悬浮边框颜色 | `string` | `#458fff` | `#1B61DD` |
 | `controlBorderRadiusLg` | 控件边框圆角Lg | `number` | `2` | `2` |

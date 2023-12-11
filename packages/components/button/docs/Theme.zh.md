@@ -1,7 +1,7 @@
 | 名称 | 描述 | 类型 | default | dark |
 |---|---|---|---|---|
 | `bgColor` |  | `string` | `#ffffff` | `#0A0C0F` |
-| `bgColorDisabled` |  | `string` | `#e1e5eb` | `#1F2329` |
+| `bgColorDisabled` |  | `string` | `#edf1f7` | `#171A1F` |
 | `borderColor` |  | `string` | `#d3d7de` | `#3C424D` |
 | `borderRadius` |  | `number` | `2` | `2` |
 | `color` |  | `string` | `#2f3540` | `#F4F8FF` |

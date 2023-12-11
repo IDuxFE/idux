@@ -170,14 +170,14 @@
   --ix-color-container-bg: #0a0c0f;
   --ix-color-container-bg-hover: #171a1f;
   --ix-color-container-bg-active: #151d33;
-  --ix-color-container-bg-disabled: #1f2329;
+  --ix-color-container-bg-disabled: #171a1f;
   --ix-color-addon-container-bg: #171a1f;
   --ix-color-emphasized-container-bg: #1f2329;
   --ix-color-emphasized-container-bg-hover: #1f2329;
-  --ix-color-emphasized-container-bg-disabled: #1f2329;
+  --ix-color-emphasized-container-bg-disabled: #687080;
   --ix-color-info-container-bg: #171a1f;
   --ix-color-info-container-bg-hover: #171a1f;
-  --ix-color-info-container-bg-disabled: #171a1f;
+  --ix-color-info-container-bg-disabled: #1f2329;
   --ix-color-fill-container-bg: #687080;
   --ix-color-separator: #1f2329;
   --ix-color-text-placeholder: #525966;
@@ -227,7 +227,7 @@
   --ix-control-box-shadow-focus: 0 0 0 2px rgba(64, 131, 232, 0.2);
   --ix-control-box-shadow-invalid: 0 0 0 2px rgba(232, 81, 76, 0.2);
   --ix-control-bg-color: #0a0c0f;
-  --ix-control-bg-color-disabled: #1f2329;
+  --ix-control-bg-color-disabled: #171a1f;
   --ix-control-border-color-hover: #1b61dd;
   --ix-control-border-color-active: #6aa6f4;
   --ix-control-padding-size-horizontal-xs: 7px;
@@ -357,7 +357,7 @@
   --ix-button-color: #f4f8ff;
   --ix-button-color-disabled: #687080;
   --ix-button-bg-color: #0a0c0f;
-  --ix-button-bg-color-disabled: #1f2329;
+  --ix-button-bg-color-disabled: #171a1f;
   --ix-button-border-color: #3c424d;
   --ix-button-border-radius: 2px;
   --ix-button-primary-color: #fff;
@@ -638,21 +638,21 @@
   --ix-menu-horizontal-item-color-active: #4083e8;
   --ix-menu-horizontal-item-bg-hover: #171a1f;
   --ix-menu-horizontal-item-bg-active: #151d33;
-  --ix-menu-dark-item-color: #fff;
-  --ix-menu-dark-item-color-hover: #fff;
-  --ix-menu-dark-item-color-active: #fff;
+  --ix-menu-dark-item-color: #f4f8ff;
+  --ix-menu-dark-item-color-hover: #f4f8ff;
+  --ix-menu-dark-item-color-active: #4083e8;
   --ix-menu-dark-item-color-disabled: #687080;
   --ix-menu-dark-item-group-color: #808999;
   --ix-menu-dark-item-font-weight-active: 600;
-  --ix-menu-dark-item-bg: #fff;
-  --ix-menu-dark-item-bg-hover: #ffffff;
-  --ix-menu-dark-item-bg-active: #4083e8;
-  --ix-menu-dark-item-bg-disabled: #fff;
-  --ix-menu-dark-item-group-bg: #fff;
-  --ix-menu-dark-horizontal-item-color-hover: #fff;
-  --ix-menu-dark-horizontal-item-color-active: #fff;
-  --ix-menu-dark-horizontal-item-bg-hover: #ffffff;
-  --ix-menu-dark-horizontal-item-bg-active: #c2c7d1;
+  --ix-menu-dark-item-bg: #0a0c0f;
+  --ix-menu-dark-item-bg-hover: #171a1f;
+  --ix-menu-dark-item-bg-active: #151d33;
+  --ix-menu-dark-item-bg-disabled: #0a0c0f;
+  --ix-menu-dark-item-group-bg: #0a0c0f;
+  --ix-menu-dark-horizontal-item-color-hover: #f4f8ff;
+  --ix-menu-dark-horizontal-item-color-active: #4083e8;
+  --ix-menu-dark-horizontal-item-bg-hover: #171a1f;
+  --ix-menu-dark-horizontal-item-bg-active: #151d33;
 }
 
 /* ------ message css variables ------ */
@@ -710,8 +710,8 @@
 :root {
   --ix-pagination-font-size-sm: 12px;
   --ix-pagination-font-size-md: 12px;
-  --ix-pagination-font-size-lg: 14px;
-  --ix-pagination-itme-padding-sm: 0;
+  --ix-pagination-font-size-lg: 12px;
+  --ix-pagination-item-padding-sm: 0;
   --ix-pagination-item-padding-md: 4px;
   --ix-pagination-item-padding-lg: 4px;
   --ix-pagination-item-content-size-sm: 24px;
@@ -803,7 +803,7 @@
 :root {
   --ix-skeleton-margin-bottom: 8px;
   --ix-skeleton-loader-margin-bottom: 4px;
-  --ix-skeleton-start-color: #1f2329;
+  --ix-skeleton-start-color: #171a1f;
   --ix-skeleton-end-color: #1f2329;
 }
 
@@ -813,17 +813,17 @@
   --ix-slider-mark-label-color: #525966;
   --ix-slider-mark-label-color-active: #f4f8ff;
   --ix-slider-dot-bg-color: #1f2329;
-  --ix-slider-dot-bg-color-disabled: #1f2329;
+  --ix-slider-dot-bg-color-disabled: #171a1f;
   --ix-slider-dot-bg-color-active: #4083e8;
   --ix-slider-rail-bg-color: #1f2329;
   --ix-slider-rail-bg-color-hover: #1f2329;
   --ix-slider-track-bg-color: #4083e8;
   --ix-slider-track-bg-color-hover: #4083e8;
-  --ix-slider-track-bg-color-disabled: #1f2329;
+  --ix-slider-track-bg-color-disabled: #171a1f;
   --ix-slider-thumb-bg-color: #ffffff;
   --ix-slider-thumb-border-color: #4083e8;
   --ix-slider-thumb-border-color-hover: #4083e8;
-  --ix-slider-thumb-border-color-disabled: #1f2329;
+  --ix-slider-thumb-border-color-disabled: #171a1f;
   --ix-slider-thumb-border-width: 2px;
   --ix-slider-thumb-border-type: solid;
   --ix-slider-thumb-border-color-focus: #4083e8;
@@ -916,6 +916,8 @@
   --ix-table-head-icon-color: #687080;
   --ix-table-head-icon-color-active: #4083e8;
   --ix-table-head-icon-bg-color-hover: #1f2329;
+  --ix-table-inset-shadow-start: inset 10px 0 8px -8px #0a0c0f;
+  --ix-table-inset-shadow-end: inset -10px 0 8px -8px #0a0c0f;
   --ix-table-body-row-bg-color-hover: #171a1f;
   --ix-table-body-row-bg-color-selected: #0a0c0f;
   --ix-table-body-row-bg-color-expanded: #171a1f;
