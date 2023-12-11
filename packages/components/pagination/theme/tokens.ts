@@ -22,7 +22,7 @@ export interface PaginationThemeTokens {
   /**
    * @desc sm 尺寸下分页器padding
    */
-  itmePaddingSm: string | number
+  itemPaddingSm: string | number
   /**
    * @desc md 尺寸下分页器padding
    */

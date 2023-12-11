@@ -20,7 +20,7 @@ export function getDefaultThemeTokens(
     fontSizeMd: fontSizeSm,
     fontSizeLg: fontSizeSm,
 
-    itmePaddingSm: 0,
+    itemPaddingSm: 0,
     itemPaddingMd: paddingSizeXs,
     itemPaddingLg: paddingSizeXs,
 

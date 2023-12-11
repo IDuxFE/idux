@@ -73,6 +73,12 @@
   --ix-pro-search-tag-name-color: #808999;
   --ix-pro-search-segment-padding-horizontal: 4px;
   --ix-pro-search-segment-max-width: 150px;
+  --ix-pro-search-search-btn-color: #fff;
+  --ix-pro-search-search-btn-color-hover: #fff;
+  --ix-pro-search-search-btn-color-disabled: #fff;
+  --ix-pro-search-search-btn-bg-color: #4083e8;
+  --ix-pro-search-search-btn-bg-color-hover: #1b61dd;
+  --ix-pro-search-search-btn-bg-color-disabled: #687080;
   --ix-pro-search-name-panel-min-width: 160px;
   --ix-pro-search-operator-panel-min-width: 20px;
   --ix-pro-search-select-panel-min-width: 100px;
@@ -86,6 +92,7 @@
   --ix-pro-textarea-index-col-min-width: 32px;
   --ix-pro-textarea-index-col-padding-horizontal: 4px;
   --ix-pro-textarea-index-col-bg-color: #171a1f;
+  --ix-pro-textarea-index-col-bg-color-disabled: #1f2329;
   --ix-pro-textarea-index-col-cell-error-bg-color: #821d1f;
   --ix-pro-textarea-error-line-bg-color: #33151a;
   --ix-pro-textarea-count-bottom: 1px;
