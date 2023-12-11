@@ -14,7 +14,6 @@ import { IxLayoutSider, type LayoutSiderProps } from '@idux/components/layout'
 import { IxMenu, type MenuClickOptions, type MenuData, type MenuProps } from '@idux/components/menu'
 
 import Logo from './Logo'
-import MenuThemeProvider from './MenuThemeProvider'
 import { proLayoutToken } from '../token'
 import { getTargetPaths } from '../utils/menu'
 
@@ -75,7 +74,7 @@ export default defineComponent({
         <IxLayoutSider class={classes.value} {...siderProps}>
           {props.type === 'sider' && <Logo v-slots={slots} />}
           {slots.siderHeader && <div class={`${prefixCls}-header`}>{slots.siderHeader()}</div>}
-          <MenuThemeProvider class={`${prefixCls}-content`}>{contentNode}</MenuThemeProvider>
+          <div class={`${prefixCls}-content`}>{contentNode}</div>
           {slots.siderFooter && <div class={`${prefixCls}-footer`}>{slots.siderFooter()}</div>}
         </IxLayoutSider>
       )
