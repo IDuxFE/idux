@@ -1,9 +1,9 @@
 <template>
   <IxForm class="demo-form" :control="formGroup">
-    <IxFormItem message="Please input your username!">
+    <IxFormItem>
       <IxInput control="username" prefix="user"></IxInput>
     </IxFormItem>
-    <IxFormItem message="Please input your password, its length is 6-18!">
+    <IxFormItem>
       <IxInput control="password" prefix="lock" :type="passwordVisible ? 'text' : 'password'">
         <template #suffix>
           <IxIcon :name="passwordVisible ? 'eye-invisible' : 'eye'" @click="passwordVisible = !passwordVisible">
@@ -37,7 +37,7 @@ const { required, minLength, maxLength } = Validators
 
 const formGroup = useFormGroup(
   {
-    username: ['', required],
+    username: ['', maxLength(10)],
     password: ['', [required, minLength(6), maxLength(18)]],
     remember: [true],
   },
