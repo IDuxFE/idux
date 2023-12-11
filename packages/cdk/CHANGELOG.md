@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.3](https://github.com/IDuxFE/idux/compare/v1.12.3...v2.0.0-beta.3) (2023-12-11)
+
+
+### Bug Fixes
+
+* **cdk:forms:** interactions trigger dosen't work ([#1770](https://github.com/IDuxFE/idux/issues/1770)) ([c099b1a](https://github.com/IDuxFE/idux/commit/c099b1a50545ecc28c40a7610320614dbf23866e))
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/IDuxFE/idux/issues/1751)) ([a4540ec](https://github.com/IDuxFE/idux/commit/a4540ecb226f110b0fdd74a4d4525427db02d926))
+* **cdk:forms:** add `interactions` trigger ([#1766](https://github.com/IDuxFE/idux/issues/1766)) ([dcdbfb3](https://github.com/IDuxFE/idux/commit/dcdbfb3effa0461edb0806fe4b08b59c78e45833))
+* **cdk:theme:** add cdk theme support ([#1739](https://github.com/IDuxFE/idux/issues/1739)) ([6616ebc](https://github.com/IDuxFE/idux/commit/6616ebc5472367231d52f9f55a923b1504a8c5dc))
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([f587f3a](https://github.com/IDuxFE/idux/commit/f587f3aa856b0576a6d9bb8b1d428301c4f5cccb))
+
+
+### BREAKING CHANGES
+
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
+
+
+
+
 # [2.0.0-beta.1](https://github.com/IDuxFE/idux/compare/v2.0.0-beta.0...v2.0.0-beta.1) (2023-11-29)
 
 
