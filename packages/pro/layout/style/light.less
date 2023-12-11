@@ -1,5 +1,5 @@
 .@{pro-layout-prefix} {
-  .menuThemeStyle({
+  @tokens: {
     itemColor: var(--ix-pro-layout-menu-item-color);
     itemColorHover: var(--ix-pro-layout-menu-item-color-hover);
     itemColorActive: var(--ix-pro-layout-menu-item-color-active);
@@ -16,7 +16,15 @@
     horizontalItemColorActive: var(--ix-pro-layout-menu-horizontal-item-color-active);
     horizontalItemBgHover: var(--ix-pro-layout-menu-horizontal-item-bg-hover);
     horizontalItemBgActive: var(--ix-pro-layout-menu-horizontal-item-bg-active);
-  });
+  };
+
+  .menuThemeStyle(@tokens);
+  &-sider-menu-overlay {
+    .menuThemeStyle(@tokens);
+  }
+  &-header-menu-overlay {
+    .menuThemeStyle(@tokens);
+  }
 
   background-color: var(--ix-pro-layout-content-bg-color);
   transition: background-color var(--ix-motion-duration-slow);
