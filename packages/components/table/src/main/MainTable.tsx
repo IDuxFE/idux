@@ -41,6 +41,7 @@ export default defineComponent({
       slots,
       expandable,
       mergedPrefixCls,
+      mergedInsetShadow,
       mergedVirtualItemHeight,
       mergedAutoHeight,
       columnWidths,
@@ -116,6 +117,7 @@ export default defineComponent({
         [`${prefixCls}-ping-end`]: pingedEnd.value,
         [`${prefixCls}-fixed-layout`]: tableLayout.value === 'fixed',
         [`${prefixCls}-fixed-column`]: hasFixed.value,
+        [`${prefixCls}-inset-shadow`]: mergedInsetShadow.value,
         [`${prefixCls}-scroll-horizontal`]: scrollWidth.value,
         [`${prefixCls}-scroll-vertical`]: scrollHeight.value,
       })

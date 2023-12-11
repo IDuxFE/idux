@@ -1,0 +1,30 @@
+.@{table-prefix} {
+  &-inset-shadow {
+    &.@{table-prefix}-ping-start:not(.@{table-prefix}-fixed-column) {
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: -1px;
+        width: 30px;
+        transition: box-shadow var(--ix-motion-duration-fast);
+        box-shadow: var(--ix-table-inset-shadow-start);
+        content: '';
+        pointer-events: none;
+      }
+    }
+    &.@{table-prefix}-ping-end:not(.@{table-prefix}-fixed-column) {
+      &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: -1px;
+        width: 30px;
+        transition: box-shadow var(--ix-motion-duration-fast);
+        content: '';
+        pointer-events: none;
+        box-shadow: var(--ix-table-inset-shadow-end);
+      }
+    }
+  }
+}
