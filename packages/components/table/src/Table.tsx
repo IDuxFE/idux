@@ -51,6 +51,7 @@ export default defineComponent({
     const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
     const mergedGetKey = useGetKey(props, config, 'components/table')
     const mergedEmptyCell = computed(() => props.emptyCell ?? config.emptyCell)
+    const mergedInsetShadow = computed(() => props.insetShadow ?? config.insetShadow)
     const mergedSize = computed(() => props.size ?? config.size)
     const mergedVirtualItemHeight = computed(() => props.virtualItemHeight ?? virtualItemHeight[mergedSize.value])
     const { mergedPagination } = usePagination(props, config, mergedSize)
@@ -86,6 +87,7 @@ export default defineComponent({
       locale,
       mergedPrefixCls,
       mergedEmptyCell,
+      mergedInsetShadow,
       mergedVirtualItemHeight,
       mergedAutoHeight,
       ...columnsContext,

@@ -3,7 +3,7 @@
 exports[`Table > basic work > render work 1`] = `
 "<div class=\\"ix-table ix-table-borderless ix-table-md\\">
   <!---->
-  <div class=\\"ix-table-container\\">
+  <div class=\\"ix-table-container ix-table-inset-shadow\\">
     <div class=\\"ix-table-content\\">
       <table class=\\"ix-table-table\\" style=\\"table-layout: auto;\\">
         <colgroup>

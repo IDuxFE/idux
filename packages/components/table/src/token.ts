@@ -37,6 +37,7 @@ export interface TableContext
   mergedPrefixCls: ComputedRef<string>
   mergedAutoHeight: ComputedRef<boolean>
   mergedEmptyCell: ComputedRef<string | ((options: TableEmptyCellOptions) => VNodeChild) | undefined>
+  mergedInsetShadow: ComputedRef<boolean>
   mergedVirtualItemHeight: ComputedRef<number>
   tableLayout: ComputedRef<'auto' | 'fixed'>
 }

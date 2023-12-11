@@ -486,6 +486,8 @@ export interface TableConfig {
 
   emptyCell?: string | ((options: TableEmptyCellOptions) => VNodeChild)
 
+  insetShadow: boolean
+
   pagination: { position: TablePaginationPosition } & Partial<PaginationConfig>
 
   columnBase: TableColumnBaseConfig
