@@ -76,28 +76,30 @@ export function useSelectedState(
     return [...indeterminateKeySet]
   })
 
-  const setValue = (keys: VKey[]) => {
-    let currValue: VKey | VKey[] | VKey[][]
+  const getFullPath = (currKey: VKey) => {
+    const getDisabledFn = mergedGetDisabled.value
+    const dataMap = mergedDataMap.value
+    const fullPath = getParentKeys(dataMap, dataMap.get(currKey), true, getDisabledFn)
+    fullPath.push(currKey)
+    return fullPath
+  }
 
+  const getCurrValue = (keys: VKey[]) => {
     if (!mergedFullPath.value) {
-      currValue = multiple.value ? keys : keys[0]
-    } else {
-      const getDisabledFn = mergedGetDisabled.value
-      if (!multiple.value) {
-        const currKey = keys[0]
-        const dataMap = mergedDataMap.value
-        currValue = getParentKeys(dataMap, dataMap.get(currKey), true, getDisabledFn)
-        currValue.push(currKey)
-      } else {
-        const dataMap = mergedDataMap.value
-        currValue = keys.map(currKey => {
-          const parentKeys = getParentKeys(dataMap, dataMap.get(currKey), true, getDisabledFn)
-          parentKeys.push(currKey)
-          return parentKeys
-        })
-      }
+      return multiple.value ? keys : keys[0]
     }
+    if (keys.length === 0) {
+      return keys
+    }
+    if (multiple.value) {
+      return keys.map(getFullPath)
+    } else {
+      return getFullPath(keys[0])
+    }
+  }
 
+  const setValue = (keys: VKey[]) => {
+    const currValue = getCurrValue(keys)
     const oldValue = toRaw(selectedKeys.value)
     if (currValue !== oldValue) {
       setSelectedKeys(currValue)
