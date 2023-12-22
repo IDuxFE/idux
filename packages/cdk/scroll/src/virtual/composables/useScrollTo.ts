@@ -5,8 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { GetKey } from '../composables/useGetKey'
-import type { SyncScrollTop } from '../composables/useScrollPlacement'
+import type { GetKey } from './useGetKey'
+import type { SyncScroll } from './useScrollPlacement'
 import type { VirtualScrollProps, VirtualScrollToFn, VirtualScrollToOptions } from '../types'
 import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef, Ref } from 'vue'
@@ -19,9 +19,9 @@ export function useScrollTo(
   props: VirtualScrollProps,
   holderRef: Ref<HTMLElement | undefined>,
   getKey: ComputedRef<GetKey>,
-  heights: Map<VKey, number>,
-  collectHeight: () => void,
-  syncScrollTop: SyncScrollTop,
+  getRowHeight: (rowKey: VKey) => number,
+  collectSize: () => void,
+  syncScroll: SyncScroll,
 ): VirtualScrollToFn {
   let refId: number
 
@@ -33,10 +33,10 @@ export function useScrollTo(
 
     // Normal scroll logic
     cancelRAF(refId)
-    const { dataSource, itemHeight } = props
+    const { dataSource, rowHeight, itemHeight } = props
 
     if (typeof option === 'number') {
-      syncScrollTop(option, true)
+      syncScroll({ top: option }, true)
     } else if (typeof option === 'object') {
       const { align, offset = 0 } = option
       let index: number
@@ -47,14 +47,14 @@ export function useScrollTo(
       }
 
       // We will retry 3 times in case dynamic height shaking
-      const syncScroll = (times: number, targetAlign?: 'top' | 'bottom') => {
+      const _syncScroll = (times: number, targetAlign?: 'top' | 'bottom') => {
         const holderElement = holderRef.value
         if (times < 0 || !holderElement) {
           return
         }
 
         const height = holderElement.clientHeight
-        let needCollectHeight = false
+        let needCollectSize = false
         let newTargetAlign = targetAlign
 
         // Go to next frame if height not exist
@@ -69,13 +69,13 @@ export function useScrollTo(
           for (let i = 0; i <= index; i++) {
             const itemKey = getKey.value(dataSource[i])
             itemTop = stackTop
-            const cacheHeight = heights.get(itemKey)
-            itemBottom = itemTop + (isNil(cacheHeight) ? itemHeight! : cacheHeight)
+            const cacheHeight = getRowHeight(itemKey)
+            itemBottom = itemTop + (isNil(cacheHeight) ? rowHeight ?? itemHeight! : cacheHeight)
 
             stackTop = itemBottom
 
             if (i === index && isNil(cacheHeight)) {
-              needCollectHeight = true
+              needCollectSize = true
             }
           }
 
@@ -84,10 +84,10 @@ export function useScrollTo(
 
           switch (mergedAlign) {
             case 'top':
-              targetTop = itemTop - offset
+              targetTop = Math.max(itemTop - offset, 0)
               break
             case 'bottom':
-              targetTop = itemBottom - height + offset
+              targetTop = Math.max(itemBottom - height + offset, 0)
               break
 
             default: {
@@ -102,20 +102,20 @@ export function useScrollTo(
           }
 
           if (targetTop !== null && targetTop !== holderElement.scrollTop) {
-            syncScrollTop(targetTop, true)
+            syncScroll({ top: targetTop }, true)
           }
         }
 
         // We will retry since element may not sync height as it described
         refId = rAF(() => {
-          if (needCollectHeight) {
-            collectHeight()
+          if (needCollectSize) {
+            collectSize()
           }
-          syncScroll(times - 1, newTargetAlign)
+          _syncScroll(times - 1, newTargetAlign)
         })
       }
 
-      syncScroll(3)
+      _syncScroll(3)
     }
   }
 }

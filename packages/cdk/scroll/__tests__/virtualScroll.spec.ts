@@ -2,7 +2,7 @@ import { MountingOptions, VueWrapper, flushPromises, mount } from '@vue/test-uti
 import { h } from 'vue'
 
 import VirtualScroll from '../src/virtual/VirtualScroll'
-import { VirtualItemRenderFn, VirtualScrollInstance, VirtualScrollProps } from '../src/virtual/types'
+import { VirtualRowRenderFn, VirtualScrollInstance, VirtualScrollProps } from '../src/virtual/types'
 
 const getData = (length: number, key = 'key') => {
   const data: { key: string }[] = []
@@ -14,12 +14,12 @@ const getData = (length: number, key = 'key') => {
 
 const defaultProps = {
   height: 200,
-  itemHeight: 20,
+  rowHeight: 20,
   getKey: 'key',
 } as const
 
 const defaultItemSlot = `
-<template #item="{ item, index }">
+<template #row="{ item, index }">
   <span class="virtual-item" style="height: 20px;">{{ item.key }} - {{ index }}</span>
 </template>
 `
@@ -86,7 +86,7 @@ describe('VirtualScroll', () => {
 
       await wrapper.setProps({ dataSource: getData(15) })
 
-      expect(wrapper.findAll('.virtual-item').length).toEqual(12)
+      expect(wrapper.findAll('.virtual-item').length).toEqual(11)
     })
 
     test('fullHeight work', async () => {
@@ -118,12 +118,12 @@ describe('VirtualScroll', () => {
       await wrapper.setProps({ dataSource: getData(20) })
 
       expect(wrapper.find('.cdk-virtual-scroll-holder').attributes('style')).toContain('height: 200px')
-      expect(wrapper.findAll('.virtual-item').length).toEqual(12)
+      expect(wrapper.findAll('.virtual-item').length).toEqual(11)
 
       await wrapper.setProps({ height: 300 })
 
       expect(wrapper.find('.cdk-virtual-scroll-holder').attributes('style')).toContain('height: 300px')
-      expect(wrapper.findAll('.virtual-item').length).toEqual(17)
+      expect(wrapper.findAll('.virtual-item').length).toEqual(16)
     })
 
     test('itemHeight work', async () => {
@@ -136,11 +136,11 @@ describe('VirtualScroll', () => {
 
       await wrapper.setProps({ dataSource: getData(30) })
 
-      expect(wrapper.findAll('.virtual-item').length).toEqual(12)
+      expect(wrapper.findAll('.virtual-item').length).toEqual(11)
 
-      await wrapper.setProps({ itemHeight: 10 })
+      await wrapper.setProps({ rowHeight: 10 })
 
-      expect(wrapper.findAll('.virtual-item').length).toEqual(22)
+      expect(wrapper.findAll('.virtual-item').length).toEqual(21)
     })
 
     test('getKey work', async () => {
@@ -156,13 +156,13 @@ describe('VirtualScroll', () => {
       wrapper.findAll('.virtual-item').forEach((item, index) => expect(item.text()).toEqual(`key-${index} - ${index}`))
     })
 
-    test('itemRender work', async () => {
-      const itemRender: VirtualItemRenderFn = ({ item, index }) => {
+    test('rowRender work', async () => {
+      const rowRender: VirtualRowRenderFn = ({ item, index }) => {
         const { key } = item as { key: string }
         return h('span', { class: 'virtual-item' }, [`${key} - ${index}`])
       }
       const wrapper = VirtualScrollMount({
-        props: { dataSource: getData(20), itemRender },
+        props: { dataSource: getData(20), rowRender },
       })
 
       expect(wrapper.html()).toMatchSnapshot()

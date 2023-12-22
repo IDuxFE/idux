@@ -7,7 +7,7 @@
 
 import { type PropType, type VNode, computed, defineComponent, inject, normalizeClass } from 'vue'
 
-import { CdkVirtualScroll, type VirtualItemRenderFn } from '@idux/cdk/scroll'
+import { CdkVirtualScroll, type VirtualRowRenderFn } from '@idux/cdk/scroll'
 import { ɵEmpty } from '@idux/components/_private/empty'
 
 import Option from './Option'
@@ -34,14 +34,16 @@ export default defineComponent({
       let children: VNode
       if (dataSource.length > 0) {
         const { _virtualScrollHeight, virtualItemHeight, virtual } = cascaderPanelProps
-        const itemRender: VirtualItemRenderFn<MergedData> = ({ item, index }) => <Option index={index} {...item} />
+        const rowRender: VirtualRowRenderFn<MergedData> = ({ item, index }) => (
+          <Option index={index} optionKey={item.key} {...item} />
+        )
         children = (
           <CdkVirtualScroll
             dataSource={dataSource}
             getKey="key"
             height={_virtualScrollHeight}
-            itemHeight={virtualItemHeight}
-            itemRender={itemRender}
+            rowHeight={virtualItemHeight}
+            rowRender={rowRender}
             virtual={virtual}
           />
         )

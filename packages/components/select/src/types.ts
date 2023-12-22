@@ -172,6 +172,7 @@ export const optionProps = {
   disabled: { type: Boolean, default: false },
   index: { type: Number, required: true },
   label: { type: [String, Number] as PropType<string | number>, default: undefined },
+  optionKey: { type: [String, Number, Symbol] as PropType<VKey>, required: true },
   rawData: { type: Object as PropType<SelectOptionProps>, required: true },
   parentKey: { type: [String, Number, Symbol] as PropType<VKey>, default: undefined },
 } as const

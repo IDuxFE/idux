@@ -1,5 +1,5 @@
 <template>
-  <CdkVirtualScroll :dataSource="data" :height="height" getKey="key" :itemHeight="20" :itemRender="itemRender">
+  <CdkVirtualScroll :dataSource="data" :height="height" getKey="key" :rowHeight="20" :rowRender="itemRender">
   </CdkVirtualScroll>
 
   <IxSpace>
@@ -33,7 +33,7 @@
 <script setup lang="ts">
 import { computed, h, ref } from 'vue'
 
-import { VirtualItemRenderFn } from '@idux/cdk/scroll'
+import { VirtualRowRenderFn } from '@idux/cdk/scroll'
 
 const getData = (length: number, key = 'key') => {
   const data: { key: string }[] = []
@@ -47,7 +47,7 @@ const dataLength = ref(20)
 const data = computed(() => getData(dataLength.value))
 const height = ref(200)
 const switchItemRender = ref(false)
-const itemRender = computed<VirtualItemRenderFn>(() => {
+const itemRender = computed<VirtualRowRenderFn>(() => {
   if (switchItemRender.value) {
     return ({ item }) => h('div', { style: { height: '20px', paddingLeft: '8px' } }, [`${item.key}`])
   } else {

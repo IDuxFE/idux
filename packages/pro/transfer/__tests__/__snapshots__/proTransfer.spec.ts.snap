@@ -54,7 +54,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                 style="overflow: hidden;"
               >
                 <table
-                  style="table-layout: fixed; visibility: hidden;"
+                  style="table-layout: fixed;"
                 >
                   <colgroup>
                     
@@ -66,7 +66,6 @@ exports[`ProTransfer > table transfer render work 1`] = `
                     <col />
                     
                   </colgroup>
-                  
                   <thead
                     class="ix-table-thead"
                   >
@@ -74,6 +73,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                     <tr
                       class="ix-table-row"
                     >
+                      
                       
                       <th
                         class="ix-table-cell ix-table-cell-selectable"
@@ -127,10 +127,10 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         Address
                       </th>
                       
+                      
                     </tr>
                     
                   </thead>
-                  
                 </table>
               </div>
               <div
@@ -154,6 +154,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                   <tbody
                     class="ix-table-tbody"
                   >
+                    
                     <tr
                       aria-hidden="true"
                       class="ix-table-measure-row"
@@ -204,6 +205,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       style="cursor: pointer;"
                     >
                       
+                      
                       <td
                         class="ix-table-cell"
                       >
@@ -251,11 +253,13 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         <!---->
                       </td>
                       
+                      
                     </tr>
                     <tr
                       class="ix-table-row"
                       style="cursor: pointer;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -304,11 +308,13 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         <!---->
                       </td>
                       
+                      
                     </tr>
                     <tr
                       class="ix-table-row"
                       style="cursor: not-allowed;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -358,11 +364,13 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         <!---->
                       </td>
                       
+                      
                     </tr>
                     <tr
                       class="ix-table-row"
                       style="cursor: pointer;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -411,11 +419,13 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         <!---->
                       </td>
                       
+                      
                     </tr>
                     <tr
                       class="ix-table-row"
                       style="cursor: pointer;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -464,11 +474,13 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         <!---->
                       </td>
                       
+                      
                     </tr>
                     <tr
                       class="ix-table-row"
                       style="cursor: pointer;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -517,11 +529,13 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         <!---->
                       </td>
                       
+                      
                     </tr>
                     <tr
                       class="ix-table-row"
                       style="cursor: pointer;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -570,11 +584,13 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         <!---->
                       </td>
                       
+                      
                     </tr>
                     <tr
                       class="ix-table-row"
                       style="cursor: pointer;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -623,11 +639,13 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         <!---->
                       </td>
                       
+                      
                     </tr>
                     <tr
                       class="ix-table-row"
                       style="cursor: not-allowed;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -677,11 +695,13 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         <!---->
                       </td>
                       
+                      
                     </tr>
                     <tr
                       class="ix-table-row"
                       style="cursor: pointer;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -730,11 +750,13 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         <!---->
                       </td>
                       
+                      
                     </tr>
                     <tr
                       class="ix-table-row"
                       style="cursor: pointer;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -783,11 +805,13 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         <!---->
                       </td>
                       
+                      
                     </tr>
                     <tr
                       class="ix-table-row"
                       style="cursor: pointer;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -836,11 +860,13 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         <!---->
                       </td>
                       
+                      
                     </tr>
                     <tr
                       class="ix-table-row"
                       style="cursor: not-allowed;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -890,11 +916,13 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         <!---->
                       </td>
                       
+                      
                     </tr>
                     <tr
                       class="ix-table-row"
                       style="cursor: pointer;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -943,11 +971,13 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         <!---->
                       </td>
                       
+                      
                     </tr>
                     <tr
                       class="ix-table-row"
                       style="cursor: pointer;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -996,11 +1026,13 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         <!---->
                       </td>
                       
+                      
                     </tr>
                     <tr
                       class="ix-table-row"
                       style="cursor: pointer;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -1049,7 +1081,9 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         <!---->
                       </td>
                       
+                      
                     </tr>
+                    
                     
                   </tbody>
                   <!---->
@@ -1167,7 +1201,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                 style="overflow: hidden;"
               >
                 <table
-                  style="table-layout: fixed; visibility: hidden;"
+                  style="table-layout: fixed;"
                 >
                   <colgroup>
                     
@@ -1177,7 +1211,6 @@ exports[`ProTransfer > table transfer render work 1`] = `
                     <col />
                     
                   </colgroup>
-                  
                   <thead
                     class="ix-table-thead"
                   >
@@ -1185,6 +1218,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                     <tr
                       class="ix-table-row"
                     >
+                      
                       
                       <th
                         class="ix-table-cell ix-table-cell-selectable"
@@ -1228,10 +1262,10 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         Name
                       </th>
                       
+                      
                     </tr>
                     
                   </thead>
-                  
                 </table>
               </div>
               <div
@@ -1253,6 +1287,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                   <tbody
                     class="ix-table-tbody"
                   >
+                    
                     <tr
                       aria-hidden="true"
                       class="ix-table-measure-row"
@@ -1284,6 +1319,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       class="ix-table-row"
                       style="cursor: pointer;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -1322,11 +1358,13 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         Option0
                       </td>
                       
+                      
                     </tr>
                     <tr
                       class="ix-table-row"
                       style="cursor: not-allowed;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -1366,11 +1404,13 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         Option1
                       </td>
                       
+                      
                     </tr>
                     <tr
                       class="ix-table-row"
                       style="cursor: pointer;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -1409,11 +1449,13 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         Option2
                       </td>
                       
+                      
                     </tr>
                     <tr
                       class="ix-table-row"
                       style="cursor: pointer;"
                     >
+                      
                       
                       <td
                         class="ix-table-cell"
@@ -1452,7 +1494,9 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         Option3
                       </td>
                       
+                      
                     </tr>
+                    
                     
                   </tbody>
                   <!---->

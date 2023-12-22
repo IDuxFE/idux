@@ -11,7 +11,7 @@ import { computed, defineComponent, inject, normalizeClass, provide, ref } from 
 
 import {
   CdkVirtualScroll,
-  type VirtualItemRenderFn,
+  type VirtualRowRenderFn,
   type VirtualScrollInstance,
   type VirtualScrollToFn,
 } from '@idux/cdk/scroll'
@@ -99,12 +99,12 @@ export default defineComponent({
       const children = [<ListBox v-slots={slots} />]
 
       if (options.length > 0) {
-        const itemRender: VirtualItemRenderFn<FlattenedOption> = ({ item, index }) => {
-          const { type, ...rest } = item
+        const rowRender: VirtualRowRenderFn<FlattenedOption> = ({ item, index }) => {
+          const { type, key, ...rest } = item
           return type === 'group' ? (
             <OptionGroup v-slots={slots} index={index} {...rest} />
           ) : (
-            <Option v-slots={slots} index={index} {...rest} />
+            <Option v-slots={slots} index={index} optionKey={key} {...rest} />
           )
         }
 
@@ -114,8 +114,8 @@ export default defineComponent({
             dataSource={options}
             getKey="key"
             height={_virtualScrollHeight}
-            itemHeight={virtualItemHeight}
-            itemRender={itemRender}
+            rowHeight={virtualItemHeight}
+            rowRender={rowRender}
             virtual={virtual}
             onScroll={onScroll}
             onScrolledBottom={onScrolledBottom}
