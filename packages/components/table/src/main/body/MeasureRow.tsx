@@ -5,17 +5,20 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { defineComponent, inject } from 'vue'
+import type { TableColumnMerged } from '../../composables/useColumns'
+
+import { type PropType, defineComponent, inject } from 'vue'
 
 import MeasureCell from './MeasureCell'
 import { TABLE_TOKEN, tableBodyToken } from '../../token'
 
 export default defineComponent({
-  setup() {
-    const { mergedPrefixCls, flattedColumns } = inject(TABLE_TOKEN)!
+  props: { columns: Array as PropType<TableColumnMerged[]> },
+  setup(props) {
+    const { mergedPrefixCls } = inject(TABLE_TOKEN)!
     const { changeColumnWidth } = inject(tableBodyToken)!
     return () => {
-      const children = flattedColumns.value.map(column => {
+      const children = props.columns?.map(column => {
         const { key } = column
         const cellProps = { key, cellKey: key, changeColumnWidth }
         return <MeasureCell {...cellProps}></MeasureCell>
