@@ -11,7 +11,7 @@ import { isNil } from 'lodash-es'
 
 import {
   CdkVirtualScroll,
-  type VirtualItemRenderFn,
+  type VirtualRowRenderFn,
   type VirtualScrollInstance,
   type VirtualScrollToOptions,
 } from '@idux/cdk/scroll'
@@ -183,7 +183,7 @@ export default defineComponent({
 
       let children: VNodeTypes
       if (nodes.length > 0) {
-        const itemRender: VirtualItemRenderFn<MergedNode> = ({ item }) => <TreeNode node={item} {...item}></TreeNode>
+        const rowRender: VirtualRowRenderFn<MergedNode> = ({ item }) => <TreeNode node={item} {...item}></TreeNode>
         const { height, virtual, virtualItemHeight, onScroll, onScrolledBottom } = props
         children = virtual ? (
           <CdkVirtualScroll
@@ -192,8 +192,8 @@ export default defineComponent({
             dataSource={nodes}
             getKey="key"
             height={autoHeight.value ? '100%' : height}
-            itemHeight={virtualItemHeight}
-            itemRender={itemRender}
+            rowHeight={virtualItemHeight}
+            rowRender={rowRender}
             virtual
             onScroll={onScroll}
             onScrolledBottom={onScrolledBottom}

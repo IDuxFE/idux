@@ -21,7 +21,10 @@ export type {
   VirtualScrollComponent,
   VirtualScrollPublicProps as VirtualScrollProps,
   VirtualContentRenderFn,
-  VirtualItemRenderFn,
+  VirtualRowRenderFn,
+  VirtualColRenderFn,
   VirtualScrollToOptions,
   VirtualScrollToFn,
+  VirtualScrollEnabled,
+  VirtualScrollRowData,
 } from './src/virtual/types'

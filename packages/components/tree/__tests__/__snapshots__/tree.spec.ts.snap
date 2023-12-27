@@ -374,49 +374,41 @@ exports[`Tree > height and virtual work 1`] = `
 "<div class=\\"ix-tree ix-tree-active ix-tree-virtual\\" role=\\"tree\\">
   <!----><input style=\\"width: 0px; height: 0px; display: flex; overflow: hidden; opacity: 0; border: 0px; padding: 0px; margin: 0px;\\" tabindex=\\"0\\" aria-label=\\"for screen reader\\">
   <div class=\\"cdk-virtual-scroll ix-tree-content\\">
-    <div class=\\"cdk-virtual-scroll-holder\\" style=\\"max-height: 100px;\\">
-      <div class=\\"cdk-virtual-scroll-filler\\" style=\\"height: 308px;\\">
-        <div class=\\"cdk-virtual-scroll-content\\" style=\\"transform: translateY(0px); position: absolute; left: 0px; right: 0px; top: 0px;\\">
-          <div class=\\"ix-tree-node ix-tree-node-expanded\\" aria-label=\\"Node 0\\" aria-selected=\\"false\\" title=\\"Node 0\\"><span aria-hidden=\\"true\\" class=\\"ix-tree-node-indent\\"></span>
-            <!----><span class=\\"ix-tree-node-expand\\"><!----><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(90deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></span><label class=\\"ix-checkbox ix-tree-node-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
-              <!---->
-              <!---->
-              <!---->
-            </label><span class=\\"ix-tree-node-content\\"><!----><span class=\\"ix-tree-node-content-label\\">Node 0</span>
-            <!----></span>
-          </div>
-          <div class=\\"ix-tree-node ix-tree-node-expanded\\" aria-label=\\"Node 0-0\\" aria-selected=\\"false\\" title=\\"Node 0-0\\"><span aria-hidden=\\"true\\" class=\\"ix-tree-node-indent\\"><span class=\\"ix-tree-node-indent-unit\\"></span></span>
-            <!----><span class=\\"ix-tree-node-expand\\"><!----><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(90deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></span><label class=\\"ix-checkbox ix-checkbox-checked ix-tree-node-checkbox\\" role=\\"checkbox\\" aria-checked=\\"true\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
-              <!---->
-              <!---->
-              <!---->
-            </label><span class=\\"ix-tree-node-content\\"><!----><span class=\\"ix-tree-node-content-label\\">Node 0-0</span>
-            <!----></span>
-          </div>
-          <div class=\\"ix-tree-node\\" aria-label=\\"Node 0-0-0\\" aria-selected=\\"false\\" title=\\"Node 0-0-0\\"><span aria-hidden=\\"true\\" class=\\"ix-tree-node-indent\\"><span class=\\"ix-tree-node-indent-unit\\"></span><span class=\\"ix-tree-node-indent-unit\\"></span></span>
-            <!----><span class=\\"ix-tree-node-expand ix-tree-node-expand-noop\\"><!----><!----></span><label class=\\"ix-checkbox ix-tree-node-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
-              <!---->
-              <!---->
-              <!---->
-            </label><span class=\\"ix-tree-node-content\\"><!----><span class=\\"ix-tree-node-content-label\\">Node 0-0-0</span>
-            <!----></span>
-          </div>
-          <div class=\\"ix-tree-node\\" aria-label=\\"Node 0-0-1\\" aria-selected=\\"false\\" title=\\"Node 0-0-1\\"><span aria-hidden=\\"true\\" class=\\"ix-tree-node-indent\\"><span class=\\"ix-tree-node-indent-unit\\"></span><span class=\\"ix-tree-node-indent-unit\\"></span></span>
-            <!----><span class=\\"ix-tree-node-expand ix-tree-node-expand-noop\\"><!----><!----></span><label class=\\"ix-checkbox ix-tree-node-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
-              <!---->
-              <!---->
-              <!---->
-            </label><span class=\\"ix-tree-node-content\\"><!----><span class=\\"ix-tree-node-content-label\\">Node 0-0-1</span>
-            <!----></span>
-          </div>
-          <div class=\\"ix-tree-node\\" aria-label=\\"Node 0-0-2\\" aria-selected=\\"false\\" title=\\"Node 0-0-2\\"><span aria-hidden=\\"true\\" class=\\"ix-tree-node-indent\\"><span class=\\"ix-tree-node-indent-unit\\"></span><span class=\\"ix-tree-node-indent-unit\\"></span></span>
-            <!----><span class=\\"ix-tree-node-expand ix-tree-node-expand-noop\\"><!----><!----></span><label class=\\"ix-checkbox ix-tree-node-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
-              <!---->
-              <!---->
-              <!---->
-            </label><span class=\\"ix-tree-node-content\\"><!----><span class=\\"ix-tree-node-content-label\\">Node 0-0-2</span>
-            <!----></span>
-          </div>
+    <div class=\\"cdk-virtual-scroll-holder\\" style=\\"max-height: 100px; width: 100%;\\">
+      <div class=\\"cdk-virtual-scroll-filler-horizontal\\"></div>
+      <div class=\\"cdk-virtual-scroll-filler-vertical\\" style=\\"height: 308px; width: 0px;\\"></div>
+      <div class=\\"cdk-virtual-scroll-content\\" style=\\"margin-top: 0px;\\">
+        <div class=\\"ix-tree-node ix-tree-node-expanded\\" aria-label=\\"Node 0\\" aria-selected=\\"false\\" title=\\"Node 0\\"><span aria-hidden=\\"true\\" class=\\"ix-tree-node-indent\\"></span>
+          <!----><span class=\\"ix-tree-node-expand\\"><!----><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(90deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></span><label class=\\"ix-checkbox ix-tree-node-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+            <!---->
+            <!---->
+            <!---->
+          </label><span class=\\"ix-tree-node-content\\"><!----><span class=\\"ix-tree-node-content-label\\">Node 0</span>
+          <!----></span>
+        </div>
+        <div class=\\"ix-tree-node ix-tree-node-expanded\\" aria-label=\\"Node 0-0\\" aria-selected=\\"false\\" title=\\"Node 0-0\\"><span aria-hidden=\\"true\\" class=\\"ix-tree-node-indent\\"><span class=\\"ix-tree-node-indent-unit\\"></span></span>
+          <!----><span class=\\"ix-tree-node-expand\\"><!----><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(90deg);\\" role=\\"img\\" aria-label=\\"right\\"></i></span><label class=\\"ix-checkbox ix-checkbox-checked ix-tree-node-checkbox\\" role=\\"checkbox\\" aria-checked=\\"true\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+            <!---->
+            <!---->
+            <!---->
+          </label><span class=\\"ix-tree-node-content\\"><!----><span class=\\"ix-tree-node-content-label\\">Node 0-0</span>
+          <!----></span>
+        </div>
+        <div class=\\"ix-tree-node\\" aria-label=\\"Node 0-0-0\\" aria-selected=\\"false\\" title=\\"Node 0-0-0\\"><span aria-hidden=\\"true\\" class=\\"ix-tree-node-indent\\"><span class=\\"ix-tree-node-indent-unit\\"></span><span class=\\"ix-tree-node-indent-unit\\"></span></span>
+          <!----><span class=\\"ix-tree-node-expand ix-tree-node-expand-noop\\"><!----><!----></span><label class=\\"ix-checkbox ix-tree-node-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+            <!---->
+            <!---->
+            <!---->
+          </label><span class=\\"ix-tree-node-content\\"><!----><span class=\\"ix-tree-node-content-label\\">Node 0-0-0</span>
+          <!----></span>
+        </div>
+        <div class=\\"ix-tree-node\\" aria-label=\\"Node 0-0-1\\" aria-selected=\\"false\\" title=\\"Node 0-0-1\\"><span aria-hidden=\\"true\\" class=\\"ix-tree-node-indent\\"><span class=\\"ix-tree-node-indent-unit\\"></span><span class=\\"ix-tree-node-indent-unit\\"></span></span>
+          <!----><span class=\\"ix-tree-node-expand ix-tree-node-expand-noop\\"><!----><!----></span><label class=\\"ix-checkbox ix-tree-node-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+            <!---->
+            <!---->
+            <!---->
+          </label><span class=\\"ix-tree-node-content\\"><!----><span class=\\"ix-tree-node-content-label\\">Node 0-0-1</span>
+          <!----></span>
         </div>
       </div>
     </div>

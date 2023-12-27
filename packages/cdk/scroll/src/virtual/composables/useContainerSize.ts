@@ -14,15 +14,23 @@ import { isNumber } from 'lodash-es'
 import { useResizeObserver } from '@idux/cdk/resize'
 import { useState } from '@idux/cdk/utils'
 
-export function useContainerHeight(
+export function useContainerSize(
   props: VirtualScrollProps,
   containerRef: Ref<HTMLElement | undefined>,
-): ComputedRef<number> {
-  const [height, setHeight] = useState(0)
+): ComputedRef<{ width: number; height: number }> {
+  const [size, setSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   useResizeObserver(containerRef, entry => {
-    const { contentRect } = entry
-    setHeight(contentRect.height)
+    const {
+      contentRect: { height, width },
+    } = entry
+
+    if (height !== size.value.height || width !== size.value.width) {
+      setSize({ height, width })
+    }
   })
 
-  return computed(() => (isNumber(props.height) ? props.height : height.value))
+  return computed(() => ({
+    height: isNumber(props.height) ? props.height : size.value.height,
+    width: isNumber(props.width) ? props.width : size.value.width,
+  }))
 }
