@@ -10,6 +10,25 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 2.0.0-beta.4(2023-12-27)
+
+
+### Bug Fixes
+
+* **comp:select:** selectOptionFontSize 主题变量在css文件中引用错误 ([#1777](https://github.com/IDuxFE/idux/issues/1777)) ([3cd5982](https://github.com/IDuxFE/idux/commit/3cd5982632eb4eca1bb03d24c7b1f16976d1010f))
+
+
+### Features
+
+* **cdk:scroll:** 支持横向虚拟滚动 ([#1775](https://github.com/IDuxFE/idux/issues/1775)) ([4b39705](https://github.com/IDuxFE/idux/commit/4b39705af35cff3422dc7666777409c2f80030b1))
+* **comp:table:** 支持横向虚拟滚动提升大量数据列渲染性能，使用 `virtualHorizontal` 配置 ([#1776](https://github.com/IDuxFE/idux/issues/1776)) ([bb77f91](https://github.com/IDuxFE/idux/commit/bb77f9138ee0b46408f07b9149092f7964babc64))
+
+
+### BREAKING CHANGES
+
+* **cdk:scroll:** itemHeight 已经废弃, 请使用 rowHeight
+* **cdk:scroll:** itemRender 已经废弃, 请使用 rowRender
+
 # 2.0.0-beta.3(2023-12-11)
 
 
