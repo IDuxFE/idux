@@ -4,13 +4,15 @@
       ref="listRef"
       :dataSource="data"
       :height="200"
-      :itemHeight="20"
+      :rowHeight="20"
+      :bufferSize="20"
+      :bufferOffset="5"
       getKey="key"
       @scroll="onScroll"
       @scrolledChange="onScrolledChange"
       @scrolledBottom="onScrolledBottom"
     >
-      <template #item="{ item, index }">
+      <template #row="{ item, index }">
         <span class="virtual-item" @click="onItemClick(item.key)">{{ item.key }} - {{ index }}</span>
       </template>
     </CdkVirtualScroll>

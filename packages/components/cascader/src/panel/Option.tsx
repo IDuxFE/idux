@@ -9,7 +9,7 @@ import { type PropType, Slot, computed, defineComponent, inject, normalizeClass 
 
 import { isNil } from 'lodash-es'
 
-import { callEmit, useKey } from '@idux/cdk/utils'
+import { callEmit } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
 import { convertIconVNode } from '@idux/components/utils'
 
@@ -23,11 +23,11 @@ export default defineComponent({
     index: { type: Number, required: true },
     isLeaf: { type: Boolean, required: true },
     label: { type: String, required: true },
+    optionKey: { type: [String, Number, Symbol], required: true },
     parentKey: { type: [String, Number, Symbol], default: undefined },
     rawData: { type: Object as PropType<CascaderData>, required: true },
   },
   setup(props) {
-    const key = useKey()
     const {
       props: cascaderPanelProps,
       slots,
@@ -47,12 +47,12 @@ export default defineComponent({
       handleSelect,
       handleExpand,
     } = inject(cascaderPanelToken)!
-    const isActive = computed(() => key === activeKey.value)
+    const isActive = computed(() => props.optionKey === activeKey.value)
     const isDisabled = computed(() => mergedGetDisabled.value(props.rawData))
-    const isExpanded = computed(() => expandedKeys.value.includes(key))
-    const isLoading = computed(() => loadingKeys.value.includes(key))
-    const isSelected = computed(() => selectedWithStrategyKeys.value.includes(key))
-    const isIndeterminate = computed(() => indeterminateKeys.value.includes(key))
+    const isExpanded = computed(() => expandedKeys.value.includes(props.optionKey))
+    const isLoading = computed(() => loadingKeys.value.includes(props.optionKey))
+    const isSelected = computed(() => selectedWithStrategyKeys.value.includes(props.optionKey))
+    const isIndeterminate = computed(() => indeterminateKeys.value.includes(props.optionKey))
 
     const classes = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-option`
@@ -68,7 +68,7 @@ export default defineComponent({
     })
 
     const _handleSelect = () => {
-      handleSelect(key)
+      handleSelect(props.optionKey)
       callEmit(cascaderPanelProps.onSelect, props.rawData, isSelected.value)
     }
 
@@ -83,7 +83,7 @@ export default defineComponent({
         isNil(props.parentKey) && setExpandedKeys([])
       } else {
         cascaderPanelProps.strategy === 'off' && _handleSelect()
-        cascaderPanelProps.expandTrigger === 'click' && handleExpand(key)
+        cascaderPanelProps.expandTrigger === 'click' && handleExpand(props.optionKey)
       }
     }
 
@@ -92,8 +92,8 @@ export default defineComponent({
       _handleSelect()
     }
     const handleMouseEnter = () => {
-      setActiveKey(key)
-      !props.isLeaf && cascaderPanelProps.expandTrigger === 'hover' && handleExpand(key)
+      setActiveKey(props.optionKey)
+      !props.isLeaf && cascaderPanelProps.expandTrigger === 'hover' && handleExpand(props.optionKey)
     }
 
     return () => {
@@ -135,7 +135,7 @@ export default defineComponent({
           {!props.isLeaf && (
             <span key="__expand-icon" class={`${prefixCls}-expand-icon`}>
               {convertIconVNode(slots.expandIcon, isLoading.value ? 'loading' : mergedExpandIcon.value, {
-                key,
+                key: props.optionKey,
                 expanded: isExpanded.value,
                 data: rawData,
               })}
