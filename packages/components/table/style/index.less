@@ -41,10 +41,6 @@
     &::after {
       right: 0;
     }
-
-    .cdk-virtual-scroll-holder {
-      overflow-y: scroll;
-    }
   }
 
   table {
@@ -190,6 +186,7 @@
         flex-grow: 1;
       }
 
+      &-body-virtual-scroll,
       &-content {
         flex-basis: 0;
         height: 0;
@@ -200,15 +197,10 @@
         flex-shrink: 0;
       }
     }
-
-    .cdk-virtual-scroll {
-      flex: 1 1 0;
-    }
   }
 
   &-empty&-auto-height,
   &-empty&-full-height {
-    .cdk-virtual-scroll-filler,
     .cdk-virtual-scroll-content,
     table {
       height: 100%;

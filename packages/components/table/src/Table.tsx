@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { VirtualScrollEnabled } from '@idux/cdk/scroll'
+
 import { type VNode, computed, defineComponent, normalizeClass, provide } from 'vue'
 
 import { isBoolean } from 'lodash-es'
@@ -34,6 +36,7 @@ import { tableProps } from './types'
 import { getThemeTokens } from '../theme'
 
 const virtualItemHeight = { sm: 32, md: 40, lg: 56 } as const
+const virtualColWidth = 150
 
 export default defineComponent({
   name: 'IxTable',
@@ -53,7 +56,14 @@ export default defineComponent({
     const mergedEmptyCell = computed(() => props.emptyCell ?? config.emptyCell)
     const mergedInsetShadow = computed(() => props.insetShadow ?? config.insetShadow)
     const mergedSize = computed(() => props.size ?? config.size)
+    const mergedVirtual = computed<VirtualScrollEnabled>(() => {
+      return {
+        horizontal: props.virtualHorizontal,
+        vertical: props.virtual,
+      }
+    })
     const mergedVirtualItemHeight = computed(() => props.virtualItemHeight ?? virtualItemHeight[mergedSize.value])
+    const mergedVirtualColWidth = computed(() => props.virtualColWidth ?? virtualColWidth)
     const { mergedPagination } = usePagination(props, config, mergedSize)
 
     const stickyContext = useSticky(props)
@@ -62,7 +72,14 @@ export default defineComponent({
     const sortableContext = useSortable(columnsContext.flattedColumns)
     const filterableContext = useFilterable(columnsContext.flattedColumns)
     const expandableContext = useExpandable(props, columnsContext.flattedColumns)
-    const tableLayout = useTableLayout(props, columnsContext, scrollContext, stickyContext.isSticky, mergedAutoHeight)
+    const tableLayout = useTableLayout(
+      props,
+      columnsContext,
+      scrollContext,
+      stickyContext.isSticky,
+      mergedVirtual,
+      mergedAutoHeight,
+    )
 
     const { activeSorters } = sortableContext
     const { activeFilters } = filterableContext
@@ -88,7 +105,9 @@ export default defineComponent({
       mergedPrefixCls,
       mergedEmptyCell,
       mergedInsetShadow,
+      mergedVirtual,
       mergedVirtualItemHeight,
+      mergedVirtualColWidth,
       mergedAutoHeight,
       ...columnsContext,
       ...scrollContext,

@@ -51,6 +51,7 @@ export default defineComponent({
       handleSort,
       activeOrderByMap,
       activeFilterByMap,
+      mergedRows,
       handleFilter,
     } = inject(TABLE_TOKEN)!
 
@@ -88,14 +89,16 @@ export default defineComponent({
     })
 
     const style = computed<CSSProperties | undefined>(() => {
-      const { fixed, colStart, colEnd } = props.column as HeadColumn
+      const { key, fixed } = props.column as HeadColumn
+      const { offsetIndexMap } = mergedRows.value
       if (!fixed) {
         return
       }
       const { starts, ends } = columnOffsetsWithScrollBar.value
-      const offsets = fixed === 'start' ? starts : ends
-      const offsetIndex = fixed === 'start' ? colStart : colEnd
-      const fixedOffset = convertCssPixel(offsets[offsetIndex])
+      const offsets = Object.values(fixed === 'start' ? starts : ends)
+      const offsetIndex = offsetIndexMap[key][fixed === 'start' ? 'colStart' : 'colEnd']
+
+      const fixedOffset = convertCssPixel(offsets.find(offset => offset.index === offsetIndex)?.offset)
       return {
         position: 'sticky',
         left: fixed === 'start' ? fixedOffset : undefined,

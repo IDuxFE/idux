@@ -28,7 +28,7 @@ export function useScroll(
   watch(virtualScrollRef, instance => {
     if (instance) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      scrollBodyRef.value = (instance as any).holderRef.value
+      scrollBodyRef.value = (instance as any).getHolderElement()
     }
   })
 
@@ -141,6 +141,7 @@ function useScrollRef(
     if (!target) {
       return
     }
+
     if (target.scrollLeft !== scrollLeft) {
       target.scrollLeft = scrollLeft
     }

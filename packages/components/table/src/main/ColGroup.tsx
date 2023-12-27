@@ -6,63 +6,59 @@
  */
 
 /* eslint-disable indent */
+import type { TableColumnMerged } from '../composables/useColumns'
 
-import { defineComponent, inject, normalizeClass } from 'vue'
+import { type PropType, computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { convertCssPixel } from '@idux/cdk/utils'
 
 import { TABLE_TOKEN } from '../token'
 
 export default defineComponent({
-  props: { isFixedHolder: Boolean },
+  props: { isFixedHolder: Boolean, columns: Array as PropType<TableColumnMerged[]> },
   setup(props) {
-    const {
-      flattedColumns,
-      flattedColumnsWithScrollBar,
-      columnWidthsWithScrollBar,
-      mergedSelectableMenus,
-      mergedPrefixCls,
-    } = inject(TABLE_TOKEN)!
+    const { flattedColumns, flattedColumnsWithScrollBar, columnWidthMap, mergedSelectableMenus, mergedPrefixCls } =
+      inject(TABLE_TOKEN)!
+
+    const resolvedColumns = computed(() => {
+      const { isFixedHolder, columns } = props
+      if (!columns) {
+        return isFixedHolder ? flattedColumnsWithScrollBar.value : flattedColumns.value
+      }
+
+      return columns
+    })
 
     return () => {
-      const { isFixedHolder } = props
-      const columns = isFixedHolder ? flattedColumnsWithScrollBar.value : flattedColumns.value
-
       // 所有列的宽度都不存在且没有特殊列的时候，跳过渲染
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      if (columns.every(column => !column.width && !column.type)) {
+      if (resolvedColumns.value.every(column => !column.width && !column.type)) {
         return
       }
 
       const prefixCls = mergedPrefixCls.value
-      const children = columns.map((column, colIndex) => {
+      const children = resolvedColumns.value.map(column => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const { key, type } = column
-        const mergedWidth = isFixedHolder ? columnWidthsWithScrollBar.value[colIndex] : column.width
+        const mergedWidth = column.width ?? columnWidthMap.value[key]
         const className = type
           ? normalizeClass({
               [`${prefixCls}-col-${type}`]: true,
               [`${prefixCls}-col-with-dropdown`]: type === 'selectable' && mergedSelectableMenus.value.length > 0,
             })
           : undefined
-        let style: string | Record<string, string> | undefined
-        if (isFixedHolder) {
-          style = mergedWidth ? `width: ${convertCssPixel(mergedWidth)}` : undefined
-        } else {
-          style = {
-            width: convertCssPixel(mergedWidth),
-            // for proTable: resizable, minWidth and maxWidth
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            minWidth: convertCssPixel(column.minWidth),
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            maxWidth: convertCssPixel(column.maxWidth),
-          }
+        const style = {
+          width: convertCssPixel(mergedWidth),
+          // for proTable: resizable, minWidth and maxWidth
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          minWidth: convertCssPixel(column.minWidth),
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          maxWidth: convertCssPixel(column.maxWidth),
         }
-
         return <col key={key} class={className} style={style}></col>
       })
 

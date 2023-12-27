@@ -3,8 +3,9 @@
     :columns="columns"
     :dataSource="data"
     header="Pro Table"
-    :scroll="scroll"
     :toolbar="toolbar"
+    virtualHorizontal
+    :virtualColWidth="200"
     @columnsChange="onColumnsChange"
   >
     <template #name="{ value }">
@@ -31,6 +32,8 @@ interface Data {
   address: string
   tags: string[]
   description: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any
 }
 
 const toolbar = [
@@ -40,11 +43,20 @@ const toolbar = [
 
 const onColumnsChange = console.log
 
+const dataColumns = Array.from(new Array(1000)).map((_, idx) => ({
+  title: `data${idx}`,
+  dataKey: `data${idx}`,
+  changeVisible: true,
+  visible: idx < 100,
+  width: 200,
+}))
+
 const columns: ProTableColumn<Data>[] = [
   {
     type: 'indexable',
     changeVisible: false,
     width: 60,
+    fixed: 'start',
   },
   {
     title: 'Name',
@@ -74,6 +86,7 @@ const columns: ProTableColumn<Data>[] = [
     minWidth: 100,
     resizable: true,
   },
+  ...dataColumns,
   {
     title: 'Tags',
     dataKey: 'tags',
@@ -93,12 +106,13 @@ const columns: ProTableColumn<Data>[] = [
     changeIndex: false,
     customCell: 'action',
     width: 200,
+    fixed: 'end',
   },
 ]
 
 const data: Data[] = []
 for (let index = 0; index < 100; index++) {
-  data.push({
+  const item: Data = {
     key: index,
     name: `Edrward ${index}`,
     age: 18 + (index % 10),
@@ -107,8 +121,12 @@ for (let index = 0; index < 100; index++) {
     description: `My name is Edrward ${index}, I am ${
       18 + (index % 10)
     } years old, living in London Park no. ${index}.`,
-  })
-}
+  }
 
-const scroll = { width: 1200 }
+  dataColumns.forEach((column, dataIndex) => {
+    item[column.dataKey] = `this is data row-${index} data-${dataIndex}`
+  })
+
+  data.push(item)
+}
 </script>
