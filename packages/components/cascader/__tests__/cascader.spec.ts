@@ -229,6 +229,20 @@ describe('Cascader', () => {
       expect(getAllOptionGroup(wrapper)[2].find('.ix-cascader-option-disabled').exists()).toBe(false)
       expect(getAllOptionGroup(wrapper)[0].find('.ix-cascader-option-disabled').text()).toBe('Pro')
     })
+
+    test('clearable  work', async () => {
+      const onUpdateValue = vi.fn()
+      const wrapper = CascaderMount({
+        props: {
+          clearable: true,
+          'onUpdate:value': onUpdateValue,
+        },
+      })
+
+      await wrapper.find('.ix-selector-clear').trigger('click')
+
+      expect(onUpdateValue).toBeCalledWith([])
+    })
   })
 
   describe('multiple work', () => {
