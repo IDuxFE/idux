@@ -5,8 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { TableColumnMerged } from '../composables/useColumns'
+
 import {
   type CSSProperties,
+  type VNodeChild,
   computed,
   defineComponent,
   inject,
@@ -21,18 +24,27 @@ import {
 import { debounce, isNumber } from 'lodash-es'
 
 import { offResize, onResize } from '@idux/cdk/resize'
-import { CdkVirtualScroll, type VirtualContentRenderFn, type VirtualItemRenderFn } from '@idux/cdk/scroll'
-import { Logger, type VKey, callEmit, convertElement, isVisibleElement } from '@idux/cdk/utils'
+import {
+  CdkVirtualScroll,
+  type VirtualColRenderFn,
+  type VirtualContentRenderFn,
+  type VirtualRowRenderFn,
+  type VirtualScrollRowData,
+} from '@idux/cdk/scroll'
+import { Logger, type VKey, callEmit, convertArray, convertElement, isVisibleElement } from '@idux/cdk/utils'
 
 import ColGroup from './ColGroup'
 import FixedHolder from './FixedHolder'
 import StickyScroll from './StickyScroll'
 import Body from './body/Body'
+import MeasureRow from './body/MeasureRow'
+import { renderBodyCell, renderBodyCells } from './body/RenderBodyCells'
 import { renderBodyRow } from './body/RenderBodyRow'
 import Head from './head/Head'
 import Foot from './tfoot/Foot'
 import { type FlattedData } from '../composables/useDataSource'
 import { TABLE_TOKEN, tableBodyToken } from '../token'
+import { modifyVirtualData } from '../utils'
 
 export default defineComponent({
   setup() {
@@ -42,11 +54,16 @@ export default defineComponent({
       expandable,
       mergedPrefixCls,
       mergedInsetShadow,
+      mergedVirtual,
       mergedVirtualItemHeight,
+      mergedVirtualColWidth,
       mergedAutoHeight,
       columnWidths,
       changeColumnWidth,
+      clearColumnWidth,
       flattedData,
+      flattedColumns,
+      fixedColumns,
       isSticky,
       mergedSticky,
       virtualScrollRef,
@@ -63,6 +80,10 @@ export default defineComponent({
 
     const mainTableRef = ref<HTMLDivElement>()
     const mainTableWidth = ref(0)
+
+    const showMeasure = computed(
+      () => mergedAutoHeight.value || !!scrollWidth.value || isSticky.value || mergedVirtual.value.horizontal,
+    )
 
     const _changeColumnWidth = (key: VKey, width: number | false) => {
       if (isVisibleElement(mainTableRef.value)) {
@@ -89,6 +110,12 @@ export default defineComponent({
     onMounted(() => {
       triggerScroll()
 
+      watch(
+        () => flattedColumns.value.length,
+        () => {
+          clearColumnWidth()
+        },
+      )
       watch([() => props.dataSource, scrollWidth], ([, width]) => {
         if (width) {
           triggerScroll()
@@ -149,52 +176,132 @@ export default defineComponent({
       )
     }
 
+    const virtualData = computed<VirtualScrollRowData<TableColumnMerged>[]>(() => {
+      if (!mergedVirtual.value.vertical && !mergedVirtual.value.horizontal) {
+        return []
+      }
+
+      return flattedData.value.map(data => {
+        return {
+          ...data,
+          data: flattedColumns.value,
+        }
+      })
+    })
+
+    const renderMeasureRow = (columns: TableColumnMerged[] | undefined) => {
+      if (!showMeasure.value || !columns) {
+        return
+      }
+
+      return <MeasureRow columns={columns} />
+    }
+
+    const _renderBody = (
+      columns: TableColumnMerged[] | undefined,
+      data: FlattedData[] | undefined,
+      children: VNodeChild | undefined,
+    ) => {
+      let contentNodes: VNodeChild
+
+      if (children) {
+        contentNodes = children
+      } else {
+        const rows: VNodeChild[] = []
+        data?.forEach((item, rowIndex) => {
+          const cells = renderBodyCells(columns ?? [], item, rowIndex)
+          rows.push(
+            ...convertArray(renderBodyRow(item, rowIndex, slots, expandable.value, mergedPrefixCls.value, cells)),
+          )
+        })
+
+        contentNodes = rows
+      }
+
+      return (
+        <Body>
+          {renderMeasureRow(columns)}
+          {contentNodes}
+        </Body>
+      )
+    }
+
+    const renderBody = () => _renderBody(flattedColumns.value, flattedData.value)
+    const renderVirtualBody = (columns: TableColumnMerged[] | undefined, children: VNodeChild) =>
+      _renderBody(columns, undefined, children)
+
     return () => {
       const prefixCls = mergedPrefixCls.value
       const autoHeight = mergedAutoHeight.value
+      const virtual = mergedVirtual.value
       const children = slots.default ? slots.default() : []
 
-      if (autoHeight || scrollHeight.value || isSticky.value) {
+      if (autoHeight || scrollHeight.value || isSticky.value || virtual.horizontal) {
         const { offsetTop } = mergedSticky.value
         if (!props.headless) {
-          children.push(
-            <FixedHolder offsetTop={offsetTop}>
-              <Head></Head>
-            </FixedHolder>,
-          )
+          children.push(<FixedHolder offsetTop={offsetTop}></FixedHolder>)
         }
 
-        if (props.virtual && (props.scroll || autoHeight)) {
-          const itemRender: VirtualItemRenderFn<FlattedData> = ({ item, index }) =>
-            renderBodyRow(item, index, slots, expandable.value, prefixCls)
+        if ((virtual.vertical && (props.scroll || autoHeight)) || (!virtual.vertical && virtual.horizontal)) {
+          const rowRender: VirtualRowRenderFn<FlattedData> = ({ item, index, children }) =>
+            renderBodyRow(item, index, slots, expandable.value, prefixCls, children)
+          const colRender: VirtualColRenderFn<VirtualScrollRowData<TableColumnMerged>> = ({
+            row,
+            item,
+            index,
+            rowIndex,
+          }) => renderBodyCell(item, row, rowIndex, index)
 
-          const contentRender: VirtualContentRenderFn = children => {
+          const contentRender: VirtualContentRenderFn = (children, { renderedData }) => {
+            const columns = (renderedData[0] as VirtualScrollRowData<TableColumnMerged> | undefined)?.data
+
             return (
               <table ref={scrollContentRef} class={`${prefixCls}-table`} style={tableStyle.value}>
-                <ColGroup></ColGroup>
-                <Body>{children}</Body>
+                {columns ? <ColGroup columns={columns}></ColGroup> : undefined}
+                {renderVirtualBody(columns, children)}
                 {false && <Foot></Foot>}
               </table>
             )
           }
+          const colModifier = (renderedRow: FlattedData, renderedCols: TableColumnMerged[]) => {
+            const { fixedStartColumns, fixedEndColumns } = fixedColumns.value
+            return modifyVirtualData(
+              renderedRow,
+              renderedCols,
+              flattedColumns.value,
+              flattedData.value,
+              fixedStartColumns,
+              fixedEndColumns,
+              false,
+            )
+          }
           const { scroll, onScrolledBottom } = props
 
-          if (__DEV__ && !autoHeight && !isNumber(scroll?.height)) {
-            Logger.warn('components/table', '`scroll.height` must is a valid number when enable virtual scroll')
+          if (__DEV__ && virtual.vertical && !autoHeight && !isNumber(scroll?.height)) {
+            Logger.warn(
+              'components/table',
+              '`scroll.height` must is a valid number when enable vertical virtual scroll',
+            )
           }
 
           children.push(
             <CdkVirtualScroll
               ref={virtualScrollRef}
-              style={contentStyle.value}
-              dataSource={flattedData.value}
+              class={`${prefixCls}-body-virtual-scroll`}
+              dataSource={virtualData.value}
+              colModifier={colModifier}
               fullHeight={scroll?.fullHeight}
-              getKey="rowKey"
+              getKey={item => item.rowKey ?? item.key}
               height={mergedAutoHeight.value ? '100%' : (scroll?.height as number)}
-              itemHeight={mergedVirtualItemHeight.value}
-              itemRender={itemRender}
+              width={'100%'}
+              rowHeight={mergedVirtualItemHeight.value}
+              colWidth={mergedVirtualColWidth.value}
+              rowRender={rowRender}
+              colRender={colRender}
               contentRender={contentRender}
-              virtual
+              virtual={mergedVirtual.value}
+              bufferSize={props.virtualBufferSize}
+              bufferOffset={props.virtualBufferOffset}
               onScroll={handleScroll}
               onScrolledBottom={onScrolledBottom}
               onScrolledChange={handleScrolledChange}
@@ -205,7 +312,7 @@ export default defineComponent({
             <div ref={scrollBodyRef} class={`${prefixCls}-content`} style={contentStyle.value} onScroll={handleScroll}>
               <table ref={scrollContentRef} class={`${prefixCls}-table`} style={tableStyle.value}>
                 <ColGroup></ColGroup>
-                <Body></Body>
+                {renderBody()}
                 {false && <Foot></Foot>}
               </table>
             </div>,
@@ -221,7 +328,7 @@ export default defineComponent({
             <table ref={scrollContentRef} class={`${prefixCls}-table`} style={tableStyle.value}>
               <ColGroup></ColGroup>
               {!props.headless && <Head></Head>}
-              <Body></Body>
+              {renderBody()}
               {false && <Foot></Foot>}
             </table>
           </div>,

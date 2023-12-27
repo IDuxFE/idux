@@ -17,8 +17,10 @@ export default defineComponent({
     const cellRef = ref<HTMLTableCellElement>()
 
     const handleResize = (evt: ResizeObserverEntry) => {
-      const { offsetWidth } = evt.target as HTMLTableCellElement
-      props.changeColumnWidth(props.cellKey, offsetWidth)
+      const {
+        contentRect: { width },
+      } = evt
+      props.changeColumnWidth(props.cellKey, width)
     }
 
     useResizeObserver(cellRef, handleResize)

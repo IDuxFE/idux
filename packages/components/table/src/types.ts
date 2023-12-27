@@ -48,7 +48,11 @@ export const tableProps = {
   scrollToTopOnChange: { type: Boolean, default: undefined },
   tableLayout: { type: String as PropType<'auto' | 'fixed'>, default: undefined },
   virtual: { type: Boolean, default: false },
+  virtualHorizontal: { type: Boolean, default: false },
   virtualItemHeight: { type: Number, default: undefined },
+  virtualColWidth: { type: Number, default: undefined },
+  virtualBufferSize: { type: Number, default: undefined },
+  virtualBufferOffset: { type: Number, default: undefined },
 
   // events
   'onUpdate:expandedRowKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
@@ -258,19 +262,8 @@ export type TableBodyRowProps = ExtractInnerPropTypes<typeof tableBodyRowProps>
 export const tableBodyCellProps = {
   column: { type: Object as PropType<TableColumnMerged>, required: true },
   colIndex: { type: Number, required: true },
-  level: { type: Number, default: undefined },
-  record: { type: Object as PropType<any>, required: true },
-  rowIndex: { type: Number, required: true },
-  disabled: { type: Boolean, default: undefined },
-  expanded: { type: Boolean, default: undefined },
-  hasPrevSibling: { type: Boolean, default: undefined },
-  hasNextSibling: { type: Boolean, default: undefined },
-  showLineIndentIndexList: { type: Array as PropType<number[]>, default: () => [] },
-  handleExpend: { type: Function as PropType<() => void>, default: undefined },
-  isHover: { type: Boolean, default: undefined },
-  selected: { type: Boolean, default: undefined },
-  indeterminate: { type: Boolean, default: undefined },
-  handleSelect: { type: Function as PropType<() => void>, default: undefined },
+  colSpan: Number,
+  rowSpan: Number,
 } as const
 
 export type TableBodyCellProps = ExtractInnerPropTypes<typeof tableBodyCellProps>
