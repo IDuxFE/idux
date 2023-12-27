@@ -5,10 +5,10 @@
 @import './mixin.less';
 
 .@{select-prefix} {
-  @option-line-height: calc(var(--ix-select-font-size) + var(--ix-line-height-gutter));
+  @option-line-height: calc(var(--ix-select-option-font-size) + var(--ix-line-height-gutter));
   &-option {
     .reset-component();
-    .select-option(var(--ix-select-font-size), var(--ix-color-text));
+    .select-option(var(--ix-select-option-font-size), var(--ix-color-text));
 
     &-disabled {
       color: var(--ix-color-text-disabled);
@@ -37,7 +37,7 @@
 
   &-option-group {
     .reset-component();
-    .select-option(var(--ix-select-font-size), var(--ix-color-text-info));
+    .select-option(var(--ix-select-option-font-size), var(--ix-color-text-info));
 
     display: block;
     margin: var(--ix-select-option-group-margin);
