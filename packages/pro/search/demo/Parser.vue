@@ -274,6 +274,7 @@ const searchFields = ref<SearchField[]>([
 
 const tableColums: TableColumn[] = [
   {
+    key: 'index',
     type: 'indexable',
   },
   {
@@ -292,9 +293,10 @@ const tableData = computed(() => {
   const parseRes = parse(value.value)
 
   return parseRes.map(res => {
-    const { label, segments } = res
+    const { label, segments, key } = res
 
     return {
+      key,
       name: label,
       input: segments.map(seg => seg.input).join(' '),
     }

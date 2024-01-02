@@ -637,12 +637,12 @@ exports[`DatePanel > year type disabledDate work 1`] = `
               <div class=\\"ix-date-panel-cell-trigger\\">2022</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell ix-date-panel-cell-current\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">2023</div>
             </div>
           </td>
-          <td class=\\"ix-date-panel-cell\\" role=\\"gridcell\\">
+          <td class=\\"ix-date-panel-cell ix-date-panel-cell-current\\" role=\\"gridcell\\">
             <div class=\\"ix-date-panel-cell-inner\\">
               <div class=\\"ix-date-panel-cell-trigger\\">2024</div>
             </div>

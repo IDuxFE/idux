@@ -17,7 +17,7 @@ import { type VKey, callEmit } from '@idux/cdk/utils'
 import { generateSegmentStates } from '../utils'
 
 export interface SearchState {
-  key: VKey
+  key: string
   name: string
   index: number
   fieldKey: VKey
@@ -188,17 +188,19 @@ export function useSearchStates(
     return searchState ? _getVisibleSegmentStates(searchState) : []
   }
 
-  function checkSearchStateValid(searchState: SearchState, dataKeyCountMap: Map<VKey, number>) {
+  function checkSearchStateValid(searchState: SearchState, dataKeyCountMap: Map<VKey, number>, allowEmpty = false) {
     if (!searchState.fieldKey) {
       return false
     }
 
-    const visibleSegments = _getVisibleSegmentStates(searchState)
+    if (!allowEmpty) {
+      const visibleSegments = _getVisibleSegmentStates(searchState)
 
-    // all valid segmentValue are not allowd to be undefined or null
-    // when current value isn't valid, return immediatly
-    if (visibleSegments.some(state => isNil(state.value))) {
-      return false
+      // all valid segmentValue are not allowd to be undefined or null
+      // when current value isn't valid, return immediatly
+      if (visibleSegments.some(state => isNil(state.value))) {
+        return false
+      }
     }
 
     const count = dataKeyCountMap.get(searchState.fieldKey)
@@ -206,7 +208,8 @@ export function useSearchStates(
     // if there are more than one searchState of the same field key
     // check whether mutiple searchState is allowed from the field config
     if (count && count > 1) {
-      return !!props.searchFields?.find(field => field.key === searchState.fieldKey)?.multiple
+      const searchField = findSearchField(searchState.fieldKey)
+      return !!searchField?.multiple
     }
 
     // all validations are passed
@@ -235,6 +238,10 @@ export function useSearchStates(
       const count = dataKeyCountMap.get(fieldKey)
       dataKeyCountMap.set(fieldKey, (count ?? 0) + 1)
     }
+    const _decrementCount = (fieldKey: VKey) => {
+      const count = dataKeyCountMap.get(fieldKey)
+      dataKeyCountMap.set(fieldKey, count && count > 0 ? count - 1 : 0)
+    }
 
     const createdStates = getMarks()
       .map(({ key, mark }) => mark === 'created' && getSearchStateByKey(key))
@@ -246,13 +253,20 @@ export function useSearchStates(
     const addCreatedState = (state: SearchState) => {
       const fieldKey = state.fieldKey
       const key = _getKey(fieldKey)
+      _incrementCount(fieldKey)
+
+      if (!checkSearchStateValid(state, dataKeyCountMap, true)) {
+        _decrementCount(fieldKey)
+        return
+      }
+
+      unmark(state.key)
+      mark(key, 'created')
 
       newStates.push({
         ...state,
         key,
       })
-
-      _incrementCount(fieldKey)
     }
     const addNewState = (searchValue: SearchValue | undefined) => {
       if (!searchValue) {
@@ -265,15 +279,34 @@ export function useSearchStates(
         return
       }
 
-      const key = _getKey(fieldKey)
+      let insertIndex = newStates.length
+      let key = _getKey(fieldKey)
+      let hasCreatedState = false
+
       const segmentStates = generateSegmentStates(searchField, searchValue)
-      const searchState = { key, index: newStates.length, fieldKey, searchValue, segmentStates } as SearchState
+      const searchState = { fieldKey, searchValue, segmentStates } as SearchState
+
+      if (!searchField.multiple) {
+        const createdStateIndex = newStates.findIndex(state => state.fieldKey === fieldKey)
+        hasCreatedState = createdStateIndex > -1
+
+        if (hasCreatedState) {
+          key = newStates[createdStateIndex].key
+          insertIndex = createdStateIndex
+          _decrementCount(fieldKey)
+        }
+      }
+
+      _incrementCount(fieldKey)
       if (!checkSearchStateValid(searchState, dataKeyCountMap)) {
+        !hasCreatedState && _decrementCount(fieldKey)
         return
       }
 
-      newStates.push(searchState)
-      _incrementCount(fieldKey)
+      searchState.key = key
+      searchState.index = insertIndex
+
+      newStates[insertIndex] = searchState
     }
 
     while (newStateIndex < (searchValues.value?.length ?? -1) || createStateIndex < createdStates.length) {
