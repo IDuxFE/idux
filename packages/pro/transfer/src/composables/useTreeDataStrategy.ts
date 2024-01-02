@@ -90,8 +90,8 @@ const genDisabledKeys = <V extends TreeTransferData<V, C>, C extends string>(
 }
 
 function createSeparateDataSourceFn<V extends TreeTransferData<V, C>, C extends string>(
-  childrenKey: ComputedRef<C>,
-  cachedTargetData: Ref<V[]>,
+  childrenKey: C,
+  cachedTargetData: { value: V[] },
   cascaderStrategy: CascaderStrategy,
   targetDataCount: Ref<number>,
   dataMap: Map<VKey, V>,
@@ -108,8 +108,7 @@ function createSeparateDataSourceFn<V extends TreeTransferData<V, C>, C extends 
         case 'off':
           return (item, _, isSource) => selectedKeySet.has(getKey(item)) !== isSource
         case 'child':
-          return (item, _, isSource) =>
-            selectedKeySet.has(getKey(item)) !== isSource && !item[childrenKey.value]?.length
+          return (item, _, isSource) => selectedKeySet.has(getKey(item)) !== isSource && !item[childrenKey]?.length
         case 'parent':
           return (item, parent, isSource) =>
             [item, ...parent].map(getKey).some(key => selectedKeySet.has(key)) !== isSource
@@ -120,7 +119,7 @@ function createSeparateDataSourceFn<V extends TreeTransferData<V, C>, C extends 
       if (isSource || cascaderStrategy !== 'off') {
         return filterTree(
           data,
-          childrenKey.value,
+          childrenKey,
           (item, parent, filteredChildren) => {
             const filterRes = filterFn(item, parent, isSource)
 
@@ -137,9 +136,9 @@ function createSeparateDataSourceFn<V extends TreeTransferData<V, C>, C extends 
       }
 
       const res: V[] = []
-      traverseTree(data, childrenKey.value, (item, parent) => {
+      traverseTree(data, childrenKey, (item, parent) => {
         if (filterFn(item, parent, isSource)) {
-          res.push({ ...item, [childrenKey.value]: undefined })
+          res.push({ ...item, [childrenKey]: undefined })
         }
       })
       return res
@@ -157,15 +156,14 @@ function createSeparateDataSourceFn<V extends TreeTransferData<V, C>, C extends 
 
     // merge new data with previous data
     // beacause we intend to cache selected data after dataSource changes
-    const targetData = mergeTree(previousTargetData, newTargetData, childrenKey.value, getKey)
+    const targetData = mergeTree(previousTargetData, newTargetData, childrenKey, getKey)
     cachedTargetData.value = targetData
 
     targetDataCount.value = cascaderStrategy === 'off' ? targetData.length : dataMap.size - sourceDataKeySet.size
 
     return {
       sourceData,
-      targetData:
-        cascaderStrategy === 'off' ? targetData : flattenTargetTree(targetData, childrenKey.value, flatTargetData),
+      targetData: cascaderStrategy === 'off' ? targetData : flattenTargetTree(targetData, childrenKey, flatTargetData),
     }
   }
 }
@@ -194,7 +192,7 @@ function createStrategy<V extends TreeTransferData<V, C>, C extends string>(
     getAllSelectedKeys: (selected, data, selectedKeySet, disabledKeySet) =>
       getAllSelectedKeys(selected, checkStateResolver, data, selectedKeySet, disabledKeySet),
     separateDataSource: createSeparateDataSourceFn(
-      childrenKey,
+      childrenKey.value,
       cachedTargetData,
       cascaderStrategy,
       targetDataCount,

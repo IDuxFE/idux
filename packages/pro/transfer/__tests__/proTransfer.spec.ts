@@ -202,14 +202,14 @@ describe('ProTransfer', () => {
     await sourceTree.findAll('.ix-tree-node')[0].find('input').setValue(true)
     await appendTrigger.trigger('click')
 
-    expect(onChange).toBeCalledWith(['1-2-2', '1', '1-2', '1-2-1', '1-1', '1-3'], ['1-2-2'])
+    expect(onChange).toBeCalledWith(['1-2-2', '1', '1-1', '1-2', '1-2-1', '1-3'], ['1-2-2'])
 
-    await wrapper.setProps({ value: ['1-2-2', '1', '1-2', '1-2-1', '1-1', '1-3'] })
+    await wrapper.setProps({ value: ['1-2-2', '1', '1-1', '1-2', '1-2-1', '1-3'] })
 
     await targetTree.findAll('.ix-tree-node')[0].find('input').setValue(true)
     await removeTrigger.trigger('click')
 
-    expect(onChange).toBeCalledWith(['1-2-2'], ['1-2-2', '1', '1-2', '1-2-1', '1-1', '1-3'])
+    expect(onChange).toBeCalledWith(['1-2-2'], ['1-2-2', '1', '1-1', '1-2', '1-2-1', '1-3'])
   })
 
   test('table immediate work', async () => {

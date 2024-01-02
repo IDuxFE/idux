@@ -29,7 +29,7 @@ export interface TreeDataStrategyContext<
   parentKeyMap: Map<VKey, VKey>
   getKey: ComputedRef<GetKeyFn>
   childrenKey: ComputedRef<C>
-  cachedTargetData: Ref<V[]>
+  cachedTargetData: { value: V[] }
   targetDataCount: Ref<number>
 }
 
@@ -39,7 +39,7 @@ export function useTreeDataStrategyContext<V extends TreeTransferData<V, C>, C e
   getKey: ComputedRef<GetKeyFn>,
   cascadeStrategy: ComputedRef<TreeCascadeStrategy>,
 ): TreeDataStrategyContext<V, C> {
-  const cachedTargetData = ref(props.defaultTargetData ?? []) as Ref<V[]>
+  const cachedTargetData = { value: props.defaultTargetData ?? [] } as { value: V[] }
   const targetDataCount = ref(0)
   const dataMap: Map<VKey, V> = new Map()
   const parentKeyMap: Map<VKey, VKey> = new Map()
