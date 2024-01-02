@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.4](https://github.com/IDuxFE/idux/compare/v1.12.2...v1.12.4) (2024-01-02)
+
+
+### Bug Fixes
+
+* **comp:button:** pointer events sholud be none when disabled ([#1744](https://github.com/IDuxFE/idux/issues/1744)) ([2ca124d](https://github.com/IDuxFE/idux/commit/2ca124d5b8ee8a20496e67970d0e563fe2e8dba1))
+* **comp:desc:** header component does not take effect ([#1742](https://github.com/IDuxFE/idux/issues/1742)) ([dd1aab8](https://github.com/IDuxFE/idux/commit/dd1aab86dc429858d8919ff9c438839d7f688e32))
+* **comp:desc:** use div to wrap header slot ([#1752](https://github.com/IDuxFE/idux/issues/1752)) ([dd31ee4](https://github.com/IDuxFE/idux/commit/dd31ee4aee432327eab90356625bbd8ed91c01af))
+* **comp:input:** sufix click does not effect ([#1745](https://github.com/IDuxFE/idux/issues/1745)) ([4769dcd](https://github.com/IDuxFE/idux/commit/4769dcd7f58f56662b6098e77ad9009aa2eafdea))
+* **comp:radio:** gap behaves abnormally when configured without 0px ([#1740](https://github.com/IDuxFE/idux/issues/1740)) ([9ecd14a](https://github.com/IDuxFE/idux/commit/9ecd14aa5663399f1e3c92d3f40d8f5f05ad9dee))
+* **pro:search:** non-multiple field created state should be overwritten by new state ([#1778](https://github.com/IDuxFE/idux/issues/1778)) ([617c192](https://github.com/IDuxFE/idux/commit/617c192e190ef902e591b4fb3e1de6227ee50946))
+
+
+
+
+
 ## [1.12.3](https://github.com/IDuxFE/idux/compare/v1.12.2...v1.12.3) (2023-12-05)
 
 
