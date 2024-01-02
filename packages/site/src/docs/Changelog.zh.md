@@ -10,6 +10,13 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 1.12.4(2024-01-02)
+
+
+### Bug Fixes
+
+* **pro:search:** 非multiple的搜索项，受控添加的新搜索项应当覆盖创建但未确认的搜索项 ([#1778](https://github.com/IDuxFE/idux/issues/1778)) ([617c192](https://github.com/IDuxFE/idux/commit/617c192e190ef902e591b4fb3e1de6227ee50946))
+
 ## 1.12.3(2023-12-05)
 
 
