@@ -28,8 +28,10 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     heightLg: heightXl,
     heightXl: height2xl,
 
-    barWidth: 4,
+    barWidth: 2,
     barBgColor: colorPrimary,
+    barBorderRadius: 0,
+    barMarginRight: 6,
 
     prefixColor: colorText,
     prefixColorHover: colorPrimaryText,
