@@ -57,9 +57,11 @@ export default defineComponent({
 
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
+      const gap = mergedGap.value
       return {
         [prefixCls]: true,
         [`${prefixCls}-clickable`]: props.clickable,
+        [`${prefixCls}-compact`]: !gap || gap === '0',
       }
     })
 
