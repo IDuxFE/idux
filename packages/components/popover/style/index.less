@@ -16,16 +16,16 @@
     z-index: 1;
 
     > .@{header-prefix} {
-      padding-left: 12px;
-      padding-right: 12px;
+      padding-left: var(--ix-padding-size-md);
+      padding-right: var(--ix-padding-size-md);
     }
   }
 
   &-content {
-    padding: 12px;
+    padding: var(--ix-padding-size-sm) var(--ix-padding-size-md);
   }
 
   .@{header-prefix} + &-content {
-    padding-top: 4px;
+    padding-top: var(--ix-padding-size-xs);
   }
 }
