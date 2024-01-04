@@ -9,10 +9,11 @@
     :virtualColWidth="150"
   >
   </IxTable>
+  <IxButton @click="toggleEmpty"> ToggleEmpty </IxButton>
 </template>
 
 <script lang="ts" setup>
-import { h } from 'vue'
+import { h, ref } from 'vue'
 
 import { TableColumn } from '@idux/components/table'
 import { IxText } from '@idux/components/text'
@@ -42,7 +43,7 @@ for (let index = 0; index < columnCount; index++) {
   })
 }
 
-const data: Data[] = []
+const fullData: Data[] = []
 for (let index = 0; index < rowCount; index++) {
   const item: Data = { key: index }
 
@@ -50,8 +51,18 @@ for (let index = 0; index < rowCount; index++) {
     item[`column${colIndex}`] = `row-${index} col-${colIndex} hahahahahahahahahahah`
   }
 
-  data.push(item)
+  fullData.push(item)
 }
 
-const scroll = { height: 800 }
+const data = ref<Data[]>(fullData)
+
+const toggleEmpty = () => {
+  if (data.value.length > 0) {
+    data.value = []
+  } else {
+    data.value = fullData
+  }
+}
+
+const scroll = { height: 800, fullHeight: true }
 </script>

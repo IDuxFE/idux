@@ -45,7 +45,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
             <!---->
             
             <div
-              class="ix-table-container ix-table-fixed-layout ix-table-inset-shadow ix-table-scroll-vertical"
+              class="ix-table-container ix-table-fixed-layout ix-table-inset-shadow"
             >
               
               <!---->
@@ -135,7 +135,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
               </div>
               <div
                 class="ix-table-content"
-                style="overflow-y: scroll; max-height: auto;"
+                style="overflow-x: auto; overflow-y: auto;"
               >
                 <table
                   class="ix-table-table"
@@ -155,6 +155,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                     class="ix-table-tbody"
                   >
                     
+                    <!---->
                     <tr
                       aria-hidden="true"
                       class="ix-table-measure-row"
@@ -199,6 +200,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       </td>
                       
                     </tr>
+                    <!---->
                     
                     <tr
                       class="ix-table-row"
@@ -1192,7 +1194,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
             <!---->
             
             <div
-              class="ix-table-container ix-table-fixed-layout ix-table-inset-shadow ix-table-scroll-vertical"
+              class="ix-table-container ix-table-fixed-layout ix-table-inset-shadow"
             >
               
               <!---->
@@ -1270,7 +1272,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
               </div>
               <div
                 class="ix-table-content"
-                style="overflow-y: scroll; max-height: auto;"
+                style="overflow-x: auto; overflow-y: auto;"
               >
                 <table
                   class="ix-table-table"
@@ -1288,6 +1290,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                     class="ix-table-tbody"
                   >
                     
+                    <!---->
                     <tr
                       aria-hidden="true"
                       class="ix-table-measure-row"
@@ -1314,6 +1317,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       </td>
                       
                     </tr>
+                    <!---->
                     
                     <tr
                       class="ix-table-row"

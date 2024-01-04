@@ -1,19 +1,22 @@
 <template>
-  <IxTable :columns="columns" :dataSource="data">
-    <template #name="{ value }">
-      <IxButton mode="link">{{ value }}</IxButton>
-    </template>
-    <template #action="{ record }">
-      <IxButtonGroup :gap="8" mode="link" separator="|">
-        <IxButton>Invite {{ record.name }}</IxButton>
-        <IxButton>Delete</IxButton>
-      </IxButtonGroup>
-    </template>
-  </IxTable>
+  <IxSpace vertical style="width: 100%">
+    <IxTable :columns="columns" :dataSource="data">
+      <template #name="{ value }">
+        <IxButton mode="link">{{ value }}</IxButton>
+      </template>
+      <template #action="{ record }">
+        <IxButtonGroup :gap="8" mode="link" separator="|">
+          <IxButton>Invite {{ record.name }}</IxButton>
+          <IxButton>Delete</IxButton>
+        </IxButtonGroup>
+      </template>
+    </IxTable>
+    <IxButton @click="toggleEmpty"> ToggleEmpty </IxButton>
+  </IxSpace>
 </template>
 
 <script lang="ts" setup>
-import { h } from 'vue'
+import { h, ref } from 'vue'
 
 import { TableColumn } from '@idux/components/table'
 import { IxTag } from '@idux/components/tag'
@@ -59,14 +62,24 @@ const columns: TableColumn<Data>[] = [
   },
 ]
 
-const data: Data[] = []
+const fullData: Data[] = []
 for (let index = 0; index < 100; index++) {
-  data.push({
+  fullData.push({
     key: index,
     name: `Edrward ${index}`,
     age: 18 + index,
     address: `London Park no. ${index}`,
     tags: ['nice', 'developer'],
   })
+}
+
+const data = ref<Data[]>(fullData)
+
+const toggleEmpty = () => {
+  if (data.value.length > 0) {
+    data.value = []
+  } else {
+    data.value = fullData
+  }
 }
 </script>

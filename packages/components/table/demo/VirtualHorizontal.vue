@@ -1,9 +1,13 @@
 <template>
   <IxTable :columns="columns" :dataSource="data" :pagination="false" virtualHorizontal :virtualColWidth="150">
   </IxTable>
+  <br />
+  <IxButton @click="toggleEmpty"> ToggleEmpty </IxButton>
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
+
 import { TableColumn } from '@idux/components/table'
 
 interface Data {
@@ -25,7 +29,7 @@ for (let index = 0; index < columnCount; index++) {
   })
 }
 
-const data: Data[] = []
+const fullData: Data[] = []
 for (let index = 0; index < 8; index++) {
   const item: Data = { key: index }
 
@@ -33,6 +37,16 @@ for (let index = 0; index < 8; index++) {
     item[`column${colIndex}`] = `row-${index} col-${colIndex}`
   }
 
-  data.push(item)
+  fullData.push(item)
+}
+
+const data = ref<Data[]>(fullData)
+
+const toggleEmpty = () => {
+  if (data.value.length > 0) {
+    data.value = []
+  } else {
+    data.value = fullData
+  }
 }
 </script>

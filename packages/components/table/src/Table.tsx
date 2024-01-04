@@ -67,7 +67,7 @@ export default defineComponent({
     const { mergedPagination } = usePagination(props, config, mergedSize)
 
     const stickyContext = useSticky(props)
-    const scrollContext = useScroll(props, mergedAutoHeight, stickyContext)
+    const scrollContext = useScroll(props, stickyContext)
     const columnsContext = useColumns(props, slots, config, scrollContext.scrollBarSizeOnFixedHolder)
     const sortableContext = useSortable(columnsContext.flattedColumns)
     const filterableContext = useFilterable(columnsContext.flattedColumns)
@@ -145,14 +145,21 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const header = <ɵHeader v-slots={slots} header={props.header} />
       const footer = renderFooter(slots, prefixCls)
-      const [paginationTop, paginationBottom] = renderPagination(
-        slots,
-        mergedPagination.value,
-        filteredData.value,
-        prefixCls,
-      )
+
       const children = [header]
-      const resetChildren = [paginationTop, <MainTable />, footer, paginationBottom].filter(Boolean) as VNode[]
+      let resetChildren = [<MainTable />, footer].filter(Boolean) as VNode[]
+
+      if (flattedData.value.length > 0) {
+        const [paginationTop, paginationBottom] = renderPagination(
+          slots,
+          mergedPagination.value,
+          filteredData.value,
+          prefixCls,
+        )
+
+        resetChildren = [paginationTop, ...resetChildren, paginationBottom].filter(Boolean) as VNode[]
+      }
+
       const spinProps = convertSpinProps(props.spin)
       if (spinProps) {
         children.push(<IxSpin {...spinProps}>{resetChildren}</IxSpin>)

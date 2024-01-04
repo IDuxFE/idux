@@ -1,5 +1,11 @@
 <template>
-  <IxTable v-model:expandedRowKeys="expandedRowKeys" :columns="columns" :dataSource="data" :pagination="false">
+  <IxTable
+    v-model:expandedRowKeys="expandedRowKeys"
+    tableLayout="fixed"
+    :columns="columns"
+    :dataSource="data"
+    :pagination="false"
+  >
     <template #name="{ value }">
       <IxButton mode="link">{{ value }}</IxButton>
     </template>
@@ -27,22 +33,67 @@ const expandedRowKeys = ref([1])
 const columns: TableColumn<Data>[] = [
   {
     type: 'expandable',
+    width: 60,
+    fixed: 'start',
     disabled: record => !record.description,
     onChange: expendedRowKeys => console.log(expendedRowKeys),
     customExpand: 'expand',
   },
   {
+    width: 400,
     title: 'Name',
     dataKey: 'name',
     customCell: 'name',
   },
   {
+    width: 200,
     title: 'Age',
     dataKey: 'age',
   },
   {
+    width: 400,
     title: 'Address',
     dataKey: 'address',
+  },
+  {
+    width: 400,
+    title: 'data1',
+    dataKey: 'data1',
+  },
+  {
+    width: 400,
+    title: 'data2',
+    dataKey: 'data2',
+  },
+  {
+    width: 400,
+    title: 'data3',
+    dataKey: 'data3',
+  },
+  {
+    width: 400,
+    title: 'data4',
+    dataKey: 'data4',
+  },
+  {
+    width: 400,
+    title: 'data5',
+    dataKey: 'data5',
+  },
+  {
+    width: 400,
+    title: 'data6',
+    dataKey: 'data6',
+  },
+  {
+    width: 400,
+    title: 'data7',
+    dataKey: 'data7',
+  },
+  {
+    width: 400,
+    title: 'data8',
+    dataKey: 'data8',
   },
 ]
 

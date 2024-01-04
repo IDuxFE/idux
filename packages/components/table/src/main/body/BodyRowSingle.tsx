@@ -5,22 +5,24 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type VNodeChild, computed, defineComponent, inject } from 'vue'
+import type { TableColumnMerged } from '../../composables/useColumns'
+
+import { type PropType, type VNodeChild, computed, defineComponent, inject } from 'vue'
 
 import { convertCssPixel } from '@idux/cdk/utils'
 
 import { TABLE_TOKEN, tableBodyToken } from '../../token'
 
 export default defineComponent({
-  props: { isEmpty: Boolean },
+  props: { columns: Array as PropType<TableColumnMerged[]>, isEmpty: Boolean },
   setup(props, { slots }) {
-    const { mergedPrefixCls, flattedColumns, hasFixed, scrollWidth, scrollBarColumn } = inject(TABLE_TOKEN)!
+    const { mergedPrefixCls, hasFixed, scrollHorizontalOverflowed, scrollBarColumn } = inject(TABLE_TOKEN)!
     const { mainTableWidth } = inject(tableBodyToken)!
-    const columnCount = computed(() => flattedColumns.value.length)
+    const columnCount = computed(() => props.columns?.length ?? 1)
     return () => {
       let children: VNodeChild = slots.default!()
 
-      if (props.isEmpty ? scrollWidth.value : hasFixed.value) {
+      if (props.isEmpty ? scrollHorizontalOverflowed.value : hasFixed.value) {
         const scrollBar = scrollBarColumn.value
         children = (
           <div
@@ -38,7 +40,7 @@ export default defineComponent({
       }
       return (
         <tr>
-          <td colSpan={columnCount.value}>{children}</td>
+          <td colspan={columnCount.value}>{children}</td>
         </tr>
       )
     }
