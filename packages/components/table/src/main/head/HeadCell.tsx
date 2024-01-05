@@ -70,8 +70,8 @@ export default defineComponent({
         [`${prefixCls}-cell-${type}`]: !!type,
         [`${prefixCls}-cell-filterable`]: !!filterable,
         [`${prefixCls}-cell-sortable`]: !!sortable,
-        [`${prefixCls}-cell-align-center`]: hasChildren || align === 'center',
-        [`${prefixCls}-cell-align-end`]: !hasChildren && align === 'end',
+        [`${prefixCls}-cell-align-center`]: hasChildren || align?.title === 'center',
+        [`${prefixCls}-cell-align-end`]: !hasChildren && align?.title === 'end',
         [`${prefixCls}-cell-ellipsis`]: !!mergedEllipsis.value,
       }
       if (fixed) {

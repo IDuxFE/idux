@@ -70,7 +70,7 @@ export default defineComponent({
       let classes = {
         [`${prefixCls}-cell`]: true,
         [`${prefixCls}-cell-sorted`]: !!activeSortOrderBy.value,
-        [`${prefixCls}-cell-align-${align}`]: !!align && align != 'start',
+        [`${prefixCls}-cell-align-${align.cell}`]: !!align && align.cell != 'start',
         [`${prefixCls}-cell-ellipsis`]: !!mergedEllipsis.value,
       }
       if (fixed) {

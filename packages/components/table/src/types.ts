@@ -87,7 +87,7 @@ export type TableColumn<T = any, K = VKey> =
 
 export interface TableColumnCommon<T = any> {
   key?: VKey
-  align?: TableColumnAlign
+  align?: TableColumnAlign | { title: TableColumnAlign; cell: TableColumnAlign }
   colSpan?: (record: T, rowIndex: number) => number
   rowSpan?: (record: T, rowIndex: number) => number
   fixed?: TableColumnFixed
