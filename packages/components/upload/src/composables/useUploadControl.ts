@@ -32,7 +32,7 @@ export function useUploadControl(fileList: ComputedRef<UploadFile[]>, uploadRequ
   watch(
     [proxyedFileList, () => proxyedFileList.value.length],
     ([currentFileList, currentLength], [preFileList, preLength]) => {
-      if (currentLength === preLength) {
+      if (currentLength === preLength && currentLength !== 1 && preLength !== 1) {
         return
       }
 
