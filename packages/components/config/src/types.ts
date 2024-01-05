@@ -497,7 +497,7 @@ export interface TableConfig {
 }
 
 export interface TableColumnBaseConfig {
-  align: TableColumnAlign
+  align: TableColumnAlign | { title: TableColumnAlign; cell: TableColumnAlign }
   filterable: { multiple: boolean; footer: true }
   sortable: { nextTooltip: boolean; orders: TableColumnSortOrder[] }
 }

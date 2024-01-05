@@ -79,8 +79,14 @@
         &-top-line {
           position: absolute;
           height: calc(var(--ix-tree-node-content-height) / 2 - 4px);
-          /* stylelint-disable function-no-unknown */
           top: calc((var(--ix-tree-node-content-height) / 4 - 4px) * -1);
+          right: 50%;
+          .vertical-line();
+        }
+        &-bottom-line {
+          position: absolute;
+          height: calc(var(--ix-tree-node-content-height) / 2 - 4px);
+          bottom: calc((var(--ix-tree-node-content-height) / 4 - 4px) * -1);
           right: 50%;
           .vertical-line();
         }
@@ -88,8 +94,8 @@
         &::after {
           position: absolute;
           top: calc(50% - var(--ix-line-width) / 2);
-          right: -2px;
-          width: calc(var(--ix-tree-node-icon-width) / 4);
+          right: 0;
+          width: calc((var(--ix-tree-node-icon-width) - var(--ix-font-size-icon)) / 2);
           z-index: 1;
           .horizontal-line();
 
@@ -125,7 +131,7 @@
           position: absolute;
           top: calc(var(--ix-tree-node-padding-vertical) * -1);
           right: calc(var(--ix-tree-node-icon-width) / 2);
-          bottom: calc(var(--ix-tree-node-padding-vertical) * -1 + 1px);
+          bottom: calc(var(--ix-tree-node-padding-vertical) * -1);
           .vertical-line();
 
           content: '';
@@ -192,7 +198,7 @@
     }
   }
 
-  &-checkbox {
+  & &-checkbox {
     margin: var(--ix-tree-node-checkbox-margin);
   }
 
@@ -216,7 +222,7 @@
         position: absolute;
         top: calc(var(--ix-tree-node-padding-vertical) * -1);
         right: calc(var(--ix-tree-node-icon-width) / 2);
-        bottom: calc(var(--ix-tree-node-padding-vertical) * -1 + 1px);
+        bottom: calc(var(--ix-tree-node-padding-vertical) * -1);
         .vertical-line();
 
         content: ' ';
@@ -224,9 +230,9 @@
 
       &::after {
         position: absolute;
-        top: 50%;
+        top: calc(50% - var(--ix-line-width));
         bottom: 0;
-        left: 55%;
+        left: 50%;
         right: 0;
         .horizontal-line();
 

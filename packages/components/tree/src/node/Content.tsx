@@ -18,12 +18,11 @@ import { treeNodeContentProps } from '../types'
 
 export default defineComponent({
   props: treeNodeContentProps,
-  setup(props) {
+  setup(props, { slots }) {
     const {
       props: treeProps,
       mergedPrefixCls,
       mergedCheckOnClick,
-      slots,
       handleSelect,
       handleCheck,
       searchedKeys,

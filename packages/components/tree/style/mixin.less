@@ -1,24 +1,12 @@
 // https://www.zhangxinxu.com/study/201710/css3-linear-gradient-dashed-generate.html
 .horizontal-line() {
   height: var(--ix-line-width);
-  background: linear-gradient(
-    to right,
-    var(--ix-color-border),
-    var(--ix-color-border) 2.25px,
-    transparent 2.25px,
-    transparent
-  );
+  background-color: var(--ix-color-separator);
   background-size: 3px 100%;
 }
 
 .vertical-line() {
   width: var(--ix-line-width);
-  background: linear-gradient(
-    to bottom,
-    var(--ix-color-border),
-    var(--ix-color-border) 2.25px,
-    transparent 2.25px,
-    transparent
-  );
+  background-color: var(--ix-color-separator);
   background-size: 100% 3px;
 }

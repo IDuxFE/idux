@@ -80,7 +80,6 @@ export default defineComponent({
 
     provide(treeToken, {
       props,
-      slots,
       config,
       flattedNodes,
       mergedPrefixCls,
@@ -206,7 +205,7 @@ export default defineComponent({
           >
             <div class={`${mergedPrefixCls.value}-content-inner`}>
               {nodes.map(item => (
-                <TreeNode node={item} {...item}></TreeNode>
+                <TreeNode v-slots={slots} node={item} {...item}></TreeNode>
               ))}
             </div>
           </div>

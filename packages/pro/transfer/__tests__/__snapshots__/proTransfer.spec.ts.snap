@@ -1618,17 +1618,15 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
-                      height="14px"
                       viewBox="0 0 16 16"
-                      width="14px"
                     >
                       <rect
-                        height="16"
+                        height="14"
                         rx="1"
                         style="fill: var(--ix-color-emphasized-container-bg);"
-                        width="16"
-                        x="0"
-                        y="0"
+                        width="14"
+                        x="1"
+                        y="1"
                       />
                       <rect
                         height="2"
@@ -1640,6 +1638,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <!---->
                     </svg>
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -1700,6 +1699,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   <span
                     class="ix-tree-node-expand ix-tree-node-expand-noop"
                   >
+                    <!---->
                     <!---->
                     <!---->
                   </span>
@@ -1764,6 +1764,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <!---->
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -1823,17 +1824,15 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
-                      height="14px"
                       viewBox="0 0 16 16"
-                      width="14px"
                     >
                       <rect
-                        height="16"
+                        height="14"
                         rx="1"
                         style="fill: var(--ix-color-emphasized-container-bg);"
-                        width="16"
-                        x="0"
-                        y="0"
+                        width="14"
+                        x="1"
+                        y="1"
                       />
                       <rect
                         height="2"
@@ -1845,6 +1844,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <!---->
                     </svg>
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -1905,6 +1905,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   <span
                     class="ix-tree-node-expand ix-tree-node-expand-noop"
                   >
+                    <!---->
                     <!---->
                     <!---->
                   </span>
@@ -1969,17 +1970,15 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
-                      height="14px"
                       viewBox="0 0 16 16"
-                      width="14px"
                     >
                       <rect
-                        height="16"
+                        height="14"
                         rx="1"
                         style="fill: var(--ix-color-emphasized-container-bg);"
-                        width="16"
-                        x="0"
-                        y="0"
+                        width="14"
+                        x="1"
+                        y="1"
                       />
                       <rect
                         height="2"
@@ -1991,6 +1990,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <!---->
                     </svg>
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -2054,6 +2054,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   <span
                     class="ix-tree-node-expand ix-tree-node-expand-noop"
                   >
+                    <!---->
                     <!---->
                     <!---->
                   </span>
@@ -2121,6 +2122,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <!---->
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -2184,6 +2186,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <!---->
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -2243,17 +2246,15 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
-                      height="14px"
                       viewBox="0 0 16 16"
-                      width="14px"
                     >
                       <rect
-                        height="16"
+                        height="14"
                         rx="1"
                         style="fill: var(--ix-color-emphasized-container-bg);"
-                        width="16"
-                        x="0"
-                        y="0"
+                        width="14"
+                        x="1"
+                        y="1"
                       />
                       <rect
                         height="2"
@@ -2265,6 +2266,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <!---->
                     </svg>
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -2325,6 +2327,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   <span
                     class="ix-tree-node-expand ix-tree-node-expand-noop"
                   >
+                    <!---->
                     <!---->
                     <!---->
                   </span>
@@ -2389,17 +2392,15 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
-                      height="14px"
                       viewBox="0 0 16 16"
-                      width="14px"
                     >
                       <rect
-                        height="16"
+                        height="14"
                         rx="1"
                         style="fill: var(--ix-color-emphasized-container-bg);"
-                        width="16"
-                        x="0"
-                        y="0"
+                        width="14"
+                        x="1"
+                        y="1"
                       />
                       <rect
                         height="2"
@@ -2411,6 +2412,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <!---->
                     </svg>
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -2474,6 +2476,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   <span
                     class="ix-tree-node-expand ix-tree-node-expand-noop"
                   >
+                    <!---->
                     <!---->
                     <!---->
                   </span>
@@ -2541,6 +2544,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <!---->
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -2604,6 +2608,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <!---->
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -2663,17 +2668,15 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
-                      height="14px"
                       viewBox="0 0 16 16"
-                      width="14px"
                     >
                       <rect
-                        height="16"
+                        height="14"
                         rx="1"
                         style="fill: var(--ix-color-emphasized-container-bg);"
-                        width="16"
-                        x="0"
-                        y="0"
+                        width="14"
+                        x="1"
+                        y="1"
                       />
                       <rect
                         height="2"
@@ -2685,6 +2688,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <!---->
                     </svg>
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -2745,6 +2749,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   <span
                     class="ix-tree-node-expand ix-tree-node-expand-noop"
                   >
+                    <!---->
                     <!---->
                     <!---->
                   </span>
@@ -2809,17 +2814,15 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
-                      height="14px"
                       viewBox="0 0 16 16"
-                      width="14px"
                     >
                       <rect
-                        height="16"
+                        height="14"
                         rx="1"
                         style="fill: var(--ix-color-emphasized-container-bg);"
-                        width="16"
-                        x="0"
-                        y="0"
+                        width="14"
+                        x="1"
+                        y="1"
                       />
                       <rect
                         height="2"
@@ -2831,6 +2834,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <!---->
                     </svg>
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -2894,6 +2898,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   <span
                     class="ix-tree-node-expand ix-tree-node-expand-noop"
                   >
+                    <!---->
                     <!---->
                     <!---->
                   </span>
@@ -2961,6 +2966,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <!---->
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -3024,6 +3030,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <!---->
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -3083,17 +3090,15 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
-                      height="14px"
                       viewBox="0 0 16 16"
-                      width="14px"
                     >
                       <rect
-                        height="16"
+                        height="14"
                         rx="1"
                         style="fill: var(--ix-color-emphasized-container-bg);"
-                        width="16"
-                        x="0"
-                        y="0"
+                        width="14"
+                        x="1"
+                        y="1"
                       />
                       <rect
                         height="2"
@@ -3105,6 +3110,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <!---->
                     </svg>
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -3165,6 +3171,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   <span
                     class="ix-tree-node-expand ix-tree-node-expand-noop"
                   >
+                    <!---->
                     <!---->
                     <!---->
                   </span>
@@ -3229,17 +3236,15 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
-                      height="14px"
                       viewBox="0 0 16 16"
-                      width="14px"
                     >
                       <rect
-                        height="16"
+                        height="14"
                         rx="1"
                         style="fill: var(--ix-color-emphasized-container-bg);"
-                        width="16"
-                        x="0"
-                        y="0"
+                        width="14"
+                        x="1"
+                        y="1"
                       />
                       <rect
                         height="2"
@@ -3251,6 +3256,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <!---->
                     </svg>
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -3314,6 +3320,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   <span
                     class="ix-tree-node-expand ix-tree-node-expand-noop"
                   >
+                    <!---->
                     <!---->
                     <!---->
                   </span>
@@ -3381,6 +3388,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <!---->
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -3442,6 +3450,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   <span
                     class="ix-tree-node-expand ix-tree-node-expand-noop"
                   >
+                    <!---->
                     <!---->
                     <!---->
                   </span>
@@ -3643,17 +3652,15 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
-                      height="14px"
                       viewBox="0 0 16 16"
-                      width="14px"
                     >
                       <rect
-                        height="16"
+                        height="14"
                         rx="1"
                         style="fill: var(--ix-color-emphasized-container-bg);"
-                        width="16"
-                        x="0"
-                        y="0"
+                        width="14"
+                        x="1"
+                        y="1"
                       />
                       <rect
                         height="2"
@@ -3665,6 +3672,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <!---->
                     </svg>
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -3727,17 +3735,15 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
-                      height="14px"
                       viewBox="0 0 16 16"
-                      width="14px"
                     >
                       <rect
-                        height="16"
+                        height="14"
                         rx="1"
                         style="fill: var(--ix-color-emphasized-container-bg);"
-                        width="16"
-                        x="0"
-                        y="0"
+                        width="14"
+                        x="1"
+                        y="1"
                       />
                       <rect
                         height="2"
@@ -3749,6 +3755,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                       />
                       <!---->
                     </svg>
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -3814,6 +3821,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <!---->
+                    <!---->
                   </span>
                   <label
                     aria-checked="false"
@@ -3877,6 +3885,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   <span
                     class="ix-tree-node-expand ix-tree-node-expand-noop"
                   >
+                    <!---->
                     <!---->
                     <!---->
                   </span>

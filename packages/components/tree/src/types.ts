@@ -262,6 +262,10 @@ export const treeNodeExpandProps = {
     type: Boolean,
     default: undefined,
   },
+  hasBottomLine: {
+    type: Boolean,
+    default: undefined,
+  },
   isLeaf: {
     type: Boolean,
     default: undefined,
