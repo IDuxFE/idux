@@ -23,7 +23,7 @@ export function usePopperOptions(options: PopperOptions): {
     delay: options.delay ?? defaultDelay,
     disabled: options.disabled ?? false,
     offset: options.offset ?? [0, 0],
-    placement: options.placement ?? 'top',
+    placement: options.placement ?? 'bottomStart',
     trigger: options.trigger ?? 'hover',
     visible: options.visible ?? false,
     strategy: options.strategy ?? 'absolute',
