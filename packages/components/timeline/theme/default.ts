@@ -7,7 +7,7 @@
 
 import type { CertainThemeTokens, GlobalThemeTokens } from '@idux/components/theme'
 export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTokens<'timeline'> {
-  const { fontSizeSm, marginSizeSm, colorSeparator } = tokens
+  const { fontSizeSm, marginSizeSm, marginSizeLg, colorSeparator } = tokens
 
   return {
     fontSize: fontSizeSm,
@@ -18,6 +18,6 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     lineBgColor: colorSeparator,
 
     pendingItemContentMinWidth: 40,
-    contentMarginBottom: 20,
+    contentMarginBottom: marginSizeLg,
   }
 }
