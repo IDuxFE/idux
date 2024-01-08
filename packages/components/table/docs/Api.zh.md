@@ -60,7 +60,7 @@ export type TableColumn<T = any, V = any> =
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `align` | 文本对齐方式 | `'start' \| 'center' \| 'end'` | `'start'` | ✅ | - |
+| `align` | 文本对齐方式 | `'start' \| 'center' \| 'end' \| { title: 'start' \| 'center' \| 'end', cell: 'start' \| 'center' \| 'end' }` | `'start'` | ✅ | - |
 | `colSpan` | 计算列的 `colSpan` | `(record: T, rowIndex: number) => number` | - | - | 返回为 `0` 时，不渲染, 通常用于列合并 |
 | `fixed` | 是否固定 | `'start' \| 'end'` | - | - | - |
 | `rowSpan` | 计算列的 `rowSpan` | `(record: T, rowIndex: number) => number` | - | - | 返回为 `0` 时，不渲染, 通常用于行合并 |

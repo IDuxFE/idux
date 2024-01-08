@@ -17,7 +17,7 @@ import {
   watchEffect,
 } from 'vue'
 
-import { debounce, isNil } from 'lodash-es'
+import { debounce, isNil, isString } from 'lodash-es'
 
 import { type VKey, flattenNode } from '@idux/cdk/utils'
 import { type TableConfig } from '@idux/components/config'
@@ -121,7 +121,7 @@ export type TableColumnMergedExtra =
   | TableColumnMergedScrollBar
 
 export interface TableColumnMergedBase extends TableColumnBase {
-  align: TableColumnAlign
+  align: { title: TableColumnAlign; cell: TableColumnAlign }
   key: VKey
 }
 export interface TableColumnMergedBaseExtra extends TableColumnMergedBase {
@@ -132,13 +132,13 @@ export interface TableColumnMergedBaseExtra extends TableColumnMergedBase {
   titleRowSpan?: number
 }
 export interface TableColumnMergedExpandable extends TableColumnMergedBaseExtra, TableColumnExpandable {
-  align: TableColumnAlign
+  align: { title: TableColumnAlign; cell: TableColumnAlign }
   key: VKey
   icon: string | VNodeChild | ((options: { expanded: boolean; record: unknown }) => string | VNodeChild)
   titleColSpan: number
 }
 export interface TableColumnMergedSelectable extends TableColumnMergedBaseExtra, TableColumnSelectable {
-  align: TableColumnAlign
+  align: { title: TableColumnAlign; cell: TableColumnAlign }
   key: VKey
   multiple: boolean
   titleColSpan: number
@@ -191,6 +191,17 @@ export function convertColumns(nodes: VNode[] | undefined): TableColumn[] {
   return columns
 }
 
+function resolveColumnAlign(align: TableColumnAlign | { title: TableColumnAlign; cell: TableColumnAlign }): {
+  title: TableColumnAlign
+  cell: TableColumnAlign
+} {
+  if (isString(align)) {
+    return { title: align, cell: align }
+  }
+
+  return align
+}
+
 function convertColumn(column: TableColumn, config: TableConfig): TableColumnMerged {
   const { columnBase, columnExpandable, columnSelectable, columnIndexable } = config
   const { align = columnBase.align } = column
@@ -200,24 +211,24 @@ function convertColumn(column: TableColumn, config: TableConfig): TableColumnMer
     const { type } = column
     if (type === 'expandable') {
       const { showLine = columnExpandable.showLine, icon = columnExpandable.icon } = column
-      return { ...column, key, align, icon, showLine }
+      return { ...column, key, align: resolveColumnAlign(align), icon, showLine }
     }
     if (type === 'selectable') {
       // The default value for `multiple` is true
       const { multiple = true, showIndex = columnSelectable.showIndex } = column
-      return { ...column, key, align, multiple, showIndex } as TableColumnMerged
+      return { ...column, key, align: resolveColumnAlign(align), multiple, showIndex } as TableColumnMerged
     }
     if (type === 'indexable') {
       const align = column.align ?? columnIndexable.align ?? columnBase.align
-      return { ...columnIndexable, ...column, align, key } as TableColumnMerged
+      return { ...columnIndexable, ...column, align: resolveColumnAlign(align), key } as TableColumnMerged
     }
     // for ProTable to support more type
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    return { ...column, key, align }
+    return { ...column, key, align: resolveColumnAlign(align) }
   } else {
     const { sortable, filterable, children } = column
-    const newColumn = { ...column, key, align }
+    const newColumn = { ...column, key, align: resolveColumnAlign(align) }
     if (sortable) {
       newColumn.sortable = { ...columnBase.sortable, ...sortable }
     }

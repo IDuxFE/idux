@@ -38,6 +38,10 @@ const columns: TableColumn<Data>[] = [
   {
     title: 'Age',
     dataKey: 'age',
+    align: {
+      title: 'start',
+      cell: 'end',
+    },
   },
   {
     title: 'Address',
