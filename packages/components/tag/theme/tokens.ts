@@ -7,7 +7,12 @@
 
 export interface TagThemeTokens {
   /**
-   * @desc 标签背景颜色
+   * @desc 标签普通背景颜色
+   */
+  bgColorNormal: string
+
+  /**
+   * @desc 标签填充背景颜色
    */
   bgColorFilled: string
 
