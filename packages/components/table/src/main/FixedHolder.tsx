@@ -56,7 +56,6 @@ export default defineComponent({
       fixedColumns,
       mergedRows,
       isSticky,
-      columnWidths,
     } = inject(TABLE_TOKEN)!
 
     const virtualScrollRef = ref<VirtualScrollInstance>()
@@ -97,14 +96,6 @@ export default defineComponent({
       }
     })
 
-    const tableStyle = computed<CSSProperties>(() => {
-      const visibility = hasData.value && scrollWidth.value && !columnWidths.value.length ? 'hidden' : undefined
-      return {
-        tableLayout: 'fixed',
-        visibility,
-      }
-    })
-
     const virtualData = computed<VirtualScrollRowData<TableColumnMergedExtra>[]>(() => {
       if (!mergedVirtual.value.horizontal) {
         return []
@@ -134,7 +125,7 @@ export default defineComponent({
           }
 
           return (
-            <table style={tableStyle.value}>
+            <table style={{ tableLayout: 'fixed' }}>
               {showColGroup && <ColGroup columns={flattedColumns} isFixedHolder />}
               <Head>{children}</Head>
             </table>
@@ -190,7 +181,7 @@ export default defineComponent({
       return (
         <div class={classes.value} style={style.value} ref={scrollHeadRef}>
           {
-            <table style={tableStyle.value}>
+            <table style={{ tableLayout: 'fixed' }}>
               {showColGroup && <ColGroup isFixedHolder />}
               <Head></Head>
             </table>

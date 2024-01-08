@@ -62,7 +62,6 @@ export default defineComponent({
       mergedAutoHeight,
       columnWidths,
       changeColumnWidth,
-      clearColumnWidth,
       flattedData,
       flattedColumns,
       fixedColumns,
@@ -112,12 +111,6 @@ export default defineComponent({
     onMounted(() => {
       triggerScroll()
 
-      watch(
-        () => flattedColumns.value.length,
-        () => {
-          clearColumnWidth()
-        },
-      )
       watch([() => props.dataSource, scrollWidth], ([, width]) => {
         if (width) {
           triggerScroll()
