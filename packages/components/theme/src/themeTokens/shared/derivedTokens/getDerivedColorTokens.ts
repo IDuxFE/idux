@@ -117,7 +117,7 @@ export function getDerivedColorTokens(
     colorInfoText: infoColorPalette.base,
     colorInfoTextHover: infoColorPalette.l10,
     colorInfoTextActive: infoColorPalette.d10,
-    colorInfoIcon: infoColorPalette.l10,
+    colorInfoIcon: infoColorPalette.base,
   }
 
   const greyColors = getGreyColors()
@@ -130,8 +130,8 @@ export function getDerivedColorTokens(
     ...riskColors,
     ...fatalColors,
     ...infoColors,
-    colorOffline: greyColors.d10,
-    colorOfflineBg: greyColors.d10,
-    colorOfflineText: greyColors.d10,
+    colorOffline: greyColors.base,
+    colorOfflineBg: greyColors.base,
+    colorOfflineText: greyColors.base,
   } as DerivedColorTokens
 }
