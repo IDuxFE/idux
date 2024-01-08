@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { PanelRenderContext, Segment, TreeSelectPanelData, TreeSelectSearchField } from '../types'
+import type { PanelRenderContext, Segment, SegmentState, TreeSelectPanelData, TreeSelectSearchField } from '../types'
 
 import { isNil, isString, toString } from 'lodash-es'
 
@@ -111,7 +111,7 @@ export function createTreeSelectSegment(
     inputClassName: [`${prefixCls}-tree-select-segment-input`],
     containerClassName: [`${prefixCls}-tree-select-segment-container`],
     parse: input => parseInput(input, config, nodeLabelMap),
-    format: value => formatValue(value, config, nodeKeyMap),
+    format: (value, states) => formatValue(value, states, config, nodeKeyMap),
     panelRenderer,
   }
 }
@@ -131,15 +131,28 @@ function parseInput(
 
 function formatValue(
   value: VKey | VKey[] | undefined,
+  states: SegmentState[] | undefined,
   config: TreeSelectSearchField['fieldConfig'],
   nodeKeyMap: Map<VKey, TreeSelectPanelData>,
 ): string {
-  const { separator } = config
+  const { separator, searchable } = config
   if (isNil(value)) {
     return ''
   }
 
-  return getLabelByKeys(nodeKeyMap, convertArray(value)).join(` ${separator ?? defaultSeparator} `)
+  const _separator = separator ?? defaultSeparator
+  const labels = getLabelByKeys(nodeKeyMap, convertArray(value))
+
+  if (searchable) {
+    const inputParts = states ? states[states.length - 1]?.input?.split(_separator) ?? [] : []
+    const lastInputPart = inputParts[inputParts.length - 1]?.trim() as string | undefined
+
+    if (lastInputPart && !labels.includes(lastInputPart)) {
+      return [...labels, lastInputPart].join(` ${_separator} `)
+    }
+  }
+
+  return labels.join(` ${_separator} `)
 }
 
 function getLabelByKeys(nodeKeyMap: Map<VKey, TreeSelectPanelData>, keys: VKey[]): (string | number)[] {
