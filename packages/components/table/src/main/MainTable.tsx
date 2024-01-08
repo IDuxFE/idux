@@ -75,6 +75,8 @@ export default defineComponent({
       pingedEnd,
       scrollWidth,
       scrollHeight,
+      scrollHorizontalOverflowed,
+      scrollVerticalOverflowed,
       hasFixed,
       tableLayout,
     } = inject(TABLE_TOKEN)!
@@ -140,8 +142,8 @@ export default defineComponent({
         [`${prefixCls}-fixed-layout`]: tableLayout.value === 'fixed',
         [`${prefixCls}-fixed-column`]: hasFixed.value,
         [`${prefixCls}-inset-shadow`]: mergedInsetShadow.value,
-        [`${prefixCls}-scroll-horizontal`]: scrollWidth.value,
-        [`${prefixCls}-scroll-vertical`]: scrollHeight.value,
+        [`${prefixCls}-scroll-horizontal`]: scrollHorizontalOverflowed.value,
+        [`${prefixCls}-scroll-vertical`]: scrollVerticalOverflowed.value,
       })
     })
 
