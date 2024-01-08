@@ -437,7 +437,7 @@ export const defaultConfig: GlobalConfig = {
     icon: {
       preview: 'zoom-in',
       file: 'paper-clip',
-      remove: 'delete',
+      remove: 'close',
       retry: 'edit',
     },
   },
