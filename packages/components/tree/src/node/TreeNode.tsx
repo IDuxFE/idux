@@ -23,7 +23,7 @@ import { getParentKeys } from '../utils'
 
 export default defineComponent({
   props: treeNodeProps,
-  setup(props) {
+  setup(props, { slots }) {
     const {
       props: treeProps,
       flattedNodes,
@@ -31,7 +31,6 @@ export default defineComponent({
       mergedShowLine,
       activeKey,
       selectedKeys,
-      slots,
       draggableIcon,
       dragKey,
       dropKey,
@@ -49,7 +48,8 @@ export default defineComponent({
 
     const isActive = computed(() => activeKey.value === nodeKey.value)
     const isLast = computed(() => mergedShowLine.value && props.isLast)
-    const hasTopLine = computed(() => mergedShowLine.value && !props.isLeaf && props.level !== 0 && props.isFirst)
+    const hasTopLine = computed(() => mergedShowLine.value && !props.isLeaf && (!props.isFirst || props.level !== 0))
+    const hasBottomLine = computed(() => mergedShowLine.value && !props.isLeaf && !props.isLast)
     const selected = computed(() => selectedKeys.value.includes(nodeKey.value))
     const disabled = computed(() => props.selectDisabled || !treeProps.selectable)
 
@@ -164,11 +164,13 @@ export default defineComponent({
             draggable && <span class={`${mergedPrefixCls.value}-node-draggable-icon-noop`}></span>
           )}
           {isLeaf && mergedShowLine.value ? (
-            <LeafLine />
+            <LeafLine v-slots={slots} />
           ) : (
             <Expand
+              v-slots={slots}
               expanded={expanded}
               hasTopLine={hasTopLine.value}
+              hasBottomLine={hasBottomLine.value}
               isLeaf={isLeaf}
               nodeKey={nodeKey.value}
               rawNode={rawNode}
@@ -176,6 +178,7 @@ export default defineComponent({
           )}
           {checkable && <Checkbox checkDisabled={checkDisabled} node={node} />}
           <Content
+            v-slots={slots}
             disabled={disabled.value}
             node={node}
             nodeKey={nodeKey.value}

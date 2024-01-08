@@ -17,9 +17,8 @@
     <template #prefix="{ node }">
       <IxIcon :name="getNodeLabelIcon(node)" />
     </template>
-    <template #expandIcon="{ expanded }">
-      <IxIcon v-if="customExpandIcon" :name="expanded ? 'folder-open' : 'folder'"></IxIcon>
-      <IxIcon v-else name="right" :rotate="expanded ? 90 : 0"></IxIcon>
+    <template v-if="customExpandIcon" #expandIcon="{ expanded }">
+      <IxIcon :name="expanded ? 'folder-open' : 'folder'"></IxIcon>
     </template>
   </IxTree>
 </template>
