@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { PanelRenderContext, Segment, SelectPanelData, SelectSearchField } from '../types'
+import type { PanelRenderContext, Segment, SegmentState, SelectPanelData, SelectSearchField } from '../types'
 import type { ProSearchLocale } from '@idux/pro/locales'
 
 import { isNil, toString } from 'lodash-es'
@@ -68,7 +68,7 @@ export function createSelectSegment(
     inputClassName: [`${prefixCls}-select-segment-input`],
     containerClassName: [`${prefixCls}-select-segment-container`],
     parse: input => parseInput(input, config, locale.allSelected),
-    format: value => formatValue(value, config, locale.allSelected),
+    format: (value, states) => formatValue(value, states, config, locale.allSelected),
     panelRenderer,
   }
 }
@@ -91,10 +91,11 @@ function parseInput(
 
 function formatValue(
   value: VKey | VKey[] | undefined,
+  states: SegmentState[] | undefined,
   config: SelectSearchField['fieldConfig'],
   allSelected: string,
 ): string {
-  const { concludeAllSelected, dataSource, separator } = config
+  const { concludeAllSelected, dataSource, separator, searchable } = config
   if (isNil(value)) {
     return ''
   }
@@ -105,7 +106,19 @@ function formatValue(
     return allSelected
   }
 
-  return getLabelByKeys(dataSource, convertArray(value)).join(` ${separator ?? defaultSeparator} `)
+  const _separator = separator ?? defaultSeparator
+  const labels = getLabelByKeys(dataSource, convertArray(value))
+
+  if (searchable) {
+    const inputParts = states ? states[states.length - 1]?.input?.split(_separator) ?? [] : []
+    const lastInputPart = inputParts[inputParts.length - 1]?.trim() as string | undefined
+
+    if (lastInputPart && !labels.includes(lastInputPart)) {
+      return [...labels, lastInputPart].join(` ${_separator} `)
+    }
+  }
+
+  return labels.join(` ${_separator} `)
 }
 
 function getLabelByKeys(dataSource: SelectPanelData[], keys: VKey[]): (string | number)[] {

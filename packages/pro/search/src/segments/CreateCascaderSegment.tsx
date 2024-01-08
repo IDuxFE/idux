@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { CascaderPanelData, CascaderSearchField, PanelRenderContext, Segment } from '../types'
+import type { CascaderPanelData, CascaderSearchField, PanelRenderContext, Segment, SegmentState } from '../types'
 
 import { ref } from 'vue'
 
@@ -110,7 +110,7 @@ export function createCascaderSegment(
     inputClassName: [`${prefixCls}-cascader-segment-input`],
     containerClassName: [`${prefixCls}-cascader-segment-container`],
     parse: input => parseInput(input, config, nodeLabelMap, checkedKeysResolver, parentKeyMap),
-    format: value => formatValue(value, config, nodeKeyMap),
+    format: (value, states) => formatValue(value, states, config, nodeKeyMap),
     panelRenderer,
   }
 }
@@ -138,19 +138,32 @@ function parseInput(
 
 function formatValue(
   value: VKey | (VKey | VKey[])[] | undefined,
+  states: SegmentState[] | undefined,
   config: CascaderSearchField['fieldConfig'],
   nodeKeyMap: Map<VKey, CascaderPanelData>,
 ): string {
-  const { fullPath, multiple, separator, pathSeparator } = config
+  const { fullPath, multiple, separator, pathSeparator, searchable } = config
   if (isNil(value)) {
     return ''
   }
 
-  return getLabelByKeys(
+  const _separator = separator ?? defaultSeparator
+  const labels = getLabelByKeys(
     nodeKeyMap,
     (multiple ? value : [value]) as VKey[] | VKey[][],
     fullPath ?? defaultFullPath ? pathSeparator ?? defaultPathSeparator : undefined,
-  ).join(` ${separator ?? defaultSeparator} `)
+  )
+
+  if (searchable) {
+    const inputParts = states ? states[states.length - 1]?.input?.split(_separator) ?? [] : []
+    const lastInputPart = inputParts[inputParts.length - 1]?.trim() as string | undefined
+
+    if (lastInputPart && !labels.includes(lastInputPart)) {
+      return [...labels, lastInputPart].join(` ${_separator} `)
+    }
+  }
+
+  return labels.join(` ${_separator} `)
 }
 
 function getLabelByKeys(
