@@ -4,8 +4,10 @@
   --ix-header-height-md: 48px;
   --ix-header-height-lg: 48px;
   --ix-header-height-xl: 56px;
-  --ix-header-bar-width: 4px;
+  --ix-header-bar-width: 2px;
   --ix-header-bar-bg-color: #4083e8;
+  --ix-header-bar-border-radius: 0;
+  --ix-header-bar-margin-right: 6px;
   --ix-header-prefix-color: #f4f8ff;
   --ix-header-prefix-color-hover: #4083e8;
   --ix-header-prefix-color-active: #4083e8;
