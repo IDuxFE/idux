@@ -6,14 +6,33 @@
  */
 
 export interface AlertThemeTokens {
+  /**
+   * @desc 高度
+   */
   height: number
+  /**
+   * @desc 边框圆角
+   */
   borderRadius: number
 
-  // private
-
+  /**
+   * @private internal
+   */
   successBgColor: string
+  /**
+   * @private internal
+   */
   infoBgColor: string
+  /**
+   * @private internal
+   */
   warningBgColor: string
+  /**
+   * @private internal
+   */
   errorBgColor: string
+  /**
+   * @private internal
+   */
   offlineBgColor: string
 }

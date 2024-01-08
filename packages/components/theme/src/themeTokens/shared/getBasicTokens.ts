@@ -14,6 +14,7 @@ export function getBasicTokens(
 ): BasicTokens {
   const baseColors = getBaseColors()
   const redColorPalette = getColorPalette(baseColors.red)
+  const blueColorPalette = getColorPalette(baseColors.blue)
   const greyColors = getGreyColors()
 
   return {
@@ -23,7 +24,7 @@ export function getBasicTokens(
     colorWarning: baseColors.brown,
     colorRisk: baseColors.orange,
     colorFatal: redColorPalette.d30,
-    colorInfo: baseColors.blue,
+    colorInfo: blueColorPalette.l10,
     colorLink: baseColors.blue,
 
     colorWhite: baseColors.white,
