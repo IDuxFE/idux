@@ -1,6 +1,6 @@
 {
   "name": "@idux/cdk",
-  "version": "2.0.0-beta.4",
+  "version": "2.0.0-beta.5",
   "description": "A UI Component Development Kit for Vue 3.x",
   "keywords": [
     "vue",

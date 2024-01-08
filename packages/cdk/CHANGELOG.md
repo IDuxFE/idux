@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.5](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0-beta.5) (2024-01-08)
+
+
+### Bug Fixes
+
+* **cdk:drag-drop:** remove user-select none style ([#1743](https://github.com/IDuxFE/idux/issues/1743)) ([d76dcda](https://github.com/IDuxFE/idux/commit/d76dcdabf443c1aa3399d82271fbbcbee79e260f))
+* **cdk:forms:** interactions trigger dosen't work ([#1770](https://github.com/IDuxFE/idux/issues/1770)) ([fc44cbf](https://github.com/IDuxFE/idux/commit/fc44cbf912b2ba78f4847ad599d64d89464c408a))
+* **cdk:popper:** modify default placement to `bottomStart` ([#1785](https://github.com/IDuxFE/idux/issues/1785)) ([5d9ddc4](https://github.com/IDuxFE/idux/commit/5d9ddc4d9e21226c9d7ef89b223cc4eb574ac611))
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/IDuxFE/idux/issues/1751)) ([415f07f](https://github.com/IDuxFE/idux/commit/415f07f5c5a23ac1737865b945417e1424a7086b))
+* **cdk:forms:** add `interactions` trigger ([#1766](https://github.com/IDuxFE/idux/issues/1766)) ([83c60e7](https://github.com/IDuxFE/idux/commit/83c60e729ec1d1979a1250f1d1cd88583a4be5ec))
+* **cdk:scroll:** virtual scroll supports horizontal ([#1775](https://github.com/IDuxFE/idux/issues/1775)) ([77a0411](https://github.com/IDuxFE/idux/commit/77a0411370fb88e15e192850b57ae9bc5956a884))
+* **cdk:theme:** add cdk theme support ([#1739](https://github.com/IDuxFE/idux/issues/1739)) ([ab9cb89](https://github.com/IDuxFE/idux/commit/ab9cb894e44be39dcf1310a4a0ff3a66be1d3649))
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([5976f6d](https://github.com/IDuxFE/idux/commit/5976f6dcfecd276ad7c3406786266f65453da8dd))
+
+
+### BREAKING CHANGES
+
+* **cdk:scroll:** itemHeight is deprecated, use rowHeight instead
+* **cdk:scroll:** itemRender is deprecated, use rowRender instead
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
+
+
+
+
 # [2.0.0-beta.4](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0-beta.4) (2023-12-27)
 
 
