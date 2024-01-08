@@ -56,7 +56,7 @@ export function useColumns(
 
   const columnCount = computed(() => flattedColumnsWithScrollBar.value.length)
 
-  const { columnWidthMap, columnWidths, changeColumnWidth, clearColumnWidth } = useColumnWidths(flattedColumns)
+  const { columnWidthMap, columnWidths, changeColumnWidth } = useColumnWidths(flattedColumns)
   const { columnOffsets, columnOffsetsWithScrollBar } = useColumnOffsets(fixedColumns, columnWidthMap, columnCount)
 
   const mergedRows = computed(() => mergeRows(mergedColumns.value, scrollBarColumn.value))
@@ -72,7 +72,6 @@ export function useColumns(
     columnWidthMap,
     columnWidths,
     changeColumnWidth,
-    clearColumnWidth,
     columnOffsets,
     columnOffsetsWithScrollBar,
     mergedRows,
@@ -96,7 +95,6 @@ export interface ColumnsContext {
   columnWidthMap: Ref<Record<VKey, number>>
   columnWidths: Ref<number[]>
   changeColumnWidth: (key: VKey, width: number | false) => void
-  clearColumnWidth: () => void
   columnOffsets: ComputedRef<{
     starts: Record<VKey, { index: number; offset: number }>
     ends: Record<VKey, { index: number; offset: number }>
@@ -339,11 +337,7 @@ function useColumnWidths(flattedColumns: ComputedRef<TableColumnMerged[]>) {
     }
   }
 
-  const clearColumnWidth = () => {
-    widthMap.value = {}
-  }
-
-  return { columnWidthMap: widthMap, columnWidths, changeColumnWidth, clearColumnWidth }
+  return { columnWidthMap: widthMap, columnWidths, changeColumnWidth }
 }
 
 function useColumnOffsets(
