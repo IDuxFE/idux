@@ -15,7 +15,7 @@ export function usePopper(options?: PopperOptions): PopperInstance
 | `delay` | 延迟显示或隐藏的时间 | `number \| [number \| null, number \| null]` | `0` | - | 为数组时，第一个元素是延迟显示的时间，第二个元素是延迟隐藏的时间 |
 | `disabled` | 是否禁用浮层 | `boolean` | `false` | - | - |
 | `offset` | 浮层相对目标元素的偏移量 | `[number, number]` | `[0, 0]` | - | 第一个元素是水平偏移量，第二个元素是垂直偏移量 |
-| `placement` | 浮层的位置 | `PopperPlacement` | `top` | - | - |
+| `placement` | 浮层的位置 | `PopperPlacement` | `bottomStart` | - | - |
 | `trigger` | 浮层的触发方式 | `PopperTrigger` | `hover` | - | - |
 | `visible` | 是否显示浮层 | `boolean` | `false` | - | - |
 | `strategy` | 浮层的定位策略 | `'absolute' \| 'fixed'` | `absolute` | - | - |
