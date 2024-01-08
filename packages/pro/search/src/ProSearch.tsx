@@ -134,9 +134,11 @@ export default defineComponent({
       })
     })
     const containerStyle = computed(() =>
-      normalizeStyle({
-        zIndex: currentZIndex.value,
-      }),
+      focused.value
+        ? normalizeStyle({
+            zIndex: currentZIndex.value,
+          })
+        : undefined,
     )
 
     expose({ focus, blur })
