@@ -11,7 +11,7 @@
   --ix-tree-node-content-padding: 0 8px 0 4px;
   --ix-tree-node-content-label-padding: 0 4px;
   --ix-tree-node-content-label-highlight-color: #4083e8;
-  --ix-tree-node-checkbox-margin: 0 4px 0 4px;
+  --ix-tree-node-checkbox-margin: 0 4px 0 1px;
   --ix-tree-node-icon-width: 24px;
   --ix-tree-expand-icon-color: #687080;
 }

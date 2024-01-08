@@ -107,9 +107,9 @@
   --ix-color-info-text-hover: #1b61dd;
   --ix-color-info-text-active: #6aa6f4;
   --ix-color-info-icon: #4083e8;
-  --ix-color-offline: #808999;
-  --ix-color-offline-bg: #808999;
-  --ix-color-offline-text: #808999;
+  --ix-color-offline: #525966;
+  --ix-color-offline-bg: #525966;
+  --ix-color-offline-text: #525966;
   --ix-font-size-xs: 10px;
   --ix-font-size-sm: 12px;
   --ix-font-size-md: 14px;
@@ -283,7 +283,7 @@
   --ix-alert-info-bg-color: rgba(64, 131, 232, 0.2);
   --ix-alert-warning-bg-color: rgba(253, 170, 29, 0.2);
   --ix-alert-error-bg-color: rgba(232, 81, 76, 0.2);
-  --ix-alert-offline-bg-color: rgba(128, 137, 153, 0.2);
+  --ix-alert-offline-bg-color: rgba(82, 89, 102, 0.2);
 }
 
 /* ------ anchor css variables ------ */
@@ -572,8 +572,10 @@
   --ix-header-height-md: 48px;
   --ix-header-height-lg: 48px;
   --ix-header-height-xl: 56px;
-  --ix-header-bar-width: 4px;
+  --ix-header-bar-width: 2px;
   --ix-header-bar-bg-color: #4083e8;
+  --ix-header-bar-border-radius: 0;
+  --ix-header-bar-margin-right: 6px;
   --ix-header-prefix-color: #f4f8ff;
   --ix-header-prefix-color-hover: #4083e8;
   --ix-header-prefix-color-active: #4083e8;
@@ -1001,7 +1003,7 @@
   --ix-timeline-line-width: 2px;
   --ix-timeline-line-bg-color: #1f2329;
   --ix-timeline-pending-item-content-min-width: 40px;
-  --ix-timeline-content-margin-bottom: 20px;
+  --ix-timeline-content-margin-bottom: 16px;
 }
 
 /* ------ tooltip css variables ------ */
@@ -1059,7 +1061,7 @@
   --ix-tree-node-content-padding: 0 8px 0 4px;
   --ix-tree-node-content-label-padding: 0 4px;
   --ix-tree-node-content-label-highlight-color: #4083e8;
-  --ix-tree-node-checkbox-margin: 0 4px 0 4px;
+  --ix-tree-node-checkbox-margin: 0 4px 0 1px;
   --ix-tree-node-icon-width: 24px;
   --ix-tree-expand-icon-color: #687080;
 }

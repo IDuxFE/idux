@@ -314,7 +314,7 @@ token `getter` 只会在第一次注册成功的时候实际执行，因此不�
 | `colorBorderSecondary` | 次级边框颜色，比基础边框颜色要浅一阶段， 通常用于表格、卡片等不需要边框特别突出的组件 | `string` | `#e1e5eb` | `#1F2329` |
 | `colorError` | 错误信息色 | `string` | `#f52727` | `#E8514C` |
 | `colorFatal` | 失陷信息色 | `string` | `#82010e` | `#A72122` |
-| `colorInfo` | 信息颜色 | `string` | `#1c6eff` | `#4083E8` |
+| `colorInfo` | 信息颜色 | `string` | `#458fff` | `#4083E8` |
 | `colorLink` | 链接颜色 | `string` | `#1c6eff` | `#4083E8` |
 | `colorPrimary` | 主题色 | `string` | `#1c6eff` | `#4083E8` |
 | `colorRisk` | 风险信息色 | `string` | `#fa721b` | `#E88641` |
@@ -381,19 +381,19 @@ token `getter` 只会在第一次注册成功的时候实际执行，因此不�
 | `colorFatalText` | 失陷色阶文字颜色 | `string` | `#82010e` | `#8f1e1f` |
 | `colorFatalTextActive` | 失陷色阶文字激活颜色 | `string` | `#5c000c` | `#a23e3b` |
 | `colorFatalTextHover` | 失陷色阶文字悬浮颜色 | `string` | `#8f1820` | `#701a1b` |
-| `colorInfoBg` | 信息色阶背景颜色 | `string` | `#1c6eff` | `#4083E8` |
-| `colorInfoBgActive` | 信息色阶背景激活颜色 | `string` | `#0d51d9` | `#6AA6F4` |
-| `colorInfoBgHover` | 信息色阶背景悬浮颜色 | `string` | `#458fff` | `#1B61DD` |
-| `colorInfoBorder` | 信息色阶边框颜色 | `string` | `#1c6eff` | `#4083E8` |
-| `colorInfoBorderActive` | 信息色阶边框激活颜色 | `string` | `#0d51d9` | `#6AA6F4` |
-| `colorInfoBorderHover` | 信息色阶边框悬浮颜色 | `string` | `#458fff` | `#1B61DD` |
+| `colorInfoBg` | 信息色阶背景颜色 | `string` | `#458fff` | `#4083E8` |
+| `colorInfoBgActive` | 信息色阶背景激活颜色 | `string` | `#306ed9` | `#6AA6F4` |
+| `colorInfoBgHover` | 信息色阶背景悬浮颜色 | `string` | `#6eadff` | `#1B61DD` |
+| `colorInfoBorder` | 信息色阶边框颜色 | `string` | `#458fff` | `#4083E8` |
+| `colorInfoBorderActive` | 信息色阶边框激活颜色 | `string` | `#306ed9` | `#6AA6F4` |
+| `colorInfoBorderHover` | 信息色阶边框悬浮颜色 | `string` | `#6eadff` | `#1B61DD` |
 | `colorInfoIcon` | 信息色阶图标颜色 | `string` | `#458fff` | `#4083E8` |
-| `colorInfoText` | 信息色阶文字颜色 | `string` | `#1c6eff` | `#4083E8` |
-| `colorInfoTextActive` | 信息色阶文字激活颜色 | `string` | `#0d51d9` | `#6AA6F4` |
-| `colorInfoTextHover` | 信息色阶文字悬浮颜色 | `string` | `#458fff` | `#1B61DD` |
-| `colorOffline` | 离线颜色 | `string` | `#6f7785` | `#808999` |
-| `colorOfflineBg` | 离线背景颜色 | `string` | `#6f7785` | `#808999` |
-| `colorOfflineText` | 离线文字颜色 | `string` | `#6f7785` | `#808999` |
+| `colorInfoText` | 信息色阶文字颜色 | `string` | `#458fff` | `#4083E8` |
+| `colorInfoTextActive` | 信息色阶文字激活颜色 | `string` | `#306ed9` | `#6AA6F4` |
+| `colorInfoTextHover` | 信息色阶文字悬浮颜色 | `string` | `#6eadff` | `#1B61DD` |
+| `colorOffline` | 离线颜色 | `string` | `#a1a7b3` | `#525966` |
+| `colorOfflineBg` | 离线背景颜色 | `string` | `#a1a7b3` | `#525966` |
+| `colorOfflineText` | 离线文字颜色 | `string` | `#a1a7b3` | `#525966` |
 | `colorPrimaryActive` | 主题色阶激活颜色，常用于背景色 | `string` | `#0d51d9` | `#6AA6F4` |
 | `colorPrimaryBorder` | 主题色阶边框颜色 | `string` | `#1c6eff` | `#4083E8` |
 | `colorPrimaryBorderActive` | 主题色阶边框激活颜色 | `string` | `#0d51d9` | `#6AA6F4` |
@@ -474,14 +474,6 @@ token `getter` 只会在第一次注册成功的时候实际执行，因此不�
 | `paddingSizeSm` | 内边距尺寸Sm | `number` | `8` | `8` |
 | `paddingSizeXl` | 内边距尺寸Xl | `number` | `24` | `24` |
 | `paddingSizeXs` | 内边距尺寸Xs | `number` | `4` | `4` |
-| `screenLgMax` |  | `number` | `1719.99` | `1719.99` |
-| `screenLgMin` |  | `number` | `1280` | `1280` |
-| `screenMdMax` |  | `number` | `1279.99` | `1279.99` |
-| `screenMdMin` |  | `number` | `960` | `960` |
-| `screenSmMax` |  | `number` | `959.99` | `959.99` |
-| `screenSmMin` |  | `number` | `600` | `600` |
-| `screenXlMin` |  | `number` | `1720` | `1720` |
-| `screenXsMax` |  | `number` | `599.99` | `599.99` |
 
 <!-- insert derivedTokens end -->
 
@@ -490,7 +482,6 @@ token `getter` 只会在第一次注册成功的时候实际执行，因此不�
 <!-- insert extendedTokens start -->
 | 名称 | 描述 | 类型 | default | dark |
 |---|---|---|---|---|
-| `alertCompColorAlpha` | IxAlert 组件的颜色Alpha值， 仅用于这一个组件 | `number` | `0.1` | `0.2` |
 | `colorAddonContainerBg` | 容器附加元素背景色，例如输入框的 addon | `string` | `#f7f9fc` | `#171A1F` |
 | `colorBgInverse` | 反向背景颜色，用于有背景颜色的容器中，如幽灵按钮 | `string` | `#2f3540` | `#fff` |
 | `colorBgInverseDisabled` | 反向禁用背景颜色，用于有背景颜色的容器中，如幽灵按钮 | `string` | `#1e232b` | `#FFFFFF` |
@@ -571,7 +562,6 @@ token `getter` 只会在第一次注册成功的时候实际执行，因此不�
 | `scrollbarTrackBorderRadius` | 滚动条轨道边框圆角 | `number` | `0` | `0` |
 | `scrollbarTrackBoxShadow` | 滚动条轨道阴影 | `string` | `unset` | `unset` |
 | `scrollbarWidth` | 滚动条宽度 | `number` | `12` | `12` |
-| `tagCompColorAlpha` | IxTag 组件的颜色Alpha值，仅用于这一个组件 | `number` | `0.1` | `0.2` |
 
 <!-- insert extendedTokens end -->
 

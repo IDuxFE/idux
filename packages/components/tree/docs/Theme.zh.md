@@ -6,7 +6,7 @@
 | `expandIconColor` |  | `string` | `#bec3cc` | `#687080` |
 | `nodeBgColorHover` |  | `string` | `#f7f9fc` | `#171A1F` |
 | `nodeBgColorSelected` |  | `string` | `#ffffff` | `#0A0C0F` |
-| `nodeCheckboxMargin` |  | `string` | `0 4px 0 4px` | `0 4px 0 4px` |
+| `nodeCheckboxMargin` |  | `string` | `0 4px 0 1px` | `0 4px 0 1px` |
 | `nodeColorSelected` |  | `string` | `#1c6eff` | `#4083E8` |
 | `nodeContentHeight` |  | `number` | `32` | `32` |
 | `nodeContentLabelHighlightColor` |  | `string` | `#1c6eff` | `#4083E8` |
