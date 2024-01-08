@@ -7,8 +7,15 @@
 
 import type { CertainThemeTokens, GlobalThemeTokens } from '@idux/components/theme'
 export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTokens<'collapse'> {
-  const { colorContainerBg, colorInfoContainerBg, fontSizeHeaderSm, fontSizeXl, fontSize2xl, paddingSizeMd, paddingSizeLg } =
-    tokens
+  const {
+    colorContainerBg,
+    colorInfoContainerBg,
+    fontSizeHeaderSm,
+    fontSizeXl,
+    fontSize2xl,
+    paddingSizeMd,
+    paddingSizeLg,
+  } = tokens
 
   return {
     fontSizeSm: fontSizeHeaderSm,
