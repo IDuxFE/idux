@@ -5,12 +5,21 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type CertainThemeTokens, type GlobalThemeTokens, getAlphaColor } from '@idux/components/theme'
-export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTokens<'tag'> {
+import {
+  type CertainThemeTokens,
+  type GlobalThemeTokens,
+  type ThemeTokenAlgorithms,
+  getAlphaColor,
+} from '@idux/components/theme'
+export function getDefaultThemeTokens(
+  tokens: GlobalThemeTokens,
+  algrithms: ThemeTokenAlgorithms,
+): CertainThemeTokens<'tag'> {
   const {
     lineWidth,
     borderRadiusSm,
     tagCompColorAlpha,
+    colorTextInfo,
     colorSuccessBg,
     colorInfoBg,
     colorWarningBg,
@@ -18,9 +27,12 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     colorErrorBg,
     colorFatalBg,
   } = tokens
+  const { getGreyColors } = algrithms
+  const greyColors = getGreyColors()
 
   return {
-    bgColorFilled: '#99acd1',
+    bgColorNormal: getAlphaColor(colorTextInfo, tagCompColorAlpha),
+    bgColorFilled: greyColors.base,
     borderWidth: lineWidth,
     borderRadius: borderRadiusSm,
 

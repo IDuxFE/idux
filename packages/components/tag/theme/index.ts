@@ -9,8 +9,8 @@ import type { TokenGetter } from '@idux/components/theme'
 
 import { getDefaultThemeTokens } from './default'
 
-export const getThemeTokens: TokenGetter<'tag'> = (tokens, presetTheme) => {
-  return presetTheme === 'default' ? getDefaultThemeTokens(tokens) : getDefaultThemeTokens(tokens)
+export const getThemeTokens: TokenGetter<'tag'> = (tokens, presetTheme, algrithms) => {
+  return presetTheme === 'default' ? getDefaultThemeTokens(tokens, algrithms) : getDefaultThemeTokens(tokens, algrithms)
 }
 
 export type { TagThemeTokens } from './tokens'
