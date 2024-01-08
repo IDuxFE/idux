@@ -33,6 +33,7 @@ function getTokenList(list: DeclarationReflection[]): Token[] {
   return (list || [])
     .filter(
       item =>
+        !item.flags.includes('Private') &&
         !item.comment?.blockTags.some(
           tag => tag.tag === '@internal' || tag.tag === '@private' || tag.tag === '@deprecated',
         ),
@@ -56,6 +57,8 @@ export async function getTokenMeta(): Promise<TokenMeta | undefined> {
         resolve(__dirname, '../../../packages/components/*/theme/tokens.ts'),
         resolve(__dirname, '../../../packages/pro/*/theme/tokens.ts'),
       ],
+      excludePrivate: false,
+      excludeInternal: false,
       skipErrorChecking: true,
     },
     [new TSConfigReader(), new TypeDocReader()],
