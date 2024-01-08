@@ -165,6 +165,10 @@
           &-selected:not(&-disabled) {
             .@{tabs-prefix}-nav-tab-label {
               color: var(--ix-color-primary-text);
+            }
+          }
+          .@{tabs-prefix}:not(.@{tabs-prefix}-segment) &-selected:not(&-disabled) {
+            .@{tabs-prefix}-nav-tab-label {
               font-weight: var(--ix-font-weight-header);
             }
           }
@@ -225,7 +229,6 @@
             &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
               border: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border-secondary);
               border-bottom: transparent;
-              font-weight: var(--ix-font-weight-header);
 
               &::after {
                 content: ' ';
@@ -482,10 +485,6 @@
                 }
               }
 
-              &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
-                font-weight: var(--ix-font-weight-header);
-              }
-
               &:first-child {
                 border-radius: var(--ix-tabs-border-radius) 0 0 var(--ix-tabs-border-radius);
               }
@@ -508,7 +507,6 @@
         .@{tabs-prefix}-nav > .@{tabs-prefix}-nav-list > .@{tabs-prefix}-nav-tab {
           &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
             background-color: var(--ix-color-primary);
-            font-weight: var(--ix-font-weight-header);
 
             .@{tabs-prefix}-nav-tab-label {
               color: var(--ix-color-text-inverse);
@@ -527,7 +525,7 @@
 
   &-nav-add-icon,
   &-nav-close-icon {
-    font-size: var(--ix-font-size-lg);
+    font-size: var(--ix-font-size-icon);
   }
 
   &-nav-close-icon {
