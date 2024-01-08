@@ -41,7 +41,6 @@ export default defineComponent({
         children = <IxIcon name="loading"></IxIcon>
       } else if (!props.isLeaf) {
         const { expanded, nodeKey: key, rawNode: node } = props
-        console.log('renderExpand', slots.expandIcon)
         children = (slots.expandIcon ?? expandIconRenderer)?.({ key, expanded, node })
       }
 
