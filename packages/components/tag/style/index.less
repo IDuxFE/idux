@@ -11,22 +11,25 @@
   align-items: center;
   color: var(--ix-tag-color, var(--ix-color-text-info));
   background-color: var(--ix-tag-background-color, var(--ix-color-emphasized-container-bg));
-  padding: 0 calc(8px - var(--ix-tag-border-width));
+  padding: 0 calc(var(--ix-margin-size-sm) - var(--ix-tag-border-width));
   line-height: @tag-line-height;
   border: var(--ix-tag-border-width) solid transparent;
   border-radius: var(--ix-tag-border-radius);
 
-  & + & {
-    margin-left: 8px;
+  & + &,
+  & + .@{tag-prefix}-group,
+  .@{tag-prefix}-group + &,
+  .@{tag-prefix}-group + .@{tag-prefix}-group {
+    margin-left: var(--ix-margin-size-sm);
   }
 
   > .@{icon-prefix} {
-    margin-left: -4px;
+    margin-left: calc(var(--ix-margin-size-xs) * -1);
     font-size: var(--ix-font-size-icon);
   }
 
   .@{icon-prefix} + &-content {
-    padding-left: 4px;
+    padding-left: var(--ix-margin-size-xs);
   }
 
   &-content {
@@ -49,7 +52,7 @@
   }
 
   &-close-icon {
-    margin-left: 4px;
+    margin-left: var(--ix-margin-size-xs);
     font-size: var(--ix-font-size-icon);
     cursor: pointer;
   }
@@ -68,7 +71,7 @@
 }
 
 .@{tag-prefix}-numeric {
-  @tag-prefix-size: calc(@tag-line-height + 4px);
+  @tag-prefix-size: calc(@tag-line-height + var(--ix-margin-size-xs));
 
   position: relative;
   padding-left: calc(@tag-prefix-size + var(--ix-tag-border-width));
@@ -96,16 +99,43 @@
       cursor: pointer;
     }
   }
+
+  &-compact {
+    &:not(.@{space-prefix}-vertical) {
+      > .@{space-prefix}-item:first-child > .@{tag-prefix} {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      > .@{space-prefix}-item:last-child > .@{tag-prefix} {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      > .@{space-prefix}-item:not(:first-child):not(:last-child) > .@{tag-prefix} {
+        border-radius: 0;
+      }
+
+      > .@{space-prefix}-item:not(:last-child) > .@{tag-prefix}.@{tag-prefix}-bordered {
+        margin-right: -1px;
+      }
+    }
+  }
 }
 
 .tag-status-color(@status) {
   @color: '--ix-color-@{status}';
   @background-color: '--ix-tag-@{status}-bg-color';
   @background-color-filled: '--ix-color-@{status}-bg';
+  @icon-color: '--ix-color-@{status}-icon';
 
   &-@{status} {
     --ix-tag-color: ~'var(@{color})';
     --ix-tag-background-color: ~'var(@{background-color})';
+
+    .@{tag-prefix}-close-icon {
+      color: ~'var(@{icon-color})';
+    }
   }
 
   &-@{status}&-bordered {
