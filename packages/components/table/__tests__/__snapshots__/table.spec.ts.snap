@@ -4,7 +4,7 @@ exports[`Table > basic work > render work 1`] = `
 "<div class=\\"ix-table ix-table-borderless ix-table-md\\">
   <!---->
   <div class=\\"ix-table-container ix-table-inset-shadow\\">
-    <div class=\\"ix-table-content\\">
+    <div class=\\"ix-table-content\\" style=\\"overflow-x: auto; overflow-y: auto;\\">
       <table class=\\"ix-table-table\\" style=\\"table-layout: auto;\\">
         <colgroup>
           <col class=\\"ix-table-col-expandable\\">
@@ -34,6 +34,8 @@ exports[`Table > basic work > render work 1`] = `
           </tr>
         </thead>
         <tbody class=\\"ix-table-tbody\\">
+          <!---->
+          <!---->
           <!---->
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell\\">
