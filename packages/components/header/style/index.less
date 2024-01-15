@@ -153,7 +153,7 @@
 }
 
 .header-size(@height, @font-size, @padding) {
-  @bar-height: calc(@font-size + 2px);
+  @bar-height: calc(@font-size - 2px);
 
   .reset-font-size(@font-size);
 
@@ -161,7 +161,7 @@
 
   &.@{header-prefix}-with-bar {
     &::before {
-      margin-top: calc((@height - @bar-height) / 2);
+      margin: auto 0;
       height: @bar-height;
     }
   }
