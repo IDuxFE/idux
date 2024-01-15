@@ -39,9 +39,15 @@
     }
   }
 
-  &.@{selector-prefix}-opened .@{selector-prefix}-item {
-    color: var(--ix-color-text-placeholder);
+  &.@{selector-prefix}-opened {
+    &.@{selector-prefix}-allow-input,
+    &.@{selector-prefix}-searchable {
+      .@{selector-prefix}-item {
+        color: var(--ix-color-text-placeholder);
+      }
+    }
   }
+    
 
   &.@{selector-prefix}-sm {
     .select-size(var(--ix-control-height-sm), var(--ix-control-padding-size-horizontal-sm), var(--ix-control-font-size-sm));
