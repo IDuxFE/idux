@@ -13,7 +13,7 @@
       <IxButton @click="onClick">Button</IxButton>
       <IxDropdown v-model:visible="settingDropdownVisible">
         <IxButton shape="square">
-          <IxIcon name="setting" :rotate="settingDropdownVisible ? -180 : 0" size="16px" />
+          <IxIcon name="setting" class="flex-center" :rotate="settingDropdownVisible ? -180 : 0" size="16px" />
         </IxButton>
         <template #overlay>
           <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
@@ -23,8 +23,10 @@
 
     <IxDropdown v-model:visible="arrowDropdownVisible">
       <IxButton>
-        Button
-        <IxIcon name="down" :rotate="arrowDropdownVisible ? -180 : 0" size="16px" style="margin-left: 4px"></IxIcon>
+        <div class="flex-center">
+          Button
+          <IxIcon name="down" :rotate="arrowDropdownVisible ? -180 : 0" size="16px" style="margin-left: 4px"></IxIcon>
+        </div>
       </IxButton>
       <template #overlay>
         <IxMenu :dataSource="dataSource" :selectable="false"></IxMenu>
@@ -50,3 +52,10 @@ const dataSource: MenuData[] = [
 
 const onClick = () => console.log('button click')
 </script>
+
+<style scoped>
+.flex-center {
+  display: flex;
+  align-items: center;
+}
+</style>
