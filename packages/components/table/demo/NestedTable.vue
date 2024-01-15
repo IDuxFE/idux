@@ -4,7 +4,7 @@
       <IxButton mode="link">{{ value }}</IxButton>
     </template>
     <template #action>
-      <IxButtonGroup :gap="8" mode="link" separator="|">
+      <IxButtonGroup :gap="16" mode="link">
         <IxButton>OK</IxButton>
         <IxButton>Canel</IxButton>
       </IxButtonGroup>
@@ -12,7 +12,7 @@
     <template #expand="{ record }">
       <IxTable :columns="nestedColumns" :dataSource="record.nestedData" :pagination="false">
         <template #action>
-          <IxButtonGroup :gap="8" mode="link" separator="|">
+          <IxButtonGroup :gap="16" mode="link">
             <IxButton>OK</IxButton>
             <IxButton>Canel</IxButton>
           </IxButtonGroup>

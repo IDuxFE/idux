@@ -28,7 +28,7 @@
       </span>
     </template>
     <template #action>
-      <IxButtonGroup :gap="8" mode="link" separator="|">
+      <IxButtonGroup :gap="16" mode="link">
         <IxButton>Detail</IxButton>
         <IxButton>Delete</IxButton>
       </IxButtonGroup>
