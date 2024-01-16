@@ -7,7 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { VirtualScrollToFn } from '@idux/cdk/scroll'
+import type { VirtualScrollMode, VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, TreeTypeData, VKey } from '@idux/cdk/utils'
 import type { CascaderStrategy } from '@idux/components/cascader'
 import type { EmptyProps } from '@idux/components/empty'
@@ -103,6 +103,7 @@ export const proTransferProps = {
   sourceExpandedKeys: Array as PropType<VKey[]>,
   targetExpandedKeys: Array as PropType<VKey[]>,
   virtual: { type: Boolean, default: false },
+  virtualScrollMode: { type: String as PropType<VirtualScrollMode>, default: undefined },
   virtualItemHeight: { type: Number, default: undefined },
 
   //Events

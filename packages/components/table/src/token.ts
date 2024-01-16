@@ -35,6 +35,7 @@ export interface TableContext
   slots: Slots
   config: TableConfig
   locale: Locale
+  getVirtualColWidth: (rowKey: VKey, colKey: VKey) => number | undefined
   mergedPrefixCls: ComputedRef<string>
   mergedAutoHeight: ComputedRef<boolean>
   mergedEmptyCell: ComputedRef<string | ((options: TableEmptyCellOptions) => VNodeChild) | undefined>

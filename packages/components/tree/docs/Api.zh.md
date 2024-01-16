@@ -33,6 +33,7 @@
 | `selectable` | 是否允许选择 | `boolean \| 'multiple'` | `true` | - | 为 `multiple` 时表示允许多选 |
 | `showLine` | 是否显示连接线 | `boolean` | `false` | ✅ | - |
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | 需要设置 `height` |
+| `virtualScrollMode` | 虚拟滚动的滚动模式 | `'native' \| 'simulated'` | `'native'` | - | - |
 | `onCheck` | 选择框勾选状态发生变化时触发 | `(checked: boolean, node: TreeNode) => void` | - | - | - |
 | `onCheckedChange` | 选择框勾选状态发生变化时触发 | `(checkedKeys: VKey[], checkedNodes: TreeNode[]) => void` | - | - | - |
 | `onDragStart` | `dragstart` 触发时调用 | `(options: TreeDragDropOptions) => void` | - | - | - |

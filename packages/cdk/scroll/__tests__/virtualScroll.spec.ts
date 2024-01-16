@@ -28,6 +28,10 @@ describe('VirtualScroll', () => {
   const VirtualScrollMount = (options?: MountingOptions<Partial<VirtualScrollProps>>) => {
     const { props, ...rest } = options || {}
     const mergedOptions = { props: { ...defaultProps, ...props }, ...rest } as MountingOptions<VirtualScrollProps>
+    const scrollHeight = (props?.dataSource?.length ?? 0) * 20
+
+    vi.spyOn(HTMLElement.prototype, 'scrollHeight', 'get').mockImplementation(() => scrollHeight)
+
     return mount(VirtualScroll, mergedOptions) as VueWrapper<VirtualScrollInstance>
   }
 
@@ -35,8 +39,9 @@ describe('VirtualScroll', () => {
     vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockImplementation(() => 200)
   })
 
-  afterAll(() => {
+  afterEach(() => {
     vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockClear()
+    vi.spyOn(HTMLElement.prototype, 'scrollHeight', 'get').mockClear()
   })
 
   describe('basic work', () => {

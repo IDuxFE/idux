@@ -373,8 +373,8 @@ exports[`Tree > getKey work 2`] = `
 exports[`Tree > height and virtual work 1`] = `
 "<div class=\\"ix-tree ix-tree-active ix-tree-virtual\\" role=\\"tree\\">
   <!----><input style=\\"width: 0px; height: 0px; display: flex; overflow: hidden; opacity: 0; border: 0px; padding: 0px; margin: 0px;\\" tabindex=\\"0\\" aria-label=\\"for screen reader\\">
-  <div class=\\"cdk-virtual-scroll ix-tree-content\\">
-    <div class=\\"cdk-virtual-scroll-holder\\" style=\\"max-height: 100px; width: 100%;\\">
+  <div class=\\"cdk-virtual-scroll cdk-virtual-scroll-overflowed-vertical ix-tree-content\\">
+    <div class=\\"cdk-virtual-scroll-holder\\" style=\\"max-height: 100px; width: 100%; overflow-x: auto; overflow-y: auto;\\">
       <div class=\\"cdk-virtual-scroll-filler-horizontal\\"></div>
       <div class=\\"cdk-virtual-scroll-filler-vertical\\" style=\\"height: 308px; width: 0px;\\"></div>
       <div class=\\"cdk-virtual-scroll-content\\" style=\\"margin-top: 0px;\\">
@@ -412,6 +412,8 @@ exports[`Tree > height and virtual work 1`] = `
         </div>
       </div>
     </div>
+    <!---->
+    <!---->
   </div>
 </div>"
 `;

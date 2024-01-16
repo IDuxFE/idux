@@ -23,19 +23,19 @@ export interface ScrollOptions {
 export function setScroll(options: number | ScrollOptions, target: Element | Window = window): void {
   const { scrollTop, scrollLeft }: ScrollOptions = isObject(options) ? options : { scrollTop: options }
   if (target === window) {
-    if (scrollTop) {
+    if (!isNil(scrollTop)) {
       document.body.scrollTop = scrollTop
       document.documentElement.scrollTop = scrollTop
     }
-    if (scrollLeft) {
+    if (!isNil(scrollLeft)) {
       document.body.scrollLeft = scrollLeft
       document.documentElement.scrollLeft = scrollLeft
     }
   } else {
-    if (scrollTop) {
+    if (!isNil(scrollTop)) {
       ;(target as Element).scrollTop = scrollTop
     }
-    if (scrollLeft) {
+    if (!isNil(scrollLeft)) {
       ;(target as Element).scrollLeft = scrollLeft
     }
   }

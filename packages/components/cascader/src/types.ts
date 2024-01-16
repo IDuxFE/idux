@@ -8,6 +8,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
+import type { VirtualScrollMode } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
@@ -45,6 +46,7 @@ export const cascaderPanelProps = {
   separator: { type: String, default: '/' },
   strategy: { type: String as PropType<CascaderStrategy>, default: 'all' },
   virtual: { type: Boolean, default: false },
+  virtualScrollMode: { type: String as PropType<VirtualScrollMode>, default: undefined },
   virtualItemHeight: { type: Number, default: 32 },
 
   // events
@@ -112,6 +114,7 @@ export const cascaderProps = {
   suffix: { type: String, default: undefined },
   virtual: { type: Boolean, default: false },
   virtualItemHeight: { type: Number, default: undefined },
+  virtualScrollMode: { type: String as PropType<VirtualScrollMode>, default: undefined },
 
   // events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,

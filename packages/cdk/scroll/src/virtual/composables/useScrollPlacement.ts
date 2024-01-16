@@ -10,7 +10,7 @@ import type { Ref } from 'vue'
 
 import { computed, onActivated } from 'vue'
 
-import { isFunction, isNil } from 'lodash-es'
+import { isFunction } from 'lodash-es'
 
 import { callEmit } from '@idux/cdk/utils'
 
@@ -22,52 +22,23 @@ export interface ScrollPlacementContext {
   handleScroll: (evt: Event) => void
 }
 
-const keepInRange = (maxScrollSize: number, newScrollSize: number) => {
-  let newSize = Math.max(newScrollSize, 0)
-  if (!Number.isNaN(maxScrollSize)) {
-    newSize = Math.min(newSize, maxScrollSize)
-  }
-  return newSize
-}
-
 export function useScrollPlacement(
   props: VirtualScrollProps,
   holderRef: Ref<HTMLElement | undefined>,
   scroll: Ref<Scroll>,
   scrollHeight: Ref<number>,
-  scrollWidth: Ref<number>,
   containerSize: Ref<{ width: number; height: number }>,
   changeScroll: (value: Scroll) => void,
+  setScroll: (value: Scroll, setContainerScroll: boolean) => Required<Scroll>,
 ): ScrollPlacementContext {
   const maxScrollHeight = computed(() => {
     const height = scrollHeight.value
     return height > 0 ? Math.max(height - containerSize.value.height, 0) : NaN
   })
-  const maxScrollWidth = computed(() => {
-    const width = scrollWidth.value
-    return width > 0 ? Math.max(width - containerSize.value.width, 0) : NaN
-  })
 
   const syncScroll: SyncScroll = (newScroll, setHolderScroll?: boolean) => {
     const resolvedScroll = isFunction(newScroll) ? newScroll(scroll.value) : newScroll
-
-    if (isNil(resolvedScroll.top) && isNil(resolvedScroll.left)) {
-      return
-    }
-
-    const alignedTop = isNil(resolvedScroll.top)
-      ? scroll.value.top
-      : keepInRange(maxScrollHeight.value, resolvedScroll.top ?? 0)
-    const alignedLeft = isNil(resolvedScroll.left)
-      ? scroll.value.left
-      : keepInRange(maxScrollWidth.value, resolvedScroll.left ?? 0)
-
-    const holderElement = holderRef.value
-
-    if (holderElement && setHolderScroll) {
-      holderElement.scrollTop = alignedTop ?? 0
-      holderElement.scrollLeft = alignedLeft ?? 0
-    }
+    const { top: alignedTop, left: alignedLeft } = setScroll(resolvedScroll, !!setHolderScroll)
 
     changeScroll({ top: alignedTop, left: alignedLeft })
   }

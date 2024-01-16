@@ -49,6 +49,8 @@ export default defineComponent({
       return {
         [fullHeight || isString(height) ? 'height' : 'maxHeight']: resolvedHeight,
         [fullWidth || isString(width) ? 'width' : 'maxWidth']: resolvedWidth,
+        overflowX: props.scrollMode !== 'native' || !resolvedWidth || resolvedWidth === 'auto' ? 'hidden' : 'auto',
+        overflowY: props.scrollMode !== 'native' || !resolvedHeight || resolvedHeight === 'auto' ? 'hidden' : 'auto',
       }
     })
 
@@ -82,8 +84,12 @@ export default defineComponent({
     const contentRef = ref<HTMLDivElement>()
     const onContentResize = throttle(collectSize, 16)
     // 这里不能用 useResizeObserver, 会有 test 爆栈警告, 具体原因后面再排查。
-    onMounted(() => onResize(contentRef.value, onContentResize))
-    onBeforeUnmount(() => offResize(contentRef.value, onContentResize))
+    onMounted(() => {
+      onResize(contentRef.value, onContentResize)
+    })
+    onBeforeUnmount(() => {
+      offResize(contentRef.value, onContentResize)
+    })
 
     return () => {
       const children = slots.default!()

@@ -33,7 +33,7 @@ export default defineComponent({
       const { dataSource } = props
       let children: VNode
       if (dataSource.length > 0) {
-        const { _virtualScrollHeight, virtualItemHeight, virtual } = cascaderPanelProps
+        const { _virtualScrollHeight, virtualItemHeight, virtualScrollMode, virtual } = cascaderPanelProps
         const rowRender: VirtualRowRenderFn<MergedData> = ({ item, index }) => (
           <Option index={index} optionKey={item.key} {...item} />
         )
@@ -45,6 +45,7 @@ export default defineComponent({
             rowHeight={virtualItemHeight}
             rowRender={rowRender}
             virtual={virtual}
+            scrollMode={virtual ? virtualScrollMode : undefined}
           />
         )
       } else {

@@ -11,7 +11,7 @@ import type { TableColumnMerged, TableColumnMergedExtra } from './composables/us
 import type { FlattedData } from './composables/useDataSource'
 import type { ActiveFilter } from './composables/useFilterable'
 import type { ActiveSorter } from './composables/useSortable'
-import type { VirtualScrollToFn } from '@idux/cdk/scroll'
+import type { VirtualScrollMode, VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { HeaderProps } from '@idux/components/header'
@@ -48,6 +48,7 @@ export const tableProps = {
   scrollToTopOnChange: { type: Boolean, default: undefined },
   tableLayout: { type: String as PropType<'auto' | 'fixed'>, default: undefined },
   virtual: { type: Boolean, default: false },
+  virtualScrollMode: { type: String as PropType<VirtualScrollMode>, default: undefined },
   virtualHorizontal: { type: Boolean, default: false },
   virtualItemHeight: { type: Number, default: undefined },
   virtualColWidth: { type: Number, default: undefined },

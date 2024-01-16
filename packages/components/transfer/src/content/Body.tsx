@@ -96,6 +96,7 @@ export default defineComponent({
           removable={!props.isSource && transferProps.mode === 'immediate'}
           virtual={transferProps.virtual}
           virtualItemHeight={transferProps.virtualItemHeight}
+          virtualScrollMode={transferProps.virtualScrollMode}
           scroll={transferProps.scroll}
           v-slots={listSlots}
           onCheckChange={onCheckChange}

@@ -30,6 +30,7 @@ export function usePanelProps(
     multipleLimit: props.multipleLimit,
     virtual: props.virtual,
     virtualItemHeight: props.virtualItemHeight,
+    virtualScrollMode: props.virtualScrollMode,
     'onUpdate:activeValue': setActiveValue,
     onOptionClick,
     onScroll: props.onScroll,
