@@ -46,7 +46,10 @@ const columns: TableColumn<Data>[] = [
   {
     title: 'Count',
     dataKey: 'cnt',
-    align: 'end',
+    align: {
+      title: 'start',
+      cell: 'end',
+    },
     sortable: {
       sorter: (curr, next) => curr.cnt - next.cnt,
     },
