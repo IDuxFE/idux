@@ -22,6 +22,8 @@ export interface RowSize {
 
 export type VirutalDataSizes = Map<VKey, RowSize>
 
+export type VirtualScrollMode = 'native' | 'simulated'
+
 export interface ModifiedData {
   data: any
   index: number
@@ -52,6 +54,8 @@ export const virtualListProps = {
   width: { type: [Number, String] as PropType<number | '100%'>, default: '100%' },
   fullWidth: { type: Boolean, default: true },
   colWidth: { type: Number, default: 0 },
+  getRowHeight: Function as PropType<(rowKey: VKey) => number | undefined>,
+  getColWidth: Function as PropType<(rowKey: VKey, colKey: VKey) => number | undefined>,
   /**
    * @deprecated use rowRender instead
    */
@@ -61,6 +65,10 @@ export const virtualListProps = {
   virtual: {
     type: [Boolean, Object] as PropType<boolean | VirtualScrollEnabled>,
     default: (): VirtualScrollEnabled => ({ horizontal: false, vertical: true }),
+  },
+  scrollMode: {
+    type: String as PropType<VirtualScrollMode>,
+    default: 'native',
   },
   isStrictGrid: {
     type: Boolean,

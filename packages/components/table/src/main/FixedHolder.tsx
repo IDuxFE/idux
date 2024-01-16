@@ -48,6 +48,7 @@ export default defineComponent({
       mergedPrefixCls,
       mergedVirtual,
       mergedVirtualColWidth,
+      getVirtualColWidth,
       scrollHeadRef,
       handleScroll,
       scrollWidth,
@@ -166,6 +167,7 @@ export default defineComponent({
                 height={0}
                 width={'100%'}
                 colWidth={mergedVirtualColWidth.value}
+                getColWidth={getVirtualColWidth}
                 rowRender={rowRender}
                 colRender={colRneder}
                 contentRender={contentRender}

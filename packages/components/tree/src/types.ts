@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { MergedNode } from './composables/useDataSource'
-import type { VirtualScrollToFn } from '@idux/cdk/scroll'
+import type { VirtualScrollMode, VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { CascaderStrategy } from '@idux/components/cascader'
 import type { EmptyProps } from '@idux/components/empty'
@@ -76,6 +76,7 @@ export const treeProps = {
   },
   showLine: { type: Boolean, default: undefined },
   virtual: { type: Boolean, default: false },
+  virtualScrollMode: { type: String as PropType<VirtualScrollMode>, default: undefined },
   virtualItemHeight: { type: Number, default: 28 },
 
   // events

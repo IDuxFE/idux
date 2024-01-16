@@ -12,6 +12,10 @@ import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 export interface VirtualScrollContext {
   props: VirtualScrollProps
   slots: Slots
+  containerSize: ComputedRef<{
+    width: number
+    height: number
+  }>
   enabled: ComputedRef<VirtualScrollEnabled>
   holderRef: Ref<HTMLElement | undefined>
   fillerHorizontalRef: Ref<HTMLElement | undefined>

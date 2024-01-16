@@ -161,11 +161,13 @@ export function useSizeCollect(props: VirtualScrollProps): SizeCollectContext {
   }
 
   const getRowHeight = (rowKey: VKey) => {
-    return sizes.get(rowKey)?.height ?? props.rowHeight
+    return sizes.get(rowKey)?.height ?? props.getRowHeight?.(rowKey) ?? props.rowHeight
   }
   const getColWidth = (rowKey: VKey, colKey: VKey) => {
     return (
-      (props.isStrictGrid ? strictGridColSizes.get(colKey) : sizes.get(rowKey)?.colWidths.get(colKey)) ?? props.colWidth
+      (props.isStrictGrid ? strictGridColSizes.get(colKey) : sizes.get(rowKey)?.colWidths.get(colKey)) ??
+      props.getColWidth?.(rowKey, colKey) ??
+      props.colWidth
     )
   }
 

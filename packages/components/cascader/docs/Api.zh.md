@@ -45,6 +45,7 @@
 | `strategy` | 设置级联策略 | `'all' \| 'parent' \| 'child' \| 'off'` | `'all'` | - | 具体用法参见 [级联策略](#components-cascader-demo-Strategy) |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | `down` | ✅ | - |
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | 需要设置 `height` |
+| `virtualScrollMode` | 虚拟滚动的滚动模式 | `'native' \| 'simulated'` | `'native'` | - | - |
 | `onChange` | 选中值发生改变后的回调 | `(value: any, oldValue: any) => void` | - | - | - |
 | `onClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - | - | - |
 | `onExpand` | 点击展开图标时触发 | `(expanded: boolean, data: CascaderData) => void` | - | - | - |
@@ -122,6 +123,7 @@ interface SelectedItemProps {
 | `separator` | 设置分割符 | `string` | `/` | - | - |
 | `strategy` | 设置级联策略 | `'all' \| 'parent' \| 'child' \| 'off'` | `'all'` | - | 具体用法参见 [级联策略](#components-cascader-demo-Strategy) |
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | 需要设置 `height` |
+| `virtualScrollMode` | 虚拟滚动的滚动模式 | `'native' \| 'simulated'` | `'native'` | - | - |
 | `onSelect` | 选中值触发 | `(option: CascaderData, oldValue: any) => void` | - | - | - |
 | `onExpand` | 点击展开图标时触发 | `(expanded: boolean, isSelected: boolean) => void` | - | - | - |
 | `onExpandedChange` | 展开状态发生变化时触发 | `(expendedKeys: VKey[], expendedData: CascaderData[]) => void` | - | - | - |

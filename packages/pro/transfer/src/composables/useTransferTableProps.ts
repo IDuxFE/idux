@@ -80,6 +80,7 @@ export function useTransferTableProps(
       pagination: false,
       selectedRowKeys: selectedKeys.value,
       virtual: props.virtual,
+      virtualScrollMode: props.virtualScrollMode,
       virtualItemHeight: props.virtualItemHeight,
       getKey: getKey.value as (record: unknown) => number | string,
       onColumnsChange,

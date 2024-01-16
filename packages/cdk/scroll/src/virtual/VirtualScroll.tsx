@@ -5,7 +5,18 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComponentPublicInstance, computed, defineComponent, onMounted, onUpdated, provide, ref, watch } from 'vue'
+import {
+  type ComponentPublicInstance,
+  computed,
+  defineComponent,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  onUpdated,
+  provide,
+  ref,
+  watch,
+} from 'vue'
 
 import { Logger, callEmit, useState } from '@idux/cdk/utils'
 
@@ -22,6 +33,8 @@ import Row from './contents/Row'
 import { virtualScrollToken } from './token'
 import { type VirtualScrollEnabled, virtualListProps } from './types'
 import { isRowData } from './utils'
+import { CdkScrollbar } from '../scrollbar'
+import { useScroll } from '../useScroll'
 
 export default defineComponent({
   name: 'CdkVirtualScroll',
@@ -58,14 +71,40 @@ export default defineComponent({
       }
     })
 
-    const containerRef = ref<HTMLElement>()
+    const horizontalOverflowed = computed(() => scrollWidth.value > containerSize.value.width)
+    const verticalOverflowed = computed(() => scrollHeight.value > containerSize.value.height)
+
     const holderRef = ref<HTMLElement>()
     const fillerHorizontalRef = ref<HTMLElement>()
     const fillerVerticalRef = ref<HTMLElement>()
 
-    const containerSize = useContainerSize(props, containerRef)
+    const containerSize = useContainerSize(props, holderRef)
 
     const [scroll, changeScroll] = useState<Scroll>({ top: 0, left: 0 })
+
+    const {
+      scrollTop: simulatedScrollTop,
+      scrollLeft: simulatedScrollLeft,
+      scrollHeight: simulatedScrollHeight,
+      scrollWidth: simulatedScrollWidth,
+      syncScroll: syncSimulatedScroll,
+      init: initSimulatedScroll,
+      update: updateSimulatedScroll,
+      destroy: destroySimulatedScroll,
+    } = useScroll(holderRef, {
+      simulatedScroll: props.scrollMode !== 'native',
+      setContainerScroll: false,
+      onScroll: (top, left) => {
+        syncScroll({ top, left }, true)
+      },
+    })
+
+    const onHorizontalScroll = (offset: number) => {
+      syncScroll({ left: offset }, true)
+    }
+    const onVerticalScroll = (offset: number) => {
+      syncScroll({ top: offset }, true)
+    }
 
     const {
       scrollHeight,
@@ -83,9 +122,9 @@ export default defineComponent({
       holderRef,
       scroll,
       scrollHeight,
-      scrollWidth,
       containerSize,
       changeScroll,
+      syncSimulatedScroll,
     )
 
     const pool = useRenderPool(props, topIndex, bottomIndex, leftIndex, rightIndex, getKey)
@@ -102,9 +141,17 @@ export default defineComponent({
       })
     })
 
+    const classes = computed(() => ({
+      'cdk-virtual-scroll': true,
+      'cdk-virtual-scroll-simulated-scroll': props.scrollMode !== 'native',
+      'cdk-virtual-scroll-overflowed-horizontal': horizontalOverflowed.value,
+      'cdk-virtual-scroll-overflowed-vertical': verticalOverflowed.value,
+    }))
+
     provide(virtualScrollToken, {
       props,
       slots,
+      containerSize,
       enabled,
       holderRef,
       fillerHorizontalRef,
@@ -133,8 +180,15 @@ export default defineComponent({
       callEmit(props.onScrolledChange, topIndex.value, bottomIndex.value, mergedData.value),
     )
 
-    onMounted(collectSize)
+    onMounted(() => {
+      collectSize()
+      initSimulatedScroll()
+      watch([scrollWidth, scrollHeight], () => {
+        nextTick(() => updateSimulatedScroll())
+      })
+    })
     onUpdated(collectSize)
+    onBeforeUnmount(destroySimulatedScroll)
 
     return () => {
       const rowRender = slots.row ?? slots.item ?? props.rowRender ?? props.itemRender
@@ -188,8 +242,27 @@ export default defineComponent({
       })
 
       return (
-        <div ref={containerRef} class="cdk-virtual-scroll">
+        <div class={classes.value}>
           <Holder>{rows}</Holder>
+          {props.scrollMode === 'simulated' && (
+            <CdkScrollbar
+              v-show={verticalOverflowed.value}
+              containerSize={containerSize.value.height}
+              scrollRange={simulatedScrollHeight.value}
+              scrollOffset={simulatedScrollTop.value}
+              onScroll={onVerticalScroll}
+            />
+          )}
+          {props.scrollMode === 'simulated' && (
+            <CdkScrollbar
+              v-show={horizontalOverflowed.value}
+              horizontal
+              containerSize={containerSize.value.width}
+              scrollRange={simulatedScrollWidth.value}
+              scrollOffset={simulatedScrollLeft.value}
+              onScroll={onHorizontalScroll}
+            />
+          )}
         </div>
       )
     }

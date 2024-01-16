@@ -65,6 +65,7 @@ export default defineComponent({
       flattedData,
       flattedColumns,
       fixedColumns,
+      getVirtualColWidth,
       isSticky,
       mergedSticky,
       virtualScrollRef,
@@ -330,10 +331,12 @@ export default defineComponent({
               width={'100%'}
               rowHeight={mergedVirtualItemHeight.value}
               colWidth={mergedVirtualColWidth.value}
+              getColWidth={getVirtualColWidth}
               rowRender={rowRender}
               colRender={colRender}
               contentRender={contentRender}
               virtual={mergedVirtual.value}
+              scrollMode={props.virtualScrollMode}
               bufferSize={props.virtualBufferSize}
               bufferOffset={props.virtualBufferOffset}
               onScroll={handleScroll}

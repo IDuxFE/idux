@@ -75,7 +75,7 @@ export default defineComponent({
     }
 
     const renderBody = () => {
-      const { dataSource, virtual, virtualItemHeight, scroll } = props
+      const { dataSource, virtual, virtualItemHeight, virtualScrollMode, scroll } = props
       const data = dataSource ?? []
 
       if (data.length <= 0) {
@@ -93,6 +93,7 @@ export default defineComponent({
             rowHeight={virtualItemHeight}
             rowRender={renderListItem}
             virtual
+            scrollMode={virtualScrollMode}
             onScroll={handleScroll}
             onScrolledBottom={handleScrolledBottom}
             onScrolledChange={handleScrolledChange}

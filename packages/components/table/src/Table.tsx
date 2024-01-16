@@ -6,8 +6,9 @@
  */
 
 import type { VirtualScrollEnabled } from '@idux/cdk/scroll'
+import type { VKey } from '@idux/cdk/utils'
 
-import { type VNode, computed, defineComponent, normalizeClass, provide } from 'vue'
+import { type VNode, computed, defineComponent, normalizeClass, provide, watch } from 'vue'
 
 import { isBoolean } from 'lodash-es'
 
@@ -17,7 +18,7 @@ import { IxSpin, type SpinProps } from '@idux/components/spin'
 import { useThemeToken } from '@idux/components/theme'
 import { useGetKey } from '@idux/components/utils'
 
-import { useColumns } from './composables/useColumns'
+import { type TableColumnMerged, useColumns } from './composables/useColumns'
 import { useDataSource } from './composables/useDataSource'
 import { useExpandable } from './composables/useExpandable'
 import { useFilterable } from './composables/useFilterable'
@@ -81,8 +82,26 @@ export default defineComponent({
       mergedAutoHeight,
     )
 
+    const { columnWidthMap, flattedColumns } = columnsContext
     const { activeSorters } = sortableContext
     const { activeFilters } = filterableContext
+
+    const columnMap = new Map<VKey, TableColumnMerged>()
+    const initColumnMap = () => {
+      columnMap.clear()
+      flattedColumns.value.forEach(col => {
+        columnMap.set(col.key, col)
+      })
+    }
+    watch(
+      flattedColumns,
+      () => {
+        initColumnMap()
+      },
+      {
+        immediate: true,
+      },
+    )
 
     const dataContext = useDataSource(
       props,
@@ -97,6 +116,10 @@ export default defineComponent({
 
     useScrollOnChange(props, config, mergedPagination, activeSorters, activeFilters, scrollContext.scrollTo)
 
+    const getVirtualColWidth = (rowKey: VKey, colKey: VKey) => {
+      return columnWidthMap.value[colKey] ?? columnMap.get(colKey)?.width
+    }
+
     const context = {
       props,
       slots,
@@ -109,6 +132,7 @@ export default defineComponent({
       mergedVirtualItemHeight,
       mergedVirtualColWidth,
       mergedAutoHeight,
+      getVirtualColWidth,
       ...columnsContext,
       ...scrollContext,
       ...sortableContext,

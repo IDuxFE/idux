@@ -1,6 +1,48 @@
+@scrollbar-width: var(--ix-cdk-scrollbar-width, var(--ix-scrollbar-width, 12px));
+@scrollbar-height: var(--ix-cdk-scrollbar-height, var(--ix-scrollbar-height, 12px));
+@scrollbar-padding: var(--ix-cdk-scrollbar-padding, var(--ix-scrollbar-thumb-border-width, 2px));
+
+.cdk-scroll-block {
+  overflow: hidden;
+}
+
+.cdk-scrollbar {
+  .cdk-scrollbar-thumb {
+    background-color: var(--ix-cdk-scrollbar-thumb-bg, var(--ix-scrollbar-thumb-bg, #e1e5eb));
+    border-radius: var(--ix-cdk-scrollbar-thumb-border-radius, var(--ix-scrollbar-thumb-border-radius, 6px));
+    cursor: pointer;
+    user-select: none;
+
+    &:hover,
+    &-moving {
+      background-color: var(--ix-cdk-scrollbar-thumb-bg-hover, var(--ix-scrollbar-thumb-bg-hover, #bec3cc));
+    }
+    &:active {
+      background-color: var(--ix-cdk-scrollbar-thumb-bg-active, var(--ix-scrollbar-thumb-bg-active, #bec3cc));
+    }
+  }
+
+  &&-vertical {
+    height: 100%;
+    width: @scrollbar-width;
+    padding: 0 @scrollbar-padding 0 @scrollbar-padding;
+    .cdk-scrollbar-thumb {
+      width: 100%;
+    }
+  }
+
+  &&-horizontal {
+    width: 100%;
+    height: @scrollbar-height;
+    padding: @scrollbar-padding 0 @scrollbar-padding 0;
+    .cdk-scrollbar-thumb {
+      height: 100%;
+    }
+  }
+}
+
 .cdk-virtual-scroll {
   &-holder {
-    overflow: auto;
     overflow-anchor: none;
   }
 
@@ -12,8 +54,36 @@
     display: flex;
     flex-flow: column wrap;
   }
-}
 
-.cdk-scroll-block {
-  overflow: hidden;
+  &-simulated-scroll {
+    position: relative;
+
+    .cdk-scrollbar {
+      position: absolute;
+
+      &:not(.cdk-scrollbar-horizontal) {
+        top: 0;
+        right: 0;
+      }
+      .cdk-scrollbar-horizontal {
+        bottom: 0;
+        left: 0;
+      }
+    }
+
+    &.cdk-virtual-scroll-overflowed-horizontal {
+      padding-bottom: @scrollbar-height;
+    }
+    &.cdk-virtual-scroll-overflowed-vertical {
+      padding-right: @scrollbar-width;
+    }
+    &.cdk-virtual-scroll-overflowed-horizontal.cdk-virtual-scroll-overflowed-vertical {
+      .cdk-scrollbar-vertical {
+        height: calc(100% - @scrollbar-height);
+      }
+      .cdk-scrollbar-horizontal {
+        width: calc(100% - @scrollbar-width);
+      }
+    }
+  }
 }

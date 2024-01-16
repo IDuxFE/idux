@@ -9,7 +9,7 @@
 
 import type { TransferOperationsContext } from './composables/useTransferOperations'
 import type { ConvertToSlotParams } from './utils'
-import type { VirtualScrollToFn } from '@idux/cdk/scroll'
+import type { VirtualScrollMode, VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { PaginationProps } from '@idux/components/pagination'
@@ -162,6 +162,7 @@ export const transferProps = {
   },
   showSelectAll: { type: Boolean, default: undefined },
   virtual: { type: Boolean, default: false },
+  virtualScrollMode: { type: String as PropType<VirtualScrollMode>, default: undefined },
   virtualItemHeight: { type: Number, default: undefined },
 
   //Events
@@ -238,6 +239,7 @@ export const transferListProps = {
   labelKey: String,
   scroll: Object as PropType<TransferScroll>,
   virtual: { type: Boolean, default: false },
+  virtualScrollMode: { type: String as PropType<VirtualScrollMode>, default: undefined },
   virtualItemHeight: { type: Number, default: 32 },
 
   onCheckChange: [Function, Array] as PropType<MaybeArray<(item: TransferData, checked: boolean) => void>>,

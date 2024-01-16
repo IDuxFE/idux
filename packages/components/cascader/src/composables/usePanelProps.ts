@@ -47,10 +47,12 @@ export function usePanelProps(
     searchValue: searchValue.value,
     strategy: props.strategy,
     virtual: props.virtual,
+    virtualScrollMode: props.virtualScrollMode,
     virtualItemHeight: props.virtualItemHeight,
 
     'onUpdate:expandedKeys': setExpandedKeys,
     'onUpdate:loadedKeys': setLoadedKeys,
     onSelect,
+    onLoaded: props.onLoaded,
   }))
 }

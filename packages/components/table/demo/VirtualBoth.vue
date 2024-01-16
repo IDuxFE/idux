@@ -5,6 +5,7 @@
     :pagination="false"
     virtual
     virtualHorizontal
+    virtualScrollMode="simulated"
     :scroll="scroll"
     :virtualColWidth="150"
   >

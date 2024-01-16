@@ -16,10 +16,10 @@ import { useState } from '@idux/cdk/utils'
 
 export function useContainerSize(
   props: VirtualScrollProps,
-  containerRef: Ref<HTMLElement | undefined>,
+  holderRef: Ref<HTMLElement | undefined>,
 ): ComputedRef<{ width: number; height: number }> {
   const [size, setSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
-  useResizeObserver(containerRef, entry => {
+  useResizeObserver(holderRef, entry => {
     const {
       contentRect: { height, width },
     } = entry
