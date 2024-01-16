@@ -23,7 +23,7 @@
         <span v-else>{{ value }}</span>
       </template>
       <template #action="{ record }">
-        <IxButtonGroup :gap="8" mode="link" separator="|">
+        <IxButtonGroup :gap="16" mode="link">
           <template v-if="record.editable">
             <IxButton @click="onSave(record)">Save</IxButton>
             <IxButton @click="onCancel(record)">Cancel</IxButton>
