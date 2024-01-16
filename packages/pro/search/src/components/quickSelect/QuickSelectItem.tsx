@@ -71,8 +71,8 @@ export default defineComponent({
     const searchDataSegment = computed(() =>
       props.searchField.segments.find(seg => searchDataTypes.includes(seg.name as SearchDataTypes)),
     )
-    const searchDataSegmentState = computed(
-      () => searchState.value?.segmentStates.find(seg => searchDataTypes.includes(seg.name as SearchDataTypes)),
+    const searchDataSegmentState = computed(() =>
+      searchState.value?.segmentStates.find(seg => searchDataTypes.includes(seg.name as SearchDataTypes)),
     )
 
     const [itemValue, setItemValue] = useState<unknown>(searchDataSegmentState.value?.value)

@@ -21,12 +21,11 @@ export function useFileSelect(
   filesDataContext: FilesDataContext,
 ): (files: File[]) => Promise<void> {
   const { fileList, updateFiles } = filesDataContext
-  const accept = computed(
-    () =>
-      props.accept
-        ?.split(',')
-        .map(type => type.trim())
-        .filter(Boolean),
+  const accept = computed(() =>
+    props.accept
+      ?.split(',')
+      .map(type => type.trim())
+      .filter(Boolean),
   )
   const maxCount = computed(() => props.maxCount ?? 0)
 
