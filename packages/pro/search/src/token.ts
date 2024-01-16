@@ -6,6 +6,7 @@
  */
 
 import type { ActiveSegmentContext } from './composables/useActiveSegment'
+import type { CacheDataContext } from './composables/useCacheData'
 import type { FocusStateContext } from './composables/useFocusedState'
 import type { ResolvedSearchFieldsContext } from './composables/useResolvedSearchFields'
 import type { SearchStateContext } from './composables/useSearchStates'
@@ -20,7 +21,8 @@ export interface ProSearchContext
   extends FocusStateContext,
     SearchStateContext,
     ResolvedSearchFieldsContext,
-    ActiveSegmentContext {
+    ActiveSegmentContext,
+    CacheDataContext {
   elementRef: Ref<HTMLElement | undefined>
   tempSegmentInputRef: Ref<HTMLInputElement | undefined>
   props: ProSearchProps

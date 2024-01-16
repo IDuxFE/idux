@@ -5,6 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { CacheDataContext } from './useCacheData'
 import type { SearchValueContext } from './useSearchValues'
 import type { ProSearchProps, ResolvedSearchField, SearchValue, Segment, SegmentState } from '../types'
 
@@ -26,10 +27,10 @@ export interface SearchState {
 }
 
 interface InitSearchState {
-  (key: VKey): void
-  (key: VKey, force: boolean): void
-  (key: VKey, segmentName: string): void
-  (key: VKey, segmentName: string, force: boolean): void
+  (key: string): void
+  (key: string, force: boolean): void
+  (key: string, segmentName: string): void
+  (key: string, segmentName: string, force: boolean): void
 }
 
 export interface SearchStateContext {
@@ -54,6 +55,8 @@ export function useSearchStates(
   props: ProSearchProps,
   fieldKeyMap: ComputedRef<Map<VKey, ResolvedSearchField>>,
   searchValueContext: SearchValueContext,
+  getCacheData: CacheDataContext['getCacheData'],
+  setCacheData: CacheDataContext['setCacheData'],
 ): SearchStateContext {
   const { searchValues, setSearchValues } = searchValueContext
   const getKey = createStateKeyGetter()
@@ -124,7 +127,12 @@ export function useSearchStates(
     }
 
     const segmentState = searchState.segmentStates.find(state => state.name === name)
-    const input = segment.format(value, searchState.segmentStates)
+    const input = segment.format(
+      value,
+      searchState.segmentStates,
+      dataKey => getCacheData(searchState.key, name, dataKey),
+      (dataKey, data) => setCacheData(searchState.key, name, dataKey, data),
+    )
 
     if (!segmentState) {
       searchState.segmentStates.push({ name, input, value })
@@ -142,7 +150,12 @@ export function useSearchStates(
     }
 
     const segmentState = searchState.segmentStates.find(state => state.name === name)
-    const value = segment.parse(input, searchState.segmentStates)
+    const value = segment.parse(
+      input,
+      searchState.segmentStates,
+      dataKey => getCacheData(searchState.key, name, dataKey),
+      (dataKey, data) => setCacheData(searchState.key, name, dataKey, data),
+    )
 
     if (segmentState) {
       segmentState.value = value
@@ -283,7 +296,7 @@ export function useSearchStates(
       let key = _getKey(fieldKey)
       let hasCreatedState = false
 
-      const segmentStates = generateSegmentStates(searchField, searchValue)
+      const segmentStates = generateSegmentStates(searchField, searchValue, key, getCacheData, setCacheData)
       const searchState = { fieldKey, searchValue, segmentStates } as SearchState
 
       if (!searchField.multiple) {
@@ -331,7 +344,7 @@ export function useSearchStates(
     searchStates.value = newStates
   }
 
-  const initSearchState: InitSearchState = (key: VKey, segmentNameOrForce?: string | boolean, force?: boolean) => {
+  const initSearchState: InitSearchState = (key: string, segmentNameOrForce?: string | boolean, force?: boolean) => {
     const _force = isString(segmentNameOrForce) ? force : segmentNameOrForce
     const _segmentName = isString(segmentNameOrForce) ? segmentNameOrForce : undefined
 
@@ -342,7 +355,7 @@ export function useSearchStates(
     }
 
     const searchValue = searchState.searchValue
-    const segmentStates = generateSegmentStates(searchField, searchValue)
+    const segmentStates = generateSegmentStates(searchField, searchValue, key, getCacheData, setCacheData)
 
     if (!_segmentName) {
       searchState.segmentStates = segmentStates
@@ -369,7 +382,7 @@ export function useSearchStates(
       name: searchField.label,
       index: searchStates.value.length,
       fieldKey: fieldKey,
-      segmentStates: generateSegmentStates(searchField, searchValue),
+      segmentStates: generateSegmentStates(searchField, searchValue, newKey, getCacheData, setCacheData),
     }
     searchStates.value.push(newSearchState)
     mark(newKey, 'created')

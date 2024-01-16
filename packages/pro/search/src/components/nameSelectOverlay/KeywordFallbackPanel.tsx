@@ -30,7 +30,10 @@ export default defineComponent({
       setActiveSegment,
       setTempActive,
       setOverlayOpened,
+      updateSegmentValue,
       validateSearchState,
+      getCacheData,
+      setCacheData,
     } = inject(proSearchContext)!
 
     const searchStatesKeys = computed(() => new Set(searchStates.value?.map(state => state.fieldKey)))
@@ -78,24 +81,27 @@ export default defineComponent({
       props.onChange?.(selectedFieldKey)
 
       const searchField = fieldKeyMap.value.get(selectedFieldKey)!
+      const searchState = createSearchState(selectedFieldKey)
+      const hasOperators = searchField.operators && searchField.operators.length > 0
+      const valueSegment = hasOperators ? searchField.segments[1] : searchField.segments[0]
+
+      if (!searchState) {
+        return
+      }
 
       let searchValue: unknown
       if (isObject(searchField.keywordFallback) && searchField.keywordFallback.parse) {
         searchValue = searchField.keywordFallback.parse(props.searchValue)
       } else {
-        const hasOperators = searchField.operators && searchField.operators.length > 0
-        const valueSegment = hasOperators ? searchField.segments[1] : searchField.segments[0]
-
-        searchValue = valueSegment.parse(props.searchValue, [])
+        searchValue = valueSegment.parse(
+          props.searchValue,
+          [],
+          dataKey => getCacheData(searchState.key, valueSegment.name, dataKey),
+          (dataKey, data) => setCacheData(searchState.key, valueSegment.name, dataKey, data),
+        )
       }
 
-      const searchState = createSearchState(selectedFieldKey, {
-        value: searchValue,
-      })
-
-      if (!searchState) {
-        return
-      }
+      updateSegmentValue(searchState.key, valueSegment.name, searchValue)
 
       const segmentStates = searchState.segmentStates
 

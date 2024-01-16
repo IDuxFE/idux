@@ -19,6 +19,7 @@ import SearchItemComp from './components/SearchItem'
 import QuickSelectPanel from './components/quickSelect/QuickSelectPanel'
 import NameSelectSegment from './components/segment/TempSegment'
 import { useActiveSegment } from './composables/useActiveSegment'
+import { useCacheData } from './composables/useCacheData'
 import { useCommonOverlayProps } from './composables/useCommonOverlayProps'
 import { useControl } from './composables/useControl'
 import { useElementWidthMeasure } from './composables/useElementWidthMeasure'
@@ -69,7 +70,9 @@ export default defineComponent({
       locale.search,
     )
     const { fieldKeyMap } = resolvedSearchFieldsContext
-    const searchStateContext = useSearchStates(props, fieldKeyMap, searchValueContext)
+
+    const { getCacheData, setCacheData, clearCacheData } = useCacheData()
+    const searchStateContext = useSearchStates(props, fieldKeyMap, searchValueContext, getCacheData, setCacheData)
     const { searchStates, initSearchStates, clearSearchState, updateSearchValues, isSegmentVisible } =
       searchStateContext
 
@@ -113,6 +116,9 @@ export default defineComponent({
       },
       { immediate: true, deep: true },
     )
+    watch([searchStates, () => searchStates.value.length], ([states]) => {
+      clearCacheData(states)
+    })
 
     const placeholder = computed(() => props.placeholder ?? locale.search.placeholder)
     const clearable = computed(() => props.clearable ?? config.clearable)
@@ -170,6 +176,9 @@ export default defineComponent({
       mergedPrefixCls,
       enableQuickSelect,
       commonOverlayProps,
+      getCacheData,
+      setCacheData,
+      clearCacheData,
 
       ...focusStateContext,
       ...searchStateContext,

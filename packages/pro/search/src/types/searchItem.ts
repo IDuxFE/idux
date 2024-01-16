@@ -27,7 +27,7 @@ export interface SearchItemConfirmContext<V = unknown> extends Partial<SearchVal
 }
 
 export interface SearchItem {
-  key: VKey
+  key: string
   name: string
   optionKey?: VKey
   error?: SearchItemError
@@ -43,7 +43,7 @@ export const searchItemProps = {
 export type SearchItemProps = ExtractInnerPropTypes<typeof searchItemProps>
 
 export const searchItemTagProps = {
-  itemKey: { type: [String, Number, Symbol] as PropType<VKey>, required: true },
+  itemKey: { type: String, required: true },
   segments: { type: Array as PropType<{ input: string; name: string }[]>, required: true },
   error: Object as PropType<SearchItemError>,
 }

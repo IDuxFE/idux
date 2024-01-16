@@ -7,6 +7,7 @@
 
 import type { CustomSegmentConfig, ExtendedSegment, InnerSegmentTypes, PanelRenderContext, Segment } from '../types'
 import type { DateConfig } from '@idux/components/config'
+import type { ProSearchLocale } from '@idux/pro/locales'
 import type { VNodeChild } from 'vue'
 
 import { isFunction, isString } from 'lodash-es'
@@ -18,11 +19,16 @@ import { createSelectSegment } from './CreateSelectSegment'
 import { createTreeSelectSegment } from './CreateTreeSelectSegment'
 import { createInputSegment } from './createInputSegment'
 
-export function createCustomSegment(prefixCls: string, dateConfig: DateConfig, config: CustomSegmentConfig): Segment {
+export function createCustomSegment(
+  prefixCls: string,
+  dateConfig: DateConfig,
+  config: CustomSegmentConfig,
+  locale: ProSearchLocale,
+): Segment {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let extendedSegment: Segment<any> | undefined
   if ('extends' in config) {
-    extendedSegment = createExtendedSegment(prefixCls, dateConfig, config.extends, config.config)
+    extendedSegment = createExtendedSegment(prefixCls, dateConfig, config.extends, config.config, locale)
   }
 
   const { name, visible, parse, format, customPanel, placeholder } = config
@@ -48,10 +54,11 @@ function createExtendedSegment(
   dateConfig: DateConfig,
   type: InnerSegmentTypes,
   config: ExtendedSegment['config'],
+  locale: ProSearchLocale,
 ) {
   switch (type) {
     case 'select':
-      return createSelectSegment(prefixCls, config as (ExtendedSegment & { extends: 'selectdd' })['config'])
+      return createSelectSegment(prefixCls, config as (ExtendedSegment & { extends: 'selectdd' })['config'], locale)
     case 'treeSelect':
       return createTreeSelectSegment(prefixCls, config as (ExtendedSegment & { extends: 'treeSelect' })['config'])
     case 'cascader':
