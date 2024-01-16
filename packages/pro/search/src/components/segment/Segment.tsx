@@ -42,6 +42,8 @@ export default defineComponent({
       searchStates,
       overlayOpened: _overlayOpened,
       setOverlayOpened,
+      getCacheData,
+      setCacheData,
     } = context
     const overlayRef = ref<ɵOverlayInstance>()
     const segmentInputRef = ref<SegmentInputInstance>()
@@ -188,6 +190,8 @@ export default defineComponent({
         ok: handleConfirm,
         setValue: handleChange,
         setOnKeyDown: setPanelOnKeyDown,
+        getCacheData: dataKey => getCacheData(props.itemKey, props.segment.name, dataKey),
+        setCacheData: (dataKey, data) => setCacheData(props.itemKey, props.segment.name, dataKey, data),
       })
 
       contentNodeEmpty.value = !contentNode

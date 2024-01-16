@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import type { PanelRenderContext, Segment, SegmentState, SelectPanelData, SelectSearchField } from '../types'
 import type { ProSearchLocale } from '@idux/pro/locales'
 
@@ -16,6 +18,7 @@ import SelectPanel from '../panel/SelectPanel'
 import { filterDataSource, getSelectDataSourceKeys, getSelectableCommonParams } from '../utils'
 
 const defaultSeparator = '|'
+const dataSourceCacheKey = 'select-data-source'
 
 export function createSelectSegment(
   prefixCls: string,
@@ -68,7 +71,8 @@ export function createSelectSegment(
     inputClassName: [`${prefixCls}-select-segment-input`],
     containerClassName: [`${prefixCls}-select-segment-container`],
     parse: input => parseInput(input, config, locale.allSelected),
-    format: (value, states) => formatValue(value, states, config, locale.allSelected),
+    format: (value, states, getCacheData, setCacheData) =>
+      formatValue(value, states, getCacheData, setCacheData, config, locale.allSelected),
     panelRenderer,
   }
 }
@@ -92,22 +96,31 @@ function parseInput(
 function formatValue(
   value: VKey | VKey[] | undefined,
   states: SegmentState[] | undefined,
+  getCacheData: (dataKey: string) => any,
+  setCacheData: (dataKey: string, data: any) => void,
   config: SelectSearchField['fieldConfig'],
   allSelected: string,
 ): string {
-  const { concludeAllSelected, dataSource, separator, searchable } = config
   if (isNil(value)) {
     return ''
   }
 
+  const { concludeAllSelected, dataSource, separator, searchable } = config
+  const cachedData = getCacheData(dataSourceCacheKey) as SelectPanelData[] | undefined
+  const mergedDataSource = cachedData ? mergeData(cachedData, dataSource) : dataSource
+
   const values = convertArray(value)
 
-  if (concludeAllSelected && values.length > 0 && values.length >= dataSource.length) {
+  const dataKeyMap = new Map(mergedDataSource.map(data => [data.key, data]))
+  const newCacheData = values.map(value => dataKeyMap.get(value))
+  setCacheData(dataSourceCacheKey, newCacheData)
+
+  if (concludeAllSelected && values.length > 0 && values.length >= mergedDataSource.length) {
     return allSelected
   }
 
   const _separator = separator ?? defaultSeparator
-  const labels = getLabelByKeys(dataSource, convertArray(value))
+  const labels = getLabelByKeys(mergedDataSource, values)
 
   if (searchable) {
     const inputParts = states ? states[states.length - 1]?.input?.split(_separator) ?? [] : []
@@ -138,4 +151,17 @@ function getKeyByLabels(dataSource: SelectPanelData[], labels: string[]): VKey[]
     dataSource,
     option => labels.findIndex(label => label.trim() === toString(option.label).trim()) > -1,
   ).map(data => data.key)
+}
+
+function mergeData(cachedData: SelectPanelData[], dataSource: SelectPanelData[]) {
+  const mergedData = [...dataSource]
+  const dataSourceKeySet = new Set(dataSource.map(data => data.key))
+
+  cachedData.forEach(data => {
+    if (!dataSourceKeySet.has(data.key)) {
+      mergedData.push(data)
+    }
+  })
+
+  return mergedData
 }

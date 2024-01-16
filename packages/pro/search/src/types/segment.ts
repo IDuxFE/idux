@@ -5,7 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ExtractInnerPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import type { ExtractInnerPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { DefineComponent, PropType, Slots, VNodeChild } from 'vue'
 
 export interface SegmentState {
@@ -14,8 +16,18 @@ export interface SegmentState {
   value: unknown
 }
 
-export type InputFormater<V = unknown> = (value: V, states: SegmentState[]) => string
-export type InputParser<V = unknown> = (input: string, states: SegmentState[]) => V | null
+export type InputFormater<V = unknown> = (
+  value: V,
+  states: SegmentState[],
+  getCacheData: (dataKey: string) => any,
+  setCacheData: (dataKey: string, data: any) => void,
+) => string
+export type InputParser<V = unknown> = (
+  input: string,
+  states: SegmentState[],
+  getCacheData: (dataKey: string) => any,
+  setCacheData: (dataKey: string, data: any) => void,
+) => V | null
 
 export type RenderLocation = 'individual' | 'quick-select-panel'
 
@@ -29,6 +41,8 @@ export interface PanelRenderContext<V = unknown> {
   cancel: () => void
   setValue: (value: V) => void
   setOnKeyDown: (onKeyDown: ((evt: KeyboardEvent) => boolean) | undefined) => void
+  getCacheData: (dataKey: string) => any
+  setCacheData: (dataKey: string, data: any) => void
 }
 
 export interface Segment<V = unknown> {
@@ -45,7 +59,7 @@ export interface Segment<V = unknown> {
 
 export const segmentProps = {
   itemKey: {
-    type: [String, Number, Symbol] as PropType<VKey>,
+    type: String,
     required: true,
   },
   input: String,
