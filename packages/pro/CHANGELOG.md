@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.6](https://github.com/IDuxFE/idux/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2024-01-17)
+
+
+### Bug Fixes
+
+* **pro:search:** quick select panel search bar overflows ([#1819](https://github.com/IDuxFE/idux/issues/1819)) ([c6824ea](https://github.com/IDuxFE/idux/commit/c6824ea4efaa3548015a831e7e3f5c15cd7b31d7))
+
+
+### Features
+
+* **cdk:scroll:** add simulated scroll support to VirtualScroll ([#1812](https://github.com/IDuxFE/idux/issues/1812)) ([17ccefa](https://github.com/IDuxFE/idux/commit/17ccefaf3cd0689e12e69be9d5af95578a12eae5))
+* **pro:search:** select field supports caching selected data ([#1814](https://github.com/IDuxFE/idux/issues/1814)) ([6e80276](https://github.com/IDuxFE/idux/commit/6e80276e2b6461c98f2946b490e1d48ac0dcdc35))
+
+
+
+
+
 # [2.0.0-beta.5](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0-beta.5) (2024-01-08)
 
 

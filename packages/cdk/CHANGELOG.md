@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.6](https://github.com/IDuxFE/idux/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2024-01-17)
+
+
+### Bug Fixes
+
+* **cdk:popper:** arrow size not properly calculated ([#1813](https://github.com/IDuxFE/idux/issues/1813)) ([f7abe16](https://github.com/IDuxFE/idux/commit/f7abe16f9b8bf71124d46fc96c8a6594d36ef64e))
+
+
+### Features
+
+* **cdk:scroll:** add simulated scroll support to VirtualScroll ([#1812](https://github.com/IDuxFE/idux/issues/1812)) ([17ccefa](https://github.com/IDuxFE/idux/commit/17ccefaf3cd0689e12e69be9d5af95578a12eae5))
+
+
+
+
+
 # [2.0.0-beta.5](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0-beta.5) (2024-01-08)
 
 

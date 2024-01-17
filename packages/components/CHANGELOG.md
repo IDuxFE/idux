@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.6](https://github.com/IDuxFE/idux/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2024-01-17)
+
+
+### Bug Fixes
+
+* **comp:*:** modify all overlay default placement to bottomStart ([#1815](https://github.com/IDuxFE/idux/issues/1815)) ([4189049](https://github.com/IDuxFE/idux/commit/4189049b6e151ceaca7f0c29ea1f249e525e7646))
+* **comp:alert:** change alert icon marigin-right to marginSizeXs([#1802](https://github.com/IDuxFE/idux/issues/1802)) ([4df6f97](https://github.com/IDuxFE/idux/commit/4df6f97f89afcfd47f33b9279afc4ebe02714829))
+* **comp:collapse:** change header prefix margin right to marginSizeMd ([#1811](https://github.com/IDuxFE/idux/issues/1811)) ([6bf6655](https://github.com/IDuxFE/idux/commit/6bf6655451c2066a6b1136b95886d246eafbb0bd))
+* **comp:header:** change bar height ([#1804](https://github.com/IDuxFE/idux/issues/1804)) ([972bd64](https://github.com/IDuxFE/idux/commit/972bd64a73f456dbb540e99df5dc7a69ea383895))
+* **comp:select:** theme token optionGroupMargin unit error ([#1821](https://github.com/IDuxFE/idux/issues/1821)) ([c1c2906](https://github.com/IDuxFE/idux/commit/c1c2906b76292206dc939682676ab5ca005c4fd7))
+* **comp:tag:** change tag padding x to 8px, use box-shadow instead of border ([#1801](https://github.com/IDuxFE/idux/issues/1801)) ([371c61d](https://github.com/IDuxFE/idux/commit/371c61d063d007909f3e1ba8aa80920398c1fb16))
+* **comp:tag:** reset bordered style from box-shadow to border ([#1817](https://github.com/IDuxFE/idux/issues/1817)) ([7154ca5](https://github.com/IDuxFE/idux/commit/7154ca5886adf5bf6df92bc367973e094867d8d4))
+
+
+### Features
+
+* **cdk:scroll:** add simulated scroll support to VirtualScroll ([#1812](https://github.com/IDuxFE/idux/issues/1812)) ([17ccefa](https://github.com/IDuxFE/idux/commit/17ccefaf3cd0689e12e69be9d5af95578a12eae5))
+
+
+
+
+
 # [2.0.0-beta.5](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0-beta.5) (2024-01-08)
 
 
