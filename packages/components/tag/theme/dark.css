@@ -1,6 +1,7 @@
 /* ------ tag css variables ------ */
 :root {
-  --ix-tag-bg-color-filled: #99acd1;
+  --ix-tag-bg-color-normal: rgba(128, 137, 153, 0.2);
+  --ix-tag-bg-color-filled: #525966;
   --ix-tag-border-width: 1px;
   --ix-tag-border-radius: 2px;
   --ix-tag-min-width-rect: 40px;

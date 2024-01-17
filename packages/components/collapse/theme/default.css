@@ -1,7 +1,7 @@
 /* ------ collapse css variables ------ */
 :root {
-  --ix-collapse-font-size-sm: 12px;
-  --ix-collapse-font-size-md: 12px;
+  --ix-collapse-font-size-sm: 14px;
+  --ix-collapse-font-size-md: 14px;
   --ix-collapse-expand-icon-size-sm: 20px;
   --ix-collapse-expand-icon-size-md: 24px;
   --ix-collapse-padding-horizontal-sm: 12px;
