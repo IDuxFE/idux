@@ -25,7 +25,7 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
 
     optionLabelMarginLeft: marginSizeSm,
     optionContainerPadding: `${paddingSizeXs}px 0`,
-    optionGroupMargin: `0 ${marginSizeMd}`,
+    optionGroupMargin: `0 ${marginSizeMd}px`,
     optionGroupPaddingLeft: 0,
     multipleOptionGroupedPaddingLeft: paddingSizeMd,
     optionGroupedPaddingLeft: paddingSizeXl,

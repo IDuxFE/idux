@@ -3,7 +3,7 @@
 | `multipleOptionGroupedPaddingLeft` |  | `number` | `12` | `12` |
 | `optionContainerPadding` |  | `string | number` | `4px 0` | `4px 0` |
 | `optionFontSize` |  | `number` | `12` | `12` |
-| `optionGroupMargin` |  | `string | number` | `0 12` | `0 12` |
+| `optionGroupMargin` |  | `string | number` | `0 12px` | `0 12px` |
 | `optionGroupPaddingLeft` |  | `number` | `0` | `0` |
 | `optionGroupedPaddingLeft` |  | `number` | `24` | `24` |
 | `optionHeight` |  | `number` | `32` | `32` |
