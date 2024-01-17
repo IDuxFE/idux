@@ -7,23 +7,22 @@
   }
 
   &-panel {
-    padding: var(--ix-padding-size-md) var(--ix-padding-size-md) 0;
+    padding: var(--ix-padding-size-md) var(--ix-padding-size-sm) 0;
 
-    @shortcust-padding: 8px;
+    @shortcuts-padding: 8px;
     &-shortcuts {
       position: relative;
       width: 100%;
       display: flex;
       flex-wrap: wrap;
-      padding: 0 @shortcust-padding var(--ix-padding-size-xs) @shortcust-padding;
-      margin-bottom: var(--ix-padding-size-md);
-      
+      padding: 0 @shortcuts-padding var(--ix-padding-size-xs) @shortcuts-padding;
+
       &::after {
         content: ' ';
         position: absolute;
         bottom: 0;
-        left: @shortcust-padding;
-        width: calc(100% - @shortcust-padding * 2);
+        left: @shortcuts-padding;
+        width: calc(100% - @shortcuts-padding * 2);
         height: 1px;
         background-color: var(--ix-color-separator);
       }
@@ -40,6 +39,12 @@
       width: 1px;
       margin: 0 var(--ix-padding-size-xs);
       flex-shrink: 0;
+    }
+
+    &-shortcuts + &-items {
+      .@{pro-search-prefix}-quick-select-item-header {
+        padding-top: var(--ix-padding-size-md);
+      }
     }
   }
   &-shortcut {
