@@ -10,6 +10,25 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 2.0.0-beta.6(2024-01-17)
+
+
+### Bug Fixes
+
+* **cdk:popper:** 箭头的尺寸没有被正确计算 ([#1813](https://github.com/IDuxFE/idux/issues/1813)) ([f7abe16](https://github.com/IDuxFE/idux/commit/f7abe16f9b8bf71124d46fc96c8a6594d36ef64e))
+* **comp:*:** 修改所有的浮层默认 placement 为 bottomStart ([#1815](https://github.com/IDuxFE/idux/issues/1815)) ([4189049](https://github.com/IDuxFE/idux/commit/4189049b6e151ceaca7f0c29ea1f249e525e7646))
+* **comp:alert:** 修改 alert 图标的 margin-right 为 marginSizeXs([#1802](https://github.com/IDuxFE/idux/issues/1802)) ([4df6f97](https://github.com/IDuxFE/idux/commit/4df6f97f89afcfd47f33b9279afc4ebe02714829))
+* **comp:collapse:** 修改头部前缀的 margin-right 为 marginSizeMd ([#1811](https://github.com/IDuxFE/idux/issues/1811)) ([6bf6655](https://github.com/IDuxFE/idux/commit/6bf6655451c2066a6b1136b95886d246eafbb0bd))
+* **comp:header:** 修改竖条的高度为文字高度减去2px ([#1804](https://github.com/IDuxFE/idux/issues/1804)) ([972bd64](https://github.com/IDuxFE/idux/commit/972bd64a73f456dbb540e99df5dc7a69ea383895))
+* **comp:select:** 主题token optionGroupMargin 的单位错误 ([#1821](https://github.com/IDuxFE/idux/issues/1821)) ([c1c2906](https://github.com/IDuxFE/idux/commit/c1c2906b76292206dc939682676ab5ca005c4fd7))
+* **pro:search:** 快捷搜索面板的搜索条展开后上方被遮挡 ([#1819](https://github.com/IDuxFE/idux/issues/1819)) ([c6824ea](https://github.com/IDuxFE/idux/commit/c6824ea4efaa3548015a831e7e3f5c15cd7b31d7))
+
+
+### Features
+
+* **cdk:scroll:** 虚拟滚动新增模拟滚动模式支持 ([#1812](https://github.com/IDuxFE/idux/issues/1812)) ([17ccefa](https://github.com/IDuxFE/idux/commit/17ccefaf3cd0689e12e69be9d5af95578a12eae5))
+* **pro:search:** select field 支持缓存已选的源数据 ([#1814](https://github.com/IDuxFE/idux/issues/1814)) ([6e80276](https://github.com/IDuxFE/idux/commit/6e80276e2b6461c98f2946b490e1d48ac0dcdc35))
+
 # 2.0.0-beta.5(2024-01-08)
 
 
