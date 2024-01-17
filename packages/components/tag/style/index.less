@@ -11,8 +11,9 @@
   align-items: center;
   color: var(--ix-tag-color, var(--ix-color-text-info));
   background-color: var(--ix-tag-background-color, var(--ix-color-emphasized-container-bg));
-  padding: 0 var(--ix-margin-size-sm);
+  padding: 0 calc(var(--ix-margin-size-sm) - var(--ix-tag-border-width));
   line-height: @tag-line-height;
+  border: var(--ix-tag-border-width) var(--ix-line-type) transparent;
   border-radius: var(--ix-tag-border-radius);
 
   & + &,
@@ -37,7 +38,7 @@
   }
 
   &-bordered {
-    box-shadow: inset 0 0 0 var(--ix-tag-border-width) var(--ix-tag-border-color, var(--ix-color-border));
+    border-color: var(--ix-tag-border-color, var(--ix-color-border));
   }
 
   &-round {
@@ -70,7 +71,7 @@
 }
 
 .@{tag-prefix}-numeric {
-  @tag-prefix-size: calc(@tag-line-height + var(--ix-margin-size-xs));
+  @tag-prefix-size: calc(@tag-line-height + var(--ix-tag-border-width) * 4);
 
   position: relative;
   padding-left: calc(@tag-prefix-size + var(--ix-tag-border-width));
@@ -79,15 +80,15 @@
 
   &-prefix {
     position: absolute;
-    left: -2px;
-    top: -2px;
+    left: calc(var(--ix-tag-border-width) * -2);
+    top: calc(var(--ix-tag-border-width) * -2);
     display: flex;
     align-items: center;
     justify-content: center;
     height: @tag-prefix-size;
     width: @tag-prefix-size;
     background-color: inherit;
-    box-shadow: inset 0 0 0 var(--ix-tag-border-width) var(--ix-color-container-bg);
+    border: var(--ix-tag-border-width) solid var(--ix-color-container-bg);
     border-radius: @tag-prefix-size;
   }
 }
