@@ -11,7 +11,6 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     heightMd,
     heightSm,
     fontSizeIcon,
-    marginSizeXs,
     paddingSizeXs,
     paddingSizeSm,
     colorPrimaryHover,
@@ -39,7 +38,7 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     nodeContentLabelPadding: `0 ${paddingSizeXs}px`,
     nodeContentLabelHighlightColor: colorPrimaryText,
 
-    nodeCheckboxMargin: `0 ${marginSizeXs}px 0 ${Math.max((fontSizeIcon - nodeIconWidth) / 2 + 1, 1)}px`,
+    nodeCheckboxMargin: `0 0 0 ${Math.max((fontSizeIcon - nodeIconWidth) / 2 + 1, 1)}px`,
     nodeIconWidth,
     expandIconColor: colorIconInfo,
   }

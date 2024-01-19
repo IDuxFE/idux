@@ -259,12 +259,12 @@
       display: flex;
       justify-items: center;
       align-items: center;
+      margin-right: var(--ix-margin-size-xs);
     }
 
     &-label {
       display: inline-block;
       flex-grow: 1;
-      padding: var(--ix-tree-node-content-label-padding);
 
       &-highlight {
         color: var(--ix-tree-node-content-label-highlight-color);
@@ -279,6 +279,7 @@
   &-selected:not(&-disabled) .@{tree-node-prefix}-content {
     background-color: var(--ix-tree-node-bg-color-selected);
     color: var(--ix-tree-node-color-selected);
+    font-weight: var(--ix-font-weight-lg);
 
     &:hover {
       background-color: var(--ix-tree-node-bg-color-hover);
