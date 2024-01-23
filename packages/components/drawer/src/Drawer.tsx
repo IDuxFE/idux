@@ -84,7 +84,7 @@ export default defineComponent({
     useScrollStrategy(props, mask, mergedVisible)
 
     return () => {
-      if (!mergedVisible.value && props.destroyOnHide) {
+      if (!visible.value && props.destroyOnHide) {
         return null
       }
       return (
