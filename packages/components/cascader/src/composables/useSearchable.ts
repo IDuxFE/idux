@@ -32,7 +32,7 @@ export function useSearchable(
   const searchedKeys = computed(() => {
     const searchValue = props.searchValue
     const searchFn = mergedSearchFn.value
-    if (!searchValue || !searchFn) {
+    if (!searchValue) {
       return NoopArray as unknown as VKey[]
     }
     const _parentEnabled = parentEnabled.value
@@ -70,7 +70,7 @@ function getDefaultSearchFn(labelKey: string): CascaderSearchFn {
 function doSearch(
   keySet: Set<VKey>,
   data: MergedData,
-  searchFn: CascaderSearchFn,
+  searchFn: CascaderSearchFn | false,
   searchValue: string,
   _parentEnabled: boolean,
   getDisabledFn: GetDisabledFn,
@@ -79,7 +79,7 @@ function doSearch(
   if (keySet.has(key) || getDisabledFn(rawData)) {
     return
   }
-  if (searchFn(rawData, searchValue)) {
+  if (searchFn === false || searchFn(rawData, searchValue)) {
     if (_parentEnabled || data.isLeaf) {
       keySet.add(key)
     }
