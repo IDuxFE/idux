@@ -33,7 +33,7 @@ export function useSearchable(
     const searchValue = props.searchValue
     const searchFn = mergedSearchFn.value
     if (!searchValue || !searchFn) {
-      return NoopArray as unknown as VKey[]
+      return searchFn === false ? mergedData.value.map(data => data.key) : (NoopArray as unknown as VKey[])
     }
     const _parentEnabled = parentEnabled.value
     const getDisabledFn = mergedGetDisabled.value
