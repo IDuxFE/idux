@@ -7,7 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { type ComputedRef, type Ref, onMounted, ref } from 'vue'
+import { type ComputedRef, type Ref, onMounted, ref, watch } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 import { useFormFocusMonitor } from '@idux/components/form'
@@ -108,6 +108,11 @@ export function useInputState(props: SelectorProps, mergedSearchable: ComputedRe
   }
 
   onMounted(() => syncMirrorWidth())
+  watch(mirrorRef, val => {
+    if (val) {
+      syncMirrorWidth()
+    }
+  })
 
   return {
     inputRef,
