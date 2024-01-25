@@ -14,13 +14,49 @@
         <span class="virtual-item" @click="onItemClick(item.key)">{{ row.key }} - {{ index }}</span>
       </template>
     </CdkVirtualScroll>
+    <IxSpace>
+      <IxButton @click="scrollTo({ top: 100, left: 100 })"> Scroll To [100px, 100px] </IxButton>
+      <IxButton
+        @click="scrollTo({ rowKey: 'row-key-50', colKey: 'col-key-50', verticalAlign: 'top', horizontalAlign: 'end' })"
+      >
+        Scroll To [row-key-50, col-key-50](top, end)
+      </IxButton>
+      <IxButton @click="scrollTo({ rowIndex: 40, colIndex: 40, verticalAlign: 'top', horizontalAlign: 'start' })">
+        Scroll To [40, 40](top, start)
+      </IxButton>
+      <IxButton @click="scrollTo({ rowIndex: 40, colIndex: 40, verticalAlign: 'bottom', horizontalAlign: 'end' })">
+        Scroll To [40, 40](bottom, end)
+      </IxButton>
+      <IxButton @click="scrollTo({ rowIndex: 40, colIndex: 40, verticalAlign: 'auto', horizontalAlign: 'auto' })">
+        Scroll To [40, 40](auto)
+      </IxButton>
+      <IxButton
+        @click="
+          scrollTo({
+            rowIndex: 100,
+            colIndex: 100,
+            verticalAlign: 'top',
+            horizontalAlign: 'end',
+            verticalOffset: 15,
+            horizontalOffset: 15,
+          })
+        "
+      >
+        Scroll To [100, 100](top, start) + 15 offset
+      </IxButton>
+    </IxSpace>
   </div>
 </template>
 
 <script setup lang="ts">
 import { h, ref } from 'vue'
 
-import { VirtualRowRenderFn, VirtualScrollInstance, VirtualScrollRowData } from '@idux/cdk/scroll'
+import {
+  VirtualRowRenderFn,
+  VirtualScrollInstance,
+  VirtualScrollRowData,
+  VirtualScrollToOptions,
+} from '@idux/cdk/scroll'
 
 const listRef = ref<VirtualScrollInstance>()
 const colData: { key: string }[] = []
@@ -47,6 +83,8 @@ const rowRender: VirtualRowRenderFn = ({ children }) =>
 const onItemClick = (key: string) => {
   console.log('click:', key)
 }
+
+const scrollTo = (value: number | VirtualScrollToOptions) => listRef.value?.scrollTo(value)
 </script>
 
 <style lang="less">

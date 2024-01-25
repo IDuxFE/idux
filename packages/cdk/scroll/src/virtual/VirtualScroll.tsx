@@ -71,8 +71,8 @@ export default defineComponent({
       }
     })
 
-    const horizontalOverflowed = computed(() => scrollWidth.value > containerSize.value.width)
-    const verticalOverflowed = computed(() => scrollHeight.value > containerSize.value.height)
+    const horizontalOverflowed = computed(() => containerScrollWidth.value > Math.ceil(containerSize.value.width))
+    const verticalOverflowed = computed(() => containerScrollHeight.value > Math.ceil(containerSize.value.height))
 
     const holderRef = ref<HTMLElement>()
     const fillerHorizontalRef = ref<HTMLElement>()
@@ -83,14 +83,14 @@ export default defineComponent({
     const [scroll, changeScroll] = useState<Scroll>({ top: 0, left: 0 })
 
     const {
-      scrollTop: simulatedScrollTop,
-      scrollLeft: simulatedScrollLeft,
-      scrollHeight: simulatedScrollHeight,
-      scrollWidth: simulatedScrollWidth,
-      syncScroll: syncSimulatedScroll,
-      init: initSimulatedScroll,
-      update: updateSimulatedScroll,
-      destroy: destroySimulatedScroll,
+      scrollTop: containerScrollTop,
+      scrollLeft: containerScrollLeft,
+      scrollHeight: containerScrollHeight,
+      scrollWidth: containerScrollWidth,
+      syncScroll: syncContainerScroll,
+      init: initContainerScroll,
+      update: updateContainerScroll,
+      destroy: destroyContainerScroll,
     } = useScroll(holderRef, {
       simulatedScroll: props.scrollMode !== 'native',
       setContainerScroll: false,
@@ -124,7 +124,7 @@ export default defineComponent({
       scrollHeight,
       containerSize,
       changeScroll,
-      syncSimulatedScroll,
+      syncContainerScroll,
     )
 
     const pool = useRenderPool(props, topIndex, bottomIndex, leftIndex, rightIndex, getKey)
@@ -172,7 +172,7 @@ export default defineComponent({
       renderedData: mergedData,
     })
 
-    const scrollTo = useScrollTo(props, holderRef, getKey, getRowHeight, collectSize, syncScroll)
+    const scrollTo = useScrollTo(props, holderRef, getKey, getRowHeight, getColWidth, syncScroll)
     const getHolderElement = () => holderRef.value
     expose({ scrollTo, getHolderElement })
 
@@ -182,13 +182,13 @@ export default defineComponent({
 
     onMounted(() => {
       collectSize()
-      initSimulatedScroll()
+      initContainerScroll()
       watch([scrollWidth, scrollHeight], () => {
-        nextTick(() => updateSimulatedScroll())
+        nextTick(() => updateContainerScroll())
       })
     })
     onUpdated(collectSize)
-    onBeforeUnmount(destroySimulatedScroll)
+    onBeforeUnmount(destroyContainerScroll)
 
     return () => {
       const rowRender = slots.row ?? slots.item ?? props.rowRender ?? props.itemRender
@@ -248,8 +248,8 @@ export default defineComponent({
             <CdkScrollbar
               v-show={verticalOverflowed.value}
               containerSize={containerSize.value.height}
-              scrollRange={simulatedScrollHeight.value}
-              scrollOffset={simulatedScrollTop.value}
+              scrollRange={containerScrollHeight.value}
+              scrollOffset={containerScrollTop.value}
               onScroll={onVerticalScroll}
             />
           )}
@@ -258,8 +258,8 @@ export default defineComponent({
               v-show={horizontalOverflowed.value}
               horizontal
               containerSize={containerSize.value.width}
-              scrollRange={simulatedScrollWidth.value}
-              scrollOffset={simulatedScrollLeft.value}
+              scrollRange={containerScrollWidth.value}
+              scrollOffset={containerScrollLeft.value}
               onScroll={onHorizontalScroll}
             />
           )}
