@@ -93,9 +93,40 @@ export type VirtualScrollComponent = DefineComponent<
 >
 export type VirtualScrollInstance = InstanceType<DefineComponent<VirtualScrollProps, VirtualScrollBindings>>
 
-export type VirtualScrollToOptions = { align?: 'top' | 'bottom' | 'auto'; offset?: number } & (
-  | { key: VKey }
-  | { index: number }
+export type VirtualScrollToOptions = {
+  /**
+   * @deprecated use verticalAlign instead
+   */
+  align?: 'top' | 'bottom' | 'auto'
+  verticalAlign?: 'top' | 'bottom' | 'auto'
+  horizontalAlign?: 'start' | 'end' | 'auto'
+  /**
+   * @deprecated use verticalOffset instead
+   */
+  offset?: number
+  verticalOffset?: number
+  horizontalOffset?: number
+} & (
+  | {
+      /**
+       * @deprecated use rowKey instead
+       */
+      key?: VKey
+      rowKey: VKey
+      colKey?: VKey
+    }
+  | {
+      /**
+       * @deprecated use rowIndex instead
+       */
+      index?: number
+      rowIndex: number
+      colIndex?: number
+    }
+  | {
+      top?: number
+      left?: number
+    }
 )
 export type VirtualScrollToFn = (option?: number | VirtualScrollToOptions) => void
 export type VirtualRowRenderFn<Row = any> = (option: { item: Row; index: number; children?: VNode[] }) => VNodeChild
