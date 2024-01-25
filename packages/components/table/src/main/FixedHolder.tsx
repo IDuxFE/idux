@@ -7,24 +7,13 @@
 
 import type { FlattedData } from '../composables/useDataSource'
 
-import {
-  type CSSProperties,
-  type Ref,
-  computed,
-  defineComponent,
-  inject,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  watch,
-} from 'vue'
+import { type CSSProperties, type Ref, computed, defineComponent, inject, onBeforeUnmount, onMounted, watch } from 'vue'
 
 import {
   CdkVirtualScroll,
   type VirtualColRenderFn,
   type VirtualContentRenderFn,
   type VirtualRowRenderFn,
-  type VirtualScrollInstance,
   type VirtualScrollRowData,
 } from '@idux/cdk/scroll'
 import { convertCssPixel, off, on } from '@idux/cdk/utils'
@@ -49,8 +38,9 @@ export default defineComponent({
       mergedVirtual,
       mergedVirtualColWidth,
       getVirtualColWidth,
-      scrollHeadRef,
+      headerVirtualScrollRef,
       handleScroll,
+      scrollHeadRef,
       scrollWidth,
       flattedData,
       flattedColumns,
@@ -58,23 +48,6 @@ export default defineComponent({
       mergedRows,
       isSticky,
     } = inject(TABLE_TOKEN)!
-
-    const virtualScrollRef = ref<VirtualScrollInstance>()
-
-    onMounted(() => {
-      watch(
-        virtualScrollRef,
-        virtualScroll => {
-          if (virtualScroll) {
-            scrollHeadRef.value = virtualScroll.getHolderElement()
-            scrollHeadRef.value.style.overflow = 'hidden'
-          }
-        },
-        {
-          immediate: true,
-        },
-      )
-    })
 
     useScrollEvents(scrollHeadRef, handleScroll)
 
@@ -160,7 +133,7 @@ export default defineComponent({
           <div class={classes.value} style={style.value}>
             {
               <CdkVirtualScroll
-                ref={virtualScrollRef}
+                ref={headerVirtualScrollRef}
                 dataSource={virtualData.value}
                 colModifier={colModifier}
                 getKey="key"
