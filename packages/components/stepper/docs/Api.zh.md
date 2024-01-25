@@ -10,7 +10,7 @@
 `dot` | 是否为点状步骤条 | `boolean` | `false` | - | - |
 `labelPlacement` | 指定文本信息放置的位置 | `'end' \| 'bottom'` | `'end'` | -| - |
 `percent` | 当前激活节点的进度 | `number` | - | - | 取值是 0-100 |
-`size` | 指定节点的大小 | `'md' \| 'sm'` | `'md'` | ✅ | - |
+`size` | 指定节点的大小 | `'md' \| 'sm'` | `'sm'` | ✅ | - |
 `status` | 指定节点的状态 | `'process' \| 'finish' \| 'wait' \| 'error'` | `process` | - | - |
 
 ### IxStepperItem
