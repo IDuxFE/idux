@@ -291,17 +291,20 @@ function useFixedColumns(flattedColumnsWithScrollBar: ComputedRef<(TableColumnMe
   const fixedColumns = computed(() => {
     const fixedStartColumns: (TableColumnMerged | TableColumnScrollBar)[] = []
     const fixedEndColumns: (TableColumnMerged | TableColumnScrollBar)[] = []
+    const fixedColumnIndexMap: Record<VKey, number> = {}
 
-    flattedColumnsWithScrollBar.value.forEach(column => {
-      const { fixed } = column
+    flattedColumnsWithScrollBar.value.forEach((column, index) => {
+      const { key, fixed } = column
       if (fixed === 'start') {
         fixedStartColumns.push(column)
+        fixedColumnIndexMap[key] = index
       } else if (fixed === 'end') {
         fixedEndColumns.push(column)
+        fixedColumnIndexMap[key] = index
       }
     })
 
-    return { fixedStartColumns, fixedEndColumns }
+    return { fixedStartColumns, fixedEndColumns, fixedColumnIndexMap }
   })
   const fixedColumnKeys = computed(() => {
     const { fixedStartColumns, fixedEndColumns } = fixedColumns.value
@@ -344,32 +347,38 @@ function useColumnOffsets(
   fixedColumns: ComputedRef<{
     fixedStartColumns: (TableColumnMerged | TableColumnScrollBar)[]
     fixedEndColumns: (TableColumnMerged | TableColumnScrollBar)[]
+    fixedColumnIndexMap: Record<VKey, number>
   }>,
   columnWidthsMap: Ref<Record<VKey, number>>,
   columnCount: Ref<number>,
 ) {
-  const columnOffsets = computed(() =>
-    calculateOffsets(
-      fixedColumns.value.fixedStartColumns,
-      fixedColumns.value.fixedEndColumns.filter(column => column.type !== 'scroll-bar'),
+  const columnOffsets = computed(() => {
+    const { fixedStartColumns, fixedEndColumns, fixedColumnIndexMap } = fixedColumns.value
+    return calculateOffsets(
+      fixedStartColumns,
+      fixedEndColumns.filter(column => column.type !== 'scroll-bar'),
+      fixedColumnIndexMap,
       columnWidthsMap.value,
       columnCount.value - 1,
-    ),
-  )
-  const columnOffsetsWithScrollBar = computed(() =>
-    calculateOffsets(
-      fixedColumns.value.fixedStartColumns,
-      fixedColumns.value.fixedEndColumns,
+    )
+  })
+  const columnOffsetsWithScrollBar = computed(() => {
+    const { fixedStartColumns, fixedEndColumns, fixedColumnIndexMap } = fixedColumns.value
+    return calculateOffsets(
+      fixedStartColumns,
+      fixedEndColumns,
+      fixedColumnIndexMap,
       columnWidthsMap.value,
       columnCount.value,
-    ),
-  )
+    )
+  })
   return { columnOffsets, columnOffsetsWithScrollBar }
 }
 
 function calculateOffsets(
   startColumns: (TableColumnMerged | TableColumnScrollBar)[],
   endColumns: (TableColumnMerged | TableColumnScrollBar)[],
+  columnIndexMap: Record<VKey, number>,
   columnWidthsMap: Record<VKey, number>,
   columnCount: number,
 ) {
@@ -383,7 +392,7 @@ function calculateOffsets(
     const column = startColumns[index]
     const width = columnWidthsMap[column.key] ?? column.width ?? 0
 
-    startOffsets[column.key] = { index, offset: startOffset }
+    startOffsets[column.key] = { index: columnIndexMap[column.key] ?? index, offset: startOffset }
     startOffset += width
   }
 
@@ -391,7 +400,7 @@ function calculateOffsets(
     const column = endColumns[endColumns.length - index - 1]
     const width = columnWidthsMap[column.key] ?? column.width ?? 0
 
-    endOffsets[column.key] = { index: columnCount - index - 1, offset: endOffset }
+    endOffsets[column.key] = { index: columnIndexMap[column.key] ?? columnCount - index - 1, offset: endOffset }
     endOffset += width
   }
 
