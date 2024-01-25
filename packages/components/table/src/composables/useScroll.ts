@@ -16,20 +16,42 @@ import { type TableProps } from '../types'
 
 export function useScroll(props: TableProps, { setStickyScrollLeft }: StickyContext): ScrollContext {
   const virtualScrollRef = ref<VirtualScrollInstance | undefined>()
+  const headerVirtualScrollRef = ref<VirtualScrollInstance | undefined>()
   const scrollHeadRef = ref<HTMLDivElement>()
   const scrollBodyRef = ref<HTMLDivElement>()
   const scrollContentRef = ref<HTMLDivElement>()
   const scrollFootRef = ref<HTMLDivElement>()
 
-  watch(virtualScrollRef, instance => {
-    if (instance) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      scrollBodyRef.value = (instance as any).getHolderElement()
-    }
-  })
+  watch(
+    virtualScrollRef,
+    instance => {
+      if (instance) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        scrollBodyRef.value = (instance as any).getHolderElement()
+      }
+    },
+    {
+      immediate: true,
+    },
+  )
+  watch(
+    headerVirtualScrollRef,
+    instance => {
+      if (instance) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        scrollHeadRef.value = (instance as any).getHolderElement()
+        scrollHeadRef.value!.style.overflow = 'hidden'
+      }
+    },
+    {
+      immediate: true,
+    },
+  )
 
   const { handleScroll, pingedStart, pingedEnd } = useScrollRef(
     props,
+    virtualScrollRef,
+    headerVirtualScrollRef,
     scrollHeadRef,
     scrollBodyRef,
     scrollFootRef,
@@ -61,6 +83,7 @@ export function useScroll(props: TableProps, { setStickyScrollLeft }: StickyCont
 
   return {
     virtualScrollRef,
+    headerVirtualScrollRef,
     scrollHeadRef,
     scrollBodyRef,
     scrollContentRef,
@@ -80,6 +103,7 @@ export function useScroll(props: TableProps, { setStickyScrollLeft }: StickyCont
 
 export interface ScrollContext {
   virtualScrollRef: Ref<VirtualScrollInstance | undefined>
+  headerVirtualScrollRef: Ref<VirtualScrollInstance | undefined>
   scrollHeadRef: Ref<HTMLDivElement | undefined>
   scrollBodyRef: Ref<HTMLDivElement | undefined>
   scrollContentRef: Ref<HTMLDivElement | undefined>
@@ -103,6 +127,8 @@ export interface ScrollOptions {
 
 function useScrollRef(
   props: TableProps,
+  virtualScrollRef: Ref<VirtualScrollInstance | undefined>,
+  headerVirtualScrollRef: Ref<VirtualScrollInstance | undefined>,
   scrollHeadRef: Ref<HTMLDivElement | undefined>,
   scrollBodyRef: Ref<HTMLDivElement | undefined>,
   scrollFootRef: Ref<HTMLDivElement | undefined>,
@@ -143,6 +169,13 @@ function useScrollRef(
       target.scrollLeft = scrollLeft
     }
   }
+  const forceVirtualScroll = (scrollLeft: number, target: VirtualScrollInstance | undefined) => {
+    if (!target) {
+      return
+    }
+
+    target.scrollTo({ left: scrollLeft })
+  }
 
   const changeStickyScrollLeft = (scrollLeft: number) => {
     const scrollBodyElement = convertElement(scrollBodyRef)
@@ -160,8 +193,12 @@ function useScrollRef(
     const lockedTarget = lockedScrollTargetRef.value
     if (!lockedTarget || lockedTarget === currentTarget) {
       lockScrollTarget(currentTarget)
-      forceScroll(mergedScrollLeft, scrollHeadRef.value)
-      forceScroll(mergedScrollLeft, convertElement(scrollBodyRef))
+      headerVirtualScrollRef.value
+        ? forceVirtualScroll(mergedScrollLeft, headerVirtualScrollRef.value)
+        : forceScroll(mergedScrollLeft, scrollHeadRef.value)
+      virtualScrollRef.value
+        ? forceVirtualScroll(mergedScrollLeft, virtualScrollRef.value)
+        : forceScroll(mergedScrollLeft, convertElement(scrollBodyRef))
       forceScroll(mergedScrollLeft, scrollFootRef.value)
       changeStickyScrollLeft(mergedScrollLeft)
     }

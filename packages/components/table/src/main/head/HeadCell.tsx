@@ -107,7 +107,7 @@ export default defineComponent({
     })
 
     const activeSortOrderBy = computed(() => activeOrderByMap[props.column.key])
-    const activeFilterBy = computed(() => activeFilterByMap[props.column.key] || NoopArray)
+    const activeFilterBy = computed(() => activeFilterByMap[props.column.key] || (NoopArray as unknown as VKey[]))
     const onUpdateFilterBy = (filterBy: VKey[]) => {
       const { key, filterable } = props.column
       handleFilter(key, filterable!, filterBy)
