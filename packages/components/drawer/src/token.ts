@@ -18,7 +18,8 @@ export interface DrawerContext {
   drawerElRef: Ref<HTMLElement | undefined>
   visible: Ref<boolean>
   delayedLoaded: Ref<boolean>
-  animatedVisible: Ref<boolean | undefined>
+  animatedVisible: Ref<boolean>
+  isAnimating: Ref<boolean>
   mergedVisible: ComputedRef<boolean>
   currentZIndex: ComputedRef<number>
   levelAction: Ref<'push' | 'pull' | undefined>

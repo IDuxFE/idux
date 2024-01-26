@@ -51,7 +51,8 @@ export default defineComponent({
     const mask = computed(() => props.mask ?? config.mask)
     const mergedDistance = computed(() => props.distance ?? config.distance)
 
-    const { loaded, delayedLoaded, visible, setVisible, animatedVisible, mergedVisible } = useVisible(props)
+    const { loaded, delayedLoaded, visible, setVisible, animatedVisible, isAnimating, mergedVisible } =
+      useVisible(props)
     const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visible)
 
     const drawerElRef = ref<HTMLElement>()
@@ -69,6 +70,7 @@ export default defineComponent({
       visible,
       delayedLoaded,
       animatedVisible,
+      isAnimating,
       mergedVisible,
       currentZIndex,
       levelAction,
@@ -110,6 +112,9 @@ function useVisible(props: DrawerProps) {
   const loaded = ref<boolean>(false)
   const delayedLoaded = ref<boolean>(false)
   const delayedVisible = ref<boolean>(false)
+  const isAnimating = ref(false)
+  const animatedVisible = ref<boolean>(false)
+
   watch(
     visible,
     v => {
@@ -123,22 +128,15 @@ function useVisible(props: DrawerProps) {
       } else {
         delayedVisible.value = v
       }
+
+      isAnimating.value = true
     },
     {
       immediate: true,
     },
   )
 
-  const animatedVisible = ref<boolean>()
-
-  const mergedVisible = computed(() => {
-    const currVisible = visible.value
-    const currAnimatedVisible = animatedVisible.value
-    if (currAnimatedVisible === undefined || currVisible) {
-      return currVisible
-    }
-    return currAnimatedVisible
-  })
+  const mergedVisible = computed(() => visible.value || (isAnimating.value ? animatedVisible.value : visible.value))
 
   onDeactivated(() => {
     if (mergedVisible.value && props.closeOnDeactivated) {
@@ -146,7 +144,7 @@ function useVisible(props: DrawerProps) {
     }
   })
 
-  return { loaded, delayedLoaded, visible: delayedVisible, setVisible, animatedVisible, mergedVisible }
+  return { loaded, delayedLoaded, visible: delayedVisible, setVisible, animatedVisible, isAnimating, mergedVisible }
 }
 
 function useScrollStrategy(props: DrawerProps, mask: ComputedRef<boolean>, mergedVisible: ComputedRef<boolean>) {
