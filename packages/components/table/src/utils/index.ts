@@ -99,10 +99,17 @@ export function modifyVirtualData(
 
     const index = flattedColumns.findIndex(col => col.key === column.key)
 
+    let poolKey: string
+    if (isString(column.key)) {
+      poolKey = `fix-${rowIndex}-${column.key}`
+    } else {
+      poolKey = `fix-${rowIndex}-${index}`
+    }
+
     return {
       data: column,
       index,
-      poolKey: `fix-${rowIndex}-${index}`,
+      poolKey,
     }
   }
 
