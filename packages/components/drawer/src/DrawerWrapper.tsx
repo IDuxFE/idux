@@ -52,6 +52,7 @@ export default defineComponent({
       visible,
       delayedLoaded,
       animatedVisible,
+      isAnimating,
       mergedVisible,
       currentZIndex,
       levelAction,
@@ -130,7 +131,7 @@ export default defineComponent({
       sentinelEndRef,
     )
 
-    const { onEnter, onAfterEnter, onAfterLeave } = useEvents(props, wrapperRef, animatedVisible)
+    const { onEnter, onAfterEnter, onAfterLeave } = useEvents(props, wrapperRef, animatedVisible, isAnimating)
 
     onMounted(() => {
       watchVisibleChange(props, wrapperRef, sentinelStartRef, mask)
@@ -292,6 +293,7 @@ function useEvents(
   props: DrawerProps,
   wrapperRef: Ref<HTMLDivElement | undefined>,
   animatedVisible: Ref<boolean | undefined>,
+  isAnimating: Ref<boolean>,
 ) {
   let lastOutSideActiveElement: HTMLElement | null = null
   const onEnter = () => {
@@ -311,6 +313,7 @@ function useEvents(
 
     callEmit(props.onAfterOpen)
     animatedVisible.value = true
+    isAnimating.value = false
   }
 
   const onAfterLeave = () => {
@@ -330,6 +333,7 @@ function useEvents(
 
     callEmit(props.onAfterClose)
     animatedVisible.value = false
+    isAnimating.value = false
   }
   return { onEnter, onAfterEnter, onAfterLeave }
 }
