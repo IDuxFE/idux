@@ -25,6 +25,13 @@ interface RowPoolItem extends PoolItem {
   cols?: PoolItem[]
 }
 
+interface Pool {
+  getPoolItem: (key?: string) => PoolItem
+  getPoolItemByItemKey: (itemKey: VKey) => PoolItem
+  recyclePoolItem: (poolItem: PoolItem) => void
+  destroy: () => void
+}
+
 /**
  * we use a render pool to reuse rendered components and dom elements
  *
@@ -46,59 +53,44 @@ export function useRenderPool(
   rightIndex: Ref<number[]>,
   getKey: ComputedRef<GetKey>,
 ): Ref<RowPoolItem[]> {
-  let poolSeed = 0
+  const renderedItems = ref<RowPoolItem[]>([])
 
-  const rowPool = ref<RowPoolItem[]>([])
-  let rowInactivePool: RowPoolItem[] = []
-  let colInactivePools: Record<string, PoolItem[]> = {}
-
-  const createPoolKey = () => {
-    return `pool-${poolSeed++}`
-  }
-
-  const getPoolItem = (inactivePool: PoolItem[], key?: string): PoolItem => {
-    if (key) {
-      return {
-        key,
-        isCustomKey: true,
-      } as PoolItem
-    }
-
-    if (inactivePool.length > 0) {
-      return inactivePool.pop()!
-    }
-
-    return {
-      key: createPoolKey(),
-    } as PoolItem
-  }
+  const rowPool: Pool = createPool()
+  let colPools: Record<string, Pool> = {}
 
   const updatePool = (
-    pool: PoolItem[],
-    inactivePool: PoolItem[],
+    items: PoolItem[],
+    pool: Pool,
     data: unknown[],
     start: number,
     end: number,
     recycleAll: boolean,
   ) => {
-    const inactiveKeys = new Set<string>(recycleAll ? pool.map(poolItem => poolItem.key) : [])
+    const inactiveKeys = new Set<string>()
+    if (recycleAll) {
+      items.forEach(item => {
+        inactiveKeys.add(item.key)
+        pool.recyclePoolItem(item)
+      })
+    }
+
     let updated = false
 
-    for (const poolItem of pool) {
-      if (poolItem.index < start || poolItem.index > end || poolItem.isCustomKey) {
-        inactiveKeys.add(poolItem.key)
+    for (const item of items) {
+      if (item.index < start || item.index > end || item.isCustomKey) {
+        inactiveKeys.add(item.key)
 
         // pool items with custom key shouldn't be resused
-        if (!poolItem.isCustomKey) {
-          inactivePool.push(poolItem)
+        if (!item.isCustomKey) {
+          pool.recyclePoolItem(item)
         }
       }
     }
 
     updated = !!inactiveKeys.size
 
-    const poolMap = new Map(pool.map(poolItem => [poolItem.itemKey, poolItem]))
-    const poolKeySet = new Set(pool.map(poolItem => poolItem.key))
+    const poolMap = new Map(items.map(item => [item.itemKey, item]))
+    const poolKeySet = new Set(items.map(item => item.key))
 
     for (let index = start; index <= end; index++) {
       const item = data[index]
@@ -115,7 +107,7 @@ export function useRenderPool(
       }
 
       // create a new pooled item
-      const poolItem = getPoolItem(inactivePool)
+      const poolItem = pool.getPoolItemByItemKey(itemKey)
       inactiveKeys.delete(poolItem.key)
       poolItem.item = item
       poolItem.index = index
@@ -123,7 +115,7 @@ export function useRenderPool(
 
       // if an inactive item is resued, remove it from deleted item list
       if (!poolKeySet.has(poolItem.key)) {
-        pool.push(poolItem)
+        items.push(poolItem)
       }
 
       updated = true
@@ -131,16 +123,16 @@ export function useRenderPool(
 
     // remove deleted items
     for (const inactiveKey of inactiveKeys) {
-      const index = pool.findIndex(pi => pi.key === inactiveKey)
+      const index = items.findIndex(item => item.key === inactiveKey)
 
       if (index > -1) {
-        pool.splice(index, 1)
+        items.splice(index, 1)
       }
     }
 
     // only resort the items when pool updated
     if (updated) {
-      pool.sort((item1, item2) => item1.index - item2.index)
+      items.sort((item1, item2) => item1.index - item2.index)
     }
   }
 
@@ -153,13 +145,13 @@ export function useRenderPool(
       rowPoolItem.cols = []
     }
 
-    let inactivePool = colInactivePools[rowPoolItem.key]
-    if (!inactivePool) {
-      inactivePool = []
-      colInactivePools[rowPoolItem.key] = inactivePool
+    let pool = colPools[rowPoolItem.key]
+    if (!pool) {
+      pool = createPool()
+      colPools[rowPoolItem.key] = pool
     }
 
-    updatePool(rowPoolItem.cols, inactivePool, rowPoolItem.item.data, left, right, recycleAll)
+    updatePool(rowPoolItem.cols, pool, rowPoolItem.item.data, left, right, recycleAll)
 
     if (!props.colModifier) {
       return
@@ -170,14 +162,14 @@ export function useRenderPool(
 
     // append modified data to pool
     ;[...(prependedCols ?? [])].reverse().forEach(({ data, index, poolKey }) => {
-      const poolItem = getPoolItem(rowInactivePool, poolKey) as RowPoolItem
+      const poolItem = pool.getPoolItem(poolKey) as RowPoolItem
       poolItem.item = data
       poolItem.index = index
       poolItem.itemKey = getKey.value(data)
       rowPoolItem.cols!.unshift(poolItem)
     })
     appendedCols?.forEach(({ data, index, poolKey }) => {
-      const poolItem = getPoolItem(rowInactivePool, poolKey) as RowPoolItem
+      const poolItem = pool.getPoolItem(poolKey) as RowPoolItem
       poolItem.item = data
       poolItem.index = index
       poolItem.itemKey = getKey.value(data)
@@ -186,28 +178,28 @@ export function useRenderPool(
   }
 
   const updateRowPool = (top: number, bottom: number, recycleAll: boolean) => {
-    updatePool(rowPool.value, rowInactivePool, props.dataSource, top, bottom, recycleAll)
+    updatePool(renderedItems.value, rowPool, props.dataSource, top, bottom, recycleAll)
 
     if (!props.rowModifier) {
       return
     }
 
-    const renderedRows = rowPool.value.map(poolItem => poolItem.item)
+    const renderedRows = renderedItems.value.map(item => item.item)
     const { start: prependedRows, end: appendedRows } = props.rowModifier(renderedRows) ?? {}
 
     ;[...(prependedRows ?? [])].reverse().forEach(({ data, index, poolKey }) => {
-      const poolItem = getPoolItem(rowInactivePool, poolKey) as RowPoolItem
+      const poolItem = rowPool.getPoolItem(poolKey) as RowPoolItem
       poolItem.item = data
       poolItem.index = index
       poolItem.itemKey = getKey.value(data)
-      rowPool.value.unshift(poolItem)
+      renderedItems.value.unshift(poolItem)
     })
     appendedRows?.forEach(({ data, index, poolKey }) => {
-      const poolItem = getPoolItem(rowInactivePool, poolKey) as RowPoolItem
+      const poolItem = rowPool.getPoolItem(poolKey) as RowPoolItem
       poolItem.item = data
       poolItem.index = index
       poolItem.itemKey = getKey.value(data)
-      rowPool.value.push(poolItem)
+      renderedItems.value.push(poolItem)
     })
   }
 
@@ -220,7 +212,7 @@ export function useRenderPool(
 
     updateRowPool(topIndex.value, bottomIndex.value, recycleAll)
 
-    rowPool.value.forEach((poolItem, index) => {
+    renderedItems.value.forEach((poolItem, index) => {
       updateColPool(poolItem, leftIndex.value[index], rightIndex.value[index], recycleAll)
     })
 
@@ -251,10 +243,74 @@ export function useRenderPool(
   )
 
   onUnmounted(() => {
-    rowPool.value = []
-    rowInactivePool = []
-    colInactivePools = {}
+    renderedItems.value = []
+    rowPool.destroy()
+
+    for (const key of Object.keys(colPools)) {
+      colPools[key].destroy()
+    }
+
+    colPools = {}
   })
 
-  return rowPool
+  return renderedItems
+}
+
+function createPool(): Pool {
+  let poolSeed = 0
+
+  const pooledItemMap = new Map<VKey, PoolItem>()
+
+  const createPoolKey = () => {
+    return `pool-${poolSeed++}`
+  }
+
+  const getPoolItem = (key?: string) => {
+    if (key) {
+      return {
+        key,
+        isCustomKey: true,
+      } as PoolItem
+    }
+
+    if (pooledItemMap.size > 0) {
+      let poolItem: PoolItem
+      for (const [, item] of pooledItemMap) {
+        poolItem = item
+        break
+      }
+
+      pooledItemMap.delete(poolItem!.itemKey)
+    }
+
+    return {
+      key: createPoolKey(),
+    } as PoolItem
+  }
+
+  const getPoolItemByItemKey = (itemKey: VKey) => {
+    const poolItem = pooledItemMap.get(itemKey)
+
+    if (poolItem) {
+      pooledItemMap.delete(itemKey)
+      return poolItem
+    }
+
+    return getPoolItem()
+  }
+
+  const recyclePoolItem = (poolItem: PoolItem) => {
+    pooledItemMap.set(poolItem.itemKey, poolItem)
+  }
+
+  const destroy = () => {
+    pooledItemMap.clear()
+  }
+
+  return {
+    getPoolItem,
+    getPoolItemByItemKey,
+    recyclePoolItem,
+    destroy,
+  }
 }
