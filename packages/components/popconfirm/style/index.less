@@ -26,20 +26,17 @@
     .@{icon-prefix} {
       font-size: var(--ix-font-size-icon);
       color: var(--ix-popconfirm-icon-color);
-      margin-right: 8px;
+      margin-right: var(--ix-margin-size-sm);
     }
   }
 
   &-content {
-    padding: 16px 16px 8px;
+    padding: 16px 16px 8px calc(var(--ix-font-size-icon) + var(--ix-margin-size-sm) + 16px);
   }
 
   &-title + &-content {
     padding-top: 0;
-  }
-
-  &-with-content &-title {
-    font-weight: var(--ix-font-weight-header);
+    padding-bottom: 0;
   }
 
   &-footer {
