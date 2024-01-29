@@ -10,10 +10,7 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
   const {
     heightMd,
     heightSm,
-    fontSizeIcon,
     marginSizeXs,
-    paddingSizeXs,
-    paddingSizeSm,
     colorPrimaryHover,
     colorPrimaryText,
     colorContainerBgHover,
@@ -33,13 +30,14 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
 
     nodeColorSelected: colorPrimaryText,
 
+    nodePaddingHorizontal: marginSizeXs,
     nodePaddingVertical: `0px`,
     nodeContentHeight: heightMd,
-    nodeContentPadding: `0 ${paddingSizeSm}px 0 ${paddingSizeXs}px`,
-    nodeContentLabelPadding: `0 ${paddingSizeXs}px`,
     nodeContentLabelHighlightColor: colorPrimaryText,
 
-    nodeCheckboxMargin: `0 ${marginSizeXs}px 0 ${Math.max((fontSizeIcon - nodeIconWidth) / 2 + 1, 1)}px`,
+    nodeContentPrefixMarginRight: marginSizeXs,
+
+    nodeCheckboxMarginRight: marginSizeXs,
     nodeIconWidth,
     expandIconColor: colorIconInfo,
   }
