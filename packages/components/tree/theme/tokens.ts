@@ -15,13 +15,14 @@ export interface TreeThemeTokens {
 
   nodeColorSelected: string
 
+  nodePaddingHorizontal: string | number
   nodePaddingVertical: string | number
   nodeContentHeight: number
-  nodeContentPadding: string | number
-  nodeContentLabelPadding: string | number
   nodeContentLabelHighlightColor: string
 
-  nodeCheckboxMargin: string
+  nodeContentPrefixMarginRight: number
+  nodeCheckboxMarginRight: number
+
   nodeIconWidth: number
   expandIconColor: string
 }

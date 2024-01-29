@@ -76,25 +76,24 @@
         position: relative;
         color: var(--ix-tree-expand-icon-color);
 
+        @line-height: calc(var(--ix-tree-node-content-height) / 2 - var(--ix-margin-size-xs));
+        @line-offset: calc((var(--ix-tree-node-content-height) - var(--ix-font-size-icon)) / 2 - @line-height);
+
         &-top-line {
-          position: absolute;
-          height: calc(var(--ix-tree-node-content-height) / 2 - 4px);
-          top: calc((var(--ix-tree-node-content-height) / 4 - 4px) * -1);
-          right: 50%;
+          height: @line-height;
+          top: @line-offset;
           .vertical-line();
         }
         &-bottom-line {
-          position: absolute;
-          height: calc(var(--ix-tree-node-content-height) / 2 - 4px);
-          bottom: calc((var(--ix-tree-node-content-height) / 4 - 4px) * -1);
-          right: 50%;
+          height: @line-height;
+          bottom: @line-offset;
           .vertical-line();
         }
 
         &::after {
           position: absolute;
           top: calc(50% - var(--ix-line-width) / 2);
-          right: 0;
+          right: var(--ix-margin-size-2xs);
           width: calc((var(--ix-tree-node-icon-width) - var(--ix-font-size-icon)) / 2);
           z-index: 1;
           .horizontal-line();
@@ -106,10 +105,8 @@
       &:not(&-expanded):not(&-last) {
         .@{tree-node-prefix}-expand {
           &::before {
-            position: absolute;
             top: calc(var(--ix-tree-node-content-height) - 6px);
-            right: 50%;
-            height: calc(var(--ix-tree-node-content-height) / 2 - 4px);
+            height: calc(var(--ix-tree-node-content-height) / 2 - var(--ix-margin-size-xs));
             z-index: 1;
             .vertical-line();
 
@@ -128,9 +125,7 @@
         height: 100%;
 
         &::before {
-          position: absolute;
           top: calc(var(--ix-tree-node-padding-vertical) * -1);
-          right: calc(var(--ix-tree-node-icon-width) / 2);
           bottom: calc(var(--ix-tree-node-padding-vertical) * -1);
           .vertical-line();
 
@@ -155,7 +150,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: var(--ix-tree-node-padding-vertical) 0;
+  padding: var(--ix-tree-node-padding-vertical) var(--ix-tree-node-padding-horizontal);
   white-space: nowrap;
 
   .@{icon-prefix} {
@@ -190,7 +185,7 @@
     height: var(--ix-tree-node-content-height);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     cursor: pointer;
 
     &-noop {
@@ -199,7 +194,7 @@
   }
 
   & &-checkbox {
-    margin: var(--ix-tree-node-checkbox-margin);
+    margin-right: var(--ix-tree-node-checkbox-margin-right);
   }
 
   &-leaf {
@@ -208,7 +203,7 @@
     text-align: center;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     cursor: default;
 
     &-line {
@@ -219,9 +214,7 @@
       width: 100%;
 
       &::before {
-        position: absolute;
         top: calc(var(--ix-tree-node-padding-vertical) * -1);
-        right: calc(var(--ix-tree-node-icon-width) / 2);
         bottom: calc(var(--ix-tree-node-padding-vertical) * -1);
         .vertical-line();
 
@@ -232,8 +225,8 @@
         position: absolute;
         top: calc(50% - var(--ix-line-width));
         bottom: 0;
-        left: 50%;
-        right: 0;
+        left: calc(var(--ix-font-size-icon) / 2);
+        right: var(--ix-margin-size-2xs);
         .horizontal-line();
 
         content: ' ';
@@ -248,7 +241,6 @@
     min-height: var(--ix-tree-node-content-height);
     line-height: var(--ix-tree-node-content-height);
     transition: background-color var(--ix-motion-duration-medium);
-    padding: var(--ix-tree-node-content-padding);
 
     &:hover {
       background-color: var(--ix-tree-node-bg-color-hover);
@@ -260,11 +252,13 @@
       justify-items: center;
       align-items: center;
     }
+    &-prefix {
+      margin-right: var(--ix-tree-node-content-prefix-margin-right);
+    }
 
     &-label {
       display: inline-block;
       flex-grow: 1;
-      padding: var(--ix-tree-node-content-label-padding);
 
       &-highlight {
         color: var(--ix-tree-node-content-label-highlight-color);
