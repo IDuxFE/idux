@@ -7,6 +7,12 @@
 
 import { TinyColor } from '@ctrl/tinycolor'
 
-export function getAlphaColor(baseColor: string, alpha: number): string {
-  return new TinyColor(baseColor).setAlpha(alpha).toRgbString()
+export function getAlphaColor(baseColor: string, alpha: number, bgColor?: string): string {
+  const alphaColor = new TinyColor(baseColor).setAlpha(alpha)
+
+  if (!bgColor) {
+    return alphaColor.toRgbString()
+  }
+
+  return alphaColor.onBackground(bgColor).toRgbString()
 }
