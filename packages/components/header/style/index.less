@@ -12,32 +12,27 @@
   width: 100%;
 
   &-sm {
-    .header-size(var(--ix-header-height-sm), var(--ix-font-size-header-sm), 8px);
+    .header-size(var(--ix-header-height-sm), var(--ix-font-size-header-sm), var(--ix-padding-size-sm));
   }
 
   &-md {
-    .header-size(var(--ix-header-height-md), var(--ix-font-size-header-md), 8px);
+    .header-size(var(--ix-header-height-md), var(--ix-font-size-header-md), var(--ix-padding-size-sm));
   }
 
   &-lg {
-    .header-size(var(--ix-header-height-lg), var(--ix-font-size-header-lg), 8px);
-  }
-
-  // @deprecated
-  &-xl {
-    .header-size(var(--ix-header-height-xl), var(--ix-font-size-header-xl), 12px);
+    .header-size(var(--ix-header-height-lg), var(--ix-font-size-header-lg), var(--ix-padding-size-sm));
   }
 
   &-prefix {
-    margin-right: 16px;
+    margin-right: var(--ix-margin-size-md);
   }
 
   .@{avatar-prefix} {
-    margin-right: 16px;
+    margin-right: var(--ix-margin-size-md);
   }
 
   &-title-wrapper {
-    margin-right: 16px;
+    margin-right: var(--ix-margin-size-lg);
   }
 
   &-title {
@@ -50,7 +45,7 @@
     .ellipsis();
 
     color: var(--ix-color-text-title-secondary);
-    margin-left: 8px;
+    margin-left: var(--ix-margin-size-sm);
   }
 
   &-prefix,
@@ -77,7 +72,7 @@
   &-suffix {
     color: var(--ix-header-suffix-color);
     margin-left: auto;
-    padding: 0 4px;
+    padding: 0 var(--ix-padding-size-xs);
 
     &:hover {
       color: var(--ix-header-suffix-color-hover);
@@ -161,13 +156,13 @@
 
   &.@{header-prefix}-with-bar {
     &::before {
-      margin: auto 0;
+      margin-top: calc((@height - @bar-height) / 2);
       height: @bar-height;
     }
   }
 
   &.@{header-prefix}-with-description {
-    min-height: calc(@height + 16px);
+    min-height: calc(@height + var(--ix-height-xs));
     padding-top: @padding;
     padding-bottom: @padding;
   }
