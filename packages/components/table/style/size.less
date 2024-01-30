@@ -1,5 +1,9 @@
 .table-size( @font-size, @head-height, @padding-horizontal, @padding-vertical) {
-  .reset-font-size(@font-size);
+  font-size: @font-size;
+
+  @line-height: calc(@font-size + var(--ix-line-height-gutter));
+
+  line-height: @line-height;
 
   &:not(.@{table-prefix}-borderless) {
     > .@{header-prefix} {
@@ -12,7 +16,7 @@
     font-size: calc(@font-size + 2px);
   }
   .@{table-prefix}-expandable-wrapper {
-    height: calc(100% + 7px); // cell height + padding
+    height: calc(100% + @padding-vertical * 2); // cell height + padding
     margin-top: -1px; // cell border bottom
   }
 
@@ -36,8 +40,12 @@
 
   td.@{table-prefix}-cell,
   .@{table-prefix}-alert-row > td,
-  .@{table-prefix}-expanded-row > td,
+  .@{table-prefix}-expanded-row > td {
+    height: calc(@padding-vertical * 2 + @line-height);
+    padding: @padding-vertical @padding-horizontal;
+  }
   .@{table-prefix}-footer {
+    min-height: calc(@padding-vertical * 2 + @line-height);
     padding: @padding-vertical @padding-horizontal;
   }
 
