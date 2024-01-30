@@ -107,7 +107,7 @@ export default defineComponent({
 
     const handleOptionClick = (option: SelectData) => {
       changeSelected(getKey.value(option))
-      props.allowInput && clearInput()
+      ;(props.allowInput || !props.multiple) && clearInput()
       if (!props.multiple) {
         setOverlayOpened(false)
       }
