@@ -19,6 +19,7 @@ export function getDefaultThemeTokens(
     lineWidth,
     borderRadiusSm,
     tagCompColorAlpha,
+    colorContainerBg,
     colorTextInfo,
     colorSuccessBg,
     colorInfoBg,
@@ -31,7 +32,7 @@ export function getDefaultThemeTokens(
   const greyColors = getGreyColors()
 
   return {
-    bgColorNormal: getAlphaColor(colorTextInfo, tagCompColorAlpha),
+    bgColorNormal: getAlphaColor(colorTextInfo, tagCompColorAlpha, colorContainerBg),
     bgColorFilled: greyColors.base,
     borderWidth: lineWidth,
     borderRadius: borderRadiusSm,
@@ -41,11 +42,11 @@ export function getDefaultThemeTokens(
     minWidthNumeric: 64,
 
     // private
-    successBgColor: getAlphaColor(colorSuccessBg, tagCompColorAlpha),
-    infoBgColor: getAlphaColor(colorInfoBg, tagCompColorAlpha),
-    warningBgColor: getAlphaColor(colorWarningBg, tagCompColorAlpha),
-    riskBgColor: getAlphaColor(colorRiskBg, tagCompColorAlpha),
-    errorBgColor: getAlphaColor(colorErrorBg, tagCompColorAlpha),
-    fatalBgColor: getAlphaColor(colorFatalBg, tagCompColorAlpha),
+    successBgColor: getAlphaColor(colorSuccessBg, tagCompColorAlpha, colorContainerBg),
+    infoBgColor: getAlphaColor(colorInfoBg, tagCompColorAlpha, colorContainerBg),
+    warningBgColor: getAlphaColor(colorWarningBg, tagCompColorAlpha, colorContainerBg),
+    riskBgColor: getAlphaColor(colorRiskBg, tagCompColorAlpha, colorContainerBg),
+    errorBgColor: getAlphaColor(colorErrorBg, tagCompColorAlpha, colorContainerBg),
+    fatalBgColor: getAlphaColor(colorFatalBg, tagCompColorAlpha, colorContainerBg),
   }
 }

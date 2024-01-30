@@ -11,6 +11,7 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     heightMd,
     borderRadiusSm,
     alertCompColorAlpha,
+    colorContainerBg,
     colorSuccessBg,
     colorInfoBg,
     colorWarningBg,
@@ -22,10 +23,10 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     height: heightMd,
     borderRadius: borderRadiusSm,
 
-    successBgColor: getAlphaColor(colorSuccessBg, alertCompColorAlpha),
-    infoBgColor: getAlphaColor(colorInfoBg, alertCompColorAlpha),
-    warningBgColor: getAlphaColor(colorWarningBg, alertCompColorAlpha),
-    errorBgColor: getAlphaColor(colorErrorBg, alertCompColorAlpha),
-    offlineBgColor: getAlphaColor(colorOffline, alertCompColorAlpha),
+    successBgColor: getAlphaColor(colorSuccessBg, alertCompColorAlpha, colorContainerBg),
+    infoBgColor: getAlphaColor(colorInfoBg, alertCompColorAlpha, colorContainerBg),
+    warningBgColor: getAlphaColor(colorWarningBg, alertCompColorAlpha, colorContainerBg),
+    errorBgColor: getAlphaColor(colorErrorBg, alertCompColorAlpha, colorContainerBg),
+    offlineBgColor: getAlphaColor(colorOffline, alertCompColorAlpha, colorContainerBg),
   }
 }
