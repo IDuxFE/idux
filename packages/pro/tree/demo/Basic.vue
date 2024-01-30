@@ -146,13 +146,13 @@ const onUpdateSelectedKeys = (keys: string[]) => {
 .demo-pro-tree {
   .add-btn {
     font-size: 12px;
-    color: #1c6eff;
+    color: var(--ix-color-primary);
   }
 
   .ix-tree-node {
     .ix-tree-node-content-suffix {
       position: sticky;
-      right: 12px;
+      right: 0;
       display: none;
     }
 
@@ -169,9 +169,9 @@ const onUpdateSelectedKeys = (keys: string[]) => {
   }
 
   .operation-icon {
-    color: #5e6573;
+    color: var(--ix-color-icon);
     &:hover {
-      color: #1c6eff;
+      color: var(--ix-color-icon-hover);
     }
   }
 }

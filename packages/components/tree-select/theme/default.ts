@@ -15,7 +15,7 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     optionPadding: `${paddingSizeSm}px ${paddingSizeMd}px`,
     optionMarginLeft: marginSizeSm,
     optionContainerPadding: `${paddingSizeXs}px 0`,
-    optionContainerTreeNodePadding: `0 0 0 ${paddingSizeSm}px`,
+    optionContainerTreeNodePadding: `0 0 0 ${paddingSizeMd}px`,
 
     overlaySearchWrapperPadding: `${paddingSizeXs}px ${paddingSizeMd}px ${paddingSizeSm}px`,
   }
