@@ -59,7 +59,7 @@ export function useKeyboardEvents(
           setOverlayOpened(false)
         }
 
-        props.allowInput && clearInput()
+        ;(props.allowInput || !props.multiple) && clearInput()
         break
       }
       case 'Backspace': {
