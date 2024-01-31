@@ -279,11 +279,11 @@
 :root {
   --ix-alert-height: 32px;
   --ix-alert-border-radius: 2px;
-  --ix-alert-success-bg-color: rgba(64, 198, 149, 0.2);
-  --ix-alert-info-bg-color: rgba(64, 131, 232, 0.2);
-  --ix-alert-warning-bg-color: rgba(253, 170, 29, 0.2);
-  --ix-alert-error-bg-color: rgba(232, 81, 76, 0.2);
-  --ix-alert-offline-bg-color: rgba(82, 89, 102, 0.2);
+  --ix-alert-success-bg-color: rgb(21, 49, 42);
+  --ix-alert-info-bg-color: rgb(21, 36, 58);
+  --ix-alert-warning-bg-color: rgb(59, 44, 18);
+  --ix-alert-error-bg-color: rgb(54, 26, 27);
+  --ix-alert-offline-bg-color: rgb(24, 27, 32);
 }
 
 /* ------ anchor css variables ------ */
@@ -943,19 +943,19 @@
 
 /* ------ tag css variables ------ */
 :root {
-  --ix-tag-bg-color-normal: rgba(128, 137, 153, 0.2);
+  --ix-tag-bg-color-normal: rgb(34, 37, 43);
   --ix-tag-bg-color-filled: #525966;
   --ix-tag-border-width: 1px;
   --ix-tag-border-radius: 2px;
   --ix-tag-min-width-rect: 40px;
   --ix-tag-min-width-round: 48px;
   --ix-tag-min-width-numeric: 64px;
-  --ix-tag-success-bg-color: rgba(64, 198, 149, 0.2);
-  --ix-tag-info-bg-color: rgba(64, 131, 232, 0.2);
-  --ix-tag-warning-bg-color: rgba(253, 170, 29, 0.2);
-  --ix-tag-risk-bg-color: rgba(232, 134, 65, 0.2);
-  --ix-tag-error-bg-color: rgba(232, 81, 76, 0.2);
-  --ix-tag-fatal-bg-color: rgba(143, 30, 31, 0.2);
+  --ix-tag-success-bg-color: rgb(21, 49, 42);
+  --ix-tag-info-bg-color: rgb(21, 36, 58);
+  --ix-tag-warning-bg-color: rgb(59, 44, 18);
+  --ix-tag-risk-bg-color: rgb(54, 36, 25);
+  --ix-tag-error-bg-color: rgb(54, 26, 27);
+  --ix-tag-fatal-bg-color: rgb(37, 16, 18);
 }
 
 /* ------ textarea css variables ------ */
@@ -1057,12 +1057,12 @@
   --ix-tree-node-bg-color-hover: #171a1f;
   --ix-tree-node-bg-color-selected: #0a0c0f;
   --ix-tree-node-color-selected: #4083e8;
+  --ix-tree-node-padding-horizontal: 4px;
   --ix-tree-node-padding-vertical: 0px;
   --ix-tree-node-content-height: 32px;
-  --ix-tree-node-content-padding: 0 8px 0 4px;
-  --ix-tree-node-content-label-padding: 0 4px;
   --ix-tree-node-content-label-highlight-color: #4083e8;
-  --ix-tree-node-checkbox-margin: 0 4px 0 1px;
+  --ix-tree-node-content-prefix-margin-right: 4px;
+  --ix-tree-node-checkbox-margin-right: 4px;
   --ix-tree-node-icon-width: 24px;
   --ix-tree-expand-icon-color: #687080;
 }
@@ -1074,7 +1074,7 @@
   --ix-tree-select-option-padding: 8px 12px;
   --ix-tree-select-option-margin-left: 8px;
   --ix-tree-select-option-container-padding: 4px 0;
-  --ix-tree-select-option-container-tree-node-padding: 0 0 0 8px;
+  --ix-tree-select-option-container-tree-node-padding: 0 0 0 12px;
   --ix-tree-select-overlay-search-wrapper-padding: 4px 12px 8px;
 }
 
