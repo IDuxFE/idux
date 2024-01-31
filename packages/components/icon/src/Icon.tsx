@@ -5,7 +5,16 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type CSSProperties, computed, defineComponent, normalizeClass, onMounted, ref, watch } from 'vue'
+import {
+  type CSSProperties,
+  computed,
+  defineComponent,
+  normalizeClass,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  watch,
+} from 'vue'
 
 import { convertCssPixel, isNumeric } from '@idux/cdk/utils'
 import { type IconConfig, useGlobalConfig } from '@idux/components/config'
@@ -24,6 +33,12 @@ export default defineComponent({
     const root = ref<HTMLElement>()
 
     onMounted(() => appendChild(props, config, root.value!))
+    onBeforeUnmount(() => {
+      if (root.value) {
+        clearSVGElement(root.value)
+        root.value = undefined
+      }
+    })
 
     watch([() => props.name, () => props.iconfont], () => {
       const rootElement = root.value
