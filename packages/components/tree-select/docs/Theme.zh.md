@@ -1,7 +1,7 @@
 | 名称 | 描述 | 类型 | default | dark |
 |---|---|---|---|---|
 | `optionContainerPadding` |  | `string | number` | `4px 0` | `4px 0` |
-| `optionContainerTreeNodePadding` |  | `string | number` | `0 0 0 8px` | `0 0 0 8px` |
+| `optionContainerTreeNodePadding` |  | `string | number` | `0 0 0 12px` | `0 0 0 12px` |
 | `optionFontSize` |  | `number` | `12` | `12` |
 | `optionHeight` |  | `number` | `32` | `32` |
 | `optionMarginLeft` |  | `number` | `8` | `8` |

@@ -185,7 +185,7 @@
     height: var(--ix-tree-node-content-height);
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     cursor: pointer;
 
     &-noop {
@@ -203,7 +203,7 @@
     text-align: center;
     display: flex;
     align-items: center;
-    justify-content: left;
+    justify-content: flex-start;
     cursor: default;
 
     &-line {
@@ -251,6 +251,10 @@
       display: flex;
       justify-items: center;
       align-items: center;
+
+      .@{icon-prefix} {
+        color: var(--ix-color-icon);
+      }
     }
     &-prefix {
       margin-right: var(--ix-tree-node-content-prefix-margin-right);

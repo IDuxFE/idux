@@ -1,16 +1,16 @@
 /* ------ tag css variables ------ */
 :root {
-  --ix-tag-bg-color-normal: rgba(128, 137, 153, 0.2);
+  --ix-tag-bg-color-normal: rgb(34, 37, 43);
   --ix-tag-bg-color-filled: #525966;
   --ix-tag-border-width: 1px;
   --ix-tag-border-radius: 2px;
   --ix-tag-min-width-rect: 40px;
   --ix-tag-min-width-round: 48px;
   --ix-tag-min-width-numeric: 64px;
-  --ix-tag-success-bg-color: rgba(64, 198, 149, 0.2);
-  --ix-tag-info-bg-color: rgba(64, 131, 232, 0.2);
-  --ix-tag-warning-bg-color: rgba(253, 170, 29, 0.2);
-  --ix-tag-risk-bg-color: rgba(232, 134, 65, 0.2);
-  --ix-tag-error-bg-color: rgba(232, 81, 76, 0.2);
-  --ix-tag-fatal-bg-color: rgba(143, 30, 31, 0.2);
+  --ix-tag-success-bg-color: rgb(21, 49, 42);
+  --ix-tag-info-bg-color: rgb(21, 36, 58);
+  --ix-tag-warning-bg-color: rgb(59, 44, 18);
+  --ix-tag-risk-bg-color: rgb(54, 36, 25);
+  --ix-tag-error-bg-color: rgb(54, 26, 27);
+  --ix-tag-fatal-bg-color: rgb(37, 16, 18);
 }
