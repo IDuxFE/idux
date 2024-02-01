@@ -10,6 +10,40 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 2.0.0(2024-02-01)
+
+### Bug Fixes
+
+* **cdk:form,comp:icon:** 修复疑似的内存泄露问题 ([#1846](https://github.com/IDuxFE/idux/issues/1846)) ([43581b1](https://github.com/IDuxFE/idux/commit/7ce35d7f3ed92e64d63b3c3c950d8b3dbac0b9ba))
+* **cdk:scroll:** 优化虚拟滚动渲染池的复用逻辑 ([#1837](https://github.com/IDuxFE/idux/issues/1837)) ([4a37a0a](https://github.com/IDuxFE/idux/commit/998abea734bc03205a835469247dd1f06343619e))
+* **comp:alert,tag:** 将rgba的背景色替换成在基础背景色上没有alhpa通道的颜色，避免透出背景色 ([#1840](https://github.com/IDuxFE/idux/issues/1840)) ([458b070](https://github.com/IDuxFE/idux/commit/8d05916477f4ff4ad4afc6d5a0e6e29a8c4bd5eb))
+* **comp:button:** 当存在图标时，按钮内容没有垂直居中 ([#1830](https://github.com/IDuxFE/idux/issues/1830)) ([cefdc0d](https://github.com/IDuxFE/idux/commit/fbf4586a6e26c585d09cbcb0b814b465ba985103))
+* **comp:cascader:** 远程搜索不生效 ([#1832](https://github.com/IDuxFE/idux/issues/1832)) ([8d1e463](https://github.com/IDuxFE/idux/commit/551935ea1b8cec100d6757eb4518c7e991845945))
+* **comp:drawer:** 设置了 destroyOnHide 的抽屉如果在进入动画结束之前设置关闭抽屉，会导致抽屉无法销毁遮挡屏幕 ([#1836](https://github.com/IDuxFE/idux/issues/1836)) ([773fb38](https://github.com/IDuxFE/idux/commit/1156a4f4e209bde9af2d8dda122733c9fde3ecb2))
+* **comp:header:** header的竖条应当和title顶部对齐 ([#1842](https://github.com/IDuxFE/idux/issues/1842)) ([592fc8b](https://github.com/IDuxFE/idux/commit/1688ecd673fc5b8799edd37e02b343e55b35845a))
+* **comp:popconfirm:** 修改内容区域和title的间距样式 ([#1823](https://github.com/IDuxFE/idux/issues/1823)) ([fc63a44](https://github.com/IDuxFE/idux/commit/339c292614be2892f593e574b078ee77a2291edb))
+* **comp:popover:** 移除内容区域的上内边距 ([#1822](https://github.com/IDuxFE/idux/issues/1822)) ([6b29646](https://github.com/IDuxFE/idux/commit/b372290f615ce5a72ed24d565d1b3a7f0310685a))
+* **comp:select:** 单选场景下，选项被选中后应当清楚搜索的输入 ([#1843](https://github.com/IDuxFE/idux/issues/1843)) ([15daf1c](https://github.com/IDuxFE/idux/commit/6fbf32bf51c09476b7ab414229e4c64d3b5b0202))
+* **comp:select:** 当类型从单选动态改为多选的时候，输入框的长度不正确 ([#1829](https://github.com/IDuxFE/idux/issues/1829)) ([91c1f34](https://github.com/IDuxFE/idux/commit/0c7e0a44a0148be61803a51d021d5dbe05c755e8))
+* **comp:table:** 不连续的固定列，在滚动后固定效果出现问题，没有正常固定 ([#1835](https://github.com/IDuxFE/idux/issues/1835)) ([9a8332b](https://github.com/IDuxFE/idux/commit/d2c4f17385b1ea5ac21d65571494b6a3de6d2fd8))
+* **comp:table:** 树表格的连线显示不正常 ([#1844](https://github.com/IDuxFE/idux/issues/1844)) ([2405527](https://github.com/IDuxFE/idux/commit/3e1b72fa1c0995fc30061d468bf8eac374157e28))
+* **comp:table:** 表格内容和表头的横向滚动位置同步，在有虚拟滚动的情况下，应当使用虚拟滚动的scrollTo来设置，而不是直接设置容器的滚动，避免白屏问题 ([#1834](https://github.com/IDuxFE/idux/issues/1834)) ([383ca7d](https://github.com/IDuxFE/idux/commit/18b9e6b6cefcc6e0fbc25c53914e62a629c52455))
+* **comp:tree:** 修改树节点连线以及图标之间的布局和间距，使其符合设计规范 ([#1839](https://github.com/IDuxFE/idux/issues/1839)) ([f091062](https://github.com/IDuxFE/idux/commit/de649a98cfabf9ede54a1707e1a0f2ed31d280ea))
+* **pro:table:** 当刚好滚动到布局工具触发按钮与列边界线重合后，鼠标悬浮到布局工具的触发按钮上时，不应当触发resize ([#1838](https://github.com/IDuxFE/idux/issues/1838)) ([ba1b33e](https://github.com/IDuxFE/idux/commit/de649a98cfabf9ede54a1707e1a0f2ed31d280ea))
+
+
+### Features
+
+* **cdk:scroll:** 虚拟滚动的 scrollTo 方法支持设置横向滚动位置和目标 ([#1833](https://github.com/IDuxFE/idux/issues/1833)) ([d062236](https://github.com/IDuxFE/idux/commit/437c0348d8df072d2f15235423203ac2eda7901b))
+
+
+### BREAKING CHANGES
+
+* **cdk:scroll:** scrollTo 选项 `index` 已经废弃, 请使用 `rowIndex`
+* **cdk:scroll:** scrollTo 选项 `offset` 已经废弃, 请使用 `verticalOffset`
+* **cdk:scroll:** scrollTo 选项 `key` 已经废弃, 请使用 `rowKey`
+* **cdk:scroll:** scrollTo 选项 `align` 已经废弃, 请使用 `verticalAlign`
+
 # 2.0.0-beta.6(2024-01-17)
 
 
