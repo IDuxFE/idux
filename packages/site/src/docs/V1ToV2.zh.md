@@ -59,6 +59,29 @@ order: 10
 
 注意： 2.0 的正式版之前我们暂时不会移除这些 API，只有 `IxTag` 的 `color` 被移除了，因为它影响了后面的设计。
 
+以下是废弃的内容：
+
+- __cdk/click-outside__: `clickOutside` 指令已经废弃，替换使用 `vClickOutside`
+- __cdk/scroll__: `itemHeight` 已经废弃，替换使用 `rowHeight`
+- __cdk/scroll__: `itemRender` 已经废弃，替换使用 `rowRender`
+- __cdk/scroll__: scrollTo 方法的参数 `align` 已经废弃，替换使用 `verticalAlign`
+- __cdk/scroll__: scrollTo 方法的参数 `offset` 已经废弃，替换使用 `verticalOffset`
+- __cdk/scroll__: scrollTo 方法的参数 `key` 已经废弃，替换使用 `rowKey`
+- __cdk/scroll__: scrollTo 方法的参数 `index` 已经废弃，替换使用 `rowIndex`
+- __components/badge__: `color` 已经废弃，替换使用css变量 `--ix-badge-background-color`
+- __components/badge__: `dot` 全局配置已经废弃，请不要再使用
+- __components/empty__: `icon` 全局配置已经废弃，请不要再使用
+- __components/modal__: `width` 全局配置已经废弃，请不要再使用
+- __components/tabs__: `onTabClick` 事件已经废弃，请不要再使用
+- __components/text__: `expandable` 已经废弃，替换使用 `ellipsis.expandable`
+- __components/text__: `lineClamp` 已经废弃，替换使用 `ellipsis.rows`
+- __pro/layout__: `IxProLayoutSiderTrigger` 已经废弃，替换使用 `IxLayoutSiderTrigger`
+- __pro/layout__: `compress` 已经废弃，请不要再使用
+- __pro/layout__: `siderHover` 已经废弃，替代使用 `sider.pointer`
+- __pro/table__: `columnIndexable` 全局配置已经废弃，请使用 components 下的 `columnIndexable` 全局配置
+- __pro/search__: `searchField` 配置 `quickSelectSearchable` 已经废弃，替换使用 `quickSelect.searchable`
+
+
 ## 开始升级
 
 ### 保存现在的代码
