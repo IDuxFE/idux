@@ -24,7 +24,7 @@ import {
 
 import { isArray, isFunction, isNil, isPlainObject, isString } from 'lodash-es'
 
-import { convertArray } from '@idux/cdk/utils'
+import { convertArray, tryOnScopeDispose } from '@idux/cdk/utils'
 
 import {
   type AsyncValidatorFn,
@@ -607,6 +607,22 @@ export abstract class AbstractControl<T = any> {
     current.dirty = computed(() => this._dirty.value)
     current.pristine = computed(() => !this._dirty.value)
     current.validated = computed(() => this._validated.value)
+
+    tryOnScopeDispose(() => {
+      current.controls = null
+      current.valueRef = null
+      current.errors = null
+      current.status = null
+      current.valid = null
+      current.invalid = null
+      current.validating = null
+      current.disabled = null
+      current.blurred = null
+      current.unblurred = null
+      current.dirty = null
+      current.pristine = null
+      current.validated = null
+    })
 
     if (this._disabledFn) {
       nextTick(() => {
