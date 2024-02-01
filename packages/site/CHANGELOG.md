@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0) (2024-02-01)
+
+
+* merge next into main (#1848) ([a75f53d](https://github.com/IDuxFE/idux/commit/a75f53d5f129e4859b704faf0dbfb1944a234126)), closes [#1848](https://github.com/IDuxFE/idux/issues/1848) [#1737](https://github.com/IDuxFE/idux/issues/1737) [#1738](https://github.com/IDuxFE/idux/issues/1738) [#1739](https://github.com/IDuxFE/idux/issues/1739) [#1751](https://github.com/IDuxFE/idux/issues/1751) [#1754](https://github.com/IDuxFE/idux/issues/1754) [#1755](https://github.com/IDuxFE/idux/issues/1755) [#1756](https://github.com/IDuxFE/idux/issues/1756) [#1757](https://github.com/IDuxFE/idux/issues/1757) [#1758](https://github.com/IDuxFE/idux/issues/1758) [#1759](https://github.com/IDuxFE/idux/issues/1759) [#1760](https://github.com/IDuxFE/idux/issues/1760) [#1761](https://github.com/IDuxFE/idux/issues/1761) [#1763](https://github.com/IDuxFE/idux/issues/1763) [#1762](https://github.com/IDuxFE/idux/issues/1762) [#1764](https://github.com/IDuxFE/idux/issues/1764) [#1765](https://github.com/IDuxFE/idux/issues/1765) [#1766](https://github.com/IDuxFE/idux/issues/1766) [#1767](https://github.com/IDuxFE/idux/issues/1767) [#1768](https://github.com/IDuxFE/idux/issues/1768) [#1769](https://github.com/IDuxFE/idux/issues/1769) [#1770](https://github.com/IDuxFE/idux/issues/1770) [#1771](https://github.com/IDuxFE/idux/issues/1771) [#1772](https://github.com/IDuxFE/idux/issues/1772) [#1775](https://github.com/IDuxFE/idux/issues/1775) [#1774](https://github.com/IDuxFE/idux/issues/1774) [#1776](https://github.com/IDuxFE/idux/issues/1776) [#1777](https://github.com/IDuxFE/idux/issues/1777) [#1779](https://github.com/IDuxFE/idux/issues/1779) [#1780](https://github.com/IDuxFE/idux/issues/1780) [#1782](https://github.com/IDuxFE/idux/issues/1782) [#1781](https://github.com/IDuxFE/idux/issues/1781) [#1783](https://github.com/IDuxFE/idux/issues/1783) [#1785](https://github.com/IDuxFE/idux/issues/1785) [#1784](https://github.com/IDuxFE/idux/issues/1784) [#1786](https://github.com/IDuxFE/idux/issues/1786) [#1787](https://github.com/IDuxFE/idux/issues/1787) [#1788](https://github.com/IDuxFE/idux/issues/1788) [#1789](https://github.com/IDuxFE/idux/issues/1789) [#1791](https://github.com/IDuxFE/idux/issues/1791) [#1790](https://github.com/IDuxFE/idux/issues/1790) [#1792](https://github.com/IDuxFE/idux/issues/1792) [#1793](https://github.com/IDuxFE/idux/issues/1793) [#1794](https://github.com/IDuxFE/idux/issues/1794) [#1795](https://github.com/IDuxFE/idux/issues/1795) [#1796](https://github.com/IDuxFE/idux/issues/1796) [#1797](https://github.com/IDuxFE/idux/issues/1797) [#1798](https://github.com/IDuxFE/idux/issues/1798) [#1799](https://github.com/IDuxFE/idux/issues/1799) [#1803](https://github.com/IDuxFE/idux/issues/1803) [#1804](https://github.com/IDuxFE/idux/issues/1804) [#1805](https://github.com/IDuxFE/idux/issues/1805) [#1806](https://github.com/IDuxFE/idux/issues/1806) [#1807](https://github.com/IDuxFE/idux/issues/1807) [#1810](https://github.com/IDuxFE/idux/issues/1810) [#1802](https://github.com/IDuxFE/idux/issues/1802) [#1811](https://github.com/IDuxFE/idux/issues/1811) [#1801](https://github.com/IDuxFE/idux/issues/1801) [#1813](https://github.com/IDuxFE/idux/issues/1813) [#1812](https://github.com/IDuxFE/idux/issues/1812) [#1816](https://github.com/IDuxFE/idux/issues/1816) [#1814](https://github.com/IDuxFE/idux/issues/1814) [#1815](https://github.com/IDuxFE/idux/issues/1815) [#1817](https://github.com/IDuxFE/idux/issues/1817) [#1819](https://github.com/IDuxFE/idux/issues/1819) [#1820](https://github.com/IDuxFE/idux/issues/1820) [#1821](https://github.com/IDuxFE/idux/issues/1821) [#1822](https://github.com/IDuxFE/idux/issues/1822) [#1830](https://github.com/IDuxFE/idux/issues/1830) [#1832](https://github.com/IDuxFE/idux/issues/1832) [#1829](https://github.com/IDuxFE/idux/issues/1829) [#1827](https://github.com/IDuxFE/idux/issues/1827) [#1833](https://github.com/IDuxFE/idux/issues/1833) [#1835](https://github.com/IDuxFE/idux/issues/1835) [#1834](https://github.com/IDuxFE/idux/issues/1834) [#1836](https://github.com/IDuxFE/idux/issues/1836) [#1838](https://github.com/IDuxFE/idux/issues/1838) [#1837](https://github.com/IDuxFE/idux/issues/1837) [#1823](https://github.com/IDuxFE/idux/issues/1823) [#1839](https://github.com/IDuxFE/idux/issues/1839) [#1840](https://github.com/IDuxFE/idux/issues/1840) [#1841](https://github.com/IDuxFE/idux/issues/1841) [#1842](https://github.com/IDuxFE/idux/issues/1842) [#1843](https://github.com/IDuxFE/idux/issues/1843) [#1844](https://github.com/IDuxFE/idux/issues/1844) [#1845](https://github.com/IDuxFE/idux/issues/1845) [#1847](https://github.com/IDuxFE/idux/issues/1847) [#1846](https://github.com/IDuxFE/idux/issues/1846)
+
+
+### BREAKING CHANGES
+
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+* typography is removed
+* itemHeight is deprecated, use rowHeight instead
+* itemRender is deprecated, use rowRender instead
+* scrollTo option index is deprecated, use rowIndex instead
+* scrollTo option offset is deprecated, use verticalOffset instead
+* scrollTo option key is deprecated, use rowKey instead
+* scrollTo option align is deprecated, use verticalAlign instead
+
+
+
+
+
 # [2.0.0-beta.6](https://github.com/IDuxFE/idux/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2024-01-17)
 
 **Note:** Version bump only for package @idux/site

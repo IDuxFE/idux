@@ -23,7 +23,7 @@
     "lessvariable:update": "ts-node scripts/gen/style-variable/update.ts",
     "prepare": "husky install",
     "preinstall": "npx only-allow pnpm",
-    "version": "lerna version --conventional-commits --conventional-prerelease --no-push --exact",
+    "version": "lerna version --conventional-commits --no-push --exact",
     "test": "vitest",
     "lint": "npm-run-all -p ls-lint eslint stylelint markdownlint",
     "lint:fix": "npm-run-all -p ls-lint eslint:fix stylelint:fix markdownlint:fix",
