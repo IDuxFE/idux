@@ -1,7 +1,7 @@
 // Vitest Snapshot v1
 
 exports[`Pagination > render work 1`] = `
-"<ul class=\\"ix-pagination ix-pagination-md\\">
+"<ul class=\\"ix-pagination ix-pagination-sm\\">
   <li class=\\"ix-pagination-total\\">共 50 项</li>
   <li class=\\"ix-pagination-item ix-pagination-item-prev ix-pagination-item-disabled\\" tabindex=\\"-1\\" title=\\"上一页\\"><span class=\\"ix-pagination-item-content\\"><i class=\\"ix-icon ix-icon-left\\" role=\\"img\\" aria-label=\\"left\\"></i></span></li>
   <li class=\\"ix-pagination-item ix-pagination-item-page ix-pagination-item-active\\" tabindex=\\"0\\" title=\\"1\\"><span class=\\"ix-pagination-item-content\\">1</span></li>
@@ -14,7 +14,7 @@ exports[`Pagination > render work 1`] = `
 `;
 
 exports[`Pagination > render work 2`] = `
-"<ul class=\\"ix-pagination ix-pagination-simple ix-pagination-md\\">
+"<ul class=\\"ix-pagination ix-pagination-simple ix-pagination-sm\\">
   <li class=\\"ix-pagination-total\\">共 50 项</li>
   <li class=\\"ix-pagination-item ix-pagination-item-prev ix-pagination-item-disabled\\" tabindex=\\"-1\\" title=\\"上一页\\"><span class=\\"ix-pagination-item-content\\"><i class=\\"ix-icon ix-icon-left\\" role=\\"img\\" aria-label=\\"left\\"></i></span></li>
   <li class=\\"ix-pagination-item\\">1<span class=\\"ix-pagination-item-slash\\">/</span><span>5</span></li>
@@ -23,7 +23,7 @@ exports[`Pagination > render work 2`] = `
 `;
 
 exports[`Pagination > render work 3`] = `
-"<ul class=\\"ix-pagination ix-pagination-md\\">
+"<ul class=\\"ix-pagination ix-pagination-sm\\">
   <li class=\\"ix-pagination-total\\">共 500 项</li>
   <li class=\\"ix-pagination-item ix-pagination-item-prev ix-pagination-item-disabled\\" tabindex=\\"-1\\" title=\\"上一页\\"><span class=\\"ix-pagination-item-content\\"><i class=\\"ix-icon ix-icon-left\\" role=\\"img\\" aria-label=\\"left\\"></i></span></li>
   <li class=\\"ix-pagination-item ix-pagination-item-page ix-pagination-item-active\\" tabindex=\\"0\\" title=\\"1\\"><span class=\\"ix-pagination-item-content\\">1</span></li>

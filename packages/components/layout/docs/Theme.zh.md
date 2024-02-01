@@ -1,5 +1,4 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@layout-sider-width` | `224px` | - | - |
-| `@layout-sider-collapsed-width` | `@menu-collapsed-width` | `44px` | - |
-| `@layout-header-height` | - | `44px` | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `siderCollapsedWidth` |  | `number` | `44` | `44` |
+| `siderWidth` |  | `number` | `224` | `224` |

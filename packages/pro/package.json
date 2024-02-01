@@ -1,6 +1,6 @@
 {
   "name": "@idux/pro",
-  "version": "1.12.4",
+  "version": "2.0.0-beta.6",
   "description": "A higher level of abstraction UI component library for Vue 3.x",
   "keywords": [
     "vue",
@@ -38,8 +38,8 @@
     "clean": "rimraf dist node_modules"
   },
   "dependencies": {
-    "@idux/cdk": "1.12.4",
-    "@idux/components": "1.12.4",
+    "@idux/cdk": "2.0.0-beta.6",
+    "@idux/components": "2.0.0-beta.6",
     "ajv": "^8.11.0",
     "ajv-formats": "^3.0.0-rc.0",
     "lodash-es": "^4.17.0"

@@ -14,8 +14,8 @@ import { IxIcon } from '@idux/components/icon'
 import { treeToken } from '../token'
 
 export default defineComponent({
-  setup() {
-    const { props, mergedPrefixCls, slots } = inject(treeToken)!
+  setup(_, { slots }) {
+    const { props, mergedPrefixCls } = inject(treeToken)!
 
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-node-leaf`

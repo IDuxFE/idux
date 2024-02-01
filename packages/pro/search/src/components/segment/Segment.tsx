@@ -21,6 +21,7 @@ import {
 
 import { convertArray, useState } from '@idux/cdk/utils'
 import { ɵOverlay, type ɵOverlayInstance, type ɵOverlayProps } from '@idux/components/_private/overlay'
+import { useThemeToken } from '@idux/pro/theme'
 
 import { type ProSearchContext, proSearchContext, searchItemContext } from '../../token'
 import { type SegmentInputInstance, type SegmentProps, segmentProps } from '../../types'
@@ -30,6 +31,7 @@ export default defineComponent({
   props: segmentProps,
   setup(props: SegmentProps, { slots }) {
     const context = inject(proSearchContext)!
+    const { globalHashId, hashId } = useThemeToken('proSearch')
     const {
       mergedPrefixCls,
       bindOverlayMonitor,
@@ -40,6 +42,8 @@ export default defineComponent({
       searchStates,
       overlayOpened: _overlayOpened,
       setOverlayOpened,
+      getCacheData,
+      setCacheData,
     } = context
     const overlayRef = ref<ɵOverlayInstance>()
     const segmentInputRef = ref<SegmentInputInstance>()
@@ -149,7 +153,14 @@ export default defineComponent({
         handleConfirm,
       )
 
-    const overlayProps = useOverlayAttrs(props, mergedPrefixCls, commonOverlayProps, overlayOpened)
+    const overlayProps = useOverlayAttrs(
+      props,
+      mergedPrefixCls,
+      commonOverlayProps,
+      overlayOpened,
+      globalHashId,
+      hashId,
+    )
 
     const renderTrigger = () => (
       <SegmentInput
@@ -179,6 +190,8 @@ export default defineComponent({
         ok: handleConfirm,
         setValue: handleChange,
         setOnKeyDown: setPanelOnKeyDown,
+        getCacheData: dataKey => getCacheData(props.itemKey, props.segment.name, dataKey),
+        setCacheData: (dataKey, data) => setCacheData(props.itemKey, props.segment.name, dataKey, data),
       })
 
       contentNodeEmpty.value = !contentNode
@@ -211,10 +224,17 @@ function useOverlayAttrs(
   mergedPrefixCls: ComputedRef<string>,
   commonOverlayProps: ComputedRef<ɵOverlayProps>,
   overlayOpened: ComputedRef<boolean>,
+  globalHashId: ComputedRef<string>,
+  hashId: ComputedRef<string>,
 ): ComputedRef<ɵOverlayProps> {
   return computed(() => ({
     ...commonOverlayProps.value,
-    class: normalizeClass([`${mergedPrefixCls.value}-segment-overlay`, ...(props.segment.containerClassName ?? [])]),
+    class: normalizeClass([
+      `${mergedPrefixCls.value}-segment-overlay`,
+      globalHashId.value,
+      hashId.value,
+      ...(props.segment.containerClassName ?? []),
+    ]),
     trigger: 'manual',
     visible: overlayOpened.value,
     disabled: props.disabled,

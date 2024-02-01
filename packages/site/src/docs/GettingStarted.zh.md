@@ -51,14 +51,13 @@ npm install @idux/cdk @idux/components @idux/pro
 // idux.ts
 import { type App } from "vue";
 
-// 示例导入的是 default 主题，如果需要使用其他主题或者定制主题，请参考定制主题的文档
 // 如果需要 css 按需加载，移除下面 2 行代码
-import "@idux/components/default.full.css";
-import "@idux/pro/default.css";
+import "@idux/components/index.full.css";
+import "@idux/pro/index.css";
 // 如果需要 css 按需加载，则按需添加下面的代码
 // import "@idux/cdk/index.css";
-// import "@idux/components/style/core/reset.default.css";
-// import "@idux/components/style/core/reset-scroll.default.css";
+// import "@idux/components/style/core/reset.css";
+// import "@idux/components/style/core/reset-scroll.css";
 
 // 如果需要 js 按需加载，移除下面 3 行代码
 import IduxCdk from "@idux/cdk";
@@ -79,8 +78,6 @@ const loadIconDynamically = (iconName: string) => {
 };
 
 const customConfig = { icon: { loadIconDynamically } }
-// 如果是 seer 主题
-// customConfig = merge(seerConfig, { icon: { loadIconDynamically } })
 const globalConfig = createGlobalConfig(customConfig)
 
 const install = (app: App): void => {
@@ -124,6 +121,30 @@ export default defineConfig({
 });
 ```
 
+### 引入Provider
+
+#### IxThemeProvider
+
+在 Idux v2 版本中，我们增加了 `IxThemeProvider` 来管理主题配置并动态插入主题css变量，如果需要使用动态主题或者主题覆盖功能，要在 `vue` 应用的最外围包裹使用 `IxThemeProvider`。
+
+例如，可以在 App.vue 中这样写：
+
+```html
+<template>
+  <IxThemeProvider>
+    <div class="app-wrapper">
+      ...
+    </div>
+  </IxThemeProvider>
+</template>
+```
+
+在不配置 `presetTheme` 的情况下，默认使用 `default` 主题，如果有主题定制或动态主题的需求，请查看 [定制主题](/docs/customize-theme/zh)
+
+#### 其他Provider
+
+如果有需求使用 `useMessage` 等 API，需要根据实际情况引入其他的 `Provider`，详情请查看具体组件文档。
+
 ### 类型提示
 
 我们提供了所有组件的类型定义，你可以参考下面的代码进行导入类型声明。
@@ -160,7 +181,7 @@ npm run dev
 
 当你只用到 `@idux` 的部分组件且比较在意包体积大小时，可以只加载用到的组件。
 
-推荐**仅按需加载 js 代码**，css 代码无需按需加载, 首先你需要修改 `idux.ts` 中的代码。
+首先你需要修改 `idux.ts` 中的代码。
 
 ```diff
 - import IduxCdk from "@idux/cdk";
@@ -171,6 +192,48 @@ const install = (app: App): void => {
 -  app.use(IduxCdk).use(IduxComponents).use(IduxPro).use(globalConfig);
 +  app.use(globalConfig)
 };
+```
+
+之后需要引入 `cdk` 的样式文件，再根据需求引入 `reset` 样式
+
+```ts
+import "@idux/cdk/index.css";
+import "@idux/components/style/core/reset.css";
+import "@idux/components/style/core/reset-scroll.css";
+```
+
+需要特别注意的是，在按需引入的场景下，`reset` 样式在编译之后的引入顺序可能在组件样式之后，因此可能会导致组件样式异常。
+这种情况下，需要将 `reset` 样式放在 `public` 目录下在 `index.html` 中引入，也可以通过其他方式解决，我们推荐使用 `vite-plugin-static-copy` 来处理这两个样式
+
+```ts
+// vite.config.ts
+import { viteStaticCopy } from "vite-plugin-static-copy";
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    ...
+    viteStaticCopy({
+      targets: [
+        {
+          src: "./node_modules/@idux/components/style/core/reset*.css",
+          dest: "assets",
+        },
+      ],
+    }),
+  ],
+});
+```
+
+```html
+<html>
+  <head>
+    ...
+    <link rel="stylesheet" href="/assets/reset.css" />
+    <link rel="stylesheet" href="/assets/reset-scroll.css" />
+  </head>
+  ...
+</html>
 ```
 
 然后可以选择以下任意一种方式进行加载组件代码。
@@ -188,7 +251,8 @@ export default defineConfig({
     /* ... */
     Components({
       resolvers: [IduxResolver()],
-      // 可以通过指定 `importStyle` 来按需加载 css 或 less 代码, 也支持不同的主题
+      // 可以通过指定 `importStyle` 来按需加载 css 或 less 代码
+      // 主题默认会通过 IxThemeProvider 自动插入，但如果使用 IxThemeProvider，可以配置 `importStyleTheme` 来引入组件的 css 变量
       // 别忘了修改 idux.ts 中的样式导入代码
       // resolvers: [IduxResolver({ importStyle: 'css', importStyleTheme: 'default' })],
     }),
@@ -218,7 +282,7 @@ module.exports = {
 ```ts
 // App.vue or other components
 import { IxButton } from "@idux/components/button"
-import "@idux/components/button/style/themes/default_css"
+import "@idux/components/button/style"
 ```
 
 ## 其他

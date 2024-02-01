@@ -4,6 +4,8 @@ import { BreakpointKey } from '@idux/cdk/breakpoint'
 
 export const isDevMode = process.env.NODE_ENV !== 'production'
 
+export type AppTheme = 'default' | 'dark'
+
 export interface AppContext {
   org: string
   repo: string
@@ -11,7 +13,8 @@ export interface AppContext {
   path: ComputedRef<string>
   page: ComputedRef<string>
   breakpoints: Record<BreakpointKey, boolean>
-  setTheme: (theme: string) => void
+  theme: ComputedRef<AppTheme>
+  setTheme: (theme: AppTheme) => void
 }
 
 export const appContextToken: InjectionKey<AppContext> = Symbol('appContextToken')

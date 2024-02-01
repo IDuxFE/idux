@@ -1,0 +1,6 @@
+/* ------ popover css variables ------ */
+:root {
+  --ix-popover-font-size: 12px;
+  --ix-popover-color: #808999;
+  --ix-popover-min-width: 240px;
+}

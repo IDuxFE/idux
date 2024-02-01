@@ -14,9 +14,8 @@
       :dataSource="treeData"
       :leafLineIcon="customLeafLineIcon ? 'file' : undefined"
     >
-      <template #expandIcon="{ expanded }">
-        <IxIcon v-if="customExpandIcon" :name="expanded ? 'plus-square' : 'minus-square'"></IxIcon>
-        <IxIcon v-else name="right" :rotate="expanded ? 90 : 0"></IxIcon>
+      <template v-if="customExpandIcon" #expandIcon="{ expanded }">
+        <IxIcon :name="expanded ? 'plus-square' : 'minus-square'"></IxIcon>
       </template>
     </IxTreeSelect>
   </IxSpace>

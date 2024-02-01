@@ -1,26 +1,20 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 @import '../../style/motion/fade.less';
 
 .@{tooltip-prefix} {
   .reset-component();
-  .reset-font-size(@tooltip-font-size);
+  .reset-font-size(var(--ix-tooltip-font-size));
 
-  color: @tooltip-color;
-  background-color: @tooltip-background-color;
-  border-radius: @tooltip-border-radius;
-  box-shadow: @tooltip-box-shadow;
+  color: var(--ix-tooltip-color);
   z-index: 1000;
 
   &-wrapper {
     position: relative;
     word-wrap: break-word;
-    min-width: @tooltip-min-width;
-    max-width: @tooltip-max-width;
-    padding: 4px 8px;
+    min-width: var(--ix-tooltip-min-width);
+    max-width: var(--ix-tooltip-max-width);
+    padding: var(--ix-padding-size-xs) var(--ix-padding-size-sm);
     z-index: 1;
-  }
-
-  .@{overlay-prefix}-arrow {
-    color: @tooltip-background-color;
   }
 }

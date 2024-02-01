@@ -7,13 +7,12 @@
 
 import { defineComponent, inject } from 'vue'
 
-import HeadCell from './HeadCell'
 import { TABLE_TOKEN } from '../../token'
 import { tableHeadRowProps } from '../../types'
 
 export default defineComponent({
   props: tableHeadRowProps,
-  setup(props) {
+  setup(props, { slots }) {
     const { props: tableProps, mergedPrefixCls } = inject(TABLE_TOKEN)!
 
     return () => {
@@ -24,11 +23,7 @@ export default defineComponent({
       const Tag = (tableProps.customTag?.headRow ?? 'tr') as any
       return (
         <Tag class={`${mergedPrefixCls.value}-row`} {...customAdditional}>
-          {columns
-            .filter(column => column.titleColSpan !== 0)
-            .map(column => (
-              <HeadCell key={column.key} column={column} />
-            ))}
+          {slots.default?.()}
         </Tag>
       )
     }

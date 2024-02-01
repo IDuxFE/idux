@@ -68,7 +68,7 @@ function createSearchItemContentSegments(
 ) {
   if (searchField.type === 'multiSegment') {
     return searchField.fieldConfig.segments.map(segmentConfig =>
-      createCustomSegment(prefixCls, dateConfig, segmentConfig),
+      createCustomSegment(prefixCls, dateConfig, segmentConfig, locale),
     )
   }
 
@@ -87,7 +87,7 @@ function createSearchItemContentSegments(
       case 'dateRangePicker':
         return createDateRangePickerSegment(prefixCls, searchField.fieldConfig, dateConfig)
       case 'custom':
-        return createCustomSegment(prefixCls, dateConfig, searchField.fieldConfig)
+        return createCustomSegment(prefixCls, dateConfig, searchField.fieldConfig, locale)
       default:
         return
     }

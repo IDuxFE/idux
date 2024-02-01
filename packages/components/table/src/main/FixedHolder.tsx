@@ -5,21 +5,49 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type CSSProperties, type Ref, computed, defineComponent, inject, onBeforeUnmount, onMounted } from 'vue'
+import type { FlattedData } from '../composables/useDataSource'
 
+import { type CSSProperties, type Ref, computed, defineComponent, inject, onBeforeUnmount, onMounted, watch } from 'vue'
+
+import {
+  CdkVirtualScroll,
+  type VirtualColRenderFn,
+  type VirtualContentRenderFn,
+  type VirtualRowRenderFn,
+  type VirtualScrollRowData,
+} from '@idux/cdk/scroll'
 import { convertCssPixel, off, on } from '@idux/cdk/utils'
 
 import ColGroup from './ColGroup'
+import Head from './head/Head'
+import { renderHeaderCell } from './head/RenderHeaderCells'
+import { renderHeaderRow } from './head/RenderHeaderRow'
+import { type TableColumnMergedExtra, flatColumns } from '../composables/useColumns'
 import { TABLE_TOKEN } from '../token'
+import { modifyVirtualData } from '../utils'
 
 export default defineComponent({
   props: {
     offsetTop: { type: Number, default: undefined },
     offsetBottom: { type: Number, default: undefined },
   },
-  setup(props, { slots }) {
-    const { mergedPrefixCls, scrollHeadRef, handleScroll, scrollWidth, flattedData, isSticky, columnWidths } =
-      inject(TABLE_TOKEN)!
+  setup(props) {
+    const {
+      props: tableProps,
+      mergedPrefixCls,
+      mergedVirtual,
+      mergedVirtualColWidth,
+      getVirtualColWidth,
+      headerVirtualScrollRef,
+      handleScroll,
+      scrollHeadRef,
+      scrollWidth,
+      flattedData,
+      flattedColumns,
+      fixedColumns,
+      mergedRows,
+      isSticky,
+    } = inject(TABLE_TOKEN)!
 
     useScrollEvents(scrollHeadRef, handleScroll)
 
@@ -42,21 +70,97 @@ export default defineComponent({
       }
     })
 
-    const tableStyle = computed<CSSProperties>(() => {
-      const visibility = hasData.value && !columnWidths.value.length ? 'hidden' : undefined
-      return {
-        tableLayout: 'fixed',
-        visibility,
+    const virtualData = computed<VirtualScrollRowData<TableColumnMergedExtra>[]>(() => {
+      if (!mergedVirtual.value.horizontal) {
+        return []
       }
+
+      return mergedRows.value.rows.map((columns, rowIdx) => {
+        return {
+          key: rowIdx,
+          data: columns,
+        }
+      })
     })
 
     return () => {
+      const showColGroup = hasData.value || !isMaxContent.value
+      if (mergedVirtual.value.horizontal) {
+        const contentRender: VirtualContentRenderFn = (children, { renderedData }) => {
+          let flattedColumns: TableColumnMergedExtra[] = []
+
+          if (showColGroup) {
+            const columns: TableColumnMergedExtra[] = []
+            ;(renderedData as VirtualScrollRowData<TableColumnMergedExtra>[]).forEach(row => {
+              columns.push(...row.data)
+            })
+
+            flattedColumns = flatColumns(columns)
+          }
+
+          return (
+            <table style={{ tableLayout: 'fixed' }}>
+              {showColGroup && <ColGroup columns={flattedColumns} isFixedHolder />}
+              <Head>{children}</Head>
+            </table>
+          )
+        }
+
+        const rowRender: VirtualRowRenderFn<VirtualScrollRowData<TableColumnMergedExtra>> = ({
+          item,
+          index,
+          children,
+        }) => renderHeaderRow(item.data, index, children)
+        const colRneder: VirtualColRenderFn<VirtualScrollRowData<TableColumnMergedExtra>> = ({ item }) =>
+          renderHeaderCell(item)
+
+        const colModifier = (renderedRow: FlattedData, renderedCols: TableColumnMergedExtra[]) => {
+          const { fixedStartColumns, fixedEndColumns } = fixedColumns.value
+          return modifyVirtualData(
+            renderedRow,
+            renderedCols,
+            flattedColumns.value,
+            flattedData.value,
+            fixedStartColumns,
+            fixedEndColumns,
+            true,
+          )
+        }
+
+        const { virtualBufferSize, virtualBufferOffset } = tableProps
+
+        return (
+          <div class={classes.value} style={style.value}>
+            {
+              <CdkVirtualScroll
+                ref={headerVirtualScrollRef}
+                dataSource={virtualData.value}
+                colModifier={colModifier}
+                getKey="key"
+                height={0}
+                width={'100%'}
+                colWidth={mergedVirtualColWidth.value}
+                getColWidth={getVirtualColWidth}
+                rowRender={rowRender}
+                colRender={colRneder}
+                contentRender={contentRender}
+                virtual={{ horizontal: true, vertical: false }}
+                bufferSize={virtualBufferSize}
+                bufferOffset={virtualBufferOffset}
+              />
+            }
+          </div>
+        )
+      }
+
       return (
         <div class={classes.value} style={style.value} ref={scrollHeadRef}>
-          <table style={tableStyle.value}>
-            {(hasData.value || !isMaxContent.value) && <ColGroup isFixedHolder />}
-            {slots.default && slots.default()}
-          </table>
+          {
+            <table style={{ tableLayout: 'fixed' }}>
+              {showColGroup && <ColGroup isFixedHolder />}
+              <Head></Head>
+            </table>
+          }
         </div>
       )
     }
@@ -68,15 +172,36 @@ function useScrollEvents(
   handleScroll: (evt?: Event, scrollLeft?: number) => void,
 ) {
   const onWheel = (evt: WheelEvent) => {
-    const deltaX = evt.deltaX
+    if (!evt.shiftKey) {
+      return
+    }
+
+    const delta = evt.deltaY
     const currentTarget = evt.currentTarget as HTMLDivElement
-    if (deltaX) {
-      const scrollLeft = currentTarget.scrollLeft + deltaX
+    if (delta) {
+      const scrollLeft = currentTarget.scrollLeft + delta
       handleScroll(evt, scrollLeft)
-      evt.preventDefault()
     }
   }
 
-  onMounted(() => on(scrollHeadRef.value, 'wheel', onWheel, { passive: true }))
-  onBeforeUnmount(() => off(scrollHeadRef.value, 'wheel', onWheel))
+  const bindWheelEvt = (el: HTMLElement | undefined) => {
+    on(el, 'wheel', onWheel, { passive: true })
+  }
+  const unbindWheelEvt = (el: HTMLElement | undefined) => {
+    off(el, 'wheel', onWheel)
+  }
+
+  onMounted(() => {
+    watch(
+      scrollHeadRef,
+      (scrollHead, oldScrollHead) => {
+        unbindWheelEvt(oldScrollHead)
+        bindWheelEvt(scrollHead)
+      },
+      {
+        immediate: true,
+      },
+    )
+  })
+  onBeforeUnmount(() => unbindWheelEvt(scrollHeadRef.value))
 }

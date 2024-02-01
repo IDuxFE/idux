@@ -8,7 +8,7 @@
     line-height: 1;
     align-items: center;
     vertical-align: middle;
-    color: @table-expandable-icon-color;
+    color: var(--ix-table-expandable-icon-color);
     background-color: transparent;
     border-style: none;
     outline: none;
@@ -17,8 +17,8 @@
     &-button {
       z-index: 1;
       padding: 1px;
-      background-color: var(--ix-background-color);
-      transition: background var(--ix-transition-duration-fast);
+      background-color: var(--ix-color-container-bg);
+      transition: background var(--ix-motion-duration-fast);
     }
     &-disabled &-button {
       cursor: unset;
@@ -31,7 +31,7 @@
       position: relative;
       display: inline-block;
       margin-right: 1px;
-      width: @spacing-xs;
+      width: var(--ix-margin-size-xs);
       vertical-align: middle;
     }
     &-show-line + &-gap::before {
@@ -41,7 +41,7 @@
       top: 50%;
       width: 100%;
       height: 1px;
-      background-color: @table-tree-line-color;
+      background-color: var(--ix-color-separator);
     }
 
     &-line-right {
@@ -50,7 +50,7 @@
       right: 0;
       width: 50%;
       height: 1px;
-      background-color: @table-tree-line-color;
+      background-color: var(--ix-color-separator);
     }
     &-line-top {
       position: absolute;
@@ -58,7 +58,7 @@
       left: 50%;
       width: 1px;
       height: 50%;
-      background-color: @table-tree-line-color;
+      background-color: var(--ix-color-separator);
     }
     &-line-bottom {
       position: absolute;
@@ -66,7 +66,7 @@
       left: 50%;
       width: 1px;
       height: 50%;
-      background-color: @table-tree-line-color;
+      background-color: var(--ix-color-separator);
     }
   }
   &-expandable-indent {
@@ -82,7 +82,7 @@
       left: 50%;
       height: 100%;
       width: 1px;
-      background-color: @table-tree-line-color;
+      background-color: var(--ix-color-separator);
     }
   }
   &-expandable-wrapper {
@@ -92,14 +92,35 @@
 
   & tr&-expanded-row {
     & > td {
-      background-color: @table-expandable-background-color;
+      background-color: var(--ix-table-body-row-bg-color-expanded);
+      .@{table-prefix}-expandable-trigger-button {
+        background-color: var(--ix-table-body-row-bg-color-expanded);
+      }
 
       > .@{table-prefix} {
         margin: -4px 28px;
       }
     }
     &:hover > td {
-      background-color: @table-expandable-background-color-hover;
+      background-color: var(--ix-table-body-row-bg-color-expanded);
+      .@{table-prefix}-expandable-trigger-button {
+        background-color: var(--ix-table-body-row-bg-color-expanded);
+      }
+    }
+  } 
+
+  & tr[class*=~'@{table-prefix}-row-level-'] {
+    & > td {
+      background-color: var(--ix-table-body-row-bg-color-expanded);
+      .@{table-prefix}-expandable-trigger-button {
+        background-color: var(--ix-table-body-row-bg-color-expanded);
+      }
+    }
+    &:hover > td {
+      background-color: var(--ix-table-body-row-bg-color-expanded);
+      .@{table-prefix}-expandable-trigger-button {
+        background-color: var(--ix-table-body-row-bg-color-expanded);
+      }
     }
   }
 }

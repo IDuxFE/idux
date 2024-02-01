@@ -17,3 +17,6 @@ export type { DropdownInstance, DropdownComponent, DropdownPublicProps as Dropdo
 
 export { dropdownToken as ɵDropdownToken } from './src/token'
 export type { DropdownContext as ɵDropdownContext } from './src/token'
+
+export { getThemeTokens as getDropdownThemeTokens } from './theme'
+export type { DropdownThemeTokens } from './theme'

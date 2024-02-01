@@ -15,15 +15,17 @@ export interface DrawerContext {
   common: CommonConfig
   config: DrawerConfig
   mergedPrefixCls: ComputedRef<string>
+  drawerElRef: Ref<HTMLElement | undefined>
   visible: Ref<boolean>
   delayedLoaded: Ref<boolean>
-  animatedVisible: Ref<boolean | undefined>
+  animatedVisible: Ref<boolean>
+  isAnimating: Ref<boolean>
   mergedVisible: ComputedRef<boolean>
   currentZIndex: ComputedRef<number>
-  level: Ref<number>
   levelAction: Ref<'push' | 'pull' | undefined>
-  push: () => void
-  pull: () => void
+  distance: Ref<number>
+  push: (childSize: number) => void
+  pull: (childSize: number) => void
 }
 
 export const drawerToken: InjectionKey<DrawerContext> = Symbol('drawerToken')

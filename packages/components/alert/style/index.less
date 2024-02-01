@@ -1,47 +1,48 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 @import './mixin.less';
 
 .@{alert-prefix} {
   .reset-component-new();
 
-  @line-height: calc(var(--ix-font-size) + var(--ix-line-height-gutter));
+  @line-height: calc(var(--ix-font-size-sm) + var(--ix-line-height-gutter));
 
-  font-size: var(--ix-font-size);
+  font-size: var(--ix-font-size-sm);
   line-height: @line-height;
   display: flex;
-  padding: calc((@alert-height - @line-height - 2px) / 2) 8px;
+  padding: calc((var(--ix-alert-height) - @line-height - 2px) / 2) 8px;
   border: 1px solid transparent;
-  border-radius: @alert-border-radius;
+  border-radius: var(--ix-alert-border-radius);
 
-  .alert-status-color(success, @alert-success-color, @alert-success-background-color);
-  .alert-status-color(info, @alert-info-color, @alert-info-background-color);
-  .alert-status-color(warning, @alert-warning-color, @alert-warning-background-color);
-  .alert-status-color(error, @alert-error-color, @alert-error-background-color);
-  .alert-status-color(offline, @alert-offline-color, @alert-offline-background-color);
+  .alert-status-color(success, var(--ix-color-success-text), var(--ix-alert-success-bg-color));
+  .alert-status-color(info, var(--ix-color-info-text), var(--ix-alert-info-bg-color));
+  .alert-status-color(warning, var(--ix-color-warning-text), var(--ix-alert-warning-bg-color));
+  .alert-status-color(error, var(--ix-color-error-text), var(--ix-alert-error-bg-color));
+  .alert-status-color(offline, var(--ix-color-offline-text), var(--ix-alert-offline-bg-color));
 
   &-banner {
-    padding: calc((@alert-height - @line-height - 2px) / 2) 16px;
-    border-bottom-color: @alert-banner-border-color;
+    padding: calc((var(--ix-alert-height) - @line-height - 2px) / 2) 16px;
+    border-bottom-color: var(--ix-color-border-secondary);
   }
 
   &-icon {
-    margin-right: 8px;
+    margin-right: var(--ix-margin-size-xs);
   }
 
   &-close-icon {
     cursor: pointer;
     margin-left: 16px;
-    color: @alert-icon-color;
-    transition: color var(--ix-transition-duration-fast);
+    color: var(--ix-color-icon);
+    transition: color var(--ix-motion-duration-fast);
 
     &:hover {
-      color: @alert-icon-color-hover;
+      color: var(--ix-color-icon-hover);
     }
   }
 
   &-icon,
   &-close-icon {
-    font-size: var(--ix-font-size-lg);
+    font-size: var(--ix-font-size-icon);
   }
 
   &-content {
@@ -54,7 +55,7 @@
   }
 
   &-with-description &-title {
-    .reset-font-size(calc(var(--ix-font-size) + 2px));
+    .reset-font-size(calc(var(--ix-font-size-sm) + 2px));
 
     margin-bottom: 4px;
   }
@@ -63,7 +64,7 @@
     margin-left: 16px;
 
     &.@{pagination-prefix} {
-      color: @alert-icon-color;
+      color: var(--ix-color-icon);
       background-color: transparent;
 
       .@{pagination-prefix}-item:hover,

@@ -3,6 +3,223 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.6](https://github.com/IDuxFE/idux/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2024-01-17)
+
+
+### Bug Fixes
+
+* **comp:*:** modify all overlay default placement to bottomStart ([#1815](https://github.com/IDuxFE/idux/issues/1815)) ([4189049](https://github.com/IDuxFE/idux/commit/4189049b6e151ceaca7f0c29ea1f249e525e7646))
+* **comp:alert:** change alert icon marigin-right to marginSizeXs([#1802](https://github.com/IDuxFE/idux/issues/1802)) ([4df6f97](https://github.com/IDuxFE/idux/commit/4df6f97f89afcfd47f33b9279afc4ebe02714829))
+* **comp:collapse:** change header prefix margin right to marginSizeMd ([#1811](https://github.com/IDuxFE/idux/issues/1811)) ([6bf6655](https://github.com/IDuxFE/idux/commit/6bf6655451c2066a6b1136b95886d246eafbb0bd))
+* **comp:header:** change bar height ([#1804](https://github.com/IDuxFE/idux/issues/1804)) ([972bd64](https://github.com/IDuxFE/idux/commit/972bd64a73f456dbb540e99df5dc7a69ea383895))
+* **comp:select:** theme token optionGroupMargin unit error ([#1821](https://github.com/IDuxFE/idux/issues/1821)) ([c1c2906](https://github.com/IDuxFE/idux/commit/c1c2906b76292206dc939682676ab5ca005c4fd7))
+* **comp:tag:** change tag padding x to 8px, use box-shadow instead of border ([#1801](https://github.com/IDuxFE/idux/issues/1801)) ([371c61d](https://github.com/IDuxFE/idux/commit/371c61d063d007909f3e1ba8aa80920398c1fb16))
+* **comp:tag:** reset bordered style from box-shadow to border ([#1817](https://github.com/IDuxFE/idux/issues/1817)) ([7154ca5](https://github.com/IDuxFE/idux/commit/7154ca5886adf5bf6df92bc367973e094867d8d4))
+
+
+### Features
+
+* **cdk:scroll:** add simulated scroll support to VirtualScroll ([#1812](https://github.com/IDuxFE/idux/issues/1812)) ([17ccefa](https://github.com/IDuxFE/idux/commit/17ccefaf3cd0689e12e69be9d5af95578a12eae5))
+
+
+
+
+
+# [2.0.0-beta.5](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0-beta.5) (2024-01-08)
+
+
+### Bug Fixes
+
+* **cdk:forms:** interactions trigger dosen't work ([#1770](https://github.com/IDuxFE/idux/issues/1770)) ([fc44cbf](https://github.com/IDuxFE/idux/commit/fc44cbf912b2ba78f4847ad599d64d89464c408a))
+* **comp:button:** pointer events sholud be none when disabled ([#1744](https://github.com/IDuxFE/idux/issues/1744)) ([2ca124d](https://github.com/IDuxFE/idux/commit/2ca124d5b8ee8a20496e67970d0e563fe2e8dba1))
+* **comp:cascader:** the value is incorrect after clicking the clear icon ([#1774](https://github.com/IDuxFE/idux/issues/1774)) ([0134f36](https://github.com/IDuxFE/idux/commit/0134f36c60140a6dcfe2864ce93c7e7ddce60e01))
+* **comp:checkbox:** button theme not registered ([#1758](https://github.com/IDuxFE/idux/issues/1758)) ([1c68326](https://github.com/IDuxFE/idux/commit/1c6832680e58c20cb134eb5f9443e6ba1370b4d3))
+* **comp:collapse:** modify header font-size to fontSizeHeaderSm ([#1790](https://github.com/IDuxFE/idux/issues/1790)) ([664c34b](https://github.com/IDuxFE/idux/commit/664c34bb1b1b5a00b8685a13742f400a2169f8ed))
+* **comp:desc:** header component does not take effect ([#1742](https://github.com/IDuxFE/idux/issues/1742)) ([dd1aab8](https://github.com/IDuxFE/idux/commit/dd1aab86dc429858d8919ff9c438839d7f688e32))
+* **comp:desc:** use div to wrap header slot ([#1752](https://github.com/IDuxFE/idux/issues/1752)) ([dd31ee4](https://github.com/IDuxFE/idux/commit/dd31ee4aee432327eab90356625bbd8ed91c01af))
+* **comp:head:** modify header bar style ([#1781](https://github.com/IDuxFE/idux/issues/1781)) ([12278ef](https://github.com/IDuxFE/idux/commit/12278ef297d1878a7cd7e273f542a2e0c87b3048))
+* **comp:input:** sufix click does not effect ([#1745](https://github.com/IDuxFE/idux/issues/1745)) ([4769dcd](https://github.com/IDuxFE/idux/commit/4769dcd7f58f56662b6098e77ad9009aa2eafdea))
+* **comp:modal:** adjust the icon of the modal that confirm the mode ([#1763](https://github.com/IDuxFE/idux/issues/1763)) ([6227d4a](https://github.com/IDuxFE/idux/commit/6227d4adf9ecfeb24938c1fe56f150b51c996b8c))
+* **comp:modal:** fix adjust modal icon height ([#1762](https://github.com/IDuxFE/idux/issues/1762)) ([019674d](https://github.com/IDuxFE/idux/commit/019674d091296ff5d709fa6e62b3617d5335172b))
+* **comp:pagination:** change lg size font size to fontSizeSm ([#1761](https://github.com/IDuxFE/idux/issues/1761)) ([5669abc](https://github.com/IDuxFE/idux/commit/5669abcc0f0eaf8e8865c9d512b6246b389797b9))
+* **comp:popover,tooltip:** replace paddings with theme variables ([#1780](https://github.com/IDuxFE/idux/issues/1780)) ([0c2be7b](https://github.com/IDuxFE/idux/commit/0c2be7b23582e13cbf1595703cfc90b2584a1739))
+* **comp:radio:** gap behaves abnormally when configured without 0px ([#1740](https://github.com/IDuxFE/idux/issues/1740)) ([9ecd14a](https://github.com/IDuxFE/idux/commit/9ecd14aa5663399f1e3c92d3f40d8f5f05ad9dee))
+* **comp:select:** selectOptionFontSize theme var reference error ([#1777](https://github.com/IDuxFE/idux/issues/1777)) ([0e0db55](https://github.com/IDuxFE/idux/commit/0e0db55b993f95ad86d2797e071c7b9dc6546b60))
+* **comp:table:** pagination should hide when data empty ([#1782](https://github.com/IDuxFE/idux/issues/1782)) ([85d80e1](https://github.com/IDuxFE/idux/commit/85d80e174ad0fb81c7b04001a67bc86cdf98479b))
+* **comp:table:** scroll classes is determined by scroll overflowed ([#1798](https://github.com/IDuxFE/idux/issues/1798)) ([dfbaec7](https://github.com/IDuxFE/idux/commit/dfbaec78965f7d29b994842845c148b9ee7ec5f3))
+* **comp:table:** table header not visible when width not collected ([#1794](https://github.com/IDuxFE/idux/issues/1794)) ([7a1cd70](https://github.com/IDuxFE/idux/commit/7a1cd702e367fa494fe507c83231f4529ed56ee5))
+* **comp:tabs:** tabs segment mod nav font-weight should be normal ([#1788](https://github.com/IDuxFE/idux/issues/1788)) ([7a8a89f](https://github.com/IDuxFE/idux/commit/7a8a89fb1b5440abe93cee14d9a6a21e4a163d17))
+* **comp:tag:** modify tag normal bg color ([#1792](https://github.com/IDuxFE/idux/issues/1792)) ([5990a28](https://github.com/IDuxFE/idux/commit/5990a284794ecfb10595c8d2cfede460ba3499ed))
+* **comp:timeline:** modify contentMarginBottom to marginSizeLg ([#1791](https://github.com/IDuxFE/idux/issues/1791)) ([bc3b27f](https://github.com/IDuxFE/idux/commit/bc3b27f453adb23202ea7a0de08238ede3f5eb30))
+* **comp:tree:** update tree line style ([#1783](https://github.com/IDuxFE/idux/issues/1783)) ([ca64a1e](https://github.com/IDuxFE/idux/commit/ca64a1e0b0e60bfa301aa78518b173b6668be4dd))
+* **comp:tree:** virtual treeNode slots not passed ([#1799](https://github.com/IDuxFE/idux/issues/1799)) ([f9361f7](https://github.com/IDuxFE/idux/commit/f9361f7fd102846b2a5183dd72620bcc3f583c6f))
+* **comp:upload:** file is not uploaded when maxCount is 1 ([#1786](https://github.com/IDuxFE/idux/issues/1786)) ([400a0b4](https://github.com/IDuxFE/idux/commit/400a0b4cb1db93f8354e53c97c3384115ae04bae))
+* **comp:upload:** file remove icon should be 'close' ([#1787](https://github.com/IDuxFE/idux/issues/1787)) ([f862fdf](https://github.com/IDuxFE/idux/commit/f862fdf59e4c22cf8171e6e2e7f650940120baba))
+* **comp:** modify offline color token ([#1789](https://github.com/IDuxFE/idux/issues/1789)) ([00cd10c](https://github.com/IDuxFE/idux/commit/00cd10cd033c37e6c83e3a8aa5689d8b8bc85d86))
+* **pro:layout:** dark theme overlay menu style error ([#1771](https://github.com/IDuxFE/idux/issues/1771)) ([64169d2](https://github.com/IDuxFE/idux/commit/64169d270741f242ecfcae49cd749b5fce59391b))
+* **pro:layout:** style error when theme style not injected ([#1769](https://github.com/IDuxFE/idux/issues/1769)) ([e216b08](https://github.com/IDuxFE/idux/commit/e216b08b90da1f9857b36cd40749f8025bab9c58))
+* **pro:search:** non-multiple field created state should be overwritten by new state ([#1778](https://github.com/IDuxFE/idux/issues/1778)) ([617c192](https://github.com/IDuxFE/idux/commit/617c192e190ef902e591b4fb3e1de6227ee50946))
+* style dependencies missing in on-demand import entries ([#1755](https://github.com/IDuxFE/idux/issues/1755)) ([4b97958](https://github.com/IDuxFE/idux/commit/4b979588419d125bd13ce83425700961bf1dfbcf))
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/IDuxFE/idux/issues/1751)) ([415f07f](https://github.com/IDuxFE/idux/commit/415f07f5c5a23ac1737865b945417e1424a7086b))
+* **cdk:forms:** add `interactions` trigger ([#1766](https://github.com/IDuxFE/idux/issues/1766)) ([83c60e7](https://github.com/IDuxFE/idux/commit/83c60e729ec1d1979a1250f1d1cd88583a4be5ec))
+* **cdk:scroll:** virtual scroll supports horizontal ([#1775](https://github.com/IDuxFE/idux/issues/1775)) ([77a0411](https://github.com/IDuxFE/idux/commit/77a0411370fb88e15e192850b57ae9bc5956a884))
+* **comp:drawer:** distance is configurable and determined by drawer size ([#1767](https://github.com/IDuxFE/idux/issues/1767)) ([4420e37](https://github.com/IDuxFE/idux/commit/4420e37000a2a9512e86d6a6292cc5ad3dada40f))
+* **comp:table:** add insetShadow to horizontal overlowed container ([#1768](https://github.com/IDuxFE/idux/issues/1768)) ([2d51ad6](https://github.com/IDuxFE/idux/commit/2d51ad69eb37eeaa012a3a06f133a2535f40a4e3))
+* **comp:table:** add virtualHorizontal support ([#1776](https://github.com/IDuxFE/idux/issues/1776)) ([23a8484](https://github.com/IDuxFE/idux/commit/23a84844a4d03446059171f230674bc22eec1eaa))
+* **comp:table:** change rowHeight theme tokens to paddings ([#1760](https://github.com/IDuxFE/idux/issues/1760)) ([c9b4ef7](https://github.com/IDuxFE/idux/commit/c9b4ef741fde5782d4c0bc95177527e0ac252cf5))
+* **comp:table:** column align supports cell and title ([#1784](https://github.com/IDuxFE/idux/issues/1784)) ([7a69ea1](https://github.com/IDuxFE/idux/commit/7a69ea147bbabd269d7cb36b3d914a1b2969e316))
+* **comp:tag:** support compact group tags ([#1779](https://github.com/IDuxFE/idux/issues/1779)) ([318d8ef](https://github.com/IDuxFE/idux/commit/318d8efa3700c1f8da8a39e11bf5fbd236e26626))
+* **comp:theme:** root level IxThemeProvider is no longer needed ([#1765](https://github.com/IDuxFE/idux/issues/1765)) ([bd5603e](https://github.com/IDuxFE/idux/commit/bd5603e2064bad94daec56e61e1672226a95d8a2))
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([5976f6d](https://github.com/IDuxFE/idux/commit/5976f6dcfecd276ad7c3406786266f65453da8dd))
+* modify disable color theme tokens ([#1764](https://github.com/IDuxFE/idux/issues/1764)) ([33b3d4d](https://github.com/IDuxFE/idux/commit/33b3d4d71634942a288470b06793b9a296ba4a29))
+* remove typography support ([#1738](https://github.com/IDuxFE/idux/issues/1738)) ([5d06267](https://github.com/IDuxFE/idux/commit/5d0626761f45355f436d0a88f3a8f3c3a37ae58d))
+
+
+### BREAKING CHANGES
+
+* **cdk:scroll:** itemHeight is deprecated, use rowHeight instead
+* **cdk:scroll:** itemRender is deprecated, use rowRender instead
+* typography is removed
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
+
+
+
+
+# [2.0.0-beta.4](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0-beta.4) (2023-12-27)
+
+
+### Bug Fixes
+
+* **cdk:forms:** interactions trigger dosen't work ([#1770](https://github.com/IDuxFE/idux/issues/1770)) ([c099b1a](https://github.com/IDuxFE/idux/commit/c099b1a50545ecc28c40a7610320614dbf23866e))
+* **comp:button:** pointer events sholud be none when disabled ([#1744](https://github.com/IDuxFE/idux/issues/1744)) ([2ca124d](https://github.com/IDuxFE/idux/commit/2ca124d5b8ee8a20496e67970d0e563fe2e8dba1))
+* **comp:cascader:** the value is incorrect after clicking the clear icon ([#1774](https://github.com/IDuxFE/idux/issues/1774)) ([337c894](https://github.com/IDuxFE/idux/commit/337c8947a87a9986419de0927dcc290ecb1abc2a))
+* **comp:checkbox:** button theme not registered ([#1758](https://github.com/IDuxFE/idux/issues/1758)) ([534cf7e](https://github.com/IDuxFE/idux/commit/534cf7e7c0a0d707393dcc97f85f5f4918f23d56))
+* **comp:desc:** header component does not take effect ([#1742](https://github.com/IDuxFE/idux/issues/1742)) ([dd1aab8](https://github.com/IDuxFE/idux/commit/dd1aab86dc429858d8919ff9c438839d7f688e32))
+* **comp:desc:** use div to wrap header slot ([#1752](https://github.com/IDuxFE/idux/issues/1752)) ([dd31ee4](https://github.com/IDuxFE/idux/commit/dd31ee4aee432327eab90356625bbd8ed91c01af))
+* **comp:input:** sufix click does not effect ([#1745](https://github.com/IDuxFE/idux/issues/1745)) ([4769dcd](https://github.com/IDuxFE/idux/commit/4769dcd7f58f56662b6098e77ad9009aa2eafdea))
+* **comp:modal:** adjust the icon of the modal that confirm the mode ([#1763](https://github.com/IDuxFE/idux/issues/1763)) ([142a0ef](https://github.com/IDuxFE/idux/commit/142a0ef8cb2ba28216d2245569aacd9929b9549d))
+* **comp:modal:** fix adjust modal icon height ([#1762](https://github.com/IDuxFE/idux/issues/1762)) ([e248941](https://github.com/IDuxFE/idux/commit/e2489411de67425b255e92ce0e38eddb17f64fd7))
+* **comp:pagination:** change lg size font size to fontSizeSm ([#1761](https://github.com/IDuxFE/idux/issues/1761)) ([076d924](https://github.com/IDuxFE/idux/commit/076d9242092735b71dc52d283b33c094ff592b5c))
+* **comp:radio:** gap behaves abnormally when configured without 0px ([#1740](https://github.com/IDuxFE/idux/issues/1740)) ([9ecd14a](https://github.com/IDuxFE/idux/commit/9ecd14aa5663399f1e3c92d3f40d8f5f05ad9dee))
+* **comp:select:** selectOptionFontSize theme var reference error ([#1777](https://github.com/IDuxFE/idux/issues/1777)) ([3cd5982](https://github.com/IDuxFE/idux/commit/3cd5982632eb4eca1bb03d24c7b1f16976d1010f))
+* **pro:layout:** dark theme overlay menu style error ([#1771](https://github.com/IDuxFE/idux/issues/1771)) ([98c6d98](https://github.com/IDuxFE/idux/commit/98c6d98a30ae24c99913de4b3aafcd2ebe5ec595))
+* **pro:layout:** style error when theme style not injected ([#1769](https://github.com/IDuxFE/idux/issues/1769)) ([f7bbf20](https://github.com/IDuxFE/idux/commit/f7bbf2072fdc1b84486882659a1e3c1515bd81f8))
+* style dependencies missing in on-demand import entries ([#1755](https://github.com/IDuxFE/idux/issues/1755)) ([0bd7cc9](https://github.com/IDuxFE/idux/commit/0bd7cc9b796e4081bf08b0527af5259c46e83d98))
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/IDuxFE/idux/issues/1751)) ([a4540ec](https://github.com/IDuxFE/idux/commit/a4540ecb226f110b0fdd74a4d4525427db02d926))
+* **cdk:forms:** add `interactions` trigger ([#1766](https://github.com/IDuxFE/idux/issues/1766)) ([dcdbfb3](https://github.com/IDuxFE/idux/commit/dcdbfb3effa0461edb0806fe4b08b59c78e45833))
+* **cdk:scroll:** virtual scroll supports horizontal ([#1775](https://github.com/IDuxFE/idux/issues/1775)) ([4b39705](https://github.com/IDuxFE/idux/commit/4b39705af35cff3422dc7666777409c2f80030b1))
+* **comp:drawer:** distance is configurable and determined by drawer size ([#1767](https://github.com/IDuxFE/idux/issues/1767)) ([949e855](https://github.com/IDuxFE/idux/commit/949e855c4d19caab5f174f96816a88f3203818f9))
+* **comp:table:** add insetShadow to horizontal overlowed container ([#1768](https://github.com/IDuxFE/idux/issues/1768)) ([65a1aca](https://github.com/IDuxFE/idux/commit/65a1acac6de4c3cfc1116af54f45ceb4ac0562e6))
+* **comp:table:** add virtualHorizontal support ([#1776](https://github.com/IDuxFE/idux/issues/1776)) ([bb77f91](https://github.com/IDuxFE/idux/commit/bb77f9138ee0b46408f07b9149092f7964babc64))
+* **comp:table:** change rowHeight theme tokens to paddings ([#1760](https://github.com/IDuxFE/idux/issues/1760)) ([48f0394](https://github.com/IDuxFE/idux/commit/48f03943b5adb6a3fb731d14077bc84fb0526884))
+* **comp:theme:** root level IxThemeProvider is no longer needed ([#1765](https://github.com/IDuxFE/idux/issues/1765)) ([3565d49](https://github.com/IDuxFE/idux/commit/3565d49edc951dabfd6ea25150923be70d1777ff))
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([f587f3a](https://github.com/IDuxFE/idux/commit/f587f3aa856b0576a6d9bb8b1d428301c4f5cccb))
+* modify disable color theme tokens ([#1764](https://github.com/IDuxFE/idux/issues/1764)) ([29566d5](https://github.com/IDuxFE/idux/commit/29566d5867ea08db3d5a9efa902ebe5d29328d7d))
+* remove typography support ([#1738](https://github.com/IDuxFE/idux/issues/1738)) ([65a9c6c](https://github.com/IDuxFE/idux/commit/65a9c6c2fe9f1b915be15dbe4d420f91299256b4))
+
+
+### BREAKING CHANGES
+
+* **cdk:scroll:** itemHeight is deprecated, use rowHeight instead
+* **cdk:scroll:** itemRender is deprecated, use rowRender instead
+* typography is removed
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
+
+
+
+
+# [2.0.0-beta.3](https://github.com/IDuxFE/idux/compare/v1.12.3...v2.0.0-beta.3) (2023-12-11)
+
+
+### Bug Fixes
+
+* **cdk:forms:** interactions trigger dosen't work ([#1770](https://github.com/IDuxFE/idux/issues/1770)) ([c099b1a](https://github.com/IDuxFE/idux/commit/c099b1a50545ecc28c40a7610320614dbf23866e))
+* **comp:checkbox:** button theme not registered ([#1758](https://github.com/IDuxFE/idux/issues/1758)) ([534cf7e](https://github.com/IDuxFE/idux/commit/534cf7e7c0a0d707393dcc97f85f5f4918f23d56))
+* **comp:modal:** adjust the icon of the modal that confirm the mode ([#1763](https://github.com/IDuxFE/idux/issues/1763)) ([142a0ef](https://github.com/IDuxFE/idux/commit/142a0ef8cb2ba28216d2245569aacd9929b9549d))
+* **comp:modal:** fix adjust modal icon height ([#1762](https://github.com/IDuxFE/idux/issues/1762)) ([e248941](https://github.com/IDuxFE/idux/commit/e2489411de67425b255e92ce0e38eddb17f64fd7))
+* **comp:pagination:** change lg size font size to fontSizeSm ([#1761](https://github.com/IDuxFE/idux/issues/1761)) ([076d924](https://github.com/IDuxFE/idux/commit/076d9242092735b71dc52d283b33c094ff592b5c))
+* **pro:layout:** dark theme overlay menu style error ([#1771](https://github.com/IDuxFE/idux/issues/1771)) ([98c6d98](https://github.com/IDuxFE/idux/commit/98c6d98a30ae24c99913de4b3aafcd2ebe5ec595))
+* **pro:layout:** style error when theme style not injected ([#1769](https://github.com/IDuxFE/idux/issues/1769)) ([f7bbf20](https://github.com/IDuxFE/idux/commit/f7bbf2072fdc1b84486882659a1e3c1515bd81f8))
+* style dependencies missing in on-demand import entries ([#1755](https://github.com/IDuxFE/idux/issues/1755)) ([0bd7cc9](https://github.com/IDuxFE/idux/commit/0bd7cc9b796e4081bf08b0527af5259c46e83d98))
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/IDuxFE/idux/issues/1751)) ([a4540ec](https://github.com/IDuxFE/idux/commit/a4540ecb226f110b0fdd74a4d4525427db02d926))
+* **cdk:forms:** add `interactions` trigger ([#1766](https://github.com/IDuxFE/idux/issues/1766)) ([dcdbfb3](https://github.com/IDuxFE/idux/commit/dcdbfb3effa0461edb0806fe4b08b59c78e45833))
+* **comp:drawer:** distance is configurable and determined by drawer size ([#1767](https://github.com/IDuxFE/idux/issues/1767)) ([949e855](https://github.com/IDuxFE/idux/commit/949e855c4d19caab5f174f96816a88f3203818f9))
+* **comp:table:** add insetShadow to horizontal overlowed container ([#1768](https://github.com/IDuxFE/idux/issues/1768)) ([65a1aca](https://github.com/IDuxFE/idux/commit/65a1acac6de4c3cfc1116af54f45ceb4ac0562e6))
+* **comp:table:** change rowHeight theme tokens to paddings ([#1760](https://github.com/IDuxFE/idux/issues/1760)) ([48f0394](https://github.com/IDuxFE/idux/commit/48f03943b5adb6a3fb731d14077bc84fb0526884))
+* **comp:theme:** root level IxThemeProvider is no longer needed ([#1765](https://github.com/IDuxFE/idux/issues/1765)) ([3565d49](https://github.com/IDuxFE/idux/commit/3565d49edc951dabfd6ea25150923be70d1777ff))
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([f587f3a](https://github.com/IDuxFE/idux/commit/f587f3aa856b0576a6d9bb8b1d428301c4f5cccb))
+* modify disable color theme tokens ([#1764](https://github.com/IDuxFE/idux/issues/1764)) ([29566d5](https://github.com/IDuxFE/idux/commit/29566d5867ea08db3d5a9efa902ebe5d29328d7d))
+* remove typography support ([#1738](https://github.com/IDuxFE/idux/issues/1738)) ([65a9c6c](https://github.com/IDuxFE/idux/commit/65a9c6c2fe9f1b915be15dbe4d420f91299256b4))
+
+
+### BREAKING CHANGES
+
+* typography is removed
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
+
+
+
+
+# [2.0.0-beta.2](https://github.com/IDuxFE/idux/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2023-12-01)
+
+
+### Bug Fixes
+
+* **comp:checkbox:** button theme not registered ([#1758](https://github.com/IDuxFE/idux/issues/1758)) ([64bb7a3](https://github.com/IDuxFE/idux/commit/64bb7a36d4656ac35119d0daed559073e3a4a8ba))
+* style dependencies missing in on-demand import entries ([#1755](https://github.com/IDuxFE/idux/issues/1755)) ([48b7e73](https://github.com/IDuxFE/idux/commit/48b7e736963436ff4527d81af7dd89765c4aec93))
+
+
+
+
+
+# [2.0.0-beta.1](https://github.com/IDuxFE/idux/compare/v2.0.0-beta.0...v2.0.0-beta.1) (2023-11-29)
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/IDuxFE/idux/issues/1751)) ([411ed2b](https://github.com/IDuxFE/idux/commit/411ed2b90f15e3b8c7f1989429fa023065304143))
+
+
+
+
+
+# [2.0.0-beta.0](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0-beta.0) (2023-11-23)
+
+
+### Features
+
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([ea22a8f](https://github.com/IDuxFE/idux/commit/ea22a8fa8fb863a4c546b9af62025718779d3463))
+* remove typography support ([#1738](https://github.com/IDuxFE/idux/issues/1738)) ([ed6462a](https://github.com/IDuxFE/idux/commit/ed6462ac516a8aaec6cc9774f9ee7210e593ffc0))
+
+
+### BREAKING CHANGES
+
+* typography is removed
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
 ## [1.12.4](https://github.com/IDuxFE/idux/compare/v1.12.2...v1.12.4) (2024-01-02)
 
 
@@ -16,9 +233,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **pro:search:** non-multiple field created state should be overwritten by new state ([#1778](https://github.com/IDuxFE/idux/issues/1778)) ([617c192](https://github.com/IDuxFE/idux/commit/617c192e190ef902e591b4fb3e1de6227ee50946))
 
 
-
-
-
 ## [1.12.3](https://github.com/IDuxFE/idux/compare/v1.12.2...v1.12.3) (2023-12-05)
 
 
@@ -29,9 +243,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **comp:desc:** use div to wrap header slot ([#1752](https://github.com/IDuxFE/idux/issues/1752)) ([dd31ee4](https://github.com/IDuxFE/idux/commit/dd31ee4aee432327eab90356625bbd8ed91c01af))
 * **comp:input:** sufix click does not effect ([#1745](https://github.com/IDuxFE/idux/issues/1745)) ([4769dcd](https://github.com/IDuxFE/idux/commit/4769dcd7f58f56662b6098e77ad9009aa2eafdea))
 * **comp:radio:** gap behaves abnormally when configured without 0px ([#1740](https://github.com/IDuxFE/idux/issues/1740)) ([9ecd14a](https://github.com/IDuxFE/idux/commit/9ecd14aa5663399f1e3c92d3f40d8f5f05ad9dee))
-
-
-
 
 
 ## [1.12.2](https://github.com/IDuxFE/idux/compare/v1.12.1...v1.12.2) (2023-11-06)

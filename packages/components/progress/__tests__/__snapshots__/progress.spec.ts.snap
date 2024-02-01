@@ -3,10 +3,10 @@
 exports[`Progress > gapPosition work 1`] = `
 "<div class=\\"ix-progress-circle ix-progress ix-progress-normal\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
     <!---->
-    <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 220.30970943744057px 295.3097094374406px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" stroke=\\"red\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
+    <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 220.30970943744057px 295.3097094374406px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" stroke=\\"red\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
        a 47,47 0 1 1 0,-94
        a 47,47 0 1 1 0,94\\"></path>
-    <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 110.15485471872029px 295.3097094374406px; stroke-dashoffset: -37.5px;\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
+    <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 110.15485471872029px 295.3097094374406px; stroke-dashoffset: -37.5px;\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
        a 47,47 0 1 1 0,-94
        a 47,47 0 1 1 0,94\\"></path>
   </svg>
@@ -17,10 +17,10 @@ exports[`Progress > gapPosition work 1`] = `
 exports[`Progress > gapPosition work 2`] = `
 "<div class=\\"ix-progress-circle ix-progress ix-progress-normal\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
     <!---->
-    <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 220.30970943744057px 295.3097094374406px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" stroke=\\"red\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m -47,0
+    <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 220.30970943744057px 295.3097094374406px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" stroke=\\"red\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"6\\" d=\\"M 50,50 m -47,0
        a 47,47 0 1 1 94,0
        a 47,47 0 1 1 -94,0\\"></path>
-    <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 110.15485471872029px 295.3097094374406px; stroke-dashoffset: -37.5px;\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m -47,0
+    <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 110.15485471872029px 295.3097094374406px; stroke-dashoffset: -37.5px;\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"6\\" d=\\"M 50,50 m -47,0
        a 47,47 0 1 1 94,0
        a 47,47 0 1 1 -94,0\\"></path>
   </svg>
@@ -31,10 +31,10 @@ exports[`Progress > gapPosition work 2`] = `
 exports[`Progress > gapPosition work 3`] = `
 "<div class=\\"ix-progress-circle ix-progress ix-progress-normal\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
     <!---->
-    <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 220.30970943744057px 295.3097094374406px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" stroke=\\"red\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 47,0
+    <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 220.30970943744057px 295.3097094374406px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" stroke=\\"red\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"6\\" d=\\"M 50,50 m 47,0
        a 47,47 0 1 1 -94,0
        a 47,47 0 1 1 94,0\\"></path>
-    <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 110.15485471872029px 295.3097094374406px; stroke-dashoffset: -37.5px;\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 47,0
+    <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 110.15485471872029px 295.3097094374406px; stroke-dashoffset: -37.5px;\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"6\\" d=\\"M 50,50 m 47,0
        a 47,47 0 1 1 -94,0
        a 47,47 0 1 1 94,0\\"></path>
   </svg>
@@ -45,10 +45,10 @@ exports[`Progress > gapPosition work 3`] = `
 exports[`Progress > render circle progress work 1`] = `
 "<div class=\\"ix-progress-circle ix-progress ix-progress-normal\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
     <!---->
-    <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 295.3097094374406px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,-47
+    <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 295.3097094374406px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,-47
        a 47,47 0 1 1 0,94
        a 47,47 0 1 1 0,-94\\"></path>
-    <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 147.6548547187203px 295.3097094374406px; stroke-dashoffset: -0px;\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,-47
+    <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 147.6548547187203px 295.3097094374406px; stroke-dashoffset: -0px;\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,-47
        a 47,47 0 1 1 0,94
        a 47,47 0 1 1 0,-94\\"></path>
   </svg>
@@ -59,10 +59,10 @@ exports[`Progress > render circle progress work 1`] = `
 exports[`Progress > render dashboard progress work 1`] = `
 "<div class=\\"ix-progress-circle ix-progress ix-progress-normal\\" style=\\"width: 132px; height: 132px; font-size: 25.8px;\\"><svg viewBox=\\"0 0 100 100\\">
     <!---->
-    <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 220.30970943744057px 295.3097094374406px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
+    <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 220.30970943744057px 295.3097094374406px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
        a 47,47 0 1 1 0,-94
        a 47,47 0 1 1 0,94\\"></path>
-    <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 110.15485471872029px 295.3097094374406px; stroke-dashoffset: -37.5px;\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
+    <path class=\\"ix-progress-circle-path ix-progress-circle-bg\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 110.15485471872029px 295.3097094374406px; stroke-dashoffset: -37.5px;\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,47
        a 47,47 0 1 1 0,-94
        a 47,47 0 1 1 0,94\\"></path>
   </svg>
@@ -71,7 +71,7 @@ exports[`Progress > render dashboard progress work 1`] = `
 `;
 
 exports[`Progress > render line progress work 1`] = `
-"<div class=\\"ix-progress-line ix-progress-line-md ix-progress-line-round ix-progress ix-progress-normal\\">
+"<div class=\\"ix-progress-line ix-progress-line-md ix-progress ix-progress-normal\\">
   <div class=\\"ix-progress-line-outer\\">
     <div class=\\"ix-progress-line-inner\\">
       <!---->
@@ -83,7 +83,7 @@ exports[`Progress > render line progress work 1`] = `
 `;
 
 exports[`Progress > render successColor progress 1`] = `
-"<div class=\\"ix-progress-line ix-progress-line-md ix-progress-line-round ix-progress ix-progress-normal\\">
+"<div class=\\"ix-progress-line ix-progress-line-md ix-progress ix-progress-normal\\">
   <div class=\\"ix-progress-line-outer\\">
     <div class=\\"ix-progress-line-inner\\">
       <div class=\\"ix-progress-line-success-bg\\" style=\\"width: 20%; background: red;\\"></div>
@@ -95,7 +95,7 @@ exports[`Progress > render successColor progress 1`] = `
 `;
 
 exports[`Progress > strokeColor work 1`] = `
-"<div class=\\"ix-progress-line ix-progress-line-md ix-progress-line-round ix-progress ix-progress-normal\\">
+"<div class=\\"ix-progress-line ix-progress-line-md ix-progress ix-progress-normal\\">
   <div class=\\"ix-progress-line-outer\\">
     <div class=\\"ix-progress-line-inner\\">
       <!---->
@@ -114,10 +114,10 @@ exports[`Progress > strokeColor work 2`] = `
         <stop offset=\\"100%\\" stop-color=\\"#87d068\\"></stop>
       </linearGradient>
     </defs>
-    <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 295.3097094374406px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" stroke=\\"#f5f5f5\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,-47
+    <path class=\\"ix-progress-circle-trail\\" style=\\"stroke-dasharray: 295.3097094374406px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s;\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,-47
        a 47,47 0 1 1 0,94
        a 47,47 0 1 1 0,-94\\"></path>
-    <path class=\\"ix-progress-circle-path\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 147.6548547187203px 295.3097094374406px; stroke-dashoffset: -0px;\\" stroke=\\"url(#ix-progress-gradient-ix-2)\\" fill-opacity=\\"0\\" stroke-linecap=\\"round\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,-47
+    <path class=\\"ix-progress-circle-path\\" style=\\"transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s; stroke-dasharray: 147.6548547187203px 295.3097094374406px; stroke-dashoffset: -0px;\\" stroke=\\"url(#ix-progress-gradient-ix-2)\\" fill-opacity=\\"0\\" stroke-linecap=\\"square\\" stroke-width=\\"6\\" d=\\"M 50,50 m 0,-47
        a 47,47 0 1 1 0,94
        a 47,47 0 1 1 0,-94\\"></path>
   </svg>
@@ -126,7 +126,7 @@ exports[`Progress > strokeColor work 2`] = `
 `;
 
 exports[`Progress > strokeColor work 3`] = `
-"<div class=\\"ix-progress-line ix-progress-line-md ix-progress-line-round ix-progress ix-progress-normal\\">
+"<div class=\\"ix-progress-line ix-progress-line-md ix-progress ix-progress-normal\\">
   <div class=\\"ix-progress-line-outer\\">
     <div class=\\"ix-progress-line-inner\\">
       <!---->
@@ -138,7 +138,7 @@ exports[`Progress > strokeColor work 3`] = `
 `;
 
 exports[`Progress > strokeColor work 4`] = `
-"<div class=\\"ix-progress-line ix-progress-line-md ix-progress-line-round ix-progress ix-progress-normal\\">
+"<div class=\\"ix-progress-line ix-progress-line-md ix-progress ix-progress-normal\\">
   <div class=\\"ix-progress-line-outer\\">
     <div class=\\"ix-progress-line-inner\\">
       <!---->
@@ -150,7 +150,7 @@ exports[`Progress > strokeColor work 4`] = `
 `;
 
 exports[`Progress > trailColor work 1`] = `
-"<div class=\\"ix-progress-line ix-progress-line-md ix-progress-line-round ix-progress ix-progress-normal\\">
+"<div class=\\"ix-progress-line ix-progress-line-md ix-progress ix-progress-normal\\">
   <div class=\\"ix-progress-line-outer\\">
     <div class=\\"ix-progress-line-inner\\" style=\\"background: red;\\">
       <!---->

@@ -5,27 +5,21 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, Ref, type VNodeTypes, computed, defineComponent, inject, normalizeClass, ref } from 'vue'
+import { type ComputedRef, computed, defineComponent, inject, normalizeClass, provide, ref } from 'vue'
 
 import { type VKey } from '@idux/cdk/utils'
 
-import BodyCell from './BodyCell'
-import {
-  type TableColumnMerged,
-  type TableColumnMergedExpandable,
-  type TableColumnMergedSelectable,
-} from '../../composables/useColumns'
+import { type TableColumnMergedExpandable, type TableColumnMergedSelectable } from '../../composables/useColumns'
 import { FlattedData } from '../../composables/useDataSource'
-import { TABLE_TOKEN } from '../../token'
+import { TABLE_TOKEN, tableBodyRowToken } from '../../token'
 import { type TableBodyRowProps, tableBodyRowProps } from '../../types'
 
 export default defineComponent({
   props: tableBodyRowProps,
-  setup(props) {
+  setup(props, { slots }) {
     const {
       props: tableProps,
       mergedPrefixCls,
-      flattedColumns,
       expandable,
       handleExpandChange,
       checkExpandDisabled,
@@ -61,6 +55,17 @@ export default defineComponent({
       })
     })
 
+    provide(tableBodyRowToken, {
+      props,
+      expandDisabled,
+      handleExpend,
+      isSelected,
+      isIndeterminate,
+      selectDisabled,
+      handleSelect,
+      isHover,
+    })
+
     return () => {
       const customAdditionalFn = tableProps.customAdditional?.bodyRow
       const customAdditional = customAdditionalFn
@@ -71,17 +76,7 @@ export default defineComponent({
 
       return (
         <Tag class={classes.value} {...attrs.value} {...customAdditional}>
-          {renderChildren(
-            props,
-            flattedColumns,
-            expandDisabled,
-            handleExpend,
-            isSelected,
-            isIndeterminate,
-            selectDisabled,
-            handleSelect,
-            isHover,
-          )}
+          {slots.default?.()}
         </Tag>
       )
     }
@@ -155,55 +150,4 @@ function useEvents(
   })
 
   return { expandDisabled, handleExpend, selectDisabled, handleSelect, isHover, attrs }
-}
-
-function renderChildren(
-  props: TableBodyRowProps,
-  flattedColumns: ComputedRef<TableColumnMerged[]>,
-  expandDisabled: ComputedRef<boolean>,
-  handleExpend: () => void,
-  isSelected: ComputedRef<boolean>,
-  isIndeterminate: ComputedRef<boolean>,
-  selectDisabled: ComputedRef<boolean>,
-  handleSelect: () => void,
-  isHover: Ref<boolean>,
-) {
-  const children: VNodeTypes[] = []
-  const { rowIndex, record, level, hasNextSibling, hasPrevSibling, showLineIndentIndexList } = props
-  flattedColumns.value.forEach((column, colIndex) => {
-    const { type, colSpan: getColSpan, rowSpan: getRowSpan, key } = column
-    const colSpan = getColSpan?.(record, rowIndex)
-    const rowSpan = getRowSpan?.(record, rowIndex)
-    if (colSpan === 0 || rowSpan === 0) {
-      return
-    }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const colProps: any = {
-      colSpan: colSpan === 1 ? undefined : colSpan,
-      rowSpan: rowSpan === 1 ? undefined : rowSpan,
-      rowIndex,
-      colIndex,
-      record,
-      column,
-      level,
-      hasNextSibling,
-      hasPrevSibling,
-      showLineIndentIndexList,
-      key,
-    }
-    if (type === 'expandable') {
-      colProps.expanded = props.expanded
-      colProps.disabled = expandDisabled.value
-      colProps.handleExpend = handleExpend
-    } else if (type === 'selectable') {
-      colProps.selected = isSelected.value
-      colProps.indeterminate = isIndeterminate.value
-      colProps.disabled = selectDisabled.value
-      colProps.handleSelect = handleSelect
-      colProps.isHover = isHover.value
-    }
-    children.push(<BodyCell {...colProps}></BodyCell>)
-  })
-
-  return children
 }

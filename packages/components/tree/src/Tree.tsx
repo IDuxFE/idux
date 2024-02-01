@@ -11,13 +11,14 @@ import { isNil } from 'lodash-es'
 
 import {
   CdkVirtualScroll,
-  type VirtualItemRenderFn,
+  type VirtualRowRenderFn,
   type VirtualScrollInstance,
   type VirtualScrollToOptions,
 } from '@idux/cdk/scroll'
 import { type VKey, callEmit, convertCssPixel } from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { useGetKey } from '@idux/components/utils'
 
 import { useCheckable } from './composables/useCheckable'
@@ -30,6 +31,7 @@ import { useSelectable } from './composables/useSelectable'
 import TreeNode from './node/TreeNode'
 import { treeToken } from './token'
 import { treeProps } from './types'
+import { getThemeTokens } from '../theme'
 
 const hiddenStyle: CSSProperties = {
   width: 0,
@@ -47,6 +49,9 @@ export default defineComponent({
   props: treeProps,
   setup(props, { attrs, expose, slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('tree')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tree`)
     const config = useGlobalConfig('tree')
 
@@ -75,7 +80,6 @@ export default defineComponent({
 
     provide(treeToken, {
       props,
-      slots,
       config,
       flattedNodes,
       mergedPrefixCls,
@@ -106,6 +110,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return {
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-active`]: !isNil(activeKey.value),
         [`${prefixCls}-blocked`]: mergedBlocked.value,
@@ -176,8 +182,10 @@ export default defineComponent({
 
       let children: VNodeTypes
       if (nodes.length > 0) {
-        const itemRender: VirtualItemRenderFn<MergedNode> = ({ item }) => <TreeNode node={item} {...item}></TreeNode>
-        const { height, virtual, virtualItemHeight, onScroll, onScrolledBottom } = props
+        const rowRender: VirtualRowRenderFn<MergedNode> = ({ item }) => (
+          <TreeNode v-slots={slots} node={item} {...item}></TreeNode>
+        )
+        const { height, virtual, virtualItemHeight, virtualScrollMode, onScroll, onScrolledBottom } = props
         children = virtual ? (
           <CdkVirtualScroll
             ref={virtualScrollRef}
@@ -185,9 +193,10 @@ export default defineComponent({
             dataSource={nodes}
             getKey="key"
             height={autoHeight.value ? '100%' : height}
-            itemHeight={virtualItemHeight}
-            itemRender={itemRender}
+            rowHeight={virtualItemHeight}
+            rowRender={rowRender}
             virtual
+            scrollMode={virtualScrollMode}
             onScroll={onScroll}
             onScrolledBottom={onScrolledBottom}
             onScrolledChange={handleScrolledChange}
@@ -199,7 +208,7 @@ export default defineComponent({
           >
             <div class={`${mergedPrefixCls.value}-content-inner`}>
               {nodes.map(item => (
-                <TreeNode node={item} {...item}></TreeNode>
+                <TreeNode v-slots={slots} node={item} {...item}></TreeNode>
               ))}
             </div>
           </div>

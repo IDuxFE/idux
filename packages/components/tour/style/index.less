@@ -1,4 +1,6 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
+@import '../../style/motion/fade.less';
 
 .@{tour-prefix} {
   &-mask {
@@ -25,42 +27,35 @@
     background: transparent;
   }
 
-  &-overlay {
-    box-shadow: @tour-panel-box-shadow;
-
-    .@{overlay-prefix}-arrow {
-      color: @tour-panel-background-color;
-    }
+  &-overlay.@{overlay-prefix} {
+    --ix-overlay-border-radius: var(--ix-tour-border-radius);
+    --ix-overlay-bg-color: var(--ix-tour-bg-color);
   }
 
   &-panel {
-    min-width: @tour-panel-min-width;
-    background-color: @tour-panel-background-color;
-    border-radius: @tour-panel-border-radius;
+    min-width: var(--ix-tour-min-width);
+    background-color: var(--ix-tour-bg-color);
+    border-radius: var(--ix-tour-border-radius);
     .reset-component();
 
     > .@{header-prefix} {
-      padding-left: @tour-panel-padding-left;
+      padding-left: var(--ix-tour-padding-left);
       padding-right: 8px;
     }
 
     &-inner {
-      padding: 0 @tour-panel-padding-right  @tour-panel-padding-bottom @tour-panel-padding-left;
+      padding: 0 var(--ix-tour-padding-right) var(--ix-tour-padding-bottom) var(--ix-tour-padding-left);
 
       &-no-header {
-        padding-top: @tour-panel-padding-top;
+        padding-top: var(--ix-tour-padding-top);
       }
     }
 
     &-description {
-      color: @tour-panel-description-color;
-      font-size: @tour-panel-description-font-size;
+      color: var(--ix-tour-description-color);
+      font-size: var(--ix-tour-description-font-size);
       margin-bottom: 8px;
     }
-    &-indicators {
-      color: @tour-panel-indicators-color;
-    }
-
     &-footer {
       width: 100%;
       display: flex;
@@ -68,15 +63,15 @@
     }
 
     &-indicators {
-      color: @tour-panel-indicators-color;
-      font-size: @tour-panel-description-font-size;
+      color: var(--ix-tour-indicators-color);
+      font-size: var(--ix-tour-indicators-font-size);
     }
 
     &-buttons {
       margin-left: auto;
     }
     &-button + &-button {
-      margin-left: @tour-panel-footer-button-gap;
+      margin-left: var(--ix-tour-footer-btn-gap);
     }
   }
 }

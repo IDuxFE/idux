@@ -7,7 +7,7 @@
 
 import { computed, defineComponent, normalizeClass, normalizeStyle, provide, ref } from 'vue'
 
-import { CdkVirtualScroll, type VirtualItemRenderFn, type VirtualScrollInstance } from '@idux/cdk/scroll'
+import { CdkVirtualScroll, type VirtualRowRenderFn, type VirtualScrollInstance } from '@idux/cdk/scroll'
 import { callEmit, convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 
@@ -46,7 +46,7 @@ export default defineComponent({
       callEmit(props.onScrolledChange, startIndex, endIndex, visibleData)
     }
 
-    const renderListItem: VirtualItemRenderFn<TransferData> = ({ item, index }) => {
+    const renderListItem: VirtualRowRenderFn<TransferData> = ({ item, index }) => {
       const key = getKey(item)
       const onCheckChange = (checked: boolean) => {
         callEmit(props.onCheckChange, item, checked)
@@ -75,7 +75,7 @@ export default defineComponent({
     }
 
     const renderBody = () => {
-      const { dataSource, virtual, virtualItemHeight, scroll } = props
+      const { dataSource, virtual, virtualItemHeight, virtualScrollMode, scroll } = props
       const data = dataSource ?? []
 
       if (data.length <= 0) {
@@ -90,9 +90,10 @@ export default defineComponent({
             fullHeight={!!scroll?.fullHeight}
             getKey={getKey}
             height={(scroll?.height as number) ?? '100%'}
-            itemHeight={virtualItemHeight}
-            itemRender={renderListItem}
+            rowHeight={virtualItemHeight}
+            rowRender={renderListItem}
             virtual
+            scrollMode={virtualScrollMode}
             onScroll={handleScroll}
             onScrolledBottom={handleScrolledBottom}
             onScrolledChange={handleScrolledChange}

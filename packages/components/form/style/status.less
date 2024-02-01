@@ -8,27 +8,27 @@
     .@{idux-prefix}-date-range-picker {
       &.@{idux-prefix}-trigger:not(.@{idux-prefix}-trigger-disabled),
       &.@{idux-prefix}-trigger:hover:not(.@{idux-prefix}-trigger-disabled):not(.@{idux-prefix}-trigger-borderless) {
-        border-color: @form-item-invalid-color;
+        border-color: var(--ix-color-error-border);
       }
 
       &.@{idux-prefix}-trigger-focused {
-        border-color: @form-item-invalid-color;
-        box-shadow: @form-item-invalid-box-shadow;
+        border-color: var(--ix-color-error-border);
+        box-shadow: var(--ix-control-box-shadow-invalid);
       }
     }
   }
 
   &-message-invalid {
-    color: @form-item-invalid-color;
+    color: var(--ix-color-error-text);
   }
 
   // === Validating ===
   &-message-validating {
-    color: @form-item-validating-color;
+    color: var(--ix-color-info-text);
   }
 
   // === valid ===
   &-message-valid {
-    color: @form-item-valid-color;
+    color: var(--ix-color-success-text);
   }
 }

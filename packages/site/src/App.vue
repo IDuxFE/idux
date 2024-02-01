@@ -5,7 +5,7 @@
         <IxModalProvider ref="modalProviderRef">
           <IxNotificationProvider ref="notificationProviderRef">
             <IxMessageProvider ref="messageProviderRef">
-              <div class="root-wrapper">
+              <div :class="['root-wrapper', globalHashId]">
                 <LayoutHeader></LayoutHeader>
                 <div v-if="page !== 'home'" class="main-wrapper">
                   <IxRow>
@@ -39,7 +39,7 @@
                   <router-view></router-view>
                 </template>
               </div>
-              <div v-if="page !== 'home' && breakpoints.xs" class="root-drawer">
+              <div v-if="page !== 'home' && breakpoints.xs" :class="['root-drawer', globalHashId]">
                 <div class="root-drawer-handle" @click="isDrawerOpen = !isDrawerOpen">
                   <IxIcon name="menu-fold"></IxIcon>
                 </div>
@@ -62,18 +62,24 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide, ref } from 'vue'
+import { inject, ref } from 'vue'
 
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 
-import { useSharedBreakpoints } from '@idux/cdk/breakpoint'
-import { GlobalConfig, GlobalConfigKey, defaultConfig, seerConfig, useGlobalConfig } from '@idux/components/config'
+// import { GlobalConfig, GlobalConfigKey, defaultConfig, useGlobalConfig } from '@idux/components/config'
 import { DrawerProviderInstance } from '@idux/components/drawer'
 import { MessageProviderInstance } from '@idux/components/message'
 import { ModalProviderInstance } from '@idux/components/modal'
 import { NotificationProviderInstance } from '@idux/components/notification'
+import { useThemeToken } from '@idux/components/theme'
 
-import { AppContext, appContextToken } from './context'
+const { globalHashId } = useThemeToken()
+
+import { appContextToken } from './context'
+
+const { breakpoints, page } = inject(appContextToken)!
+
+const isDrawerOpen = ref(false)
 
 const drawerProviderRef = ref<DrawerProviderInstance>()
 const modalProviderRef = ref<ModalProviderInstance>()
@@ -87,46 +93,4 @@ router.afterEach(() => {
   notificationProviderRef.value?.destroyAll()
   messageProviderRef.value?.destroyAll()
 })
-
-const route = useRoute()
-
-const path = computed(() => route.path)
-const page = computed(() => {
-  const match = route.path.match(/\/(\w+)/)
-  return match?.[1] ?? 'home'
-})
-
-const breakpoints = useSharedBreakpoints()
-
-const isDrawerOpen = ref(false)
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const configChanges = {} as Record<GlobalConfigKey, (config: Partial<GlobalConfig[GlobalConfigKey]>) => void>
-const compNames = Object.keys(defaultConfig) as GlobalConfigKey[]
-compNames.forEach(compName => {
-  const [, change] = useGlobalConfig(compName, {})
-  configChanges[compName] = change
-})
-
-const setTheme = (theme: string) => {
-  const config = theme === 'seer' ? seerConfig : defaultConfig
-  const compNames = Object.keys(config) as GlobalConfigKey[]
-  compNames.forEach(compName => {
-    const currConfig = config[compName]
-    const currChange = configChanges[compName]
-    currChange(currConfig!)
-  })
-}
-
-const appContext: AppContext = {
-  org: 'IDuxFE',
-  repo: 'components',
-  lang: ref('zh'),
-  path,
-  page,
-  breakpoints,
-  setTheme,
-}
-
-provide(appContextToken, appContext)
 </script>

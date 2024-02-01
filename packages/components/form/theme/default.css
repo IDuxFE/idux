@@ -1,0 +1,12 @@
+/* ------ form css variables ------ */
+:root {
+  --ix-form-label-color: #6f7785;
+  --ix-form-label-required-color: #cf171d;
+  --ix-form-label-font-size: 12px;
+  --ix-form-label-colon-margin-left: 2px;
+  --ix-form-label-colon-margin-right: 8px;
+  --ix-form-message-tooltip-bg-color: #ff5752;
+  --ix-form-item-margin-bottom: 8px;
+  --ix-form-vertical-item-label-padding: 0 0 8px;
+  --ix-form-vertical-item-label-margin: 0;
+}

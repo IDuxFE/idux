@@ -20,6 +20,7 @@ import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/s
 import { type SelectConfig, useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister, useFormSize, useFormStatus } from '@idux/components/form'
 import { IxSpin } from '@idux/components/spin'
+import { useThemeToken } from '@idux/components/theme'
 import { useOverlayFocusMonitor } from '@idux/components/utils'
 
 import { useActiveState } from './composables/useActiveState'
@@ -32,6 +33,7 @@ import { useSelectedState } from './composables/useSelectedState'
 import Panel from './panel/Panel'
 import { SELECT_PANEL_DATA_TOKEN } from './token'
 import { type SelectData, type SelectPanelInstance, type SelectProps, selectProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxSelect',
@@ -39,6 +41,9 @@ export default defineComponent({
   props: selectProps,
   setup(props, { attrs, expose, slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('select')
+    registerToken(getThemeTokens)
+
     const config = useGlobalConfig('select')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-select`)
 
@@ -102,7 +107,7 @@ export default defineComponent({
 
     const handleOptionClick = (option: SelectData) => {
       changeSelected(getKey.value(option))
-      props.allowInput && clearInput()
+      ;(props.allowInput || !props.multiple) && clearInput()
       if (!props.multiple) {
         setOverlayOpened(false)
       }
@@ -135,6 +140,8 @@ export default defineComponent({
       const { overlayClassName } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [`${prefixCls}-overlay`]: true,
         [overlayClassName || '']: !!overlayClassName,
       })

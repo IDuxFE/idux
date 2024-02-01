@@ -18,14 +18,20 @@
 | `emptyCell` | 单元格数据为空时默认渲染的内容 | `string \| ((options: TableEmptyCellOptions) => VNodeChild) \| #emptyCell='TableEmptyCellOptions'` | - | ✅ | 仅支持普通列，且数据为 `undefined \| null \| ''` 时生效 |
 | `getKey` | 获取数据的唯一标识 | `string \| (record: any) => VKey` | `key` | ✅ | - |
 | `headless` | 是否隐藏表头 | `boolean` | `false` | - |- |
+| `insetShadow` | 横向滚动溢出后是否展示内嵌的阴影 | `boolean` | `true` | ✅ |- |
 | `pagination` | 配置分页器, 参见[TablePagination](#TablePagination) | `boolean \| TablePagination` | - | ✅ | 设置 `false` 时表示不显示分页 |
 | `scroll` | 表格滚动配置项，可以指定滚动区域的宽、高, 参见[TableScroll](#TableScroll) | `TableScroll` | - | - | - |
 | `scrollToTopOnChange` | 是否在表格的分页、筛选、排序信息改变后滚动到顶部 | `boolean` | `true` | ✅ | - |
 | `size` | 表格大小 | `'lg' \| 'md' \| 'sm'` | `md` | ✅ |- |
 | `spin` | 表格是否加载中 | `boolean \| SpinProps` | - | - | - |
 | `tableLayout` | 表格元素的 [table-layout](https://developer.mozilla.org/zh-CN/docs/Web/CSS/table-layout) 属性 | `'auto' \| 'fixed'` | - | - | 固定表头/列或设置了 `column.ellipsis` 时，默认值为 `fixed` |
-| `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | 需要设置 `scroll.height` |
+| `virtual` | 是否开启纵向虚拟滚动 | `boolean` | `false` | - | 需要设置 `scroll.height` |
+| `virtualHorizontal` | 是否开启横向虚拟滚动 | `boolean` | `false` | - | 不可以设置 `scroll.width`，并且每列的宽度必须配置 |
+| `virtualScrollMode` | 虚拟滚动的滚动模式 | `'native' \| 'simulated'` | `'native'` | - | - |
 | `virtualItemHeight` | 虚拟滚动每一行的高度 | `number` | - | - | 标准大小的表格不需要设置，会自动设置。如果有非标准大小的表格，可以设置一个准确的值来提高性能。 |
+| `virtualColWidth` | 虚拟滚动每一列的宽度 | `number` | - | - | 需要设置一个默认的值。 |
+| `virtualBufferSize` | 虚拟滚动的buffer大小 | `number` | - | - | - |
+| `virtualBufferOffset` | 虚拟滚动的buffer边界offset | `number` | - | - | - |
 | `onScroll` | 滚动事件 | `(evt: Event) => void` | - | - | - |
 | `onScrolledChange` | 滚动的位置发生变化 | `(startIndex: number, endIndex: number, visibleNodes: TreeNode[]) => void` | - | - | 仅 `virtual` 模式下可用 |
 | `onScrolledBottom` | 滚动到底部时触发 | `() => void` | - | - | 仅 `virtual` 模式下可用 |
@@ -55,7 +61,7 @@ export type TableColumn<T = any, V = any> =
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `align` | 文本对齐方式 | `'start' \| 'center' \| 'end'` | `'start'` | ✅ | - |
+| `align` | 文本对齐方式 | `'start' \| 'center' \| 'end' \| { title: 'start' \| 'center' \| 'end', cell: 'start' \| 'center' \| 'end' }` | `'start'` | ✅ | - |
 | `colSpan` | 计算列的 `colSpan` | `(record: T, rowIndex: number) => number` | - | - | 返回为 `0` 时，不渲染, 通常用于列合并 |
 | `fixed` | 是否固定 | `'start' \| 'end'` | - | - | - |
 | `rowSpan` | 计算列的 `rowSpan` | `(record: T, rowIndex: number) => number` | - | - | 返回为 `0` 时，不渲染, 通常用于行合并 |

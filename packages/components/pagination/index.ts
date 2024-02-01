@@ -21,3 +21,7 @@ export type {
   PaginationItemType,
   PaginationItemRenderOptions,
 } from './src/types'
+
+export { getThemeTokens as getPaginationThemeTokens } from './theme'
+
+export type { PaginationThemeTokens } from './theme'

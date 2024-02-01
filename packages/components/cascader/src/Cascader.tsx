@@ -15,6 +15,7 @@ import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/s
 import { useGlobalConfig } from '@idux/components/config'
 import { useFormItemRegister, useFormSize, useFormStatus } from '@idux/components/form'
 import { ɵUseOverlayState } from '@idux/components/select'
+import { useThemeToken } from '@idux/components/theme'
 import { useGetDisabled, useGetKey, useOverlayFocusMonitor } from '@idux/components/utils'
 
 import { useDataSource } from './composables/useDataSource'
@@ -24,6 +25,7 @@ import { useSelectedState } from './composables/useSelectedState'
 import Panel from './panel/Panel'
 import { CASCADER_PANEL_DATA_TOKEN } from './token'
 import { cascaderProps } from './types'
+import { getThemeTokens } from '../theme'
 
 const defaultOffset: [number, number] = [0, 4]
 
@@ -33,6 +35,9 @@ export default defineComponent({
   props: cascaderProps,
   setup(props, { attrs, expose, slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('cascader')
+    registerToken(getThemeTokens)
+
     const config = useGlobalConfig('cascader')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-cascader`)
 
@@ -121,6 +126,8 @@ export default defineComponent({
       const { overlayClassName, multiple } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [`${prefixCls}-overlay`]: true,
         [`${prefixCls}-overlay-multiple`]: multiple,
         [overlayClassName || '']: !!overlayClassName,

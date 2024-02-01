@@ -35,13 +35,13 @@ export function convertOptions(baseOptions: BaseOptions, extraOptions: ExtraOpti
     placement: kebabCase(placement) as Placement,
     strategy,
     middleware: [
-      autoAdjust && flip({ padding: 4 }),
-      autoAdjust && shift(),
       !!arrowElement && arrow(arrowElement),
       offsetMiddleware({
         mainAxis: offset[1],
         crossAxis: offset[0],
       }),
+      autoAdjust && flip({ padding: 2, crossAxis: false }),
+      autoAdjust && shift(),
       referenceHidden(),
       updatePlacement(_updatePlacement),
       ...middlewares,

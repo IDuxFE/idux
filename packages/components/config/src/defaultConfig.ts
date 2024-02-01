@@ -5,18 +5,51 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import { type VNodeChild, h } from 'vue'
+
+import { IxIcon } from '@idux/components/icon'
 import { zhCN } from '@idux/components/locales'
 
 import { numFormatter } from './numFormatter'
 import { type GlobalConfig } from './types'
 
+const expandIconRenderer = ({ expanded }: { expanded: boolean }): VNodeChild =>
+  h(
+    'svg',
+    {
+      viewBox: '0 0 16 16',
+      style: {
+        width: 'var(--ix-font-size-icon)',
+        height: 'var(--ix-font-size-icon)',
+      },
+    },
+    [
+      h('rect', {
+        x: 1,
+        y: 1,
+        width: 14,
+        height: 14,
+        rx: 1,
+        style: { fill: 'var(--ix-color-emphasized-container-bg)' },
+      }),
+      h('rect', { x: 5, y: 7, width: 6, height: 2, rx: 0.2, style: { fill: 'var(--ix-color-icon)' } }),
+      !expanded
+        ? h('rect', { x: 7, y: 5, width: 2, height: 6, rx: 0.2, style: { fill: 'var(--ix-color-icon)' } })
+        : null,
+    ],
+  )
+
 export const defaultConfig: GlobalConfig = {
   common: {
     prefixCls: 'ix',
     overlayZIndex: 1000,
-    theme: 'default',
   },
   locale: zhCN,
+  theme: {
+    injectThemeStyle: true,
+    presetTheme: 'default',
+    hashed: true,
+  },
 
   alert: {
     closable: false,
@@ -48,13 +81,13 @@ export const defaultConfig: GlobalConfig = {
     overflowCount: 99,
   },
   button: {
-    size: 'md',
+    size: 'sm',
     waveless: false,
   },
   card: {
     borderless: false,
     hoverable: false,
-    size: 'md',
+    size: 'sm',
     shadow: true,
   },
   carousel: {
@@ -96,8 +129,8 @@ export const defaultConfig: GlobalConfig = {
   },
   desc: {
     col: 3,
-    colonless: false,
-    labelAlign: 'end',
+    colonless: true,
+    labelAlign: 'start',
     layout: 'horizontal',
     size: 'md',
   },
@@ -111,6 +144,7 @@ export const defaultConfig: GlobalConfig = {
     closable: true,
     closeOnEsc: true,
     closeIcon: 'close-filled',
+    distance: 160,
     height: 256,
     mask: true,
     maskClosable: true,
@@ -126,8 +160,8 @@ export const defaultConfig: GlobalConfig = {
   },
   empty: {},
   form: {
-    colonless: false,
-    labelAlign: 'end',
+    colonless: true,
+    labelAlign: 'start',
     layout: 'horizontal',
     size: 'md',
     labelTooltipIcon: 'question-circle',
@@ -177,7 +211,7 @@ export const defaultConfig: GlobalConfig = {
   menu: {
     getKey: 'key',
     indent: 16,
-    offset: [0, 8],
+    offset: [0, 4],
     suffix: 'right',
     theme: 'light',
   },
@@ -195,12 +229,12 @@ export const defaultConfig: GlobalConfig = {
   },
   modal: {
     animatable: true,
-    centered: false,
+    centered: true,
     closable: true,
     closeIcon: 'close-filled',
     closeOnEsc: true,
     mask: true,
-    maskClosable: true,
+    maskClosable: false,
   },
   notification: {
     destroyOnHover: false,
@@ -217,13 +251,13 @@ export const defaultConfig: GlobalConfig = {
     showTitle: true,
     showTotal: true,
     simple: false,
-    size: 'md',
+    size: 'sm',
   },
   popconfirm: {
     autoAdjust: true,
     delay: 100,
     destroyOnHide: false,
-    placement: 'top',
+    placement: 'bottomStart',
     trigger: 'click',
     offset: [0, 4],
   },
@@ -231,14 +265,14 @@ export const defaultConfig: GlobalConfig = {
     autoAdjust: true,
     delay: 100,
     destroyOnHide: false,
-    placement: 'top',
+    placement: 'bottomStart',
     showArrow: true,
     trigger: 'hover',
     closeIcon: 'close',
     offset: [0, 4],
   },
   progress: {
-    strokeLinecap: 'round',
+    strokeLinecap: 'square',
     size: 'md',
     format: (percent: number) => percent + '%',
     icon: {
@@ -293,7 +327,7 @@ export const defaultConfig: GlobalConfig = {
   stepper: {
     clickable: false,
     labelPlacement: 'end',
-    size: 'md',
+    size: 'sm',
   },
   switch: {
     size: 'md',
@@ -308,6 +342,7 @@ export const defaultConfig: GlobalConfig = {
     getKey: 'key',
     size: 'md',
     scrollToTopOnChange: true,
+    insetShadow: true,
     pagination: {
       position: 'bottomEnd',
     },
@@ -323,8 +358,8 @@ export const defaultConfig: GlobalConfig = {
       },
     },
     columnExpandable: {
-      showLine: false,
-      icon: 'right',
+      showLine: true,
+      icon: expandIconRenderer,
     },
     columnSelectable: {
       showIndex: false,
@@ -349,7 +384,8 @@ export const defaultConfig: GlobalConfig = {
     trim: false,
   },
   text: {
-    copyIcon: ['copy', 'check'],
+    copyIcon: ({ copied }) =>
+      h(IxIcon, { name: !copied ? 'copy' : 'check-circle-filled', style: copied ? { color: '#20CC94' } : undefined }),
   },
   timePicker: {
     borderless: false,
@@ -357,7 +393,7 @@ export const defaultConfig: GlobalConfig = {
     clearIcon: 'close-circle',
     size: 'md',
     suffix: 'clock-circle',
-    allowInput: false,
+    allowInput: true,
     format: 'HH:mm:ss',
   },
   transfer: {
@@ -371,7 +407,7 @@ export const defaultConfig: GlobalConfig = {
     delay: 100,
     destroyOnHide: false,
     offset: [0, 4],
-    placement: 'top',
+    placement: 'bottomStart',
     trigger: 'hover',
   },
   tour: {
@@ -390,7 +426,7 @@ export const defaultConfig: GlobalConfig = {
     autoHeight: false,
     blocked: false,
     childrenKey: 'children',
-    expandIcon: 'right',
+    expandIcon: expandIconRenderer,
     draggableIcon: 'holder',
     getKey: 'key',
     labelKey: 'label',
@@ -420,7 +456,7 @@ export const defaultConfig: GlobalConfig = {
     icon: {
       preview: 'zoom-in',
       file: 'paper-clip',
-      remove: 'delete',
+      remove: 'close',
       retry: 'edit',
     },
   },

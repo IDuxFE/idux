@@ -13,16 +13,21 @@ import { callEmit, convertArray, flattenNode, useState } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 import { IxPagination } from '@idux/components/pagination'
+import { useThemeToken } from '@idux/components/theme'
 import { convertStringVNode } from '@idux/components/utils'
 
 import { useCloseable } from './composables/useCloseable'
 import { alertProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxAlert',
   props: alertProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('alert')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-alert`)
 
     const config = useGlobalConfig('alert')
@@ -61,6 +66,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-${props.type}`]: true,
         [`${prefixCls}-banner`]: props.banner,

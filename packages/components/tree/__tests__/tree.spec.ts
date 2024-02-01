@@ -92,7 +92,7 @@ describe('Tree', () => {
     const { props, ...rest } = options || {}
     return mount(Tree, {
       ...rest,
-      props: { dataSource, expandedKeys, checkedKeys, selectedKeys, checkable: true, ...props },
+      props: { dataSource, expandedKeys, checkedKeys, selectedKeys, expandIcon: 'right', checkable: true, ...props },
     })
   }
 

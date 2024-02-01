@@ -14,7 +14,8 @@ import type { ScrollContext } from './composables/useScroll'
 import type { SelectableContext } from './composables/useSelectable'
 import type { SortableContext } from './composables/useSortable'
 import type { StickyContext } from './composables/useSticky'
-import type { TableEmptyCellOptions, TableProps } from './types'
+import type { TableBodyRowProps, TableEmptyCellOptions, TableProps } from './types'
+import type { VirtualScrollEnabled } from '@idux/cdk/scroll'
 import type { VKey } from '@idux/cdk/utils'
 import type { TableConfig } from '@idux/components/config'
 import type { Locale } from '@idux/components/locales'
@@ -34,10 +35,14 @@ export interface TableContext
   slots: Slots
   config: TableConfig
   locale: Locale
+  getVirtualColWidth: (rowKey: VKey, colKey: VKey) => number | undefined
   mergedPrefixCls: ComputedRef<string>
   mergedAutoHeight: ComputedRef<boolean>
   mergedEmptyCell: ComputedRef<string | ((options: TableEmptyCellOptions) => VNodeChild) | undefined>
+  mergedInsetShadow: ComputedRef<boolean>
+  mergedVirtual: ComputedRef<VirtualScrollEnabled>
   mergedVirtualItemHeight: ComputedRef<number>
+  mergedVirtualColWidth: ComputedRef<number>
   tableLayout: ComputedRef<'auto' | 'fixed'>
 }
 
@@ -49,4 +54,16 @@ export interface TableBodyContext {
   changeColumnWidth: (key: VKey, width: number | false) => void
 }
 
+export interface TableBodyRowContext {
+  props: TableBodyRowProps
+  expandDisabled: ComputedRef<boolean>
+  handleExpend: () => void
+  isSelected: ComputedRef<boolean>
+  isIndeterminate: ComputedRef<boolean>
+  selectDisabled: ComputedRef<boolean>
+  handleSelect: () => void
+  isHover: Ref<boolean>
+}
+
 export const tableBodyToken: InjectionKey<TableBodyContext> = Symbol('tableBodyToken')
+export const tableBodyRowToken: InjectionKey<TableBodyRowContext> = Symbol('tableBodyRowToken')

@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 
 .@{card-prefix} {
@@ -5,20 +6,20 @@
   .reset-color();
 
   position: relative;
-  border: @card-border-width @card-border-style @card-border-color;
-  border-radius: @card-border-radius;
+  border: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border-secondary);
+  border-radius: var(--ix-component-border-radius);
   overflow: hidden;
 
   &-sm {
-    .card-size(@card-font-size-sm, @card-padding-sm, 2px);
+    .card-size(var(--ix-card-font-size-sm), var(--ix-card-padding-size-sm), var(--ix-margin-size-2xs));
   }
 
   &-md {
-    .card-size(@card-font-size-md, @card-padding-md, 4px);
+    .card-size(var(--ix-card-font-size-md), var(--ix-card-padding-size-md), var(--ix-margin-size-xs));
   }
 
   &-lg {
-    .card-size(@card-font-size-lg, @card-padding-lg, 8px);
+    .card-size(var(--ix-card-font-size-lg), var(--ix-card-padding-size-lg), var(--ix-margin-size-sm));
   }
 
   &-borderless {
@@ -26,20 +27,16 @@
   }
 
   &-has-shadow {
-    box-shadow: @card-box-shadow;
-
-    & when (@theme = seer) {
-      border: none;
-    }
+    box-shadow: var(--ix-box-shadow-sm);
+    border-width: var(--ix-card-show-shadow-border-width);
   }
 
   &-hoverable {
     cursor: pointer;
-    transition: @transition-all-base;
+    transition: all var(--ix-motion-duration-medium);
 
     &:hover {
-      border-color: @card-border-color-hover;
-      box-shadow: @card-box-shadow;
+      box-shadow: var(--ix-box-shadow-sm);
     }
   }
 
@@ -50,19 +47,19 @@
     }
 
     img {
-      border-radius: @card-border-radius @card-border-radius 0 0;
+      border-radius: var(--ix-component-border-radius) var(--ix-component-border-radius) 0 0;
     }
   }
 
   &:not(&-borderless) &-cover {
-    margin-top: -@card-border-width;
-    margin-right: -@card-border-width;
-    margin-left: -@card-border-width;
+    margin-top: calc(var(--ix-line-width) * -1);
+    margin-right: calc(var(--ix-line-width) * -1);
+    margin-left: calc(var(--ix-line-width) * -1);
   }
 
   &-footer {
     display: flex;
-    border-top: @card-border-width @card-border-style @card-border-color;
+    border-top: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border-secondary);
     list-style: none;
 
     > li {
@@ -74,7 +71,7 @@
       }
 
       &:not(:last-child) {
-        border-right: @card-border-width @card-border-style @card-border-color;
+        border-right: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border-secondary);
       }
     }
   }
@@ -88,34 +85,42 @@
   }
 
   &-loading-col {
-    padding: 0 @card-loading-spacing;
+    padding: 0 var(--ix-card-loading-spacing);
   }
 
   &-loading-block {
-    height: @card-loading-height;
-    margin: @card-loading-spacing 0;
-    background: linear-gradient(90deg, @card-gradient-min, @card-gradient-max, @card-gradient-min);
-    background-size: @card-loading-background-size @card-loading-background-size;
-    border-radius: @card-border-radius;
-    animation: card-loading @card-loading-transition-duration ease infinite;
+    height: var(--ix-card-loading-height);
+    margin: var(--ix-card-loading-spacing) 0;
+    background: linear-gradient(
+      90deg,
+      var(--ix-card-loading-start-color),
+      var(--ix-card-loading-end-color),
+      var(--ix-card-loading-start-color)
+    );
+    background-size: var(--ix-card-loading-bg-size) var(--ix-card-loading-bg-size);
+    border-radius: var(--ix-component-border-radius);
+    animation: card-loading 2s ease infinite;
   }
 
   &-has-grid:not(&-loading) &-body {
-    margin: -@card-border-width 0 0 -@card-border-width;
+    margin: calc(var(--ix-line-width) * -1) 0 0 calc(var(--ix-line-width) * -1);
     padding: 0;
   }
 
   &-grid {
-    padding: @card-padding-md;
-    box-shadow: @card-border-width 0 0 0 @card-border-color, 0 @card-border-width 0 0 @card-border-color,
-      @card-border-width @card-border-width 0 0 @card-border-color, @card-border-width 0 0 0 @card-border-color inset,
-      0 @card-border-width 0 0 @card-border-color inset;
+    padding: var(--ix-card-padding-size-md);
+    box-shadow:
+      var(--ix-line-width) 0 0 0 var(--ix-color-border-secondary),
+      0 var(--ix-line-width) 0 0 var(--ix-color-border-secondary),
+      var(--ix-line-width) var(--ix-line-width) 0 0 var(--ix-color-border-secondary),
+      var(--ix-line-width) 0 0 0 var(--ix-color-border-secondary) inset,
+      0 var(--ix-line-width) 0 0 var(--ix-color-border-secondary) inset;
 
     &-hoverable {
-      transition: @transition-all-base;
+      transition: all var(--ix-motion-duration-medium);
 
       &:hover {
-        box-shadow: @card-box-shadow;
+        box-shadow: var(--ix-box-shadow-sm);
       }
     }
   }
@@ -124,13 +129,13 @@
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    border: @card-border-width @card-border-style @card-border-color-selectable;
+    border: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border);
 
     &:hover {
-      border: @card-border-width @card-border-style @card-border-color-selectable-hover;
+      border: var(--ix-line-width) var(--ix-line-type) var(--ix-color-primary-border-hover);
 
       .@{card-prefix}-mark {
-        border-color: @card-border-color-selectable @card-border-color-selectable transparent transparent;
+        border-color: var(--ix-color-border) var(--ix-color-border) transparent transparent;
       }
     }
   }
@@ -139,38 +144,38 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: @card-icon-width;
-    height: @card-icon-height;
+    width: var(--ix-card-mark-width);
+    height: var(--ix-card-mark-height);
   }
 
   &-mark {
     width: 0;
     height: 0;
-    border-style: @card-border-style;
-    border-width: (@card-icon-height / 2) (@card-icon-width / 2);
-    border-color: @card-icon-color @card-icon-color transparent transparent;
-    border-radius: 0 @card-border-width 0;
+    border-style: var(--ix-line-type);
+    border-width: calc(var(--ix-card-mark-height) / 2) calc(var(--ix-card-mark-width) / 2);
+    border-color: var(--ix-color-icon) var(--ix-color-icon) transparent transparent;
+    border-radius: 0 var(--ix-line-width) 0;
   }
 
   &-mark-icon {
-    font-size: @font-size-md;
+    font-size: var(--ix-font-size-md);
     position: absolute;
     top: -3px;
     right: -1px;
   }
 
   &-selected {
-    border: @card-border-width @card-border-style @color-primary;
+    border: var(--ix-line-width) var(--ix-line-type) var(--ix-color-primary);
 
     .@{card-prefix}-mark {
-      border-color: @color-primary @color-primary transparent transparent;
+      border-color: var(--ix-color-primary) var(--ix-color-primary) transparent transparent;
     }
 
     &:hover {
-      border: @card-border-width @card-border-style @color-primary;
+      border: var(--ix-line-width) var(--ix-line-type) var(--ix-color-primary);
 
       .@{card-prefix}-mark {
-        border-color: @color-primary @color-primary transparent transparent;
+        border-color: var(--ix-color-primary) var(--ix-color-primary) transparent transparent;
       }
     }
   }
@@ -180,12 +185,12 @@
     cursor: not-allowed;
 
     &.@{card-prefix}-selectable:hover {
-      border: @card-border-width @card-border-style @card-border-color-selectable;
+      border: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border);
       box-shadow: none;
     }
 
     &.@{card-prefix}-selected:hover {
-      border: @card-border-width @card-border-style @color-primary;
+      border: var(--ix-line-width) var(--ix-line-type) var(--ix-color-primary);
     }
   }
 }

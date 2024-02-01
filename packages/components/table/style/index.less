@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/clearfix.less';
 @import '../../style/mixins/ellipsis.less';
 @import '../../style/mixins/reset.less';
@@ -9,6 +10,7 @@
 @import './expandable.less';
 @import './selectable.less';
 @import './triggers.less';
+@import './shadow.less';
 
 .@{table-prefix} {
   .reset-component-new();
@@ -27,7 +29,7 @@
       bottom: 0;
       z-index: 1;
       width: 30px;
-      transition: box-shadow var(--ix-transition-duration-fast);
+      transition: box-shadow var(--ix-motion-duration-fast);
       content: '';
       pointer-events: none;
     }
@@ -39,10 +41,6 @@
     &::after {
       right: 0;
     }
-
-    .cdk-virtual-scroll-holder {
-      overflow-y: scroll;
-    }
   }
 
   table {
@@ -52,16 +50,16 @@
   }
 
   th {
-    color: @table-head-color;
-    background-color: @table-head-background-color;
-    font-weight: @table-head-font-weight;
+    color: var(--ix-table-head-color);
+    background-color: var(--ix-table-head-bg-color);
+    font-weight: var(--ix-font-weight-md);
 
     &:not(:last-child)::before {
       position: absolute;
       top: 50%;
       right: 0;
       width: 1px;
-      background-color: @table-head-separator-color;
+      background-color: var(--ix-table-head-separator-color);
       transform: translateY(-50%);
       content: '';
     }
@@ -72,7 +70,7 @@
   }
 
   td {
-    transition: background var(--ix-transition-duration-fast);
+    transition: background var(--ix-motion-duration-fast);
 
     // TODO: Nest Table
   }
@@ -80,10 +78,10 @@
   tr {
     &:hover {
       > td {
-        background-color: @table-body-row-background-color-hover;
+        background-color: var(--ix-table-body-row-bg-color-hover);
       }
       .@{table-prefix}-expandable-trigger-button {
-        background-color: @table-body-row-background-color-hover;
+        background-color: var(--ix-table-body-row-bg-color-hover);
       }
     }
 
@@ -91,7 +89,7 @@
     &.@{table-prefix}-empty-row {
       &:hover {
         > td {
-          background-color: var(--ix-background-color);
+          background-color: var(--ix-color-container-bg);
         }
       }
     }
@@ -100,6 +98,7 @@
   &-cell {
     position: relative;
     text-align: start;
+    vertical-align: var(--ix-table-body-cell-vertical-align);
     overflow-wrap: break-word;
   }
 
@@ -140,7 +139,7 @@
   }
 
   &-cell-scroll-bar {
-    box-shadow: 0 1px 0 1px @table-head-background-color;
+    box-shadow: 0 1px 0 1px var(--ix-table-head-bg-color);
   }
 
   &-pagination {
@@ -187,6 +186,7 @@
         flex-grow: 1;
       }
 
+      &-body-virtual-scroll,
       &-content {
         flex-basis: 0;
         height: 0;
@@ -195,17 +195,16 @@
 
       &-fixed-holder {
         flex-shrink: 0;
-      }
-    }
 
-    .cdk-virtual-scroll {
-      flex: 1 1 0;
+        .cdk-virtual-scroll-holder {
+          overflow: hidden !important;
+        }
+      }
     }
   }
 
   &-empty&-auto-height,
   &-empty&-full-height {
-    .cdk-virtual-scroll-filler,
     .cdk-virtual-scroll-content,
     table {
       height: 100%;
@@ -216,7 +215,7 @@
     &-holder {
       position: sticky;
       z-index: 3;
-      background-color: var(--ix-background-color);
+      background-color: var(--ix-color-container-bg);
     }
 
     &-scrollbar {

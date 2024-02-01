@@ -12,6 +12,7 @@ import { isObject } from 'lodash-es'
 import { type VKey, callEmit, useState } from '@idux/cdk/utils'
 import { IxLayoutSider, type LayoutSiderProps } from '@idux/components/layout'
 import { IxMenu, type MenuClickOptions, type MenuData, type MenuProps } from '@idux/components/menu'
+import { useThemeToken } from '@idux/pro/theme'
 
 import Logo from './Logo'
 import { proLayoutToken } from '../token'
@@ -22,6 +23,7 @@ export default defineComponent({
   setup(_, { slots }) {
     const { props, mergedPrefixCls, activeKey, setActiveKey, activePaths, siderMenus, collapsed, setCollapsed } =
       inject(proLayoutToken)!
+    const { hashId } = useThemeToken('proLayout')
 
     const { expandedKeys, setExpandedKeys } = useExpandedKeys(activePaths, siderMenus)
 
@@ -55,7 +57,7 @@ export default defineComponent({
       const siderProps = mergeProps(innerSiderProps, props.sider!) as LayoutSiderProps
 
       const innerMenuProps: MenuProps = {
-        overlayClassName: `${prefixCls}-menu-overlay`,
+        overlayClassName: `${prefixCls}-menu-overlay ${hashId.value}`,
         collapsed: siderProps.collapsed,
         dataSource: siderMenus.value,
         expandedKeys: expandedKeys.value,

@@ -1,22 +1,23 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 
 .@{avatar-prefix} {
   .reset-component-new();
-  .reset-color(@avatar-color, @avatar-background-color);
+  .reset-color(var(--ix-color-text-inverse), var(--ix-color-container-bg-disabled));
 
   position: relative;
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   white-space: nowrap;
   overflow: hidden;
 
   &-circle {
-    border-radius: @avatar-border-radius-circle;
+    border-radius: 50%;
   }
 
   &-square {
-    border-radius: @avatar-border-radius-square;
+    border-radius: var(--ix-avatar-border-radius-square);
   }
 
   &-image {
@@ -24,15 +25,15 @@
   }
 
   &-lg {
-    .avatar-size(@avatar-size-lg);
+    .avatar-size(var(--ix-avatar-size-lg));
   }
 
   &-md {
-    .avatar-size(@avatar-size-md);
+    .avatar-size(var(--ix-avatar-size-md));
   }
 
   &-sm {
-    .avatar-size(@avatar-size-sm);
+    .avatar-size(var(--ix-avatar-size-sm));
   }
 
   &-text {

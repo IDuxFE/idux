@@ -1,9 +1,6 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@tooltip-font-size` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
-| `@tooltip-color` | `var(--ix-text-color-info)` | - | - |
-| `@tooltip-background-color` | `var(--ix-background-color)` | - | - |
-| `@tooltip-border-radius` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
-| `@tooltip-box-shadow` | `@shadow-bottom-sm` | - | - |
-| `@tooltip-min-width` | `32px` | - | - |
-| `@tooltip-max-width` | `400px` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `color` |  | `string` | `#6f7785` | `#808999` |
+| `fontSize` |  | `number` | `12` | `12` |
+| `maxWidth` |  | `number` | `400` | `400` |
+| `minWidth` |  | `number` | `32` | `32` |

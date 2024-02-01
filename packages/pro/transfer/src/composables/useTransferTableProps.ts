@@ -67,8 +67,8 @@ export function useTransferTableProps(
     const mergedLayoutTool = !layoutTool
       ? false
       : layoutTool === true
-      ? { changeSize: false }
-      : { ...layoutTool, changeSize: false }
+        ? { changeSize: false }
+        : { ...layoutTool, changeSize: false }
 
     return {
       autoHeight: !scroll,
@@ -80,6 +80,7 @@ export function useTransferTableProps(
       pagination: false,
       selectedRowKeys: selectedKeys.value,
       virtual: props.virtual,
+      virtualScrollMode: props.virtualScrollMode,
       virtualItemHeight: props.virtualItemHeight,
       getKey: getKey.value as (record: unknown) => number | string,
       onColumnsChange,

@@ -3,6 +3,167 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.6](https://github.com/IDuxFE/idux/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2024-01-17)
+
+
+### Bug Fixes
+
+* **pro:search:** quick select panel search bar overflows ([#1819](https://github.com/IDuxFE/idux/issues/1819)) ([c6824ea](https://github.com/IDuxFE/idux/commit/c6824ea4efaa3548015a831e7e3f5c15cd7b31d7))
+
+
+### Features
+
+* **cdk:scroll:** add simulated scroll support to VirtualScroll ([#1812](https://github.com/IDuxFE/idux/issues/1812)) ([17ccefa](https://github.com/IDuxFE/idux/commit/17ccefaf3cd0689e12e69be9d5af95578a12eae5))
+* **pro:search:** select field supports caching selected data ([#1814](https://github.com/IDuxFE/idux/issues/1814)) ([6e80276](https://github.com/IDuxFE/idux/commit/6e80276e2b6461c98f2946b490e1d48ac0dcdc35))
+
+
+
+
+
+# [2.0.0-beta.5](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0-beta.5) (2024-01-08)
+
+
+### Bug Fixes
+
+* **comp:select:** selectOptionFontSize theme var reference error ([#1777](https://github.com/IDuxFE/idux/issues/1777)) ([0e0db55](https://github.com/IDuxFE/idux/commit/0e0db55b993f95ad86d2797e071c7b9dc6546b60))
+* **comp:table:** pagination should hide when data empty ([#1782](https://github.com/IDuxFE/idux/issues/1782)) ([85d80e1](https://github.com/IDuxFE/idux/commit/85d80e174ad0fb81c7b04001a67bc86cdf98479b))
+* **comp:tree:** update tree line style ([#1783](https://github.com/IDuxFE/idux/issues/1783)) ([ca64a1e](https://github.com/IDuxFE/idux/commit/ca64a1e0b0e60bfa301aa78518b173b6668be4dd))
+* **pro:layout:** dark theme overlay menu style error ([#1771](https://github.com/IDuxFE/idux/issues/1771)) ([64169d2](https://github.com/IDuxFE/idux/commit/64169d270741f242ecfcae49cd749b5fce59391b))
+* **pro:layout:** logo title color theme var reference error ([#1759](https://github.com/IDuxFE/idux/issues/1759)) ([8fced5c](https://github.com/IDuxFE/idux/commit/8fced5c6262d842f88ccd8c3d4c09660a9ef0835))
+* **pro:layout:** style error when theme style not injected ([#1769](https://github.com/IDuxFE/idux/issues/1769)) ([e216b08](https://github.com/IDuxFE/idux/commit/e216b08b90da1f9857b36cd40749f8025bab9c58))
+* **pro:search:** click is correct when key is zero ([#1748](https://github.com/IDuxFE/idux/issues/1748)) ([9d996ce](https://github.com/IDuxFE/idux/commit/9d996cedbfb1c6748911ae6e6e3e263177444737))
+* **pro:search:** container zIndex shouldn't be set when not focused ([#1795](https://github.com/IDuxFE/idux/issues/1795)) ([613079d](https://github.com/IDuxFE/idux/commit/613079d37e43bcf3c36cd05f4dcbeb0cdec4ab88))
+* **pro:search:** non-multiple field created state should be overwritten by new state ([#1778](https://github.com/IDuxFE/idux/issues/1778)) ([617c192](https://github.com/IDuxFE/idux/commit/617c192e190ef902e591b4fb3e1de6227ee50946))
+* **pro:search:** replace spacing with theme tokens ([#1793](https://github.com/IDuxFE/idux/issues/1793)) ([6505440](https://github.com/IDuxFE/idux/commit/65054408d5dc1ea5ddff19cb3b34c9087faba995))
+* **pro:search:** searchable fields should keep search text after value change ([#1796](https://github.com/IDuxFE/idux/issues/1796)) ([97cf777](https://github.com/IDuxFE/idux/commit/97cf77786e8bab7303c3dc212a80b5c465ed772b))
+* **pro:table:** layoutool checkbox shouldn't be checkable when disabled ([#1741](https://github.com/IDuxFE/idux/issues/1741)) ([0905872](https://github.com/IDuxFE/idux/commit/0905872941527f73d5acf56e0dc18d4768c2ad11))
+* **pro:transfer:** maximum recursive updates exceeded under vue 3.4 ([e511253](https://github.com/IDuxFE/idux/commit/e511253fa9654247b5c68db2bf176b38cbe28306))
+* style dependencies missing in on-demand import entries ([#1755](https://github.com/IDuxFE/idux/issues/1755)) ([4b97958](https://github.com/IDuxFE/idux/commit/4b979588419d125bd13ce83425700961bf1dfbcf))
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/IDuxFE/idux/issues/1751)) ([415f07f](https://github.com/IDuxFE/idux/commit/415f07f5c5a23ac1737865b945417e1424a7086b))
+* **cdk:scroll:** virtual scroll supports horizontal ([#1775](https://github.com/IDuxFE/idux/issues/1775)) ([77a0411](https://github.com/IDuxFE/idux/commit/77a0411370fb88e15e192850b57ae9bc5956a884))
+* **comp:table:** add insetShadow to horizontal overlowed container ([#1768](https://github.com/IDuxFE/idux/issues/1768)) ([2d51ad6](https://github.com/IDuxFE/idux/commit/2d51ad69eb37eeaa012a3a06f133a2535f40a4e3))
+* **comp:table:** add virtualHorizontal support ([#1776](https://github.com/IDuxFE/idux/issues/1776)) ([23a8484](https://github.com/IDuxFE/idux/commit/23a84844a4d03446059171f230674bc22eec1eaa))
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([5976f6d](https://github.com/IDuxFE/idux/commit/5976f6dcfecd276ad7c3406786266f65453da8dd))
+* modify disable color theme tokens ([#1764](https://github.com/IDuxFE/idux/issues/1764)) ([33b3d4d](https://github.com/IDuxFE/idux/commit/33b3d4d71634942a288470b06793b9a296ba4a29))
+
+
+### BREAKING CHANGES
+
+* **cdk:scroll:** itemHeight is deprecated, use rowHeight instead
+* **cdk:scroll:** itemRender is deprecated, use rowRender instead
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
+
+
+
+
+# [2.0.0-beta.4](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0-beta.4) (2023-12-27)
+
+
+### Bug Fixes
+
+* **comp:select:** selectOptionFontSize theme var reference error ([#1777](https://github.com/IDuxFE/idux/issues/1777)) ([3cd5982](https://github.com/IDuxFE/idux/commit/3cd5982632eb4eca1bb03d24c7b1f16976d1010f))
+* **pro:layout:** dark theme overlay menu style error ([#1771](https://github.com/IDuxFE/idux/issues/1771)) ([98c6d98](https://github.com/IDuxFE/idux/commit/98c6d98a30ae24c99913de4b3aafcd2ebe5ec595))
+* **pro:layout:** logo title color theme var reference error ([#1759](https://github.com/IDuxFE/idux/issues/1759)) ([f44039d](https://github.com/IDuxFE/idux/commit/f44039d1dac65480ddde1a3b7afbaf3e9fefa6ba))
+* **pro:layout:** style error when theme style not injected ([#1769](https://github.com/IDuxFE/idux/issues/1769)) ([f7bbf20](https://github.com/IDuxFE/idux/commit/f7bbf2072fdc1b84486882659a1e3c1515bd81f8))
+* **pro:search:** click is correct when key is zero ([#1748](https://github.com/IDuxFE/idux/issues/1748)) ([9d996ce](https://github.com/IDuxFE/idux/commit/9d996cedbfb1c6748911ae6e6e3e263177444737))
+* **pro:table:** layoutool checkbox shouldn't be checkable when disabled ([#1741](https://github.com/IDuxFE/idux/issues/1741)) ([0905872](https://github.com/IDuxFE/idux/commit/0905872941527f73d5acf56e0dc18d4768c2ad11))
+* style dependencies missing in on-demand import entries ([#1755](https://github.com/IDuxFE/idux/issues/1755)) ([0bd7cc9](https://github.com/IDuxFE/idux/commit/0bd7cc9b796e4081bf08b0527af5259c46e83d98))
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/IDuxFE/idux/issues/1751)) ([a4540ec](https://github.com/IDuxFE/idux/commit/a4540ecb226f110b0fdd74a4d4525427db02d926))
+* **cdk:scroll:** virtual scroll supports horizontal ([#1775](https://github.com/IDuxFE/idux/issues/1775)) ([4b39705](https://github.com/IDuxFE/idux/commit/4b39705af35cff3422dc7666777409c2f80030b1))
+* **comp:table:** add insetShadow to horizontal overlowed container ([#1768](https://github.com/IDuxFE/idux/issues/1768)) ([65a1aca](https://github.com/IDuxFE/idux/commit/65a1acac6de4c3cfc1116af54f45ceb4ac0562e6))
+* **comp:table:** add virtualHorizontal support ([#1776](https://github.com/IDuxFE/idux/issues/1776)) ([bb77f91](https://github.com/IDuxFE/idux/commit/bb77f9138ee0b46408f07b9149092f7964babc64))
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([f587f3a](https://github.com/IDuxFE/idux/commit/f587f3aa856b0576a6d9bb8b1d428301c4f5cccb))
+* modify disable color theme tokens ([#1764](https://github.com/IDuxFE/idux/issues/1764)) ([29566d5](https://github.com/IDuxFE/idux/commit/29566d5867ea08db3d5a9efa902ebe5d29328d7d))
+
+
+### BREAKING CHANGES
+
+* **cdk:scroll:** itemHeight is deprecated, use rowHeight instead
+* **cdk:scroll:** itemRender is deprecated, use rowRender instead
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
+
+
+
+
+# [2.0.0-beta.3](https://github.com/IDuxFE/idux/compare/v1.12.3...v2.0.0-beta.3) (2023-12-11)
+
+
+### Bug Fixes
+
+* **pro:layout:** dark theme overlay menu style error ([#1771](https://github.com/IDuxFE/idux/issues/1771)) ([98c6d98](https://github.com/IDuxFE/idux/commit/98c6d98a30ae24c99913de4b3aafcd2ebe5ec595))
+* **pro:layout:** logo title color theme var reference error ([#1759](https://github.com/IDuxFE/idux/issues/1759)) ([f44039d](https://github.com/IDuxFE/idux/commit/f44039d1dac65480ddde1a3b7afbaf3e9fefa6ba))
+* **pro:layout:** style error when theme style not injected ([#1769](https://github.com/IDuxFE/idux/issues/1769)) ([f7bbf20](https://github.com/IDuxFE/idux/commit/f7bbf2072fdc1b84486882659a1e3c1515bd81f8))
+* style dependencies missing in on-demand import entries ([#1755](https://github.com/IDuxFE/idux/issues/1755)) ([0bd7cc9](https://github.com/IDuxFE/idux/commit/0bd7cc9b796e4081bf08b0527af5259c46e83d98))
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/IDuxFE/idux/issues/1751)) ([a4540ec](https://github.com/IDuxFE/idux/commit/a4540ecb226f110b0fdd74a4d4525427db02d926))
+* **comp:table:** add insetShadow to horizontal overlowed container ([#1768](https://github.com/IDuxFE/idux/issues/1768)) ([65a1aca](https://github.com/IDuxFE/idux/commit/65a1acac6de4c3cfc1116af54f45ceb4ac0562e6))
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([f587f3a](https://github.com/IDuxFE/idux/commit/f587f3aa856b0576a6d9bb8b1d428301c4f5cccb))
+* modify disable color theme tokens ([#1764](https://github.com/IDuxFE/idux/issues/1764)) ([29566d5](https://github.com/IDuxFE/idux/commit/29566d5867ea08db3d5a9efa902ebe5d29328d7d))
+
+
+### BREAKING CHANGES
+
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
+
+
+
+
+# [2.0.0-beta.2](https://github.com/IDuxFE/idux/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2023-12-01)
+
+
+### Bug Fixes
+
+* style dependencies missing in on-demand import entries ([#1755](https://github.com/IDuxFE/idux/issues/1755)) ([48b7e73](https://github.com/IDuxFE/idux/commit/48b7e736963436ff4527d81af7dd89765c4aec93))
+
+
+
+
+
+# [2.0.0-beta.1](https://github.com/IDuxFE/idux/compare/v2.0.0-beta.0...v2.0.0-beta.1) (2023-11-29)
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/IDuxFE/idux/issues/1751)) ([411ed2b](https://github.com/IDuxFE/idux/commit/411ed2b90f15e3b8c7f1989429fa023065304143))
+
+
+
+
+
+# [2.0.0-beta.0](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0-beta.0) (2023-11-23)
+
+
+### Features
+
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([ea22a8f](https://github.com/IDuxFE/idux/commit/ea22a8fa8fb863a4c546b9af62025718779d3463))
+
+
+### BREAKING CHANGES
+
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
 ## [1.12.4](https://github.com/IDuxFE/idux/compare/v1.12.2...v1.12.4) (2024-01-02)
 
 
@@ -12,10 +173,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **pro:search:** non-multiple field created state should be overwritten by new state ([#1778](https://github.com/IDuxFE/idux/issues/1778)) ([617c192](https://github.com/IDuxFE/idux/commit/617c192e190ef902e591b4fb3e1de6227ee50946))
 * **pro:table:** layoutool checkbox shouldn't be checkable when disabled ([#1741](https://github.com/IDuxFE/idux/issues/1741)) ([0905872](https://github.com/IDuxFE/idux/commit/0905872941527f73d5acf56e0dc18d4768c2ad11))
 
-
-
-
-
 ## [1.12.3](https://github.com/IDuxFE/idux/compare/v1.12.2...v1.12.3) (2023-12-05)
 
 
@@ -23,9 +180,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * **pro:search:** click is correct when key is zero ([#1748](https://github.com/IDuxFE/idux/issues/1748)) ([9d996ce](https://github.com/IDuxFE/idux/commit/9d996cedbfb1c6748911ae6e6e3e263177444737))
 * **pro:table:** layoutool checkbox shouldn't be checkable when disabled ([#1741](https://github.com/IDuxFE/idux/issues/1741)) ([0905872](https://github.com/IDuxFE/idux/commit/0905872941527f73d5acf56e0dc18d4768c2ad11))
-
-
-
 
 
 ## [1.12.2](https://github.com/IDuxFE/idux/compare/v1.12.1...v1.12.2) (2023-11-06)

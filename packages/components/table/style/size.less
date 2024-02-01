@@ -1,5 +1,9 @@
-.table-size( @font-size, @head-height, @body-height, @padding-horizontal) {
-  .reset-font-size(@font-size);
+.table-size( @font-size, @head-height, @padding-horizontal, @padding-vertical) {
+  font-size: @font-size;
+
+  @line-height: calc(@font-size + var(--ix-line-height-gutter));
+
+  line-height: @line-height;
 
   &:not(.@{table-prefix}-borderless) {
     > .@{header-prefix} {
@@ -12,7 +16,7 @@
     font-size: calc(@font-size + 2px);
   }
   .@{table-prefix}-expandable-wrapper {
-    height: calc(100% + 7px); // cell height + padding
+    height: calc(100% + @padding-vertical * 2); // cell height + padding
     margin-top: -1px; // cell border bottom
   }
 
@@ -36,18 +40,25 @@
 
   td.@{table-prefix}-cell,
   .@{table-prefix}-alert-row > td,
-  .@{table-prefix}-expanded-row > td,
+  .@{table-prefix}-expanded-row > td {
+    height: calc(@padding-vertical * 2 + @line-height);
+    padding: @padding-vertical @padding-horizontal;
+  }
   .@{table-prefix}-footer {
-    height: @body-height;
-    // border-bottom: 1px
-    padding: 4px @padding-horizontal 3px;
+    min-height: calc(@padding-vertical * 2 + @line-height);
+    padding: @padding-vertical @padding-horizontal;
+  }
+
+  .@{table-prefix}-fixed-row {
+    margin-left: calc(@padding-horizontal * -1);
+    padding-left: @padding-horizontal;
   }
 
   // TODO: Nest Table
 }
 
 .@{table-prefix}-sm {
-  .table-size(@table-font-size-sm, @table-head-row-height-sm, @table-body-row-height-sm, @table-row-padding-horizontal-sm);
+  .table-size(var(--ix-table-font-size-sm), var(--ix-table-head-row-height-sm), var(--ix-table-cell-padding-horizontal-sm), var(--ix-table-cell-padding-vertical-sm));
 
   .@{table-prefix}-col-expandable,
   .@{table-prefix}-col-selectable {
@@ -55,7 +66,7 @@
   }
 
   .@{table-prefix}-col-indexable {
-    width: if(@theme = seer, 48px, 40px);
+    width: 48px;
   }
 
   .@{table-prefix}-col-selectable&-col-with-dropdown {
@@ -68,7 +79,7 @@
 }
 
 .@{table-prefix}-md {
-  .table-size(@table-font-size-md, @table-head-row-height-md, @table-body-row-height-md, @table-row-padding-horizontal-md);
+  .table-size(var(--ix-table-font-size-md), var(--ix-table-head-row-height-md), var(--ix-table-cell-padding-horizontal-md), var(--ix-table-cell-padding-vertical-md));
 
   .@{table-prefix}-col-expandable,
   .@{table-prefix}-col-selectable {
@@ -76,7 +87,7 @@
   }
 
   .@{table-prefix}-col-indexable {
-    width: if(@theme = seer, 48px, 40px);
+    width: 48px;
   }
 
   .@{table-prefix}-col-selectable.@{table-prefix}-col-with-dropdown {
@@ -85,7 +96,7 @@
 }
 
 .@{table-prefix}-lg {
-  .table-size(@table-font-size-lg, @table-head-row-height-lg, @table-body-row-height-lg, @table-row-padding-horizontal-lg);
+  .table-size(var(--ix-table-font-size-lg), var(--ix-table-head-row-height-lg), var(--ix-table-cell-padding-horizontal-lg), var(--ix-table-cell-padding-vertical-lg));
 
   .@{table-prefix}-col-expandable,
   .@{table-prefix}-col-selectable {
@@ -93,7 +104,7 @@
   }
 
   .@{table-prefix}-col-indexable {
-    width: if(@theme = seer, 60px, 48px);
+    width: 60px;
   }
 
   .@{table-prefix}-col-selectable.@{table-prefix}-col-with-dropdown {

@@ -12,6 +12,7 @@ import { isObject } from 'lodash-es'
 import { callEmit } from '@idux/cdk/utils'
 import { IxLayoutHeader } from '@idux/components/layout'
 import { IxMenu, type MenuClickOptions, type MenuProps } from '@idux/components/menu'
+import { useThemeToken } from '@idux/pro/theme'
 
 import Logo from './Logo'
 import { proLayoutToken } from '../token'
@@ -21,6 +22,7 @@ export default defineComponent({
   name: 'IxProLayoutHeader',
   setup(_, { slots }) {
     const { props, mergedPrefixCls, setActiveKey, headerMenus, activeHeaderKey } = inject(proLayoutToken)!
+    const { hashId } = useThemeToken('proLayout')
 
     const theme = computed(() => {
       const { theme } = props
@@ -56,7 +58,7 @@ export default defineComponent({
       const prefixCls = `${mergedPrefixCls.value}-header`
 
       const innerMenuProps: MenuProps = {
-        overlayClassName: `${prefixCls}-menu-overlay`,
+        overlayClassName: `${prefixCls}-menu-overlay ${hashId.value}`,
         dataSource: headerMenus.value,
         selectedKeys: menuSelectedKeys.value,
         mode: 'horizontal',

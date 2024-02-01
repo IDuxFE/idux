@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import type { SearchState } from '../../composables/useSearchStates'
 
 import { computed, defineComponent, inject, normalizeClass, ref, watch } from 'vue'
@@ -30,6 +32,8 @@ export default defineComponent({
       removeSearchState,
       updateSegmentValue,
       updateSearchValues,
+      getCacheData,
+      setCacheData,
       tempSegmentInputRef,
     } = inject(proSearchContext)!
 
@@ -71,8 +75,8 @@ export default defineComponent({
     const searchDataSegment = computed(() =>
       props.searchField.segments.find(seg => searchDataTypes.includes(seg.name as SearchDataTypes)),
     )
-    const searchDataSegmentState = computed(
-      () => searchState.value?.segmentStates.find(seg => searchDataTypes.includes(seg.name as SearchDataTypes)),
+    const searchDataSegmentState = computed(() =>
+      searchState.value?.segmentStates.find(seg => searchDataTypes.includes(seg.name as SearchDataTypes)),
     )
 
     const [itemValue, setItemValue] = useState<unknown>(searchDataSegmentState.value?.value)
@@ -124,6 +128,21 @@ export default defineComponent({
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-quick-select-item`
       const classes = normalizeClass([prefixCls, ...(searchDataSegment.value?.containerClassName ?? [])])
+
+      const _getCacheData = (dataKey: string) => {
+        if (!searchState.value || !searchDataSegment.value) {
+          return
+        }
+
+        return getCacheData(searchState.value.key, searchDataSegment.value.name, dataKey)
+      }
+      const _setCacheData = (dataKey: string, data: any) => {
+        if (!searchState.value || !searchDataSegment.value) {
+          return
+        }
+
+        return setCacheData(searchState.value.key, searchDataSegment.value.name, dataKey, data)
+      }
       return (
         <div class={classes}>
           <div class={`${prefixCls}-header`}>
@@ -159,6 +178,8 @@ export default defineComponent({
               cancel,
               setValue,
               setOnKeyDown,
+              getCacheData: _getCacheData,
+              setCacheData: _setCacheData,
             })}
           </div>
         </div>

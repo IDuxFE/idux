@@ -26,6 +26,7 @@ import { isFunction } from 'lodash-es'
 import { callEmit, convertCssPixel } from '@idux/cdk/utils'
 import { ɵFooter } from '@idux/components/_private/footer'
 import { ɵHeader } from '@idux/components/_private/header'
+import { useThemeToken } from '@idux/components/theme'
 
 import { DRAWER_TOKEN, drawerToken } from './token'
 
@@ -36,24 +37,26 @@ const drawerTransitionMap = {
   end: 'move-end',
 }
 const horizontalPlacement = ['start', 'end']
-const defaultDistance = 160
 
 export default defineComponent({
   inheritAttrs: false,
   setup(_, { attrs }) {
+    const { globalHashId, hashId } = useThemeToken('drawer')
     const {
       props,
       slots,
       common,
       config,
       mergedPrefixCls,
+      drawerElRef,
       visible,
       delayedLoaded,
       animatedVisible,
+      isAnimating,
       mergedVisible,
       currentZIndex,
-      level,
       levelAction,
+      distance,
     } = inject(drawerToken)!
     const { close } = inject(DRAWER_TOKEN)!
     const { closable, closeIcon, closeOnEsc, mask, maskClosable } = useConfig(props, config)
@@ -81,12 +84,13 @@ export default defineComponent({
     const transformStyle = computed(() => {
       const { placement } = props
       const horizontal = isHorizontal.value
-      const distance = level.value * defaultDistance
       let transform
       if (horizontal) {
-        transform = distance > 0 ? `translateX(${placement === 'start' ? distance : -distance}px)` : undefined
+        transform =
+          distance.value > 0 ? `translateX(${placement === 'start' ? distance.value : -distance.value}px)` : undefined
       } else {
-        transform = distance > 0 ? `translateY(${placement === 'top' ? distance : -distance}px)` : undefined
+        transform =
+          distance.value > 0 ? `translateY(${placement === 'top' ? distance.value : -distance.value}px)` : undefined
       }
       return transform
     })
@@ -95,6 +99,8 @@ export default defineComponent({
       const action = levelAction.value
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [`${prefixCls}-wrapper`]: true,
         [`${prefixCls}-${props.placement}`]: true,
         [`${prefixCls}-opened`]: animatedVisible.value,
@@ -125,7 +131,7 @@ export default defineComponent({
       sentinelEndRef,
     )
 
-    const { onEnter, onAfterEnter, onAfterLeave } = useEvents(props, wrapperRef, animatedVisible)
+    const { onEnter, onAfterEnter, onAfterLeave } = useEvents(props, wrapperRef, animatedVisible, isAnimating)
 
     onMounted(() => {
       watchVisibleChange(props, wrapperRef, sentinelStartRef, mask)
@@ -154,6 +160,7 @@ export default defineComponent({
             {delayedLoaded.value && (
               <div
                 v-show={visible.value}
+                ref={drawerElRef}
                 role="document"
                 class={prefixCls}
                 style={contentStyle.value}
@@ -286,6 +293,7 @@ function useEvents(
   props: DrawerProps,
   wrapperRef: Ref<HTMLDivElement | undefined>,
   animatedVisible: Ref<boolean | undefined>,
+  isAnimating: Ref<boolean>,
 ) {
   let lastOutSideActiveElement: HTMLElement | null = null
   const onEnter = () => {
@@ -305,6 +313,7 @@ function useEvents(
 
     callEmit(props.onAfterOpen)
     animatedVisible.value = true
+    isAnimating.value = false
   }
 
   const onAfterLeave = () => {
@@ -324,6 +333,7 @@ function useEvents(
 
     callEmit(props.onAfterClose)
     animatedVisible.value = false
+    isAnimating.value = false
   }
   return { onEnter, onAfterEnter, onAfterLeave }
 }

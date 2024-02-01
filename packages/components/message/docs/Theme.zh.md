@@ -1,20 +1,15 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@message-margin` | `@spacing-sm` | - | - |
-| `@message-font-size` | `@font-size-md` | - | - |
-| `@message-line-height` | `@line-height-base` | `24px` | - |
-| `@message-content-min-width` | `128px` | - | - |
-| `@message-content-max-width` | `480px` | - | - |
-| `@message-content-padding-horizontal` | `@spacing-lg` | - | - |
-| `@message-content-padding-vertical` | `(round((((@height-lg - @message-font-size * @message-line-height) / 2) * 10) / 10))` | `8px` | - |
-| `@message-content-bg-color` | `@background-color-component` | - | - |
-| `@message-content-border-radius` | `@border-radius-md` | - | - |
-| `@message-content-box-shadow` | `@shadow-bottom-md` | - | - |
-| `@message-icon-size` | `@font-size-lg` | - | - |
-| `@message-icon-margin-right` | `@spacing-sm` | - | - |
-| `@message-wrapper-top` | `15%` | - | - |
-| `@message-icon-info-color` | `@color-info-l10` | - | - |
-| `@message-icon-success-color` | `@color-success` | - | - |
-| `@message-icon-warning-color` | `@color-warning-l10` | - | - |
-| `@message-icon-error-color` | `@color-error-l10` | - | - |
-| `@message-icon-loading-color` | `@color-primary-l10` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `bgColor` |  | `string` | `#ffffff` | `#0A0C0F` |
+| `borderColor` |  | `string` | `none` | `#1F2329` |
+| `borderRadius` |  | `number` | `4` | `4` |
+| `borderType` |  | `string` | `solid` | `solid` |
+| `borderWidth` |  | `number` | `0` | `1` |
+| `contentMaxWidth` |  | `number` | `480` | `480` |
+| `contentMinWidth` |  | `number` | `128` | `128` |
+| `contentPaddingHorizontal` |  | `number` | `16` | `16` |
+| `contentPaddingVertical` |  | `number` | `8` | `8` |
+| `fontSize` |  | `number` | `14` | `14` |
+| `iconMarginRight` |  | `number` | `8` | `8` |
+| `margin` |  | `string | number` | `8` | `8` |
+| `wrapperTop` |  | `string | number` | `15%` | `15%` |

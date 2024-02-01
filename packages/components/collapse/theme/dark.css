@@ -1,0 +1,11 @@
+/* ------ collapse css variables ------ */
+:root {
+  --ix-collapse-font-size-sm: 14px;
+  --ix-collapse-font-size-md: 14px;
+  --ix-collapse-expand-icon-size-sm: 20px;
+  --ix-collapse-expand-icon-size-md: 24px;
+  --ix-collapse-padding-horizontal-sm: 12px;
+  --ix-collapse-padding-horizontal-md: 16px;
+  --ix-collapse-panel-header-bg-color: #171a1f;
+  --ix-collapse-panel-content-bg-color: #0a0c0f;
+}

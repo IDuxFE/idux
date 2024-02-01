@@ -14,3 +14,7 @@ const IxResult = Result as unknown as ResultComponent
 export { IxResult }
 
 export type { ResultInstance, ResultComponent, ResultPublicProps as ResultProps, ResultStatus } from './src/types'
+
+export { getThemeTokens as getResultThemeTokens } from './theme'
+
+export type { ResultThemeTokens } from './theme'

@@ -1,0 +1,7 @@
+/* ------ pro-transfer css variables ------ */
+:root {
+  --ix-pro-transfer-list-min-width: 260px;
+  --ix-pro-transfer-list-min-height: 290px;
+  --ix-pro-transfer-table-close-icon-padding: 0 0 0 12px;
+  --ix-pro-transfer-tree-close-icon-padding: 0 8px;
+}

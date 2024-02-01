@@ -39,8 +39,8 @@ export default defineComponent({
         const contentNode = isFunction(content)
           ? content()
           : isVNode(content)
-          ? cloneVNode(content, contentProps, true)
-          : content
+            ? cloneVNode(content, contentProps, true)
+            : content
         return <Modal {...mergedProps} {...restProps} __content_node={contentNode} />
       })
       return (

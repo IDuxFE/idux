@@ -9,6 +9,7 @@ import { type Ref, defineComponent, provide, ref, shallowRef } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
 import { IxImageViewer } from '@idux/components/image'
+import { useThemeToken } from '@idux/components/theme'
 
 import FileSelector from './component/Selector'
 import { useCmpClasses } from './composables/useDisplay'
@@ -19,11 +20,15 @@ import { useRequest } from './composables/useRequest'
 import { useUploadControl } from './composables/useUploadControl'
 import { uploadToken } from './token'
 import { uploadProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxUpload',
   props: uploadProps,
   setup(props, { slots }) {
+    const { globalHashId, hashId, registerToken } = useThemeToken('upload')
+    registerToken(getThemeTokens)
+
     const locale = useGlobalConfig('locale')
     const cpmClasses = useCmpClasses()
     const [showSelector, setSelectorVisible] = useShowSelector()
@@ -49,7 +54,7 @@ export default defineComponent({
     })
 
     return () => (
-      <div class={cpmClasses.value}>
+      <div class={[cpmClasses.value, globalHashId.value, hashId.value]}>
         {showSelector.value && <FileSelector>{slots.default?.()}</FileSelector>}
         {slots.list?.({ abort, upload })}
         <IxImageViewer v-model:visible={viewerVisible.value} images={images.value}></IxImageViewer>

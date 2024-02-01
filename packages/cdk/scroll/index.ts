@@ -6,6 +6,8 @@
  */
 
 export * from './src/strategy'
+export * from './src/scrollbar'
+export * from './src/useScroll'
 export * from './src/utils'
 
 import type { VirtualScrollComponent } from './src/virtual/types'
@@ -21,7 +23,11 @@ export type {
   VirtualScrollComponent,
   VirtualScrollPublicProps as VirtualScrollProps,
   VirtualContentRenderFn,
-  VirtualItemRenderFn,
+  VirtualRowRenderFn,
+  VirtualColRenderFn,
   VirtualScrollToOptions,
   VirtualScrollToFn,
+  VirtualScrollEnabled,
+  VirtualScrollRowData,
+  VirtualScrollMode,
 } from './src/virtual/types'

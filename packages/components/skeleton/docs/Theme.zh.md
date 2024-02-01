@@ -1,6 +1,6 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@skeleton-margin-bottom` | `@spacing-sm` | - | - |
-| `@skeleton-loader-margin-bottom` | `@spacing-xs` | - | - |
-| `@skeleton-start-color` | `@color-graphite-l40` | - | - |
-| `@skeleton-end-color` | `@color-graphite-l30` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `endColor` |  | `string` | `#e1e5eb` | `#1F2329` |
+| `loaderMarginBottom` |  | `number` | `4` | `4` |
+| `marginBottom` |  | `number` | `8` | `8` |
+| `startColor` |  | `string` | `#edf1f7` | `#171A1F` |

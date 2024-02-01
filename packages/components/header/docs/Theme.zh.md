@@ -1,22 +1,19 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@header-height-sm` | `var(--ix-height-lg)` | - | - |
-| `@header-height-md` | `var(--ix-height-xl)` | - | - |
-| `@header-height-lg` | `var(--ix-height-xl)` | - | - |
-| `@header-height-xl` | `var(--ix-height-2xl)` | - | - |
-| `@header-font-size-sm` | `var(--ix-font-size-md)` | - | - |
-| `@header-font-size-md` | `var(--ix-font-size-lg)` | - | - |
-| `@header-font-size-lg` | `var(--ix-font-size-xl)` | - | - |
-| `@header-font-size-xl` | `var(--ix-font-size-2xl)` | - | - |
-| `@header-color` | `var(--ix-text-color-title)` | - | - |
-| `@header-color-hover` | `var(--ix-color-primary-l10)` | - | - |
-| `@header-color-active` | `var(--ix-color-primary-d10)` | - | - |
-| `@header-color-disabled` | `var(--ix-text-color-disabled)` | - | - |
-| `@header-bar-width` | `4px` | - | - |
-| `@header-bar-background-color` | `var(--ix-color-primary)` | - | - |
-| `@header-title-font-weight` | `var(--ix-font-weight-xl)` | - | - |
-| `@header-sub-title-color` | `var(--ix-text-color-title-secondary)` | - | - |
-| `@header-sub-title-font-size` | `var(--ix-font-size-md)` | - | - |
-| `@header-suffix-color` | `var(--ix-text-color-title-secondary)` | - | - |
-| `@header-description-color` | `var(--ix-text-color-info)` | - | - |
-| `@header-icon-font-size` | `var(--ix-font-size-lg)` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `barBgColor` | 竖条颜色 | `string` | `#1c6eff` | `#4083E8` |
+| `barBorderRadius` | 竖条圆角尺寸 | `number` | `0` | `0` |
+| `barMarginRight` | 竖条距离文字的宽度 | `number` | `6` | `6` |
+| `barWidth` | 竖条宽度 | `number` | `2` | `2` |
+| `heightLg` | lg 尺寸高度 | `number` | `48` | `48` |
+| `heightMd` | md 尺寸高度 | `number` | `48` | `48` |
+| `heightSm` | sm 尺寸高度 | `number` | `40` | `40` |
+| `heightXl` | xl 尺寸高度 | `number` | `56` | `56` |
+| `prefixColor` | 前缀文字颜色 | `string` | `#2f3540` | `#F4F8FF` |
+| `prefixColorActive` | 前缀文字激活颜色 | `string` | `#1c6eff` | `#4083E8` |
+| `prefixColorDisabled` | 前缀文字禁用颜色 | `string` | `#bec3cc` | `#687080` |
+| `prefixColorHover` | 前缀文字悬浮颜色 | `string` | `#1c6eff` | `#4083E8` |
+| `subTitleFontSize` | 副标题字体大小 | `number` | `14` | `14` |
+| `suffixColor` | 后缀文字颜色 | `string` | `#5e6573` | `#A1A7B3` |
+| `suffixColorActive` | 后缀文字激活颜色 | `string` | `#0d51d9` | `#6AA6F4` |
+| `suffixColorDisabled` | 后缀文字禁用颜色 | `string` | `#bec3cc` | `#687080` |
+| `suffixColorHover` | 后缀文字悬浮颜色 | `string` | `#1c6eff` | `#4083E8` |

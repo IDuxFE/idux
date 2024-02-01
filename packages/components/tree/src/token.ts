@@ -14,11 +14,10 @@ import type { TreeProps } from './types'
 import type { VKey } from '@idux/cdk/utils'
 import type { TreeConfig } from '@idux/components/config'
 import type { GetKeyFn } from '@idux/components/utils'
-import type { ComputedRef, InjectionKey, Slots } from 'vue'
+import type { ComputedRef, InjectionKey } from 'vue'
 
 export interface TreeContext extends CheckableContext, DragDropContext, ExpandableContext, SelectableContext {
   props: TreeProps
-  slots: Slots
   config: TreeConfig
   flattedNodes: ComputedRef<MergedNode[]>
   mergedPrefixCls: ComputedRef<string>

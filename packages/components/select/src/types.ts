@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
-import type { VirtualScrollToFn } from '@idux/cdk/scroll'
+import type { VirtualScrollMode, VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { FormSize } from '@idux/components/form'
@@ -29,6 +29,7 @@ export const selectPanelProps = {
   multiple: { type: Boolean, default: false },
   multipleLimit: { type: Number, default: Number.MAX_SAFE_INTEGER },
   virtual: { type: Boolean, default: false },
+  virtualScrollMode: { type: String as PropType<VirtualScrollMode>, default: undefined },
   virtualItemHeight: { type: Number, default: 32 },
 
   // events
@@ -86,6 +87,7 @@ export const selectProps = {
   suffix: { type: String, default: undefined },
   spin: { type: [Boolean, Object] as PropType<boolean | SpinProps>, default: undefined },
   virtual: { type: Boolean, default: false },
+  virtualScrollMode: { type: String as PropType<VirtualScrollMode>, default: undefined },
   virtualItemHeight: { type: Number, default: undefined },
 
   // events
@@ -172,6 +174,7 @@ export const optionProps = {
   disabled: { type: Boolean, default: false },
   index: { type: Number, required: true },
   label: { type: [String, Number] as PropType<string | number>, default: undefined },
+  optionKey: { type: [String, Number, Symbol] as PropType<VKey>, required: true },
   rawData: { type: Object as PropType<SelectOptionProps>, required: true },
   parentKey: { type: [String, Number, Symbol] as PropType<VKey>, default: undefined },
 } as const

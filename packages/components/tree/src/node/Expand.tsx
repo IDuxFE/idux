@@ -16,8 +16,8 @@ import { treeNodeExpandProps } from '../types'
 
 export default defineComponent({
   props: treeNodeExpandProps,
-  setup(props) {
-    const { mergedPrefixCls, slots, expandIconRenderer, loadingKeys, handleExpand } = inject(treeToken)!
+  setup(props, { slots }) {
+    const { mergedPrefixCls, expandIconRenderer, loadingKeys, handleExpand } = inject(treeToken)!
 
     const isLoading = computed(() => loadingKeys.value.includes(props.nodeKey))
     const classes = computed(() => {
@@ -48,6 +48,7 @@ export default defineComponent({
         <span class={classes.value} onClick={onClick}>
           {props.hasTopLine && <div class={`${prefixCls}-top-line`} />}
           {children}
+          {props.hasBottomLine && <div class={`${prefixCls}-bottom-line`} />}
         </span>
       )
     }

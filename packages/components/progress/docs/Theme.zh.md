@@ -1,19 +1,14 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@progress-normal-background-color` | `@color-success` | - | - |
-| `@progress-success-background-color` | `@color-success` | - | - |
-| `@progress-exception-background-color` | `@color-error` | `@color-red-l10` | - |
-| `@progress-active-background-color` | `@color-success` | - | - |
-| `@progress-trail-background-color` | `@color-graphite-l40` | - | - |
-| `@progress-text-width` | `36px` | - | - |
-| `@progress-border-radius` | `100px` | - | - |
-| `@progress-text-color` | `@text-color` | - | - |
-| `@progress-line-height-lg` | `8px` | - | - |
-| `@progress-line-height-md` | `6px` | - | - |
-| `@progress-line-height-sm` | `2px` | - | - |
-| `@progress-line-font-size-lg` | `@font-size-md` | - | - |
-| `@progress-line-font-size-md` | `@font-size-md` | `@font-size-sm` | - |
-| `@progress-line-font-size-sm` | `@font-size-sm` | - | - |
-| `@progress-line-text-padding` | `0 0 0 @spacing-sm` | - | - |
-| `@progress-circle-width` | `120px` | - | - |
-| `@progress-circle-font-size-md` | `@font-size-2xl` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `borderRadius` |  | `number` | `100` | `100` |
+| `circleFontSize` |  | `number` | `24` | `24` |
+| `circleWidth` |  | `number` | `120` | `120` |
+| `lineFontSizeLg` |  | `number` | `14` | `14` |
+| `lineFontSizeMd` |  | `number` | `12` | `12` |
+| `lineFontSizeSm` |  | `number` | `12` | `12` |
+| `lineSizeLg` |  | `number` | `8` | `8` |
+| `lineSizeMd` |  | `number` | `6` | `6` |
+| `lineSizeSm` |  | `number` | `2` | `2` |
+| `lineTextPadding` |  | `string | number` | `0 0 0 8px` | `0 0 0 8px` |
+| `textWidth` |  | `number` | `36` | `36` |
+| `trailBgColor` |  | `string` | `#edf1f7` | `#1F2329` |

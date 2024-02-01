@@ -1,0 +1,105 @@
+
+/* ------ pro-layout css variables ------ */
+:root {
+  --ix-pro-layout-content-bg-color: #f7f9fc;
+  --ix-pro-layout-header-box-shadow: 0 1px 0 0 #e1e5eb;
+  --ix-pro-layout-sider-box-shadow: 1px 0 0 0 #e1e5eb;
+  --ix-pro-layout-logo-font-size: 20px;
+  --ix-pro-layout-logo-font-weight: 600;
+  --ix-pro-layout-logo-img-height: 36px;
+  --ix-pro-layout-sider-trigger-bg: #edf1f7;
+  --ix-pro-layout-sider-trigger-bg-hover: #e1e5eb;
+  --ix-pro-layout-dark-sider-trigger-bg: #454c59;
+  --ix-pro-layout-dark-sider-trigger-bg-hover: #1e232b;
+  --ix-pro-layout-menu-item-color: #2f3540;
+  --ix-pro-layout-menu-item-color-hover: #2f3540;
+  --ix-pro-layout-menu-item-color-active: #1c6eff;
+  --ix-pro-layout-menu-item-color-disabled: #bec3cc;
+  --ix-pro-layout-menu-item-group-color: #6f7785;
+  --ix-pro-layout-menu-item-bg: #ffffff;
+  --ix-pro-layout-menu-item-bg-hover: #f7f9fc;
+  --ix-pro-layout-menu-item-bg-active: #e8f4ff;
+  --ix-pro-layout-menu-item-bg-disabled: #ffffff;
+  --ix-pro-layout-menu-item-group-bg: #ffffff;
+  --ix-pro-layout-menu-sub-expanded-bg: #ffffff;
+  --ix-pro-layout-menu-sub-expanded-bg-active: #ffffff;
+  --ix-pro-layout-menu-horizontal-item-color-hover: #2f3540;
+  --ix-pro-layout-menu-horizontal-item-color-active: #1c6eff;
+  --ix-pro-layout-menu-horizontal-item-bg-hover: #f7f9fc;
+  --ix-pro-layout-menu-horizontal-item-bg-active: #e8f4ff;
+  --ix-pro-layout-dark-menu-item-color: #ffffff;
+  --ix-pro-layout-dark-menu-item-color-hover: #ffffff;
+  --ix-pro-layout-dark-menu-item-color-active: #ffffff;
+  --ix-pro-layout-dark-menu-item-color-disabled: #bec3cc;
+  --ix-pro-layout-dark-menu-item-group-color: #6f7785;
+  --ix-pro-layout-dark-menu-item-font-weight-active: 600;
+  --ix-pro-layout-dark-menu-item-bg: #2f3540;
+  --ix-pro-layout-dark-menu-item-bg-hover: #1e232b;
+  --ix-pro-layout-dark-menu-item-bg-active: #1c6eff;
+  --ix-pro-layout-dark-menu-item-bg-disabled: #2f3540;
+  --ix-pro-layout-dark-menu-item-group-bg: #2f3540;
+  --ix-pro-layout-dark-menu-sub-expanded-bg: #2f3540;
+  --ix-pro-layout-dark-menu-sub-expanded-bg-active: #2f3540;
+  --ix-pro-layout-dark-menu-horizontal-item-color-hover: #ffffff;
+  --ix-pro-layout-dark-menu-horizontal-item-color-active: #ffffff;
+  --ix-pro-layout-dark-menu-horizontal-item-bg-hover: #1e232b;
+  --ix-pro-layout-dark-menu-horizontal-item-bg-active: #454c59;
+}
+
+/* ------ pro-search css variables ------ */
+:root {
+  --ix-pro-search-height-sm: 24px;
+  --ix-pro-search-height-md: 32px;
+  --ix-pro-search-container-padding-sm: 2px;
+  --ix-pro-search-container-padding-md: 4px;
+  --ix-pro-search-tag-gap-sm: 2px;
+  --ix-pro-search-tag-gap-md: 4px;
+  --ix-pro-search-quick-select-padding-sm: 8px;
+  --ix-pro-search-quick-select-padding-md: 12px;
+  --ix-pro-search-tag-color: #2f3540;
+  --ix-pro-search-tag-bg-color: #edf1f7;
+  --ix-pro-search-tag-color-disabled: #bec3cc;
+  --ix-pro-search-tag-bg-color-disabled: #edf1f7;
+  --ix-pro-search-tag-name-color: #6f7785;
+  --ix-pro-search-segment-padding-horizontal: 4px;
+  --ix-pro-search-segment-max-width: 150px;
+  --ix-pro-search-search-btn-color: #ffffff;
+  --ix-pro-search-search-btn-color-hover: #ffffff;
+  --ix-pro-search-search-btn-color-disabled: #ffffff;
+  --ix-pro-search-search-btn-bg-color: #1c6eff;
+  --ix-pro-search-search-btn-bg-color-hover: #458fff;
+  --ix-pro-search-search-btn-bg-color-disabled: #bec3cc;
+  --ix-pro-search-name-panel-min-width: 160px;
+  --ix-pro-search-operator-panel-min-width: 20px;
+  --ix-pro-search-select-panel-min-width: 100px;
+  --ix-pro-search-tree-select-panel-min-width: 200px;
+  --ix-pro-search-tree-select-panel-max-width: 400px;
+}
+
+/* ------ pro-textarea css variables ------ */
+:root {
+  --ix-pro-textarea-index-col-color: #2f3540;
+  --ix-pro-textarea-index-col-min-width: 32px;
+  --ix-pro-textarea-index-col-padding-horizontal: 4px;
+  --ix-pro-textarea-index-col-bg-color: #f7f9fc;
+  --ix-pro-textarea-index-col-bg-color-disabled: #e1e5eb;
+  --ix-pro-textarea-index-col-cell-error-bg-color: #ffaca3;
+  --ix-pro-textarea-error-line-bg-color: #fff2f0;
+  --ix-pro-textarea-count-bottom: 1px;
+  --ix-pro-textarea-count-right: 8px;
+  --ix-pro-textarea-count-opacity: 0.9;
+  --ix-pro-textarea-count-color: #a1a7b3;
+}
+
+/* ------ pro-transfer css variables ------ */
+:root {
+  --ix-pro-transfer-list-min-width: 260px;
+  --ix-pro-transfer-list-min-height: 290px;
+  --ix-pro-transfer-table-close-icon-padding: 0 0 0 12px;
+  --ix-pro-transfer-tree-close-icon-padding: 0 8px;
+}
+
+/* ------ pro-tree css variables ------ */
+:root {
+  --ix-pro-tree-header-height: 38px;
+}

@@ -1,0 +1,17 @@
+/* ------ tree css variables ------ */
+:root {
+  --ix-tree-drop-line-width: 2px;
+  --ix-tree-drop-line-color: #1b61dd;
+  --ix-tree-bg-color: #0a0c0f;
+  --ix-tree-node-bg-color-hover: #171a1f;
+  --ix-tree-node-bg-color-selected: #0a0c0f;
+  --ix-tree-node-color-selected: #4083e8;
+  --ix-tree-node-padding-horizontal: 4px;
+  --ix-tree-node-padding-vertical: 0px;
+  --ix-tree-node-content-height: 32px;
+  --ix-tree-node-content-label-highlight-color: #4083e8;
+  --ix-tree-node-content-prefix-margin-right: 4px;
+  --ix-tree-node-checkbox-margin-right: 4px;
+  --ix-tree-node-icon-width: 24px;
+  --ix-tree-expand-icon-color: #687080;
+}

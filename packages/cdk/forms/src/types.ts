@@ -21,6 +21,7 @@ export interface ValidateError {
 }
 
 export type ValidateErrors = Record<string, ValidateError>
+export type ValidatorTrigger = 'change' | 'blur' | 'submit' | 'interactions'
 
 export type ValidateMessageFn = (err: Omit<ValidateError, 'message'>, control: AbstractControl) => string
 export type ValidateMessage = string | ValidateMessageFn | Record<string, string | ValidateMessageFn>
@@ -38,7 +39,7 @@ export interface ValidatorOptions {
   disabled?: boolean | ((control: AbstractControl, initializing: boolean) => boolean)
   name?: string
   example?: string
-  trigger?: 'change' | 'blur' | 'submit'
+  trigger?: ValidatorTrigger
   validators?: ValidatorFn | ValidatorFn[]
   asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[]
 }

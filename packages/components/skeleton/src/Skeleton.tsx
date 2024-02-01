@@ -9,8 +9,10 @@ import { computed, defineComponent, normalizeClass } from 'vue'
 
 import { convertCssPixel } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import { skeletonProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxSkeleton',
@@ -18,6 +20,9 @@ export default defineComponent({
   props: skeletonProps,
   setup(props, { slots, attrs }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('skeleton')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-skeleton`)
     const config = useGlobalConfig('skeleton')
     const loaderClass = computed(() => {
@@ -54,7 +59,7 @@ export default defineComponent({
       const loaderList = Array.from({ length: props.repeat }).map(() => loader)
 
       return (
-        <div class={prefixCls} {...attrs}>
+        <div class={[prefixCls, globalHashId.value, hashId.value]} {...attrs}>
           {loaderList}
         </div>
       )

@@ -120,8 +120,8 @@ const onCopy = (evt: MouseEvent, name: string) => {
     border-radius: 4px;
     cursor: pointer;
     transition:
-      color @transition-duration-base @ease-in-out,
-      background-color @transition-duration-base @ease-in-out;
+      color var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out),
+      background-color var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out);
 
     &::after {
       position: absolute;
@@ -133,14 +133,14 @@ const onCopy = (evt: MouseEvent, name: string) => {
       line-height: 110px;
       text-align: center;
       opacity: 0;
-      transition: all @transition-duration-base @ease-in-out;
+      transition: all var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out);
       content: 'Copied!';
     }
 
     .ix-icon {
       margin: 12px;
       font-size: 24px;
-      transition: all @transition-duration-base @ease-in-out;
+      transition: all var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out);
     }
 
     &:hover {

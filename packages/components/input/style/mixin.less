@@ -4,14 +4,14 @@
   width: 100%;
   min-width: 0;
   outline: 0;
-  color: @form-new-color;
-  border: 1px solid @form-new-border-color;
+  color: var(--ix-color-text);
+  border: 1px solid var(--ix-color-border);
 
   &[disabled] {
     cursor: not-allowed;
   }
 
-  .placeholder(@form-new-placeholder-color);
+  .placeholder();
 }
 
 .input-size(@height, @font-size, @padding-horizontal, @border-radius) {
@@ -32,7 +32,7 @@
 
   .@{input-prefix}-addon {
     .@{selector-prefix} {
-      margin: -5px -@padding-horizontal;
+      margin: -5px calc(@padding-horizontal * -1);
     }
   }
 
@@ -49,13 +49,13 @@
 }
 
 .input-disabled() {
-  color: @form-new-color-disabled;
-  background-color: @form-new-background-color-disabled;
-  border-color: @form-new-border-color;
+  color: var(--ix-color-text-disabled);
+  background-color: var(--ix-control-bg-color-disabled);
+  border-color: var(--ix-color-border);
   box-shadow: none;
   cursor: not-allowed;
 
   &:hover {
-    border-color: @form-new-border-color;
+    border-color: var(--ix-color-border);
   }
 }

@@ -12,7 +12,7 @@
   &:hover,
   &:focus,
   &:active {
-    color: @disabled-color;
+    color: var(--ix-color-text-disabled);
   }
 }
 
@@ -22,7 +22,7 @@
   &:hover,
   &:focus,
   &:active {
-    background-color: @disabled-bg-color;
+    background-color: var(--ix-color-container-bg-disabled);
   }
 }
 
@@ -32,10 +32,10 @@
   &:hover,
   &:focus,
   &:active {
-    border-color: @color-graphite-l20;
+    border-color: var(--ix-color-border);
   }
 }
 
 .base-transition() {
-  transition: @transition-all-base;
+  transition: all var(--ix-motion-duration-medium);
 }

@@ -27,3 +27,7 @@ export type {
   ProLayoutTheme,
   ProLayoutType,
 } from './src/types'
+
+export { getThemeTokens as getProLayoutThemeTokens } from './theme'
+
+export type { ProLayoutThemeTokens } from './theme'

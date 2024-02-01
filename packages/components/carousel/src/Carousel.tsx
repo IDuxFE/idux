@@ -10,6 +10,7 @@ import { computed, defineComponent, normalizeClass, onBeforeUpdate, provide, ref
 import { convertElement, flattenNode } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
+import { useThemeToken } from '@idux/components/theme'
 
 import { useAutoplay } from './composables/useAutoplay'
 import { useStrategy } from './composables/useStrategy'
@@ -17,12 +18,16 @@ import Dot from './contents/Dot'
 import Slider from './contents/Slider'
 import { carouselToken } from './token'
 import { carouselProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxCarousel',
   props: carouselProps,
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('carousel')
+    registerToken(getThemeTokens)
+
     const config = useGlobalConfig('carousel')
 
     const mergedPrefixCls = computed(() => `${common.prefixCls}-carousel`)
@@ -75,6 +80,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-horizontal`]: !mergedVertical.value,
         [`${prefixCls}-vertical`]: mergedVertical.value,

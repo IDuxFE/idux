@@ -1,0 +1,17 @@
+/* ------ image css variables ------ */
+:root {
+  --ix-image-min-width: 96px;
+  --ix-image-min-height: 96px;
+  --ix-image-object-fit: contain;
+  --ix-image-preview-bg-color: rgba(0, 0, 0, 0.5);
+  --ix-image-preview-icon-color: #ffffff;
+  --ix-image-preview-icon-size: 20px;
+  --ix-image-viewer-bg-color: rgba(0, 0, 0, 0.45);
+  --ix-image-viewer-opr-color: #ffffff;
+  --ix-image-viewer-opr-color-disabled: rgba(255, 255, 255, 0.35);
+  --ix-image-viewer-opr-height: 48px;
+  --ix-image-viewer-opr-margin-bottom: 48px;
+  --ix-image-viewer-opr-font-size: 20px;
+  --ix-image-viewer-opr-bg-color: rgba(0, 0, 0, 0.1);
+  --ix-image-viewer-opr-item-margin: 0 24px;
+}

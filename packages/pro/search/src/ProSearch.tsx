@@ -13,11 +13,13 @@ import { ɵOverlay, type ɵOverlayInstance } from '@idux/components/_private/ove
 import { useGlobalConfig as useComponentGlobalConfig, useDateConfig } from '@idux/components/config'
 import { useZIndex } from '@idux/components/utils'
 import { useGlobalConfig } from '@idux/pro/config'
+import { useThemeToken } from '@idux/pro/theme'
 
 import SearchItemComp from './components/SearchItem'
 import QuickSelectPanel from './components/quickSelect/QuickSelectPanel'
 import NameSelectSegment from './components/segment/TempSegment'
 import { useActiveSegment } from './composables/useActiveSegment'
+import { useCacheData } from './composables/useCacheData'
 import { useCommonOverlayProps } from './composables/useCommonOverlayProps'
 import { useControl } from './composables/useControl'
 import { useElementWidthMeasure } from './composables/useElementWidthMeasure'
@@ -30,6 +32,7 @@ import { useSearchValues } from './composables/useSearchValues'
 import { proSearchContext } from './token'
 import { type SearchItem, proSearchProps } from './types'
 import { renderIcon } from './utils/RenderIcon'
+import { getThemeTokens } from '../theme'
 
 const nameSelectOverflowItemKey = 'name-select'
 
@@ -39,6 +42,9 @@ export default defineComponent({
   props: proSearchProps,
   setup(props, { attrs, expose, slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('proSearch')
+    registerToken(getThemeTokens)
+
     const componentCommon = useComponentGlobalConfig('common')
     const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('search')
@@ -64,7 +70,9 @@ export default defineComponent({
       locale.search,
     )
     const { fieldKeyMap } = resolvedSearchFieldsContext
-    const searchStateContext = useSearchStates(props, fieldKeyMap, searchValueContext)
+
+    const { getCacheData, setCacheData, clearCacheData } = useCacheData()
+    const searchStateContext = useSearchStates(props, fieldKeyMap, searchValueContext, getCacheData, setCacheData)
     const { searchStates, initSearchStates, clearSearchState, updateSearchValues, isSegmentVisible } =
       searchStateContext
 
@@ -108,6 +116,9 @@ export default defineComponent({
       },
       { immediate: true, deep: true },
     )
+    watch([searchStates, () => searchStates.value.length], ([states]) => {
+      clearCacheData(states)
+    })
 
     const placeholder = computed(() => props.placeholder ?? locale.search.placeholder)
     const clearable = computed(() => props.clearable ?? config.clearable)
@@ -120,6 +131,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-${size.value}`]: size.value,
         [`${prefixCls}-focused`]: focused.value,
@@ -127,9 +140,11 @@ export default defineComponent({
       })
     })
     const containerStyle = computed(() =>
-      normalizeStyle({
-        zIndex: currentZIndex.value,
-      }),
+      focused.value
+        ? normalizeStyle({
+            zIndex: currentZIndex.value,
+          })
+        : undefined,
     )
 
     expose({ focus, blur })
@@ -161,6 +176,9 @@ export default defineComponent({
       mergedPrefixCls,
       enableQuickSelect,
       commonOverlayProps,
+      getCacheData,
+      setCacheData,
+      clearCacheData,
 
       ...focusStateContext,
       ...searchStateContext,
@@ -226,7 +244,12 @@ export default defineComponent({
 
       const quickSelectOverlayProps = {
         ...commonOverlayProps.value,
-        class: `${mergedPrefixCls.value}-quick-select-overlay ${componentCommon.prefixCls}-scroll-min`,
+        class: [
+          `${mergedPrefixCls.value}-quick-select-overlay`,
+          `${componentCommon.prefixCls}-scroll-min`,
+          globalHashId.value,
+          hashId.value,
+        ],
         style: {
           width: convertCssPixel(elementWidth.value),
         },

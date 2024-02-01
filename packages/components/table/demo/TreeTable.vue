@@ -4,7 +4,7 @@
       <IxButton mode="link">{{ value }}</IxButton>
     </template>
     <template #action="{ record }">
-      <IxButtonGroup :gap="8" mode="link" separator="|">
+      <IxButtonGroup :gap="16" mode="link">
         <IxButton>Invite {{ record.name }}</IxButton>
         <IxButton>Delete</IxButton>
       </IxButtonGroup>
@@ -46,7 +46,10 @@ const columns: TableColumn<Data>[] = [
   {
     title: 'Count',
     dataKey: 'cnt',
-    align: 'end',
+    align: {
+      title: 'start',
+      cell: 'end',
+    },
     sortable: {
       sorter: (curr, next) => curr.cnt - next.cnt,
     },

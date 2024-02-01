@@ -1,6 +1,9 @@
 <template>
   <IxDropdown v-model:visible="visible">
-    <a class="ix-dropdown-trigger">Hover me <IxIcon name="down" :rotate="visible ? -180 : 0"></IxIcon></a>
+    <a class="ix-dropdown-trigger flex-center">
+      Hover me
+      <IxIcon name="down" :style="{ fontSize: '16px' }" :rotate="visible ? -180 : 0"></IxIcon
+    ></a>
     <template #overlay>
       <IxMenu :dataSource="dataSource" :selectable="false" @click="onClick"></IxMenu>
     </template>
@@ -31,3 +34,10 @@ const onClick = ({ key }: MenuClickOptions) => {
   }
 }
 </script>
+
+<style scoped>
+.flex-center {
+  display: flex;
+  align-items: center;
+}
+</style>

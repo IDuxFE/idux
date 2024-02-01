@@ -12,15 +12,20 @@ import { Ref, Slots, VNode, computed, defineComponent } from 'vue'
 import { ɵHeader } from '@idux/components/_private/header'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { ɵUseTooltipOverlay } from '@idux/components/tooltip'
 
 import { popoverProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxPopover',
   props: popoverProps,
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('popover')
+    registerToken(getThemeTokens)
+
     const config = useGlobalConfig('popover')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-popover`)
     const { overlayRef, updatePopper, overlayProps, setVisible } = ɵUseTooltipOverlay(props, config, mergedPrefixCls)
@@ -34,7 +39,7 @@ export default defineComponent({
       return (
         <ɵOverlay
           ref={overlayRef}
-          class={prefixCls}
+          class={[prefixCls, globalHashId.value, hashId.value]}
           {...overlayProps.value}
           v-slots={{
             default: slots.default,

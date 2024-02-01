@@ -1,0 +1,13 @@
+/* ------ pagination css variables ------ */
+:root {
+  --ix-pagination-font-size-sm: 12px;
+  --ix-pagination-font-size-md: 12px;
+  --ix-pagination-font-size-lg: 12px;
+  --ix-pagination-item-padding-sm: 0;
+  --ix-pagination-item-padding-md: 4px;
+  --ix-pagination-item-padding-lg: 4px;
+  --ix-pagination-item-content-size-sm: 24px;
+  --ix-pagination-item-content-size-md: 24px;
+  --ix-pagination-item-content-size-lg: 32px;
+  --ix-pagination-out-line-color: #1b61dd;
+}

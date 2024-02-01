@@ -11,7 +11,7 @@ import type { TableColumnMerged, TableColumnMergedExtra } from './composables/us
 import type { FlattedData } from './composables/useDataSource'
 import type { ActiveFilter } from './composables/useFilterable'
 import type { ActiveSorter } from './composables/useSortable'
-import type { VirtualScrollToFn } from '@idux/cdk/scroll'
+import type { VirtualScrollMode, VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { EmptyProps } from '@idux/components/empty'
 import type { HeaderProps } from '@idux/components/header'
@@ -39,6 +39,7 @@ export const tableProps = {
   getKey: { type: [String, Function] as PropType<string | ((record: any) => any)>, default: undefined },
   header: { type: [String, Object] as PropType<string | HeaderProps>, default: undefined },
   headless: { type: Boolean, default: undefined },
+  insetShadow: { type: Boolean, default: undefined },
   pagination: { type: [Boolean, Object] as PropType<boolean | TablePagination>, default: true },
   scroll: { type: Object as PropType<TableScroll>, default: undefined },
   size: { type: String as PropType<TableSize>, default: undefined },
@@ -47,7 +48,12 @@ export const tableProps = {
   scrollToTopOnChange: { type: Boolean, default: undefined },
   tableLayout: { type: String as PropType<'auto' | 'fixed'>, default: undefined },
   virtual: { type: Boolean, default: false },
+  virtualScrollMode: { type: String as PropType<VirtualScrollMode>, default: undefined },
+  virtualHorizontal: { type: Boolean, default: false },
   virtualItemHeight: { type: Number, default: undefined },
+  virtualColWidth: { type: Number, default: undefined },
+  virtualBufferSize: { type: Number, default: undefined },
+  virtualBufferOffset: { type: Number, default: undefined },
 
   // events
   'onUpdate:expandedRowKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
@@ -82,7 +88,7 @@ export type TableColumn<T = any, K = VKey> =
 
 export interface TableColumnCommon<T = any> {
   key?: VKey
-  align?: TableColumnAlign
+  align?: TableColumnAlign | { title: TableColumnAlign; cell: TableColumnAlign }
   colSpan?: (record: T, rowIndex: number) => number
   rowSpan?: (record: T, rowIndex: number) => number
   fixed?: TableColumnFixed
@@ -257,19 +263,8 @@ export type TableBodyRowProps = ExtractInnerPropTypes<typeof tableBodyRowProps>
 export const tableBodyCellProps = {
   column: { type: Object as PropType<TableColumnMerged>, required: true },
   colIndex: { type: Number, required: true },
-  level: { type: Number, default: undefined },
-  record: { type: Object as PropType<any>, required: true },
-  rowIndex: { type: Number, required: true },
-  disabled: { type: Boolean, default: undefined },
-  expanded: { type: Boolean, default: undefined },
-  hasPrevSibling: { type: Boolean, default: undefined },
-  hasNextSibling: { type: Boolean, default: undefined },
-  showLineIndentIndexList: { type: Array as PropType<number[]>, default: () => [] },
-  handleExpend: { type: Function as PropType<() => void>, default: undefined },
-  isHover: { type: Boolean, default: undefined },
-  selected: { type: Boolean, default: undefined },
-  indeterminate: { type: Boolean, default: undefined },
-  handleSelect: { type: Function as PropType<() => void>, default: undefined },
+  colSpan: Number,
+  rowSpan: Number,
 } as const
 
 export type TableBodyCellProps = ExtractInnerPropTypes<typeof tableBodyCellProps>

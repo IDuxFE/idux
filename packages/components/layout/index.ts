@@ -52,3 +52,7 @@ export type {
   LayoutFixedType,
   LayoutCollapseChangeType,
 } from './src/types'
+
+export { getThemeTokens as getLayoutThemeTokens } from './theme'
+
+export type { LayoutThemeTokens } from './theme'

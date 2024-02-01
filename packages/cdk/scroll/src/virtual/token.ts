@@ -5,22 +5,35 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { SyncScrollTop } from './composables/useScrollPlacement'
-import type { VirtualScrollProps } from './types'
+import type { Scroll, SyncScroll } from './composables/useScrollPlacement'
+import type { VirtualScrollEnabled, VirtualScrollProps } from './types'
 import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 
 export interface VirtualScrollContext {
   props: VirtualScrollProps
   slots: Slots
+  containerSize: ComputedRef<{
+    width: number
+    height: number
+  }>
+  enabled: ComputedRef<VirtualScrollEnabled>
   holderRef: Ref<HTMLElement | undefined>
-  fillerRef: Ref<HTMLElement | undefined>
+  fillerHorizontalRef: Ref<HTMLElement | undefined>
+  fillerVerticalRef: Ref<HTMLElement | undefined>
   useVirtual: ComputedRef<boolean>
-  collectHeights: () => void
-  scrollTop: Ref<number>
+  collectSize: () => void
+  scroll: Ref<Scroll>
   scrollHeight: Ref<number>
-  scrollOffset: Ref<number | undefined>
-  syncScrollTop: SyncScrollTop
+  scrollWidth: Ref<number>
+  scrollOffsetTop: Ref<number | undefined>
+  scrollOffsetLeft: Ref<number | undefined>
+  syncScroll: SyncScroll
   handleScroll: (evt: Event) => void
+  topIndex: Ref<number>
+  bottomIndex: Ref<number>
+  leftIndex: Ref<number[]>
+  rightIndex: Ref<number[]>
+  renderedData: ComputedRef<unknown[]>
 }
 
 export const virtualScrollToken: InjectionKey<VirtualScrollContext> = Symbol('virtualScrollToken')

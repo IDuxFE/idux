@@ -1,17 +1,17 @@
 .@{table-prefix} {
   &-selectable-trigger {
-    margin-left: @spacing-xs;
-    color: @table-head-color;
+    margin-left: var(--ix-margin-size-xs);
+    color: var(--ix-table-head-color);
     font-size: var(--ix-font-size-lg);
     cursor: pointer;
   }
 
   & tr&-row-selected {
     &:hover > td {
-      background-color: @table-body-row-background-color-hover;
+      background-color: var(--ix-table-body-row-bg-color-hover);
     }
     & > td {
-      background: @table-body-row-background-color-selected;
+      background: var(--ix-table-body-row-bg-color-selected);
     }
   }
 }

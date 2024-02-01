@@ -1,17 +1,4 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@alert-height` | `var(--ix-height-md)` | - | - |
-| `@alert-border-radius` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
-| `@alert-icon-color` | `var(--ix-text-color-secondary)` | - | - |
-| `@alert-icon-color-hover` | `var(--ix-color-primary)` | - | - |
-| `@alert-banner-border-color` | `var(--ix-border-color-secondary)` | - | - |
-| `@alert-success-color` | `var(--ix-color-turquoise)` | `var(--ix-color-turquoise-d10)` | - |
-| `@alert-info-color` | `var(--ix-color-primary)` | - | - |
-| `@alert-warning-color` | `var(--ix-color-brown)` | `#a35f40` | - |
-| `@alert-error-color` | `var(--ix-color-red)` | `var(--ix-color-red-d10)` | - |
-| `@alert-offline-color` | `var(--ix-text-color-info)` | - | - |
-| `@alert-success-background-color` | `#f1faf7` | - | - |
-| `@alert-info-background-color` | `#f2f7ff` | - | - |
-| `@alert-warning-background-color` | `#fffaf2` | - | - |
-| `@alert-error-background-color` | `#fff2f2` | - | - |
-| `@alert-offline-background-color` | `#f7f7f8` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `borderRadius` | 边框圆角 | `number` | `2` | `2` |
+| `height` | 高度 | `number` | `32` | `32` |

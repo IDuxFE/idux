@@ -1,3 +1,5 @@
+/// <reference types="vue/jsx" />
+
 export {}
 
 declare global {

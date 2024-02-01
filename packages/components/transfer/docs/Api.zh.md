@@ -29,6 +29,7 @@
 | `onChange` | 已选数据改变回调函数 | `(keys: VKey[], oldKeys: Vkey[]) => void` | - | - | - |
 | `onScroll` | 数据列表滚动事件 | `(isSource: boolean, evt: Event) => void` | - | - | 仅使用默认列表并开启 `virtual` 下可用 |
 | `onScrolledChange` | 数据列表滚动的位置发生变化 | `(isSource: boolean, startIndex: number, endIndex: number, visibleNodes: unknown[]) => void` | - | - | 仅使用默认列表并开启 `virtual` 下可用 |
+| `virtualScrollMode` | 虚拟滚动的滚动模式 | `'native' \| 'simulated'` | `'native'` | - | - |
 | `onScrolledBottom` | 数据列表滚动到底部时触发 | `(isSource: boolean) => void` | - | - | 仅使用默认列表并开启 `virtual` 下可用 |
 | `onSearch` | 穿梭框搜索触发回调函数 | `(isSource: boolean, searchValue: string \| undefined) => void` | - | - | - |
 | `onSelectAll` | 数据列表全部勾选回调函数 | `(isSource: boolean, checked: boolean) => void` | - | - | - |

@@ -9,15 +9,20 @@ import { computed, defineComponent, normalizeClass } from 'vue'
 
 import { convertNumber, isNumeric } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import BadgeSub from './BadgeSub'
 import { badgeProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxBadge',
   props: badgeProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('badge')
+    registerToken(getThemeTokens)
+
     const config = useGlobalConfig('badge')
 
     const mergedPrefixCls = computed(() => `${common.prefixCls}-badge`)
@@ -37,6 +42,8 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const { status, processing } = props
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-${status}`]: true,
         [`${prefixCls}-processing`]: processing,

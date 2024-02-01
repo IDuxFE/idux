@@ -15,16 +15,21 @@ import { scrollToTop } from '@idux/cdk/scroll'
 import { callEmit, getOffset, off, on } from '@idux/cdk/utils'
 import { IxAffix } from '@idux/components/affix'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { convertTarget } from '@idux/components/utils'
 
 import { anchorToken } from './token'
 import { anchorProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxAnchor',
   props: anchorProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('anchor')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-anchor`)
     const config = useGlobalConfig('anchor')
     const hideLinkBall = computed(() => props.hideLinkBall ?? config.hideLinkBall)
@@ -55,7 +60,7 @@ export default defineComponent({
         return anchorNode
       }
       return (
-        <IxAffix target={props.target} offset={props.offsetTop}>
+        <IxAffix class={[globalHashId.value, hashId.value]} target={props.target} offset={props.offsetTop}>
           {anchorNode}
         </IxAffix>
       )

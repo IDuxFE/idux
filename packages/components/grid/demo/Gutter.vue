@@ -30,9 +30,9 @@
 
 <style lang="less" scoped>
 .inner-box {
-  background: @color-primary;
-  color: @color-white;
+  background: var(--ix-color-primary);
+  color: #fff;
   text-align: center;
-  padding: @spacing-sm;
+  padding: var(--ix-padding-size-sm);
 }
 </style>

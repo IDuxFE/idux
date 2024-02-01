@@ -440,7 +440,7 @@ describe('Select', () => {
 
       const wrapper = SelectMount({ props: { virtual: true, open: true, dataSource } })
 
-      expect(wrapper.findAllComponents(Option).length).toBe(10)
+      expect(wrapper.findAllComponents(Option).length).toBe(9)
 
       await wrapper.setProps({ virtual: false })
 

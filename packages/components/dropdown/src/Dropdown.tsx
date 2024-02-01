@@ -10,9 +10,11 @@ import { computed, defineComponent, provide, toRef } from 'vue'
 import { useControlledProp } from '@idux/cdk/utils'
 import { ɵOverlay } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import { dropdownToken } from './token'
 import { dropdownProps } from './types'
+import { getThemeTokens } from '../theme'
 
 const defaultDelay: [number, number] = [0, 100]
 
@@ -21,6 +23,9 @@ export default defineComponent({
   props: dropdownProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('dropdown')
+    registerToken(getThemeTokens)
+
     const config = useGlobalConfig('dropdown')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-dropdown`)
 
@@ -32,7 +37,7 @@ export default defineComponent({
       const { trigger = config.trigger, placement = config.placement } = props
 
       const overlayProps = {
-        class: mergedPrefixCls.value,
+        class: [mergedPrefixCls.value, globalHashId.value, hashId.value],
         autoAdjust: props.autoAdjust ?? config.autoAdjust,
         clickOutside: trigger === 'click' || trigger === 'contextmenu',
         container: props.overlayContainer ?? config.overlayContainer,

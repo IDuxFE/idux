@@ -10,7 +10,6 @@ import type { VKey } from '@idux/cdk/utils'
 
 import { computed, defineComponent, inject } from 'vue'
 
-import { useKey } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 
 import Checkbox from './Checkbox'
@@ -24,7 +23,7 @@ import { getParentKeys } from '../utils'
 
 export default defineComponent({
   props: treeNodeProps,
-  setup(props) {
+  setup(props, { slots }) {
     const {
       props: treeProps,
       flattedNodes,
@@ -32,7 +31,6 @@ export default defineComponent({
       mergedShowLine,
       activeKey,
       selectedKeys,
-      slots,
       draggableIcon,
       dragKey,
       dropKey,
@@ -46,17 +44,18 @@ export default defineComponent({
       handleDrop,
     } = inject(treeToken)!
 
-    const key = useKey()
+    const nodeKey = computed(() => props.node.key)
 
-    const isActive = computed(() => activeKey.value === key)
+    const isActive = computed(() => activeKey.value === nodeKey.value)
     const isLast = computed(() => mergedShowLine.value && props.isLast)
-    const hasTopLine = computed(() => mergedShowLine.value && !props.isLeaf && props.level !== 0 && props.isFirst)
-    const selected = computed(() => selectedKeys.value.includes(key))
+    const hasTopLine = computed(() => mergedShowLine.value && !props.isLeaf && (!props.isFirst || props.level !== 0))
+    const hasBottomLine = computed(() => mergedShowLine.value && !props.isLeaf && !props.isLast)
+    const selected = computed(() => selectedKeys.value.includes(nodeKey.value))
     const disabled = computed(() => props.selectDisabled || !treeProps.selectable)
 
-    const dragging = computed(() => dragKey.value === key)
-    const dropping = computed(() => dropKey.value === key)
-    const dropParent = computed(() => dropParentKey.value === key)
+    const dragging = computed(() => dragKey.value === nodeKey.value)
+    const dropping = computed(() => dropKey.value === nodeKey.value)
+    const dropParent = computed(() => dropParentKey.value === nodeKey.value)
     const dropBefore = computed(() => dropping.value && dropType.value === 'before')
     const dropInside = computed(() => dropping.value && dropType.value === 'inside')
     const dropAfter = computed(() => dropping.value && dropType.value === 'after')
@@ -126,7 +125,7 @@ export default defineComponent({
       const { checkable, draggable } = treeProps
       const mergedDraggable = draggable && !dragDisabled
       const draggableIconNode = slots.draggableIcon?.() ?? <IxIcon name={draggableIcon.value} />
-      const currNode = nodeMap.get(key)
+      const currNode = nodeMap.get(nodeKey.value)
       const noopIdentUnitArr: number[] = []
       if (mergedShowLine.value) {
         getParentKeys(nodeMap, currNode)
@@ -165,12 +164,27 @@ export default defineComponent({
             draggable && <span class={`${mergedPrefixCls.value}-node-draggable-icon-noop`}></span>
           )}
           {isLeaf && mergedShowLine.value ? (
-            <LeafLine />
+            <LeafLine v-slots={slots} />
           ) : (
-            <Expand expanded={expanded} hasTopLine={hasTopLine.value} isLeaf={isLeaf} nodeKey={key} rawNode={rawNode} />
+            <Expand
+              v-slots={slots}
+              expanded={expanded}
+              hasTopLine={hasTopLine.value}
+              hasBottomLine={hasBottomLine.value}
+              isLeaf={isLeaf}
+              nodeKey={nodeKey.value}
+              rawNode={rawNode}
+            />
           )}
           {checkable && <Checkbox checkDisabled={checkDisabled} node={node} />}
-          <Content disabled={disabled.value} node={node} nodeKey={key} label={label} selected={selected.value} />
+          <Content
+            v-slots={slots}
+            disabled={disabled.value}
+            node={node}
+            nodeKey={nodeKey.value}
+            label={label}
+            selected={selected.value}
+          />
         </div>
       )
     }

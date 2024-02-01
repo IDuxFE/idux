@@ -20,7 +20,7 @@ import {
   type TableColumnMergedExtra,
   type TableColumnMergedSelectable,
 } from '../../composables/useColumns'
-import { TABLE_TOKEN } from '../../token'
+import { TABLE_TOKEN, type TableBodyRowContext, tableBodyRowToken } from '../../token'
 import {
   type TableBodyCellProps,
   type TableColumnIndexable,
@@ -51,8 +51,10 @@ export default defineComponent({
       selectable,
       mergedPagination,
     } = inject(TABLE_TOKEN)!
+    const rowContext = inject(tableBodyRowToken)!
+    const rowProps = rowContext.props
     const activeSortOrderBy = computed(() => activeOrderByMap[props.column.key])
-    const dataValue = useDataValue(props)
+    const dataValue = useDataValue(rowContext, props)
 
     const isFixStartLast = computed(() => fixedColumnKeys.value.lastStartKey === props.column.key)
     const isFixEndFirst = computed(() => fixedColumnKeys.value.firstEndKey === props.column.key)
@@ -68,7 +70,7 @@ export default defineComponent({
       let classes = {
         [`${prefixCls}-cell`]: true,
         [`${prefixCls}-cell-sorted`]: !!activeSortOrderBy.value,
-        [`${prefixCls}-cell-align-${align}`]: !!align && align != 'start',
+        [`${prefixCls}-cell-align-${align.cell}`]: !!align && align.cell != 'start',
         [`${prefixCls}-cell-ellipsis`]: !!mergedEllipsis.value,
       }
       if (fixed) {
@@ -91,7 +93,7 @@ export default defineComponent({
       }
       const { starts, ends } = columnOffsets.value
       const offsets = fixed === 'start' ? starts : ends
-      const fixedOffset = convertCssPixel(offsets[props.colIndex])
+      const fixedOffset = convertCssPixel(offsets[props.column.key].offset)
       return {
         position: 'sticky',
         left: fixed === 'start' ? fixedOffset : undefined,
@@ -107,19 +109,19 @@ export default defineComponent({
       let title: string | undefined
 
       if (type === 'selectable') {
-        children = renderSelectableChildren(props, slots, selectable, config, mergedPagination)
+        children = renderSelectableChildren(rowContext, slots, selectable, config, mergedPagination)
       } else if (type === 'indexable') {
-        children = renderIndexableChildren(props, slots, column as TableColumnIndexable, mergedPagination)
+        children = renderIndexableChildren(rowContext, slots, column as TableColumnIndexable, mergedPagination)
       } else {
         const text = dataValue.value
-        children = renderChildren(props, slots, text)
+        children = renderChildren(rowContext, props, slots, text)
         title = getColTitle(mergedEllipsis.value, children, text)
 
         // emptyCell 仅支持普通列
         if (!type && (isNil(children) || children === '')) {
           const emptyCellRender = slots.emptyCell || mergedEmptyCell.value
           children = isFunction(emptyCellRender)
-            ? emptyCellRender({ column, record: props.record, rowIndex: props.rowIndex })
+            ? emptyCellRender({ column, record: rowProps.record, rowIndex: rowProps.rowIndex })
             : emptyCellRender
         }
       }
@@ -131,7 +133,7 @@ export default defineComponent({
 
       const customAdditionalFn = tableProps.customAdditional?.bodyCell
       const customAdditional = customAdditionalFn
-        ? customAdditionalFn({ column, record: props.record, rowIndex: props.rowIndex })
+        ? customAdditionalFn({ column, record: rowProps.record, rowIndex: rowProps.rowIndex })
         : undefined
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const Tag = (tableProps.customTag?.bodyCell ?? 'td') as any
@@ -139,7 +141,7 @@ export default defineComponent({
       const contentNode =
         type === 'expandable' ? (
           <div class={`${mergedPrefixCls.value}-expandable-wrapper`}>
-            {renderExpandableChildren(props, slots, expandable, isTreeData, mergedPrefixCls.value)}
+            {renderExpandableChildren(rowContext, slots, expandable, isTreeData, mergedPrefixCls.value)}
             {!isEmptyNode(children) && <span class={`${mergedPrefixCls.value}-expandable-trigger-gap`}></span>}
             {children}
           </div>
@@ -148,7 +150,14 @@ export default defineComponent({
         )
 
       return (
-        <Tag class={classes.value} style={style.value} title={title} {...customAdditional}>
+        <Tag
+          class={classes.value}
+          style={style.value}
+          title={title}
+          colSpan={props.colSpan}
+          rowSpan={props.rowSpan}
+          {...customAdditional}
+        >
           {contentNode}
         </Tag>
       )
@@ -156,9 +165,12 @@ export default defineComponent({
   },
 })
 
-function useDataValue(props: TableBodyCellProps) {
+function useDataValue(context: TableBodyRowContext, props: TableBodyCellProps) {
   return computed(() => {
-    const { column, record } = props
+    const {
+      props: { record },
+    } = context
+    const { column } = props
     const dataKeys = convertArray(column.dataKey)
     if (dataKeys.length <= 0) {
       return undefined
@@ -177,22 +189,29 @@ function useDataValue(props: TableBodyCellProps) {
   })
 }
 
-function renderChildren(props: TableBodyCellProps, slots: Slots, value: string) {
-  const { record, rowIndex, column } = props
+function renderChildren(context: TableBodyRowContext, props: TableBodyCellProps, slots: Slots, value: string) {
+  const {
+    props: { record, rowIndex },
+  } = context
+  const { column } = props
   const { customCell } = column
   const cellRender = isString(customCell) ? slots[customCell] : customCell
   return cellRender ? cellRender({ value, record, rowIndex }) : value
 }
 
 function renderExpandableChildren(
-  props: TableBodyCellProps,
+  context: TableBodyRowContext,
   slots: Slots,
   expandable: ComputedRef<TableColumnMergedExpandable | undefined>,
   isTreeData: ComputedRef<boolean>,
   prefixCls: string,
 ) {
   const { icon, customIcon, indent, showLine } = expandable.value!
-  const { record, expanded, level = 0, hasPrevSibling, hasNextSibling, showLineIndentIndexList } = props
+  const {
+    props: { record, expanded, level = 0, hasPrevSibling, hasNextSibling, showLineIndentIndexList },
+    expandDisabled,
+    handleExpend,
+  } = context
   const hasParent = level > 0
   const mergedShowLine = isTreeData.value && showLine && indent
 
@@ -209,7 +228,7 @@ function renderExpandableChildren(
   const triggerCls = {
     [`${prefixCls}-expandable-trigger`]: true,
     [`${prefixCls}-expandable-trigger-show-line`]: mergedShowLine,
-    [`${prefixCls}-expandable-trigger-disabled`]: props.disabled,
+    [`${prefixCls}-expandable-trigger-disabled`]: expandDisabled.value,
   }
 
   const indents = []
@@ -234,7 +253,7 @@ function renderExpandableChildren(
       <button
         class={`${prefixCls}-expandable-trigger-button`}
         type="button"
-        onClick={props.disabled ? undefined : props.handleExpend}
+        onClick={expandDisabled.value ? undefined : handleExpend}
       >
         {iconNode}
       </button>
@@ -248,48 +267,64 @@ function renderExpandableChildren(
 }
 
 function renderSelectableChildren(
-  props: TableBodyCellProps,
+  rowContext: TableBodyRowContext,
   slots: Slots,
   selectable: ComputedRef<TableColumnMergedSelectable | undefined>,
   config: TableConfig,
   mergedPagination: ComputedRef<TablePagination | null>,
 ) {
-  const { record, rowIndex, selected: checked, indeterminate, disabled, isHover, handleSelect: onChange } = props
+  const {
+    props: { record, rowIndex },
+    isSelected,
+    isIndeterminate,
+    selectDisabled,
+    isHover,
+    handleSelect: onChange,
+  } = rowContext
   const { showIndex, multiple, customCell } = selectable.value!
   const onClick = (evt: Event) => {
     // see https://github.com/IDuxFE/idux/issues/547
     evt.stopPropagation()
     // radio 支持反选
-    if (!multiple && checked && !disabled && onChange) {
+    if (!multiple && isSelected.value && !selectDisabled.value && onChange) {
       onChange()
     }
   }
 
-  if (!checked && !isHover && showIndex) {
-    return renderIndexableChildren(props, slots, config.columnIndexable as TableColumnIndexable, mergedPagination)
+  if (!isSelected.value && !isHover && showIndex) {
+    return renderIndexableChildren(rowContext, slots, config.columnIndexable as TableColumnIndexable, mergedPagination)
   }
 
   const customRender = isString(customCell) ? slots[customCell] : customCell
   if (multiple) {
-    const checkboxProps = { checked, disabled, indeterminate, onChange, onClick }
+    const checkboxProps = {
+      checked: isSelected.value,
+      disabled: selectDisabled.value,
+      indeterminate: isIndeterminate.value,
+      onChange,
+      onClick,
+    }
     return customRender ? (
       customRender({ ...checkboxProps, record, rowIndex })
     ) : (
       <IxCheckbox {...checkboxProps}></IxCheckbox>
     )
   } else {
-    const radioProps = { checked, disabled, onChange, onClick }
+    const radioProps = { checked: isSelected.value, disabled: selectDisabled.value, onChange, onClick }
     return customRender ? customRender({ ...radioProps, record, rowIndex }) : <IxRadio {...radioProps}></IxRadio>
   }
 }
 
 function renderIndexableChildren(
-  props: TableBodyCellProps,
+  context: TableBodyRowContext,
   slots: Slots,
   indexable: TableColumnIndexable,
   mergedPagination: ComputedRef<TablePagination | null>,
 ) {
-  const { record, rowIndex, disabled } = props
+  const {
+    props: { record, rowIndex },
+    selectDisabled,
+  } = context
   const { customCell } = indexable
   const { pageIndex = 1, pageSize = 0 } = mergedPagination.value || {}
   const customRender = isString(customCell) ? slots[customCell] : customCell
@@ -297,6 +332,6 @@ function renderIndexableChildren(
     __DEV__ && Logger.warn('components/table', 'invalid customCell, please check the column is correct')
     return undefined
   }
-  const style = disabled ? 'cursor: not-allowed' : 'cursor: pointer'
+  const style = selectDisabled.value ? 'cursor: not-allowed' : 'cursor: pointer'
   return <span style={style}>{customRender({ record, rowIndex, pageIndex, pageSize })}</span>
 }

@@ -30,8 +30,11 @@ export type {
   MenuSubProps,
   MenuDividerComponent,
   MenuMode,
-  MenuTheme,
   MenuClickOptions,
   MenuCustomAdditional,
   MenuData,
+  MenuTheme,
 } from './src/types'
+
+export { getThemeTokens as getMenuThemeTokens } from './theme'
+export type { MenuThemeTokens } from './theme'

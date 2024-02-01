@@ -51,6 +51,7 @@ export default defineComponent({
       handleSort,
       activeOrderByMap,
       activeFilterByMap,
+      mergedRows,
       handleFilter,
     } = inject(TABLE_TOKEN)!
 
@@ -69,8 +70,8 @@ export default defineComponent({
         [`${prefixCls}-cell-${type}`]: !!type,
         [`${prefixCls}-cell-filterable`]: !!filterable,
         [`${prefixCls}-cell-sortable`]: !!sortable,
-        [`${prefixCls}-cell-align-center`]: hasChildren || align === 'center',
-        [`${prefixCls}-cell-align-end`]: !hasChildren && align === 'end',
+        [`${prefixCls}-cell-align-center`]: hasChildren || align?.title === 'center',
+        [`${prefixCls}-cell-align-end`]: !hasChildren && align?.title === 'end',
         [`${prefixCls}-cell-ellipsis`]: !!mergedEllipsis.value,
       }
       if (fixed) {
@@ -88,14 +89,16 @@ export default defineComponent({
     })
 
     const style = computed<CSSProperties | undefined>(() => {
-      const { fixed, colStart, colEnd } = props.column as HeadColumn
+      const { key, fixed } = props.column as HeadColumn
+      const { offsetIndexMap } = mergedRows.value
       if (!fixed) {
         return
       }
       const { starts, ends } = columnOffsetsWithScrollBar.value
-      const offsets = fixed === 'start' ? starts : ends
-      const offsetIndex = fixed === 'start' ? colStart : colEnd
-      const fixedOffset = convertCssPixel(offsets[offsetIndex])
+      const offsets = Object.values(fixed === 'start' ? starts : ends)
+      const offsetIndex = offsetIndexMap[key][fixed === 'start' ? 'colStart' : 'colEnd']
+
+      const fixedOffset = convertCssPixel(offsets.find(offset => offset.index === offsetIndex)?.offset)
       return {
         position: 'sticky',
         left: fixed === 'start' ? fixedOffset : undefined,
@@ -104,7 +107,7 @@ export default defineComponent({
     })
 
     const activeSortOrderBy = computed(() => activeOrderByMap[props.column.key])
-    const activeFilterBy = computed(() => activeFilterByMap[props.column.key] || NoopArray)
+    const activeFilterBy = computed(() => activeFilterByMap[props.column.key] || (NoopArray as unknown as VKey[]))
     const onUpdateFilterBy = (filterBy: VKey[]) => {
       const { key, filterable } = props.column
       handleFilter(key, filterable!, filterBy)

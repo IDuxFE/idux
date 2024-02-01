@@ -29,3 +29,6 @@ export type {
   DrawerRef,
   DrawerBindings,
 } from './src/types'
+
+export { getThemeTokens as getDrawerThemeTokens } from './theme'
+export type { DrawerThemeTokens } from './theme'

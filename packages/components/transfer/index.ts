@@ -34,3 +34,7 @@ export type {
 } from './src/types'
 
 export { TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN, TRANSFER_OPERATIONS_TOKEN } from './src/token'
+
+export { getThemeTokens as getTransferThemeTokens } from './theme'
+
+export type { TransferThemeTokens } from './theme'

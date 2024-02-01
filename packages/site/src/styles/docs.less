@@ -4,7 +4,8 @@
     margin-bottom: 8px;
 
     > .ix-radio-group {
-      background-color: #eceff3;
+      background-color: var(--ix-color-emphasized-container-bg);
+      border: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border);
       border-radius: 20px;
       padding: 4px;
 
@@ -15,7 +16,7 @@
         border-radius: 16px;
 
         &.ix-radio-checked {
-          background: @color-primary;
+          background: var(--ix-color-primary);
           box-shadow: @shadow-bottom-sm;
         }
       }
@@ -35,7 +36,7 @@
 
       td {
         & code {
-          color: @color-magenta;
+          color: #d619be;
         }
       }
 
@@ -55,7 +56,7 @@
 
       td {
         & code {
-          color: @color-magenta;
+          color: #d619be;
         }
       }
 
@@ -68,7 +69,7 @@
 
 .site-anchor {
   position: absolute;
-  top: @spacing-sm;
+  top: var(--ix-margin-size-sm);
   right: 0;
 
   .ix-anchor {
@@ -76,6 +77,10 @@
       &-title {
         width: @toc-width;
       }
+    }
+
+    &-wrapper {
+      background-color: var(--ix-color-info-container-bg);
     }
   }
 }
@@ -90,7 +95,7 @@
   display: block;
   width: max-content;
   max-width: 100%;
-  line-height: @line-height-base;
+  line-height: 1.5;
   overflow: auto;
 
   td {

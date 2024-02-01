@@ -1,11 +1,10 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@collapse-font-size-sm` | `var(--ix-font-size-sm)` | - | - |
-| `@collapse-font-size-md` | `var(--ix-font-size-md)` | `var(--ix-font-size-sm)` | - |
-| `@collapse-expand-icon-font-size-sm` | `var(--ix-font-size-xl)` | - | - |
-| `@collapse-expand-icon-font-size-md` | `var(--ix-font-size-2xl)` | - | - |
-| `@collapse-padding-horizontal-sm` | `var(--ix-spacing-md)` | - | - |
-| `@collapse-padding-horizontal-md` | `var(--ix-spacing-lg)` | - | - |
-| `@collapse-border` | `1px solid var(--ix-border-color)` | - | - |
-| `@collapse-border-radius` | `var(--ix-border-radius-md)` | `var(--ix-border-radius-sm)` | - |
-| `@collapse-content-background-color` | `var(--ix-background-color-light)` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `expandIconSizeMd` |  | `number` | `24` | `24` |
+| `expandIconSizeSm` |  | `number` | `20` | `20` |
+| `fontSizeMd` |  | `number` | `14` | `14` |
+| `fontSizeSm` |  | `number` | `14` | `14` |
+| `paddingHorizontalMd` |  | `number` | `16` | `16` |
+| `paddingHorizontalSm` |  | `number` | `12` | `12` |
+| `panelContentBgColor` |  | `string` | `#f7f9fc` | `#0A0C0F` |
+| `panelHeaderBgColor` |  | `string` | `#ffffff` | `#171A1F` |

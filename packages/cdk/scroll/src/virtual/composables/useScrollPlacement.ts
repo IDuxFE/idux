@@ -14,48 +14,39 @@ import { isFunction } from 'lodash-es'
 
 import { callEmit } from '@idux/cdk/utils'
 
-export type SyncScrollTop = (newTop: number | ((prev: number) => number), setHolderScrollTop?: boolean) => void
+export type Scroll = { top?: number; left?: number }
+export type SyncScroll = (newScroll: Scroll | ((prev: Scroll) => Scroll), setHolderScroll?: boolean) => void
 
 export interface ScrollPlacementContext {
-  syncScrollTop: SyncScrollTop
+  syncScroll: SyncScroll
   handleScroll: (evt: Event) => void
-}
-
-const keepInRange = (maxScrollHeight: number, newScrollTop: number) => {
-  let newTop = Math.max(newScrollTop, 0)
-  if (!Number.isNaN(maxScrollHeight)) {
-    newTop = Math.min(newTop, maxScrollHeight)
-  }
-  return newTop
 }
 
 export function useScrollPlacement(
   props: VirtualScrollProps,
   holderRef: Ref<HTMLElement | undefined>,
-  scrollTop: Ref<number>,
+  scroll: Ref<Scroll>,
   scrollHeight: Ref<number>,
-  containerHeight: Ref<number>,
-  changeScrollTop: (value: number) => void,
+  containerSize: Ref<{ width: number; height: number }>,
+  changeScroll: (value: Scroll) => void,
+  setScroll: (value: Scroll, setContainerScroll: boolean) => Required<Scroll>,
 ): ScrollPlacementContext {
   const maxScrollHeight = computed(() => {
     const height = scrollHeight.value
-    return height > 0 ? Math.max(height - containerHeight.value, 0) : NaN
+    return height > 0 ? Math.max(height - containerSize.value.height, 0) : NaN
   })
 
-  const syncScrollTop = (newTop: number | ((prev: number) => number), setHolderScrollTop?: boolean) => {
-    const value = isFunction(newTop) ? newTop(scrollTop.value) : newTop
-    const alignedTop = keepInRange(maxScrollHeight.value, value)
-    const holderElement = holderRef.value
-    if (holderElement && setHolderScrollTop) {
-      holderElement.scrollTop = alignedTop
-    }
-    changeScrollTop(alignedTop)
+  const syncScroll: SyncScroll = (newScroll, setHolderScroll?: boolean) => {
+    const resolvedScroll = isFunction(newScroll) ? newScroll(scroll.value) : newScroll
+    const { top: alignedTop, left: alignedLeft } = setScroll(resolvedScroll, !!setHolderScroll)
+
+    changeScroll({ top: alignedTop, left: alignedLeft })
   }
 
   const handleScroll = (evt: Event) => {
-    const { scrollTop: newScrollTop } = evt.currentTarget as Element
-    if (newScrollTop !== scrollTop.value) {
-      syncScrollTop(newScrollTop)
+    const { scrollTop: newScrollTop, scrollLeft: newScrollLeft } = evt.currentTarget as Element
+    if (newScrollTop !== scroll.value.top || newScrollLeft !== scroll.value.left) {
+      syncScroll({ top: newScrollTop, left: newScrollLeft })
     }
     callEmit(props.onScroll, evt)
 
@@ -66,12 +57,12 @@ export function useScrollPlacement(
     }
   }
 
-  const initScrollTop = () => {
+  const initScroll = () => {
     if (holderRef.value) {
-      syncScrollTop(scrollTop.value, true)
+      syncScroll(scroll.value, true)
     }
   }
-  onActivated(initScrollTop)
+  onActivated(initScroll)
 
-  return { syncScrollTop, handleScroll }
+  return { syncScroll, handleScroll }
 }

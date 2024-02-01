@@ -1,0 +1,10 @@
+/* ------ upload css variables ------ */
+:root {
+  --ix-upload-selector-dragable-border: 1px dashed #d3d7de;
+  --ix-upload-selector-dragable-border-dragover: 1px dashed #1c6eff;
+  --ix-upload-list-name-max-width: calc(100% - 74px);
+  --ix-upload-list-img-thumb-width: 48px;
+  --ix-upload-list-img-thumb-height: 48px;
+  --ix-upload-list-img-card-height: 96px;
+  --ix-upload-list-img-card-width: 96px;
+}

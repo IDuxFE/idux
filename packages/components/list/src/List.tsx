@@ -12,6 +12,7 @@ import { ɵEmpty } from '@idux/components/_private/empty'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxRow } from '@idux/components/grid'
 import { IxSpin } from '@idux/components/spin'
+import { useThemeToken } from '@idux/components/theme'
 
 import { listToken } from './token'
 import { ListProps, listProps } from './types'
@@ -21,6 +22,7 @@ export default defineComponent({
   props: listProps,
   setup(props: ListProps, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId } = useThemeToken()
     const mergedPrefixCls = computed(() => `${common.prefixCls}-list`)
     const listConfig = useGlobalConfig('list')
 
@@ -43,6 +45,7 @@ export default defineComponent({
       const borderless = props.borderless ?? listConfig.borderless
       const size = props.size ?? listConfig.size
       return normalizeClass({
+        [globalHashId.value]: !globalHashId.value,
         [`${prefixCls}`]: true,
         [`${prefixCls}-split`]: true,
         [`${prefixCls}-${size}`]: true,

@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/box.less';
 @import '../../style/mixins/reset.less';
 @import '../../style/motion/zoom.less';
@@ -36,8 +37,8 @@
     height: 100%;
     pointer-events: auto;
     overflow: hidden;
-    border-radius: @modal-border-radius;
-    box-shadow: @modal-box-shadow;
+    border-radius: var(--ix-border-radius-md);
+    box-shadow: var(--ix-box-shadow-lg);
 
     > .@{header-prefix} {
       padding-left: 16px;
@@ -51,10 +52,10 @@
     overflow: auto;
 
     &-title {
-      .reset-font-size(@modal-body-title-font-size);
+      .reset-font-size(var(--ix-modal-title-font-size));
 
-      font-weight: @modal-body-title-font-weight;
-      color: @modal-body-title-color;
+      font-weight: var(--ix-modal-title-font-weight);
+      color: var(--ix-modal-title-color);
       margin-bottom: 4px;
     }
 
@@ -64,7 +65,7 @@
       justify-content: center;
       width: 100%;
       padding-right: 16px;
-      color: @modal-body-content-color;
+      color: var(--ix-modal-content-color);
 
       &-only-title {
         align-items: center;
@@ -87,38 +88,39 @@
     }
 
     &-icon {
-      font-size: @modal-body-icon-font-size;
-      line-height: 1;
+      font-size: var(--ix-modal-icon-size);
+      height: calc(var(--ix-modal-icon-size) + var(--ix-line-height-gutter));
+      line-height: calc(var(--ix-modal-icon-size) + var(--ix-line-height-gutter));
       margin: 0 16px;
     }
 
     &-confirm {
       .@{modal-prefix}-body-icon {
-        color: @modal-body-confirm-color;
+        color: var(--ix-color-warning-icon);
       }
     }
 
     &-info {
       .@{modal-prefix}-body-icon {
-        color: @modal-body-info-color;
+        color: var(--ix-color-info-icon);
       }
     }
 
     &-success {
       .@{modal-prefix}-body-icon {
-        color: @modal-body-success-color;
+        color: var(--ix-color-success-icon);
       }
     }
 
     &-warning {
       .@{modal-prefix}-body-icon {
-        color: @modal-body-warning-color;
+        color: var(--ix-color-warning-icon);
       }
     }
 
     &-error {
       .@{modal-prefix}-body-icon {
-        color: @modal-body-error-color;
+        color: var(--ix-color-error-icon);
       }
     }
   }

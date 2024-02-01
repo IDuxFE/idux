@@ -10,14 +10,19 @@ import { computed, defineComponent, normalizeClass } from 'vue'
 import { isObject } from 'lodash-es'
 
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import { layoutProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxLayout',
   props: layoutProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('layout')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-layout`)
     const mergedFixed = computed(() => {
       const { fixed } = props
@@ -31,6 +36,8 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const { header, sider } = mergedFixed.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-fixed-header`]: header,
         [`${prefixCls}-fixed-sider`]: sider,

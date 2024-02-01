@@ -1,14 +1,16 @@
+@import '../../style/variable/index.less';
+@import '../../../components/style/variable/index.less';
 @import '../../style/mixins/reset.less';
 @import '../../../components/style/mixins/ellipsis.less';
 
 .@{pro-transfer-prefix} {
   .reset-component();
 
-  min-width: @pro-transfer-list-min-width;
-  min-height: @pro-transfer-list-min-height;
+  min-width: var(--ix-pro-transfer-list-min-width);
+  min-height: var(--ix-pro-transfer-list-min-height);
 
   .@{transfer-prefix}-list {
-    background-color: @pro-transfer-list-background-color;
+    background-color: var(--ix-color-container-bg);
   }
 
   &-empty-wrapper {
@@ -24,14 +26,14 @@
     &-close-icon {
       margin-left: auto;
       cursor: pointer;
-      font-size: @pro-transfer-list-close-icon-font-size;
-      color: @pro-transfer-list-close-icon-color;
+      font-size: var(--ix-font-size-icon);
+      color: var(--ix-color-icon);
       &:hover {
-        color: @pro-transfer-list-close-icon-hover-color;
+        color: var(--ix-color-icon-hover);
       }
       &:focus,
       &:active {
-        color: @pro-transfer-list-close-icon-active-color;
+        color: var(--ix-color-icon-active);
       }
     }
   }
@@ -41,15 +43,13 @@
       display: inline-flex;
       width: 100%;
       align-items: center;
-      // TODO: fixed
-      line-height: @form-line-height;
 
       &-ellipsis &-text {
         .ellipsis();
       }
     }
     &-close-icon {
-      padding: @pro-transfer-table-close-icon-padding;
+      padding: var(--ix-pro-transfer-table-close-icon-padding);
       flex-shrink: 0;
     }
 
@@ -63,39 +63,40 @@
       .@{tree-node-prefix}-content-suffix {
         position: sticky;
         right: 0;
-        background: linear-gradient(to right, transparent, @pro-transfer-list-background-color 30%);
+        background: linear-gradient(to right, transparent, var(--ix-color-container-bg) 30%);
       }
       .@{tree-node-prefix}:hover {
-        background-color: @pro-transfer-list-item-hover-color;
+        background-color: var(--ix-color-container-bg-hover);
         .@{tree-node-prefix}-content-suffix {
-          background: linear-gradient(to right, transparent, @pro-transfer-list-item-hover-color 30%);
+          background: linear-gradient(to right, transparent, var(--ix-color-container-bg-hover) 30%);
         }
       }
     }
     &.@{tree-prefix}-blocked .@{tree-node-prefix} {
       transition: none;
-      background-color: @pro-transfer-list-background-color;
+      background-color: var(--ix-color-container-bg);
+      padding-left: var(--ix-padding-size-md);
       &:hover {
-        background-color: @pro-transfer-list-item-hover-color;
+        background-color: var(--ix-color-container-bg-hover);
         &-content {
-          background-color: @pro-transfer-list-item-hover-color;
+          background-color: var(--ix-color-container-bg-hover);
         }
       }
       &-content {
-        background-color: @pro-transfer-list-background-color;
+        background-color: var(--ix-color-container-bg);
         transition: none;
       }
 
       &-active:not(&-disabled),
       &-selected:not(&-disabled) {
-        background-color: @pro-transfer-list-background-color;
+        background-color: var(--ix-color-container-bg);
         &:hover {
-          background-color: @pro-transfer-list-item-hover-color;
+          background-color: var(--ix-color-container-bg-hover);
         }
       }
     }
     & .@{tree-node-prefix} &-close-icon {
-      padding: @pro-transfer-tree-close-icon-padding;
+      padding: var(--ix-pro-transfer-tree-close-icon-padding);
     }
   }
 }

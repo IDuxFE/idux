@@ -1,0 +1,5 @@
+/* ------ badge css variables ------ */
+:root {
+  --ix-badge-dot-size: 6px;
+  --ix-badge-count-size: 16px;
+}

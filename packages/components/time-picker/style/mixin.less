@@ -1,10 +1,9 @@
 .time-picker-trigger() {
   display: inline-flex;
   width: 100%;
-  line-height: @time-picker-line-height;
 
   &:not(.@{trigger-prefix}-disabled) {
-    color: @time-picker-color;
+    color: var(--ix-color-text);
   }
 
   &-input {
@@ -15,12 +14,6 @@
       min-width: 0;
     }
   }
-
-  &-overlay {
-    z-index: 1000;
-    background-color: @time-picker-overlay-background-color;
-    box-shadow: @time-picker-overlay-box-shadow;
-  }
 }
 
 .time-picker-board() {
@@ -30,10 +23,10 @@
     }
 
     &-input {
-      margin-bottom: @time-picker-overlay-input-margin-bottom;
-      color: @time-picker-color;
+      margin-bottom: var(--ix-margin-size-sm);
+      color: var(--ix-color-text);
       input {
-        color: @time-picker-color;
+        color: var(--ix-color-text);
       }
     }
   }

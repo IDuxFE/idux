@@ -1,12 +1,13 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 @import './mixin.less';
 
 .@{tree-prefix} {
   .reset-component();
 
-  font-size: @tree-font-size;
-  background-color: @tree-background-color;
-  border-radius: @border-radius-sm;
+  font-size: var(--ix-font-size-sm);
+  background-color: var(--ix-tree-bg-color);
+  border-radius: var(--ix-border-radius-sm);
 
   &-content-inner {
     display: flex;
@@ -14,7 +15,7 @@
   }
 
   &-focused:not(:hover):not(&-active) {
-    background-color: @tree-background-color-focused;
+    background-color: var(--ix-color-container-bg-active);
   }
 
   &-auto-height {
@@ -27,22 +28,22 @@
 
   &-blocked {
     .@{tree-node-prefix} {
-      transition: background-color @transition-duration-base;
+      transition: background-color var(--ix-motion-duration-medium);
 
       &-active:not(&-disabled),
       &-selected:not(&-disabled) {
-        background-color: @tree-node-selected-background-color;
+        background-color: var(--ix-tree-node-bg-color-selected);
 
         &:hover {
-          background-color: @tree-node-hover-background-color;
+          background-color: var(--ix-tree-node-bg-color-hover);
           .@{tree-node-prefix}-content {
-            background-color: @tree-node-hover-background-color;
+            background-color: var(--ix-tree-node-bg-color-hover);
           }
         }
       }
 
       &:hover {
-        background-color: @tree-node-hover-background-color;
+        background-color: var(--ix-tree-node-bg-color-hover);
 
         .@{tree-node-prefix} {
           &-draggable-icon {
@@ -50,7 +51,7 @@
           }
 
           &-content {
-            background-color: @tree-node-hover-background-color;
+            background-color: var(--ix-tree-node-bg-color-hover);
           }
         }
       }
@@ -73,22 +74,27 @@
 
       &-expand {
         position: relative;
-        color: @tree-expand-icon-color;
+        color: var(--ix-tree-expand-icon-color);
+
+        @line-height: calc(var(--ix-tree-node-content-height) / 2 - var(--ix-margin-size-xs));
+        @line-offset: calc((var(--ix-tree-node-content-height) - var(--ix-font-size-icon)) / 2 - @line-height);
 
         &-top-line {
-          position: absolute;
-          height: (@tree-node-content-height / 2 - 4);
-          /* stylelint-disable function-no-unknown */
-          top: -(@tree-node-content-height / 4 - 4);
-          right: 50%;
+          height: @line-height;
+          top: @line-offset;
+          .vertical-line();
+        }
+        &-bottom-line {
+          height: @line-height;
+          bottom: @line-offset;
           .vertical-line();
         }
 
         &::after {
           position: absolute;
-          top: calc(50% - @tree-node-line-size / 2);
-          right: -2px;
-          width: (@tree-node-icon-width / 4);
+          top: calc(50% - var(--ix-line-width) / 2);
+          right: var(--ix-margin-size-2xs);
+          width: calc((var(--ix-tree-node-icon-width) - var(--ix-font-size-icon)) / 2);
           z-index: 1;
           .horizontal-line();
 
@@ -99,10 +105,8 @@
       &:not(&-expanded):not(&-last) {
         .@{tree-node-prefix}-expand {
           &::before {
-            position: absolute;
-            top: (@tree-node-content-height - 6);
-            right: 50%;
-            height: (@tree-node-content-height / 2 - 4);
+            top: calc(var(--ix-tree-node-content-height) - 6px);
+            height: calc(var(--ix-tree-node-content-height) / 2 - var(--ix-margin-size-xs));
             z-index: 1;
             .vertical-line();
 
@@ -121,10 +125,8 @@
         height: 100%;
 
         &::before {
-          position: absolute;
-          top: -@tree-node-padding-vertical;
-          right: (@tree-node-icon-width / 2);
-          bottom: -@tree-node-padding-vertical + 1;
+          top: calc(var(--ix-tree-node-padding-vertical) * -1);
+          bottom: calc(var(--ix-tree-node-padding-vertical) * -1);
           .vertical-line();
 
           content: '';
@@ -148,42 +150,42 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: @tree-node-padding-vertical 0;
+  padding: var(--ix-tree-node-padding-vertical) var(--ix-tree-node-padding-horizontal);
   white-space: nowrap;
 
   .@{icon-prefix} {
-    font-size: @tree-icon-font-size;
+    font-size: var(--ix-font-size-icon);
   }
 
   &-indent {
     &-noop-unit,
     &-unit {
       display: inline-block;
-      width: @tree-node-icon-width;
+      width: var(--ix-tree-node-icon-width);
     }
   }
 
   &-draggable-icon {
     cursor: pointer;
     opacity: 0.4;
-    transition: opacity @transition-duration-base @ease-in-out;
-    width: @tree-node-icon-width;
-    height: @tree-node-content-height;
+    transition: opacity var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out);
+    width: var(--ix-tree-node-icon-width);
+    height: var(--ix-tree-node-content-height);
     display: flex;
     align-items: center;
     justify-content: center;
 
     &-noop {
-      width: @tree-node-icon-width;
+      width: var(--ix-tree-node-icon-width);
     }
   }
 
   &-expand {
-    width: @tree-node-icon-width;
-    height: @tree-node-content-height;
+    width: var(--ix-tree-node-icon-width);
+    height: var(--ix-tree-node-content-height);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     cursor: pointer;
 
     &-noop {
@@ -191,17 +193,17 @@
     }
   }
 
-  &-checkbox {
-    margin: @tree-node-checkbox-margin;
+  & &-checkbox {
+    margin-right: var(--ix-tree-node-checkbox-margin-right);
   }
 
   &-leaf {
-    width: @tree-node-icon-width;
+    width: var(--ix-tree-node-icon-width);
     align-self: stretch;
     text-align: center;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     cursor: default;
 
     &-line {
@@ -212,10 +214,8 @@
       width: 100%;
 
       &::before {
-        position: absolute;
-        top: -@tree-node-padding-vertical;
-        right: (@tree-node-icon-width / 2);
-        bottom: -@tree-node-padding-vertical + 1;
+        top: calc(var(--ix-tree-node-padding-vertical) * -1);
+        bottom: calc(var(--ix-tree-node-padding-vertical) * -1);
         .vertical-line();
 
         content: ' ';
@@ -223,10 +223,10 @@
 
       &::after {
         position: absolute;
-        top: 50%;
+        top: calc(50% - var(--ix-line-width));
         bottom: 0;
-        left: 55%;
-        right: 0;
+        left: calc(var(--ix-font-size-icon) / 2);
+        right: var(--ix-margin-size-2xs);
         .horizontal-line();
 
         content: ' ';
@@ -238,13 +238,12 @@
     position: relative;
     display: inline-flex;
     cursor: pointer;
-    min-height: @tree-node-content-height;
-    line-height: @tree-node-content-height;
-    transition: background-color @transition-duration-base;
-    padding: @tree-node-content-padding;
+    min-height: var(--ix-tree-node-content-height);
+    line-height: var(--ix-tree-node-content-height);
+    transition: background-color var(--ix-motion-duration-medium);
 
     &:hover {
-      background-color: @tree-node-hover-background-color;
+      background-color: var(--ix-tree-node-bg-color-hover);
     }
 
     &-prefix,
@@ -252,34 +251,40 @@
       display: flex;
       justify-items: center;
       align-items: center;
+
+      .@{icon-prefix} {
+        color: var(--ix-color-icon);
+      }
+    }
+    &-prefix {
+      margin-right: var(--ix-tree-node-content-prefix-margin-right);
     }
 
     &-label {
       display: inline-block;
       flex-grow: 1;
-      padding: @tree-node-content-label-padding;
 
       &-highlight {
-        color: @tree-node-content-label-highlight-color;
+        color: var(--ix-tree-node-content-label-highlight-color);
       }
     }
   }
 
   &-active:not(&-disabled) .@{tree-node-prefix}-content {
-    background-color: @tree-node-hover-background-color;
+    background-color: var(--ix-tree-node-bg-color-hover);
   }
 
   &-selected:not(&-disabled) .@{tree-node-prefix}-content {
-    background-color: @tree-node-selected-background-color;
-    color: @tree-node-selected-color;
+    background-color: var(--ix-tree-node-bg-color-selected);
+    color: var(--ix-tree-node-color-selected);
 
     &:hover {
-      background-color: @tree-node-hover-background-color;
+      background-color: var(--ix-tree-node-bg-color-hover);
     }
   }
 
   &-disabled .@{tree-node-prefix}-content {
-    color: @tree-node-disabled-color;
+    color: var(--ix-color-text-disabled);
     cursor: not-allowed;
 
     &:hover {
@@ -304,13 +309,13 @@
 
   &-drop-parent::after,
   &-drop-inside::after {
-    border: @tree-box-shadow-size solid @tree-box-shadow-color;
+    border: var(--ix-tree-drop-line-width) solid var(--ix-tree-drop-line-color);
   }
 
   &-drop-before .@{tree-node-prefix}-content::after {
-    border-top: @tree-box-shadow-size solid @tree-box-shadow-color;
+    border-top: var(--ix-tree-drop-line-width) solid var(--ix-tree-drop-line-color);
   }
   &-drop-after .@{tree-node-prefix}-content::after {
-    border-bottom: @tree-box-shadow-size solid @tree-box-shadow-color;
+    border-bottom: var(--ix-tree-drop-line-width) solid var(--ix-tree-drop-line-color);
   }
 }

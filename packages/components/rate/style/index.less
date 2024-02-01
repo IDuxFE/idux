@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 
 .@{rate-prefix} {
@@ -7,7 +8,7 @@
   line-height: unset;
   list-style: none;
   outline: none;
-  color: @rate-active-color;
+  color: var(--ix-rate-active-color);
 
   &-item {
     position: relative;
@@ -16,15 +17,15 @@
     cursor: pointer;
 
     &:not(:last-child) {
-      margin-right: @rate-item-margin-right;
+      margin-right: var(--ix-rate-item-margin-right);
     }
 
     > span {
-      transition: all @transition-duration-base @ease-in-out;
+      transition: all var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out);
 
       &:hover,
       &:focus-visible {
-        transform: scale(@rate-item-hover-scale);
+        transform: scale(var(--ix-rate-item-scale-hover));
       }
 
       &:focus {
@@ -32,14 +33,14 @@
       }
 
       &:focus-visible {
-        outline: @rate-item-focus-outline;
+        outline: var(--ix-rate-item-outline-focus);
       }
     }
 
     &-first,
     &-second {
-      color: @rate-placeholder-color;
-      transition: all @transition-duration-base @ease-in-out;
+      color: var(--ix-color-fill-container-bg);
+      transition: all var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out);
       user-select: none;
     }
 
@@ -73,14 +74,14 @@
   }
 
   &-sm {
-    font-size: @rate-size-sm;
+    font-size: var(--ix-rate-size-sm);
   }
 
   &-md {
-    font-size: @rate-size-md;
+    font-size: var(--ix-rate-size-md);
   }
 
   &-lg {
-    font-size: @rate-size-lg;
+    font-size: var(--ix-rate-size-lg);
   }
 }

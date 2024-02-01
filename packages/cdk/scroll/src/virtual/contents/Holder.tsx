@@ -7,7 +7,7 @@
 
 import { type CSSProperties, computed, defineComponent, inject, onBeforeUnmount, onMounted, ref } from 'vue'
 
-import { isString, throttle } from 'lodash-es'
+import { isNumber, isString, throttle } from 'lodash-es'
 
 import { offResize, onResize } from '@idux/cdk/resize'
 import { convertCssPixel } from '@idux/cdk/utils'
@@ -19,66 +19,114 @@ export default defineComponent({
     const {
       props,
       slots: virtualScrollSlots,
+      enabled,
       holderRef,
-      fillerRef,
-      collectHeights,
+      fillerHorizontalRef,
+      fillerVerticalRef,
+      collectSize,
       scrollHeight,
-      scrollOffset,
+      scrollWidth,
+      scrollOffsetLeft,
+      scrollOffsetTop,
       handleScroll,
+      topIndex,
+      bottomIndex,
+      leftIndex,
+      rightIndex,
+      renderedData,
     } = inject(virtualScrollToken)!
 
     const style = computed<CSSProperties | undefined>(() => {
-      const { height, fullHeight } = props
-      if (!height || height <= 0) {
-        return undefined
+      const { height, fullHeight, width, fullWidth } = props
+
+      const resolvedHeight = convertSize(height)
+      const resolvedWidth = convertSize(width)
+
+      if (!resolvedHeight && !resolvedWidth) {
+        return
       }
 
-      if (isString(height)) {
-        return { height }
+      return {
+        [fullHeight || isString(height) ? 'height' : 'maxHeight']: resolvedHeight,
+        [fullWidth || isString(width) ? 'width' : 'maxWidth']: resolvedWidth,
+        overflowX: props.scrollMode !== 'native' || !resolvedWidth || resolvedWidth === 'auto' ? 'hidden' : 'auto',
+        overflowY: props.scrollMode !== 'native' || !resolvedHeight || resolvedHeight === 'auto' ? 'hidden' : 'auto',
       }
-
-      return { [fullHeight ? 'height' : 'maxHeight']: convertCssPixel(height) }
     })
 
-    const fillerStyle = computed<CSSProperties | undefined>(() => {
-      if (scrollOffset.value === undefined) {
+    const fillerVerticalStyle = computed<CSSProperties | undefined>(() => {
+      if (scrollOffsetTop.value === undefined) {
         return undefined
       }
-      return { height: `${scrollHeight.value}px` }
+      return { height: `${scrollHeight.value}px`, width: 0 }
+    })
+    const fillerHorizontalStyle = computed<CSSProperties | undefined>(() => {
+      if (scrollOffsetLeft.value === undefined) {
+        return undefined
+      }
+
+      return { width: `${scrollWidth.value}px`, height: 0 }
     })
 
     const contentStyle = computed<CSSProperties | undefined>(() => {
-      const offset = scrollOffset.value
-      if (offset === undefined) {
+      const offsetTop = scrollOffsetTop.value
+      const offsetLeft = scrollOffsetLeft.value
+
+      if (offsetTop === undefined && offsetLeft == undefined) {
         return undefined
       }
       return {
-        transform: `translateY(${offset}px)`,
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        top: 0,
+        marginTop: convertCssPixel(offsetTop),
+        marginLeft: convertCssPixel(offsetLeft),
       }
     })
 
     const contentRef = ref<HTMLDivElement>()
-    const onContentResize = throttle(collectHeights, 16)
+    const onContentResize = throttle(collectSize, 16)
     // 这里不能用 useResizeObserver, 会有 test 爆栈警告, 具体原因后面再排查。
-    onMounted(() => onResize(contentRef.value, onContentResize))
-    onBeforeUnmount(() => offResize(contentRef.value, onContentResize))
+    onMounted(() => {
+      onResize(contentRef.value, onContentResize)
+    })
+    onBeforeUnmount(() => {
+      offResize(contentRef.value, onContentResize)
+    })
 
     return () => {
       const children = slots.default!()
       const contentRender = virtualScrollSlots.content ?? props.contentRender
       return (
         <div ref={holderRef} class="cdk-virtual-scroll-holder" style={style.value} onScroll={handleScroll}>
-          <div ref={fillerRef} class="cdk-virtual-scroll-filler" style={fillerStyle.value}>
-            <div ref={contentRef} class="cdk-virtual-scroll-content" style={contentStyle.value}>
-              {contentRender ? contentRender(children) : children}
-            </div>
+          {enabled.value.horizontal && (
+            <div
+              ref={fillerHorizontalRef}
+              class="cdk-virtual-scroll-filler-horizontal"
+              style={fillerHorizontalStyle.value}
+            ></div>
+          )}
+          {enabled.value.vertical && (
+            <div
+              ref={fillerVerticalRef}
+              class="cdk-virtual-scroll-filler-vertical"
+              style={fillerVerticalStyle.value}
+            ></div>
+          )}
+          <div ref={contentRef} class="cdk-virtual-scroll-content" style={contentStyle.value}>
+            {contentRender
+              ? contentRender(children, {
+                  topIndex: topIndex.value,
+                  bottomIndex: bottomIndex.value,
+                  leftIndex: leftIndex.value,
+                  rightIndex: rightIndex.value,
+                  renderedData: renderedData.value,
+                })
+              : children}
           </div>
         </div>
       )
     }
   },
 })
+
+function convertSize(size: number | string | undefined) {
+  return !size || (isNumber(size) && size <= 0) ? undefined : isString(size) ? size : convertCssPixel(size)
+}

@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 
 .@{desc-prefix} {
@@ -12,7 +13,7 @@
       display: table-cell;
       text-align: end;
       white-space: nowrap;
-      color: @desc-item-label-color;
+      color: var(--ix-desc-label-color);
 
       &::after {
         position: relative;
@@ -42,15 +43,15 @@
   }
 
   &-sm &-item {
-    .desc-item-size(@desc-item-height-sm, @desc-item-font-size-sm);
+    .desc-item-size(var(--ix-desc-item-height-sm), var(--ix-desc-font-size-sm));
   }
 
   &-md &-item {
-    .desc-item-size(@desc-item-height-md, @desc-item-font-size-md);
+    .desc-item-size(var(--ix-desc-item-height-md), var(--ix-desc-font-size-md));
   }
 
   &-lg &-item {
-    .desc-item-size(@desc-item-height-lg, @desc-item-font-size-lg);
+    .desc-item-size(var(--ix-desc-item-height-lg), var(--ix-desc-font-size-lg));
   }
 
   &-vertical &-item &-item-label {

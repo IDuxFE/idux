@@ -1,0 +1,1090 @@
+:root {
+  --ix-color-primary: #1c6eff;
+  --ix-color-error: #f52727;
+  --ix-color-success: #12a679;
+  --ix-color-warning: #fdaa1d;
+  --ix-color-risk: #fa721b;
+  --ix-color-fatal: #82010e;
+  --ix-color-info: #458fff;
+  --ix-color-link: #1c6eff;
+  --ix-color-white: #ffffff;
+  --ix-color-text: #2f3540;
+  --ix-color-bg: #ffffff;
+  --ix-color-border: #d3d7de;
+  --ix-color-border-secondary: #e1e5eb;
+  --ix-font-size: 14px;
+  --ix-font-family: pingfang SC, helvetica neue, arial, hiragino sans gb,
+    microsoft yahei ui, microsoft yahei, simsun, sans-serif;
+  --ix-font-family-code: "SFMono-Regular", Consolas, "Liberation Mono", Menlo,
+    Courier, monospace;
+  --ix-font-weight: 400;
+  --ix-border-radius: 4px;
+  --ix-height: 32px;
+  --ix-line-height-gutter: 8px;
+  --ix-spacing: 8px;
+  --ix-line-width: 1px;
+  --ix-line-type: solid;
+  --ix-motion-duration: 0.24s;
+  --ix-motion-ease-in: cubic-bezier(0.12, 0, 0.39, 0);
+  --ix-motion-ease-out: cubic-bezier(0.61, 1, 0.88, 1);
+  --ix-motion-ease-in-out: cubic-bezier(0.37, 0, 0.63, 1);
+  --ix-motion-ease-in-back: cubic-bezier(0.36, 0, 0.66, -0.56);
+  --ix-motion-ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ix-motion-ease-in-circ: cubic-bezier(0.55, 0, 1, 0.45);
+  --ix-motion-ease-out-circ: cubic-bezier(0, 0.55, 0.45, 1);
+  --ix-motion-ease-in-quint: cubic-bezier(0.64, 0, 0.78, 0);
+  --ix-motion-ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ix-screen-sm: 600px;
+  --ix-screen-md: 960px;
+  --ix-screen-lg: 1280px;
+  --ix-screen-xl: 1720px;
+  --ix-color-primary-hover: #458fff;
+  --ix-color-primary-active: #0d51d9;
+  --ix-color-primary-border: #1c6eff;
+  --ix-color-primary-border-hover: #458fff;
+  --ix-color-primary-border-active: #0d51d9;
+  --ix-color-primary-text: #1c6eff;
+  --ix-color-primary-text-hover: #458fff;
+  --ix-color-primary-text-active: #0d51d9;
+  --ix-color-primary-icon: #1c6eff;
+  --ix-color-success-bg: #12a679;
+  --ix-color-success-bg-hover: #30b387;
+  --ix-color-success-bg-active: #088060;
+  --ix-color-success-border: #088060;
+  --ix-color-success-border-hover: #12a679;
+  --ix-color-success-border-active: #015945;
+  --ix-color-success-text: #088060;
+  --ix-color-success-text-hover: #12a679;
+  --ix-color-success-text-active: #015945;
+  --ix-color-success-icon: #12a679;
+  --ix-color-error-bg: #ff5752;
+  --ix-color-error-bg-hover: #ff837a;
+  --ix-color-error-bg-active: #cf171d;
+  --ix-color-error-border: #cf171d;
+  --ix-color-error-border-hover: #f52727;
+  --ix-color-error-border-active: #a80a15;
+  --ix-color-error-text: #cf171d;
+  --ix-color-error-text-hover: #f52727;
+  --ix-color-error-text-active: #cf171d;
+  --ix-color-error-icon: #ff5752;
+  --ix-color-warning-bg: #fdaa1d;
+  --ix-color-warning-bg-hover: #ffc145;
+  --ix-color-warning-bg-active: #d6860d;
+  --ix-color-warning-border: #fdaa1d;
+  --ix-color-warning-border-hover: #ffc145;
+  --ix-color-warning-border-active: #d6860d;
+  --ix-color-warning-text: #fdaa1d;
+  --ix-color-warning-text-hover: #ffc145;
+  --ix-color-warning-text-active: #d6860d;
+  --ix-color-warning-icon: #ffc145;
+  --ix-color-risk-bg: #fa721b;
+  --ix-color-risk-bg-hover: #ff9245;
+  --ix-color-risk-bg-active: #d4520d;
+  --ix-color-risk-border: #fa721b;
+  --ix-color-risk-border-hover: #ff9245;
+  --ix-color-risk-border-active: #d4520d;
+  --ix-color-risk-text: #fa721b;
+  --ix-color-risk-text-hover: #ff9245;
+  --ix-color-risk-text-active: #d4520d;
+  --ix-color-risk-icon: #ff9245;
+  --ix-color-fatal-bg: #82010e;
+  --ix-color-fatal-bg-hover: #8f1820;
+  --ix-color-fatal-bg-active: #5c000c;
+  --ix-color-fatal-border: #82010e;
+  --ix-color-fatal-border-hover: #8f1820;
+  --ix-color-fatal-border-active: #5c000c;
+  --ix-color-fatal-text: #82010e;
+  --ix-color-fatal-text-hover: #8f1820;
+  --ix-color-fatal-text-active: #5c000c;
+  --ix-color-fatal-icon: #8f1820;
+  --ix-color-info-bg: #458fff;
+  --ix-color-info-bg-hover: #6eadff;
+  --ix-color-info-bg-active: #306ed9;
+  --ix-color-info-border: #458fff;
+  --ix-color-info-border-hover: #6eadff;
+  --ix-color-info-border-active: #306ed9;
+  --ix-color-info-text: #458fff;
+  --ix-color-info-text-hover: #6eadff;
+  --ix-color-info-text-active: #306ed9;
+  --ix-color-info-icon: #458fff;
+  --ix-color-offline: #a1a7b3;
+  --ix-color-offline-bg: #a1a7b3;
+  --ix-color-offline-text: #a1a7b3;
+  --ix-font-size-xs: 10px;
+  --ix-font-size-sm: 12px;
+  --ix-font-size-md: 14px;
+  --ix-font-size-lg: 16px;
+  --ix-font-size-xl: 20px;
+  --ix-font-size-2xl: 24px;
+  --ix-font-size-3xl: 30px;
+  --ix-font-size-header-sm: 14px;
+  --ix-font-size-header-md: 16px;
+  --ix-font-size-header-lg: 20px;
+  --ix-font-size-header-xl: 24px;
+  --ix-font-weight-xs: 200;
+  --ix-font-weight-sm: 300;
+  --ix-font-weight-md: 400;
+  --ix-font-weight-lg: 500;
+  --ix-font-weight-xl: 600;
+  --ix-padding-size-2xs: 2px;
+  --ix-padding-size-xs: 4px;
+  --ix-padding-size-sm: 8px;
+  --ix-padding-size-md: 12px;
+  --ix-padding-size-lg: 16px;
+  --ix-padding-size-xl: 24px;
+  --ix-padding-size-2xl: 32px;
+  --ix-margin-size-2xs: 2px;
+  --ix-margin-size-xs: 4px;
+  --ix-margin-size-sm: 8px;
+  --ix-margin-size-md: 12px;
+  --ix-margin-size-lg: 16px;
+  --ix-margin-size-xl: 24px;
+  --ix-margin-size-2xl: 32px;
+  --ix-height-xs: 16px;
+  --ix-height-sm: 24px;
+  --ix-height-md: 32px;
+  --ix-height-lg: 40px;
+  --ix-height-xl: 48px;
+  --ix-height-2xl: 56px;
+  --ix-height-3xl: 64px;
+  --ix-border-radius-xs: 2px;
+  --ix-border-radius-sm: 2px;
+  --ix-border-radius-md: 4px;
+  --ix-border-radius-lg: 8px;
+  --ix-line-width-bold: 2px;
+  --ix-arrow-size: 6px;
+  --ix-screen-xs-max: 599.99px;
+  --ix-screen-sm-min: 600px;
+  --ix-screen-sm-max: 959.99px;
+  --ix-screen-md-min: 960px;
+  --ix-screen-md-max: 1279.99px;
+  --ix-screen-lg-min: 1280px;
+  --ix-screen-lg-max: 1719.99px;
+  --ix-screen-xl-min: 1720px;
+  --ix-motion-duration-fast: 0.18s;
+  --ix-motion-duration-medium: 0.24s;
+  --ix-motion-duration-slow: 0.3s;
+  --ix-box-shadow-sm: 0 2px 10px 0px rgba(30, 35, 43, 0.16);
+  --ix-box-shadow-md: 0 4px 16px 0px rgba(30, 35, 43, 0.14);
+  --ix-box-shadow-lg: 0 8px 22px 0px rgba(30, 35, 43, 0.12);
+  --ix-color-container-bg: #ffffff;
+  --ix-color-container-bg-hover: #f7f9fc;
+  --ix-color-container-bg-active: #e8f4ff;
+  --ix-color-container-bg-disabled: #edf1f7;
+  --ix-color-addon-container-bg: #f7f9fc;
+  --ix-color-emphasized-container-bg: #edf1f7;
+  --ix-color-emphasized-container-bg-hover: #e1e5eb;
+  --ix-color-emphasized-container-bg-disabled: #bec3cc;
+  --ix-color-info-container-bg: #f7f9fc;
+  --ix-color-info-container-bg-hover: #f7f9fc;
+  --ix-color-info-container-bg-disabled: #e1e5eb;
+  --ix-color-fill-container-bg: #bec3cc;
+  --ix-color-separator: #e1e5eb;
+  --ix-color-text-placeholder: #a1a7b3;
+  --ix-color-text-disabled: #bec3cc;
+  --ix-color-text-inverse: #ffffff;
+  --ix-color-text-inverse-disabled: #bec3cc;
+  --ix-color-text-title: #2f3540;
+  --ix-color-text-title-secondary: #454c59;
+  --ix-color-text-info: #6f7785;
+  --ix-color-icon: #5e6573;
+  --ix-color-icon-info: #bec3cc;
+  --ix-color-icon-hover: #1c6eff;
+  --ix-color-icon-active: #0d51d9;
+  --ix-color-icon-disabled: #bec3cc;
+  --ix-color-warning-outline: #fdaa1d;
+  --ix-color-error-outline: #f52727;
+  --ix-color-bg-inverse: #2f3540;
+  --ix-color-bg-inverse-disabled: #1e232b;
+  --ix-color-border-inverse: #ffffff;
+  --ix-color-mask: rgba(0, 0, 0, 0.45);
+  --ix-tag-comp-color-alpha: 0.1;
+  --ix-alert-comp-color-alpha: 0.1;
+  --ix-font-size-icon: 16px;
+  --ix-font-weight-header: 600;
+  --ix-component-border-radius: 2px;
+  --ix-scrollbar-width: 12px;
+  --ix-scrollbar-height: 12px;
+  --ix-scrollbar-thumb-bg: #e1e5eb;
+  --ix-scrollbar-thumb-bg-hover: #bec3cc;
+  --ix-scrollbar-thumb-bg-active: #bec3cc;
+  --ix-scrollbar-thumb-border-width: 2px;
+  --ix-scrollbar-thumb-border-radius: 6px;
+  --ix-scrollbar-thumb-box-shadow: none;
+  --ix-scrollbar-track-bg: unset;
+  --ix-scrollbar-track-border-radius: 0;
+  --ix-scrollbar-track-box-shadow: unset;
+  --ix-control-height-xs: 16px;
+  --ix-control-height-sm: 24px;
+  --ix-control-height-md: 32px;
+  --ix-control-height-lg: 40px;
+  --ix-control-line-width: 1px;
+  --ix-control-line-type: solid;
+  --ix-control-font-size-xs: 10px;
+  --ix-control-font-size-sm: 12px;
+  --ix-control-font-size-md: 12px;
+  --ix-control-font-size-lg: 14px;
+  --ix-control-box-shadow-focus: 0 0 0 2px rgba(28, 110, 255, 0.2);
+  --ix-control-box-shadow-invalid: 0 0 0 2px rgba(245, 39, 39, 0.2);
+  --ix-control-bg-color: #ffffff;
+  --ix-control-bg-color-disabled: #edf1f7;
+  --ix-control-border-color-hover: #458fff;
+  --ix-control-border-color-active: #0d51d9;
+  --ix-control-padding-size-horizontal-xs: 7px;
+  --ix-control-padding-size-horizontal-sm: 7px;
+  --ix-control-padding-size-horizontal-md: 11px;
+  --ix-control-padding-size-horizontal-lg: 11px;
+  --ix-control-padding-size-vertical-xs: 0;
+  --ix-control-padding-size-vertical-sm: 1px;
+  --ix-control-padding-size-vertical-md: 5px;
+  --ix-control-padding-size-vertical-lg: 8px;
+  --ix-control-border-radius-xs: 2px;
+  --ix-control-border-radius-sm: 2px;
+  --ix-control-border-radius-md: 2px;
+  --ix-control-border-radius-lg: 2px;
+  --ix-overlay-bg-color: #ffffff;
+  --ix-overlay-arrow-size: 6px;
+  --ix-overlay-border-radius: 2px;
+  --ix-overlay-border-width: 0;
+  --ix-overlay-border-color: none;
+  --ix-overlay-border-type: solid;
+}
+:root {
+  --ix-reset-color-text: #2f3540;
+  --ix-reset-color-text-title: #2f3540;
+  --ix-reset-color-bg: #ffffff;
+  --ix-reset-color-link: #1c6eff;
+  --ix-reset-font-family: pingfang SC, helvetica neue, arial, hiragino sans gb,
+    microsoft yahei ui, microsoft yahei, simsun, sans-serif;
+  --ix-reset-font-family-code: "SFMono-Regular", Consolas, "Liberation Mono",
+    Menlo, Courier, monospace;
+  --ix-reset-font-size: 12px;
+  --ix-reset-font-weight: 400;
+  --ix-reset-font-weight-header: 600;
+  --ix-reset-line-height-gutter: 8px;
+  --ix-reset-scrollbar-width: 12px;
+  --ix-reset-scrollbar-height: 12px;
+  --ix-reset-scrollbar-thumb-bg: #e1e5eb;
+  --ix-reset-scrollbar-thumb-bg-hover: #bec3cc;
+  --ix-reset-scrollbar-thumb-bg-active: #bec3cc;
+  --ix-reset-scrollbar-thumb-border-width: 2px;
+  --ix-reset-scrollbar-thumb-border-radius: 6px;
+  --ix-reset-scrollbar-thumb-box-shadow: none;
+  --ix-reset-scrollbar-track-bg: unset;
+  --ix-reset-scrollbar-track-border-radius: 0;
+  --ix-reset-scrollbar-track-box-shadow: unset;
+}
+
+/* ------ alert css variables ------ */
+:root {
+  --ix-alert-height: 32px;
+  --ix-alert-border-radius: 2px;
+  --ix-alert-success-bg-color: rgb(231, 246, 242);
+  --ix-alert-info-bg-color: rgb(236, 244, 255);
+  --ix-alert-warning-bg-color: rgb(255, 247, 232);
+  --ix-alert-error-bg-color: rgb(255, 238, 238);
+  --ix-alert-offline-bg-color: rgb(246, 246, 247);
+}
+
+/* ------ anchor css variables ------ */
+:root {
+  --ix-anchor-ink-ball-width: 2px;
+  --ix-anchor-ink-ball-height: 16px;
+}
+
+/* ------ avatar css variables ------ */
+:root {
+  --ix-avatar-size-sm: 24px;
+  --ix-avatar-size-md: 32px;
+  --ix-avatar-size-lg: 40px;
+  --ix-avatar-border-radius-square: 2px;
+}
+
+/* ------ back-top css variables ------ */
+:root {
+  --ix-back-top-size-lg: 64px;
+  --ix-back-top-size-md: 48px;
+  --ix-back-top-size-sm: 40px;
+  --ix-back-top-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05);
+  --ix-back-top-color: #96c7ff;
+  --ix-back-top-color-hover: #1c6eff;
+  --ix-back-top-bg-color: #ffffff;
+  --ix-back-top-border-width: 0;
+  --ix-back-top-border-type: solid;
+  --ix-back-top-border-color: none;
+}
+
+/* ------ badge css variables ------ */
+:root {
+  --ix-badge-dot-size: 6px;
+  --ix-badge-count-size: 16px;
+}
+
+/* ------ breadcrumb css variables ------ */
+:root {
+  --ix-breadcrumb-font-size: 12px;
+  --ix-breadcrumb-item-color: #6f7785;
+  --ix-breadcrumb-link-color: #6f7785;
+  --ix-breadcrumb-link-color-hover: #1c6eff;
+  --ix-breadcrumb-separator-color: #bec3cc;
+  --ix-breadcrumb-separator-font-size: 12px;
+  --ix-breadcrumb-last-item-color: #2f3540;
+  --ix-breadcrumb-separator-margin: 0 4px;
+}
+
+/* ------ button css variables ------ */
+:root {
+  --ix-button-font-size-xs: 12px;
+  --ix-button-font-size-sm: 12px;
+  --ix-button-font-size-md: 14px;
+  --ix-button-font-size-lg: 16px;
+  --ix-button-font-size-xl: 16px;
+  --ix-button-min-width-xs: 56px;
+  --ix-button-min-width-sm: 64px;
+  --ix-button-min-width-md: 72px;
+  --ix-button-min-width-lg: 120px;
+  --ix-button-min-width-xl: 160px;
+  --ix-button-height-xs: 24px;
+  --ix-button-height-sm: 32px;
+  --ix-button-height-md: 32px;
+  --ix-button-height-lg: 40px;
+  --ix-button-height-xl: 48px;
+  --ix-button-padding-size-horizontal-xs: 8px;
+  --ix-button-padding-size-horizontal-sm: 12px;
+  --ix-button-padding-size-horizontal-md: 16px;
+  --ix-button-padding-size-horizontal-lg: 24px;
+  --ix-button-padding-size-horizontal-xl: 32px;
+  --ix-button-color: #2f3540;
+  --ix-button-color-disabled: #bec3cc;
+  --ix-button-bg-color: #ffffff;
+  --ix-button-bg-color-disabled: #edf1f7;
+  --ix-button-border-color: #d3d7de;
+  --ix-button-border-radius: 2px;
+  --ix-button-primary-color: #ffffff;
+  --ix-button-primary-bg-color: #1c6eff;
+  --ix-button-primary-bg-color-hover: #458fff;
+  --ix-button-primary-bg-color-active: #0d51d9;
+  --ix-button-danger-color: #cf171d;
+  --ix-button-danger-color-hover: #f52727;
+  --ix-button-danger-color-active: #cf171d;
+  --ix-button-danger-bg-color: #ff5752;
+  --ix-button-danger-bg-color-hover: #ff837a;
+  --ix-button-danger-bg-color-active: #cf171d;
+  --ix-button-ghost-color: #ffffff;
+  --ix-button-ghost-color-hover: #ffffff;
+  --ix-button-ghost-color-active: #595959;
+  --ix-button-ghost-border-color-hover: #ffffff;
+  --ix-button-ghost-border-color-active: #ffffff;
+  --ix-button-ghost-border-color: #ffffff;
+  --ix-button-ghost-bg-color-hover: rgba(255, 255, 255, 0.2);
+  --ix-button-ghost-bg-color-active: #ffffff;
+  --ix-button-ghost-bg-color-disabled: rgba(255, 255, 255, 0.4);
+  --ix-button-icon-color: inherit;
+  --ix-button-icon-font-size: 16px;
+}
+
+/* ------ card css variables ------ */
+:root {
+  --ix-card-font-size-sm: 12px;
+  --ix-card-font-size-md: 12px;
+  --ix-card-font-size-lg: 14px;
+  --ix-card-padding-size-sm: 16px;
+  --ix-card-padding-size-md: 16px;
+  --ix-card-padding-size-lg: 24px;
+  --ix-card-show-shadow-border-width: 0;
+  --ix-card-mark-width: 20px;
+  --ix-card-mark-height: 16px;
+  --ix-card-header-padding: 8px;
+  --ix-card-loading-spacing: 4px;
+  --ix-card-loading-height: 14px;
+  --ix-card-loading-bg-size: 600%;
+  --ix-card-loading-start-color: #edf1f7;
+  --ix-card-loading-end-color: #e1e5eb;
+  --ix-card-grid-width: 25%;
+}
+
+/* ------ carousel css variables ------ */
+:root {
+  --ix-carousel-arrow-size: 32px;
+  --ix-carousel-arrow-color: #ffffff;
+  --ix-carousel-horizontal-dot-width: 32px;
+  --ix-carousel-horizontal-dot-height: 2px;
+  --ix-carousel-vertical-dot-width: 2px;
+  --ix-carousel-vertical-dot-height: 16px;
+  --ix-carousel-dot-bg-color: #ffffff;
+  --ix-carousel-dot-border-radius: 2px;
+  --ix-carousel-icon-opacity: 0.3;
+  --ix-carousel-icon-opacity-hover: 0.6;
+  --ix-carousel-icon-opacity-active: 0.8;
+}
+
+/* ------ cascader css variables ------ */
+:root {
+  --ix-cascader-option-font-size: 12px;
+  --ix-cascader-option-height: 32px;
+  --ix-cascader-option-padding: 8px 12px;
+  --ix-cascader-option-label-highlight-color: #1c6eff;
+  --ix-cascader-option-group-min-width: 120px;
+  --ix-cascader-option-group-min-height: 180px;
+  --ix-cascader-option-label-margin-left: 8px;
+  --ix-cascader-option-container-padding: 4px 0;
+  --ix-cascader-overlay-search-wrapper-padding: 4px 12px 8px;
+}
+
+/* ------ checkbox css variables ------ */
+:root {
+  --ix-checkbox-label-padding: 0 4px;
+  --ix-checkbox-fieldset-bg-color: #f7f9fc;
+  --ix-checkbox-fieldset-border-color: #e1e5eb;
+}
+
+/* ------ collapse css variables ------ */
+:root {
+  --ix-collapse-font-size-sm: 14px;
+  --ix-collapse-font-size-md: 14px;
+  --ix-collapse-expand-icon-size-sm: 20px;
+  --ix-collapse-expand-icon-size-md: 24px;
+  --ix-collapse-padding-horizontal-sm: 12px;
+  --ix-collapse-padding-horizontal-md: 16px;
+  --ix-collapse-panel-header-bg-color: #ffffff;
+  --ix-collapse-panel-content-bg-color: #f7f9fc;
+}
+
+/* ------ comment css variables ------ */
+:root {
+  --ix-comment-nest-indent: 44px;
+  --ix-comment-author-name-color: #a1a7b3;
+  --ix-comment-author-time-color: #6f7785;
+  --ix-comment-action-color: #6f7785;
+  --ix-comment-action-color-hover: #2f3540;
+}
+
+/* ------ date-picker css variables ------ */
+:root {
+  --ix-date-picker-separator-margin-horizontal: 16px;
+  --ix-date-picker-overlay-width: 252px;
+  --ix-date-picker-overlay-padding: 16px;
+  --ix-date-picker-overlay-footer-padding: 8px 16px;
+  --ix-date-picker-overlay-date-input-width: 120px;
+  --ix-date-picker-overlay-time-input-width: 96px;
+  --ix-date-picker-board-width: 220px;
+  --ix-date-picker-board-max-height: 260px;
+  --ix-date-picker-range-board-border: none;
+  --ix-date-picker-range-overlay-padding: 16px 16px 0 16px;
+  --ix-date-picker-range-overlay-footer-padding: 8px 0;
+  --ix-date-picker-range-overlay-separator-width: 32px;
+  --ix-date-picker-range-overlay-separator-font-size: 12px;
+  --ix-date-picker-panel-font-size: 12px;
+  --ix-date-picker-panel-color: #2f3540;
+  --ix-date-picker-panel-cell-width: 28px;
+  --ix-date-picker-panel-cell-height: 28px;
+  --ix-date-picker-panel-cell-width-lg: 52px;
+  --ix-date-picker-panel-cell-height-lg: 24px;
+  --ix-date-picker-panel-cell-color-active: #ffffff;
+  --ix-date-picker-panel-cell-color-hover: #458fff;
+  --ix-date-picker-panel-cell-color-disabled: #bec3cc;
+  --ix-date-picker-panel-cell-bg-color-hover: #f7f9fc;
+  --ix-date-picker-panel-cell-bg-color-active: #1c6eff;
+  --ix-date-picker-panel-cell-bg-color-in-range: #e8f4ff;
+  --ix-date-picker-panel-cell-bg-color-disabled: #f7f9fc;
+  --ix-date-picker-panel-cell-trigger-width: 20px;
+  --ix-date-picker-panel-cell-trigger-height: 20px;
+  --ix-date-picker-panel-cell-trigger-width-lg: 52px;
+  --ix-date-picker-panel-cell-trigger-height-lg: 24px;
+  --ix-date-picker-panel-cell-current-color: #1c6eff;
+  --ix-date-picker-panel-cell-current-border-color: #bfdfff;
+  --ix-date-picker-panel-cell-current-bg-color: #1c6eff;
+  --ix-date-picker-panel-heaer-height: 32px;
+  --ix-date-picker-panel-header-font-size: 12px;
+  --ix-date-picker-panel-header-font-weight: 400;
+  --ix-date-picker-panel-header-spacing: 16px;
+  --ix-date-picker-panel-body-header-bg-color: #f7f9fc;
+}
+
+/* ------ desc css variables ------ */
+:root {
+  --ix-desc-item-height-sm: 24px;
+  --ix-desc-item-height-md: 32px;
+  --ix-desc-item-height-lg: 40px;
+  --ix-desc-font-size-sm: 12px;
+  --ix-desc-font-size-md: 12px;
+  --ix-desc-font-size-lg: 12px;
+  --ix-desc-label-color: #6f7785;
+}
+
+/* ------ divider css variables ------ */
+:root {
+  --ix-divider-line-width: 1px;
+  --ix-divider-line-color: #d3d7de;
+  --ix-divider-font-size-sm: 12px;
+  --ix-divider-font-size-md: 14px;
+  --ix-divider-font-size-lg: 16px;
+  --ix-divider-margin-vertical-sm: 12px;
+  --ix-divider-margin-vertical-md: 16px;
+  --ix-divider-margin-vertical-lg: 24px;
+  --ix-divider-margin-horizontal-sm: 4px;
+  --ix-divider-margin-horizontal-md: 8px;
+  --ix-divider-margin-horizontal-lg: 12px;
+}
+
+/* ------ drawer css variables ------ */
+:root {
+  --ix-drawer-box-shadow-start: 6px 0 16px -8px rgba(0, 0, 0, 0.08),
+    9px 0 28px 0 rgba(0, 0, 0, 0.05), 12px 0 48px 16px rgba(0, 0, 0, 0.03);
+  --ix-drawer-box-shadow-end: -6px 0 16px -8px rgba(0, 0, 0, 0.08),
+    -9px 0 28px 0 rgba(0, 0, 0, 0.05), -12px 0 48px 16px rgba(0, 0, 0, 0.03);
+  --ix-drawer-box-shadow-top: 0 -6px 16px -8px rgba(0, 0, 0, 0.08),
+    0 -9px 28px 0 rgba(0, 0, 0, 0.05), 0 -12px 48px 16px rgba(0, 0, 0, 0.03);
+  --ix-drawer-border-width: 0;
+  --ix-drawer-border-type: solid;
+  --ix-drawer-border-color: none;
+}
+
+/* ------ dropdown css variables ------ */
+:root {
+  --ix-dropdown-min-width: 128px;
+  --ix-dropdown-menu-container-padding: 4px 0;
+}
+
+/* ------ empty css variables ------ */
+:root {
+  --ix-empty-color: #a1a7b3;
+  --ix-empty-desc-color: #6f7785;
+  --ix-empty-desc-font-size: 16px;
+}
+
+/* ------ form css variables ------ */
+:root {
+  --ix-form-label-color: #6f7785;
+  --ix-form-label-required-color: #cf171d;
+  --ix-form-label-font-size: 12px;
+  --ix-form-label-colon-margin-left: 2px;
+  --ix-form-label-colon-margin-right: 8px;
+  --ix-form-message-tooltip-bg-color: #ff5752;
+  --ix-form-item-margin-bottom: 8px;
+  --ix-form-vertical-item-label-padding: 0 0 8px;
+  --ix-form-vertical-item-label-margin: 0;
+}
+
+/* ------ header css variables ------ */
+:root {
+  --ix-header-height-sm: 40px;
+  --ix-header-height-md: 48px;
+  --ix-header-height-lg: 48px;
+  --ix-header-height-xl: 56px;
+  --ix-header-bar-width: 2px;
+  --ix-header-bar-bg-color: #1c6eff;
+  --ix-header-bar-border-radius: 0;
+  --ix-header-bar-margin-right: 6px;
+  --ix-header-prefix-color: #2f3540;
+  --ix-header-prefix-color-hover: #1c6eff;
+  --ix-header-prefix-color-active: #1c6eff;
+  --ix-header-prefix-color-disabled: #bec3cc;
+  --ix-header-suffix-color: #5e6573;
+  --ix-header-suffix-color-hover: #1c6eff;
+  --ix-header-suffix-color-active: #0d51d9;
+  --ix-header-suffix-color-disabled: #bec3cc;
+  --ix-header-sub-title-font-size: 14px;
+}
+
+/* ------ image css variables ------ */
+:root {
+  --ix-image-min-width: 96px;
+  --ix-image-min-height: 96px;
+  --ix-image-object-fit: contain;
+  --ix-image-preview-bg-color: rgba(0, 0, 0, 0.5);
+  --ix-image-preview-icon-color: #ffffff;
+  --ix-image-preview-icon-size: 20px;
+  --ix-image-viewer-bg-color: rgba(0, 0, 0, 0.45);
+  --ix-image-viewer-opr-color: #ffffff;
+  --ix-image-viewer-opr-color-disabled: rgba(255, 255, 255, 0.35);
+  --ix-image-viewer-opr-height: 48px;
+  --ix-image-viewer-opr-margin-bottom: 48px;
+  --ix-image-viewer-opr-font-size: 20px;
+  --ix-image-viewer-opr-bg-color: rgba(0, 0, 0, 0.1);
+  --ix-image-viewer-opr-item-margin: 0 24px;
+}
+
+/* ------ layout css variables ------ */
+:root {
+  --ix-layout-sider-width: 224px;
+  --ix-layout-sider-collapsed-width: 44px;
+}
+
+/* ------ loading-bar css variables ------ */
+:root {
+  --ix-loading-bar-height: 2px;
+  --ix-loading-bar-loading-color: #1c6eff;
+}
+
+/* ------ menu css variables ------ */
+:root {
+  --ix-menu-border-radius: 0;
+  --ix-menu-height: 32px;
+  --ix-menu-height-level-1: 40px;
+  --ix-menu-font-size: 12px;
+  --ix-menu-font-size-level-1: 14px;
+  --ix-menu-overlay-min-width: 128px;
+  --ix-menu-collapsed-width: 44px;
+  --ix-menu-item-color: #2f3540;
+  --ix-menu-item-color-hover: #2f3540;
+  --ix-menu-item-color-active: #1c6eff;
+  --ix-menu-item-color-disabled: #bec3cc;
+  --ix-menu-item-group-color: #6f7785;
+  --ix-menu-item-bg: #ffffff;
+  --ix-menu-item-bg-hover: #f7f9fc;
+  --ix-menu-item-bg-active: #e8f4ff;
+  --ix-menu-item-bg-disabled: #ffffff;
+  --ix-menu-item-group-bg: #ffffff;
+  --ix-menu-horizontal-item-color-hover: #2f3540;
+  --ix-menu-horizontal-item-color-active: #1c6eff;
+  --ix-menu-horizontal-item-bg-hover: #f7f9fc;
+  --ix-menu-horizontal-item-bg-active: #e8f4ff;
+  --ix-menu-dark-item-color: #ffffff;
+  --ix-menu-dark-item-color-hover: #ffffff;
+  --ix-menu-dark-item-color-active: #ffffff;
+  --ix-menu-dark-item-color-disabled: #bec3cc;
+  --ix-menu-dark-item-group-color: #6f7785;
+  --ix-menu-dark-item-font-weight-active: 600;
+  --ix-menu-dark-item-bg: #2f3540;
+  --ix-menu-dark-item-bg-hover: #1e232b;
+  --ix-menu-dark-item-bg-active: #1c6eff;
+  --ix-menu-dark-item-bg-disabled: #2f3540;
+  --ix-menu-dark-item-group-bg: #2f3540;
+  --ix-menu-dark-horizontal-item-color-hover: #ffffff;
+  --ix-menu-dark-horizontal-item-color-active: #ffffff;
+  --ix-menu-dark-horizontal-item-bg-hover: #1e232b;
+  --ix-menu-dark-horizontal-item-bg-active: #454c59;
+}
+
+/* ------ message css variables ------ */
+:root {
+  --ix-message-margin: 8px;
+  --ix-message-font-size: 14px;
+  --ix-message-border-width: 0;
+  --ix-message-border-type: solid;
+  --ix-message-border-color: none;
+  --ix-message-content-min-width: 128px;
+  --ix-message-content-max-width: 480px;
+  --ix-message-content-padding-vertical: 8px;
+  --ix-message-content-padding-horizontal: 16px;
+  --ix-message-bg-color: #ffffff;
+  --ix-message-border-radius: 4px;
+  --ix-message-icon-margin-right: 8px;
+  --ix-message-wrapper-top: 15%;
+}
+
+/* ------ modal css variables ------ */
+:root {
+  --ix-modal-title-font-size: 14px;
+  --ix-modal-title-font-weight: 400;
+  --ix-modal-title-color: #2f3540;
+  --ix-modal-content-color: #6f7785;
+  --ix-modal-icon-size: 40px;
+}
+
+/* ------ notification css variables ------ */
+:root {
+  --ix-notification-padding: 8px 8px 8px 16px;
+  --ix-notification-margin: 0 0 8px 0;
+  --ix-notification-width: 384px;
+  --ix-notification-max-width: calc(100vw - 48px);
+  --ix-notification-border-width: 0;
+  --ix-notification-border-type: solid;
+  --ix-notification-border-color: none;
+  --ix-notification-font-size: 14px;
+  --ix-notification-bg-color: #ffffff;
+  --ix-notification-border-radius: 2px;
+  --ix-notification-icon-margin: 4px 8px;
+  --ix-notification-icon-wrapper-width: 44px;
+  --ix-notification-title-font-size: 14px;
+  --ix-notification-title-line-height: 24px;
+  --ix-notification-title-margin: 0 24px 8px 0;
+  --ix-notification-content-font-size: 12px;
+  --ix-notification-content-color: #6f7785;
+  --ix-notification-content-margin: 0 16px 0 0;
+  --ix-notification-close-icon-top: 8px;
+  --ix-notification-close-icon-right: 8px;
+  --ix-notification-footer-margin: 8px 0 0 0;
+}
+
+/* ------ pagination css variables ------ */
+:root {
+  --ix-pagination-font-size-sm: 12px;
+  --ix-pagination-font-size-md: 12px;
+  --ix-pagination-font-size-lg: 12px;
+  --ix-pagination-item-padding-sm: 0;
+  --ix-pagination-item-padding-md: 4px;
+  --ix-pagination-item-padding-lg: 4px;
+  --ix-pagination-item-content-size-sm: 24px;
+  --ix-pagination-item-content-size-md: 24px;
+  --ix-pagination-item-content-size-lg: 32px;
+  --ix-pagination-out-line-color: #458fff;
+}
+
+/* ------ popconfirm css variables ------ */
+:root {
+  --ix-popconfirm-font-size: 12px;
+  --ix-popconfirm-title-font-size: 14px;
+  --ix-popconfirm-color: #2f3540;
+  --ix-popconfirm-icon-color: #fdaa1d;
+  --ix-popconfirm-min-width: 240px;
+}
+
+/* ------ popover css variables ------ */
+:root {
+  --ix-popover-font-size: 12px;
+  --ix-popover-color: #6f7785;
+  --ix-popover-min-width: 240px;
+}
+
+/* ------ progress css variables ------ */
+:root {
+  --ix-progress-trail-bg-color: #edf1f7;
+  --ix-progress-text-width: 36px;
+  --ix-progress-border-radius: 100px;
+  --ix-progress-line-size-sm: 2px;
+  --ix-progress-line-size-md: 6px;
+  --ix-progress-line-size-lg: 8px;
+  --ix-progress-line-font-size-sm: 12px;
+  --ix-progress-line-font-size-md: 12px;
+  --ix-progress-line-font-size-lg: 14px;
+  --ix-progress-line-text-padding: 0 0 0 8px;
+  --ix-progress-circle-width: 120px;
+  --ix-progress-circle-font-size: 24px;
+}
+
+/* ------ radio css variables ------ */
+:root {
+  --ix-radio-label-padding: 0 4px;
+  --ix-radio-fieldset-border-radius: 2px;
+  --ix-radio-fieldset-bg-color: #f7f9fc;
+  --ix-radio-fieldset-border-color: #e1e5eb;
+}
+
+/* ------ rate css variables ------ */
+:root {
+  --ix-rate-active-color: #ffc145;
+  --ix-rate-size-sm: 14px;
+  --ix-rate-size-md: 20px;
+  --ix-rate-size-lg: 28px;
+  --ix-rate-item-margin-right: 8px;
+  --ix-rate-item-scale-hover: 1.1;
+  --ix-rate-item-outline-focus: 1px dashed #ffc145;
+}
+
+/* ------ result css variables ------ */
+:root {
+  --ix-result-padding: 48px 32px;
+  --ix-result-icon-size: 48px;
+  --ix-result-title-font-size: 20px;
+  --ix-result-title-line-height: 32px;
+  --ix-result-subtitle-font-size: 12px;
+  --ix-result-subtitle-line-height: 18px;
+  --ix-result-subtitle-margin-top: 4px;
+  --ix-result-extra-margin-top: 24px;
+  --ix-result-content-margin-top: 24px;
+  --ix-result-content-padding: 24px 40px;
+}
+
+/* ------ select css variables ------ */
+:root {
+  --ix-select-option-font-size: 12px;
+  --ix-select-option-height: 32px;
+  --ix-select-option-padding: 8px 12px;
+  --ix-select-option-label-margin-left: 8px;
+  --ix-select-option-container-padding: 4px 0;
+  --ix-select-option-group-margin: 0 12px;
+  --ix-select-option-group-padding-left: 0;
+  --ix-select-multiple-option-grouped-padding-left: 12px;
+  --ix-select-option-grouped-padding-left: 24px;
+  --ix-select-overlay-search-wrapper-padding: 4px 12px 8px;
+}
+
+/* ------ skeleton css variables ------ */
+:root {
+  --ix-skeleton-margin-bottom: 8px;
+  --ix-skeleton-loader-margin-bottom: 4px;
+  --ix-skeleton-start-color: #edf1f7;
+  --ix-skeleton-end-color: #e1e5eb;
+}
+
+/* ------ slider css variables ------ */
+:root {
+  --ix-slider-rail-size: 2px;
+  --ix-slider-mark-label-color: #a1a7b3;
+  --ix-slider-mark-label-color-active: #2f3540;
+  --ix-slider-dot-bg-color: #e1e5eb;
+  --ix-slider-dot-bg-color-disabled: #edf1f7;
+  --ix-slider-dot-bg-color-active: #1c6eff;
+  --ix-slider-rail-bg-color: #e1e5eb;
+  --ix-slider-rail-bg-color-hover: #e1e5eb;
+  --ix-slider-track-bg-color: #1c6eff;
+  --ix-slider-track-bg-color-hover: #1c6eff;
+  --ix-slider-track-bg-color-disabled: #edf1f7;
+  --ix-slider-thumb-bg-color: #ffffff;
+  --ix-slider-thumb-border-color: #1c6eff;
+  --ix-slider-thumb-border-color-hover: #1c6eff;
+  --ix-slider-thumb-border-color-disabled: #edf1f7;
+  --ix-slider-thumb-border-width: 2px;
+  --ix-slider-thumb-border-type: solid;
+  --ix-slider-thumb-border-color-focus: #1c6eff;
+  --ix-slider-thumb-box-shadow-focus: 0 0 0 5px rgba(28, 110, 255, 0.12);
+  --ix-slider-thumb-size: 10px;
+}
+
+/* ------ space css variables ------ */
+:root {
+  --ix-space-separator-color: #e1e5eb;
+}
+
+/* ------ spin css variables ------ */
+:root {
+  --ix-spin-tip-color: #1c6eff;
+  --ix-spin-icon-color: #1c6eff;
+  --ix-spin-font-size-sm: 12px;
+  --ix-spin-font-size-md: 14px;
+  --ix-spin-font-size-lg: 16px;
+  --ix-spin-icon-size-sm: 20px;
+  --ix-spin-icon-size-md: 28px;
+  --ix-spin-icon-size-lg: 48px;
+  --ix-spin-bg-circle-stroke: #1c6eff;
+  --ix-spin-fst-arch-stroke: #12a679;
+  --ix-spin-snd-arch-stroke: #d3d7de;
+}
+
+/* ------ statistic css variables ------ */
+:root {
+  --ix-statistic-font-size-sm: 14px;
+  --ix-statistic-font-size-md: 14px;
+  --ix-statistic-font-size-lg: 24px;
+  --ix-statistic-font-size-xl: 30px;
+  --ix-statistic-color: #2f3540;
+}
+
+/* ------ stepper css variables ------ */
+:root {
+  --ix-stepper-icon-size-sm: 24px;
+  --ix-stepper-icon-size-md: 32px;
+  --ix-stepper-icon-font-size-sm: 14px;
+  --ix-stepper-icon-font-size-md: 16px;
+  --ix-stepper-icon-border-width-sm: 2px;
+  --ix-stepper-icon-border-width-md: 2px;
+  --ix-stepper-icon-margin-sm: 0 8px 0 0;
+  --ix-stepper-icon-margin-md: 0 8px 0 0;
+  --ix-stepper-title-font-size-sm: 14px;
+  --ix-stepper-title-font-size-md: 16px;
+  --ix-stepper-description-font-size-sm: 12px;
+  --ix-stepper-description-font-size-md: 14px;
+  --ix-stepper-content-min-height-sm: 60px;
+  --ix-stepper-content-min-height-md: 80px;
+  --ix-stepper-line-type: dashed;
+}
+
+/* ------ switch css variables ------ */
+:root {
+  --ix-switch-active-disabled-color: #96c7ff;
+  --ix-switch-height-sm: 16px;
+  --ix-switch-height-md: 24px;
+  --ix-switch-height-lg: 32px;
+  --ix-switch-handle-size-sm: 12px;
+  --ix-switch-handle-size-md: 20px;
+  --ix-switch-handle-size-lg: 28px;
+  --ix-switch-icon-font-size-sm: 9px;
+  --ix-switch-icon-font-size-md: 14px;
+  --ix-switch-icon-font-size-lg: 14px;
+  --ix-switch-handle-padding: 2px;
+  --ix-switch-handle-bg-color: #ffffff;
+  --ix-switch-handle-box-shadow: none;
+}
+
+/* ------ table css variables ------ */
+:root {
+  --ix-table-font-size-sm: 12px;
+  --ix-table-font-size-md: 12px;
+  --ix-table-font-size-lg: 12px;
+  --ix-table-head-row-height-sm: 32px;
+  --ix-table-head-row-height-md: 32px;
+  --ix-table-head-row-height-lg: 32px;
+  --ix-table-cell-padding-horizontal-sm: 8px;
+  --ix-table-cell-padding-horizontal-md: 12px;
+  --ix-table-cell-padding-horizontal-lg: 16px;
+  --ix-table-cell-padding-vertical-sm: 6px;
+  --ix-table-cell-padding-vertical-md: 10px;
+  --ix-table-cell-padding-vertical-lg: 18px;
+  --ix-table-head-color: #454c59;
+  --ix-table-head-bg-color: #edf1f7;
+  --ix-table-head-separator-color: #d3d7de;
+  --ix-table-head-icon-color: #bec3cc;
+  --ix-table-head-icon-color-active: #1c6eff;
+  --ix-table-head-icon-bg-color-hover: #e1e5eb;
+  --ix-table-inset-shadow-start: inset 10px 0 8px -8px rgba(30, 35, 43, 0.12);
+  --ix-table-inset-shadow-end: inset -10px 0 8px -8px rgba(30, 35, 43, 0.12);
+  --ix-table-body-row-bg-color-hover: #f7f9fc;
+  --ix-table-body-row-bg-color-selected: #ffffff;
+  --ix-table-body-row-bg-color-expanded: #f7f9fc;
+  --ix-table-body-row-bg-color-tree-expanded: #f7f9fc;
+  --ix-table-body-cell-vertical-align: middle;
+  --ix-table-expandable-icon-color: #bec3cc;
+}
+
+/* ------ tabs css variables ------ */
+:root {
+  --ix-tabs-nav-font-size-md: 12px;
+  --ix-tabs-nav-font-size-lg: 14px;
+  --ix-tabs-nav-tab-padding: 0 16px;
+  --ix-tabs-nav-tab-min-width: 72px;
+  --ix-tabs-nav-tab-height: 40px;
+  --ix-tabs-nav-bar-height: 2px;
+  --ix-tabs-segment-nav-height: 32px;
+  --ix-tabs-border-radius: 2px;
+  --ix-tabs-panel-padding-size: 16px;
+}
+
+/* ------ tag css variables ------ */
+:root {
+  --ix-tag-bg-color-normal: rgb(241, 241, 243);
+  --ix-tag-bg-color-filled: #a1a7b3;
+  --ix-tag-border-width: 1px;
+  --ix-tag-border-radius: 2px;
+  --ix-tag-min-width-rect: 40px;
+  --ix-tag-min-width-round: 48px;
+  --ix-tag-min-width-numeric: 64px;
+  --ix-tag-success-bg-color: rgb(231, 246, 242);
+  --ix-tag-info-bg-color: rgb(236, 244, 255);
+  --ix-tag-warning-bg-color: rgb(255, 247, 232);
+  --ix-tag-risk-bg-color: rgb(255, 241, 232);
+  --ix-tag-error-bg-color: rgb(255, 238, 238);
+  --ix-tag-fatal-bg-color: rgb(243, 230, 231);
+}
+
+/* ------ textarea css variables ------ */
+:root {
+  --ix-textarea-count-bottom: 1px;
+  --ix-textarea-count-right: 8px;
+  --ix-textarea-count-opacity: 0.9;
+  --ix-textarea-count-color: #a1a7b3;
+}
+
+/* ------ time-picker css variables ------ */
+:root {
+  --ix-time-picker-separator-margin-horizontal: 24px;
+  --ix-time-picker-overlay-width: 200px;
+  --ix-time-picker-overlay-padding: 8px 8px 0 8px;
+  --ix-time-picker-overlay-footer-padding: 8px 16px;
+  --ix-time-picker-range-board-width: 184px;
+  --ix-time-picker-range-board-border: none;
+  --ix-time-picker-range-overlay-padding: 16px 16px 0 16px;
+  --ix-time-picker-range-overlay-footer-padding: 8px 0;
+  --ix-time-picker-range-overlay-separator-padding: 2px 10px;
+  --ix-time-picker-range-overlay-separator-font-size: 12px;
+  --ix-time-picker-panel-height: 224px;
+  --ix-time-picker-panel-padding-horizontal: 8px;
+  --ix-time-picker-panel-padding-vertical: 8px;
+  --ix-time-picker-panel-font-size: 12px;
+  --ix-time-picker-panel-cell-height: 32px;
+  --ix-time-picker-panel-cell-padding-horizontal: 8px;
+  --ix-time-picker-panel-cell-color: #6f7785;
+  --ix-time-picker-panel-cell-color-active: #2f3540;
+  --ix-time-picker-panel-cell-bg-color-hover: transparent;
+  --ix-time-picker-panel-cell-bg-color-active: transparent;
+  --ix-time-picker-panel-cell-font-weight-active: 600;
+  --ix-time-picker-panel-scrollbar-width: 6px;
+  --ix-time-picker-panel-scrollbar-thumb-bg-color: #e1e5eb;
+  --ix-time-picker-panel-scrollbar-thumb-border-radius: 10px;
+  --ix-time-picker-panel-scrollbar-track-bg-color: unset;
+}
+
+/* ------ timeline css variables ------ */
+:root {
+  --ix-timeline-font-size: 12px;
+  --ix-timeline-dot-size: 12px;
+  --ix-timeline-dot-border-width: 2px;
+  --ix-timeline-content-label-margin-top: 8px;
+  --ix-timeline-line-width: 2px;
+  --ix-timeline-line-bg-color: #e1e5eb;
+  --ix-timeline-pending-item-content-min-width: 40px;
+  --ix-timeline-content-margin-bottom: 16px;
+}
+
+/* ------ tooltip css variables ------ */
+:root {
+  --ix-tooltip-font-size: 12px;
+  --ix-tooltip-color: #6f7785;
+  --ix-tooltip-min-width: 32px;
+  --ix-tooltip-max-width: 400px;
+}
+
+/* ------ tour css variables ------ */
+:root {
+  --ix-tour-bg-color: #ffffff;
+  --ix-tour-description-color: #2f3540;
+  --ix-tour-indicators-color: #6f7785;
+  --ix-tour-border-radius: 4px;
+  --ix-tour-min-width: 250px;
+  --ix-tour-padding-top: 16px;
+  --ix-tour-padding-left: 16px;
+  --ix-tour-padding-right: 16px;
+  --ix-tour-padding-bottom: 16px;
+  --ix-tour-description-font-size: 12px;
+  --ix-tour-indicators-font-size: 12px;
+  --ix-tour-footer-btn-gap: 4px;
+}
+
+/* ------ transfer css variables ------ */
+:root {
+  --ix-transfer-height: 290px;
+  --ix-transfer-content-width: 260px;
+  --ix-transfer-header-height: 40px;
+  --ix-transfer-suffix-margin-left: 12px;
+  --ix-transfer-footer-height: 40px;
+  --ix-transfer-content-padding: 0 8px 0 12px;
+  --ix-transfer-opr-min-width: 4px;
+  --ix-transfer-opr-padding: 8px;
+  --ix-transfer-opr-button-width: 24px;
+  --ix-transfer-opr-button-height: 32px;
+  --ix-transfer-opr-button-gap: 8px;
+  --ix-transfer-search-width: 110px;
+  --ix-transfer-list-item-min-height: 32px;
+  --ix-transfer-close-icon-padding: 0 12px;
+}
+
+/* ------ tree css variables ------ */
+:root {
+  --ix-tree-drop-line-width: 2px;
+  --ix-tree-drop-line-color: #458fff;
+  --ix-tree-bg-color: #ffffff;
+  --ix-tree-node-bg-color-hover: #f7f9fc;
+  --ix-tree-node-bg-color-selected: #ffffff;
+  --ix-tree-node-color-selected: #1c6eff;
+  --ix-tree-node-padding-horizontal: 4px;
+  --ix-tree-node-padding-vertical: 0px;
+  --ix-tree-node-content-height: 32px;
+  --ix-tree-node-content-label-highlight-color: #1c6eff;
+  --ix-tree-node-content-prefix-margin-right: 4px;
+  --ix-tree-node-checkbox-margin-right: 4px;
+  --ix-tree-node-icon-width: 24px;
+  --ix-tree-expand-icon-color: #bec3cc;
+}
+
+/* ------ tree-select css variables ------ */
+:root {
+  --ix-tree-select-option-font-size: 12px;
+  --ix-tree-select-option-height: 32px;
+  --ix-tree-select-option-padding: 8px 12px;
+  --ix-tree-select-option-margin-left: 8px;
+  --ix-tree-select-option-container-padding: 4px 0;
+  --ix-tree-select-option-container-tree-node-padding: 0 0 0 12px;
+  --ix-tree-select-overlay-search-wrapper-padding: 4px 12px 8px;
+}
+
+/* ------ upload css variables ------ */
+:root {
+  --ix-upload-selector-dragable-border: 1px dashed #d3d7de;
+  --ix-upload-selector-dragable-border-dragover: 1px dashed #1c6eff;
+  --ix-upload-list-name-max-width: calc(100% - 74px);
+  --ix-upload-list-img-thumb-width: 48px;
+  --ix-upload-list-img-thumb-height: 48px;
+  --ix-upload-list-img-card-height: 96px;
+  --ix-upload-list-img-card-width: 96px;
+}

@@ -11,15 +11,20 @@ import { isString } from 'lodash-es'
 
 import { type EmptyConfig, useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
+import { type PresetTheme, useThemeToken } from '@idux/components/theme'
 
-import { EmptyDefaultImage, EmptySimpleImage } from './Images'
+import { EmptyDefaultImage, EmptyDefaultImageDark, EmptySimpleImage, EmptySimpleImageDark } from './Images'
 import { type EmptyProps, emptyProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxEmpty',
   props: emptyProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { presetTheme, globalHashId, hashId, registerToken } = useThemeToken('empty')
+    registerToken(getThemeTokens)
+
     const locale = useGlobalConfig('locale')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-empty`)
     const config = useGlobalConfig('empty')
@@ -28,6 +33,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-simple`]: props.simple,
       })
@@ -38,7 +45,7 @@ export default defineComponent({
       const descriptionNode = slots.description ? slots.description() : mergedDescription.value
       return (
         <div class={classes.value}>
-          <div class={`${prefixCls}-image`}>{renderImage(props, slots, config)}</div>
+          <div class={`${prefixCls}-image`}>{renderImage(props, slots, config, presetTheme.value)}</div>
           {descriptionNode && <div class={`${prefixCls}-description`}>{descriptionNode}</div>}
           {slots.default && <div class={`${prefixCls}-content`}>{slots.default()}</div>}
         </div>
@@ -47,7 +54,7 @@ export default defineComponent({
   },
 })
 
-function renderImage(props: EmptyProps, slots: Slots, config: EmptyConfig) {
+function renderImage(props: EmptyProps, slots: Slots, config: EmptyConfig, presetTheme: PresetTheme) {
   if (slots.image) {
     return slots.image(props)
   }
@@ -64,5 +71,8 @@ function renderImage(props: EmptyProps, slots: Slots, config: EmptyConfig) {
     return isString(icon) ? <IxIcon name={icon} /> : icon
   }
 
-  return props.simple ? <EmptySimpleImage /> : <EmptyDefaultImage />
+  const SimpleImg = presetTheme === 'dark' ? EmptySimpleImageDark : EmptySimpleImage
+  const DefaultImg = presetTheme === 'dark' ? EmptyDefaultImageDark : EmptyDefaultImage
+
+  return props.simple ? <SimpleImg /> : <DefaultImg />
 }

@@ -8,15 +8,20 @@
 import { computed, defineComponent, inject, onBeforeUnmount, onMounted, watch } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import { anchorToken } from './token'
 import { linkProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxAnchorLink',
   props: linkProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('anchor')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-anchor-link`)
 
     const { registerLink, unregisterLink, activeLink, handleLinkClick } = inject(anchorToken)!
@@ -45,7 +50,7 @@ export default defineComponent({
       const { href, title } = props
       const prefixCls = mergedPrefixCls.value
       return (
-        <div class={prefixCls}>
+        <div class={[prefixCls, globalHashId.value, hashId.value]}>
           <a class={classes.value} href={href} data-href={href} title={title} onClick={onClick}>
             {slots.title?.() ?? title}
           </a>

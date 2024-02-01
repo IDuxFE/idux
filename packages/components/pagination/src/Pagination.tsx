@@ -9,6 +9,7 @@ import { type VNodeTypes, computed, defineComponent, normalizeClass, provide } f
 
 import { ɵInput } from '@idux/components/_private/input'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import { useItems } from './composables/useItems'
 import { useJumpToIndex } from './composables/useJumpTo'
@@ -19,12 +20,16 @@ import Sizes from './contents/Sizes'
 import Total from './contents/Total'
 import { paginationToken } from './token'
 import { paginationProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxPagination',
   props: paginationProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('pagination')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-pagination`)
     const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('pagination')
@@ -57,6 +62,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-disabled`]: props.disabled,
         [`${prefixCls}-simple`]: simple.value,

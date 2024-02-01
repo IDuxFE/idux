@@ -18,35 +18,35 @@
     <IxButton @click="errorVisible = !errorVisible">Error</IxButton>
   </IxSpace>
   <IxModal v-model:visible="confirmVisible" header="Title" type="confirm" title="Are you sure delete this task?">
-    <p>Some descriptions...</p>
+    <p class="content">Some descriptions...</p>
   </IxModal>
   <IxModal v-model:visible="infoVisible" header="Title" type="info" title="This is a notification message">
     <p>Some messages...</p>
   </IxModal>
   <IxModal v-model:visible="successVisible" header="Title" type="success" title="This is a success message">
-    <p>Some messages...</p>
+    <p class="content">Some messages...</p>
   </IxModal>
   <IxModal v-model:visible="warningVisible" header="Title" type="warning" title="This is an warning message">
-    <p>Some messages...</p>
+    <p class="content">Some messages...</p>
   </IxModal>
   <IxModal v-model:visible="errorVisible" header="Title" type="error" title="This is an error message">
-    <p>Some messages...</p>
+    <p class="content">Some messages...</p>
   </IxModal>
 
   <IxModal v-model:visible="confirmNoHeaderVisible" type="confirm" title="Are you sure delete this task?">
-    <p>Some descriptions...</p>
+    <p class="content">Some descriptions...</p>
   </IxModal>
   <IxModal v-model:visible="infoNoHeaderVisible" type="info" title="This is a notification message">
-    <p>Some messages...</p>
+    <p class="content">Some messages...</p>
   </IxModal>
   <IxModal v-model:visible="successNoHeaderVisible" type="success" title="This is a success message">
-    <p>Some messages...</p>
+    <p class="content">Some messages...</p>
   </IxModal>
   <IxModal v-model:visible="warningNoHeaderVisible" type="warning" title="This is an warning message">
-    <p>Some messages...</p>
+    <p class="content">Some messages...</p>
   </IxModal>
   <IxModal v-model:visible="errorNoHeaderVisible" type="error" title="This is an error message">
-    <p>Some messages...</p>
+    <p class="content">Some messages...</p>
   </IxModal>
 </template>
 
@@ -65,3 +65,9 @@ const successNoHeaderVisible = ref(false)
 const warningNoHeaderVisible = ref(false)
 const errorNoHeaderVisible = ref(false)
 </script>
+
+<style scoped>
+.content {
+  margin-bottom: 0;
+}
+</style>

@@ -14,12 +14,15 @@ import { isNil } from 'lodash-es'
 import { useAccessorAndControl } from '@idux/cdk/forms'
 import { callEmit, useKey } from '@idux/cdk/utils'
 import { ɵWave, type ɵWaveInstance } from '@idux/components/_private/wave'
+import { getButtonThemeTokens } from '@idux/components/button'
 import { useGlobalConfig } from '@idux/components/config'
 import { FORM_TOKEN, useFormElement, useFormItemRegister } from '@idux/components/form'
+import { useThemeToken } from '@idux/components/theme'
 import { convertStringVNode } from '@idux/components/utils'
 
 import { type RadioGroupContext, radioGroupToken } from './token'
 import { type RadioProps, radioProps } from './types'
+import { getThemeTokens } from '../theme'
 
 const buttonSizeMap = {
   sm: 'xs',
@@ -34,6 +37,11 @@ export default defineComponent({
   setup(props, { attrs, expose, slots }) {
     const key = useKey()
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('radio')
+    const { hashId: buttonHashId, registerToken: registerButtonTokens } = useThemeToken('button')
+    registerToken(getThemeTokens)
+    registerButtonTokens(getButtonThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-radio`)
     const config = useGlobalConfig('radio')
 
@@ -71,6 +79,9 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const commonPrefixCls = common.prefixCls
       const classes = {
+        [globalHashId.value]: !!globalHashId.value,
+        [buttonHashId.value]: !!buttonHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-checked`]: isChecked.value,
         [`${prefixCls}-disabled`]: isDisabled.value,

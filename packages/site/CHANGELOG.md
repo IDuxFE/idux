@@ -3,20 +3,123 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.6](https://github.com/IDuxFE/idux/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2024-01-17)
+
+**Note:** Version bump only for package @idux/site
+
+
+
+
+
+# [2.0.0-beta.5](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0-beta.5) (2024-01-08)
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/IDuxFE/idux/issues/1751)) ([415f07f](https://github.com/IDuxFE/idux/commit/415f07f5c5a23ac1737865b945417e1424a7086b))
+* **cdk:scroll:** virtual scroll supports horizontal ([#1775](https://github.com/IDuxFE/idux/issues/1775)) ([77a0411](https://github.com/IDuxFE/idux/commit/77a0411370fb88e15e192850b57ae9bc5956a884))
+* **comp:table:** change rowHeight theme tokens to paddings ([#1760](https://github.com/IDuxFE/idux/issues/1760)) ([c9b4ef7](https://github.com/IDuxFE/idux/commit/c9b4ef741fde5782d4c0bc95177527e0ac252cf5))
+* **comp:theme:** root level IxThemeProvider is no longer needed ([#1765](https://github.com/IDuxFE/idux/issues/1765)) ([bd5603e](https://github.com/IDuxFE/idux/commit/bd5603e2064bad94daec56e61e1672226a95d8a2))
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([5976f6d](https://github.com/IDuxFE/idux/commit/5976f6dcfecd276ad7c3406786266f65453da8dd))
+
+
+### BREAKING CHANGES
+
+* **cdk:scroll:** itemHeight is deprecated, use rowHeight instead
+* **cdk:scroll:** itemRender is deprecated, use rowRender instead
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
+
+
+
+
+# [2.0.0-beta.4](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0-beta.4) (2023-12-27)
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/IDuxFE/idux/issues/1751)) ([a4540ec](https://github.com/IDuxFE/idux/commit/a4540ecb226f110b0fdd74a4d4525427db02d926))
+* **cdk:scroll:** virtual scroll supports horizontal ([#1775](https://github.com/IDuxFE/idux/issues/1775)) ([4b39705](https://github.com/IDuxFE/idux/commit/4b39705af35cff3422dc7666777409c2f80030b1))
+* **comp:table:** change rowHeight theme tokens to paddings ([#1760](https://github.com/IDuxFE/idux/issues/1760)) ([48f0394](https://github.com/IDuxFE/idux/commit/48f03943b5adb6a3fb731d14077bc84fb0526884))
+* **comp:theme:** root level IxThemeProvider is no longer needed ([#1765](https://github.com/IDuxFE/idux/issues/1765)) ([3565d49](https://github.com/IDuxFE/idux/commit/3565d49edc951dabfd6ea25150923be70d1777ff))
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([f587f3a](https://github.com/IDuxFE/idux/commit/f587f3aa856b0576a6d9bb8b1d428301c4f5cccb))
+
+
+### BREAKING CHANGES
+
+* **cdk:scroll:** itemHeight is deprecated, use rowHeight instead
+* **cdk:scroll:** itemRender is deprecated, use rowRender instead
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
+
+
+
+
+# [2.0.0-beta.3](https://github.com/IDuxFE/idux/compare/v1.12.3...v2.0.0-beta.3) (2023-12-11)
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/IDuxFE/idux/issues/1751)) ([a4540ec](https://github.com/IDuxFE/idux/commit/a4540ecb226f110b0fdd74a4d4525427db02d926))
+* **comp:table:** change rowHeight theme tokens to paddings ([#1760](https://github.com/IDuxFE/idux/issues/1760)) ([48f0394](https://github.com/IDuxFE/idux/commit/48f03943b5adb6a3fb731d14077bc84fb0526884))
+* **comp:theme:** root level IxThemeProvider is no longer needed ([#1765](https://github.com/IDuxFE/idux/issues/1765)) ([3565d49](https://github.com/IDuxFE/idux/commit/3565d49edc951dabfd6ea25150923be70d1777ff))
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([f587f3a](https://github.com/IDuxFE/idux/commit/f587f3aa856b0576a6d9bb8b1d428301c4f5cccb))
+
+
+### BREAKING CHANGES
+
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
+
+
+
+
+# [2.0.0-beta.2](https://github.com/sallerli1/idux/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2023-12-01)
+
+**Note:** Version bump only for package @idux/site
+
+
+
+
+
+# [2.0.0-beta.1](https://github.com/sallerli1/idux/compare/v2.0.0-beta.0...v2.0.0-beta.1) (2023-11-29)
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/sallerli1/idux/issues/1751)) ([411ed2b](https://github.com/sallerli1/idux/commit/411ed2b90f15e3b8c7f1989429fa023065304143))
+
+
+
+
+
+# [2.0.0-beta.0](https://github.com/sallerli1/idux/compare/v1.12.2...v2.0.0-beta.0) (2023-11-23)
+
+
+### Features
+
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/sallerli1/idux/issues/1737)) ([ea22a8f](https://github.com/sallerli1/idux/commit/ea22a8fa8fb863a4c546b9af62025718779d3463))
+
+
+### BREAKING CHANGES
+
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
 ## [1.12.4](https://github.com/IDuxFE/idux/compare/v1.12.2...v1.12.4) (2024-01-02)
 
 **Note:** Version bump only for package @idux/site
 
-
-
-
-
 ## [1.12.3](https://github.com/IDuxFE/idux/compare/v1.12.2...v1.12.3) (2023-12-05)
 
 **Note:** Version bump only for package @idux/site
-
-
-
 
 
 ## [1.12.2](https://github.com/IDuxFE/idux/compare/v1.12.1...v1.12.2) (2023-11-06)

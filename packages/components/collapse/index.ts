@@ -24,3 +24,6 @@ export type {
   CollapsePanelPublicProps as CollapsePanelInstance,
   CollapseSize,
 } from './src/types'
+
+export { getThemeTokens as getCollapseThemeTokens } from './theme'
+export type { CollapseThemeTokens } from './theme'

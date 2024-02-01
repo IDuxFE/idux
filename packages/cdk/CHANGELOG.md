@@ -3,6 +3,135 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.6](https://github.com/IDuxFE/idux/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2024-01-17)
+
+
+### Bug Fixes
+
+* **cdk:popper:** arrow size not properly calculated ([#1813](https://github.com/IDuxFE/idux/issues/1813)) ([f7abe16](https://github.com/IDuxFE/idux/commit/f7abe16f9b8bf71124d46fc96c8a6594d36ef64e))
+
+
+### Features
+
+* **cdk:scroll:** add simulated scroll support to VirtualScroll ([#1812](https://github.com/IDuxFE/idux/issues/1812)) ([17ccefa](https://github.com/IDuxFE/idux/commit/17ccefaf3cd0689e12e69be9d5af95578a12eae5))
+
+
+
+
+
+# [2.0.0-beta.5](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0-beta.5) (2024-01-08)
+
+
+### Bug Fixes
+
+* **cdk:drag-drop:** remove user-select none style ([#1743](https://github.com/IDuxFE/idux/issues/1743)) ([d76dcda](https://github.com/IDuxFE/idux/commit/d76dcdabf443c1aa3399d82271fbbcbee79e260f))
+* **cdk:forms:** interactions trigger dosen't work ([#1770](https://github.com/IDuxFE/idux/issues/1770)) ([fc44cbf](https://github.com/IDuxFE/idux/commit/fc44cbf912b2ba78f4847ad599d64d89464c408a))
+* **cdk:popper:** modify default placement to `bottomStart` ([#1785](https://github.com/IDuxFE/idux/issues/1785)) ([5d9ddc4](https://github.com/IDuxFE/idux/commit/5d9ddc4d9e21226c9d7ef89b223cc4eb574ac611))
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/IDuxFE/idux/issues/1751)) ([415f07f](https://github.com/IDuxFE/idux/commit/415f07f5c5a23ac1737865b945417e1424a7086b))
+* **cdk:forms:** add `interactions` trigger ([#1766](https://github.com/IDuxFE/idux/issues/1766)) ([83c60e7](https://github.com/IDuxFE/idux/commit/83c60e729ec1d1979a1250f1d1cd88583a4be5ec))
+* **cdk:scroll:** virtual scroll supports horizontal ([#1775](https://github.com/IDuxFE/idux/issues/1775)) ([77a0411](https://github.com/IDuxFE/idux/commit/77a0411370fb88e15e192850b57ae9bc5956a884))
+* **cdk:theme:** add cdk theme support ([#1739](https://github.com/IDuxFE/idux/issues/1739)) ([ab9cb89](https://github.com/IDuxFE/idux/commit/ab9cb894e44be39dcf1310a4a0ff3a66be1d3649))
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([5976f6d](https://github.com/IDuxFE/idux/commit/5976f6dcfecd276ad7c3406786266f65453da8dd))
+
+
+### BREAKING CHANGES
+
+* **cdk:scroll:** itemHeight is deprecated, use rowHeight instead
+* **cdk:scroll:** itemRender is deprecated, use rowRender instead
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
+
+
+
+
+# [2.0.0-beta.4](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0-beta.4) (2023-12-27)
+
+
+### Bug Fixes
+
+* **cdk:drag-drop:** remove user-select none style ([#1743](https://github.com/IDuxFE/idux/issues/1743)) ([d76dcda](https://github.com/IDuxFE/idux/commit/d76dcdabf443c1aa3399d82271fbbcbee79e260f))
+* **cdk:forms:** interactions trigger dosen't work ([#1770](https://github.com/IDuxFE/idux/issues/1770)) ([c099b1a](https://github.com/IDuxFE/idux/commit/c099b1a50545ecc28c40a7610320614dbf23866e))
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/IDuxFE/idux/issues/1751)) ([a4540ec](https://github.com/IDuxFE/idux/commit/a4540ecb226f110b0fdd74a4d4525427db02d926))
+* **cdk:forms:** add `interactions` trigger ([#1766](https://github.com/IDuxFE/idux/issues/1766)) ([dcdbfb3](https://github.com/IDuxFE/idux/commit/dcdbfb3effa0461edb0806fe4b08b59c78e45833))
+* **cdk:scroll:** virtual scroll supports horizontal ([#1775](https://github.com/IDuxFE/idux/issues/1775)) ([4b39705](https://github.com/IDuxFE/idux/commit/4b39705af35cff3422dc7666777409c2f80030b1))
+* **cdk:theme:** add cdk theme support ([#1739](https://github.com/IDuxFE/idux/issues/1739)) ([6616ebc](https://github.com/IDuxFE/idux/commit/6616ebc5472367231d52f9f55a923b1504a8c5dc))
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([f587f3a](https://github.com/IDuxFE/idux/commit/f587f3aa856b0576a6d9bb8b1d428301c4f5cccb))
+
+
+### BREAKING CHANGES
+
+* **cdk:scroll:** itemHeight is deprecated, use rowHeight instead
+* **cdk:scroll:** itemRender is deprecated, use rowRender instead
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
+
+
+
+
+# [2.0.0-beta.3](https://github.com/IDuxFE/idux/compare/v1.12.3...v2.0.0-beta.3) (2023-12-11)
+
+
+### Bug Fixes
+
+* **cdk:forms:** interactions trigger dosen't work ([#1770](https://github.com/IDuxFE/idux/issues/1770)) ([c099b1a](https://github.com/IDuxFE/idux/commit/c099b1a50545ecc28c40a7610320614dbf23866e))
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/IDuxFE/idux/issues/1751)) ([a4540ec](https://github.com/IDuxFE/idux/commit/a4540ecb226f110b0fdd74a4d4525427db02d926))
+* **cdk:forms:** add `interactions` trigger ([#1766](https://github.com/IDuxFE/idux/issues/1766)) ([dcdbfb3](https://github.com/IDuxFE/idux/commit/dcdbfb3effa0461edb0806fe4b08b59c78e45833))
+* **cdk:theme:** add cdk theme support ([#1739](https://github.com/IDuxFE/idux/issues/1739)) ([6616ebc](https://github.com/IDuxFE/idux/commit/6616ebc5472367231d52f9f55a923b1504a8c5dc))
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([f587f3a](https://github.com/IDuxFE/idux/commit/f587f3aa856b0576a6d9bb8b1d428301c4f5cccb))
+
+
+### BREAKING CHANGES
+
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
+
+
+
+
+# [2.0.0-beta.1](https://github.com/IDuxFE/idux/compare/v2.0.0-beta.0...v2.0.0-beta.1) (2023-11-29)
+
+
+### Features
+
+* add dark theme ([#1751](https://github.com/IDuxFE/idux/issues/1751)) ([411ed2b](https://github.com/IDuxFE/idux/commit/411ed2b90f15e3b8c7f1989429fa023065304143))
+
+
+
+
+
+# [2.0.0-beta.0](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0-beta.0) (2023-11-23)
+
+
+### Features
+
+* **cdk:theme:** add cdk theme support ([#1739](https://github.com/IDuxFE/idux/issues/1739)) ([f34f0e5](https://github.com/IDuxFE/idux/commit/f34f0e573d294719abe216dd2f3fbf196bcd021b))
+* dynamic theme with theme tokens is now supported ([#1737](https://github.com/IDuxFE/idux/issues/1737)) ([ea22a8f](https://github.com/IDuxFE/idux/commit/ea22a8fa8fb863a4c546b9af62025718779d3463))
+
+
+### BREAKING CHANGES
+
+* original css vars and less vars are removed
+* original default theme is removed, seer is now default theme
+* original style entries is removed, now only index is provided
+
 ## [1.12.4](https://github.com/IDuxFE/idux/compare/v1.12.2...v1.12.4) (2024-01-02)
 
 
@@ -10,19 +139,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * **cdk:drag-drop:** remove user-select none style ([#1743](https://github.com/IDuxFE/idux/issues/1743)) ([d76dcda](https://github.com/IDuxFE/idux/commit/d76dcdabf443c1aa3399d82271fbbcbee79e260f))
 
-
-
-
-
 ## [1.12.3](https://github.com/IDuxFE/idux/compare/v1.12.2...v1.12.3) (2023-12-05)
 
 
 ### Bug Fixes
 
 * **cdk:drag-drop:** remove user-select none style ([#1743](https://github.com/IDuxFE/idux/issues/1743)) ([d76dcda](https://github.com/IDuxFE/idux/commit/d76dcdabf443c1aa3399d82271fbbcbee79e260f))
-
-
-
 
 
 ## [1.9.4](https://github.com/IDuxFE/idux/compare/v1.9.3...v1.9.4) (2023-08-28)

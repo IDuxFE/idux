@@ -45,6 +45,7 @@ import type { TabsSize } from '@idux/components/tabs'
 import type { TagShape } from '@idux/components/tag'
 import type { TextCopyIconRenderer, TextExpandIconRenderer } from '@idux/components/text'
 import type { TextareaAutoRows, TextareaResize } from '@idux/components/textarea'
+import type { DeepPartialThemeTokens, PresetTheme, ThemeProviderAttachTo } from '@idux/components/theme'
 import type { TargetGap, TourMaskOptions } from '@idux/components/tour'
 import type { TreeExpandIconRenderer, TreeNode } from '@idux/components/tree'
 import type { UploadFilesType, UploadIconType, UploadRequestMethod, UploadRequestOption } from '@idux/components/upload'
@@ -54,6 +55,7 @@ import type { VNode, VNodeChild } from 'vue'
 export interface GlobalConfig {
   common: CommonConfig
   locale: Locale
+  theme: ThemeConfig
 
   alert: AlertConfig
   anchor: AnchorConfig
@@ -120,7 +122,12 @@ export interface CommonConfig {
   prefixCls: string
   overlayContainer?: OverlayContainerType
   overlayZIndex: number | (() => number)
-  theme: 'default' | 'seer'
+}
+export interface ThemeConfig extends DeepPartialThemeTokens {
+  presetTheme: PresetTheme
+  injectThemeStyle: boolean
+  hashed: boolean
+  attachTo?: ThemeProviderAttachTo
 }
 
 export interface AlertConfig {
@@ -231,6 +238,7 @@ export interface DrawerConfig {
   closeIcon: string
   closeOnEsc: boolean
   container?: PortalTargetType
+  distance: number
   height: string | number
   mask: boolean
   maskClosable: boolean
@@ -478,6 +486,8 @@ export interface TableConfig {
 
   emptyCell?: string | ((options: TableEmptyCellOptions) => VNodeChild)
 
+  insetShadow: boolean
+
   pagination: { position: TablePaginationPosition } & Partial<PaginationConfig>
 
   columnBase: TableColumnBaseConfig
@@ -487,7 +497,7 @@ export interface TableConfig {
 }
 
 export interface TableColumnBaseConfig {
-  align: TableColumnAlign
+  align: TableColumnAlign | { title: TableColumnAlign; cell: TableColumnAlign }
   filterable: { multiple: boolean; footer: true }
   sortable: { nextTooltip: boolean; orders: TableColumnSortOrder[] }
 }

@@ -37,7 +37,7 @@ import { appContextToken } from '../../../context'
 
 export default defineComponent({
   setup() {
-    const { breakpoints, lang, org, repo } = inject(appContextToken)!
+    const { breakpoints, lang, org, repo, setTheme } = inject(appContextToken)!
     const router = useRouter()
 
     const locale = computed(() => homeLocales[lang.value])
@@ -48,6 +48,8 @@ export default defineComponent({
     const gotoPage = (path: string) => {
       router.push(`${path}/${lang.value}`)
     }
+
+    setTheme('default')
 
     return { breakpoints, lang, locale, buttonSize, githubUrl, gotoPage }
   },
@@ -203,7 +205,7 @@ export default defineComponent({
           margin-bottom: 8px;
 
           strong {
-            color: @color-primary;
+            color: var(--ix-color-primary-text);
           }
         }
 

@@ -1,32 +1,35 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
-@import './mixin.less';
+
+@tag-line-height: calc(var(--ix-font-size-sm) + var(--ix-line-height-gutter) - var(--ix-tag-border-width) * 2);
 
 .@{tag-prefix} {
   .reset-component-new();
-  .reset-font-size();
+  .reset-font-size(var(--ix-font-size-sm));
 
   display: inline-flex;
   align-items: center;
-  color: @tag-color;
-  background-color: @tag-background-color;
-  padding: 0 calc(8px - @tag-border-width);
+  color: var(--ix-tag-color, var(--ix-color-text-info));
+  background-color: var(--ix-tag-background-color, var(--ix-color-emphasized-container-bg));
+  padding: 0 calc(var(--ix-margin-size-sm) - var(--ix-tag-border-width));
   line-height: @tag-line-height;
-  border: @tag-border-width solid @tag-background-color;
-  border-radius: @tag-border-radius;
+  border: var(--ix-tag-border-width) var(--ix-line-type) transparent;
+  border-radius: var(--ix-tag-border-radius);
 
-  .make-color-classes(@preset-colors);
-
-  & + & {
-    margin-left: 8px;
+  & + &,
+  & + .@{tag-prefix}-group,
+  .@{tag-prefix}-group + &,
+  .@{tag-prefix}-group + .@{tag-prefix}-group {
+    margin-left: var(--ix-margin-size-sm);
   }
 
   > .@{icon-prefix} {
-    margin-left: -4px;
-    font-size: var(--ix-font-size-lg);
+    margin-left: calc(var(--ix-margin-size-xs) * -1);
+    font-size: var(--ix-font-size-icon);
   }
 
   .@{icon-prefix} + &-content {
-    padding-left: 4px;
+    padding-left: var(--ix-margin-size-xs);
   }
 
   &-content {
@@ -35,26 +38,22 @@
   }
 
   &-bordered {
-    border-color: @tag-border-color;
-  }
-
-  &-has-color {
-    color: @text-color-inverse;
+    border-color: var(--ix-tag-border-color, var(--ix-color-border));
   }
 
   &-round {
     border-radius: @tag-line-height;
-    min-width: @tag-min-width-round;
+    min-width: var(--ix-tag-min-width-round);
   }
 
   &-rect {
     border-radius: 0;
-    min-width: @tag-min-width-rect;
+    min-width: var(--ix-tag-min-width-rect);
   }
 
   &-close-icon {
-    margin-left: 4px;
-    font-size: var(--ix-font-size-lg);
+    margin-left: var(--ix-margin-size-xs);
+    font-size: var(--ix-font-size-icon);
     cursor: pointer;
   }
 
@@ -66,32 +65,30 @@
   .tag-status-color(fatal);
 
   &-filled {
-    --ix-tag-color: @tag-color-inverse;
-    --ix-tag-background-color: @tag-background-color-filled;
+    --ix-tag-color: var(--ix-color-text-inverse);
+    --ix-tag-background-color: var(--ix-tag-bg-color-filled);
   }
 }
 
 .@{tag-prefix}-numeric {
-  @tag-prefix-size: calc(@tag-line-height + 4px);
+  @tag-prefix-size: calc(@tag-line-height + var(--ix-tag-border-width) * 4);
 
   position: relative;
-  padding-left: calc(@tag-prefix-size + @tag-border-width);
-  min-width: @tag-min-width-numeric;
+  padding-left: calc(@tag-prefix-size + var(--ix-tag-border-width));
+  min-width: var(--ix-tag-min-width-numeric);
   border-radius: @tag-line-height;
-
-  .make-numeric-color-classes(@preset-colors);
 
   &-prefix {
     position: absolute;
-    left: -2px;
-    top: -2px;
+    left: calc(var(--ix-tag-border-width) * -2);
+    top: calc(var(--ix-tag-border-width) * -2);
     display: flex;
     align-items: center;
     justify-content: center;
     height: @tag-prefix-size;
     width: @tag-prefix-size;
     background-color: inherit;
-    border: @tag-border-width solid @text-color-inverse;
+    border: var(--ix-tag-border-width) solid var(--ix-color-container-bg);
     border-radius: @tag-prefix-size;
   }
 }
@@ -102,23 +99,50 @@
       cursor: pointer;
     }
   }
+
+  &-compact {
+    &:not(.@{space-prefix}-vertical) {
+      > .@{space-prefix}-item:first-child > .@{tag-prefix} {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      > .@{space-prefix}-item:last-child > .@{tag-prefix} {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      > .@{space-prefix}-item:not(:first-child):not(:last-child) > .@{tag-prefix} {
+        border-radius: 0;
+      }
+
+      > .@{space-prefix}-item:not(:last-child) > .@{tag-prefix}.@{tag-prefix}-bordered {
+        margin-right: -1px;
+      }
+    }
+  }
 }
 
 .tag-status-color(@status) {
-  @color: 'tag-color-@{status}';
-  @background-color: 'tag-background-color-@{status}';
-  @background-color-filled: 'tag-background-color-@{status}-filled';
+  @color: '--ix-color-@{status}';
+  @background-color: '--ix-tag-@{status}-bg-color';
+  @background-color-filled: '--ix-color-@{status}-bg';
+  @icon-color: '--ix-color-@{status}-icon';
 
   &-@{status} {
-    --ix-tag-color: @@color;
-    --ix-tag-background-color: @@background-color;
+    --ix-tag-color: ~'var(@{color})';
+    --ix-tag-background-color: ~'var(@{background-color})';
+
+    .@{tag-prefix}-close-icon {
+      color: ~'var(@{icon-color})';
+    }
   }
 
   &-@{status}&-bordered {
-    --ix-tag-border-color: @@color;
+    --ix-tag-border-color: ~'var(@{color})';
   }
 
   &-@{status}&-filled {
-    --ix-tag-background-color: @@background-color-filled;
+    --ix-tag-background-color: ~'var(@{background-color-filled})';
   }
 }

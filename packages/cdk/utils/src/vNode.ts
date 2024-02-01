@@ -37,7 +37,17 @@ function getValidNode(node: VNode, depth: number): VNode | undefined {
  * @param maxDepth depth to be searched, default is 3
  */
 export function getFirstValidNode(nodes: VNodeChild, maxDepth = 3): VNode | undefined {
-  return (convertArray(nodes) as VNode[]).find(node => getValidNode(node, maxDepth))
+  let validNode: VNode | undefined
+
+  for (const node of convertArray(nodes) as VNode[]) {
+    validNode = getValidNode(node, maxDepth)
+
+    if (validNode) {
+      break
+    }
+  }
+
+  return validNode
 }
 
 /**

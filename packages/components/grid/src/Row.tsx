@@ -9,9 +9,10 @@ import { type CSSProperties, computed, defineComponent, normalizeClass, provide 
 
 import { isArray, isObject } from 'lodash-es'
 
-import { BREAKPOINTS_KEYS, useSharedBreakpoints } from '@idux/cdk/breakpoint'
+import { BREAKPOINTS_KEYS, type BreakpointKey, useSharedBreakpoints } from '@idux/cdk/breakpoint'
 import { convertNumber } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import { rowToken } from './token'
 import { type RowProps, rowProps } from './types'
@@ -21,16 +22,20 @@ export default defineComponent({
   props: rowProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId } = useThemeToken()
     const mergedPrefixCls = computed(() => `${common.prefixCls}-row`)
     const config = useGlobalConfig('row')
 
-    const mergedGutters = useGutters(props)
+    const breakpoints = useSharedBreakpoints()
+
+    const mergedGutters = useGutters(props, breakpoints)
     provide(rowToken, { mergedGutters })
 
     const classes = computed(() => {
       const { align, justify, wrap = config.wrap } = props
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
         [prefixCls]: true,
         [`${prefixCls}-align-${align}`]: align,
         [`${prefixCls}-justify-${justify}`]: justify,
@@ -61,8 +66,7 @@ export default defineComponent({
   },
 })
 
-function useGutters(props: RowProps) {
-  const breakpoints = useSharedBreakpoints()
+function useGutters(props: RowProps, breakpoints: Record<BreakpointKey, boolean>) {
   return computed(() => {
     const { gutter } = props
     const results: [number, number] = [0, 0]

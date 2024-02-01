@@ -10,6 +10,129 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 2.0.0-beta.6(2024-01-17)
+
+
+### Bug Fixes
+
+* **cdk:popper:** 箭头的尺寸没有被正确计算 ([#1813](https://github.com/IDuxFE/idux/issues/1813)) ([f7abe16](https://github.com/IDuxFE/idux/commit/f7abe16f9b8bf71124d46fc96c8a6594d36ef64e))
+* **comp:*:** 修改所有的浮层默认 placement 为 bottomStart ([#1815](https://github.com/IDuxFE/idux/issues/1815)) ([4189049](https://github.com/IDuxFE/idux/commit/4189049b6e151ceaca7f0c29ea1f249e525e7646))
+* **comp:alert:** 修改 alert 图标的 margin-right 为 marginSizeXs([#1802](https://github.com/IDuxFE/idux/issues/1802)) ([4df6f97](https://github.com/IDuxFE/idux/commit/4df6f97f89afcfd47f33b9279afc4ebe02714829))
+* **comp:collapse:** 修改头部前缀的 margin-right 为 marginSizeMd ([#1811](https://github.com/IDuxFE/idux/issues/1811)) ([6bf6655](https://github.com/IDuxFE/idux/commit/6bf6655451c2066a6b1136b95886d246eafbb0bd))
+* **comp:header:** 修改竖条的高度为文字高度减去2px ([#1804](https://github.com/IDuxFE/idux/issues/1804)) ([972bd64](https://github.com/IDuxFE/idux/commit/972bd64a73f456dbb540e99df5dc7a69ea383895))
+* **comp:select:** 主题token optionGroupMargin 的单位错误 ([#1821](https://github.com/IDuxFE/idux/issues/1821)) ([c1c2906](https://github.com/IDuxFE/idux/commit/c1c2906b76292206dc939682676ab5ca005c4fd7))
+* **pro:search:** 快捷搜索面板的搜索条展开后上方被遮挡 ([#1819](https://github.com/IDuxFE/idux/issues/1819)) ([c6824ea](https://github.com/IDuxFE/idux/commit/c6824ea4efaa3548015a831e7e3f5c15cd7b31d7))
+
+
+### Features
+
+* **cdk:scroll:** 虚拟滚动新增模拟滚动模式支持 ([#1812](https://github.com/IDuxFE/idux/issues/1812)) ([17ccefa](https://github.com/IDuxFE/idux/commit/17ccefaf3cd0689e12e69be9d5af95578a12eae5))
+* **pro:search:** select field 支持缓存已选的源数据 ([#1814](https://github.com/IDuxFE/idux/issues/1814)) ([6e80276](https://github.com/IDuxFE/idux/commit/6e80276e2b6461c98f2946b490e1d48ac0dcdc35))
+
+# 2.0.0-beta.5(2024-01-08)
+
+
+### Bug Fixes
+
+* **cdk:popper:** 修改默认的 placement 为 `bottomStart` ([#1785](https://github.com/IDuxFE/idux/issues/1785)) ([5d9ddc4](https://github.com/IDuxFE/idux/commit/5d9ddc4d9e21226c9d7ef89b223cc4eb574ac611))
+* **comp:collapse:** 修改 header 的字体大小为 fontSizeHeaderSm ([#1790](https://github.com/IDuxFE/idux/issues/1790)) ([664c34b](https://github.com/IDuxFE/idux/commit/664c34bb1b1b5a00b8685a13742f400a2169f8ed))
+* **comp:head:** 修改头部组件竖线样式 ([#1781](https://github.com/IDuxFE/idux/issues/1781)) ([12278ef](https://github.com/IDuxFE/idux/commit/12278ef297d1878a7cd7e273f542a2e0c87b3048))
+* **comp:popover,tooltip:** 将paddings相关css样式改为引用主题样式 ([#1780](https://github.com/IDuxFE/idux/issues/1780)) ([0c2be7b](https://github.com/IDuxFE/idux/commit/0c2be7b23582e13cbf1595703cfc90b2584a1739))
+* **comp:table:** 数据为空时不应当展示分页 ([#1782](https://github.com/IDuxFE/idux/issues/1782)) ([85d80e1](https://github.com/IDuxFE/idux/commit/85d80e174ad0fb81c7b04001a67bc86cdf98479b))
+* **comp:table:** scroll相关的class应当由表格是否有滚动溢出判断 ([#1798](https://github.com/IDuxFE/idux/issues/1798)) ([dfbaec7](https://github.com/IDuxFE/idux/commit/dfbaec78965f7d29b994842845c148b9ee7ec5f3))
+* **comp:table:** 表格的头部在列宽未计算时不显示 ([#1794](https://github.com/IDuxFE/idux/issues/1794)) ([7a1cd70](https://github.com/IDuxFE/idux/commit/7a1cd702e367fa494fe507c83231f4529ed56ee5))
+* **comp:tabs:** segment类型的tab在选中时不应当字体加粗 ([#1788](https://github.com/IDuxFE/idux/issues/1788)) ([7a8a89f](https://github.com/IDuxFE/idux/commit/7a8a89fb1b5440abe93cee14d9a6a21e4a163d17))
+* **comp:tag:** 修改normal类型的标签背景颜色 ([#1792](https://github.com/IDuxFE/idux/issues/1792)) ([5990a28](https://github.com/IDuxFE/idux/commit/5990a284794ecfb10595c8d2cfede460ba3499ed))
+* **comp:timeline:** 修改 contentMarginBottom 主题token为 marginSizeLg ([#1791](https://github.com/IDuxFE/idux/issues/1791)) ([bc3b27f](https://github.com/IDuxFE/idux/commit/bc3b27f453adb23202ea7a0de08238ede3f5eb30))
+* **comp:tree:** 根据设计稿修改树连线样式 ([#1783](https://github.com/IDuxFE/idux/issues/1783)) ([ca64a1e](https://github.com/IDuxFE/idux/commit/ca64a1e0b0e60bfa301aa78518b173b6668be4dd))
+* **comp:upload:** 当maxCount为1时，后面选中的文件不会自动上传 ([#1786](https://github.com/IDuxFE/idux/issues/1786)) ([400a0b4](https://github.com/IDuxFE/idux/commit/400a0b4cb1db93f8354e53c97c3384115ae04bae))
+* **comp:upload:** 文件列表中移除按钮图标修改为 'close' ([#1787](https://github.com/IDuxFE/idux/issues/1787)) ([f862fdf](https://github.com/IDuxFE/idux/commit/f862fdf59e4c22cf8171e6e2e7f650940120baba))
+* **comp:** 修改 offline 相关颜色主题token ([#1789](https://github.com/IDuxFE/idux/issues/1789)) ([00cd10c](https://github.com/IDuxFE/idux/commit/00cd10cd033c37e6c83e3a8aa5689d8b8bc85d86))
+* **pro:search:** container的zIndex在没有聚焦时不应当被绑定 ([#1795](https://github.com/IDuxFE/idux/issues/1795)) ([613079d](https://github.com/IDuxFE/idux/commit/613079d37e43bcf3c36cd05f4dcbeb0cdec4ab88))
+* **pro:search:** 将间距相关的css样式改为引用主题变量 ([#1793](https://github.com/IDuxFE/idux/issues/1793)) ([6505440](https://github.com/IDuxFE/idux/commit/65054408d5dc1ea5ddff19cb3b34c9087faba995))
+* **pro:search:** 可搜索的搜索项，在勾选选项之后应当保留搜索字符串 ([#1796](https://github.com/IDuxFE/idux/issues/1796)) ([97cf777](https://github.com/IDuxFE/idux/commit/97cf77786e8bab7303c3dc212a80b5c465ed772b))
+
+### Features
+
+* **comp:table:** 列的 align 配置支持 cell and title，即表头和表体的对齐方式分开配置 ([#1784](https://github.com/IDuxFE/idux/issues/1784)) ([7a69ea1](https://github.com/IDuxFE/idux/commit/7a69ea147bbabd269d7cb36b3d914a1b2969e316))
+* **comp:tag:** 支持组合标签 ([#1779](https://github.com/IDuxFE/idux/issues/1779)) ([318d8ef](https://github.com/IDuxFE/idux/commit/318d8efa3700c1f8da8a39e11bf5fbd236e26626))
+
+# 2.0.0-beta.4(2023-12-27)
+
+
+### Bug Fixes
+
+* **comp:select:** selectOptionFontSize 主题变量在css文件中引用错误 ([#1777](https://github.com/IDuxFE/idux/issues/1777)) ([3cd5982](https://github.com/IDuxFE/idux/commit/3cd5982632eb4eca1bb03d24c7b1f16976d1010f))
+
+
+### Features
+
+* **cdk:scroll:** 支持横向虚拟滚动 ([#1775](https://github.com/IDuxFE/idux/issues/1775)) ([4b39705](https://github.com/IDuxFE/idux/commit/4b39705af35cff3422dc7666777409c2f80030b1))
+* **comp:table:** 支持横向虚拟滚动提升大量数据列渲染性能，使用 `virtualHorizontal` 配置 ([#1776](https://github.com/IDuxFE/idux/issues/1776)) ([bb77f91](https://github.com/IDuxFE/idux/commit/bb77f9138ee0b46408f07b9149092f7964babc64))
+
+
+### BREAKING CHANGES
+
+* **cdk:scroll:** itemHeight 已经废弃, 请使用 rowHeight
+* **cdk:scroll:** itemRender 已经废弃, 请使用 rowRender
+
+# 2.0.0-beta.3(2023-12-11)
+
+
+### Bug Fixes
+
+* **cdk:forms:** `interactions` trigger 表现异常 ([#1770](https://github.com/IDuxFE/idux/issues/1770)) ([c099b1a](https://github.com/IDuxFE/idux/commit/c099b1a50545ecc28c40a7610320614dbf23866e))
+* **comp:pagination:** 修改 lg 尺寸下的字体大小为 fontSizeSm ([#1761](https://github.com/IDuxFE/idux/issues/1761)) ([076d924](https://github.com/IDuxFE/idux/commit/076d9242092735b71dc52d283b33c094ff592b5c))
+* **pro:layout:** dark模式下的菜单浮层样式异常 ([#1771](https://github.com/IDuxFE/idux/issues/1771)) ([98c6d98](https://github.com/IDuxFE/idux/commit/98c6d98a30ae24c99913de4b3aafcd2ebe5ec595))
+* **pro:layout:** logo的title文字颜色主题token引用不正确 ([#1759](https://github.com/IDuxFE/idux/issues/1759)) ([f44039d](https://github.com/IDuxFE/idux/commit/f44039d1dac65480ddde1a3b7afbaf3e9fefa6ba))
+* **pro:layout:** 主题css没有配置自动注入时，样式异常 ([#1769](https://github.com/IDuxFE/idux/issues/1769)) ([f7bbf20](https://github.com/IDuxFE/idux/commit/f7bbf2072fdc1b84486882659a1e3c1515bd81f8))
+
+
+### Features
+
+* **cdk:forms:** 新增 `interactions` 的校验触发方式 ([#1766](https://github.com/IDuxFE/idux/issues/1766)) ([dcdbfb3](https://github.com/IDuxFE/idux/commit/dcdbfb3effa0461edb0806fe4b08b59c78e45833))
+* **comp:drawer:** distance（多浮层的间距） 可以配置，并且会根据浮层的尺寸差自动计算 ([#1767](https://github.com/IDuxFE/idux/issues/1767)) ([949e855](https://github.com/IDuxFE/idux/commit/949e855c4d19caab5f174f96816a88f3203818f9))
+* **comp:table:** 给表格容器的水平方向溢出的侧边加上内嵌阴影 ([#1768](https://github.com/IDuxFE/idux/issues/1768)) ([65a1aca](https://github.com/IDuxFE/idux/commit/65a1acac6de4c3cfc1116af54f45ceb4ac0562e6))
+* **comp:table:** 修改 rowHeight 主题token为 padding，表格行不再指定高度，而是通过padding撑开 ([#1760](https://github.com/IDuxFE/idux/issues/1760)) ([48f0394](https://github.com/IDuxFE/idux/commit/48f03943b5adb6a3fb731d14077bc84fb0526884))
+* **comp:theme:** 最外层的 IxThemeProvider 不再是必须的 ([#1765](https://github.com/IDuxFE/idux/issues/1765)) ([3565d49](https://github.com/IDuxFE/idux/commit/3565d49edc951dabfd6ea25150923be70d1777ff))
+* 修改禁用背景颜色相关的主题token ([#1764](https://github.com/IDuxFE/idux/issues/1764)) ([29566d5](https://github.com/IDuxFE/idux/commit/29566d5867ea08db3d5a9efa902ebe5d29328d7d))
+
+# 2.0.0-beta.2(2023-12-01)
+
+
+### Bug Fixes
+
+* **comp:checkbox:** 配置 `buttoned` 时，button的主题没有没正确注册 ([#1758](https://github.com/sallerli1/idux/issues/1758)) ([64bb7a3](https://github.com/sallerli1/idux/commit/64bb7a36d4656ac35119d0daed559073e3a4a8ba))
+* 样式依赖在按需引入时有缺失 ([#1755](https://github.com/sallerli1/idux/issues/1755)) ([48b7e73](https://github.com/sallerli1/idux/commit/48b7e736963436ff4527d81af7dd89765c4aec93))
+
+
+### Features
+
+* 为按需引入增加组件的主题变量入口 ([#1756](https://github.com/sallerli1/idux/issues/1756)) ([67173bf](https://github.com/sallerli1/idux/commit/67173bf7e39371f7d039ada1d6aeab95e32ab6b9))
+
+# 2.0.0-beta.1(2023-11-29)
+
+### Features
+
+* 新增暗黑主题 ([#1751](https://github.com/sallerli1/idux/issues/1751)) ([411ed2b](https://github.com/sallerli1/idux/commit/411ed2b90f15e3b8c7f1989429fa023065304143))
+
+# 2.0.0-beta.0(2023-11-23)
+
+
+### Features
+
+* **cdk:theme:** 新增 cdk `useTheme` API ([#1739](https://github.com/sallerli1/idux/issues/1739)) ([f34f0e5](https://github.com/sallerli1/idux/commit/f34f0e573d294719abe216dd2f3fbf196bcd021b))
+* 新增基于design token实现的动态主题支持 ([#1737](https://github.com/sallerli1/idux/issues/1737)) ([ea22a8f](https://github.com/sallerli1/idux/commit/ea22a8fa8fb863a4c546b9af62025718779d3463))
+* 移除 typography 组件和指令 ([#1738](https://github.com/sallerli1/idux/issues/1738)) ([ed6462a](https://github.com/sallerli1/idux/commit/ed6462ac516a8aaec6cc9774f9ee7210e593ffc0))
+
+
+### BREAKING CHANGES
+
+* typography 已经被移除
+* 原有的css变量和less变量被移除，现全部修改为token变量
+* 原有的默认主题被移除，seer主题现在被作为默认主题 default
+* 原有的样式入口被移除，现在的入口是 index.less、index.css、index.full.css
+
 ## 1.12.4(2024-01-02)
 
 
@@ -30,7 +153,6 @@ order: 13
 * **comp:radio:** gap 在配置 0px 时表现异常 ([#1740](https://github.com/IDuxFE/idux/issues/1740)) ([9ecd14a](https://github.com/IDuxFE/idux/commit/9ecd14aa5663399f1e3c92d3f40d8f5f05ad9dee))
 * **pro:search:** 当key是0的时候表现不正常 ([#1748](https://github.com/IDuxFE/idux/issues/1748)) ([9d996ce](https://github.com/IDuxFE/idux/commit/9d996cedbfb1c6748911ae6e6e3e263177444737))
 * **pro:table:** layoutool checkbox在禁用时不应当可点击 ([#1741](https://github.com/IDuxFE/idux/issues/1741)) ([0905872](https://github.com/IDuxFE/idux/commit/0905872941527f73d5acf56e0dc18d4768c2ad11))
-
 
 ## 1.12.2(2023-11-06)
 

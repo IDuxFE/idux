@@ -23,7 +23,7 @@ a {
   display: inline-block;
   width: 24px;
   height: 24px;
-  border: 1px solid var(--ix-border-color);
+  border: 1px solid var(--ix-color-border);
   border-radius: var(--ix-border-radius-sm);
 }
 </style>

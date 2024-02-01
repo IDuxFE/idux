@@ -1,38 +1,40 @@
 .@{stepper-prefix}-md {
+  @stepper-item-spacing-md: calc(var(--ix-stepper-icon-size-md) / 2);
   .@{stepper-item-prefix} {
     padding-left: @stepper-item-spacing-md;
   }
 
   .@{stepper-item-prefix}-content {
-    min-height: @stepper-item-content-min-height-md;
+    min-height: var(--ix-stepper-item-content-min-height-md);
   }
 
   .@{stepper-item-prefix}-tail {
     left: @stepper-item-spacing-md;
-    padding: @stepper-item-icon-size-md + 4px 0 4px;
+    padding: calc(var(--ix-stepper-icon-size-md) + 4px) 0 4px;
   }
 
   .@{stepper-item-prefix}-icon {
-    width: @stepper-item-icon-size-md;
-    height: @stepper-item-icon-size-md;
-    line-height: @stepper-item-icon-size-md - 2px;
-    border-radius: @stepper-item-icon-size-md;
-    font-size: @stepper-item-icon-font-size-md;
-    margin: @stepper-item-icon-margin-md;
+    border-width: var(--ix-stepper-icon-border-width-md);
+    width: var(--ix-stepper-icon-size-md);
+    height: var(--ix-stepper-icon-size-md);
+    line-height: calc(var(--ix-stepper-icon-size-md) - 2px);
+    border-radius: var(--ix-stepper-icon-size-md);
+    font-size: var(--ix-stepper-icon-font-size-md);
+    margin: var(--ix-stepper-icon-margin-md);
   }
 
   .@{stepper-item-prefix}-title {
     padding-right: @stepper-item-spacing-md;
-    font-size: @stepper-item-title-font-size-md;
-    line-height: @stepper-item-icon-size-md;
+    font-size: var(--ix-stepper-title-font-size-md);
+    line-height: var(--ix-stepper-icon-size-md);
 
     &::after {
-      top: (@stepper-item-icon-size-md / 2);
+      top: @stepper-item-spacing-md;
     }
   }
 
   .@{stepper-item-prefix}-description {
-    font-size: @stepper-item-description-font-size-md;
+    font-size: var(--ix-stepper-description-font-size-md);
   }
 
   &.@{stepper-prefix}-vertical {
@@ -43,40 +45,42 @@
 }
 
 .@{stepper-prefix}-sm {
+  @stepper-item-spacing-sm: calc(var(--ix-stepper-icon-size-sm) / 2);
   .@{stepper-item-prefix} {
     padding-left: @stepper-item-spacing-sm;
   }
 
   .@{stepper-item-prefix}-content {
-    min-height: @stepper-item-content-min-height-sm;
+    min-height: var(--ix-stepper-content-min-height-sm);
   }
 
   .@{stepper-item-prefix}-tail {
     left: @stepper-item-spacing-sm;
-    padding: @stepper-item-icon-size-sm + 4px 0 4px;
+    padding: calc(var(--ix-stepper-icon-size-sm) + 4px) 0 4px;
   }
 
   .@{stepper-item-prefix}-icon {
-    width: @stepper-item-icon-size-sm;
-    height: @stepper-item-icon-size-sm;
-    line-height: @stepper-item-icon-size-sm - 2px;
-    border-radius: @stepper-item-icon-size-sm;
-    font-size: @stepper-item-icon-font-size-sm;
-    margin: @stepper-item-icon-margin-sm;
+    border-width: var(--ix-stepper-icon-border-width-sm);
+    width: var(--ix-stepper-icon-size-sm);
+    height: var(--ix-stepper-icon-size-sm);
+    line-height: calc(var(--ix-stepper-icon-size-sm) - 2px);
+    border-radius: var(--ix-stepper-icon-size-sm);
+    font-size: var(--ix-stepper-icon-font-size-sm);
+    margin: var(--ix-stepper-icon-margin-sm);
   }
 
   .@{stepper-item-prefix}-title {
     padding-right: @stepper-item-spacing-sm;
-    font-size: @stepper-item-title-font-size-sm;
-    line-height: @stepper-item-icon-size-sm;
+    font-size: var(--ix-stepper-title-font-size-sm);
+    line-height: var(--ix-stepper-icon-size-sm);
 
     &::after {
-      top: (@stepper-item-icon-size-sm / 2);
+      top: calc(var(--ix-stepper-icon-size-sm) / 2);
     }
   }
 
   .@{stepper-item-prefix}-description {
-    font-size: @stepper-item-description-font-size-sm;
+    font-size: var(--ix-stepper-description-font-size-sm);
   }
 
   &.@{stepper-prefix}-vertical {

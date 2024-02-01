@@ -17,6 +17,8 @@
       </template>
     </IxTable>
   </div>
+  <br />
+  <IxButton @click="toggleEmpty">ToggleEmpty</IxButton>
 </template>
 
 <script lang="ts" setup>
@@ -38,14 +40,12 @@ const columns: TableColumn<Data>[] = [
     title: 'Name',
     dataKey: 'name',
     width: 100,
-    fixed: 'start',
     customCell: 'name',
   },
   {
     title: 'Age',
     dataKey: 'age',
     width: 100,
-    fixed: 'start',
   },
   {
     title: 'Column 1',
@@ -97,20 +97,29 @@ const columns: TableColumn<Data>[] = [
   {
     title: 'Action',
     key: 'action',
-    fixed: 'end',
     width: 100,
     customCell: 'action',
   },
 ]
 
-const data: Data[] = []
+const fullData: Data[] = []
 for (let i = 0; i < 100; i++) {
-  data.push({
+  fullData.push({
     key: i,
     name: `Edrward ${i}`,
     age: 32,
     address: `London Park no. ${i}`,
   })
+}
+
+const data = ref<Data[]>(fullData)
+
+const toggleEmpty = () => {
+  if (data.value.length > 0) {
+    data.value = []
+  } else {
+    data.value = fullData
+  }
 }
 
 const scroll: TableScroll = { width: 1500 }

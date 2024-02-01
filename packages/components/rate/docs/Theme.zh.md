@@ -1,10 +1,9 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@rate-placeholder-color` | `@form-placeholder-color` | `@color-graphite-l10` | - |
-| `@rate-active-color` | `@color-yellow` | `@color-brown-l10` | - |
-| `@rate-size-sm` | `14px` | - | - |
-| `@rate-size-md` | `20px` | - | - |
-| `@rate-size-lg` | `28px` | - | - |
-| `@rate-item-margin-right` | `@spacing-sm` | - | - |
-| `@rate-item-hover-scale` | `1.1` | - | - |
-| `@rate-item-focus-outline` | `1px dashed @rate-active-color` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `activeColor` |  | `string` | `#ffc145` | `#DB941D` |
+| `itemMarginRight` |  | `number` | `8` | `8` |
+| `itemOutlineFocus` |  | `string` | `1px dashed #ffc145` | `1px dashed #DB941D` |
+| `itemScaleHover` |  | `number` | `1.1` | `1.1` |
+| `sizeLg` |  | `number` | `28` | `28` |
+| `sizeMd` |  | `number` | `20` | `20` |
+| `sizeSm` |  | `number` | `14` | `14` |

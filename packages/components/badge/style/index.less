@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 @import '../../style/motion/zoom.less';
 
@@ -32,11 +33,11 @@
     &-enter-active,
     &-leave-active {
       animation-fill-mode: both;
-      animation-duration: var(--ix-transition-duration-slow);
+      animation-duration: var(--ix-motion-duration-slow);
     }
 
     &-enter-active {
-      animation-timing-function: var(--ix-ease-out-back);
+      animation-timing-function: var(--ix-motion-ease-out-back);
 
       &:last-child {
         animation-name: ix-badge-sub-last-enter;
@@ -48,7 +49,7 @@
     }
 
     &-leave-active {
-      animation-timing-function: var(--ix-ease-in-back);
+      animation-timing-function: var(--ix-motion-ease-in-back);
 
       &:last-child {
         animation-name: ix-badge-sub-last-leave;
@@ -62,14 +63,14 @@
 
   &-count {
     z-index: auto;
-    min-width: @badge-count-size;
-    height: @badge-count-size;
-    line-height: @badge-count-size;
-    font-size: @badge-font-size;
-    color: @badge-color;
+    min-width: var(--ix-badge-count-size);
+    height: var(--ix-badge-count-size);
+    line-height: var(--ix-badge-count-size);
+    font-size: var(--ix-font-size-sm);
+    color: var(--ix-color-text-inverse);
     background-color: var(--ix-badge-background-color);
-    border-radius: calc(@badge-count-size / 2);
-    box-shadow: 0 0 0 1px @badge-color;
+    border-radius: calc(var(--ix-badge-count-size) / 2);
+    box-shadow: 0 0 0 1px var(--ix-background-color);
     text-align: center;
     white-space: nowrap;
     font-variant-numeric: tabular-nums;
@@ -77,21 +78,21 @@
     &-track {
       position: relative;
       display: inline-block;
-      height: @badge-count-size;
-      transition: all var(--ix-transition-duration-medium) var(--ix-ease-in-out);
+      height: var(--ix-badge-count-size);
+      transition: all var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out);
       .safari-fix-motion();
 
       &-wrapper {
         white-space: nowrap;
         display: inline-block;
-        height: @badge-count-size;
+        height: var(--ix-badge-count-size);
         overflow: hidden;
       }
     }
 
     &-unit {
       display: block;
-      height: @badge-count-size;
+      height: var(--ix-badge-count-size);
       .safari-fix-motion();
     }
   }
@@ -107,27 +108,27 @@
     vertical-align: middle;
     top: -1px;
     z-index: auto;
-    width: @badge-dot-size;
-    height: @badge-dot-size;
+    width: var(--ix-badge-dot-size);
+    height: var(--ix-badge-dot-size);
     border-radius: 100%;
     background-color: var(--ix-badge-background-color);
     box-shadow: 0 0 0 1px var(--ix-background-color);
   }
 
   &-error {
-    --ix-badge-background-color: @badge-background-color-error;
+    --ix-badge-background-color: var(--ix-color-error);
   }
 
   &-success {
-    --ix-badge-background-color: @badge-background-color-success;
+    --ix-badge-background-color: var(--ix-color-success);
   }
 
   &-info {
-    --ix-badge-background-color: @badge-background-color-info;
+    --ix-badge-background-color: var(--ix-color-info);
   }
 
   &-warning {
-    --ix-badge-background-color: @badge-background-color-warning;
+    --ix-badge-background-color: var(--ix-color-warning);
   }
 
   &-content {

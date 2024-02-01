@@ -1,37 +1,13 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@pro-textarea-color` | `@form-color` | - | - |
-| `@pro-textarea-color-secondary` | `@form-color-secondary` | - | - |
-| `@pro-textarea-line-height` | `@form-line-height` | `20px` | - |
-| `@pro-textarea-font-size-sm` | `@form-font-size-sm` | - | - |
-| `@pro-textarea-font-size-md` | `@form-font-size-md` | - | - |
-| `@pro-textarea-font-size-lg` | `@form-font-size-lg` | - | - |
-| `@pro-textarea-padding-vertical-sm` | `@form-padding-vertical-sm` | `4px` | - |
-| `@pro-textarea-padding-vertical-md` | `@form-padding-vertical-md` | `6px` | - |
-| `@pro-textarea-padding-vertical-lg` | `@form-padding-vertical-lg` | `8px` | - |
-| `@pro-textarea-border-width` | `@form-border-width` | - | - |
-| `@pro-textarea-border-style` | `@form-border-style` | - | - |
-| `@pro-textarea-border-color` | `@form-border-color` | - | - |
-| `@pro-textarea-border-radius` | `@border-radius-md` | - | - |
-| `@pro-textarea-background-color` | `@form-background-color` | - | - |
-| `@pro-textarea-placeholder-color` | `@form-placeholder-color` | - | - |
-| `@pro-textarea-hover-color` | `@form-hover-color` | - | - |
-| `@pro-textarea-active-color` | `@form-active-color` | - | - |
-| `@pro-textarea-active-box-shadow` | `@form-active-box-shadow` | - | - |
-| `@pro-textarea-disabled-color` | `@form-disabled-color` | - | - |
-| `@pro-textarea-disabled-background-color` | `@form-disabled-background-color` | - | - |
-| `@pro-textarea-index-column-color` | `@pro-textarea-color` | - | - |
-| `@pro-textarea-index-column-min-width` | `32px` | - | - |
-| `@pro-textarea-index-column-padding-horizontal` | `@spacing-xs` | - | - |
-| `@pro-textarea-index-column-background-color` | `@color-graphite-l50` | - | - |
-| `@pro-textarea-index-column-cell-error-background-color` | `@color-error-l30` | - | - |
-| `@pro-textarea-error-line-background-color` | `@color-error-l50` | - | - |
-| `@pro-textarea-error-line-tooltip-background-color` | `@form-item-invalid-color` | - | - |
-| `@pro-textarea-error-line-tooltip-color` | `@color-white` | - | - |
-| `@pro-textarea-count-bottom` | `1px` | - | - |
-| `@pro-textarea-count-right` | `8px` | - | - |
-| `@pro-textarea-count-opacity` | `0.9` | - | - |
-| `@pro-textarea-count-color` | `@pro-textarea-placeholder-color` | - | - |
-| `@pro-textarea-padding-horizontal-sm` | - | `4px` | - |
-| `@pro-textarea-padding-horizontal-md` | - | `6px` | - |
-| `@pro-textarea-padding-horizontal-lg` | - | `8px` | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `countBottom` |  | `number` | `1` | `1` |
+| `countColor` |  | `string` | `#a1a7b3` | `#525966` |
+| `countOpacity` |  | `number` | `0.9` | `0.9` |
+| `countRight` |  | `number` | `8` | `8` |
+| `errorLineBgColor` |  | `string` | `#fff2f0` | `#33151A` |
+| `indexColBgColor` |  | `string` | `#f7f9fc` | `#171A1F` |
+| `indexColBgColorDisabled` |  | `string` | `#e1e5eb` | `#1F2329` |
+| `indexColCellErrorBgColor` |  | `string` | `#ffaca3` | `#821D1F` |
+| `indexColColor` |  | `string` | `#2f3540` | `#F4F8FF` |
+| `indexColMinWidth` |  | `number` | `32` | `32` |
+| `indexColPaddingHorizontal` |  | `number` | `4` | `4` |

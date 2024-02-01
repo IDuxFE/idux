@@ -10,6 +10,7 @@ import { type WatchStopHandle, computed, defineComponent, normalizeClass, provid
 import { BREAKPOINTS_KEYS, useSharedBreakpoints } from '@idux/cdk/breakpoint'
 import { useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import { layoutSiderToken } from './token'
 import { layoutSiderProps } from './types'
@@ -19,6 +20,7 @@ export default defineComponent({
   props: layoutSiderProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId } = useThemeToken('layout')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-layout-sider`)
 
     const [collapsed, setCollapsed] = useControlledProp(props, 'collapsed', false)
@@ -76,6 +78,8 @@ export default defineComponent({
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-collapsed`]: collapsed.value,
       })

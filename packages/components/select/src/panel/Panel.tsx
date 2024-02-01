@@ -11,17 +11,19 @@ import { computed, defineComponent, inject, normalizeClass, provide, ref } from 
 
 import {
   CdkVirtualScroll,
-  type VirtualItemRenderFn,
+  type VirtualRowRenderFn,
   type VirtualScrollInstance,
   type VirtualScrollToFn,
 } from '@idux/cdk/scroll'
 import { callEmit } from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
 import { type SelectConfig, useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import ListBox from './ListBox'
 import Option from './Option'
 import OptionGroup from './OptionGroup'
+import { getThemeTokens } from '../../theme'
 import { usePanelGetOptionKey } from '../composables/useGetOptionKey'
 import { useFlattenedOptions } from '../composables/useOptions'
 import { usePanelActiveState } from '../composables/usePanelActiveState'
@@ -34,6 +36,9 @@ export default defineComponent({
   props: selectPanelProps,
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('select')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-select`)
     const config = useGlobalConfig('select')
     const locale = useGlobalConfig('locale')
@@ -64,6 +69,8 @@ export default defineComponent({
       const prefixCls = `${mergedPrefixCls.value}-panel`
 
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-multiple`]: !!props.multiple,
       })
@@ -87,17 +94,17 @@ export default defineComponent({
     }
 
     return () => {
-      const { _virtualScrollHeight, virtualItemHeight, virtual, onScroll, onScrolledBottom } = props
+      const { _virtualScrollHeight, virtualItemHeight, virtualScrollMode, virtual, onScroll, onScrolledBottom } = props
       const options = flattenedOptions.value
       const children = [<ListBox v-slots={slots} />]
 
       if (options.length > 0) {
-        const itemRender: VirtualItemRenderFn<FlattenedOption> = ({ item, index }) => {
-          const { type, ...rest } = item
+        const rowRender: VirtualRowRenderFn<FlattenedOption> = ({ item, index }) => {
+          const { type, key, ...rest } = item
           return type === 'group' ? (
             <OptionGroup v-slots={slots} index={index} {...rest} />
           ) : (
-            <Option v-slots={slots} index={index} {...rest} />
+            <Option v-slots={slots} index={index} optionKey={key} {...rest} />
           )
         }
 
@@ -107,8 +114,9 @@ export default defineComponent({
             dataSource={options}
             getKey="key"
             height={_virtualScrollHeight}
-            itemHeight={virtualItemHeight}
-            itemRender={itemRender}
+            rowHeight={virtualItemHeight}
+            scrollMode={virtual ? virtualScrollMode : undefined}
+            rowRender={rowRender}
             virtual={virtual}
             onScroll={onScroll}
             onScrolledBottom={onScrolledBottom}

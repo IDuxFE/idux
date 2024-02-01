@@ -8,6 +8,7 @@
 import { computed, defineComponent } from 'vue'
 
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import { layoutHeaderProps } from './types'
 
@@ -16,10 +17,11 @@ export default defineComponent({
   props: layoutHeaderProps,
   setup(_, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId } = useThemeToken('layout')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-layout-header`)
     return () => {
       const prefixCls = mergedPrefixCls.value
-      return <header class={prefixCls}>{slots.default?.()}</header>
+      return <header class={[prefixCls, globalHashId.value, hashId.value]}>{slots.default?.()}</header>
     }
   },
 })

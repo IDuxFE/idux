@@ -1,0 +1,13 @@
+/* ------ select css variables ------ */
+:root {
+  --ix-select-option-font-size: 12px;
+  --ix-select-option-height: 32px;
+  --ix-select-option-padding: 8px 12px;
+  --ix-select-option-label-margin-left: 8px;
+  --ix-select-option-container-padding: 4px 0;
+  --ix-select-option-group-margin: 0 12px;
+  --ix-select-option-group-padding-left: 0;
+  --ix-select-multiple-option-grouped-padding-left: 12px;
+  --ix-select-option-grouped-padding-left: 24px;
+  --ix-select-overlay-search-wrapper-padding: 4px 12px 8px;
+}

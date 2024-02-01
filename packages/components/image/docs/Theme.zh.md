@@ -1,19 +1,16 @@
-| 名称 | default | seer | 备注 |
-| --- | --- | --- | --- |
-| `@image-min-width` | `96px` | - | - |
-| `@image-min-height` | `96px` | - | - |
-| `@image-object-fit` | `contain` | - | - |
-| `@image-preview-background-color` | `rgba(0, 0, 0, 0.5)` | - | - |
-| `@image-preview-icon-color` | `@color-white` | - | - |
-| `@image-preview-icon-font-size` | `@font-size-xl` | - | - |
-| `@image-viewer-background-color` | `rgba(0, 0, 0, 0.45)` | - | - |
-| `@image-viewer-opr-color` | `@color-white` | - | - |
-| `@image-viewer-opr-disabled-color` | `rgba(255, 255, 255, 0.35)` | - | - |
-| `@image-viewer-opr-height` | `48px` | - | - |
-| `@image-viewer-opr-bottom` | `48px` | - | - |
-| `@image-viewer-opr-font-size` | `@font-size-xl` | - | - |
-| `@image-viewer-opr-background-color` | `rgba(0, 0, 0, 0.1)` | - | - |
-| `@image-viewer-opr-border-radius` | `calc(@image-viewer-opr-height / 2)` | - | - |
-| `@image-viewer-opr-item-margin` | `0 24px` | - | - |
-| `@image-viewer-preview-img-max-width` | `100%` | - | - |
-| `@image-viewer-preview-img-max-height` | `100%` | - | - |
+| 名称 | 描述 | 类型 | default | dark |
+|---|---|---|---|---|
+| `minHeight` |  | `number` | `96` | `96` |
+| `minWidth` |  | `number` | `96` | `96` |
+| `objectFit` |  | `string` | `contain` | `contain` |
+| `previewBgColor` |  | `string` | `rgba(0, 0, 0, 0.5)` | `rgba(0, 0, 0, 0.5)` |
+| `previewIconColor` |  | `string` | `#ffffff` | `#fff` |
+| `previewIconSize` |  | `number` | `20` | `20` |
+| `viewerBgColor` |  | `string` | `rgba(0, 0, 0, 0.45)` | `rgba(0, 0, 0, 0.45)` |
+| `viewerOprBgColor` |  | `string` | `rgba(0, 0, 0, 0.1)` | `rgba(0, 0, 0, 0.1)` |
+| `viewerOprColor` |  | `string` | `#ffffff` | `#fff` |
+| `viewerOprColorDisabled` |  | `string` | `rgba(255, 255, 255, 0.35)` | `rgba(255, 255, 255, 0.35)` |
+| `viewerOprFontSize` |  | `number` | `20` | `20` |
+| `viewerOprHeight` |  | `number` | `48` | `48` |
+| `viewerOprItemMargin` |  | `string | number` | `0 24px` | `0 24px` |
+| `viewerOprMarginBottom` |  | `number` | `48` | `48` |

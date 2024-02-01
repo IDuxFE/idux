@@ -9,15 +9,20 @@ import { computed, defineComponent, normalizeClass, provide, reactive, toRefs } 
 
 import { flattenNode, useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 
 import { stepperItemKey, stepperToken } from './token'
 import { stepperProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxStepper',
   props: stepperProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('stepper')
+    registerToken(getThemeTokens)
+
     const mergedPrefixCls = computed(() => `${common.prefixCls}-stepper`)
     const config = useGlobalConfig('stepper')
 
@@ -26,6 +31,8 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const { labelPlacement = config.labelPlacement, percent, vertical } = props
       return normalizeClass({
+        [globalHashId.value]: !!globalHashId.value,
+        [hashId.value]: !!hashId.value,
         [prefixCls]: true,
         [`${prefixCls}-label-${labelPlacement}`]: true,
         [`${prefixCls}-${size.value}`]: true,

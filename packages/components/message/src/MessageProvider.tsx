@@ -19,11 +19,13 @@ import {
 import { CdkPortal } from '@idux/cdk/portal'
 import { VKey, callEmit, convertArray, convertCssPixel, uniqueId } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { convertStringVNode, usePortalTarget } from '@idux/components/utils'
 
 import Message from './Message'
 import { MESSAGE_PROVIDER_TOKEN } from './token'
 import { type MessageOptions, type MessageRef, messageProviderProps } from './types'
+import { getThemeTokens, transforms } from '../theme'
 
 export default defineComponent({
   name: 'IxMessageProvider',
@@ -31,6 +33,9 @@ export default defineComponent({
   props: messageProviderProps,
   setup(props, { expose, slots, attrs }) {
     const common = useGlobalConfig('common')
+    const { globalHashId, hashId, registerToken } = useThemeToken('message')
+    registerToken(getThemeTokens, transforms)
+
     const config = useGlobalConfig('message')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-message`)
     const mergedPortalTarget = usePortalTarget(props, config, common, mergedPrefixCls)
@@ -67,7 +72,7 @@ export default defineComponent({
               tag="div"
               appear
               name={`${common.prefixCls}-move-up`}
-              class={`${mergedPrefixCls.value}-wrapper`}
+              class={[`${mergedPrefixCls.value}-wrapper`, globalHashId.value, hashId.value]}
               style={style.value}
               {...attrs}
             >

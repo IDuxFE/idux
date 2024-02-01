@@ -8,7 +8,7 @@ exports[`Tabs > render work 1`] = `
         <!---->
       </div>
     </div>
-    <div class=\\"ix-tabs-nav-operations ix-tabs-nav-operations-hidden\\"><button class=\\"ix-button ix-button-icon-only ix-button-text ix-button-square ix-button-md\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-more\\" role=\\"img\\" aria-label=\\"more\\"></i>
+    <div class=\\"ix-tabs-nav-operations ix-tabs-nav-operations-hidden\\"><button class=\\"ix-button ix-button-icon-only ix-button-text ix-button-square ix-button-sm\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-more\\" role=\\"img\\" aria-label=\\"more\\"></i>
         <!---->
       </button>
       <!---->

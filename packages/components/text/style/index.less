@@ -1,3 +1,4 @@
+@import '../../style/variable/index.less';
 @import '../../style/mixins/reset.less';
 @import '../../style//mixins/ellipsis.less';
 
@@ -37,12 +38,12 @@
   &-copy-icon {
     margin-left: 2px;
     line-height: 1;
-    font-size: @text-copy-icon-font-size;
-    color: @text-copy-icon-color;
+    font-size: var(--ix-font-size-icon);
+    color: var(--ix-color-link);
     cursor: pointer;
   }
   &-expand-icon {
-    color: @text-expand-icon-color;
+    color: var(--ix-color-link);
     cursor: pointer;
   }
 }

@@ -1,3 +1,6 @@
+@import '../../style/variable/index.less';
+@import '../../../components/style/variable/index.less';
+@import '../../../components/menu/style/mixins.less';
 @import './header.less';
 @import './sider.less';
 @import './light.less';
@@ -15,9 +18,9 @@
   &-logo {
     position: relative;
     overflow: hidden;
-    height: if((@theme = seer), @menu-height-level-1, calc(@menu-height-level-1 + 8px));
-    line-height: if((@theme = seer), @menu-height-level-1, calc(@menu-height-level-1 + 8px));
-    transition: padding var(--ix-transition-duration-fast) var(--ix-ease-in-out);
+    height: var(--ix-menu-height-level-1);
+    line-height: var(--ix-menu-height-level-1);
+    transition: padding var(--ix-motion-duration-fast) var(--ix-motion-ease-in-out);
 
     > a {
       display: flex;
@@ -28,15 +31,15 @@
 
       > img {
         display: inline-block;
-        height: @pro-layout-logo-image-height;
+        height: var(--ix-pro-layout-logo-img-height);
       }
 
       > h1 {
         display: inline-block;
         margin: 0 0 0 12px;
-        font-size: @pro-layout-logo-font-size;
-        font-weight: @pro-layout-logo-font-weight;
-        animation: ix-layout-sider-text-hidden var(--ix-transition-duration-medium);
+        font-size: var(--ix-pro-layout-logo-font-size);
+        font-weight: var(--ix-pro-layout-logo-font-weight);
+        animation: ix-layout-sider-text-hidden var(--ix-motion-duration-medium);
       }
     }
   }
@@ -44,13 +47,7 @@
   &-is-mixin &-header,
   &-is-both &-header {
     .@{pro-layout-prefix}-logo {
-      min-width: calc(@layout-sider-width - 16px);
-    }
-  }
-
-  &-is-both &-header &-header-content when (@theme = default) {
-    > .@{menu-prefix} {
-      margin-left: -4px;
+      min-width: calc(var(--ix-layout-sider-width) - 16px);
     }
   }
 

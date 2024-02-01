@@ -44,6 +44,7 @@ const columns: ProTableColumn<Data>[] = [
   {
     type: 'indexable',
     changeVisible: false,
+    width: 60,
   },
   {
     title: 'Name',

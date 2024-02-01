@@ -77,6 +77,10 @@ export const drawerProps = {
     type: String as PropType<DrawerPlacement>,
     default: 'end',
   },
+  distance: {
+    type: Number,
+    default: undefined,
+  },
   scrollStrategy: Object as PropType<ScrollStrategy>,
   width: [String, Number] as PropType<string | number>,
   zIndex: Number,

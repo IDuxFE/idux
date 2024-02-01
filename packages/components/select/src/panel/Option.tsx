@@ -9,7 +9,7 @@ import { computed, defineComponent, inject } from 'vue'
 
 import { isNil, toString } from 'lodash-es'
 
-import { callEmit, useKey } from '@idux/cdk/utils'
+import { callEmit } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
 
 import { selectPanelContext } from '../token'
@@ -19,7 +19,6 @@ import { renderOptionLabel } from '../utils/renderOptionLabel'
 export default defineComponent({
   props: optionProps,
   setup(props, { slots }) {
-    const key = useKey()
     const {
       props: selectPanelProps,
       mergedPrefixCls,
@@ -30,9 +29,9 @@ export default defineComponent({
       setActiveIndex,
     } = inject(selectPanelContext)!
 
-    const isActive = computed(() => activeValue.value === key)
+    const isActive = computed(() => activeValue.value === props.optionKey)
 
-    const isSelected = computed(() => selectedKeys.value.some(selectedKey => selectedKey === key))
+    const isSelected = computed(() => selectedKeys.value.some(selectedKey => selectedKey === props.optionKey))
 
     const isDisabled = computed(() => props.disabled || (!isSelected.value && selectedLimit.value))
 

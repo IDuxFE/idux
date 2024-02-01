@@ -1,0 +1,23 @@
+/* ------ slider css variables ------ */
+:root {
+  --ix-slider-rail-size: 2px;
+  --ix-slider-mark-label-color: #525966;
+  --ix-slider-mark-label-color-active: #f4f8ff;
+  --ix-slider-dot-bg-color: #1f2329;
+  --ix-slider-dot-bg-color-disabled: #171a1f;
+  --ix-slider-dot-bg-color-active: #4083e8;
+  --ix-slider-rail-bg-color: #1f2329;
+  --ix-slider-rail-bg-color-hover: #1f2329;
+  --ix-slider-track-bg-color: #4083e8;
+  --ix-slider-track-bg-color-hover: #4083e8;
+  --ix-slider-track-bg-color-disabled: #171a1f;
+  --ix-slider-thumb-bg-color: #ffffff;
+  --ix-slider-thumb-border-color: #4083e8;
+  --ix-slider-thumb-border-color-hover: #4083e8;
+  --ix-slider-thumb-border-color-disabled: #171a1f;
+  --ix-slider-thumb-border-width: 2px;
+  --ix-slider-thumb-border-type: solid;
+  --ix-slider-thumb-border-color-focus: #4083e8;
+  --ix-slider-thumb-box-shadow-focus: 0 0 0 5px rgba(64, 131, 232, 0.12);
+  --ix-slider-thumb-size: 10px;
+}

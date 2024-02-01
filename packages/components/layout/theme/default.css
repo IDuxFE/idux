@@ -1,0 +1,5 @@
+/* ------ layout css variables ------ */
+:root {
+  --ix-layout-sider-width: 224px;
+  --ix-layout-sider-collapsed-width: 44px;
+}

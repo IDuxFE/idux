@@ -22,15 +22,18 @@ import {
 } from 'vue'
 
 import { CdkPortal } from '@idux/cdk/portal'
+import { useResizeObserver } from '@idux/cdk/resize'
 import { BlockScrollStrategy, type ScrollStrategy } from '@idux/cdk/scroll'
 import { callEmit, useControlledProp } from '@idux/cdk/utils'
 import { ɵMask } from '@idux/components/_private/mask'
 import { useGlobalConfig } from '@idux/components/config'
+import { useThemeToken } from '@idux/components/theme'
 import { usePortalTarget, useZIndex } from '@idux/components/utils'
 
 import DrawerWrapper from './DrawerWrapper'
 import { DRAWER_TOKEN, drawerToken } from './token'
 import { type DrawerProps, drawerProps } from './types'
+import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxDrawer',
@@ -38,17 +41,24 @@ export default defineComponent({
   props: drawerProps,
   setup(props, { slots, expose, attrs }) {
     const common = useGlobalConfig('common')
+    const { registerToken } = useThemeToken('drawer')
+    registerToken(getThemeTokens)
+
     const config = useGlobalConfig('drawer')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-drawer`)
     const mergedPortalTarget = usePortalTarget(props, config, common, mergedPrefixCls)
 
     const mask = computed(() => props.mask ?? config.mask)
+    const mergedDistance = computed(() => props.distance ?? config.distance)
 
-    const { loaded, delayedLoaded, visible, setVisible, animatedVisible, mergedVisible } = useVisible(props)
+    const { loaded, delayedLoaded, visible, setVisible, animatedVisible, isAnimating, mergedVisible } =
+      useVisible(props)
     const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visible)
 
+    const drawerElRef = ref<HTMLElement>()
+
     const { open, close } = useTrigger(props, setVisible)
-    const { level, levelAction, push, pull } = useLevel(visible)
+    const { levelAction, distance, push, pull } = useLevel(props, visible, mergedDistance, drawerElRef)
 
     provide(drawerToken, {
       props,
@@ -56,13 +66,15 @@ export default defineComponent({
       common,
       config,
       mergedPrefixCls,
+      drawerElRef,
       visible,
       delayedLoaded,
       animatedVisible,
+      isAnimating,
       mergedVisible,
       currentZIndex,
-      level,
       levelAction,
+      distance,
       push,
       pull,
     })
@@ -100,6 +112,9 @@ function useVisible(props: DrawerProps) {
   const loaded = ref<boolean>(false)
   const delayedLoaded = ref<boolean>(false)
   const delayedVisible = ref<boolean>(false)
+  const isAnimating = ref(false)
+  const animatedVisible = ref<boolean>(false)
+
   watch(
     visible,
     v => {
@@ -113,22 +128,15 @@ function useVisible(props: DrawerProps) {
       } else {
         delayedVisible.value = v
       }
+
+      isAnimating.value = true
     },
     {
       immediate: true,
     },
   )
 
-  const animatedVisible = ref<boolean>()
-
-  const mergedVisible = computed(() => {
-    const currVisible = visible.value
-    const currAnimatedVisible = animatedVisible.value
-    if (currAnimatedVisible === undefined || currVisible) {
-      return currVisible
-    }
-    return currAnimatedVisible
-  })
+  const mergedVisible = computed(() => visible.value || (isAnimating.value ? animatedVisible.value : visible.value))
 
   onDeactivated(() => {
     if (mergedVisible.value && props.closeOnDeactivated) {
@@ -136,7 +144,7 @@ function useVisible(props: DrawerProps) {
     }
   })
 
-  return { loaded, delayedLoaded, visible: delayedVisible, setVisible, animatedVisible, mergedVisible }
+  return { loaded, delayedLoaded, visible: delayedVisible, setVisible, animatedVisible, isAnimating, mergedVisible }
 }
 
 function useScrollStrategy(props: DrawerProps, mask: ComputedRef<boolean>, mergedVisible: ComputedRef<boolean>) {
@@ -176,27 +184,78 @@ function useTrigger(props: DrawerProps, setVisible: (visible: boolean) => void) 
   return { open, close }
 }
 
-function useLevel(visible: Ref<boolean>) {
+function useLevel(
+  props: DrawerProps,
+  visible: Ref<boolean>,
+  mergedDistance: ComputedRef<number>,
+  drawerElRef: Ref<HTMLElement | undefined>,
+) {
   const parentContext = inject(drawerToken, null)
 
   const level = ref(0)
+  const distance = ref(0)
   const levelAction = ref<'push' | 'pull'>()
+  const drawerSize = ref(0)
+  const sizeAttrName = computed(() => (['top', 'bottom'].includes(props.placement) ? 'height' : 'width'))
 
-  const push = () => {
-    level.value++
-    parentContext?.push()
+  let sizeUpdateCb: (() => void) | undefined
+
+  useResizeObserver(drawerElRef, ({ contentRect }) => {
+    drawerSize.value = contentRect[sizeAttrName.value] ?? 0
+
+    sizeUpdateCb?.()
+  })
+
+  const onSizeUpdate = (cb: () => void) => {
+    sizeUpdateCb = () => {
+      cb()
+      sizeUpdateCb = undefined
+    }
   }
 
-  const pull = () => {
+  const updateDistance = (childSize: number) => {
+    const minDisatance = Math.min(drawerSize.value, mergedDistance.value)
+    if (!drawerSize.value || !childSize || drawerSize.value - childSize >= minDisatance) {
+      distance.value = 0
+    } else {
+      distance.value = minDisatance - (drawerSize.value - childSize)
+    }
+  }
+
+  const push = (childSize: number) => {
+    level.value++
+
+    updateDistance(childSize)
+    pushParent()
+  }
+
+  const pull = (childSize: number) => {
     level.value--
-    parentContext?.pull()
+
+    updateDistance(childSize)
+    pullParent()
+  }
+
+  const pushParent = () => {
+    if (parentContext?.props.placement !== props.placement) {
+      return
+    }
+
+    parentContext?.push(drawerSize.value + distance.value)
+  }
+  const pullParent = () => {
+    if (parentContext?.props.placement !== props.placement) {
+      return
+    }
+
+    parentContext?.pull(visible.value ? drawerSize.value + distance.value : 0)
   }
 
   watch(visible, value => {
     if (value) {
-      parentContext?.push()
+      onSizeUpdate(pushParent)
     } else {
-      parentContext?.pull()
+      pullParent()
       levelAction.value = undefined
     }
   })
@@ -207,15 +266,15 @@ function useLevel(visible: Ref<boolean>) {
 
   onMounted(() => {
     if (visible.value) {
-      parentContext?.push()
+      pushParent()
     }
   })
 
   onBeforeUnmount(() => {
     if (visible.value) {
-      parentContext?.pull()
+      pullParent()
     }
   })
 
-  return { level, levelAction, push, pull }
+  return { levelAction, distance, push, pull }
 }
