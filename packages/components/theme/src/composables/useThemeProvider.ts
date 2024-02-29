@@ -90,21 +90,17 @@ export function createThemeProviderContext(
       }
 
       // sub providers don't register reset styles
-      if (props?.inherit && !!supperContext) {
+      if ((props?.inherit && !!supperContext) || isTokensRegistered(resetTokenKey)) {
         return
       }
 
-      if (!isTokensRegistered(resetTokenKey)) {
-        registerToken(
-          resetTokenKey,
-          globalTokens => (useSupper ? supperContext!.getThemeTokens(resetTokenKey) : getResetTokens(globalTokens)),
-          undefined,
-          false,
-          useSupper ? supperContext!.getThemeHashId(resetTokenKey) : undefined,
-        )
-      } else {
-        updateToken(resetTokenKey, useSupper ? supperContext!.getThemeHashId(resetTokenKey) : undefined)
-      }
+      registerToken(
+        resetTokenKey,
+        globalTokens => (useSupper ? supperContext!.getThemeTokens(resetTokenKey) : getResetTokens(globalTokens)),
+        undefined,
+        false,
+        useSupper ? supperContext!.getThemeHashId(resetTokenKey) : undefined,
+      )
     },
     {
       immediate: true,
