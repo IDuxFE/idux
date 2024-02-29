@@ -19,7 +19,7 @@ import { getThemeTokens } from '../../theme'
 import { useRangeActiveValue } from '../composables/useActiveValue'
 import { useRangePanelState } from '../composables/useRangePanelState'
 import { dateRangePanelProps } from '../types'
-import { sortRangeValue } from '../utils'
+import { convertPickerTypeToConfigType } from '../utils'
 
 export default defineComponent({
   name: 'IxDateRangePanel',
@@ -51,22 +51,17 @@ export default defineComponent({
 
     const renderSide = (isFrom: boolean) => {
       const timeValue = panelValue.value?.[isFrom ? 0 : 1]
+      const datePanelType = convertPickerTypeToConfigType(props.type)
       const activeValue = isFrom ? fromActiveValue.value : toActiveValue.value
 
       const handleTimePanelChange = (value: Date) => {
-        handleChange(
-          sortRangeValue(
-            dateConfig,
-            isFrom ? [value, panelValue.value?.[1]] : [panelValue.value?.[0], value],
-            'date',
-          ) as Date[],
-        )
+        handleChange((isFrom ? [value, panelValue.value?.[1]] : [panelValue.value?.[0], value]) as Date[])
       }
 
       const datePanelProps = {
         cellTooltip: props.cellTooltip,
         disabledDate: props.disabledDate,
-        type: props.type === 'datetime' ? 'date' : props.type,
+        type: datePanelType,
         value: panelValue.value,
         visible: props.type === 'datetime' ? props.visible === 'datePanel' : !!props.visible,
         activeDate: activeValue,

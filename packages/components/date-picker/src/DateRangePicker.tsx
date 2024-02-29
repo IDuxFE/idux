@@ -54,7 +54,13 @@ export default defineComponent({
 
     const { accessor, handleFocus: _handleFocus, handleBlur: _handleBlur, handleChange } = pickerStateContext
 
-    const rangeControlContext = useRangeControl(dateConfig, formatContext, inputEnableStatus, toRef(accessor, 'value'))
+    const rangeControlContext = useRangeControl(
+      dateConfig,
+      formatContext,
+      inputEnableStatus,
+      toRef(accessor, 'value'),
+      toRef(props, 'type'),
+    )
     const handleKeyDown = useRangeKeyboardEvents(rangeControlContext, overlayOpened, setOverlayOpened, handleChange)
 
     const { focused, handleFocus, handleBlur, bindOverlayMonitor } = useOverlayFocusMonitor(_handleFocus, _handleBlur)
@@ -93,7 +99,9 @@ export default defineComponent({
     watch(overlayOpened, opened => {
       if (opened) {
         setTimeout(() => {
-          inputRef.value?.focus()
+          if (!focused.value) {
+            inputRef.value?.focus()
+          }
         })
       } else {
         rangeControlContext.init(true)

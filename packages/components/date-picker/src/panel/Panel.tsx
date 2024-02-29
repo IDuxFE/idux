@@ -17,7 +17,7 @@ import { getTimePickerThemeTokens } from '@idux/components/time-picker'
 import { getThemeTokens } from '../../theme'
 import { useActiveValue } from '../composables/useActiveValue'
 import { datePanelProps } from '../types'
-import { applyDateTime } from '../utils'
+import { applyDateTime, convertPickerTypeToConfigType } from '../utils'
 
 export default defineComponent({
   name: 'IxDatePanel',
@@ -55,7 +55,7 @@ export default defineComponent({
     }
 
     return () => {
-      const datePanelType = props.type === 'datetime' ? 'date' : props.type
+      const datePanelType = convertPickerTypeToConfigType(props.type)
 
       const datePanelProps = {
         cellTooltip: props.cellTooltip,

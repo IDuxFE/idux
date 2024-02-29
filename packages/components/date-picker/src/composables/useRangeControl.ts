@@ -5,15 +5,23 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { DatePickerType } from '../types'
+import type { DateConfig, DateConfigType, TimeConfigType } from '@idux/components/config'
+
 import { type ComputedRef, type Ref, computed, watch } from 'vue'
 
 import { convertArray, useState } from '@idux/cdk/utils'
-import { type DateConfig } from '@idux/components/config'
 
 import { type PickerControlContext, useControl } from './useControl'
 import { type FormatContext } from './useFormat'
 import { type InputEnableStatus } from './useInputEnableStatus'
-import { compareDateTime, convertToDate, sortRangeValue } from '../utils'
+import {
+  adjustRangeValue,
+  compareDateTime,
+  convertPickerTypeToConfigType,
+  convertToDate,
+  sortRangeValue,
+} from '../utils'
 
 export interface PickerRangeControlContext {
   buffer: ComputedRef<(Date | undefined)[] | undefined>
@@ -34,11 +42,13 @@ export function useRangeControl(
   formatContext: FormatContext,
   inputEnableStatus: ComputedRef<InputEnableStatus>,
   valueRef: Ref<(string | number | Date)[] | undefined>,
+  typeRef: Ref<DatePickerType>,
 ): PickerRangeControlContext {
-  const { formatRef } = formatContext
-  const [buffer, setBuffer] = useState<(Date | undefined)[] | undefined>(
+  const { formatRef, hourEnabled, secondEnabled, minuteEnabled } = formatContext
+  const convertedValue = computed(() =>
     convertArray(valueRef.value).map(v => convertToDate(dateConfig, v, formatRef.value)),
   )
+  const [buffer, setBuffer] = useState<(Date | undefined)[] | undefined>(convertedValue.value)
   const [bufferUpdated, setBufferUpdated] = useState(false)
   const handleBufferUpdate = (values: (string | number | Date | undefined)[] | undefined) => {
     setBuffer(sortRangeValue(dateConfig, getRangeValue(dateConfig, values, formatRef.value), 'date'))
@@ -73,12 +83,24 @@ export function useRangeControl(
       : [buffer.value?.[0], value]
   }
 
+  const getAdjustedBufferValue = (value: Date | undefined, isFrom: boolean) => {
+    const adjustType: DateConfigType | TimeConfigType = secondEnabled.value
+      ? 'second'
+      : minuteEnabled.value
+        ? 'minute'
+        : hourEnabled.value
+          ? 'hour'
+          : convertPickerTypeToConfigType(typeRef.value)
+
+    return adjustRangeValue(dateConfig, getValidBufferValue(value, isFrom), convertedValue.value, adjustType)
+  }
+
   const fromControl = useControl(dateConfig, formatContext, inputEnableStatus, fromDateRef, value => {
-    setBuffer(getValidBufferValue(value, true))
+    setBuffer(getAdjustedBufferValue(value, true))
     setBufferUpdated(true)
   })
   const toControl = useControl(dateConfig, formatContext, inputEnableStatus, toDateRef, value => {
-    setBuffer(getValidBufferValue(value, false))
+    setBuffer(getAdjustedBufferValue(value, false))
     setBufferUpdated(true)
   })
 
