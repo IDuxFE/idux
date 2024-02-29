@@ -16,14 +16,18 @@ import {
   addWeeks,
   addYears,
   endOfDay,
+  endOfHour,
+  endOfMinute,
   endOfMonth,
   endOfQuarter,
+  endOfSecond,
   endOfWeek,
   endOfYear,
   format as formatDate,
   getDate,
   getDay,
   getHours,
+  getMilliseconds,
   getMinutes,
   getMonth,
   getQuarter,
@@ -43,6 +47,7 @@ import {
   setDate,
   setDay,
   setHours,
+  setMilliseconds,
   setMinutes,
   setMonth,
   setQuarter,
@@ -50,8 +55,11 @@ import {
   setWeek,
   setYear,
   startOfDay,
+  startOfHour,
+  startOfMinute,
   startOfMonth,
   startOfQuarter,
+  startOfSecond,
   startOfWeek,
   startOfYear,
   toDate,
@@ -59,7 +67,7 @@ import {
 
 import { useGlobalConfig } from './globalConfig'
 
-export type TimeConfigType = 'hour' | 'minute' | 'second'
+export type TimeConfigType = 'hour' | 'minute' | 'second' | 'millisecond'
 export type DateConfigType = 'year' | 'quarter' | 'month' | 'week' | 'date' | 'day'
 
 export type DateConfig<P = number | Date, R = Date> = {
@@ -69,8 +77,8 @@ export type DateConfig<P = number | Date, R = Date> = {
   get: (date: P, type: DateConfigType | TimeConfigType) => number
   set: (date: P, amount: number, type: DateConfigType | TimeConfigType) => R
   add: (date: P, amount: number, type: DateConfigType) => R
-  startOf: (date: P, type: DateConfigType) => R
-  endOf: (date: P, type: DateConfigType) => R
+  startOf: (date: P, type: DateConfigType | TimeConfigType) => R
+  endOf: (date: P, type: DateConfigType | TimeConfigType) => R
   isSame: (date: P, dateToCompare: P, type: DateConfigType | TimeConfigType) => boolean
   isValid: (date: unknown) => boolean
 
@@ -127,6 +135,8 @@ function createDefaultDateConfig(): DateConfig<number | Date, Date> {
           return getMinutes(date)
         case 'second':
           return getSeconds(date)
+        case 'millisecond':
+          return getMilliseconds(date)
       }
     },
     set: (date, amount, type) => {
@@ -149,6 +159,8 @@ function createDefaultDateConfig(): DateConfig<number | Date, Date> {
           return setMinutes(date, amount)
         case 'second':
           return setSeconds(date, amount)
+        case 'millisecond':
+          return setMilliseconds(date, amount)
       }
     },
     add: (date, amount, type) => {
@@ -179,6 +191,13 @@ function createDefaultDateConfig(): DateConfig<number | Date, Date> {
         case 'date':
         case 'day':
           return startOfDay(date)
+        case 'hour':
+          return startOfHour(date)
+        case 'minute':
+          return startOfMinute(date)
+        case 'second':
+        case 'millisecond':
+          return startOfSecond(date)
       }
     },
     endOf: (date, type) => {
@@ -194,6 +213,13 @@ function createDefaultDateConfig(): DateConfig<number | Date, Date> {
         case 'date':
         case 'day':
           return endOfDay(date)
+        case 'hour':
+          return endOfHour(date)
+        case 'minute':
+          return endOfMinute(date)
+        case 'second':
+        case 'millisecond':
+          return endOfSecond(date)
       }
     },
 
@@ -216,6 +242,8 @@ function createDefaultDateConfig(): DateConfig<number | Date, Date> {
           return isSameMinute(date, dateToCompare)
         case 'second':
           return isSameSecond(date, dateToCompare)
+        case 'millisecond':
+          return toDate(date).getTime() === toDate(dateToCompare).getTime()
       }
     },
     isValid: date => isValid(date),
