@@ -5,11 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, normalizeClass, normalizeStyle, onMounted, ref, watch } from 'vue'
+import { type Ref, computed, defineComponent, normalizeClass, normalizeStyle, onMounted, ref, watch } from 'vue'
 
 import { isNil } from 'lodash-es'
 
-import { type VKey, callEmit, useControlledProp, useState } from '@idux/cdk/utils'
+import { type VKey, callEmit, useControlledProp, useEventListener, useState } from '@idux/cdk/utils'
 import { ɵHeader } from '@idux/components/_private/header'
 import { ɵInput } from '@idux/components/_private/input'
 import { IxButton } from '@idux/components/button'
@@ -19,7 +19,7 @@ import { IxTree, type TreeInstance } from '@idux/components/tree'
 import { useGlobalConfig } from '@idux/pro/config'
 import { useThemeToken } from '@idux/pro/theme'
 
-import { proTreeProps } from './types'
+import { type ProTreeProps, proTreeProps } from './types'
 import { getThemeTokens } from '../theme'
 
 export default defineComponent({
@@ -42,10 +42,12 @@ export default defineComponent({
      */
     const [expandAllBtnStatus, setExpandAllBtnStatus] = useState(false)
     const treeRef = ref<TreeInstance>()
+    const elRef = ref<HTMLElement>()
 
     const [searchValue, setSearchValue] = useControlledProp(props, 'searchValue', '')
     const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', [])
-    const [collapsed, setCollapsed] = useControlledProp(props, 'collapsed')
+
+    const { collapsed, animatedCollapsed, isAnimating, setCollapsed } = useCollapsedState(props, elRef)
 
     onMounted(() => {
       setExpandAllBtnStatusWithFlattedNodes()
@@ -68,7 +70,8 @@ export default defineComponent({
         [globalHashId.value]: !!globalHashId.value,
         [hashId.value]: !!hashId.value,
         [prefixCls]: true,
-        [`${prefixCls}-collapsed`]: collapsed.value,
+        [`${prefixCls}-collapsed`]: animatedCollapsed.value,
+        [`${prefixCls}-animating`]: isAnimating.value,
       })
     })
 
@@ -198,7 +201,7 @@ export default defineComponent({
       const showHeaderIcon = !isNil(collapsed.value)
       const showHeader = props.header || slots.header || showHeaderIcon
       return (
-        <div class={classes.value} style={style.value}>
+        <div ref={elRef} class={classes.value} style={style.value}>
           {showHeader && (
             <div class={`${prefixCls}-header-wrapper`}>
               <ɵHeader v-slots={slots} header={props.header} />
@@ -241,3 +244,46 @@ export default defineComponent({
     }
   },
 })
+
+function useCollapsedState(props: ProTreeProps, elRef: Ref<HTMLElement | undefined>) {
+  const [collapsed, setCollapsed] = useControlledProp(props, 'collapsed')
+  const [delayedCollapsed, setDelayedCollapsed] = useState(false)
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  const animatedCollapsed = computed(() => delayedCollapsed.value || isAnimating.value)
+
+  const handleTransitionStart = (evt: TransitionEvent) => {
+    if (!evt || evt.target !== elRef.value) {
+      return
+    }
+
+    setIsAnimating(true)
+  }
+  const handleTransitionEnd = (evt: TransitionEvent) => {
+    if (!evt || evt.target !== elRef.value) {
+      return
+    }
+
+    setIsAnimating(false)
+  }
+
+  // delay the collapsed state so that animating state always changes before collapsed state
+  // otherwise there will be a short tick when it's collpased and transition hasn't started yet
+  // which will cause the tree to blink
+  watch(collapsed, _collapsed => {
+    setTimeout(() => {
+      setDelayedCollapsed(!!_collapsed)
+    })
+  })
+
+  useEventListener(elRef, 'transitionstart', handleTransitionStart)
+  useEventListener(elRef, 'transitionend', handleTransitionEnd)
+  useEventListener(elRef, 'transitioncancel', handleTransitionEnd)
+
+  return {
+    collapsed,
+    animatedCollapsed,
+    isAnimating,
+    setCollapsed,
+  }
+}
