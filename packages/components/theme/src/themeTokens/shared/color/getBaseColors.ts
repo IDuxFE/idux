@@ -38,7 +38,7 @@ export function getBaseColors(): BaseColors {
     canary: '#fcd200',
     bud: '#8dd118',
     green: '#39c317',
-    turquoise: '#12a679',
+    turquoise: '#20cc94',
     cyan: '#19d2db',
     glacier: '#1ba0f2',
     blue: '#1c6eff',
