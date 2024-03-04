@@ -132,9 +132,11 @@ export function useTokenRegister(
 
     if (key === globalTokenKey) {
       setGlobalHashId(record.hashId)
-      ;[...tokenRecordMap.keys()].forEach(componentTokenKey => {
-        updateToken(componentTokenKey)
-      })
+      ;[...tokenRecordMap.keys()]
+        .filter(key => key !== globalTokenKey)
+        .forEach(componentTokenKey => {
+          updateToken(componentTokenKey)
+        })
     }
 
     return record.hashId

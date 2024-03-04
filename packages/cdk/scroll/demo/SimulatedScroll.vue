@@ -8,6 +8,7 @@
       :colWidth="200"
       :virtual="true"
       :rowRender="rowRender"
+      scrollMode="simulated"
       getKey="key"
     >
       <template #col="{ row, item, index }">
