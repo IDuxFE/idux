@@ -28,8 +28,12 @@ export function useRangePanelState(props: DateRangePanelProps, dateConfig: DateC
 
   watch(
     () => props.visible,
-    () => {
+    visible => {
       setIsSelecting(false)
+
+      if (!visible) {
+        callEmit(props.onSelect, props.value)
+      }
     },
   )
 
