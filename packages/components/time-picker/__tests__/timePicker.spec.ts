@@ -160,9 +160,10 @@ describe('TimePicker', () => {
     const onInput = vi.fn()
     const onChange = vi.fn()
     const onUpdateValue = vi.fn()
+    const defaultDate = new Date(2021, 12, 8, 0, 0, 0, 0)
     const wrapper = TimePickerMount({
       props: {
-        value: new Date(2021, 12, 8, 0, 0, 0, 0),
+        value: defaultDate,
         open: true,
         format: 'hh:mm:ss',
         onInput,
@@ -174,8 +175,8 @@ describe('TimePicker', () => {
     await wrapper.find('.ix-time-picker').find('input').setValue('12:11:13')
     expect(onInput).toBeCalled()
 
-    const newDate = parse('12:11:13', 'hh:mm:ss', new Date())
-    expect(onChange).toBeCalledWith(newDate, new Date(2021, 12, 8, 0, 0, 0, 0))
+    const newDate = parse('12:11:13', 'hh:mm:ss', defaultDate)
+    expect(onChange).toBeCalledWith(newDate, defaultDate)
     expect(onUpdateValue).toBeCalledWith(newDate)
   })
 

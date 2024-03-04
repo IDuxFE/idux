@@ -11,17 +11,12 @@ import type { DateConfig, DateConfigType, TimeConfigType } from '@idux/component
 import { type ComputedRef, type Ref, computed, watch } from 'vue'
 
 import { convertArray, useState } from '@idux/cdk/utils'
+import { adjustRangeValue, compareDateTime, convertToDate, sortRangeValue } from '@idux/components/utils'
 
 import { type PickerControlContext, useControl } from './useControl'
 import { type FormatContext } from './useFormat'
 import { type InputEnableStatus } from './useInputEnableStatus'
-import {
-  adjustRangeValue,
-  compareDateTime,
-  convertPickerTypeToConfigType,
-  convertToDate,
-  sortRangeValue,
-} from '../utils'
+import { convertPickerTypeToConfigType } from '../utils'
 
 export interface PickerRangeControlContext {
   buffer: ComputedRef<(Date | undefined)[] | undefined>

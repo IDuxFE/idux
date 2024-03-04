@@ -6,7 +6,7 @@
  */
 
 import type { TimePickerProps } from '../types'
-import type { DateConfig } from '@idux/components/config'
+import type { DateConfig, DateConfigType, TimeConfigType } from '@idux/components/config'
 import type { ComputedRef, Ref } from 'vue'
 
 import { computed, watch } from 'vue'
@@ -14,8 +14,9 @@ import { computed, watch } from 'vue'
 import { isString } from 'lodash-es'
 
 import { useState } from '@idux/cdk/utils'
+import { applyDateTime, convertToDate } from '@idux/components/utils'
 
-import { convertToDate } from '../utils'
+import { checkHourEnabled, checkMinuteEnabled, checkSecondEnabled, checkUse12Hours } from '../utils'
 
 export type OnPickerValueChange = (value: Date | undefined) => void
 
@@ -52,11 +53,17 @@ export function usePickerControl(
     isString(valueProp.value) ? valueProp.value : dateValue.value ? formatDate(dateValue.value, formatRef.value) : '',
   )
 
+  const timeInputEnabledStatus = computed(() => ({
+    hourEnabled: checkHourEnabled(formatRef.value) || checkUse12Hours(formatRef.value),
+    minuteEnabled: checkMinuteEnabled(formatRef.value),
+    secondEnabled: checkSecondEnabled(formatRef.value),
+  }))
+
   function init(force = false) {
     if (
       force ||
       !inputValue.value ||
-      parse(inputValue.value, formatRef.value).valueOf() !== dateValue.value?.valueOf()
+      parse(inputValue.value, formatRef.value).valueOf() !== parse(formatedDateValue.value, formatRef.value).valueOf()
     ) {
       setInputValue(formatedDateValue.value)
     }
@@ -66,8 +73,27 @@ export function usePickerControl(
 
   watch([valueProp, formatRef], () => init(), { immediate: true })
 
-  function parseInput(value: string, format: string) {
-    return value ? dateConfig.parse(value, format) : undefined
+  function adjustTimeOfInput(value: Date | undefined) {
+    if (!value || !dateValue.value) {
+      return value
+    }
+
+    const { hourEnabled, minuteEnabled, secondEnabled } = timeInputEnabledStatus.value
+    const typesToApply = [
+      'year',
+      'month',
+      'date',
+      !hourEnabled && 'hour',
+      !minuteEnabled && 'minute',
+      !secondEnabled && 'second',
+      'millisecond',
+    ].filter(Boolean) as (DateConfigType | TimeConfigType)[]
+
+    return applyDateTime(dateConfig, dateValue.value, value, typesToApply)
+  }
+
+  function parseInput(value: string, format: string, referenceDate: Date | undefined) {
+    return value ? dateConfig.parse(value, format, referenceDate) : undefined
   }
   function checkInputValid(date: Date | undefined) {
     return !date || dateConfig.isValid(date)
@@ -77,9 +103,9 @@ export function usePickerControl(
     const value = (evt.target as HTMLInputElement).value
 
     setInputValue(value)
-    const currDate = parseInput(value, formatRef.value)
+    const currDate = parseInput(value, formatRef.value, dateValue.value)
     if (checkInputValid(currDate)) {
-      handleChange(inputValue.value ? currDate : undefined)
+      handleChange(inputValue.value ? adjustTimeOfInput(currDate) : undefined)
     }
   }
 

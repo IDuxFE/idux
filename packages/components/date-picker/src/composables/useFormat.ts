@@ -21,6 +21,12 @@ interface TimePanelEnabledStatus {
   use12Hours: ComputedRef<boolean>
 }
 
+export interface DateInputEnabledStatus {
+  yearEnabled: boolean
+  monthEnabled: boolean
+  dateEnabled: boolean
+}
+
 export interface FormatContext extends Omit<TimePanelEnabledStatus, 'hourUse12Hours'> {
   formatRef: ComputedRef<string>
   dateFormatRef: ComputedRef<string>
@@ -93,4 +99,16 @@ function useTimePanelEnabledStatus(
     secondEnabled: computed(() => /s/.test(_formatRef.value)),
     use12Hours: computed(() => /[aA]/.test(_formatRef.value)),
   }
+}
+
+export function useDateInputEnabledStatus(formatRef: ComputedRef<string>): ComputedRef<DateInputEnabledStatus> {
+  return computed(() => {
+    const format = formatRef.value
+
+    return {
+      yearEnabled: /[yYR]/.test(format),
+      monthEnabled: /[MQID]/.test(format),
+      dateEnabled: /[dDiEec]/.test(format),
+    }
+  })
 }
