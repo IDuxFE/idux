@@ -66,20 +66,35 @@
   }
 
   &-collapsed {
+    .@{tree-prefix} {
+      .@{tree-prefix}-content {
+        overflow: hidden;
+
+        .cdk-virtual-scroll-holder {
+          overflow: hidden !important;
+        }
+      }
+    }
+  }
+  &-collapsed:not(&-animating) {
     .@{pro-tree-prefix} {
       &-header-wrapper {
         .@{header-prefix} {
           display: none;
         }
+
+        justify-content: center;
       }
 
       &-search-wrapper {
         opacity: 0;
+        visibility: hidden;
       }
     }
 
     .@{tree-prefix} {
       opacity: 0;
+      visibility: hidden;
     }
   }
 }
