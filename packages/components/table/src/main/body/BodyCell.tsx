@@ -103,15 +103,22 @@ export default defineComponent({
 
     return () => {
       const { column } = props
+      const prefixCls = mergedPrefixCls.value
 
       const { type } = column as BodyColumn
       let children: VNodeChild
       let title: string | undefined
 
       if (type === 'selectable') {
-        children = renderSelectableChildren(rowContext, slots, selectable, config, mergedPagination)
+        children = renderSelectableChildren(rowContext, slots, selectable, config, mergedPagination, prefixCls)
       } else if (type === 'indexable') {
-        children = renderIndexableChildren(rowContext, slots, column as TableColumnIndexable, mergedPagination)
+        children = renderIndexableChildren(
+          rowContext,
+          slots,
+          column as TableColumnIndexable,
+          mergedPagination,
+          prefixCls,
+        )
       } else {
         const text = dataValue.value
         children = renderChildren(rowContext, props, slots, text)
@@ -128,7 +135,7 @@ export default defineComponent({
 
       // see: https://github.com/IDuxFE/idux/issues/1081
       if (props.column.fixed && mergedEllipsis.value && (isFixStartLast.value || isFixEndFirst.value)) {
-        children = <span class={`${mergedPrefixCls.value}-cell-content`}>{children}</span>
+        children = <span class={`${prefixCls}-cell-content`}>{children}</span>
       }
 
       const customAdditionalFn = tableProps.customAdditional?.bodyCell
@@ -140,9 +147,9 @@ export default defineComponent({
 
       const contentNode =
         type === 'expandable' ? (
-          <div class={`${mergedPrefixCls.value}-expandable-wrapper`}>
-            {renderExpandableChildren(rowContext, slots, expandable, isTreeData, mergedPrefixCls.value)}
-            {!isEmptyNode(children) && <span class={`${mergedPrefixCls.value}-expandable-trigger-gap`}></span>}
+          <div class={`${prefixCls}-expandable-wrapper`}>
+            {renderExpandableChildren(rowContext, slots, expandable, isTreeData, prefixCls)}
+            {!isEmptyNode(children) && <span class={`${prefixCls}-expandable-trigger-gap`}></span>}
             {children}
           </div>
         ) : (
@@ -272,6 +279,7 @@ function renderSelectableChildren(
   selectable: ComputedRef<TableColumnMergedSelectable | undefined>,
   config: TableConfig,
   mergedPagination: ComputedRef<TablePagination | null>,
+  prefixCls: string,
 ) {
   const {
     props: { record, rowIndex },
@@ -291,8 +299,14 @@ function renderSelectableChildren(
     }
   }
 
-  if (!isSelected.value && !isHover && showIndex) {
-    return renderIndexableChildren(rowContext, slots, config.columnIndexable as TableColumnIndexable, mergedPagination)
+  if (!isSelected.value && !isHover.value && showIndex) {
+    return renderIndexableChildren(
+      rowContext,
+      slots,
+      config.columnIndexable as TableColumnIndexable,
+      mergedPagination,
+      prefixCls,
+    )
   }
 
   const customRender = isString(customCell) ? slots[customCell] : customCell
@@ -320,6 +334,7 @@ function renderIndexableChildren(
   slots: Slots,
   indexable: TableColumnIndexable,
   mergedPagination: ComputedRef<TablePagination | null>,
+  prefixCls: string,
 ) {
   const {
     props: { record, rowIndex },
@@ -332,6 +347,7 @@ function renderIndexableChildren(
     __DEV__ && Logger.warn('components/table', 'invalid customCell, please check the column is correct')
     return undefined
   }
-  const style = selectDisabled.value ? 'cursor: not-allowed' : 'cursor: pointer'
-  return <span style={style}>{customRender({ record, rowIndex, pageIndex, pageSize })}</span>
+
+  const classes = [`${prefixCls}-indexable`, selectDisabled.value && `${prefixCls}-indexable-disabled`]
+  return <span class={classes}>{customRender({ record, rowIndex, pageIndex, pageSize })}</span>
 }
