@@ -10,6 +10,29 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 2.0.1(2024-03-05)
+
+
+### Bug Fixes
+
+* **comp:config:** `millisecond` 应该被包含在 TimeConfigType 中 ([#1850](https://github.com/IDuxFE/idux/issues/1850)) ([405b050](https://github.com/IDuxFE/idux/commit/405b0504f957bd1b7c081cfa99a3792a6d03729e))
+* **comp:date-picker:** 范围选择选中的日期范围应该覆盖完整的时间 ([#1851](https://github.com/IDuxFE/idux/issues/1851)) ([8174c4f](https://github.com/IDuxFE/idux/commit/8174c4f4b71d62d6614fc7ba08abc530bc844f9b))
+  - 例如：选择1月到3月，应该是从1月1日0点0分0秒0毫秒到3月31日23点59分59秒999毫秒
+* **comp:select:** 由可输入的select通过输入创建的选择，通过点击面板选中时，返回了undefined ([#1855](https://github.com/IDuxFE/idux/issues/1855)) ([fa02551](https://github.com/IDuxFE/idux/commit/fa025514a2aac19f22ee91a834cef47a4060b2aa))
+* **comp:table:** selectable 列中 checkbox 或者 radio 的高度不正确，会导致行高比正常文字行高很多，导致selectable列配置了showIndex时，悬浮后行高抖动明显 ([#1859](https://github.com/IDuxFE/idux/issues/1859)) ([690fab8](https://github.com/IDuxFE/idux/commit/690fab8773c42ae2595f5b521fe29a4c819606e1))
+* **comp:table:** selectable 列的 showIndex 不生效 ([#1858](https://github.com/IDuxFE/idux/issues/1858)) ([654ad1a](https://github.com/IDuxFE/idux/commit/654ad1a644f79b867d0cb1785e858184091a3a4f))
+* **comp:theme:** 基础色 turquoise 不正确，根据设计稿色板调整 ([#1852](https://github.com/IDuxFE/idux/issues/1852)) ([70e75eb](https://github.com/IDuxFE/idux/commit/70e75eb64068e9d3b595a5338b8090f2b685400b))
+* **comp:theme:** 优化全局变量的更新逻辑 ([#1853](https://github.com/IDuxFE/idux/issues/1853)) ([b89990c](https://github.com/IDuxFE/idux/commit/b89990c14ae52ebf991cfd164502a9dc6a4b51f5))
+* **comp:time-picker,date-picker:** format字符串中未体现的时间或日期部分，应当从传入的值或者上次选中的值中拿取并赋值 ([#1857](https://github.com/IDuxFE/idux/issues/1857)) ([6a75ae2](https://github.com/IDuxFE/idux/commit/6a75ae28947a56f10536064f6a5d2b2bdcbd7daa))
+  - 例如：yyyy-MM 的格式输入，在通过手动输入后并不能体现日、小时、分钟这些部分，如果有传入的或者上次选中的值，这些部分的取值应该和其保持一致
+* **date-picker:** 日期范围选择，当面板被关闭时，应当触发一次 onSelect ([#1856](https://github.com/IDuxFE/idux/issues/1856)) ([c82e28b](https://github.com/IDuxFE/idux/commit/c82e28baf6ea1b65e3538e2df8ee36ee16bc3957))
+  - 该修改主要为了修复通过onSelect来设置禁用日期的场景，原本当正在选择的状态中关闭面板，会导致禁用日期的设置不正常
+* **pro:tree:** 优化树横向展开收起的动画效果以及显式问题 ([#1854](https://github.com/IDuxFE/idux/issues/1854)) ([98d0595](https://github.com/IDuxFE/idux/commit/98d059538e0fd46fcb1ddff4379a6dc5c6c49b48))
+  - 1. 展开收起过程中不应当出现滚动条
+  - 2. 展开收起的过程中不应该隐藏内容
+  - 3. 收起之后树的内容应该不可点击
+  - 4. 收起之后配置了collapsedWidth并小于44px时，展开收起图标应该水平居中对齐
+
 # 2.0.0(2024-02-01)
 
 ### Bug Fixes
