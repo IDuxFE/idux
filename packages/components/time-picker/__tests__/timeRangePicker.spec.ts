@@ -197,9 +197,11 @@ describe('TimePicker', () => {
     const onInput = vi.fn()
     const onChange = vi.fn()
     const onUpdateValue = vi.fn()
+    const defaultFromDate = new Date(2021, 12, 8, 0, 0, 0, 0)
+    const defaultToDate = new Date(2021, 12, 8, 1, 0, 0, 0)
     const wrapper = TimeRangePickerMount({
       props: {
-        value: [new Date(2021, 12, 8, 0, 0, 0, 0), new Date(2021, 12, 8, 1, 0, 0, 0)],
+        value: [defaultFromDate, defaultToDate],
         open: true,
         format: 'hh:mm:ss',
         onInput,
@@ -218,13 +220,10 @@ describe('TimePicker', () => {
     await toInputEl.setValue('12:11:14')
     expect(onInput).toBeCalled()
 
-    const newFromDate = parse('12:11:13', 'hh:mm:ss', new Date())
-    const newToDate = parse('12:11:14', 'hh:mm:ss', new Date())
+    const newFromDate = parse('12:11:13', 'hh:mm:ss', defaultFromDate)
+    const newToDate = parse('12:11:14', 'hh:mm:ss', defaultToDate)
     await triggerConfirm(wrapper)
-    expect(onChange).toBeCalledWith(
-      [newFromDate, newToDate],
-      [new Date(2021, 12, 8, 0, 0, 0, 0), new Date(2021, 12, 8, 1, 0, 0, 0)],
-    )
+    expect(onChange).toBeCalledWith([newFromDate, newToDate], [defaultFromDate, defaultToDate])
     expect(onUpdateValue).toBeCalledWith([newFromDate, newToDate])
   })
 

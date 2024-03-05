@@ -83,7 +83,7 @@ export type DateConfig<P = number | Date, R = Date> = {
   isValid: (date: unknown) => boolean
 
   format: (date: P, format: string) => string
-  parse: (dateString: string, format: string) => R
+  parse: (dateString: string, format: string, referenceDate?: Date | number) => R
   convert: (date: unknown, format: string) => R
 
   getLocalizedLabels: (
@@ -111,7 +111,8 @@ export function useDateConfig(): DateConfig<number | Date, Date> {
 function createDefaultDateConfig(): DateConfig<number | Date, Date> {
   const locale = useGlobalConfig('locale')
   const now = () => new Date()
-  const parse = (dateString: string, format: string) => parseDate(dateString, format, now(), { locale: locale.date })
+  const parse = (dateString: string, format: string, referenceDate?: Date | number) =>
+    parseDate(dateString, format, referenceDate ?? now(), { locale: locale.date })
   return {
     now,
     weekStartsOn: () => locale.date.options?.weekStartsOn ?? 1,

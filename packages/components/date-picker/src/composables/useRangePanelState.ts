@@ -11,8 +11,9 @@ import type { DateConfig } from '@idux/components/config'
 import { type ComputedRef, computed, watch } from 'vue'
 
 import { callEmit, convertArray, useState } from '@idux/cdk/utils'
+import { adjustRangeValue, sortRangeValue } from '@idux/components/utils'
 
-import { adjustRangeValue, convertPickerTypeToConfigType, sortRangeValue } from '../utils'
+import { convertPickerTypeToConfigType } from '../utils'
 
 export interface RangePanelStateContext {
   panelValue: ComputedRef<(Date | undefined)[] | undefined>

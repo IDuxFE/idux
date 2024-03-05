@@ -8,6 +8,7 @@
 export * from './src/colors'
 export * from './src/convertTarget'
 export * from './src/convertVNode'
+export * from './src/date'
 export * from './src/portalTarget'
 export * from './src/useDisabled'
 export * from './src/useKey'

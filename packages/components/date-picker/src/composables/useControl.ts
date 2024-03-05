@@ -5,14 +5,15 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { DateConfig, DateConfigType, TimeConfigType } from '@idux/components/config'
+
 import { type ComputedRef, type Ref, watch } from 'vue'
 
 import { useState } from '@idux/cdk/utils'
-import { type DateConfig } from '@idux/components/config'
+import { applyDateTime, convertToDate, isSameDateTime } from '@idux/components/utils'
 
-import { type FormatContext } from './useFormat'
+import { type DateInputEnabledStatus, type FormatContext, useDateInputEnabledStatus } from './useFormat'
 import { type InputEnableStatus } from './useInputEnableStatus'
-import { applyDateTime, convertToDate, isSameDateTime } from '../utils'
 
 export interface PickerControlContext {
   inputValue: ComputedRef<string>
@@ -45,7 +46,8 @@ export function useControl(
   valueRef: Ref<string | number | Date | undefined>,
   handleChange: (value: Date | undefined) => void,
 ): PickerControlContext {
-  const { formatRef, dateFormatRef, timeFormatRef } = formatContext
+  const { formatRef, dateFormatRef, timeFormatRef, hourEnabled, minuteEnabled, secondEnabled, use12Hours } =
+    formatContext
 
   const [inputValue, setInputValue] = useState<string>('')
   const [dateInputValue, setDateInputValue] = useState<string>('')
@@ -55,6 +57,9 @@ export function useControl(
   const [dateInputFocused, setDateInputFocused] = useState(false)
   const [timeInputFocused, setTimeInputFocused] = useState(false)
 
+  const dateInputEnableStatus = useDateInputEnabledStatus(formatRef)
+  const innerDateInputEnableStatus = useDateInputEnabledStatus(dateFormatRef)
+
   function initInputValue(currValue: Date | undefined, force = false) {
     if (!currValue) {
       setInputValue('')
@@ -63,7 +68,11 @@ export function useControl(
 
     const { parse, format } = dateConfig
 
-    if (force || parse(inputValue.value, formatRef.value).valueOf() !== currValue.valueOf()) {
+    if (
+      force ||
+      parse(inputValue.value, formatRef.value).valueOf() !==
+        parse(format(currValue, formatRef.value), formatRef.value).valueOf()
+    ) {
       setInputValue(format(currValue, formatRef.value))
     }
   }
@@ -107,52 +116,98 @@ export function useControl(
   watch([valueRef, formatRef], () => init(), { immediate: true })
   watch(inputEnableStatus, () => init())
 
-  function parseInput(value: string, format: string) {
-    return value ? dateConfig.parse(value, format) : undefined
+  function parseInput(value: string, format: string, referenceDate: Date | undefined) {
+    return value ? dateConfig.parse(value, format, referenceDate) : undefined
   }
   function checkInputValid(date: Date | undefined) {
     return !date || dateConfig.isValid(date)
   }
 
+  enum DateTimeAdjustType {
+    input,
+    timeInput,
+    dateInput,
+  }
+  function getDatePartAdjustTypes(enableStatus: DateInputEnabledStatus) {
+    const { yearEnabled, monthEnabled, dateEnabled } = enableStatus
+
+    return [!yearEnabled && 'year', !monthEnabled && 'month', !dateEnabled && 'date'].filter(Boolean) as (
+      | DateConfigType
+      | TimeConfigType
+    )[]
+  }
+  function getTimePartAdjustTypes() {
+    const _hourEnabled = hourEnabled.value || use12Hours.value
+    return [
+      !_hourEnabled && 'hour',
+      !minuteEnabled.value && 'minute',
+      !secondEnabled.value && 'second',
+      'millisecond',
+    ].filter(Boolean) as (DateConfigType | TimeConfigType)[]
+  }
+  function adjustDateTimeOfInput(value: Date | undefined, propValue: Date | undefined, type: DateTimeAdjustType) {
+    if (!value || !propValue) {
+      return value
+    }
+
+    let typesToApply: (DateConfigType | TimeConfigType)[]
+
+    if (type === DateTimeAdjustType.dateInput) {
+      typesToApply = [
+        ...getDatePartAdjustTypes(innerDateInputEnableStatus.value),
+        'hour',
+        'minute',
+        'second',
+        'millisecond',
+      ]
+    } else if (type === DateTimeAdjustType.timeInput) {
+      typesToApply = ['year', 'month', 'date', ...getTimePartAdjustTypes()]
+    } else {
+      typesToApply = [...getDatePartAdjustTypes(dateInputEnableStatus.value), ...getTimePartAdjustTypes()]
+    }
+
+    return applyDateTime(dateConfig, propValue, value, typesToApply)
+  }
+
   function handleInput(evt: Event) {
     const value = (evt.target as HTMLInputElement).value
+    const referenceValue = convertToDate(dateConfig, valueRef.value, formatRef.value)
 
     setInputValue(value)
-    const currDate = parseInput(value, formatRef.value)
-    if (checkInputValid(currDate)) {
-      handleChange(currDate)
-    }
-  }
-  function handleDateInput(evt: Event) {
-    const value = (evt.target as HTMLInputElement).value
-
-    setDateInputValue(value)
-    let currDate = parseInput(value, dateFormatRef.value)
+    let currDate = parseInput(value, formatRef.value, referenceValue)
     if (!checkInputValid(currDate)) {
       return
     }
 
-    const accessorValue = convertToDate(dateConfig, valueRef.value, formatRef.value)
-    if (currDate && accessorValue) {
-      currDate = applyDateTime(dateConfig, accessorValue, currDate, ['hour', 'minute', 'second'])
+    currDate = adjustDateTimeOfInput(currDate, referenceValue, DateTimeAdjustType.input)
+    handleChange(currDate)
+  }
+  function handleDateInput(evt: Event) {
+    const value = (evt.target as HTMLInputElement).value
+    const referenceValue = convertToDate(dateConfig, valueRef.value, formatRef.value)
+
+    setDateInputValue(value)
+    let currDate = parseInput(value, dateFormatRef.value, referenceValue)
+    if (!checkInputValid(currDate)) {
+      return
     }
+
+    currDate = adjustDateTimeOfInput(currDate, referenceValue, DateTimeAdjustType.dateInput)
 
     handleChange(currDate)
     setVisiblePanel('datePanel')
   }
   function handleTimeInput(evt: Event) {
     const value = (evt.target as HTMLInputElement).value
+    const referenceValue = convertToDate(dateConfig, valueRef.value, formatRef.value)
 
     setTimeInputValue(value)
-    let currDate = parseInput(value, timeFormatRef.value)
+    let currDate = parseInput(value, timeFormatRef.value, referenceValue)
     if (!checkInputValid(currDate)) {
       return
     }
 
-    const accessorValue = convertToDate(dateConfig, valueRef.value, formatRef.value)
-    if (currDate && accessorValue) {
-      currDate = applyDateTime(dateConfig, accessorValue, currDate, ['year', 'month', 'date'])
-    }
+    currDate = adjustDateTimeOfInput(currDate, referenceValue, DateTimeAdjustType.timeInput)
 
     handleChange(currDate)
     setVisiblePanel('timePanel')

@@ -133,9 +133,10 @@ describe('DatePicker', () => {
     const onInput = vi.fn()
     const onChange = vi.fn()
     const onUpdateValue = vi.fn()
+    const defaultValue = new Date('2021-10-01')
     const wrapper = DatePickerMount({
       props: {
-        value: new Date('2021-10-01'),
+        value: defaultValue,
         format: 'yyyy-MM-dd',
         onInput,
         onChange,
@@ -147,7 +148,12 @@ describe('DatePicker', () => {
     expect(onInput).toBeCalled()
 
     const newDate = parse('2021-10-11', 'yyyy-MM-dd', new Date())
-    expect(onChange).toBeCalledWith(newDate, new Date('2021-10-01'))
+    newDate.setHours(defaultValue.getHours())
+    newDate.setMinutes(defaultValue.getMinutes())
+    newDate.setSeconds(defaultValue.getSeconds())
+    newDate.setMilliseconds(defaultValue.getMilliseconds())
+
+    expect(onChange).toBeCalledWith(newDate, defaultValue)
     expect(onUpdateValue).toBeCalledWith(newDate)
   })
 

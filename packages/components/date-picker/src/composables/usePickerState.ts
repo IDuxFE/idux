@@ -13,9 +13,9 @@ import { type FormAccessor, ValidateStatus, useAccessorAndControl } from '@idux/
 import { callEmit, convertArray } from '@idux/cdk/utils'
 import { type DateConfig } from '@idux/components/config'
 import { FormSize, useFormItemRegister, useFormSize, useFormStatus } from '@idux/components/form'
+import { convertToDate, sortRangeValue } from '@idux/components/utils'
 
 import { type DatePickerProps, type DateRangePickerProps } from '../types'
-import { convertToDate, sortRangeValue } from '../utils'
 
 type StateValueType<T extends DatePickerProps | DateRangePickerProps> = T extends DatePickerProps
   ? Date | undefined

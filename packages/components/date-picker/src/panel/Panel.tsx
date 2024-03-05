@@ -13,11 +13,12 @@ import { ɵTimePanel } from '@idux/components/_private/time-panel'
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
 import { useThemeToken } from '@idux/components/theme'
 import { getTimePickerThemeTokens } from '@idux/components/time-picker'
+import { applyDateTime } from '@idux/components/utils'
 
 import { getThemeTokens } from '../../theme'
 import { useActiveValue } from '../composables/useActiveValue'
 import { datePanelProps } from '../types'
-import { applyDateTime, convertPickerTypeToConfigType } from '../utils'
+import { convertPickerTypeToConfigType } from '../utils'
 
 export default defineComponent({
   name: 'IxDatePanel',
@@ -38,7 +39,11 @@ export default defineComponent({
       callEmit(props.onChange, value)
     }
     function handleDatePanelChange(value: Date) {
-      handleChange(props.value ? applyDateTime(dateConfig, props.value, value, ['hour', 'minute', 'second']) : value)
+      handleChange(
+        props.value
+          ? applyDateTime(dateConfig, props.value, value, ['hour', 'minute', 'second', 'millisecond'])
+          : value,
+      )
     }
     function handleTimePanelChange(value: Date) {
       handleChange(props.value ? applyDateTime(dateConfig, props.value, value, ['year', 'month', 'date']) : value)
