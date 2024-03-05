@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/IDuxFE/idux/compare/v2.0.0...v2.0.1) (2024-03-05)
+
+
+### Bug Fixes
+
+* **comp:config:** `millisecond` should be included in TimeConfigType ([#1850](https://github.com/IDuxFE/idux/issues/1850)) ([405b050](https://github.com/IDuxFE/idux/commit/405b0504f957bd1b7c081cfa99a3792a6d03729e))
+* **comp:date-picker:** range start and and date cover full range ([#1851](https://github.com/IDuxFE/idux/issues/1851)) ([8174c4f](https://github.com/IDuxFE/idux/commit/8174c4f4b71d62d6614fc7ba08abc530bc844f9b))
+* **comp:select:** clicking an option created by input selects undefind ([#1855](https://github.com/IDuxFE/idux/issues/1855)) ([fa02551](https://github.com/IDuxFE/idux/commit/fa025514a2aac19f22ee91a834cef47a4060b2aa))
+* **comp:table:** height of checkbox or radio in selectable column cell isn't right ([#1859](https://github.com/IDuxFE/idux/issues/1859)) ([690fab8](https://github.com/IDuxFE/idux/commit/690fab8773c42ae2595f5b521fe29a4c819606e1))
+* **comp:table:** selectable column showIndex doesn't work ([#1858](https://github.com/IDuxFE/idux/issues/1858)) ([654ad1a](https://github.com/IDuxFE/idux/commit/654ad1a644f79b867d0cb1785e858184091a3a4f))
+* **comp:theme:** base color turquoise not correct ([#1852](https://github.com/IDuxFE/idux/issues/1852)) ([70e75eb](https://github.com/IDuxFE/idux/commit/70e75eb64068e9d3b595a5338b8090f2b685400b))
+* **comp:theme:** optimize global token update logic ([#1853](https://github.com/IDuxFE/idux/issues/1853)) ([b89990c](https://github.com/IDuxFE/idux/commit/b89990c14ae52ebf991cfd164502a9dc6a4b51f5))
+* **comp:time-picker,date-picker:** missing parts from input format should be applied by prop value ([#1857](https://github.com/IDuxFE/idux/issues/1857)) ([6a75ae2](https://github.com/IDuxFE/idux/commit/6a75ae28947a56f10536064f6a5d2b2bdcbd7daa))
+* **date-picker:** range panel onSelect should be triggered when panel not visible ([#1856](https://github.com/IDuxFE/idux/issues/1856)) ([c82e28b](https://github.com/IDuxFE/idux/commit/c82e28baf6ea1b65e3538e2df8ee36ee16bc3957))
+* **pro:tree:** optimize collapse transition apperance ([#1854](https://github.com/IDuxFE/idux/issues/1854)) ([98d0595](https://github.com/IDuxFE/idux/commit/98d059538e0fd46fcb1ddff4379a6dc5c6c49b48))
+
+
+
+
+
 # [2.0.0](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0) (2024-02-01)
 
 ### Bug Fixes

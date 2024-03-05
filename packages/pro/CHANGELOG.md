@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/IDuxFE/idux/compare/v2.0.0...v2.0.1) (2024-03-05)
+
+
+### Bug Fixes
+
+* **comp:table:** height of checkbox or radio in selectable column cell isn't right ([#1859](https://github.com/IDuxFE/idux/issues/1859)) ([690fab8](https://github.com/IDuxFE/idux/commit/690fab8773c42ae2595f5b521fe29a4c819606e1))
+* **pro:tree:** optimize collapse transition apperance ([#1854](https://github.com/IDuxFE/idux/issues/1854)) ([98d0595](https://github.com/IDuxFE/idux/commit/98d059538e0fd46fcb1ddff4379a6dc5c6c49b48))
+
+
+
+
+
 # [2.0.0](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0) (2024-02-01)
 
 
