@@ -14,4 +14,11 @@
       background: var(--ix-table-body-row-bg-color-selected);
     }
   }
+
+  & td.@{table-prefix}-cell-selectable {
+    .@{checkbox-prefix},
+    .@{radio-prefix} {
+      line-height: 1;
+    }
+  }
 }

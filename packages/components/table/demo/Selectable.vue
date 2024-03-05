@@ -9,9 +9,6 @@
       <IxSwitch v-model:checked="selectableColumn.showIndex" :labels="['Index', 'Index']"></IxSwitch>
     </IxSpace>
     <IxTable v-model:selectedRowKeys="selectedRowKeys" :columns="columns" :dataSource="data" :pagination="false">
-      <template #name="{ value }">
-        <IxButton mode="link">{{ value }}</IxButton>
-      </template>
     </IxTable>
   </IxSpace>
 </template>
@@ -46,7 +43,6 @@ const columns: TableColumn<Data>[] = [
   {
     title: 'Name',
     dataKey: 'name',
-    customCell: 'name',
   },
   {
     title: 'Age',

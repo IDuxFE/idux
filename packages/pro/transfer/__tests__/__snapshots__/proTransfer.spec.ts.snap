@@ -209,7 +209,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -264,7 +264,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -319,7 +319,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -375,7 +375,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -430,7 +430,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -485,7 +485,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -540,7 +540,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -595,7 +595,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -650,7 +650,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -706,7 +706,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -761,7 +761,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -816,7 +816,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -871,7 +871,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -927,7 +927,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -982,7 +982,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -1037,7 +1037,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -1326,7 +1326,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -1371,7 +1371,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -1417,7 +1417,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"
@@ -1462,7 +1462,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                       
                       
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-selectable"
                       >
                         <label
                           aria-checked="false"

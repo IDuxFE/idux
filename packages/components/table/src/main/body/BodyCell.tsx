@@ -65,13 +65,14 @@ export default defineComponent({
     })
 
     const classes = computed(() => {
-      const { fixed, align } = props.column as BodyColumn
+      const { fixed, align, type } = props.column as BodyColumn
       const prefixCls = mergedPrefixCls.value
       let classes = {
         [`${prefixCls}-cell`]: true,
         [`${prefixCls}-cell-sorted`]: !!activeSortOrderBy.value,
         [`${prefixCls}-cell-align-${align.cell}`]: !!align && align.cell != 'start',
         [`${prefixCls}-cell-ellipsis`]: !!mergedEllipsis.value,
+        [`${prefixCls}-cell-${type}`]: !!type,
       }
       if (fixed) {
         classes = {
@@ -348,6 +349,6 @@ function renderIndexableChildren(
     return undefined
   }
 
-  const classes = [`${prefixCls}-indexable`, selectDisabled.value && `${prefixCls}-indexable-disabled`]
+  const classes = [`${prefixCls}-indexable-label`, selectDisabled.value && `${prefixCls}-indexable-label-disabled`]
   return <span class={classes}>{customRender({ record, rowIndex, pageIndex, pageSize })}</span>
 }
