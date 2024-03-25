@@ -63,7 +63,7 @@ export default defineComponent({
     const valueRef = toRef(accessor, 'value')
 
     const { lineHeight, boxSizingData, resizeToFitContent } = ɵUseAutoRows(elementRef, ref(true))
-    const rowCounts = useRowCounts(elementRef, valueRef, lineHeight, boxSizingData)
+    const rowCounts = useRowCounts(elementRef, valueRef, lineHeight, boxSizingData, props.rows)
     const errorLinesContext = useErrorLines(props, lineHeight, boxSizingData)
     const dataCount = useDataCount(props, config, valueRef)
 
@@ -96,7 +96,14 @@ export default defineComponent({
       handleCompositionEnd,
     })
 
-    const style = computed(() => normalizeStyle({ resize: props.resize ?? config.resize }))
+    const style = computed(() =>
+      normalizeStyle({
+        resize: props.resize ?? config.resize,
+        height: props.rows
+          ? `${props.rows * lineHeight.value + boxSizingData.value.paddingBottom + boxSizingData.value.paddingTop}px`
+          : undefined,
+      }),
+    )
     const classes = computed(() => {
       const prefixCls = mergedPrefixCls.value
       const size = props.size ?? config.size

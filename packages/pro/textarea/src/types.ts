@@ -24,6 +24,7 @@ export const proTextareaProps = {
   placeholder: String,
   resize: { type: String as PropType<TextareaResize>, default: undefined },
   showCount: { type: Boolean, default: undefined },
+  rows: Number,
 
   onKeyDown: [Function, Array] as PropType<MaybeArray<(evt: KeyboardEvent) => void>>,
 } as const

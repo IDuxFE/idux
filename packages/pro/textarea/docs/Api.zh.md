@@ -15,6 +15,7 @@
 | `maxCount` | 数字提示显示的最大值 | `number` | - | ✅ | 仅用于提示，不做校验控制 |
 | `readonly` | 是否只读状态 | `boolean` | `false` | - | - |
 | `resize` | 缩放方向 | `none \| both \| horizontal \| vertical` | `none` | ✅ | - |
+| `rows` | 展示文本的行数 | `number` | - | - | - |
 | `showCount` | 是否展示字符数 | `boolean` | `false` | ✅ | - |
 | `size` | 设置大小 | `'sm' \| 'md' \| 'lg'` | `'md'` | ✅ | - |
 | `trim` | 失去焦点后自动去除前后空格  | `boolean` | `false` | - | - |
