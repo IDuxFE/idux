@@ -33,6 +33,7 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       return normalizeClass({
         [prefixCls]: true,
+        [globalHashId.value]: !!globalHashId.value,
         [`${prefixCls}-${size}`]: true,
         [`${prefixCls}-${status}`]: !!status,
         [`${prefixCls}-borderless`]: borderless,
@@ -65,7 +66,7 @@ export default defineComponent({
       }
 
       const { class: className, style, ...rest } = attrs
-      const classNames = normalizeClass([classes.value, className, globalHashId.value])
+      const classNames = normalizeClass([classes.value, className])
       const inputNode = <input ref={inputRef} class={`${prefixCls}-inner`} disabled={disabled} {...rest} />
 
       if (!(addonBeforeNode || addonAfterNode)) {
