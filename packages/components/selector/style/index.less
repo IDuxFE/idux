@@ -1,0 +1,63 @@
+@import '../../style/variable/index.less';
+@import '../../style/mixins/borderless.less';
+@import '../../style/mixins/ellipsis.less';
+@import '../../style/mixins/reset.less';
+@import './single.less';
+@import './multiple.less';
+
+.@{selector-prefix} {
+  .reset-component();
+
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  &-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: all var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out);
+    cursor: pointer;
+  }
+
+  &-item {
+    .ellipsis();
+
+    user-select: none;
+
+    &-label {
+      .ellipsis();
+    }
+  }
+
+  &-input {
+    &-inner {
+      width: 100%;
+      min-width: 1px;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      appearance: none;
+      cursor: pointer;
+    }
+  }
+
+  &-placeholder {
+    flex: 1;
+    overflow: hidden;
+    color: var(--ix-color-text-placeholder);
+    position: absolute;
+    .ellipsis();
+  }
+
+  &-searchable &-content,
+  &-allow-input &-content {
+    cursor: text;
+
+    .@{selector-prefix}-input-inner {
+      cursor: auto;
+    }
+  }
+}
