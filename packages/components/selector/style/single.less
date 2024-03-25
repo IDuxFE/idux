@@ -1,0 +1,22 @@
+.@{selector-prefix}-single {
+  .@{selector-prefix} {
+    &-content {
+      width: 100%;
+      display: flex;
+    }
+
+    &-input {
+      flex: auto;
+      width: 0;
+      margin-right: calc((var(--ix-font-size-icon) / 2) + var(--ix-margin-size-sm));
+    }
+
+    &-item {
+      position: absolute;
+    }
+  }
+
+  &.@{selector-prefix}-opened .@{selector-prefix}-item {
+    color: var(--ix-color-text-placeholder);
+  }
+}
