@@ -38,6 +38,7 @@ export type RegisterToken<K extends ThemeKeys | keyof Ext, Ext extends object = 
   key: K,
   getTokens: TokenGetter<K, Ext>,
   transforms?: TokenTransforms<K, Ext> | undefined,
+  prefix?: string,
   hashed?: boolean,
   hashId?: string,
 ) => string | undefined
@@ -67,19 +68,13 @@ export function useTokenRegister(
   const tokenGettersMap = new Map<ThemeKeys, TokenGetter<ThemeKeys>>()
   const tokenTransformsMap = new Map<ThemeKeys, TokenTransforms<ThemeKeys> | undefined>()
   const tokenHashedMap = new Map<ThemeKeys, boolean | undefined>()
+  const tokenPrefixMap = new Map<ThemeKeys, string | undefined>()
 
   const updateThemeStyle = useDynamicCss(mergedAttachTo)
 
   const [globalHashId, setGlobalHashId] = useState<string>('')
 
-  const _updateToken = <K extends ThemeKeys>(
-    key: K,
-    getTokens: TokenGetter<K>,
-    transforms: TokenTransforms<K> | undefined,
-    force: boolean,
-    hashed?: boolean,
-    existedHashId?: string,
-  ) => {
+  const _updateToken = <K extends ThemeKeys>(key: K, force: boolean, existedHashId?: string) => {
     let record = tokenRecordMap.get(key ?? globalTokenKey)
 
     if (record && !force) {
@@ -91,6 +86,15 @@ export function useTokenRegister(
       : tokenRecordMap.get(globalTokenKey)?.tokens) as unknown as GlobalThemeTokens
 
     if (!globalTokens) {
+      return
+    }
+
+    const getTokens = tokenGettersMap.get(key) as TokenGetter<K>
+    const transforms = tokenTransformsMap.get(key)
+    const prefix = tokenPrefixMap.get(key)
+    const hashed = tokenHashedMap.get(key)
+
+    if (!getTokens) {
       return
     }
 
@@ -117,14 +121,12 @@ export function useTokenRegister(
     }
 
     tokenRecordMap.set(key, record)
-    tokenGettersMap.set(key, getTokens)
-    tokenTransformsMap.set(key, transforms)
-    tokenHashedMap.set(key, hashed)
 
     // if hashId is already provided, we consider the style injected already, no need to inject it again
     if (injectThemeStyle.value && !existedHashId) {
       const cssContent = tokenToCss(
         { ...record, hashId: hashed ?? mergedHashed.value ? record.hashId : '' } as TokenRecord<string>,
+        prefix,
         transforms,
       )
       updateThemeStyle(cssContent, record.hashId, oldHashId)
@@ -146,10 +148,16 @@ export function useTokenRegister(
     key: K,
     getTokens: TokenGetter<K>,
     transforms: TokenTransforms<K> | undefined,
+    prefix?: string,
     hashed?: boolean,
     hashId?: string,
   ) => {
-    return _updateToken(key, getTokens, transforms, false, hashed, hashId)
+    tokenGettersMap.set(key, getTokens)
+    tokenTransformsMap.set(key, transforms)
+    tokenPrefixMap.set(key, prefix)
+    tokenHashedMap.set(key, hashed)
+
+    return _updateToken(key, false, hashId)
   }
 
   const updateToken = <K extends ThemeKeys>(key: K, hashId?: string) => {
@@ -157,11 +165,7 @@ export function useTokenRegister(
       return
     }
 
-    const tokenGetter = tokenGettersMap.get(key)!
-    const tokenTransforms = tokenTransformsMap.get(key)
-    const tokenHashed = tokenHashedMap.get(key)
-
-    return _updateToken(key, tokenGetter, tokenTransforms, true, tokenHashed, hashId)
+    return _updateToken(key, true, hashId)
   }
 
   const isTokensRegistered = (key: ThemeKeys) => {

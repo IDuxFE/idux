@@ -83,6 +83,7 @@ export function createThemeProviderContext(
           () => (useSupper ? supperContext!.getThemeTokens(globalTokenKey) : mergedTokens.value.global),
           undefined,
           undefined,
+          undefined,
           useSupper ? supperContext!.getThemeHashId(globalTokenKey) : undefined,
         )
       } else {
@@ -97,6 +98,7 @@ export function createThemeProviderContext(
       registerToken(
         resetTokenKey,
         globalTokens => (useSupper ? supperContext!.getThemeTokens(resetTokenKey) : getResetTokens(globalTokens)),
+        undefined,
         undefined,
         false,
         useSupper ? supperContext!.getThemeHashId(resetTokenKey) : undefined,
@@ -135,12 +137,5 @@ export function createThemeProviderContext(
     isTokensRegistered,
   }
 }
-
-// export function useThemeProvider(props?: ThemeProviderProps) {
-//   let supperContext = inject(THEME_PROVIDER_TOKEN, null)
-//   supperContext = supperContext ?? useSharedThemeProvider()
-
-//   return createThemeProviderContext(supperContext, props)
-// }
 
 export const useSharedThemeProvider = createSharedComposable(() => createThemeProviderContext(null))

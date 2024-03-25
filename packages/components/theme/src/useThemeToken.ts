@@ -31,7 +31,7 @@ export interface ScopedUseThemeTokenContext<K extends UseThemeTokenScope | keyof
   globalHashId: ComputedRef<string>
   hashId: ComputedRef<string>
   themeTokens: ComputedRef<CertainThemeTokens<K, Ext>>
-  registerToken: (getTokens: TokenGetter<K, Ext>, transforms?: TokenTransforms<K, Ext>) => string
+  registerToken: (getTokens: TokenGetter<K, Ext>, transforms?: TokenTransforms<K, Ext>, prefixCls?: string) => string
 }
 
 export interface GlobalUseThemeTokenContext {
@@ -94,8 +94,12 @@ export function useThemeToken<Ext extends object, K extends UseThemeTokenScope |
     const hashId = computed(() => (hashed.value ? getThemeHashId(key) ?? '' : ''))
     const themeTokens = computed(() => getThemeTokens(key))
 
-    const registerToken = (getTokens: TokenGetter<NotNullKey, Ext>, transforms?: TokenTransforms<NotNullKey, Ext>) => {
-      return _registerToken(key, getTokens, transforms as TokenTransforms<ThemeKeys | keyof Ext, Ext>) ?? ''
+    const registerToken = (
+      getTokens: TokenGetter<NotNullKey, Ext>,
+      transforms?: TokenTransforms<NotNullKey, Ext>,
+      prefixCls?: string,
+    ) => {
+      return _registerToken(key, getTokens, transforms as TokenTransforms<ThemeKeys | keyof Ext, Ext>, prefixCls) ?? ''
     }
 
     return {
