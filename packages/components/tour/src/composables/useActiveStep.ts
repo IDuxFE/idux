@@ -33,11 +33,10 @@ export function useActiveStep(
 
   const getActiveStep = async (index: number) => {
     const props = mergedProps.value
-    if (!props.steps) {
+    const step = props.steps?.[index]
+    if (!step) {
       return
     }
-
-    const step = props.steps[index]
 
     if (step.beforeEnter) {
       await step.beforeEnter()
@@ -117,9 +116,9 @@ export function useActiveStep(
   }
 
   watch(
-    activeIndex,
-    async current => {
-      if (current === activeStep.value?.index) {
+    [activeIndex, () => mergedProps.value.steps],
+    ([current, steps], [, preSteps]) => {
+      if (current === activeStep.value?.index && steps === preSteps) {
         return
       }
 

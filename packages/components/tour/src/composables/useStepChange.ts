@@ -76,7 +76,7 @@ export function useStepChange(
   watch(
     activeIndex,
     (current, pre) => {
-      if (current !== pre) {
+      if (current !== pre && visible.value) {
         transitionTmr && clearTimeout(transitionTmr)
         lock()
       }
