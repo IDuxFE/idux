@@ -7,27 +7,26 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { type ComputedRef, Slots, computed, defineComponent, normalizeClass, onMounted, provide, ref, watch } from 'vue'
+import { type ComputedRef, type Slots, computed, defineComponent, normalizeClass, provide, ref, watch } from 'vue'
 
 import { isBoolean } from 'lodash-es'
 
 import { useAccessorAndControl } from '@idux/cdk/forms'
 import { type VirtualScrollToFn } from '@idux/cdk/scroll'
-import { type VKey, callEmit, useState } from '@idux/cdk/utils'
+import { type VKey, callEmit, useControlledProp, useState } from '@idux/cdk/utils'
+import { IxSelector, type SelectorInstance } from '@idux/components//selector'
 import { ɵInput } from '@idux/components/_private/input'
-import { ɵOverlay } from '@idux/components/_private/overlay'
-import { ɵSelector, type ɵSelectorInstance } from '@idux/components/_private/selector'
 import { type SelectConfig, useGlobalConfig } from '@idux/components/config'
-import { useFormItemRegister, useFormSize, useFormStatus } from '@idux/components/form'
+import { type ControlTriggerSlots, IxControlTrigger } from '@idux/components/control-trigger'
+import { useFormItemRegister, useFormStatus } from '@idux/components/form'
 import { IxSpin } from '@idux/components/spin'
 import { useThemeToken } from '@idux/components/theme'
-import { useOverlayFocusMonitor } from '@idux/components/utils'
+import { useMergedCommonControlProps } from '@idux/components/utils'
 
 import { useActiveState } from './composables/useActiveState'
 import { GetKeyFn, useGetOptionKey } from './composables/useGetOptionKey'
 import { useKeyboardEvents } from './composables/useKeyboardEvents'
 import { useConvertedOptions, useFilteredOptions, useFlattenedOptions, useOptionKeyMap } from './composables/useOptions'
-import { useOverlayState } from './composables/useOverlayState'
 import { usePanelProps } from './composables/usePanelProps'
 import { useSelectedState } from './composables/useSelectedState'
 import Panel from './panel/Panel'
@@ -47,7 +46,7 @@ export default defineComponent({
     const config = useGlobalConfig('select')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-select`)
 
-    const triggerRef = ref<ɵSelectorInstance>()
+    const triggerRef = ref<SelectorInstance>()
     const focus = () => triggerRef.value?.focus()
     const blur = () => triggerRef.value?.blur()
 
@@ -55,22 +54,21 @@ export default defineComponent({
     const scrollTo: VirtualScrollToFn = (...params) => panelRef.value?.scrollTo(...params)
     const changeActiveIndex = (offset: number) => panelRef.value?.changeActiveIndex(offset)
 
-    const [inputValue, setInputValue] = useState('')
+    const [inputValue, _setInputValue] = useState('')
+    const setInputValue = (input: string) => {
+      _setInputValue(input)
+      props.searchable && callEmit(props.onSearch, input)
+    }
     const clearInput = () => {
       props.searchable === 'overlay' ? setInputValue('') : triggerRef.value?.clearInput()
     }
 
     expose({ focus, blur, scrollTo })
 
-    const { overlayRef, overlayStyle, updateOverlay, overlayOpened, setOverlayOpened } = useOverlayState(
-      props,
-      config,
-      triggerRef,
-    )
-
+    const [overlayOpened, setOverlayOpened] = useControlledProp(props, 'open', false)
     const { accessor, control } = useAccessorAndControl()
+    const commonControlProps = useMergedCommonControlProps(props, config)
     useFormItemRegister(control)
-    const mergedSize = useFormSize(props, config)
     const mergedStatus = useFormStatus(props, control)
 
     const getKey = useGetOptionKey(props, config)
@@ -121,14 +119,10 @@ export default defineComponent({
         changeSelected(inputValue.value)
         clearInput()
       }
+
       accessor.markAsBlurred()
-      setOverlayOpened(false)
       callEmit(props.onBlur, evt)
     }
-    const { focused, bindOverlayMonitor, handleFocus, handleBlur } = useOverlayFocusMonitor(onFocus, onBlur)
-    onMounted(() => {
-      bindOverlayMonitor(overlayRef, overlayOpened)
-    })
 
     const handleItemRemove = (value: VKey) => {
       focus()
@@ -146,44 +140,56 @@ export default defineComponent({
         [overlayClassName || '']: !!overlayClassName,
       })
     })
+    const selectorAllowInput = computed(() => {
+      if (props.searchable === 'overlay') {
+        return false
+      }
 
-    const renderTrigger = () => (
-      <ɵSelector
+      return props.searchable ? 'searchable' : props.allowInput
+    })
+
+    const renderTrigger: ControlTriggerSlots['trigger'] = ({
+      borderless,
+      status,
+      clearable,
+      clearIcon,
+      readonly,
+      disabled,
+      size,
+      suffix,
+      suffixRotate,
+      focused,
+      opened,
+    }) => [
+      <IxSelector
         ref={triggerRef}
         v-slots={slots}
-        className={mergedPrefixCls.value}
-        allowInput={props.allowInput}
+        class={mergedPrefixCls.value}
+        allowInput={selectorAllowInput.value}
         autocomplete={props.autocomplete}
         autofocus={props.autofocus}
-        borderless={props.borderless}
-        clearable={props.clearable}
-        clearIcon={props.clearIcon}
-        config={config}
+        borderless={borderless}
+        clearable={clearable}
+        clearIcon={clearIcon}
         dataSource={selectedOptions.value}
-        disabled={accessor.disabled}
-        focused={focused.value}
+        disabled={disabled}
+        focused={focused}
         maxLabel={props.maxLabel}
         multiple={props.multiple}
-        opened={overlayOpened.value}
+        monitorFocus={false}
+        opened={opened}
         placeholder={props.placeholder}
-        readonly={props.readonly}
-        searchable={props.searchable}
-        size={mergedSize.value}
-        status={mergedStatus.value}
-        suffix={props.suffix}
-        value={selectedValue.value}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
+        readonly={readonly}
+        size={size}
+        status={status}
+        suffix={suffix}
+        suffixRotate={suffixRotate}
         onClear={handleClear}
         onInputValueChange={setInputValue}
         onItemRemove={handleItemRemove}
         onKeydown={handleKeyDown}
-        onOpenedChange={setOverlayOpened}
-        onResize={updateOverlay}
-        onSearch={props.onSearch}
-        {...attrs}
-      />
-    )
+      />,
+    ]
 
     const renderLoading = (children: JSX.Element) => {
       const { spin } = props
@@ -191,7 +197,7 @@ export default defineComponent({
       return spinProps ? <IxSpin {...spinProps}>{children}</IxSpin> : children
     }
 
-    const renderContent = () => {
+    const renderContent: ControlTriggerSlots['overlay'] = () => {
       const children = [renderLoading(<Panel ref={panelRef} v-slots={slots} {...panelProps.value} />)]
       const { searchable, overlayRender } = props
 
@@ -201,11 +207,9 @@ export default defineComponent({
         const handleSearchInput = (evt: Event) => {
           const { value } = evt.target as HTMLInputElement
           setInputValue(value)
-          props.searchable && callEmit(props.onSearch, value)
         }
         const handleSearchClear = () => {
           setInputValue('')
-          props.searchable && callEmit(props.onSearch, '')
         }
 
         children.unshift(
@@ -225,29 +229,39 @@ export default defineComponent({
         )
       }
 
-      return <div>{overlayRender ? overlayRender(children) : children}</div>
+      return [<div>{overlayRender ? overlayRender(children) : children}</div>]
     }
 
     return () => {
-      const overlayProps = {
-        class: overlayClasses.value,
-        style: overlayStyle.value,
-        clickOutside: false,
-        container: props.overlayContainer ?? config.overlayContainer,
-        containerFallback: `.${mergedPrefixCls.value}-overlay-container`,
-        disabled: accessor.disabled || props.readonly,
+      const { suffix, borderless, clearIcon, size } = commonControlProps.value
+      const controlTriggerProps = {
+        autofocus: props.autofocus,
+        overlayClassName: overlayClasses.value,
+        overlayContainer: props.overlayContainer,
+        overlayContainerFallback: `${mergedPrefixCls.value}-overlay-container`,
+        overlayMatchWidth: props.overlayMatchWidth ?? config.overlayMatchWidth,
+        class: mergedPrefixCls.value,
+        borderless,
+        value: selectedValue.value,
         offset: props.offset ?? config.offset,
-        placement: 'bottomStart',
-        transitionName: `${common.prefixCls}-slide-auto`,
-        trigger: 'manual',
-        triggerId: attrs.id,
-        visible: overlayOpened.value,
-        'onUpdate:visible': setOverlayOpened,
-      } as const
+        open: overlayOpened.value,
+        readonly: props.readonly,
+        size,
+        status: mergedStatus.value,
+        suffix,
+        clearable: props.clearable,
+        clearIcon,
+        disabled: accessor.disabled,
+        onFocus,
+        onBlur,
+        'onUpdate:open': setOverlayOpened,
+      }
 
-      const overlaySlots = { default: renderTrigger, content: renderContent }
-
-      return <ɵOverlay ref={overlayRef} {...overlayProps} v-slots={overlaySlots} />
+      const controlTriggerSlots = {
+        trigger: renderTrigger,
+        overlay: renderContent,
+      }
+      return <IxControlTrigger v-slots={controlTriggerSlots} {...controlTriggerProps} {...attrs} />
     }
   },
 })

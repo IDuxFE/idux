@@ -4,24 +4,36 @@
 @import '../../../style/mixins/placeholder.less';
 
 .trigger-size(@height, @vertical-padding, @horizontal-padding, @font-size, @border-radius) {
-  height: @height;
-  padding: @vertical-padding calc(var(--ix-padding-size-xs) + var(--ix-padding-size-sm)) @vertical-padding
-    @horizontal-padding;
+  min-height: @height;
   font-size: @font-size;
   line-height: calc(@font-size + var(--ix-line-height-gutter));
   border-radius: @border-radius;
+  outline: none;
+
+  &:not(.@{trigger-prefix}-paddingless) {
+    padding: @vertical-padding calc(var(--ix-padding-size-xs) + var(--ix-padding-size-sm)) @vertical-padding
+      @horizontal-padding;
+  }
+
+  .@{trigger-prefix}-suffix,
+  .@{trigger-prefix}-clear-icon {
+    height: calc(@height - 2 * var(--ix-control-line-width));
+  }
 }
 
 .@{trigger-prefix} {
   .reset-component();
 
+  cursor: pointer;
   position: relative;
   width: 100%;
   color: var(--ix-color-text);
-  border: var(--ix-control-line-width) var(--ix-control-line-type) var(--ix-color-border);
   background-color: var(--ix-control-bg-color);
-  cursor: pointer;
   transition: all var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out);
+
+  &:not(.@{trigger-prefix}-borderless) {
+    border: var(--ix-control-line-width) var(--ix-control-line-type) var(--ix-color-border);
+  }
 
   &-sm {
     .trigger-size(var(--ix-control-height-sm), var(--ix-control-padding-size-vertical-sm), var(--ix-control-padding-size-horizontal-sm), var(--ix-control-font-size-sm), var(--ix-control-border-radius-sm));
@@ -67,10 +79,9 @@
   &-clear-icon {
     position: absolute;
     top: 0;
-    right: var(--ix-margin-size-sm);
     display: flex;
     align-items: center;
-    height: 100%;
+    right: var(--ix-margin-size-sm);
     transition: all var(--ix-motion-duration-medium);
     font-size: var(--ix-font-size-icon);
   }

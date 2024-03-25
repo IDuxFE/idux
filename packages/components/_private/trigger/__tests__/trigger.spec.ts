@@ -55,7 +55,7 @@ describe('Trigger', () => {
   })
 
   test('clearable work', async () => {
-    const wrapper = TriggerMount({ props: { clearable: true, clearIcon: 'clear' } })
+    const wrapper = TriggerMount({ props: { value: 1, clearable: true, clearIcon: 'clear' } })
 
     expect(wrapper.find('.ix-trigger-clear-icon').exists()).toBeTruthy()
 
@@ -65,7 +65,7 @@ describe('Trigger', () => {
   })
 
   test('clearIcon work', async () => {
-    const wrapper = TriggerMount({ props: { clearable: true, clearIcon: 'clear' } })
+    const wrapper = TriggerMount({ props: { value: 1, clearable: true, clearIcon: 'clear' } })
 
     expect(wrapper.find('.ix-icon-clear').exists()).toBeTruthy()
 
@@ -77,7 +77,7 @@ describe('Trigger', () => {
 
   test('slot clearIcon work', async () => {
     const wrapper = TriggerMount({
-      props: { clearable: true },
+      props: { value: 1, clearable: true },
       slots: {
         clearIcon: () => h('span', { class: 'custom-clear-icon-slot' }),
       },
@@ -97,50 +97,21 @@ describe('Trigger', () => {
     const wrapper = TriggerMount({
       props: { clearable: true },
       slots: {
-        clearIcon: () => h('span', { class: 'custom-suffix-slot' }),
+        suffix: () => h('span', { class: 'custom-suffix-slot' }),
       },
     })
 
     expect(wrapper.find('.custom-suffix-slot').exists()).toBeTruthy()
   })
 
-  test('onClick work', async () => {
-    const onClick = vi.fn()
-    const wrapper = TriggerMount({ props: { onClick } })
-
-    await wrapper.trigger('click')
-    expect(onClick).toBeCalled()
-
-    onClick.mockClear()
-
-    await wrapper.setProps({ disabled: true })
-    await wrapper.trigger('click')
-    expect(onClick).not.toBeCalled()
-  })
-
   test('onClear work', async () => {
     const onClear = vi.fn()
-    const wrapper = TriggerMount({ props: { clearable: true, clearIcon: 'clear', onClear } })
+    const wrapper = TriggerMount({ props: { value: 1, clearable: true, clearIcon: 'clear', onClear } })
 
     await wrapper.find('.ix-trigger-clear-icon').trigger('click')
     expect(onClear).toBeCalled()
 
     await wrapper.setProps({ disabled: true })
     expect(wrapper.find('.ix-trigger-clear-icon').exists()).toBeFalsy()
-  })
-
-  test('onKeyDown work', async () => {
-    const onKeyDown = vi.fn()
-
-    const wrapper = TriggerMount({ props: { onKeyDown } })
-
-    await wrapper.trigger('keydown')
-    expect(onKeyDown).toBeCalled()
-
-    onKeyDown.mockClear()
-
-    await wrapper.setProps({ disabled: true })
-    await wrapper.trigger('keydown')
-    expect(onKeyDown).not.toBeCalled()
   })
 })

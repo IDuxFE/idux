@@ -8,21 +8,16 @@
 import { computed, defineComponent, inject, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
-import { ɵTrigger } from '@idux/components/_private/trigger'
-import { useThemeToken } from '@idux/components/theme'
 
-import { useTriggerProps } from '../composables/useTriggerProps'
 import { datePickerToken } from '../token'
 
 export default defineComponent({
   inheritAttrs: false,
-  setup(_, { attrs, expose }) {
+  setup(_, { expose }) {
     const context = inject(datePickerToken)!
-    const { globalHashId, hashId } = useThemeToken('datePicker')
     const {
       accessor,
       props,
-      slots,
       locale,
       controlContext: { inputValue, handleInput: _handleInput },
       mergedPrefixCls,
@@ -36,8 +31,6 @@ export default defineComponent({
     const placeholder = computed(() => props.placeholder ?? locale.datePicker[`${props.type}Placeholder`])
     const inputSize = computed(() => Math.max(10, formatRef.value.length) + 2)
 
-    const triggerProps = useTriggerProps(context)
-
     const focus = () => {
       ;(inputEnableStatus.value.allowInput === 'overlay' ? triggerInputRef : inputRef).value?.focus()
     }
@@ -49,12 +42,12 @@ export default defineComponent({
       callEmit(props.onInput, evt)
     }
 
-    const renderContent = (prefixCls: string) => {
+    return () => {
       return (
-        <div class={`${prefixCls}-input`}>
+        <div class={`${mergedPrefixCls.value}-input`}>
           <input
             ref={inputEnableStatus.value.allowInput === 'overlay' ? triggerInputRef : inputRef}
-            class={`${prefixCls}-input-inner`}
+            class={`${mergedPrefixCls.value}-input-inner`}
             autocomplete="off"
             disabled={accessor.disabled}
             placeholder={placeholder.value}
@@ -64,24 +57,6 @@ export default defineComponent({
             onInput={handleInput}
           />
         </div>
-      )
-    }
-
-    return () => {
-      const prefixCls = mergedPrefixCls.value
-      const triggerSlots = {
-        default: () => renderContent(prefixCls),
-        suffix: slots.suffix,
-        clearIcon: slots.clearIcon,
-      }
-
-      return (
-        <ɵTrigger
-          className={`${prefixCls} ${globalHashId.value} ${hashId.value}`}
-          v-slots={triggerSlots}
-          {...triggerProps.value}
-          {...attrs}
-        />
       )
     }
   },

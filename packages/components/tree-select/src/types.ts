@@ -68,7 +68,7 @@ export const treeSelectProps = {
     type: [String, HTMLElement, Function] as PropType<OverlayContainerType>,
     default: undefined,
   },
-  overlayMatchWidth: { type: Boolean, default: undefined },
+  overlayMatchWidth: { type: [Boolean, String] as PropType<boolean | 'minWidth'>, default: undefined },
   overlayRender: { type: Function as PropType<(children: VNode[]) => VNodeChild>, default: undefined },
   placeholder: { type: String, default: undefined },
   readonly: { type: Boolean, default: false },

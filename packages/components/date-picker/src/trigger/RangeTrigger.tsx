@@ -8,21 +8,16 @@
 import { computed, defineComponent, inject, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
-import { ɵTrigger } from '@idux/components/_private/trigger'
-import { useThemeToken } from '@idux/components/theme'
 
-import { useTriggerProps } from '../composables/useTriggerProps'
 import { dateRangePickerToken } from '../token'
 
 export default defineComponent({
   inheritAttrs: false,
-  setup(_, { attrs, expose }) {
+  setup(_, { expose }) {
     const context = inject(dateRangePickerToken)!
-    const { globalHashId, hashId } = useThemeToken('datePicker')
     const {
       accessor,
       props,
-      slots,
       locale,
       rangeControlContext: { fromControl, toControl },
       mergedPrefixCls,
@@ -39,7 +34,6 @@ export default defineComponent({
       props.placeholder?.[1] ?? locale.dateRangePicker[`${props.type}Placeholder`][1],
     ])
     const inputSize = computed(() => Math.max(10, formatRef.value.length) + 2)
-    const triggerProps = useTriggerProps(context)
 
     const handleFromInput = (evt: Event) => {
       fromControl.handleInput(evt)
@@ -76,30 +70,12 @@ export default defineComponent({
       )
     }
 
-    const renderContent = (prefixCls: string) => (
-      <div class={`${prefixCls}-input`}>
+    return () => (
+      <div class={`${mergedPrefixCls.value}-input`}>
         {renderSide(true)}
-        <span class={`${prefixCls}-input-separator`}>{renderSeparator()}</span>
+        <span class={`${mergedPrefixCls.value}-input-separator`}>{renderSeparator()}</span>
         {renderSide(false)}
       </div>
     )
-
-    return () => {
-      const prefixCls = mergedPrefixCls.value
-      const triggerSlots = {
-        default: () => renderContent(prefixCls),
-        suffix: slots.suffix,
-        clearIcon: slots.clearIcon,
-      }
-
-      return (
-        <ɵTrigger
-          className={`${prefixCls} ${globalHashId.value} ${hashId.value}`}
-          v-slots={triggerSlots}
-          {...triggerProps.value}
-          {...attrs}
-        />
-      )
-    }
   },
 })

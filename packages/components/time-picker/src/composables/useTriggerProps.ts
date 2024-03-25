@@ -5,21 +5,20 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { ɵTriggerProps } from '@idux/components/_private/trigger'
+import type { ControlTriggerProps } from '@idux/components/control-trigger'
 
 import { type ComputedRef, computed } from 'vue'
 
-import { isArray } from 'lodash-es'
-
 import { TimePickerContext, TimeRangePickerContext } from '../tokens'
 
-export function useTriggerProps(context: TimePickerContext | TimeRangePickerContext): ComputedRef<ɵTriggerProps> {
+export function useTriggerProps(context: TimePickerContext | TimeRangePickerContext): ComputedRef<ControlTriggerProps> {
   const {
     props,
     config,
     accessor,
     mergedSize,
     mergedStatus,
+    mergedPrefixCls,
     focused,
     handleBlur,
     handleFocus,
@@ -29,32 +28,26 @@ export function useTriggerProps(context: TimePickerContext | TimeRangePickerCont
     setOverlayOpened,
   } = context
 
-  const handleClick = () => {
-    if (accessor.disabled) {
-      return
-    }
-
-    setOverlayOpened(!overlayOpened.value)
-  }
-
   return computed(() => ({
+    autofocus: props.autofocus,
     borderless: props.borderless,
-    clearable:
-      !props.readonly &&
-      !accessor.disabled &&
-      (props.clearable ?? config.clearable) &&
-      (isArray(accessor.value) ? !!accessor.value.length : !!accessor.value),
+    value: accessor.value,
+    clearable: props.clearable ?? config.clearable,
     clearIcon: props.clearIcon ?? config.clearIcon,
     disabled: accessor.disabled,
     focused: focused.value,
+    open: overlayOpened.value,
+    overlayContainer: props.overlayContainer ?? config.overlayContainer,
+    overlayContainerFallback: `.${mergedPrefixCls.value}-overlay-container`,
     readonly: props.readonly,
     size: mergedSize.value,
     status: mergedStatus.value,
     suffix: props.suffix ?? config.suffix,
-    onClick: handleClick,
+    suffixRotate: false,
+    'onUpdate:open': setOverlayOpened,
     onClear: handleClear,
     onFocus: handleFocus,
     onBlur: handleBlur,
-    onKeyDown: handleKeyDown,
+    onKeydown: handleKeyDown,
   }))
 }

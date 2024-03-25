@@ -8,21 +8,16 @@
 import { computed, defineComponent, inject, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
-import { ɵTrigger } from '@idux/components/_private/trigger'
-import { useThemeToken } from '@idux/components/theme'
 
-import { useTriggerProps } from '../composables/useTriggerProps'
 import { timePickerContext } from '../tokens'
 
 export default defineComponent({
   inheritAttrs: false,
-  setup(_, { expose, attrs }) {
-    const { globalHashId, hashId } = useThemeToken('timePicker')
+  setup(_, { expose }) {
     const context = inject(timePickerContext)!
     const {
       accessor,
       props,
-      slots,
       locale,
       mergedPrefixCls,
       formatRef,
@@ -46,12 +41,13 @@ export default defineComponent({
     }
     expose({ focus })
 
-    const triggerProps = useTriggerProps(context)
-    const renderContent = (prefixCls: string) => {
+    // const triggerProps = useTriggerProps(context)
+
+    return () => {
       return (
         <input
           ref={inputEnableStatus.value.enableExternalInput ? inputRef : triggerInputRef}
-          class={`${prefixCls}-input`}
+          class={`${mergedPrefixCls.value}-input`}
           autocomplete="off"
           disabled={accessor.disabled}
           placeholder={placeholder.value}
@@ -63,22 +59,38 @@ export default defineComponent({
       )
     }
 
-    return () => {
-      const prefixCls = mergedPrefixCls.value
-      const triggerSlots = {
-        default: () => renderContent(prefixCls),
-        suffix: slots.suffix,
-        clearIcon: slots.clearIcon,
-      }
+    // const renderContent = (prefixCls: string) => {
+    //   return (
+    //     <input
+    //       ref={inputEnableStatus.value.enableExternalInput ? inputRef : triggerInputRef}
+    //       class={`${prefixCls}-input`}
+    //       autocomplete="off"
+    //       disabled={accessor.disabled}
+    //       placeholder={placeholder.value}
+    //       readonly={props.readonly || !inputEnableStatus.value.enableExternalInput}
+    //       size={inputSize.value}
+    //       value={inputValue.value}
+    //       onInput={handleInput}
+    //     />
+    //   )
+    // }
 
-      return (
-        <ɵTrigger
-          className={`${prefixCls} ${globalHashId.value} ${hashId.value}`}
-          v-slots={triggerSlots}
-          {...triggerProps.value}
-          {...attrs}
-        />
-      )
-    }
+    // return () => {
+    //   const prefixCls = mergedPrefixCls.value
+    //   const triggerSlots = {
+    //     default: () => renderContent(prefixCls),
+    //     suffix: slots.suffix,
+    //     clearIcon: slots.clearIcon,
+    //   }
+
+    //   return (
+    //     <ɵTrigger
+    //       className={`${prefixCls} ${globalHashId.value} ${hashId.value}`}
+    //       v-slots={triggerSlots}
+    //       {...triggerProps.value}
+    //       {...attrs}
+    //     />
+    //   )
+    // }
   },
 })

@@ -1,7 +1,7 @@
 // Vitest Snapshot v1
 
 exports[`TreeSelect > multiple work > render work 1`] = `
-"<div class=\\"ix-tree-select ix-selector ix-selector-md ix-selector-opened ix-selector-single\\">
+"<div class=\\"ix-trigger ix-trigger-md ix-selector ix-selector-md ix-selector-opened ix-selector-single ix-tree-select ix-control-trigger\\" tabindex=\\"-1\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
@@ -10,15 +10,16 @@ exports[`TreeSelect > multiple work > render work 1`] = `
     <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
       <!---->
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(180deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
+  <div class=\\"ix-trigger-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  <!---->
 </div>
 <!--teleport start-->
 <!--teleport end-->"
 `;
 
 exports[`TreeSelect > single work > custom keys work 1`] = `
-"<div class=\\"ix-tree-select ix-selector ix-selector-md ix-selector-opened ix-selector-single\\">
+"<div class=\\"ix-trigger ix-trigger-md ix-selector ix-selector-md ix-selector-opened ix-selector-single ix-tree-select ix-control-trigger\\" tabindex=\\"-1\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
@@ -27,15 +28,16 @@ exports[`TreeSelect > single work > custom keys work 1`] = `
     <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
       <!---->
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(180deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
+  <div class=\\"ix-trigger-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  <!---->
 </div>
 <!--teleport start-->
 <!--teleport end-->"
 `;
 
 exports[`TreeSelect > single work > render work 1`] = `
-"<div class=\\"ix-tree-select ix-selector ix-selector-md ix-selector-opened ix-selector-single\\">
+"<div class=\\"ix-trigger ix-trigger-md ix-selector ix-selector-md ix-selector-opened ix-selector-single ix-tree-select ix-control-trigger\\" tabindex=\\"-1\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
@@ -44,15 +46,16 @@ exports[`TreeSelect > single work > render work 1`] = `
     <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
       <!---->
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(180deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
+  <div class=\\"ix-trigger-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  <!---->
 </div>
 <!--teleport start-->
 <!--teleport end-->"
 `;
 
 exports[`TreeSelect > single work > searchFn work 1`] = `
-"<div class=\\"ix-tree-select ix-selector ix-selector-md ix-selector-single\\" searchvalue=\\"node\\">
+"<div class=\\"ix-trigger ix-trigger-md ix-selector ix-selector-md ix-selector-single ix-tree-select ix-control-trigger\\" tabindex=\\"-1\\" searchvalue=\\"node\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
@@ -61,13 +64,14 @@ exports[`TreeSelect > single work > searchFn work 1`] = `
     <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
       <!---->
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
+  <div class=\\"ix-trigger-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  <!---->
 </div>"
 `;
 
 exports[`TreeSelect > single work > searchFn work 2`] = `
-"<div class=\\"ix-tree-select ix-selector ix-selector-md ix-selector-single\\" searchvalue=\\"node\\">
+"<div class=\\"ix-trigger ix-trigger-md ix-selector ix-selector-md ix-selector-single ix-tree-select ix-control-trigger\\" tabindex=\\"-1\\" searchvalue=\\"node\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
@@ -76,15 +80,16 @@ exports[`TreeSelect > single work > searchFn work 2`] = `
     <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
       <!---->
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"><svg viewBox=\\"0 0 1024 1024\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"down\\">
-          <path d=\\"M503.234 694.123 249.575 440.464c-4.998-4.998-5.001-12.869-.003-17.867l27.39-27.39c5-5 12.927-4.939 17.926.06l217.281 217.281 217.281-217.28c4.999-5 12.927-5.06 17.925-.062l27.39 27.39c5 5 4.996 12.87-.002 17.868L521.104 694.123c-4.998 4.998-12.872 4.998-17.87 0Z\\"></path>
-        </svg></i></div>
   </div>
+  <div class=\\"ix-trigger-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"><svg viewBox=\\"0 0 1024 1024\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"down\\">
+        <path d=\\"M503.234 694.123 249.575 440.464c-4.998-4.998-5.001-12.869-.003-17.867l27.39-27.39c5-5 12.927-4.939 17.926.06l217.281 217.281 217.281-217.28c4.999-5 12.927-5.06 17.925-.062l27.39 27.39c5 5 4.996 12.87-.002 17.868L521.104 694.123c-4.998 4.998-12.872 4.998-17.87 0Z\\"></path>
+      </svg></i></div>
+  <!---->
 </div>"
 `;
 
 exports[`TreeSelect > single work > searchFn work 3`] = `
-"<div class=\\"ix-tree-select ix-selector ix-selector-md ix-selector-single\\" searchvalue=\\"node\\">
+"<div class=\\"ix-trigger ix-trigger-md ix-selector ix-selector-md ix-selector-single ix-tree-select ix-control-trigger\\" tabindex=\\"-1\\" searchvalue=\\"node\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
@@ -93,15 +98,16 @@ exports[`TreeSelect > single work > searchFn work 3`] = `
     <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
       <!---->
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"><svg viewBox=\\"0 0 1024 1024\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"down\\">
-          <path d=\\"M503.234 694.123 249.575 440.464c-4.998-4.998-5.001-12.869-.003-17.867l27.39-27.39c5-5 12.927-4.939 17.926.06l217.281 217.281 217.281-217.28c4.999-5 12.927-5.06 17.925-.062l27.39 27.39c5 5 4.996 12.87-.002 17.868L521.104 694.123c-4.998 4.998-12.872 4.998-17.87 0Z\\"></path>
-        </svg></i></div>
   </div>
+  <div class=\\"ix-trigger-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"><svg viewBox=\\"0 0 1024 1024\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"down\\">
+        <path d=\\"M503.234 694.123 249.575 440.464c-4.998-4.998-5.001-12.869-.003-17.867l27.39-27.39c5-5 12.927-4.939 17.926.06l217.281 217.281 217.281-217.28c4.999-5 12.927-5.06 17.925-.062l27.39 27.39c5 5 4.996 12.87-.002 17.868L521.104 694.123c-4.998 4.998-12.872 4.998-17.87 0Z\\"></path>
+      </svg></i></div>
+  <!---->
 </div>"
 `;
 
 exports[`TreeSelect > single work > searchable work 1`] = `
-"<div class=\\"ix-tree-select ix-selector ix-selector-md ix-selector-opened ix-selector-searchable ix-selector-single\\">
+"<div class=\\"ix-trigger ix-trigger-md ix-selector ix-selector-md ix-selector-allow-input ix-selector-opened ix-selector-searchable ix-selector-single ix-tree-select ix-control-trigger\\" tabindex=\\"-1\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
@@ -110,24 +116,26 @@ exports[`TreeSelect > single work > searchable work 1`] = `
     <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
       <!---->
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
+  <div class=\\"ix-trigger-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  <!---->
 </div>
 <!--teleport start-->
 <!--teleport end-->"
 `;
 
 exports[`TreeSelect > single work > searchable work 2`] = `
-"<div class=\\"ix-tree-select ix-selector ix-selector-md ix-selector-opened ix-selector-single\\">
+"<div class=\\"ix-trigger ix-trigger-md ix-selector ix-selector-md ix-selector-opened ix-selector-single ix-tree-select ix-control-trigger\\" tabindex=\\"-1\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
       <!---->
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(180deg);\\" role=\\"img\\" aria-label=\\"down\\"><svg viewBox=\\"0 0 1024 1024\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"down\\">
-          <path d=\\"M503.234 694.123 249.575 440.464c-4.998-4.998-5.001-12.869-.003-17.867l27.39-27.39c5-5 12.927-4.939 17.926.06l217.281 217.281 217.281-217.28c4.999-5 12.927-5.06 17.925-.062l27.39 27.39c5 5 4.996 12.87-.002 17.868L521.104 694.123c-4.998 4.998-12.872 4.998-17.87 0Z\\"></path>
-        </svg></i></div>
   </div>
+  <div class=\\"ix-trigger-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"><svg viewBox=\\"0 0 1024 1024\\" focusable=\\"false\\" aria-hidden=\\"true\\" data-icon=\\"down\\">
+        <path d=\\"M503.234 694.123 249.575 440.464c-4.998-4.998-5.001-12.869-.003-17.867l27.39-27.39c5-5 12.927-4.939 17.926.06l217.281 217.281 217.281-217.28c4.999-5 12.927-5.06 17.925-.062l27.39 27.39c5 5 4.996 12.87-.002 17.868L521.104 694.123c-4.998 4.998-12.872 4.998-17.87 0Z\\"></path>
+      </svg></i></div>
+  <!---->
 </div>
 <!--teleport start-->
 <!--teleport end-->"

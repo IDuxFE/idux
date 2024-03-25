@@ -106,6 +106,7 @@ describe('Select', () => {
       const wrapper = SelectMount({ props: { autofocus: true } })
       await flushPromises()
 
+      expect(wrapper.find('.ix-selector-focused').exists()).toBe(true)
       expect(wrapper.find('.ix-selector-opened').exists()).toBe(true)
       expect(wrapper.findComponent(Panel).isVisible()).toBe(true)
     })
@@ -166,7 +167,7 @@ describe('Select', () => {
 
       expect(wrapper.find('.ix-selector-clearable').exists()).toBe(true)
 
-      await wrapper.find('.ix-selector-clear').trigger('click')
+      await wrapper.find('.ix-trigger-clear-icon').trigger('click')
 
       expect(onUpdateValue).toBeCalledWith(undefined)
 
@@ -178,11 +179,11 @@ describe('Select', () => {
     test('clearIcon work', async () => {
       const wrapper = SelectMount({ props: { clearable: true, clearIcon: 'up' } })
 
-      expect(wrapper.find('.ix-selector-clear').find('.ix-icon-up').exists()).toBe(true)
+      expect(wrapper.find('.ix-trigger-clear-icon').find('.ix-icon-up').exists()).toBe(true)
 
       await wrapper.setProps({ clearIcon: 'down' })
 
-      expect(wrapper.find('.ix-selector-clear').find('.ix-icon-down').exists()).toBe(true)
+      expect(wrapper.find('.ix-trigger-clear-icon').find('.ix-icon-down').exists()).toBe(true)
     })
 
     test('clearIcon slot work', async () => {
@@ -193,8 +194,8 @@ describe('Select', () => {
         },
       })
 
-      expect(wrapper.find('.ix-selector-clear').find('.ix-icon-up').exists()).toBe(false)
-      expect(wrapper.find('.ix-selector-clear').find('.ix-icon-down').exists()).toBe(true)
+      expect(wrapper.find('.ix-trigger-clear-icon').find('.ix-icon-up').exists()).toBe(false)
+      expect(wrapper.find('.ix-trigger-clear-icon').find('.ix-icon-down').exists()).toBe(true)
     })
 
     test('disabled work', async () => {

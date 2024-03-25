@@ -8,27 +8,59 @@
 import type { ValidateStatus } from '@idux/cdk/forms'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
 import type { FormSize } from '@idux/components/form'
-import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, Slot } from 'vue'
 
 export const triggerProps = {
-  borderless: Boolean as PropType<boolean>,
-  clearable: Boolean as PropType<boolean>,
-  clearIcon: String as PropType<string>,
-  className: String as PropType<string>,
-  disabled: Boolean as PropType<boolean>,
-  focused: Boolean as PropType<boolean>,
-  readonly: Boolean as PropType<boolean>,
-  size: String as PropType<FormSize>,
+  value: { type: null, default: undefined },
+  raw: { type: Boolean, default: false },
+  borderless: Boolean,
+  clearable: Boolean,
+  clearIcon: { type: String as PropType<string>, default: 'close-circle' },
+  disabled: Boolean,
+  focused: Boolean,
+  monitorFocus: { type: Boolean, default: true },
+  paddingless: { type: Boolean, default: false },
+  placeholder: String,
+  readonly: Boolean,
+  size: { type: String as PropType<FormSize>, default: 'md' },
   status: String as PropType<ValidateStatus>,
   suffix: String as PropType<string>,
-  onClick: [Array, Function] as PropType<MaybeArray<(evt: Event) => void>>,
+  suffixRotate: { type: [Boolean, Number, String] as PropType<boolean | string | number>, default: undefined },
   onClear: [Array, Function] as PropType<MaybeArray<(evt: MouseEvent) => void>>,
   onFocus: [Array, Function] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
   onBlur: [Array, Function] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
-  onKeyDown: [Array, Function] as PropType<MaybeArray<(evt: KeyboardEvent) => void>>,
 } as const
 
+interface TriggerBindings {
+  blur: () => void
+  focus: (options?: FocusOptions) => void
+}
+
+export type TriggerDefaultSlotParams = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  value: any
+  borderless: boolean
+  disabled: boolean
+  readonly: boolean
+  focused: boolean
+  size: FormSize
+  status: ValidateStatus | undefined
+  suffix: string | undefined
+  suffixRotate: boolean | string | number | undefined
+  clearable: boolean
+  clearIcon: string
+}
+
+export type TriggerSlots = {
+  suffix?: Slot
+  clearIcon?: Slot
+  default?: Slot<TriggerDefaultSlotParams>
+  placeholder?: Slot
+}
 export type TriggerProps = ExtractInnerPropTypes<typeof triggerProps>
 export type TriggerPublicProps = ExtractPublicPropTypes<typeof triggerProps>
-export type TriggerComponent = DefineComponent<Omit<HTMLAttributes, keyof TriggerPublicProps> & TriggerPublicProps>
-export type TriggerInstance = InstanceType<DefineComponent<TriggerProps>>
+export type TriggerComponent = DefineComponent<
+  Omit<HTMLAttributes, keyof TriggerPublicProps> & TriggerPublicProps,
+  TriggerBindings
+>
+export type TriggerInstance = InstanceType<DefineComponent<TriggerProps, TriggerBindings>>

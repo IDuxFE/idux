@@ -17,13 +17,26 @@ export function useOverlayFocusMonitor(
   onBlur: (evt: FocusEvent) => void,
 ): {
   focused: ComputedRef<boolean>
+  overlayFocused: ComputedRef<boolean>
+  triggerFocused: ComputedRef<boolean>
   bindOverlayMonitor: (overlayRef: Ref<ɵOverlayInstance | undefined>, overlayOpened: Ref<boolean>) => void
   handleFocus: (evt: FocusEvent) => void
   handleBlur: (evt: FocusEvent) => void
 } {
   const [focused, setFocused] = useState(false)
+  const [overlayFocused, setOverlayFocused] = useState(false)
+  const [triggerFocused, setTriggerFocused] = useState(false)
   const { monitor, stopMonitoring } = useSharedFocusMonitor()
-  const { handleFocus, handleBlur } = useFocusHandlers(focused, setFocused, onFocus, onBlur)
+  const { handleFocus: _handleFocus, handleBlur: _handleBlur } = useFocusHandlers(focused, setFocused, onFocus, onBlur)
+
+  const handleFocus = (evt: FocusEvent) => {
+    _handleFocus(evt)
+    setTriggerFocused(true)
+  }
+  const handleBlur = (evt: FocusEvent) => {
+    _handleBlur(evt)
+    setTriggerFocused(false)
+  }
 
   const monitorStops = new Set<() => void>()
   const _bindMonitor = (el: MaybeElement) => {
@@ -31,9 +44,11 @@ export function useOverlayFocusMonitor(
       const { origin, event } = evt
       if (event) {
         if (origin) {
-          handleFocus(event)
+          _handleFocus(event)
+          setOverlayFocused(true)
         } else {
-          handleBlur(event)
+          _handleBlur(event)
+          setOverlayFocused(false)
         }
       }
     })
@@ -83,6 +98,8 @@ export function useOverlayFocusMonitor(
 
   return {
     focused,
+    overlayFocused,
+    triggerFocused,
     bindOverlayMonitor,
     handleFocus,
     handleBlur,

@@ -1,7 +1,7 @@
 :root {
   --ix-color-primary: #1c6eff;
   --ix-color-error: #f52727;
-  --ix-color-success: #12a679;
+  --ix-color-success: #20cc94;
   --ix-color-warning: #fdaa1d;
   --ix-color-risk: #fa721b;
   --ix-color-fatal: #82010e;
@@ -47,16 +47,16 @@
   --ix-color-primary-text-hover: #458fff;
   --ix-color-primary-text-active: #0d51d9;
   --ix-color-primary-icon: #1c6eff;
-  --ix-color-success-bg: #12a679;
-  --ix-color-success-bg-hover: #30b387;
-  --ix-color-success-bg-active: #088060;
-  --ix-color-success-border: #088060;
-  --ix-color-success-border-hover: #12a679;
-  --ix-color-success-border-active: #015945;
-  --ix-color-success-text: #088060;
-  --ix-color-success-text-hover: #12a679;
-  --ix-color-success-text-active: #015945;
-  --ix-color-success-icon: #12a679;
+  --ix-color-success-bg: #20cc94;
+  --ix-color-success-bg-hover: #45d9a3;
+  --ix-color-success-bg-active: #12a679;
+  --ix-color-success-border: #12a679;
+  --ix-color-success-border-hover: #20cc94;
+  --ix-color-success-border-active: #088060;
+  --ix-color-success-text: #12a679;
+  --ix-color-success-text-hover: #20cc94;
+  --ix-color-success-text-active: #088060;
+  --ix-color-success-icon: #20cc94;
   --ix-color-error-bg: #ff5752;
   --ix-color-error-bg-hover: #ff837a;
   --ix-color-error-bg-active: #cf171d;

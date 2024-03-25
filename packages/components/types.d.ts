@@ -17,6 +17,7 @@ import type { CarouselComponent } from '@idux/components/carousel'
 import type { CascaderComponent, CascaderPanelComponent } from '@idux/components/cascader'
 import type { CheckboxComponent, CheckboxGroupComponent } from '@idux/components/checkbox'
 import type { CollapseComponent, CollapsePanelComponent } from '@idux/components/collapse'
+import type { ControlTriggerComponent, ControlTriggerOverlayComponent } from '@idux/components/control-trigger'
 import type {
   DatePanelComponent,
   DatePickerComponent,
@@ -68,6 +69,7 @@ import type {
   SelectOptionGroupComponent,
   SelectPanelComponent,
 } from '@idux/components/select'
+import type { SelectorComponent } from '@idux/components/selector'
 import type { SkeletonComponent } from '@idux/components/skeleton'
 import type { SliderComponent } from '@idux/components/slider'
 import type { SpaceComponent } from '@idux/components/space'
@@ -112,6 +114,8 @@ declare module 'vue' {
     IxCol: ColComponent
     IxCollapse: CollapseComponent
     IxCollapsePanel: CollapsePanelComponent
+    IxControlTrigger: ControlTriggerComponent
+    IxControlTriggerOverlay: ControlTriggerOverlayComponent
     IxDatePicker: DatePickerComponent
     IxDatePanel: DatePanelComponent
     IxDateRangePicker: DateRangePickerComponent
@@ -165,6 +169,7 @@ declare module 'vue' {
     IxSelectPanel: SelectPanelComponent
     IxSelectOption: SelectOptionComponent
     IxSelectOptionGroup: SelectOptionGroupComponent
+    IxSelector: SelectorComponent
     IxSkeleton: SkeletonComponent
     IxSlider: SliderComponent
     IxSpace: SpaceComponent
