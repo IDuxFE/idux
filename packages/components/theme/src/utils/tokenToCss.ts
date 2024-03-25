@@ -10,11 +10,12 @@ import { kebabCase } from 'lodash-es'
 import { defaultTokenTransform } from './tokenTransforms'
 import { type ThemeTokenKey, type TokenRecord, type TokenTransforms, globalTokenKey, themeTokenPrefix } from '../types'
 
-export function tokenToCss(record: TokenRecord<string>, transforms?: TokenTransforms<string>): string {
+export function tokenToCss(record: TokenRecord<string>, prefix?: string, transforms?: TokenTransforms<string>): string {
   const { key, tokens, hashId } = record
+  const resolvedPrefix = prefix ?? themeTokenPrefix
   let cssVarContents = ''
 
-  const varNamePrefix = `--${themeTokenPrefix}${key === globalTokenKey ? '' : `-${kebabCase(key)}`}`
+  const varNamePrefix = `--${resolvedPrefix}${key === globalTokenKey ? '' : `-${kebabCase(key)}`}`
 
   Object.entries(tokens).forEach(([tokenName, value]) => {
     const _tokenName = tokenName as ThemeTokenKey<string>
