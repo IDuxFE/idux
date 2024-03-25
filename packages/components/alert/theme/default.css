@@ -2,7 +2,7 @@
 :root {
   --ix-alert-height: 32px;
   --ix-alert-border-radius: 2px;
-  --ix-alert-success-bg-color: rgb(231, 246, 242);
+  --ix-alert-success-bg-color: rgb(233, 250, 244);
   --ix-alert-info-bg-color: rgb(236, 244, 255);
   --ix-alert-warning-bg-color: rgb(255, 247, 232);
   --ix-alert-error-bg-color: rgb(255, 238, 238);

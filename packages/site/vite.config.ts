@@ -26,6 +26,8 @@ const componentPath: Record<string, string> = {
   IxLoadingBar: '@idux/components/loading-bar',
   IxLoadingBarProvider: '@idux/components/loading-bar',
   IxThemeProvider: '@idux/components/theme',
+  IxControlTrigger: '@idux/components/control-trigger',
+  IxProTagSelect: '@idux/pro/tag-select',
 }
 
 export default defineConfig(({ command, mode }) => {

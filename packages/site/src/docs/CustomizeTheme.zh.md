@@ -318,7 +318,7 @@ token `getter` 只会在第一次注册成功的时候实际执行，因此不�
 | `colorLink` | 链接颜色 | `string` | `#1c6eff` | `#4083E8` |
 | `colorPrimary` | 主题色 | `string` | `#1c6eff` | `#4083E8` |
 | `colorRisk` | 风险信息色 | `string` | `#fa721b` | `#E88641` |
-| `colorSuccess` | 成功信息色 | `string` | `#12a679` | `#40C695` |
+| `colorSuccess` | 成功信息色 | `string` | `#20cc94` | `#40C695` |
 | `colorText` | 文字颜色 | `string` | `#2f3540` | `#F4F8FF` |
 | `colorWarning` | 警告信息色 | `string` | `#fdaa1d` | `#FDAA1D` |
 | `colorWhite` | 白色 | `string` | `#ffffff` | `#fff` |
@@ -413,16 +413,16 @@ token `getter` 只会在第一次注册成功的时候实际执行，因此不�
 | `colorRiskText` | 风险色阶文字颜色 | `string` | `#fa721b` | `#E88641` |
 | `colorRiskTextActive` | 风险色阶文字激活颜色 | `string` | `#d4520d` | `#F3A76A` |
 | `colorRiskTextHover` | 风险色阶文字悬浮颜色 | `string` | `#ff9245` | `#D8641B` |
-| `colorSuccessBg` | 成功色阶背景颜色 | `string` | `#12a679` | `#40C695` |
-| `colorSuccessBgActive` | 成功色阶背景激活颜色 | `string` | `#088060` | `#6ADCAE` |
-| `colorSuccessBgHover` | 成功色阶背景悬浮颜色 | `string` | `#30b387` | `#1FB182` |
-| `colorSuccessBorder` | 成功色阶边框颜色 | `string` | `#088060` | `#40C695` |
-| `colorSuccessBorderActive` | 成功色阶边框激活颜色 | `string` | `#015945` | `#6ADCAE` |
-| `colorSuccessBorderHover` | 成功色阶边框悬浮颜色 | `string` | `#12a679` | `#1FB182` |
-| `colorSuccessIcon` | 成功色阶图标颜色 | `string` | `#12a679` | `#40C695` |
-| `colorSuccessText` | 成功色阶文字颜色 | `string` | `#088060` | `#40C695` |
-| `colorSuccessTextActive` | 成功色阶文字激活颜色 | `string` | `#015945` | `#6ADCAE` |
-| `colorSuccessTextHover` | 成功色阶文字悬浮颜色 | `string` | `#12a679` | `#1FB182` |
+| `colorSuccessBg` | 成功色阶背景颜色 | `string` | `#20cc94` | `#40C695` |
+| `colorSuccessBgActive` | 成功色阶背景激活颜色 | `string` | `#12a679` | `#6ADCAE` |
+| `colorSuccessBgHover` | 成功色阶背景悬浮颜色 | `string` | `#45d9a3` | `#1FB182` |
+| `colorSuccessBorder` | 成功色阶边框颜色 | `string` | `#12a679` | `#40C695` |
+| `colorSuccessBorderActive` | 成功色阶边框激活颜色 | `string` | `#088060` | `#6ADCAE` |
+| `colorSuccessBorderHover` | 成功色阶边框悬浮颜色 | `string` | `#20cc94` | `#1FB182` |
+| `colorSuccessIcon` | 成功色阶图标颜色 | `string` | `#20cc94` | `#40C695` |
+| `colorSuccessText` | 成功色阶文字颜色 | `string` | `#12a679` | `#40C695` |
+| `colorSuccessTextActive` | 成功色阶文字激活颜色 | `string` | `#088060` | `#6ADCAE` |
+| `colorSuccessTextHover` | 成功色阶文字悬浮颜色 | `string` | `#20cc94` | `#1FB182` |
 | `colorWarningBg` | 警告色阶背景颜色 | `string` | `#fdaa1d` | `#FDAA1D` |
 | `colorWarningBgActive` | 警告色阶背景激活颜色 | `string` | `#d6860d` | `#F3CA6A` |
 | `colorWarningBgHover` | 警告色阶背景悬浮颜色 | `string` | `#ffc145` | `#DB941D` |

@@ -24,26 +24,14 @@ export function useKeyboardEvents(
   setOverlayOpened: (opened: boolean) => void,
 ): (evt: KeyboardEvent) => void {
   return (evt: KeyboardEvent) => {
-    const ensureOverlayOpened = () => {
-      if (['Backspace', 'Tab'].includes(evt.code)) {
-        return
-      }
-
-      if (!overlayOpened.value) {
-        setOverlayOpened(true)
-      }
-    }
-
     switch (evt.code) {
       case 'ArrowUp':
         evt.preventDefault()
         changeActiveIndex(-1)
-        ensureOverlayOpened()
         break
       case 'ArrowDown':
         evt.preventDefault()
         changeActiveIndex(1)
-        ensureOverlayOpened()
         break
       case 'Enter': {
         evt.preventDefault()
@@ -53,10 +41,9 @@ export function useKeyboardEvents(
           changeSelected(key)
         }
 
-        if (!overlayOpened.value && (!props.allowInput || !inputValue.value)) {
-          ensureOverlayOpened()
-        } else if (!props.multiple) {
+        if (!props.multiple && (overlayOpened.value || (props.allowInput && inputValue.value))) {
           setOverlayOpened(false)
+          evt.stopImmediatePropagation()
         }
 
         ;(props.allowInput || !props.multiple) && clearInput()
@@ -73,10 +60,6 @@ export function useKeyboardEvents(
         evt.preventDefault()
         setOverlayOpened(false)
         break
-      }
-
-      default: {
-        ensureOverlayOpened()
       }
     }
   }

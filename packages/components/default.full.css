@@ -1,7 +1,7 @@
 :root {
   --ix-color-primary: #1c6eff;
   --ix-color-error: #f52727;
-  --ix-color-success: #12a679;
+  --ix-color-success: #20cc94;
   --ix-color-warning: #fdaa1d;
   --ix-color-risk: #fa721b;
   --ix-color-fatal: #82010e;
@@ -47,16 +47,16 @@
   --ix-color-primary-text-hover: #458fff;
   --ix-color-primary-text-active: #0d51d9;
   --ix-color-primary-icon: #1c6eff;
-  --ix-color-success-bg: #12a679;
-  --ix-color-success-bg-hover: #30b387;
-  --ix-color-success-bg-active: #088060;
-  --ix-color-success-border: #088060;
-  --ix-color-success-border-hover: #12a679;
-  --ix-color-success-border-active: #015945;
-  --ix-color-success-text: #088060;
-  --ix-color-success-text-hover: #12a679;
-  --ix-color-success-text-active: #015945;
-  --ix-color-success-icon: #12a679;
+  --ix-color-success-bg: #20cc94;
+  --ix-color-success-bg-hover: #45d9a3;
+  --ix-color-success-bg-active: #12a679;
+  --ix-color-success-border: #12a679;
+  --ix-color-success-border-hover: #20cc94;
+  --ix-color-success-border-active: #088060;
+  --ix-color-success-text: #12a679;
+  --ix-color-success-text-hover: #20cc94;
+  --ix-color-success-text-active: #088060;
+  --ix-color-success-icon: #20cc94;
   --ix-color-error-bg: #ff5752;
   --ix-color-error-bg-hover: #ff837a;
   --ix-color-error-bg-active: #cf171d;
@@ -279,7 +279,7 @@
 :root {
   --ix-alert-height: 32px;
   --ix-alert-border-radius: 2px;
-  --ix-alert-success-bg-color: rgb(231, 246, 242);
+  --ix-alert-success-bg-color: rgb(233, 250, 244);
   --ix-alert-info-bg-color: rgb(236, 244, 255);
   --ix-alert-warning-bg-color: rgb(255, 247, 232);
   --ix-alert-error-bg-color: rgb(255, 238, 238);
@@ -849,7 +849,7 @@
   --ix-spin-icon-size-md: 28px;
   --ix-spin-icon-size-lg: 48px;
   --ix-spin-bg-circle-stroke: #1c6eff;
-  --ix-spin-fst-arch-stroke: #12a679;
+  --ix-spin-fst-arch-stroke: #20cc94;
   --ix-spin-snd-arch-stroke: #d3d7de;
 }
 
@@ -950,7 +950,7 @@
   --ix-tag-min-width-rect: 40px;
   --ix-tag-min-width-round: 48px;
   --ix-tag-min-width-numeric: 64px;
-  --ix-tag-success-bg-color: rgb(231, 246, 242);
+  --ix-tag-success-bg-color: rgb(233, 250, 244);
   --ix-tag-info-bg-color: rgb(236, 244, 255);
   --ix-tag-warning-bg-color: rgb(255, 247, 232);
   --ix-tag-risk-bg-color: rgb(255, 241, 232);

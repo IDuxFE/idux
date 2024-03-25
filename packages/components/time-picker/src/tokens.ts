@@ -22,7 +22,6 @@ interface BasePickerContext<T extends TimePickerProps | TimeRangePickerProps>
   slots: Slots
   dateConfig: DateConfig
   common: CommonConfig
-  focused: ComputedRef<boolean>
   locale: Locale
   config: TimePickerConfig
   inputRef: Ref<HTMLInputElement | undefined>

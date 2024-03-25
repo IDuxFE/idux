@@ -239,7 +239,7 @@ describe('Cascader', () => {
         },
       })
 
-      await wrapper.find('.ix-selector-clear').trigger('click')
+      await wrapper.find('.ix-trigger-clear-icon').trigger('click')
 
       expect(onUpdateValue).toBeCalledWith([])
     })

@@ -8,21 +8,16 @@
 import { type ComputedRef, computed, defineComponent, inject, ref } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
-import { ɵTrigger } from '@idux/components/_private/trigger'
-import { useThemeToken } from '@idux/components/theme'
 
-import { useTriggerProps } from '../composables/useTriggerProps'
 import { timeRangePickerContext } from '../tokens'
 
 export default defineComponent({
   inheritAttrs: false,
-  setup(_, { attrs, expose }) {
-    const { globalHashId, hashId } = useThemeToken('timePicker')
+  setup(_, { expose }) {
     const context = inject(timeRangePickerContext)!
     const {
       accessor,
       props,
-      slots,
       locale,
       mergedPrefixCls,
       inputRef,
@@ -71,31 +66,42 @@ export default defineComponent({
       )
     }
 
-    const triggerProps = useTriggerProps(context)
-    const renderContent = (prefixCls: string) => (
-      <span class={`${prefixCls}-input`}>
-        {renderSide(prefixCls, true)}
-        <span class={`${prefixCls}-input-separator`}>{renderSeparator()}</span>
-        {renderSide(prefixCls, false)}
-      </span>
-    )
-
     return () => {
       const prefixCls = mergedPrefixCls.value
-      const triggerSlots = {
-        default: () => renderContent(prefixCls),
-        suffix: slots.suffix,
-        clearIcon: slots.clearIcon,
-      }
-
       return (
-        <ɵTrigger
-          className={`${prefixCls} ${globalHashId.value} ${hashId.value}`}
-          v-slots={triggerSlots}
-          {...triggerProps.value}
-          {...attrs}
-        />
+        <span class={`${prefixCls}-input`}>
+          {renderSide(prefixCls, true)}
+          <span class={`${prefixCls}-input-separator`}>{renderSeparator()}</span>
+          {renderSide(prefixCls, false)}
+        </span>
       )
     }
+
+    // const triggerProps = useTriggerProps(context)
+    // const renderContent = (prefixCls: string) => (
+    //   <span class={`${prefixCls}-input`}>
+    //     {renderSide(prefixCls, true)}
+    //     <span class={`${prefixCls}-input-separator`}>{renderSeparator()}</span>
+    //     {renderSide(prefixCls, false)}
+    //   </span>
+    // )
+
+    // return () => {
+    //   const prefixCls = mergedPrefixCls.value
+    //   const triggerSlots = {
+    //     default: () => renderContent(prefixCls),
+    //     suffix: slots.suffix,
+    //     clearIcon: slots.clearIcon,
+    //   }
+
+    //   return (
+    //     <ɵTrigger
+    //       className={`${prefixCls} ${globalHashId.value} ${hashId.value}`}
+    //       v-slots={triggerSlots}
+    //       {...triggerProps.value}
+    //       {...attrs}
+    //     />
+    //   )
+    // }
   },
 })

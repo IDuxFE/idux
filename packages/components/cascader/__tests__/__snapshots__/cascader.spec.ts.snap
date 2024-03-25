@@ -1,7 +1,7 @@
 // Vitest Snapshot v1
 
 exports[`Cascader > multiple work > render work 1`] = `
-"<div class=\\"ix-cascader ix-selector ix-selector-md ix-selector-multiple ix-selector-opened\\">
+"<div class=\\"ix-trigger ix-trigger-md ix-trigger-paddingless ix-selector ix-selector-md ix-selector-multiple ix-selector-opened ix-cascader ix-control-trigger ix-cascader\\" tabindex=\\"-1\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-overflow ix-selector-overflow \\">
@@ -16,15 +16,16 @@ exports[`Cascader > multiple work > render work 1`] = `
         <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\" readonly=\\"\\"><span class=\\"ix-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
       </div>
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(180deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
+  <div class=\\"ix-trigger-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(180deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  <!---->
 </div>
 <!--teleport start-->
 <!--teleport end-->"
 `;
 
 exports[`Cascader > single work > render work 1`] = `
-"<div class=\\"ix-cascader ix-selector ix-selector-md ix-selector-opened ix-selector-single\\">
+"<div class=\\"ix-trigger ix-trigger-md ix-selector ix-selector-md ix-selector-opened ix-selector-single ix-cascader ix-control-trigger ix-cascader\\" tabindex=\\"-1\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Components/General/Button</span>
@@ -33,8 +34,9 @@ exports[`Cascader > single work > render work 1`] = `
     <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
       <!---->
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(180deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
+  <div class=\\"ix-trigger-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(180deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  <!---->
 </div>
 <!--teleport start-->
 <!--teleport end-->"

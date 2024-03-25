@@ -1,8 +1,8 @@
 // Vitest Snapshot v1
 
 exports[`Trigger > render work 1`] = `
-"<div class=\\"ix-trigger\\" tabindex=\\"-1\\">
-  <!---->
+"<div class=\\"ix-trigger ix-trigger-md\\" tabindex=\\"-1\\">
+  <!----><span class=\\"ix-trigger-placeholder\\"><!----></span>
   <!---->
   <!---->
 </div>"

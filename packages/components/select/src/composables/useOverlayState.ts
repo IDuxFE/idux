@@ -9,7 +9,7 @@ import { type CSSProperties, type ComputedRef, type Ref, computed, onMounted, re
 
 import { convertCssPixel, useControlledProp, useState } from '@idux/cdk/utils'
 import { type ɵOverlayInstance } from '@idux/components/_private/overlay'
-import { type ɵSelectorInstance } from '@idux/components/_private/selector'
+import { type SelectorInstance } from '@idux/components/selector'
 
 export interface OverlayStateContext {
   overlayRef: Ref<ɵOverlayInstance | undefined>
@@ -26,7 +26,7 @@ export function useOverlayState(
     overlayMatchWidth?: boolean
   },
   config: { overlayMatchWidth: boolean },
-  triggerRef: Ref<ɵSelectorInstance | undefined>,
+  triggerRef: Ref<SelectorInstance | undefined>,
 ): OverlayStateContext {
   const overlayRef = ref<ɵOverlayInstance>()
   const [overlayWidth, setOverlayWidth] = useState('')

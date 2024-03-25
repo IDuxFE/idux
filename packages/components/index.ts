@@ -21,6 +21,7 @@ import { IxCascader, IxCascaderPanel } from '@idux/components/cascader'
 import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
 import { IxCollapse, IxCollapsePanel } from '@idux/components/collapse'
 import { IxComment } from '@idux/components/comment'
+import { IxControlTrigger, IxControlTriggerOverlay } from '@idux/components/control-trigger'
 import { IxDatePanel, IxDatePicker, IxDateRangePanel, IxDateRangePicker } from '@idux/components/date-picker'
 import { IxDesc, IxDescItem } from '@idux/components/desc'
 import { IxDivider } from '@idux/components/divider'
@@ -56,6 +57,7 @@ import { IxRadio, IxRadioGroup } from '@idux/components/radio'
 import { IxRate } from '@idux/components/rate'
 import { IxResult } from '@idux/components/result'
 import { IxSelect, IxSelectOption, IxSelectOptionGroup, IxSelectPanel } from '@idux/components/select'
+import { IxSelector } from '@idux/components/selector'
 import { IxSkeleton } from '@idux/components/skeleton'
 import { IxSlider } from '@idux/components/slider'
 import { IxSpace } from '@idux/components/space'
@@ -98,6 +100,8 @@ const components = [
   IxCascader,
   IxCascaderPanel,
   IxComment,
+  IxControlTrigger,
+  IxControlTriggerOverlay,
   IxCheckbox,
   IxCheckboxGroup,
   IxCollapse,
@@ -156,6 +160,7 @@ const components = [
   IxSelectPanel,
   IxSelectOption,
   IxSelectOptionGroup,
+  IxSelector,
   IxSkeleton,
   IxSlider,
   IxSpace,
@@ -214,6 +219,7 @@ export * from '@idux/components/cascader'
 export * from '@idux/components/checkbox'
 export * from '@idux/components/collapse'
 export * from '@idux/components/comment'
+export * from '@idux/components/control-trigger'
 export * from '@idux/components/config'
 export * from '@idux/components/date-picker'
 export * from '@idux/components/desc'
@@ -260,6 +266,7 @@ export * from '@idux/components/theme'
 export * from '@idux/components/time-picker'
 export * from '@idux/components/timeline'
 export * from '@idux/components/tooltip'
+export * from '@idux/components/tour'
 export * from '@idux/components/transfer'
 export * from '@idux/components/tree'
 export * from '@idux/components/tree-select'
@@ -267,5 +274,3 @@ export * from '@idux/components/upload'
 export * from '@idux/components/utils'
 export * from '@idux/components/version'
 export * from '@idux/components/watermark'
-
-export * from '@idux/components/tour'

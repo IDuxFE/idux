@@ -1,7 +1,7 @@
 // Vitest Snapshot v1
 
 exports[`Select > multiple work > maxLabel responsive work 1`] = `
-"<div class=\\"ix-select ix-selector ix-selector-md ix-selector-multiple\\">
+"<div class=\\"ix-trigger ix-trigger-md ix-trigger-paddingless ix-selector ix-selector-md ix-selector-multiple ix-select ix-control-trigger ix-select\\" tabindex=\\"-1\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-overflow ix-selector-overflow \\">
@@ -31,13 +31,14 @@ exports[`Select > multiple work > maxLabel responsive work 1`] = `
         <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\" readonly=\\"\\"><span class=\\"ix-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
       </div>
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
+  <div class=\\"ix-trigger-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  <!---->
 </div>"
 `;
 
 exports[`Select > multiple work > maxLabel responsive work 2`] = `
-"<div class=\\"ix-select ix-selector ix-selector-md ix-selector-multiple\\">
+"<div class=\\"ix-trigger ix-trigger-md ix-trigger-paddingless ix-selector ix-selector-md ix-selector-multiple ix-select ix-control-trigger ix-select\\" tabindex=\\"-1\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-overflow ix-selector-overflow \\">
@@ -58,13 +59,14 @@ exports[`Select > multiple work > maxLabel responsive work 2`] = `
         <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\" readonly=\\"\\"><span class=\\"ix-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
       </div>
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
+  <div class=\\"ix-trigger-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  <!---->
 </div>"
 `;
 
 exports[`Select > multiple work > render work 1`] = `
-"<div class=\\"ix-select ix-selector ix-selector-md ix-selector-multiple\\">
+"<div class=\\"ix-trigger ix-trigger-md ix-trigger-paddingless ix-selector ix-selector-md ix-selector-multiple ix-select ix-control-trigger ix-select\\" tabindex=\\"-1\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-overflow ix-selector-overflow \\">
@@ -82,13 +84,14 @@ exports[`Select > multiple work > render work 1`] = `
         <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\" readonly=\\"\\"><span class=\\"ix-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
       </div>
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
+  <div class=\\"ix-trigger-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  <!---->
 </div>"
 `;
 
 exports[`Select > single work > render work 1`] = `
-"<div class=\\"ix-select ix-selector ix-selector-md ix-selector-single\\">
+"<div class=\\"ix-trigger ix-trigger-md ix-selector ix-selector-md ix-selector-single ix-select ix-control-trigger ix-select\\" tabindex=\\"-1\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Tom</span>
@@ -97,13 +100,14 @@ exports[`Select > single work > render work 1`] = `
     <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
       <!---->
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
+  <div class=\\"ix-trigger-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  <!---->
 </div>"
 `;
 
 exports[`Select > template work > render work 1`] = `
-"<div class=\\"ix-select ix-selector ix-selector-md ix-selector-single\\">
+"<div class=\\"ix-trigger ix-trigger-md ix-selector ix-selector-md ix-selector-single ix-select ix-control-trigger ix-select\\" tabindex=\\"-1\\">
   <!---->
   <div class=\\"ix-selector-content\\">
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Tom</span>
@@ -112,7 +116,8 @@ exports[`Select > template work > render work 1`] = `
     <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
       <!---->
     </div>
-    <div class=\\"ix-selector-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
   </div>
+  <div class=\\"ix-trigger-suffix\\"><i class=\\"ix-icon ix-icon-down\\" style=\\"transform: rotate(0deg);\\" role=\\"img\\" aria-label=\\"down\\"></i></div>
+  <!---->
 </div>"
 `;

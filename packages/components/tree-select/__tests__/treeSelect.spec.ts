@@ -224,7 +224,7 @@ describe('TreeSelect', () => {
 
       expect(wrapper.find('.ix-selector-clearable').exists()).toBe(true)
 
-      await wrapper.find('.ix-selector-clear').trigger('click')
+      await wrapper.find('.ix-trigger-clear-icon').trigger('click')
 
       expect(onUpdateValue).toBeCalledWith(undefined)
 
@@ -236,11 +236,11 @@ describe('TreeSelect', () => {
     test('clearIcon work', async () => {
       const wrapper = TreeSelectMount({ props: { clearable: true, clearIcon: 'up' } })
 
-      expect(wrapper.find('.ix-selector-clear').find('.ix-icon-up').exists()).toBe(true)
+      expect(wrapper.find('.ix-trigger-clear-icon').find('.ix-icon-up').exists()).toBe(true)
 
       await wrapper.setProps({ clearIcon: 'down' })
 
-      expect(wrapper.find('.ix-selector-clear').find('.ix-icon-down').exists()).toBe(true)
+      expect(wrapper.find('.ix-trigger-clear-icon').find('.ix-icon-down').exists()).toBe(true)
     })
 
     test('disabled work', async () => {
@@ -383,7 +383,7 @@ describe('TreeSelect', () => {
     test('clearable props work', async () => {
       const wrapper = TreeSelectMount({ props: { clearable: true } })
 
-      expect(wrapper.find('.ix-selector-clear').exists()).toBe(true)
+      expect(wrapper.find('.ix-trigger-clear-icon').exists()).toBe(true)
     })
   })
 
@@ -482,7 +482,7 @@ describe('TreeSelect', () => {
 
       expect(wrapper.find('.ix-selector-placeholder').text()).toBe('placeholder')
 
-      await wrapper.setProps({ value: 'tom' })
+      await wrapper.setProps({ value: '0-0' })
 
       expect(wrapper.find('.ix-selector-placeholder').exists()).toBe(false)
 

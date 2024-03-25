@@ -24,7 +24,6 @@ export interface DatePickerContext extends OverlayStateContext, FormatContext, P
   common: CommonConfig
   locale: Locale
   config: DatePickerConfig
-  focused: ComputedRef<boolean>
   mergedPrefixCls: ComputedRef<string>
   dateConfig: DateConfig
   inputRef: Ref<HTMLInputElement | undefined>
@@ -40,7 +39,6 @@ export interface DateRangePickerContext
   props: DateRangePickerProps
   slots: Slots
   common: CommonConfig
-  focused: ComputedRef<boolean>
   locale: Locale
   config: DatePickerConfig
   mergedPrefixCls: ComputedRef<string>
