@@ -54,6 +54,7 @@ async function generateThemeVariables(theme: PresetTheme, tokenMeta: TokenMeta) 
           tokens,
           hashId: '',
         },
+        undefined,
         transforms,
       )
 

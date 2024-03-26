@@ -35,6 +35,13 @@ export const defaultConfig: ProGlobalConfig = {
       searchable: false,
     },
   },
+  tagSelect: {
+    borderless: false,
+    clearable: false,
+    clearIcon: 'close-circle',
+    size: 'md',
+    suffix: 'down',
+  },
   tree: {
     clearIcon: 'close-circle',
     collapseIcon: ['collapse', 'expand'],

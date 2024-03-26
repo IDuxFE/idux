@@ -8,11 +8,13 @@
 import type { CertainThemeTokens, ThemeKeys, TokenGetter, TokenTransforms } from '@idux/components/theme'
 import type { ProLayoutThemeTokens } from '@idux/pro/layout'
 import type { ProSearchThemeTokens } from '@idux/pro/search'
+import type { ProTagSelectThemeTokens } from '@idux/pro/tag-select'
 import type { ProTextareaThemeTokens } from '@idux/pro/textarea'
 import type { ProTransferThemeTokens } from '@idux/pro/transfer'
 import type { ProTreeThemeTokens } from '@idux/pro/tree'
 
 export interface ProComponentThemeTokens {
+  proTagSelect: ProTagSelectThemeTokens
   proTextarea: ProTextareaThemeTokens
   proTransfer: ProTransferThemeTokens
   proTree: ProTreeThemeTokens

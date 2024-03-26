@@ -31,6 +31,23 @@ const enUS: ProLocale = {
       noPinTitle: 'Unpinned',
     },
   },
+  tagSelect: {
+    colors: {
+      grey: 'grey',
+      green: 'green',
+      blue: 'blue',
+      yellow: 'yellow',
+      red: 'red',
+      orange: 'orange',
+    },
+    remove: 'delete',
+    createTag: 'Create tag',
+    removeTag: 'Remove tag',
+    maxExceededAlert: 'Tags count reached limit of ${0}',
+    empty: 'No Data',
+    ok: 'OK',
+    cancel: 'Cancel',
+  },
   tree: {
     expandAll: 'Expand',
     collapseAll: 'Collapse',

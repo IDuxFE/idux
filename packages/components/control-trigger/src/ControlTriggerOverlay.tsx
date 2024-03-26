@@ -39,6 +39,7 @@ export default defineComponent({
         disabled: controlTriggerProps.disabled || controlTriggerProps.readonly,
         offset: controlTriggerProps.offset ?? defaultOffset,
         placement: props.placement ?? 'bottomStart',
+        showArrow: props.showArrow,
         transitionName: `${common.prefixCls}-slide-auto`,
         trigger: props.trigger ?? 'click',
         triggerId: attrs.id,
