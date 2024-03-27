@@ -161,7 +161,6 @@ export default defineComponent({
         focused={focused}
         maxLabel={props.maxLabel}
         multiple={props.multiple}
-        monitorFocus={false}
         opened={opened}
         placeholder={props.placeholder}
         readonly={readonly}
@@ -225,8 +224,8 @@ export default defineComponent({
       const controlTriggerProps = {
         autofocus: props.autofocus,
         overlayClassName: overlayClasses.value,
-        overlayContainer: props.overlayContainer,
-        overlayContainerFallback: `${mergedPrefixCls.value}-overlay-container`,
+        overlayContainer: props.overlayContainer ?? config.overlayContainer,
+        overlayContainerFallback: `.${mergedPrefixCls.value}-overlay-container`,
         overlayMatchWidth: props.overlayMatchWidth ?? config.overlayMatchWidth,
         class: mergedPrefixCls.value,
         borderless,

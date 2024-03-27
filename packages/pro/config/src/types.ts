@@ -23,6 +23,7 @@ export interface ProGlobalConfig {
 
   form: ProFormConfig
   table: ProTableConfig
+  tagSelect: ProTagSelectConfig
   tree: ProTreeConfig
   textarea: ProTextareaConfig
   search: ProSearchConfig
@@ -78,6 +79,14 @@ export interface ProTableConfig {
     resetable: boolean
     searchable: boolean
   }
+}
+
+export interface ProTagSelectConfig {
+  borderless: boolean
+  clearable: boolean
+  clearIcon: string
+  size: FormSize
+  suffix: string
 }
 
 export interface ProTreeConfig {

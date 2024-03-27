@@ -31,6 +31,23 @@ const zhCN: ProLocale = {
       noPinTitle: '不固定',
     },
   },
+  tagSelect: {
+    colors: {
+      grey: '灰',
+      green: '绿',
+      blue: '蓝',
+      yellow: '黄',
+      red: '红',
+      orange: '橙',
+    },
+    remove: '删除',
+    createTag: '创建标签',
+    removeTag: '删除标签',
+    maxExceededAlert: '标签已达${0}个上限，请及时清理',
+    empty: '暂无数据',
+    ok: '确定',
+    cancel: '取消',
+  },
   tree: {
     expandAll: '展开全部',
     collapseAll: '收起全部',

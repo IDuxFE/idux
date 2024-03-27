@@ -43,10 +43,29 @@ export interface ProSearchLocale {
   switchToDatePanel: string
 }
 
+export interface ProTagSelectLocale {
+  colors: {
+    grey: string
+    green: string
+    blue: string
+    yellow: string
+    red: string
+    orange: string
+  }
+  remove: string
+  createTag: string
+  removeTag: string
+  maxExceededAlert: string
+  empty: string
+  ok: string
+  cancel: string
+}
+
 export interface ProLocale {
   type: ProLocaleType
 
   table: ProTableLocale
+  tagSelect: ProTagSelectLocale
   tree: ProTreeLocale
   search: ProSearchLocale
 }

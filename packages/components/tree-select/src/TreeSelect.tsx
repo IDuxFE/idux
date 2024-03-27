@@ -164,7 +164,6 @@ export default defineComponent({
         focused={focused}
         maxLabel={props.maxLabel}
         multiple={props.multiple}
-        monitorFocus={false}
         opened={opened}
         placeholder={props.placeholder}
         readonly={props.readonly}
@@ -198,7 +197,7 @@ export default defineComponent({
         offset: props.offset ?? config.offset,
         overlayClassName: overlayClasses.value,
         overlayContainer: props.overlayContainer ?? config.overlayContainer,
-        overlayContainerFallback: `${mergedPrefixCls.value}-overlay-container`,
+        overlayContainerFallback: `.${mergedPrefixCls.value}-overlay-container`,
         overlayMatchWidth: props.overlayMatchWidth ?? config.overlayMatchWidth,
         'onUpdate:open': setOverlayOpened,
         onFocus: handleFocus,
