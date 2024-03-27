@@ -35,17 +35,24 @@ export function useStepChange(
     animate: false,
   }
 
+  const isLocked = () => locks.stepChange || locks.animate
   const lock = () => {
-    Object.keys(locks).forEach(key => (locks[key as keyof typeof locks] = true))
+    locks.stepChange = true
+    locks.animate = true
 
     setIsStepChanging(true)
   }
   const unlock = (lock: keyof typeof locks) => {
+    const locked = isLocked()
     locks[lock] = false
 
-    if (Object.keys(locks).every(key => !locks[key as keyof typeof locks])) {
+    if (locked && !locks.animate && !locks.stepChange) {
       setIsStepChanging(false)
     }
+  }
+  const unlockAll = () => {
+    unlock('animate')
+    unlock('stepChange')
   }
 
   const setIsStepChanging = (changing: boolean) => {
@@ -76,7 +83,7 @@ export function useStepChange(
   watch(
     activeIndex,
     (current, pre) => {
-      if (current !== pre && visible.value) {
+      if (current !== pre) {
         transitionTmr && clearTimeout(transitionTmr)
         lock()
       }
@@ -88,8 +95,13 @@ export function useStepChange(
   watch(
     activeStep,
     (step, preStep) => {
-      if (step && !preStep) {
+      if (!isLocked()) {
         runStepChangeCbs()
+        return
+      }
+
+      if (step && !preStep) {
+        unlockAll()
         return
       }
 

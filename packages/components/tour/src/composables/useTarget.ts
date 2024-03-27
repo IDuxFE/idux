@@ -10,6 +10,8 @@ import type { ResolvedTourStep, TargetPositionInfo, TargetPositionOrigin } from 
 
 import { type ComputedRef, type Ref, onMounted, onUnmounted, shallowRef, watch } from 'vue'
 
+import { isBoolean } from 'lodash-es'
+
 import { useEventListener, useState } from '@idux/cdk/utils'
 
 import { isInViewPort } from '../utils'
@@ -33,21 +35,74 @@ export function useTarget(
     targetRef.value = (await activeStep.value?.target()) ?? null
   }
 
-  const updatePopsition = (scrollIntoView = false, origin: TargetPositionOrigin = 'index') => {
-    const targetEl = targetRef.value
-    const { offset = 0, radius = 0 } = activeStep.value?.gap ?? {}
+  const getContainerPos = () => {
+    const mask = activeStep.value?.mask
+    if (isBoolean(mask) || !mask || !mask.container || mask.container === 'viewport') {
+      return {
+        containerX: 0,
+        containerY: 0,
+        containerWidth: window.innerWidth,
+        containerHeight: window.innerHeight,
+      }
+    }
 
+    const { x, y, width, height } = mask.container
+    return {
+      containerX: x,
+      containerY: y,
+      containerWidth: width,
+      containerHeight: height,
+    }
+  }
+
+  const getTargetPositionInfo = () => {
+    const targetEl = targetRef.value
+    const { offset = 0, radius = 0, outline = 0 } = activeStep.value?.gap ?? {}
     if (!targetEl) {
-      setPositionInfo({
-        windowWidth: window.innerWidth,
-        windowHeight: window.innerHeight,
+      return {
         x: window.innerWidth / 2,
         y: window.innerHeight / 2,
         width: 0,
         height: 0,
         radius,
-        origin,
-      })
+        outline,
+      }
+    }
+
+    let { x, y, width, height } = targetEl.getBoundingClientRect()
+
+    // enlarge offset by 1 when outline is provided
+    // because outline should be painted right 1px outside of target rect
+    const mergedOffset = offset + (outline ? outline + 1 : 0)
+
+    if (mergedOffset) {
+      x -= mergedOffset
+      y -= mergedOffset
+      width += mergedOffset * 2
+      height += mergedOffset * 2
+    }
+
+    return {
+      x,
+      y,
+      width,
+      height,
+      radius,
+      outline,
+    }
+  }
+
+  const updatePopsition = (scrollIntoView = false, origin: TargetPositionOrigin = 'index') => {
+    const targetEl = targetRef.value
+
+    const positionInfo = {
+      ...getContainerPos(),
+      ...getTargetPositionInfo(),
+      origin,
+    }
+
+    if (!targetEl) {
+      setPositionInfo(positionInfo)
       return
     }
 
@@ -59,31 +114,7 @@ export function useTarget(
       return
     }
 
-    const { x, y, width, height } = targetEl.getBoundingClientRect()
-
-    if (!offset) {
-      setPositionInfo({
-        windowWidth: window.innerWidth,
-        windowHeight: window.innerHeight,
-        x,
-        y,
-        width,
-        height,
-        radius,
-        origin,
-      })
-    } else {
-      setPositionInfo({
-        windowWidth: window.innerWidth,
-        windowHeight: window.innerHeight,
-        x: x - offset,
-        y: y - offset,
-        width: width + offset * 2,
-        height: height + offset * 2,
-        radius,
-        origin,
-      })
-    }
+    setPositionInfo(positionInfo)
   }
 
   let stopResizeLisiten: (() => void) | undefined
@@ -91,7 +122,11 @@ export function useTarget(
 
   onMounted(() => {
     watch([() => activeStep.value?.target, visible], updateTarget, { immediate: true })
-    watch(targetRef, () => updatePopsition(true, 'index'), { immediate: true })
+    watch(
+      [targetRef, activeStep],
+      ([target], [preTarget]) => updatePopsition(true, target !== preTarget ? 'index' : 'step-update'),
+      { flush: 'post', immediate: true },
+    )
     watch(visible, () => updatePopsition(true, 'visible'))
     watch(
       visible,

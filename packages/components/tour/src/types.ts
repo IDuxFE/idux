@@ -12,27 +12,33 @@ import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 import { ɵOverlayPlacementDef } from '@idux/components/_private/overlay'
 
-export type TargetPositionOrigin = 'resize' | 'scroll' | 'index' | 'visible'
+export type TargetPositionOrigin = 'resize' | 'scroll' | 'index' | 'visible' | 'step-update'
 
 export interface TargetPositionInfo {
-  windowWidth: number
-  windowHeight: number
+  containerX: number
+  containerY: number
+  containerHeight: number
+  containerWidth: number
   x: number
   y: number
   width: number
   height: number
   radius: number
+  outline: number
   origin: TargetPositionOrigin
 }
 
 export interface TargetGap {
   offset?: number
   radius?: number
+  outline?: number
 }
 
 export interface TourMaskOptions {
   color?: string
   class?: string
+  container?: 'viewport' | { x: number; y: number; width: number; height: number }
+  outlineColor?: string
 }
 
 export type TargetGetter = () => MaybeElement | null | Promise<MaybeElement | null>

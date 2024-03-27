@@ -12,7 +12,7 @@ import type { TourLocale } from '@idux/components/locales'
 
 import { type ComputedRef, watch } from 'vue'
 
-import { isFunction, isNumber, isString } from 'lodash-es'
+import { isFunction, isNumber, isString, merge } from 'lodash-es'
 
 import { convertElement, useState } from '@idux/cdk/utils'
 
@@ -43,7 +43,7 @@ export function useActiveStep(
     }
 
     const gap = step.gap ?? props.gap
-    const mergedGap = isNumber(gap) ? { offset: gap } : gap
+    const mergedGap = merge({ ...props.gap }, isNumber(gap) ? { offset: gap } : gap)
 
     const target = async () => {
       if (!step.target) {
@@ -116,16 +116,12 @@ export function useActiveStep(
   }
 
   watch(
-    [activeIndex, () => mergedProps.value.steps],
-    ([current, steps], [, preSteps]) => {
-      if (current === activeStep.value?.index && steps === preSteps) {
-        return
-      }
-
+    [activeIndex, () => mergedProps.value.steps, mergedProps],
+    ([current]) => {
       destroySteps()
       pushCurrentUpdate(current)
     },
-    { immediate: true, flush: 'post' },
+    { immediate: true, flush: 'post', deep: true },
   )
 
   return activeStep

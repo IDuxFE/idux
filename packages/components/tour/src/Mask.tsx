@@ -14,7 +14,16 @@ import { tourToken } from './token'
 export default defineComponent({
   setup() {
     const { globalHashId, hashId } = useThemeToken('tour')
-    const { mergedPrefixCls, mergedProps, maskPath, maskAttrs, maskClass, maskStyle } = inject(tourToken)!
+    const {
+      mergedPrefixCls,
+      mergedProps,
+      maskPath,
+      maskOutlinePath,
+      maskAttrs,
+      maskClass,
+      maskStyle,
+      maskOutlineStyle,
+    } = inject(tourToken)!
 
     const classes = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-mask`
@@ -32,7 +41,14 @@ export default defineComponent({
     return () => {
       return (
         <svg class={classes.value} style={maskStyle.value} {...maskAttrs.value}>
-          <path d={maskPath.value} />
+          <path class={`${mergedPrefixCls.value}-mask-target`} d={maskPath.value} />
+          {maskOutlinePath.value && (
+            <path
+              class={`${mergedPrefixCls.value}-mask-outline`}
+              style={maskOutlineStyle.value}
+              d={maskOutlinePath.value}
+            />
+          )}
         </svg>
       )
     }
