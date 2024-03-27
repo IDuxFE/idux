@@ -10,6 +10,29 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 2.1.0(2024-03-27)
+
+
+### Bug Fixes
+
+* **comp:input:** input 组件的主题hashId没有正确绑定 ([#1863](https://github.com/IDuxFE/idux/issues/1863)) ([bf11379](https://github.com/IDuxFE/idux/commit/bf1137915a9cf8d023821cc5a2b36f50959c03c9))
+* **comp:textarea:** textarea 在暗黑主题下文字颜色不正常 ([#1864](https://github.com/IDuxFE/idux/issues/1864)) ([17fa41f](https://github.com/IDuxFE/idux/commit/17fa41f109a60bb1c5a8e17030716c7a62a3ed37))
+* **comp:tour:** 异步添加的 step 不能生效 ([#1866](https://github.com/IDuxFE/idux/issues/1866)) ([0c6c54d](https://github.com/IDuxFE/idux/commit/0c6c54d377b74e66d47ee7c3e75f12b3eca7aa35))
+
+
+### Features
+
+* **comp:control-trigger:** 新增 `IxControlTrigger` 组件，用于自定义带有浮层的输入控件 ([#1862](https://github.com/IDuxFE/idux/issues/1862)) ([899f796](https://github.com/IDuxFE/idux/commit/899f796e20ca411c9f4ba541df57521021e2689b))
+  - select, treeSelect, cascader, time-picker, date-picker 组件均重构为使用该组件包裹
+* **comp:theme:** `useThemeToken` 自定义注册的主题变量支持指定前缀 ([#1865](https://github.com/IDuxFE/idux/issues/1865)) ([094f62a](https://github.com/IDuxFE/idux/commit/094f62adef4496e2aff00c2dba830c1cb129df26))
+* **comp:tour:** 支持 `targetDisabled` 配置是否禁用目标区域的操作 ([#1869](https://github.com/IDuxFE/idux/issues/1869)) ([5c48d01](https://github.com/IDuxFE/idux/commit/5c48d01f5d798bd0c8746f0cc66f67f696e72106))
+* **comp:tour:** 支持通过外边框以及遮罩渲染容器配置 ([#1868](https://github.com/IDuxFE/idux/issues/1868)) ([5c25eb3](https://github.com/IDuxFE/idux/commit/5c25eb3643b5bf593392545fd6ad0f4572297a0f))
+  - 通过 `gap.outline` 设置外边框的宽度，通过 `mask.outlineColor` 设置外边框的颜色
+  - 通过 `mask.container` 设置遮罩渲染的位置信息，指定遮罩的位置和宽高
+* **comp:selector** 新增 `IxSelector` 选择框组件，用于选择器类型组件的自定义 ([#1861](https://github.com/IDuxFE/idux/issues/1861)) ([a50147b](https://github.com/IDuxFE/idux/commit/a50147bfc26071ae42ae1b65e24b13d6a71302be))
+  - select, treeSelect, cascader, time-picker, date-picker 组件均重构为使用该组件实现
+* **pro:tag-select** 新增 `IxProTagSelect` 标签选择组件 ([#1867](https://github.com/IDuxFE/idux/issues/1867)) ([9b50004](https://github.com/IDuxFE/idux/commit/9b50004dfa3d4e11e67fb307eee93bebac703663))
+
 ## 2.0.1(2024-03-05)
 
 
