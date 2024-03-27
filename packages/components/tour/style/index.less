@@ -13,7 +13,10 @@
     clip-rule: evenodd;
     stroke-linejoin: round;
     stroke-miterlimit: 2;
-    pointer-events: none;
+
+    &:not(&-target-disabled) {
+      pointer-events: none;
+    }
 
     & &-target {
       pointer-events: auto;

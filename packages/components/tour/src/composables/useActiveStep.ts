@@ -83,6 +83,7 @@ export function useActiveStep(
       ...step,
       index,
       target,
+      targetDisabled: step.targetDisabled ?? props.targetDisabled,
       gap: mergedGap,
       mask: step.mask ?? props.mask,
       placement: step.placement ?? props.placement,

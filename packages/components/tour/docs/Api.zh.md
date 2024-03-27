@@ -17,6 +17,7 @@
 | `showArrow` | 浮层是否显示箭头 | `boolean` | `true` | ✅ | - |
 | `steps` | 步骤配置 | `TourStep[]` | - | - | - |
 | `scrollIntoViewOptions` | `scrollIntoView` 参数 | `boolean \| ScrollIntoViewOptions` | `true` | ✅ | - |
+| `targetDisabled` | 是否禁用目标区域 | `boolean` | `false` | - | - |
 | `zIndex` | 浮层和遮罩的zIndex | `number` | - | - | - |
 | `onChange` | `activeIndex`值变化的回调函数 | `(current: number, pre: number) => void` | - | - | - |
 | `onClose` | 关闭的回调函数 | `() => void` | - | - | - |
@@ -24,27 +25,35 @@
 
 ```ts
 interface TourMaskOptions {
-  color?: string
-  class?: string
+  color?: string // 遮罩颜色
+  class?: string // 遮罩自定义class
+  outlineColor?: string // 目标区域外轮廓
+}
+
+interface TargetGap {
+  offset?: number // 目标高亮的区域距离实际节点的间距
+  radius?: number // 目标高亮区域的边框圆角
+  outline?: number // 目标高亮区域的外轮廓
 }
 
 type TargetGetter = () => HTMLElement | null | Promise<HTMLElement | null>
 
 interface TourStep {
-  title: string
-  description?: string
-  gap?: number | TargetGap
-  mask?: boolean | TourMaskOptions
-  target?: MaybeElement | null | string | TargetGetter
-  placement?: PopperPlacement
-  showArrow?: boolean
-  nextButton?: ButtonProps | boolean
-  nextButtonText?: string
-  prevButton?: ButtonProps | boolean
-  prevButtonText?: string
-  scrollIntoViewOptions?: boolean | ScrollIntoViewOptions
-  beforeEnter?: () => void | Promise<void>
-  afterLeave?: () => void | Promise<void>
+  title: string // 标题
+  description?: string // 描述
+  gap?: number | TargetGap // 目标高亮区域配置
+  mask?: boolean | TourMaskOptions // 遮罩配置
+  target?: MaybeElement | null | string | TargetGetter // 目标节点获取
+  targetDisabled?: boolean // 是否禁用目标操作
+  placement?: PopperPlacement // 浮层位置
+  showArrow?: boolean // 是否展示箭头
+  nextButton?: ButtonProps | boolean // 下一步的按钮配置
+  nextButtonText?: string // 下一步按钮文字
+  prevButton?: ButtonProps | boolean // 上一步的按钮配置
+  prevButtonText?: string // 上一步按钮文字
+  scrollIntoViewOptions?: boolean | ScrollIntoViewOptions // 滚动到可视区域
+  beforeEnter?: () => void | Promise<void> // 进入之前执行
+  afterLeave?: () => void | Promise<void> // 结束之后执行，步骤跳转之前会等待执行结果
 }
 ```
 
