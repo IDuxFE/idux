@@ -9,6 +9,7 @@ export interface TourThemeTokens {
   bgColor: string
   descriptionColor: string
   indicatorsColor: string
+  outlineColor: string
 
   borderRadius: number
 

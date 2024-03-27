@@ -7,12 +7,22 @@
 
 import type { CertainThemeTokens, GlobalThemeTokens } from '@idux/components/theme'
 export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTokens<'tour'> {
-  const { colorText, colorTextInfo, colorContainerBg, borderRadiusMd, fontSizeSm, marginSizeXs, paddingSizeLg } = tokens
+  const {
+    colorPrimary,
+    colorText,
+    colorTextInfo,
+    colorContainerBg,
+    borderRadiusMd,
+    fontSizeSm,
+    marginSizeXs,
+    paddingSizeLg,
+  } = tokens
 
   return {
     bgColor: colorContainerBg,
     descriptionColor: colorText,
     indicatorsColor: colorTextInfo,
+    outlineColor: colorPrimary,
 
     borderRadius: borderRadiusMd,
 

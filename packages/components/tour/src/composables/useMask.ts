@@ -28,9 +28,11 @@ const animateDuration = 200
 
 export interface MaskContext {
   maskPath: ComputedRef<string>
+  maskOutlinePath: ComputedRef<string | undefined>
   maskAttrs: ComputedRef<SVGAttributes>
   maskClass: ComputedRef<string | undefined>
   maskStyle: ComputedRef<CSSProperties>
+  maskOutlineStyle: ComputedRef<CSSProperties>
   isAnimating: ComputedRef<boolean>
   onAnimateEnd: (cb: () => void) => void
 }
@@ -44,19 +46,38 @@ export function useMask(
   currentZIndex: ComputedRef<number>,
 ): MaskContext {
   const [maskPath, setMaskPath] = useState<string>('')
+  const [maskOutlinePath, setMaskOutlinePath] = useState<string | undefined>(undefined)
+
+  const updateMask = (positionInfo: Omit<TargetPositionInfo, 'origin'> | null | false) => {
+    if (positionInfo === false) {
+      setMaskPath('')
+      setMaskOutlinePath(undefined)
+    } else {
+      setMaskPath(getMaskPath(positionInfo))
+      setMaskOutlinePath(getMaskOutlinePath(positionInfo))
+    }
+  }
+
   const [isAnimating, setIsAnimating] = useState<boolean>(false)
   const animateCbs = new Set<() => void>()
 
-  const maskAttrs = computed(() => (positionInfo.value ? getMaskAttrs(positionInfo.value) : {}))
+  const maskAttrs = computed(() => (positionInfo.value ? getMaskAttrs() : {}))
 
   const maskStyle = computed(() => {
     const { mask } = activeStep.value ?? {}
 
     return normalizeStyle({
       fill: isBoolean(mask) ? undefined : mask?.color,
-      width: convertCssPixel(positionInfo.value?.windowWidth ?? window.innerWidth),
-      height: convertCssPixel(positionInfo.value?.windowHeight ?? window.innerHeight),
+      width: convertCssPixel(window.innerWidth),
+      height: convertCssPixel(window.innerHeight),
       zIndex: currentZIndex.value,
+    }) as CSSProperties
+  })
+  const maskOutlineStyle = computed(() => {
+    const { mask } = activeStep.value ?? {}
+
+    return normalizeStyle({
+      fill: isBoolean(mask) ? undefined : mask?.outlineColor,
     }) as CSSProperties
   })
   const maskClass = computed(() => {
@@ -89,22 +110,25 @@ export function useMask(
     const tick = () => {
       const elapsed = Date.now() - start
 
-      setMaskPath(
-        getMaskPath({
-          windowHeight: to.windowHeight,
-          windowWidth: to.windowWidth,
-          x: easeInOutQuad(elapsed, from.x, to.x - from.x, animateDuration),
-          y: easeInOutQuad(elapsed, from.y, to.y - from.y, animateDuration),
-          width: easeInOutQuad(elapsed, from.width, to.width - from.width, animateDuration),
-          height: easeInOutQuad(elapsed, from.height, to.height - from.height, animateDuration),
-          radius: easeInOutQuad(elapsed, from.radius, to.radius - from.radius, animateDuration),
-        }),
-      )
+      const currentTickPos = {
+        containerWidth: to.containerWidth,
+        containerHeight: to.containerHeight,
+        containerX: to.containerX,
+        containerY: to.containerY,
+        x: easeInOutQuad(elapsed, from.x, to.x - from.x, animateDuration),
+        y: easeInOutQuad(elapsed, from.y, to.y - from.y, animateDuration),
+        width: easeInOutQuad(elapsed, from.width, to.width - from.width, animateDuration),
+        height: easeInOutQuad(elapsed, from.height, to.height - from.height, animateDuration),
+        radius: easeInOutQuad(elapsed, from.radius, to.radius - from.radius, animateDuration),
+        outline: to.outline,
+      }
+
+      updateMask(currentTickPos)
 
       if (elapsed < animateDuration) {
         rAFHandle = rAF(tick)
       } else {
-        setMaskPath(getMaskPath(to))
+        updateMask(to)
         setIsAnimating(false)
         runAnimateCbs()
       }
@@ -124,9 +148,9 @@ export function useMask(
 
       if (!activeStep.value?.mask) {
         cancelAnimate()
-        setMaskPath('')
+        updateMask(false)
       } else if (!mergedProps.value.animatable || pos?.origin !== 'index' || !prePos || !pos) {
-        setMaskPath(getMaskPath(pos))
+        updateMask(pos)
 
         if (mergedProps.value.animatable && (isAnimating.value || activeIndex.value !== _tempIndex)) {
           runAnimateCbs()
@@ -147,23 +171,20 @@ export function useMask(
 
   return {
     maskPath,
+    maskOutlinePath,
     maskAttrs,
     maskStyle,
+    maskOutlineStyle,
     maskClass,
     isAnimating,
     onAnimateEnd,
   }
 }
 
-function getMaskPath(positionInfo: Omit<TargetPositionInfo, 'origin'> | null): string {
-  const viewBoxRect = (width: number, height: number) => `M${width},0L0,0L0,${height}L${width},${height}L${width},0Z`
-
-  if (!positionInfo) {
-    return viewBoxRect(window.innerWidth, window.innerHeight)
-  }
-
-  const { windowWidth, windowHeight, x, y, width, height, radius } = positionInfo
-
+function arch(h: 1 | -1, v: 1 | -1, radius: number) {
+  return `a${radius},${radius} 0 0 1 ${h * radius},${v * radius}`
+}
+function drawRect(x: number, y: number, width: number, height: number, radius: number = 0) {
   // prevent glitches when stage is too small for radius
   const limitedRadius = Math.min(radius, width / 2, height / 2)
 
@@ -175,23 +196,36 @@ function getMaskPath(positionInfo: Omit<TargetPositionInfo, 'origin'> | null): s
   const boxWidth = width - normalizedRadius * 2
   const boxHeight = height - normalizedRadius * 2
 
-  const arch = (h: 1 | -1, v: 1 | -1) =>
-    `a${normalizedRadius},${normalizedRadius} 0 0 1 ${h * normalizedRadius},${v * normalizedRadius}`
-
-  /* eslint-disable indent */
-  return `${viewBoxRect(windowWidth, windowHeight)}
-    M${boxX},${boxY} h${boxWidth} ${arch(1, 1)} v${boxHeight} ${arch(-1, 1)} h-${boxWidth} ${arch(
-      -1,
-      -1,
-    )} v-${boxHeight} ${arch(1, -1)} z`
-  /* eslint-enable indent */
+  return `M${boxX},${boxY} h${boxWidth} ${arch(1, 1, normalizedRadius)} v${boxHeight} ${arch(-1, 1, normalizedRadius)} h-${boxWidth} ${arch(
+    -1,
+    -1,
+    normalizedRadius,
+  )} v-${boxHeight} ${arch(1, -1, normalizedRadius)} z`
 }
 
-function getMaskAttrs(positionInfo: TargetPositionInfo): SVGAttributes {
-  const { windowWidth, windowHeight } = positionInfo
+function getMaskPath(positionInfo: Omit<TargetPositionInfo, 'origin'> | null): string {
+  if (!positionInfo) {
+    return drawRect(0, 0, window.innerWidth, window.innerHeight, 0)
+  }
 
+  const { containerX, containerY, containerWidth, containerHeight, x, y, width, height, radius } = positionInfo
+
+  return `${drawRect(containerX, containerY, containerWidth, containerHeight)}${drawRect(x, y, width, height, radius)}`
+}
+
+function getMaskOutlinePath(positionInfo: Omit<TargetPositionInfo, 'origin'> | null): string | undefined {
+  if (!positionInfo || !positionInfo.outline) {
+    return
+  }
+
+  const { x, y, width, height, radius, outline } = positionInfo
+
+  return `${drawRect(x - 1, y - 1, width + 2, height + 2, radius)}${drawRect(x + outline, y + outline, width - outline * 2, height - outline * 2, radius)}`
+}
+
+function getMaskAttrs(): SVGAttributes {
   return {
-    viewBox: `0 0 ${windowWidth} ${windowHeight}`,
+    viewBox: `0 0 ${window.innerWidth} ${window.innerHeight}`,
     version: '1.1',
     preserveAspectRatio: 'xMinYMin slice',
   }

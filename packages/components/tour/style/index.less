@@ -15,9 +15,13 @@
     stroke-miterlimit: 2;
     pointer-events: none;
 
-    & > path {
+    & &-target {
       pointer-events: auto;
       cursor: auto;
+    }
+
+    & &-outline {
+      fill: var(--ix-tour-outline-color);
     }
   }
 
