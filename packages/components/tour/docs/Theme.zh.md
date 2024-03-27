@@ -8,6 +8,7 @@
 | `indicatorsColor` |  | `string` | `#6f7785` | `#808999` |
 | `indicatorsFontSize` |  | `number` | `12` | `12` |
 | `minWidth` |  | `number` | `250` | `250` |
+| `outlineColor` |  | `string` | `#1c6eff` | `#4083E8` |
 | `paddingBottom` |  | `number` | `16` | `16` |
 | `paddingLeft` |  | `number` | `16` | `16` |
 | `paddingRight` |  | `number` | `16` | `16` |
