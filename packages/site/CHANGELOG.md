@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/IDuxFE/idux/compare/v2.0.1...v2.1.0) (2024-03-27)
+
+
+### Features
+
+* add control trigger ([#1862](https://github.com/IDuxFE/idux/issues/1862)) ([899f796](https://github.com/IDuxFE/idux/commit/899f796e20ca411c9f4ba541df57521021e2689b))
+
+
+
+
+
 ## [2.0.1](https://github.com/IDuxFE/idux/compare/v2.0.0...v2.0.1) (2024-03-05)
 
 **Note:** Version bump only for package @idux/site

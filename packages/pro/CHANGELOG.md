@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/IDuxFE/idux/compare/v2.0.1...v2.1.0) (2024-03-27)
+
+
+### Features
+
+* **pro:** add proTagSelect component ([#1867](https://github.com/IDuxFE/idux/issues/1867)) ([9b50004](https://github.com/IDuxFE/idux/commit/9b50004dfa3d4e11e67fb307eee93bebac703663))
+
+
+
+
+
 ## [2.0.1](https://github.com/IDuxFE/idux/compare/v2.0.0...v2.0.1) (2024-03-05)
 
 

@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/IDuxFE/idux/compare/v2.0.1...v2.1.0) (2024-03-27)
+
+
+### Bug Fixes
+
+* **comp:input:** input theme hashId isn't correctly bound ([#1863](https://github.com/IDuxFE/idux/issues/1863)) ([bf11379](https://github.com/IDuxFE/idux/commit/bf1137915a9cf8d023821cc5a2b36f50959c03c9))
+* **comp:textarea:** textarea color isn't correct under dark theme ([#1864](https://github.com/IDuxFE/idux/issues/1864)) ([17fa41f](https://github.com/IDuxFE/idux/commit/17fa41f109a60bb1c5a8e17030716c7a62a3ed37))
+* **comp:tour:** async appended steps doesn't work ([#1866](https://github.com/IDuxFE/idux/issues/1866)) ([0c6c54d](https://github.com/IDuxFE/idux/commit/0c6c54d377b74e66d47ee7c3e75f12b3eca7aa35))
+
+
+### Features
+
+* add control trigger ([#1862](https://github.com/IDuxFE/idux/issues/1862)) ([899f796](https://github.com/IDuxFE/idux/commit/899f796e20ca411c9f4ba541df57521021e2689b))
+* **comp:theme:** supports prefix for token register ([#1865](https://github.com/IDuxFE/idux/issues/1865)) ([094f62a](https://github.com/IDuxFE/idux/commit/094f62adef4496e2aff00c2dba830c1cb129df26))
+* **comp:tour:** supports `targetDisabled` ([#1869](https://github.com/IDuxFE/idux/issues/1869)) ([5c48d01](https://github.com/IDuxFE/idux/commit/5c48d01f5d798bd0c8746f0cc66f67f696e72106))
+* **comp:tour:** supports outline and mask container ([#1868](https://github.com/IDuxFE/idux/issues/1868)) ([5c25eb3](https://github.com/IDuxFE/idux/commit/5c25eb3643b5bf593392545fd6ad0f4572297a0f))
+* **comp:** add selector component ([#1861](https://github.com/IDuxFE/idux/issues/1861)) ([a50147b](https://github.com/IDuxFE/idux/commit/a50147bfc26071ae42ae1b65e24b13d6a71302be))
+* **pro:** add proTagSelect component ([#1867](https://github.com/IDuxFE/idux/issues/1867)) ([9b50004](https://github.com/IDuxFE/idux/commit/9b50004dfa3d4e11e67fb307eee93bebac703663))
+
+
+
+
+
 ## [2.0.1](https://github.com/IDuxFE/idux/compare/v2.0.0...v2.0.1) (2024-03-05)
 
 
