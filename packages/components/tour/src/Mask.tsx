@@ -23,6 +23,7 @@ export default defineComponent({
       maskClass,
       maskStyle,
       maskOutlineStyle,
+      activeStep,
     } = inject(tourToken)!
 
     const classes = computed(() => {
@@ -35,6 +36,7 @@ export default defineComponent({
         hashId.value,
         maskClass.value,
         animatable ? `${prefixCls}-animatable` : undefined,
+        activeStep.value?.targetDisabled ? `${prefixCls}-target-disabled` : undefined,
       ])
     })
 

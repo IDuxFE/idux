@@ -49,6 +49,7 @@ export interface TourStep {
   gap?: number | TargetGap
   mask?: boolean | TourMaskOptions
   target?: MaybeElement | null | string | TargetGetter
+  targetDisabled?: boolean
   placement?: PopperPlacement
   showArrow?: boolean
   nextButton?: ButtonProps | boolean
@@ -118,6 +119,10 @@ export const tourProps = {
   },
   scrollIntoViewOptions: {
     type: [Boolean, Object] as PropType<boolean | ScrollIntoViewOptions>,
+  },
+  targetDisabled: {
+    type: Boolean,
+    default: false,
   },
   zIndex: Number,
 
