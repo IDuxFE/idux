@@ -851,6 +851,7 @@
   --ix-spin-bg-circle-stroke: #1c6eff;
   --ix-spin-fst-arch-stroke: #20cc94;
   --ix-spin-snd-arch-stroke: #d3d7de;
+  --ix-spin-mask-bg-color: rgba(255, 255, 255, 0.7);
 }
 
 /* ------ statistic css variables ------ */
@@ -1013,6 +1014,7 @@
   --ix-tooltip-color: #6f7785;
   --ix-tooltip-min-width: 32px;
   --ix-tooltip-max-width: 400px;
+  --ix-tooltip-white-space: pre-wrap;
 }
 
 /* ------ tour css variables ------ */
