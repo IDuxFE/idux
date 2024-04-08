@@ -34,20 +34,18 @@ export default defineComponent({
       updateSearchValues,
       getCacheData,
       setCacheData,
-      tempSegmentInputRef,
     } = inject(proSearchContext)!
 
     const searchInputRef = ref<HTMLInputElement>()
     const searchIconRef = ref<IconInstance>()
 
     const [searchInput, setSearchInput] = useState('')
-    const [searchInputOpend, _setSearchInputOpened] = useState(false)
     const setSearchInputOpened = (opened: boolean) => {
-      _setSearchInputOpened(opened)
       if (opened) {
         searchInputRef.value?.focus()
+        props.setSearchInputActive?.(true)
       } else {
-        tempSegmentInputRef.value?.focus()
+        props.setSearchInputActive?.(false)
       }
     }
 
@@ -67,7 +65,7 @@ export default defineComponent({
       const prefixCls = `${mergedPrefixCls.value}-quick-select-item-search-bar`
       return normalizeClass({
         [prefixCls]: true,
-        [`${prefixCls}-opened`]: searchInputOpend.value,
+        [`${prefixCls}-opened`]: props.searchInputActive,
       })
     })
 
@@ -81,6 +79,14 @@ export default defineComponent({
 
     const [itemValue, setItemValue] = useState<unknown>(searchDataSegmentState.value?.value)
     watch(() => searchDataSegmentState.value?.value, setItemValue)
+    watch(
+      () => props.searchInputActive,
+      active => {
+        if (!active) {
+          setSearchInput('')
+        }
+      },
+    )
 
     const confirmValue = (value: unknown) => {
       let searchStateKey = searchState.value?.key
@@ -114,15 +120,20 @@ export default defineComponent({
     const setOnKeyDown = () => {}
 
     const handleBlur = () => {
-      setSearchInput('')
       setSearchInputOpened(false)
     }
     const handleSearchIconClick = () => {
-      setSearchInputOpened(!searchInputOpend.value)
+      setSearchInputOpened(!props.searchInputActive)
     }
     const handleSearchIconMouseDown = (evt: MouseEvent) => {
       evt.preventDefault()
       evt.stopImmediatePropagation()
+    }
+    const handleContentMouseDown = (evt: MouseEvent) => {
+      if (props.searchInputActive) {
+        evt.preventDefault()
+        evt.stopImmediatePropagation()
+      }
     }
 
     return () => {
@@ -167,7 +178,7 @@ export default defineComponent({
               </div>
             )}
           </div>
-          <div class={`${prefixCls}-content`}>
+          <div class={`${prefixCls}-content`} onMousedown={handleContentMouseDown}>
             {searchDataSegment.value?.panelRenderer?.({
               slots,
               input: searchInput.value,

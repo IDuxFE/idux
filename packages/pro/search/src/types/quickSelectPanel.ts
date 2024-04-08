@@ -11,6 +11,8 @@ import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export const quickSelectPanelItemProps = {
   searchField: { type: Object as PropType<ResolvedSearchField>, required: true },
+  searchInputActive: Boolean,
+  setSearchInputActive: Function as PropType<(active: boolean) => void>,
 } as const
 
 export const quickSelectPanelShortcutProps = {

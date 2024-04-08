@@ -7,9 +7,11 @@
 
 import type { ResolvedSearchField } from '../../types'
 
-import { type VNodeChild, computed, defineComponent, inject } from 'vue'
+import { type VNodeChild, computed, defineComponent, inject, watch } from 'vue'
 
-import { isEmptyNode } from '@idux/cdk/utils'
+import { isNil } from 'lodash-es'
+
+import { type VKey, isEmptyNode, useState } from '@idux/cdk/utils'
 
 import QuickSelectPanelItem from './QuickSelectItem'
 import QuickSelectPanelShortcut from './QuickSelectShortcut'
@@ -34,6 +36,27 @@ export default defineComponent({
       return {
         quickSelectFields,
         shortcutFields,
+      }
+    })
+
+    const [inputActiveFieldKey, setInputActiveFieldKey] = useState<VKey | undefined>(undefined)
+    const setInputActive = (key: VKey, active: boolean) => {
+      if (active) {
+        setInputActiveFieldKey(key)
+      } else if (inputActiveFieldKey.value === key) {
+        setInputActiveFieldKey(undefined)
+        tempSegmentInputRef.value?.focus()
+      }
+    }
+
+    watch(separatedFields, fields => {
+      const { quickSelectFields } = fields
+
+      if (
+        !isNil(inputActiveFieldKey.value) &&
+        quickSelectFields.findIndex(field => field.key === inputActiveFieldKey.value) < 0
+      ) {
+        setInputActiveFieldKey(undefined)
       }
     })
 
@@ -71,7 +94,16 @@ export default defineComponent({
           {separatedFields.value.quickSelectFields.length && (
             <div class={`${prefixCls}-items`}>
               {separatedFields.value.quickSelectFields.map((field, idx) => {
-                const nodes = [<QuickSelectPanelItem searchField={field} v-slots={slots} />]
+                const nodes = [
+                  <QuickSelectPanelItem
+                    searchField={field}
+                    searchInputActive={inputActiveFieldKey.value === field.key}
+                    setSearchInputActive={(active: boolean) => {
+                      setInputActive(field.key, active)
+                    }}
+                    v-slots={slots}
+                  />,
+                ]
 
                 if (idx < separatedFields.value.quickSelectFields.length - 1) {
                   nodes.push(<div class={`${prefixCls}-item-separator`}></div>)
