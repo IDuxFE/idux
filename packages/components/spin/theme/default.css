@@ -11,4 +11,5 @@
   --ix-spin-bg-circle-stroke: #1c6eff;
   --ix-spin-fst-arch-stroke: #20cc94;
   --ix-spin-snd-arch-stroke: #d3d7de;
+  --ix-spin-mask-bg-color: rgba(255, 255, 255, 0.7);
 }

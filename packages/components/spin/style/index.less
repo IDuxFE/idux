@@ -28,7 +28,7 @@
       right: 0;
       bottom: 0;
       position: absolute;
-      background-color: var(--ix-color-mask);
+      background-color: var(--ix-spin-mask-bg-color);
       pointer-events: auto;
     }
   }
@@ -40,6 +40,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition-duration: var(--ix-motion-duration-medium);
+    background-color: var(--ix-spin-mask-bg-color);
 
     &-tip-vertical {
       flex-direction: column;
@@ -81,10 +83,8 @@
 
   &-container {
     position: relative;
-    transition: opacity var(--ix-motion-duration-medium);
 
     &-blur {
-      opacity: 0.3;
       user-select: none;
       clear: both;
       overflow: hidden;

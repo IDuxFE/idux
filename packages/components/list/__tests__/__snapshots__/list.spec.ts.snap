@@ -4,7 +4,9 @@ exports[`List > render work 1`] = `
 "<div class=\\"ix-list ix-list-split ix-list-md ix-list-border\\">
   <!---->
   <div class=\\"ix-spin\\">
-    <!---->
+    <transition-stub name=\\"ix-fade\\" appear=\\"true\\" persisted=\\"false\\" css=\\"true\\">
+      <!---->
+    </transition-stub>
     <div class=\\"ix-spin-container\\">
       <div>
         <div class=\\"ix-list-item\\">

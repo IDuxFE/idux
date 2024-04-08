@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, computed, defineComponent, normalizeClass, normalizeStyle } from 'vue'
+import { type ComputedRef, Transition, computed, defineComponent, normalizeClass, normalizeStyle } from 'vue'
 
 import { hasSlot } from '@idux/cdk/utils'
 import { ɵLoading } from '@idux/components/_private/loading'
@@ -105,7 +105,9 @@ export default defineComponent({
 
     return () => (
       <div class={[mergedPrefixCls.value, globalHashId.value, hashId.value]}>
-        {renderSpinner()}
+        <Transition name={`${common.prefixCls}-fade`} appear>
+          {renderSpinner()}
+        </Transition>
         {renderContent()}
       </div>
     )
