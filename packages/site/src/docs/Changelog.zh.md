@@ -10,6 +10,30 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 2.1.1(2024-04-08)
+
+
+### Bug Fixes
+
+* **comp:carousel:** 当轮播图的数量小于等于1时，前后切换的箭头不应该显示，且切换的方法调用不应该生效 ([#1871](https://github.com/IDuxFE/idux/issues/1871)) ([e8a6d6e](https://github.com/IDuxFE/idux/commit/e8a6d6e00e01e683c4fe63345f6b80ba8c020d63))
+* **comp:collapse,empty:** margin size css 变量引用错误 ([#1872](https://github.com/IDuxFE/idux/issues/1872)) ([dca4899](https://github.com/IDuxFE/idux/commit/dca489914745f956d63abebb350a8324cc69c926))
+* **comp:input:** 在IxInput的addon中渲染的select组件，样式不正常 ([#1873](https://github.com/IDuxFE/idux/issues/1873)) ([73c4f11](https://github.com/IDuxFE/idux/commit/73c4f11feb33487a015153bcac2d2f326be2cff8))
+* **comp:spin:** spin 的遮罩背景颜色不正确 ([#1874](https://github.com/IDuxFE/idux/issues/1874)) ([f2fcf2d](https://github.com/IDuxFE/idux/commit/f2fcf2dfe16fee05aeedd298de3361e9be76b81b))
+  - 修改为使用背景色混合0.7的不透明度的颜色
+  - 新增了 `maskBgColor`的主题token，可以用来配置遮罩颜色
+  - 不再使用opacity来设置遮罩的效果，改为使用背景颜色
+* **comp:table:** 点击展开收起图标不应该触发行的选中 ([#1875](https://github.com/IDuxFE/idux/issues/1875)) ([818722e](https://github.com/IDuxFE/idux/commit/818722e99e026893b40f7ca3f37881c161105358))
+* **comp:tooltip:** tooltip 的内容应该支持换行 ([#1876](https://github.com/IDuxFE/idux/issues/1876)) ([ab4a449](https://github.com/IDuxFE/idux/commit/ab4a4491fa7446018897173485f09ca6db7fedfa))
+  - 提供了 `whiteSpace` 的主题token，现在默认为 `pre-wrap`，如果该行为对当前场景有影响，可以自行配置
+* **comp:tree-select:** 从选择框中移除一个选项，不能级联处理树的选中项 ([#1877](https://github.com/IDuxFE/idux/issues/1877)) ([ce4f477](https://github.com/IDuxFE/idux/commit/ce4f4778e370562ee8bf4130c663d2c182d37d90))
+  - 重构了树组件的选中处理逻辑
+* **pro:search:** 快捷面板中，当选中下方的选项时，不应该收起面板中的搜索输入框 ([#1883](https://github.com/IDuxFE/idux/issues/1883)) ([e9d8517](https://github.com/IDuxFE/idux/commit/e9d8517a2772f708d37f379bc1e70a41ecff8933))
+* **pro:tag-select:** 标签最大数量超出的告警提示内容不正确 ([#1882](https://github.com/IDuxFE/idux/issues/1882)) ([c6eef62](https://github.com/IDuxFE/idux/commit/c6eef623e1d5a8485c835bd5b69360fa1348545f))
+* **pro:tag-select:** 当移除一个未被选中的标签数据时，不应该触发 `onTagRemove` 事件 ([#1880](https://github.com/IDuxFE/idux/issues/1880)) ([c3703a8](https://github.com/IDuxFE/idux/commit/c3703a8b71050e50802e14997d501af1cbe5c949))
+* **pro:tag-select:** 支持了 `beforeRemoveConfirm` 和 `beforeSelectConfirm` ([#1879](https://github.com/IDuxFE/idux/issues/1879)) ([4f48690](https://github.com/IDuxFE/idux/commit/4f4869003bb14c6af9e470f2602286072c298939))
+* **pro:tag-select:** 当有一个标签数据被搜索输入严格匹配到的时候，不应该展示创建标签的选项 ([#1881](https://github.com/IDuxFE/idux/issues/1881)) ([fb6116f](https://github.com/IDuxFE/idux/commit/fb6116ffd7102a9025e5b0b5a4a14b48d6db7601))
+* **pro:tag-select:** 当overlayMatchWidth为true时，标签的文字不应该溢出 ([#1878](https://github.com/IDuxFE/idux/issues/1878)) ([d2fcdbf](https://github.com/IDuxFE/idux/commit/d2fcdbff3487505cd2be2f1dca849e71d8b2655d))
+
 # 2.1.0(2024-03-27)
 
 
