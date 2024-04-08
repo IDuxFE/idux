@@ -1,5 +1,6 @@
 @import '../../style/variable/index.less';
 @import '../../../components/style/variable/index.less';
+@import '../../../components/style/mixins/ellipsis.less';
 @import '../../style/mixins/reset.less';
 
 .@{pro-tag-select-prefix} {
@@ -33,17 +34,29 @@
     &-tag {
       height: var(--ix-pro-tag-select-tag-height);
       line-height: calc(var(--ix-pro-tag-select-tag-height) - var(--ix-control-line-width) * 2);
+
+      .@{control-trigger-prefix}-overlay-match-width & {
+        max-width: calc(100% - var(--ix-font-size-icon) - var(--ix-margin-size-sm));
+
+        .@{tag-prefix}-content {
+          max-width: 100%;
+          .ellipsis();
+        }
+      }
     }
 
     &-edit-trigger {
       margin-left: auto;
       height: 100%;
       width: var(--ix-font-size-icon);
-      display: none;
+      display: flex;
       align-items: center;
       justify-content: center;
       font-size: var(--ix-font-size-icon);
       color: var(--ix-color-icon);
+      visibility: hidden;
+      pointer-events: none;
+      cursor: pointer;
 
       &:hover {
         color: var(--ix-color-icon-hover);
@@ -52,7 +65,8 @@
 
     &:hover {
       .@{pro-tag-select-prefix}-option-edit-trigger {
-        display: flex;
+        visibility: visible;
+        pointer-events: unset;
       }
     }
   }
@@ -150,8 +164,14 @@
   &-selected-tag {
     height: @select-item-height;
     line-height: @select-item-line-height;
+    max-width: 100%;
     margin: @select-margin-half 0;
     margin-inline-end: var(--ix-margin-size-xs);
+
+    .@{tag-prefix}-content {
+      max-width: 100%;
+      .ellipsis();
+    }
 
     &-remove-icon {
       margin-left: var(--ix-margin-size-xs);

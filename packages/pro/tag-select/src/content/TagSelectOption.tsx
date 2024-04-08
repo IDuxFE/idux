@@ -85,7 +85,7 @@ export default defineComponent({
       return (
         <div class={classes.value} onClick={handleClick} onMouseenter={handleMouseEnter}>
           {slots.optionLabel?.(props.data) ?? (
-            <IxTag class={`${prefixCls}-option-tag`} shape="round" style={tagStyle.value}>
+            <IxTag class={`${prefixCls}-option-tag`} shape="round" style={tagStyle.value} title={label}>
               {slots.tagLabel?.(props.data) ?? label}
             </IxTag>
           )}

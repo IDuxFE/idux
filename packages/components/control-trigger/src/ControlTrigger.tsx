@@ -58,7 +58,7 @@ export default defineComponent({
       onFocus,
       onBlur,
     )
-    const { overlayOpened, overlayRef, overlayStyle, setOverlayOpened } = useOverlayState(
+    const { overlayOpened, overlayRef, overlayMatchWidth, overlayStyle, setOverlayOpened } = useOverlayState(
       props,
       defaultTriggerProps,
       triggerRef,
@@ -132,6 +132,7 @@ export default defineComponent({
       return normalizeClass({
         [globalHashId.value]: !!globalHashId.value,
         [`${prefixCls}-overlay`]: true,
+        [`${prefixCls}-overlay-match-width`]: overlayMatchWidth.value === true,
         [overlayClassName || '']: !!overlayClassName,
       })
     })
