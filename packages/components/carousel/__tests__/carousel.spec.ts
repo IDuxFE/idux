@@ -107,11 +107,8 @@ describe('Carousel', () => {
       },
     })
 
-    await wrapper.find('.ix-carousel-arrow-prev').trigger('click')
-    expect(onChange).toHaveBeenCalledTimes(0)
-
-    await wrapper.find('.ix-carousel-arrow-next').trigger('click')
-    expect(onChange).toHaveBeenCalledTimes(0)
+    expect(wrapper.find('.ix-carousel-arrow-prev').exists()).toBeFalsy()
+    expect(wrapper.find('.ix-carousel-arrow-next').exists()).toBeFalsy()
   })
 
   test('slot dot work', async () => {

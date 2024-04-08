@@ -88,6 +88,11 @@ export function useStrategy(
     }
 
     const { from, to } = getBoundary(activeIndex.value, index, length)
+
+    if (from === to) {
+      return
+    }
+
     nextIndex.value = index
     runningIndex.value = to
 
