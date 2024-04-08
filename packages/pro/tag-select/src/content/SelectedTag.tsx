@@ -30,6 +30,7 @@ export default defineComponent({
     const {
       props: proTagSelectProps,
       locale,
+      focus,
       mergedPrefixCls,
       dataToSelect,
       selectConfirmPanelOpened,
@@ -77,6 +78,15 @@ export default defineComponent({
       handleTagRemove(props.value)
     }
 
+    const handleOk = () => {
+      handleTagSelectOk()
+      focus()
+    }
+    const handleCancel = () => {
+      handleTagSelectCancel()
+      focus()
+    }
+
     const renderConfirmOverlay = () => {
       const prefixCls = `${mergedPrefixCls.value}-select-confirm`
       return (
@@ -84,10 +94,10 @@ export default defineComponent({
           <ɵHeader class={`${prefixCls}-header`} header={proTagSelectProps.selectConfirmHeader} size="sm" />
           <div class={`${prefixCls}-content`}>{slots.selectConfirmContent?.(tagData.value)}</div>
           <div class={`${prefixCls}-footer`}>
-            <IxButton mode="primary" size="xs" onClick={handleTagSelectOk}>
+            <IxButton mode="primary" size="xs" onClick={handleOk}>
               {locale.ok}
             </IxButton>
-            <IxButton size="xs" onClick={handleTagSelectCancel}>
+            <IxButton size="xs" onClick={handleCancel}>
               {locale.cancel}
             </IxButton>
           </div>

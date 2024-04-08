@@ -8,6 +8,7 @@
 import type { OverlayStateContext } from './useOverlayState'
 import type { SelectedStateContext } from './useSelectedState'
 import type { MergedTagData, TagDataContext } from './useTagData'
+import type { ProTagSelectProps } from '../types'
 import type { ComputedRef } from 'vue'
 
 import { useState } from '@idux/cdk/utils'
@@ -18,12 +19,13 @@ export interface RemoveConfirmContext {
   dataToRemove: ComputedRef<MergedTagData | undefined>
   modalVisible: ComputedRef<boolean>
   handleTagDataRemove: (data: MergedTagData) => Promise<boolean>
-  handleModalOk: () => void
+  handleModalOk: () => Promise<void>
   handleModalCancel: () => void
   handleModalAfterClose: () => void
 }
 
 export function useRemoveConfirm(
+  props: ProTagSelectProps,
   tagDataContext: TagDataContext,
   selectedStateContext: SelectedStateContext,
   overlayStateContext: OverlayStateContext,
@@ -51,7 +53,13 @@ export function useRemoveConfirm(
     return removeConfirmDeferred.wait()
   }
 
-  const handleModalOk = () => {
+  const handleModalOk = async () => {
+    const { beforeRemoveConfirm } = props
+
+    if (beforeRemoveConfirm && !(await beforeRemoveConfirm(dataToRemove.value!))) {
+      return
+    }
+
     setModalVisible(false)
 
     if (dataToRemove.value) {

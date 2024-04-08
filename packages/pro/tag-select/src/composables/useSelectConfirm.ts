@@ -19,7 +19,7 @@ import { type Deferred, createDeferred } from '../utils'
 export interface SelectConfirmContext {
   dataToSelect: ComputedRef<MergedTagData | undefined>
   handleTagSelect: (data: MergedTagData) => Promise<boolean>
-  handleTagSelectOk: () => void
+  handleTagSelectOk: () => Promise<void>
   handleTagSelectCancel: () => void
 }
 
@@ -69,7 +69,12 @@ export function useSelectConfirm(
     return tagSelectDeferred.wait()
   }
 
-  const handleTagSelectOk = () => {
+  const handleTagSelectOk = async () => {
+    const { beforeSelectConfirm } = props
+    if (beforeSelectConfirm && !(await beforeSelectConfirm(dataToSelect.value!))) {
+      return
+    }
+
     setLocked(false)
     setSelectConfirmPanelOpened(false)
 

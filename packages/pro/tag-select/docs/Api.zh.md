@@ -25,6 +25,8 @@
 | `readonly` | 只读模式 | `boolean` | - | - | - |
 | `removeConfirmHeader` | 删除标签的确认弹窗头部配置 | `string \| HeaderProps` | - | - | - |
 | `removeConfirmTitle` | 删除标签的确认弹窗title | `string \| VNode \| (() => VNodeChild)` | - | - | - |
+| `beforeSelectConfirm` | 选择前点击确认，判断是否可以确认选择 | `(data: TagSelectData) => boolean \| Promise<boolean>` | - | - | - |
+| `beforeRemoveConfirm` | 删除前点击确认，判断是否可以确认删除 | `(data: TagSelectData) => boolean \| Promise<boolean>` | - | - | - |
 | `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | - | - |
 | `status` | 手动指定校验状态 | `valid \| invalid \| validating` | - | - | - |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | `down` | - | - |

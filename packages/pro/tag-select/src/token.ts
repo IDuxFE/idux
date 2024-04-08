@@ -25,6 +25,7 @@ export interface ProTagSelectContext
   triggerRef: Ref<SelectorInstance | undefined>
   props: ProTagSelectProps
   focused: ComputedRef<boolean>
+  focus: (options?: FocusOptions) => void
   mergedTagSelectColors: ComputedRef<TagSelectColor[]>
   selectedValue: ComputedRef<VKey[] | undefined>
   mergedData: ComputedRef<MergedTagData[]>
