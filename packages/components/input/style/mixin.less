@@ -14,7 +14,7 @@
   .placeholder();
 }
 
-.input-size(@height, @font-size, @padding-horizontal, @border-radius) {
+.input-size(@height, @font-size, @padding-vertical, @padding-horizontal, @border-radius) {
   .reset-font-size(@font-size);
 
   height: @height;
@@ -31,8 +31,13 @@
   }
 
   .@{input-prefix}-addon {
-    .@{selector-prefix} {
-      margin: -5px calc(@padding-horizontal * -1);
+    .@{trigger-prefix} {
+      &:not(.@{trigger-prefix}-paddingless) {
+        margin: calc(var(--ix-line-width) * -1) calc(@padding-horizontal * -1 - var(--ix-line-width));
+      }
+      .@{trigger-prefix}-paddingless {
+        margin: calc(var(--ix-line-width) * -1);
+      }
     }
   }
 
