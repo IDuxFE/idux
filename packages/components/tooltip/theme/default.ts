@@ -15,5 +15,7 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
 
     minWidth: 32,
     maxWidth: 400,
+
+    whiteSpace: 'pre-wrap',
   }
 }
