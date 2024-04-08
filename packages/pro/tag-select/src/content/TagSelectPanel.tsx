@@ -20,11 +20,11 @@ export default defineComponent({
   setup(_, { slots }) {
     const common = useGlobalConfig('common')
     const {
+      props,
       locale,
       mergedPrefixCls,
       filteredData,
       dataMaxExceeded,
-      selectedValue,
       inputValue,
       inputFullyMatched,
       setEditPanelOpened,
@@ -50,7 +50,7 @@ export default defineComponent({
             <div class={`${prefixCls}-alert`}>
               {slots.maxExceededAlert?.() ?? (
                 <IxAlert icon="info-circle">
-                  {locale.maxExceededAlert.replace('${0}', toString(selectedValue.value?.length ?? 0))}
+                  {locale.maxExceededAlert.replace('${0}', toString(props.tagDataLimit ?? 0))}
                 </IxAlert>
               )}
             </div>
