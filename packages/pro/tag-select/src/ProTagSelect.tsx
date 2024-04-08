@@ -63,7 +63,7 @@ export default defineComponent({
     const tagEditContext = useTagEdit(overlayStateContext)
     const selectedStateContext = useSelectedState(props, accessor, tagDataContext)
     const selectConfirmContext = useSelectConfirm(props, tagDataContext, selectedStateContext, overlayStateContext)
-    const removeConfirmContext = useRemoveConfirm(tagDataContext, selectedStateContext, overlayStateContext)
+    const removeConfirmContext = useRemoveConfirm(props, tagDataContext, selectedStateContext, overlayStateContext)
     const operationContext = useOperations(
       tagDataContext,
       selectConfirmContext,
@@ -114,6 +114,7 @@ export default defineComponent({
       triggerRef,
       props,
       focused,
+      focus,
       mergedPrefixCls,
       locale: locales.tagSelect,
       mergedTagSelectColors: tagColorsContext.mergedTagSelectColors,

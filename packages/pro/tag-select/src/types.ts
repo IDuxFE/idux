@@ -59,6 +59,8 @@ export const proTagSelectProps = {
   removeConfirmHeader: [String, Object] as PropType<string | HeaderProps>,
   removeConfirmTitle: [String, Object, Function] as PropType<string | VNode | (() => VNodeChild)>,
   selectConfirmHeader: [String, Object] as PropType<string | HeaderProps>,
+  beforeSelectConfirm: Function as PropType<(data: TagSelectData) => boolean | Promise<boolean>>,
+  beforeRemoveConfirm: Function as PropType<(data: TagSelectData) => boolean | Promise<boolean>>,
   size: { type: String as PropType<FormSize>, default: undefined },
   status: String as PropType<ValidateStatus>,
   suffix: { type: String, default: undefined },
