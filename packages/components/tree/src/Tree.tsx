@@ -62,21 +62,26 @@ export default defineComponent({
     const mergedShowLine = computed(() => props.showLine ?? config.showLine)
     const mergedBlocked = computed(() => props.blocked ?? config.blocked)
     const mergedCheckOnClick = computed(() => props.checkable && props.checkOnClick)
-    const { mergedNodes, mergedNodeMap } = useMergeNodes(props, mergedChildrenKey, mergedGetKey, mergedLabelKey)
+    const { mergedNodes, mergedNodeMap, parentKeyMap, depthMap, setLoadedNodes } = useMergeNodes(
+      props,
+      mergedChildrenKey,
+      mergedGetKey,
+      mergedLabelKey,
+    )
     const { searchedKeys } = useSearchable(props, mergedNodeMap, mergedLabelKey)
     const expandableContext = useExpandable(
       props,
       config,
       mergedChildrenKey,
-      mergedGetKey,
-      mergedLabelKey,
       mergedNodeMap,
       searchedKeys,
+      setLoadedNodes,
     )
     const flattedNodes = useFlattedNodes(mergedNodes, expandableContext, props, searchedKeys)
-    const checkableContext = useCheckable(props, mergedNodeMap)
+    const checkableContext = useCheckable(props, mergedNodes, mergedNodeMap, parentKeyMap, depthMap)
     const dragDropContext = useDragDrop(props, config, expandableContext)
     const selectableContext = useSelectable(props, mergedNodeMap)
+    const { handleCheck } = checkableContext
 
     provide(treeToken, {
       props,
@@ -155,6 +160,15 @@ export default defineComponent({
     const _getFlattedNodes = () => {
       return flattedNodes.value
     }
+    const _handleCheck = (key: VKey) => {
+      const node = mergedNodeMap.value.get(key)
+
+      if (!node) {
+        return
+      }
+
+      handleCheck(node)
+    }
 
     expose({
       focus,
@@ -166,6 +180,7 @@ export default defineComponent({
 
       // private
       _getFlattedNodes,
+      _handleCheck,
     })
 
     const handleScrolledChange = (startIndex: number, endIndex: number, visibleNodes: MergedNode[]) => {

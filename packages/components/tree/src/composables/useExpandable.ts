@@ -5,6 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { MergedNode } from './useDataSource'
+import type { TreeExpandIconRenderer, TreeNode, TreeProps } from '../types'
+
 import { type ComputedRef, type Ref, computed, h, ref, watch } from 'vue'
 
 import { isArray, isFunction, isString } from 'lodash-es'
@@ -12,10 +15,7 @@ import { isArray, isFunction, isString } from 'lodash-es'
 import { VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 import { type TreeConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
-import { type GetKeyFn } from '@idux/components/utils'
 
-import { type MergedNode, convertMergeNodes, convertMergedNodeMap } from './useDataSource'
-import { type TreeExpandIconRenderer, type TreeNode, type TreeProps } from '../types'
 import { callChange, getParentKeys } from '../utils'
 
 export interface ExpandableContext {
@@ -32,10 +32,9 @@ export function useExpandable(
   props: TreeProps,
   config: TreeConfig,
   mergedChildrenKey: ComputedRef<string>,
-  mergedGetKey: ComputedRef<GetKeyFn>,
-  mergedLabelKey: ComputedRef<string>,
   mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>,
   searchedKeys: ComputedRef<VKey[]>,
+  setLoadedNodes: (key: VKey, nodes: TreeNode[]) => void,
 ): ExpandableContext {
   const expandIcon = computed(() => props.expandIcon ?? config.expandIcon)
   const [expandedKeys, setExpandedKeys] = useControlledProp(props, 'expandedKeys', () => [])
@@ -91,25 +90,8 @@ export function useExpandable(
       const nodeMap = mergedNodeMap.value
       const currNode = nodeMap.get(key)!
       if (childrenNodes?.length) {
-        const level = currNode.level
-        const mergedChildren = convertMergeNodes(
-          props,
-          childrenNodes,
-          childrenKey,
-          mergedGetKey.value,
-          mergedLabelKey.value,
-          key,
-          level,
-          {
-            check: !!currNode.checkDisabled,
-            drag: !!currNode.dragDisabled,
-            drop: !!currNode.dropDisabled,
-            select: !!currNode.selectDisabled,
-          },
-        )
-        convertMergedNodeMap(mergedChildren, nodeMap)
+        setLoadedNodes(key, childrenNodes)
         currNode.rawNode[childrenKey] = childrenNodes
-        currNode.children = mergedChildren
         const newLoadedKeys = [...loadedKeys.value, key]
         setLoadedKeys(newLoadedKeys)
         callEmit(props.onLoaded, newLoadedKeys, rawNode)

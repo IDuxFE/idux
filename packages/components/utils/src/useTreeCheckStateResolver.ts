@@ -25,7 +25,7 @@ interface GetAllUncheckedKeys<V extends TreeTypeData<V, C>, C extends keyof V> {
 export interface TreeCheckStateResolverContext<V extends TreeTypeData<V, C>, C extends keyof V> {
   data: V[] | undefined
   dataMap: Map<VKey, V>
-  parentKeyMap: Map<VKey, VKey>
+  parentKeyMap: Map<VKey, VKey | undefined>
   depthMap: Map<VKey, number>
 }
 export interface TreeCheckStateResolver<V extends TreeTypeData<V, C>, C extends keyof V> {
@@ -151,7 +151,7 @@ export function useTreeCheckStateResolver<V extends TreeTypeData<V, C>, C extend
     appendedKeys.forEach(key => {
       _getParents(key, resolverContext).forEach(parent => {
         if (parent[childrenKey.value]?.every(child => newKeySet.has(getKey.value(child)))) {
-          newKeySet.add(key)
+          newKeySet.add(getKey.value(parent))
         }
       })
     })

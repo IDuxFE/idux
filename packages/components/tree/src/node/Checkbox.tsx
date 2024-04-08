@@ -15,11 +15,16 @@ import { treeNodeCheckboxProps } from '../types'
 export default defineComponent({
   props: treeNodeCheckboxProps,
   setup(props) {
-    const { mergedPrefixCls, allCheckedKeys, indeterminateKeys, handleCheck } = inject(treeToken)!
+    const {
+      mergedPrefixCls,
+      isChecked: _isChecked,
+      isIndeterminate: _isIndeterminate,
+      handleCheck,
+    } = inject(treeToken)!
     const isChecked = computed(() => {
-      return allCheckedKeys.value.includes(props.node.key)
+      return _isChecked(props.node.key)
     })
-    const isIndeterminate = computed(() => indeterminateKeys.value.includes(props.node.key))
+    const isIndeterminate = computed(() => _isIndeterminate(props.node.key))
 
     const onChange = () => handleCheck(props.node)
 

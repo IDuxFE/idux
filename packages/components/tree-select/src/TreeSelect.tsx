@@ -45,6 +45,7 @@ export default defineComponent({
     const mergedLabelKey = computed(() => props.labelKey ?? config.labelKey)
 
     const triggerRef = ref<SelectorInstance>()
+    const treeRef = ref<TreeInstance>()
     const [inputValue, setInputValue] = useState('')
     const focus = () => triggerRef.value?.focus()
     const blur = () => triggerRef.value?.blur()
@@ -63,11 +64,11 @@ export default defineComponent({
     const { selectedValue, selectedNodes, changeSelected, handleRemove, handleClear } = useSelectedState(
       props,
       accessor,
+      treeRef,
       mergedNodeMap,
     )
     const [overlayOpened, setOverlayOpened] = useControlledProp(props, 'open', false)
 
-    const treeRef = ref<TreeInstance>()
     const scrollTo: VirtualScrollToFn = options => {
       treeRef.value?.scrollTo(options)
     }

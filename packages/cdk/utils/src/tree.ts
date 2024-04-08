@@ -36,13 +36,13 @@ export function traverseTree<V extends TreeTypeData<V, C>, C extends keyof V>(
 export function mapTree<V extends TreeTypeData<V, C>, R extends object, C extends keyof V>(
   data: V[],
   childrenKey: C,
-  mapFn: (item: V, parents: V[]) => R | undefined,
+  mapFn: (item: V, parents: V[], index: number) => R | undefined,
 ): (R & TreeTypeData<R, C>)[] {
   const map = (_data: V[], parents: V[]) => {
     const res: (TreeTypeData<R, C> & R)[] = []
     for (let idx = 0; idx < _data.length; idx++) {
       const item = _data[idx]
-      const mappedItem = mapFn(item, parents) as R & TreeTypeData<R, C>
+      const mappedItem = mapFn(item, parents, idx) as R & TreeTypeData<R, C>
       if (!mappedItem) {
         continue
       }

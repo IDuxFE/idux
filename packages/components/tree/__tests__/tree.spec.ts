@@ -193,16 +193,16 @@ describe('Tree', () => {
 
       const allNodes = wrapper.findAll('.ix-tree-node')
 
-      expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(false)
+      expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(true)
       expect(allNodes[1].find('.ix-checkbox-checked').exists()).toBe(true)
       // 0-1 exclude disabled
-      expect(allNodes[2].find('.ix-checkbox-checked').exists()).toBe(false)
+      expect(allNodes[2].find('.ix-checkbox-checked').exists()).toBe(true)
       expect(allNodes[3].find('.ix-checkbox-checked').exists()).toBe(true)
 
       // 0-0, unchecked
       await allNodes[1].find('input').setValue(false)
 
-      expect(onUpdateCheckedKeys).toBeCalledWith(['0-2'])
+      expect(onUpdateCheckedKeys).toBeCalledWith(['0-1', '0-2'])
 
       await wrapper.setProps({ checkedKeys: [] })
 
@@ -262,8 +262,8 @@ describe('Tree', () => {
       await wrapper.setProps({ checkedKeys: [] })
 
       expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(false)
-      expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(false)
-      expect(allNodes[0].find('.ix-checkbox-checked').exists()).toBe(false)
+      expect(allNodes[1].find('.ix-checkbox-checked').exists()).toBe(false)
+      expect(allNodes[2].find('.ix-checkbox-checked').exists()).toBe(false)
 
       //0, checked
       await allNodes[0].find('input').setValue(true)

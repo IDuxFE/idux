@@ -7,15 +7,15 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { type ComputedRef, computed, toRaw } from 'vue'
+import type { TreeInstance } from '@idux/components/tree'
+
+import { type ComputedRef, type Ref, computed, toRaw } from 'vue'
 
 import { type FormAccessor } from '@idux/cdk/forms'
 import { type VKey, callEmit, convertArray } from '@idux/cdk/utils'
 
 import { type MergedNode } from './useDataSource'
 import { type TreeSelectNode, type TreeSelectProps } from '../types'
-
-//import { generateOption } from '../utils/generateOption'
 
 export interface SelectedStateContext {
   selectedValue: ComputedRef<VKey[]>
@@ -28,6 +28,7 @@ export interface SelectedStateContext {
 export function useSelectedState(
   props: TreeSelectProps,
   accessor: FormAccessor,
+  treeRef: Ref<TreeInstance | undefined>,
   mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>,
 ): SelectedStateContext {
   const selectedValue = computed(() => convertArray(accessor.value))
@@ -54,7 +55,7 @@ export function useSelectedState(
   }
 
   const handleRemove = (key: VKey) => {
-    setValue(selectedValue.value.filter(item => key !== item))
+    treeRef.value?._handleCheck(key)
   }
 
   const handleClear = (evt: MouseEvent) => {

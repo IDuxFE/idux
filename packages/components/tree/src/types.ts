@@ -134,6 +134,7 @@ export interface TreeBindings<K = VKey> {
 
   //private
   _getFlattedNodes: () => MergedNode[]
+  _handleCheck: (key: VKey) => void
 }
 export type TreeComponent = DefineComponent<Omit<HTMLAttributes, keyof TreePublicProps> & TreePublicProps, TreeBindings>
 export type TreeInstance = InstanceType<DefineComponent<TreeProps, TreeBindings>>
