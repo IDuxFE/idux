@@ -5,34 +5,59 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type WritableComputedRef, computed } from 'vue'
+import { type ComputedRef, type WritableComputedRef, computed, ref, watch } from 'vue'
 
 import { isNil } from 'lodash-es'
 
 import { type VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
-import { type CascaderStrategy } from '@idux/components/cascader'
+import { type TreeCheckStateResolverContext, useTreeCheckStateResolver } from '@idux/components/utils'
 
 import { type MergedNode } from './useDataSource'
 import { type TreeNode, type TreeProps } from '../types'
-import { callChange, getChildrenKeys, getParentKeys } from '../utils'
+import { callChange } from '../utils'
 
 export interface CheckableContext {
   checkedKeys: WritableComputedRef<VKey[]>
-  allCheckedKeys: ComputedRef<VKey[]>
-  checkDisabledKeys: ComputedRef<VKey[]>
-  indeterminateKeys: ComputedRef<VKey[]>
+  isChecked: (key: VKey) => boolean
+  isIndeterminate: (key: VKey) => boolean
   handleCheck: (node: MergedNode) => void
 }
 
-export function useCheckable(props: TreeProps, mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>): CheckableContext {
+export function useCheckable(
+  props: TreeProps,
+  mergedNodes: ComputedRef<MergedNode[]>,
+  mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>,
+  parentKeyMap: ComputedRef<Map<VKey, VKey | undefined>>,
+  depthMap: ComputedRef<Map<VKey, number>>,
+): CheckableContext {
   const [checkedKeys, setCheckedKeys] = useControlledProp(props, 'checkedKeys', () => [])
 
-  const checkDisabledKeys = computed(() => {
-    const disabledKeys: VKey[] = []
+  const resolverContext = computed<TreeCheckStateResolverContext<MergedNode, 'children'>>(() => {
+    return {
+      data: mergedNodes.value,
+      dataMap: mergedNodeMap.value,
+      parentKeyMap: parentKeyMap.value,
+      depthMap: depthMap.value,
+    }
+  })
+  const childrenKey = ref('children' as const)
+  const getKey = ref((item: MergedNode) => item.key)
+  const cascaderStrategy = computed(() => props.cascaderStrategy)
+
+  const checkedStateResolver = useTreeCheckStateResolver(resolverContext, childrenKey, getKey, cascaderStrategy)
+  const allCheckedStateResolver = useTreeCheckStateResolver(
+    resolverContext,
+    childrenKey,
+    getKey,
+    computed(() => (cascaderStrategy.value === 'off' ? 'off' : 'all')),
+  )
+
+  const checkDisabledKeySet = computed(() => {
+    const disabledKeys = new Set<VKey>()
     if (props.checkable) {
       mergedNodeMap.value.forEach((node, key) => {
         if (node.checkDisabled) {
-          disabledKeys.push(key)
+          disabledKeys.add(key)
         }
       })
     }
@@ -40,69 +65,77 @@ export function useCheckable(props: TreeProps, mergedNodeMap: ComputedRef<Map<VK
   })
 
   // allCheckedKeys控制勾选框的勾选状态，checkedKeys控制回调的返回值
-  const allCheckedKeys = computed(() => {
-    if (props.cascaderStrategy !== 'off') {
-      return findAllCheckedKeys(mergedNodeMap.value, checkedKeys.value, checkDisabledKeys.value)
-    } else {
-      return checkedKeys.value
-    }
+  const allCheckedKeySet = computed(() => {
+    const keys = allCheckedStateResolver.appendKeys([], checkedKeys.value)
+
+    return new Set(keys)
   })
 
-  const indeterminateKeys = computed(() => {
-    const _checkedKeys = allCheckedKeys.value
-    if (_checkedKeys.length === 0 || props.cascaderStrategy === 'off') {
-      return []
+  const indeterminateKeySet = computed(() => {
+    const _checkedKeySet = allCheckedKeySet.value
+    if (_checkedKeySet.size === 0 || props.cascaderStrategy === 'off') {
+      return new Set<VKey>()
     }
 
-    const indeterminateKeySet = new Set<VKey>()
+    const keySet = new Set<VKey>()
     const nodeMap = mergedNodeMap.value
-    _checkedKeys.forEach(key => {
+    _checkedKeySet.forEach(key => {
       const { parentKey } = nodeMap.get(key) || {}
       if (!isNil(parentKey)) {
         let parent = nodeMap.get(parentKey)
-        if (parent && !_checkedKeys.includes(parent.key)) {
-          indeterminateKeySet.add(parentKey)
+        if (parent && !_checkedKeySet.has(parent.key)) {
+          keySet.add(parentKey)
           while (parent && !isNil(parent.parentKey)) {
-            indeterminateKeySet.add(parent.parentKey)
+            keySet.add(parent.parentKey)
             parent = nodeMap.get(parent.parentKey)
           }
         }
       }
     })
-    return [...indeterminateKeySet]
+    return keySet
   })
+
+  const isCheckDisabled = (key: VKey) => {
+    return checkDisabledKeySet.value.has(key)
+  }
+
+  const isChecked = (key: VKey) => {
+    return allCheckedKeySet.value.has(key)
+  }
+
+  const isIndeterminate = (key: VKey) => {
+    return indeterminateKeySet.value.has(key)
+  }
 
   const handleCheck = (node: MergedNode) => {
     const currKey = node.key
-    const nodeMap = mergedNodeMap.value
-    const disabledKeys = checkDisabledKeys.value
-    const cascaderStrategy = props.cascaderStrategy
-    const cascaderEnabled = cascaderStrategy !== 'off'
-    const childrenKeys = cascaderEnabled ? getChildrenKeys(node, disabledKeys) : []
-    const index = allCheckedKeys.value.indexOf(currKey)
 
-    let tempKeys = [...allCheckedKeys.value]
-
-    const checked =
-      index > -1 ||
-      (!!childrenKeys.length &&
-        childrenKeys.every(key => tempKeys.includes(key) || indeterminateKeys.value.includes(key)))
-
-    if (checked) {
-      const parentKeys = cascaderEnabled ? getParentKeys(nodeMap, node, disabledKeys) : []
-      tempKeys.splice(index, 1)
-      tempKeys = tempKeys.filter(key => !parentKeys.includes(key) && !childrenKeys.includes(key))
-    } else {
-      tempKeys.push(currKey)
-      cascaderEnabled && setParentChecked(nodeMap, node, tempKeys, disabledKeys)
-      tempKeys.push(...childrenKeys)
+    if (node.checkDisabled) {
+      return
     }
 
-    handleChange(
-      checked,
-      node.rawNode,
-      processAllCheckedKeysByCheckStrategy(cascaderStrategy, tempKeys, nodeMap, disabledKeys),
+    const children = cascaderStrategy.value !== 'off' ? node.children ?? [] : []
+    const checked =
+      isChecked(currKey) ||
+      (!!children.length &&
+        children.every(child => isChecked(child.key) || isIndeterminate(child.key) || isCheckDisabled(child.key)))
+
+    const _checkedKeys = checkedStateResolver.appendKeys([], checkedKeys.value)
+    const newCheckedKeys = checkedStateResolver[checked ? 'removeKeys' : 'appendKeys'](_checkedKeys, [currKey])
+
+    const disabledKeys = checked
+      ? [...allCheckedKeySet.value].filter(key => isCheckDisabled(key))
+      : (cascaderStrategy.value === 'parent'
+          ? allCheckedStateResolver.appendKeys([], newCheckedKeys)
+          : newCheckedKeys
+        ).filter(key => isCheckDisabled(key) && !allCheckedKeySet.value.has(key))
+
+    const resolvedCheckedKeys = checkedStateResolver[checked ? 'appendKeys' : 'removeKeys'](
+      newCheckedKeys,
+      disabledKeys,
     )
+
+    handleChange(checked, node.rawNode, resolvedCheckedKeys)
   }
 
   const handleChange = (checked: boolean, rawNode: TreeNode, newKeys: VKey[]) => {
@@ -112,105 +145,15 @@ export function useCheckable(props: TreeProps, mergedNodeMap: ComputedRef<Map<VK
     callChange(mergedNodeMap, newKeys, onCheckedChange)
   }
 
+  watch(cascaderStrategy, () => {
+    const newCheckedKeys = checkedStateResolver.appendKeys([], checkedKeys.value)
+    setCheckedKeys(newCheckedKeys)
+  })
+
   return {
     checkedKeys,
-    allCheckedKeys,
-    checkDisabledKeys,
-    indeterminateKeys,
+    isChecked,
+    isIndeterminate,
     handleCheck,
   }
-}
-
-function setParentChecked(
-  dataMap: Map<VKey, MergedNode>,
-  currNode: MergedNode | undefined,
-  tempKeys: VKey[],
-  disabledKeys: VKey[],
-) {
-  let parentSelected = true
-  while (parentSelected && currNode && !isNil(currNode.parentKey)) {
-    const parent = dataMap.get(currNode.parentKey)
-    if (parent && !disabledKeys.includes(currNode.parentKey)) {
-      parentSelected = parent.children!.every(item => disabledKeys.includes(item.key) || tempKeys.includes(item.key))
-      if (parentSelected) {
-        tempKeys.push(currNode.parentKey)
-      }
-    }
-    currNode = parent
-  }
-}
-function processAllCheckedKeysByCheckStrategy(
-  cascaderStrategy: CascaderStrategy,
-  checkedKys: VKey[],
-  dataMap: Map<VKey, MergedNode>,
-  disabledKeys: VKey[],
-) {
-  if (cascaderStrategy === 'off') {
-    return [...new Set(checkedKys)]
-  }
-
-  let res: VKey[] = []
-  checkedKys = filterCheckedKeysWithDisabled(dataMap, checkedKys, disabledKeys)
-
-  // 将禁用且勾选的节点先push
-  if (disabledKeys.length) {
-    res = checkedKys.filter(item => disabledKeys.includes(item))
-  }
-
-  for (const checkedKey of checkedKys) {
-    const currNode = dataMap.get(checkedKey)
-    if (currNode) {
-      const selfKey = currNode.key
-      const parentKey = currNode.parentKey
-
-      if (cascaderStrategy === 'parent') {
-        if (!checkedKys.includes(parentKey!)) {
-          res.push(selfKey)
-        }
-      } else if (cascaderStrategy === 'child') {
-        if (currNode.isLeaf) {
-          res.push(selfKey)
-        }
-      } else {
-        res.push(selfKey)
-      }
-    }
-  }
-
-  return [...new Set(res)]
-}
-
-function findAllCheckedKeys(dataMap: Map<VKey, MergedNode>, checkedKys: VKey[], disabledKeys: VKey[]) {
-  let res = [...checkedKys]
-  let lastParentKey
-
-  for (const checkedKey of checkedKys) {
-    const currNode = dataMap.get(checkedKey)
-    const parentKey = currNode?.parentKey
-    const childrenKeys = getChildrenKeys(currNode, disabledKeys)
-    res = res.concat(childrenKeys)
-    if (!isNil(parentKey) && lastParentKey !== parentKey) {
-      setParentChecked(dataMap, currNode, res, disabledKeys)
-      lastParentKey = parentKey
-    }
-  }
-
-  res = filterCheckedKeysWithDisabled(dataMap, [...new Set(res)], disabledKeys)
-
-  return res
-}
-
-// 把禁用且未勾选节点的父节点从checkedKeys中排除
-function filterCheckedKeysWithDisabled(dataMap: Map<VKey, MergedNode>, tempKeys: VKey[], disabledKeys: VKey[]) {
-  let res = [...tempKeys]
-  if (disabledKeys.length) {
-    for (const disabledKey of disabledKeys) {
-      if (!res.includes(disabledKey)) {
-        const currNode = dataMap.get(disabledKey)
-        const parentKeys = getParentKeys(dataMap, currNode, disabledKeys)
-        res = res.filter(key => !parentKeys.includes(key))
-      }
-    }
-  }
-  return res
 }

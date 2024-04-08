@@ -8,13 +8,10 @@
 import type { ExpandableContext } from './useExpandable'
 import type { TreeNode, TreeNodeDisabled, TreeProps } from '../types'
 import type { VKey } from '@idux/cdk/utils'
-import type { CascaderStrategy } from '@idux/components/cascader'
 import type { GetKeyFn } from '@idux/components/utils'
 import type { ComputedRef } from 'vue'
 
-import { computed } from 'vue'
-
-import { isNil } from 'lodash-es'
+import { computed, ref } from 'vue'
 
 export interface MergedNode {
   children?: MergedNode[]
@@ -42,18 +39,57 @@ export function useMergeNodes(
 ): {
   mergedNodes: ComputedRef<MergedNode[]>
   mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>
+  parentKeyMap: ComputedRef<Map<VKey, VKey | undefined>>
+  depthMap: ComputedRef<Map<VKey, number>>
+  setLoadedNodes: (key: VKey, nodes: TreeNode[]) => void
 } {
-  const mergedNodes = computed(() =>
-    convertMergeNodes(props, props.dataSource, mergedChildrenKey.value, mergedGetKey.value, mergedLabelKey.value),
-  )
+  const loadedNodes = ref<Record<VKey, TreeNode[]>>({})
 
-  const mergedNodeMap = computed(() => {
-    const map = new Map<VKey, MergedNode>()
-    convertMergedNodeMap(mergedNodes.value, map)
-    return map
+  const setLoadedNodes = (key: VKey, nodes: TreeNode[]) => {
+    loadedNodes.value[key] = nodes
+  }
+  const getLoadedNodes = (key: VKey): TreeNode[] | undefined => {
+    return loadedNodes.value[key]
+  }
+
+  const context = computed(() => {
+    const dataKeyMap = new Map<VKey, MergedNode>()
+    const parentKeyMap = new Map<VKey, VKey>()
+    const depthMap = new Map<VKey, number>()
+
+    const mergedNodes = convertMergeNodes(
+      props.dataSource,
+      getLoadedNodes,
+      {
+        props,
+        childrenKey: mergedChildrenKey.value,
+        getKey: mergedGetKey.value,
+        labelKey: mergedLabelKey.value,
+        parentKey: undefined,
+        parentLevel: -1,
+        parentsDisabled: [],
+      },
+      {
+        dataKeyMap,
+        parentKeyMap,
+        depthMap,
+      },
+    )
+
+    return {
+      mergedNodes,
+      dataKeyMap,
+      parentKeyMap,
+      depthMap,
+    }
   })
 
-  return { mergedNodes, mergedNodeMap }
+  const mergedNodes = computed(() => context.value.mergedNodes)
+  const mergedNodeMap = computed(() => context.value.dataKeyMap)
+  const parentKeyMap = computed(() => context.value.parentKeyMap)
+  const depthMap = computed(() => context.value.depthMap)
+
+  return { mergedNodes, mergedNodeMap, parentKeyMap, depthMap, setLoadedNodes }
 }
 
 export function useFlattedNodes(
@@ -81,102 +117,87 @@ export function useFlattedNodes(
 }
 
 export function convertMergeNodes(
-  props: TreeProps,
   nodes: TreeNode[],
-  childrenKey: string,
-  getKey: GetKeyFn,
-  labelKey: string,
-  parentKey?: VKey,
-  parentLevel?: number,
-  parentDisabled?: TreeNodeDisabled,
+  getLoadedNodes: (key: VKey) => TreeNode[] | undefined,
+  options: {
+    props: TreeProps
+    childrenKey: string
+    getKey: GetKeyFn
+    labelKey: string
+    parentKey: VKey | undefined
+    parentLevel: number
+    parentsDisabled: TreeNodeDisabled[]
+  },
+  maps: {
+    dataKeyMap: Map<VKey, MergedNode>
+    parentKeyMap: Map<VKey, VKey | undefined>
+    depthMap: Map<VKey, number>
+  },
 ): MergedNode[] {
+  const { props, childrenKey, getKey, labelKey, parentKey, parentLevel, parentsDisabled } = options
   const { cascaderStrategy, disabled, loadChildren } = props
-  const level = isNil(parentLevel) ? -1 : parentLevel
+  const { dataKeyMap, parentKeyMap, depthMap } = maps
+  const hasLoad = !!loadChildren
 
-  return nodes.map((node, index) =>
-    convertMergeNode(
-      node,
-      childrenKey,
-      getKey,
-      labelKey,
-      disabled,
-      !!loadChildren,
-      index === 0,
-      index === nodes.length - 1,
-      level,
-      cascaderStrategy,
-      parentDisabled ? [parentDisabled] : [],
-      parentKey,
-    ),
-  )
-}
+  return nodes.map((node, index) => {
+    const key = getKey(node)
+    const nodeDisabled = convertDisabled(node, disabled)
+    const subNodes = ((node as Record<string, unknown>)[childrenKey] ?? getLoadedNodes(key)) as TreeNode[] | undefined
+    const label = node[labelKey] as string
+    const level = parentLevel + 1
 
-function convertMergeNode(
-  rawNode: TreeNode,
-  childrenKey: string,
-  getKey: GetKeyFn,
-  labelKey: string,
-  disabled: ((node: TreeNode) => boolean | TreeNodeDisabled) | undefined,
-  hasLoad: boolean,
-  isFirst: boolean,
-  isLast: boolean,
-  level: number,
-  cascaderStrategy: CascaderStrategy,
-  parentsDisabled: TreeNodeDisabled[],
-  parentKey?: VKey,
-): MergedNode {
-  const key = getKey(rawNode)
-  const nodeDisabled = convertDisabled(rawNode, disabled)
-  const subNodes = (rawNode as Record<string, unknown>)[childrenKey] as TreeNode[] | undefined
-  const label = rawNode[labelKey] as string
+    const children =
+      subNodes &&
+      convertMergeNodes(
+        subNodes,
+        getLoadedNodes,
+        {
+          props,
+          childrenKey,
+          getKey,
+          labelKey,
+          parentKey: key,
+          parentLevel: level,
+          parentsDisabled: [nodeDisabled, ...(parentsDisabled ?? [])],
+        },
+        maps,
+      )
 
-  level++
+    const mergedDisabled = mergeDisabled(
+      nodeDisabled,
+      parentsDisabled ?? [],
+      children?.map(child => ({
+        check: child.checkDisabled,
+        drag: child.dragDisabled,
+        drop: child.dropDisabled,
+        select: child.selectDisabled,
+      })) ?? [],
+      cascaderStrategy !== 'off',
+    )
 
-  const children = subNodes?.map((subNode, index) =>
-    convertMergeNode(
-      subNode,
-      childrenKey,
-      getKey,
-      labelKey,
-      disabled,
-      hasLoad,
-      index === 0,
-      index === subNodes.length - 1,
-      level,
-      cascaderStrategy,
-      [nodeDisabled, ...parentsDisabled],
+    const mergedNode = {
+      label,
       key,
-    ),
-  )
+      children,
+      isFirst: index === 0,
+      isLeaf: node.isLeaf ?? !(subNodes?.length || hasLoad),
+      isLast: index === nodes.length - 1,
+      parentKey,
+      expanded: false,
+      level,
+      rawNode: node,
+      checkDisabled: mergedDisabled.check,
+      dragDisabled: mergedDisabled.drag,
+      dropDisabled: mergedDisabled.drop,
+      selectDisabled: mergedDisabled.select,
+    }
 
-  const mergedDisabled = mergeDisabled(
-    nodeDisabled,
-    parentsDisabled,
-    children?.map(child => ({
-      check: child.checkDisabled,
-      drag: child.dragDisabled,
-      drop: child.dropDisabled,
-      select: child.selectDisabled,
-    })) ?? [],
-    cascaderStrategy !== 'off',
-  )
+    dataKeyMap.set(key, mergedNode)
+    parentKeyMap.set(key, parentKey)
+    depthMap.set(key, level)
 
-  return {
-    label,
-    key,
-    children,
-    isFirst,
-    isLeaf: rawNode.isLeaf ?? !(subNodes?.length || hasLoad),
-    isLast,
-    parentKey,
-    expanded: false,
-    level,
-    rawNode,
-    checkDisabled: mergedDisabled.check,
-    dragDisabled: mergedDisabled.drag,
-    dropDisabled: mergedDisabled.drop,
-    selectDisabled: mergedDisabled.select,
-  }
+    return mergedNode
+  })
 }
 
 function convertDisabled(node: TreeNode, disabled?: (node: TreeNode) => boolean | TreeNodeDisabled) {
