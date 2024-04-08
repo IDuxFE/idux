@@ -1,6 +1,6 @@
 {
   "name": "@idux/components",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A UI Component Library for Vue 3.x",
   "keywords": [
     "vue",
@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@emotion/hash": "^0.9.1",
-    "@idux/cdk": "2.0.0",
+    "@idux/cdk": "2.1.1",
     "date-fns": "^2.27.0",
     "lodash-es": "^4.17.0"
   },

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/IDuxFE/idux/compare/v2.1.0...v2.1.1) (2024-04-08)
+
+
+### Bug Fixes
+
+* **comp:tree-select:** removing item from selector doesn't uncheck tree node ([#1877](https://github.com/IDuxFE/idux/issues/1877)) ([ce4f477](https://github.com/IDuxFE/idux/commit/ce4f4778e370562ee8bf4130c663d2c182d37d90))
+
+
+
+
+
 # [2.0.0](https://github.com/IDuxFE/idux/compare/v1.12.2...v2.0.0) (2024-02-01)
 
 

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/IDuxFE/idux/compare/v2.1.0...v2.1.1) (2024-04-08)
+
+
+### Bug Fixes
+
+* **comp:spin:** spin mask backgroun color isn't correct ([#1874](https://github.com/IDuxFE/idux/issues/1874)) ([f2fcf2d](https://github.com/IDuxFE/idux/commit/f2fcf2dfe16fee05aeedd298de3361e9be76b81b))
+* **pro:search:** quickselect search input shouldn't hide when option selected ([#1883](https://github.com/IDuxFE/idux/issues/1883)) ([e9d8517](https://github.com/IDuxFE/idux/commit/e9d8517a2772f708d37f379bc1e70a41ecff8933))
+* **pro:tag-select:** max exceeded alert content error ([#1882](https://github.com/IDuxFE/idux/issues/1882)) ([c6eef62](https://github.com/IDuxFE/idux/commit/c6eef623e1d5a8485c835bd5b69360fa1348545f))
+* **pro:tag-select:** removing unselected tag data shouldn't emit tagRemove ([#1880](https://github.com/IDuxFE/idux/issues/1880)) ([c3703a8](https://github.com/IDuxFE/idux/commit/c3703a8b71050e50802e14997d501af1cbe5c949))
+* **pro:tag-select:** supports beforeRemoveConfirm and beforeSelectConfirm ([#1879](https://github.com/IDuxFE/idux/issues/1879)) ([4f48690](https://github.com/IDuxFE/idux/commit/4f4869003bb14c6af9e470f2602286072c298939))
+* **pro:tag-select:** tag creation option should hide when input fully matched ([#1881](https://github.com/IDuxFE/idux/issues/1881)) ([fb6116f](https://github.com/IDuxFE/idux/commit/fb6116ffd7102a9025e5b0b5a4a14b48d6db7601))
+* **pro:tag-select:** tag text shouldn't overflow when overlayMatchWidth is true ([#1878](https://github.com/IDuxFE/idux/issues/1878)) ([d2fcdbf](https://github.com/IDuxFE/idux/commit/d2fcdbff3487505cd2be2f1dca849e71d8b2655d))
+
+
+
+
+
 # [2.1.0](https://github.com/IDuxFE/idux/compare/v2.0.1...v2.1.0) (2024-03-27)
 
 

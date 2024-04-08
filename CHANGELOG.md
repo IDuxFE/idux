@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/IDuxFE/idux/compare/v2.1.0...v2.1.1) (2024-04-08)
+
+
+### Bug Fixes
+
+* **comp:carousel:** pre and next arrow should hide when item count is 0 ([#1871](https://github.com/IDuxFE/idux/issues/1871)) ([e8a6d6e](https://github.com/IDuxFE/idux/commit/e8a6d6e00e01e683c4fe63345f6b80ba8c020d63))
+* **comp:collapse,empty:** margin size css var reference error ([#1872](https://github.com/IDuxFE/idux/issues/1872)) ([dca4899](https://github.com/IDuxFE/idux/commit/dca489914745f956d63abebb350a8324cc69c926))
+* **comp:input:** select style component within input addon isn't correct ([#1873](https://github.com/IDuxFE/idux/issues/1873)) ([73c4f11](https://github.com/IDuxFE/idux/commit/73c4f11feb33487a015153bcac2d2f326be2cff8))
+* **comp:spin:** spin mask backgroun color isn't correct ([#1874](https://github.com/IDuxFE/idux/issues/1874)) ([f2fcf2d](https://github.com/IDuxFE/idux/commit/f2fcf2dfe16fee05aeedd298de3361e9be76b81b))
+* **comp:table:** clicking expand icon shouldn't trigger row select ([#1875](https://github.com/IDuxFE/idux/issues/1875)) ([818722e](https://github.com/IDuxFE/idux/commit/818722e99e026893b40f7ca3f37881c161105358))
+* **comp:tooltip:** tooltip content should wrap on line break ([#1876](https://github.com/IDuxFE/idux/issues/1876)) ([ab4a449](https://github.com/IDuxFE/idux/commit/ab4a4491fa7446018897173485f09ca6db7fedfa))
+* **comp:tree-select:** removing item from selector doesn't uncheck tree node ([#1877](https://github.com/IDuxFE/idux/issues/1877)) ([ce4f477](https://github.com/IDuxFE/idux/commit/ce4f4778e370562ee8bf4130c663d2c182d37d90))
+* **pro:search:** quickselect search input shouldn't hide when option selected ([#1883](https://github.com/IDuxFE/idux/issues/1883)) ([e9d8517](https://github.com/IDuxFE/idux/commit/e9d8517a2772f708d37f379bc1e70a41ecff8933))
+* **pro:tag-select:** max exceeded alert content error ([#1882](https://github.com/IDuxFE/idux/issues/1882)) ([c6eef62](https://github.com/IDuxFE/idux/commit/c6eef623e1d5a8485c835bd5b69360fa1348545f))
+* **pro:tag-select:** removing unselected tag data shouldn't emit tagRemove ([#1880](https://github.com/IDuxFE/idux/issues/1880)) ([c3703a8](https://github.com/IDuxFE/idux/commit/c3703a8b71050e50802e14997d501af1cbe5c949))
+* **pro:tag-select:** supports beforeRemoveConfirm and beforeSelectConfirm ([#1879](https://github.com/IDuxFE/idux/issues/1879)) ([4f48690](https://github.com/IDuxFE/idux/commit/4f4869003bb14c6af9e470f2602286072c298939))
+* **pro:tag-select:** tag creation option should hide when input fully matched ([#1881](https://github.com/IDuxFE/idux/issues/1881)) ([fb6116f](https://github.com/IDuxFE/idux/commit/fb6116ffd7102a9025e5b0b5a4a14b48d6db7601))
+* **pro:tag-select:** tag text shouldn't overflow when overlayMatchWidth is true ([#1878](https://github.com/IDuxFE/idux/issues/1878)) ([d2fcdbf](https://github.com/IDuxFE/idux/commit/d2fcdbff3487505cd2be2f1dca849e71d8b2655d))
+
+
+
+
+
 # [2.1.0](https://github.com/IDuxFE/idux/compare/v2.0.1...v2.1.0) (2024-03-27)
 
 
