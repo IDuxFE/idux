@@ -71,6 +71,11 @@ export function useSelectedState(
       return
     }
 
+    const newSelectedValue = selectedValue.value?.filter(item => key !== item)
+    if (newSelectedValue?.length === selectedValue.value?.length) {
+      return
+    }
+
     setSelectedValue(selectedValue.value?.filter(item => key !== item))
     callEmit(props.onTagRemove, data)
   }
