@@ -10,7 +10,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
     <div
       class="ix-spin"
     >
-      <!---->
+      <transition-stub
+        appear="true"
+        css="true"
+        name="ix-fade"
+        persisted="false"
+      >
+        <!---->
+      </transition-stub>
       <div
         class="ix-spin-container"
       >
@@ -1151,7 +1158,14 @@ exports[`ProTransfer > table transfer render work 1`] = `
     <div
       class="ix-spin"
     >
-      <!---->
+      <transition-stub
+        appear="true"
+        css="true"
+        name="ix-fade"
+        persisted="false"
+      >
+        <!---->
+      </transition-stub>
       <div
         class="ix-spin-container"
       >
@@ -1531,7 +1545,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
     <div
       class="ix-spin"
     >
-      <!---->
+      <transition-stub
+        appear="true"
+        css="true"
+        name="ix-fade"
+        persisted="false"
+      >
+        <!---->
+      </transition-stub>
       <div
         class="ix-spin-container"
       >
@@ -3557,7 +3578,14 @@ exports[`ProTransfer > tree transfer render work 1`] = `
     <div
       class="ix-spin"
     >
-      <!---->
+      <transition-stub
+        appear="true"
+        css="true"
+        name="ix-fade"
+        persisted="false"
+      >
+        <!---->
+      </transition-stub>
       <div
         class="ix-spin-container"
       >
