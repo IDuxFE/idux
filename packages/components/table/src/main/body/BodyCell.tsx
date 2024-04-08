@@ -255,14 +255,19 @@ function renderExpandableChildren(
     }
   }
 
+  const handleClick = (evt: MouseEvent) => {
+    evt.preventDefault()
+    evt.stopImmediatePropagation()
+
+    if (!expandDisabled.value) {
+      handleExpend()
+    }
+  }
+
   return [
     ...indents,
     <span class={triggerCls} style={indentStyle}>
-      <button
-        class={`${prefixCls}-expandable-trigger-button`}
-        type="button"
-        onClick={expandDisabled.value ? undefined : handleExpend}
-      >
+      <button class={`${prefixCls}-expandable-trigger-button`} type="button" onClick={handleClick}>
         {iconNode}
       </button>
       {mergedShowLine && [
