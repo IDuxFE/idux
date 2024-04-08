@@ -191,7 +191,7 @@ export default defineComponent({
               ))}
             </div>
           </div>
-          {mergedShowArrow.value && (
+          {mergedShowArrow.value && children.length > 1 && (
             <>
               <div key="__arrow-prev" class={`${prefixCls}-arrow ${prefixCls}-arrow-prev`} onClick={prev}>
                 {slots.arrow ? slots.arrow({ type: 'prev' }) : <IxIcon name="left-filled" />}
