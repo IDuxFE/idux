@@ -4,3 +4,4 @@
 | `fontSize` |  | `number` | `12` | `12` |
 | `maxWidth` |  | `number` | `400` | `400` |
 | `minWidth` |  | `number` | `32` | `32` |
+| `whiteSpace` |  | `string` | `pre-wrap` | `pre-wrap` |

@@ -4,4 +4,5 @@
   --ix-tooltip-color: #808999;
   --ix-tooltip-min-width: 32px;
   --ix-tooltip-max-width: 400px;
+  --ix-tooltip-white-space: pre-wrap;
 }

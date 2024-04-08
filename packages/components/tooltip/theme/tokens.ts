@@ -11,4 +11,6 @@ export interface TooltipThemeTokens {
 
   minWidth: number
   maxWidth: number
+
+  whiteSpace: string
 }
