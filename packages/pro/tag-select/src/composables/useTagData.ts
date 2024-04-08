@@ -69,7 +69,7 @@ export function useTagData(props: ProTagSelectProps, tagColorContext: TagColorCo
   })
 
   const inputFullyMatched = computed(
-    () => filteredData.value.length === 1 && filteredData.value[0].label === inputValue.value,
+    () => inputValue.value && filteredData.value.findIndex(data => data.label === inputValue.value) > -1,
   )
 
   const getTagDataByKey = (key: VKey) => {
