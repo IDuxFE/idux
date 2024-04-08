@@ -16,6 +16,7 @@ import { type ɵTriggerInstance } from '@idux/components/_private/trigger'
 export interface OverlayStateContext {
   overlayRef: Ref<ControlTriggerOverlayInstance | undefined>
   overlayStyle: ComputedRef<CSSProperties | undefined>
+  overlayMatchWidth: ComputedRef<boolean | 'minWidth'>
   updateOverlay: (rect?: DOMRect) => void
   overlayOpened: ComputedRef<boolean>
   setOverlayOpened: (open: boolean) => void
@@ -35,14 +36,14 @@ export function useOverlayState(
 ): OverlayStateContext {
   const overlayRef = ref<ControlTriggerOverlayInstance>()
   const [overlayWidth, setOverlayWidth] = useState('')
-  const overlayStyle = computed(() => {
-    const { overlayMatchWidth = config.overlayMatchWidth } = props
 
-    if (!overlayMatchWidth) {
+  const overlayMatchWidth = computed(() => props.overlayMatchWidth ?? config.overlayMatchWidth)
+  const overlayStyle = computed(() => {
+    if (!overlayMatchWidth.value) {
       return
     }
 
-    return { [overlayMatchWidth === true ? 'width' : 'minWidth']: overlayWidth.value }
+    return { [overlayMatchWidth.value === true ? 'width' : 'minWidth']: overlayWidth.value }
   })
   const [_overlayOpened, setOverlayOpened] = useControlledProp(props, 'open', false)
   const overlayOpened = computed(() => !props.disabled && _overlayOpened.value)
@@ -83,5 +84,5 @@ export function useOverlayState(
     useResizeObserver(triggerRef, ({ contentRect }) => updateOverlay(contentRect))
   })
 
-  return { overlayRef, overlayStyle, updateOverlay, overlayOpened, setOverlayOpened }
+  return { overlayRef, overlayStyle, overlayMatchWidth, updateOverlay, overlayOpened, setOverlayOpened }
 }

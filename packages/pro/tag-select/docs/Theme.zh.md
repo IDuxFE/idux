@@ -1,7 +1,7 @@
 | 名称 | 描述 | 类型 | default | dark |
 |---|---|---|---|---|
 | `colorIndicatorSize` | 颜色指示圆圈的尺寸 | `number` | `12` | `12` |
-| `editPanelMinWidth` | 编辑面板的最小宽度 | `number` | `225` | `225` |
+| `editPanelMinWidth` | 编辑面板的最小宽度 | `number` | `140` | `140` |
 | `panelMaxHeight` | 数据面板的最大高度 | `number` | `256` | `256` |
 | `presetColorBlueBg` | 预设蓝色背景色 | `string` | `rgb(232, 241, 255)` | `rgb(21, 36, 58)` |
 | `presetColorBlueLabel` | 预设蓝色文字色 | `string` | `#1c6eff` | `#4083E8` |

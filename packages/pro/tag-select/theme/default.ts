@@ -37,7 +37,7 @@ export function getDefaultThemeTokens(
     presetColorOrangeBg: getAlphaColor(orangeColor, tagCompColorAlpha, colorContainerBg),
     colorIndicatorSize: 12,
     panelMaxHeight: 256,
-    editPanelMinWidth: 225,
+    editPanelMinWidth: 140,
     tagHeight: 20,
   }
 }
