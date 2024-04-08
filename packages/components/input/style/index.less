@@ -8,15 +8,15 @@
   .reset-color();
 
   &-sm {
-    .input-size(var(--ix-control-height-sm), var(--ix-control-font-size-sm), var(--ix-control-padding-size-horizontal-sm), var(--ix-control-border-radius-sm));
+    .input-size(var(--ix-control-height-sm), var(--ix-control-font-size-sm), var(--ix-control-padding-size-vertical-sm), var(--ix-control-padding-size-horizontal-sm), var(--ix-control-border-radius-sm));
   }
 
   &-md {
-    .input-size(var(--ix-control-height-md), var(--ix-control-font-size-md), var(--ix-control-padding-size-horizontal-md), var(--ix-control-border-radius-md));
+    .input-size(var(--ix-control-height-md), var(--ix-control-font-size-md), var(--ix-control-padding-size-vertical-md), var(--ix-control-padding-size-horizontal-md), var(--ix-control-border-radius-md));
   }
 
   &-lg {
-    .input-size(var(--ix-control-height-lg), var(--ix-control-font-size-lg), var(--ix-control-padding-size-horizontal-lg), var(--ix-control-border-radius-lg));
+    .input-size(var(--ix-control-height-lg), var(--ix-control-font-size-lg), var(--ix-control-padding-size-vertical-lg), var(--ix-control-padding-size-horizontal-lg), var(--ix-control-border-radius-lg));
   }
 
   &,
@@ -114,7 +114,7 @@
     display: inline-block;
     text-align: center;
     background-color: var(--ix-color-addon-container-bg);
-    border: 1px solid var(--ix-color-border);
+    border: var(--ix-line-width) solid var(--ix-color-border);
     white-space: nowrap;
 
     &:first-child {
@@ -122,11 +122,9 @@
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
 
-      .@{selector-prefix} {
-        &-content {
-          border-top-right-radius: 0;
-          border-bottom-right-radius: 0;
-        }
+      .@{trigger-prefix} {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
       }
     }
 
@@ -135,32 +133,19 @@
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
 
-      .@{selector-prefix} {
-        &-content {
-          border-top-left-radius: 0;
-          border-bottom-left-radius: 0;
-        }
+      .@{trigger-prefix} {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
       }
     }
 
-    .@{selector-prefix} {
-      &-content {
-        background-color: inherit;
-        border-color: transparent;
-      }
-
-      // TODO: select 那边要去掉这两个样式
-      &-item {
-        left: unset !important;
-        width: unset !important;
-      }
-
-      &-item-label {
-        width: 100%;
-      }
+    .@{trigger-prefix} {
+      background-color: transparent;
+      border-color: transparent;
+      z-index: 1;
 
       &-suffix {
-        right: 4px;
+        right: var(--ix-margin-size-xs);
       }
     }
   }
@@ -266,13 +251,13 @@
       color: var(--ix-color-error-text);
       border-color: var(--ix-color-error-border);
 
-      .@{selector-prefix} {
-        &:hover &-content,
-        &-content {
+      .@{trigger-prefix} {
+        border-color: transparent;
+        &:hover {
           border-color: transparent;
         }
 
-        &.@{selector-prefix}-focused .@{selector-prefix}-content {
+        &.@{trigger-prefix}-focused {
           border-color: transparent;
           // todo remove
           box-shadow: none;
