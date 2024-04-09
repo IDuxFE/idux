@@ -9,7 +9,7 @@
   position: relative;
   pointer-events: none;
   width: auto;
-  max-width: calc(100vw - 32px);
+  max-width: calc(100vw - var(--ix-margin-size-2xl));
   margin: 0 auto;
 
   &-wrapper {
@@ -41,14 +41,14 @@
     box-shadow: var(--ix-box-shadow-lg);
 
     > .@{header-prefix} {
-      padding-left: 16px;
-      padding-right: 16px;
+      padding-left: var(--ix-padding-size-lg);
+      padding-right: var(--ix-padding-size-lg);
     }
   }
 
   &-body {
     flex: 1;
-    padding: 8px 16px;
+    padding: var(--ix-padding-size-sm) var(--ix-padding-size-lg);
     overflow: auto;
 
     &-title {
@@ -56,7 +56,8 @@
 
       font-weight: var(--ix-modal-title-font-weight);
       color: var(--ix-modal-title-color);
-      margin-bottom: 4px;
+      margin-bottom: var(--ix-margin-size-xs);
+      word-break: var(--ix-modal-title-word-break);
     }
 
     &-content {
@@ -64,7 +65,7 @@
       flex-direction: column;
       justify-content: center;
       width: 100%;
-      padding-right: 16px;
+      padding-right: var(--ix-padding-size-lg);
       color: var(--ix-modal-content-color);
 
       &-only-title {
@@ -84,14 +85,14 @@
     &-warning,
     &-error {
       display: flex;
-      padding: 0 16px;
+      padding: 0 var(--ix-padding-size-lg);
     }
 
     &-icon {
       font-size: var(--ix-modal-icon-size);
       height: calc(var(--ix-modal-icon-size) + var(--ix-line-height-gutter));
       line-height: calc(var(--ix-modal-icon-size) + var(--ix-line-height-gutter));
-      margin: 0 16px;
+      margin: 0 var(--ix-padding-size-lg);
     }
 
     &-confirm {
@@ -128,10 +129,10 @@
   &-footer {
     display: flex;
     justify-content: flex-end;
-    padding: 12px 16px;
+    padding: var(--ix-padding-size-md) var(--ix-padding-size-lg);
 
     .@{button-prefix} + .@{button-prefix} {
-      margin-left: 8px;
+      margin-left: var(--ix-margin-size-sm);
     }
   }
 
@@ -156,8 +157,8 @@
 
 @media (max-width: @screen-sm-max) {
   .@{modal-prefix} {
-    max-width: calc(100vw - 16px);
-    margin: 8px auto;
+    max-width: calc(100vw - var(--ix-padding-size-lg));
+    margin: var(--ix-margin-size-sm) auto;
   }
 
   .@{modal-prefix}-centered {
