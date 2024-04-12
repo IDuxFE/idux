@@ -1,9 +1,13 @@
 .@{table-prefix} {
   &-fix {
+    &-start {
+      z-index: 2;
+    }
+    &-end {
+      z-index: 3;
+    }
     &-start,
     &-end {
-      z-index: 2;
-
       td& {
         background-color: var(--ix-color-container-bg);
       }
