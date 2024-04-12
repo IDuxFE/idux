@@ -5,46 +5,52 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type PropType, computed, defineComponent, inject } from 'vue'
+import type { ProTableColumn } from '../types'
+import type { VKey } from '@idux/cdk/utils'
 
-import { type VKey, useKey } from '@idux/cdk/utils'
+import { type PropType, defineComponent, inject } from 'vue'
+
 import { IxIcon } from '@idux/components/icon'
 import { IxTree, type TreeDragDropOptions, type TreeProps } from '@idux/components/tree'
 
 import { proTableToken } from '../token'
-import { type ProTableColumn, type ProTableColumnBase } from '../types'
-import { getColumnTitle, loopColumns } from '../utils'
+import { getColumnTitle } from '../utils'
 
 export default defineComponent({
   props: {
     columns: { type: Array as PropType<ProTableColumn[]>, required: true },
+    checkedKeys: { type: Array as PropType<VKey[]>, required: true },
     searchValue: { type: String, default: undefined },
     title: { type: String, default: undefined },
-    onDrop: { type: Function, required: true },
-    onFixedChange: { type: Function, required: true },
-    onVisibleChange: { type: Function, required: true },
+    onDrop: { type: Function as PropType<(options: TreeDragDropOptions) => void>, required: true },
+    onFixedChange: {
+      type: Function as PropType<(column: ProTableColumn, fixed: 'start' | 'end' | undefined) => void>,
+      required: true,
+    },
+    onVisibleChange: {
+      type: Function as PropType<(showedKeys: Set<VKey>, hiddenKeys: Set<VKey>) => void>,
+      required: true,
+    },
   },
   setup(props) {
-    const key = useKey()
     const { locale, mergedPrefixCls } = inject(proTableToken)!
 
-    const checkedKeys = computed(() => getCheckedKeys(props.columns))
+    const onCheckedChange = (checkedKeys: VKey[]) => {
+      const visibleKeySet = new Set(checkedKeys)
+      const oldVisibleKeys = new Set(props.checkedKeys)
 
-    const onCheck = (checked: boolean, column: ProTableColumn) => {
-      if (!column.children) {
-        column.visible = checked
-      } else {
-        loopColumns(column.children, child => {
-          if (!child.children && child.changeVisible !== false) {
-            child.visible = checked
-          }
-        })
-      }
-      props.onVisibleChange()
+      checkedKeys.forEach(key => {
+        if (oldVisibleKeys.has(key)) {
+          visibleKeySet.delete(key)
+          oldVisibleKeys.delete(key)
+        }
+      })
+
+      props.onVisibleChange(visibleKeySet, oldVisibleKeys)
     }
 
     const onDrop = (options: TreeDragDropOptions) => {
-      const { dragNode, dropNode, dropType } = options
+      const { dragNode, dropNode } = options
 
       const dragKey = dragNode?.key
       const dropKey = dropNode?.key
@@ -52,44 +58,41 @@ export default defineComponent({
         return
       }
 
-      const columns = getDropColumns(props.columns, dragKey, dropKey, dropType)
-      props.onDrop!(key, columns)
+      props.onDrop!(options)
     }
 
     const onFixedChange = (fixed: 'start' | 'end' | undefined, column: ProTableColumn, evt: MouseEvent) => {
       evt.preventDefault()
-      column.fixed = fixed
-      loopColumns(column.children, child => {
-        child.fixed = fixed
-      })
-      props.onFixedChange()
+      evt.stopImmediatePropagation()
+      props.onFixedChange(column, fixed)
     }
 
     return () => {
-      const dataSource = props.columns.filter(column => column.layoutable !== false)
       // 不要显示空状态
-      if (dataSource.length === 0) {
+      if (props.columns.length === 0) {
         return
       }
 
-      const { searchValue, title } = props
+      const prefixCls = `${mergedPrefixCls.value}-layout-tool-tree`
+      const { columns, searchValue, title } = props
       const { startPin, endPin, noPin } = locale.table.layout
 
       const treeProps: TreeProps = {
         blocked: true,
-        cascaderStrategy: 'all',
+        cascaderStrategy: 'child',
         checkable: true,
-        checkedKeys: checkedKeys.value,
+        checkedKeys: props.checkedKeys,
         checkOnClick: true,
         draggable: true,
-        dataSource,
+        dataSource: columns,
         disabled: disableColumn,
         empty: '',
         childrenKey: 'children',
         getKey: 'key',
         labelKey: 'title',
         searchValue,
-        onCheck,
+        searchFn: () => true,
+        onCheckedChange,
         onDrop,
       }
 
@@ -138,8 +141,6 @@ export default defineComponent({
         },
       }
 
-      const prefixCls = `${mergedPrefixCls.value}-layout-tool-tree`
-
       return (
         <div class={prefixCls}>
           {title && <div class={`${prefixCls}-title`}>{title}</div>}
@@ -159,73 +160,5 @@ function disableColumn(column: ProTableColumn) {
     check: changeVisible === false,
     select: changeVisible === false,
     drag: changeIndex === false,
-  }
-}
-
-function getCheckedKeys(columns: ProTableColumn[]) {
-  const keys: VKey[] = []
-  findDisplayKeys(columns, keys)
-  return keys
-}
-
-function findDisplayKeys(columns: ProTableColumn[], keys: VKey[]) {
-  for (let index = 0; index < columns.length; index++) {
-    const column = columns[index]
-    if (column.visible === false) {
-      continue
-    }
-    if ('children' in column && column.children) {
-      findDisplayKeys(column.children, keys)
-    } else {
-      keys.push(column.key!)
-    }
-  }
-}
-
-function getDropColumns(columns: ProTableColumn[], dragKey: VKey, dropKey: VKey, dropType: string | undefined) {
-  const newColumns = [...columns]
-  // 原数据中移除被拖拽的节点
-  let dragColumn: ProTableColumn
-  findTargetColumn(newColumns, dragKey, (column, index, columns) => {
-    dragColumn = column
-    columns.splice(index, 1)
-  })
-
-  if (dropType === 'inside') {
-    findTargetColumn(newColumns, dropKey, item => {
-      // 添加到头部
-      ;(item as ProTableColumnBase).children!.unshift(dragColumn)
-    })
-  } else {
-    let targetIndex: number
-    let targetColumns: ProTableColumn[] = []
-
-    findTargetColumn(newColumns, dropKey, (_, index, columns) => {
-      targetIndex = index
-      targetColumns = columns
-    })
-
-    if (dropType === 'before') {
-      targetColumns.splice(targetIndex!, 0, dragColumn!)
-    } else {
-      targetColumns.splice(targetIndex! + 1, 0, dragColumn!)
-    }
-  }
-  return newColumns
-}
-
-function findTargetColumn(
-  columns: ProTableColumn[],
-  key: VKey,
-  callback: (column: ProTableColumn, index: number, columns: ProTableColumn[]) => void,
-) {
-  for (let index = 0; index < columns.length; index++) {
-    const column = columns[index]
-    if (column.key! === key) {
-      return callback(column, index, columns)
-    }
-    if ('children' in column && column.children) {
-      findTargetColumn(column.children, key, callback)
-    }
   }
 }
