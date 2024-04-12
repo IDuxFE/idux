@@ -13,6 +13,7 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): CertainThemeTo
     titleFontSize: fontSizeMd,
     titleFontWeight: fontWeightMd,
     titleColor: colorTextTitle,
+    titleWordBreak: 'break-word',
 
     contentColor: colorTextInfo,
     iconSize: 40,

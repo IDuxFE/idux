@@ -679,6 +679,7 @@
   --ix-modal-title-font-size: 14px;
   --ix-modal-title-font-weight: 400;
   --ix-modal-title-color: #2f3540;
+  --ix-modal-title-word-break: break-word;
   --ix-modal-content-color: #6f7785;
   --ix-modal-icon-size: 40px;
 }
