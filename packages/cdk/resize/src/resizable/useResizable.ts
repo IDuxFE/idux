@@ -125,10 +125,12 @@ export function useResizable(
 
   const handleResizeStart = (placement: ResizableHandlePlacement, evt: PointerEvent) => {
     activePlacement.value = placement
+    resizing.value = true
     const { width, height, left, top } = convertElement(target)!.getBoundingClientRect()
     const { clientX, clientY } = evt
     startPosition.value = { width, height, left, top, clientX, clientY }
     const position = { width, height, offsetWidth: 0, offsetHeight: 0 }
+    currPosition.value = position
     callEmit(options.onResizeStart, position, evt)
   }
 
@@ -138,7 +140,6 @@ export function useResizable(
       return
     }
     setBodyCursor(currPlacement)
-    resizing.value = true
 
     const { width: currWidth, height: currHeight } = calcSizeByEvent(currPlacement, evt)
     const { width: newWidth, height: newHeight } = calcSizeByBounds(currPlacement, currWidth, currHeight, -1)
