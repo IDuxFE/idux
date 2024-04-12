@@ -148,6 +148,7 @@ export function useCheckable(
   watch(cascaderStrategy, () => {
     const newCheckedKeys = checkedStateResolver.appendKeys([], checkedKeys.value)
     setCheckedKeys(newCheckedKeys)
+    callChange(mergedNodeMap, newCheckedKeys, props.onCheckedChange)
   })
 
   return {
