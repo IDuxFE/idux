@@ -7,14 +7,18 @@
 
 import { type ComputedRef, computed, watch } from 'vue'
 
-import { type VKey, callEmit, useState } from '@idux/cdk/utils'
+import { type VKey, callEmit, filterTree, useState } from '@idux/cdk/utils'
 import { ɵGetColumnKey } from '@idux/components/table'
 import { type ProTableConfig } from '@idux/pro/config'
 
 import { type ProTableColumn, type ProTableProps } from '../types'
-import { loopColumns } from '../utils'
 
 export interface ColumnsContext {
+  checkedColumnKeys: ComputedRef<{
+    start: VKey[]
+    center: VKey[]
+    end: VKey[]
+  }>
   mergedColumns: ComputedRef<ProTableColumn[]>
   setMergedColumns: (columns: ProTableColumn[]) => void
   mergedColumnMap: ComputedRef<Map<VKey, ProTableColumn>>
@@ -25,19 +29,58 @@ export interface ColumnsContext {
 export function useColumns(props: ProTableProps, config: ProTableConfig): ColumnsContext {
   const originalColumns = computed(() => props.columns)
   const [mergedColumns, setMergedColumns] = useState(mergeColumns(originalColumns.value, config))
-  const mergedColumnMap = computed(() => {
+
+  const mergedContext = computed(() => {
     const map = new Map<VKey, ProTableColumn>()
-    loopColumns(mergedColumns.value, column => map.set(column.key!, column))
-    return map
+    const checkedKeys = {
+      start: [] as VKey[],
+      center: [] as VKey[],
+      end: [] as VKey[],
+    }
+
+    const displayColumns = filterTree(
+      mergedColumns.value as (ProTableColumn & { children?: ProTableColumn[] })[],
+      'children',
+      (column, parents) => {
+        const key = column.key!
+        map.set(key, column)
+
+        if (column.visible === false || parents.some(parent => parent.visible === false)) {
+          return false
+        }
+
+        if (
+          !column.children?.length &&
+          column.layoutable !== false &&
+          parents.every(parent => parent.layoutable !== false)
+        ) {
+          if (isFixed('start', column, parents)) {
+            checkedKeys.start.push(key)
+          } else if (isFixed('end', column, parents)) {
+            checkedKeys.end.push(key)
+          } else {
+            checkedKeys.center.push(key)
+          }
+        }
+
+        return true
+      },
+      'and',
+    ) as ProTableColumn[]
+
+    return { map, checkedKeys, displayColumns }
   })
-  const displayColumns = computed(() => getDisplayColumns(mergedColumns.value))
+
+  const mergedColumnMap = computed(() => mergedContext.value.map)
+  const checkedColumnKeys = computed(() => mergedContext.value.checkedKeys)
+  const displayColumns = computed(() => mergedContext.value.displayColumns)
 
   watch(originalColumns, columns => setMergedColumns(mergeColumns(columns, config)))
   watch(mergedColumns, newColumns => callEmit(props.onColumnsChange, newColumns))
 
   const resetColumns = () => setMergedColumns(mergeColumns(originalColumns.value, config))
 
-  return { mergedColumns, setMergedColumns, mergedColumnMap, displayColumns, resetColumns }
+  return { checkedColumnKeys, mergedColumns, setMergedColumns, mergedColumnMap, displayColumns, resetColumns }
 }
 
 function mergeColumns(columns: ProTableColumn[], config: ProTableConfig, parentKey?: VKey) {
@@ -54,21 +97,6 @@ function convertMergeColumn(column: ProTableColumn, config: ProTableConfig, pare
   return mergeColumn
 }
 
-function getDisplayColumns(columns: ProTableColumn[]): ProTableColumn[] {
-  const result: ProTableColumn[] = []
-  columns.forEach(column => {
-    if (column.visible === false) {
-      return
-    }
-    if ('children' in column && column.children) {
-      const newChildren = getDisplayColumns(column.children)
-      if (newChildren.length === 0) {
-        return
-      }
-      result.push({ ...column, children: newChildren })
-    } else {
-      result.push(column)
-    }
-  })
-  return result
+function isFixed(fixed: 'start' | 'end', column: ProTableColumn, parents: ProTableColumn[]) {
+  return column.fixed === fixed || parents.some(parent => parent.fixed === fixed)
 }

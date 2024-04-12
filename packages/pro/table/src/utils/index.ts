@@ -10,18 +10,6 @@ import { type ProTableLocale } from '@idux/pro/locales'
 
 import { type ProTableColumn } from '../types'
 
-export function loopColumns(columns: ProTableColumn[] | undefined, callback: (column: ProTableColumn) => void): void {
-  if (!columns || columns.length === 0) {
-    return
-  }
-  columns.forEach(column => {
-    callback(column)
-    if ('children' in column) {
-      loopColumns(column.children!, callback)
-    }
-  })
-}
-
 export function getColumnTitle(column: ProTableColumn, locale: ProTableLocale): string {
   const { title, type } = column
   if (title) {

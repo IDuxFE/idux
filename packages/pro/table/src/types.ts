@@ -74,6 +74,7 @@ export interface ProTableColumnBase<T = any, K = VKey>
     ProTableColumnLayoutConfig {
   copyable?: boolean
   editable?: boolean
+  title?: string
   tooltip?: string | TooltipProps
   tooltipIcon?: string
 
