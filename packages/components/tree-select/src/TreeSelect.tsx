@@ -94,9 +94,7 @@ export default defineComponent({
     }
 
     const handleNodeClick = () => {
-      if (props.multiple) {
-        clearInput()
-      } else {
+      if (!props.multiple) {
         setOverlayOpened(false)
       }
     }
