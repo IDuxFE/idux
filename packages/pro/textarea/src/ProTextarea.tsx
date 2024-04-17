@@ -39,6 +39,7 @@ export default defineComponent({
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
     const { globalHashId, hashId, registerToken } = useThemeToken('proTextarea')
+    const { themeTokens } = useThemeToken()
     registerToken(getThemeTokens, transforms)
 
     const config = useGlobalConfig('textarea')
@@ -63,7 +64,7 @@ export default defineComponent({
     const valueRef = toRef(accessor, 'value')
 
     const { lineHeight, boxSizingData, resizeToFitContent } = ɵUseAutoRows(elementRef, ref(true))
-    const rowCounts = useRowCounts(elementRef, valueRef, lineHeight, boxSizingData, props.rows)
+    const rowCounts = useRowCounts(props, elementRef, valueRef, lineHeight, boxSizingData)
     const errorLinesContext = useErrorLines(props, lineHeight, boxSizingData)
     const dataCount = useDataCount(props, config, valueRef)
 
@@ -100,7 +101,14 @@ export default defineComponent({
       normalizeStyle({
         resize: props.resize ?? config.resize,
         height: props.rows
-          ? `${props.rows * lineHeight.value + boxSizingData.value.paddingBottom + boxSizingData.value.paddingTop}px`
+          ? `${
+              props.rows * lineHeight.value +
+              boxSizingData.value.paddingBottom +
+              boxSizingData.value.paddingTop +
+              boxSizingData.value.borderBottom +
+              boxSizingData.value.borderTop +
+              themeTokens.value.controlLineWidth * 2
+            }px`
           : undefined,
       }),
     )
