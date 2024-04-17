@@ -1,6 +1,6 @@
 | 名称 | 描述 | 类型 | default | dark |
 |---|---|---|---|---|
-| `fontSize` |  | `number` | `12` | `12` |
+| `fontSize` |  | `number` | `14` | `14` |
 | `itemColor` |  | `string` | `#6f7785` | `#808999` |
 | `lastItemColor` |  | `string` | `#2f3540` | `#F4F8FF` |
 | `linkColor` |  | `string` | `#6f7785` | `#808999` |
