@@ -10,6 +10,26 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 2.1.2(2024-04-17)
+
+
+### Bug Fixes
+
+* **cdk:resizable:** 在刚开始resize的时候，position就应该被设置 ([#1889](https://github.com/IDuxFE/idux/issues/1889)) ([aaf85b6](https://github.com/IDuxFE/idux/commit/aaf85b6b1f430d27f24ac88bbcb881b69f233d4f))
+* **comp:*:** 主题token转换成css变量使用的正则表达式在safari下不兼容，导致白屏 ([#1897](https://github.com/IDuxFE/idux/issues/1897)) ([8166a03](https://github.com/IDuxFE/idux/commit/8166a03c821bbb236f0ba442118f307ef1ef7172))
+* **comp:*:** 更新 colorInfo 和 colorOfflineText token ([#1896](https://github.com/IDuxFE/idux/issues/1896)) ([8a10fc8](https://github.com/IDuxFE/idux/commit/8a10fc81f7153c3ac3d48d68d2125b86f32154be))
+* **comp:breadcrumb:** 修改 breadcrumb 的字体大小为 fontSizeMd ([#1893](https://github.com/IDuxFE/idux/issues/1893)) ([6d51cf9](https://github.com/IDuxFE/idux/commit/6d51cf924e1ac342ab00393d2006b93eb42af3fb))
+* **comp:modal:** 弹窗的 title 应该可以设置 word break ([#1888](https://github.com/IDuxFE/idux/issues/1888)) ([62b606a](https://github.com/IDuxFE/idux/commit/62b606a6b5c0e697c9508bc3aaa213f28fb91e2e))
+* **comp:select:** 模块引入路径错误 ([#1885](https://github.com/IDuxFE/idux/issues/1885)) ([bae7eb7](https://github.com/IDuxFE/idux/commit/bae7eb7e626698867476bfe263057dc11775c6ff))
+* **comp:table:** 固到列尾的列 z-index 应该比固定到列首的列高 ([#1892](https://github.com/IDuxFE/idux/issues/1892)) ([4941867](https://github.com/IDuxFE/idux/commit/49418677195a7d77bdfdfe816500240a769e9001))
+* **comp:table:** 当某一行的最后一个元素因为row-span是0而没有展示的时候，上一列的有边框缺失了 ([#1890](https://github.com/IDuxFE/idux/issues/1890)) ([76d77b6](https://github.com/IDuxFE/idux/commit/76d77b60642ba9a14c27fe89c774663a6284c2e5))
+* **comp:tree-select:** 多选模式下，在选项被点击选中后，搜索的输入不应该被清空 ([#1886](https://github.com/IDuxFE/idux/issues/1886)) ([28f70c1](https://github.com/IDuxFE/idux/commit/28f70c1b724c0ff89aa875bb2a0c08c9a1f2e03e))
+* **comp:tree:** cascaderStrategy 变动之后，checkedChange事件应该被触发 ([#1887](https://github.com/IDuxFE/idux/issues/1887)) ([a122a31](https://github.com/IDuxFE/idux/commit/a122a31bdcff2e3c532082496301f70ca5c1880a))
+* **pro:table:** 布局工具的列搜索不存在之后，会出现多个空状态 ([#1891](https://github.com/IDuxFE/idux/issues/1891)) ([b122426](https://github.com/IDuxFE/idux/commit/b12242689a40727f950e8eac51539e4476284b08))
+  - 重构proTable的列操作逻辑，不再显式更改计算属性的值
+* **pro:textarea:** 支持 rows 设置 ([#1518](https://github.com/IDuxFE/idux/issues/1518)) ([562314c](https://github.com/IDuxFE/idux/commit/562314c3bd9a64f154bfa6608d4798f0ce0f806b))
+* **pro:textarea:** rows 配置之后，高度异常 ([#1894](https://github.com/IDuxFE/idux/issues/1894)) ([f9737fd](https://github.com/IDuxFE/idux/commit/f9737fd1ec0295ac81fb8e5d5cfa8d4f8462d75e))
+
 ## 2.1.1(2024-04-08)
 
 
