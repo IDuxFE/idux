@@ -73,6 +73,7 @@ export default defineComponent({
         [`${prefixCls}-cell-align-${align.cell}`]: !!align && align.cell != 'start',
         [`${prefixCls}-cell-ellipsis`]: !!mergedEllipsis.value,
         [`${prefixCls}-cell-${type}`]: !!type,
+        [`${prefixCls}-cell-last`]: !!props.isLast,
       }
       if (fixed) {
         classes = {

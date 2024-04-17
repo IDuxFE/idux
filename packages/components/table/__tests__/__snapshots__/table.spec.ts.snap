@@ -53,7 +53,7 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 0</a><a>Delete</a></td>
+            <td class=\\"ix-table-cell ix-table-cell-last\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 0</a><a>Delete</a></td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell ix-table-cell-expandable\\">
@@ -71,7 +71,7 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 1</a><a>Delete</a></td>
+            <td class=\\"ix-table-cell ix-table-cell-last\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 1</a><a>Delete</a></td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell ix-table-cell-expandable\\">
@@ -89,7 +89,7 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 2</a><a>Delete</a></td>
+            <td class=\\"ix-table-cell ix-table-cell-last\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 2</a><a>Delete</a></td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell ix-table-cell-expandable\\">
@@ -107,7 +107,7 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 3</a><a>Delete</a></td>
+            <td class=\\"ix-table-cell ix-table-cell-last\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 3</a><a>Delete</a></td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell ix-table-cell-expandable\\">
@@ -125,7 +125,7 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 4</a><a>Delete</a></td>
+            <td class=\\"ix-table-cell ix-table-cell-last\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 4</a><a>Delete</a></td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell ix-table-cell-expandable\\">
@@ -143,7 +143,7 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 5</a><a>Delete</a></td>
+            <td class=\\"ix-table-cell ix-table-cell-last\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 5</a><a>Delete</a></td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell ix-table-cell-expandable\\">
@@ -161,7 +161,7 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 6</a><a>Delete</a></td>
+            <td class=\\"ix-table-cell ix-table-cell-last\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 6</a><a>Delete</a></td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell ix-table-cell-expandable\\">
@@ -179,7 +179,7 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 7</a><a>Delete</a></td>
+            <td class=\\"ix-table-cell ix-table-cell-last\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 7</a><a>Delete</a></td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell ix-table-cell-expandable\\">
@@ -197,7 +197,7 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 8</a><a>Delete</a></td>
+            <td class=\\"ix-table-cell ix-table-cell-last\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 8</a><a>Delete</a></td>
           </tr>
           <tr class=\\"ix-table-row\\">
             <td class=\\"ix-table-cell ix-table-cell-expandable\\">
@@ -215,7 +215,7 @@ exports[`Table > basic work > render work 1`] = `
               <!----></span><span class=\\"ix-tag ix-tag-normal\\" color=\\"warning\\"><!----><!----><span class=\\"ix-tag-content\\">DEVELOPER</span>
               <!----></span>
             </td>
-            <td class=\\"ix-table-cell\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 9</a><a>Delete</a></td>
+            <td class=\\"ix-table-cell ix-table-cell-last\\"><a style=\\"margin-right: 8px;\\">Invite Edrward 9</a><a>Delete</a></td>
           </tr>
         </tbody>
         <!---->
