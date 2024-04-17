@@ -1,6 +1,6 @@
 /* ------ breadcrumb css variables ------ */
 :root {
-  --ix-breadcrumb-font-size: 12px;
+  --ix-breadcrumb-font-size: 14px;
   --ix-breadcrumb-item-color: #6f7785;
   --ix-breadcrumb-link-color: #6f7785;
   --ix-breadcrumb-link-color-hover: #1c6eff;

@@ -56,7 +56,7 @@ export function getThemeTokens(
   const presetBasicTokens = getBasicTokens(getBaseColors, getColorPalette, getGreyColors)
   const mergedBasicTokens = merge(presetBasicTokens, pick(mergedPresetTokens, Object.keys(presetBasicTokens)))
 
-  const presetDerivedTokens = getDerivedTokens(mergedBasicTokens, { getColorPalette, getGreyColors })
+  const presetDerivedTokens = getDerivedTokens(mergedBasicTokens, { getBaseColors, getColorPalette, getGreyColors })
   const mergedDerivedTokens = merge(presetDerivedTokens, pick(mergedPresetTokens, Object.keys(presetDerivedTokens)))
 
   const presetExtendedTokens = getExtendedTokens(

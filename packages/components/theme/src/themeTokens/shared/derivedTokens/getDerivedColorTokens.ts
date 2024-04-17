@@ -5,10 +5,11 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { BasicTokens, DerivedColorTokens, GetColorPalette, GetGreyColors } from '../../../types'
+import type { BasicTokens, DerivedColorTokens, GetBaseColors, GetColorPalette, GetGreyColors } from '../../../types'
 
 export function getDerivedColorTokens(
   basicTokens: BasicTokens,
+  getBaseColors: GetBaseColors,
   getColorPalette: GetColorPalette,
   getGreyColors: GetGreyColors,
 ): DerivedColorTokens {
@@ -18,6 +19,8 @@ export function getDerivedColorTokens(
   const warningColorPalette = getColorPalette(basicTokens.colorWarning)
   const riskColorPalette = getColorPalette(basicTokens.colorRisk)
   const fatalColorPalette = getColorPalette(basicTokens.colorFatal)
+
+  const blueColorPalette = getColorPalette(getBaseColors().blue)
   const infoColorPalette = getColorPalette(basicTokens.colorInfo)
 
   const primaryStatusColors: Partial<DerivedColorTokens> = {
@@ -106,19 +109,34 @@ export function getDerivedColorTokens(
     colorFatalIcon: fatalColorPalette.l10,
   }
 
-  const infoColors: Partial<DerivedColorTokens> = {
-    colorInfoBg: infoColorPalette.base,
-    colorInfoBgHover: infoColorPalette.l10,
-    colorInfoBgActive: infoColorPalette.d10,
-    colorInfoBorder: infoColorPalette.base,
-    colorInfoBorderHover: infoColorPalette.l10,
-    colorInfoBorderActive: infoColorPalette.d10,
+  const infoColors: Partial<DerivedColorTokens> =
+    basicTokens.colorInfo === blueColorPalette.l10
+      ? {
+          colorInfoBg: blueColorPalette.l10,
+          colorInfoBgHover: blueColorPalette.l20,
+          colorInfoBgActive: blueColorPalette.base,
+          colorInfoBorder: blueColorPalette.l10,
+          colorInfoBorderHover: blueColorPalette.l20,
+          colorInfoBorderActive: blueColorPalette.base,
 
-    colorInfoText: infoColorPalette.base,
-    colorInfoTextHover: infoColorPalette.l10,
-    colorInfoTextActive: infoColorPalette.d10,
-    colorInfoIcon: infoColorPalette.base,
-  }
+          colorInfoText: blueColorPalette.l10,
+          colorInfoTextHover: blueColorPalette.l20,
+          colorInfoTextActive: blueColorPalette.base,
+          colorInfoIcon: blueColorPalette.l10,
+        }
+      : {
+          colorInfoBg: infoColorPalette.base,
+          colorInfoBgHover: infoColorPalette.l10,
+          colorInfoBgActive: infoColorPalette.d10,
+          colorInfoBorder: infoColorPalette.base,
+          colorInfoBorderHover: infoColorPalette.l10,
+          colorInfoBorderActive: infoColorPalette.d10,
+
+          colorInfoText: infoColorPalette.base,
+          colorInfoTextHover: infoColorPalette.l10,
+          colorInfoTextActive: infoColorPalette.d10,
+          colorInfoIcon: infoColorPalette.base,
+        }
 
   const greyColors = getGreyColors()
 
@@ -132,6 +150,6 @@ export function getDerivedColorTokens(
     ...infoColors,
     colorOffline: greyColors.base,
     colorOfflineBg: greyColors.base,
-    colorOfflineText: greyColors.base,
+    colorOfflineText: greyColors.d10,
   } as DerivedColorTokens
 }

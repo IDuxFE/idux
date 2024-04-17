@@ -382,18 +382,18 @@ token `getter` 只会在第一次注册成功的时候实际执行，因此不�
 | `colorFatalTextActive` | 失陷色阶文字激活颜色 | `string` | `#5c000c` | `#a23e3b` |
 | `colorFatalTextHover` | 失陷色阶文字悬浮颜色 | `string` | `#8f1820` | `#701a1b` |
 | `colorInfoBg` | 信息色阶背景颜色 | `string` | `#458fff` | `#4083E8` |
-| `colorInfoBgActive` | 信息色阶背景激活颜色 | `string` | `#306ed9` | `#6AA6F4` |
+| `colorInfoBgActive` | 信息色阶背景激活颜色 | `string` | `#1c6eff` | `#6AA6F4` |
 | `colorInfoBgHover` | 信息色阶背景悬浮颜色 | `string` | `#6eadff` | `#1B61DD` |
 | `colorInfoBorder` | 信息色阶边框颜色 | `string` | `#458fff` | `#4083E8` |
-| `colorInfoBorderActive` | 信息色阶边框激活颜色 | `string` | `#306ed9` | `#6AA6F4` |
+| `colorInfoBorderActive` | 信息色阶边框激活颜色 | `string` | `#1c6eff` | `#6AA6F4` |
 | `colorInfoBorderHover` | 信息色阶边框悬浮颜色 | `string` | `#6eadff` | `#1B61DD` |
 | `colorInfoIcon` | 信息色阶图标颜色 | `string` | `#458fff` | `#4083E8` |
 | `colorInfoText` | 信息色阶文字颜色 | `string` | `#458fff` | `#4083E8` |
-| `colorInfoTextActive` | 信息色阶文字激活颜色 | `string` | `#306ed9` | `#6AA6F4` |
+| `colorInfoTextActive` | 信息色阶文字激活颜色 | `string` | `#1c6eff` | `#6AA6F4` |
 | `colorInfoTextHover` | 信息色阶文字悬浮颜色 | `string` | `#6eadff` | `#1B61DD` |
 | `colorOffline` | 离线颜色 | `string` | `#a1a7b3` | `#525966` |
 | `colorOfflineBg` | 离线背景颜色 | `string` | `#a1a7b3` | `#525966` |
-| `colorOfflineText` | 离线文字颜色 | `string` | `#a1a7b3` | `#525966` |
+| `colorOfflineText` | 离线文字颜色 | `string` | `#6f7785` | `#808999` |
 | `colorPrimaryActive` | 主题色阶激活颜色，常用于背景色 | `string` | `#0d51d9` | `#6AA6F4` |
 | `colorPrimaryBorder` | 主题色阶边框颜色 | `string` | `#1c6eff` | `#4083E8` |
 | `colorPrimaryBorderActive` | 主题色阶边框激活颜色 | `string` | `#0d51d9` | `#6AA6F4` |
