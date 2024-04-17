@@ -16,7 +16,7 @@ import BodyCell from './BodyCell'
 export function renderBodyCells(columns: TableColumnMerged[], record: any, rowIndex: number): VNode[] {
   const children: VNode[] = []
   columns.forEach((column, colIndex) => {
-    const cell = renderBodyCell(column, record, rowIndex, colIndex)
+    const cell = renderBodyCell(column, record, rowIndex, colIndex === columns.length - 1)
 
     if (cell) {
       children.push(cell)
@@ -30,7 +30,7 @@ export function renderBodyCell(
   column: TableColumnMerged,
   record: any,
   rowIndex: number,
-  colIndex: number,
+  isLast: boolean,
 ): VNode | undefined {
   const { colSpan: getColSpan, rowSpan: getRowSpan } = column
   const colSpan = getColSpan?.(record, rowIndex)
@@ -43,7 +43,7 @@ export function renderBodyCell(
   const colProps: any = {
     colSpan: colSpan === 1 ? undefined : colSpan,
     rowSpan: rowSpan === 1 ? undefined : rowSpan,
-    colIndex,
+    isLast,
     column,
   }
 
