@@ -33,7 +33,23 @@ export function tokenToCss(record: TokenRecord<string>, prefix?: string, transfo
 }
 
 function getTokenCssVarName(tokenName: string): string {
-  return tokenName
-    .replace(/(?<![A-Z0-9])([A-Z0-9])/g, (input, upperChar) => (upperChar ? `-${upperChar.toLowerCase()}` : input))
-    .toLowerCase()
+  let name = ''
+  let preChar: string | undefined
+  for (let i = 0; i < tokenName.length; i++) {
+    const char = tokenName[i]
+
+    if (preChar && !isUppercaseOrNumber(preChar) && isUppercaseOrNumber(char)) {
+      name += `-${char}`
+    } else {
+      name += char
+    }
+
+    preChar = char
+  }
+  return name.toLowerCase()
+}
+
+function isUppercaseOrNumber(char: string) {
+  const charCode = char.charCodeAt(0)
+  return (charCode >= 65 && charCode <= 90) || (charCode >= 48 && charCode <= 57)
 }
