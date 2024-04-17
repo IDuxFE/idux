@@ -7,7 +7,7 @@
 
 import type { ProTextareaProps } from '../types'
 import type { ɵBoxSizingData } from '@idux/components/textarea'
-import type { ComputedRef } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 
 import { useState } from '@idux/cdk/utils'
 
@@ -20,7 +20,7 @@ export interface ErrorLinesContext {
 
 export function useErrorLines(
   props: ProTextareaProps,
-  lineHeight: ComputedRef<number>,
+  lineHeight: Ref<number>,
   sizingData: ComputedRef<ɵBoxSizingData>,
 ): ErrorLinesContext {
   const [visibleErrIndex, setvisibleErrIndex] = useState<number>(-1)

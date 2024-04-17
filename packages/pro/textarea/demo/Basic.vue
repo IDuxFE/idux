@@ -3,6 +3,7 @@
     <IxSpace vertical>
       <IxProTextarea
         v-model:value="value"
+        :rows="3"
         :disabled="disabled"
         :onChange="onChange"
         placeholder="Basic usage"
@@ -25,6 +26,5 @@ const onChange = (value: string, oldValue: string) => {
 <style scoped lang="less">
 .ix-pro-textarea {
   width: 480px;
-  height: 210px;
 }
 </style>
