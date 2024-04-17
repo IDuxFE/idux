@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.2](https://github.com/IDuxFE/idux/compare/v2.1.1...v2.1.2) (2024-04-17)
+
+
+### Bug Fixes
+
+* **cdk:resizable:** position should be set at start of resizing ([#1889](https://github.com/IDuxFE/idux/issues/1889)) ([aaf85b6](https://github.com/IDuxFE/idux/commit/aaf85b6b1f430d27f24ac88bbcb881b69f233d4f))
+* **comp:*:** theme token css var getter is not supported in safari ([#1897](https://github.com/IDuxFE/idux/issues/1897)) ([8166a03](https://github.com/IDuxFE/idux/commit/8166a03c821bbb236f0ba442118f307ef1ef7172))
+* **comp:*:** update colorInfo and colorOfflineText token ([#1896](https://github.com/IDuxFE/idux/issues/1896)) ([8a10fc8](https://github.com/IDuxFE/idux/commit/8a10fc81f7153c3ac3d48d68d2125b86f32154be))
+* **comp:breadcrumb:** modify breadcrumb fontSize to fontSizeMd ([#1893](https://github.com/IDuxFE/idux/issues/1893)) ([6d51cf9](https://github.com/IDuxFE/idux/commit/6d51cf924e1ac342ab00393d2006b93eb42af3fb))
+* **comp:modal:** modal title should have word break ([#1888](https://github.com/IDuxFE/idux/issues/1888)) ([62b606a](https://github.com/IDuxFE/idux/commit/62b606a6b5c0e697c9508bc3aaa213f28fb91e2e))
+* **comp:select:** module import error ([#1885](https://github.com/IDuxFE/idux/issues/1885)) ([bae7eb7](https://github.com/IDuxFE/idux/commit/bae7eb7e626698867476bfe263057dc11775c6ff))
+* **comp:table:** fixed end column z-index should be above fixed start columns ([#1892](https://github.com/IDuxFE/idux/issues/1892)) ([4941867](https://github.com/IDuxFE/idux/commit/49418677195a7d77bdfdfe816500240a769e9001))
+* **comp:table:** table cell border missing when row span included ([#1890](https://github.com/IDuxFE/idux/issues/1890)) ([76d77b6](https://github.com/IDuxFE/idux/commit/76d77b60642ba9a14c27fe89c774663a6284c2e5))
+* **comp:table:** table cell border missing when row span included ([#1895](https://github.com/IDuxFE/idux/issues/1895)) ([f8aedce](https://github.com/IDuxFE/idux/commit/f8aedce3b6f6b0a35d5fde04851d03e5a8e0a950))
+* **comp:tree-select:** search input shouldn't be cleared after option checked ([#1886](https://github.com/IDuxFE/idux/issues/1886)) ([28f70c1](https://github.com/IDuxFE/idux/commit/28f70c1b724c0ff89aa875bb2a0c08c9a1f2e03e))
+* **comp:tree:** checkedChange should be called after cascaderStrategy change ([#1887](https://github.com/IDuxFE/idux/issues/1887)) ([a122a31](https://github.com/IDuxFE/idux/commit/a122a31bdcff2e3c532082496301f70ca5c1880a))
+* **pro:table:** layout tool tree shouldn't show empty ([#1891](https://github.com/IDuxFE/idux/issues/1891)) ([b122426](https://github.com/IDuxFE/idux/commit/b12242689a40727f950e8eac51539e4476284b08))
+* **pro:textarea:** add rows prop ([#1518](https://github.com/IDuxFE/idux/issues/1518)) ([562314c](https://github.com/IDuxFE/idux/commit/562314c3bd9a64f154bfa6608d4798f0ce0f806b))
+* **pro:textarea:** height isn't correct when rows is set ([#1894](https://github.com/IDuxFE/idux/issues/1894)) ([f9737fd](https://github.com/IDuxFE/idux/commit/f9737fd1ec0295ac81fb8e5d5cfa8d4f8462d75e))
+
+
+
+
+
 ## [2.1.1](https://github.com/IDuxFE/idux/compare/v2.1.0...v2.1.1) (2024-04-08)
 
 

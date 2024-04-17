@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.2](https://github.com/IDuxFE/idux/compare/v2.1.1...v2.1.2) (2024-04-17)
+
+
+### Bug Fixes
+
+* **cdk:resizable:** position should be set at start of resizing ([#1889](https://github.com/IDuxFE/idux/issues/1889)) ([aaf85b6](https://github.com/IDuxFE/idux/commit/aaf85b6b1f430d27f24ac88bbcb881b69f233d4f))
+
+
+
+
+
 ## [2.1.1](https://github.com/IDuxFE/idux/compare/v2.1.0...v2.1.1) (2024-04-08)
 
 

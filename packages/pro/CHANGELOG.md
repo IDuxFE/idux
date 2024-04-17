@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.2](https://github.com/IDuxFE/idux/compare/v2.1.1...v2.1.2) (2024-04-17)
+
+
+### Bug Fixes
+
+* **comp:table:** table cell border missing when row span included ([#1895](https://github.com/IDuxFE/idux/issues/1895)) ([f8aedce](https://github.com/IDuxFE/idux/commit/f8aedce3b6f6b0a35d5fde04851d03e5a8e0a950))
+* **pro:table:** layout tool tree shouldn't show empty ([#1891](https://github.com/IDuxFE/idux/issues/1891)) ([b122426](https://github.com/IDuxFE/idux/commit/b12242689a40727f950e8eac51539e4476284b08))
+* **pro:textarea:** add rows prop ([#1518](https://github.com/IDuxFE/idux/issues/1518)) ([562314c](https://github.com/IDuxFE/idux/commit/562314c3bd9a64f154bfa6608d4798f0ce0f806b))
+* **pro:textarea:** height isn't correct when rows is set ([#1894](https://github.com/IDuxFE/idux/issues/1894)) ([f9737fd](https://github.com/IDuxFE/idux/commit/f9737fd1ec0295ac81fb8e5d5cfa8d4f8462d75e))
+
+
+
+
+
 ## [2.1.1](https://github.com/IDuxFE/idux/compare/v2.1.0...v2.1.1) (2024-04-08)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.2](https://github.com/IDuxFE/idux/compare/v2.1.1...v2.1.2) (2024-04-17)
+
+
+### Bug Fixes
+
+* **comp:*:** update colorInfo and colorOfflineText token ([#1896](https://github.com/IDuxFE/idux/issues/1896)) ([8a10fc8](https://github.com/IDuxFE/idux/commit/8a10fc81f7153c3ac3d48d68d2125b86f32154be))
+
+
+
+
+
 ## [2.1.1](https://github.com/IDuxFE/idux/compare/v2.1.0...v2.1.1) (2024-04-08)
 
 **Note:** Version bump only for package @idux/site
