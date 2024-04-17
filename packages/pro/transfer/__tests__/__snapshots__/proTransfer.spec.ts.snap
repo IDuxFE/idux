@@ -257,7 +257,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         4
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         <!---->
                       </td>
@@ -312,7 +312,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         5
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         <!---->
                       </td>
@@ -368,7 +368,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         6
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         <!---->
                       </td>
@@ -423,7 +423,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         7
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         <!---->
                       </td>
@@ -478,7 +478,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         8
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         <!---->
                       </td>
@@ -533,7 +533,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         9
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         <!---->
                       </td>
@@ -588,7 +588,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         10
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         <!---->
                       </td>
@@ -643,7 +643,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         11
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         <!---->
                       </td>
@@ -699,7 +699,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         12
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         <!---->
                       </td>
@@ -754,7 +754,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         13
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         <!---->
                       </td>
@@ -809,7 +809,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         14
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         <!---->
                       </td>
@@ -864,7 +864,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         15
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         <!---->
                       </td>
@@ -920,7 +920,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         16
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         <!---->
                       </td>
@@ -975,7 +975,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         17
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         <!---->
                       </td>
@@ -1030,7 +1030,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         18
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         <!---->
                       </td>
@@ -1085,7 +1085,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         19
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         <!---->
                       </td>
@@ -1371,7 +1371,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         </label>
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         Option0
                       </td>
@@ -1417,7 +1417,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         </label>
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         Option1
                       </td>
@@ -1462,7 +1462,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         </label>
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         Option2
                       </td>
@@ -1507,7 +1507,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
                         </label>
                       </td>
                       <td
-                        class="ix-table-cell"
+                        class="ix-table-cell ix-table-cell-last"
                       >
                         Option3
                       </td>

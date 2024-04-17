@@ -262,7 +262,7 @@ export type TableBodyRowProps = ExtractInnerPropTypes<typeof tableBodyRowProps>
 
 export const tableBodyCellProps = {
   column: { type: Object as PropType<TableColumnMerged>, required: true },
-  colIndex: { type: Number, required: true },
+  isLast: { type: Boolean, required: true },
   colSpan: Number,
   rowSpan: Number,
 } as const
