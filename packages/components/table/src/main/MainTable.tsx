@@ -21,7 +21,7 @@ import {
   watch,
 } from 'vue'
 
-import { debounce, isNumber } from 'lodash-es'
+import { isNumber } from 'lodash-es'
 
 import { offResize, onResize } from '@idux/cdk/resize'
 import {
@@ -53,6 +53,8 @@ export default defineComponent({
     const {
       props,
       slots,
+      clientWidth,
+      setClientWidth,
       expandable,
       mergedPrefixCls,
       mergedInsetShadow,
@@ -60,7 +62,6 @@ export default defineComponent({
       mergedVirtualItemHeight,
       mergedVirtualColWidth,
       mergedAutoHeight,
-      columnWidths,
       changeColumnWidth,
       flattedData,
       flattedColumns,
@@ -83,7 +84,6 @@ export default defineComponent({
     } = inject(TABLE_TOKEN)!
 
     const mainTableRef = ref<HTMLDivElement>()
-    const mainTableWidth = ref(0)
 
     const showMeasure = computed(
       () => mergedAutoHeight.value || !!scrollWidth.value || isSticky.value || mergedVirtual.value.horizontal,
@@ -95,7 +95,7 @@ export default defineComponent({
       }
     }
 
-    provide(tableBodyToken, { mainTableWidth, changeColumnWidth: _changeColumnWidth })
+    provide(tableBodyToken, { changeColumnWidth: _changeColumnWidth })
 
     const triggerScroll = () => {
       const currentTarget = convertElement(scrollBodyRef)
@@ -106,8 +106,8 @@ export default defineComponent({
 
     const handleWrapperResize = (evt: ResizeObserverEntry) => {
       const { offsetWidth } = evt.target as HTMLDivElement
-      if (offsetWidth !== mainTableWidth.value) {
-        mainTableWidth.value = offsetWidth
+      if (offsetWidth !== clientWidth.value) {
+        setClientWidth(offsetWidth)
       }
     }
 
@@ -119,15 +119,6 @@ export default defineComponent({
           triggerScroll()
         }
       })
-
-      // see https://github.com/IDuxFE/idux/issues/1140
-      const handlerColumnWidthsChange = () => {
-        const currScrollLeft = convertElement(scrollBodyRef)?.scrollLeft
-        if (currScrollLeft === 0) {
-          triggerScroll()
-        }
-      }
-      watch(columnWidths, debounce(handlerColumnWidthsChange, 16))
 
       onResize(mainTableRef.value, handleWrapperResize)
     })
@@ -283,7 +274,7 @@ export default defineComponent({
             item,
             index,
             rowIndex,
-          }) => renderBodyCell(item, row, rowIndex, index)
+          }) => renderBodyCell(item, row, rowIndex, index === row.data.length - 1)
 
           const contentRender: VirtualContentRenderFn = (children, { renderedData }) => {
             const columns = flattedData.value.length

@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { ColumnOffsetsContext } from './composables/useColumnOffsets'
+import type { ColumnWidthMeasureContext } from './composables/useColumnWidthMeasure'
 import type { ColumnsContext } from './composables/useColumns'
 import type { DataSourceContext } from './composables/useDataSource'
 import type { ExpandableContext } from './composables/useExpandable'
@@ -23,6 +25,8 @@ import type { ComputedRef, InjectionKey, Ref, Slots, VNodeChild } from 'vue'
 
 export interface TableContext
   extends ColumnsContext,
+    ColumnWidthMeasureContext,
+    ColumnOffsetsContext,
     DataSourceContext,
     ExpandableContext,
     PaginationContext,
@@ -36,6 +40,8 @@ export interface TableContext
   config: TableConfig
   locale: Locale
   getVirtualColWidth: (rowKey: VKey, colKey: VKey) => number | undefined
+  clientWidth: ComputedRef<number>
+  setClientWidth: (clientWidth: number) => void
   mergedPrefixCls: ComputedRef<string>
   mergedAutoHeight: ComputedRef<boolean>
   mergedEmptyCell: ComputedRef<string | ((options: TableEmptyCellOptions) => VNodeChild) | undefined>
@@ -50,7 +56,6 @@ export interface TableContext
 export const TABLE_TOKEN: InjectionKey<TableContext> = Symbol('TABLE_TOKEN')
 
 export interface TableBodyContext {
-  mainTableWidth: Ref<number>
   changeColumnWidth: (key: VKey, width: number | false) => void
 }
 
