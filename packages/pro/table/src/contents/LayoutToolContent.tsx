@@ -117,7 +117,9 @@ export default defineComponent({
         },
       )
 
-      setMergedColumns(newColumns)
+      const { startColumns, centerColumns, endColumns } = groupColumns(newColumns)
+
+      setMergedColumns([...startColumns, ...centerColumns, ...endColumns])
     }
 
     const handleVisibleChange = (showedKeySet: Set<VKey>, hiddenKeys: Set<VKey>) => {
