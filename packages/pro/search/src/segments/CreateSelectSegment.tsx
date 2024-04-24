@@ -112,8 +112,11 @@ function formatValue(
   const values = convertArray(value)
 
   const dataKeyMap = new Map(mergedDataSource.map(data => [data.key, data]))
-  const newCacheData = values.map(value => dataKeyMap.get(value))
-  setCacheData(dataSourceCacheKey, newCacheData)
+  const newCacheData = values.map(value => dataKeyMap.get(value)).filter(Boolean)
+
+  if (newCacheData?.length) {
+    setCacheData(dataSourceCacheKey, newCacheData)
+  }
 
   if (concludeAllSelected && values.length > 0 && values.length >= mergedDataSource.length) {
     return allSelected
