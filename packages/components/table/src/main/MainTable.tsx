@@ -221,7 +221,7 @@ export default defineComponent({
       } else if (data?.length) {
         const rows: VNodeChild[] = []
         data.forEach((item, rowIndex) => {
-          const cells = renderBodyCells(columns ?? [], item, rowIndex)
+          const cells = renderBodyCells(columns ?? [], item.record, rowIndex)
           rows.push(
             ...convertArray(
               renderBodyRow(item, columns, rowIndex, slots, expandable.value, mergedPrefixCls.value, cells),
@@ -274,7 +274,7 @@ export default defineComponent({
             item,
             index,
             rowIndex,
-          }) => renderBodyCell(item, row, rowIndex, index === row.data.length - 1)
+          }) => renderBodyCell(item, row.record, rowIndex, index === row.data.length - 1)
 
           const contentRender: VirtualContentRenderFn = (children, { renderedData }) => {
             const columns = flattedData.value.length
