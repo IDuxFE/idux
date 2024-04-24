@@ -99,6 +99,24 @@
         color: var(--ix-color-icon);
         margin-right: var(--ix-margin-size-sm);
       }
+
+      &:hover {
+        background-color: var(--ix-color-container-bg-hover);
+      }
+      &:active,
+      &:hover:active {
+        background-color: var(--ix-color-container-bg-active);
+      }
+    }
+    &-divider {
+      width: 100%;
+      margin: var(--ix-margin-size-xs) 0;
+      padding: 0 var(--ix-padding-size-sm);
+      &-line {
+        width: calc(100%);
+        height: var(--ix-line-width);
+        background-color: var(--ix-color-separator);
+      }
     }
     &-colors {
       display: flex;
@@ -115,8 +133,8 @@
         padding: 0 var(--ix-padding-size-md);
         display: flex;
         align-items: center;
-        &:hover,
-        &-selected:hover {
+        cursor: pointer;
+        &:not(&-selected):hover {
           background-color: var(--ix-color-container-bg-hover);
         }
         &-selected {
