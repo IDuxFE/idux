@@ -14,6 +14,7 @@
 | `dataEditable` | 标签数据是否可以编辑 | `boolean` | `true` | - | 配置true则可以在下拉面板的选项末尾点击编辑图标进行编辑 |
 | `disabled` | 是否禁用 | `boolean` | `false` | - | - |
 | `confirmBeforeSelect` | 是否在选择标签之后需要确认 | `boolean \| 'force'` | `false` | - | 配置true或者force时，选择标签后会弹出一个浮层进行确定或者取消，配置force则强制必须确定或者取消才能进行下一步 |
+| `confirmBeforeDataRemove` | 是否在删除标签数据时需要确认 | `boolean` | `false` | - | 配置true时，删除标签数据会弹出一个弹窗进行确定或者取消 |
 | `createdTagDataModifier` | 修改创建的标签数据 | `(data: TagSelectData) => TagSelectData` | - | - | 标签创建时，会随机选择一个内置的颜色，可以通过该函数修改内部创建的数据 |
 | `maxTags` | 选择框内展示的标签最大数量 | `number \| 'responsive'` | `Number.MAX_SAFE_INTEGER` | - | - |
 | `tagsLimit` | 可以选择的标签最大数量 | `number` | `Number.MAX_SAFE_INTEGER` | - | - |
