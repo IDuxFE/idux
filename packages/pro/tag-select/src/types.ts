@@ -44,6 +44,7 @@ export const proTagSelectProps = {
   dataEditable: { type: Boolean, default: true },
   disabled: { type: Boolean, default: false },
   confirmBeforeSelect: { type: [Boolean, String] as PropType<boolean | 'force'>, default: false },
+  confirmBeforeDataRemove: { type: Boolean, default: true },
   maxTags: { type: [Number, String] as PropType<number | 'responsive'>, default: Number.MAX_SAFE_INTEGER },
   tagsLimit: { type: Number, default: Number.MAX_SAFE_INTEGER },
   tagDataLimit: { type: Number, default: Number.MAX_SAFE_INTEGER },

@@ -44,6 +44,12 @@ export function useRemoveConfirm(
       return Promise.resolve(false)
     }
 
+    if (!props.confirmBeforeDataRemove) {
+      removeData(data)
+      handleRemove(data.key)
+      return Promise.resolve(true)
+    }
+
     setLocked(true)
     setDataToRemove(data)
     setModalVisible(true)
