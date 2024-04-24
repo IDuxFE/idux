@@ -281,6 +281,8 @@ function createPool(): Pool {
       }
 
       pooledItemMap.delete(poolItem!.itemKey)
+
+      return poolItem!
     }
 
     return {
