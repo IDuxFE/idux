@@ -6,18 +6,20 @@
  */
 
 import type { VirtualScrollEnabled } from '@idux/cdk/scroll'
-import type { VKey } from '@idux/cdk/utils'
 
 import { type VNode, computed, defineComponent, normalizeClass, provide, watch } from 'vue'
 
 import { isBoolean } from 'lodash-es'
 
+import { type VKey, useState } from '@idux/cdk/utils'
 import { ɵHeader } from '@idux/components/_private/header'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxSpin, type SpinProps } from '@idux/components/spin'
 import { useThemeToken } from '@idux/components/theme'
 import { useGetKey } from '@idux/components/utils'
 
+import { useColumnOffsets } from './composables/useColumnOffsets'
+import { useColumnWidthMeasure } from './composables/useColumnWidthMeasure'
 import { type TableColumnMerged, useColumns } from './composables/useColumns'
 import { useDataSource } from './composables/useDataSource'
 import { useExpandable } from './composables/useExpandable'
@@ -51,6 +53,8 @@ export default defineComponent({
     const locale = useGlobalConfig('locale')
     const config = useGlobalConfig('table')
 
+    const [clientWidth, setClientWidth] = useState(0)
+
     const mergedAutoHeight = computed(() => props.autoHeight ?? config.autoHeight)
     const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
     const mergedGetKey = useGetKey(props, config, 'components/table')
@@ -70,9 +74,18 @@ export default defineComponent({
     const stickyContext = useSticky(props)
     const scrollContext = useScroll(props, stickyContext)
     const columnsContext = useColumns(props, slots, config, scrollContext.scrollBarSizeOnFixedHolder)
-    const sortableContext = useSortable(columnsContext.flattedColumns)
-    const filterableContext = useFilterable(columnsContext.flattedColumns)
-    const expandableContext = useExpandable(props, columnsContext.flattedColumns)
+
+    const { flattedColumns, flattedColumnsWithScrollBar, fixedColumns } = columnsContext
+
+    const columnMeasureContext = useColumnWidthMeasure(flattedColumns)
+    const { measuredColumnWidthMap } = columnMeasureContext
+
+    const columnCount = computed(() => flattedColumnsWithScrollBar.value.length)
+
+    const columnOffsetsContext = useColumnOffsets(fixedColumns, measuredColumnWidthMap, columnCount)
+    const sortableContext = useSortable(flattedColumns)
+    const filterableContext = useFilterable(flattedColumns)
+    const expandableContext = useExpandable(props, flattedColumns)
     const tableLayout = useTableLayout(
       props,
       columnsContext,
@@ -82,7 +95,6 @@ export default defineComponent({
       mergedAutoHeight,
     )
 
-    const { columnWidthMap, flattedColumns } = columnsContext
     const { activeSorters } = sortableContext
     const { activeFilters } = filterableContext
 
@@ -117,7 +129,7 @@ export default defineComponent({
     useScrollOnChange(props, config, mergedPagination, activeSorters, activeFilters, scrollContext.scrollTo)
 
     const getVirtualColWidth = (rowKey: VKey, colKey: VKey) => {
-      return columnWidthMap.value[colKey] ?? columnMap.get(colKey)?.width
+      return measuredColumnWidthMap.value[colKey] ?? columnMap.get(colKey)?.width
     }
 
     const context = {
@@ -125,6 +137,8 @@ export default defineComponent({
       slots,
       config,
       locale,
+      clientWidth,
+      setClientWidth,
       mergedPrefixCls,
       mergedEmptyCell,
       mergedInsetShadow,
@@ -134,6 +148,8 @@ export default defineComponent({
       mergedAutoHeight,
       getVirtualColWidth,
       ...columnsContext,
+      ...columnMeasureContext,
+      ...columnOffsetsContext,
       ...scrollContext,
       ...sortableContext,
       ...filterableContext,

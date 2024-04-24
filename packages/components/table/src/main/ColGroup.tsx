@@ -17,8 +17,13 @@ import { TABLE_TOKEN } from '../token'
 export default defineComponent({
   props: { isFixedHolder: Boolean, columns: Array as PropType<TableColumnMerged[]> },
   setup(props) {
-    const { flattedColumns, flattedColumnsWithScrollBar, columnWidthMap, mergedSelectableMenus, mergedPrefixCls } =
-      inject(TABLE_TOKEN)!
+    const {
+      flattedColumns,
+      flattedColumnsWithScrollBar,
+      measuredColumnWidthMap,
+      mergedSelectableMenus,
+      mergedPrefixCls,
+    } = inject(TABLE_TOKEN)!
 
     const resolvedColumns = computed(() => {
       const { isFixedHolder, columns } = props
@@ -42,7 +47,7 @@ export default defineComponent({
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const { key, type } = column
-        const mergedWidth = column.width ?? columnWidthMap.value[key]
+        const mergedWidth = props.isFixedHolder ? measuredColumnWidthMap.value[key] ?? column.width : column.width
         const className = type
           ? normalizeClass({
               [`${prefixCls}-col-${type}`]: true,

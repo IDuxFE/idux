@@ -11,13 +11,12 @@ import { type PropType, type VNodeChild, computed, defineComponent, inject } fro
 
 import { convertCssPixel } from '@idux/cdk/utils'
 
-import { TABLE_TOKEN, tableBodyToken } from '../../token'
+import { TABLE_TOKEN } from '../../token'
 
 export default defineComponent({
   props: { columns: Array as PropType<TableColumnMerged[]>, isEmpty: Boolean },
   setup(props, { slots }) {
-    const { mergedPrefixCls, hasFixed, scrollHorizontalOverflowed, scrollBarColumn } = inject(TABLE_TOKEN)!
-    const { mainTableWidth } = inject(tableBodyToken)!
+    const { clientWidth, mergedPrefixCls, hasFixed, scrollHorizontalOverflowed, scrollBarColumn } = inject(TABLE_TOKEN)!
     const columnCount = computed(() => props.columns?.length ?? 1)
     return () => {
       let children: VNodeChild = slots.default!()
@@ -28,7 +27,7 @@ export default defineComponent({
           <div
             class={`${mergedPrefixCls.value}-fixed-row`}
             style={{
-              width: convertCssPixel(mainTableWidth.value - (scrollBar ? scrollBar.width : 0)),
+              width: convertCssPixel(clientWidth.value - (scrollBar ? scrollBar.width : 0)),
               position: 'sticky',
               left: 0,
               overflow: 'hidden',

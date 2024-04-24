@@ -5,19 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import {
-  type ComputedRef,
-  type Ref,
-  type Slots,
-  type VNode,
-  type VNodeChild,
-  computed,
-  ref,
-  watch,
-  watchEffect,
-} from 'vue'
+import { type ComputedRef, type Slots, type VNode, type VNodeChild, computed } from 'vue'
 
-import { debounce, isNil, isString } from 'lodash-es'
+import { isNil, isString } from 'lodash-es'
 
 import { type VKey, flattenNode } from '@idux/cdk/utils'
 import { type TableConfig } from '@idux/components/config'
@@ -54,11 +44,6 @@ export function useColumns(
   )
   const hasFixed = computed(() => flattedColumns.value.some(column => column.fixed))
 
-  const columnCount = computed(() => flattedColumnsWithScrollBar.value.length)
-
-  const { columnWidthMap, columnWidths, changeColumnWidth } = useColumnWidths(flattedColumns)
-  const { columnOffsets, columnOffsetsWithScrollBar } = useColumnOffsets(fixedColumns, columnWidthMap, columnCount)
-
   const mergedRows = computed(() => mergeRows(mergedColumns.value, scrollBarColumn.value))
 
   return {
@@ -69,11 +54,6 @@ export function useColumns(
     fixedColumnKeys,
     hasEllipsis,
     hasFixed,
-    columnWidthMap,
-    columnWidths,
-    changeColumnWidth,
-    columnOffsets,
-    columnOffsetsWithScrollBar,
     mergedRows,
   }
 }
@@ -85,6 +65,7 @@ export interface ColumnsContext {
   fixedColumns: ComputedRef<{
     fixedStartColumns: (TableColumnMerged | TableColumnScrollBar)[]
     fixedEndColumns: (TableColumnMerged | TableColumnScrollBar)[]
+    fixedColumnIndexMap: Record<VKey, number>
   }>
   fixedColumnKeys: ComputedRef<{
     lastStartKey: VKey | undefined
@@ -92,17 +73,6 @@ export interface ColumnsContext {
   }>
   hasEllipsis: ComputedRef<boolean>
   hasFixed: ComputedRef<boolean>
-  columnWidthMap: Ref<Record<VKey, number>>
-  columnWidths: Ref<number[]>
-  changeColumnWidth: (key: VKey, width: number | false) => void
-  columnOffsets: ComputedRef<{
-    starts: Record<VKey, { index: number; offset: number }>
-    ends: Record<VKey, { index: number; offset: number }>
-  }>
-  columnOffsetsWithScrollBar: ComputedRef<{
-    starts: Record<VKey, { index: number; offset: number }>
-    ends: Record<VKey, { index: number; offset: number }>
-  }>
   mergedRows: ComputedRef<{
     rows: TableColumnMergedExtra[][]
     offsetIndexMap: Record<VKey, { colStart: number; colEnd: number }>
@@ -313,101 +283,6 @@ function useFixedColumns(flattedColumnsWithScrollBar: ComputedRef<(TableColumnMe
   })
 
   return { fixedColumns, fixedColumnKeys }
-}
-
-function useColumnWidths(flattedColumns: ComputedRef<TableColumnMerged[]>) {
-  const widthMap = ref<Record<VKey, number>>({})
-  const widthString = ref<string>()
-  const columnWidths = ref<number[]>([])
-  watch(
-    widthString,
-    // resizable: 列宽设置百分比的情况下，拖拽会改变多列的宽度，用 debounce 来减少重复渲染次数。
-    debounce(widths => {
-      columnWidths.value = widths ? widths.split('-').filter(Boolean).map(Number) : []
-    }, 16),
-  )
-
-  watchEffect(() => {
-    const columns = flattedColumns.value
-    widthString.value = columns.map(column => widthMap.value[column.key]).join('-')
-  })
-
-  const changeColumnWidth = (key: VKey, width: number | false) => {
-    if (width === false) {
-      delete widthMap.value[key]
-    } else {
-      widthMap.value[key] = width
-    }
-  }
-
-  return { columnWidthMap: widthMap, columnWidths, changeColumnWidth }
-}
-
-function useColumnOffsets(
-  fixedColumns: ComputedRef<{
-    fixedStartColumns: (TableColumnMerged | TableColumnScrollBar)[]
-    fixedEndColumns: (TableColumnMerged | TableColumnScrollBar)[]
-    fixedColumnIndexMap: Record<VKey, number>
-  }>,
-  columnWidthsMap: Ref<Record<VKey, number>>,
-  columnCount: Ref<number>,
-) {
-  const columnOffsets = computed(() => {
-    const { fixedStartColumns, fixedEndColumns, fixedColumnIndexMap } = fixedColumns.value
-    return calculateOffsets(
-      fixedStartColumns,
-      fixedEndColumns.filter(column => column.type !== 'scroll-bar'),
-      fixedColumnIndexMap,
-      columnWidthsMap.value,
-      columnCount.value - 1,
-    )
-  })
-  const columnOffsetsWithScrollBar = computed(() => {
-    const { fixedStartColumns, fixedEndColumns, fixedColumnIndexMap } = fixedColumns.value
-    return calculateOffsets(
-      fixedStartColumns,
-      fixedEndColumns,
-      fixedColumnIndexMap,
-      columnWidthsMap.value,
-      columnCount.value,
-    )
-  })
-  return { columnOffsets, columnOffsetsWithScrollBar }
-}
-
-function calculateOffsets(
-  startColumns: (TableColumnMerged | TableColumnScrollBar)[],
-  endColumns: (TableColumnMerged | TableColumnScrollBar)[],
-  columnIndexMap: Record<VKey, number>,
-  columnWidthsMap: Record<VKey, number>,
-  columnCount: number,
-) {
-  const startOffsets: Record<VKey, { index: number; offset: number }> = {}
-  const endOffsets: Record<VKey, { index: number; offset: number }> = {}
-
-  let startOffset = 0
-  let endOffset = 0
-
-  for (let index = 0; index < startColumns.length; index++) {
-    const column = startColumns[index]
-    const width = columnWidthsMap[column.key] ?? column.width ?? 0
-
-    startOffsets[column.key] = { index: columnIndexMap[column.key] ?? index, offset: startOffset }
-    startOffset += width
-  }
-
-  for (let index = 0; index < endColumns.length; index++) {
-    const column = endColumns[endColumns.length - index - 1]
-    const width = columnWidthsMap[column.key] ?? column.width ?? 0
-
-    endOffsets[column.key] = { index: columnIndexMap[column.key] ?? columnCount - index - 1, offset: endOffset }
-    endOffset += width
-  }
-
-  return {
-    starts: startOffsets,
-    ends: endOffsets,
-  }
 }
 
 function mergeRows(mergedColumns: TableColumnMerged[], scrollBarColumn: TableColumnScrollBar | undefined) {
