@@ -33,6 +33,7 @@
 
     &-tag {
       height: var(--ix-pro-tag-select-tag-height);
+      min-width: auto;
       line-height: calc(var(--ix-pro-tag-select-tag-height) - var(--ix-control-line-width) * 2);
 
       .@{control-trigger-prefix}-overlay-match-width & {
@@ -165,6 +166,7 @@
     height: @select-item-height;
     line-height: @select-item-line-height;
     max-width: 100%;
+    min-width: auto;
     margin: @select-margin-half 0;
     margin-inline-end: var(--ix-margin-size-xs);
 
