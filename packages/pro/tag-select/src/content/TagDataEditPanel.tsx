@@ -111,6 +111,9 @@ export default defineComponent({
             <IxIcon class={`${prefixCls}-delete-icon`} name="delete" />
             <span class={`${prefixCls}-delete-label`}>{locale.remove}</span>
           </div>
+          <div class={`${prefixCls}-divider`}>
+            <div class={`${prefixCls}-divider-line`}></div>
+          </div>
           <div class={`${prefixCls}-colors`}>
             {mergedTagSelectColors.value.map(color => renderColorItem(`${prefixCls}-colors`, color))}
           </div>
