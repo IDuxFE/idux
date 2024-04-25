@@ -10,6 +10,28 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 2.1.3(2024-04-25)
+
+
+### Bug Fixes
+
+* **cdk:virtual:** 渲染池的元素复用效果没有生效 ([#1900](https://github.com/IDuxFE/idux/issues/1900)) ([514b2dd](https://github.com/IDuxFE/idux/commit/514b2dd5a76bac45b2ae3b2306751164a8470331))
+  - 正常情况下，当某个元素或者组件被滚动到区域外变成非激活状态时，会被回收并复用
+* **comp:table:** 重构表格列宽计算和测量的逻辑 ([#1899](https://github.com/IDuxFE/idux/issues/1899)) ([425def0](https://github.com/IDuxFE/idux/commit/425def0567b009e75e92a98f8a6c35b8eaef37d4))
+  - tbody所在的表格，colgroup中不会再使用测量后的列宽作为宽度，仅会使用表格列最初配置的宽度
+  - thead所在的表格，colgroup中优先使用测量后的列宽作为宽度
+* **comp:table:** rowSpan 和 colSpan 的参数传递错误 ([#1908](https://github.com/IDuxFE/idux/issues/1908)) ([2aebaec](https://github.com/IDuxFE/idux/commit/2aebaec3878e0bf5b610e7f6716d68c833bbd1ab))
+* **pro:search:** 在 select 类型的 field 数据没有加载之前设置了 value，数据加载过后会报错 ([#1906](https://github.com/IDuxFE/idux/issues/1906)) ([5f00488](https://github.com/IDuxFE/idux/commit/5f00488397b041cfb22605dd392c73494911c474))
+* **pro:table:** 改变列的固定位置后，列的排序应该被改变 ([#1901](https://github.com/IDuxFE/idux/issues/1901)) ([daba3f6](https://github.com/IDuxFE/idux/commit/daba3f69128fb8540f5642a47b4100ee4a8a1426))
+* **pro:tag-select:** 修改创建标签选项的输入内容 font-weight 为 fontWeightXl ([#1903](https://github.com/IDuxFE/idux/issues/1903)) ([03f67c3](https://github.com/IDuxFE/idux/commit/03f67c3be5aa5bd4ac22088ccd0a22cf85b62ebb))
+* **pro:tag-select:** 修改标签数据编辑面板的样式 ([#1904](https://github.com/IDuxFE/idux/issues/1904)) ([3a87226](https://github.com/IDuxFE/idux/commit/3a87226ca4a648fa58732c95d953d701cc6fe5c8))
+  - 删除按钮增加悬浮和激活背景色
+  - 删除按钮下方增加分割线
+  - 已经选中的颜色，悬浮后不会改变背景色
+* **pro:tag-select:** 标签数据删除后的弹窗确认是否需要，应该是可以配置的 ([#1905](https://github.com/IDuxFE/idux/issues/1905)) ([659b1f7](https://github.com/IDuxFE/idux/commit/659b1f7e039cc9c350ea4185a3550ee9f18fee1b))
+* **pro:tag-select:** 标签的 min-widht 应该是 auto ([#1902](https://github.com/IDuxFE/idux/issues/1902)) ([d80987d](https://github.com/IDuxFE/idux/commit/d80987ded74c0830f65df320e77bff376acdd273))
+
+
 ## 2.1.2(2024-04-17)
 
 
