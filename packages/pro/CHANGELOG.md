@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.3](https://github.com/IDuxFE/idux/compare/v2.1.2...v2.1.3) (2024-04-25)
+
+
+### Bug Fixes
+
+* **pro:search:** setting value before select option loaded throws error ([#1906](https://github.com/IDuxFE/idux/issues/1906)) ([5f00488](https://github.com/IDuxFE/idux/commit/5f00488397b041cfb22605dd392c73494911c474))
+* **pro:table:** column sequence should change after fixed changed ([#1901](https://github.com/IDuxFE/idux/issues/1901)) ([daba3f6](https://github.com/IDuxFE/idux/commit/daba3f69128fb8540f5642a47b4100ee4a8a1426))
+* **pro:tag-select:** change creation option input font-weight to xl ([#1903](https://github.com/IDuxFE/idux/issues/1903)) ([03f67c3](https://github.com/IDuxFE/idux/commit/03f67c3be5aa5bd4ac22088ccd0a22cf85b62ebb))
+* **pro:tag-select:** modify tag edit panel style ([#1904](https://github.com/IDuxFE/idux/issues/1904)) ([3a87226](https://github.com/IDuxFE/idux/commit/3a87226ca4a648fa58732c95d953d701cc6fe5c8))
+* **pro:tag-select:** tag data remove confirm should be configuarable ([#1905](https://github.com/IDuxFE/idux/issues/1905)) ([659b1f7](https://github.com/IDuxFE/idux/commit/659b1f7e039cc9c350ea4185a3550ee9f18fee1b))
+* **pro:tag-select:** tag min width should be auto ([#1902](https://github.com/IDuxFE/idux/issues/1902)) ([d80987d](https://github.com/IDuxFE/idux/commit/d80987ded74c0830f65df320e77bff376acdd273))
+
+
+
+
+
 ## [2.1.2](https://github.com/IDuxFE/idux/compare/v2.1.1...v2.1.2) (2024-04-17)
 
 

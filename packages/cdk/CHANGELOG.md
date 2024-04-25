@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.3](https://github.com/IDuxFE/idux/compare/v2.1.2...v2.1.3) (2024-04-25)
+
+
+### Bug Fixes
+
+* **cdk:virtual:** render pool item reuse doesn't take effect ([#1900](https://github.com/IDuxFE/idux/issues/1900)) ([514b2dd](https://github.com/IDuxFE/idux/commit/514b2dd5a76bac45b2ae3b2306751164a8470331))
+
+
+
+
+
 ## [2.1.2](https://github.com/IDuxFE/idux/compare/v2.1.1...v2.1.2) (2024-04-17)
 
 

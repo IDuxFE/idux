@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.3](https://github.com/IDuxFE/idux/compare/v2.1.2...v2.1.3) (2024-04-25)
+
+
+### Bug Fixes
+
+* **comp:table:** refactor table column width measure logic ([#1899](https://github.com/IDuxFE/idux/issues/1899)) ([425def0](https://github.com/IDuxFE/idux/commit/425def0567b009e75e92a98f8a6c35b8eaef37d4))
+* **comp:table:** rowSpan and colSpan param error ([#1908](https://github.com/IDuxFE/idux/issues/1908)) ([2aebaec](https://github.com/IDuxFE/idux/commit/2aebaec3878e0bf5b610e7f6716d68c833bbd1ab))
+
+
+
+
+
 ## [2.1.2](https://github.com/IDuxFE/idux/compare/v2.1.1...v2.1.2) (2024-04-17)
 
 
