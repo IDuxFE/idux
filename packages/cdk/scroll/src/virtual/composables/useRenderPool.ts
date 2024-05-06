@@ -11,6 +11,8 @@ import type { VKey } from '@idux/cdk/utils'
 
 import { type ComputedRef, type Ref, onUnmounted, ref, watch } from 'vue'
 
+import { isNil } from 'lodash-es'
+
 import { isRowData } from '../utils'
 
 interface PoolItem {
@@ -27,7 +29,7 @@ interface RowPoolItem extends PoolItem {
 
 interface Pool {
   getPoolItem: (key?: string) => PoolItem
-  getPoolItemByItemKey: (itemKey: VKey) => PoolItem
+  getPoolItemByItemKey: (itemKey: VKey) => PoolItem | undefined
   recyclePoolItem: (poolItem: PoolItem) => void
   destroy: () => void
 }
@@ -89,8 +91,9 @@ export function useRenderPool(
 
     updated = !!inactiveKeys.size
 
-    const poolMap = new Map(items.map(item => [item.itemKey, item]))
+    const poolKeyMap = new Map(items.map(item => [item.itemKey, item.key]))
     const poolKeySet = new Set(items.map(item => item.key))
+    const newlyAppendedItems: { item: unknown; index: number; itemKey: VKey }[] = []
 
     for (let index = start; index <= end; index++) {
       const item = data[index]
@@ -99,27 +102,49 @@ export function useRenderPool(
       }
 
       const itemKey = getKey.value(item)
-      const existedPoolItem = poolMap.get(itemKey)
+      const existedPoolItemKey = poolKeyMap.get(itemKey)
 
       // item still active, continue
-      if (existedPoolItem && !inactiveKeys.has(existedPoolItem.key)) {
+      if (!isNil(existedPoolItemKey) && !inactiveKeys.has(existedPoolItemKey)) {
         continue
       }
 
-      // create a new pooled item
-      const poolItem = pool.getPoolItemByItemKey(itemKey)
-      inactiveKeys.delete(poolItem.key)
+      newlyAppendedItems.push({ item, index, itemKey })
+    }
+
+    const updatePoolItem = (poolItem: PoolItem, item: unknown, index: number, itemKey: VKey) => {
       poolItem.item = item
       poolItem.index = index
       poolItem.itemKey = itemKey
+
+      inactiveKeys.delete(poolItem.key)
+      updated = true
 
       // if an inactive item is resued, remove it from deleted item list
       if (!poolKeySet.has(poolItem.key)) {
         items.push(poolItem)
       }
-
-      updated = true
     }
+
+    let i = 0
+    let currentItem = newlyAppendedItems[i]
+    while (currentItem) {
+      const { item, index, itemKey } = currentItem
+      const poolItem = pool.getPoolItemByItemKey(itemKey)
+
+      if (poolItem) {
+        updatePoolItem(poolItem, item, index, itemKey)
+        newlyAppendedItems.splice(i, 1)
+        currentItem = newlyAppendedItems[i]
+      } else {
+        currentItem = newlyAppendedItems[++i]
+      }
+    }
+
+    newlyAppendedItems.forEach(({ item, index, itemKey }) => {
+      const poolItem = pool.getPoolItem()
+      updatePoolItem(poolItem, item, index, itemKey)
+    })
 
     // remove deleted items
     for (const inactiveKey of inactiveKeys) {
@@ -151,13 +176,13 @@ export function useRenderPool(
       colPools[rowPoolItem.key] = pool
     }
 
-    updatePool(rowPoolItem.cols, pool, rowPoolItem.item.data, left, right, recycleAll)
+    updatePool(rowPoolItem.cols!, pool, rowPoolItem.item.data, left, right, recycleAll)
 
     if (!props.colModifier) {
       return
     }
 
-    const renderedCols = rowPoolItem.cols.map(poolItem => poolItem.item)
+    const renderedCols = rowPoolItem.cols!.map(poolItem => poolItem.item)
     const { start: prependedCols, end: appendedCols } = props.colModifier(rowPoolItem.item, renderedCols) ?? {}
 
     // append modified data to pool
@@ -203,6 +228,12 @@ export function useRenderPool(
     })
   }
 
+  const dataSourceChangedTrigger = ref(false)
+  let dataSourceChanged = false
+  const triggerByDataSourceChange = () => {
+    dataSourceChangedTrigger.value = !dataSourceChangedTrigger.value
+  }
+
   let isUpdating = false
   const update = (recycleAll = false) => {
     if (isUpdating || (!props.dataSource.length && !recycleAll)) {
@@ -224,16 +255,22 @@ export function useRenderPool(
   watch(
     () => props.dataSource,
     () => {
-      update(true)
+      dataSourceChanged = true
+      triggerByDataSourceChange()
     },
     {
       deep: true,
+      flush: 'pre',
     },
   )
   watch(
-    [topIndex, bottomIndex, leftIndex, rightIndex],
+    [topIndex, bottomIndex, leftIndex, rightIndex, dataSourceChangedTrigger],
     () => {
-      update()
+      update(dataSourceChanged)
+
+      if (dataSourceChanged) {
+        dataSourceChanged = false
+      }
     },
     {
       immediate: true,
@@ -295,10 +332,9 @@ function createPool(): Pool {
 
     if (poolItem) {
       pooledItemMap.delete(itemKey)
-      return poolItem
     }
 
-    return getPoolItem()
+    return poolItem
   }
 
   const recyclePoolItem = (poolItem: PoolItem) => {

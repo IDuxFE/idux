@@ -41,6 +41,7 @@ export function renderBodyCell(
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const colProps: any = {
+    key: column.key,
     colSpan: colSpan === 1 ? undefined : colSpan,
     rowSpan: rowSpan === 1 ? undefined : rowSpan,
     isLast,
