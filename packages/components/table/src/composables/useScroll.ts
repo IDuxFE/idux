@@ -48,6 +48,8 @@ export function useScroll(props: TableProps, { setStickyScrollLeft }: StickyCont
     },
   )
 
+  const resizeMark = useTableResized(scrollBodyRef, scrollContentRef)
+
   const { handleScroll, pingedStart, pingedEnd } = useScrollRef(
     props,
     virtualScrollRef,
@@ -55,10 +57,11 @@ export function useScroll(props: TableProps, { setStickyScrollLeft }: StickyCont
     scrollHeadRef,
     scrollBodyRef,
     scrollFootRef,
+    resizeMark,
     setStickyScrollLeft,
   )
 
-  const { scrollHorizontalOverflowed, scrollVerticalOverflowed } = useScrollOverflowed(scrollBodyRef, scrollContentRef)
+  const { scrollHorizontalOverflowed, scrollVerticalOverflowed } = useScrollOverflowed(scrollBodyRef, resizeMark)
   const scrollWidth = computed(() => convertCssPixel(props.scroll?.width))
   const scrollHeight = computed(() => convertCssPixel(props.scroll?.height))
 
@@ -132,6 +135,7 @@ function useScrollRef(
   scrollHeadRef: Ref<HTMLDivElement | undefined>,
   scrollBodyRef: Ref<HTMLDivElement | undefined>,
   scrollFootRef: Ref<HTMLDivElement | undefined>,
+  resizeMark: Ref<boolean>,
   setStickyScrollLeft: (value: number) => void,
 ) {
   const pingedStart = ref(false)
@@ -214,13 +218,17 @@ function useScrollRef(
     }
   }
 
+  watch(resizeMark, () => {
+    const currentTarget = convertElement(scrollBodyRef)
+    if (currentTarget) {
+      handleScroll({ currentTarget } as unknown as Event)
+    }
+  })
+
   return { handleScroll, pingedStart, pingedEnd }
 }
 
-function useScrollOverflowed(
-  scrollBodyRef: Ref<HTMLDivElement | undefined>,
-  scrollContentRef: Ref<HTMLDivElement | undefined>,
-) {
+function useScrollOverflowed(scrollBodyRef: Ref<HTMLDivElement | undefined>, resizeMark: Ref<boolean>) {
   const scrollHorizontalOverflowed = ref(false)
   const scrollVerticalOverflowed = ref(false)
 
@@ -235,20 +243,34 @@ function useScrollOverflowed(
     }
   }
 
-  let stopResizeObservers: Array<() => void> = []
-  const stopHandler = () => stopResizeObservers.forEach(stop => stop())
-
-  onMounted(() => {
-    stopResizeObservers = [
-      useResizeObserver(scrollBodyRef, calcScrollOverflowed),
-      useResizeObserver(scrollContentRef, calcScrollOverflowed),
-    ]
-  })
-
-  onBeforeUnmount(() => stopHandler())
+  watch(resizeMark, calcScrollOverflowed)
 
   return {
     scrollHorizontalOverflowed,
     scrollVerticalOverflowed,
   }
+}
+
+function useTableResized(
+  scrollBodyRef: Ref<HTMLDivElement | undefined>,
+  scrollContentRef: Ref<HTMLDivElement | undefined>,
+) {
+  const resizeMark = ref(false)
+  const handleResize = () => {
+    resizeMark.value = !resizeMark.value
+  }
+
+  let stopResizeObservers: Array<() => void> = []
+  const stopHandler = () => stopResizeObservers.forEach(stop => stop())
+
+  onMounted(() => {
+    stopResizeObservers = [
+      useResizeObserver(scrollBodyRef, handleResize),
+      useResizeObserver(scrollContentRef, handleResize),
+    ]
+  })
+
+  onBeforeUnmount(() => stopHandler())
+
+  return resizeMark
 }
