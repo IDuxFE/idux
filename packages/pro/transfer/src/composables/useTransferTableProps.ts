@@ -5,6 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { TableTransferContext } from '../token'
 import type { ProTransferProps, TransferData } from '../types'
 import type { TransferBindings } from '@idux/components/transfer'
 import type { ProTableColumn, ProTableColumnSelectable, ProTableProps } from '@idux/pro/table'
@@ -21,10 +22,12 @@ export function useTransferTableProps(
   props: ProTransferProps,
   slots: Slots,
   transferBindings: TransferBindings,
+  tableContext: TableTransferContext | null,
   mergedPrefixCls: ComputedRef<string>,
   isSource: boolean,
 ): ComputedRef<ProTableProps> {
   const { paginatedData, paginatedDataSource, selectedKeys, getKey } = transferBindings
+  const { childrenKey, expandedKeysContext } = tableContext ?? {}
 
   const convertedColumns = computed(() =>
     convertTableColumns(
@@ -73,6 +76,8 @@ export function useTransferTableProps(
     return {
       autoHeight: !scroll,
       ...customTableProps,
+      childrenKey: childrenKey?.value,
+      expandedRowKeys: expandedKeysContext?.[isSource ? 'sourceExpandedKeys' : 'targetExpandedKeys'].value,
       dataSource: isSource && props.mode === 'immediate' ? paginatedDataSource.value : paginatedData.value,
       columns: convertedColumns.value,
       layoutTool: mergedLayoutTool,
@@ -87,6 +92,8 @@ export function useTransferTableProps(
       onScroll,
       onScrolledChange,
       onScrolledBottom,
+      'onUpdate:expandedRowKeys':
+        expandedKeysContext?.[isSource ? 'handleSourceExpandedChange' : 'handleTargetExpandedChange'],
     }
   })
 }
@@ -119,7 +126,9 @@ function convertTableColumns(
     disabled: record => cellDisabledKeys.value.has(getKey.value(record)) || !!props.disabled,
     multiple: true,
     trigger: 'click',
-    onChange: selectedKeys => handleSelectChange(selectedKeys),
+    onChange: selectedKeys => {
+      handleSelectChange(selectedKeys)
+    },
   }
 
   if (isSource || props.mode !== 'immediate') {
@@ -137,9 +146,10 @@ function convertTableColumns(
 
   if (props.mode === 'immediate' && !isSource) {
     const lastCol = convertedColumns[convertedColumns.length - 1]
-    if ('type' in lastCol) {
+    if ('type' in lastCol && lastCol.type !== 'expandable') {
       convertedColumns.push({
         ...layoutDisabledColumnConfig,
+        width: 40,
         customCell: ({ record }: { record: TransferData }) => {
           const key = getKey.value(record)
           return renderRemovableLabel(

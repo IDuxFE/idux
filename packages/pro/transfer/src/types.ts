@@ -22,7 +22,7 @@ import type { TreeProps } from '@idux/components/tree'
 import type { ProTableColumn, ProTableLayoutToolProps, ProTableProps } from '@idux/pro/table'
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
-export type ProTransferTypes = 'table' | 'tree'
+export type ProTransferTypes = 'table' | 'tree' | 'tree-table'
 export type { TransferData } from '@idux/components/transfer'
 
 export type TreeTransferData<V extends object = Record<VKey, unknown>, C extends string = 'children'> = TransferData &
@@ -34,7 +34,7 @@ export type ProTransferTableProps<T = any, K = VKey> = {
   sourceLayoutTool?: boolean | Omit<ProTableLayoutToolProps, 'changeSize'>
   targetLayoutTool?: boolean | Omit<ProTableLayoutToolProps, 'changeSize'>
   onColumnsChange?: (isSource: boolean, columns: ProTableColumn<T, K>[]) => void
-} & Pick<ProTableProps, 'tableLayout' | 'ellipsis' | 'borderless'>
+} & Pick<ProTableProps, 'tableLayout' | 'ellipsis' | 'borderless' | 'childrenKey' | 'cascaderStrategy'>
 
 export type ProTransferTreeProps = Pick<
   TreeProps,

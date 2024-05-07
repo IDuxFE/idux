@@ -5,24 +5,19 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { TreeDataStrategyContext } from '../composables/useTreeDataStrategyContext'
-import type { CascaderStrategy } from '@idux/components/cascader'
-import type { GetKeyFn } from '@idux/components/utils'
+import { computed, defineComponent, inject, provide } from 'vue'
 
-import { type ComputedRef, type Ref, computed, defineComponent, inject, provide } from 'vue'
-
-import { type VKey, useControlledProp } from '@idux/cdk/utils'
+import { useControlledProp } from '@idux/cdk/utils'
 import { useGlobalConfig as useComponentGlobalConfig } from '@idux/components/config'
 import { IxTransfer, type TransferDataStrategyProp, type TransferListSlotParams } from '@idux/components/transfer'
 import { useThemeToken } from '@idux/pro/theme'
 
 import { useTransferData } from '../composables/useTransferData'
-import { useTreeDataStrategies } from '../composables/useTreeDataStrategy'
-import { type TreeExpandedKeysContext, useTreeExpandedKeys } from '../composables/useTreeExpandedKeys'
+import { useTreeContext } from '../composables/useTreeContext'
 import ProTransferList from '../content/ProTransferList'
 import ProTransferTree from '../content/ProTransferTree'
 import { proTransferContext, treeTransferContext } from '../token'
-import { type ProTransferProps, type TreeTransferData, proTransferProps } from '../types'
+import { type TreeTransferData, proTransferProps } from '../types'
 
 export default defineComponent({
   props: proTransferProps,
@@ -131,30 +126,3 @@ export default defineComponent({
     }
   },
 })
-
-function useTreeContext<C extends string>(
-  props: ProTransferProps,
-  childrenKey: ComputedRef<C>,
-  cascadeStrategy: ComputedRef<CascaderStrategy>,
-  getKey: ComputedRef<GetKeyFn>,
-  targetKeySet: ComputedRef<Set<VKey>>,
-): {
-  dataStrategyContext: TreeDataStrategyContext<TreeTransferData, C>
-  expandedKeysContext: TreeExpandedKeysContext
-  mergedDataStrategy: Ref<TransferDataStrategyProp<TreeTransferData<TreeTransferData, C>>>
-} {
-  const { context: dataStrategyContext, mergedDataStrategy } = useTreeDataStrategies(
-    props,
-    childrenKey,
-    getKey,
-    cascadeStrategy,
-  )
-  const { parentKeyMap, dataMap } = dataStrategyContext
-  const expandedKeysContext = useTreeExpandedKeys(props, childrenKey, getKey, targetKeySet, parentKeyMap, dataMap)
-
-  return {
-    dataStrategyContext,
-    expandedKeysContext,
-    mergedDataStrategy,
-  }
-}

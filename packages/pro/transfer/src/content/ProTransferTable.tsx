@@ -12,7 +12,7 @@ import { TRANSFER_SOURCE_TOKEN, TRANSFER_TARGET_TOKEN } from '@idux/components/t
 import { IxProTable } from '@idux/pro/table'
 
 import { useTransferTableProps } from '../composables/useTransferTableProps'
-import { proTransferContext } from '../token'
+import { proTransferContext, tableTransferContext } from '../token'
 import { proTransferTableContentProps } from '../types'
 
 export default defineComponent({
@@ -29,10 +29,12 @@ export default defineComponent({
     const proTransferTableCls = computed(() => `${mergedPrefixCls.value}-table-content`)
 
     const transferBindings = inject(props.isSource ? TRANSFER_SOURCE_TOKEN : TRANSFER_TARGET_TOKEN)!
+    const tableContext = inject(tableTransferContext, null)
     const tableProps = useTransferTableProps(
       proTransferProps,
       slots,
       transferBindings,
+      tableContext,
       proTransferTableCls,
       props.isSource,
     )
