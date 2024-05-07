@@ -1,5 +1,5 @@
 <template>
-  <IxTable :columns="columns" :dataSource="data">
+  <IxTable v-model:selectedRowKeys="selectedRowKeys" :columns="columns" :dataSource="data" cascaderStrategy="off">
     <template #name="{ value }">
       <IxButton mode="link">{{ value }}</IxButton>
     </template>
@@ -13,8 +13,9 @@
 </template>
 
 <script lang="ts" setup>
-import { h } from 'vue'
+import { h, ref } from 'vue'
 
+import { VKey } from '@idux/cdk/utils'
 import { TableColumn } from '@idux/components/table'
 import { IxTag } from '@idux/components/tag'
 
@@ -27,9 +28,34 @@ interface Data {
   children?: Data[]
 }
 
+const selectedRowKeys = ref<VKey[]>(['1-2-2'])
+
 const columns: TableColumn<Data>[] = [
   {
     type: 'selectable',
+    disabled: record => record.key === '1-2-2',
+    menus: [
+      'all',
+      'invert',
+      'none',
+      'pageInvert',
+      {
+        type: 'item',
+        key: 'odd',
+
+        label: 'Select Odd Row',
+      },
+      {
+        type: 'item',
+        key: 'even',
+        label: 'Select Even Row',
+      },
+    ],
+    onChange: (selectedKeys, selectedRows) => console.log(selectedKeys, selectedRows),
+    onMenuClick: (options, currentPageRowKeys) => {
+      const filterFlag = options.key === 'odd' ? 0 : 1
+      selectedRowKeys.value = currentPageRowKeys.filter((_, index) => index % 2 === filterFlag)
+    },
   },
   {
     type: 'expandable',

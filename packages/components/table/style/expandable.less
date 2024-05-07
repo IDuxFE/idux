@@ -12,8 +12,10 @@
     background-color: transparent;
     border-style: none;
     outline: none;
-    cursor: pointer;
-
+    &:not(&-disabled) {
+      cursor: pointer;
+    }
+    
     &-button {
       z-index: 1;
       padding: 1px;

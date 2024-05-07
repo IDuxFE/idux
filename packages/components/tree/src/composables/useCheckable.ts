@@ -7,10 +7,9 @@
 
 import { type ComputedRef, type WritableComputedRef, computed, ref, watch } from 'vue'
 
-import { isNil } from 'lodash-es'
-
 import { type VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
-import { type TreeCheckStateResolverContext, useTreeCheckStateResolver } from '@idux/components/utils'
+import { type TreeCheckStateResolverContext } from '@idux/components/utils'
+import { useTreeCheckState } from '@idux/components/utils'
 
 import { type MergedNode } from './useDataSource'
 import { type TreeNode, type TreeProps } from '../types'
@@ -43,110 +42,36 @@ export function useCheckable(
   const childrenKey = ref('children' as const)
   const getKey = ref((item: MergedNode) => item.key)
   const cascaderStrategy = computed(() => props.cascaderStrategy)
+  const isDisabled = ref((data: MergedNode) => !!data.checkDisabled)
 
-  const checkedStateResolver = useTreeCheckStateResolver(resolverContext, childrenKey, getKey, cascaderStrategy)
-  const allCheckedStateResolver = useTreeCheckStateResolver(
+  const { checkStateResolver, isChecked, isIndeterminate, toggle } = useTreeCheckState(
+    checkedKeys,
     resolverContext,
     childrenKey,
     getKey,
-    computed(() => (cascaderStrategy.value === 'off' ? 'off' : 'all')),
+    cascaderStrategy,
+    isDisabled,
   )
 
-  const checkDisabledKeySet = computed(() => {
-    const disabledKeys = new Set<VKey>()
-    if (props.checkable) {
-      mergedNodeMap.value.forEach((node, key) => {
-        if (node.checkDisabled) {
-          disabledKeys.add(key)
-        }
-      })
-    }
-    return disabledKeys
-  })
-
-  // allCheckedKeys控制勾选框的勾选状态，checkedKeys控制回调的返回值
-  const allCheckedKeySet = computed(() => {
-    const keys = allCheckedStateResolver.appendKeys([], checkedKeys.value)
-
-    return new Set(keys)
-  })
-
-  const indeterminateKeySet = computed(() => {
-    const _checkedKeySet = allCheckedKeySet.value
-    if (_checkedKeySet.size === 0 || props.cascaderStrategy === 'off') {
-      return new Set<VKey>()
-    }
-
-    const keySet = new Set<VKey>()
-    const nodeMap = mergedNodeMap.value
-    _checkedKeySet.forEach(key => {
-      const { parentKey } = nodeMap.get(key) || {}
-      if (!isNil(parentKey)) {
-        let parent = nodeMap.get(parentKey)
-        if (parent && !_checkedKeySet.has(parent.key)) {
-          keySet.add(parentKey)
-          while (parent && !isNil(parent.parentKey)) {
-            keySet.add(parent.parentKey)
-            parent = nodeMap.get(parent.parentKey)
-          }
-        }
-      }
-    })
-    return keySet
-  })
-
-  const isCheckDisabled = (key: VKey) => {
-    return checkDisabledKeySet.value.has(key)
-  }
-
-  const isChecked = (key: VKey) => {
-    return allCheckedKeySet.value.has(key)
-  }
-
-  const isIndeterminate = (key: VKey) => {
-    return indeterminateKeySet.value.has(key)
-  }
-
   const handleCheck = (node: MergedNode) => {
-    const currKey = node.key
+    const { checked, checkedKeys: newCheckedKeys } = toggle(node)
 
     if (node.checkDisabled) {
       return
     }
 
-    const children = cascaderStrategy.value !== 'off' ? node.children ?? [] : []
-    const checked =
-      isChecked(currKey) ||
-      (!!children.length &&
-        children.every(child => isChecked(child.key) || isIndeterminate(child.key) || isCheckDisabled(child.key)))
-
-    const _checkedKeys = checkedStateResolver.appendKeys([], checkedKeys.value)
-    const newCheckedKeys = checkedStateResolver[checked ? 'removeKeys' : 'appendKeys'](_checkedKeys, [currKey])
-
-    const disabledKeys = checked
-      ? [...allCheckedKeySet.value].filter(key => isCheckDisabled(key))
-      : (cascaderStrategy.value === 'parent'
-          ? allCheckedStateResolver.appendKeys([], newCheckedKeys)
-          : newCheckedKeys
-        ).filter(key => isCheckDisabled(key) && !allCheckedKeySet.value.has(key))
-
-    const resolvedCheckedKeys = checkedStateResolver[checked ? 'appendKeys' : 'removeKeys'](
-      newCheckedKeys,
-      disabledKeys,
-    )
-
-    handleChange(checked, node.rawNode, resolvedCheckedKeys)
+    handleChange(checked, node.rawNode, newCheckedKeys)
   }
 
   const handleChange = (checked: boolean, rawNode: TreeNode, newKeys: VKey[]) => {
     const { onCheck, onCheckedChange } = props
-    callEmit(onCheck, !checked, rawNode)
+    callEmit(onCheck, checked, rawNode)
     setCheckedKeys(newKeys)
     callChange(mergedNodeMap, newKeys, onCheckedChange)
   }
 
   watch(cascaderStrategy, () => {
-    const newCheckedKeys = checkedStateResolver.appendKeys([], checkedKeys.value)
+    const newCheckedKeys = checkStateResolver.appendKeys([], checkedKeys.value)
     setCheckedKeys(newCheckedKeys)
     callChange(mergedNodeMap, newCheckedKeys, props.onCheckedChange)
   })
