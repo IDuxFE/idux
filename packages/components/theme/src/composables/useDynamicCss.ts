@@ -6,10 +6,11 @@
  */
 
 import type { DynamicCssOptions } from '../types'
+import type { ComputedRef } from 'vue'
 
-import { type ComputedRef, onUnmounted } from 'vue'
+import { tryOnScopeDispose } from '@idux/cdk/utils'
 
-import { removeCSS, updateCSS } from '../utils'
+import { findExistNode, getStyleRefCnt, removeCSS, setStyleRefCnt, updateCSS } from '../utils'
 
 interface InjectedStyle {
   attachTo: DynamicCssOptions['attachTo']
@@ -20,7 +21,7 @@ interface InjectedStyle {
 const injectedStyles: InjectedStyle[] = []
 
 export function useDynamicCss(
-  mergedAttatchTo: ComputedRef<DynamicCssOptions['attachTo']>,
+  mergedAttachTo: ComputedRef<DynamicCssOptions['attachTo']>,
 ): (css: string, hashId: string, oldHashId?: string) => void {
   const localInjectedStyleCnts = new Map<string, number>()
 
@@ -47,49 +48,83 @@ export function useDynamicCss(
 
   const findInjectedStyle = (
     hashId: string,
-    attatchTo: DynamicCssOptions['attachTo'],
+    attachTo: DynamicCssOptions['attachTo'],
   ): {
     index: number
     style: InjectedStyle | null
+    styleElement: HTMLStyleElement | undefined
   } => {
-    const index = injectedStyles.findIndex(style => style.hashId === hashId && style.attachTo === attatchTo)
+    let index = injectedStyles.findIndex(style => style.hashId === hashId && style.attachTo === attachTo)
+    let style = injectedStyles[index]
+    const styleElement = findExistNode(hashId, { attachTo })
+
+    if (styleElement) {
+      const styleRefCnt = getStyleRefCnt(styleElement)
+
+      if (!style) {
+        style = {
+          hashId,
+          attachTo: mergedAttachTo.value,
+          refCnt: styleRefCnt,
+        }
+        index = injectedStyles.length
+        injectedStyles.push(style)
+      } else {
+        style.refCnt = styleRefCnt
+      }
+    }
 
     return {
       index,
-      style: injectedStyles[index],
+      style,
+      styleElement: styleElement,
     }
+  }
+
+  const setInjectedStyle = (injectedStyle: InjectedStyle, styleElement: HTMLStyleElement) => {
+    injectedStyles.push(injectedStyle)
+    setStyleRefCnt(styleElement, injectedStyle.refCnt)
+  }
+
+  const updateInjectedStyleRefCnt = (injectedStyle: InjectedStyle, styleElement: HTMLStyleElement, cnt: number) => {
+    injectedStyle.refCnt = cnt
+    setStyleRefCnt(styleElement, cnt)
   }
 
   const inject = (hashId: string, css: string) => {
     incrementCnt(hashId)
-    const { style } = findInjectedStyle(hashId, mergedAttatchTo.value)
+    const { style, styleElement } = findInjectedStyle(hashId, mergedAttachTo.value)
 
-    if (style) {
+    if (style && styleElement) {
+      updateInjectedStyleRefCnt(style, styleElement, style.refCnt + 1)
       style.refCnt++
     } else {
-      injectedStyles.push({
-        hashId,
-        attachTo: mergedAttatchTo.value,
-        refCnt: 1,
-      })
-
-      updateCSS(css, hashId, { attachTo: mergedAttatchTo.value })
+      const newInjectedStyleElement = updateCSS(css, hashId, { attachTo: mergedAttachTo.value })
+      newInjectedStyleElement &&
+        setInjectedStyle(
+          {
+            hashId,
+            attachTo: mergedAttachTo.value,
+            refCnt: 1,
+          },
+          newInjectedStyleElement,
+        )
     }
   }
 
   const remove = (hashId: string) => {
     decrementCnt(hashId)
-    const { index, style } = findInjectedStyle(hashId, mergedAttatchTo.value)
+    const { index, style, styleElement } = findInjectedStyle(hashId, mergedAttachTo.value)
 
-    if (!style) {
+    if (!style || !styleElement) {
       return
     }
 
-    style.refCnt--
+    updateInjectedStyleRefCnt(style, styleElement, style.refCnt - 1)
 
     if (style.refCnt <= 0) {
       injectedStyles.splice(index, 1)
-      removeCSS(hashId, { attachTo: mergedAttatchTo.value })
+      removeCSS(hashId, { attachTo: mergedAttachTo.value })
     }
   }
 
@@ -101,7 +136,7 @@ export function useDynamicCss(
     inject(hashId, css)
   }
 
-  onUnmounted(() => {
+  tryOnScopeDispose(() => {
     for (const [hashId, cnt] of localInjectedStyleCnts.entries()) {
       for (let i = 0; i < cnt; i++) {
         remove(hashId)
