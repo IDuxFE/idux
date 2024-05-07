@@ -13,6 +13,7 @@ import type { ActiveFilter } from './composables/useFilterable'
 import type { ActiveSorter } from './composables/useSortable'
 import type { VirtualScrollMode, VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
+import type { CascaderStrategy } from '@idux/components/cascader'
 import type { EmptyProps } from '@idux/components/empty'
 import type { HeaderProps } from '@idux/components/header'
 import type { MenuClickOptions, MenuData } from '@idux/components/menu'
@@ -26,6 +27,7 @@ export const tableProps = {
   autoHeight: { type: Boolean, default: undefined },
   borderless: { type: Boolean, default: undefined },
   childrenKey: { type: String, default: undefined },
+  cascaderStrategy: { type: String as PropType<CascaderStrategy>, default: 'all' },
   columns: { type: Array as PropType<TableColumn[]>, default: () => [] },
   customAdditional: { type: Object as PropType<TableCustomAdditional<any, any>>, default: undefined },
   customTag: { type: Object as PropType<TableCustomTag>, default: undefined },

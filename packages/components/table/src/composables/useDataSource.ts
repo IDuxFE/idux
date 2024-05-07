@@ -7,12 +7,39 @@
 
 import { type ComputedRef, type Ref, computed } from 'vue'
 
-import { type VKey } from '@idux/cdk/utils'
+import { type VKey, traverseTree } from '@idux/cdk/utils'
 import { type GetKeyFn } from '@idux/components/utils'
 
 import { type ActiveFilter } from './useFilterable'
 import { type ActiveSorter } from './useSortable'
 import { type TablePagination, type TableProps } from '../types'
+
+export interface DataSourceContext {
+  isTreeData: ComputedRef<boolean>
+  filteredData: ComputedRef<MergedData[]>
+  flattedData: ComputedRef<FlattedData[]>
+  mergedData: ComputedRef<MergedData[]>
+  mergedMap: ComputedRef<Map<VKey, MergedData>>
+  paginatedData: ComputedRef<MergedData[]>
+  paginatedMap: ComputedRef<Map<VKey, MergedData>>
+  parentKeyMap: ComputedRef<Map<VKey, VKey | undefined>>
+  depthMap: ComputedRef<Map<VKey, number>>
+}
+
+export interface MergedData {
+  children?: MergedData[]
+  parentKey?: VKey
+  record: unknown
+  rowKey: VKey
+  hasPrevSibling: boolean
+  hasNextSibling: boolean
+  showLineIndentIndexList: number[]
+}
+
+export interface FlattedData extends MergedData {
+  expanded?: boolean
+  level?: number
+}
 
 export function useDataSource(
   props: TableProps,
@@ -31,11 +58,23 @@ export function useDataSource(
     )
   })
 
-  const mergedMap = computed(() => {
-    const map = new Map<VKey, MergedData>()
-    convertDataMap(mergedData.value, map)
-    return map
+  const mergedContext = computed(() => {
+    const dataKeyMap = new Map<VKey, MergedData>()
+    const parentKeyMap = new Map<VKey, VKey | undefined>()
+    const depthMap = new Map<VKey, number>()
+    // convertDataMap(mergedData.value, map)
+
+    traverseTree(mergedData.value, 'children', (item, parents) => {
+      dataKeyMap.set(item.rowKey, item)
+      parentKeyMap.set(item.rowKey, parents[0]?.rowKey)
+      depthMap.set(item.rowKey, parents.length)
+    })
+    return { dataKeyMap, parentKeyMap, depthMap }
   })
+
+  const mergedMap = computed(() => mergedContext.value.dataKeyMap)
+  const parentKeyMap = computed(() => mergedContext.value.parentKeyMap)
+  const depthMap = computed(() => mergedContext.value.depthMap)
 
   const filteredData = computed(() => filterData(mergedData.value, activeFilters.value, expandedRowKeys.value))
   const sortedData = computed(() => sortData(filteredData.value, activeSorters.value, expandedRowKeys.value))
@@ -56,7 +95,9 @@ export function useDataSource(
   })
   const paginatedMap = computed(() => {
     const map = new Map<VKey, MergedData>()
-    convertDataMap(paginatedData.value, map)
+    traverseTree(paginatedData.value, 'children', item => {
+      map.set(item.rowKey, item)
+    })
     return map
   })
 
@@ -70,30 +111,17 @@ export function useDataSource(
 
   const isTreeData = computed(() => mergedData.value.some(data => data.children?.length))
 
-  return { isTreeData, filteredData, flattedData, mergedMap, paginatedMap }
-}
-
-export interface DataSourceContext {
-  isTreeData: ComputedRef<boolean>
-  filteredData: ComputedRef<MergedData[]>
-  flattedData: ComputedRef<FlattedData[]>
-  mergedMap: ComputedRef<Map<VKey, MergedData>>
-  paginatedMap: ComputedRef<Map<VKey, MergedData>>
-}
-
-export interface MergedData {
-  children?: MergedData[]
-  parentKey?: VKey
-  record: unknown
-  rowKey: VKey
-  hasPrevSibling: boolean
-  hasNextSibling: boolean
-  showLineIndentIndexList: number[]
-}
-
-export interface FlattedData extends MergedData {
-  expanded?: boolean
-  level?: number
+  return {
+    isTreeData,
+    filteredData,
+    flattedData,
+    mergedData,
+    mergedMap,
+    paginatedData,
+    paginatedMap,
+    parentKeyMap,
+    depthMap,
+  }
 }
 
 function convertMergeData(
@@ -127,16 +155,6 @@ function convertMergeData(
     )
   }
   return result
-}
-
-function convertDataMap(mergedData: MergedData[], map: Map<VKey, MergedData>) {
-  mergedData.forEach(item => {
-    const { rowKey, children } = item
-    map.set(rowKey, item)
-    if (children) {
-      convertDataMap(children, map)
-    }
-  })
 }
 
 function sortData(mergedData: MergedData[], activeSorters: ActiveSorter[], expandedRowKeys: VKey[]) {

@@ -9,6 +9,7 @@
 | `v-model:selectedRowKeys` | 选中行的 `key` 数组 | `(string \| number)[]` | - | - | - |
 | `autoHeight` | 是否自适应高度 | `boolean` | `false` | ✅ | - |
 | `borderless` | 是否无边框 | `boolean` | `true` | ✅ | - |
+| `cascaderStrategy` | 设置级联策略 | `'all' \| 'parent' \| 'child'` | `'off'` | `all` | 具体用法参见 [级联策略](#components-tree-demo-CascaderStrategy) |
 | `childrenKey` | 指定树形结构的 `key` | `string` | `children` | ✅ | - |
 | `columns` | 表格列的配置描述 | `TableColumn[]` | - | - |  参见[TableColumn](#TableColumn)  |
 | `customAdditional` | 自定义表格行和单元格的额外属性 | `TableCustomAdditional` | - | - | 参见[TableCustomAdditional](#TableCustomAdditional) |

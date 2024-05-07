@@ -21,13 +21,13 @@ export default defineComponent({
       props: tableProps,
       mergedPrefixCls,
       expandable,
+      isChecked,
+      isIndeterminate,
+      isCheckDisabled,
       handleExpandChange,
       checkExpandDisabled,
       selectable,
-      selectedRowKeys,
-      indeterminateRowKeys,
       handleSelectChange,
-      currentPageRowKeys,
     } = inject(TABLE_TOKEN)!
 
     const { expandDisabled, handleExpend, selectDisabled, handleSelect, isHover, attrs } = useEvents(
@@ -37,11 +37,11 @@ export default defineComponent({
       handleExpandChange,
       selectable,
       handleSelectChange,
-      currentPageRowKeys,
+      isCheckDisabled,
     )
 
-    const isSelected = computed(() => selectedRowKeys.value.includes(props.rowKey))
-    const isIndeterminate = computed(() => indeterminateRowKeys.value.includes(props.rowKey))
+    const _isSelected = computed(() => isChecked(props.rowKey))
+    const _isIndeterminate = computed(() => isIndeterminate(props.rowKey))
 
     const classes = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-row`
@@ -50,7 +50,7 @@ export default defineComponent({
       return normalizeClass({
         [`${prefixCls}`]: true,
         [`${prefixCls}-level-${level}`]: !!level,
-        [`${prefixCls}-selected`]: isSelected.value,
+        [`${prefixCls}-selected`]: _isSelected.value,
         [`${prefixCls}-expanded`]: expanded,
       })
     })
@@ -59,8 +59,8 @@ export default defineComponent({
       props,
       expandDisabled,
       handleExpend,
-      isSelected,
-      isIndeterminate,
+      isSelected: _isSelected,
+      isIndeterminate: _isIndeterminate,
       selectDisabled,
       handleSelect,
       isHover,
@@ -90,7 +90,7 @@ function useEvents(
   handleExpandChange: (key: VKey, record: unknown) => void,
   selectable: ComputedRef<TableColumnMergedSelectable | undefined>,
   handleSelectChange: (key: VKey, record: unknown) => void,
-  currentPageRowKeys: ComputedRef<{ enabledRowKeys: VKey[]; disabledRowKeys: VKey[] }>,
+  isCheckDisabled: (key: VKey) => boolean,
 ) {
   const expandDisabled = computed(() => checkExpandDisabled(props.rowData))
   const expendTrigger = computed(() => expandable.value?.trigger)
@@ -99,7 +99,7 @@ function useEvents(
     handleExpandChange(rowKey, record)
   }
 
-  const selectDisabled = computed(() => currentPageRowKeys.value.disabledRowKeys.includes(props.rowKey))
+  const selectDisabled = computed(() => isCheckDisabled(props.rowKey))
   const selectTrigger = computed(() => selectable.value?.trigger)
   const showIndex = computed(() => selectable.value?.showIndex)
   const isHover = ref(false)

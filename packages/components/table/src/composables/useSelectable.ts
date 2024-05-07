@@ -5,23 +5,46 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, computed } from 'vue'
+import { type ComputedRef, computed, ref } from 'vue'
 
-import { isNil, isString, isSymbol } from 'lodash-es'
+import { isString, isSymbol } from 'lodash-es'
 
 import { type VKey, callEmit, useControlledProp } from '@idux/cdk/utils'
 import { type Locale } from '@idux/components/locales'
 import { type MenuClickOptions, type MenuData } from '@idux/components/menu'
+import {
+  type TreeCheckStateContext,
+  type TreeCheckStateResolverContext,
+  useTreeCheckState,
+} from '@idux/components/utils'
 
 import { type TableColumnMerged, type TableColumnMergedSelectable } from './useColumns'
 import { type DataSourceContext, type MergedData } from './useDataSource'
 import { type TableProps } from '../types'
 
+export interface SelectableContext {
+  selectable: ComputedRef<TableColumnMergedSelectable | undefined>
+  selectedRowKeys: ComputedRef<VKey[]>
+  isChecked: (key: VKey) => boolean
+  isIndeterminate: (key: VKey) => boolean
+  isCheckDisabled: (key: VKey) => boolean
+  currentPageRowKeys: ComputedRef<{
+    enabledRowKeys: VKey[]
+    disabledRowKeys: VKey[]
+  }>
+  currentPageAllSelected: ComputedRef<boolean>
+  currentPageSomeSelected: ComputedRef<boolean>
+  handleSelectChange: (key: VKey, record: unknown) => void
+  handleHeadSelectChange: () => void
+  mergedSelectableMenus: ComputedRef<MenuData[]>
+  handleSelectableMenuClick: (options: MenuClickOptions) => void
+}
+
 export function useSelectable(
   props: TableProps,
   locale: Locale,
   flattedColumns: ComputedRef<TableColumnMerged[]>,
-  { mergedMap, paginatedMap }: DataSourceContext,
+  { mergedData, mergedMap, paginatedData, paginatedMap, parentKeyMap, depthMap }: DataSourceContext,
 ): SelectableContext {
   const selectable = computed(() =>
     flattedColumns.value.find(column => 'type' in column && column.type === 'selectable'),
@@ -29,12 +52,39 @@ export function useSelectable(
 
   const [selectedRowKeys, setSelectedRowKeys] = useControlledProp(props, 'selectedRowKeys', () => [])
 
+  const resolverContext = computed<TreeCheckStateResolverContext<MergedData, 'children'>>(() => {
+    return {
+      data: mergedData.value,
+      dataMap: mergedMap.value,
+      parentKeyMap: parentKeyMap.value,
+      depthMap: depthMap.value,
+    }
+  })
+  const childrenKey = ref('children' as const)
+  const getKey = ref((item: MergedData) => item.rowKey)
+  const cascaderStrategy = computed(() => (selectable.value?.multiple ? props.cascaderStrategy : 'off'))
+
+  const isDisabled = computed(() => {
+    const disabled = selectable.value?.disabled
+
+    return (data: MergedData) => !!disabled?.(data.record)
+  })
+
+  const checkStateContext = useTreeCheckState(
+    selectedRowKeys,
+    resolverContext,
+    childrenKey,
+    getKey,
+    cascaderStrategy,
+    isDisabled,
+  )
+  const { checkStateResolver, isCheckDisabled, isChecked, isIndeterminate, toggle } = checkStateContext
+
   const currentPageRowKeys = computed(() => {
-    const { disabled } = selectable.value || {}
     const enabledRowKeys: VKey[] = []
     const disabledRowKeys: VKey[] = []
-    paginatedMap.value.forEach((currData, key) => {
-      if (disabled?.(currData.record)) {
+    paginatedMap.value.forEach((_, key) => {
+      if (isCheckDisabled(key)) {
         disabledRowKeys.push(key)
       } else {
         enabledRowKeys.push(key)
@@ -43,53 +93,34 @@ export function useSelectable(
     return { enabledRowKeys, disabledRowKeys }
   })
 
-  const indeterminateRowKeys = computed(() => {
-    const indeterminateKeySet = new Set<VKey>()
-    const selectedKeys = selectedRowKeys.value
-    const { disabledRowKeys } = currentPageRowKeys.value
-    const dataMap = mergedMap.value
-    selectedKeys.forEach(key => {
-      const { parentKey } = dataMap.get(key) || {}
-      if (!isNil(parentKey)) {
-        let parent = dataMap.get(parentKey)
-        if (parent && !selectedKeys.includes(parent.rowKey)) {
-          while (parent && !isNil(parent?.rowKey)) {
-            if (!disabledRowKeys.includes(parent.rowKey)) {
-              indeterminateKeySet.add(parent.rowKey)
-            }
-            parent = !isNil(parent.parentKey) ? dataMap.get(parent.parentKey) : undefined
-          }
+  const currentPageAllSelectState = computed(() => {
+    let checked = true
+    let allSelected = true
+    let someSelected = false
+
+    for (const key of paginatedMap.value.keys()) {
+      if (isChecked(key) || isIndeterminate(key)) {
+        someSelected = true
+      } else {
+        allSelected = false
+
+        if (!isCheckDisabled(key)) {
+          checked = false
         }
       }
-    })
-    return [...indeterminateKeySet]
-  })
-
-  // 统计当前页中被选中行的数量（过滤掉被禁用的）
-  const countCurrentPageSelected = computed(() => {
-    const selectedKeys = selectedRowKeys.value
-    const { disabledRowKeys } = currentPageRowKeys.value
-    let total = 0
-    paginatedMap.value.forEach((_, key) => {
-      if (!disabledRowKeys.includes(key) && selectedKeys.includes(key)) {
-        total++
-      }
-    }, 0)
-    return total
-  })
-
-  // 当前页是否全部被选中
-  const currentPageAllSelected = computed(() => {
-    const dataCount = paginatedMap.value.size
-    const disabledCount = currentPageRowKeys.value.disabledRowKeys.length
-    if (dataCount === 0 || dataCount === disabledCount) {
-      return false
     }
-    return dataCount === disabledCount + countCurrentPageSelected.value
+
+    return { checked, allSelected, someSelected }
   })
+
+  // 当前页全选是否被勾选
+  const currentPageAllSelected = computed(() => currentPageAllSelectState.value.checked)
 
   // 当前页是否部分被选中
-  const currentPageSomeSelected = computed(() => !currentPageAllSelected.value && countCurrentPageSelected.value > 0)
+
+  const currentPageSomeSelected = computed(
+    () => !currentPageAllSelectState.value.allSelected && currentPageAllSelectState.value.someSelected,
+  )
   // 缓存已经被选中的数据，考虑到后端分页的清空，dataMap 中没有全部的数据
   const cacheSelectedMap = new Map<VKey, MergedData>()
 
@@ -120,51 +151,64 @@ export function useSelectable(
 
   const handleSelectChange = (key: VKey, record: unknown) => {
     const dataMap = mergedMap.value
-    const { disabledRowKeys } = currentPageRowKeys.value
-    const { multiple, onSelect } = selectable.value || {}
-    let tempRowKeys = [...selectedRowKeys.value]
-    const index = tempRowKeys.indexOf(key)
-    const selected = index >= 0
+    const currData = dataMap.get(key)
 
-    if (multiple) {
-      const currData = dataMap.get(key)
-      const childrenKeys = getChildrenKeys(currData, disabledRowKeys)
-      if (selected) {
-        tempRowKeys.splice(index, 1)
-        const parentKeys = getParentKeys(dataMap, currData, disabledRowKeys)
-        tempRowKeys = tempRowKeys.filter(key => !parentKeys.includes(key) && !childrenKeys.includes(key))
-      } else {
-        tempRowKeys.push(key)
-        tempRowKeys.push(...childrenKeys)
-      }
-
-      setParentSelected(dataMap, currData, tempRowKeys, disabledRowKeys)
-    } else {
-      tempRowKeys = selected ? [] : [key]
+    if (!currData) {
+      return
     }
 
-    callEmit(onSelect, !selected, record)
+    const { multiple, onSelect } = selectable.value || {}
+
+    let tempRowKeys = [...selectedRowKeys.value]
+    let _checked
+
+    if (multiple) {
+      const { checked, checkedKeys } = toggle(currData)
+      _checked = checked
+      tempRowKeys = checkedKeys
+    } else {
+      _checked = !isChecked(key)
+      tempRowKeys = _checked ? [key] : []
+    }
+
+    callEmit(onSelect, _checked, record)
     emitChange(tempRowKeys)
   }
 
   const handleHeadSelectChange = () => {
-    const { enabledRowKeys } = currentPageRowKeys.value
-    const tempRowKeySet = new Set(selectedRowKeys.value)
+    const { disabledRowKeys } = currentPageRowKeys.value
+    let newSelectedKeys: VKey[]
     if (currentPageAllSelected.value) {
-      enabledRowKeys.forEach(key => tempRowKeySet.delete(key))
+      newSelectedKeys = checkStateResolver.getAllUncheckedKeys(
+        paginatedData.value,
+        disabledRowKeys.filter(key => isChecked(key)),
+      )
     } else {
-      enabledRowKeys.forEach(key => tempRowKeySet.add(key))
+      newSelectedKeys = checkStateResolver.getAllCheckedKeys(
+        paginatedData.value,
+        disabledRowKeys.filter(key => !isChecked(key)),
+      )
     }
-    emitChange([...tempRowKeySet])
+
+    emitChange(newSelectedKeys)
   }
 
   const mergedSelectableMenus = useMergedMenus(selectable, locale)
-  const handleSelectableMenuClick = useMenuClickHandle(selectable, mergedMap, paginatedMap, selectedRowKeys, emitChange)
+  const handleSelectableMenuClick = useMenuClickHandle(
+    selectable,
+    checkStateContext,
+    mergedMap,
+    paginatedMap,
+    selectedRowKeys,
+    emitChange,
+  )
 
   return {
     selectable,
     selectedRowKeys,
-    indeterminateRowKeys,
+    isChecked,
+    isIndeterminate,
+    isCheckDisabled,
     currentPageRowKeys,
     currentPageAllSelected,
     currentPageSomeSelected,
@@ -172,73 +216,6 @@ export function useSelectable(
     handleHeadSelectChange,
     mergedSelectableMenus,
     handleSelectableMenuClick,
-  }
-}
-
-export interface SelectableContext {
-  selectable: ComputedRef<TableColumnMergedSelectable | undefined>
-  selectedRowKeys: ComputedRef<VKey[]>
-  indeterminateRowKeys: ComputedRef<VKey[]>
-  currentPageRowKeys: ComputedRef<{
-    enabledRowKeys: VKey[]
-    disabledRowKeys: VKey[]
-  }>
-  currentPageAllSelected: ComputedRef<boolean>
-  currentPageSomeSelected: ComputedRef<boolean>
-  handleSelectChange: (key: VKey, record: unknown) => void
-  handleHeadSelectChange: () => void
-  mergedSelectableMenus: ComputedRef<MenuData[]>
-  handleSelectableMenuClick: (options: MenuClickOptions) => void
-}
-
-function getChildrenKeys(currData: MergedData | undefined, disabledRowKeys: VKey[]) {
-  const keys: VKey[] = []
-  const { children } = currData || {}
-  children &&
-    children.forEach(item => {
-      const { rowKey } = item
-      if (!disabledRowKeys.includes(rowKey)) {
-        keys.push(item.rowKey)
-      }
-      keys.push(...getChildrenKeys(item, disabledRowKeys))
-    })
-  return keys
-}
-
-function getParentKeys(dataMap: Map<VKey, MergedData>, currData: MergedData | undefined, disabledRowKeys: VKey[]) {
-  const keys: VKey[] = []
-  while (currData?.parentKey) {
-    const { parentKey } = currData
-    if (!disabledRowKeys.includes(currData.parentKey)) {
-      keys.push(parentKey)
-    }
-    currData = dataMap.get(parentKey)
-  }
-  return keys
-}
-
-function setParentSelected(
-  dataMap: Map<VKey, MergedData>,
-  currData: MergedData | undefined,
-  tempRowKeys: VKey[],
-  disabledRowKeys: VKey[],
-) {
-  let parentSelected = true
-  while (parentSelected && currData && !isNil(currData.parentKey)) {
-    const parent = dataMap.get(currData.parentKey)
-    if (parent && !disabledRowKeys.includes(currData.parentKey)) {
-      parentSelected = parent.children!.every(
-        item => disabledRowKeys.includes(item.rowKey) || tempRowKeys.includes(item.rowKey),
-      )
-
-      const parentKeyIdx = tempRowKeys.findIndex(key => key === currData!.parentKey)
-      if (parentSelected) {
-        parentKeyIdx < 0 && tempRowKeys.push(currData.parentKey)
-      } else {
-        parentKeyIdx > -1 && tempRowKeys.splice(parentKeyIdx, 1)
-      }
-    }
-    currData = parent
   }
 }
 
@@ -277,40 +254,46 @@ function useMergedMenus(selectable: ComputedRef<TableColumnMergedSelectable | un
 
 function useMenuClickHandle(
   selectable: ComputedRef<TableColumnMergedSelectable | undefined>,
+  checkStateContext: TreeCheckStateContext<MergedData, 'children'>,
   mergedMap: ComputedRef<Map<VKey, MergedData>>,
   paginatedMap: ComputedRef<Map<VKey, MergedData>>,
   selectedRowKeys: ComputedRef<VKey[]>,
   emitChange: (tempRowKeys: VKey[]) => void,
 ) {
+  const { checkDisabledKeySet, checkStateResolver, isChecked, isCheckDisabled } = checkStateContext
   const handleSelectAll = () => {
-    const { disabled, onSelectAll } = selectable.value || {}
-    const tempRowKeys: VKey[] = []
-    mergedMap.value.forEach((currData, key) => {
-      if (!disabled?.(currData.record)) {
-        tempRowKeys.push(key)
-      }
-    })
-    callEmit(onSelectAll, tempRowKeys)
-    emitChange(tempRowKeys)
+    const { onSelectAll } = selectable.value || {}
+    const newSelectedKeys = checkStateResolver.getAllCheckedKeys(
+      [...checkDisabledKeySet.value].filter(key => !isChecked(key)),
+    )
+    callEmit(onSelectAll, newSelectedKeys)
+    emitChange(newSelectedKeys)
   }
 
   const handleSelectInvert = () => {
-    const { disabled, onSelectInvert } = selectable.value || {}
-    const tempRowKeys = [...selectedRowKeys.value]
+    const { onSelectInvert } = selectable.value || {}
+    const appendedKeys: VKey[] = []
+    const removedKeys: VKey[] = []
 
-    mergedMap.value.forEach((currData, key) => {
-      if (disabled?.(currData.record)) {
+    mergedMap.value.forEach((_, key) => {
+      if (isCheckDisabled(key)) {
         return
       }
-      const index = tempRowKeys.indexOf(key)
-      if (index >= 0) {
-        tempRowKeys.splice(index, 1)
+
+      if (isChecked(key)) {
+        removedKeys.push(key)
       } else {
-        tempRowKeys.push(key)
+        appendedKeys.push(key)
       }
     })
-    emitChange(tempRowKeys)
-    callEmit(onSelectInvert, tempRowKeys)
+
+    const newSelectedKeys = checkStateResolver.removeKeys(
+      checkStateResolver.appendKeys(selectedRowKeys.value, appendedKeys),
+      removedKeys,
+    )
+
+    emitChange(newSelectedKeys)
+    callEmit(onSelectInvert, newSelectedKeys)
   }
 
   const handleSelectNone = () => {
@@ -320,17 +303,29 @@ function useMenuClickHandle(
   }
 
   const handleSelectPageInvert = () => {
-    const { disabled, onSelectPageInvert } = selectable.value || {}
-    const tempRowKeys: VKey[] = []
-    const currSelectedRowKeys = selectedRowKeys.value
-    paginatedMap.value.forEach((currData, key) => {
-      if (disabled?.(currData.record) || currSelectedRowKeys.includes(key)) {
+    const { onSelectPageInvert } = selectable.value || {}
+    const appendedKeys: VKey[] = []
+    const removedKeys: VKey[] = []
+
+    paginatedMap.value.forEach((_, key) => {
+      if (isCheckDisabled(key)) {
         return
       }
-      tempRowKeys.push(key)
+
+      if (isChecked(key)) {
+        removedKeys.push(key)
+      } else {
+        appendedKeys.push(key)
+      }
     })
-    callEmit(onSelectPageInvert, tempRowKeys)
-    emitChange(tempRowKeys)
+
+    const newSelectedKeys = checkStateResolver.removeKeys(
+      checkStateResolver.appendKeys(selectedRowKeys.value, appendedKeys),
+      removedKeys,
+    )
+
+    emitChange(newSelectedKeys)
+    callEmit(onSelectPageInvert, newSelectedKeys)
   }
 
   const menuClickHandles = new Map<symbol, () => void>([
@@ -347,13 +342,13 @@ function useMenuClickHandle(
       handle()
       return
     }
-    const { disabled, onMenuClick } = selectable.value || {}
+    const { onMenuClick } = selectable.value || {}
     if (!onMenuClick) {
       return
     }
     const tempRowKeys: VKey[] = []
-    paginatedMap.value.forEach((currData, key) => {
-      if (disabled?.(currData.record)) {
+    paginatedMap.value.forEach((_, key) => {
+      if (isCheckDisabled(key)) {
         return
       }
       tempRowKeys.push(key)
