@@ -474,6 +474,7 @@ export interface SwitchConfig {
 
 export interface TabsConfig {
   size: TabsSize
+  showAllTabsPanel: boolean
 }
 
 export interface TableConfig {

@@ -48,7 +48,8 @@ export default defineComponent({
 
     const optionLabelRender = (data: SelectData) => {
       const { key, label, disabled, customTitle } = data
-      const titleSlot = isString(customTitle) ? slots[customTitle] : customTitle
+      const titleSlot =
+        (isString(customTitle) ? slots[customTitle] : customTitle) ?? slots.allTabsPanelLabel ?? slots.title
 
       return (
         <IxRow>
@@ -106,6 +107,7 @@ export default defineComponent({
             }}
             dataSource={mergedDataSource}
             onOptionClick={handleSelectChange}
+            virtual
             _virtualScrollHeight={props._virtualScrollHeight}
           />
         </div>

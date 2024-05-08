@@ -20,6 +20,7 @@ export type TabsType = 'card' | 'line' | 'segment'
 export const tabsProps = {
   selectedKey: { type: [Number, String, Symbol] as PropType<VKey>, default: undefined },
 
+  allTabsPanelOpen: { type: Boolean, default: undefined },
   addable: { type: Boolean, default: false },
   closable: { type: Boolean, default: false },
   dataSource: { type: Array as PropType<TabsData[]>, default: undefined },
@@ -27,9 +28,11 @@ export const tabsProps = {
   mode: { type: String as PropType<TabsMode>, default: 'default' },
   placement: { type: String as PropType<TabsPlacement>, default: 'top' },
   size: { type: String as PropType<TabsSize>, default: undefined },
+  showAllTabsPanel: { type: Boolean, default: undefined },
   type: { type: String as PropType<TabsType>, default: 'card' },
 
   'onUpdate:selectedKey': [Function, Array] as PropType<MaybeArray<(key: any) => void>>,
+  'onUpdate:allTabsPanelOpen': [Function, Array] as PropType<MaybeArray<(opened: boolean) => void>>,
   onAdd: [Function, Array] as PropType<MaybeArray<() => void | boolean | Promise<boolean>>>,
   onClose: [Function, Array] as PropType<MaybeArray<(key: any) => void | boolean | Promise<boolean>>>,
   /**

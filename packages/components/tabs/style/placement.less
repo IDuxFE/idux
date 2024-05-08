@@ -1,0 +1,173 @@
+.@{tabs-prefix}-line {
+  &.@{tabs-prefix} {
+    &-nav-start,
+    &-nav-end {
+      .@{tabs-prefix} {
+        &-nav-wrapper {
+          flex-direction: column;
+
+          .@{tabs-prefix}-nav-operations {
+            flex-direction: column;
+            width: 100%;
+          }
+
+          .@{tabs-prefix}-nav {
+            flex-direction: column;
+            &-bar {
+              width: var(--ix-tabs-nav-bar-height);
+            }
+
+            &-border {
+              height: 100%;
+              width: 1px;
+            }
+
+            &-list {
+              flex-direction: column;
+              &-inner {
+                flex-direction: column;
+                > .@{tabs-prefix}-nav-tab {
+                  height: auto;
+                  justify-content: flex-start;
+                  padding: 0;
+
+                  &:not(:first-child) {
+                    margin-top: 32px;
+                  }
+                }
+              }
+            }
+          }
+
+          .@{tabs-prefix}-nav-pre-btn,
+          .@{tabs-prefix}-nav-next-btn {
+            left: 0;
+            right: 0;
+            height: calc(var(--ix-height-sm) + var(--ix-padding-size-md));
+            width: calc(100% - var(--ix-line-width) * 2);
+            margin-right: var(--ix-line-width);
+            margin-left: 0;
+          }
+          .@{tabs-prefix}-nav-pre-btn {
+            top: 0;
+            bottom: unset;
+            padding-right: 0;
+            padding-bottom: var(--ix-padding-size-md);
+            margin-top: 0;
+            background: linear-gradient(180deg,var(--ix-color-container-bg) 58%, transparent);
+          }
+          .@{tabs-prefix}-nav-next-btn {
+            bottom: 0;
+            top: unset;
+            margin-bottom: 0;
+            padding-top: var(--ix-padding-size-md);
+            padding-left: 0;
+            background: linear-gradient(0deg,var(--ix-color-container-bg) 58%, transparent);
+          }
+        }
+
+        &-pane-wrapper {
+          > .@{tabs-prefix}-pane {
+            height: 100%;
+          }
+        }
+
+        &-nav-operations {
+          gap: var(--ix-padding-size-sm);
+          border-top: var(--ix-line-width) var(--ix-line-type) var(--ix-color-separator);
+        }
+
+        &-nav-operations-item {
+          flex-direction: column;
+          padding-left: 0;
+          padding-top: var(--ix-padding-size-sm);
+          height: auto;
+          width: 100%;
+          &::before {
+            content: none;
+          }
+        }
+      }
+    }
+
+    &-nav-start {
+      &.@{tabs-prefix} {
+        flex-direction: row;
+      }
+
+      .@{tabs-prefix}-nav-wrapper {
+        .@{tabs-prefix}-nav {
+          &-bar {
+            right: 0;
+            border-radius: var(--ix-tabs-border-radius) 0 0 var(--ix-tabs-border-radius);
+          }
+
+          &-border {
+            left: unset;
+          }
+        }
+      }
+
+      .@{tabs-prefix}-pane-wrapper {
+        padding: 0 0 0 var(--ix-tabs-panel-padding-size);
+      }
+    }
+
+    &-nav-end {
+      &.@{tabs-prefix} {
+        flex-direction: row-reverse;
+      }
+
+      .@{tabs-prefix}-nav-wrapper {
+        .@{tabs-prefix} {
+          &-nav {
+            &-bar {
+              left: 0;
+              width: var(--ix-tabs-nav-bar-height);
+              border-radius: 0 var(--ix-tabs-border-radius) var(--ix-tabs-border-radius) 0;
+            }
+
+            &-border {
+              height: 100%;
+              left: 0;
+              width: var(--ix-line-width);
+              background-color: var(--ix-color-border-secondary);
+            }
+
+            &-tab {
+              min-height: var(--ix-tabs-nav-tab-height);
+            }
+          }
+        }
+      }
+
+      .@{tabs-prefix}-pane-wrapper {
+        padding: 0 var(--ix-tabs-panel-padding-size) 0 0;
+      }
+    }
+
+    &-nav-top,
+    &-nav-bottom {
+      .@{tabs-prefix}-nav-tab {
+        padding: 0;
+        min-width: auto;
+
+        + .@{tabs-prefix}-nav-tab {
+          margin: 0 0 0 32px;
+        }
+      }
+    }
+
+    &-nav-bottom {
+      &.@{tabs-prefix} {
+        flex-direction: column-reverse;
+      }
+
+      > .@{tabs-prefix} {
+        &-pane-wrapper {
+          padding: 0 0 var(--ix-tabs-panel-padding-size) 0;
+        }
+      }
+    }
+  }
+}

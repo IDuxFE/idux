@@ -10,7 +10,7 @@ import { ref } from 'vue'
 const selectedKey = ref(0)
 
 const dataSource = ref(
-  Array.from({ length: 3 }).map((_, index) => {
+  Array.from({ length: 20 }).map((_, index) => {
     return { key: index, title: `Tab ${index}` }
   }),
 )

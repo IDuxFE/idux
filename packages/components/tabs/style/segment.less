@@ -1,0 +1,73 @@
+.@{tabs-prefix}-segment {
+  > .@{tabs-prefix}-nav-wrapper {
+    > .@{tabs-prefix}-nav {
+      > .@{tabs-prefix}-nav-list {
+        > .@{tabs-prefix}-nav-list-inner > .@{tabs-prefix} {
+          &-nav-tab {
+            border: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border);
+            height: var(--ix-tabs-segment-nav-height);
+
+            &:not(:first-child) {
+              border-left: none;
+
+              &::before {
+                position: absolute;
+                top: calc(var(--ix-line-width) * -1);
+                left: calc(var(--ix-line-width) * -1);
+                display: block;
+                box-sizing: content-box;
+                width: var(--ix-line-width);
+                height: 100%;
+                padding: var(--ix-line-width) 0;
+                background-color: var(--ix-color-border);
+                content: '';
+              }
+            }
+
+            &:hover:not(.@{tabs-prefix}-nav-tab-disabled),
+            &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
+              border-color: var(--ix-color-primary-border);
+              z-index: 1;
+
+              &::before {
+                background: var(--ix-color-primary);
+              }
+            }
+
+            &:first-child {
+              border-radius: var(--ix-tabs-border-radius) 0 0 var(--ix-tabs-border-radius);
+            }
+
+            &:last-child {
+              border-radius: 0 var(--ix-tabs-border-radius) var(--ix-tabs-border-radius) 0;
+            }
+
+            &-disabled {
+              background-color: var(--ix-color-container-bg-disabled);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.@{tabs-prefix}-nav-primary {
+    > .@{tabs-prefix}-nav-wrapper > {
+      .@{tabs-prefix}-nav > .@{tabs-prefix}-nav-list > .@{tabs-prefix}-nav-list-inner > .@{tabs-prefix}-nav-tab {
+        &-selected:not(.@{tabs-prefix}-nav-tab-disabled) {
+          background-color: var(--ix-color-primary);
+
+          .@{tabs-prefix}-nav-tab-label {
+            color: var(--ix-color-text-inverse);
+          }
+
+          &:hover {
+            .@{tabs-prefix}-nav-tab-label {
+              color: var(--ix-color-text-inverse);
+            }
+          }
+        }
+      }
+    }
+  }
+}

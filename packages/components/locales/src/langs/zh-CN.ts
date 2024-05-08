@@ -89,6 +89,9 @@ const zhCN: Locale = {
     sortAsc: '点击升序',
     sortCancel: '取消排序',
   },
+  tabs: {
+    allTabs: '所有面板',
+  },
   text: {
     copyText: ['点击复制', '复制成功'],
   },

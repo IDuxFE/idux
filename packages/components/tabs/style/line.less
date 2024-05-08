@@ -1,0 +1,28 @@
+.@{tabs-prefix}-line {
+  > .@{tabs-prefix}-nav-wrapper {
+    .@{tabs-prefix}-nav {
+      &-bar {
+        position: absolute;
+        background-color: var(--ix-color-primary);
+        transition:
+          width var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out),
+          height var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out),
+          left var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out),
+          top var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out);
+        bottom: 0;
+        height: var(--ix-tabs-nav-bar-height);
+        border-radius: var(--ix-tabs-border-radius) var(--ix-tabs-border-radius) 0 0;
+
+        &-disabled {
+          background-color: var(--ix-color-text-disabled);
+        }
+      }
+
+      &-disabled {
+        .@{tabs-prefix}-nav-tab-label {
+          color: var(--ix-color-text-disabled);
+        }
+      }
+    }
+  }
+}

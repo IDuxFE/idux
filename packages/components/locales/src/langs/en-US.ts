@@ -89,6 +89,9 @@ const enUS: Locale = {
     sortAsc: 'Sort ascending',
     sortCancel: 'Cancel sort',
   },
+  tabs: {
+    allTabs: 'All tabs',
+  },
   text: {
     copyText: ['Copy', 'Copy Success'],
   },
