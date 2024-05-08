@@ -16,7 +16,7 @@
 | `disabled` | 是否禁用穿梭框 | `boolean` | `false` | - | - |
 | `defaultTargetData` | 初始默认目标列表数据 | `TransferData` | - | - | 仅用于设置初始数据，不可响应式变更 |
 | `empty` | 空状态的配置 | `'default' \| 'simple' \| EmptyProps` | `'simple'` | - | - |
-| `flatTargetData` | 是否平展开已选树数据 | `boolean \| 'all'` | `false` | - | 平展开后仅将树的叶子节点数据以列表展示，仅在 `type` 为 `'tree'` 下生效 |
+| `flatTargetData` | 是否平展开已选树数据 | `boolean \| 'all'` | `false` | - | 平展开后仅将树的叶子节点数据以列表展示，仅在 `type` 为 `'tree'` 和 `'tree-table'` 下生效 |
 | `getKey` | 数据项 `key` 的取值 | `string \| (item: unknown) => string \| number` | - | - | 默认取数据的 `key` 属性 |
 | `mode` | 穿梭框模式 | `'default' \| 'immediate'` | `'default'` | - | `'immediate'` 模式为勾选即触发穿梭，不展示穿梭操作按钮 |
 | `pagination` | 数据列表分页配置 | `boolean \| TransferPaginationProps` | `false` | ✅ | 仅使用默认列表底部时可用 |
@@ -24,7 +24,7 @@
 | `searchable` | 数据列表是否可搜索 | `boolean \| { source: boolean, target: boolean }` | `false` | ✅ | - |
 | `searchFn` | 搜索的判断函数 | `SearchFn` | - | - |
 |`spin` | 数据列表的加载状态 | `boolean \| { source: boolean, target: boolean }` | `false` | - | - |
-| `type` | 穿梭框类型 | `'table' \| 'tree'` | `'table'` | - | - |
+| `type` | 穿梭框类型 | `'table' \| 'tree' \| 'tree-table'` | `'table'` | - | - |
 | `tableProps` | 表格自定义参数 | `ProTransferTableProps` | - | - | 仅在 `type` 为 `'table'` 下生效 |
 | `treeProps` | 树自定义参数 | `ProTransferTreeProps` | - | - | 仅在 `type` 为 `'tree'` 下生效 |
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | 需要设置 `scroll.height` |
@@ -66,8 +66,8 @@ export type ProTransferTableProps<T = any, K = VKey> = {
   targetColumns: ProTableColumn<T, K>[]
   sourceLayoutTool?: boolean | Omit<ProTableLayoutToolProps, 'changeSize'>
   targetLayoutTool?: boolean | Omit<ProTableLayoutToolProps, 'changeSize'>
-  onColumnsChange?: (isSource: boolean, columns: ProTableColumn<T, K>[]) => void 
-} & Pick<ProTableProps, 'tableLayout' | 'ellipsis' | 'borderless'>
+  onColumnsChange?: (isSource: boolean, columns: ProTableColumn<T, K>[]) => void
+} & Pick<ProTableProps, 'tableLayout' | 'ellipsis' | 'borderless' | 'childrenKey' | 'cascaderStrategy'>
 
 export type ProTransferTreeProps = Pick<
   TreeProps,

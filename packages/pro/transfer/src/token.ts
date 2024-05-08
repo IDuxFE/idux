@@ -20,6 +20,12 @@ export interface ProTransferContext {
   sourceContentRef: Ref<TransferContentInstance | undefined>
   targetContentRef: Ref<TransferContentInstance | undefined>
 }
+
+export interface TableTransferContext<C extends string = string> {
+  childrenKey: ComputedRef<C>
+  expandedKeysContext: TreeExpandedKeysContext
+}
+
 export interface TreeTransferContext<V extends TreeTransferData<V, C> = TreeTransferData, C extends string = string> {
   cascaderStrategy: ComputedRef<TreeCascadeStrategy>
   childrenKey: ComputedRef<C>
@@ -30,4 +36,5 @@ export interface TreeTransferContext<V extends TreeTransferData<V, C> = TreeTran
 }
 
 export const proTransferContext: InjectionKey<ProTransferContext> = Symbol('proTransferContext')
+export const tableTransferContext: InjectionKey<TableTransferContext> = Symbol('tableTransferContext')
 export const treeTransferContext: InjectionKey<TreeTransferContext> = Symbol('treeTransferContext')

@@ -24,11 +24,12 @@ export function renderRemovableLabel(
 
   const classes = {
     [`${prefixCls}-removable-label`]: true,
+    [`${prefixCls}-removable-label-with-text`]: !!defaultSlot,
     [`${prefixCls}-removable-label-ellipsis`]: !!ellipsis,
   }
   return (
     <span class={classes}>
-      <span class={`${prefixCls}-removable-label-text`}>{defaultSlot?.()}</span>
+      {defaultSlot && <span class={`${prefixCls}-removable-label-text`}>{defaultSlot()}</span>}
       {!disabled && renderRemoveIcon(prefixCls, onClick)}
     </span>
   )

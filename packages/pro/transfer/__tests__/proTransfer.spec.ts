@@ -252,13 +252,16 @@ describe('ProTransfer', () => {
         .exists(),
     ).toBeTruthy()
 
-    await Promise.all(
-      targetTable
-        .find('tbody')
-        .findAll('tr:not(.ix-table-measure-row)')
-        .slice(0, 2)
-        .map(tr => tr.find('.ix-pro-transfer-table-content-close-icon').trigger('click')),
-    )
+    await targetTable
+      .find('tbody')
+      .findAll('tr:not(.ix-table-measure-row)')[0]
+      .find('.ix-pro-transfer-table-content-close-icon')
+      .trigger('click')
+    await targetTable
+      .find('tbody')
+      .findAll('tr:not(.ix-table-measure-row)')[1]
+      .find('.ix-pro-transfer-table-content-close-icon')
+      .trigger('click')
 
     expect(targetTable.find('tbody').findAll('tr:not(.ix-table-measure-row)').length).toBe(1)
   })
