@@ -56,7 +56,7 @@ export const defaultConfig: GlobalConfig = {
     icon: {
       success: 'check-circle',
       error: 'exclamation-circle',
-      info: 'bulb',
+      info: 'info-circle',
       warning: 'exclamation-circle',
       offline: 'info-circle',
     },
