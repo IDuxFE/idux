@@ -5,21 +5,21 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { VKey } from '@idux/cdk/utils'
+import type { TransferData } from '../types'
 import type { Slot, VNodeChild } from 'vue'
 
 import { IxIcon } from '@idux/components/icon'
 
 export function renderRemovableLabel(
-  key: VKey,
+  record: TransferData,
   disabled: boolean,
   ellipsis: boolean,
   defaultSlot: Slot | null,
-  triggerRemove: (keys: VKey[]) => void,
+  triggerRemove: (record: TransferData) => void,
   prefixCls: string,
 ): VNodeChild {
   const onClick = () => {
-    triggerRemove([key])
+    triggerRemove(record)
   }
 
   const classes = {

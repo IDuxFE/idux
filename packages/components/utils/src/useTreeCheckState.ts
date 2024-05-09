@@ -131,7 +131,7 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
     const resolvedCheckedKeys = checkStateResolver[checked ? 'appendKeys' : 'removeKeys'](newCheckedKeys, disabledKeys)
 
     return {
-      checked,
+      checked: !checked,
       checkedKeys: resolvedCheckedKeys,
     }
   }

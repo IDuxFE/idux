@@ -14,7 +14,7 @@ import { type ComputedRef, type Slots, computed } from 'vue'
 
 import { isString, omit } from 'lodash-es'
 
-import { callEmit } from '@idux/cdk/utils'
+import { callEmit, getTreeKeys } from '@idux/cdk/utils'
 
 import { renderRemovableLabel } from '../content/RenderRemovableLabel'
 
@@ -32,6 +32,7 @@ export function useTransferTableProps(
   const convertedColumns = computed(() =>
     convertTableColumns(
       isSource ? props.tableProps?.sourceColumns : props.tableProps?.targetColumns,
+      childrenKey,
       mergedPrefixCls,
       transferBindings,
       props,
@@ -100,6 +101,7 @@ export function useTransferTableProps(
 
 function convertTableColumns(
   columns: ProTableColumn[] | undefined,
+  childrenKey: ComputedRef<string> | undefined,
   mergedPrefixCls: ComputedRef<string>,
   transferBindings: TransferBindings,
   props: ProTransferProps,
@@ -146,6 +148,17 @@ function convertTableColumns(
 
   if (props.mode === 'immediate' && !isSource) {
     const lastCol = convertedColumns[convertedColumns.length - 1]
+
+    const _triggerRemove = (record: TransferData) => {
+      if (props.type === 'tree-table' && childrenKey) {
+        triggerRemove(
+          getTreeKeys([record], childrenKey.value, getKey.value).filter(key => !disabledKeys.value.has(key)),
+        )
+      } else {
+        triggerRemove([getKey.value(record)])
+      }
+    }
+
     if ('type' in lastCol && lastCol.type !== 'expandable') {
       convertedColumns.push({
         ...layoutDisabledColumnConfig,
@@ -153,11 +166,11 @@ function convertTableColumns(
         customCell: ({ record }: { record: TransferData }) => {
           const key = getKey.value(record)
           return renderRemovableLabel(
-            key,
+            record,
             cellDisabledKeys.value.has(key),
             false,
             null,
-            triggerRemove,
+            _triggerRemove,
             mergedPrefixCls.value,
           )
         },
@@ -184,11 +197,11 @@ function convertTableColumns(
         customCell: (data: { value: any; record: any; rowIndex: number }) => {
           const key = getKey.value(data.record)
           return renderRemovableLabel(
-            key,
+            data.record,
             cellDisabledKeys.value.has(key),
             !!ellipsis,
             () => renderLabel(data),
-            triggerRemove,
+            _triggerRemove,
             mergedPrefixCls.value,
           )
         },
