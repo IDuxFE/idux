@@ -7,7 +7,7 @@
 
 import { defineComponent, inject, shallowRef, watch } from 'vue'
 
-import { isString } from 'lodash-es'
+import { isNil, isString } from 'lodash-es'
 
 import { VKey, useState } from '@idux/cdk/utils'
 import { IxCol, IxRow } from '@idux/components/grid'
@@ -21,7 +21,7 @@ import { moreSelectPaneProps } from '../types'
 export default defineComponent({
   props: moreSelectPaneProps,
   setup(props, { slots }) {
-    const { props: tabsProps, mergedPrefixCls, handleTabClose, setSelectedKey } = inject(tabsToken)!
+    const { props: tabsProps, mergedPrefixCls, selectedKey, handleTabClose, setSelectedKey } = inject(tabsToken)!
 
     const [searchValue, setSearchValue] = useState('')
     const searchInputRef = shallowRef<InputInstance>()
@@ -105,6 +105,7 @@ export default defineComponent({
             v-slots={{
               optionLabel: optionLabelRender,
             }}
+            selectedKeys={!isNil(selectedKey.value) ? [selectedKey.value] : undefined}
             dataSource={mergedDataSource}
             onOptionClick={handleSelectChange}
             virtual
