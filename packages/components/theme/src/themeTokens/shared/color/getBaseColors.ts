@@ -24,6 +24,9 @@ export type BaseColorKeys =
   | 'grey'
   | 'white'
   | 'black'
+  | 'gold'
+  | 'silver'
+  | 'bronze'
 
 export type BaseColors = {
   [key in BaseColorKeys]: string
@@ -49,5 +52,8 @@ export function getBaseColors(): BaseColors {
     grey: '#a3a3a3',
     white: '#ffffff',
     black: '#000000',
+    gold: '#e7aa40',
+    silver: '#a9b4c8',
+    bronze: '#c97f58',
   }
 }
