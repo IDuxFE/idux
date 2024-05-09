@@ -111,7 +111,7 @@ export function createTreeSelectSegment(
     inputClassName: [`${prefixCls}-tree-select-segment-input`],
     containerClassName: [`${prefixCls}-tree-select-segment-container`],
     parse: input => parseInput(input, config, nodeLabelMap),
-    format: (value, states) => formatValue(value, states, config, nodeKeyMap),
+    format: (value, states) => formatValue(value, states, config, nodeKeyMap, nodeLabelMap),
     panelRenderer,
   }
 }
@@ -134,6 +134,7 @@ function formatValue(
   states: SegmentState[] | undefined,
   config: TreeSelectSearchField['fieldConfig'],
   nodeKeyMap: Map<VKey, TreeSelectPanelData>,
+  nodeLabelMap: Map<string | number, TreeSelectPanelData[]>,
 ): string {
   const { separator, searchable } = config
   if (isNil(value)) {
@@ -147,7 +148,7 @@ function formatValue(
     const inputParts = states ? states[states.length - 1]?.input?.split(_separator) ?? [] : []
     const lastInputPart = inputParts[inputParts.length - 1]?.trim() as string | undefined
 
-    if (lastInputPart && !labels.includes(lastInputPart)) {
+    if (lastInputPart && !getKeyByLabels(nodeLabelMap, [lastInputPart]).length) {
       return [...labels, lastInputPart].join(` ${_separator} `)
     }
   }
