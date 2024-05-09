@@ -2,9 +2,14 @@
 :root {
   --ix-alert-height: 32px;
   --ix-alert-border-radius: 2px;
+  --ix-alert-success-text-color: #12a679;
   --ix-alert-success-bg-color: rgb(233, 250, 244);
+  --ix-alert-info-text-color: #458fff;
   --ix-alert-info-bg-color: rgb(236, 244, 255);
-  --ix-alert-warning-bg-color: rgb(255, 247, 232);
+  --ix-alert-warning-text-color: #a35f40;
+  --ix-alert-warning-bg-color: rgb(253, 247, 236);
+  --ix-alert-error-text-color: #cf171d;
   --ix-alert-error-bg-color: rgb(255, 238, 238);
+  --ix-alert-offline-text-color: #6f7785;
   --ix-alert-offline-bg-color: rgb(246, 246, 247);
 }
