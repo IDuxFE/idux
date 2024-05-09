@@ -3,7 +3,12 @@
     <IxTabs v-model:selectedKey="selectedKey" :dataSource="dataSource">
       <template #content="{ key }"> Content of Tab {{ key }} </template>
     </IxTabs>
-    <IxTabs v-model:selectedKey="selectedKey" :dataSource="dataSource" type="line">
+    <IxTabs
+      v-model:selectedKey="selectedKey"
+      v-model:allTabsPanelOpen="allTabsPanelOpen"
+      :dataSource="dataSource"
+      type="line"
+    >
       <template #content="{ key }"> Content of Tab {{ key }} </template>
     </IxTabs>
     <IxTabs v-model:selectedKey="selectedKey" :dataSource="dataSource" type="segment">
@@ -20,6 +25,7 @@
 import { ref } from 'vue'
 
 const selectedKey = ref(0)
+const allTabsPanelOpen = ref(false)
 
 const dataSource = Array.from({ length: 99 }).map((_, index) => {
   return { key: index, title: `Tab ${index}` }

@@ -255,7 +255,7 @@ describe('Tabs', () => {
         },
       })
 
-      const addBtn = wrapper.find('.ix-tabs-nav-tab-add')
+      const addBtn = wrapper.find('.ix-tabs-nav-add-btn')
       expect(addBtn.exists()).toBe(true)
 
       await addBtn.trigger('click')
@@ -265,7 +265,7 @@ describe('Tabs', () => {
         addable: false,
       })
 
-      expect(wrapper.find('.ix-tabs-nav-tab-add').exists()).toBe(false)
+      expect(wrapper.find('.ix-tabs-nav-add-btn').exists()).toBe(false)
     })
 
     test('closable work', async () => {

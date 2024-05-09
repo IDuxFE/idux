@@ -5,59 +5,56 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, normalizeClass, shallowRef, watch } from 'vue'
+import { Transition, computed, defineComponent, inject, normalizeClass, shallowRef, watch } from 'vue'
 
 import { isString } from 'lodash-es'
 
-import { callEmit, convertCssPixel, useState } from '@idux/cdk/utils'
+import { convertCssPixel } from '@idux/cdk/utils'
 import { IxButton } from '@idux/components/button'
 import { IxIcon } from '@idux/components/icon'
 import { IxPopover } from '@idux/components/popover'
-import { SelectData } from '@idux/components/select'
 
+import AddBtn from './AddBtn'
 import MoreSelectPane from './MoreSelectPane'
 import TabNav from './TabNav'
-import { useSizeObservable } from '../composables/useSizeObservable'
+import { useNavListScroll } from '../composables/useNavListScroll'
+import { useSelectedNav } from '../composables/useSelectedNav'
 import { tabsToken } from '../tokens'
 
 export default defineComponent({
   props: { selectedKey: { type: [Number, String, Symbol] } },
   setup(props, { slots }) {
     const {
+      common,
       props: tabsProps,
+      config,
+      locale,
       mergedPrefixCls,
       mergedDataSource,
+      allTabsPanelVisible,
       isHorizontal,
       closedKeys,
       navAttrs,
+      setAllTabsPanelVisible,
     } = inject(tabsToken)!
 
-    const wrapperRef = shallowRef<HTMLElement>()
-    const navRef = shallowRef<HTMLElement>()
+    const navListRef = shallowRef<HTMLElement>()
+    const navListInnerRef = shallowRef<HTMLElement>()
     const operationsRef = shallowRef<HTMLElement>()
     const selectedNavRef = shallowRef<HTMLElement>()
-    const addBtnRef = shallowRef<HTMLElement>()
 
-    const {
-      selectedNavSize,
-      navOffset,
-      wrapperSize,
-      operationsSize,
-      selectedNavOffset,
-      hasScroll,
-      firstShow,
-      lastShow,
-    } = useSizeObservable(
-      tabsProps,
-      wrapperRef,
-      navRef,
-      selectedNavRef,
-      addBtnRef,
-      operationsRef,
+    const { selectedNavSize, selectedNavOffset } = useSelectedNav(tabsProps, selectedNavRef, isHorizontal, closedKeys)
+    const { hasScroll, scrolledStart, scrolledEnd, pre, next } = useNavListScroll(
+      navListRef,
+      navListInnerRef,
       isHorizontal,
+      selectedNavSize,
+      selectedNavOffset,
       navAttrs,
       closedKeys,
     )
+
+    const showAllTabs = computed(() => hasScroll.value && (tabsProps.showAllTabsPanel ?? config.showAllTabsPanel))
 
     const allNavDataSource = computed(() => {
       const currClosedKeys = closedKeys.value
@@ -65,31 +62,17 @@ export default defineComponent({
     })
 
     const moreNavDataSource = computed(() => {
-      // TODO: 性能优化
-      return allNavDataSource.value.reduce((acc: SelectData[], data) => {
-        const attr = navAttrs[data.key]
-        if (
-          attr &&
-          // 将没有展示完全的 nav 全部放入到moreSelectPane中
-          (attr.offset < navOffset.value ||
-            wrapperSize.value - operationsSize.value - (attr.offset - navOffset.value) < attr.size)
-        ) {
-          acc.push({
-            key: data.key,
-            label: data.title,
-            disabled: data.disabled,
-            customTitle: data.customTitle ?? 'title',
-          })
-        }
-        return acc
-      }, [])
+      return allNavDataSource.value.map(item => ({
+        key: item.key,
+        label: item.title,
+        disabled: item.disabled,
+        customTitle: item.customTitle,
+      }))
     })
 
-    const [moreSelectPaneVisible, setMoreSelectPaneVisible] = useState(false)
-
-    watch(moreNavDataSource, dataSource => {
-      if (dataSource.length === 0) {
-        setMoreSelectPaneVisible(false)
+    watch(hasScroll, _hasScroll => {
+      if (!_hasScroll) {
+        setAllTabsPanelVisible(false)
       }
     })
 
@@ -101,13 +84,9 @@ export default defineComponent({
       })
     })
 
-    const navStyle = computed(() => {
-      return `transform: translate${isHorizontal.value ? 'X' : 'Y'}(-${navOffset.value}px)`
-    })
-
     const navBarStyle = computed(() => {
       const size = convertCssPixel(selectedNavSize.value)
-      const offset = convertCssPixel(selectedNavOffset.value - navOffset.value)
+      const offset = convertCssPixel(selectedNavOffset.value)
       if (isHorizontal.value) {
         return { width: size, left: offset }
       } else {
@@ -115,11 +94,32 @@ export default defineComponent({
       }
     })
 
+    const popoverPlacement = computed(() => {
+      const { placement } = tabsProps
+
+      switch (placement) {
+        case 'top':
+          return 'bottomEnd'
+        case 'bottom':
+          return 'topStart'
+        case 'start':
+          return 'rightEnd'
+        case 'end':
+          return 'leftEnd'
+        default:
+          return 'bottomStart'
+      }
+    })
+
     const handleSelectedNavChange = (element: HTMLElement) => {
       selectedNavRef.value = element
     }
-
-    const handleAdd = () => callEmit(tabsProps.onAdd)
+    const handleMouseenter = () => {
+      setAllTabsPanelVisible(true)
+    }
+    const handleMouseleave = () => {
+      setAllTabsPanelVisible(false)
+    }
 
     return () => {
       const { selectedKey } = props
@@ -127,71 +127,93 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
 
       return (
-        <div class={classes.value} ref={wrapperRef}>
-          <div
-            class={[
-              `${prefixCls}-nav`,
-              firstShow.value ? `${prefixCls}-nav-first-show` : '',
-              lastShow.value ? `${prefixCls}-nav-last-show` : '',
-            ]}
-          >
-            <div ref={navRef} style={navStyle.value} class={`${prefixCls}-nav-list`}>
-              {allNavDataSource.value.map(data => {
-                const { key, content, customContent, customTitle = 'title', ...navProps } = data
-                const titleSlot = isString(customTitle) ? slots[customTitle] : customTitle
-                return (
-                  <TabNav
-                    {...navProps}
-                    key={key}
-                    selected={selectedKey === key}
-                    onSelected={handleSelectedNavChange}
-                    v-slots={{ title: titleSlot }}
-                  />
-                )
-              })}
-              {addable && (
-                <button
-                  ref={addBtnRef}
-                  class={[`${prefixCls}-nav-tab-add`, hasScroll.value && `${prefixCls}-nav-tab-add-hidden`]}
-                  onClick={handleAdd}
-                >
-                  {slots.addIcon ? slots.addIcon() : <IxIcon name="plus" class={`${prefixCls}-nav-add-icon`} />}
+        <div class={classes.value}>
+          <div class={`${prefixCls}-nav`}>
+            <Transition appear name={`${common}-fade`}>
+              {hasScroll.value && !scrolledStart.value && (
+                <button class={`${prefixCls}-nav-pre-btn`} onClick={pre}>
+                  <span class={`${prefixCls}-nav-btn-trigger`}>
+                    <IxIcon name={isHorizontal.value ? 'left' : 'up'} />
+                  </span>
                 </button>
               )}
+            </Transition>
+            <div ref={navListRef} class={`${prefixCls}-nav-list`}>
+              <div ref={navListInnerRef} class={`${prefixCls}-nav-list-inner`}>
+                {allNavDataSource.value.map(data => {
+                  const { key, content, customContent, customTitle = 'title', ...navProps } = data
+                  const titleSlot = isString(customTitle) ? slots[customTitle] : customTitle
+                  return (
+                    <TabNav
+                      {...navProps}
+                      onSelected={handleSelectedNavChange}
+                      key={key}
+                      selected={selectedKey === key}
+                      v-slots={{ title: titleSlot }}
+                    />
+                  )
+                })}
+                {addable && !hasScroll.value && <AddBtn v-slots={slots} />}
+                {isHorizontal.value && hasScroll.value && <div class={`${prefixCls}-nav-list-gap-filler`}></div>}
+                {type === 'line' && <div class={`${prefixCls}-nav-bar`} style={navBarStyle.value}></div>}
+              </div>
             </div>
+            <Transition appear name={`${common}-fade`}>
+              {hasScroll.value && !scrolledEnd.value && (
+                <button class={`${prefixCls}-nav-next-btn`} onClick={next}>
+                  <span class={`${prefixCls}-nav-btn-trigger`}>
+                    <IxIcon name={isHorizontal.value ? 'right' : 'down'} />
+                  </span>
+                </button>
+              )}
+            </Transition>
           </div>
           <div
             ref={operationsRef}
             class={[`${prefixCls}-nav-operations`, !hasScroll.value && `${prefixCls}-nav-operations-hidden`]}
           >
-            <IxPopover
-              trigger="hover"
-              placement="bottomStart"
-              visible={moreSelectPaneVisible.value}
-              {...{
-                'onUpdate:visible': setMoreSelectPaneVisible,
-              }}
-              class={`${prefixCls}-nav-operations-popover`}
-              v-slots={{
-                content: () => {
-                  return (
-                    <MoreSelectPane
-                      visible={moreSelectPaneVisible.value}
-                      dataSource={moreNavDataSource.value}
-                      v-slots={slots}
-                    />
-                  )
-                },
-              }}
-            >
-              <IxButton icon="more" mode="text" shape="square"></IxButton>
-            </IxPopover>
+            {showAllTabs.value && (
+              <span class={`${prefixCls}-nav-operations-item`}>
+                <IxPopover
+                  trigger="manual"
+                  placement={popoverPlacement.value}
+                  showArrow={false}
+                  visible={allTabsPanelVisible.value}
+                  props={{ 'onUpdate:visible': setAllTabsPanelVisible }}
+                  class={`${prefixCls}-nav-operations-popover`}
+                  onMouseenter={handleMouseenter}
+                  onMouseleave={handleMouseleave}
+                  v-slots={{
+                    content: () => {
+                      return (
+                        <MoreSelectPane
+                          visible={allTabsPanelVisible.value}
+                          dataSource={moreNavDataSource.value}
+                          v-slots={slots}
+                        />
+                      )
+                    },
+                  }}
+                >
+                  <IxButton
+                    icon="more"
+                    mode="text"
+                    shape={isHorizontal.value ? undefined : 'square'}
+                    onMouseenter={handleMouseenter}
+                    onMouseleave={handleMouseleave}
+                  >
+                    {isHorizontal.value ? locale.allTabs : ''}
+                  </IxButton>
+                </IxPopover>
+              </span>
+            )}
             {addable && (
-              <IxButton v-slots={{ icon: slots.addIcon }} icon="plus" mode="text" shape="square" onClick={handleAdd} />
+              <span class={`${prefixCls}-nav-operations-item`}>
+                <AddBtn v-slots={slots} />
+              </span>
             )}
           </div>
           {type !== 'segment' && <div class={`${prefixCls}-nav-border`}></div>}
-          {type === 'line' && <div class={`${prefixCls}-nav-bar`} style={navBarStyle.value}></div>}
         </div>
       )
     }

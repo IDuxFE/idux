@@ -4,18 +4,25 @@ exports[`Tabs > render work 1`] = `
 "<div class=\\"ix-tabs ix-tabs-md ix-tabs-card ix-tabs-nav-top\\">
   <div class=\\"ix-tabs-nav-wrapper\\">
     <div class=\\"ix-tabs-nav\\">
-      <div style=\\"transform: translateX(-0px);\\" class=\\"ix-tabs-nav-list\\">
+      <transition-stub name=\\"[object Object]-fade\\" appear=\\"true\\" persisted=\\"false\\" css=\\"true\\">
         <!---->
+      </transition-stub>
+      <div class=\\"ix-tabs-nav-list\\">
+        <div class=\\"ix-tabs-nav-list-inner\\">
+          <!---->
+          <!---->
+          <!---->
+        </div>
       </div>
-    </div>
-    <div class=\\"ix-tabs-nav-operations ix-tabs-nav-operations-hidden\\"><button class=\\"ix-button ix-button-icon-only ix-button-text ix-button-square ix-button-sm\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-more\\" role=\\"img\\" aria-label=\\"more\\"></i>
+      <transition-stub name=\\"[object Object]-fade\\" appear=\\"true\\" persisted=\\"false\\" css=\\"true\\">
         <!---->
-      </button>
+      </transition-stub>
+    </div>
+    <div class=\\"ix-tabs-nav-operations ix-tabs-nav-operations-hidden\\">
       <!---->
       <!---->
     </div>
     <div class=\\"ix-tabs-nav-border\\"></div>
-    <!---->
   </div>
   <div class=\\"ix-tabs-pane-wrapper\\"></div>
 </div>"

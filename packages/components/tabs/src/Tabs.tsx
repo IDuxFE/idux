@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, normalizeClass, provide, reactive } from 'vue'
+import { computed, defineComponent, normalizeClass, provide, ref } from 'vue'
 
 import { isNil, isString } from 'lodash-es'
 
@@ -25,6 +25,7 @@ export default defineComponent({
   props: tabsProps,
   setup(props, { slots }) {
     const common = useGlobalConfig('common')
+    const locale = useGlobalConfig('locale')
     const { globalHashId, hashId, registerToken } = useThemeToken('tabs')
     registerToken(getThemeTokens)
 
@@ -38,10 +39,11 @@ export default defineComponent({
     const isHorizontal = computed(() => horizontalPlacement.includes(props.placement))
 
     const [selectedKey, setSelectedKey] = useControlledProp(props, 'selectedKey')
+    const [allTabsPanelVisible, setAllTabsPanelVisible] = useControlledProp(props, 'allTabsPanelOpen', false)
     const [closedKeys, setClosedKeys] = useState<VKey[]>([])
 
     // 存储每个标签的尺寸和偏移
-    const navAttrs = reactive<Record<VKey, { offset: number; size: number }>>({})
+    const navAttrs = ref<Record<VKey, { offset: number; size: number }>>({})
 
     const handleTabClick = async (key: VKey, evt: Event) => {
       const result = await callEmit(props.onBeforeLeave, key, selectedKey.value)
@@ -69,15 +71,20 @@ export default defineComponent({
     }
 
     provide(tabsToken, {
+      common,
+      config,
       props,
+      locale: locale.tabs,
       mergedPrefixCls,
       mergedDataSource,
+      allTabsPanelVisible,
       isHorizontal,
       closedKeys,
       navAttrs,
       handleTabClick,
       handleTabClose,
       setSelectedKey,
+      setAllTabsPanelVisible,
     })
 
     const classes = computed(() => {
@@ -109,7 +116,6 @@ export default defineComponent({
               return (
                 <TabPane
                   key={key}
-                  closed={currClosedKeys.includes(key)}
                   content={content}
                   forceRender={forceRender}
                   selected={key === currSelectedKey}

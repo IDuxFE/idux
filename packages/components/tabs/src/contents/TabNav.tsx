@@ -54,7 +54,7 @@ export default defineComponent({
           offset: el[offsetProp.value],
         }
       }
-      navAttrs[key] = attr
+      navAttrs.value[key] = attr
     }
 
     onMounted(() => setNavAttr(elementRef.value))

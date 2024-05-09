@@ -3,6 +3,12 @@
     <template #title="{ title }"> Default {{ title }}</template>
     <template #content="{ key }"> Default content of Tab {{ key }} </template>
     <template #customTitle="{ title }"> Custom {{ title }}</template>
+    <template #allTabsPanelLabel="{ title }">
+      <span style="display: flex; align-items: center">
+        {{ title }}
+        <IxIcon name="robot" />
+      </span>
+    </template>
     <template #customContent="{ key }"> Custom content of Tab {{ key }} </template>
   </IxTabs>
 </template>
@@ -28,5 +34,9 @@ const dataSource: TabsData[] = [
     customTitle: 'customTitle',
     customContent: 'customContent',
   },
+  ...Array.from({ length: 20 }).map((_, idx) => ({
+    key: idx + 3,
+    title: `Tab ${idx + 3}`,
+  })),
 ]
 </script>

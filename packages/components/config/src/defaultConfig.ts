@@ -334,6 +334,7 @@ export const defaultConfig: GlobalConfig = {
   },
   tabs: {
     size: 'md',
+    showAllTabsPanel: true,
   },
   table: {
     autoHeight: false,
