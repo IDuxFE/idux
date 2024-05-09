@@ -16,23 +16,43 @@ export interface AlertThemeTokens {
   borderRadius: number
 
   /**
-   * @private internal
+   * @desc success 类型文字颜色
+   */
+  successTextColor: string
+  /**
+   * @desc success 类型背景颜色
    */
   successBgColor: string
   /**
-   * @private internal
+   * @desc info 类型文字颜色
+   */
+  infoTextColor: string
+  /**
+   * @desc info 类型背景颜色
    */
   infoBgColor: string
   /**
-   * @private internal
+   * @desc warning 类型文字颜色
+   */
+  warningTextColor: string
+  /**
+   * @desc warning 类型背景颜色
    */
   warningBgColor: string
   /**
-   * @private internal
+   * @desc error 类型文字颜色
+   */
+  errorTextColor: string
+  /**
+   * @desc error 类型背景颜色
    */
   errorBgColor: string
   /**
-   * @private internal
+   * @desc offline 类型文字颜色
+   */
+  offlineTextColor: string
+  /**
+   * @desc offline 类型背景颜色
    */
   offlineBgColor: string
 }
