@@ -96,6 +96,7 @@ export interface TableColumnCommon<T = any> {
   fixed?: TableColumnFixed
   titleColSpan?: number
   width?: string | number
+  minWidth?: number
 }
 
 export interface TableColumnBase<T = any, K = VKey> extends TableColumnCommon<T> {

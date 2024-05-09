@@ -28,7 +28,8 @@ export function useColumnOffsets(
     fixedEndColumns: (TableColumnMerged | TableColumnScrollBar)[]
     fixedColumnIndexMap: Record<VKey, number>
   }>,
-  columnWidthsMap: Ref<Record<VKey, number>>,
+  measuredColumnWidthMap: Ref<Record<VKey, number>>,
+  columnWidthMap: ComputedRef<Map<VKey, number | string | undefined>>,
   columnCount: Ref<number>,
 ): ColumnOffsetsContext {
   const columnOffsets = computed(() => {
@@ -37,8 +38,9 @@ export function useColumnOffsets(
       fixedStartColumns,
       fixedEndColumns.filter(column => column.type !== 'scroll-bar'),
       fixedColumnIndexMap,
-      columnWidthsMap.value,
+      columnWidthMap.value,
       columnCount.value - 1,
+      measuredColumnWidthMap.value,
     )
   })
   const columnOffsetsWithScrollBar = computed(() => {
@@ -47,8 +49,9 @@ export function useColumnOffsets(
       fixedStartColumns,
       fixedEndColumns,
       fixedColumnIndexMap,
-      columnWidthsMap.value,
+      columnWidthMap.value,
       columnCount.value,
+      measuredColumnWidthMap.value,
     )
   })
   return { columnOffsets, columnOffsetsWithScrollBar }
@@ -58,8 +61,9 @@ function calculateOffsets(
   startColumns: (TableColumnMerged | TableColumnScrollBar)[],
   endColumns: (TableColumnMerged | TableColumnScrollBar)[],
   columnIndexMap: Record<VKey, number>,
-  columnWidthsMap: Record<VKey, number>,
+  columnWidthMap: Map<VKey, number | string | undefined>,
   columnCount: number,
+  measuredColumnWidthMap: Record<VKey, number>,
 ) {
   const startOffsets: Record<VKey, { index: number; offset: number }> = {}
   const endOffsets: Record<VKey, { index: number; offset: number }> = {}
@@ -69,7 +73,7 @@ function calculateOffsets(
 
   for (let index = 0; index < startColumns.length; index++) {
     const column = startColumns[index]
-    const width = columnWidthsMap[column.key] ?? column.width ?? 0
+    const width = measuredColumnWidthMap[column.key] ?? columnWidthMap.get(column.key) ?? 0
 
     startOffsets[column.key] = { index: columnIndexMap[column.key] ?? index, offset: startOffset }
     startOffset += width
@@ -77,7 +81,7 @@ function calculateOffsets(
 
   for (let index = 0; index < endColumns.length; index++) {
     const column = endColumns[endColumns.length - index - 1]
-    const width = columnWidthsMap[column.key] ?? column.width ?? 0
+    const width = measuredColumnWidthMap[column.key] ?? columnWidthMap.get(column.key) ?? 0
 
     endOffsets[column.key] = { index: columnIndexMap[column.key] ?? columnCount - index - 1, offset: endOffset }
     endOffset += width

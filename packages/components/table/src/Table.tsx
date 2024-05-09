@@ -20,6 +20,7 @@ import { useGetKey } from '@idux/components/utils'
 
 import { useColumnOffsets } from './composables/useColumnOffsets'
 import { useColumnWidthMeasure } from './composables/useColumnWidthMeasure'
+import { useColumnWidths } from './composables/useColumnWidths'
 import { type TableColumnMerged, useColumns } from './composables/useColumns'
 import { useDataSource } from './composables/useDataSource'
 import { useExpandable } from './composables/useExpandable'
@@ -77,12 +78,14 @@ export default defineComponent({
 
     const { flattedColumns, flattedColumnsWithScrollBar, fixedColumns } = columnsContext
 
+    const columnWidthMap = useColumnWidths(flattedColumns, scrollContext.scrollWidth, clientWidth)
+
     const columnMeasureContext = useColumnWidthMeasure(flattedColumns)
     const { measuredColumnWidthMap } = columnMeasureContext
 
     const columnCount = computed(() => flattedColumnsWithScrollBar.value.length)
 
-    const columnOffsetsContext = useColumnOffsets(fixedColumns, measuredColumnWidthMap, columnCount)
+    const columnOffsetsContext = useColumnOffsets(fixedColumns, measuredColumnWidthMap, columnWidthMap, columnCount)
     const sortableContext = useSortable(flattedColumns)
     const filterableContext = useFilterable(flattedColumns)
     const expandableContext = useExpandable(props, flattedColumns)
@@ -138,6 +141,7 @@ export default defineComponent({
       config,
       locale,
       clientWidth,
+      columnWidthMap,
       setClientWidth,
       mergedPrefixCls,
       mergedEmptyCell,

@@ -34,10 +34,12 @@ const columns: TableColumn<Data>[] = [
     title: 'Name',
     dataKey: 'name',
     customCell: 'name',
+    width: 150,
   },
   {
     title: 'Age',
     dataKey: 'age',
+    minWidth: 200,
     align: {
       title: 'start',
       cell: 'end',
