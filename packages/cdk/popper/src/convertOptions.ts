@@ -31,17 +31,20 @@ export function convertOptions(baseOptions: BaseOptions, extraOptions: ExtraOpti
   const { placement, strategy, middlewares, offset, autoAdjust } = baseOptions
   const { arrowElement, updatePlacement: _updatePlacement } = extraOptions
 
+  const { width } = arrowElement?.getBoundingClientRect() ?? {}
+  const arrowSize = width ? width / 2 : 0
+
   return {
     placement: kebabCase(placement) as Placement,
     strategy,
     middleware: [
+      autoAdjust && flip({ padding: 2 + arrowSize, crossAxis: false }),
+      autoAdjust && shift(),
       !!arrowElement && arrow(arrowElement),
       offsetMiddleware({
         mainAxis: offset[1],
         crossAxis: offset[0],
       }),
-      autoAdjust && flip({ padding: 2, crossAxis: false }),
-      autoAdjust && shift(),
       referenceHidden(),
       updatePlacement(_updatePlacement),
       ...middlewares,
