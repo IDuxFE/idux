@@ -10,6 +10,31 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 2.2.0(2024-05-09)
+
+
+### Bug Fixes
+
+* **cdk:popper:** 在触发了shift中间件之后，箭头的位置没有重新计算 ([#1917](https://github.com/IDuxFE/idux/issues/1917)) ([a4072a5](https://github.com/IDuxFE/idux/commit/a4072a571c6bc10d93d588c2ccec97bcc2f33742))
+* **cdk:virtual:** 渲染池中具有相同数据key的元素没有被成功复用 ([#1910](https://github.com/IDuxFE/idux/issues/1910)) ([df3a961](https://github.com/IDuxFE/idux/commit/df3a961ee47b518dfeebc5979389704f748feaa6))
+* **comp:alert:** 修改 `info` 类型的告警图标为 `info-circle` ([#1916](https://github.com/IDuxFE/idux/issues/1916)) ([e08e100](https://github.com/IDuxFE/idux/commit/e08e100607bd3ee8debfaccd592c55c1c54c870e))
+* **comp:table:** 固定列的阴影在初始渲染和resize之后没有正常显示 ([#1909](https://github.com/IDuxFE/idux/issues/1909)) ([0ea197a](https://github.com/IDuxFE/idux/commit/0ea197ac3f4acbbcd1309da1669e2e6e5b292715))
+* **comp:tabs:** 所有面板浮层中，选中的tab选项应该具有选中的状态样式 ([#1921](https://github.com/IDuxFE/idux/issues/1921)) ([b883501](https://github.com/IDuxFE/idux/commit/b883501633b5a301aa42c41ce4714cbab07ccb82))
+* **comp:theme:** 将主题样式的引用次数保存在style元素上，避免不同的上下文间不能共享引用次数 ([#1907](https://github.com/IDuxFE/idux/issues/1907)) ([ff062cd](https://github.com/IDuxFE/idux/commit/ff062cdcd14244babd911a648cf1a578d3e62a51))
+* **pro:search:** tree-select 类型的搜索项，在取消勾选某个叶子节点后，搜索输入解析错误 ([#1914](https://github.com/IDuxFE/idux/issues/1914)) ([5e44824](https://github.com/IDuxFE/idux/commit/5e448248ab1e259f57295e8ed1737673206d70dd))
+
+
+### Features
+
+* **comp:alert:** 新增文字和背景颜色主题token配置 ([#1918](https://github.com/IDuxFE/idux/issues/1918)) ([114e26f](https://github.com/IDuxFE/idux/commit/114e26f551ed3f378d5818616cca4e36d42cf053))
+  - 修改 `warning` 类型的文字和背景颜色，取色板中的 `gold.base` 和 `bronze.d10`
+* **comp:table:** 树表格支持 cascaderStrategy，自定义级联策略 ([#1911](https://github.com/IDuxFE/idux/issues/1911)) ([e05e6af](https://github.com/IDuxFE/idux/commit/e05e6af66da5d7776dc8c50c35965e1947425fe1))
+* **comp:tabs:** 重写tabs组件以支持新特性 ([#1913](https://github.com/IDuxFE/idux/issues/1913)) ([3c34eba](https://github.com/IDuxFE/idux/commit/3c34eba9776f202697ae1a24a1946c5e44cf0723))
+  - 1. 支持所有面板（之前的下拉面板仅仅展示溢出的tab选项，现在会展示所有的tab）
+  - 2. 支持tabs导航内的滚动和左右切换
+* **comp:theme:** 新增 gold, silver 和 bronze 颜色到基础颜色 ([#1915](https://github.com/IDuxFE/idux/issues/1915)) ([1946e26](https://github.com/IDuxFE/idux/commit/1946e268bee09593cccf998decbae9f136fb745b))
+* **pro:transfer:** 支持 `tree-table` 类型的穿梭框（树表格） ([#1912](https://github.com/IDuxFE/idux/issues/1912)) ([06a8263](https://github.com/IDuxFE/idux/commit/06a8263231e5a778834d8e7eb358ec08ab920656))
+
 ## 2.1.3(2024-04-25)
 
 
