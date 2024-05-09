@@ -21,6 +21,7 @@ export interface TabsContext {
   allTabsPanelVisible: ComputedRef<boolean>
   isHorizontal: ComputedRef<boolean>
   closedKeys: ComputedRef<VKey[]>
+  selectedKey: ComputedRef<VKey | undefined>
   navAttrs: Ref<Record<VKey, { offset: number; size: number } | undefined>>
   handleTabClick: (key: VKey, evt: Event) => Promise<void>
   handleTabClose: (key: VKey) => Promise<void>

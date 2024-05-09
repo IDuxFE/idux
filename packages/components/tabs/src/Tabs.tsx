@@ -81,6 +81,7 @@ export default defineComponent({
       isHorizontal,
       closedKeys,
       navAttrs,
+      selectedKey,
       handleTabClick,
       handleTabClose,
       setSelectedKey,
