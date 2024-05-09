@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/IDuxFE/idux/compare/v2.1.3...v2.2.0) (2024-05-09)
+
+
+### Bug Fixes
+
+* **cdk:virtual:** render pool item with same item key is not reused ([#1910](https://github.com/IDuxFE/idux/issues/1910)) ([df3a961](https://github.com/IDuxFE/idux/commit/df3a961ee47b518dfeebc5979389704f748feaa6))
+* **comp:alert:** modify alert info type icon to info-circle ([#1916](https://github.com/IDuxFE/idux/issues/1916)) ([e08e100](https://github.com/IDuxFE/idux/commit/e08e100607bd3ee8debfaccd592c55c1c54c870e))
+* **comp:table:** fixed column shadow are displayed after resize ([#1909](https://github.com/IDuxFE/idux/issues/1909)) ([0ea197a](https://github.com/IDuxFE/idux/commit/0ea197ac3f4acbbcd1309da1669e2e6e5b292715))
+* **comp:tabs:** all tabs panel should have selected state ([#1921](https://github.com/IDuxFE/idux/issues/1921)) ([b883501](https://github.com/IDuxFE/idux/commit/b883501633b5a301aa42c41ce4714cbab07ccb82))
+* **comp:theme:** store theme style reference count on style element ([#1907](https://github.com/IDuxFE/idux/issues/1907)) ([ff062cd](https://github.com/IDuxFE/idux/commit/ff062cdcd14244babd911a648cf1a578d3e62a51))
+
+
+### Features
+
+* **comp:alert:** add theme tokens for typed alert text and bg colors ([#1918](https://github.com/IDuxFE/idux/issues/1918)) ([114e26f](https://github.com/IDuxFE/idux/commit/114e26f551ed3f378d5818616cca4e36d42cf053))
+* **comp:table:** support cascaderStrategy for tree table ([#1911](https://github.com/IDuxFE/idux/issues/1911)) ([e05e6af](https://github.com/IDuxFE/idux/commit/e05e6af66da5d7776dc8c50c35965e1947425fe1))
+* **comp:tabs:** rewirte tabs component to support new features ([#1913](https://github.com/IDuxFE/idux/issues/1913)) ([3c34eba](https://github.com/IDuxFE/idux/commit/3c34eba9776f202697ae1a24a1946c5e44cf0723))
+* **comp:theme:** add gold, silver and bronze color to base colors ([#1915](https://github.com/IDuxFE/idux/issues/1915)) ([1946e26](https://github.com/IDuxFE/idux/commit/1946e268bee09593cccf998decbae9f136fb745b))
+
+
+
+
+
 ## [2.1.3](https://github.com/IDuxFE/idux/compare/v2.1.2...v2.1.3) (2024-04-25)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/IDuxFE/idux/compare/v2.1.3...v2.2.0) (2024-05-09)
+
+
+### Bug Fixes
+
+* **cdk:popper:** arrow position is incorrect after shift ([#1917](https://github.com/IDuxFE/idux/issues/1917)) ([a4072a5](https://github.com/IDuxFE/idux/commit/a4072a571c6bc10d93d588c2ccec97bcc2f33742))
+* **cdk:virtual:** render pool item with same item key is not reused ([#1910](https://github.com/IDuxFE/idux/issues/1910)) ([df3a961](https://github.com/IDuxFE/idux/commit/df3a961ee47b518dfeebc5979389704f748feaa6))
+
+
+
+
+
 ## [2.1.3](https://github.com/IDuxFE/idux/compare/v2.1.2...v2.1.3) (2024-04-25)
 
 

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/IDuxFE/idux/compare/v2.1.3...v2.2.0) (2024-05-09)
+
+
+### Bug Fixes
+
+* **pro:search:** input is formatted incorrectly after tree select leaf option unchecked ([#1914](https://github.com/IDuxFE/idux/issues/1914)) ([5e44824](https://github.com/IDuxFE/idux/commit/5e448248ab1e259f57295e8ed1737673206d70dd))
+
+
+### Features
+
+* **comp:tabs:** rewirte tabs component to support new features ([#1913](https://github.com/IDuxFE/idux/issues/1913)) ([3c34eba](https://github.com/IDuxFE/idux/commit/3c34eba9776f202697ae1a24a1946c5e44cf0723))
+* **pro:transfer:** supports tree-table type transfer ([#1912](https://github.com/IDuxFE/idux/issues/1912)) ([06a8263](https://github.com/IDuxFE/idux/commit/06a8263231e5a778834d8e7eb358ec08ab920656))
+
+
+
+
+
 ## [2.1.3](https://github.com/IDuxFE/idux/compare/v2.1.2...v2.1.3) (2024-04-25)
 
 
