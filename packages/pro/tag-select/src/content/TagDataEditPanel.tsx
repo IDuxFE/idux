@@ -47,6 +47,7 @@ export default defineComponent({
       [() => props.visible, () => props.data.label],
       () => {
         setInputValue(props.data.label)
+        setInputValidateError(undefined)
       },
       {
         immediate: true,
