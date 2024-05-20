@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/IDuxFE/idux/compare/v2.2.0...v2.2.1) (2024-05-20)
+
+
+### Bug Fixes
+
+* **comp:*:** overlay border color token is invalid ([#1924](https://github.com/IDuxFE/idux/issues/1924)) ([f1ac247](https://github.com/IDuxFE/idux/commit/f1ac24711c89c9feb871a1b3610fd9cff26ceb32))
+* **comp:popconfirm:** content padding should be diferent when no header icon rendered ([#1929](https://github.com/IDuxFE/idux/issues/1929)) ([cd02157](https://github.com/IDuxFE/idux/commit/cd0215742cefdab756eba022c5a74f2ca07a4479))
+* **comp:table:** select all shouldn't be checked when empty ([#1928](https://github.com/IDuxFE/idux/issues/1928)) ([dd13848](https://github.com/IDuxFE/idux/commit/dd1384843dc83ca628a7a155fa0d55ee58332c0f))
+* **comp:tabs:** line type bar offset error after tab title updates ([#1927](https://github.com/IDuxFE/idux/issues/1927)) ([2ec613a](https://github.com/IDuxFE/idux/commit/2ec613a5218519550360707b133b67a3ad96116f))
+* **comp:tree-select:** removing item in selector doesn't work ([#1923](https://github.com/IDuxFE/idux/issues/1923)) ([134992f](https://github.com/IDuxFE/idux/commit/134992fde39f722f9e6d64773eae53f0b0d59dbb))
+
+
+
+
+
 # [2.2.0](https://github.com/IDuxFE/idux/compare/v2.1.3...v2.2.0) (2024-05-09)
 
 

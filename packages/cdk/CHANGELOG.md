@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/IDuxFE/idux/compare/v2.2.0...v2.2.1) (2024-05-20)
+
+
+### Bug Fixes
+
+* **cdk:scroll:** pool item not recycled index isn't right ([#1926](https://github.com/IDuxFE/idux/issues/1926)) ([c177f36](https://github.com/IDuxFE/idux/commit/c177f364727e30867bc35b76843f4060a69353bf))
+
+
+
+
+
 # [2.2.0](https://github.com/IDuxFE/idux/compare/v2.1.3...v2.2.0) (2024-05-09)
 
 

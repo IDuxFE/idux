@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/IDuxFE/idux/compare/v2.2.0...v2.2.1) (2024-05-20)
+
+
+### Bug Fixes
+
+* **pro:table:** check in layout tool after search doesn't work ([#1925](https://github.com/IDuxFE/idux/issues/1925)) ([19078ee](https://github.com/IDuxFE/idux/commit/19078ee89316c522c5dec74e405229a96100277b))
+* **pro:tag-select:** modify theme colors ([#1922](https://github.com/IDuxFE/idux/issues/1922)) ([5256ad1](https://github.com/IDuxFE/idux/commit/5256ad107a8a47f30b05d3686554c4e03e626c8c))
+* **pro:tag-select:** tag data edit and create should be validated ([#1931](https://github.com/IDuxFE/idux/issues/1931)) ([fe649cc](https://github.com/IDuxFE/idux/commit/fe649cc822ba0b35803dbfd547384b857072c88b))
+
+
+
+
+
 # [2.2.0](https://github.com/IDuxFE/idux/compare/v2.1.3...v2.2.0) (2024-05-09)
 
 

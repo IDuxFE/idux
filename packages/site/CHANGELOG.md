@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/IDuxFE/idux/compare/v2.2.0...v2.2.1) (2024-05-20)
+
+
+### Bug Fixes
+
+* **comp:*:** overlay border color token is invalid ([#1924](https://github.com/IDuxFE/idux/issues/1924)) ([f1ac247](https://github.com/IDuxFE/idux/commit/f1ac24711c89c9feb871a1b3610fd9cff26ceb32))
+
+
+
+
+
 # [2.2.0](https://github.com/IDuxFE/idux/compare/v2.1.3...v2.2.0) (2024-05-09)
 
 **Note:** Version bump only for package @idux/site
