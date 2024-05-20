@@ -36,6 +36,7 @@ export default defineComponent({
       const contentNode = slots.content ? slots.content() : props.content
       const classes = normalizeClass({
         [`${prefixCls}-wrapper`]: true,
+        [`${prefixCls}-with-icon`]: !!iconNode,
         [`${prefixCls}-with-content`]: !!contentNode,
       })
       return (
