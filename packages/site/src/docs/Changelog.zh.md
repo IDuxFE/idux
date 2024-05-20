@@ -10,6 +10,25 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 2.2.1(2024-05-20)
+
+
+### Bug Fixes
+
+* **cdk:scroll:** 下一次渲染时，渲染池中未被回收的元素（即上一次渲染也存在的元素）的index和数据不正确，应该重新赋值 ([#1926](https://github.com/IDuxFE/idux/issues/1926)) ([c177f36](https://github.com/IDuxFE/idux/commit/c177f364727e30867bc35b76843f4060a69353bf))
+* **comp:*:** 默认主题下 overlay border color 主题token不合法，修改为 `transparent` ([#1924](https://github.com/IDuxFE/idux/issues/1924)) ([f1ac247](https://github.com/IDuxFE/idux/commit/f1ac24711c89c9feb871a1b3610fd9cff26ceb32))
+* **comp:popconfirm:** 在当header中的icon未渲染，或者header未渲染时，内容区域的padding不应该留出icon的位置 ([#1929](https://github.com/IDuxFE/idux/issues/1929)) ([cd02157](https://github.com/IDuxFE/idux/commit/cd0215742cefdab756eba022c5a74f2ca07a4479))
+* **comp:table:** 当表格数据为空时，全选不应该被勾选 ([#1928](https://github.com/IDuxFE/idux/issues/1928)) ([dd13848](https://github.com/IDuxFE/idux/commit/dd1384843dc83ca628a7a155fa0d55ee58332c0f))
+* **comp:tabs:** `line` 类型的tabs，当title中的内容因为自定义渲染被更新导致尺寸变化，线的位置不正确 ([#1927](https://github.com/IDuxFE/idux/issues/1927)) ([2ec613a](https://github.com/IDuxFE/idux/commit/2ec613a5218519550360707b133b67a3ad96116f))
+* **comp:tree-select:** 当浮层中的树没有渲染时，通过选择框删除标签不起作用 ([#1923](https://github.com/IDuxFE/idux/issues/1923)) ([134992f](https://github.com/IDuxFE/idux/commit/134992fde39f722f9e6d64773eae53f0b0d59dbb))
+* **pro:table:** 布局工具中通过搜索过滤之后，勾选某一个列，表格的列显示状态异常 ([#1925](https://github.com/IDuxFE/idux/issues/1925)) ([19078ee](https://github.com/IDuxFE/idux/commit/19078ee89316c522c5dec74e405229a96100277b))
+* **pro:tag-select:** 修改颜色相关主题token，并提供 `indicatorColor` 单独配置编辑面板中的指示圆点的颜色 ([#1922](https://github.com/IDuxFE/idux/issues/1922)) ([5256ad1](https://github.com/IDuxFE/idux/commit/5256ad107a8a47f30b05d3686554c4e03e626c8c))
+  - 默认的颜色调整
+  - colors 配置新增 `indicatorColor` 配置，未提供则仍然使用 `backgroundColor`
+* **pro:tag-select:** 通过输入创建标签以及在编辑面板中修改标签的label时，支持对输入进行校验 ([#1931](https://github.com/IDuxFE/idux/issues/1931)) ([fe649cc](https://github.com/IDuxFE/idux/commit/fe649cc822ba0b35803dbfd547384b857072c88b))
+  - 新增 `tagLabelValidator` 对输入进行校验，并展示错误提示
+  - 新增 `alert` 插槽，用来自定义面板中告警提示的显示
+
 # 2.2.0(2024-05-09)
 
 
