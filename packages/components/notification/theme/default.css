@@ -6,7 +6,7 @@
   --ix-notification-max-width: calc(100vw - 48px);
   --ix-notification-border-width: 0;
   --ix-notification-border-type: solid;
-  --ix-notification-border-color: none;
+  --ix-notification-border-color: transparent;
   --ix-notification-font-size: 14px;
   --ix-notification-bg-color: #ffffff;
   --ix-notification-border-radius: 2px;

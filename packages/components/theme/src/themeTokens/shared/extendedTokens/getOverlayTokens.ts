@@ -15,7 +15,7 @@ export function getOverlayTokens(tokens: BasicTokens & DerivedTokens & ExtendedC
     overlayArrowSize: arrowSize,
     overlayBorderRadius: borderRadiusSm,
     overlayBorderWidth: 0,
-    overlayBorderColor: 'none',
+    overlayBorderColor: 'transparent',
     overlayBorderType: lineType,
   }
 }

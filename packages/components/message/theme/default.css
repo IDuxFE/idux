@@ -4,7 +4,7 @@
   --ix-message-font-size: 14px;
   --ix-message-border-width: 0;
   --ix-message-border-type: solid;
-  --ix-message-border-color: none;
+  --ix-message-border-color: transparent;
   --ix-message-content-min-width: 128px;
   --ix-message-content-max-width: 480px;
   --ix-message-content-padding-vertical: 8px;

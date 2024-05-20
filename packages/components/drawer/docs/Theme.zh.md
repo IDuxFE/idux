@@ -1,6 +1,6 @@
 | 名称 | 描述 | 类型 | default | dark |
 |---|---|---|---|---|
-| `borderColor` |  | `string` | `none` | `#1F2329` |
+| `borderColor` |  | `string` | `transparent` | `#1F2329` |
 | `borderType` |  | `string` | `solid` | `solid` |
 | `borderWidth` |  | `number` | `0` | `1` |
 | `boxShadowEnd` |  | `string` | `-6px 0 16px -8px rgba(0, 0, 0, 0.08), -9px 0 28px 0 rgba(0, 0, 0, 0.05), -12px 0 48px 16px rgba(0, 0, 0, 0.03)` | `-6px 0 16px -8px rgba(0, 0, 0, 0.08), -9px 0 28px 0 rgba(0, 0, 0, 0.05), -12px 0 48px 16px rgba(0, 0, 0, 0.03)` |
