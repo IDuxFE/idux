@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type ShallowRef, nextTick, onMounted, watch } from 'vue'
+import { type ComputedRef, type Ref, type ShallowRef, nextTick, onMounted, watch } from 'vue'
 
 import { useResizeObserver } from '@idux/cdk/resize'
 import { VKey, useState } from '@idux/cdk/utils'
@@ -22,6 +22,7 @@ export function useSelectedNav(
   selectedNavRef: ShallowRef<HTMLElement | undefined>,
   isHorizontal: ComputedRef<boolean>,
   closedKeys: ComputedRef<VKey[]>,
+  navAttrs: Ref<Record<VKey, { offset: number; size: number } | undefined>>,
 ): SelectedNavContext {
   const [selectedNavSize, setSelectedNavSize] = useState(0)
   const [selectedNavOffset, setSelectedNavOffset] = useState(0)
@@ -44,6 +45,7 @@ export function useSelectedNav(
 
   onMounted(() => {
     watch([() => props.dataSource, closedKeys, selectedNavRef], updateSelectedNavOffset, { immediate: true })
+    watch(navAttrs, updateSelectedNavOffset, { deep: true })
   })
 
   return {
