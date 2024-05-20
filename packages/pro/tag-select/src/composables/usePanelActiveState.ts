@@ -34,13 +34,13 @@ export function usePanelActiveState(
 ): PanelActiveStateContext {
   const [activeValue, setActiveValue] = useState<VKey | undefined>(undefined)
 
-  const { inputValue, inputFullyMatched, filteredData, dataMaxExceeded } = tagDataContext
+  const { tagCreateEnabled, filteredData } = tagDataContext
   const { selectedValue } = selectedStateContext
 
   const mergedOptions = computed<PanelOption[]>(() => {
     const options: PanelOption[] = [...filteredData.value]
 
-    if (inputValue.value && !inputFullyMatched.value && !dataMaxExceeded.value) {
+    if (tagCreateEnabled.value) {
       options.push({ key: creationDataKey })
     }
 

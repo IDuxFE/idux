@@ -48,6 +48,7 @@ export const proTagSelectProps = {
   maxTags: { type: [Number, String] as PropType<number | 'responsive'>, default: Number.MAX_SAFE_INTEGER },
   tagsLimit: { type: Number, default: Number.MAX_SAFE_INTEGER },
   tagDataLimit: { type: Number, default: Number.MAX_SAFE_INTEGER },
+  tagLabelValidator: Function as PropType<(label: string) => string | undefined>,
   overlayClassName: { type: String, default: undefined },
   overlayContainer: {
     type: [String, HTMLElement, Function] as PropType<OverlayContainerType>,
@@ -84,6 +85,7 @@ export const proTagSelectProps = {
 } as const
 
 export interface ProTagSelectSlots {
+  alert: Slot
   clearIcon: Slot
   suffix: Slot
   selectedLabel: Slot<TagSelectData>

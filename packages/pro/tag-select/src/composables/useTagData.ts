@@ -23,7 +23,8 @@ export interface TagDataContext {
   filteredData: ComputedRef<MergedTagData[]>
   dataMaxExceeded: ComputedRef<boolean>
   inputValue: ComputedRef<string | undefined>
-  inputFullyMatched: ComputedRef<boolean>
+  inputValidateError: ComputedRef<string | undefined>
+  tagCreateEnabled: ComputedRef<boolean>
   setInputValue: (input: string | undefined) => void
 
   getTagDataByKey: (key: VKey) => MergedTagData | undefined
@@ -69,7 +70,19 @@ export function useTagData(props: ProTagSelectProps, tagColorContext: TagColorCo
   })
 
   const inputFullyMatched = computed(
-    () => inputValue.value && filteredData.value.findIndex(data => data.label === inputValue.value) > -1,
+    () => !!inputValue.value && filteredData.value.findIndex(data => data.label === inputValue.value) > -1,
+  )
+
+  const inputValidateError = computed(() => {
+    if (inputValue.value && !inputFullyMatched.value && !dataMaxExceeded.value) {
+      return props.tagLabelValidator?.(inputValue.value)
+    }
+
+    return undefined
+  })
+
+  const tagCreateEnabled = computed(
+    () => !!inputValue.value && !inputFullyMatched.value && !dataMaxExceeded.value && !inputValidateError.value,
   )
 
   const getTagDataByKey = (key: VKey) => {
@@ -108,7 +121,8 @@ export function useTagData(props: ProTagSelectProps, tagColorContext: TagColorCo
     filteredData,
     dataMaxExceeded,
     inputValue,
-    inputFullyMatched,
+    tagCreateEnabled,
+    inputValidateError,
     setInputValue,
 
     getTagDataByKey,

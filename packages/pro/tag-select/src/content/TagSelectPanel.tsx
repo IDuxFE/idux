@@ -25,13 +25,13 @@ export default defineComponent({
       mergedPrefixCls,
       filteredData,
       dataMaxExceeded,
+      tagCreateEnabled,
       inputValue,
-      inputFullyMatched,
+      inputValidateError,
       setEditPanelOpened,
     } = inject(proTagSelectContext)!
 
     const showEmpty = computed(() => !filteredData.value.length && (!inputValue.value || dataMaxExceeded.value))
-    const showCreatOption = computed(() => inputValue.value && !inputFullyMatched.value && !dataMaxExceeded.value)
 
     const handleMousedown = (evt: MouseEvent) => {
       setEditPanelOpened(false)
@@ -41,25 +41,43 @@ export default defineComponent({
       }
     }
 
+    const renderAlert = () => {
+      if (slots.alert) {
+        return slots.alert({ input: inputValue.value, inputValidateError: inputValidateError.value })
+      }
+
+      if (dataMaxExceeded.value) {
+        return (
+          slots.maxExceededAlert?.() ?? (
+            <IxAlert icon="info-circle" type="offline">
+              {locale.maxExceededAlert.replace('${0}', toString(props.tagDataLimit ?? 0))}
+            </IxAlert>
+          )
+        )
+      }
+
+      if (inputValidateError.value) {
+        return (
+          <IxAlert icon="info-circle" type="offline">
+            {inputValidateError.value}
+          </IxAlert>
+        )
+      }
+
+      return
+    }
+
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-panel`
 
       return (
         <div class={[prefixCls, `${common.prefixCls}-scroll-min`]} onMousedown={handleMousedown}>
-          {dataMaxExceeded.value && (
-            <div class={`${prefixCls}-alert`}>
-              {slots.maxExceededAlert?.() ?? (
-                <IxAlert icon="info-circle">
-                  {locale.maxExceededAlert.replace('${0}', toString(props.tagDataLimit ?? 0))}
-                </IxAlert>
-              )}
-            </div>
-          )}
+          {renderAlert()}
           {filteredData.value.map(data => (
             <TagSelectOption data={data} v-slots={slots} />
           ))}
           {showEmpty.value && <div class={`${prefixCls}-empty`}>{locale.empty}</div>}
-          {showCreatOption.value && <TagSelectCreationOption />}
+          {tagCreateEnabled.value && <TagSelectCreationOption />}
         </div>
       )
     }

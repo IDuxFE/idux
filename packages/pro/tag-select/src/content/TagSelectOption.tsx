@@ -33,6 +33,8 @@ export default defineComponent({
       changeActiveValue,
     } = inject(proTagSelectContext)!
 
+    const editPanelVisible = computed(() => editPanelOpened.value && dataToEdit.value?.key === props.data.key)
+
     const classes = computed(() => {
       const prefixCls = `${mergedPrefixCls.value}-option`
 
@@ -75,7 +77,7 @@ export default defineComponent({
     }
 
     const renderOverlayContent = () => {
-      return <TagDataEditPanel data={props.data} />
+      return <TagDataEditPanel data={props.data} visible={editPanelVisible.value} />
     }
 
     return () => {
@@ -93,7 +95,7 @@ export default defineComponent({
             <IxControlTriggerOverlay
               placement="bottomEnd"
               trigger="manual"
-              visible={editPanelOpened.value && dataToEdit.value?.key === props.data.key}
+              visible={editPanelVisible.value}
               v-slots={{ content: renderOverlayContent }}
             >
               <div
