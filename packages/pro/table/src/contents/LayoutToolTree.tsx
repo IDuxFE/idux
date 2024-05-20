@@ -6,10 +6,10 @@
  */
 
 import type { ProTableColumn } from '../types'
-import type { VKey } from '@idux/cdk/utils'
 
-import { type PropType, defineComponent, inject } from 'vue'
+import { type PropType, computed, defineComponent, inject } from 'vue'
 
+import { type VKey, getTreeKeys } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 import { IxTree, type TreeDragDropOptions, type TreeProps } from '@idux/components/tree'
 
@@ -35,9 +35,21 @@ export default defineComponent({
   setup(props) {
     const { locale, mergedPrefixCls } = inject(proTableToken)!
 
+    const columnKeys = computed(
+      () =>
+        new Set(
+          getTreeKeys(
+            props.columns as (ProTableColumn & { children?: ProTableColumn[] })[],
+            'children',
+            data => data.key!,
+            true,
+          ),
+        ),
+    )
+
     const onCheckedChange = (checkedKeys: VKey[]) => {
       const visibleKeySet = new Set(checkedKeys)
-      const oldVisibleKeys = new Set(props.checkedKeys)
+      const oldVisibleKeys = new Set(props.checkedKeys.filter(key => columnKeys.value.has(key)))
 
       checkedKeys.forEach(key => {
         if (oldVisibleKeys.has(key)) {
