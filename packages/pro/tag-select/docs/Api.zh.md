@@ -49,6 +49,7 @@ interface TagSelectColor {
   name: string
   labelColor: string
   backgroundColor: string
+  indicatorColor?: string
   borderColor?: string
 }
 
