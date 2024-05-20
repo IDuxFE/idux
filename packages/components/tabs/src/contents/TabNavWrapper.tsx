@@ -43,7 +43,13 @@ export default defineComponent({
     const operationsRef = shallowRef<HTMLElement>()
     const selectedNavRef = shallowRef<HTMLElement>()
 
-    const { selectedNavSize, selectedNavOffset } = useSelectedNav(tabsProps, selectedNavRef, isHorizontal, closedKeys)
+    const { selectedNavSize, selectedNavOffset } = useSelectedNav(
+      tabsProps,
+      selectedNavRef,
+      isHorizontal,
+      closedKeys,
+      navAttrs,
+    )
     const { hasScroll, scrolledStart, scrolledEnd, pre, next } = useNavListScroll(
       navListRef,
       navListInnerRef,
