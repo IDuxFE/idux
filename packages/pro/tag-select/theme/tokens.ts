@@ -10,7 +10,10 @@ export interface ProTagSelectThemeTokens {
    * @desc 预设灰色文字色
    */
   presetColorGreyLabel: string
-
+  /**
+   * @desc 预设灰色颜色指示圆圈色
+   */
+  presetColorGreyIndicator: string
   /**
    * @desc 预设灰色背景色
    */
@@ -20,7 +23,10 @@ export interface ProTagSelectThemeTokens {
    * @desc 预设绿色文字色
    */
   presetColorGreenLabel: string
-
+  /**
+   * @desc 预设绿色颜色指示圆圈色
+   */
+  presetColorGreenIndicator: string
   /**
    * @desc 预设绿色背景色
    */
@@ -30,7 +36,10 @@ export interface ProTagSelectThemeTokens {
    * @desc 预设蓝色文字色
    */
   presetColorBlueLabel: string
-
+  /**
+   * @desc 预设蓝色颜色指示圆圈色
+   */
+  presetColorBlueIndicator: string
   /**
    * @desc 预设蓝色背景色
    */
@@ -40,7 +49,10 @@ export interface ProTagSelectThemeTokens {
    * @desc 预设黄色文字色
    */
   presetColorYellowLabel: string
-
+  /**
+   * @desc 预设黄色颜色指示圆圈色
+   */
+  presetColorYellowIndicator: string
   /**
    * @desc 预设黄色背景色
    */
@@ -50,7 +62,10 @@ export interface ProTagSelectThemeTokens {
    * @desc 预设红色文字色
    */
   presetColorRedLabel: string
-
+  /**
+   * @desc 预设红色颜色指示圆圈色
+   */
+  presetColorRedIndicator: string
   /**
    * @desc 预设红色背景色
    */
@@ -60,7 +75,10 @@ export interface ProTagSelectThemeTokens {
    * @desc 预设橙色文字色
    */
   presetColorOrangeLabel: string
-
+  /**
+   * @desc 预设橙色颜色指示圆圈色
+   */
+  presetColorOrangeIndicator: string
   /**
    * @desc 预设橙色背景色
    */
