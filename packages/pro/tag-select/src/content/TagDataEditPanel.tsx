@@ -10,6 +10,8 @@ import type { TagSelectColor } from '../types'
 
 import { type PropType, defineComponent, inject, onMounted, ref, watch } from 'vue'
 
+import { useState } from '@idux/cdk/utils'
+import { IxFormItem } from '@idux/components/form'
 import { IxIcon } from '@idux/components/icon'
 import { type InputInstance, IxInput } from '@idux/components/input'
 import { useThemeToken } from '@idux/pro/theme'
@@ -19,9 +21,11 @@ import { proTagSelectContext } from '../token'
 export default defineComponent({
   props: {
     data: { type: Object as PropType<MergedTagData>, required: true },
+    visible: Boolean,
   },
   setup(props) {
     const {
+      props: proTagSelectProps,
       locale,
       mergedPrefixCls,
       mergedTagSelectColors,
@@ -37,9 +41,26 @@ export default defineComponent({
     const { globalHashId, hashId } = useThemeToken('proTagSelect')
 
     const inputRef = ref<InputInstance>()
+    const [inputValue, setInputValue] = useState('')
+    const [inputValidateError, setInputValidateError] = useState<string | undefined>(undefined)
+    watch(
+      [() => props.visible, () => props.data.label],
+      () => {
+        setInputValue(props.data.label)
+      },
+      {
+        immediate: true,
+      },
+    )
 
     const handleInputChange = (input: string) => {
-      handleTagDataLabelInput(input, props.data)
+      setInputValue(input)
+      const validateError = proTagSelectProps.tagLabelValidator?.(input)
+      setInputValidateError(validateError)
+
+      if (!validateError) {
+        handleTagDataLabelInput(input, props.data)
+      }
     }
 
     const handleDeleteClick = () => {
@@ -99,13 +120,20 @@ export default defineComponent({
       return (
         <div class={[prefixCls, globalHashId.value, hashId.value]} onMousedown={handlePanelMousedown}>
           <div class={`${prefixCls}-input`}>
-            <IxInput
-              ref={inputRef}
-              class={`${prefixCls}-input-inner`}
-              value={props.data.label}
-              size="sm"
-              onChange={handleInputChange}
-            />
+            <IxFormItem
+              messageTooltip
+              message={inputValidateError.value}
+              status={inputValidateError.value ? 'invalid' : 'valid'}
+            >
+              <IxInput
+                ref={inputRef}
+                class={`${prefixCls}-input-inner`}
+                value={inputValue.value}
+                size="sm"
+                status={inputValidateError.value ? 'invalid' : 'valid'}
+                onChange={handleInputChange}
+              />
+            </IxFormItem>
           </div>
           <div class={`${prefixCls}-delete`} onClick={handleDeleteClick}>
             <IxIcon class={`${prefixCls}-delete-icon`} name="delete" />

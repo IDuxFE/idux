@@ -8,7 +8,7 @@
 import type { OperationsContext } from './composables/useOperations'
 import type { OverlayStateContext } from './composables/useOverlayState'
 import type { PanelActiveStateContext } from './composables/usePanelActiveState'
-import type { MergedTagData, TagDataContext } from './composables/useTagData'
+import type { TagDataContext } from './composables/useTagData'
 import type { TagEditContext } from './composables/useTagEdit'
 import type { ProTagSelectProps, TagSelectColor } from './types'
 import type { VKey } from '@idux/cdk/utils'
@@ -28,10 +28,7 @@ export interface ProTagSelectContext
   focus: (options?: FocusOptions) => void
   mergedTagSelectColors: ComputedRef<TagSelectColor[]>
   selectedValue: ComputedRef<VKey[] | undefined>
-  mergedData: ComputedRef<MergedTagData[]>
   maxExceeded: ComputedRef<boolean>
-  inputValue: ComputedRef<string | undefined>
-  inputFullyMatched: ComputedRef<boolean>
   mergedPrefixCls: ComputedRef<string>
   locale: ProTagSelectLocale
 }

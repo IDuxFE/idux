@@ -31,6 +31,7 @@
 | `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | - | - |
 | `status` | 手动指定校验状态 | `valid \| invalid \| validating` | - | - | - |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | `down` | - | - |
+| `tagLabelValidator` | 标签创建或编辑的输入校验 | `(input: string) => string \| undefined` | - | 返回非空 `string` 为校验不合法，返回为提示信息 |
 | `onClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - | - | - |
 | `onChange` | 选中值发生改变后的回调 | `(value: (string \| number \| symbol)[] \| undefined, oldValue: (string \| number \| symbol)[] \| undefined) => void` | - | - | - |
 | `onFocus` | 获取焦点后的回调 | `(evt: FocusEvent) => void` | - | - | - |
@@ -66,6 +67,7 @@ interface TagSelectData {
 
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
+| `alert` | 自定义告警提示 | `{ input: string, inputValidateError: string \| undefined }` | - |
 | `clearIcon` | 自定义清除图标 | - | - |
 | `suffix` | 自定义选择框的后缀 | - | - |
 | `selectedLabel` | 自定义选中标签的文本内容 | `TagSelectData` | - |
