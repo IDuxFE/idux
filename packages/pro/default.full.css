@@ -79,16 +79,22 @@
 /* ------ pro-tag-select css variables ------ */
 :root {
   --ix-pro-tag-select-preset-color-grey-label: #a1a7b3;
+  --ix-pro-tag-select-preset-color-grey-indicator: #e1e5eb;
   --ix-pro-tag-select-preset-color-grey-bg: rgb(246, 246, 247);
-  --ix-pro-tag-select-preset-color-green-label: #39c317;
-  --ix-pro-tag-select-preset-color-green-bg: rgb(235, 249, 232);
+  --ix-pro-tag-select-preset-color-green-label: #20cc94;
+  --ix-pro-tag-select-preset-color-green-indicator: rgb(188, 240, 223);
+  --ix-pro-tag-select-preset-color-green-bg: rgb(233, 250, 244);
   --ix-pro-tag-select-preset-color-blue-label: #1c6eff;
+  --ix-pro-tag-select-preset-color-blue-indicator: rgb(187, 212, 255);
   --ix-pro-tag-select-preset-color-blue-bg: rgb(232, 241, 255);
   --ix-pro-tag-select-preset-color-yellow-label: #f8d81a;
+  --ix-pro-tag-select-preset-color-yellow-indicator: rgb(253, 243, 186);
   --ix-pro-tag-select-preset-color-yellow-bg: rgb(254, 251, 232);
   --ix-pro-tag-select-preset-color-red-label: #f52727;
+  --ix-pro-tag-select-preset-color-red-indicator: rgb(252, 190, 190);
   --ix-pro-tag-select-preset-color-red-bg: rgb(254, 233, 233);
   --ix-pro-tag-select-preset-color-orange-label: #fa721b;
+  --ix-pro-tag-select-preset-color-orange-indicator: rgb(254, 213, 187);
   --ix-pro-tag-select-preset-color-orange-bg: rgb(255, 241, 232);
   --ix-pro-tag-select-color-indicator-size: 12px;
   --ix-pro-tag-select-panel-max-height: 256px;

@@ -15,8 +15,9 @@ export function getDefaultThemeTokens(
   const { colorContainerBg, tagCompColorAlpha } = tokens
   const { getBaseColors, getGreyColors } = algrithms
 
+  const greyColors = getGreyColors()
   const greyColor = getGreyColors().base
-  const greenColor = getBaseColors().green
+  const greenColor = getBaseColors().turquoise
   const blueColor = getBaseColors().blue
   const yelloColor = getBaseColors().yellow
   const redColor = getBaseColors().red
@@ -24,16 +25,22 @@ export function getDefaultThemeTokens(
 
   return {
     presetColorGreyLabel: greyColor,
+    presetColorGreyIndicator: greyColors.l30,
     presetColorGreyBg: getAlphaColor(greyColor, tagCompColorAlpha, colorContainerBg),
     presetColorGreenLabel: greenColor,
+    presetColorGreenIndicator: getAlphaColor(greenColor, 0.3, colorContainerBg),
     presetColorGreenBg: getAlphaColor(greenColor, tagCompColorAlpha, colorContainerBg),
     presetColorBlueLabel: blueColor,
+    presetColorBlueIndicator: getAlphaColor(blueColor, 0.3, colorContainerBg),
     presetColorBlueBg: getAlphaColor(blueColor, tagCompColorAlpha, colorContainerBg),
     presetColorYellowLabel: yelloColor,
+    presetColorYellowIndicator: getAlphaColor(yelloColor, 0.3, colorContainerBg),
     presetColorYellowBg: getAlphaColor(yelloColor, tagCompColorAlpha, colorContainerBg),
     presetColorRedLabel: redColor,
+    presetColorRedIndicator: getAlphaColor(redColor, 0.3, colorContainerBg),
     presetColorRedBg: getAlphaColor(redColor, tagCompColorAlpha, colorContainerBg),
     presetColorOrangeLabel: orangeColor,
+    presetColorOrangeIndicator: getAlphaColor(orangeColor, 0.3, colorContainerBg),
     presetColorOrangeBg: getAlphaColor(orangeColor, tagCompColorAlpha, colorContainerBg),
     colorIndicatorSize: 12,
     panelMaxHeight: 256,

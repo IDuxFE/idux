@@ -60,7 +60,7 @@ export default defineComponent({
         [`${colorItemPrefixCls}-selected`]: isSelected,
       }
       const colorIndicatorStyle = {
-        background: color.backgroundColor,
+        background: color.indicatorColor ?? color.backgroundColor,
       }
       const handleClick = () => {
         handleTagDataColorChange(color.key, props.data)
