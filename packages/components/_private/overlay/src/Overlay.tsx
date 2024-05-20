@@ -151,7 +151,7 @@ export default defineComponent({
       return (
         <>
           {trigger}
-          <CdkPortal target={mergedContainer.value} load={visibility.value}>
+          <CdkPortal target={mergedContainer.value} load={props.lazy ? visibility.value : true}>
             <Transition appear name={props.transitionName} onAfterLeave={onAfterLeave}>
               {content}
             </Transition>

@@ -174,6 +174,7 @@ export default defineComponent({
         class={overlayClasses.value}
         style={overlayStyle.value}
         visible={overlayOpened.value}
+        lazy={props.overlayLazy}
         trigger="manual"
         v-slots={{ default: renderTrigger, content: renderContent }}
       />

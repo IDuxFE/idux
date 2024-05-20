@@ -190,6 +190,7 @@ export default defineComponent({
         clearable: props.clearable,
         clearIcon: props.clearIcon,
         disabled: accessor.disabled || props.readonly,
+        overlayLazy: false,
         readonly: props.readonly,
         value: selectedValue.value,
         open: overlayOpened.value,

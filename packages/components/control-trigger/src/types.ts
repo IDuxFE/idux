@@ -24,6 +24,7 @@ export const controlTriggerProps = {
     default: undefined,
   },
   overlayContainerFallback: String,
+  overlayLazy: { type: Boolean, default: true },
   overlayMatchWidth: { type: [Boolean, String] as PropType<boolean | 'minWidth'>, default: undefined },
 
   // events
@@ -35,6 +36,10 @@ export const controlTriggerProps = {
 
 export const controlTrigglerOverlayProps = {
   visible: {
+    type: Boolean,
+    default: undefined,
+  },
+  lazy: {
     type: Boolean,
     default: undefined,
   },
