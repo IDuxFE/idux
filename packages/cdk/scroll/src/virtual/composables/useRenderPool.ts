@@ -91,26 +91,9 @@ export function useRenderPool(
 
     updated = !!inactiveKeys.size
 
-    const poolKeyMap = new Map(items.map(item => [item.itemKey, item.key]))
+    const poolMap = new Map(items.map(item => [item.itemKey, item]))
     const poolKeySet = new Set(items.map(item => item.key))
     const newlyAppendedItems: { item: unknown; index: number; itemKey: VKey }[] = []
-
-    for (let index = start; index <= end; index++) {
-      const item = data[index]
-      if (!item) {
-        continue
-      }
-
-      const itemKey = getKey.value(item)
-      const existedPoolItemKey = poolKeyMap.get(itemKey)
-
-      // item still active, continue
-      if (!isNil(existedPoolItemKey) && !inactiveKeys.has(existedPoolItemKey)) {
-        continue
-      }
-
-      newlyAppendedItems.push({ item, index, itemKey })
-    }
 
     const updatePoolItem = (poolItem: PoolItem, item: unknown, index: number, itemKey: VKey) => {
       poolItem.item = item
@@ -124,6 +107,24 @@ export function useRenderPool(
       if (!poolKeySet.has(poolItem.key)) {
         items.push(poolItem)
       }
+    }
+
+    for (let index = start; index <= end; index++) {
+      const item = data[index]
+      if (!item) {
+        continue
+      }
+
+      const itemKey = getKey.value(item)
+      const existedPoolItem = poolMap.get(itemKey)
+
+      // item still active, continue
+      if (!isNil(existedPoolItem) && !inactiveKeys.has(existedPoolItem.key)) {
+        updatePoolItem(existedPoolItem, item, index, itemKey)
+        continue
+      }
+
+      newlyAppendedItems.push({ item, index, itemKey })
     }
 
     let i = 0
