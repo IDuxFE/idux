@@ -50,6 +50,10 @@ export const overlayProps = {
     type: Boolean,
     default: undefined,
   },
+  lazy: {
+    type: Boolean,
+    default: true,
+  },
   offset: Array as unknown as PropType<[number, number]>,
   showArrow: {
     type: Boolean,

@@ -37,6 +37,7 @@ export default defineComponent({
         containerFallback:
           controlTriggerProps.overlayContainerFallback ?? `.${mergedPrefixCls.value}-overlay-container`,
         disabled: controlTriggerProps.disabled || controlTriggerProps.readonly,
+        lazy: props.lazy ?? controlTriggerProps.overlayLazy,
         offset: controlTriggerProps.offset ?? defaultOffset,
         placement: props.placement ?? 'bottomStart',
         showArrow: props.showArrow,
