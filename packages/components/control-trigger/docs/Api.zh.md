@@ -15,6 +15,7 @@
 | `overlayClassName` | 下拉菜单的 `class`  | `string` | - | - | - |
 | `overlayContainer` | 自定义浮层容器节点  | `string \| HTMLElement \| (trigger?: Element) => string \| HTMLElement` | - | - | - |
 | `overlayContainerFallback` | 默认的浮层容器节点class | `string` | - | - | - |
+| `overlayLazy` | 浮层是否懒渲染 | `boolean` | `true` | - | - |
 | `overlayMatchWidth` | 下拉菜单和选择器同宽  | `boolean` | `false` | - | - |
 | `paddingless` | 是否去掉内边距 | `boolean` | `false` | - | - |
 | `placeholder` | 占位符 | `string \| #placeholder` | - | - | - |
