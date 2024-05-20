@@ -246,7 +246,7 @@
   --ix-overlay-arrow-size: 6px;
   --ix-overlay-border-radius: 2px;
   --ix-overlay-border-width: 0;
-  --ix-overlay-border-color: none;
+  --ix-overlay-border-color: transparent;
   --ix-overlay-border-type: solid;
 }
 :root {

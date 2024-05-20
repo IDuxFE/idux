@@ -246,7 +246,7 @@
   --ix-overlay-arrow-size: 6px;
   --ix-overlay-border-radius: 2px;
   --ix-overlay-border-width: 0;
-  --ix-overlay-border-color: none;
+  --ix-overlay-border-color: transparent;
   --ix-overlay-border-type: solid;
 }
 :root {
@@ -316,7 +316,7 @@
   --ix-back-top-bg-color: #ffffff;
   --ix-back-top-border-width: 0;
   --ix-back-top-border-type: solid;
-  --ix-back-top-border-color: none;
+  --ix-back-top-border-color: transparent;
 }
 
 /* ------ badge css variables ------ */
@@ -542,7 +542,7 @@
     0 -9px 28px 0 rgba(0, 0, 0, 0.05), 0 -12px 48px 16px rgba(0, 0, 0, 0.03);
   --ix-drawer-border-width: 0;
   --ix-drawer-border-type: solid;
-  --ix-drawer-border-color: none;
+  --ix-drawer-border-color: transparent;
 }
 
 /* ------ dropdown css variables ------ */
@@ -668,7 +668,7 @@
   --ix-message-font-size: 14px;
   --ix-message-border-width: 0;
   --ix-message-border-type: solid;
-  --ix-message-border-color: none;
+  --ix-message-border-color: transparent;
   --ix-message-content-min-width: 128px;
   --ix-message-content-max-width: 480px;
   --ix-message-content-padding-vertical: 8px;
@@ -697,7 +697,7 @@
   --ix-notification-max-width: calc(100vw - 48px);
   --ix-notification-border-width: 0;
   --ix-notification-border-type: solid;
-  --ix-notification-border-color: none;
+  --ix-notification-border-color: transparent;
   --ix-notification-font-size: 14px;
   --ix-notification-bg-color: #ffffff;
   --ix-notification-border-radius: 2px;
