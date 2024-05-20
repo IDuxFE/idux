@@ -94,8 +94,8 @@ export function useSelectable(
   })
 
   const currentPageAllSelectState = computed(() => {
-    let checked = true
-    let allSelected = true
+    let checked = !!paginatedMap.value.size
+    let allSelected = !!paginatedMap.value.size
     let someSelected = false
 
     for (const key of paginatedMap.value.keys()) {
