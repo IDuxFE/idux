@@ -146,7 +146,7 @@ const createRecordGroup = (record: Data) => {
 
 const nameValidator = (value: string, control: AbstractControl): ValidateErrors | undefined => {
   const currentEditKey = control.parent?.get('key')?.getValue()
-  if(currentEditKey === undefined){
+  if (currentEditKey === undefined) {
     return undefined
   }
 
@@ -185,7 +185,7 @@ const nameValidator = (value: string, control: AbstractControl): ValidateErrors 
 
 const sidValidator = (value: string, control: AbstractControl): ValidateErrors | undefined => {
   const gender = control.parent?.get('gender')?.getValue()
-  if(gender === undefined){
+  if (gender === undefined) {
     return undefined
   }
   console.log(`value is ${value}`)
@@ -246,7 +246,10 @@ const onSave = (record: Data) => {
       const copyData = [...data.value]
       const targetIndex = copyData.findIndex(item => item.key === record.key)
 
-      copyData.splice(targetIndex, 1, {...formValue, key: formValue.key.startsWith(addKeyPrefix) ? uniqueId('ADDED') : formValue.key})
+      copyData.splice(targetIndex, 1, {
+        ...formValue,
+        key: formValue.key.startsWith(addKeyPrefix) ? uniqueId('ADDED') : formValue.key,
+      })
       data.value = copyData
       success(`${formValue.name} saved successfully`)
       formGroup.removeControl(record.key as never)
@@ -316,7 +319,7 @@ const onSaveAll = () => {
         const result = newItem ? newItem : item
         return {
           ...result,
-          key: result.key.startsWith(addKeyPrefix) ? uniqueId('ADDED') : result.key
+          key: result.key.startsWith(addKeyPrefix) ? uniqueId('ADDED') : result.key,
         }
       })
       records.forEach(record => formGroup.removeControl(record.key as never))
