@@ -70,7 +70,7 @@ export function createSelectSegment(
     name: 'select',
     inputClassName: [`${prefixCls}-select-segment-input`],
     containerClassName: [`${prefixCls}-select-segment-container`],
-    parse: input => parseInput(input, config, locale.allSelected),
+    parse: (input, _, getCacheData) => parseInput(input, config, locale.allSelected, getCacheData),
     format: (value, states, getCacheData, setCacheData) =>
       formatValue(value, states, getCacheData, setCacheData, config, locale.allSelected),
     panelRenderer,
@@ -81,14 +81,18 @@ function parseInput(
   input: string,
   config: SelectSearchField['fieldConfig'],
   allSelected: string,
+  getCacheData: (dataKey: string) => any,
 ): VKey | VKey[] | undefined {
   const { concludeAllSelected, separator, dataSource, multiple } = config
   const trimedInput = input.trim()
 
+  const cachedData = getCacheData(dataSourceCacheKey)
+  const mergedDataSource = cachedData ? mergeData(cachedData, dataSource) : dataSource
+
   const keys =
     concludeAllSelected && trimedInput === allSelected
-      ? dataSource.map(data => data.key)
-      : getKeyByLabels(dataSource, trimedInput.split(separator ?? defaultSeparator))
+      ? mergedDataSource.map(data => data.key)
+      : getKeyByLabels(mergedDataSource, trimedInput.split(separator ?? defaultSeparator))
 
   return multiple ? (keys.length > 0 ? keys : undefined) : keys[0]
 }
