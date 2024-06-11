@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/IDuxFE/idux/compare/v2.2.1...v2.2.2) (2024-06-11)
+
+
+### Bug Fixes
+
+* **pro:search:** selecting option after remote search overides value ([#1935](https://github.com/IDuxFE/idux/issues/1935)) ([708f1f7](https://github.com/IDuxFE/idux/commit/708f1f76beaa6efac2f2cd8e094229b8172db07d))
+
+
+
+
+
 ## [2.2.1](https://github.com/IDuxFE/idux/compare/v2.2.0...v2.2.1) (2024-05-20)
 
 

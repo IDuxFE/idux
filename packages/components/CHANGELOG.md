@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/IDuxFE/idux/compare/v2.2.1...v2.2.2) (2024-06-11)
+
+
+### Bug Fixes
+
+* **comp:table:** select all check state isn't displayed correctly ([#1936](https://github.com/IDuxFE/idux/issues/1936)) ([d1fb275](https://github.com/IDuxFE/idux/commit/d1fb2758516a537498af520076b491605dd1e1e4))
+* **comp:table:** selection should not be emptied after dataSource change ([#1938](https://github.com/IDuxFE/idux/issues/1938)) ([aa97b68](https://github.com/IDuxFE/idux/commit/aa97b68fba18f854a8b093d052b8463ea4c98db0))
+
+
+
+
+
 ## [2.2.1](https://github.com/IDuxFE/idux/compare/v2.2.0...v2.2.1) (2024-05-20)
 
 

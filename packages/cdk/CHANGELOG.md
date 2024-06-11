@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/IDuxFE/idux/compare/v2.2.1...v2.2.2) (2024-06-11)
+
+
+### Bug Fixes
+
+* **cdk:virtual:** items render incorrectly after datasource change ([#1937](https://github.com/IDuxFE/idux/issues/1937)) ([2511d1a](https://github.com/IDuxFE/idux/commit/2511d1aa3c42b320a88313ccdff231f8654c760f))
+
+
+
+
+
 ## [2.2.1](https://github.com/IDuxFE/idux/compare/v2.2.0...v2.2.1) (2024-05-20)
 
 
