@@ -62,27 +62,7 @@ export function useTreeCheckStateResolver<V extends TreeTypeData<V, C>, C extend
       return dataOrContext
     }
 
-    const dataMap = new Map<VKey, V>()
-    const parentKeyMap = new Map<VKey, VKey>()
-    const depthMap = new Map<VKey, number>()
-
-    traverseTree(dataOrContext, childrenKey.value, (item, parents) => {
-      const key = getKey.value(item)
-      const parent = parents[0]
-      dataMap.set(key, item)
-      depthMap.set(key, parents.length)
-
-      if (parent) {
-        parentKeyMap.set(key, getKey.value(parent))
-      }
-    })
-
-    return {
-      data: dataOrContext,
-      dataMap,
-      parentKeyMap,
-      depthMap,
-    }
+    return getTreeCheckStateResolverContext(dataOrContext, childrenKey.value, getKey.value)
   }
 
   const mergedCascadeStrategy = computed(() => cascadeStrategy?.value ?? 'all')
@@ -278,5 +258,33 @@ export function useTreeCheckStateResolver<V extends TreeTypeData<V, C>, C extend
     removeKeys,
     getAllCheckedKeys,
     getAllUncheckedKeys,
+  }
+}
+
+export function getTreeCheckStateResolverContext<V extends TreeTypeData<V, C>, C extends keyof V>(
+  data: V[],
+  childrenKey: C,
+  getKey: (item: V) => VKey,
+): TreeCheckStateResolverContext<V, C> {
+  const dataMap = new Map<VKey, V>()
+  const parentKeyMap = new Map<VKey, VKey>()
+  const depthMap = new Map<VKey, number>()
+
+  traverseTree(data, childrenKey, (item, parents) => {
+    const key = getKey(item)
+    const parent = parents[0]
+    dataMap.set(key, item)
+    depthMap.set(key, parents.length)
+
+    if (parent) {
+      parentKeyMap.set(key, getKey(parent))
+    }
+  })
+
+  return {
+    data,
+    dataMap,
+    parentKeyMap,
+    depthMap,
   }
 }

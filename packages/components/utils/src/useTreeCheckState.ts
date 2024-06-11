@@ -7,17 +7,29 @@
 
 import type { CascaderStrategy } from '@idux/components/cascader'
 
-import { type ComputedRef, type Ref, computed } from 'vue'
+import { type ComputedRef, type Ref, computed, ref, watch } from 'vue'
 
-import { isNil } from 'lodash-es'
+import { isArray, isBoolean, isNil, isObject } from 'lodash-es'
 
-import { type TreeTypeData, type VKey } from '@idux/cdk/utils'
+import { type TreeTypeData, type VKey, filterTree, mergeTree } from '@idux/cdk/utils'
 import {
   GetKeyFn,
   type TreeCheckStateResolver,
   type TreeCheckStateResolverContext,
+  getTreeCheckStateResolverContext,
   useTreeCheckStateResolver,
 } from '@idux/components/utils'
+
+interface GetAllCheckedKeys<V extends TreeTypeData<V, C>, C extends keyof V> {
+  (data: V[], cached?: boolean): VKey[]
+  (defaultUnCheckedKeys: VKey[]): VKey[]
+  (data: V[], defaultUnCheckedKeys: VKey[], cached?: boolean): VKey[]
+}
+interface GetAllUncheckedKeys<V extends TreeTypeData<V, C>, C extends keyof V> {
+  (data: V[], cached?: boolean): VKey[]
+  (defaultCheckedKeys: VKey[]): VKey[]
+  (data: V[], defaultCheckedKeys: VKey[], cached?: boolean): VKey[]
+}
 
 export interface TreeCheckStateContext<V extends TreeTypeData<V, C>, C extends keyof V> {
   allCheckedKeySet: ComputedRef<Set<VKey>>
@@ -30,6 +42,8 @@ export interface TreeCheckStateContext<V extends TreeTypeData<V, C>, C extends k
     checked: boolean
     checkedKeys: VKey[]
   }
+  getAllCheckedKeys: GetAllCheckedKeys<V, C>
+  getAllUncheckedKeys: GetAllUncheckedKeys<V, C>
 }
 
 export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof V>(
@@ -40,16 +54,55 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
   cascaderStrategy: Ref<CascaderStrategy>,
   isDisabled: Ref<((data: V) => boolean) | undefined>,
 ): TreeCheckStateContext<V, C> {
-  const checkStateResolver = useTreeCheckStateResolver(resolverContext, childrenKey, getKey, cascaderStrategy)
+  const cachedSelectedData = ref([]) as Ref<V[]>
+  const cachedSelectedDataReolverContext = computed(() =>
+    getTreeCheckStateResolverContext(cachedSelectedData.value, childrenKey.value, getKey.value),
+  )
+
+  const mergedResolverContext = computed(() => {
+    const { data, dataMap, parentKeyMap, depthMap } = resolverContext.value
+    const {
+      data: cachedData,
+      dataMap: cachedDataMap,
+      parentKeyMap: cachedParentMap,
+      depthMap: cachedDepthMap,
+    } = cachedSelectedDataReolverContext.value
+
+    const mergedData = mergeTree(data ?? [], cachedData ?? [], childrenKey.value, getKey.value)
+    const mergedDataMap = new Map(dataMap)
+
+    mergedDataMap.forEach((item, key) => {
+      if (cachedDataMap.has(key)) {
+        const cachedItem = cachedDataMap.get(key)!
+        mergedDataMap.set(key, mergeTree([item], [cachedItem], childrenKey.value, getKey.value)[0])
+        cachedDataMap.delete(key)
+      }
+    })
+    cachedDataMap.forEach((item, key) => {
+      mergedDataMap.set(key, item)
+    })
+
+    const mergedParentKeyMap = new Map([...cachedParentMap, ...parentKeyMap])
+    const mergedDepthMap = new Map([...cachedDepthMap, ...depthMap])
+
+    return {
+      data: mergedData,
+      dataMap: mergedDataMap,
+      parentKeyMap: mergedParentKeyMap,
+      depthMap: mergedDepthMap,
+    }
+  })
+
+  const checkStateResolver = useTreeCheckStateResolver(mergedResolverContext, childrenKey, getKey, cascaderStrategy)
   const allCheckStateResolver = useTreeCheckStateResolver(
-    resolverContext,
+    mergedResolverContext,
     childrenKey,
     getKey,
     computed(() => 'all'),
   )
 
   const checkDisabledKeySet = computed(() => {
-    const { dataMap } = resolverContext.value
+    const { dataMap } = mergedResolverContext.value
     const disabledKeys = new Set<VKey>()
     dataMap.forEach((data, key) => {
       if (isDisabled.value?.(data)) {
@@ -68,7 +121,7 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
   })
 
   const indeterminateKeySet = computed(() => {
-    const { parentKeyMap } = resolverContext.value
+    const { parentKeyMap } = mergedResolverContext.value
     const _checkedKeySet = allCheckedKeySet.value
     if (_checkedKeySet.size === 0 || cascaderStrategy.value === 'off') {
       return new Set<VKey>()
@@ -85,6 +138,12 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
       }
     })
     return keySet
+  })
+
+  watch([checkedKeys, cascaderStrategy], () => {
+    const { data } = mergedResolverContext.value
+    const keySet = allCheckedKeySet.value
+    cachedSelectedData.value = filterTree(data, childrenKey.value, item => keySet.has(getKey.value(item)), 'or')
   })
 
   const isCheckDisabled = (key: VKey) => {
@@ -136,6 +195,48 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
     }
   }
 
+  const resolveAllCheckedFnParams = (data?: V[] | VKey[], defaultKeysOrCached?: VKey[] | boolean, cached?: boolean) => {
+    const dataProvided = ((data?: V[] | VKey[]): data is V[] => isArray(data) && isObject(data?.[0]))(data)
+    const _defaultKeys = (dataProvided ? (isBoolean(defaultKeysOrCached) ? [] : defaultKeysOrCached) : data) ?? []
+    const _cached = dataProvided ? (isBoolean(defaultKeysOrCached) ? defaultKeysOrCached : cached) : undefined
+    const _data = dataProvided
+      ? _cached
+        ? mergeTree(data, cachedSelectedData.value, childrenKey.value, getKey.value)
+        : data
+      : []
+
+    return {
+      dataProvided,
+      data: _data,
+      defaultKeys: _defaultKeys,
+      cached: _cached,
+    }
+  }
+
+  const getAllCheckedKeys = (
+    data?: V[] | VKey[],
+    defaultUnCheckedKeysOrCached?: VKey[] | boolean,
+    cached?: boolean,
+  ) => {
+    const params = resolveAllCheckedFnParams(data, defaultUnCheckedKeysOrCached, cached)
+
+    return params.dataProvided
+      ? checkStateResolver.getAllCheckedKeys(params.data, params.defaultKeys)
+      : checkStateResolver.getAllCheckedKeys(params.defaultKeys)
+  }
+
+  const getAllUncheckedKeys = (
+    data?: V[] | VKey[],
+    defaultCheckedKeysOrCached?: VKey[] | boolean,
+    cached?: boolean,
+  ) => {
+    const params = resolveAllCheckedFnParams(data, defaultCheckedKeysOrCached, cached)
+
+    return params.dataProvided
+      ? checkStateResolver.getAllUncheckedKeys(params.data, params.defaultKeys)
+      : checkStateResolver.getAllCheckedKeys(params.defaultKeys)
+  }
+
   return {
     allCheckedKeySet,
     checkDisabledKeySet,
@@ -144,5 +245,7 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
     isCheckDisabled,
     isIndeterminate,
     toggle,
+    getAllCheckedKeys,
+    getAllUncheckedKeys,
   }
 }
