@@ -10,6 +10,18 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 2.2.2(2024-06-11)
+
+
+### Bug Fixes
+
+* **cdk:virtual:** 当`dataSource`改变时，渲染出的元素不正常，会出现重复 ([#1937](https://github.com/IDuxFE/idux/issues/1937)) ([2511d1a](https://github.com/IDuxFE/idux/commit/2511d1aa3c42b320a88313ccdff231f8654c760f))
+  - 例如：在 `IxProTable` 中，改变显示的列，再向左滚动，会出现重复的列，导致渲染异常
+* **comp:table:** 全选勾选框，在所有的数据都被禁用的时候，不应该展示已勾选的状态 ([#1936](https://github.com/IDuxFE/idux/issues/1936)) ([d1fb275](https://github.com/IDuxFE/idux/commit/d1fb2758516a537498af520076b491605dd1e1e4))
+* **comp:table:** 当`dataSource`改变后，原本选中的列会被清空 ([#1938](https://github.com/IDuxFE/idux/issues/1938)) ([aa97b68](https://github.com/IDuxFE/idux/commit/aa97b68fba18f854a8b093d052b8463ea4c98db0))
+  - 例如：在服务端分页和搜索的场景中，先选中当前页的行或者全选当前页，切页之后再选择某行或全选当前页，会出现上一次选择的数据被清空覆盖的情况
+* **pro:search:** `select`搜索项中， 远程搜索的场景下，搜索过后选中某项数据，会覆盖掉之前选中的数据 ([#1935](https://github.com/IDuxFE/idux/issues/1935)) ([708f1f7](https://github.com/IDuxFE/idux/commit/708f1f76beaa6efac2f2cd8e094229b8172db07d))
+
 ## 2.2.1(2024-05-20)
 
 
