@@ -110,6 +110,10 @@ export function useSelectable(
       }
     }
 
+    if (!allSelected && !someSelected) {
+      checked = false
+    }
+
     return { checked, allSelected, someSelected }
   })
 
@@ -117,7 +121,6 @@ export function useSelectable(
   const currentPageAllSelected = computed(() => currentPageAllSelectState.value.checked)
 
   // 当前页是否部分被选中
-
   const currentPageSomeSelected = computed(
     () => !currentPageAllSelectState.value.allSelected && currentPageAllSelectState.value.someSelected,
   )
