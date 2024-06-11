@@ -26,13 +26,27 @@ const pagination = reactive<TablePagination>({
 })
 
 const loading = ref(false)
+const loadedData = new Map()
 
 const fetchData = async (pageIndex: number, pageSize: number) => {
+  const key = `${pageIndex}-${pageSize}`
+  let results
+
   loading.value = true
 
-  const { results } = await fetch(`https://randomuser.me/api?page=${pageIndex}&results=${pageSize}`).then(res =>
-    res.json(),
-  )
+  if (loadedData.has(key)) {
+    results = await new Promise(resolve => {
+      setTimeout(() => {
+        resolve(loadedData.get(key))
+      }, 200)
+    })
+  } else {
+    ;({ results } = await fetch(`https://randomuser.me/api?page=${pageIndex}&results=${pageSize}`).then(res =>
+      res.json(),
+    ))
+
+    loadedData.set(`${pageIndex}-${pageSize}`, results)
+  }
 
   dataSource.value = results
   pagination.total = 200 // mock the total data here

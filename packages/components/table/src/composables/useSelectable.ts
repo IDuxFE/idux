@@ -78,7 +78,8 @@ export function useSelectable(
     cascaderStrategy,
     isDisabled,
   )
-  const { checkStateResolver, isCheckDisabled, isChecked, isIndeterminate, toggle } = checkStateContext
+  const { isCheckDisabled, isChecked, isIndeterminate, toggle, getAllCheckedKeys, getAllUncheckedKeys } =
+    checkStateContext
 
   const currentPageRowKeys = computed(() => {
     const enabledRowKeys: VKey[] = []
@@ -182,14 +183,16 @@ export function useSelectable(
     const { disabledRowKeys } = currentPageRowKeys.value
     let newSelectedKeys: VKey[]
     if (currentPageAllSelected.value) {
-      newSelectedKeys = checkStateResolver.getAllUncheckedKeys(
+      newSelectedKeys = getAllUncheckedKeys(
         paginatedData.value,
         disabledRowKeys.filter(key => isChecked(key)),
+        true,
       )
     } else {
-      newSelectedKeys = checkStateResolver.getAllCheckedKeys(
+      newSelectedKeys = getAllCheckedKeys(
         paginatedData.value,
         disabledRowKeys.filter(key => !isChecked(key)),
+        true,
       )
     }
 
@@ -263,12 +266,10 @@ function useMenuClickHandle(
   selectedRowKeys: ComputedRef<VKey[]>,
   emitChange: (tempRowKeys: VKey[]) => void,
 ) {
-  const { checkDisabledKeySet, checkStateResolver, isChecked, isCheckDisabled } = checkStateContext
+  const { checkDisabledKeySet, checkStateResolver, getAllCheckedKeys, isChecked, isCheckDisabled } = checkStateContext
   const handleSelectAll = () => {
     const { onSelectAll } = selectable.value || {}
-    const newSelectedKeys = checkStateResolver.getAllCheckedKeys(
-      [...checkDisabledKeySet.value].filter(key => !isChecked(key)),
-    )
+    const newSelectedKeys = getAllCheckedKeys([...checkDisabledKeySet.value].filter(key => !isChecked(key)))
     callEmit(onSelectAll, newSelectedKeys)
     emitChange(newSelectedKeys)
   }
