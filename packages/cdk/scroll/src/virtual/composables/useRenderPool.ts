@@ -81,11 +81,7 @@ export function useRenderPool(
     for (const item of items) {
       if (item.index < start || item.index > end || item.isCustomKey) {
         inactiveKeys.add(item.key)
-
-        // pool items with custom key shouldn't be resused
-        if (!item.isCustomKey) {
-          pool.recyclePoolItem(item)
-        }
+        pool.recyclePoolItem(item)
       }
     }
 
@@ -339,7 +335,10 @@ function createPool(): Pool {
   }
 
   const recyclePoolItem = (poolItem: PoolItem) => {
-    pooledItemMap.set(poolItem.itemKey, poolItem)
+    // pool items with custom key shouldn't be resused
+    if (!poolItem.isCustomKey) {
+      pooledItemMap.set(poolItem.itemKey, poolItem)
+    }
   }
 
   const destroy = () => {
