@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.3](https://github.com/IDuxFE/idux/compare/v2.2.2...v2.2.3) (2024-06-12)
+
+
+### Bug Fixes
+
+* **comp:select:** selector input value should be emptied after blur ([#1941](https://github.com/IDuxFE/idux/issues/1941)) ([502d8ce](https://github.com/IDuxFE/idux/commit/502d8ce6562b4ce0b4c11e03461da3f5764fcb2f))
+* **comp:table:** pagination should render but hide when empty ([#1940](https://github.com/IDuxFE/idux/issues/1940)) ([e2f7a65](https://github.com/IDuxFE/idux/commit/e2f7a65cca8e256e18abf5e13194b28dc1a6da61))
+* **comp:table:** table selection emptyed after data change and select ([#1939](https://github.com/IDuxFE/idux/issues/1939)) ([373b434](https://github.com/IDuxFE/idux/commit/373b434cb4a80d524691331ade0f477bd350e3b6))
+* **comp:tree-select:** panel shakes after scrolling at bottom ([#1942](https://github.com/IDuxFE/idux/issues/1942)) ([2ef737d](https://github.com/IDuxFE/idux/commit/2ef737d32a8d0af2dacde14be72ce2ccf40498bf))
+
+
+
+
+
 ## [2.2.2](https://github.com/IDuxFE/idux/compare/v2.2.1...v2.2.2) (2024-06-11)
 
 
