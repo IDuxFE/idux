@@ -25,11 +25,12 @@ export default defineComponent({
       handleEnterDown,
     } = inject(selectorToken)!
 
+    const innerInputValue = computed(() => (props.allowInput || mergedSearchable.value ? inputValue.value : ''))
     const inputReadonly = computed(
       () => props.readonly || !mergedFocused.value || !(props.allowInput || mergedSearchable.value),
     )
     const innerStyle = computed(() => {
-      return { opacity: inputReadonly.value ? 0 : undefined }
+      return { opacity: inputReadonly.value && !innerInputValue.value ? 0 : undefined }
     })
 
     return () => {
@@ -45,7 +46,7 @@ export default defineComponent({
             autofocus={autofocus}
             disabled={disabled}
             readonly={inputReadonly.value}
-            value={inputValue.value}
+            value={innerInputValue.value}
             onCompositionstart={handleCompositionStart}
             onCompositionend={handleCompositionEnd}
             onKeydown={handleEnterDown}

@@ -115,8 +115,11 @@ export default defineComponent({
       callEmit(props.onFocus, evt)
     }
     const onBlur = (evt: FocusEvent) => {
-      if (props.allowInput && inputValue.value) {
-        changeSelected(inputValue.value)
+      if (inputValue.value) {
+        if (props.allowInput) {
+          changeSelected(inputValue.value)
+        }
+
         clearInput()
       }
 
