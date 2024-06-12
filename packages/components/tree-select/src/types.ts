@@ -88,7 +88,7 @@ export const treeSelectProps = {
     default: undefined,
   },
   virtual: { type: Boolean, default: false },
-  virtualItemHeight: { type: Number, default: undefined },
+  virtualItemHeight: { type: Number, default: 32 },
 
   // events
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<(value: any) => void>>,

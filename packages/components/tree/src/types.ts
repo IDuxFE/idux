@@ -77,7 +77,7 @@ export const treeProps = {
   showLine: { type: Boolean, default: undefined },
   virtual: { type: Boolean, default: false },
   virtualScrollMode: { type: String as PropType<VirtualScrollMode>, default: undefined },
-  virtualItemHeight: { type: Number, default: 28 },
+  virtualItemHeight: { type: Number, default: 32 },
 
   // events
   'onUpdate:checkedKeys': [Function, Array] as PropType<MaybeArray<(keys: any[]) => void>>,
