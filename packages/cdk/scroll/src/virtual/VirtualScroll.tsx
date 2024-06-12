@@ -18,7 +18,7 @@ import {
   watch,
 } from 'vue'
 
-import { Logger, callEmit, useState } from '@idux/cdk/utils'
+import { Logger, callEmit, convertElement, parseSize, useState } from '@idux/cdk/utils'
 
 import { useContainerSize } from './composables/useContainerSize'
 import { useGetKey } from './composables/useGetKey'
@@ -33,7 +33,7 @@ import Row from './contents/Row'
 import { virtualScrollToken } from './token'
 import { type VirtualScrollEnabled, virtualListProps } from './types'
 import { isRowData } from './utils'
-import { CdkScrollbar } from '../scrollbar'
+import { CdkScrollbar, type ScrollBarInstance } from '../scrollbar'
 import { useScroll } from '../useScroll'
 
 export default defineComponent({
@@ -71,16 +71,32 @@ export default defineComponent({
       }
     })
 
-    const horizontalOverflowed = computed(() => containerScrollWidth.value > Math.ceil(containerSize.value.width))
-    const verticalOverflowed = computed(() => containerScrollHeight.value > Math.ceil(containerSize.value.height))
-
     const holderRef = ref<HTMLElement>()
+    const horizontalScrollbarRef = ref<ScrollBarInstance>()
+    const verticalScrollBarRef = ref<ScrollBarInstance>()
     const fillerHorizontalRef = ref<HTMLElement>()
     const fillerVerticalRef = ref<HTMLElement>()
 
     const containerSize = useContainerSize(props, holderRef)
 
     const [scroll, changeScroll] = useState<Scroll>({ top: 0, left: 0 })
+
+    const simulatedScroll = computed(() => {
+      if (props.scrollMode !== 'simulated') {
+        return false
+      }
+
+      const horizontalScrollbarEl = convertElement(horizontalScrollbarRef.value)
+      const verticalScrollbarEl = convertElement(verticalScrollBarRef.value)
+
+      const scrollbarWidth = verticalScrollbarEl ? parseSize(getComputedStyle(verticalScrollbarEl).width) : 0
+      const scrollbarHeight = horizontalScrollbarEl ? parseSize(getComputedStyle(horizontalScrollbarEl).height) : 0
+
+      return {
+        scrollbarWidth,
+        scrollbarHeight,
+      }
+    })
 
     const {
       scrollTop: containerScrollTop,
@@ -91,8 +107,10 @@ export default defineComponent({
       init: initContainerScroll,
       update: updateContainerScroll,
       destroy: destroyContainerScroll,
+      horizontalOverflowed,
+      verticalOverflowed,
     } = useScroll(holderRef, {
-      simulatedScroll: props.scrollMode !== 'native',
+      simulatedScroll: simulatedScroll,
       setContainerScroll: false,
       onScroll: (top, left) => {
         syncScroll({ top, left }, true)
@@ -183,7 +201,11 @@ export default defineComponent({
     onMounted(() => {
       collectSize()
       initContainerScroll()
-      watch([scrollWidth, scrollHeight], () => {
+      watch([scrollWidth, scrollHeight], ([width, height], [oldWidth, oldHeight]) => {
+        if (Math.ceil(width) === Math.ceil(oldWidth) && Math.ceil(height) === Math.ceil(oldHeight)) {
+          return
+        }
+
         nextTick(() => updateContainerScroll())
       })
     })
@@ -246,6 +268,7 @@ export default defineComponent({
           <Holder>{rows}</Holder>
           {props.scrollMode === 'simulated' && (
             <CdkScrollbar
+              ref={verticalScrollBarRef}
               v-show={verticalOverflowed.value}
               containerSize={containerSize.value.height}
               scrollRange={containerScrollHeight.value}
@@ -255,6 +278,7 @@ export default defineComponent({
           )}
           {props.scrollMode === 'simulated' && (
             <CdkScrollbar
+              ref={horizontalScrollbarRef}
               v-show={horizontalOverflowed.value}
               horizontal
               containerSize={containerSize.value.width}

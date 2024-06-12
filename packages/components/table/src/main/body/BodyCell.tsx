@@ -95,7 +95,12 @@ export default defineComponent({
       }
       const { starts, ends } = columnOffsets.value
       const offsets = fixed === 'start' ? starts : ends
-      const fixedOffset = convertCssPixel(offsets[props.column.key].offset)
+      const fixedOffset = convertCssPixel(offsets[props.column.key]?.offset)
+
+      if (isNil(fixedOffset)) {
+        return {}
+      }
+
       return {
         position: 'sticky',
         left: fixed === 'start' ? fixedOffset : undefined,

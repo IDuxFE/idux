@@ -9,6 +9,7 @@ import type { ScrollbarProps } from '../types'
 
 import { type ComputedRef, type Ref, computed, onBeforeUnmount, onMounted } from 'vue'
 
+import { useResizeObserver } from '@idux/cdk/resize'
 import { callEmit, cancelRAF, rAF, useEventListener, useState } from '@idux/cdk/utils'
 
 export interface ScrollbarStateContext {
@@ -23,10 +24,17 @@ export function useScrollbarState(
   scrollbarRef: Ref<HTMLElement | undefined>,
   thumbRef: Ref<HTMLElement | undefined>,
 ): ScrollbarStateContext {
-  const thumbSize = computed(() => getThumbSize(props.thumbMinSize, props.containerSize, props.scrollRange))
+  const [scrollbarSize, setScrollbarSize] = useState(0)
+  useResizeObserver(scrollbarRef, ({ contentRect }) => {
+    setScrollbarSize(props.horizontal ? contentRect.width : contentRect.height)
+  })
+
+  const thumbSize = computed(() =>
+    getThumbSize(props.thumbMinSize, scrollbarSize.value, props.containerSize, props.scrollRange),
+  )
 
   const enabledScrollRange = computed(() => Math.max(props.scrollRange - props.containerSize, 0))
-  const enabledOffsetRange = computed(() => Math.max(props.containerSize - thumbSize.value, 0))
+  const enabledOffsetRange = computed(() => Math.max(scrollbarSize.value - thumbSize.value, 0))
   const offset = computed(() => {
     if (props.scrollOffset === 0 || enabledOffsetRange.value === 0) {
       return 0
@@ -114,12 +122,12 @@ function getPageXY(evt: MouseEvent | TouchEvent, horizontal: boolean) {
   return pageData[horizontal ? 'pageX' : 'pageY']
 }
 
-function getThumbSize(thumbMinSize: number, containerSize = 0, scrollRange = 0) {
-  let baseSize = (containerSize / scrollRange) * containerSize
+function getThumbSize(thumbMinSize: number, scrollbarSize: number, containerSize = 0, scrollRange = 0) {
+  let baseSize = (containerSize / scrollRange) * scrollbarSize
   if (isNaN(baseSize)) {
     baseSize = 0
   }
   baseSize = Math.max(baseSize, thumbMinSize)
-  baseSize = Math.min(baseSize, containerSize / 2)
+  baseSize = Math.min(baseSize, scrollbarSize)
   return Math.floor(baseSize)
 }
