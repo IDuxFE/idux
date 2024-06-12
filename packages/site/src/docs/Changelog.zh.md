@@ -10,6 +10,18 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 2.2.3(2024-06-12)
+
+
+### Bug Fixes
+
+* **comp:select:** 在失焦之后，选择框中的输入内容应当清空 ([#1941](https://github.com/IDuxFE/idux/issues/1941)) ([502d8ce](https://github.com/IDuxFE/idux/commit/502d8ce6562b4ce0b4c11e03461da3f5764fcb2f))
+  - 单选场景下，在配置了searchable之后，在选择框中输入搜索内容，失焦之后输入的内容没有清空并且input元素遮挡了选中的内容
+* **comp:table:** 分页器在数据为空的时候应当渲染，但通过v-show隐藏 ([#1940](https://github.com/IDuxFE/idux/issues/1940)) ([e2f7a65](https://github.com/IDuxFE/idux/commit/e2f7a65cca8e256e18abf5e13194b28dc1a6da61))
+  - 当数据为空时，默认不渲染分页，导致数据改变后分页组件的事件没有正常触发
+* **comp:table:** 当`dataSource`改变后，同时点击选择新加载的数据列，原本选中的列会被清空 ([#1939](https://github.com/IDuxFE/idux/issues/1939)) ([373b434](https://github.com/IDuxFE/idux/commit/373b434cb4a80d524691331ade0f477bd350e3b6))
+* **comp:tree-select:** 开启虚拟滚动之后，滚动到底部面板会抖动 ([#1942](https://github.com/IDuxFE/idux/issues/1942)) ([2ef737d](https://github.com/IDuxFE/idux/commit/2ef737d32a8d0af2dacde14be72ce2ccf40498bf))
+
 ## 2.2.2(2024-06-11)
 
 
