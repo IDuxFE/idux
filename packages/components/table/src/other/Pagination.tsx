@@ -17,6 +17,7 @@ export function renderPagination(
   slots: Slots,
   mergedPagination: TablePagination | null,
   filteredData: MergedData[],
+  visible: boolean,
   prefixCls: string,
 ): [VNodeChild | null, VNodeChild | null] {
   let top: VNodeChild | null = null
@@ -28,7 +29,7 @@ export function renderPagination(
     const className = `${prefixCls}-pagination ${prefixCls}-pagination-${horizontal}`
 
     const node = slots.pagination?.({ total: filteredData.length, ...mergedPagination }) ?? (
-      <IxPagination class={className} total={filteredData.length} {...mergedPagination} />
+      <IxPagination v-show={visible} class={className} total={filteredData.length} {...mergedPagination} />
     )
 
     top = vertical === 'top' ? node : null
