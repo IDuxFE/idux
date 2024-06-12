@@ -186,25 +186,21 @@ export default defineComponent({
       const header = <ɵHeader v-slots={slots} header={props.header} />
       const footer = renderFooter(slots, prefixCls)
 
+      const [paginationTop, paginationBottom] = renderPagination(
+        slots,
+        mergedPagination.value,
+        filteredData.value,
+        flattedData.value.length > 0,
+        prefixCls,
+      )
       const children = [header]
-      let resetChildren = [<MainTable />, footer].filter(Boolean) as VNode[]
-
-      if (flattedData.value.length > 0) {
-        const [paginationTop, paginationBottom] = renderPagination(
-          slots,
-          mergedPagination.value,
-          filteredData.value,
-          prefixCls,
-        )
-
-        resetChildren = [paginationTop, ...resetChildren, paginationBottom].filter(Boolean) as VNode[]
-      }
+      const restChildren = [paginationTop, <MainTable />, footer, paginationBottom].filter(Boolean) as VNode[]
 
       const spinProps = convertSpinProps(props.spin)
       if (spinProps) {
-        children.push(<IxSpin {...spinProps}>{resetChildren}</IxSpin>)
+        children.push(<IxSpin {...spinProps}>{restChildren}</IxSpin>)
       } else {
-        children.push(...resetChildren)
+        children.push(...restChildren)
       }
       return <div class={classes.value}>{children}</div>
     }
