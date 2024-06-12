@@ -70,15 +70,16 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
 
     const mergedData = mergeTree(data ?? [], cachedData ?? [], childrenKey.value, getKey.value)
     const mergedDataMap = new Map(dataMap)
+    const _cachedDataMap = new Map(cachedDataMap)
 
     mergedDataMap.forEach((item, key) => {
-      if (cachedDataMap.has(key)) {
-        const cachedItem = cachedDataMap.get(key)!
+      if (_cachedDataMap.has(key)) {
+        const cachedItem = _cachedDataMap.get(key)!
         mergedDataMap.set(key, mergeTree([item], [cachedItem], childrenKey.value, getKey.value)[0])
-        cachedDataMap.delete(key)
+        _cachedDataMap.delete(key)
       }
     })
-    cachedDataMap.forEach((item, key) => {
+    _cachedDataMap.forEach((item, key) => {
       mergedDataMap.set(key, item)
     })
 
