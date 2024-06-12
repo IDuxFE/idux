@@ -20,6 +20,7 @@ export default defineComponent({
     const {
       flattedColumns,
       flattedColumnsWithScrollBar,
+      columnWidthMap,
       measuredColumnWidthMap,
       mergedSelectableMenus,
       mergedPrefixCls,
@@ -47,7 +48,9 @@ export default defineComponent({
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const { key, type } = column
-        const mergedWidth = props.isFixedHolder ? measuredColumnWidthMap.value[key] ?? column.width : column.width
+        const mergedWidth = props.isFixedHolder
+          ? measuredColumnWidthMap.value[key] ?? columnWidthMap.value.get(key)
+          : columnWidthMap.value.get(key)
         const className = type
           ? normalizeClass({
               [`${prefixCls}-col-${type}`]: true,

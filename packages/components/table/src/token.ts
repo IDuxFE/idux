@@ -41,6 +41,7 @@ export interface TableContext
   locale: Locale
   getVirtualColWidth: (rowKey: VKey, colKey: VKey) => number | undefined
   clientWidth: ComputedRef<number>
+  columnWidthMap: ComputedRef<Map<VKey, number | string | undefined>>
   setClientWidth: (clientWidth: number) => void
   mergedPrefixCls: ComputedRef<string>
   mergedAutoHeight: ComputedRef<boolean>
