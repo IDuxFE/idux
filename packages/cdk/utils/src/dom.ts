@@ -167,10 +167,10 @@ export function getMouseClientXY(evt: MouseEvent | TouchEvent): { clientX: numbe
   return { clientX, clientY }
 }
 
-function parseSize(size: string): number {
+export function parseSize(size: string, fallback = 0): number {
   const parsedSize = parseFloat(size)
 
-  return Number.isNaN(parsedSize) ? 0 : parsedSize
+  return Number.isNaN(parsedSize) ? fallback : parsedSize
 }
 
 export function getCssDimensions(element: HTMLElement): Dimensions & { fallback: boolean } {

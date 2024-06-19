@@ -16,7 +16,7 @@ import {
   normalizeClass,
 } from 'vue'
 
-import { isFunction, isObject, isString } from 'lodash-es'
+import { isFunction, isNil, isObject, isString } from 'lodash-es'
 
 import { NoopArray, type VKey, convertCssPixel } from '@idux/cdk/utils'
 
@@ -96,7 +96,11 @@ export default defineComponent({
       }
       const { starts, ends } = columnOffsetsWithScrollBar.value
       const offsets = Object.values(fixed === 'start' ? starts : ends)
-      const offsetIndex = offsetIndexMap[key][fixed === 'start' ? 'colStart' : 'colEnd']
+      const offsetIndex = offsetIndexMap[key]?.[fixed === 'start' ? 'colStart' : 'colEnd']
+
+      if (isNil(offsetIndex)) {
+        return {}
+      }
 
       const fixedOffset = convertCssPixel(offsets.find(offset => offset.index === offsetIndex)?.offset)
       return {

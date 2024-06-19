@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type Ref, ref } from 'vue'
+import { type Ref, computed, isRef, ref } from 'vue'
 
 import { isNil } from 'lodash-es'
 
@@ -26,6 +26,10 @@ export interface ScrollContext {
   scrollLeft: Ref<number>
   scrollHeight: Ref<number>
   scrollWidth: Ref<number>
+  containerHeight: Ref<number>
+  containerWidth: Ref<number>
+  horizontalOverflowed: Ref<boolean>
+  verticalOverflowed: Ref<boolean>
 
   syncScroll: (option: { top?: number; left?: number }, setContainerScroll?: boolean) => { top: number; left: number }
   init: () => void
@@ -33,10 +37,21 @@ export interface ScrollContext {
   destroy: () => void
 }
 
+export interface SimulatedScrollOptions {
+  scrollbarWidth: number
+  scrollbarHeight: number
+}
+
+const defaultSimulatedScrollOptions: SimulatedScrollOptions = {
+  scrollbarWidth: 0,
+  scrollbarHeight: 0,
+}
+
 export interface UseScrollOption {
   updateOnResize?: boolean
   setContainerScroll?: boolean
-  simulatedScroll?: boolean
+  simulatedScroll?: boolean | SimulatedScrollOptions | Ref<boolean> | Ref<SimulatedScrollOptions>
+
   onScroll?: (top: number, left: number) => void
   onScrolledBottom?: () => void
   onScrolledTop?: () => void
@@ -63,17 +78,37 @@ export function useScroll(elementRef: Ref<HTMLElement | undefined>, option?: Use
   const scrollLeft = ref(0)
   const scrollHeight = ref(0)
   const scrollWidth = ref(0)
+  const containerWidth = ref(0)
+  const containerHeight = ref(0)
+  const horizontalOverflowed = ref(false)
+  const verticalOverflowed = ref(false)
 
   let maxScrollHeight = 0
   let maxScrollWidth = 0
-  let containerWidth = 0
-  let containerHeight = 0
 
-  const calcScrollEdge = () => {
+  const mergedSimulatedScroll = computed(() => {
+    const resolvedSimulatedScroll = isRef(simulatedScroll) ? simulatedScroll.value : simulatedScroll
+
+    if (!resolvedSimulatedScroll) {
+      return false
+    }
+
+    if (resolvedSimulatedScroll === true) {
+      return defaultSimulatedScrollOptions
+    }
+
+    return resolvedSimulatedScroll
+  })
+
+  const calcScrollEdge = (emit: boolean) => {
     scrolledTop.value = scrollTop.value <= 0
-    scrolledBottom.value = scrollTop.value + containerHeight >= scrollHeight.value
+    scrolledBottom.value = scrollTop.value + containerHeight.value >= scrollHeight.value
     scrolledLeft.value = scrollLeft.value <= 0
-    scrolledRight.value = scrollLeft.value + containerWidth >= scrollWidth.value
+    scrolledRight.value = scrollLeft.value + containerWidth.value >= scrollWidth.value
+
+    if (!emit) {
+      return
+    }
 
     if (scrolledTop.value) {
       onScrolledTop?.()
@@ -87,6 +122,56 @@ export function useScroll(elementRef: Ref<HTMLElement | undefined>, option?: Use
     if (scrolledRight.value) {
       onScrolledRight?.()
     }
+  }
+
+  const calcScrollOverflowed = () => {
+    let _containerHeight = Math.ceil(containerHeight.value)
+    let _containerWidth = Math.ceil(containerWidth.value)
+
+    if (!mergedSimulatedScroll.value) {
+      verticalOverflowed.value = scrollHeight.value > _containerHeight
+      horizontalOverflowed.value = scrollWidth.value > _containerWidth
+      return
+    }
+
+    const { scrollbarWidth, scrollbarHeight } = mergedSimulatedScroll.value
+
+    let _verticalOverflowed = false
+    let _horizontalOverflowed = false
+    const _scrollWidth = scrollWidth.value
+    const _scrollHeight = scrollHeight.value
+    const lastVerticalOverflowed = verticalOverflowed.value
+    const lastHorizontalOverflowed = horizontalOverflowed.value
+
+    const calc = () => {
+      let currentContainerWidth = _containerWidth
+      let currentContainerHeight = _containerHeight
+      const currentVerticalOverflowed = _verticalOverflowed || _scrollHeight > currentContainerHeight
+
+      if (currentVerticalOverflowed && !_verticalOverflowed && !lastVerticalOverflowed) {
+        currentContainerWidth -= scrollbarWidth
+      }
+
+      const currentHorizontalOverflowed = _horizontalOverflowed || _scrollWidth > currentContainerWidth
+
+      if (currentHorizontalOverflowed && !_horizontalOverflowed && !lastHorizontalOverflowed) {
+        currentContainerHeight -= scrollbarHeight
+      }
+
+      _verticalOverflowed = currentVerticalOverflowed
+      _horizontalOverflowed = currentHorizontalOverflowed
+
+      if (currentContainerWidth !== _containerWidth || currentContainerHeight !== _containerHeight) {
+        _containerWidth = currentContainerWidth
+        _containerHeight = currentContainerHeight
+        calc()
+      }
+    }
+
+    calc()
+
+    verticalOverflowed.value = _verticalOverflowed
+    horizontalOverflowed.value = _horizontalOverflowed
   }
 
   const syncScroll = ({ top, left }: { top?: number; left?: number }, _setContainerScroll = false) => {
@@ -109,7 +194,7 @@ export function useScroll(elementRef: Ref<HTMLElement | undefined>, option?: Use
 
     if (updated) {
       _setContainerScroll && setScroll(scrollOptions, elementRef.value)
-      calcScrollEdge()
+      calcScrollEdge(true)
     }
 
     return {
@@ -161,14 +246,12 @@ export function useScroll(elementRef: Ref<HTMLElement | undefined>, option?: Use
     }
 
     const { scrollHeight: _scrollHeight, scrollWidth: _scrollWidth, clientHeight, clientWidth } = target
-    containerHeight = clientHeight
-    containerWidth = clientWidth
+    containerHeight.value = clientHeight
+    containerWidth.value = clientWidth
     scrollHeight.value = _scrollHeight
     scrollWidth.value = _scrollWidth
     maxScrollHeight = _scrollHeight > 0 ? Math.max(_scrollHeight - clientHeight, 0) : 0
     maxScrollWidth = _scrollWidth > 0 ? Math.max(_scrollWidth - clientWidth, 0) : 0
-
-    calcScrollEdge()
 
     if (isFirefox && !pixelScrollListenerStop && (_scrollHeight > clientHeight || _scrollWidth > clientWidth)) {
       pixelScrollListenerStop = useEventListener(elementRef, 'MozMousePixelScroll', evt => evt.preventDefault())
@@ -176,6 +259,12 @@ export function useScroll(elementRef: Ref<HTMLElement | undefined>, option?: Use
       pixelScrollListenerStop?.()
       pixelScrollListenerStop = null
     }
+  }
+
+  const updateAndCalculate = () => {
+    update()
+    calcScrollEdge(false)
+    calcScrollOverflowed()
   }
 
   const stop = () => {
@@ -187,13 +276,14 @@ export function useScroll(elementRef: Ref<HTMLElement | undefined>, option?: Use
 
   const init = () => {
     destroy()
-    update()
 
     if (updateOnResize) {
-      resizeObserverStop = useResizeObserver(elementRef, () => update())
+      resizeObserverStop = useResizeObserver(elementRef, () => updateAndCalculate())
+    } else {
+      updateAndCalculate()
     }
 
-    if (simulatedScroll) {
+    if (mergedSimulatedScroll.value) {
       initWheel()
       initTouchMove()
     }
@@ -214,9 +304,13 @@ export function useScroll(elementRef: Ref<HTMLElement | undefined>, option?: Use
     scrollLeft,
     scrollHeight,
     scrollWidth,
+    containerHeight,
+    containerWidth,
+    horizontalOverflowed,
+    verticalOverflowed,
     syncScroll,
     init,
-    update,
+    update: updateAndCalculate,
     destroy,
   }
 }
