@@ -54,8 +54,10 @@ export function useRenderPool(
   leftIndex: Ref<number[]>,
   rightIndex: Ref<number[]>,
   getKey: ComputedRef<GetKey>,
-): Ref<RowPoolItem[]> {
+): { renderedItems: Ref<RowPoolItem[]>; prependedRowKeys: Ref<VKey[]>; prependedColKeys: Ref<Map<VKey, VKey[]>> } {
   const renderedItems = ref<RowPoolItem[]>([])
+  const prependedRowKeys = ref<VKey[]>([])
+  const prependedColKeys = ref<Map<VKey, VKey[]>>(new Map())
 
   const rowPool: Pool = createPool()
   let colPools: Record<string, Pool> = {}
@@ -160,7 +162,7 @@ export function useRenderPool(
 
   const updateColPool = (rowPoolItem: RowPoolItem, left: number, right: number, recycleAll: boolean) => {
     if (!isRowData(rowPoolItem.item) || !rowPoolItem.item.data) {
-      return
+      return []
     }
 
     if (!rowPoolItem.cols) {
@@ -176,11 +178,13 @@ export function useRenderPool(
     updatePool(rowPoolItem.cols!, pool, rowPoolItem.item.data, left, right, recycleAll)
 
     if (!props.colModifier) {
-      return
+      return []
     }
 
     const renderedCols = rowPoolItem.cols!.map(poolItem => poolItem.item)
     const { start: prependedCols, end: appendedCols } = props.colModifier(rowPoolItem.item, renderedCols) ?? {}
+
+    const currentPrepenedColKeys: VKey[] = []
 
     // append modified data to pool
     ;[...(prependedCols ?? [])].reverse().forEach(({ data, index, poolKey }) => {
@@ -188,6 +192,7 @@ export function useRenderPool(
       poolItem.item = data
       poolItem.index = index
       poolItem.itemKey = getKey.value(data)
+      currentPrepenedColKeys.push(poolItem.itemKey)
       rowPoolItem.cols!.unshift(poolItem)
     })
     appendedCols?.forEach(({ data, index, poolKey }) => {
@@ -197,23 +202,28 @@ export function useRenderPool(
       poolItem.itemKey = getKey.value(data)
       rowPoolItem.cols!.push(poolItem)
     })
+
+    return currentPrepenedColKeys
   }
 
   const updateRowPool = (top: number, bottom: number, recycleAll: boolean) => {
     updatePool(renderedItems.value, rowPool, props.dataSource, top, bottom, recycleAll)
 
     if (!props.rowModifier) {
-      return
+      return []
     }
 
     const renderedRows = renderedItems.value.map(item => item.item)
     const { start: prependedRows, end: appendedRows } = props.rowModifier(renderedRows) ?? {}
+
+    const currentPrepenedRowKeys: VKey[] = []
 
     ;[...(prependedRows ?? [])].reverse().forEach(({ data, index, poolKey }) => {
       const poolItem = rowPool.getPoolItem(poolKey) as RowPoolItem
       poolItem.item = data
       poolItem.index = index
       poolItem.itemKey = getKey.value(data)
+      currentPrepenedRowKeys.push(poolItem.itemKey)
       renderedItems.value.unshift(poolItem)
     })
     appendedRows?.forEach(({ data, index, poolKey }) => {
@@ -223,6 +233,8 @@ export function useRenderPool(
       poolItem.itemKey = getKey.value(data)
       renderedItems.value.push(poolItem)
     })
+
+    return currentPrepenedRowKeys
   }
 
   const dataSourceChangedTrigger = ref(false)
@@ -238,11 +250,16 @@ export function useRenderPool(
     }
     isUpdating = true
 
-    updateRowPool(topIndex.value, bottomIndex.value, recycleAll)
+    const currentPrependedRowKeys = updateRowPool(topIndex.value, bottomIndex.value, recycleAll)
+    const currentPrependedColKeys = new Map<VKey, VKey[]>()
 
     renderedItems.value.forEach((poolItem, index) => {
-      updateColPool(poolItem, leftIndex.value[index], rightIndex.value[index], recycleAll)
+      const colPrependedKeys = updateColPool(poolItem, leftIndex.value[index], rightIndex.value[index], recycleAll)
+      currentPrependedColKeys.set(poolItem.itemKey, colPrependedKeys)
     })
+
+    prependedRowKeys.value = currentPrependedRowKeys
+    prependedColKeys.value = currentPrependedColKeys
 
     isUpdating = false
   }
@@ -287,7 +304,11 @@ export function useRenderPool(
     colPools = {}
   })
 
-  return renderedItems
+  return {
+    renderedItems,
+    prependedRowKeys,
+    prependedColKeys,
+  }
 }
 
 function createPool(): Pool {
