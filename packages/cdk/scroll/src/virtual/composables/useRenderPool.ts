@@ -143,11 +143,14 @@ export function useRenderPool(
       updatePoolItem(poolItem, item, index, itemKey)
     })
 
+    const recycledItems: PoolItem[] = []
+
     // remove deleted items
     for (const inactiveKey of inactiveKeys) {
       const index = items.findIndex(item => item.key === inactiveKey)
 
       if (index > -1) {
+        recycledItems.push(items[index])
         items.splice(index, 1)
       }
     }
@@ -155,6 +158,11 @@ export function useRenderPool(
     // only resort the items when pool updated
     if (updated) {
       items.sort((item1, item2) => item1.index - item2.index)
+    }
+
+    return {
+      items,
+      recycledItems,
     }
   }
 
@@ -200,7 +208,17 @@ export function useRenderPool(
   }
 
   const updateRowPool = (top: number, bottom: number, recycleAll: boolean) => {
-    updatePool(renderedItems.value, rowPool, props.dataSource, top, bottom, recycleAll)
+    const { recycledItems } = updatePool(renderedItems.value, rowPool, props.dataSource, top, bottom, recycleAll)
+
+    ;(recycledItems as RowPoolItem[]).forEach(item => {
+      const pool = colPools[item.key]
+
+      if (pool) {
+        item.cols?.forEach(col => pool.recyclePoolItem(col))
+      }
+
+      item.cols = []
+    })
 
     if (!props.rowModifier) {
       return
