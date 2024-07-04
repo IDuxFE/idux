@@ -10,7 +10,7 @@ import { type CSSProperties, computed, defineComponent, inject, onBeforeUnmount,
 import { isNumber, isString, throttle } from 'lodash-es'
 
 import { offResize, onResize } from '@idux/cdk/resize'
-import { convertCssPixel } from '@idux/cdk/utils'
+import { type VKey, convertCssPixel } from '@idux/cdk/utils'
 
 import { virtualScrollToken } from '../token'
 
@@ -24,6 +24,10 @@ export default defineComponent({
       fillerHorizontalRef,
       fillerVerticalRef,
       collectSize,
+      getColWidth,
+      getRowHeight,
+      prependedRowKeys,
+      prependedColKeys,
       scrollHeight,
       scrollWidth,
       scrollOffsetLeft,
@@ -69,12 +73,23 @@ export default defineComponent({
     })
 
     const contentStyle = computed<CSSProperties | undefined>(() => {
-      const offsetTop = scrollOffsetTop.value
-      const offsetLeft = scrollOffsetLeft.value
+      let offsetTop = scrollOffsetTop.value
+      let offsetLeft = scrollOffsetLeft.value
 
       if (offsetTop === undefined && offsetLeft == undefined) {
         return undefined
       }
+
+      const prependedHeight = getPrependedRowHeight(prependedRowKeys.value, getRowHeight)
+      const prependedWidth = getPrependedColWidth(prependedColKeys.value, getColWidth, props.isStrictGrid)
+
+      if (offsetTop && prependedHeight) {
+        offsetTop -= prependedHeight
+      }
+      if (offsetLeft && prependedWidth) {
+        offsetLeft -= prependedWidth
+      }
+
       return {
         marginTop: convertCssPixel(offsetTop),
         marginLeft: convertCssPixel(offsetLeft),
@@ -129,4 +144,48 @@ export default defineComponent({
 
 function convertSize(size: number | string | undefined) {
   return !size || (isNumber(size) && size <= 0) ? undefined : isString(size) ? size : convertCssPixel(size)
+}
+
+function getPrependedRowHeight(prependedRowKeys: VKey[], getRowHeight: (rowKey: VKey) => number) {
+  let height = 0
+  prependedRowKeys.forEach(key => {
+    const rowHeight = getRowHeight(key)
+    height = height + rowHeight
+  })
+
+  return height
+}
+
+function getPrependedColWidth(
+  prependedColKeys: Map<VKey, VKey[]>,
+  getColWidth: (rowKey: VKey, colKey: VKey) => number,
+  isStrictGrid: boolean,
+) {
+  const getWidth = (rowKey: VKey, colKeys: VKey[] | undefined) => {
+    let width = 0
+    colKeys?.forEach(key => {
+      const rowHeight = getColWidth(rowKey, key)
+      width = width + rowHeight
+    })
+
+    return width
+  }
+
+  if (!prependedColKeys.size) {
+    return 0
+  }
+
+  const rowKeys = [...prependedColKeys.keys()]
+
+  if (isStrictGrid) {
+    return getWidth(rowKeys[0], prependedColKeys.get(rowKeys[0]))
+  }
+
+  let maxWidth = 0
+
+  rowKeys.forEach(rowKey => {
+    maxWidth = Math.max(maxWidth, getWidth(rowKey, prependedColKeys.get(rowKey)))
+  })
+
+  return maxWidth
 }

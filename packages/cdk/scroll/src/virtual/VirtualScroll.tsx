@@ -146,7 +146,11 @@ export default defineComponent({
       syncContainerScroll,
     )
 
-    const pool = useRenderPool(props, topIndex, bottomIndex, leftIndex, rightIndex, getKey)
+    const {
+      renderedItems: pool,
+      prependedRowKeys,
+      prependedColKeys,
+    } = useRenderPool(props, topIndex, bottomIndex, leftIndex, rightIndex, getKey)
     const mergedData = computed(() => {
       return pool.value.map(row => {
         if (!isRowData(row.item)) {
@@ -177,6 +181,10 @@ export default defineComponent({
       fillerVerticalRef,
       useVirtual,
       collectSize,
+      getColWidth,
+      getRowHeight,
+      prependedRowKeys,
+      prependedColKeys,
       scroll,
       scrollHeight,
       scrollWidth,
