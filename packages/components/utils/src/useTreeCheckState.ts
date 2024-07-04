@@ -121,6 +121,8 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
     return new Set(keys)
   })
 
+  const unexistedKeys = computed(() => checkedKeys.value.filter(key => !allCheckedKeySet.value.has(key)))
+
   const indeterminateKeySet = computed(() => {
     const { parentKeyMap } = mergedResolverContext.value
     const _checkedKeySet = allCheckedKeySet.value
@@ -141,10 +143,16 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
     return keySet
   })
 
-  watch([checkedKeys, cascaderStrategy], () => {
+  const updateCachedSelectedData = () => {
     const { data } = mergedResolverContext.value
     const keySet = allCheckedKeySet.value
     cachedSelectedData.value = filterTree(data, childrenKey.value, item => keySet.has(getKey.value(item)), 'or')
+  }
+  watch([checkedKeys, cascaderStrategy], updateCachedSelectedData)
+  watch(unexistedKeys, (keys, oldKeys) => {
+    if (keys.length !== oldKeys.length) {
+      updateCachedSelectedData()
+    }
   })
 
   const isCheckDisabled = (key: VKey) => {
@@ -157,6 +165,10 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
 
   const isIndeterminate = (key: VKey) => {
     return indeterminateKeySet.value.has(key)
+  }
+
+  const appendUnexistedDataKeys = (newCheckedKeys: VKey[]) => {
+    return unexistedKeys.value ? [...newCheckedKeys, ...unexistedKeys.value] : newCheckedKeys
   }
 
   const toggle = (data: V) => {
@@ -188,7 +200,9 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
           : newCheckedKeys
         ).filter(key => isCheckDisabled(key) && !allCheckedKeySet.value.has(key))
 
-    const resolvedCheckedKeys = checkStateResolver[checked ? 'appendKeys' : 'removeKeys'](newCheckedKeys, disabledKeys)
+    const resolvedCheckedKeys = appendUnexistedDataKeys(
+      checkStateResolver[checked ? 'appendKeys' : 'removeKeys'](newCheckedKeys, disabledKeys),
+    )
 
     return {
       checked: !checked,
@@ -221,9 +235,11 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
   ) => {
     const params = resolveAllCheckedFnParams(data, defaultUnCheckedKeysOrCached, cached)
 
-    return params.dataProvided
+    const allCheckedKeys = params.dataProvided
       ? checkStateResolver.getAllCheckedKeys(params.data, params.defaultKeys)
       : checkStateResolver.getAllCheckedKeys(params.defaultKeys)
+
+    return appendUnexistedDataKeys(allCheckedKeys)
   }
 
   const getAllUncheckedKeys = (

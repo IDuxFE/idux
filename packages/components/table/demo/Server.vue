@@ -1,5 +1,11 @@
 <template>
-  <IxTable :columns="columns" :dataSource="dataSource" :getKey="getKey" :pagination="pagination" :spin="loading">
+  <IxTable
+    v-model:selectedRowKeys="selectedRowKeys"
+    :columns="columns"
+    :dataSource="dataSource"
+    :pagination="pagination"
+    :spin="loading"
+  >
   </IxTable>
 </template>
 
@@ -17,8 +23,10 @@ const setPagination = (pageIndex: number, pageSize: number) => {
     pagination.pageIndex = pageIndex
   }
 
-  fetchData(pagination.pageIndex, pagination.pageSize)
+  fetchData(pagination.pageIndex!, pagination.pageSize!)
 }
+
+const selectedRowKeys = ref(['2-1', '2-2'])
 
 const pagination = reactive<TablePagination>({
   showSizeChanger: true,
@@ -26,29 +34,29 @@ const pagination = reactive<TablePagination>({
 })
 
 const loading = ref(false)
-const loadedData = new Map()
 
 const fetchData = async (pageIndex: number, pageSize: number) => {
-  const key = `${pageIndex}-${pageSize}`
-  let results
-
   loading.value = true
 
-  if (loadedData.has(key)) {
-    results = await new Promise(resolve => {
-      setTimeout(() => {
-        resolve(loadedData.get(key))
-      }, 200)
-    })
-  } else {
-    ;({ results } = await fetch(`https://randomuser.me/api?page=${pageIndex}&results=${pageSize}`).then(res =>
-      res.json(),
-    ))
+  const results = await new Promise(resolve => {
+    setTimeout(() => {
+      resolve(
+        Array.from({ length: pageSize }).map((_, idx) => {
+          return {
+            key: `${pageIndex}-${idx}`,
+            gender: 'male',
+            email: 'ssss',
+            name: {
+              first: 'saller',
+              last: 'li',
+            },
+          }
+        }),
+      )
+    }, 200)
+  })
 
-    loadedData.set(`${pageIndex}-${pageSize}`, results)
-  }
-
-  dataSource.value = results
+  dataSource.value = results as RandomUser[]
   pagination.total = 200 // mock the total data here
 
   loading.value = false
@@ -57,14 +65,12 @@ const fetchData = async (pageIndex: number, pageSize: number) => {
 onMounted(() => setPagination(1, 10))
 
 interface RandomUser {
+  key: string
   gender: string
   email: string
   name: {
     first: string
     last: string
-  }
-  login: {
-    uuid: string
   }
 }
 
@@ -101,6 +107,4 @@ const columns: TableColumn<RandomUser>[] = [
 ]
 
 const dataSource = ref<RandomUser[]>([])
-
-const getKey = (record: RandomUser) => record.login.uuid
 </script>
