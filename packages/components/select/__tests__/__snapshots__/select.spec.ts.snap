@@ -28,7 +28,7 @@ exports[`Select > multiple work > maxLabel responsive work 1`] = `
         </div>
       </div>
       <div class=\\"ix-overflow-item ix-overflow-suffix\\">
-        <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\" readonly=\\"\\"><span class=\\"ix-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
+        <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\" readonly=\\"\\" value=\\"\\"><span class=\\"ix-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
       </div>
     </div>
   </div>
@@ -56,7 +56,7 @@ exports[`Select > multiple work > maxLabel responsive work 2`] = `
         </div>
       </div>
       <div class=\\"ix-overflow-item ix-overflow-suffix\\">
-        <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\" readonly=\\"\\"><span class=\\"ix-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
+        <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\" readonly=\\"\\" value=\\"\\"><span class=\\"ix-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
       </div>
     </div>
   </div>
@@ -81,7 +81,7 @@ exports[`Select > multiple work > render work 1`] = `
       </div>
       <!---->
       <div class=\\"ix-overflow-item ix-overflow-suffix\\">
-        <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\" readonly=\\"\\"><span class=\\"ix-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
+        <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0; width: 0px;\\" autocomplete=\\"off\\" readonly=\\"\\" value=\\"\\"><span class=\\"ix-selector-input-mirror\\" aria-hidden=\\"true\\"></span></div>
       </div>
     </div>
   </div>
@@ -97,7 +97,7 @@ exports[`Select > single work > render work 1`] = `
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Tom</span>
       <!---->
     </div>
-    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\" value=\\"\\">
       <!---->
     </div>
   </div>
@@ -113,7 +113,7 @@ exports[`Select > template work > render work 1`] = `
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Tom</span>
       <!---->
     </div>
-    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\" value=\\"\\">
       <!---->
     </div>
   </div>

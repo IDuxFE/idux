@@ -7,7 +7,7 @@ exports[`TreeSelect > multiple work > render work 1`] = `
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
       <!---->
     </div>
-    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\" value=\\"\\">
       <!---->
     </div>
   </div>
@@ -25,7 +25,7 @@ exports[`TreeSelect > single work > custom keys work 1`] = `
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
       <!---->
     </div>
-    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\" value=\\"\\">
       <!---->
     </div>
   </div>
@@ -43,7 +43,7 @@ exports[`TreeSelect > single work > render work 1`] = `
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
       <!---->
     </div>
-    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\" value=\\"\\">
       <!---->
     </div>
   </div>
@@ -61,7 +61,7 @@ exports[`TreeSelect > single work > searchFn work 1`] = `
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
       <!---->
     </div>
-    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\" value=\\"\\">
       <!---->
     </div>
   </div>
@@ -79,7 +79,7 @@ exports[`TreeSelect > single work > searchFn work 2`] = `
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
       <!---->
     </div>
-    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\" value=\\"\\">
       <!---->
     </div>
   </div>
@@ -99,7 +99,7 @@ exports[`TreeSelect > single work > searchFn work 3`] = `
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
       <!---->
     </div>
-    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\" value=\\"\\">
       <!---->
     </div>
   </div>
@@ -119,7 +119,7 @@ exports[`TreeSelect > single work > searchable work 1`] = `
     <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">Node 0</span>
       <!---->
     </div>
-    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\" value=\\"\\">
       <!---->
     </div>
   </div>
@@ -134,7 +134,7 @@ exports[`TreeSelect > single work > searchable work 2`] = `
 "<div class=\\"ix-trigger ix-trigger-md ix-selector ix-selector-md ix-selector-opened ix-selector-single ix-tree-select ix-control-trigger\\" tabindex=\\"-1\\">
   <!---->
   <div class=\\"ix-selector-content\\">
-    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\">
+    <div class=\\"ix-selector-input\\"><input class=\\"ix-selector-input-inner\\" style=\\"opacity: 0;\\" autocomplete=\\"off\\" readonly=\\"\\" value=\\"\\">
       <!---->
     </div>
   </div>
