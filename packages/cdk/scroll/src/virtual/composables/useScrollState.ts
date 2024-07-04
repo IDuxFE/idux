@@ -83,13 +83,17 @@ export function useScrollState(
     ],
     (
       [enabled, dataSource, bufferSize, rowHeight, colWidth, height, width, getKey, scroll],
-      [, , , , , oldHeight, oldWidth],
+      [, oldDataSource, , , , oldHeight, oldWidth],
     ) => {
       // to ensure that the rendered size is stable between render cycles
       // the rendered size should be at least the size of that in last render tick
       // we do this to maximize render pool reusage
       let minHorizontalLength: number[] | undefined
       let minVerticalLength: number | undefined
+      if (oldDataSource !== dataSource || oldDataSource.length !== dataSource.length) {
+        calculated = false
+      }
+
       if (oldWidth === width) {
         minHorizontalLength = rightIndex.value.map((_rightIndex, index) => _rightIndex - leftIndex.value[index])
       }
@@ -155,7 +159,7 @@ export function useScrollState(
         calculated = true
       }
     },
-    { immediate: true },
+    { immediate: true, flush: 'pre' },
   )
 
   return { scrollHeight, scrollWidth, scrollOffsetTop, scrollOffsetLeft, topIndex, bottomIndex, leftIndex, rightIndex }
@@ -213,7 +217,7 @@ function calcVerticalState(
   let _renderedHeight = 0
 
   for (let index = 0; index < dataLength; index += 1) {
-    const rowHeight = getRowHeight(index)
+    const rowHeight = getRowHeight(getKey(rows[index]))
     const currentItemBottom = scrollHeight + rowHeight
 
     if (currentItemBottom >= scrollTop && topIndex === undefined) {
@@ -246,14 +250,14 @@ function calcVerticalState(
   for (let index = 0; index < bufferSize; index += 1) {
     if (topIndex !== 0) {
       topIndex -= 1
-      const appendedRowHeight = getRowHeight(topIndex)
+      const appendedRowHeight = getRowHeight(getKey(rows[topIndex]))
       offsetTop! -= appendedRowHeight
       _renderedHeight += appendedRowHeight
     }
 
     if (bottomIndex !== dataLength - 1) {
       bottomIndex += 1
-      _renderedHeight += getRowHeight(bottomIndex)
+      _renderedHeight += getRowHeight(getKey(rows[bottomIndex]))
     }
   }
 
@@ -265,7 +269,7 @@ function calcVerticalState(
   ) {
     if (bottomIndex !== dataLength - 1) {
       bottomIndex += 1
-      _renderedHeight += getRowHeight(bottomIndex)
+      _renderedHeight += getRowHeight(getKey(rows[bottomIndex]))
     }
   }
 
