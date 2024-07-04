@@ -1620,6 +1620,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
               aria-label="for screen reader"
               style="width: 0px; height: 0px; display: flex; overflow: hidden; opacity: 0; border: 0px; padding: 0px; margin: 0px;"
               tabindex="0"
+              value=""
             />
             <div
               class="ix-tree-content"
@@ -3661,6 +3662,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
               aria-label="for screen reader"
               style="width: 0px; height: 0px; display: flex; overflow: hidden; opacity: 0; border: 0px; padding: 0px; margin: 0px;"
               tabindex="0"
+              value=""
             />
             <div
               class="ix-tree-content"

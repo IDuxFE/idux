@@ -12,7 +12,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  install_packages: 'npm add -g pnpm@8.7.1 && pnpm install'
+  install_packages: 'npm add -g pnpm && pnpm install'
 
 stages:
   - stage: env
