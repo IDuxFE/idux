@@ -376,7 +376,7 @@ exports[`Tree > height and virtual work 1`] = `
   <div class=\\"cdk-virtual-scroll ix-tree-content\\">
     <div class=\\"cdk-virtual-scroll-holder\\" style=\\"max-height: 100px; width: 100%; overflow-x: auto; overflow-y: auto;\\">
       <div class=\\"cdk-virtual-scroll-filler-horizontal\\"></div>
-      <div class=\\"cdk-virtual-scroll-filler-vertical\\" style=\\"height: 352px; width: 0px;\\"></div>
+      <div class=\\"cdk-virtual-scroll-filler-vertical\\" style=\\"height: 352px; width: 1px; margin-left: -1px;\\"></div>
       <div class=\\"cdk-virtual-scroll-content\\" style=\\"margin-top: 0px;\\">
         <div class=\\"ix-tree-node ix-tree-node-expanded\\" aria-label=\\"Node 0\\" aria-selected=\\"false\\" title=\\"Node 0\\"><span aria-hidden=\\"true\\" class=\\"ix-tree-node-indent\\"></span>
           <!----><span class=\\"ix-tree-node-expand\\"><!----><i class=\\"ix-icon ix-icon-right\\" style=\\"transform: rotate(90deg);\\" role=\\"img\\" aria-label=\\"right\\"></i><!----></span><label class=\\"ix-checkbox ix-tree-node-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>

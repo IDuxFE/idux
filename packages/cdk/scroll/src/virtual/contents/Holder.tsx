@@ -58,14 +58,14 @@ export default defineComponent({
       if (scrollOffsetTop.value === undefined) {
         return undefined
       }
-      return { height: `${scrollHeight.value}px`, width: 0 }
+      return { height: `${scrollHeight.value}px`, width: '1px', marginLeft: '-1px' }
     })
     const fillerHorizontalStyle = computed<CSSProperties | undefined>(() => {
       if (scrollOffsetLeft.value === undefined) {
         return undefined
       }
 
-      return { width: `${scrollWidth.value}px`, height: 0 }
+      return { width: `${scrollWidth.value}px`, height: '1px', marginTop: '-1px' }
     })
 
     const contentStyle = computed<CSSProperties | undefined>(() => {
