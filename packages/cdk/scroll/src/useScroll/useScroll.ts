@@ -9,7 +9,6 @@ import { type Ref, computed, isRef, ref } from 'vue'
 
 import { isNil } from 'lodash-es'
 
-import { isFirefox } from '@idux/cdk/platform'
 import { useResizeObserver } from '@idux/cdk/resize'
 import { useEventListener } from '@idux/cdk/utils'
 
@@ -49,6 +48,7 @@ const defaultSimulatedScrollOptions: SimulatedScrollOptions = {
 
 export interface UseScrollOption {
   updateOnResize?: boolean
+  syncOnScroll?: boolean
   setContainerScroll?: boolean
   simulatedScroll?: boolean | SimulatedScrollOptions | Ref<boolean> | Ref<SimulatedScrollOptions>
 
@@ -62,6 +62,7 @@ export interface UseScrollOption {
 export function useScroll(elementRef: Ref<HTMLElement | undefined>, option?: UseScrollOption): ScrollContext {
   const {
     updateOnResize = true,
+    syncOnScroll = true,
     setContainerScroll = true,
     simulatedScroll = false,
     onScroll,
@@ -236,8 +237,8 @@ export function useScroll(elementRef: Ref<HTMLElement | undefined>, option?: Use
     onScrollChange,
   )
 
-  let pixelScrollListenerStop: (() => void) | null = null
   let resizeObserverStop: (() => void) | null = null
+  let onScrollStop: (() => void) | null = null
 
   const update = () => {
     const target = elementRef.value
@@ -252,13 +253,6 @@ export function useScroll(elementRef: Ref<HTMLElement | undefined>, option?: Use
     scrollWidth.value = _scrollWidth
     maxScrollHeight = _scrollHeight > 0 ? Math.max(_scrollHeight - clientHeight, 0) : 0
     maxScrollWidth = _scrollWidth > 0 ? Math.max(_scrollWidth - clientWidth, 0) : 0
-
-    if (isFirefox && !pixelScrollListenerStop && (_scrollHeight > clientHeight || _scrollWidth > clientWidth)) {
-      pixelScrollListenerStop = useEventListener(elementRef, 'MozMousePixelScroll', evt => evt.preventDefault())
-    } else {
-      pixelScrollListenerStop?.()
-      pixelScrollListenerStop = null
-    }
   }
 
   const updateAndCalculate = () => {
@@ -268,10 +262,10 @@ export function useScroll(elementRef: Ref<HTMLElement | undefined>, option?: Use
   }
 
   const stop = () => {
-    pixelScrollListenerStop?.()
     resizeObserverStop?.()
-    pixelScrollListenerStop = null
+    onScrollStop?.()
     resizeObserverStop = null
+    onScrollStop = null
   }
 
   const init = () => {
@@ -281,6 +275,17 @@ export function useScroll(elementRef: Ref<HTMLElement | undefined>, option?: Use
       resizeObserverStop = useResizeObserver(elementRef, () => updateAndCalculate())
     } else {
       updateAndCalculate()
+    }
+
+    if (syncOnScroll) {
+      onScrollStop = useEventListener(elementRef, 'scroll', () => {
+        if (!elementRef.value) {
+          return
+        }
+
+        const { scrollLeft, scrollTop } = elementRef.value
+        syncScroll({ left: scrollLeft, top: scrollTop })
+      })
     }
 
     if (mergedSimulatedScroll.value) {

@@ -17,6 +17,8 @@ interface FireFoxDOMMouseScrollEvent {
   preventDefault: VoidFunction
 }
 
+type WheelDirection = 'x' | 'y' | 'sx' | null
+
 export function useWheel(
   elementRef: Ref<HTMLElement | undefined>,
   scrolledTop: Ref<boolean>,
@@ -29,13 +31,45 @@ export function useWheel(
   destroy: () => void
 } {
   let rafId: number
-  let wheelDirection: 'x' | 'y' | 'sx' | null = null
+  let wheelDirection: WheelDirection = null
   let directionRafId: number
 
   let currentDelta: number
   let isFirefoxWheel = false
 
   const checkScrollLock = useScrollLock(scrolledTop, scrolledBottom, scrolledLeft, scrolledRight)
+
+  const calcWheelDirectionAndDelta = (evt: Event) => {
+    const { deltaX, deltaY, shiftKey } = evt as WheelEvent
+
+    let _deltaX = deltaX
+    let _deltaY = deltaY
+    let _wheelDirection: WheelDirection = null
+
+    if (wheelDirection === 'sx' || (!wheelDirection && shiftKey && deltaY && !deltaX)) {
+      _deltaX = deltaY
+      _deltaY = 0
+
+      _wheelDirection = 'sx'
+    }
+
+    if (_wheelDirection === null) {
+      _wheelDirection = Math.abs(_deltaX) > Math.abs(_deltaY) ? 'x' : 'y'
+    }
+
+    return {
+      direction: _wheelDirection,
+      delta: _wheelDirection === 'x' || _wheelDirection === 'sx' ? _deltaX : _deltaY,
+    }
+  }
+
+  const shouldPreventWheelDefault = (direction: WheelDirection, delta: number) => {
+    if (direction === 'x' || direction === 'sx') {
+      return delta > 0 ? !scrolledRight.value : !scrolledLeft.value
+    }
+
+    return delta > 0 ? !scrolledBottom.value : !scrolledTop.value
+  }
 
   const _onWheel = (delta: number, horizontal: boolean) => {
     cancelRAF(rafId)
@@ -57,30 +91,18 @@ export function useWheel(
       rAF(() => (wheelDirection = null))
     })
 
-    const { deltaX, deltaY, shiftKey } = evt
+    const { delta, direction } = calcWheelDirectionAndDelta(evt)
 
-    let _deltaX = deltaX
-    let _deltaY = deltaY
-
-    if (wheelDirection === 'sx' || (!wheelDirection && shiftKey && deltaY && !deltaX)) {
-      _deltaX = deltaY
-      _deltaY = 0
-
-      wheelDirection = 'sx'
-    }
-
-    if (wheelDirection === null) {
-      wheelDirection = Math.abs(_deltaX) > Math.abs(_deltaY) ? 'x' : 'y'
-    }
-
-    if (!isFirefox) {
-      evt.preventDefault()
-    }
+    wheelDirection = direction
 
     if (wheelDirection === 'x' || wheelDirection === 'sx') {
-      _onWheel(_deltaX, true)
+      _onWheel(delta, true)
     } else {
-      _onWheel(_deltaY, false)
+      _onWheel(delta, false)
+    }
+
+    if (shouldPreventWheelDefault(direction, delta)) {
+      evt.preventDefault()
     }
   }
 
@@ -88,10 +110,18 @@ export function useWheel(
     isFirefoxWheel = evt.detail === currentDelta
   }
 
-  let listenerStops: (() => void)[] = []
+  const onPixelScroll = (evt: Event) => {
+    const { delta, direction } = calcWheelDirectionAndDelta(evt)
+
+    if (shouldPreventWheelDefault(direction, delta)) {
+      evt.preventDefault()
+    }
+  }
+
+  let listenerStops: ((() => void) | undefined)[] = []
 
   const destroy = () => {
-    listenerStops.forEach(stop => stop())
+    listenerStops.forEach(stop => stop?.())
     listenerStops = []
   }
 
@@ -99,6 +129,7 @@ export function useWheel(
     listenerStops = [
       useEventListener(elementRef, 'wheel', onWheel),
       useEventListener(elementRef, 'DOMMouseScroll', onFirefoxWheel as unknown as (evt: Event) => void),
+      isFirefox ? useEventListener(elementRef.value, 'MozMousePixelScroll', onPixelScroll) : undefined,
     ]
   }
 

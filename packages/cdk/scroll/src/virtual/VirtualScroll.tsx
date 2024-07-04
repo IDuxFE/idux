@@ -111,6 +111,7 @@ export default defineComponent({
       verticalOverflowed,
     } = useScroll(holderRef, {
       simulatedScroll: simulatedScroll,
+      syncOnScroll: false,
       setContainerScroll: false,
       onScroll: (top, left) => {
         syncScroll({ top, left }, true)
