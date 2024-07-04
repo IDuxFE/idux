@@ -43,6 +43,7 @@ export function useScrollPlacement(
     changeScroll({ top: alignedTop, left: alignedLeft })
   }
 
+  let currentScrolledBottom = false
   const handleScroll = (evt: Event) => {
     const { scrollTop: newScrollTop, scrollLeft: newScrollLeft } = evt.currentTarget as Element
     if (newScrollTop !== scroll.value.top || newScrollLeft !== scroll.value.left) {
@@ -52,9 +53,13 @@ export function useScrollPlacement(
 
     // 某些情况下(例如浏览器缩放), 会导致 scrollTop 出现小数，newScrollTop 始终小于 maxScrollHeight
     // 所以对 newScrollTop 进行了向上取整，避免此种情况的出现。
-    if (Math.ceil(newScrollTop) >= maxScrollHeight.value) {
+    const scrolledBottom = Math.ceil(newScrollTop) >= maxScrollHeight.value
+
+    if (!currentScrolledBottom && scrolledBottom) {
       callEmit(props.onScrolledBottom)
     }
+
+    currentScrolledBottom = scrolledBottom
   }
 
   const initScroll = () => {
