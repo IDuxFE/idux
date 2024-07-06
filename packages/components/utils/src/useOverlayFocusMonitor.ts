@@ -9,24 +9,27 @@ import type { ɵOverlayInstance } from '@idux/components/_private/overlay'
 
 import { type ComputedRef, type Ref, watch } from 'vue'
 
-import { useSharedFocusMonitor } from '@idux/cdk/a11y'
-import { type MaybeElement, tryOnScopeDispose, useState } from '@idux/cdk/utils'
+import { type FocusOrigin, useSharedFocusMonitor } from '@idux/cdk/a11y'
+import { type MaybeElement, type MaybeElementRef, tryOnScopeDispose, useState } from '@idux/cdk/utils'
 
 export function useOverlayFocusMonitor(
-  onFocus: (evt: FocusEvent) => void,
+  onFocus: (evt: FocusEvent, origin: FocusOrigin) => void,
   onBlur: (evt: FocusEvent) => void,
 ): {
   focused: ComputedRef<boolean>
   overlayFocused: ComputedRef<boolean>
   triggerFocused: ComputedRef<boolean>
+  bindMonitor: (elRef: Ref<MaybeElement>) => void
   bindOverlayMonitor: (overlayRef: Ref<ɵOverlayInstance | undefined>, overlayOpened: Ref<boolean>) => void
+  focusVia: (elRef: MaybeElementRef<MaybeElement>, origin?: FocusOrigin, options?: FocusOptions) => void
+  blurVia: (elRef: MaybeElementRef<MaybeElement>) => void
   handleFocus: (evt: FocusEvent) => void
   handleBlur: (evt: FocusEvent) => void
 } {
   const [focused, setFocused] = useState(false)
   const [overlayFocused, setOverlayFocused] = useState(false)
   const [triggerFocused, setTriggerFocused] = useState(false)
-  const { monitor, stopMonitoring } = useSharedFocusMonitor()
+  const { monitor, stopMonitoring, focusVia: _focusVia, blurVia } = useSharedFocusMonitor()
   const { handleFocus: _handleFocus, handleBlur: _handleBlur } = useFocusHandlers(focused, setFocused, onFocus, onBlur)
 
   const handleFocus = (evt: FocusEvent) => {
@@ -39,16 +42,16 @@ export function useOverlayFocusMonitor(
   }
 
   const monitorStops = new Set<() => void>()
-  const _bindMonitor = (el: MaybeElement) => {
+  const _bindMonitor = (el: MaybeElement, isOverlay = false) => {
     const stop = watch(monitor(el, true), evt => {
       const { origin, event } = evt
       if (event) {
         if (origin) {
-          _handleFocus(event)
-          setOverlayFocused(true)
+          _handleFocus(event, origin)
+          isOverlay ? setOverlayFocused(true) : setTriggerFocused(true)
         } else {
           _handleBlur(event)
-          setOverlayFocused(false)
+          isOverlay ? setOverlayFocused(false) : setTriggerFocused(false)
         }
       }
     })
@@ -57,6 +60,33 @@ export function useOverlayFocusMonitor(
       stop()
       stopMonitoring(el)
     }
+  }
+
+  const bindMonitor = (elRef: Ref<MaybeElement>) => {
+    let stop: () => void | undefined
+    const stopWatch = watch(
+      elRef,
+      el => {
+        stop?.()
+
+        if (!el) {
+          return
+        }
+
+        stop = _bindMonitor(el)
+      },
+      {
+        immediate: true,
+      },
+    )
+
+    const stopMonitor = () => {
+      stop?.()
+      stopWatch()
+    }
+    monitorStops.add(stopMonitor)
+
+    return stopMonitor
   }
 
   const bindOverlayMonitor = (overlayRef: Ref<ɵOverlayInstance | undefined>, overlayOpened: Ref<boolean>) => {
@@ -92,6 +122,10 @@ export function useOverlayFocusMonitor(
     monitorStops.forEach(stop => stop())
   }
 
+  const focusVia = (elRef: MaybeElementRef<MaybeElement>, origin?: FocusOrigin, options?: FocusOptions) => {
+    _focusVia(elRef, origin ?? 'program', options)
+  }
+
   tryOnScopeDispose(() => {
     unbindAllMonitor()
   })
@@ -100,7 +134,10 @@ export function useOverlayFocusMonitor(
     focused,
     overlayFocused,
     triggerFocused,
+    bindMonitor,
     bindOverlayMonitor,
+    focusVia,
+    blurVia,
     handleFocus,
     handleBlur,
   }
@@ -109,11 +146,11 @@ export function useOverlayFocusMonitor(
 function useFocusHandlers(
   focused: ComputedRef<boolean>,
   setFocused: (focused: boolean) => void,
-  onFocus: (evt: FocusEvent) => void,
+  onFocus: (evt: FocusEvent, origin: FocusOrigin) => void,
   onBlur: (evt: FocusEvent) => void,
 ): {
-  handleFocus: (evt: FocusEvent, cb?: () => void) => void
-  handleBlur: (evt: FocusEvent, cb?: () => void) => void
+  handleFocus: (evt: FocusEvent, origin?: FocusOrigin) => void
+  handleBlur: (evt: FocusEvent) => void
 } {
   let lastFocusEvtTime = 0
 
@@ -124,7 +161,7 @@ function useFocusHandlers(
 
     // if last focus evt triggered time is after current blur event
     // we treat it as a subsquent focus event
-    return lastFocusEvtTime > evt.timeStamp
+    return lastFocusEvtTime >= evt.timeStamp
   }
   const handleBlur = async (evt: FocusEvent) => {
     // if a subsequent focus event is triggered within the monitored elements
@@ -138,7 +175,7 @@ function useFocusHandlers(
     onBlur(evt)
   }
 
-  const handleFocus = (evt: FocusEvent, cb?: () => void) => {
+  const handleFocus = (evt: FocusEvent, origin?: FocusOrigin) => {
     // record focus evt time stamp
     lastFocusEvtTime = evt.timeStamp
 
@@ -146,10 +183,8 @@ function useFocusHandlers(
       return
     }
 
-    cb?.()
-
     setFocused(true)
-    onFocus(evt)
+    onFocus(evt, origin ?? 'program')
   }
 
   return {
