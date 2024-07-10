@@ -20,6 +20,13 @@ import { transformIndexPlugin } from './plugins/transformIndexPlugin'
 const componentPath: Record<string, string> = {
   CdkClickOutside: '@idux/cdk/click-outside',
   CdkDraggable: '@idux/cdk/drag-drop',
+  CdkDndSortable: '@idux/cdk/dnd',
+  CdkDndSortableItem: '@idux/cdk/dnd',
+  CdkDndSortableHandle: '@idux/cdk/dnd',
+  CdkDndMovable: '@idux/cdk/dnd',
+  CdkDndMovableHandle: '@idux/cdk/dnd',
+  CdkDndSortableBoxIndicator: '@idux/cdk/dnd',
+  CdkDndSortableTreeIndicator: '@idux/cdk/dnd',
   CdkResizable: '@idux/cdk/resize',
   CdkResizableHandle: '@idux/cdk/resize',
   CdkResizeObserver: '@idux/cdk/resize',

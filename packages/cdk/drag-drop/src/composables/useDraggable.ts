@@ -10,7 +10,7 @@ import type { DnDEventName, DnDEventType, DnDPosition, DraggableOptions } from '
 
 import { type ComputedRef, computed, ref, watch } from 'vue'
 
-import { type MaybeElementRef, convertElement, tryOnScopeDispose, useEventListener } from '@idux/cdk/utils'
+import { Logger, type MaybeElementRef, convertElement, tryOnScopeDispose, useEventListener } from '@idux/cdk/utils'
 
 import { withBoundary } from './withBoundary'
 import { withDragFree } from './withDragFree'
@@ -37,6 +37,10 @@ export function useDraggable(
   reset: () => void
   stop: () => void
 } {
+  if (__DEV__) {
+    Logger.warn('cdk/drag-drop', '@idux/cdk/drag-drop is deprecated, use @idux/cdk/dnd instead')
+  }
+
   context = initContext(context)
 
   const registry = context.registry!

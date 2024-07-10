@@ -9,7 +9,7 @@ import type { DnDEventType, DnDPosition } from '../types'
 
 import { computed, defineComponent, normalizeClass, reactive, ref } from 'vue'
 
-import { callEmit } from '@idux/cdk/utils'
+import { Logger, callEmit } from '@idux/cdk/utils'
 
 import { draggableProps } from './types'
 import { useDraggable } from '../composables/useDraggable'
@@ -23,6 +23,10 @@ export default defineComponent({
   name: 'CdkDraggable',
   props: draggableProps,
   setup(props, { slots }) {
+    if (__DEV__) {
+      Logger.warn('cdk/drag-drop', '@idux/cdk/drag-drop is deprecated, use @idux/cdk/dnd instead')
+    }
+
     const elementRef = ref()
 
     const onDragStart = (evt: DnDEventType, position?: DnDPosition) => callEmit(props.onDragStart, evt, position)

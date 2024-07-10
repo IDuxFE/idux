@@ -40,6 +40,9 @@
     "clean": "rimraf dist node_modules"
   },
   "dependencies": {
+    "@atlaskit/pragmatic-drag-and-drop": "^1.2.1",
+    "@atlaskit/pragmatic-drag-and-drop-auto-scroll": "^1.4.0",
+    "@atlaskit/pragmatic-drag-and-drop-hitbox": "^1.0.3",
     "@floating-ui/dom": "^1.6.7",
     "lodash-es": "^4.17.21"
   },

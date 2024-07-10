@@ -1,0 +1,139 @@
+@cdk-dnd-indicator-thickness: var(--ix-cdk-dnd-indicator-thickness, var(--ix-line-width-bold, 2px));
+@cdk-dnd-indicator-color: var(--ix-cdk-dnd-indicator-color, var(--ix-color-primary-hover, #458fff));
+@cdk-dnd-indicator-mark-parent-bg-color: var(
+  --ix-cdk-dnd-indicator-mark-parent-bg-color,
+  var(--ix-color-primary-hover, #edf1f7)
+);
+@cdk-dnd-indicator-mark-parent-opacity: var(--ix-cdk-dnd-indicator-mark-parent-opacity, 0.1);
+@cdk-dnd-indicator-border-radius: var(--ix-cdk-dnd-indicator-border-radius, var(--ix-border-radius-md, 3px));
+@cdk-dnd-indicator-line-gap: var(--cdk-inner-line-gap, var(--ix-cdk-dnd-indicator-line-gap, 0px));
+
+.cdk-dnd {
+  &-sortable {
+    &-item {
+      position: relative;
+
+      &-dragging {
+        opacity: 0.3;
+      }
+    }
+    &-handle {
+      cursor: pointer;
+    }
+  }
+
+  &-movable {
+    &-handle {
+      cursor: move;
+    }
+  }
+
+  &-box-indicator {
+    display: block;
+    position: absolute;
+    z-index: 10;
+    pointer-events: none;
+    background-color: @cdk-dnd-indicator-color;
+
+    &-top {
+      .box-indicator-top();
+    }
+    &-bottom {
+      .box-indicator-bottom();
+    }
+    &-left {
+      .box-indicator-left();
+    }
+    &-right {
+      .box-indicator-right();
+    }
+  }
+  &-tree-indicator {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--cdk-inner-indent, 0);
+    right: 0;
+    pointer-events: none;
+
+    &-reorder-above {
+      .tree-indicator-line-above();
+    }
+    &-reorder-below,
+    &-reparent {
+      .tree-indicator-line-below();
+    }
+    &-make-child {
+      .tree-indicator-outline();
+    }
+    &-mark-parent {
+      .tree-indicator-mark-parent();
+    }
+  }
+}
+
+.box-indicator-vertical() {
+  width: @cdk-dnd-indicator-thickness;
+  top: 0;
+  bottom: 0;
+}
+.box-indicator-horizontal() {
+  height: @cdk-dnd-indicator-thickness;
+  right: 0;
+  left: 0;
+}
+.box-indicator-top() {
+  .box-indicator-horizontal();
+
+  top: calc(-0.5 * (@cdk-dnd-indicator-line-gap + @cdk-dnd-indicator-thickness));
+}
+.box-indicator-bottom() {
+  .box-indicator-horizontal();
+
+  bottom: calc(-0.5 * (@cdk-dnd-indicator-line-gap + @cdk-dnd-indicator-thickness));
+}
+.box-indicator-left() {
+  .box-indicator-vertical();
+
+  left: calc(-0.5 * (@cdk-dnd-indicator-line-gap + @cdk-dnd-indicator-thickness));
+}
+.box-indicator-right() {
+  .box-indicator-vertical();
+
+  right: calc(-0.5 * (@cdk-dnd-indicator-line-gap + @cdk-dnd-indicator-thickness));
+}
+
+.tree-indicator-line() {
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: block;
+    z-index: 1;
+    background-color: @cdk-dnd-indicator-color;
+    height: @cdk-dnd-indicator-thickness;
+  }
+}
+.tree-indicator-line-above() {
+  .tree-indicator-line();
+  &::after {
+    top: calc(-0.5 * @cdk-dnd-indicator-thickness);
+  }
+}
+.tree-indicator-line-below() {
+  .tree-indicator-line();
+  &::after {
+    bottom: calc(-0.5 * @cdk-dnd-indicator-thickness);
+  }
+}
+.tree-indicator-outline() {
+  border: @cdk-dnd-indicator-thickness solid @cdk-dnd-indicator-color;
+  border-radius: @cdk-dnd-indicator-border-radius;
+}
+.tree-indicator-mark-parent() {
+  background-color: @cdk-dnd-indicator-mark-parent-bg-color;
+  opacity: @cdk-dnd-indicator-mark-parent-opacity;
+  border-radius: @cdk-dnd-indicator-border-radius;
+  z-index: 1;
+}

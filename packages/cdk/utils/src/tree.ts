@@ -16,17 +16,17 @@ export type TreeTypeData<V extends object, C extends VKey> = {
 export function traverseTree<V extends TreeTypeData<V, C>, C extends keyof V>(
   data: V[],
   childrenKey: C,
-  fn: (item: V, parents: V[]) => void,
+  fn: (item: V, parents: V[], index: number) => void,
   traverseStrategy: 'pre' | 'post' = 'pre',
 ): void {
   const traverse = (_data: V[], parents: V[]) => {
     for (let idx = 0; idx < _data.length; idx++) {
       const item = _data[idx]
-      traverseStrategy === 'pre' && fn(item, parents)
+      traverseStrategy === 'pre' && fn(item, parents, idx)
       if (item[childrenKey]) {
         traverse(item[childrenKey]!, [item, ...parents])
       }
-      traverseStrategy === 'post' && fn(item, parents)
+      traverseStrategy === 'post' && fn(item, parents, idx)
     }
   }
 
@@ -149,20 +149,20 @@ export function flattenTree<V extends TreeTypeData<V, C>, C extends keyof V>(
 export function flattenTree<V extends TreeTypeData<V, C>, R extends object, C extends keyof V>(
   data: V[],
   childrenKey: C,
-  mapFn: (item: V) => R,
+  mapFn: (item: V, parents: V[]) => R,
   leafOnly?: boolean,
 ): (R & TreeTypeData<R, C>)[]
 export function flattenTree<V extends TreeTypeData<V, C>, R extends object, C extends keyof V>(
   data: V[],
   childrenKey: C,
-  mapFn?: (item: V) => R,
+  mapFn?: (item: V, parents: V[]) => R,
   leafOnly = false,
 ): V[] | (R & TreeTypeData<R, C>)[] {
   const res: V[] | (R & TreeTypeData<R, C>)[] = []
 
-  traverseTree(data, childrenKey, item => {
+  traverseTree(data, childrenKey, (item, parents) => {
     if (!leafOnly || !item[childrenKey] || item[childrenKey]!.length <= 0) {
-      const mappedItem = mapFn ? mapFn(item) : item
+      const mappedItem = mapFn ? mapFn(item, parents) : item
       mappedItem && res.push(mappedItem as V & (R & TreeTypeData<R, C>))
     }
   })
@@ -185,4 +185,116 @@ export function getTreeKeys<V extends TreeTypeData<V, C>, C extends keyof V>(
   })
 
   return keys
+}
+
+function _insertTreeItem<V extends TreeTypeData<V, C>, C extends keyof V>(
+  data: V[],
+  targetKey: VKey,
+  newItem: V,
+  childrenKey: C,
+  getKey: (item: V) => VKey,
+  isAfter = true,
+): V[] {
+  return data.flatMap(item => {
+    if (getKey(item) === targetKey) {
+      return isAfter ? [item, newItem] : [newItem, item]
+    }
+
+    const chlidren = item[childrenKey]
+    if (chlidren?.length) {
+      return {
+        ...item,
+        children: _insertTreeItem(chlidren, targetKey, newItem, childrenKey, getKey, isAfter),
+      }
+    }
+
+    return item
+  })
+}
+
+export function insertTreeItemBefore<V extends TreeTypeData<V, C>, C extends keyof V>(
+  data: V[],
+  targetKey: VKey,
+  newItem: V,
+  childrenKey: C,
+  getKey: (item: V) => VKey,
+): V[] {
+  return _insertTreeItem(data, targetKey, newItem, childrenKey, getKey, false)
+}
+
+export function insertTreeItemAfter<V extends TreeTypeData<V, C>, C extends keyof V>(
+  data: V[],
+  targetKey: VKey,
+  newItem: V,
+  childrenKey: C,
+  getKey: (item: V) => VKey,
+): V[] {
+  return _insertTreeItem(data, targetKey, newItem, childrenKey, getKey, true)
+}
+
+export function insertChildTreeItem<V extends TreeTypeData<V, C>, C extends keyof V>(
+  data: V[],
+  targetKey: VKey,
+  newItem: V,
+  childrenKey: C,
+  getKey: (item: V) => VKey,
+): V[] {
+  return data.flatMap(item => {
+    const children = item[childrenKey] ?? []
+    if (getKey(item) === targetKey) {
+      // already a parent: add as first child
+      return {
+        ...item,
+        // opening item so you can see where item landed
+        isOpen: true,
+        children: [newItem, ...children],
+      }
+    }
+
+    if (!children.length) {
+      return item
+    }
+
+    return {
+      ...item,
+      children: insertChildTreeItem(children, targetKey, newItem, childrenKey, getKey),
+    }
+  })
+}
+
+export function removeTreeItem<V extends TreeTypeData<V, C>, C extends keyof V>(
+  data: V[],
+  targetKey: VKey,
+  childrenKey: C,
+  getKey: (item: V) => VKey,
+): V[] {
+  let removed = false
+
+  const filterFn = (_data: V[]) => {
+    if (removed) {
+      return [..._data]
+    }
+
+    const filterRes: V[] = []
+
+    _data.forEach(item => {
+      if (getKey(item) !== targetKey) {
+        const children = item[childrenKey]
+        filterRes.push(
+          children?.length
+            ? {
+                ...item,
+                [childrenKey]: filterFn(children),
+              }
+            : item,
+        )
+      } else {
+        removed = true
+      }
+    })
+
+    return filterRes
+  }
+
+  return filterFn(data)
 }

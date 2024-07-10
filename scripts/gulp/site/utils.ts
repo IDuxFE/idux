@@ -19,6 +19,7 @@ export interface Meta {
   title: string
   subtitle?: string
   lang: string
+  hidden: boolean
   path: string
   order?: number
 }
@@ -45,6 +46,7 @@ export function initSite(): void {
     'utils',
     'version',
     ['pro', 'theme'],
+    ['cdk', 'drag-drop'],
   ]
   readdirSync(packageRoot).forEach(packageName => {
     if (filterPackageName.includes(packageName)) {

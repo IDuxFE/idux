@@ -9,7 +9,7 @@ import type { DnDEventType, DroppableOptions } from '../types'
 
 import { watch } from 'vue'
 
-import { type MaybeElementRef, convertElement, tryOnScopeDispose } from '@idux/cdk/utils'
+import { Logger, type MaybeElementRef, convertElement, tryOnScopeDispose } from '@idux/cdk/utils'
 
 import { type DnDContext } from './useDragDropContext'
 import { initContext } from '../utils'
@@ -29,6 +29,10 @@ export function useDroppable(
   connect: (source: MaybeElementRef) => void
   stop: () => void
 } {
+  if (__DEV__) {
+    Logger.warn('cdk/drag-drop', '@idux/cdk/drag-drop is deprecated, use @idux/cdk/dnd instead')
+  }
+
   context = initContext(context)
 
   const registry = context.registry

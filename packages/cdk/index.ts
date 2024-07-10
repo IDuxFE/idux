@@ -8,6 +8,15 @@
 import type { App, Directive } from 'vue'
 
 import { CdkClickOutside, vClickOutside } from '@idux/cdk/click-outside'
+import {
+  CdkDndBoxIndicator,
+  CdkDndMovable,
+  CdkDndMovableHandle,
+  CdkDndSortable,
+  CdkDndSortableHandle,
+  CdkDndSortableItem,
+  CdkDndTreeIndicator,
+} from '@idux/cdk/dnd'
 import { CdkDraggable } from '@idux/cdk/drag-drop'
 import { CdkPortal } from '@idux/cdk/portal'
 import { CdkResizable, CdkResizableHandle, CdkResizeObserver } from '@idux/cdk/resize'
@@ -16,7 +25,17 @@ import { version } from '@idux/cdk/version'
 
 const components = [
   CdkClickOutside,
+  /**
+   * @deprecated please use `@idux/cdk/dnd` instead'
+   */
   CdkDraggable,
+  CdkDndSortable,
+  CdkDndSortableItem,
+  CdkDndSortableHandle,
+  CdkDndBoxIndicator,
+  CdkDndTreeIndicator,
+  CdkDndMovable,
+  CdkDndMovableHandle,
   CdkPortal,
   CdkResizable,
   CdkResizableHandle,
@@ -47,6 +66,7 @@ export * from '@idux/cdk/a11y'
 export * from '@idux/cdk/breakpoint'
 export * from '@idux/cdk/click-outside'
 export * from '@idux/cdk/drag-drop'
+export * from '@idux/cdk/dnd'
 export * from '@idux/cdk/clipboard'
 export * from '@idux/cdk/forms'
 export * from '@idux/cdk/platform'
