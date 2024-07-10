@@ -33,6 +33,22 @@
     .@{checkbox-prefix} + &-label {
       margin-left: var(--ix-select-option-label-margin-left);
     }
+
+    &-drag-handle {
+      width: var(--ix-font-size-icon);
+      height: 100%;
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      margin-right: var(--ix-margin-size-xs);
+      font-size: var(--ix-font-size-icon);
+      color: var(--ix-color-icon);
+    }
+
+    &-with-drag-handle {
+      padding-left: 0;
+    }
   }
 
   &-option-group {

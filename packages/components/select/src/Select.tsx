@@ -199,6 +199,16 @@ export default defineComponent({
       return spinProps ? <IxSpin {...spinProps}>{children}</IxSpin> : children
     }
 
+    const handleContentMouseDown = (evt: MouseEvent) => {
+      if (evt.target instanceof HTMLInputElement) {
+        return
+      }
+
+      setTimeout(() => {
+        focus()
+      })
+    }
+
     const renderContent: ControlTriggerSlots['overlay'] = () => {
       const children = [renderLoading(<Panel ref={panelRef} v-slots={slots} {...panelProps.value} />)]
       const { searchable, overlayRender } = props
@@ -231,7 +241,7 @@ export default defineComponent({
         )
       }
 
-      return [<div>{overlayRender ? overlayRender(children) : children}</div>]
+      return [<div onMousedown={handleContentMouseDown}>{overlayRender ? overlayRender(children) : children}</div>]
     }
 
     return () => {

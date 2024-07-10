@@ -7,9 +7,8 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { FlattenedOption } from './composables/useOptions'
 import type { PanelActiveStateContext } from './composables/usePanelActiveState'
-import type { SelectPanelProps } from './types'
+import type { FlattenedOption, SelectPanelProps } from './types'
 import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef, InjectionKey } from 'vue'
 
@@ -20,6 +19,7 @@ export interface SelectPanelDataContext {
 export interface SelectPanelContext extends PanelActiveStateContext {
   props: SelectPanelProps
   mergedPrefixCls: ComputedRef<string>
+  mergedDndSortable: ComputedRef<false | { autoScroll: boolean; dragHandle: string | false }>
   flattenedOptions: ComputedRef<FlattenedOption[]>
   selectedKeys: ComputedRef<VKey[]>
   selectedLimit: ComputedRef<boolean>

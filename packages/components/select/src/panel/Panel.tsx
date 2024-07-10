@@ -5,10 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { FlattenedOption } from '../composables/useOptions'
+import { computed, defineComponent, inject, normalizeClass, provide, ref, toRaw } from 'vue'
 
-import { computed, defineComponent, inject, normalizeClass, provide, ref } from 'vue'
-
+import { CdkDndSortable, type DndSortableData, type DndSortableReorderInfo, useDndAutoScroll } from '@idux/cdk/dnd'
 import {
   CdkVirtualScroll,
   type VirtualRowRenderFn,
@@ -29,7 +28,8 @@ import { useFlattenedOptions } from '../composables/useOptions'
 import { usePanelActiveState } from '../composables/usePanelActiveState'
 import { useSelectedState } from '../composables/usePanelSelectedState'
 import { SELECT_PANEL_DATA_TOKEN, selectPanelContext } from '../token'
-import { type SelectPanelProps, selectPanelProps } from '../types'
+import { type FlattenedOption, type SelectPanelProps, selectPanelProps } from '../types'
+import { unFlattenOptions } from '../utils/flattenOptions'
 
 export default defineComponent({
   name: 'IxSelectPanel',
@@ -43,7 +43,26 @@ export default defineComponent({
     const config = useGlobalConfig('select')
     const locale = useGlobalConfig('locale')
 
-    const flattenedOptions = useSelectPanelData(props, config)
+    const mergedDndSortable = computed(() => {
+      const dndSortable = props.dndSortable
+      if (!dndSortable) {
+        return false
+      }
+
+      if (dndSortable === true) {
+        return {
+          autoScroll: true as const,
+          dragHandle: false as const,
+        }
+      }
+
+      return {
+        autoScroll: dndSortable.autoScroll ?? true,
+        dragHandle: dndSortable.dragHandle === true ? 'holder' : (false as const),
+      }
+    })
+
+    const { flattenedOptions, mergedChildrenKey, getKey } = useSelectPanelDataContext(props, config)
 
     const selectedStateContext = useSelectedState(props, locale)
 
@@ -51,6 +70,18 @@ export default defineComponent({
     const scrollTo: VirtualScrollToFn = options => virtualScrollRef.value?.scrollTo(options)
 
     const activeStateContext = usePanelActiveState(props, flattenedOptions, selectedStateContext.selectedKeys, scrollTo)
+
+    const autoScrollListRef = computed(() => {
+      if (!mergedDndSortable.value) {
+        return
+      }
+
+      return mergedDndSortable.value.autoScroll ? virtualScrollRef.value?.getHolderElement() : undefined
+    })
+    useDndAutoScroll(autoScrollListRef, {
+      canScroll: true,
+      allowedAxis: 'vertical',
+    })
 
     expose({
       scrollTo,
@@ -61,6 +92,7 @@ export default defineComponent({
       props,
       mergedPrefixCls,
       flattenedOptions,
+      mergedDndSortable,
       ...selectedStateContext,
       ...activeStateContext,
     })
@@ -88,9 +120,18 @@ export default defineComponent({
       }
     }
 
-    // to prevent triggering selector blur when clicking on the panel
-    const handlePanelMouseDown = (evt: MouseEvent) => {
-      evt.preventDefault()
+    const handleSortReorder = (reorderInfo: DndSortableReorderInfo) => {
+      callEmit(props.onDndSortReorder, reorderInfo)
+    }
+    const handleSortChange = (newData: DndSortableData[]) => {
+      const oldData = props.dataSource ? toRaw(props.dataSource) : []
+      const unFlattenedNewData = unFlattenOptions(
+        newData as unknown as FlattenedOption[],
+        mergedChildrenKey.value,
+        getKey.value,
+      )
+
+      callEmit(props.onDndSortChange, unFlattenedNewData, oldData)
     }
 
     return () => {
@@ -108,7 +149,7 @@ export default defineComponent({
           )
         }
 
-        children.push(
+        const list = (
           <CdkVirtualScroll
             ref={virtualScrollRef}
             dataSource={options}
@@ -121,38 +162,47 @@ export default defineComponent({
             onScroll={onScroll}
             onScrolledBottom={onScrolledBottom}
             onScrolledChange={handleScrolledChange}
-          />,
+          />
+        )
+
+        children.push(
+          mergedDndSortable.value ? (
+            <CdkDndSortable dataSource={options} onSortReorder={handleSortReorder} onSortChange={handleSortChange}>
+              {list}
+            </CdkDndSortable>
+          ) : (
+            list
+          ),
         )
       } else {
         children.push(<ɵEmpty v-slots={slots} empty={props.empty} />)
       }
 
-      return (
-        <div class={panelClasses.value} onMousedown={handlePanelMouseDown}>
-          {children}
-        </div>
-      )
+      return <div class={panelClasses.value}>{children}</div>
     }
   },
 })
 
-function useSelectPanelData(props: SelectPanelProps, config: SelectConfig) {
+function useSelectPanelDataContext(props: SelectPanelProps, config: SelectConfig) {
   const dataContext = inject(SELECT_PANEL_DATA_TOKEN, null)
-
-  if (dataContext) {
-    return dataContext.flattenedOptions
-  }
 
   const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
   const mergedLabelKey = computed(() => props.labelKey ?? config.labelKey)
   const getKey = usePanelGetOptionKey(props, config)
 
-  const flattenedOptions = useFlattenedOptions(
-    computed(() => props.dataSource),
-    mergedChildrenKey,
-    getKey,
-    mergedLabelKey,
-  )
+  const mergedFlattenedOptions = dataContext
+    ? dataContext.flattenedOptions
+    : useFlattenedOptions(
+        computed(() => props.dataSource),
+        mergedChildrenKey,
+        getKey,
+        mergedLabelKey,
+      )
 
-  return flattenedOptions
+  return {
+    flattenedOptions: mergedFlattenedOptions,
+    mergedChildrenKey,
+    mergedLabelKey,
+    getKey,
+  }
 }

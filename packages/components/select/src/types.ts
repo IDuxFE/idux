@@ -7,6 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import type { DndSortableReorderInfo } from '@idux/cdk/dnd'
 import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
 import type { VirtualScrollMode, VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
@@ -16,6 +17,11 @@ import type { SpinProps } from '@idux/components/spin'
 import type { OverlayContainerType } from '@idux/components/utils'
 import type { DefineComponent, FunctionalComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
 
+export interface SelectDndSortable {
+  autoScroll?: boolean
+  dragHandle?: boolean | string
+}
+
 export const selectPanelProps = {
   activeValue: { type: [String, Number, Symbol] as PropType<VKey>, default: undefined },
   selectedKeys: { type: Array as PropType<VKey[]>, default: undefined },
@@ -23,6 +29,7 @@ export const selectPanelProps = {
 
   customAdditional: { type: Function as PropType<SelectCustomAdditional>, default: undefined },
   dataSource: { type: Array as PropType<SelectData[]>, default: undefined },
+  dndSortable: { type: [Boolean, Object] as PropType<boolean | SelectDndSortable>, default: false },
   empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'simple' },
   getKey: { type: [String, Function] as PropType<string | ((data: SelectData<any>) => any)>, default: undefined },
   labelKey: { type: String, default: undefined },
@@ -40,6 +47,10 @@ export const selectPanelProps = {
     MaybeArray<(startIndex: number, endIndex: number, visibleData: SelectData<any>[]) => void>
   >,
   onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
+  onDndSortReorder: [Function, Array] as PropType<MaybeArray<(reorderInfo: DndSortableReorderInfo) => void>>,
+  onDndSortChange: [Function, Array] as PropType<
+    MaybeArray<(newDataSource: SelectData[], oldDataSource: SelectData[]) => void>
+  >,
 
   // private
   _virtualScrollHeight: { type: [Number, String] as PropType<number | 'auto' | '100%'>, default: 256 },
@@ -62,6 +73,7 @@ export const selectProps = {
   clearIcon: { type: String, default: undefined },
   customAdditional: { type: Object as PropType<SelectCustomAdditional>, default: undefined },
   dataSource: { type: Array as PropType<SelectData[]>, default: undefined },
+  dndSortable: { type: [Boolean, Object] as PropType<boolean | SelectDndSortable>, default: false },
   disabled: { type: Boolean, default: false },
   empty: { type: [String, Object] as PropType<'default' | 'simple' | EmptyProps>, default: 'simple' },
   getKey: { type: [String, Function] as PropType<string | ((data: SelectData) => VKey)>, default: undefined },
@@ -103,6 +115,10 @@ export const selectProps = {
     MaybeArray<(startIndex: number, endIndex: number, visibleData: SelectData<any>[]) => void>
   >,
   onScrolledBottom: [Function, Array] as PropType<MaybeArray<() => void>>,
+  onDndSortReorder: [Function, Array] as PropType<MaybeArray<(reorderInfo: DndSortableReorderInfo) => void>>,
+  onDndSortChange: [Function, Array] as PropType<
+    MaybeArray<(newDataSource: SelectData[], oldDataSource: SelectData[]) => void>
+  >,
 
   // private
   overlayHeight: { type: Number, default: 256 },
@@ -167,6 +183,14 @@ export type SelectOptionGroupComponent = FunctionalComponent<
 >
 
 export type SelectData<K = VKey> = SelectOptionProps<K> | SelectOptionGroupProps<K>
+export interface FlattenedOption {
+  key: VKey
+  label: string
+  disabled?: boolean
+  rawData: SelectData
+  type: 'group' | 'item'
+  parentKey?: VKey
+}
 
 export type SelectSearchFn = (data: SelectData<any>, searchText: string) => boolean
 

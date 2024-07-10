@@ -24,6 +24,7 @@ export function usePanelProps(
     childrenKey: props.childrenKey,
     customAdditional: props.customAdditional,
     empty: props.empty,
+    dndSortable: props.dndSortable,
     getKey: props.getKey,
     labelKey: props.labelKey,
     multiple: props.multiple,
@@ -36,6 +37,8 @@ export function usePanelProps(
     onScroll: props.onScroll,
     onScrolledChange: props.onScrolledChange,
     onScrolledBottom: props.onScrolledBottom,
+    onDndSortReorder: props.onDndSortReorder,
+    onDndSortChange: props.onDndSortChange,
     _virtualScrollHeight: props.overlayHeight,
   }))
 }
