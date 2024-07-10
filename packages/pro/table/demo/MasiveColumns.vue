@@ -1,21 +1,26 @@
 <template>
-  <IxProTable
-    :columns="columns"
-    :dataSource="data"
-    header="Pro Table"
-    :toolbar="toolbar"
-    virtualHorizontal
-    :virtualColWidth="200"
-    @columnsChange="onColumnsChange"
-  >
-    <template #name="{ value }">
-      <a>{{ value }}</a>
-    </template>
-    <template #action="{ record }">
-      <a style="margin-right: 8px">Invite {{ record.name }}</a>
-      <a>Delete</a>
-    </template>
-  </IxProTable>
+  <div style="height: 600px">
+    <IxProTable
+      autoHeight
+      :columns="columns"
+      :dataSource="data"
+      :pagination="false"
+      header="Pro Table"
+      :toolbar="toolbar"
+      virtual
+      virtualHorizontal
+      :virtualColWidth="150"
+      @columnsChange="onColumnsChange"
+    >
+      <template #name="{ value }">
+        <a>{{ value }}</a>
+      </template>
+      <template #action="{ record }">
+        <a style="margin-right: 8px">Invite {{ record.name }}</a>
+        <a>Delete</a>
+      </template>
+    </IxProTable>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -37,18 +42,18 @@ interface Data {
 }
 
 const toolbar = [
-  h(IxButton, { size: 'xs' }, () => 'Load'),
-  h(IxButton, { icon: 'reload', size: 'xs', title: 'reload', onClick: () => console.log('reload data') }),
+  h(IxButton, { props: { size: 'xs' } }, 'Load'),
+  h(IxButton, { props: { icon: 'reload', size: 'xs', title: 'reload', onClick: () => console.log('reload data') } }),
 ]
 
 const onColumnsChange = console.log
 
-const dataColumns = Array.from(new Array(1000)).map((_, idx) => ({
+const dataColumns = Array.from(new Array(100)).map((_, idx) => ({
   title: `data${idx}`,
   dataKey: `data${idx}`,
   changeVisible: true,
-  visible: idx < 100,
-  width: 200,
+  visible: idx % 3 === 1 && idx < 5,
+  width: idx % 2 === 1 ? 200 : 300,
 }))
 
 const columns: ProTableColumn<Data>[] = [
@@ -97,7 +102,7 @@ const columns: ProTableColumn<Data>[] = [
         if (tag === 'loser') {
           color = 'error'
         }
-        return h(IxTag, { color }, { default: () => tag.toUpperCase() })
+        return h(IxTag, { props: { color } }, tag.toUpperCase())
       }),
   },
   {
