@@ -27,7 +27,7 @@ export const esbuildPlugin = (options?: Options): Plugin => {
   const { include, exclude, ...restOptions } = { ...defaultOptions, ...options }
   const filter = createFilter(include, exclude)
 
-  const extensions = ['.ts', '.tsx']
+  const extensions = ['.js', '.jsx', '.ts', '.tsx']
   const resolveFile = (resolved: string, addIndex = false) => {
     for (const ext of extensions) {
       const file = addIndex ? join(resolved, `index${ext}`) : `${resolved}${ext}`

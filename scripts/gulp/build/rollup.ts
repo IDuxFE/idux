@@ -3,6 +3,7 @@ import { join, resolve } from 'path'
 import alias from '@rollup/plugin-alias'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import replace from '@rollup/plugin-replace'
+import commonjs from '@rollup/plugin-commonjs'
 import vuePlugin from '@vitejs/plugin-vue'
 import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -25,7 +26,19 @@ interface Options {
   minify?: boolean
 }
 
-const externalDeps = ['vue', '@vue', '@idux', '@floating-ui/dom', '@emotion/hash', 'date-fns', 'lodash-es', 'ajv']
+const externalDeps = [
+  'vue',
+  '@vue',
+  '@idux',
+  '@floating-ui/dom',
+  '@emotion/hash',
+  '@atlaskit/pragmatic-drag-and-drop',
+  '@atlaskit/pragmatic-drag-and-drop-hitbox',
+  '@atlaskit/pragmatic-drag-and-drop-auto-scroll',
+  'date-fns',
+  'lodash-es',
+  'ajv',
+]
 const replaceOptions = {
   __DEV__: "process.env.NODE_ENV !== 'production'",
   __TEST__: false,
@@ -78,6 +91,7 @@ export const getRollupFullOptions = (options: Options): RollupOptions => {
       ],
     }),
     nodeResolve(),
+    commonjs(),
     replace(replaceOptions),
     vuePlugin(),
     vueJsxPlugin({ enableObjectSlots: false }),
