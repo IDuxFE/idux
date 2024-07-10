@@ -9,8 +9,10 @@ import { computed, defineComponent, inject } from 'vue'
 
 import { isNil, toString } from 'lodash-es'
 
+import { CdkDndSortableHandle, CdkDndSortableItem } from '@idux/cdk/dnd'
 import { callEmit } from '@idux/cdk/utils'
 import { IxCheckbox } from '@idux/components/checkbox'
+import { IxIcon } from '@idux/components/icon'
 
 import { selectPanelContext } from '../token'
 import { optionProps } from '../types'
@@ -22,6 +24,7 @@ export default defineComponent({
     const {
       props: selectPanelProps,
       mergedPrefixCls,
+      mergedDndSortable,
       selectedKeys,
       selectedLimit,
       selectedLimitTitle,
@@ -41,6 +44,7 @@ export default defineComponent({
       return {
         [prefixCls]: true,
         [`${prefixCls}-active`]: isActive.value,
+        [`${prefixCls}-with-drag-handle`]: mergedDndSortable.value && mergedDndSortable.value.handle,
         [`${prefixCls}-disabled`]: isDisabled.value,
         [`${prefixCls}-grouped`]: !isNil(parentKey),
         [`${prefixCls}-selected`]: isSelected.value,
@@ -67,19 +71,31 @@ export default defineComponent({
         ? selectPanelProps.customAdditional({ data: rawData!, index: props.index! })
         : undefined
 
-      return (
-        <div
-          class={classes.value}
-          title={title}
-          onMouseenter={disabled ? undefined : handleMouseEnter}
-          onClick={disabled ? undefined : handleClick}
-          aria-label={_label}
-          aria-selected={selected}
-          {...customAdditional}
-        >
-          {multiple && <IxCheckbox checked={selected} disabled={disabled} />}
-          <span class={`${prefixCls}-label`}>{renderOptionLabel(slots, rawData!, _label)}</span>
-        </div>
+      const optionContentNodes = [
+        multiple && <IxCheckbox checked={selected} disabled={disabled} />,
+        <span class={`${prefixCls}-label`}>{renderOptionLabel(slots, rawData!, _label)}</span>,
+      ]
+      const optionsProps = {
+        class: classes.value,
+        title,
+        onMouseenter: disabled ? undefined : handleMouseEnter,
+        onClick: disabled ? undefined : handleClick,
+        'aria-label': _label,
+        'aria-selected': selected,
+        ...customAdditional,
+      }
+
+      return mergedDndSortable.value ? (
+        <CdkDndSortableItem itemKey={props.optionKey} canDrag={!isDisabled.value} {...optionsProps}>
+          {mergedDndSortable.value.dragHandle ? (
+            <CdkDndSortableHandle class={`${prefixCls}-drag-handle`}>
+              {!isDisabled.value && <IxIcon name={mergedDndSortable.value.dragHandle} />}
+            </CdkDndSortableHandle>
+          ) : undefined}
+          {optionContentNodes}
+        </CdkDndSortableItem>
+      ) : (
+        <div {...optionsProps}>{optionContentNodes}</div>
       )
     }
   },

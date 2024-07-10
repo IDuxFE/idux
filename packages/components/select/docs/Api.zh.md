@@ -18,6 +18,7 @@
 | `customAdditional` | 自定义下拉选项的额外属性 | `SelectCustomAdditional` | - | - | 例如 `class`, 或者原生事件 |
 | `dataSource` | 选项数据源 | `SelectData[]` | - | - | 优先级高于 `default` 插槽, 性能会更好 |
 | `disabled` | 是否禁用状态 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
+| `dndSortable` | 拖拽排序配置 | `boolean` | `SelectDndSortable` | `false` | - |
 | `empty` | 自定义当下拉列表为空时显示的内容 | `'default' \| 'simple' \| EmptyProps` | `'simple'` | - | - |
 | `getKey` | 获取数据的唯一标识 | `string \| (data: SelectData) => VKey` | `key` | ✅ | 为了兼容之前的版本，默认值也会支持 `value` |
 | `labelKey` | 选项 label 的 key | `string` | `label` | ✅ | 仅在使用 `dataSource` 时有效 |
@@ -45,6 +46,21 @@
 | `onScroll` | 滚动事件 | `(evt: Event) => void` | - | - | - |
 | `onScrolledChange` | 滚动的位置发生变化 | `(startIndex: number, endIndex: number, visibleData: SelectData[]) => void` | - | - | 仅 `virtual` 模式下可用 |
 | `onScrolledBottom` | 滚动到底部时触发 | `() => void` | - | - | 仅 `virtual` 模式下可用 |
+| `onScrolledChange` | 滚动的位置发生变化 | `(startIndex: number, endIndex: number, visibleData: SelectData[]) => void` | - | - | 仅 `virtual` 模式下可用 |
+| `onDndSortReorder` | 数据重排序之后的回调 | `(reorderInfo: DndSortableReorderInfo) => void` | - | - | - |
+| `onDndSortChange` | 数据排序改变之后的回调 | `(newData: SelectData[], oldData: SelectData[]) => void` | - | - | - |
+
+```ts
+export interface DndSortableReorderInfo {
+  sourceIndex: number
+  targetIndex: number
+  sourceKey: VKey
+  targetKey: VKey
+  sourceData: SelectData
+  targetData: SelectData
+  operation: 'insertBefore' | 'insertAfter' | 'insertChild'
+}
+```
 
 ```ts
 export type SelectData = SelectOptionProps | SelectOptionGroupProps

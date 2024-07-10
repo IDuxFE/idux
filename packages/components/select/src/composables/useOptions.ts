@@ -7,7 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { SelectData, SelectProps, SelectSearchFn } from '../types'
+import type { FlattenedOption, SelectData, SelectProps, SelectSearchFn } from '../types'
 import type { ComputedRef, Ref, Slots, VNode } from 'vue'
 
 import { computed } from 'vue'
@@ -18,16 +18,8 @@ import { type VKey, flattenNode } from '@idux/cdk/utils'
 
 import { GetKeyFn } from './useGetOptionKey'
 import { optionGroupKey, optionKey } from '../option'
+import { flattenOptions } from '../utils/flattenOptions'
 import { generateOption } from '../utils/generateOption'
-
-export interface FlattenedOption {
-  key: VKey
-  label: string
-  disabled?: boolean
-  rawData: SelectData
-  type: 'group' | 'item'
-  parentKey?: VKey
-}
 
 export function useConvertedOptions(props: SelectProps, slots: Slots): ComputedRef<SelectData[]> {
   return computed(() => {
@@ -131,48 +123,6 @@ function filterOptions(
     }
   }
   return filteredOptions
-}
-
-function flattenOptions(options: SelectData[] | undefined, childrenKey: string, getKeyFn: GetKeyFn, labelKey: string) {
-  const mergedOptions: FlattenedOption[] = []
-  const appendOption = (item: SelectData, index: number | undefined, parentKey?: VKey) => {
-    const parsedOption = parseOption(item, item => getKeyFn(item) ?? index, childrenKey, labelKey, parentKey)
-    mergedOptions.push(parsedOption)
-
-    return parsedOption.key
-  }
-
-  options?.forEach((item, index) => {
-    const children = item[childrenKey] as SelectData[]
-
-    const optionKey = appendOption(item, index)
-
-    if (children && children.length > 0) {
-      children.forEach(child => {
-        appendOption(child, undefined, optionKey)
-      })
-    }
-  })
-
-  return mergedOptions
-}
-
-function parseOption(
-  option: SelectData,
-  getKey: GetKeyFn,
-  childrenKey: string,
-  labelKey: string,
-  parentKey?: VKey,
-): FlattenedOption {
-  const children = option[childrenKey] as SelectData[] | undefined
-  return {
-    key: getKey(option),
-    parentKey,
-    label: option[labelKey],
-    disabled: !!option.disabled,
-    type: children && children.length > 0 ? 'group' : 'item',
-    rawData: option,
-  }
 }
 
 function useSearchFn(props: SelectProps, mergedLabelKey: ComputedRef<string>) {
