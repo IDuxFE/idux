@@ -10,6 +10,7 @@
 | `addable` | 显示新增按钮 | `boolean` | `false`| - | - |
 | `closable` | 显示关闭按钮 | `boolean` | `false`| - | - |
 | `dataSource` | 数据源 | `TabsData[]` | - | - | 优先级高于 `default` 插槽 |
+| `dndSortable` | 拖拽排序配置 | `boolean` | `TabsDndSortable` | `false` | - |
 | `forceRender` | 内容被隐藏时是否渲染 DOM 结构 | `boolean` | `false` | - | - |
 | `mode` | 当`type`为`segment`时按钮的样式 | `'default' \| 'primary'` | `'default'` | - | - |
 | `placement` | 标签的方位 | `'top' \| 'start' \| 'end' \| 'bottom'` | `'top'` | - | 其他类型仅在type为`line`生效 |
@@ -18,6 +19,20 @@
 | `onAdd` | 点击添加按钮后的回调 | `() => void \| boolean \| Promise<boolean>` | - | - |
 | `onClose` | 点击关闭按钮后的回调，返回 `false` 或 promise resolve `false` 或 promise reject 会阻止关闭 | `(key: any) => void \| boolean \| Promise<boolean>` | - | - |
 | `onBeforeLeave` | 切换标签之前的钩子函数，返回 `false` 或 promise resolve `false` 或 promise reject 会阻止切换 | `(key: VKey, oldKey?: VKey) => boolean \| Promise<boolean>`| - | - | - |
+| `onDndSortReorder` | 数据重排序之后的回调 | `(reorderInfo: DndSortableReorderInfo) => void` | - | - | - |
+| `onDndSortChange` | 数据排序改变之后的回调 | `(newData: TabsData[], oldData: TabsData[]) => void` | - | - | - |
+
+```ts
+export interface DndSortableReorderInfo {
+  sourceIndex: number
+  targetIndex: number
+  sourceKey: VKey
+  targetKey: VKey
+  sourceData: TabsData
+  targetData: TabsData
+  operation: 'insertBefore' | 'insertAfter' | 'insertChild'
+}
+```
 
 #### IxTabProps
 

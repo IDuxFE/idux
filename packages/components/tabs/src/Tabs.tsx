@@ -34,6 +34,25 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-tabs`)
     const mergedSize = computed(() => props.size ?? config.size)
 
+    const mergedDndSortable = computed(() => {
+      const dndSortable = props.dndSortable
+      if (!dndSortable) {
+        return false
+      }
+
+      if (dndSortable === true) {
+        return {
+          autoScroll: true as const,
+          handle: false as const,
+        }
+      }
+
+      return {
+        autoScroll: dndSortable.autoScroll ?? true,
+        handle: dndSortable.handle ?? false,
+      }
+    })
+
     const mergedDataSource = useDataSource(props, slots)
     const horizontalPlacement = ['top', 'bottom']
     const isHorizontal = computed(() => horizontalPlacement.includes(props.placement))
@@ -77,6 +96,7 @@ export default defineComponent({
       locale: locale.tabs,
       mergedPrefixCls,
       mergedDataSource,
+      mergedDndSortable,
       allTabsPanelVisible,
       isHorizontal,
       closedKeys,

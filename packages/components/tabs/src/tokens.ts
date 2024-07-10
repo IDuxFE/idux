@@ -17,6 +17,7 @@ export interface TabsContext {
   props: TabsProps
   locale: TabsLocale
   mergedPrefixCls: ComputedRef<string>
+  mergedDndSortable: ComputedRef<false | { autoScroll: boolean; handle: string | boolean }>
   mergedDataSource: ComputedRef<TabsData[]>
   allTabsPanelVisible: ComputedRef<boolean>
   isHorizontal: ComputedRef<boolean>

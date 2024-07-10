@@ -7,6 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import type { DndSortableReorderInfo } from '@idux/cdk/dnd'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, FunctionalComponent, HTMLAttributes, PropType, VNodeChild } from 'vue'
 
@@ -17,6 +18,11 @@ export type TabsPlacement = 'top' | 'bottom' | 'start' | 'end'
 export type TabsSize = 'lg' | 'md'
 export type TabsType = 'card' | 'line' | 'segment'
 
+export interface TabsDndSortable {
+  autoScroll?: boolean
+  dragHandle?: boolean | string
+}
+
 export const tabsProps = {
   selectedKey: { type: [Number, String, Symbol] as PropType<VKey>, default: undefined },
 
@@ -24,6 +30,7 @@ export const tabsProps = {
   addable: { type: Boolean, default: false },
   closable: { type: Boolean, default: false },
   dataSource: { type: Array as PropType<TabsData[]>, default: undefined },
+  dndSortable: { type: [Boolean, Object] as PropType<boolean | TabsDndSortable>, default: false },
   forceRender: { type: Boolean, default: false },
   mode: { type: String as PropType<TabsMode>, default: 'default' },
   placement: { type: String as PropType<TabsPlacement>, default: 'top' },
@@ -41,6 +48,10 @@ export const tabsProps = {
   onTabClick: [Function, Array] as PropType<MaybeArray<(key: any, evt: Event) => void>>,
   onBeforeLeave: [Function, Array] as PropType<
     MaybeArray<(key: any, oldKey?: any) => void | boolean | Promise<boolean>>
+  >,
+  onDndSortReorder: [Function, Array] as PropType<MaybeArray<(reorderInfo: DndSortableReorderInfo) => void>>,
+  onDndSortChange: [Function, Array] as PropType<
+    MaybeArray<(newDataSource: TabsData[], oldDataSource: TabsData[]) => void>
   >,
 } as const
 
@@ -85,6 +96,7 @@ export const tabPaneProps = {
 export const moreSelectPaneProps = {
   dataSource: { type: Array as PropType<SelectData[]>, default: () => [] },
   visible: { type: Boolean, default: false },
+  onSortReorder: Function as PropType<(reorderInfo: DndSortableReorderInfo) => void>,
 
   // private
   _virtualScrollHeight: { type: Number, default: 186 },

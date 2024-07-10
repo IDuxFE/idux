@@ -5,7 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { defineComponent, inject, shallowRef, watch } from 'vue'
+import type { DndSortableReorderInfo } from '@idux/cdk/dnd'
+
+import { computed, defineComponent, inject, shallowRef, watch } from 'vue'
 
 import { isNil, isString } from 'lodash-es'
 
@@ -21,10 +23,23 @@ import { moreSelectPaneProps } from '../types'
 export default defineComponent({
   props: moreSelectPaneProps,
   setup(props, { slots }) {
-    const { props: tabsProps, mergedPrefixCls, selectedKey, handleTabClose, setSelectedKey } = inject(tabsToken)!
+    const {
+      props: tabsProps,
+      mergedPrefixCls,
+      mergedDndSortable,
+      selectedKey,
+      handleTabClose,
+      setSelectedKey,
+    } = inject(tabsToken)!
 
     const [searchValue, setSearchValue] = useState('')
     const searchInputRef = shallowRef<InputInstance>()
+
+    const filteredDataSource = computed(() => {
+      return props.dataSource.filter(data => {
+        return String(data.label).indexOf(searchValue.value) !== -1
+      })
+    })
 
     const handleInput = (evt: Event) => {
       const inputValue = (evt.target as HTMLInputElement).value
@@ -44,6 +59,29 @@ export default defineComponent({
 
     const handleSelectChange = (data: SelectData) => {
       setSelectedKey(data.key as VKey)
+    }
+
+    const handleSortReorder = (reorderInfo: DndSortableReorderInfo) => {
+      if (!props.onSortReorder) {
+        return
+      }
+
+      if (filteredDataSource.value.length === props.dataSource.length) {
+        props.onSortReorder(reorderInfo)
+      } else {
+        const { sourceIndex, targetIndex, ...rest } = reorderInfo
+        const sourceKey = filteredDataSource.value[sourceIndex].key!
+        const targetKey = filteredDataSource.value[targetIndex].key!
+
+        const mergedSourceIndex = props.dataSource.findIndex(data => data.key === sourceKey)
+        const mergedTargetIndex = props.dataSource.findIndex(data => data.key === targetKey)
+
+        props.onSortReorder({
+          sourceIndex: mergedSourceIndex,
+          targetIndex: mergedTargetIndex,
+          ...rest,
+        })
+      }
     }
 
     const optionLabelRender = (data: SelectData) => {
@@ -86,9 +124,6 @@ export default defineComponent({
     )
 
     return () => {
-      const mergedDataSource = props.dataSource.filter(data => {
-        return String(data.label).indexOf(searchValue.value) !== -1
-      })
       return (
         <div>
           <IxInput
@@ -106,9 +141,10 @@ export default defineComponent({
               optionLabel: optionLabelRender,
             }}
             selectedKeys={!isNil(selectedKey.value) ? [selectedKey.value] : undefined}
-            dataSource={mergedDataSource}
+            dataSource={filteredDataSource.value}
+            dndSortable={mergedDndSortable.value}
+            onDndSortReorder={handleSortReorder}
             onOptionClick={handleSelectChange}
-            virtual
             _virtualScrollHeight={props._virtualScrollHeight}
           />
         </div>

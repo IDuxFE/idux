@@ -5,11 +5,20 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { Transition, computed, defineComponent, inject, normalizeClass, shallowRef, watch } from 'vue'
+import type { TabsData } from '../types'
+
+import { Transition, computed, defineComponent, inject, normalizeClass, shallowRef, toRaw, watch } from 'vue'
 
 import { isString } from 'lodash-es'
 
-import { convertCssPixel } from '@idux/cdk/utils'
+import {
+  CdkDndSortable,
+  type DndSortableData,
+  type DndSortableReorderInfo,
+  reorderList,
+  useDndAutoScroll,
+} from '@idux/cdk/dnd'
+import { callEmit, convertCssPixel } from '@idux/cdk/utils'
 import { IxButton } from '@idux/components/button'
 import { IxIcon } from '@idux/components/icon'
 import { IxPopover } from '@idux/components/popover'
@@ -31,6 +40,7 @@ export default defineComponent({
       locale,
       mergedPrefixCls,
       mergedDataSource,
+      mergedDndSortable,
       allTabsPanelVisible,
       isHorizontal,
       closedKeys,
@@ -59,6 +69,18 @@ export default defineComponent({
       navAttrs,
       closedKeys,
     )
+
+    const autoScrollListRef = computed(() => {
+      if (!mergedDndSortable.value) {
+        return
+      }
+
+      return mergedDndSortable.value.autoScroll ? navListRef.value : undefined
+    })
+    useDndAutoScroll(autoScrollListRef, {
+      canScroll: true,
+      allowedAxis: 'horizontal',
+    })
 
     const showAllTabs = computed(() => hasScroll.value && (tabsProps.showAllTabsPanel ?? config.showAllTabsPanel))
 
@@ -117,18 +139,106 @@ export default defineComponent({
       }
     })
 
+    let popoverHideDelayTmr: number
+    let popoverLockTmr: number
+    let popoverLocked = false
+
+    watch(allNavDataSource, () => {
+      clearTimeout(popoverLockTmr)
+      popoverLocked = true
+      popoverLockTmr = setTimeout(() => {
+        popoverLocked = false
+      }, 50)
+    })
+
     const handleSelectedNavChange = (element: HTMLElement) => {
       selectedNavRef.value = element
     }
     const handleMouseenter = () => {
+      clearTimeout(popoverHideDelayTmr)
       setAllTabsPanelVisible(true)
     }
     const handleMouseleave = () => {
-      setAllTabsPanelVisible(false)
+      if (popoverLocked) {
+        return
+      }
+
+      clearTimeout(popoverHideDelayTmr)
+      popoverHideDelayTmr = setTimeout(() => {
+        setAllTabsPanelVisible(false)
+      }, 100)
+    }
+
+    const handleSortReorder = (reorderInfo: DndSortableReorderInfo) => {
+      callEmit(tabsProps.onDndSortReorder, reorderInfo)
+    }
+    const handleNavListSortChange = (newData: TabsData[], oldData: TabsData[]) => {
+      callEmit(tabsProps.onDndSortChange, newData, oldData)
+    }
+    const handleSelectPanelSortReorder = (reorderInfo: DndSortableReorderInfo) => {
+      const { sourceIndex, targetIndex, ...rest } = reorderInfo
+      const sourceKey = moreNavDataSource.value[sourceIndex].key
+      const targetKey = moreNavDataSource.value[targetIndex].key
+
+      const oldData = toRaw(mergedDataSource.value)
+
+      const mergedSourceIndex = oldData.findIndex(data => data.key === sourceKey)
+      const mergedTargetIndex = oldData.findIndex(data => data.key === targetKey)
+      const mergedReorderInfo = {
+        sourceIndex: mergedSourceIndex,
+        targetIndex: mergedTargetIndex,
+        ...rest,
+      }
+
+      const newData = reorderList(oldData, mergedReorderInfo) as TabsData[]
+
+      callEmit(tabsProps.onDndSortReorder, mergedReorderInfo)
+      callEmit(tabsProps.onDndSortChange, newData, oldData)
+    }
+
+    const renderContent = () => {
+      const prefixCls = mergedPrefixCls.value
+      const { selectedKey } = props
+      const { addable, type } = tabsProps
+
+      const contentNodes = (
+        <div ref={navListRef} class={`${prefixCls}-nav-list`}>
+          <div ref={navListInnerRef} class={`${prefixCls}-nav-list-inner`}>
+            {allNavDataSource.value.map(data => {
+              const { key, content, customContent, customTitle = 'title', ...navProps } = data
+              const titleSlot = isString(customTitle) ? slots[customTitle] : customTitle
+              return (
+                <TabNav
+                  {...navProps}
+                  onSelected={handleSelectedNavChange}
+                  key={key}
+                  selected={selectedKey === key}
+                  v-slots={{ title: titleSlot }}
+                />
+              )
+            })}
+            {addable && !hasScroll.value && <AddBtn v-slots={slots} />}
+            {isHorizontal.value && hasScroll.value && <div class={`${prefixCls}-nav-list-gap-filler`}></div>}
+            {type === 'line' && <div class={`${prefixCls}-nav-bar`} style={navBarStyle.value}></div>}
+          </div>
+        </div>
+      )
+
+      return mergedDndSortable.value ? (
+        <CdkDndSortable
+          dataSource={mergedDataSource.value}
+          direction="horizontal"
+          onSortReorder={handleSortReorder}
+          onSortChange={handleNavListSortChange as (newData: DndSortableData[], oldData: DndSortableData[]) => void}
+        >
+          {contentNodes}
+        </CdkDndSortable>
+      ) : (
+        contentNodes
+      )
     }
 
     return () => {
-      const { selectedKey } = props
       const { addable, type } = tabsProps
       const prefixCls = mergedPrefixCls.value
 
@@ -144,26 +254,7 @@ export default defineComponent({
                 </button>
               )}
             </Transition>
-            <div ref={navListRef} class={`${prefixCls}-nav-list`}>
-              <div ref={navListInnerRef} class={`${prefixCls}-nav-list-inner`}>
-                {allNavDataSource.value.map(data => {
-                  const { key, content, customContent, customTitle = 'title', ...navProps } = data
-                  const titleSlot = isString(customTitle) ? slots[customTitle] : customTitle
-                  return (
-                    <TabNav
-                      {...navProps}
-                      onSelected={handleSelectedNavChange}
-                      key={key}
-                      selected={selectedKey === key}
-                      v-slots={{ title: titleSlot }}
-                    />
-                  )
-                })}
-                {addable && !hasScroll.value && <AddBtn v-slots={slots} />}
-                {isHorizontal.value && hasScroll.value && <div class={`${prefixCls}-nav-list-gap-filler`}></div>}
-                {type === 'line' && <div class={`${prefixCls}-nav-bar`} style={navBarStyle.value}></div>}
-              </div>
-            </div>
+            {renderContent()}
             <Transition appear name={`${common}-fade`}>
               {hasScroll.value && !scrolledEnd.value && (
                 <button class={`${prefixCls}-nav-next-btn`} onClick={next}>
@@ -195,6 +286,7 @@ export default defineComponent({
                         <MoreSelectPane
                           visible={allTabsPanelVisible.value}
                           dataSource={moreNavDataSource.value}
+                          onSortReorder={handleSelectPanelSortReorder}
                           v-slots={slots}
                         />
                       )
