@@ -17,14 +17,17 @@ import { IxButtonGroup } from '@idux/components/button'
 import { useGlobalConfig as useComponentsGlobalConfig } from '@idux/components/config'
 import { IxHeader } from '@idux/components/header'
 import { IxTable, type TableCustomAdditional, type TableCustomTag, type TableInstance } from '@idux/components/table'
+import { useGetKey } from '@idux/components/utils'
 import { useGlobalConfig } from '@idux/pro/config'
 
 import ProTableLayoutTool from './ProTableLayoutTool'
 import { useColumns } from './composables/useColumns'
 import { useResizable } from './composables/useResizable'
 import ResizableHeadCell from './contents/ResizableHeadCell'
+import SortableBody from './contents/SortableBody'
+import SortableBodyRow from './contents/SortableBodyRow'
 import { proTableToken } from './token'
-import { proTableProps } from './types'
+import { type ResolvedProTableDataDndSortable, proTableProps } from './types'
 
 export default defineComponent({
   name: 'IxProTable',
@@ -36,7 +39,25 @@ export default defineComponent({
     const locale = useGlobalConfig('locale')
 
     const mergedPrefixCls = computed(() => `${common.prefixCls}-table`)
-    const columnsContext = useColumns(props, config)
+    const mergedDndSortable = computed<ResolvedProTableDataDndSortable | false>(() => {
+      if (!props.dndSortable) {
+        return false
+      }
+
+      const { autoScroll, canDrag, canDrop, dragHandleColumn, dragHandleIcon, isSticky } =
+        props.dndSortable === true ? ({} as ResolvedProTableDataDndSortable) : props.dndSortable
+
+      return {
+        autoScroll: autoScroll ?? true,
+        dragHandleColumn: dragHandleColumn ?? true,
+        dragHandleIcon: dragHandleIcon ?? 'holder',
+        isSticky: isSticky ?? true,
+        canDrag,
+        canDrop,
+      }
+    })
+    const mergedGetKey = useGetKey(props, baseConfig, 'pro/table')
+    const columnsContext = useColumns(props, config, slots, mergedPrefixCls, mergedDndSortable)
     const { hasResizable, onResizeEnd } = useResizable(columnsContext)
     const mergedConfigSize = computed(() => props.size ?? baseConfig.size)
     const [mergedSize, setMergedSize] = useState(mergedConfigSize.value)
@@ -48,6 +69,8 @@ export default defineComponent({
       locale,
       mergedPrefixCls,
       mergedSize,
+      mergedDndSortable,
+      mergedGetKey,
       setMergedSize,
       ...columnsContext,
     })
@@ -96,7 +119,16 @@ export default defineComponent({
     }
 
     return () => {
-      const { customAdditional, customTag, layoutTool, toolbar, tableLayout, ...restProps } = props
+      const {
+        customAdditional,
+        customTag,
+        layoutTool,
+        toolbar,
+        tableLayout,
+        dndSortable,
+        columnDndSortable,
+        ...restProps
+      } = props
       const resizable = hasResizable.value
       const mergedTableLayout = tableLayout ? tableLayout : resizable ? 'fixed' : undefined
 
@@ -106,9 +138,17 @@ export default defineComponent({
           const additionalProps = customAdditional?.headCell ? customAdditional.headCell({ column }) : undefined
           return resizable ? { ...additionalProps, column, onResizeEnd } : additionalProps
         },
+        bodyRow: data => {
+          const additionalProps = customAdditional?.bodyRow ? customAdditional.bodyRow(data) : undefined
+          return mergedDndSortable.value
+            ? { ...additionalProps, itemKey: mergedGetKey.value(data.record) }
+            : additionalProps
+        },
       }
       const mergedCustomTag: TableCustomTag = {
         headCell: resizable ? ResizableHeadCell : undefined,
+        body: mergedDndSortable.value ? SortableBody : undefined,
+        bodyRow: mergedDndSortable.value ? SortableBodyRow : undefined,
         ...customTag,
       }
 

@@ -173,6 +173,7 @@ export interface TableCustomAdditional<T = any, K = VKey> {
 }
 
 export interface TableCustomTag {
+  body?: string | Component
   bodyCell?: string | Component
   bodyRow?: string | Component
   head?: string | Component

@@ -11,10 +11,13 @@ import { TABLE_TOKEN } from '../../token'
 
 export default defineComponent({
   setup(_, { slots }) {
-    const { mergedPrefixCls } = inject(TABLE_TOKEN)!
+    const { props, mergedPrefixCls } = inject(TABLE_TOKEN)!
 
     return () => {
-      return <tbody class={`${mergedPrefixCls.value}-tbody`}>{slots.default?.()}</tbody>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const Tag = (props.customTag?.body ?? 'tbody') as any
+
+      return <Tag class={`${mergedPrefixCls.value}-tbody`}>{slots.default?.()}</Tag>
     }
   },
 })

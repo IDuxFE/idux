@@ -8,7 +8,33 @@
 | `columns` | 表格列的配置描述 | `ProTableColumn[]` | - | - |  参见[ProTableColumn](#ProTableColumn)  |
 | `layoutTool` | 是否显示布局设置工具按钮 | `boolean \| ProTableLayoutToolProps` | `true` | - | 当设置为 `false` 时，你也可以使用 `IxProTableLayoutTool` 来自定义它的位置和展示形式 |
 | `toolbar` | 表格的工具栏 | `VNode[] \| #toolbar` | - | - | - |
+| `dndSortable` | 拖拽排序配置 | `boolean \| ProTableDataDndSortable` | `false` | - | - |
 | `onColumnsChange` | 表格列的配置发生改变后的回调 | `(columns: ProTableColumn[]) => void` | - | - | - |
+| `onDndSortReorder` | 表格数据重排序之后的回调 | `(reorderInfo: DndSortableReorderInfo) => void` | - | - | - |
+| `onDndSortChange` | 表格数据排序改变之后的回调 | `(newData: any[], oldData: any[]) => void` | - | - | - |
+
+```ts
+export interface DndSortableReorderInfo {
+  sourceIndex: number
+  targetIndex: number
+  sourceKey: VKey
+  targetKey: VKey
+  sourceData: any
+  targetData: any
+  operation: 'insertBefore' | 'insertAfter' | 'insertChild'
+}
+```
+
+```ts
+export interface ProTableDataDndSortable extends DndSortable {
+  autoScroll?: boolean // 表格体是否随着拖拽自动滚动
+  isSticky?: boolean | ((options: DndSortableIsStickyOptions) => boolean) // 拖拽离开目标元素后是否保持拖拽状态
+  canDrag?: boolean | ((options: CanDragOptions) => boolean) // 是否可拖拽
+  canDrop?: boolean | ((options: CanDropOptions) => boolean) // 是否可拖拽放置
+  dragHandleColumn?: Boolean | VKey // 配置拖拽把手的列，默认为true，配置具体的key，可以在columns中自定义该列
+  dragHandleIcon?: string // 拖拽把手的图标
+}
+```
 
 更多属性请参考 [TableProps](/components/table/zh#TableProps).
 
