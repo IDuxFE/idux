@@ -59,7 +59,7 @@ describe('Modal', () => {
     const wrapper = ModalMount({ props: { cancelText, cancelButton, okText, okButton } })
     const modalWrapper = wrapper.getComponent(ModalWrapper)
 
-    const [okButtonWrapper, cancelButtonWrapper] = await modalWrapper.findAll('.ix-button')
+    let [okButtonWrapper, cancelButtonWrapper] = await modalWrapper.findAll('.ix-button')
 
     expect(cancelButtonWrapper.text()).toBe(cancelText)
     expect(cancelButtonWrapper.classes()).toContain('ix-button-dashed')
@@ -70,6 +70,7 @@ describe('Modal', () => {
     cancelText = 'No No'
     okText = 'Yes Yes'
     await wrapper.setProps({ cancelText, okText })
+    ;[okButtonWrapper, cancelButtonWrapper] = await modalWrapper.findAll('.ix-button')
 
     expect(cancelButtonWrapper.text()).toBe(cancelText)
     expect(okButtonWrapper.text()).toBe(okText)

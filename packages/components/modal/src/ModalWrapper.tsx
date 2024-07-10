@@ -18,9 +18,9 @@ import {
   watch,
 } from 'vue'
 
-import { isFunction, isString } from 'lodash-es'
+import { isFunction } from 'lodash-es'
 
-import { useDraggable } from '@idux/cdk/drag-drop'
+import { CdkDndMovable, type DndMovableInstance } from '@idux/cdk/dnd'
 import { callEmit, convertCssPixel, getOffset } from '@idux/cdk/utils'
 import { ɵFooter } from '@idux/components/_private/footer'
 import { ɵHeader } from '@idux/components/_private/header'
@@ -78,6 +78,7 @@ export default defineComponent({
         [hashId.value]: !!hashId.value,
         [`${prefixCls}-wrapper`]: true,
         [`${prefixCls}-centered`]: centered.value,
+        [`${prefixCls}-draggable`]: !!props.draggable,
         [`${prefixCls}-with-mask`]: mask.value,
       }
     })
@@ -93,10 +94,10 @@ export default defineComponent({
 
     const wrapperRef = ref<HTMLDivElement>()
     const modalRef = ref<HTMLDivElement>()
-    const contentRef = ref<HTMLDivElement>()
     const headerRef = ref<HTMLDivElement>()
     const sentinelStartRef = ref<HTMLDivElement>()
     const sentinelEndRef = ref<HTMLDivElement>()
+    const movableRef = ref<DndMovableInstance>()
 
     const { onWrapperClick, onWrapperKeydown, onContentMousedown, onContentMouseup } = useEvent(
       props,
@@ -115,7 +116,6 @@ export default defineComponent({
       animatedVisible,
       modalTransformOrigin,
     )
-    const draggableResult = ref()
 
     const handleOk = (evt?: unknown) => {
       if (visible.value) {
@@ -128,26 +128,7 @@ export default defineComponent({
       }
     }
 
-    onMounted(() => watchVisibleChange(props, wrapperRef, sentinelStartRef, mask, draggableResult))
-
-    watch(
-      () => props.draggable,
-      draggable => {
-        if (draggableResult.value) {
-          draggableResult.value.stop()
-          draggableResult.value = undefined
-        }
-        if (draggable) {
-          draggableResult.value = useDraggable(contentRef, {
-            handle: headerRef,
-            free: true,
-            boundary: wrapperRef,
-            backend: isString(draggable) ? draggable : 'pointer',
-          })
-        }
-      },
-      { immediate: true },
-    )
+    onMounted(() => watchVisibleChange(props, wrapperRef, sentinelStartRef, movableRef, mask))
 
     return () => {
       const prefixCls = mergedPrefixCls.value
@@ -158,6 +139,33 @@ export default defineComponent({
         header: slots.header,
         closeIcon: slots.closeIcon,
       }
+      const contentNodes = [
+        <ɵHeader
+          ref={headerRef}
+          class={`${prefixCls}-header`}
+          v-slots={headerSlots}
+          closable={closable.value}
+          closeIcon={closeIcon.value}
+          header={props.header}
+          size={props.header ? 'md' : 'sm'}
+          onClose={close}
+        />,
+        <ModalBody></ModalBody>,
+        <ɵFooter
+          v-slots={slots}
+          class={`${prefixCls}-footer`}
+          cancel={handleCancel}
+          cancelButton={cancelButton}
+          cancelLoading={cancelLoading.value}
+          cancelText={cancelText.value}
+          cancelVisible={cancelVisible.value}
+          footer={props.footer}
+          ok={handleOk}
+          okButton={okButton}
+          okLoading={okLoading.value}
+          okText={okText.value}
+        ></ɵFooter>,
+      ]
 
       return (
         <div
@@ -187,32 +195,19 @@ export default defineComponent({
               {...attrs}
             >
               <div ref={sentinelStartRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
-              <div ref={contentRef} class={`${prefixCls}-content`}>
-                <ɵHeader
-                  ref={headerRef}
-                  v-slots={headerSlots}
-                  closable={closable.value}
-                  closeIcon={closeIcon.value}
-                  header={props.header}
-                  size={props.header ? 'md' : 'sm'}
-                  onClose={close}
-                />
-                <ModalBody></ModalBody>
-                <ɵFooter
-                  v-slots={slots}
-                  class={`${prefixCls}-footer`}
-                  cancel={handleCancel}
-                  cancelButton={cancelButton}
-                  cancelLoading={cancelLoading.value}
-                  cancelText={cancelText.value}
-                  cancelVisible={cancelVisible.value}
-                  footer={props.footer}
-                  ok={handleOk}
-                  okButton={okButton}
-                  okLoading={okLoading.value}
-                  okText={okText.value}
-                ></ɵFooter>
-              </div>
+              {props.draggable ? (
+                <CdkDndMovable
+                  ref={movableRef}
+                  class={`${prefixCls}-content`}
+                  dragHandle={headerRef.value}
+                  boundary={wrapperRef.value}
+                  mode="immediate"
+                >
+                  {contentNodes}
+                </CdkDndMovable>
+              ) : (
+                <div class={`${prefixCls}-content`}>{contentNodes}</div>
+              )}
               <div ref={sentinelEndRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
             </div>
           </Transition>
@@ -246,9 +241,8 @@ function watchVisibleChange(
   props: ModalProps,
   wrapperRef: Ref<HTMLDivElement | undefined>,
   sentinelStartRef: Ref<HTMLDivElement | undefined>,
+  movableRef: Ref<DndMovableInstance | undefined>,
   mask: ComputedRef<boolean>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  draggableResult: Ref<any>,
 ) {
   let lastOutSideActiveElement: HTMLElement | null = null
 
@@ -262,7 +256,7 @@ function watchVisibleChange(
           lastOutSideActiveElement = activeElement as HTMLElement
           sentinelStartRef.value?.focus()
         }
-        draggableResult.value?.reset()
+        movableRef.value?.init()
       } else {
         if (mask.value) {
           lastOutSideActiveElement?.focus?.()
