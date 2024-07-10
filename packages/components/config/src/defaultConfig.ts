@@ -204,6 +204,7 @@ export const defaultConfig: GlobalConfig = {
     preview: true,
   },
   imageViewer: {
+    draggable: true,
     loop: true,
     maskClosable: true,
     zoom: [0.5, 2],

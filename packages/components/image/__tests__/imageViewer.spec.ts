@@ -46,7 +46,7 @@ describe('ImageViewer', () => {
 
     expect(isElementVisible(document.querySelector('.ix-image-viewer'))).toBe(true)
 
-    await bodyWrapper.find('.ix-image-viewer img').trigger('click')
+    await bodyWrapper.find('.ix-image-viewer .ix-image-viewer-preview').trigger('click')
 
     expect(onUpdateVisible).toBeCalledWith(false)
 
@@ -185,7 +185,7 @@ describe('ImageViewer', () => {
     const wrapper = ImageViewerMount({
       props: { visible: true, 'onUpdate:visible': onUpdateVisible },
     })
-    await bodyWrapper.find('.ix-image-viewer img').trigger('click')
+    await bodyWrapper.find('.ix-image-viewer .ix-image-viewer-preview').trigger('click')
 
     expect(onUpdateVisible).toBeCalledWith(false)
     onUpdateVisible.mockRestore()

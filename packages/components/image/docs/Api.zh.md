@@ -32,6 +32,7 @@
 | `v-model:visible` | 是否可见 | `boolean` | `false` | - | - |
 | `v-model:activeIndex` | 当前激活的索引 | `number` | `0` | - | - |
 | `container` | 预览窗口容器节点  | `string \| HTMLElement \| () => string \| HTMLElement` | - | ✅ | - |
+| `draggable` | 是否可以拖拽 | `boolean` | `true` | ✅ | - |
 | `images` | 用于预览的图片链接列表，必选 | `string[]` | `[]` | - | - |
 | `loop` | 是否无限循环 | `boolean` | `true` | ✅ | - |
 | `maskClosable` | 是否可以通过点击遮罩层关闭预览 | `boolean` | `true` | ✅ | - |

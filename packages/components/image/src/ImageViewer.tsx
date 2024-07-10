@@ -7,6 +7,7 @@
 
 import { Ref, Transition, computed, defineComponent, onBeforeUnmount, onMounted, toRef, watch } from 'vue'
 
+import { CdkDndMovable } from '@idux/cdk/dnd'
 import { isFirefox } from '@idux/cdk/platform'
 import { CdkPortal } from '@idux/cdk/portal'
 import { useControlledProp } from '@idux/cdk/utils'
@@ -34,6 +35,7 @@ export default defineComponent({
     const config = useGlobalConfig('imageViewer')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-image-viewer`)
     const mergedPortalTarget = usePortalTarget(props, config, common, mergedPrefixCls)
+    const mergedDraggable = computed(() => props.draggable ?? config.draggable)
 
     const [visible, setVisible] = useControlledProp(props, 'visible', false)
     const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visible)
@@ -75,9 +77,23 @@ export default defineComponent({
 
     const style = computed(() => `z-index: ${currentZIndex.value}`)
 
-    return () => {
+    const renderImg = () => {
       const prefixCls = mergedPrefixCls.value
       const curImgSrc = props.images[activeIndex.value]
+
+      return (
+        <img
+          draggable="false"
+          onClick={evt => evt.stopImmediatePropagation()}
+          class={`${prefixCls}-preview-img`}
+          src={curImgSrc}
+          style={transformStyle.value}
+        />
+      )
+    }
+
+    return () => {
+      const prefixCls = mergedPrefixCls.value
 
       return (
         <CdkPortal target={mergedPortalTarget.value} load={visible.value}>
@@ -96,7 +112,7 @@ export default defineComponent({
                     })}
                 </div>
                 <div class={`${prefixCls}-preview`} onClick={onClickLayer}>
-                  <img class={`${prefixCls}-preview-img`} src={curImgSrc} style={transformStyle.value} />
+                  {mergedDraggable.value ? <CdkDndMovable mode="immediate">{renderImg()}</CdkDndMovable> : renderImg()}
                 </div>
               </div>
             )}

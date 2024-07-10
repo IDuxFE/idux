@@ -21,6 +21,7 @@ export const imageViewerProps = {
     type: [String, HTMLElement, Function] as PropType<PortalTargetType>,
     default: undefined,
   },
+  draggable: { type: Boolean, default: undefined },
   images: {
     type: Array as PropType<string[]>,
     default: (): string[] => [],
