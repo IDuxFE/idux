@@ -17,7 +17,8 @@ import {
   watchEffect,
 } from 'vue'
 
-import { useKey } from '@idux/cdk/utils'
+import { CdkDndSortableItem } from '@idux/cdk/dnd'
+import { convertElement, useKey } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 
 import { tabsToken } from '../tokens'
@@ -57,8 +58,8 @@ export default defineComponent({
       navAttrs.value[key] = attr
     }
 
-    onMounted(() => setNavAttr(elementRef.value))
-    onUpdated(() => setNavAttr(elementRef.value))
+    onMounted(() => setNavAttr(convertElement(elementRef.value)))
+    onUpdated(() => setNavAttr(convertElement(elementRef.value)))
     onBeforeUnmount(() => setNavAttr(undefined))
 
     const classes = computed(() => {
@@ -71,7 +72,7 @@ export default defineComponent({
     })
 
     watchEffect(() => {
-      const element = elementRef.value
+      const element = convertElement(elementRef.value)
       if (element && props.selected) {
         props.onSelected(element)
       }
@@ -102,14 +103,29 @@ export default defineComponent({
           })
         : props.title
       /* eslint-enable indent */
-      return (
+
+      const contentNodes = [
+        <span class={`${prefixCls.value}-label`}>{titleNode}</span>,
+        mergedClosable.value && (
+          <span class={`${mergedPrefixCls.value}-nav-close-icon`} onClick={handleClose}>
+            <IxIcon name="close"></IxIcon>
+          </span>
+        ),
+      ]
+
+      return tabsProps.dndSortable ? (
+        <CdkDndSortableItem
+          ref={elementRef}
+          class={classes.value}
+          onClick={handleClick}
+          itemKey={key}
+          canDrag={!props.disabled}
+        >
+          {contentNodes}
+        </CdkDndSortableItem>
+      ) : (
         <div ref={elementRef} class={classes.value} onClick={handleClick}>
-          <span class={`${prefixCls.value}-label`}>{titleNode}</span>
-          {mergedClosable.value && (
-            <span class={`${mergedPrefixCls.value}-nav-close-icon`} onClick={handleClose}>
-              <IxIcon name="close"></IxIcon>
-            </span>
-          )}
+          {contentNodes}
         </div>
       )
     }
