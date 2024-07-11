@@ -27,4 +27,5 @@ export type {
   ProTableColumnExpandable,
   ProTableColumnSelectable,
   ProTableColumnIndexable,
+  ProTableDataDndSortable,
 } from './src/types'

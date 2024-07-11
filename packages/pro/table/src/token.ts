@@ -6,7 +6,8 @@
  */
 
 import type { ColumnsContext } from './composables/useColumns'
-import type { ProTableProps } from './types'
+import type { ProTableProps, ResolvedProTableDataDndSortable } from './types'
+import type { GetKeyFn } from '@idux/components/utils'
 import type { ProTableConfig } from '@idux/pro/config'
 import type { ProLocale } from '@idux/pro/locales'
 import type { ComputedRef, InjectionKey } from 'vue'
@@ -17,6 +18,8 @@ export interface ProTableContext extends ColumnsContext {
   locale: ProLocale
   mergedPrefixCls: ComputedRef<string>
   mergedSize: ComputedRef<'lg' | 'md' | 'sm'>
+  mergedDndSortable: ComputedRef<ResolvedProTableDataDndSortable | false>
+  mergedGetKey: ComputedRef<GetKeyFn>
   setMergedSize: (value: 'lg' | 'md' | 'sm') => void
 }
 

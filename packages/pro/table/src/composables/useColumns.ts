@@ -5,13 +5,17 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, computed, watch } from 'vue'
+import { type ComputedRef, type Slots, computed, h, watch } from 'vue'
 
+import { isString } from 'lodash-es'
+
+import { CdkDndSortableHandle } from '@idux/cdk/dnd'
 import { type VKey, callEmit, filterTree, useState } from '@idux/cdk/utils'
+import { IxIcon } from '@idux/components/icon'
 import { ɵGetColumnKey } from '@idux/components/table'
 import { type ProTableConfig } from '@idux/pro/config'
 
-import { type ProTableColumn, type ProTableProps } from '../types'
+import { type ProTableColumn, type ProTableProps, type ResolvedProTableDataDndSortable } from '../types'
 
 export interface ColumnsContext {
   checkedColumnKeys: ComputedRef<{
@@ -26,9 +30,17 @@ export interface ColumnsContext {
   resetColumns: () => void
 }
 
-export function useColumns(props: ProTableProps, config: ProTableConfig): ColumnsContext {
+export function useColumns(
+  props: ProTableProps,
+  config: ProTableConfig,
+  slots: Slots,
+  mergedPrefixCls: ComputedRef<string>,
+  dndSortable: ComputedRef<ResolvedProTableDataDndSortable | false>,
+): ColumnsContext {
   const originalColumns = computed(() => props.columns)
-  const [mergedColumns, setMergedColumns] = useState(mergeColumns(originalColumns.value, config))
+  const [mergedColumns, setMergedColumns] = useState(
+    mergeColumns(mergedPrefixCls.value, originalColumns.value, config, slots, dndSortable.value),
+  )
 
   const mergedContext = computed(() => {
     const map = new Map<VKey, ProTableColumn>()
@@ -75,24 +87,148 @@ export function useColumns(props: ProTableProps, config: ProTableConfig): Column
   const checkedColumnKeys = computed(() => mergedContext.value.checkedKeys)
   const displayColumns = computed(() => mergedContext.value.displayColumns)
 
-  watch(originalColumns, columns => setMergedColumns(mergeColumns(columns, config)))
-  watch(mergedColumns, newColumns => callEmit(props.onColumnsChange, newColumns))
+  watch(originalColumns, columns =>
+    setMergedColumns(mergeColumns(mergedPrefixCls.value, columns, config, slots, dndSortable.value)),
+  )
+  watch(mergedColumns, newColumns => {
+    const pickedColumns = pickOutInsertedHandleColumn(newColumns, originalColumns.value, dndSortable.value)
+    callEmit(props.onColumnsChange, pickedColumns)
+  })
 
-  const resetColumns = () => setMergedColumns(mergeColumns(originalColumns.value, config))
+  const resetColumns = () =>
+    setMergedColumns(mergeColumns(mergedPrefixCls.value, originalColumns.value, config, slots, dndSortable.value))
 
   return { checkedColumnKeys, mergedColumns, setMergedColumns, mergedColumnMap, displayColumns, resetColumns }
 }
 
-function mergeColumns(columns: ProTableColumn[], config: ProTableConfig, parentKey?: VKey) {
-  return columns.map(column => convertMergeColumn(column, config, parentKey))
+const defaultDndSortableHandleColumnKey = '__idux-pro-table-dnd-handle__'
+
+function convertDragHandleColumn(
+  mergedPrefixCls: string,
+  slots: Slots,
+  dragHandleIcon: string,
+  column: ProTableColumn,
+): ProTableColumn {
+  const { key, customCell, ...rest } = column
+
+  const cellRender = isString(customCell) ? slots[customCell] : customCell
+
+  return {
+    key,
+    width: 40,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    customCell: (data: any) => {
+      if (cellRender) {
+        return h(CdkDndSortableHandle, { class: `${mergedPrefixCls}-dnd-sortable-drag-handle` }, () => cellRender(data))
+      }
+
+      return h(CdkDndSortableHandle, { class: `${mergedPrefixCls}-dnd-sortable-drag-handle` }, () =>
+        h(IxIcon, { name: dragHandleIcon }),
+      )
+    },
+    ...rest,
+    visible: true,
+    align: { cell: 'center' },
+    changeVisible: false,
+  } as ProTableColumn
 }
 
-function convertMergeColumn(column: ProTableColumn, config: ProTableConfig, parentKey?: VKey) {
+function insertDragHandleColumn(
+  mergedPrefixCls: string,
+  slots: Slots,
+  columns: ProTableColumn[],
+  dndSortable: ResolvedProTableDataDndSortable | false,
+) {
+  if (!dndSortable) {
+    return columns
+  }
+
+  const { dragHandleColumn, dragHandleIcon } = dndSortable
+
+  if (dragHandleColumn === false) {
+    return columns
+  }
+
+  const dragHandleColumnKey = (
+    dragHandleColumn === true ? defaultDndSortableHandleColumnKey : dragHandleColumn
+  ) as string
+
+  const existedColumnIndex = columns.findIndex(column => column.key === dragHandleColumnKey)
+
+  if (existedColumnIndex < 0) {
+    return [
+      convertDragHandleColumn(mergedPrefixCls, slots, dragHandleIcon, { key: defaultDndSortableHandleColumnKey }),
+      ...columns,
+    ] as ProTableColumn[]
+  }
+
+  const newColumns = [...columns]
+  newColumns.splice(
+    existedColumnIndex,
+    1,
+    convertDragHandleColumn(mergedPrefixCls, slots, dragHandleIcon, columns[existedColumnIndex]),
+  )
+
+  return columns
+}
+
+function pickOutInsertedHandleColumn(
+  columns: ProTableColumn[],
+  originalColumns: ProTableColumn[],
+  dndSortable: ResolvedProTableDataDndSortable | false,
+) {
+  if (!dndSortable) {
+    return columns
+  }
+
+  const { dragHandleColumn } = dndSortable
+
+  if (dragHandleColumn === false) {
+    return columns
+  }
+
+  const dragHandleColumnKey = (
+    dragHandleColumn === true ? defaultDndSortableHandleColumnKey : dragHandleColumn
+  ) as string
+
+  const dragHandleColumnIndex = columns.findIndex(column => column.key === dragHandleColumnKey)
+  const originalDragHandleColumnIndex = originalColumns.findIndex(column => column.key === dragHandleColumnKey)
+
+  const pickedColumns = [...columns]
+  pickedColumns.splice(dragHandleColumnIndex, 1, originalColumns[originalDragHandleColumnIndex])
+
+  return pickedColumns
+}
+
+function mergeColumns(
+  mergedPrefixCls: string,
+  columns: ProTableColumn[],
+  config: ProTableConfig,
+  slots: Slots,
+  dndSortable: ResolvedProTableDataDndSortable | false,
+  parentKey?: VKey,
+) {
+  return insertDragHandleColumn(
+    mergedPrefixCls,
+    slots,
+    columns.map(column => convertMergeColumn(mergedPrefixCls, column, config, slots, dndSortable, parentKey)),
+    dndSortable,
+  )
+}
+
+function convertMergeColumn(
+  mergedPrefixCls: string,
+  column: ProTableColumn,
+  config: ProTableConfig,
+  slots: Slots,
+  dndSortable: ResolvedProTableDataDndSortable | false,
+  parentKey?: VKey,
+) {
   const key = ɵGetColumnKey(column)
   const defaultColumn = column.type === 'indexable' ? config.columnIndexable : undefined
   const mergeColumn = { ...defaultColumn, ...column, key, parentKey } as ProTableColumn
   if (column.children?.length) {
-    mergeColumn.children = mergeColumns(column.children, config, key)
+    mergeColumn.children = mergeColumns(mergedPrefixCls, column.children, config, slots, dndSortable, key)
   }
   return mergeColumn
 }

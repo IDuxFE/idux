@@ -7,6 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import type { CanDragOptions, CanDropOptions, DndSortableIsStickyOptions, DndSortableReorderInfo } from '@idux/cdk/dnd'
 import type { VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { TooltipProps } from '@idux/components/tooltip'
@@ -20,14 +21,33 @@ import {
   ɵTableProps,
 } from '@idux/components/table'
 
+export interface DndSortable {
+  autoScroll?: boolean
+  isSticky?: boolean | ((options: DndSortableIsStickyOptions) => boolean)
+  canDrag?: boolean | ((options: CanDragOptions) => boolean)
+  canDrop?: boolean | ((options: CanDropOptions) => boolean)
+}
+
+export interface ProTableDataDndSortable extends DndSortable {
+  dragHandleColumn?: boolean | VKey
+  dragHandleIcon?: string
+}
+export type ResolvedProTableDataDndSortable = Pick<ProTableDataDndSortable, 'canDrag' | 'canDrop'> &
+  Required<Omit<ProTableDataDndSortable, 'canDrag' | 'canDrop'>>
+export interface ProTableColumnDndSortable extends DndSortable {}
+
 export const proTableProps = {
   ...ɵTableProps,
   columns: { type: Array as PropType<ProTableColumn[]>, default: () => [] },
   layoutTool: { type: [Boolean, Object] as PropType<boolean | ProTableLayoutToolPublicProps>, default: true },
   toolbar: { type: Array as PropType<Array<VNodeChild>>, default: undefined },
+  dndSortable: { type: [Boolean, Object] as PropType<boolean | ProTableDataDndSortable> },
+  columnDndSortable: { type: [Boolean, Object] as PropType<boolean | ProTableColumnDndSortable> },
 
   // events
   onColumnsChange: [Function, Array] as PropType<MaybeArray<(columns: ProTableColumn[]) => void>>,
+  onDndSortReorder: [Function, Array] as PropType<MaybeArray<(reorderInfo: DndSortableReorderInfo) => void>>,
+  onDndSortChange: [Function, Array] as PropType<MaybeArray<(newDataSource: any[], oldDataSource: any[]) => void>>,
 } as const
 
 export type ProTableProps = ExtractInnerPropTypes<typeof proTableProps>
