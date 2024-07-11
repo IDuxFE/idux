@@ -259,6 +259,7 @@ export const defaultConfig: GlobalConfig = {
     delay: 100,
     destroyOnHide: false,
     placement: 'bottomStart',
+    showArrow: true,
     trigger: 'click',
     offset: [0, 4],
   },
@@ -406,6 +407,7 @@ export const defaultConfig: GlobalConfig = {
   },
   tooltip: {
     autoAdjust: true,
+    showArrow: true,
     delay: 100,
     destroyOnHide: false,
     offset: [0, 4],

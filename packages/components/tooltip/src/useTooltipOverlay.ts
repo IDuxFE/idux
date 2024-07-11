@@ -50,7 +50,7 @@ export function useTooltipOverlay(
       destroyOnHide: props.destroyOnHide ?? config.destroyOnHide,
       disabled: props.disabled,
       offset: props.offset ?? config.offset,
-      showArrow: true,
+      showArrow: props.showArrow ?? config.showArrow,
       placement: props.placement ?? config.placement,
       trigger: trigger,
       zIndex: props.zIndex,

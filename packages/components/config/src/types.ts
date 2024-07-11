@@ -374,6 +374,7 @@ export interface PopconfirmConfig {
   destroyOnHide: boolean
   overlayContainer?: OverlayContainerType
   placement: PopperPlacement
+  showArrow: boolean
   trigger: PopperTrigger
   offset: [number, number]
 }
@@ -564,6 +565,7 @@ export interface TooltipConfig {
   destroyOnHide: boolean
   overlayContainer?: OverlayContainerType
   placement: PopperPlacement
+  showArrow: boolean
   offset: [number, number]
   trigger: PopperTrigger
 }
