@@ -306,6 +306,7 @@ export interface ImageConfig {
 
 export interface ImageViewerConfig {
   container?: PortalTargetType
+  draggable: boolean
   loop: boolean
   maskClosable: boolean
   zoom: number[]
