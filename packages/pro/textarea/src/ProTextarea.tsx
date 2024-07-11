@@ -65,7 +65,7 @@ export default defineComponent({
 
     const { lineHeight, boxSizingData, resizeToFitContent } = ɵUseAutoRows(elementRef, ref(true))
     const rowCounts = useRowCounts(props, elementRef, valueRef, lineHeight, boxSizingData)
-    const errorLinesContext = useErrorLines(props, lineHeight, boxSizingData)
+    const errorLinesContext = useErrorLines(props, lineHeight, rowCounts, boxSizingData)
     const dataCount = useDataCount(props, config, valueRef)
 
     const _handleInput = (evt: Event) => {

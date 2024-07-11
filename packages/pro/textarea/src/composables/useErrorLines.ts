@@ -21,18 +21,50 @@ export interface ErrorLinesContext {
 export function useErrorLines(
   props: ProTextareaProps,
   lineHeight: Ref<number>,
+  rowsCount: Ref<number[]>,
   sizingData: ComputedRef<ɵBoxSizingData>,
 ): ErrorLinesContext {
   const [visibleErrIndex, setvisibleErrIndex] = useState<number>(-1)
 
+  let currentRowTopLineIdx = -1
+  let currentRowBottomLineIdx = -1
+
   const handleTextareaMouseMove = (evt: MouseEvent) => {
     const currentHoverlineIdx = Math.floor((evt.offsetY - sizingData.value.paddingTop) / lineHeight.value)
-    const currentHoverErrIdx = props.errors?.find(error => error.index === currentHoverlineIdx)?.index
+
+    if (
+      currentRowTopLineIdx !== -1 &&
+      currentRowBottomLineIdx !== -1 &&
+      currentHoverlineIdx >= currentRowTopLineIdx &&
+      currentHoverlineIdx < currentRowBottomLineIdx
+    ) {
+      return
+    }
+
+    const _rowCounts = rowsCount.value
+    const rowLength = _rowCounts.length
+
+    let rowIdx = 0
+    let currentTop = 0
+    let currentBottom = _rowCounts[0] ?? 0
+
+    while (currentBottom <= currentHoverlineIdx && rowIdx < rowLength) {
+      currentTop += _rowCounts[rowIdx] ?? 0
+      rowIdx++
+      currentBottom += _rowCounts[rowIdx] ?? 0
+    }
+
+    const currentHoverErrIdx = props.errors?.find(error => error.index === rowIdx)?.index
 
     setvisibleErrIndex(currentHoverErrIdx ?? -1)
+    currentRowTopLineIdx = currentTop
+    currentRowBottomLineIdx = currentBottom
   }
+
   const handleTextareaMouseLeave = (_: MouseEvent) => {
     setvisibleErrIndex(-1)
+    currentRowTopLineIdx = -1
+    currentRowBottomLineIdx = -1
   }
 
   return {
