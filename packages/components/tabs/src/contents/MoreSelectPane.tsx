@@ -146,6 +146,8 @@ export default defineComponent({
             onDndSortReorder={handleSortReorder}
             onOptionClick={handleSelectChange}
             _virtualScrollHeight={props._virtualScrollHeight}
+            _onDragStart={props._onDragStart}
+            _onDrop={props._onDrop}
           />
         </div>
       )

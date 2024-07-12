@@ -167,7 +167,13 @@ export default defineComponent({
 
         children.push(
           mergedDndSortable.value ? (
-            <CdkDndSortable dataSource={options} onSortReorder={handleSortReorder} onSortChange={handleSortChange}>
+            <CdkDndSortable
+              dataSource={options}
+              onSortReorder={handleSortReorder}
+              onSortChange={handleSortChange}
+              onDragStart={props._onDragStart}
+              onDrop={props._onDrop}
+            >
               {list}
             </CdkDndSortable>
           ) : (

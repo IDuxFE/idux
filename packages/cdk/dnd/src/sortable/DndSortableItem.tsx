@@ -137,8 +137,8 @@ export default defineComponent({
     })
 
     watch([dragHandleRef, () => props.itemKey], init)
-    watch(lastMovedKey, key => {
-      if (key === props.itemKey && listItemRef.value) {
+    watch([lastMovedKey, () => props.itemKey], ([_lastMovedKey, itemKey]) => {
+      if (_lastMovedKey === itemKey && listItemRef.value) {
         triggerPostMoveFlash(listItemRef.value)
       }
     })

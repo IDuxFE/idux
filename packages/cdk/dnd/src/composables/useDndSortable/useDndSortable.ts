@@ -124,6 +124,7 @@ export function useDndSortable(options: DndSortableOptions): DndSortableContext 
       strategyContext.eventHandlers.onDrop?.(args)
       const target = location.current.dropTargets[0]
       if (!target) {
+        callEventHandlerWithSource(onDrop, undefined, undefined, location)
         return
       }
 
@@ -131,6 +132,7 @@ export function useDndSortable(options: DndSortableOptions): DndSortableContext 
       const targetData = target.data
 
       if (!isDndSortableTransferData(sourceData) || !isDndSortableTransferData(targetData)) {
+        callEventHandlerWithSource(onDrop, targetData, sourceData, location)
         return
       }
 

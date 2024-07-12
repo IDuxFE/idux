@@ -1,8 +1,7 @@
 <template>
   <IxSelect
-    :selectedKeys="value"
+    v-model:value="value"
     :dataSource="dataSource"
-    :onOptionClick="onOptionClick"
     :onDndSortChange="onDndSortChange"
     multiple
     :dndSortable="{
@@ -26,15 +25,6 @@ for (let index = 0; index < 20; index++) {
 dataSource.value = tempData
 
 const value = ref([1])
-
-const onOptionClick = (option: SelectData) => {
-  const index = value.value.findIndex(key => key === option.key)
-  if (index > -1) {
-    value.value.splice(index, 1)
-  } else {
-    value.value.push(option.key as number)
-  }
-}
 
 const onDndSortChange = (newOptions: SelectData[]) => {
   console.log('onDndSortChange', newOptions)

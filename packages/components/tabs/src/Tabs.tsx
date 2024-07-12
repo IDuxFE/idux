@@ -43,13 +43,13 @@ export default defineComponent({
       if (dndSortable === true) {
         return {
           autoScroll: true as const,
-          handle: false as const,
+          dragHandle: false as const,
         }
       }
 
       return {
         autoScroll: dndSortable.autoScroll ?? true,
-        handle: dndSortable.handle ?? false,
+        dragHandle: dndSortable.dragHandle ?? false,
       }
     })
 
