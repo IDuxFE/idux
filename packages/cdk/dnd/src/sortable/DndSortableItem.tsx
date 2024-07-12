@@ -151,13 +151,13 @@ export default defineComponent({
         return
       }
 
-      const state = resolvedDraggingOverState.value
+      const state = draggingOverState.value
       if (!state) {
         return
       }
 
       if (mergedStrategy.value === 'list') {
-        return renderEdgeIndicator(state as ListDraggingOverState)
+        return renderEdgeIndicator(state as ListDraggingOverState, props.itemKey)
       }
 
       if (mergedStrategy.value === 'tree') {
@@ -185,7 +185,11 @@ export default defineComponent({
   },
 })
 
-function renderEdgeIndicator(state: ListDraggingOverState) {
+function renderEdgeIndicator(state: ListDraggingOverState, key: VKey) {
+  if (state.key !== key) {
+    return
+  }
+
   const edge = state.instruction?.edge
   if (!edge) {
     return
