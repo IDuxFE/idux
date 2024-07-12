@@ -7,7 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { DndSortableReorderInfo } from '@idux/cdk/dnd'
+import type { DndSortableOnDragStartArgs, DndSortableOnDropArgs, DndSortableReorderInfo } from '@idux/cdk/dnd'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { DefineComponent, FunctionalComponent, HTMLAttributes, PropType, VNodeChild } from 'vue'
 
@@ -100,4 +100,6 @@ export const moreSelectPaneProps = {
 
   // private
   _virtualScrollHeight: { type: Number, default: 186 },
+  _onDragStart: Function as PropType<(args: DndSortableOnDragStartArgs) => void>,
+  _onDrop: Function as PropType<(args: DndSortableOnDropArgs) => void>,
 } as const

@@ -68,13 +68,13 @@
       left: 0;
       margin-left: 0;
       padding-right: var(--ix-padding-size-md);
-      background: linear-gradient(90deg,var(--ix-color-container-bg) 58%, transparent);
+      background: linear-gradient(90deg, var(--ix-color-container-bg) 58%, transparent);
     }
     .@{tabs-prefix}-nav-next-btn {
       right: 0;
       margin-right: 0;
       padding-left: var(--ix-padding-size-md);
-      background: linear-gradient(270deg,var(--ix-color-container-bg) 58%, transparent);
+      background: linear-gradient(270deg, var(--ix-color-container-bg) 58%, transparent);
     }
 
     .@{tabs-prefix} {
@@ -266,6 +266,11 @@
             color: var(--ix-color-primary-text-hover);
           }
         }
+
+        // TODO: use theme token
+        &-with-drag-handle {
+          padding-left: 0;
+        }
       }
     }
   }
@@ -282,7 +287,7 @@
       height: var(--ix-height-xs);
       width: var(--ix-line-width);
       background-color: var(--ix-color-separator);
-      content: ''
+      content: '';
     }
   }
 }

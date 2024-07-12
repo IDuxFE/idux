@@ -44,7 +44,7 @@ export default defineComponent({
       return {
         [prefixCls]: true,
         [`${prefixCls}-active`]: isActive.value,
-        [`${prefixCls}-with-drag-handle`]: mergedDndSortable.value && mergedDndSortable.value.handle,
+        [`${prefixCls}-with-drag-handle`]: mergedDndSortable.value && mergedDndSortable.value.dragHandle,
         [`${prefixCls}-disabled`]: isDisabled.value,
         [`${prefixCls}-grouped`]: !isNil(parentKey),
         [`${prefixCls}-selected`]: isSelected.value,

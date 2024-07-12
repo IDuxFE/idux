@@ -7,6 +7,7 @@
 
 import type { BaseDndSortableEventArgs, DndSortableEvetWithSourceArgs } from '../types'
 import type { DragLocationHistory } from '@atlaskit/pragmatic-drag-and-drop/types'
+import type { VKey } from '@idux/cdk/utils'
 
 import { isDndSortableTransferData } from './isDndSortableTransferData'
 
@@ -28,19 +29,30 @@ export function callEventHandler(
 
 export function callEventHandlerWithSource(
   handler: ((args: DndSortableEvetWithSourceArgs) => void) | undefined,
-  transferData: Record<string, unknown>,
-  sourceTransferData: Record<string, unknown>,
+  transferData: Record<string, unknown> | undefined,
+  sourceTransferData: Record<string, unknown> | undefined,
   location: DragLocationHistory,
 ): void {
-  if (!isDndSortableTransferData(transferData) || !isDndSortableTransferData(sourceTransferData)) {
-    return
+  let key: VKey | undefined
+  let data: DndSortableEvetWithSourceArgs['data'] | undefined
+  let sourceKey: VKey | undefined
+  let sourceData: DndSortableEvetWithSourceArgs['data'] | undefined
+
+  if (transferData && isDndSortableTransferData(transferData)) {
+    key = transferData.key
+    data = transferData.listData
+  }
+
+  if (sourceTransferData && isDndSortableTransferData(sourceTransferData)) {
+    sourceKey = sourceTransferData.key
+    sourceData = sourceTransferData.listData
   }
 
   handler?.({
-    key: transferData.key,
-    data: transferData.listData,
-    sourceKey: sourceTransferData.key,
-    sourceData: sourceTransferData.listData,
+    key: key!,
+    data: data!,
+    sourceKey: sourceKey!,
+    sourceData: sourceData!,
     location,
   })
 }
