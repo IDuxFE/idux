@@ -10,6 +10,42 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 2.3.0(2024-07-12)
+
+
+### Bug Fixes
+
+* **cdk:scroll:** 模拟滚动条，在数据更新之后有几率出现闪烁 ([#1943](https://github.com/IDuxFE/idux/issues/1943)) ([4b25a18](https://github.com/IDuxFE/idux/commit/4b25a18681af4d5722c19da1d595d197a8095e63))
+* **cdk:scroll:** 虚拟滚动，当已经滚动到底部的时候，横向的滚动会持续触发scrolledBottom ([#1948](https://github.com/IDuxFE/idux/issues/1948)) ([d39c7e8](https://github.com/IDuxFE/idux/commit/d39c7e8516bc1249b8bc877aefc401c9cedb6482))
+* **cdk:scroll:** 虚拟列表在数据变化之后，渲染出现错误 ([#1949](https://github.com/IDuxFE/idux/issues/1949)) ([491d5aa](https://github.com/IDuxFE/idux/commit/491d5aaa8ab42d8076526501fd2198b004e3438c))
+* **cdk:scroll:** 在 firefox 下，虚拟滚动列表中的鼠标滚轮失效 ([#1946](https://github.com/IDuxFE/idux/issues/1946)) ([9c81358](https://github.com/IDuxFE/idux/commit/9c813583a203fdc90f573b69a352eca958f3c37e))
+* **cdk:scroll:** 在虚拟列表中，如果存在在窗口左边插入的元素，滚动的位置会出现跳跃 ([#1950](https://github.com/IDuxFE/idux/issues/1950)) ([28a6724](https://github.com/IDuxFE/idux/commit/28a6724babbd2088ed1f17c1f8de86ccfedb108c))
+  - 在表格开启了横向虚拟滚动时，且存在起始位置的固定列，横向滚动会有该问题
+* **comp:*:** 带有浮层的控件（包括proSearch），在浮层中聚焦有可能会导致浮层异常关闭 ([#1952](https://github.com/IDuxFE/idux/issues/1952)) ([67a2f82](https://github.com/IDuxFE/idux/commit/67a2f8256e0adb5b507d60d1efa3cf8fb92f6ba9))
+  - 修改所有带浮层控件的聚焦控制逻辑
+  - 使用通用的浮层聚焦控制逻辑重构proSearch的聚焦控制代码
+* **comp:modal:** 使用 `cdk/dnd` 重构弹窗组件的可拖拽效果，替换掉废弃的 `drag-drop` ([#1954](https://github.com/IDuxFE/idux/issues/1954)) ([39fe969](https://github.com/IDuxFE/idux/commit/39fe969515b03fb8f171a91a560e1c091cf33e85))
+* **comp:table:** 初始设置的 `selectedRowKeys`，如果其不在最开始的 `dataSource` 中，则触发勾选会导致其被移除 ([#1951](https://github.com/IDuxFE/idux/issues/1951)) ([22698bf](https://github.com/IDuxFE/idux/commit/22698bf9863fc4aa0228933fe583269e703fe4fb))
+  - tree 组件也存在该问题
+* **pro:textarea:** 当某一行输入没有换行且跨越了多行，如果其存在输入校验错误，悬浮到除了错误行的第一行之外，错误提示都不会展示 ([#1959](https://github.com/IDuxFE/idux/issues/1959)) ([82a756b](https://github.com/IDuxFE/idux/commit/82a756bf1fcdd87b982289124c3d2001e075e3ae))
+
+
+### Features
+
+* **cdk:dnd:** 新增拖拽移动以及拖拽排序的库函数和组件 `cdk/dnd` ([#1953](https://github.com/IDuxFE/idux/issues/1953)) ([7eaa878](https://github.com/IDuxFE/idux/commit/7eaa878e55137158bb786d8a3cf141994cd9a2f9))
+  - 原 `cdk/drag-drop` 现以及废弃，请使用 `cdk/dnd` 替换
+* **comp:image:** ImageViewer 支持配置 `draggable` 以支持预览的图片拖拽 ([#1956](https://github.com/IDuxFE/idux/issues/1956)) ([d2638c3](https://github.com/IDuxFE/idux/commit/d2638c3e2bf57c85502d7f30fcfb9761ec037c77))
+* **comp:popconfirm:** popconfirm 支持 `showArrow` 全局配置 ([#1960](https://github.com/IDuxFE/idux/issues/1960)) ([63deaf5](https://github.com/IDuxFE/idux/commit/63deaf59d381f65e55b1feb00de6afd7a6321873))
+  - 同时修改了 `tooltip`, `popover` 的 `showArrow` 全局配置不生效的问题
+* **comp:select:** 新增拖拽排序功能，详情见demo ([#1955](https://github.com/IDuxFE/idux/issues/1955)) ([6281bc2](https://github.com/IDuxFE/idux/commit/6281bc2091f5c10322d271d1cfaf9eaa6d06f0df))
+* **comp:tabs:** 新增拖拽排序功能，详情见demo ([#1958](https://github.com/IDuxFE/idux/issues/1958)) ([7d70cf7](https://github.com/IDuxFE/idux/commit/7d70cf77b699bf5519a5b53d24e19f1dc1cfa8a1))
+* **pro:table:** 新增数据拖拽排序功能，详情见demo ([#1957](https://github.com/IDuxFE/idux/issues/1957)) ([9b59fb2](https://github.com/IDuxFE/idux/commit/9b59fb2616e15ff368f45fa5fece047098aba43f))
+
+
+### BREAKING CHANGES
+
+* **cdk:drag-drop:** `cdk:drag-drop` 已经废弃，使用 `cdk/dnd` 替换
+
 ## 2.2.3(2024-06-12)
 
 
