@@ -30,4 +30,6 @@ const DndBoxIndicator: FunctionalComponent<DndBoxIndicatorProps> = ({ edge, gap,
   return <div class={classes} style={style}></div>
 }
 
+DndBoxIndicator.displayName = 'DndBoxIndicator'
+
 export default DndBoxIndicator

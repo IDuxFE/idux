@@ -10,6 +10,7 @@ import { defineComponent, inject, onMounted, onUnmounted, shallowRef } from 'vue
 import { dndMovableToken } from '../tokens'
 
 export default defineComponent({
+  name: 'DndMovableHandle',
   setup(_, { slots }) {
     const { setDragHandle } = inject(dndMovableToken)!
 
