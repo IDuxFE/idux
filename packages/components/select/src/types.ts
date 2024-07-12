@@ -7,7 +7,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { DndSortableReorderInfo } from '@idux/cdk/dnd'
+import type { DndSortableOnDragStartArgs, DndSortableOnDropArgs, DndSortableReorderInfo } from '@idux/cdk/dnd'
 import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
 import type { VirtualScrollMode, VirtualScrollToFn } from '@idux/cdk/scroll'
 import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
@@ -54,6 +54,8 @@ export const selectPanelProps = {
 
   // private
   _virtualScrollHeight: { type: [Number, String] as PropType<number | 'auto' | '100%'>, default: 256 },
+  _onDragStart: Function as PropType<(args: DndSortableOnDragStartArgs) => void>,
+  _onDrop: Function as PropType<(args: DndSortableOnDropArgs) => void>,
 } as const
 
 export const selectProps = {

@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { Teleport, computed, defineComponent, nextTick, provide, toRef, watch } from 'vue'
+import { Teleport, computed, defineComponent, provide, toRef, watch } from 'vue'
 
 import { isNil } from 'lodash-es'
 
@@ -58,9 +58,9 @@ export default defineComponent({
           clearTimeout(tempLastMovedKeySetTmr)
           setLastMovedKey(tempLastMovedKey)
           tempLastMovedKey = undefined
-          nextTick(() => {
+          setTimeout(() => {
             setLastMovedKey(undefined)
-          })
+          }, 10)
         }
       },
       { deep: true },

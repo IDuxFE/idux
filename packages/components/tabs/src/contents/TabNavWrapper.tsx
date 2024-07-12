@@ -14,6 +14,7 @@ import { isString } from 'lodash-es'
 import {
   CdkDndSortable,
   type DndSortableData,
+  type DndSortableOnDropArgs,
   type DndSortableReorderInfo,
   reorderList,
   useDndAutoScroll,
@@ -168,6 +169,17 @@ export default defineComponent({
         setAllTabsPanelVisible(false)
       }, 100)
     }
+    const handleDragStart = () => {
+      popoverLocked = true
+    }
+    const handleDrop = (args: DndSortableOnDropArgs) => {
+      const { data } = args
+      popoverLocked = false
+
+      if (!data) {
+        handleMouseleave()
+      }
+    }
 
     const handleSortReorder = (reorderInfo: DndSortableReorderInfo) => {
       callEmit(tabsProps.onDndSortReorder, reorderInfo)
@@ -287,6 +299,8 @@ export default defineComponent({
                           visible={allTabsPanelVisible.value}
                           dataSource={moreNavDataSource.value}
                           onSortReorder={handleSelectPanelSortReorder}
+                          _onDragStart={handleDragStart}
+                          _onDrop={handleDrop}
                           v-slots={slots}
                         />
                       )
