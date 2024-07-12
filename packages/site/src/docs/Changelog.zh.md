@@ -10,6 +10,13 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 2.3.1(2024-07-12)
+
+
+### Bug Fixes
+
+* **cdk:dnd:** 暴露的组件没有定义name或者disableName ([#1964](https://github.com/IDuxFE/idux/issues/1964)) ([d1de6c7](https://github.com/IDuxFE/idux/commit/d1de6c7915a9250cfde3f29bb9369739b26db821))
+
 # 2.3.0(2024-07-12)
 
 
