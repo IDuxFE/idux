@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.1](https://github.com/IDuxFE/idux/compare/v2.3.0...v2.3.1) (2024-07-12)
+
+
+### Bug Fixes
+
+* **cdk:dnd:** exported components should have name ([#1964](https://github.com/IDuxFE/idux/issues/1964)) ([d1de6c7](https://github.com/IDuxFE/idux/commit/d1de6c7915a9250cfde3f29bb9369739b26db821))
+
+
+
+
+
 # [2.3.0](https://github.com/IDuxFE/idux/compare/v2.2.3...v2.3.0) (2024-07-12)
 
 
