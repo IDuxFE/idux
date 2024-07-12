@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/IDuxFE/idux/compare/v2.2.3...v2.3.0) (2024-07-12)
+
+
+### Bug Fixes
+
+* **cdk:scroll:** simulated scrollbar blinks after data change ([#1943](https://github.com/IDuxFE/idux/issues/1943)) ([4b25a18](https://github.com/IDuxFE/idux/commit/4b25a18681af4d5722c19da1d595d197a8095e63))
+* **cdk:scroll:** virtual horizontal scroll triggers scrolledBottom ([#1948](https://github.com/IDuxFE/idux/issues/1948)) ([d39c7e8](https://github.com/IDuxFE/idux/commit/d39c7e8516bc1249b8bc877aefc401c9cedb6482))
+* **cdk:scroll:** virtual list render error after dataSource change ([#1949](https://github.com/IDuxFE/idux/issues/1949)) ([491d5aa](https://github.com/IDuxFE/idux/commit/491d5aaa8ab42d8076526501fd2198b004e3438c))
+* **cdk:scroll:** virtual scroll couldn't scroll under firefox ([#1946](https://github.com/IDuxFE/idux/issues/1946)) ([9c81358](https://github.com/IDuxFE/idux/commit/9c813583a203fdc90f573b69a352eca958f3c37e))
+* **cdk:scroll:** virtual scroll start offset should deduct size of prepended items ([#1950](https://github.com/IDuxFE/idux/issues/1950)) ([28a6724](https://github.com/IDuxFE/idux/commit/28a6724babbd2088ed1f17c1f8de86ccfedb108c))
+
+
+### Features
+
+* **cdk:dnd:** add dnd lib for dnd sortting and moving ([#1953](https://github.com/IDuxFE/idux/issues/1953)) ([7eaa878](https://github.com/IDuxFE/idux/commit/7eaa878e55137158bb786d8a3cf141994cd9a2f9))
+
+
+
+
+
 ## [2.2.2](https://github.com/IDuxFE/idux/compare/v2.2.1...v2.2.2) (2024-06-11)
 
 

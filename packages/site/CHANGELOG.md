@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/IDuxFE/idux/compare/v2.2.3...v2.3.0) (2024-07-12)
+
+
+### Features
+
+* **cdk:dnd:** add dnd lib for dnd sortting and moving ([#1953](https://github.com/IDuxFE/idux/issues/1953)) ([7eaa878](https://github.com/IDuxFE/idux/commit/7eaa878e55137158bb786d8a3cf141994cd9a2f9))
+
+
+
+
+
 ## [2.2.3](https://github.com/IDuxFE/idux/compare/v2.2.2...v2.2.3) (2024-06-12)
 
 **Note:** Version bump only for package @idux/site

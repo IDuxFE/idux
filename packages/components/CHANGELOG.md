@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/IDuxFE/idux/compare/v2.2.3...v2.3.0) (2024-07-12)
+
+
+### Bug Fixes
+
+* **cdk:scroll:** simulated scrollbar blinks after data change ([#1943](https://github.com/IDuxFE/idux/issues/1943)) ([4b25a18](https://github.com/IDuxFE/idux/commit/4b25a18681af4d5722c19da1d595d197a8095e63))
+* **cdk:scroll:** virtual scroll couldn't scroll under firefox ([#1946](https://github.com/IDuxFE/idux/issues/1946)) ([9c81358](https://github.com/IDuxFE/idux/commit/9c813583a203fdc90f573b69a352eca958f3c37e))
+* **comp:*:** focusing in control overlay causes it to close unexpectedly ([#1952](https://github.com/IDuxFE/idux/issues/1952)) ([67a2f82](https://github.com/IDuxFE/idux/commit/67a2f8256e0adb5b507d60d1efa3cf8fb92f6ba9))
+* **comp:modal:** modal draggable is now refactored with `cdk/dnd` ([#1954](https://github.com/IDuxFE/idux/issues/1954)) ([39fe969](https://github.com/IDuxFE/idux/commit/39fe969515b03fb8f171a91a560e1c091cf33e85))
+* **comp:table:** initial selectedRowKeys absent from dataSource is removed after check change ([#1951](https://github.com/IDuxFE/idux/issues/1951)) ([22698bf](https://github.com/IDuxFE/idux/commit/22698bf9863fc4aa0228933fe583269e703fe4fb))
+
+
+### Features
+
+* **comp:image:** add dnd sortable support for image viewer ([#1956](https://github.com/IDuxFE/idux/issues/1956)) ([d2638c3](https://github.com/IDuxFE/idux/commit/d2638c3e2bf57c85502d7f30fcfb9761ec037c77))
+* **comp:popconfirm:** popconfirm supports showArrow global config ([#1960](https://github.com/IDuxFE/idux/issues/1960)) ([63deaf5](https://github.com/IDuxFE/idux/commit/63deaf59d381f65e55b1feb00de6afd7a6321873))
+* **comp:select:** add support for dnd sortable ([#1955](https://github.com/IDuxFE/idux/issues/1955)) ([6281bc2](https://github.com/IDuxFE/idux/commit/6281bc2091f5c10322d271d1cfaf9eaa6d06f0df))
+* **comp:tabs:** add dnd sortable support for tabs ([#1958](https://github.com/IDuxFE/idux/issues/1958)) ([7d70cf7](https://github.com/IDuxFE/idux/commit/7d70cf77b699bf5519a5b53d24e19f1dc1cfa8a1))
+* **pro:table:** add dnd sortable support for proTable ([#1957](https://github.com/IDuxFE/idux/issues/1957)) ([9b59fb2](https://github.com/IDuxFE/idux/commit/9b59fb2616e15ff368f45fa5fece047098aba43f))
+
+
+
+
+
 ## [2.2.3](https://github.com/IDuxFE/idux/compare/v2.2.2...v2.2.3) (2024-06-12)
 
 

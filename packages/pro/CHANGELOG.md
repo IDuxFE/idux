@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/IDuxFE/idux/compare/v2.2.3...v2.3.0) (2024-07-12)
+
+
+### Bug Fixes
+
+* **comp:*:** focusing in control overlay causes it to close unexpectedly ([#1952](https://github.com/IDuxFE/idux/issues/1952)) ([67a2f82](https://github.com/IDuxFE/idux/commit/67a2f8256e0adb5b507d60d1efa3cf8fb92f6ba9))
+* **comp:table:** initial selectedRowKeys absent from dataSource is removed after check change ([#1951](https://github.com/IDuxFE/idux/issues/1951)) ([22698bf](https://github.com/IDuxFE/idux/commit/22698bf9863fc4aa0228933fe583269e703fe4fb))
+* **pro:textarea:** error tooltip isn't displayed when one row has multiple lines ([#1959](https://github.com/IDuxFE/idux/issues/1959)) ([82a756b](https://github.com/IDuxFE/idux/commit/82a756bf1fcdd87b982289124c3d2001e075e3ae))
+
+
+### Features
+
+* **pro:table:** add dnd sortable support for proTable ([#1957](https://github.com/IDuxFE/idux/issues/1957)) ([9b59fb2](https://github.com/IDuxFE/idux/commit/9b59fb2616e15ff368f45fa5fece047098aba43f))
+
+
+
+
+
 ## [2.2.3](https://github.com/IDuxFE/idux/compare/v2.2.2...v2.2.3) (2024-06-12)
 
 **Note:** Version bump only for package @idux/pro
