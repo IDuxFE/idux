@@ -24,6 +24,7 @@ export const tooltipProps = {
     default: undefined,
   },
   placement: ɵOverlayPlacementDef,
+  showArrow: { type: Boolean, default: undefined },
   title: String,
   trigger: ɵOverlayTriggerDef,
   zIndex: Number,

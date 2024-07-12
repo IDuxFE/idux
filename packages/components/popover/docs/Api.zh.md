@@ -9,7 +9,6 @@
 | `closeIcon` | 关闭按钮图标 | `string` | `close` | - | - |
 | `content` | 浮层内容 | `string \| #content` | - | - | - |
 | `header` | 浮层的头部配置 | `string \| HeaderProps` | - | - | 具体请查看[Header](/components/header/zh#HeaderProps) |
-| `showArrow` | 是否显示箭头 | `boolean` | `true` | ✅ | - |
 
 更多属性请参考 [Tooltip](/components/tooltip/zh#TooltipProps).
 
