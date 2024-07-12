@@ -10,6 +10,7 @@ import { defineComponent, inject, onMounted, onUnmounted, shallowRef } from 'vue
 import { dndSortableItemToken } from '../tokens'
 
 export default defineComponent({
+  name: 'DndSortableHandle',
   setup(_, { slots }) {
     const { setDragHandle } = inject(dndSortableItemToken)!
 
