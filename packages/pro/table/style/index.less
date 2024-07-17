@@ -126,7 +126,8 @@
     }
 
     &:not(.@{table-prefix}-scroll-vertical) {
-      .@{pro-table-prefix}-layout-tool-trigger + .@{table-prefix}-content {
+      .@{pro-table-prefix}-layout-tool-trigger + .@{table-prefix}-content,
+      .@{pro-table-prefix}-layout-tool-trigger + .@{table-prefix}-fixed-holder {
         table > thead > tr:first-child {
           th:last-child > .@{table-prefix}-cell-triggers {
             padding-right: 38px;
