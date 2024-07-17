@@ -61,7 +61,7 @@ export default defineComponent({
     const mergedEllipsis = computed(() => {
       // tableProps 的 ellipsis 对特殊(带有 type )的列不生效
       const { type, ellipsis } = props.column as BodyColumn
-      return type ? ellipsis : ellipsis ?? tableProps.ellipsis
+      return type ? ellipsis : (ellipsis ?? tableProps.ellipsis)
     })
 
     const classes = computed(() => {

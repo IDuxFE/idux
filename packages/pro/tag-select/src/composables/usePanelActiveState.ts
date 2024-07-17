@@ -72,7 +72,7 @@ export function usePanelActiveState(
     watch(
       mergedOptions,
       options => {
-        const targetIndex = isNil(activeValue.value) ? -1 : keyIndexMap.value.get(activeValue.value) ?? -1
+        const targetIndex = isNil(activeValue.value) ? -1 : (keyIndexMap.value.get(activeValue.value) ?? -1)
         setActiveIndex(targetIndex !== -1 ? getEnabledActiveIndex(options, targetIndex, 1) : 0)
       },
       {

@@ -73,7 +73,7 @@ export function createCascaderSegment(
     const { panelValue, searchInput, handleChange } = getSelectableCommonParams<VKey | VKey[]>(
       context,
       !!multiple,
-      renderLocation === 'individual' ? separator ?? defaultSeparator : undefined,
+      renderLocation === 'individual' ? (separator ?? defaultSeparator) : undefined,
       !multiple || renderLocation === 'quick-select-panel',
     )
     const cascaderPanelSlots = {
@@ -130,7 +130,7 @@ function parseInput(
     trimedInput.split(separator ?? defaultSeparator),
     checkedKeysResolver,
     parentKeyMap,
-    fullPath ?? defaultFullPath ? pathSeparator ?? defaultPathSeparator : undefined,
+    (fullPath ?? defaultFullPath) ? (pathSeparator ?? defaultPathSeparator) : undefined,
   )
 
   return multiple ? (keys.length > 0 ? keys : undefined) : keys[0]
@@ -151,11 +151,11 @@ function formatValue(
   const labels = getLabelByKeys(
     nodeKeyMap,
     (multiple ? value : [value]) as VKey[] | VKey[][],
-    fullPath ?? defaultFullPath ? pathSeparator ?? defaultPathSeparator : undefined,
+    (fullPath ?? defaultFullPath) ? (pathSeparator ?? defaultPathSeparator) : undefined,
   )
 
   if (searchable) {
-    const inputParts = states ? states[states.length - 1]?.input?.split(_separator) ?? [] : []
+    const inputParts = states ? (states[states.length - 1]?.input?.split(_separator) ?? []) : []
     const lastInputPart = inputParts[inputParts.length - 1]?.trim() as string | undefined
 
     if (lastInputPart && !labels.includes(lastInputPart)) {

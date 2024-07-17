@@ -253,12 +253,18 @@ export function useTreeCheckStateResolver<V extends TreeTypeData<V, C>, C extend
   const getAllCheckedKeys = (data?: V[] | VKey[], defaultUnCheckedKeys?: VKey[]) => {
     const dataProvided = ((data?: V[] | VKey[]): data is V[] => isObject(data?.[0]))(data)
 
-    return _getAllCheckedKeys(dataProvided ? data : undefined, defaultUnCheckedKeys ?? (dataProvided ? [] : data ?? []))
+    return _getAllCheckedKeys(
+      dataProvided ? data : undefined,
+      defaultUnCheckedKeys ?? (dataProvided ? [] : (data ?? [])),
+    )
   }
   const getAllUncheckedKeys = (data?: V[] | VKey[], defaultCheckedKeys?: VKey[]) => {
     const dataProvided = ((data?: V[] | VKey[]): data is V[] => isObject(data?.[0]))(data)
 
-    return _getAllUncheckedKeys(dataProvided ? data : undefined, defaultCheckedKeys ?? (dataProvided ? [] : data ?? []))
+    return _getAllUncheckedKeys(
+      dataProvided ? data : undefined,
+      defaultCheckedKeys ?? (dataProvided ? [] : (data ?? [])),
+    )
   }
 
   return {

@@ -61,7 +61,7 @@ export function createTreeSelectSegment(
     const { panelValue, searchInput, handleChange } = getSelectableCommonParams(
       context,
       !!multiple,
-      renderLocation === 'individual' ? separator ?? defaultSeparator : undefined,
+      renderLocation === 'individual' ? (separator ?? defaultSeparator) : undefined,
       !multiple || renderLocation === 'quick-select-panel',
     )
 
@@ -145,7 +145,7 @@ function formatValue(
   const labels = getLabelByKeys(nodeKeyMap, convertArray(value))
 
   if (searchable) {
-    const inputParts = states ? states[states.length - 1]?.input?.split(_separator) ?? [] : []
+    const inputParts = states ? (states[states.length - 1]?.input?.split(_separator) ?? []) : []
     const lastInputPart = inputParts[inputParts.length - 1]?.trim() as string | undefined
 
     if (lastInputPart && !getKeyByLabels(nodeLabelMap, [lastInputPart]).length) {

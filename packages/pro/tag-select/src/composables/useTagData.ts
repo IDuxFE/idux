@@ -102,7 +102,7 @@ export function useTagData(props: ProTagSelectProps, tagColorContext: TagColorCo
       ...modifiedData,
       color: isObject(modifiedData.color)
         ? modifiedData.color
-        : getTagSelectColorByKey(modifiedData.color) ?? randomColor,
+        : (getTagSelectColorByKey(modifiedData.color) ?? randomColor),
     }
   }
   const removeData = (data: TagSelectData) => {

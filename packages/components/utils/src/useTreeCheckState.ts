@@ -121,7 +121,7 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
       }
     }
 
-    const children = cascaderStrategy.value !== 'off' ? data[childrenKey.value] ?? [] : []
+    const children = cascaderStrategy.value !== 'off' ? (data[childrenKey.value] ?? []) : []
     const checked =
       isChecked(currKey) ||
       (!!children.length &&

@@ -91,7 +91,7 @@ export function useThemeToken<Ext extends object, K extends UseThemeTokenScope |
 
   const context = getSharedContext(key, useThemeTokenContextMap, () => {
     const globalHashId = globalContext.globalHashId
-    const hashId = computed(() => (hashed.value ? getThemeHashId(key) ?? '' : ''))
+    const hashId = computed(() => (hashed.value ? (getThemeHashId(key) ?? '') : ''))
     const themeTokens = computed(() => getThemeTokens(key))
 
     const registerToken = (

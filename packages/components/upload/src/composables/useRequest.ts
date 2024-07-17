@@ -184,5 +184,5 @@ async function getAction(props: UploadProps, file: UploadFile) {
 }
 
 async function getRequestData(props: UploadProps, file: UploadFile) {
-  return isFunction(props.requestData) ? await props.requestData(file) : props.requestData ?? {}
+  return isFunction(props.requestData) ? await props.requestData(file) : (props.requestData ?? {})
 }
