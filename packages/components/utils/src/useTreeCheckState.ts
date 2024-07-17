@@ -7,7 +7,7 @@
 
 import type { CascaderStrategy } from '@idux/components/cascader'
 
-import { type ComputedRef, type Ref, computed, ref, watch } from 'vue'
+import { type ComputedRef, type Ref, computed, shallowRef, watch } from 'vue'
 
 import { isArray, isBoolean, isNil, isObject } from 'lodash-es'
 
@@ -32,7 +32,7 @@ interface GetAllUncheckedKeys<V extends TreeTypeData<V, C>, C extends keyof V> {
 }
 
 export interface TreeCheckStateContext<V extends TreeTypeData<V, C>, C extends keyof V> {
-  allCheckedKeySet: ComputedRef<Set<VKey>>
+  allCheckedKeySet: Ref<Set<VKey>>
   checkDisabledKeySet: ComputedRef<Set<VKey>>
   checkStateResolver: TreeCheckStateResolver<V, C>
   isChecked: (key: VKey) => boolean
@@ -44,6 +44,7 @@ export interface TreeCheckStateContext<V extends TreeTypeData<V, C>, C extends k
   }
   getAllCheckedKeys: GetAllCheckedKeys<V, C>
   getAllUncheckedKeys: GetAllUncheckedKeys<V, C>
+  getDataByKeys: (keys: VKey[]) => V[]
 }
 
 export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof V>(
@@ -54,53 +55,14 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
   cascaderStrategy: Ref<CascaderStrategy>,
   isDisabled: Ref<((data: V) => boolean) | undefined>,
 ): TreeCheckStateContext<V, C> {
-  const cachedSelectedData = ref([]) as Ref<V[]>
-  const cachedSelectedDataReolverContext = computed(() =>
-    getTreeCheckStateResolverContext(cachedSelectedData.value, childrenKey.value, getKey.value),
-  )
-
-  const mergedResolverContext = computed(() => {
-    const { data, dataMap, parentKeyMap, depthMap } = resolverContext.value
-    const {
-      data: cachedData,
-      dataMap: cachedDataMap,
-      parentKeyMap: cachedParentMap,
-      depthMap: cachedDepthMap,
-    } = cachedSelectedDataReolverContext.value
-
-    const mergedData = mergeTree(data ?? [], cachedData ?? [], childrenKey.value, getKey.value)
-    const mergedDataMap = new Map(dataMap)
-    const _cachedDataMap = new Map(cachedDataMap)
-
-    mergedDataMap.forEach((item, key) => {
-      if (_cachedDataMap.has(key)) {
-        const cachedItem = _cachedDataMap.get(key)!
-        mergedDataMap.set(key, mergeTree([item], [cachedItem], childrenKey.value, getKey.value)[0])
-        _cachedDataMap.delete(key)
-      }
-    })
-    _cachedDataMap.forEach((item, key) => {
-      mergedDataMap.set(key, item)
-    })
-
-    const mergedParentKeyMap = new Map([...cachedParentMap, ...parentKeyMap])
-    const mergedDepthMap = new Map([...cachedDepthMap, ...depthMap])
-
-    return {
-      data: mergedData,
-      dataMap: mergedDataMap,
-      parentKeyMap: mergedParentKeyMap,
-      depthMap: mergedDepthMap,
-    }
-  })
-
-  const checkStateResolver = useTreeCheckStateResolver(mergedResolverContext, childrenKey, getKey, cascaderStrategy)
-  const allCheckStateResolver = useTreeCheckStateResolver(
+  const {
     mergedResolverContext,
-    childrenKey,
-    getKey,
-    computed(() => 'all'),
-  )
+    cachedSelectedData,
+    checkStateResolver,
+    allCheckStateResolver,
+    allCheckedKeySet,
+    unexistedKeys,
+  } = useResolvers(checkedKeys, resolverContext, childrenKey, getKey, cascaderStrategy)
 
   const checkDisabledKeySet = computed(() => {
     const { dataMap } = mergedResolverContext.value
@@ -113,15 +75,6 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
 
     return disabledKeys
   })
-
-  const allCheckedKeySet = computed(() => {
-    const keys =
-      cascaderStrategy.value === 'off' ? checkedKeys.value : allCheckStateResolver.appendKeys([], checkedKeys.value)
-
-    return new Set(keys)
-  })
-
-  const unexistedKeys = computed(() => checkedKeys.value.filter(key => !allCheckedKeySet.value.has(key)))
 
   const indeterminateKeySet = computed(() => {
     const { parentKeyMap } = mergedResolverContext.value
@@ -141,18 +94,6 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
       }
     })
     return keySet
-  })
-
-  const updateCachedSelectedData = () => {
-    const { data } = mergedResolverContext.value
-    const keySet = allCheckedKeySet.value
-    cachedSelectedData.value = filterTree(data, childrenKey.value, item => keySet.has(getKey.value(item)), 'or')
-  }
-  watch([checkedKeys, cascaderStrategy], updateCachedSelectedData)
-  watch(unexistedKeys, (keys, oldKeys) => {
-    if (keys.length !== oldKeys.length) {
-      updateCachedSelectedData()
-    }
   })
 
   const isCheckDisabled = (key: VKey) => {
@@ -254,6 +195,12 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
       : checkStateResolver.getAllCheckedKeys(params.defaultKeys)
   }
 
+  const getDataByKeys = (keys: VKey[]) => {
+    const { dataMap } = mergedResolverContext.value
+
+    return keys.map(key => dataMap.get(key)).filter(Boolean) as V[]
+  }
+
   return {
     allCheckedKeySet,
     checkDisabledKeySet,
@@ -264,5 +211,107 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
     toggle,
     getAllCheckedKeys,
     getAllUncheckedKeys,
+    getDataByKeys,
+  }
+}
+
+function useResolvers<V extends TreeTypeData<V, C>, C extends keyof V>(
+  checkedKeys: Ref<VKey[]>,
+  resolverContext: Ref<TreeCheckStateResolverContext<V, C>>,
+  childrenKey: Ref<C>,
+  getKey: Ref<GetKeyFn>,
+  cascaderStrategy: Ref<CascaderStrategy>,
+): {
+  mergedResolverContext: Ref<TreeCheckStateResolverContext<V, C>>
+  cachedSelectedData: Ref<V[]>
+  checkStateResolver: TreeCheckStateResolver<V, C>
+  allCheckStateResolver: TreeCheckStateResolver<V, C>
+  allCheckedKeySet: Ref<Set<VKey>>
+  unexistedKeys: { value: VKey[] }
+} {
+  const cachedSelectedData = shallowRef([]) as Ref<V[]>
+  const cachedSelectedDataReolverContext = computed(() =>
+    getTreeCheckStateResolverContext(cachedSelectedData.value, childrenKey.value, getKey.value),
+  )
+
+  const mergedResolverContext = shallowRef<TreeCheckStateResolverContext<V, C>>(resolverContext.value)
+  const allCheckedKeySet = shallowRef<Set<VKey>>(new Set())
+  const unexistedKeys: { value: VKey[] } = { value: [] }
+
+  const checkStateResolver = useTreeCheckStateResolver(mergedResolverContext, childrenKey, getKey, cascaderStrategy)
+  const allCheckStateResolver = useTreeCheckStateResolver(
+    mergedResolverContext,
+    childrenKey,
+    getKey,
+    computed(() => 'all'),
+  )
+
+  const updateMergedContext = () => {
+    const { data, dataMap, parentKeyMap, depthMap } = resolverContext.value
+    const {
+      data: cachedData,
+      dataMap: cachedDataMap,
+      parentKeyMap: cachedParentMap,
+      depthMap: cachedDepthMap,
+    } = cachedSelectedDataReolverContext.value
+
+    const mergedData = mergeTree(data ?? [], cachedData ?? [], childrenKey.value, getKey.value)
+    const mergedDataMap = new Map(dataMap)
+    const _cachedDataMap = new Map(cachedDataMap)
+
+    mergedDataMap.forEach((item, key) => {
+      if (_cachedDataMap.has(key)) {
+        const cachedItem = _cachedDataMap.get(key)!
+        mergedDataMap.set(key, mergeTree([item], [cachedItem], childrenKey.value, getKey.value)[0])
+        _cachedDataMap.delete(key)
+      }
+    })
+    _cachedDataMap.forEach((item, key) => {
+      mergedDataMap.set(key, item)
+    })
+
+    const mergedParentKeyMap = new Map([...cachedParentMap, ...parentKeyMap])
+    const mergedDepthMap = new Map([...cachedDepthMap, ...depthMap])
+
+    mergedResolverContext.value = {
+      data: mergedData,
+      dataMap: mergedDataMap,
+      parentKeyMap: mergedParentKeyMap,
+      depthMap: mergedDepthMap,
+    }
+  }
+
+  const updateCachedSelectedData = () => {
+    const { data } = mergedResolverContext.value
+    const keySet = allCheckedKeySet.value
+    cachedSelectedData.value = filterTree(data ?? [], childrenKey.value, item => keySet.has(getKey.value(item)), 'or')
+  }
+
+  const updateAllSelectedKeySet = () => {
+    const keys =
+      cascaderStrategy.value === 'off' ? checkedKeys.value : allCheckStateResolver.appendKeys([], checkedKeys.value)
+
+    const keySet = new Set(keys)
+
+    allCheckedKeySet.value = keySet
+    const newUnexistedKeys = checkedKeys.value.filter(key => !keySet.has(key))
+
+    if (newUnexistedKeys.length !== unexistedKeys.value.length) {
+      updateCachedSelectedData()
+    }
+
+    unexistedKeys.value = newUnexistedKeys
+  }
+
+  watch(resolverContext, updateMergedContext)
+  watch([checkedKeys, mergedResolverContext, cascaderStrategy], updateAllSelectedKeySet, { immediate: true })
+
+  return {
+    mergedResolverContext,
+    cachedSelectedData,
+    checkStateResolver,
+    allCheckStateResolver,
+    allCheckedKeySet,
+    unexistedKeys,
   }
 }

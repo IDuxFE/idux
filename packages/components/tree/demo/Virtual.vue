@@ -1,5 +1,12 @@
 <template>
-  <IxTree v-model:expandedKeys="expandedKeys" :dataSource="treeData" :height="200" virtual></IxTree>
+  <IxTree
+    v-model:expandedKeys="expandedKeys"
+    cascaderStrategy="all"
+    checkable
+    :dataSource="treeData"
+    :height="400"
+    virtual
+  ></IxTree>
 </template>
 
 <script setup lang="ts">
@@ -8,16 +15,17 @@ import type { TreeNode } from '@idux/components/tree'
 
 import { ref } from 'vue'
 
-const expandedKeys = ref<VKey[]>([])
+const expandedKeys = ref<VKey[]>(['root'])
 
-function genData(path = '0', level = 3) {
+function genData(path = '0', level = 1) {
   const data = []
 
-  for (let index = 0; index < 10; index++) {
+  for (let index = 0; index < 100; index++) {
     const key = `${path}-${index}`
     const node: TreeNode = {
       key,
       label: key,
+      disabled: level === 0 && index === 5,
     }
 
     if (level > 0) {
@@ -30,5 +38,11 @@ function genData(path = '0', level = 3) {
   return data
 }
 
-const treeData = genData()
+const treeData = [
+  {
+    key: 'root',
+    label: '全部',
+    children: genData(),
+  },
+]
 </script>

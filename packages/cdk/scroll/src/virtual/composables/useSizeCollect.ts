@@ -9,7 +9,7 @@ import type { VirtualScrollProps, VirutalDataSizes } from '../types'
 import type { VKey } from '@idux/cdk/utils'
 import type { ComponentPublicInstance, Ref } from 'vue'
 
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 import { isNil } from 'lodash-es'
 
@@ -34,6 +34,35 @@ export function useSizeCollect(props: VirtualScrollProps): SizeCollectContext {
   const sizeUpdateMark = ref(0)
 
   let sizeUpdateId = 0
+  let rowHeight = props.rowHeight
+  let colWidth = props.colWidth
+  let _getColWidth = props.getColWidth
+  let _getRowHeight = props.getRowHeight
+
+  watch(
+    () => props.rowHeight,
+    () => {
+      rowHeight = props.rowHeight
+    },
+  )
+  watch(
+    () => props.colWidth,
+    () => {
+      colWidth = props.colWidth
+    },
+  )
+  watch(
+    () => props.getColWidth,
+    () => {
+      _getColWidth = props.getColWidth
+    },
+  )
+  watch(
+    () => props.getRowHeight,
+    () => {
+      _getRowHeight = props.getRowHeight
+    },
+  )
 
   const setRowHeight = (rowKey: VKey, height: number | undefined) => {
     if (isNil(height)) {
@@ -161,13 +190,13 @@ export function useSizeCollect(props: VirtualScrollProps): SizeCollectContext {
   }
 
   const getRowHeight = (rowKey: VKey) => {
-    return sizes.get(rowKey)?.height ?? props.getRowHeight?.(rowKey) ?? props.rowHeight
+    return sizes.get(rowKey)?.height ?? _getRowHeight?.(rowKey) ?? rowHeight
   }
   const getColWidth = (rowKey: VKey, colKey: VKey) => {
     return (
       (props.isStrictGrid ? strictGridColSizes.get(colKey) : sizes.get(rowKey)?.colWidths.get(colKey)) ??
-      props.getColWidth?.(rowKey, colKey) ??
-      props.colWidth
+      _getColWidth?.(rowKey, colKey) ??
+      colWidth
     )
   }
 

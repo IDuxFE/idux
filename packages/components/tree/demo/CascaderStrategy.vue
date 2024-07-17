@@ -16,11 +16,12 @@
       @check="onCheck"
     >
     </IxTree>
+    {{ checkedKeys }}
   </IxSpace>
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { ref, watch, watchEffect } from 'vue'
 
 import { CascaderStrategy } from '@idux/components/cascader'
 import { TreeNode } from '@idux/components/tree'
@@ -72,13 +73,14 @@ const treeData: TreeNode[] = [
   },
 ]
 
-const checkedKeys = ref(['0'])
+const checkedKeys = ref([])
 const expandedKeys = ref(['0', '0-0', '0-1'])
 const selectedKeys = ref(['0-1'])
 
 const cascaderStrategy = ref<CascaderStrategy>('all')
 
 watchEffect(() => console.log('checkedKeys:', checkedKeys.value))
+watch(cascaderStrategy, () => (checkedKeys.value = []))
 
 const onCheck = (checked: boolean, node: TreeNode) => console.log('checked', checked, node)
 </script>

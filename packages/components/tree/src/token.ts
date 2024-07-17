@@ -20,6 +20,7 @@ export interface TreeContext extends CheckableContext, DragDropContext, Expandab
   props: TreeProps
   config: TreeConfig
   flattedNodes: ComputedRef<MergedNode[]>
+  flattenedNodeMap: ComputedRef<Map<VKey, MergedNode>>
   mergedPrefixCls: ComputedRef<string>
   mergedNodeMap: ComputedRef<Map<VKey, MergedNode>>
   mergedGetKey: ComputedRef<GetKeyFn>
