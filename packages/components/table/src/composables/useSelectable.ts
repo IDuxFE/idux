@@ -78,7 +78,7 @@ export function useSelectable(
     cascaderStrategy,
     isDisabled,
   )
-  const { isCheckDisabled, isChecked, isIndeterminate, toggle, getAllCheckedKeys, getAllUncheckedKeys } =
+  const { isCheckDisabled, isChecked, isIndeterminate, toggle, getAllCheckedKeys, getAllUncheckedKeys, getDataByKeys } =
     checkStateContext
 
   const currentPageRowKeys = computed(() => {
@@ -125,30 +125,12 @@ export function useSelectable(
   const currentPageSomeSelected = computed(
     () => !currentPageAllSelectState.value.allSelected && currentPageAllSelectState.value.someSelected,
   )
-  // 缓存已经被选中的数据，考虑到后端分页的清空，dataMap 中没有全部的数据
-  const cacheSelectedMap = new Map<VKey, MergedData>()
 
   const emitChange = (tempRowKeys: VKey[]) => {
     setSelectedRowKeys(tempRowKeys)
-    const dataMap = mergedMap.value
     const { onChange } = selectable.value || {}
     if (onChange) {
-      const selectedRecords: unknown[] = []
-      // 清理掉缓存中被取消选中的数据
-      cacheSelectedMap.forEach((_, key) => {
-        if (!tempRowKeys.includes(key)) {
-          cacheSelectedMap.delete(key)
-        }
-      })
-      tempRowKeys.forEach(key => {
-        let currData = dataMap.get(key)
-        if (currData) {
-          cacheSelectedMap.set(key, currData)
-        } else {
-          currData = cacheSelectedMap.get(key)
-        }
-        currData && selectedRecords.push(currData.record)
-      })
+      const selectedRecords = getDataByKeys(tempRowKeys).map(data => data.record)
       callEmit(onChange, tempRowKeys, selectedRecords)
     }
   }

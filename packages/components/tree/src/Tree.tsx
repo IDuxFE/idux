@@ -77,7 +77,7 @@ export default defineComponent({
       searchedKeys,
       setLoadedNodes,
     )
-    const flattedNodes = useFlattedNodes(mergedNodes, expandableContext, props, searchedKeys)
+    const { flattedNodes, flattenedNodeMap } = useFlattedNodes(mergedNodes, expandableContext, props, searchedKeys)
     const checkableContext = useCheckable(props, mergedNodes, mergedNodeMap, parentKeyMap, depthMap)
     const dragDropContext = useDragDrop(props, config, expandableContext)
     const selectableContext = useSelectable(props, mergedNodeMap)
@@ -87,6 +87,7 @@ export default defineComponent({
       props,
       config,
       flattedNodes,
+      flattenedNodeMap,
       mergedPrefixCls,
       mergedNodeMap,
       mergedGetKey,

@@ -42,7 +42,7 @@ export function getSelectableCommonParams<T>(
     searchInput = trimedInput
   } else {
     const inputParts = trimedInput.split(separator)
-    searchInput = inputParts.length > panelValue.length ? inputParts.pop()?.trim() ?? '' : ''
+    searchInput = inputParts.length > panelValue.length ? (inputParts.pop()?.trim() ?? '') : ''
   }
 
   const handleChange = (v: T[] | undefined) => {

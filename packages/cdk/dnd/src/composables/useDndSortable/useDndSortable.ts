@@ -179,8 +179,8 @@ export function useDndSortable(options: DndSortableOptions): DndSortableContext 
 
         const canDragOptions = { sourceKey: key, sourceData, sourceIndex }
 
-        const listCanDrag = canDrag ? canDrag(canDragOptions) ?? true : true
-        const itemCanDrag = innerCanDrag ? innerCanDrag({ ...args, ...canDragOptions }) ?? true : true
+        const listCanDrag = canDrag ? (canDrag(canDragOptions) ?? true) : true
+        const itemCanDrag = innerCanDrag ? (innerCanDrag({ ...args, ...canDragOptions }) ?? true) : true
 
         return listCanDrag && itemCanDrag
       },
@@ -297,8 +297,8 @@ export function useDndSortable(options: DndSortableOptions): DndSortableContext 
 
         const canDropOptions = { sourceKey, sourceData, sourceIndex, targetKey: key, targetData, targetIndex }
 
-        const listCanDrop = canDrop ? canDrop(canDropOptions) ?? true : true
-        const itemCanDrop = innerCanDrop ? innerCanDrop({ ...args, ...canDropOptions }) ?? true : true
+        const listCanDrop = canDrop ? (canDrop(canDropOptions) ?? true) : true
+        const itemCanDrop = innerCanDrop ? (innerCanDrop({ ...args, ...canDropOptions }) ?? true) : true
         return listCanDrop && itemCanDrop
       },
     })

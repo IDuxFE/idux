@@ -84,7 +84,7 @@ export function createTreeStrategyContext<C extends keyof V, V extends object>(o
     }
 
     const parentKey = dataContext.value.parentKeyMap.get(key)
-    const dataArray = isNil(parentKey) ? dataSource.value : getData(parentKey)![childrenKey.value] ?? []
+    const dataArray = isNil(parentKey) ? dataSource.value : (getData(parentKey)![childrenKey.value] ?? [])
     const dataIndex = getDataIndex(key)
 
     const isLastInGroup = dataIndex === dataArray.length - 1

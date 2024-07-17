@@ -107,7 +107,7 @@ export default defineComponent({
             if (active) {
               segmentInputRef.value?.getInputElement().focus()
               updateSelectionStart(
-                (props.selectionStart ?? -1) === -1 ? props.input?.length ?? 0 : props.selectionStart ?? 0,
+                (props.selectionStart ?? -1) === -1 ? (props.input?.length ?? 0) : (props.selectionStart ?? 0),
               )
             }
           })

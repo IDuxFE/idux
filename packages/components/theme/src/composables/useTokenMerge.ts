@@ -53,7 +53,7 @@ export function useTokenMerge(
     const configComponentTokens = config.components
 
     const overwrittenTokens = merge(
-      { ...(props?.inherit && !props.presetTheme ? supperContext?.mergedTokens.value.global ?? {} : {}) },
+      { ...(props?.inherit && !props.presetTheme ? (supperContext?.mergedTokens.value.global ?? {}) : {}) },
       { ...configGlobalTokens },
       props?.tokens?.global,
     ) as GlobalThemeTokens
@@ -61,7 +61,7 @@ export function useTokenMerge(
     const mergedGlobalTokens = getThemeTokens(mergedPresetTheme.value, overwrittenTokens, mergedAlgorithms.value)
 
     const mergedComponentTokens = merge(
-      { ...(props?.inherit ? supperContext?.mergedTokens.value.components ?? {} : {}) },
+      { ...(props?.inherit ? (supperContext?.mergedTokens.value.components ?? {}) : {}) },
       { ...configComponentTokens },
       props?.tokens?.components,
     )

@@ -29,7 +29,7 @@ export default defineComponent({
       <li class={`${mergedPrefixCls.value}-item`}>
         <span class={`${mergedPrefixCls.value}-item-link`}>{slots.default?.()}</span>
         <span class={`${mergedPrefixCls.value}-item-separator`} aria-hidden="true">
-          {slots.separator ? slots.separator() : props.separator ?? separatorRef.value}
+          {slots.separator ? slots.separator() : (props.separator ?? separatorRef.value)}
         </span>
       </li>
     )

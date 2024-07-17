@@ -113,22 +113,30 @@ export function useTreeCheckStateResolver<V extends TreeTypeData<V, C>, C extend
     const { dataMap } = resolverContext
 
     const newKeySet = new Set(checkedKeys)
+    const topMostCheckedKeys = new Set<VKey>()
     appendedKeys.forEach(key => {
-      if (!dataMap.has(key)) {
+      if (!dataMap.has(key) || newKeySet.has(key)) {
         return
       }
 
       const treeData = dataMap.get(key)!
-      getTreeKeys([treeData], childrenKey.value, getKey.value, mergedCascadeStrategy.value === 'child').forEach(key => {
-        newKeySet.add(key)
-      })
+      const children = treeData[childrenKey.value]
+      newKeySet.add(key)
+      topMostCheckedKeys.add(key)
+
+      if (children?.length) {
+        getTreeKeys(children, childrenKey.value, getKey.value, mergedCascadeStrategy.value === 'child').forEach(key => {
+          newKeySet.add(key)
+          topMostCheckedKeys.delete(key)
+        })
+      }
     })
 
     if (mergedCascadeStrategy.value === 'child') {
       return Array.from(newKeySet).filter(key => !dataMap.get(key)?.[childrenKey.value]?.length)
     }
 
-    appendedKeys.forEach(key => {
+    topMostCheckedKeys.forEach(key => {
       _getParents(key, resolverContext).forEach(parent => {
         if (parent[childrenKey.value]?.every(child => newKeySet.has(getKey.value(child)))) {
           newKeySet.add(getKey.value(parent))
@@ -245,12 +253,18 @@ export function useTreeCheckStateResolver<V extends TreeTypeData<V, C>, C extend
   const getAllCheckedKeys = (data?: V[] | VKey[], defaultUnCheckedKeys?: VKey[]) => {
     const dataProvided = ((data?: V[] | VKey[]): data is V[] => isObject(data?.[0]))(data)
 
-    return _getAllCheckedKeys(dataProvided ? data : undefined, defaultUnCheckedKeys ?? (dataProvided ? [] : data ?? []))
+    return _getAllCheckedKeys(
+      dataProvided ? data : undefined,
+      defaultUnCheckedKeys ?? (dataProvided ? [] : (data ?? [])),
+    )
   }
   const getAllUncheckedKeys = (data?: V[] | VKey[], defaultCheckedKeys?: VKey[]) => {
     const dataProvided = ((data?: V[] | VKey[]): data is V[] => isObject(data?.[0]))(data)
 
-    return _getAllUncheckedKeys(dataProvided ? data : undefined, defaultCheckedKeys ?? (dataProvided ? [] : data ?? []))
+    return _getAllUncheckedKeys(
+      dataProvided ? data : undefined,
+      defaultCheckedKeys ?? (dataProvided ? [] : (data ?? [])),
+    )
   }
 
   return {

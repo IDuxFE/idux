@@ -45,5 +45,5 @@ export function convertElement<T extends MaybeElement>(
   elementOrInstance: MaybeElementRef<T>,
 ): T extends ComponentPublicInstance ? Exclude<MaybeElement, ComponentPublicInstance> : T | undefined {
   const element = unref(elementOrInstance)
-  return isHTMLElement(element) ? element : element?.$el ?? element
+  return isHTMLElement(element) ? element : (element?.$el ?? element)
 }

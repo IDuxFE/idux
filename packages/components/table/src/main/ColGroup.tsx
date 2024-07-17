@@ -47,7 +47,7 @@ export default defineComponent({
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const { key, type } = column
-        const mergedWidth = props.isFixedHolder ? measuredColumnWidthMap.value[key] ?? column.width : column.width
+        const mergedWidth = props.isFixedHolder ? (measuredColumnWidthMap.value[key] ?? column.width) : column.width
         const className = type
           ? normalizeClass({
               [`${prefixCls}-col-${type}`]: true,

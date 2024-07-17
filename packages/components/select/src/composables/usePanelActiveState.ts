@@ -60,7 +60,7 @@ export function usePanelActiveState(
     watch(
       [() => props.activeValue, flattenedOptions],
       ([value, options]) => {
-        const targetIndex = isNil(value) ? -1 : keyIndexMap.value.get(value) ?? -1
+        const targetIndex = isNil(value) ? -1 : (keyIndexMap.value.get(value) ?? -1)
         setActiveIndex(targetIndex !== -1 ? getEnabledActiveIndex(options, targetIndex, 1) : -1)
       },
       {

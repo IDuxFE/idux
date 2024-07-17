@@ -86,7 +86,7 @@ function useSelectorClasses(
 
 function useDir(props: UploadProps, config: UploadConfig) {
   const directoryCfg = { directory: 'directory', webkitdirectory: 'webkitdirectory' }
-  return computed(() => (props.directory ?? config.directory ? directoryCfg : {}))
+  return computed(() => ((props.directory ?? config.directory) ? directoryCfg : {}))
 }
 
 function useMultiple(props: UploadProps, config: UploadConfig) {

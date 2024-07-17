@@ -125,7 +125,7 @@ export function useTokenRegister(
     // if hashId is already provided, we consider the style injected already, no need to inject it again
     if (injectThemeStyle.value && !existedHashId) {
       const cssContent = tokenToCss(
-        { ...record, hashId: hashed ?? mergedHashed.value ? record.hashId : '' } as TokenRecord<string>,
+        { ...record, hashId: (hashed ?? mergedHashed.value) ? record.hashId : '' } as TokenRecord<string>,
         prefix,
         transforms,
       )

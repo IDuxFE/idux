@@ -97,23 +97,47 @@ export function useFlattedNodes(
   { expandedKeys }: ExpandableContext,
   props: TreeProps,
   searchedKeys: ComputedRef<VKey[]>,
-): ComputedRef<MergedNode[]> {
-  return computed(() => {
+): { flattedNodes: ComputedRef<MergedNode[]>; flattenedNodeMap: ComputedRef<Map<VKey, MergedNode>> } {
+  const flattenedContext = computed(() => {
     const { searchValue } = props
     const expandedKeysMap = new Map(expandedKeys.value.map((item, index) => [item, index]))
     const searchedKeysMap = new Map(searchedKeys.value.map((item, index) => [item, index]))
 
+    const flattenedNodeMap = new Map<VKey, MergedNode>()
+
     if (searchValue && !searchedKeysMap.size) {
-      return []
+      return {
+        flattedNodes: [],
+        flattenedNodeMap,
+      }
     }
 
     if (expandedKeysMap.size || searchedKeysMap.size) {
-      const nodes = flatNode(mergedNodes.value, expandedKeysMap, searchedKeysMap)
-      return nodes
+      const nodes = flatNode(mergedNodes.value, expandedKeysMap, searchedKeysMap, flattenedNodeMap)
+      return {
+        flattedNodes: nodes,
+        flattenedNodeMap,
+      }
     }
 
-    return mergedNodes.value.map(item => ({ ...item, expanded: false, level: 0 }))
+    return {
+      flattedNodes: mergedNodes.value.map(item => {
+        const node = { ...item, expanded: false, level: 0 }
+        flattenedNodeMap.set(node.key, node)
+
+        return node
+      }),
+      flattenedNodeMap,
+    }
   })
+
+  const flattedNodes = computed(() => flattenedContext.value.flattedNodes)
+  const flattenedNodeMap = computed(() => flattenedContext.value.flattenedNodeMap)
+
+  return {
+    flattedNodes,
+    flattenedNodeMap,
+  }
 }
 
 export function convertMergeNodes(
@@ -282,14 +306,19 @@ function hiddenIrrelevantNodes(mergedNodes: MergedNode[] = [], searchedKeysMap: 
 
 // TODO: performance optimization
 // when virtual scrolling is enabled, this do not need to traverse all nodes
-function flatNode(mergedNodes: MergedNode[], expandedKeysMap: Map<VKey, number>, searchedKeysMap: Map<VKey, number>) {
+function flatNode(
+  mergedNodes: MergedNode[],
+  expandedKeysMap: Map<VKey, number>,
+  searchedKeysMap: Map<VKey, number>,
+  nodeMap: Map<VKey, MergedNode>,
+) {
   const flattedNodes: MergedNode[] = []
   const stack: MergedNode[] = []
 
   hiddenIrrelevantNodes(mergedNodes, searchedKeysMap)
 
   mergedNodes.forEach(node => {
-    stack.push(node)
+    stack.push({ ...node })
 
     while (stack.length) {
       const _node = stack.pop()
@@ -300,6 +329,7 @@ function flatNode(mergedNodes: MergedNode[], expandedKeysMap: Map<VKey, number>,
         _node.expanded = expanded
 
         !hidden && flattedNodes.push(_node)
+        nodeMap.set(_node.key, _node)
 
         if (children && expanded) {
           for (let i = children.length; i > 0; i--) {
