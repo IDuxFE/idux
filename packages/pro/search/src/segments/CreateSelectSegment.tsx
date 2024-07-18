@@ -130,10 +130,12 @@ function formatValue(
   const labels = getLabelByKeys(mergedDataSource, values)
 
   if (searchable) {
-    const inputParts = states ? (states[states.length - 1]?.input?.split(_separator) ?? []) : []
+    const currentState = states?.[states.length - 1]
+    const lastLabels = currentState?.value ? getLabelByKeys(mergedDataSource, currentState.value as VKey[]) : []
+    const inputParts = currentState ? (currentState.input?.split(_separator) ?? []) : []
     const lastInputPart = inputParts[inputParts.length - 1]?.trim() as string | undefined
 
-    if (lastInputPart && !labels.includes(lastInputPart)) {
+    if (lastInputPart && !lastLabels.includes(lastInputPart) && lastInputPart !== allSelected) {
       return [...labels, lastInputPart].join(` ${_separator} `)
     }
   }
