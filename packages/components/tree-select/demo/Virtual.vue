@@ -1,5 +1,5 @@
 <template>
-  <IxTreeSelect placeholder="虚拟滚动" :dataSource="treeData" virtual></IxTreeSelect>
+  <IxTreeSelect placeholder="虚拟滚动" multiple checkable :dataSource="treeData" virtual></IxTreeSelect>
 </template>
 
 <script setup lang="ts">

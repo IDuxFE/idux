@@ -1,12 +1,16 @@
 <template>
-  <IxTree
-    v-model:expandedKeys="expandedKeys"
-    cascaderStrategy="all"
-    checkable
-    :dataSource="treeData"
-    :height="400"
-    virtual
-  ></IxTree>
+  <IxSpace vertical block>
+    <IxInput v-model:value="searchValue" placeholder="Search" suffix="search"></IxInput>
+    <IxTree
+      v-model:expandedKeys="expandedKeys"
+      cascaderStrategy="all"
+      checkable
+      :dataSource="treeData"
+      :searchValue="searchValue"
+      :height="400"
+      virtual
+    ></IxTree>
+  </IxSpace>
 </template>
 
 <script setup lang="ts">
@@ -45,4 +49,6 @@ const treeData = [
     children: genData(),
   },
 ]
+
+const searchValue = ref('')
 </script>
