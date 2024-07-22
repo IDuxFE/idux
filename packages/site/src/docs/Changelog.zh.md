@@ -10,6 +10,21 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 2.3.3(2024-07-22)
+
+
+### Bug Fixes
+
+* **pro:search:** select搜索项，当取消选择在标签中的最后一个选项时，面板的选项变成只有该选项，被异常过滤了 ([#1967](https://github.com/IDuxFE/idux/issues/1967)) ([9eccfcb](https://github.com/IDuxFE/idux/commit/9eccfcbe85e06512c1d04b7171b20070eb9755d7))
+* **pro:textarea:** 优化性能 ([#1968](https://github.com/IDuxFE/idux/issues/1968)) ([0fade99](https://github.com/IDuxFE/idux/commit/0fade99c74ff7299ce9d5781652d32b402bf8046))
+  - 1. 根据行高和滚动事件的触发，采用虚拟列表的方式优化渲染，只渲染滚动范围内的错误行和行号元素
+  - 2. 缓存每行的计算结果，在某一行的输入没有变化时，使用上次的计算结果，不重复计算
+* **pro:transfer:** 优化树穿梭框性能 ([#1969](https://github.com/IDuxFE/idux/issues/1969)) ([31ab1a0](https://github.com/IDuxFE/idux/commit/31ab1a0f8ffa09679d4aec0fc15d8a6c5495dce1))
+  - 1. 优化树穿梭框数据处理策略中的数据分割逻辑，只有在当前源数据变化的时候（比如远程的分页，搜索），才需要与缓存的选中数据进行合并处理
+  - 2. 树穿梭框，disabled函数直接取了响应式变量，会导致大量数据下频繁触发响应式变量的依赖收集逻辑，消耗大量性能
+  - 3. 基础穿梭框的数据处理逻辑中，也有同问题2的问题
+
+
 ## 2.3.2(2024-07-17)
 
 
