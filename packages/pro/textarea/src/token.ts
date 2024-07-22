@@ -6,18 +6,20 @@
  */
 
 import type { ErrorLinesContext } from './composables/useErrorLines'
+import type { LineRenderContext } from './composables/useLineRender'
 import type { ProTextareaProps } from './types'
 import type { FormAccessor } from '@idux/cdk/forms'
 import type { ɵBoxSizingData } from '@idux/components/textarea'
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
 
-export interface ProTextareaContext extends ErrorLinesContext {
+export interface ProTextareaContext extends ErrorLinesContext, LineRenderContext {
   props: ProTextareaProps
   accessor: FormAccessor
   boxSizingData: ComputedRef<ɵBoxSizingData>
   lineHeight: Ref<number>
   mergedPrefixCls: ComputedRef<string>
   rowCounts: ComputedRef<number[]>
+  rowHeights: ComputedRef<number[]>
   textareaRef: Ref<HTMLTextAreaElement | undefined>
   handleInput: (evt: Event) => void
   handleCompositionStart: (evt: CompositionEvent) => void

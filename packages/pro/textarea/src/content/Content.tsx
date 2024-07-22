@@ -22,6 +22,7 @@ export default defineComponent({
       accessor,
       boxSizingData,
       rowCounts,
+      renderedErrors,
       lineHeight,
       textareaRef,
       visibleErrIndex,
@@ -34,11 +35,12 @@ export default defineComponent({
     } = inject(proTextareaContext)!
 
     const renderErrorLines = () =>
-      props.errors
+      renderedErrors.value
         ?.map(
           error =>
             rowCounts.value.length > error.index && (
               <ErrorLine
+                key={error.index}
                 style={getErrorLineStyle(error, rowCounts.value, lineHeight.value, boxSizingData.value?.paddingTop)}
                 message={error.message}
                 visible={error.index === visibleErrIndex.value}

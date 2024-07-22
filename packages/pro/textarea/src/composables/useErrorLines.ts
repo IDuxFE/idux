@@ -7,12 +7,14 @@
 
 import type { ProTextareaProps } from '../types'
 import type { ɵBoxSizingData } from '@idux/components/textarea'
-import type { ComputedRef, Ref } from 'vue'
+
+import { type ComputedRef, type Ref, computed } from 'vue'
 
 import { useState } from '@idux/cdk/utils'
 
 export interface ErrorLinesContext {
   visibleErrIndex: ComputedRef<number>
+  errSet: ComputedRef<Set<number>>
   setvisibleErrIndex: (errIndex: number) => void
   handleTextareaMouseMove: (evt: MouseEvent) => void
   handleTextareaMouseLeave: (evt: MouseEvent) => void
@@ -25,6 +27,8 @@ export function useErrorLines(
   sizingData: ComputedRef<ɵBoxSizingData>,
 ): ErrorLinesContext {
   const [visibleErrIndex, setvisibleErrIndex] = useState<number>(-1)
+
+  const errSet = computed(() => new Set(props.errors?.map(err => err.index)))
 
   let currentRowTopLineIdx = -1
   let currentRowBottomLineIdx = -1
@@ -69,6 +73,7 @@ export function useErrorLines(
 
   return {
     visibleErrIndex,
+    errSet,
     setvisibleErrIndex,
     handleTextareaMouseMove,
     handleTextareaMouseLeave,
