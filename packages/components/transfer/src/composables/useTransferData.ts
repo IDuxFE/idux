@@ -53,7 +53,10 @@ export function useTransferData<T extends TransferData = TransferData>(
   transferPaginationContext: TransferPaginationContext,
 ): TransferDataContext<T> {
   const _getKey = useGetKey(props, config, 'transfer')
-  const getKey = computed(() => (data: T) => _getKey.value(data) ?? data.key)
+  const getKey = computed(() => {
+    const getKeyFn = _getKey.value
+    return (data: T) => getKeyFn(data) ?? data.key
+  })
 
   const dataSource = computed(() => props.dataSource as T[])
   const dataKeyMap = computed(() => transferDataStrategy.value.genDataKeyMap(dataSource.value, getKey.value))
@@ -129,10 +132,11 @@ export function useTransferData<T extends TransferData = TransferData>(
 
   const disabledKeys = computed(() => transferDataStrategy.value.genDisabledKeys(dataSource.value, getKey.value))
   const disabledTargetKeys = computed(() => {
+    const _disabledKeys = disabledKeys.value
     const keys = transferDataStrategy.value.genDisabledKeys(targetData.value, getKey.value)
 
     targetKeySet.value.forEach(key => {
-      if (disabledKeys.value.has(key)) {
+      if (_disabledKeys.has(key)) {
         keys.add(key)
       }
     })

@@ -98,6 +98,7 @@ function createSeparateDataSourceFn<V extends TreeTransferData<V, C>, C extends 
   flatTargetData: boolean | 'all' = false,
 ): Exclude<TransferDataStrategyProp<V>['separateDataSource'], undefined> {
   const sourceDataKeySet = new Set<VKey>()
+  let currentSourceData: V[] | undefined
 
   const getFilterFn = (selectedKeySet: Set<VKey>, getKey: GetKeyFn): ((data: V[], isSource: boolean) => V[]) => {
     // under cascaderStrategy `parent`, selected child nodes are not in selectedKeys
@@ -152,18 +153,28 @@ function createSeparateDataSourceFn<V extends TreeTransferData<V, C>, C extends 
 
     const sourceData = filterData(data, true)
     const newTargetData = filterData(data, false)
-    const previousTargetData = filterData(cachedTargetData.value, false)
 
-    // merge new data with previous data
-    // beacause we intend to cache selected data after dataSource changes
-    const targetData = mergeTree(previousTargetData, newTargetData, childrenKey, getKey)
-    cachedTargetData.value = targetData
+    let _targetData: V[]
 
-    targetDataCount.value = cascaderStrategy === 'off' ? targetData.length : dataMap.size - sourceDataKeySet.size
+    if (data === currentSourceData) {
+      _targetData = newTargetData
+    } else {
+      const previousTargetData = filterData(cachedTargetData.value, false)
+
+      // merge new data with previous data
+      // beacause we intend to cache selected data after dataSource changes
+      _targetData = mergeTree(previousTargetData, newTargetData, childrenKey, getKey)
+    }
+
+    currentSourceData = data
+
+    cachedTargetData.value = _targetData
+    targetDataCount.value = cascaderStrategy === 'off' ? _targetData.length : dataMap.size - sourceDataKeySet.size
 
     return {
       sourceData,
-      targetData: cascaderStrategy === 'off' ? targetData : flattenTargetTree(targetData, childrenKey, flatTargetData),
+      targetData:
+        cascaderStrategy === 'off' ? _targetData : flattenTargetTree(_targetData, childrenKey, flatTargetData),
     }
   }
 }

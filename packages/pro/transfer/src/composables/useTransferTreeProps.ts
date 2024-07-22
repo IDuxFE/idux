@@ -6,7 +6,7 @@
  */
 
 import type { TreeTransferContext } from '../token'
-import type { ProTransferProps, TransferData, TreeTransferData } from '../types'
+import type { ProTransferProps, TreeTransferData } from '../types'
 import type { TransferBindings } from '@idux/components/transfer'
 import type { TreeNode, TreeProps } from '@idux/components/tree'
 
@@ -71,8 +71,17 @@ export function useTransferTreeProps<V extends TreeTransferData<V, C>, C extends
     }
   }
 
-  const disabled: TreeProps['disabled'] = node =>
-    _disabledKeys.value.has(getKey.value(node as TransferData)) || !!props.disabled
+  const disabled = computed(() => {
+    const keySet = _disabledKeys.value
+    const _getKey = getKey.value
+
+    if (props.disabled) {
+      return () => true
+    }
+
+    return (node => keySet.has(_getKey(node))) as TreeProps['disabled']
+  })
+
   const onScroll: TreeProps['onScroll'] = evt => callEmit(props.onScroll, isSource, evt)
   const onScrolledChange: TreeProps['onScrolledChange'] = (startIndex, endIndex, visibleData) =>
     callEmit(props.onScrolledChange, isSource, startIndex, endIndex, visibleData)
@@ -90,7 +99,7 @@ export function useTransferTreeProps<V extends TreeTransferData<V, C>, C extends
       cascaderStrategy: cascaderStrategy.value,
       checkedKeys: selectedKeys.value,
       dataSource: treeDataSource.value,
-      disabled,
+      disabled: disabled.value,
       draggable: false,
       expandedKeys: isSource ? sourceExpandedKeys.value : targetExpandedKeys.value,
       height,
