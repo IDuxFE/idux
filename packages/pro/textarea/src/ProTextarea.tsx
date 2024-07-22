@@ -27,6 +27,7 @@ import { useThemeToken } from '@idux/pro/theme'
 
 import IndexColumn from './IndexColumn'
 import { useErrorLines } from './composables/useErrorLines'
+import { useErrorLineRender } from './composables/useLineRender'
 import { useRowCounts } from './composables/useRowsCounts'
 import Content from './content/Content'
 import { proTextareaContext } from './token'
@@ -63,9 +64,12 @@ export default defineComponent({
     } = ɵUseInput<HTMLTextAreaElement>(props, config)
     const valueRef = toRef(accessor, 'value')
 
+    const scrollHolderRef = ref<HTMLElement>()
+
     const { lineHeight, boxSizingData, resizeToFitContent } = ɵUseAutoRows(elementRef, ref(true))
-    const rowCounts = useRowCounts(props, elementRef, valueRef, lineHeight, boxSizingData)
+    const { rowCounts, rowHeights } = useRowCounts(props, elementRef, valueRef, lineHeight, boxSizingData)
     const errorLinesContext = useErrorLines(props, lineHeight, rowCounts, boxSizingData)
+    const errorLineRenderContext = useErrorLineRender(props, rowHeights, scrollHolderRef)
     const dataCount = useDataCount(props, config, valueRef)
 
     const _handleInput = (evt: Event) => {
@@ -90,8 +94,10 @@ export default defineComponent({
       boxSizingData,
       lineHeight,
       rowCounts,
+      rowHeights,
       textareaRef: elementRef,
       ...errorLinesContext,
+      ...errorLineRenderContext,
       handleInput: _handleInput,
       handleCompositionStart,
       handleCompositionEnd,
@@ -145,7 +151,7 @@ export default defineComponent({
       return (
         <span class={classes.value} style={style.value}>
           <div class={`${prefixCls}-index-column-bg`}></div>
-          <div class={`${prefixCls}-scroll-holder`} onMousedown={handleScrollHolderMouseDown}>
+          <div ref={scrollHolderRef} class={`${prefixCls}-scroll-holder`} onMousedown={handleScrollHolderMouseDown}>
             <div class={`${prefixCls}-inner`}>
               <IndexColumn />
               <Content />

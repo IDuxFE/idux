@@ -11,13 +11,28 @@ import { proTextareaContext } from './token'
 
 export default defineComponent({
   setup() {
-    const { props, mergedPrefixCls, rowCounts, lineHeight, boxSizingData, setvisibleErrIndex } =
-      inject(proTextareaContext)!
+    const {
+      mergedPrefixCls,
+      errSet,
+      rowCounts,
+      renderedLinesIndex,
+      renderedTopOffset,
+      lineHeight,
+      boxSizingData,
+      setvisibleErrIndex,
+    } = inject(proTextareaContext)!
 
-    const mergedRowCnts = computed(() => (rowCounts.value.length > 0 ? rowCounts.value : [0]))
+    const mergedRowCnts = computed(() => {
+      if (rowCounts.value.length > 0) {
+        const { start, end } = renderedLinesIndex.value
+        return rowCounts.value.slice(start, end + 1)
+      }
+
+      return [0]
+    })
     const columnStyle = computed(() =>
       normalizeStyle({
-        paddingTop: `${boxSizingData.value?.paddingTop ?? 0}px`,
+        paddingTop: `${(boxSizingData.value?.paddingTop ?? 0) + renderedTopOffset.value}px`,
         paddingBottom: `${boxSizingData.value?.paddingBottom ?? 0}px`,
       }),
     )
@@ -25,14 +40,19 @@ export default defineComponent({
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-index-column`
 
+      const _errSet = errSet.value
+      const _lineHeight = lineHeight.value
+      const start = renderedLinesIndex.value.start
+
       return (
         <div class={prefixCls} style={columnStyle.value}>
           {mergedRowCnts.value.map((cnt, index) => {
             const cellStyle = normalizeStyle({
-              height: `${cnt * lineHeight.value}px`,
+              height: `${cnt * _lineHeight}px`,
             })
 
-            const errorIdx = props.errors?.find(error => error.index === index)?.index ?? -1
+            const lineIndex = index + start
+            const errorIdx = _errSet.has(lineIndex) ? lineIndex : -1
             const cellClass = normalizeClass({
               [`${prefixCls}-cell`]: true,
               [`${prefixCls}-cell-error`]: errorIdx > -1,
@@ -47,12 +67,13 @@ export default defineComponent({
 
             return (
               <div
+                key={lineIndex}
                 class={cellClass}
                 style={cellStyle}
                 onMouseenter={handleCellMouseEnter}
                 onMouseleave={handleCellMouseLeave}
               >
-                {index + 1}
+                {lineIndex + 1}
               </div>
             )
           })}
