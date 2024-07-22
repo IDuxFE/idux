@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.3](https://github.com/IDuxFE/idux/compare/v2.3.2...v2.3.3) (2024-07-22)
+
+
+### Bug Fixes
+
+* **pro:transfer:** optimize tree transfer performance ([#1969](https://github.com/IDuxFE/idux/issues/1969)) ([31ab1a0](https://github.com/IDuxFE/idux/commit/31ab1a0f8ffa09679d4aec0fc15d8a6c5495dce1))
+
+
+
+
+
+
 ## [2.3.2](https://github.com/IDuxFE/idux/compare/v2.3.1...v2.3.2) (2024-07-17)
 
 
