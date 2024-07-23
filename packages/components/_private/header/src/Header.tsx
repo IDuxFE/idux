@@ -10,12 +10,12 @@ import type { FunctionalComponent } from 'vue'
 
 import { isString } from 'lodash-es'
 
-import { convertArray } from '@idux/cdk/utils'
+import { convertArray, getFirstValidNode } from '@idux/cdk/utils'
 import { IxHeader } from '@idux/components/header'
 
 const Header: FunctionalComponent<HeaderProps> = (props, { slots }) => {
   if (slots.header) {
-    return slots.header(props)
+    return getFirstValidNode(slots.header(props))
   }
 
   if (!props.header && !props.closable) {
