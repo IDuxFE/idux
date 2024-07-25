@@ -73,9 +73,13 @@ export default defineComponent({
           cancelButton && buttonProps.push(cancelButton)
         }
         children = buttonProps.map(item => {
-          const { text, ...rest } = item
+          const { text, disabled, ...rest } = item
           const _text = isFunction(text) ? text() : text
-          return <IxButton {...rest}>{_text}</IxButton>
+          return (
+            <IxButton disabled={disabled || props.disabled} {...rest}>
+              {_text}
+            </IxButton>
+          )
         })
       }
 

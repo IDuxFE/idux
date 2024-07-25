@@ -236,6 +236,7 @@ export const defaultConfig: GlobalConfig = {
     closeOnEsc: true,
     mask: true,
     maskClosable: false,
+    spinWithFullModal: false,
   },
   notification: {
     destroyOnHover: false,

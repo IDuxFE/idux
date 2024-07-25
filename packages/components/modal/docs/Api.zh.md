@@ -25,6 +25,8 @@
 | `offset` | 对话框偏移量 | `number \| string` | `128` | - |  为顶部偏移量，仅在`centered=false` 时生效 |
 | `okButton` | 确认按钮的属性 | `ButtonProps` | - | - | - |
 | `okText` | 确认按钮的文本 | `string` | `确定` | - | - |
+| `spin` | 弹窗是否是加载中 | `boolean \| SpinProps` | - | - | 当弹窗在加载中时，默认会禁用掉`footer`中的按钮 |
+| `spinWithFullModal` | `spin` 是否覆盖整个弹窗 | `boolean` | `false` | ✅ | - |
 | `title` | 对话框次标题 | `string  \| VNode \| (() => VNodeChild) \| #title` | - | - | 当 `type` 不为 `default` 时有效 |
 | `type` | 对话框类型 | `'default' \| 'confirm' \| 'info' \| 'success' \| 'warning' \| 'error'` | `default` | - | - |
 | `width` | 对话框宽度 | `string \| number` | - | - | `default` 类型默认宽度 `480px`, 其他类型默认宽度 `400` |
@@ -54,6 +56,19 @@ export interface ModalButtonProps extends ButtonProps {
 | `close` | 关闭当前对话框 | `(evt?: Event \| unknown) => Promise<void>` | - | - | `evt` 参数将传给 `onClose` 回调 |
 | `cancel` | 手动触发当前取消按钮 | `(evt?: Event \| unknown) => Promise<void>` | - | - | `evt` 参数将传给 `onCancel` 回调 |
 | `ok` | 手动触发当前确定按钮 | `(evt?: Event \| unknown) => Promise<void>` | - | - | `evt` 参数将传给 `onOk` 回调 |
+
+#### ModalSlots
+
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| `default` | 弹窗内容 | - | - |
+| `title` | 弹窗内容标题 | - | - |
+| `icon` | 弹窗图标 | - | - |
+| `header` | 弹窗的header | - | - |
+| `footer` | 弹窗的footer | `FooterProps` | - |
+| `closeIcon` | 弹窗header的关闭图标 | - | - |
+| `spinContent` | spin的内容 | - | - |
+| `spinIcon` | spin的图标 | - | - |
 
 ### IxModalProvider
 

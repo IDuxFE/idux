@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { SpinProps } from '@idux/components/spin'
+
 import {
   type ComputedRef,
   computed,
@@ -17,6 +19,8 @@ import {
   toRef,
   watch,
 } from 'vue'
+
+import { isBoolean } from 'lodash-es'
 
 import { CdkPortal } from '@idux/cdk/portal'
 import { BlockScrollStrategy, type ScrollStrategy } from '@idux/cdk/scroll'
@@ -44,6 +48,8 @@ export default defineComponent({
     const config = useGlobalConfig('modal')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-modal`)
     const mergedPortalTarget = usePortalTarget(props, config, common, mergedPrefixCls)
+    const mergedSpin = computed(() => convertSpinProps(props.spin))
+    const mergedSpinWithFullModal = computed(() => props.spinWithFullModal ?? config.spinWithFullModal)
 
     const mask = computed(() => props.mask ?? config.mask)
     const { visible, setVisible, animatedVisible, mergedVisible } = useVisible(props)
@@ -58,6 +64,8 @@ export default defineComponent({
       locale,
       config,
       mergedPrefixCls,
+      mergedSpin,
+      mergedSpinWithFullModal,
       visible,
       animatedVisible,
       mergedVisible,
@@ -176,4 +184,8 @@ function useTrigger(props: ModalProps, setVisible: (value: boolean) => void) {
   }
 
   return { cancelLoading, okLoading, open, close, cancel, ok }
+}
+
+function convertSpinProps(spin: boolean | SpinProps | undefined) {
+  return isBoolean(spin) ? { spinning: spin } : spin
 }

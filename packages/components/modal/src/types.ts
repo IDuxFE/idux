@@ -11,6 +11,7 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } 
 import type { ɵFooterButtonProps } from '@idux/components/_private/footer'
 import type { ButtonProps } from '@idux/components/button'
 import type { HeaderProps } from '@idux/components/header'
+import type { SpinProps } from '@idux/components/spin'
 import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild, VNodeProps } from 'vue'
 
 export type ModalType = 'default' | 'confirm' | 'info' | 'success' | 'warning' | 'error'
@@ -85,6 +86,8 @@ export const modalProps = {
   okButton: Object as PropType<ButtonProps>,
   okText: String,
   scrollStrategy: Object as PropType<ScrollStrategy>,
+  spin: { type: [Boolean, Object] as PropType<boolean | SpinProps>, default: undefined },
+  spinWithFullModal: { type: Boolean, default: undefined },
   title: [String, Object, Function] as PropType<string | VNode | (() => VNodeChild)>,
   type: {
     type: String as PropType<ModalType>,

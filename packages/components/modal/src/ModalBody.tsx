@@ -12,6 +12,7 @@ import { computed, defineComponent, inject } from 'vue'
 import { isFunction, isString } from 'lodash-es'
 
 import { IxIcon } from '@idux/components/icon'
+import { IxSpin } from '@idux/components/spin'
 
 import { modalToken } from './token'
 
@@ -27,7 +28,7 @@ const defaultIconTypes = {
 
 export default defineComponent({
   setup() {
-    const { props, slots, config, mergedPrefixCls } = inject(modalToken)!
+    const { props, slots, config, mergedPrefixCls, mergedSpin, mergedSpinWithFullModal } = inject(modalToken)!
     const isDefault = computed(() => props.type === 'default')
     const iconName = computed(() => {
       const { icon, type } = props
@@ -38,22 +39,42 @@ export default defineComponent({
       const prefixCls = `${mergedPrefixCls.value}-body`
       const defaultNode = slots.default?.() ?? props.__content_node
 
-      if (isDefault.value) {
-        return <div class={prefixCls}>{defaultNode}</div>
-      }
-      const classes = `${prefixCls} ${prefixCls}-${props.type}`
-      const iconNode = renderIcon(prefixCls, slots.icon, iconName.value)
-      const titleNode = renderTitle(prefixCls, slots.title, props.title)
+      let bodyNode: VNode
 
-      return (
-        <div class={classes}>
-          {iconNode}
-          <div class={[`${prefixCls}-content`, defaultNode ? '' : `${prefixCls}-content-only-title`]}>
-            {titleNode}
-            {defaultNode}
+      if (isDefault.value) {
+        bodyNode = <div class={prefixCls}>{defaultNode}</div>
+      } else {
+        const classes = `${prefixCls} ${prefixCls}-${props.type}`
+        const iconNode = renderIcon(prefixCls, slots.icon, iconName.value)
+        const titleNode = renderTitle(prefixCls, slots.title, props.title)
+
+        bodyNode = (
+          <div class={classes}>
+            {iconNode}
+            <div class={[`${prefixCls}-content`, defaultNode ? '' : `${prefixCls}-content-only-title`]}>
+              {titleNode}
+              {defaultNode}
+            </div>
           </div>
-        </div>
-      )
+        )
+      }
+
+      const spinProps = mergedSpin.value
+
+      if (!mergedSpinWithFullModal.value && spinProps) {
+        const spinSlots = {
+          default: slots.spinContent,
+          icon: slots.spinIcon,
+        }
+
+        return (
+          <IxSpin v-slots={spinSlots} {...spinProps}>
+            {bodyNode}
+          </IxSpin>
+        )
+      }
+
+      return bodyNode
     }
   },
 })

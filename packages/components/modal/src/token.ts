@@ -8,6 +8,7 @@
 import type { ModalBindings, ModalProps, ModalProviderRef } from './types'
 import type { CommonConfig, ModalConfig } from '@idux/components/config'
 import type { Locale } from '@idux/components/locales'
+import type { SpinProps } from '@idux/components/spin'
 import type { ComputedRef, InjectionKey, Ref, Slots } from 'vue'
 
 export interface ModalContext {
@@ -20,6 +21,8 @@ export interface ModalContext {
   visible: ComputedRef<boolean>
   animatedVisible: Ref<boolean | undefined>
   mergedVisible: ComputedRef<boolean>
+  mergedSpin: ComputedRef<SpinProps | undefined>
+  mergedSpinWithFullModal: ComputedRef<boolean>
   cancelLoading: Ref<boolean>
   okLoading: Ref<boolean>
   currentZIndex: ComputedRef<number>
