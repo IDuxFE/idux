@@ -13,6 +13,10 @@
   &:not(.@{trigger-prefix}-paddingless) {
     padding: @vertical-padding calc(var(--ix-padding-size-xs) + var(--ix-padding-size-sm)) @vertical-padding
       @horizontal-padding;
+
+    &.@{trigger-prefix}-with-suffix {
+      padding-right: calc(var(--ix-padding-size-xs) + var(--ix-padding-size-sm) + var(--ix-font-size-icon));
+    }
   }
 
   .@{trigger-prefix}-suffix,
