@@ -190,9 +190,11 @@ export function useTreeCheckState<V extends TreeTypeData<V, C>, C extends keyof 
   ) => {
     const params = resolveAllCheckedFnParams(data, defaultCheckedKeysOrCached, cached)
 
-    return params.dataProvided
+    const allUnCheckedKeys = params.dataProvided
       ? checkStateResolver.getAllUncheckedKeys(params.data, params.defaultKeys)
-      : checkStateResolver.getAllCheckedKeys(params.defaultKeys)
+      : checkStateResolver.getAllUncheckedKeys(params.defaultKeys)
+
+    return appendUnexistedDataKeys(allUnCheckedKeys)
   }
 
   const getDataByKeys = (keys: VKey[]) => {
