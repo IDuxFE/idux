@@ -50,9 +50,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
             class="ix-table ix-table-auto-height ix-table-borderless ix-table-md ix-pro-table ix-pro-transfer-table-content"
           >
             
-            
             <!---->
-            
             <div
               class="ix-table-container ix-table-fixed-layout ix-table-inset-shadow"
             >
@@ -1208,9 +1206,7 @@ exports[`ProTransfer > table transfer render work 1`] = `
             class="ix-table ix-table-auto-height ix-table-borderless ix-table-md ix-pro-table ix-pro-transfer-table-content"
           >
             
-            
             <!---->
-            
             <div
               class="ix-table-container ix-table-fixed-layout ix-table-inset-shadow"
             >
