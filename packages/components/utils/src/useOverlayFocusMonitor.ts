@@ -90,7 +90,7 @@ export function useOverlayFocusMonitor(
   }
 
   const bindOverlayMonitor = (overlayRef: Ref<ɵOverlayInstance | undefined>, overlayOpened: Ref<boolean>) => {
-    let stop: () => void | undefined
+    let stop: (() => void) | undefined
 
     const stopWatch = watch(
       [() => overlayRef.value?.getPopperElement(), overlayOpened],
@@ -101,7 +101,7 @@ export function useOverlayFocusMonitor(
           return
         }
 
-        stop = _bindMonitor(el)
+        stop = _bindMonitor(el, true)
       },
       {
         immediate: true,

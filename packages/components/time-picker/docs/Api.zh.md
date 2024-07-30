@@ -29,6 +29,7 @@
  | `defaultOpenValue` | 打开面板时默认高亮的值 | `Date \| string \| number` | - | - | 如果value不为空，则高亮value的值 |
  | `overlayClassName` | 浮层的类名 |`string` | - | - | - |
  | `overlayContainer` | 自定义浮层容器节点 | `string \| HTMLElement \| (trigger?: Element) => string \| HTMLElement` | - | ✅ | - |
+ | `overlayTabindex` | 自定义浮层tabindex | `number` | - | ✅ | - |
  | `onChange` | 时间选择回调函数 |`(value: Date \| undefined) => void` | - | - | - |
  | `onClear` | 清除事件回调函数 |`(evt: MouseEvent) => void` | - | - | - |
  | `onFocus` | focus事件回调函数 |`(evt: FocusEvent) => void` | - | - | - |

@@ -36,6 +36,7 @@
 | `overlayContainer` | 自定义浮层容器节点  | `string \| HTMLElement \| (trigger?: Element) => string \| HTMLElement` | - | ✅ | - |
 | `overlayMatchWidth` | 下拉菜单和选择器同宽  | `boolean \| 'minWidth'` | `true` | ✅ | - |
 | `overlayRender` | 自定义下拉菜单内容的渲染  | `(children:VNode[]) => VNodeTypes` | - | - | - |
+| `overlayTabindex` | 自定义浮层tabindex | `number` | - | ✅ | - |
 | `placeholder` | 选择框默认文本 | `string` | - | - | - |
 | `readonly` | 只读模式 | `boolean` | - | - | - |
 | `searchFn` | 搜索函数 | `boolean | (node: TreeSelectNode, searchValue?: string) => boolean` | `true` | - | 为 `true` 时使用默认的搜索规则, 如果使用远程搜索，应该设置为 `false` |

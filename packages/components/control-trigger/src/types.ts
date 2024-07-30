@@ -23,6 +23,7 @@ export const controlTriggerProps = {
     type: [String, HTMLElement, Function] as PropType<OverlayContainerType>,
     default: undefined,
   },
+  overlayTabindex: { type: Number, default: undefined },
   overlayContainerFallback: String,
   overlayLazy: { type: Boolean, default: true },
   overlayMatchWidth: { type: [Boolean, String] as PropType<boolean | 'minWidth'>, default: undefined },
@@ -50,6 +51,7 @@ export const controlTrigglerOverlayProps = {
     type: Boolean,
     default: undefined,
   },
+  tabindex: { type: Number, default: undefined },
   onAfterLeave: [Function, Array] as PropType<MaybeArray<() => void>>,
 }
 

@@ -11,7 +11,7 @@ import type { SearchStateContext } from './useSearchStates'
 
 import { type Ref, onBeforeUnmount, watch } from 'vue'
 
-import { useEventListener } from '@idux/cdk/utils'
+import { isFocusable, useEventListener } from '@idux/cdk/utils'
 
 export function useControl(
   elementRef: Ref<HTMLElement | undefined>,
@@ -55,7 +55,7 @@ export function useControl(
         setOverlayOpened(true)
       }
 
-      if (!(evt.target instanceof HTMLInputElement)) {
+      if (!isFocusable(evt.target)) {
         evt.preventDefault()
       }
     }),

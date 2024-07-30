@@ -11,7 +11,7 @@ import { type VNodeChild, computed, defineComponent, inject, watch } from 'vue'
 
 import { isNil } from 'lodash-es'
 
-import { type VKey, isEmptyNode, useState } from '@idux/cdk/utils'
+import { type VKey, isEmptyNode, isFocusable, useState } from '@idux/cdk/utils'
 
 import QuickSelectPanelItem from './QuickSelectItem'
 import QuickSelectPanelShortcut from './QuickSelectShortcut'
@@ -61,7 +61,7 @@ export default defineComponent({
     })
 
     const handleMouseDown = (evt: MouseEvent) => {
-      if (!(evt.target instanceof HTMLInputElement)) {
+      if (!isFocusable(evt.target)) {
         evt.preventDefault()
         tempSegmentInputRef.value?.focus()
       }

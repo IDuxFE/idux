@@ -43,12 +43,6 @@ export default defineComponent({
       isSelecting,
     )
 
-    const handleMouseDown = (e: MouseEvent) => {
-      if (!(e.target instanceof HTMLInputElement)) {
-        e.preventDefault()
-      }
-    }
-
     const renderSide = (isFrom: boolean) => {
       const timeValue = panelValue.value?.[isFrom ? 0 : 1]
       const datePanelType = convertPickerTypeToConfigType(props.type)
@@ -90,7 +84,7 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
 
       return (
-        <div class={[prefixCls, globalHashId.value, hashId.value]} tabindex={-1} onMousedown={handleMouseDown}>
+        <div class={[prefixCls, globalHashId.value, hashId.value]}>
           {renderSide(true)}
           {slots.separator?.() ?? <div class={`${prefixCls}-separator`}></div>}
           {renderSide(false)}

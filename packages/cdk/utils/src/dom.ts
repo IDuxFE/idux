@@ -158,6 +158,29 @@ export function isTouchEvent(evt: MouseEvent | TouchEvent): evt is TouchEvent {
   return evt.type.startsWith('touch')
 }
 
+export function isFocusable(element: unknown): boolean {
+  if (!element || (!(element instanceof HTMLElement) && !(element instanceof SVGElement))) {
+    return false
+  }
+
+  if (element.getAttribute('tabIndex') !== null) {
+    return true
+  }
+
+  switch (element.nodeName) {
+    case 'A':
+      return !!(element as HTMLAnchorElement).href && (element as HTMLAnchorElement).rel != 'ignore'
+    case 'INPUT':
+      return (element as HTMLInputElement).type != 'hidden' && (element as HTMLInputElement).type != 'file'
+    case 'BUTTON':
+    case 'SELECT':
+    case 'TEXTAREA':
+      return true
+    default:
+      return element instanceof HTMLElement ? element.isContentEditable : false
+  }
+}
+
 export function getMouseEvent(evt: MouseEvent | TouchEvent): MouseEvent | Touch {
   return isTouchEvent(evt) ? evt.touches[0] || evt.changedTouches[0] : evt
 }

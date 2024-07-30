@@ -53,6 +53,7 @@ const timePickerCommonProps = {
     type: [String, HTMLElement, Function] as PropType<OverlayContainerType>,
     default: undefined,
   },
+  overlayTabindex: { type: Number, default: undefined },
   overlayRender: Function as PropType<(children: VNode[]) => VNodeChild>,
   readonly: {
     type: Boolean as PropType<boolean>,
