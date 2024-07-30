@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/IDuxFE/idux/compare/v2.3.3...v2.4.0) (2024-07-30)
+
+
+### Bug Fixes
+
+* **comp:contro-trigger:** overlay closes when scrolling with virtual scroll ([#1978](https://github.com/IDuxFE/idux/issues/1978)) ([c2944df](https://github.com/IDuxFE/idux/commit/c2944df5fc82ad46f998678fa5b54488716edea2))
+* **comp:control-trigger:** add suffix size to padding right ([#1975](https://github.com/IDuxFE/idux/issues/1975)) ([0bc7249](https://github.com/IDuxFE/idux/commit/0bc7249d4280e17ca0935c8b0e141cc5246795c2))
+* **comp:modal:** draggable of modal with custom header slot doesn't work ([#1970](https://github.com/IDuxFE/idux/issues/1970)) ([e5ecfc5](https://github.com/IDuxFE/idux/commit/e5ecfc5bd997c3e8441a59758c12cef3717f6134))
+* **comp:table:** deselecting page removes all other selections ([#1976](https://github.com/IDuxFE/idux/issues/1976)) ([9bdfe41](https://github.com/IDuxFE/idux/commit/9bdfe415dc828d3904be46aad9d0c7a20da870d2))
+* **comp:theme:** calculated hash of unhashed tokens should be different ([#1973](https://github.com/IDuxFE/idux/issues/1973)) ([8bf3d66](https://github.com/IDuxFE/idux/commit/8bf3d66a01ee94863789c8b6747160b5cf0b6a3f))
+* **pro:table:** table has horizontal scroll when last column is resizable ([#1972](https://github.com/IDuxFE/idux/issues/1972)) ([8456922](https://github.com/IDuxFE/idux/commit/845692239b01d72f11ff40452018c98683983035))
+* **pro:textarea:** optimize performance of row height collecting ([#1971](https://github.com/IDuxFE/idux/issues/1971)) ([8ec17d2](https://github.com/IDuxFE/idux/commit/8ec17d29b34a5006ea7c80fcbf23bf3da9d2bab7))
+
+
+### Features
+
+* **comp:*:** add `overlayTabindex` prop for all overlayed controls ([#1977](https://github.com/IDuxFE/idux/issues/1977)) ([0778970](https://github.com/IDuxFE/idux/commit/0778970798c25dae995df3a36c4e90caacb6632e))
+* **comp:modal:** add `spin` support for modal ([#1974](https://github.com/IDuxFE/idux/issues/1974)) ([32ac59c](https://github.com/IDuxFE/idux/commit/32ac59cf7f3b15c47914f92e00e597d70ac3e086))
+
+
+
+
+
 ## [2.3.3](https://github.com/IDuxFE/idux/compare/v2.3.2...v2.3.3) (2024-07-22)
 
 

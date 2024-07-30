@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/IDuxFE/idux/compare/v2.3.3...v2.4.0) (2024-07-30)
+
+
+### Bug Fixes
+
+* **comp:contro-trigger:** overlay closes when scrolling with virtual scroll ([#1978](https://github.com/IDuxFE/idux/issues/1978)) ([c2944df](https://github.com/IDuxFE/idux/commit/c2944df5fc82ad46f998678fa5b54488716edea2))
+* **comp:modal:** draggable of modal with custom header slot doesn't work ([#1970](https://github.com/IDuxFE/idux/issues/1970)) ([e5ecfc5](https://github.com/IDuxFE/idux/commit/e5ecfc5bd997c3e8441a59758c12cef3717f6134))
+* **pro:table:** table has horizontal scroll when last column is resizable ([#1972](https://github.com/IDuxFE/idux/issues/1972)) ([8456922](https://github.com/IDuxFE/idux/commit/845692239b01d72f11ff40452018c98683983035))
+* **pro:textarea:** optimize performance of row height collecting ([#1971](https://github.com/IDuxFE/idux/issues/1971)) ([8ec17d2](https://github.com/IDuxFE/idux/commit/8ec17d29b34a5006ea7c80fcbf23bf3da9d2bab7))
+
+
+### Features
+
+* **comp:*:** add `overlayTabindex` prop for all overlayed controls ([#1977](https://github.com/IDuxFE/idux/issues/1977)) ([0778970](https://github.com/IDuxFE/idux/commit/0778970798c25dae995df3a36c4e90caacb6632e))
+
+
+
+
+
 ## [2.3.3](https://github.com/IDuxFE/idux/compare/v2.3.2...v2.3.3) (2024-07-22)
 
 
