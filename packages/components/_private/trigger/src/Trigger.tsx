@@ -89,6 +89,7 @@ export default defineComponent({
         [`${prefixCls}-${status}`]: !!status,
         [`${prefixCls}-borderless`]: borderless,
         [`${prefixCls}-paddingless`]: paddingless,
+        [`${prefixCls}-with-suffix`]: slots.suffix || props.suffix || mergedClearable.value,
         [`${prefixCls}-disabled`]: disabled,
         [`${prefixCls}-focused`]: mergedFocused.value,
         [`${prefixCls}-readonly`]: readonly,

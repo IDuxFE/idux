@@ -34,7 +34,7 @@ exports[`Pagination > render work 3`] = `
   <li class=\\"ix-pagination-item ix-pagination-item-next5\\" tabindex=\\"0\\" title=\\"向后 5 页\\"><span class=\\"ix-pagination-item-content\\"><span class=\\" ix-pagination-item-jumper\\"><i class=\\"ix-icon ix-icon-double-right\\" role=\\"img\\" aria-label=\\"double-right\\"></i><i class=\\"ix-icon ix-icon-ellipsis ix-pagination-item-ellipsis\\" role=\\"img\\" aria-label=\\"ellipsis\\"></i></span></span></li>
   <li class=\\"ix-pagination-item ix-pagination-item-page\\" tabindex=\\"0\\" title=\\"50\\"><span class=\\"ix-pagination-item-content\\">50</span></li>
   <li class=\\"ix-pagination-item ix-pagination-item-next\\" tabindex=\\"0\\" title=\\"下一页\\"><span class=\\"ix-pagination-item-content\\"><i class=\\"ix-icon ix-icon-right\\" role=\\"img\\" aria-label=\\"right\\"></i></span></li>
-  <li class=\\"ix-pagination-sizes\\">每页<div class=\\"ix-trigger ix-trigger-sm ix-selector ix-selector-sm ix-selector-single ix-select ix-control-trigger ix-select\\" tabindex=\\"-1\\">
+  <li class=\\"ix-pagination-sizes\\">每页<div class=\\"ix-trigger ix-trigger-sm ix-trigger-with-suffix ix-selector ix-selector-sm ix-selector-single ix-select ix-control-trigger ix-select\\" tabindex=\\"-1\\">
       <!---->
       <div class=\\"ix-selector-content\\">
         <div class=\\"ix-selector-item\\"><span class=\\"ix-selector-item-label\\">10</span>
