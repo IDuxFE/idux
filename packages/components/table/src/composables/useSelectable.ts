@@ -44,7 +44,7 @@ export function useSelectable(
   props: TableProps,
   locale: Locale,
   flattedColumns: ComputedRef<TableColumnMerged[]>,
-  { mergedData, mergedMap, paginatedData, paginatedMap, parentKeyMap, depthMap }: DataSourceContext,
+  { mergedData, mergedMap, paginatedMap, parentKeyMap, depthMap }: DataSourceContext,
 ): SelectableContext {
   const selectable = computed(() =>
     flattedColumns.value.find(column => 'type' in column && column.type === 'selectable'),
@@ -78,8 +78,7 @@ export function useSelectable(
     cascaderStrategy,
     isDisabled,
   )
-  const { isCheckDisabled, isChecked, isIndeterminate, toggle, getAllCheckedKeys, getAllUncheckedKeys, getDataByKeys } =
-    checkStateContext
+  const { checkStateResolver, isCheckDisabled, isChecked, isIndeterminate, toggle, getDataByKeys } = checkStateContext
 
   const currentPageRowKeys = computed(() => {
     const enabledRowKeys: VKey[] = []
@@ -162,20 +161,35 @@ export function useSelectable(
   }
 
   const handleHeadSelectChange = () => {
-    const { disabledRowKeys } = currentPageRowKeys.value
     let newSelectedKeys: VKey[]
     if (currentPageAllSelected.value) {
-      newSelectedKeys = getAllUncheckedKeys(
-        paginatedData.value,
-        disabledRowKeys.filter(key => isChecked(key)),
-        true,
-      )
+      const removedKeys: VKey[] = []
+
+      paginatedMap.value.forEach((_, key) => {
+        if (isCheckDisabled(key)) {
+          return
+        }
+
+        if (isChecked(key)) {
+          removedKeys.push(key)
+        }
+      })
+
+      newSelectedKeys = checkStateResolver.removeKeys(selectedRowKeys.value, removedKeys)
     } else {
-      newSelectedKeys = getAllCheckedKeys(
-        paginatedData.value,
-        disabledRowKeys.filter(key => !isChecked(key)),
-        true,
-      )
+      const appendedKeys: VKey[] = []
+
+      paginatedMap.value.forEach((_, key) => {
+        if (isCheckDisabled(key)) {
+          return
+        }
+
+        if (!isChecked(key)) {
+          appendedKeys.push(key)
+        }
+      })
+
+      newSelectedKeys = checkStateResolver.appendKeys(selectedRowKeys.value, appendedKeys)
     }
 
     emitChange(newSelectedKeys)
