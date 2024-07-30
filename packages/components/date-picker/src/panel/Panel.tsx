@@ -53,6 +53,12 @@ export default defineComponent({
       handleDatePanelChange(value)
     }
 
+    const handleMouseDown = (e: MouseEvent) => {
+      if (!(e.target instanceof HTMLInputElement)) {
+        e.preventDefault()
+      }
+    }
+
     return () => {
       const datePanelType = convertPickerTypeToConfigType(props.type)
 
@@ -76,7 +82,11 @@ export default defineComponent({
       }
 
       return (
-        <div class={[mergedPrefixCls.value, globalHashId.value, hashId.value]}>
+        <div
+          class={[mergedPrefixCls.value, globalHashId.value, hashId.value]}
+          tabindex={-1}
+          onMousedown={handleMouseDown}
+        >
           <ɵDatePanel v-show={props.visible !== 'timePanel'} v-slots={slots} {...datePanelProps} />
           {props.type === 'datetime' && <ɵTimePanel v-show={props.visible === 'timePanel'} {..._timePanelProps} />}
         </div>

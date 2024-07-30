@@ -53,6 +53,12 @@ export default defineComponent({
       setOverlayOpened(false)
     }
 
+    const handleMouseDown = (e: MouseEvent) => {
+      if (!(e.target instanceof HTMLInputElement)) {
+        e.preventDefault()
+      }
+    }
+
     const inputProps = useInputProps(context)
     const timePanelProps = useRangeTimePanelProps(props, hourEnabled, minuteEnabled, secondEnabled, use12Hours)
 
@@ -149,7 +155,7 @@ export default defineComponent({
       }
 
       const children = [
-        <div class={`${prefixCls}-body`}>
+        <div class={`${prefixCls}-body`} tabindex={-1} onMousedown={handleMouseDown}>
           {inputEnableStatus.value.enableOverlayDateInput && (
             <div class={inputsCls}>
               {renderInputsSide(inputsCls, true)}
@@ -170,7 +176,7 @@ export default defineComponent({
         />,
       ]
 
-      return props.overlayRender ? props.overlayRender(children) : <div>{children}</div>
+      return props.overlayRender ? props.overlayRender(children) : <div onMousedown={handleMouseDown}>{children}</div>
     }
   },
 })

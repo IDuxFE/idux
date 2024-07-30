@@ -89,7 +89,6 @@ export const selectProps = {
     type: [String, HTMLElement, Function] as PropType<OverlayContainerType>,
     default: undefined,
   },
-  overlayTabindex: { type: Number, default: undefined },
   overlayMatchWidth: { type: [Boolean, String] as PropType<boolean | 'minWidth'>, default: undefined },
   overlayRender: { type: Function as PropType<(children: VNode[]) => VNodeChild>, default: undefined },
   placeholder: { type: String, default: undefined },

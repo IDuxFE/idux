@@ -21,7 +21,6 @@
 | `overlayClassName` | 日期面板的 `class`  | `string` | - | - | - |
 | `overlayContainer` | 自定义浮层容器节点 | `string \| HTMLElement \| (trigger?: Element) => string \| HTMLElement` | - | ✅ | - |
 | `overlayRender` | 自定义日期面板内容的渲染  | `(children:VNode[]) => VNodeChild` | - | - | - |
-| `overlayTabindex` | 自定义浮层tabindex | `number` | - | ✅ | - |
 | `readonly` | 只读模式 | `boolean` | - | - | - |
 | `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |
 | `status` | 手动指定校验状态 | `valid \| invalid \| validating` | - | - | - |

@@ -56,6 +56,12 @@ export default defineComponent({
 
     const { activeValue, setActiveValue } = useActiveValue(props, dateConfig, formatRef, panelValue)
 
+    const handleMouseDown = (e: MouseEvent) => {
+      if (!(e.target instanceof HTMLInputElement)) {
+        e.preventDefault()
+      }
+    }
+
     return () => {
       const prefixCls = `${mergedPrefixCls.value}-overlay`
       const boardPrefixCls = `${mergedPrefixCls.value}-board`
@@ -70,7 +76,7 @@ export default defineComponent({
       }
 
       const children = [
-        <div class={`${prefixCls}-body ${boardPrefixCls}`}>
+        <div class={`${prefixCls}-body ${boardPrefixCls}`} tabindex={-1} onMousedown={handleMouseDown}>
           {inputEnableStatus.value.enableInternalInput && (
             <ɵInput
               ref={inputInstance}
@@ -93,7 +99,7 @@ export default defineComponent({
         </div>,
         <ɵFooter v-slots={slots} class={`${prefixCls}-footer`} footer={props.footer} />,
       ]
-      return props.overlayRender ? props.overlayRender(children) : <div>{children}</div>
+      return props.overlayRender ? props.overlayRender(children) : <div onMousedown={handleMouseDown}>{children}</div>
     }
   },
 })

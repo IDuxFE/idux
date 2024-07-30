@@ -93,6 +93,12 @@ export default defineComponent({
       clearInput()
     })
 
+    const handleOverlayMousedown = () => {
+      if (props.searchable !== 'overlay') {
+        setTimeout(focus)
+      }
+    }
+
     const onFocus = (evt: FocusEvent) => {
       callEmit(props.onFocus, evt)
     }
@@ -206,7 +212,11 @@ export default defineComponent({
         )
       }
 
-      return <div>{overlayRender ? overlayRender(children) : children}</div>
+      return (
+        <div tabindex={-1} onMousedown={handleOverlayMousedown}>
+          {overlayRender ? overlayRender(children) : children}
+        </div>
+      )
     }
 
     return () => {
@@ -215,7 +225,6 @@ export default defineComponent({
         autofocus: props.autofocus,
         overlayClassName: overlayClasses.value,
         overlayContainer: props.overlayContainer ?? config.overlayContainer,
-        overlayTabindex: props.overlayTabindex ?? config.overlayTabindex,
         overlayContainerFallback: `.${mergedPrefixCls.value}-overlay-container`,
         overlayMatchWidth: props.overlayMatchWidth ?? config.overlayMatchWidth,
         class: mergedPrefixCls.value,

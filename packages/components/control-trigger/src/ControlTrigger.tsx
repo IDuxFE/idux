@@ -15,7 +15,6 @@ import { useMergedCommonControlProps, useOverlayFocusMonitor } from '@idux/compo
 
 import ControlTriggerOverlay from './ControlTriggerOverlay'
 import { useOverlayState } from './composables/useOverlayState'
-import { useTriggerFocusState } from './composables/useTriggerFocusState'
 import { controlTriggerToken } from './token'
 import { type ControlTriggerSlots, controlTriggerProps } from './types'
 
@@ -38,21 +37,27 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-control-trigger`)
     const triggerRef = ref<ɵTriggerInstance>()
 
+    const focus = () => triggerRef.value?.focus()
+    const blur = () => triggerRef.value?.blur()
+
+    expose({
+      focus,
+      blur,
+    })
+
     const mergedControlProps = useMergedCommonControlProps(props, defaultTriggerProps)
 
     const onFocus = (evt: FocusEvent) => {
       callEmit(props.onFocus, evt)
-      handleTriggerFocus(evt)
     }
     const onBlur = (evt: FocusEvent) => {
       setOverlayOpened(false)
       callEmit(props.onBlur, evt)
     }
-    const { focused, triggerFocused, overlayFocused, focusVia, blurVia, bindOverlayMonitor, handleFocus, handleBlur } =
-      useOverlayFocusMonitor(onFocus, onBlur)
-
-    const { resetTriggerFocus, handleTriggerFocus } = useTriggerFocusState(triggerRef, triggerFocused)
-
+    const { focused, triggerFocused, bindOverlayMonitor, handleFocus, handleBlur } = useOverlayFocusMonitor(
+      onFocus,
+      onBlur,
+    )
     const { overlayOpened, overlayRef, overlayMatchWidth, overlayStyle, setOverlayOpened } = useOverlayState(
       props,
       defaultTriggerProps,
@@ -61,19 +66,9 @@ export default defineComponent({
       triggerFocused,
     )
 
-    const focus = () => focusVia(triggerRef.value)
-    const blur = () => blurVia(triggerRef.value)
-
-    expose({
-      focus,
-      blur,
-    })
-
     provide(controlTriggerToken, {
       props,
       mergedPrefixCls,
-      overlayFocused,
-      resetTriggerFocus,
       bindOverlayMonitor,
     })
 
@@ -180,7 +175,6 @@ export default defineComponent({
         style={overlayStyle.value}
         visible={overlayOpened.value}
         lazy={props.overlayLazy}
-        tabindex={props.overlayTabindex}
         trigger="manual"
         v-slots={{ default: renderTrigger, content: renderContent }}
       />

@@ -220,9 +220,8 @@ export default defineComponent({
       const controlTriggerProps = {
         autofocus: false,
         overlayClassName: overlayClasses.value,
-        overlayContainer: props.overlayContainer ?? config.overlayContainer,
+        overlayContainer: props.overlayContainer,
         overlayContainerFallback: `${mergedPrefixCls.value}-overlay-container`,
-        overlayTabindex: props.overlayTabindex ?? config.overlayTabindex,
         overlayMatchWidth: props.overlayMatchWidth,
         class: [mergedPrefixCls.value, globalHashId.value, hashId.value],
         borderless,

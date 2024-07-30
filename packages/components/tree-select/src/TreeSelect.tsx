@@ -87,6 +87,12 @@ export default defineComponent({
       clearInput()
     })
 
+    const handleOverlayClick = () => {
+      if (props.searchable !== 'overlay') {
+        setTimeout(focus)
+      }
+    }
+
     const handleNodeClick = () => {
       if (!props.multiple) {
         setOverlayOpened(false)
@@ -176,7 +182,7 @@ export default defineComponent({
       return spinProps ? <IxSpin {...spinProps}>{children}</IxSpin> : children
     }
 
-    const renderContent = () => renderLoading(<Content />)
+    const renderContent = () => renderLoading(<Content onMousedown={handleOverlayClick} />)
 
     return () => {
       const triggerProps = {
@@ -192,7 +198,6 @@ export default defineComponent({
         overlayClassName: overlayClasses.value,
         overlayContainer: props.overlayContainer ?? config.overlayContainer,
         overlayContainerFallback: `.${mergedPrefixCls.value}-overlay-container`,
-        overlayTabindex: props.overlayTabindex ?? config.overlayTabindex,
         overlayMatchWidth: props.overlayMatchWidth ?? config.overlayMatchWidth,
         'onUpdate:open': setOverlayOpened,
         onFocus: handleFocus,

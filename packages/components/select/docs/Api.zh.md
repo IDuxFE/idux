@@ -30,7 +30,6 @@
 | `overlayContainer` | 自定义下拉框容器节点  | `string \| HTMLElement \| (trigger?: Element) => string \| HTMLElement` | - | ✅ | - |
 | `overlayMatchWidth` | 下拉菜单和选择器同宽  | `boolean \| 'minWidth'` | `true` | ✅ | - |
 | `overlayRender` | 自定义下拉菜单内容的渲染  | `(children:VNode[]) => VNodeTypes` | - | - | - |
-| `overlayTabindex` | 自定义浮层tabindex | `number` | - | ✅ | - |
 | `placeholder` | 选择框默认文本 | `string \| #placeholder` | - | - | - |
 | `readonly` | 只读模式 | `boolean` | - | - | - |
 | `searchable` | 是否可搜索 | `boolean \| 'overlay'` | `false` | - | 当为 `true` 时搜索功能集成在选择器上，当为 `overlay` 时，搜索功能集成在悬浮层上 |

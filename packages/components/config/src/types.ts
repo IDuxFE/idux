@@ -189,7 +189,6 @@ export interface CascaderConfig {
   getKey: string | ((data: CascaderData<any>) => any)
   labelKey: string
   overlayContainer?: OverlayContainerType
-  overlayTabindex?: number
   overlayMatchWidth: boolean
   size: FormSize
   suffix: string
@@ -217,7 +216,6 @@ export interface DatePickerConfig {
   size: FormSize
   suffix: string
   overlayContainer?: OverlayContainerType
-  overlayTabindex?: number
 }
 
 export interface DescConfig {
@@ -431,7 +429,6 @@ export interface SelectConfig {
   labelKey: string
   offset: [number, number]
   overlayContainer?: OverlayContainerType
-  overlayTabindex?: number
   overlayMatchWidth: boolean
   size: FormSize
   suffix: string
@@ -551,7 +548,6 @@ export interface TimePickerConfig {
   size: FormSize
   suffix: string
   overlayContainer?: OverlayContainerType
-  overlayTabindex?: number
   allowInput: boolean | 'overlay'
   format: string
 }
@@ -608,7 +604,6 @@ export interface TreeSelectConfig {
   labelKey: string
   offset: [number, number]
   overlayContainer?: OverlayContainerType
-  overlayTabindex?: number
   overlayMatchWidth: boolean
   size: FormSize
   suffix: string

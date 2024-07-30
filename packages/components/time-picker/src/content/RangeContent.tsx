@@ -60,6 +60,12 @@ export default defineComponent({
       setOverlayOpened(false)
     }
 
+    const handleMouseDown = (e: MouseEvent) => {
+      if (!(e.target instanceof HTMLInputElement)) {
+        e.preventDefault()
+      }
+    }
+
     function renderBoard(isFrom: boolean) {
       const {
         inputValue,
@@ -118,7 +124,7 @@ export default defineComponent({
       }
 
       const children = [
-        <div class={`${prefixCls}-body`}>
+        <div class={`${prefixCls}-body`} onMousedown={handleMouseDown}>
           {renderBoard(true)}
           <div class={separatorClasses}>{inputEnableStatus.value.enableInternalInput && renderSeparator()}</div>
           {renderBoard(false)}
@@ -133,7 +139,7 @@ export default defineComponent({
           ok={handleConfirm}
         />,
       ]
-      return props.overlayRender ? props.overlayRender(children) : <div>{children}</div>
+      return props.overlayRender ? props.overlayRender(children) : <div onMousedown={handleMouseDown}>{children}</div>
     }
   },
 })

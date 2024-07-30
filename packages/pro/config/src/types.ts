@@ -7,8 +7,8 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import type { PortalTargetType } from '@idux/cdk/portal'
 import type { FormSize } from '@idux/components/form'
-import type { OverlayContainerType } from '@idux/components/utils'
 import type { ProFormSchemaFormatter } from '@idux/pro/form'
 import type { ProLocale } from '@idux/pro/locales'
 import type { ProSearchSize } from '@idux/pro/search'
@@ -85,9 +85,6 @@ export interface ProTagSelectConfig {
   borderless: boolean
   clearable: boolean
   clearIcon: string
-  overlayContainer?: OverlayContainerType
-  overlayTabindex?: number
-
   size: FormSize
   suffix: string
 }
@@ -102,7 +99,7 @@ export interface ProSearchConfig {
   clearIcon: string | VNode
   searchIcon: string | VNode
   size: ProSearchSize
-  overlayContainer?: OverlayContainerType
+  overlayContainer?: PortalTargetType
 }
 
 export interface ProTextareaConfig {

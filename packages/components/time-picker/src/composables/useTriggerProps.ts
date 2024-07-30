@@ -39,7 +39,6 @@ export function useTriggerProps(context: TimePickerContext | TimeRangePickerCont
     open: overlayOpened.value,
     overlayContainer: props.overlayContainer ?? config.overlayContainer,
     overlayContainerFallback: `.${mergedPrefixCls.value}-overlay-container`,
-    overlayTabindex: props.overlayTabindex ?? config.overlayTabindex,
     readonly: props.readonly,
     size: mergedSize.value,
     status: mergedStatus.value,
