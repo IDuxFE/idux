@@ -10,6 +10,31 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 2.4.0(2024-07-30)
+
+
+### Bug Fixes
+
+* **comp:contro-trigger:** 当控件的浮层中存在虚拟滚动，并且当被聚焦的元素不再被渲染之后，焦点会消失，导致浮层被异常关闭 ([#1978](https://github.com/IDuxFE/idux/issues/1978)) ([c2944df](https://github.com/IDuxFE/idux/commit/c2944df5fc82ad46f998678fa5b54488716edea2))
+  - 影响组件：select, treeSelect, cascader, datePicker, timePicker, tagSelect
+* **comp:control-trigger:** trigger的右padding，在有suffix的时候增加suffix的尺寸，避免输入的内容遮盖住suffix ([#1975](https://github.com/IDuxFE/idux/issues/1975)) ([0bc7249](https://github.com/IDuxFE/idux/commit/0bc7249d4280e17ca0935c8b0e141cc5246795c2))
+* **comp:modal:** 当modal使用了header插槽自定义，配置了draggable不生效，无法拖动 ([#1970](https://github.com/IDuxFE/idux/issues/1970)) ([e5ecfc5](https://github.com/IDuxFE/idux/commit/e5ecfc5bd997c3e8441a59758c12cef3717f6134))
+* **comp:table:** 取消选择某一页的数据，会异常取消掉所有其他的选中项目 ([#1976](https://github.com/IDuxFE/idux/issues/1976)) ([9bdfe41](https://github.com/IDuxFE/idux/commit/9bdfe415dc828d3904be46aad9d0c7a20da870d2))
+* **comp:theme:** 当hashed配置是false，token计算出的hash应当和配置为true的时候不同，避免重复 ([#1973](https://github.com/IDuxFE/idux/issues/1973)) ([8bf3d66](https://github.com/IDuxFE/idux/commit/8bf3d66a01ee94863789c8b6747160b5cf0b6a3f))
+* **pro:table:** 当最后一列是resizable的时候，表格会异常出现横向滚动 ([#1972](https://github.com/IDuxFE/idux/issues/1972)) ([8456922](https://github.com/IDuxFE/idux/commit/845692239b01d72f11ff40452018c98683983035))
+* **pro:textarea:** 优化行高收集计算的性能 ([#1971](https://github.com/IDuxFE/idux/issues/1971)) ([8ec17d2](https://github.com/IDuxFE/idux/commit/8ec17d29b34a5006ea7c80fcbf23bf3da9d2bab7))
+
+
+### Features
+
+* **comp:*:** 给所有浮层控件新增 `overlayTabindex` 属性 ([#1977](https://github.com/IDuxFE/idux/issues/1977)) ([0778970](https://github.com/IDuxFE/idux/commit/0778970798c25dae995df3a36c4e90caacb6632e))
+  - 影响组件：select, treeSelect, cascader, datePicker, timePicker, tagSelect
+  - 取消所有以上组件的浮层mousedown事件拦截，在`control-trigger` 组件处理，如果点击的元素不是可聚焦的，则将焦点重置到trigger上
+* **comp:modal:** 新增 `spin` 属性，支持配置浮层的Loading状态 ([#1974](https://github.com/IDuxFE/idux/issues/1974)) ([32ac59c](https://github.com/IDuxFE/idux/commit/32ac59cf7f3b15c47914f92e00e597d70ac3e086))
+  - 新增spinIcon，spinContent插槽
+  - 新增 `spinWithFullModal` 属性配置，控制spin是否覆盖整个弹窗
+
+  
 ## 2.3.3(2024-07-22)
 
 
