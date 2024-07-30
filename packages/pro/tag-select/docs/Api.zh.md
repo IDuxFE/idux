@@ -22,6 +22,7 @@
 | `overlayClassName` | 下拉菜单的 `class`  | `string` | - | - | - |
 | `overlayContainer` | 自定义下拉框容器节点  | `string \| HTMLElement \| (trigger?: Element) => string \| HTMLElement` | - | - | - |
 | `overlayMatchWidth` | 下拉菜单和选择器同宽  | `boolean \| 'minWidth'` | `true` | - | - |
+| `overlayTabindex` | 自定义浮层tabindex | `number` | - | ✅ | - |
 | `placeholder` | 选择框默认文本 | `string \| #placeholder` | - | - | - |
 | `readonly` | 只读模式 | `boolean` | - | - | - |
 | `removeConfirmHeader` | 删除标签的确认弹窗头部配置 | `string \| HeaderProps` | - | - | - |

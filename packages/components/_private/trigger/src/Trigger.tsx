@@ -10,7 +10,7 @@ import { computed, defineComponent, normalizeClass, onBeforeUnmount, onMounted, 
 import { isArray, isNil, toString } from 'lodash-es'
 
 import { useSharedFocusMonitor } from '@idux/cdk/a11y'
-import { callEmit, isEmptyNode, useState } from '@idux/cdk/utils'
+import { callEmit, isEmptyNode, isFocusable, useState } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxIcon } from '@idux/components/icon'
 
@@ -97,7 +97,7 @@ export default defineComponent({
     })
 
     const handleMouseDown = (evt: MouseEvent) => {
-      if (evt.target instanceof HTMLInputElement) {
+      if (isFocusable(evt.target)) {
         return
       }
 

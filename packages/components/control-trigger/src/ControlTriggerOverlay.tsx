@@ -5,8 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, inject, onMounted, ref } from 'vue'
+import { computed, defineComponent, inject, onMounted, shallowRef, watch } from 'vue'
 
+import { isFocusable, useEventListener } from '@idux/cdk/utils'
 import { ɵOverlay, type ɵOverlayInstance } from '@idux/components/_private/overlay'
 import { useGlobalConfig } from '@idux/components/config'
 
@@ -21,9 +22,16 @@ export default defineComponent({
   props: controlTrigglerOverlayProps,
   setup(props, { expose, slots, attrs }) {
     const common = useGlobalConfig('common')
-    const { props: controlTriggerProps, mergedPrefixCls, bindOverlayMonitor } = inject(controlTriggerToken)!
+    const {
+      props: controlTriggerProps,
+      mergedPrefixCls,
+      overlayFocused,
+      bindOverlayMonitor,
+      resetTriggerFocus,
+    } = inject(controlTriggerToken)!
 
-    const overlayRef = ref<ɵOverlayInstance>()
+    const overlayRef = shallowRef<ɵOverlayInstance>()
+    const popperElRef = computed(() => overlayRef.value?.getPopperElement())
     const updatePopper = () => {
       overlayRef.value?.updatePopper()
     }
@@ -52,10 +60,25 @@ export default defineComponent({
 
     const overlayOpened = computed(() => props.visible ?? false)
 
+    watch(overlayOpened, opened => {
+      if (!opened && overlayFocused.value) {
+        resetTriggerFocus()
+      }
+    })
+    useEventListener(popperElRef, 'mousedown', evt => {
+      if (isFocusable(evt.target) || isFocusable(evt.currentTarget)) {
+        return
+      }
+
+      resetTriggerFocus()
+    })
+
     onMounted(() => {
       bindOverlayMonitor(overlayRef, overlayOpened)
     })
 
-    return () => <ɵOverlay ref={overlayRef} tabindex={-1} {...overlayProps.value} {...attrs} v-slots={slots} />
+    return () => (
+      <ɵOverlay ref={overlayRef} tabindex={props.tabindex} {...overlayProps.value} {...attrs} v-slots={slots} />
+    )
   },
 })

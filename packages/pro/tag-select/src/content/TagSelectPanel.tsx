@@ -9,6 +9,7 @@ import { computed, defineComponent, inject } from 'vue'
 
 import { toString } from 'lodash-es'
 
+import { isFocusable } from '@idux/cdk/utils'
 import { IxAlert } from '@idux/components/alert'
 import { useGlobalConfig } from '@idux/components/config'
 
@@ -36,7 +37,7 @@ export default defineComponent({
     const handleMousedown = (evt: MouseEvent) => {
       setEditPanelOpened(false)
 
-      if (!(evt.target instanceof HTMLInputElement)) {
+      if (!isFocusable(evt.target)) {
         evt.preventDefault()
       }
     }
