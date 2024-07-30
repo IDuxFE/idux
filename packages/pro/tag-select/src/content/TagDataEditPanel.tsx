@@ -68,6 +68,13 @@ export default defineComponent({
       handleTagDataRemove(props.data)
     }
 
+    const handlePanelMousedown = (evt: MouseEvent) => {
+      if (!(evt.target instanceof HTMLInputElement)) {
+        evt.preventDefault()
+        evt.stopImmediatePropagation()
+      }
+    }
+
     const renderColorItem = (prefixCls: string, color: TagSelectColor) => {
       const isSelected = color.key === props.data.color.key
       const colorItemPrefixCls = `${prefixCls}-item`
@@ -113,7 +120,7 @@ export default defineComponent({
       const prefixCls = `${mergedPrefixCls.value}-edit-panel`
 
       return (
-        <div class={[prefixCls, globalHashId.value, hashId.value]}>
+        <div class={[prefixCls, globalHashId.value, hashId.value]} onMousedown={handlePanelMousedown}>
           <div class={`${prefixCls}-input`}>
             <IxFormItem
               messageTooltip

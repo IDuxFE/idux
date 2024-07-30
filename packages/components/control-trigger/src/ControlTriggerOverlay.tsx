@@ -72,6 +72,11 @@ export default defineComponent({
 
       resetTriggerFocus()
     })
+    useEventListener(popperElRef, 'wheel', () => {
+      if (overlayFocused.value) {
+        resetTriggerFocus()
+      }
+    })
 
     onMounted(() => {
       bindOverlayMonitor(overlayRef, overlayOpened)
