@@ -25,6 +25,7 @@ import { callEmit, convertCssPixel, getOffset } from '@idux/cdk/utils'
 import { ɵFooter } from '@idux/components/_private/footer'
 import { ɵHeader } from '@idux/components/_private/header'
 import { type ModalConfig } from '@idux/components/config'
+import { IxSpin } from '@idux/components/spin'
 import { useThemeToken } from '@idux/components/theme'
 
 import ModalBody from './ModalBody'
@@ -45,6 +46,8 @@ export default defineComponent({
       visible,
       animatedVisible,
       mergedVisible,
+      mergedSpin,
+      mergedSpinWithFullModal,
       cancelLoading,
       okLoading,
       currentZIndex,
@@ -130,7 +133,7 @@ export default defineComponent({
 
     onMounted(() => watchVisibleChange(props, wrapperRef, sentinelStartRef, movableRef, mask))
 
-    return () => {
+    const renderContent = () => {
       const prefixCls = mergedPrefixCls.value
       const okButton = { size: 'md', ...props.okButton } as const
       const cancelButton = { size: 'md', ...props.cancelButton } as const
@@ -139,7 +142,15 @@ export default defineComponent({
         header: slots.header,
         closeIcon: slots.closeIcon,
       }
-      const contentNodes = [
+
+      const spinSlots = {
+        default: slots.spinContent,
+        icon: slots.spinIcon,
+      }
+
+      const spinProps = mergedSpin.value
+
+      const children = [
         <ɵHeader
           ref={headerRef}
           class={`${prefixCls}-header`}
@@ -159,6 +170,7 @@ export default defineComponent({
           cancelLoading={cancelLoading.value}
           cancelText={cancelText.value}
           cancelVisible={cancelVisible.value}
+          disabled={spinProps?.spinning}
           footer={props.footer}
           ok={handleOk}
           okButton={okButton}
@@ -166,6 +178,34 @@ export default defineComponent({
           okText={okText.value}
         ></ɵFooter>,
       ]
+
+      const contentNode = props.draggable ? (
+        <CdkDndMovable
+          ref={movableRef}
+          class={`${prefixCls}-content`}
+          dragHandle={headerRef.value}
+          boundary={wrapperRef.value}
+          mode="immediate"
+        >
+          {children}
+        </CdkDndMovable>
+      ) : (
+        <div class={`${prefixCls}-content`}>{children}</div>
+      )
+
+      if (mergedSpinWithFullModal.value && spinProps) {
+        return (
+          <IxSpin v-slots={spinSlots} {...spinProps}>
+            {contentNode}
+          </IxSpin>
+        )
+      }
+
+      return contentNode
+    }
+
+    return () => {
+      const prefixCls = mergedPrefixCls.value
 
       return (
         <div
@@ -195,19 +235,7 @@ export default defineComponent({
               {...attrs}
             >
               <div ref={sentinelStartRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
-              {props.draggable ? (
-                <CdkDndMovable
-                  ref={movableRef}
-                  class={`${prefixCls}-content`}
-                  dragHandle={headerRef.value}
-                  boundary={wrapperRef.value}
-                  mode="immediate"
-                >
-                  {contentNodes}
-                </CdkDndMovable>
-              ) : (
-                <div class={`${prefixCls}-content`}>{contentNodes}</div>
-              )}
+              {renderContent()}
               <div ref={sentinelEndRef} tabindex={0} class={`${prefixCls}-sentinel`} aria-hidden={true}></div>
             </div>
           </Transition>

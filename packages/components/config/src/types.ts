@@ -340,6 +340,7 @@ export interface ModalConfig {
   icon?: Partial<Record<ModalType, string | VNode | (() => VNodeChild)>>
   mask: boolean
   maskClosable: boolean
+  spinWithFullModal: boolean
   /**
    * @deprecated
    */

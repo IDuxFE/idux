@@ -25,6 +25,10 @@ export const footerProps = {
     type: Boolean,
     default: true,
   },
+  disabled: {
+    type: Boolean,
+    default: undefined,
+  },
   footer: [Boolean, Array, Object, Function] as PropType<boolean | FooterButtonProps[] | VNode | (() => VNodeChild)>,
   ok: Function as PropType<(evt?: Event | unknown) => Promise<void> | void>,
   okButton: Object as PropType<ButtonProps>,
