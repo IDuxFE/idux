@@ -9,6 +9,7 @@ import type { ProTextareaProps, TextareaError } from '../types'
 
 import { type ComputedRef, type Ref, onMounted, watch } from 'vue'
 
+import { useResizeObserver } from '@idux/cdk/resize'
 import { cancelRAF, rAF, useEventListener, useState } from '@idux/cdk/utils'
 
 export interface LineRenderContext {
@@ -25,6 +26,8 @@ export function useErrorLineRender(
   const [renderedErrors, setRenderedErrors] = useState<TextareaError[]>([])
   const [renderedLinesIndex, setRenderedLinesIndex] = useState<{ start: number; end: number }>({ start: 0, end: 0 })
   const [renderedTopOffset, setRenderedTopOffset] = useState<number>(0)
+
+  let scrollHolderHeight = 0
 
   const calcErrorRenderState = () => {
     if (!scrollHolderRef.value) {
@@ -102,6 +105,13 @@ export function useErrorLineRender(
       calcErrorRenderState()
       rafId = null
     })
+  })
+  useResizeObserver(scrollHolderRef, ({ contentRect: { height } }) => {
+    if (scrollHolderHeight && scrollHolderHeight !== height) {
+      calcErrorRenderState()
+    }
+
+    scrollHolderHeight = height
   })
 
   return {

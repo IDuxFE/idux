@@ -29,6 +29,7 @@ export function useRowCounts(
   const [rowHeights, setRowHeights] = useState<number[]>([])
 
   let cachedRowCharLength: number[] = []
+  let textareaWidth = 0
 
   const calcRowCounts = () => {
     const textarea = textareaRef.value!
@@ -77,9 +78,13 @@ export function useRowCounts(
   }
 
   watch([valueRef, () => props.rows], calcRowCounts)
-  useResizeObserver(textareaRef, () => {
-    cachedRowCharLength = []
-    calcRowCounts()
+  useResizeObserver(textareaRef, ({ contentRect: { width } }) => {
+    if (textareaWidth && textareaWidth !== width) {
+      cachedRowCharLength = []
+      calcRowCounts()
+    }
+
+    textareaWidth = width
   })
 
   return {
