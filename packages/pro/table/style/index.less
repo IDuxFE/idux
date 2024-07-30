@@ -195,13 +195,15 @@
     }
   }
 
-  .cdk-resizable {
-    &-preview {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 11;
-      border-right: 2px var(--ix-line-type) var(--ix-color-border);
-    }
+  .cdk-resizable-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 11;
+    border-right: 2px var(--ix-line-type) var(--ix-color-border);
+  }
+
+  table > thead th:last-child .cdk-resizable-handle {
+    right: 0;
   }
 }
