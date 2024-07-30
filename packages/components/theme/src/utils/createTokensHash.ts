@@ -9,8 +9,10 @@ import hash from '@emotion/hash'
 
 import { themeTokenPrefix } from '../types'
 
+const unhasedHashSalt = '__unhashed__'
+
 const sequenceCache = new Map<string, string[]>()
-export function createTokensHash(key: string, tokens: Record<string, string | number>): string {
+export function createTokensHash(key: string, tokens: Record<string, string | number>, hashed = true): string {
   let sequence = sequenceCache.get(key)
 
   if (!sequence) {
@@ -18,7 +20,13 @@ export function createTokensHash(key: string, tokens: Record<string, string | nu
     sequenceCache.set(key, sequence)
   }
 
-  return `${themeTokenPrefix}-${key}-${hash(flattenTokens(tokens, sequence))}`
+  let str = flattenTokens(tokens, sequence)
+
+  if (!hashed) {
+    str += unhasedHashSalt
+  }
+
+  return `${themeTokenPrefix}-${key}-${hash(str)}`
 }
 
 function flattenTokens(tokens: Record<string, string | number>, sequence: string[]): string {

@@ -92,7 +92,7 @@ export function useTokenRegister(
     const getTokens = tokenGettersMap.get(key) as TokenGetter<K>
     const transforms = tokenTransformsMap.get(key)
     const prefix = tokenPrefixMap.get(key)
-    const hashed = tokenHashedMap.get(key)
+    const hashed = tokenHashedMap.get(key) ?? mergedHashed.value
 
     if (!getTokens) {
       return
@@ -106,7 +106,7 @@ export function useTokenRegister(
 
     const mergedCompTokens = getMergedTokens(key, tokens)
 
-    const hashId = existedHashId ?? createTokensHash(key, mergedCompTokens as Record<string, string | number>)
+    const hashId = existedHashId ?? createTokensHash(key, mergedCompTokens as Record<string, string | number>, hashed)
 
     if (record?.hashId === hashId) {
       return hashId
@@ -125,7 +125,7 @@ export function useTokenRegister(
     // if hashId is already provided, we consider the style injected already, no need to inject it again
     if (injectThemeStyle.value && !existedHashId) {
       const cssContent = tokenToCss(
-        { ...record, hashId: (hashed ?? mergedHashed.value) ? record.hashId : '' } as TokenRecord<string>,
+        { ...record, hashId: hashed ? record.hashId : '' } as TokenRecord<string>,
         prefix,
         transforms,
       )
