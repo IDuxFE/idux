@@ -119,7 +119,7 @@
       .@{pro-table-prefix}-layout-tool-trigger + .@{table-prefix}-fixed-holder {
         table > thead > tr:first-child {
           th:nth-last-of-type(2) .@{table-prefix}-cell-triggers {
-            padding-right: 30px;
+            padding-right: calc(var(--ix-font-size-icon) + var(--ix-padding-size-sm) * 2 - var(--ix-scrollbar-width));
           }
         }
       }
@@ -130,7 +130,7 @@
       .@{pro-table-prefix}-layout-tool-trigger + .@{table-prefix}-fixed-holder {
         table > thead > tr:first-child {
           th:last-child > .@{table-prefix}-cell-triggers {
-            padding-right: 38px;
+            padding-right: calc(var(--ix-font-size-icon) + var(--ix-padding-size-sm) * 2);
           }
         }
       }
