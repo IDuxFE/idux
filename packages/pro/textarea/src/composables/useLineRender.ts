@@ -88,6 +88,10 @@ export function useErrorLineRender(
       currentTop += height
     }
 
+    if (lineTopIndex === -1) {
+      lineTopIndex = 0
+    }
+
     setRenderedErrors(newErrors)
     setRenderedLinesIndex({ start: lineTopIndex, end: lineBottomIndex })
     setRenderedTopOffset(offsetTop)
