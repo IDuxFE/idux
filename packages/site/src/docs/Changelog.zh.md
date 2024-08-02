@@ -10,6 +10,17 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 2.4.1(2024-08-02)
+
+
+### Bug Fixes
+
+* **cdk:scroll:** 模拟滚动下，横向滚动条展示异常 ([#1980](https://github.com/IDuxFE/idux/issues/1980)) ([c23652f](https://github.com/IDuxFE/idux/commit/c23652ff0dda25433548e78f3edc6502e8b9d810))
+  - 当开启了模拟滚动模式和纵向虚拟滚动，没有开启横向虚拟滚动，且列表最初没有横向的滚动时，修改列表数据，使其在横向出现滚动溢出，横向虚拟滚动始终无法出现
+* **pro:table:** 修改最后一列存在筛选或者排序图标的表头按钮的右边距 ([#1981](https://github.com/IDuxFE/idux/issues/1981)) ([501b128](https://github.com/IDuxFE/idux/commit/501b128b71ffe8aee727322f00e2b62651260932))
+  - 原先是固定的值，现在改成通过token值计算
+* **pro:textarea:** 当初始的value是undefined是，没有输入的情况下，第一行的行号是0 ([#1979](https://github.com/IDuxFE/idux/issues/1979)) ([2883576](https://github.com/IDuxFE/idux/commit/2883576b5d74eb2e7c31f06a4b32c1ea00dd53b3))
+
 # 2.4.0(2024-07-30)
 
 
