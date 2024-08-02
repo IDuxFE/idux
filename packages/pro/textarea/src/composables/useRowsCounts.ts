@@ -7,7 +7,7 @@
 
 import type { ProTextareaProps } from '../types'
 
-import { type ComputedRef, type Ref, watch } from 'vue'
+import { type ComputedRef, type Ref, onMounted, watch } from 'vue'
 
 import { useResizeObserver } from '@idux/cdk/resize'
 import { useState } from '@idux/cdk/utils'
@@ -38,6 +38,7 @@ export function useRowCounts(
     const { rows } = props
     const currentRowCounts = rowCounts.value
     const currentRowHeights = rowHeights.value
+    const currentLineHeight = lineHeight.value
 
     const counts: number[] = []
     const heights: number[] = []
@@ -64,20 +65,23 @@ export function useRowCounts(
         true,
       )
 
-      counts[index] = Math.round(height / lineHeight.value)
+      counts[index] = Math.round(height / currentLineHeight)
       heights[index] = height
     })
 
     if (rows && lines.length < rows) {
       counts.push(...new Array(rows - lines.length).fill(1))
-      heights.push(...new Array(rows - lines.length).fill(lineHeight.value))
+      heights.push(...new Array(rows - lines.length).fill(currentLineHeight))
     }
 
     setRowCounts(counts)
     setRowHeights(heights)
   }
 
-  watch([valueRef, () => props.rows], calcRowCounts)
+  onMounted(() => {
+    watch([valueRef, () => props.rows], calcRowCounts, { immediate: true })
+  })
+
   useResizeObserver(textareaRef, ({ contentRect: { width } }) => {
     if (textareaWidth && textareaWidth !== width) {
       cachedRowCharLength = []
