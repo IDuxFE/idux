@@ -190,7 +190,7 @@ function calcVerticalState(
   if (!virtual || dataLength === 0 || rowHeight * dataLength <= height) {
     const scrollHeight = calcDataHeight(rows, getRowHeight, getKey)
     return {
-      scrollHeight: virtual ? scrollHeight : 0,
+      scrollHeight: scrollHeight,
       topIndex: 0,
       bottomIndex: dataLength === 0 ? 0 : dataLength - 1,
       offsetTop: 0,
@@ -315,7 +315,7 @@ function calcHorizontalState(
   if (!virtual || rows.length === 0 || colWidth * maxColLength <= width) {
     const scrollWidth = calcDataWidth(rows, getColWidth, getKey)
     return {
-      scrollWidth: virtual ? scrollWidth : 0,
+      scrollWidth: scrollWidth,
       leftIndex: rows.map(() => 0),
       rightIndex: rows.map(row => getRowColLength(row) - 1),
       offsetLeft: 0,

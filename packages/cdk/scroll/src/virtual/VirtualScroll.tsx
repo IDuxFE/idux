@@ -140,7 +140,7 @@ export default defineComponent({
       props,
       holderRef,
       scroll,
-      scrollHeight,
+      containerScrollHeight,
       containerSize,
       changeScroll,
       syncContainerScroll,
