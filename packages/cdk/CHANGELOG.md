@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://github.com/IDuxFE/idux/compare/v2.4.0...v2.4.1) (2024-08-02)
+
+
+### Bug Fixes
+
+* **cdk:scroll:** simulated horizontal scrollbar is not displayed ([#1980](https://github.com/IDuxFE/idux/issues/1980)) ([c23652f](https://github.com/IDuxFE/idux/commit/c23652ff0dda25433548e78f3edc6502e8b9d810))
+
+
+
+
+
 # [2.4.0](https://github.com/IDuxFE/idux/compare/v2.3.3...v2.4.0) (2024-07-30)
 
 

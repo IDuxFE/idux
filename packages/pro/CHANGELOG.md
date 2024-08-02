@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://github.com/IDuxFE/idux/compare/v2.4.0...v2.4.1) (2024-08-02)
+
+
+### Bug Fixes
+
+* **pro:table:** modify trigger padding of last column ([#1981](https://github.com/IDuxFE/idux/issues/1981)) ([501b128](https://github.com/IDuxFE/idux/commit/501b128b71ffe8aee727322f00e2b62651260932))
+* **pro:textarea:** row number is `0` when value is undefined ([#1979](https://github.com/IDuxFE/idux/issues/1979)) ([2883576](https://github.com/IDuxFE/idux/commit/2883576b5d74eb2e7c31f06a4b32c1ea00dd53b3))
+
+
+
+
+
 # [2.4.0](https://github.com/IDuxFE/idux/compare/v2.3.3...v2.4.0) (2024-07-30)
 
 
