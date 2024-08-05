@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.2](https://github.com/IDuxFE/idux/compare/v2.4.1...v2.4.2) (2024-08-05)
+
+
+### Bug Fixes
+
+* **comp:control-trigger:** mousedown on overlay triggers blur ([#1982](https://github.com/IDuxFE/idux/issues/1982)) ([77745dc](https://github.com/IDuxFE/idux/commit/77745dc3d55ec44a4a731ea5b9284adc1578258b))
+
+
+
+
+
 ## [2.4.1](https://github.com/IDuxFE/idux/compare/v2.4.0...v2.4.1) (2024-08-02)
 
 
