@@ -10,6 +10,13 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 2.4.2(2024-08-05)
+
+
+### Bug Fixes
+
+* **comp:control-trigger:** 当contro-trigger的浮层中不存在任何一个可聚焦的元素时，在浮层上触发的 mousedown 会触发 blur 事件并使浮层关闭 ([#1982](https://github.com/IDuxFE/idux/issues/1982)) ([77745dc](https://github.com/IDuxFE/idux/commit/77745dc3d55ec44a4a731ea5b9284adc1578258b))
+
 ## 2.4.1(2024-08-02)
 
 
