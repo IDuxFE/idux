@@ -70,6 +70,8 @@ export default defineComponent({
         return
       }
 
+      evt.preventDefault()
+
       resetTriggerFocus()
     })
     useEventListener(popperElRef, 'wheel', () => {

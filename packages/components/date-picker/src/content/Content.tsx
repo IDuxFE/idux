@@ -153,7 +153,7 @@ export default defineComponent({
       }
 
       const children = [
-        <div class={`${prefixCls}-body`} tabindex={-1}>
+        <div class={`${prefixCls}-body`}>
           {renderInputs(inputsCls)}
           <Panel v-slots={slots} {...paneProps} />
         </div>,
