@@ -8,12 +8,14 @@
 import type { ActiveSegmentContext } from './useActiveSegment'
 import type { FocusStateContext } from './useFocusedState'
 import type { SearchStateContext } from './useSearchStates'
+import type { ProSearchProps } from '../types'
 
 import { type Ref, onBeforeUnmount, watch } from 'vue'
 
 import { isFocusable, useEventListener } from '@idux/cdk/utils'
 
 export function useControl(
+  props: ProSearchProps,
   elementRef: Ref<HTMLElement | undefined>,
   activeSegmentContext: ActiveSegmentContext,
   searchStateContext: SearchStateContext,
@@ -45,6 +47,11 @@ export function useControl(
     }
   })([
     useEventListener(elementRef, 'mousedown', evt => {
+      if (props.disabled) {
+        evt.preventDefault()
+        return
+      }
+
       if (!focused.value) {
         return
       }
