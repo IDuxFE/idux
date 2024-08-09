@@ -41,7 +41,7 @@ export function useActiveSegment(
   enableQuickSelect: ComputedRef<boolean>,
   isSegmentVisible: (key: VKey, name: string) => boolean,
 ): ActiveSegmentContext {
-  const [activeSegment, setActiveSegment] = useState<ActiveSegment | undefined>(undefined)
+  const [activeSegment, _setActiveSegment] = useState<ActiveSegment | undefined>(undefined)
   const [nameSelectActive, _setNameSelectActive] = useState<boolean>(false)
   const [quickSelectActive, _setQuickSelectActive] = useState<boolean>(false)
   const [overlayOpened, setOverlayOpened] = useState<boolean>(false)
@@ -56,6 +56,15 @@ export function useActiveSegment(
       segment => segment.itemKey === activeSegment.value?.itemKey && segment.name === activeSegment.value.name,
     ),
   )
+
+  const setActiveSegment = (segment: ActiveSegment | undefined) => {
+    if (props.disabled) {
+      _setActiveSegment(undefined)
+      return
+    }
+
+    _setActiveSegment(segment)
+  }
 
   const updateActiveSegment = (segment: ActiveSegment | undefined) => {
     if (
