@@ -70,7 +70,7 @@ export default defineComponent({
       watch(
         displayedText,
         text => {
-          setTextWidth(measureTextWidth(text, segmentWrapperRef.value))
+          setTextWidth(measureTextWidth(text, segmentInputRef.value))
         },
         { immediate: true },
       )
