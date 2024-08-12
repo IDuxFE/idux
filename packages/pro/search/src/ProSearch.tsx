@@ -104,7 +104,7 @@ export default defineComponent({
       bindOverlayMonitor(quickSelectOverlayRef, quickSelectOverlayOpened)
     })
 
-    useControl(elementRef, activeSegmentContext, searchStateContext, focusStateContext)
+    useControl(props, elementRef, activeSegmentContext, searchStateContext, focusStateContext)
 
     const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(componentCommon, 'overlayZIndex'), focused)
     const { isActive, overlayOpened, quickSelectActive, setTempActive, setOverlayOpened } = activeSegmentContext
