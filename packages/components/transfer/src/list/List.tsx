@@ -85,6 +85,7 @@ export default defineComponent({
       if (virtual) {
         return (
           <CdkVirtualScroll
+            class={mergedPrefixCls.value + '-content'}
             ref={virtualScrollRef}
             dataSource={data}
             fullHeight={!!scroll?.fullHeight}
