@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.3](https://github.com/IDuxFE/idux/compare/v2.4.2...v2.4.3) (2024-08-12)
+
+
+### Bug Fixes
+
+* **comp:control-trigger:** padding right wtih suffix is incorrect ([#1986](https://github.com/IDuxFE/idux/issues/1986)) ([b115908](https://github.com/IDuxFE/idux/commit/b1159081c79b400b50575653be37b1884e2abbee))
+* **comp:transfer:** configuring virtual scrolling does not take effect ([#1983](https://github.com/IDuxFE/idux/issues/1983)) ([f85d9f9](https://github.com/IDuxFE/idux/commit/f85d9f94829e97c796f53a2450f8940b3980c751))
+* **pro:search:** component still interactable when disabled ([#1984](https://github.com/IDuxFE/idux/issues/1984)) ([2b5dc09](https://github.com/IDuxFE/idux/commit/2b5dc09d4cef0d8f7a2bbab619379350b141eeb3))
+* **pro:search:** segment input width measure is incorrect ([#1985](https://github.com/IDuxFE/idux/issues/1985)) ([8362f5d](https://github.com/IDuxFE/idux/commit/8362f5d011650038e3808dacbb93cffdd5b00969))
+
+
+
+
+
 ## [2.4.2](https://github.com/IDuxFE/idux/compare/v2.4.1...v2.4.2) (2024-08-05)
 
 
