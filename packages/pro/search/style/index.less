@@ -4,7 +4,7 @@
 @import './variables.less';
 @import '../../style/mixins/reset.less';
 @import '../../../components/style/mixins/ellipsis.less';
-@import '../../../components//style//mixins/placeholder.less';
+@import '../../../components//style/mixins/placeholder.less';
 
 @import './mixin.less';
 @import './quick-select.less';
@@ -50,11 +50,17 @@
 
     &::after {
       content: '';
-      background-color: @pro-search-search-button-background-color;
       width: @pro-search-border-width;
       position: absolute;
       right: -1px;
       top: -1px;
+    }
+
+    .@{pro-search-prefix}:not(.@{pro-search-prefix}-disabled) &::after {
+      background-color: @pro-search-search-button-background-color;
+    }
+    .@{pro-search-prefix}-disabled &::after {
+      background-color: @pro-search-search-button-disabled-background-color;
     }
   }
 

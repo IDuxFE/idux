@@ -46,15 +46,20 @@ export function useActiveSegment(
   const [quickSelectActive, _setQuickSelectActive] = useState<boolean>(false)
   const [overlayOpened, setOverlayOpened] = useState<boolean>(false)
 
-  const isActive = computed(() => !!activeSegment.value || nameSelectActive.value || quickSelectActive.value)
-
   const mergedActiveSegment = computed(() => (props.disabled ? undefined : activeSegment.value))
+  const mergedNameSelectActive = computed(() => (props.disabled ? false : nameSelectActive.value))
+  const mergedQuickSelectActive = computed(() => (props.disabled ? false : quickSelectActive.value))
+  const mergedOverlayOpened = computed(() => (props.disabled ? false : overlayOpened.value))
   const flattenedSegments = computed(() => flattenSegments(searchItems.value ?? [], isSegmentVisible))
   const activeItem = computed(() => searchItems.value?.find(item => item.key === activeSegment.value?.itemKey))
   const activeSegmentIndex = computed(() =>
     flattenedSegments.value.findIndex(
       segment => segment.itemKey === activeSegment.value?.itemKey && segment.name === activeSegment.value.name,
     ),
+  )
+
+  const isActive = computed(
+    () => !!mergedActiveSegment.value || mergedNameSelectActive.value || mergedQuickSelectActive.value,
   )
 
   const setActiveSegment = (segment: ActiveSegment | undefined) => {
@@ -176,12 +181,12 @@ export function useActiveSegment(
     setActiveSegment: updateActiveSegment,
     changeActive,
     setInactive,
-    nameSelectActive,
+    nameSelectActive: mergedNameSelectActive,
     setNameSelectActive,
-    quickSelectActive,
+    quickSelectActive: mergedQuickSelectActive,
     setQuickSelectActive,
     setTempActive,
-    overlayOpened,
+    overlayOpened: mergedOverlayOpened,
     setOverlayOpened,
   }
 }

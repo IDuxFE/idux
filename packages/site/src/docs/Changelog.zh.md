@@ -10,6 +10,18 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 2.4.3(2024-08-12)
+
+
+### Bug Fixes
+
+* **comp:control-trigger:** 有后缀或者清除图标的trigger的右边距不正确 ([#1986](https://github.com/IDuxFE/idux/issues/1986)) ([b115908](https://github.com/IDuxFE/idux/commit/b1159081c79b400b50575653be37b1884e2abbee))
+* **comp:transfer:** 配置了虚拟滚动之后，列表无法滚动，虚拟滚动不生效 ([#1983](https://github.com/IDuxFE/idux/issues/1983)) ([f85d9f9](https://github.com/IDuxFE/idux/commit/f85d9f94829e97c796f53a2450f8940b3980c751))
+* **pro:search:** 当配置了禁用之后，组件依然可以操作并选择筛选项 ([#1984](https://github.com/IDuxFE/idux/issues/1984)) ([2b5dc09](https://github.com/IDuxFE/idux/commit/2b5dc09d4cef0d8f7a2bbab619379350b141eeb3))
+* **pro:search:** 筛选项标签中的input，宽度计算不正确 ([#1985](https://github.com/IDuxFE/idux/issues/1985)) ([8362f5d](https://github.com/IDuxFE/idux/commit/8362f5d011650038e3808dacbb93cffdd5b00969))
+  - 之前使用了input标签的父元素的样式计算宽度，导致当父元素的字体大小和实际input的不一致时，宽度计算不正确
+
+
 ## 2.4.2(2024-08-05)
 
 
