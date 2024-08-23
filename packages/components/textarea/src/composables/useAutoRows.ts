@@ -152,7 +152,7 @@ export function useAutoRows(
     const contentHeight = minRows.value && cachedLineHeight.value ? minRows.value * cachedLineHeight.value : null
     const minHeight = contentHeight ? `${getHeightByContentHeight(contentHeight, boxSizingData.value)}px` : ''
 
-    textareaRef.value.style.maxHeight = minHeight
+    textareaRef.value.style.minHeight = minHeight
   }
 
   /** Sets the maximum height of the textarea as determined by maxRows. */
