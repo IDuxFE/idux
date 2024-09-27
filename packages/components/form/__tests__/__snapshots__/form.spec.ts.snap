@@ -1,70 +1,70 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Form > basic work > render work 1`] = `
-"<form class=\\"ix-form ix-form-horizontal ix-form-md\\">
-  <div class=\\"ix-row ix-form-item\\">
-    <div class=\\"ix-col ix-form-item-label ix-form-item-label-start\\"><label>Username
+"<form class="ix-form ix-form-horizontal ix-form-md">
+  <div class="ix-row ix-form-item">
+    <div class="ix-col ix-form-item-label ix-form-item-label-start"><label>Username
         <!---->
       </label></div>
-    <div class=\\"ix-col ix-form-item-control\\">
-      <div class=\\"ix-form-item-control-input\\">
-        <div class=\\"ix-form-item-control-input-content\\"><input class=\\"ix-input ix-input-md\\"></div>
+    <div class="ix-col ix-form-item-control">
+      <div class="ix-form-item-control-input">
+        <div class="ix-form-item-control-input-content"><input class="ix-input ix-input-md"></div>
         <!---->
       </div>
-      <div class=\\"ix-form-item-message\\">
-        <transition-stub name=\\"ix-fade-down\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+      <div class="ix-form-item-message">
+        <transition-stub name="ix-fade-down" appear="false" persisted="false" css="true">
           <!---->
         </transition-stub>
       </div>
     </div>
   </div>
-  <div class=\\"ix-row ix-form-item\\">
-    <div class=\\"ix-col ix-form-item-label ix-form-item-label-start\\"><label>Password
+  <div class="ix-row ix-form-item">
+    <div class="ix-col ix-form-item-label ix-form-item-label-start"><label>Password
         <!---->
       </label></div>
-    <div class=\\"ix-col ix-form-item-control\\">
-      <div class=\\"ix-form-item-control-input\\">
-        <div class=\\"ix-form-item-control-input-content\\"><input class=\\"ix-input ix-input-md\\"></div>
+    <div class="ix-col ix-form-item-control">
+      <div class="ix-form-item-control-input">
+        <div class="ix-form-item-control-input-content"><input class="ix-input ix-input-md"></div>
         <!---->
       </div>
-      <div class=\\"ix-form-item-message\\">
-        <transition-stub name=\\"ix-fade-down\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+      <div class="ix-form-item-message">
+        <transition-stub name="ix-fade-down" appear="false" persisted="false" css="true">
           <!---->
         </transition-stub>
       </div>
     </div>
   </div>
-  <div class=\\"ix-row ix-form-item\\">
-    <div class=\\"ix-col ix-form-item-label ix-form-item-label-start\\"><label>Remember
+  <div class="ix-row ix-form-item">
+    <div class="ix-col ix-form-item-label ix-form-item-label-start"><label>Remember
         <!---->
       </label></div>
-    <div class=\\"ix-col ix-form-item-control\\">
-      <div class=\\"ix-form-item-control-input\\">
-        <div class=\\"ix-form-item-control-input-content\\"><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+    <div class="ix-col ix-form-item-control">
+      <div class="ix-form-item-control-input">
+        <div class="ix-form-item-control-input-content"><label class="ix-checkbox" role="checkbox" aria-checked="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
             <!---->
             <!---->
             <!---->
           </label></div>
         <!---->
       </div>
-      <div class=\\"ix-form-item-message\\">
-        <transition-stub name=\\"ix-fade-down\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+      <div class="ix-form-item-message">
+        <transition-stub name="ix-fade-down" appear="false" persisted="false" css="true">
           <!---->
         </transition-stub>
       </div>
     </div>
   </div>
-  <div class=\\"ix-row ix-form-item\\">
+  <div class="ix-row ix-form-item">
     <!---->
-    <div class=\\"ix-col ix-form-item-control\\">
-      <div class=\\"ix-form-item-control-input\\">
-        <div class=\\"ix-form-item-control-input-content\\"><button class=\\"ix-button ix-button-default ix-button-md\\" type=\\"button\\"><span>Click</span>
-            <div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div>
+    <div class="ix-col ix-form-item-control">
+      <div class="ix-form-item-control-input">
+        <div class="ix-form-item-control-input-content"><button class="ix-button ix-button-default ix-button-md" type="button"><span>Click</span>
+            <div aria-hidden="true" class="ix-wave"></div>
           </button></div>
         <!---->
       </div>
-      <div class=\\"ix-form-item-message\\">
-        <transition-stub name=\\"ix-fade-down\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+      <div class="ix-form-item-message">
+        <transition-stub name="ix-fade-down" appear="false" persisted="false" css="true">
           <!---->
         </transition-stub>
       </div>
@@ -74,17 +74,17 @@ exports[`Form > basic work > render work 1`] = `
 `;
 
 exports[`Form > item work > render work 1`] = `
-"<div class=\\"ix-row ix-form-item\\">
-  <div class=\\"ix-col ix-form-item-label ix-form-item-label-colon\\"><label>Username
+"<div class="ix-row ix-form-item">
+  <div class="ix-col ix-form-item-label ix-form-item-label-colon"><label>Username
       <!---->
     </label></div>
-  <div class=\\"ix-col ix-form-item-control\\">
-    <div class=\\"ix-form-item-control-input\\">
-      <div class=\\"ix-form-item-control-input-content\\"><input class=\\"ix-input ix-input-md\\"></div>
+  <div class="ix-col ix-form-item-control">
+    <div class="ix-form-item-control-input">
+      <div class="ix-form-item-control-input-content"><input class="ix-input ix-input-md"></div>
       <!---->
     </div>
-    <div class=\\"ix-form-item-message\\">
-      <transition-stub name=\\"ix-fade-down\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+    <div class="ix-form-item-message">
+      <transition-stub name="ix-fade-down" appear="false" persisted="false" css="true">
         <!---->
       </transition-stub>
     </div>
@@ -93,53 +93,53 @@ exports[`Form > item work > render work 1`] = `
 `;
 
 exports[`Form > wrapper work > render work 1`] = `
-"<div class=\\"ix-row ix-form-item\\">
-  <div class=\\"ix-col ix-form-item-label ix-form-item-label-colon\\"><label>Username
+"<div class="ix-row ix-form-item">
+  <div class="ix-col ix-form-item-label ix-form-item-label-colon"><label>Username
       <!---->
     </label></div>
-  <div class=\\"ix-col ix-form-item-control\\">
-    <div class=\\"ix-form-item-control-input\\">
-      <div class=\\"ix-form-item-control-input-content\\"><input class=\\"ix-input ix-input-md\\"></div>
+  <div class="ix-col ix-form-item-control">
+    <div class="ix-form-item-control-input">
+      <div class="ix-form-item-control-input-content"><input class="ix-input ix-input-md"></div>
       <!---->
     </div>
-    <div class=\\"ix-form-item-message\\">
-      <transition-stub name=\\"ix-fade-down\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+    <div class="ix-form-item-message">
+      <transition-stub name="ix-fade-down" appear="false" persisted="false" css="true">
         <!---->
       </transition-stub>
     </div>
   </div>
 </div>
-<div class=\\"ix-row ix-form-item\\">
-  <div class=\\"ix-col ix-col-span-6 ix-form-item-label ix-form-item-label-colon\\"><label>Password
+<div class="ix-row ix-form-item">
+  <div class="ix-col ix-col-span-6 ix-form-item-label ix-form-item-label-colon"><label>Password
       <!---->
     </label></div>
-  <div class=\\"ix-col ix-form-item-control\\">
-    <div class=\\"ix-form-item-control-input\\">
-      <div class=\\"ix-form-item-control-input-content\\"><input class=\\"ix-input ix-input-md\\"></div>
+  <div class="ix-col ix-form-item-control">
+    <div class="ix-form-item-control-input">
+      <div class="ix-form-item-control-input-content"><input class="ix-input ix-input-md"></div>
       <!---->
     </div>
-    <div class=\\"ix-form-item-message\\">
-      <transition-stub name=\\"ix-fade-down\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+    <div class="ix-form-item-message">
+      <transition-stub name="ix-fade-down" appear="false" persisted="false" css="true">
         <!---->
       </transition-stub>
     </div>
   </div>
 </div>
-<div class=\\"ix-row ix-form-item\\">
-  <div class=\\"ix-col ix-col-span-8 ix-form-item-label ix-form-item-label-colon\\"><label>Remember
+<div class="ix-row ix-form-item">
+  <div class="ix-col ix-col-span-8 ix-form-item-label ix-form-item-label-colon"><label>Remember
       <!---->
     </label></div>
-  <div class=\\"ix-col ix-form-item-control\\">
-    <div class=\\"ix-form-item-control-input\\">
-      <div class=\\"ix-form-item-control-input-content\\"><label class=\\"ix-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+  <div class="ix-col ix-form-item-control">
+    <div class="ix-form-item-control-input">
+      <div class="ix-form-item-control-input-content"><label class="ix-checkbox" role="checkbox" aria-checked="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
           <!---->
           <!---->
           <!---->
         </label></div>
       <!---->
     </div>
-    <div class=\\"ix-form-item-message\\">
-      <transition-stub name=\\"ix-fade-down\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+    <div class="ix-form-item-message">
+      <transition-stub name="ix-fade-down" appear="false" persisted="false" css="true">
         <!---->
       </transition-stub>
     </div>

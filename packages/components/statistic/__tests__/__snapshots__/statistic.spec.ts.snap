@@ -1,10 +1,10 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Statistic > render work 1`] = `
-"<div class=\\"ix-statistic\\">
+"<div class="ix-statistic">
   <!---->
-  <div class=\\"ix-statistic-content\\">
-    <!----><span class=\\"ix-statistic-content-value\\"><span class=\\"ix-statistic-content-value-int\\"></span></span>
+  <div class="ix-statistic-content">
+    <!----><span class="ix-statistic-content-value"><span class="ix-statistic-content-value-int"></span></span>
     <!---->
   </div>
 </div>"

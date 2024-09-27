@@ -1,18 +1,18 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`RadioGroup > render work 1`] = `
-"<div class=\\"ix-space ix-radio-group\\" style=\\"margin-bottom: -8px;\\">
-  <div class=\\"ix-space-item\\" style=\\"margin-right: 8px; padding-bottom: 8px;\\"><label class=\\"ix-radio\\" role=\\"radio\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-radio-input\\"><input type=\\"radio\\" class=\\"ix-radio-input-inner\\" aria-hidden=\\"true\\" value=\\"a\\"><span class=\\"ix-radio-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
-      <!----><span class=\\"ix-radio-label\\">Beijing</span>
+"<div class="ix-space ix-radio-group" style="margin-bottom: -8px;">
+  <div class="ix-space-item" style="margin-right: 8px; padding-bottom: 8px;"><label class="ix-radio" role="radio" aria-checked="false" aria-disabled="false"><span class="ix-radio-input"><input type="radio" class="ix-radio-input-inner" aria-hidden="true" value="a"><span class="ix-radio-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+      <!----><span class="ix-radio-label">Beijing</span>
     </label></div>
-  <div class=\\"ix-space-item\\" style=\\"margin-right: 8px; padding-bottom: 8px;\\"><label class=\\"ix-radio\\" role=\\"radio\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-radio-input\\"><input type=\\"radio\\" class=\\"ix-radio-input-inner\\" aria-hidden=\\"true\\" value=\\"b\\"><span class=\\"ix-radio-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
-      <!----><span class=\\"ix-radio-label\\">Shanghai</span>
+  <div class="ix-space-item" style="margin-right: 8px; padding-bottom: 8px;"><label class="ix-radio" role="radio" aria-checked="false" aria-disabled="false"><span class="ix-radio-input"><input type="radio" class="ix-radio-input-inner" aria-hidden="true" value="b"><span class="ix-radio-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+      <!----><span class="ix-radio-label">Shanghai</span>
     </label></div>
-  <div class=\\"ix-space-item\\" style=\\"margin-right: 8px; padding-bottom: 8px;\\"><label class=\\"ix-radio\\" role=\\"radio\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-radio-input\\"><input type=\\"radio\\" class=\\"ix-radio-input-inner\\" aria-hidden=\\"true\\" value=\\"c\\"><span class=\\"ix-radio-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
-      <!----><span class=\\"ix-radio-label\\">Guangzhou</span>
+  <div class="ix-space-item" style="margin-right: 8px; padding-bottom: 8px;"><label class="ix-radio" role="radio" aria-checked="false" aria-disabled="false"><span class="ix-radio-input"><input type="radio" class="ix-radio-input-inner" aria-hidden="true" value="c"><span class="ix-radio-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+      <!----><span class="ix-radio-label">Guangzhou</span>
     </label></div>
-  <div class=\\"ix-space-item\\" style=\\"padding-bottom: 8px;\\"><label class=\\"ix-radio\\" role=\\"radio\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-radio-input\\"><input type=\\"radio\\" class=\\"ix-radio-input-inner\\" aria-hidden=\\"true\\" value=\\"d\\"><span class=\\"ix-radio-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
-      <!----><span class=\\"ix-radio-label\\">Shenzhen</span>
+  <div class="ix-space-item" style="padding-bottom: 8px;"><label class="ix-radio" role="radio" aria-checked="false" aria-disabled="false"><span class="ix-radio-input"><input type="radio" class="ix-radio-input-inner" aria-hidden="true" value="d"><span class="ix-radio-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+      <!----><span class="ix-radio-label">Shenzhen</span>
     </label></div>
 </div>"
 `;

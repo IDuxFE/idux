@@ -14,9 +14,9 @@ import { useThemeToken } from '@idux/pro/theme'
 
 import { type ProTransferContext, proTransferContext } from './token'
 import { type ProTransferApis, type TransferContentInstance, proTransferProps } from './types'
+import { getThemeTokens } from '../theme'
 import TableTransferWrapper from './wrapper/TableTransferWrapper'
 import TreeTransferWrapper from './wrapper/TreeTransferWrapper'
-import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxProTransfer',

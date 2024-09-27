@@ -1,11 +1,11 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Image > render work 1`] = `
-"<div class=\\"ix-image ix-image-loading ix-image-preview\\">
-  <div class=\\"ix-image-layer\\">
-    <!----><i class=\\"ix-icon ix-icon-loading ix-image-placeholder\\" role=\\"img\\" aria-label=\\"loading\\"></i>
+"<div class="ix-image ix-image-loading ix-image-preview">
+  <div class="ix-image-layer">
+    <!----><i class="ix-icon ix-icon-loading ix-image-placeholder" role="img" aria-label="loading"></i>
     <!---->
     <!---->
-  </div><img src=\\"/icons/logo.svg\\" class=\\"ix-image-inner ix-image-inner-hidden\\">
+  </div><img src="/icons/logo.svg" class="ix-image-inner ix-image-inner-hidden">
 </div>"
 `;

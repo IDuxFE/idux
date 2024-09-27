@@ -22,16 +22,16 @@ describe('Slider', () => {
         return { valueRef }
       },
     })
-    const thumb = wrapper.find('.ix-slider-thumb')
+    const thumb = wrapper.find<HTMLElement>('.ix-slider-thumb')
 
     expect(valueRef.value).toBe(1)
-    expect(getComputedStyle(thumb.element).left).toBe('1%')
+    expect(thumb.element.style.left).toBe('1%')
 
     await thumb.trigger('focus')
     await thumb.trigger('keydown', { code: 'ArrowUp' })
 
     expect(valueRef.value).toBe(2)
-    expect(getComputedStyle(thumb.element).left).toBe('2%')
+    expect(thumb.element.style.left).toBe('2%')
   })
 
   test('range work', () => {

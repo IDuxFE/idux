@@ -1,13 +1,13 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`TimePanelColumn > render work 1`] = `
-"<div class=\\"ix-time-panel-column\\">
-  <ul class=\\"ix-time-panel-column-inner\\">
-    <li class=\\"ix-time-panel-cell ix-time-panel-cell-selected\\">01</li>
-    <li class=\\"ix-time-panel-cell ix-time-panel-cell-disabled\\">02</li>
-    <li class=\\"ix-time-panel-cell\\">03</li>
-    <li class=\\"ix-time-panel-cell\\">04</li>
-    <li class=\\"ix-time-panel-cell ix-time-panel-cell-disabled\\">05</li>
+"<div class="ix-time-panel-column">
+  <ul class="ix-time-panel-column-inner">
+    <li class="ix-time-panel-cell ix-time-panel-cell-selected">01</li>
+    <li class="ix-time-panel-cell ix-time-panel-cell-disabled">02</li>
+    <li class="ix-time-panel-cell">03</li>
+    <li class="ix-time-panel-cell">04</li>
+    <li class="ix-time-panel-cell ix-time-panel-cell-disabled">05</li>
   </ul>
 </div>"
 `;

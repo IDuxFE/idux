@@ -1,16 +1,16 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Notification > render work 1`] = `
 "<div>
-  <div class=\\"ix-notification\\">
-    <div class=\\"ix-notification-icon\\" style=\\"display: none;\\">
+  <div class="ix-notification">
+    <div class="ix-notification-icon" style="display: none;">
       <!---->
-    </div><span class=\\"ix-notification-close-icon\\"><i class=\\"ix-icon ix-icon-close\\" role=\\"img\\" aria-label=\\"close\\"></i></span>
-    <div class=\\"ix-notification-main ix-notification-main-with-content\\">
-      <div class=\\"ix-notification-title\\">This is a title</div>
-      <div class=\\"ix-notification-content\\">This is a notification</div>
+    </div><span class="ix-notification-close-icon"><i class="ix-icon ix-icon-close" role="img" aria-label="close"></i></span>
+    <div class="ix-notification-main ix-notification-main-with-content">
+      <div class="ix-notification-title">This is a title</div>
+      <div class="ix-notification-content">This is a notification</div>
     </div>
-    <div class=\\"ix-notification-footer\\"></div>
+    <div class="ix-notification-footer"></div>
   </div>
 </div>"
 `;

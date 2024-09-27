@@ -1,8 +1,8 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Affix > render work 1`] = `
-"<div class=\\"ix-affix\\">
-  <div class=\\"ix-affix-content\\">
+"<div class="ix-affix">
+  <div class="ix-affix-content">
     <!---->
   </div>
 </div>"

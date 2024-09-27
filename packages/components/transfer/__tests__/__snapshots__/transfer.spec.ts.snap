@@ -1,118 +1,118 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Transfer > render work 1`] = `
-"<div class=\\"ix-transfer\\">
-  <div class=\\"ix-transfer-content ix-transfer-content-source\\">
-    <div class=\\"ix-transfer-header\\">
-      <div class=\\"ix-transfer-header-inner\\"><label class=\\"ix-checkbox ix-transfer-header-check-all\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+"<div class="ix-transfer">
+  <div class="ix-transfer-content ix-transfer-content-source">
+    <div class="ix-transfer-header">
+      <div class="ix-transfer-header-inner"><label class="ix-checkbox ix-transfer-header-check-all" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
           <!---->
           <!---->
           <!---->
-        </label><span class=\\"ix-transfer-header-label\\">待选 (20)</span>
+        </label><span class="ix-transfer-header-label">待选 (20)</span>
         <!---->
         <!---->
         <!---->
       </div>
     </div>
-    <div class=\\"ix-transfer-body\\">
-      <div class=\\"ix-transfer-list\\">
-        <ul class=\\"ix-transfer-list-inner\\">
-          <li class=\\"ix-transfer-list-item\\"><label class=\\"ix-checkbox ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" value=\\"0\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+    <div class="ix-transfer-body">
+      <div class="ix-transfer-list">
+        <ul class="ix-transfer-list-inner">
+          <li class="ix-transfer-list-item"><label class="ix-checkbox ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="0"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item ix-transfer-list-item-disabled\\"><label class=\\"ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\" value=\\"1\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item ix-transfer-list-item-disabled"><label class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="true"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" disabled="" value="1"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item\\"><label class=\\"ix-checkbox ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" value=\\"2\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item"><label class="ix-checkbox ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="2"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item\\"><label class=\\"ix-checkbox ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" value=\\"3\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item"><label class="ix-checkbox ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="3"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item\\"><label class=\\"ix-checkbox ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" value=\\"4\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item"><label class="ix-checkbox ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="4"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item\\"><label class=\\"ix-checkbox ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" value=\\"5\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item"><label class="ix-checkbox ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="5"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item ix-transfer-list-item-disabled\\"><label class=\\"ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\" value=\\"6\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item ix-transfer-list-item-disabled"><label class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="true"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" disabled="" value="6"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item\\"><label class=\\"ix-checkbox ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" value=\\"7\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item"><label class="ix-checkbox ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="7"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item\\"><label class=\\"ix-checkbox ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" value=\\"8\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item"><label class="ix-checkbox ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="8"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item\\"><label class=\\"ix-checkbox ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" value=\\"9\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item"><label class="ix-checkbox ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="9"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item\\"><label class=\\"ix-checkbox ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" value=\\"10\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item"><label class="ix-checkbox ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="10"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item\\"><label class=\\"ix-checkbox ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" value=\\"11\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item"><label class="ix-checkbox ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="11"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item ix-transfer-list-item-disabled\\"><label class=\\"ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\" value=\\"12\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item ix-transfer-list-item-disabled"><label class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="true"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" disabled="" value="12"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item\\"><label class=\\"ix-checkbox ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" value=\\"13\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item"><label class="ix-checkbox ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="13"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item\\"><label class=\\"ix-checkbox ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" value=\\"14\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item"><label class="ix-checkbox ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="14"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item\\"><label class=\\"ix-checkbox ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" value=\\"15\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item"><label class="ix-checkbox ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="15"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item ix-transfer-list-item-disabled\\"><label class=\\"ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\" value=\\"16\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item ix-transfer-list-item-disabled"><label class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="true"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" disabled="" value="16"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item\\"><label class=\\"ix-checkbox ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" value=\\"17\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item"><label class="ix-checkbox ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="17"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item\\"><label class=\\"ix-checkbox ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" value=\\"18\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item"><label class="ix-checkbox ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="18"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
             </label></li>
-          <li class=\\"ix-transfer-list-item\\"><label class=\\"ix-checkbox ix-transfer-list-item-checkbox\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"false\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" value=\\"19\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+          <li class="ix-transfer-list-item"><label class="ix-checkbox ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="19"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!---->
@@ -122,38 +122,38 @@ exports[`Transfer > render work 1`] = `
     </div>
     <!---->
   </div>
-  <div class=\\"ix-transfer-operations\\">
-    <div class=\\"ix-transfer-operations-inner\\"><button class=\\"ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-sm ix-transfer-operations-btn\\" disabled=\\"\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-double-right\\" role=\\"img\\" aria-label=\\"double-right\\"></i>
-        <div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div>
-      </button><button class=\\"ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-sm ix-transfer-operations-btn\\" disabled=\\"\\" type=\\"button\\"><i class=\\"ix-icon ix-icon-double-left\\" role=\\"img\\" aria-label=\\"double-left\\"></i>
-        <div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div>
+  <div class="ix-transfer-operations">
+    <div class="ix-transfer-operations-inner"><button class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-sm ix-transfer-operations-btn" disabled="" type="button"><i class="ix-icon ix-icon-double-right" role="img" aria-label="double-right"></i>
+        <div aria-hidden="true" class="ix-wave"></div>
+      </button><button class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-sm ix-transfer-operations-btn" disabled="" type="button"><i class="ix-icon ix-icon-double-left" role="img" aria-label="double-left"></i>
+        <div aria-hidden="true" class="ix-wave"></div>
       </button></div>
   </div>
-  <div class=\\"ix-transfer-content ix-transfer-content-target\\">
-    <div class=\\"ix-transfer-header\\">
-      <div class=\\"ix-transfer-header-inner\\"><label class=\\"ix-checkbox ix-checkbox-disabled ix-transfer-header-check-all\\" role=\\"checkbox\\" aria-checked=\\"false\\" aria-disabled=\\"true\\"><span class=\\"ix-checkbox-input\\"><input type=\\"checkbox\\" class=\\"ix-checkbox-input-inner\\" aria-hidden=\\"true\\" disabled=\\"\\"><span class=\\"ix-checkbox-input-box\\"><div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div></span></span>
+  <div class="ix-transfer-content ix-transfer-content-target">
+    <div class="ix-transfer-header">
+      <div class="ix-transfer-header-inner"><label class="ix-checkbox ix-checkbox-disabled ix-transfer-header-check-all" role="checkbox" aria-checked="false" aria-disabled="true"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" disabled=""><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
           <!---->
           <!---->
           <!---->
-        </label><span class=\\"ix-transfer-header-label\\">已选 (0)</span>
-        <!----><span class=\\"ix-transfer-header-clear-icon ix-transfer-header-clear-icon-disabled\\"><i class=\\"ix-icon ix-icon-delete\\" role=\\"img\\" aria-label=\\"delete\\"></i></span>
+        </label><span class="ix-transfer-header-label">已选 (0)</span>
+        <!----><span class="ix-transfer-header-clear-icon ix-transfer-header-clear-icon-disabled"><i class="ix-icon ix-icon-delete" role="img" aria-label="delete"></i></span>
         <!---->
       </div>
     </div>
-    <div class=\\"ix-transfer-body\\">
-      <div class=\\"ix-transfer-body-empty-wrapper\\">
-        <div class=\\"ix-empty ix-empty-simple\\">
-          <div class=\\"ix-empty-image\\"><svg width=\\"80\\" height=\\"60\\" viewBox=\\"0 0 80 60\\" xmlns=\\"http://www.w3.org/2000/svg\\">
-              <g fill=\\"none\\" fill-rule=\\"nonzero\\">
-                <ellipse cx=\\"40\\" cy=\\"53.29\\" fill=\\"#F7F9FC\\" rx=\\"25\\" ry=\\"3.29\\"></ellipse>
-                <path fill=\\"#EDF1F7\\" d=\\"M27.935 18h24.13c.025 0 .048.012.063.033L60 29H20l7.872-10.967a.078.078 0 0 1 .063-.033z\\"></path>
-                <path fill=\\"#E3E7EE\\" d=\\"M52.868 8.08l1.484 1.245c.013.01.015.03.004.044l-3.817 4.548a.031.031 0 0 1-.044.004l-1.484-1.246a.031.031 0 0 1-.004-.044l3.817-4.548a.031.031 0 0 1 .044-.004zm-26.373 0a.031.031 0 0 1 .044.003l3.817 4.548a.031.031 0 0 1-.004.044l-1.484 1.246a.031.031 0 0 1-.044-.004l-3.817-4.548a.031.031 0 0 1 .004-.044l1.484-1.246zM40.65 4c.018 0 .032.014.032.031v7.938a.031.031 0 0 1-.032.031h-1.937a.031.031 0 0 1-.031-.031V4.03c0-.017.014-.031.03-.031h1.938z\\"></path>
-                <path fill=\\"#FAFCFE\\" d=\\"M29.936 20h20.128c.026 0 .05.012.064.033L55 27H25l4.872-6.967a.078.078 0 0 1 .064-.033z\\"></path>
-                <path fill=\\"#E1E5EB\\" d=\\"M20 29h40v23.922a.078.078 0 0 1-.078.078H20.078a.078.078 0 0 1-.078-.078V29z\\"></path>
-                <rect width=\\"14\\" height=\\"3\\" x=\\"33\\" y=\\"43\\" fill=\\"#FFF\\" rx=\\".4\\"></rect>
+    <div class="ix-transfer-body">
+      <div class="ix-transfer-body-empty-wrapper">
+        <div class="ix-empty ix-empty-simple">
+          <div class="ix-empty-image"><svg width="80" height="60" viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
+              <g fill="none" fill-rule="nonzero">
+                <ellipse cx="40" cy="53.29" fill="#F7F9FC" rx="25" ry="3.29"></ellipse>
+                <path fill="#EDF1F7" d="M27.935 18h24.13c.025 0 .048.012.063.033L60 29H20l7.872-10.967a.078.078 0 0 1 .063-.033z"></path>
+                <path fill="#E3E7EE" d="M52.868 8.08l1.484 1.245c.013.01.015.03.004.044l-3.817 4.548a.031.031 0 0 1-.044.004l-1.484-1.246a.031.031 0 0 1-.004-.044l3.817-4.548a.031.031 0 0 1 .044-.004zm-26.373 0a.031.031 0 0 1 .044.003l3.817 4.548a.031.031 0 0 1-.004.044l-1.484 1.246a.031.031 0 0 1-.044-.004l-3.817-4.548a.031.031 0 0 1 .004-.044l1.484-1.246zM40.65 4c.018 0 .032.014.032.031v7.938a.031.031 0 0 1-.032.031h-1.937a.031.031 0 0 1-.031-.031V4.03c0-.017.014-.031.03-.031h1.938z"></path>
+                <path fill="#FAFCFE" d="M29.936 20h20.128c.026 0 .05.012.064.033L55 27H25l4.872-6.967a.078.078 0 0 1 .064-.033z"></path>
+                <path fill="#E1E5EB" d="M20 29h40v23.922a.078.078 0 0 1-.078.078H20.078a.078.078 0 0 1-.078-.078V29z"></path>
+                <rect width="14" height="3" x="33" y="43" fill="#FFF" rx=".4"></rect>
               </g>
             </svg></div>
-          <div class=\\"ix-empty-description\\">暂无数据</div>
+          <div class="ix-empty-description">暂无数据</div>
           <!---->
         </div>
       </div>

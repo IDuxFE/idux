@@ -1,9 +1,9 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Popover > header props work 1`] = `"<transition-stub name=\\"ix-fade\\" appear=\\"true\\" persisted=\\"false\\" css=\\"true\\"><div class=\\"ix-overlay ix-popover\\" style=\\"z-index: 2022; position: absolute; left: 0px; top: 0px;\\"><div class=\\"ix-popover-wrapper\\"><div class=\\"ix-header ix-header-sm\\"><span class=\\"ix-header-prefix\\"><i class=\\"ix-icon ix-icon-up\\" role=\\"img\\" aria-label=\\"up\\"></i></span><!----><div class=\\"ix-header-content\\"><div class=\\"ix-header-title-wrapper\\"><span class=\\"ix-header-title\\">Title</span><span class=\\"ix-header-sub-title\\">subTitle</span></div><!----></div><span class=\\"ix-header-suffix\\"><i class=\\"ix-icon ix-icon-down\\" role=\\"img\\" aria-label=\\"down\\"></i></span></div></div><div class=\\"ix-overlay-arrow\\"></div></div></transition-stub>"`;
+exports[`Popover > header props work 1`] = `"<transition-stub name="ix-fade" appear="true" persisted="false" css="true"><div class="ix-overlay ix-popover" style="z-index: 2022; position: absolute; left: 0px; top: 0px;"><div class="ix-popover-wrapper"><div class="ix-header ix-header-sm"><span class="ix-header-prefix"><i class="ix-icon ix-icon-up" role="img" aria-label="up"></i></span><!----><div class="ix-header-content"><div class="ix-header-title-wrapper"><span class="ix-header-title">Title</span><span class="ix-header-sub-title">subTitle</span></div><!----></div><span class="ix-header-suffix"><i class="ix-icon ix-icon-down" role="img" aria-label="down"></i></span></div></div><div class="ix-overlay-arrow"></div></div></transition-stub>"`;
 
 exports[`Popover > render work 1`] = `
-"<div id=\\"trigger\\">trigger</div>
+"<div id="trigger">trigger</div>
 <!--teleport start-->
 <!--teleport end-->"
 `;

@@ -16,8 +16,8 @@ import { type GetKeyFn } from '@idux/components/utils'
 import MenuDivider from './MenuDivider'
 import MenuItem from './MenuItem'
 import MenuItemGroup from './MenuItemGroup'
-import MenuSub from './menu-sub/MenuSub'
 import { type MenuData } from '../types'
+import MenuSub from './menu-sub/MenuSub'
 
 export function coverChildren(data: MenuData[] | undefined, getKetFn: GetKeyFn): VNode[] {
   if (!data || data.length === 0) {

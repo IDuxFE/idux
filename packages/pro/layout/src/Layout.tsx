@@ -13,6 +13,7 @@ import { getMenuThemeTokens } from '@idux/components/menu'
 import { useGlobalConfig } from '@idux/pro/config'
 import { useThemeToken } from '@idux/pro/theme'
 
+import { getThemeTokens } from '../theme'
 import { useActiveHeaderKey, useActiveKey } from './composables/useActiveKey'
 import { useHeaderMenus, useSiderMenus } from './composables/useMenu'
 import Header from './contents/Header'
@@ -20,7 +21,6 @@ import Sider from './contents/Sider'
 import { proLayoutToken } from './token'
 import { proLayoutProps } from './types'
 import { getTargetPaths } from './utils/menu'
-import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxProLayout',

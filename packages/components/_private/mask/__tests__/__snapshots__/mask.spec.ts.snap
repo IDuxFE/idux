@@ -1,7 +1,7 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Mask > render work 1`] = `
-"<transition-stub name=\\"ix-fade\\" appear=\\"true\\" persisted=\\"false\\" css=\\"true\\">
-  <div class=\\"ix-mask\\"></div>
+"<transition-stub name="ix-fade" appear="true" persisted="false" css="true">
+  <div class="ix-mask"></div>
 </transition-stub>"
 `;

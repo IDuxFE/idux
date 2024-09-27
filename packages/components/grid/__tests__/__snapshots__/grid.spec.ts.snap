@@ -1,8 +1,8 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Row & Col > render work 1`] = `
-"<div class=\\"ix-row\\">
-  <div class=\\"ix-col ix-col-span-12\\">1</div>
-  <div class=\\"ix-col ix-col-span-12\\">1</div>
+"<div class="ix-row">
+  <div class="ix-col ix-col-span-12">1</div>
+  <div class="ix-col ix-col-span-12">1</div>
 </div>"
 `;

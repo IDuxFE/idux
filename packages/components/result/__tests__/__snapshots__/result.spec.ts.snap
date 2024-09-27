@@ -1,8 +1,8 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Result > render work 1`] = `
-"<div class=\\"ix-result ix-result-info\\">
-  <div class=\\"ix-result-icon\\"><i class=\\"ix-icon ix-icon-info-circle-filled\\" role=\\"img\\" aria-label=\\"info-circle-filled\\"></i></div>
+"<div class="ix-result ix-result-info">
+  <div class="ix-result-icon"><i class="ix-icon ix-icon-info-circle-filled" role="img" aria-label="info-circle-filled"></i></div>
   <!---->
   <!---->
   <!---->

@@ -1,32 +1,32 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`List > render work 1`] = `
-"<div class=\\"ix-list ix-list-split ix-list-md ix-list-border\\">
+"<div class="ix-list ix-list-split ix-list-md ix-list-border">
   <!---->
-  <div class=\\"ix-spin\\">
-    <transition-stub name=\\"ix-fade\\" appear=\\"true\\" persisted=\\"false\\" css=\\"true\\">
+  <div class="ix-spin">
+    <transition-stub name="ix-fade" appear="true" persisted="false" css="true">
       <!---->
     </transition-stub>
-    <div class=\\"ix-spin-container\\">
+    <div class="ix-spin-container">
       <div>
-        <div class=\\"ix-list-item\\">
+        <div class="ix-list-item">
           <!---->
-          <div class=\\"ix-list-item-content\\">default</div>
-          <!---->
-        </div>
-        <div class=\\"ix-list-item\\">
-          <!---->
-          <div class=\\"ix-list-item-content\\">default</div>
+          <div class="ix-list-item-content">default</div>
           <!---->
         </div>
-        <div class=\\"ix-list-item\\">
+        <div class="ix-list-item">
           <!---->
-          <div class=\\"ix-list-item-content\\">default</div>
+          <div class="ix-list-item-content">default</div>
           <!---->
         </div>
-        <div class=\\"ix-list-item\\">
+        <div class="ix-list-item">
           <!---->
-          <div class=\\"ix-list-item-content\\">default</div>
+          <div class="ix-list-item-content">default</div>
+          <!---->
+        </div>
+        <div class="ix-list-item">
+          <!---->
+          <div class="ix-list-item-content">default</div>
           <!---->
         </div>
       </div>

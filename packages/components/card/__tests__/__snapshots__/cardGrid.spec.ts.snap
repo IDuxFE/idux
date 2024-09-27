@@ -1,18 +1,18 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`CardGrid > hoverable work 1`] = `
-"<div class=\\"ix-card ix-card-has-shadow ix-card-has-grid ix-card-sm\\">
+"<div class="ix-card ix-card-has-shadow ix-card-has-grid ix-card-sm">
   <!---->
   <!---->
-  <div class=\\"ix-card-body\\">
-    <div class=\\"ix-row\\">
-      <div class=\\"ix-col ix-card-grid ix-card-grid-hoverable\\">Content</div>
-      <div class=\\"ix-col ix-card-grid ix-card-grid-hoverable\\">Content</div>
-      <div class=\\"ix-col ix-card-grid\\">Content</div>
-      <div class=\\"ix-col ix-card-grid ix-card-grid-hoverable\\">Content</div>
-      <div class=\\"ix-col ix-card-grid\\">Content</div>
-      <div class=\\"ix-col ix-card-grid\\">Content</div>
-      <div class=\\"ix-col ix-card-grid\\">Content</div>
+  <div class="ix-card-body">
+    <div class="ix-row">
+      <div class="ix-col ix-card-grid ix-card-grid-hoverable">Content</div>
+      <div class="ix-col ix-card-grid ix-card-grid-hoverable">Content</div>
+      <div class="ix-col ix-card-grid">Content</div>
+      <div class="ix-col ix-card-grid ix-card-grid-hoverable">Content</div>
+      <div class="ix-col ix-card-grid">Content</div>
+      <div class="ix-col ix-card-grid">Content</div>
+      <div class="ix-col ix-card-grid">Content</div>
     </div>
   </div>
   <!---->
@@ -21,18 +21,18 @@ exports[`CardGrid > hoverable work 1`] = `
 `;
 
 exports[`CardGrid > hoverable2 work 1`] = `
-"<div class=\\"ix-card ix-card-has-shadow ix-card-has-grid ix-card-sm\\">
+"<div class="ix-card ix-card-has-shadow ix-card-has-grid ix-card-sm">
   <!---->
   <!---->
-  <div class=\\"ix-card-body\\">
-    <div class=\\"ix-row\\">
-      <div class=\\"ix-col ix-card-grid\\">Content</div>
-      <div class=\\"ix-col ix-card-grid\\">Content</div>
-      <div class=\\"ix-col ix-card-grid ix-card-grid-hoverable\\">Content</div>
-      <div class=\\"ix-col ix-card-grid ix-card-grid-hoverable\\">Content</div>
-      <div class=\\"ix-col ix-card-grid ix-card-grid-hoverable\\">Content</div>
-      <div class=\\"ix-col ix-card-grid ix-card-grid-hoverable\\">Content</div>
-      <div class=\\"ix-col ix-card-grid ix-card-grid-hoverable\\">Content</div>
+  <div class="ix-card-body">
+    <div class="ix-row">
+      <div class="ix-col ix-card-grid">Content</div>
+      <div class="ix-col ix-card-grid">Content</div>
+      <div class="ix-col ix-card-grid ix-card-grid-hoverable">Content</div>
+      <div class="ix-col ix-card-grid ix-card-grid-hoverable">Content</div>
+      <div class="ix-col ix-card-grid ix-card-grid-hoverable">Content</div>
+      <div class="ix-col ix-card-grid ix-card-grid-hoverable">Content</div>
+      <div class="ix-col ix-card-grid ix-card-grid-hoverable">Content</div>
     </div>
   </div>
   <!---->
@@ -41,18 +41,18 @@ exports[`CardGrid > hoverable2 work 1`] = `
 `;
 
 exports[`CardGrid > render work 1`] = `
-"<div class=\\"ix-card ix-card-has-shadow ix-card-has-grid ix-card-sm\\">
+"<div class="ix-card ix-card-has-shadow ix-card-has-grid ix-card-sm">
   <!---->
   <!---->
-  <div class=\\"ix-card-body\\">
-    <div class=\\"ix-row\\">
-      <div class=\\"ix-col ix-card-grid\\">Content</div>
-      <div class=\\"ix-col ix-card-grid\\">Content</div>
-      <div class=\\"ix-col ix-card-grid\\">Content</div>
-      <div class=\\"ix-col ix-card-grid\\">Content</div>
-      <div class=\\"ix-col ix-card-grid\\">Content</div>
-      <div class=\\"ix-col ix-card-grid\\">Content</div>
-      <div class=\\"ix-col ix-card-grid\\">Content</div>
+  <div class="ix-card-body">
+    <div class="ix-row">
+      <div class="ix-col ix-card-grid">Content</div>
+      <div class="ix-col ix-card-grid">Content</div>
+      <div class="ix-col ix-card-grid">Content</div>
+      <div class="ix-col ix-card-grid">Content</div>
+      <div class="ix-col ix-card-grid">Content</div>
+      <div class="ix-col ix-card-grid">Content</div>
+      <div class="ix-col ix-card-grid">Content</div>
     </div>
   </div>
   <!---->

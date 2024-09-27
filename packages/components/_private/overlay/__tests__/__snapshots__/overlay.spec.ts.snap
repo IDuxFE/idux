@@ -1,7 +1,7 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Overlay > render work 1`] = `
-"<div id=\\"trigger\\">trigger</div>
+"<div id="trigger">trigger</div>
 <!--teleport start-->
 <!--teleport end-->"
 `;

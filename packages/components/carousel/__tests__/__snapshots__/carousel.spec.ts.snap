@@ -1,21 +1,21 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Carousel > render work 1`] = `
-"<div class=\\"ix-carousel ix-carousel-horizontal\\">
-  <div class=\\"ix-carousel-sliders\\" tabindex=\\"-1\\">
-    <div class=\\"ix-carousel-slider-track\\">
-      <div class=\\"ix-carousel-slider ix-carousel-slider-active\\">
+"<div class="ix-carousel ix-carousel-horizontal">
+  <div class="ix-carousel-sliders" tabindex="-1">
+    <div class="ix-carousel-slider-track">
+      <div class="ix-carousel-slider ix-carousel-slider-active">
         <div>card1</div>
       </div>
-      <div class=\\"ix-carousel-slider\\">
+      <div class="ix-carousel-slider">
         <div>card2</div>
       </div>
     </div>
   </div>
   <!---->
-  <ul class=\\"ix-carousel-dots ix-carousel-dots-bottom\\">
-    <li class=\\"ix-carousel-dot ix-carousel-dot-active\\"><button type=\\"button\\"></button></li>
-    <li class=\\"ix-carousel-dot\\"><button type=\\"button\\"></button></li>
+  <ul class="ix-carousel-dots ix-carousel-dots-bottom">
+    <li class="ix-carousel-dot ix-carousel-dot-active"><button type="button"></button></li>
+    <li class="ix-carousel-dot"><button type="button"></button></li>
   </ul>
 </div>"
 `;

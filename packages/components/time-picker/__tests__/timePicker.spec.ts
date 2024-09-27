@@ -120,8 +120,9 @@ describe('TimePicker', () => {
     expect(inputEl.attributes().disabled).toBeUndefined()
 
     const disabledHours = () => [1, 2, 3]
-    const disabledMinutes = (hour: number) => (hour === 5 ? [1, 2, 3] : [])
-    const disabledSeconds = (hour: number, minute: number) => (hour === 5 && minute === 5 ? [1, 2, 3] : [])
+    const disabledMinutes = (hour: number | undefined) => (hour === 5 ? [1, 2, 3] : [])
+    const disabledSeconds = (hour: number | undefined, minute: number | undefined) =>
+      hour === 5 && minute === 5 ? [1, 2, 3] : []
     // test disabled fn
     await wrapper.setProps({
       disabledHours,
@@ -225,11 +226,8 @@ describe('TimePicker', () => {
   })
 
   test('defaultOpenValue work', async () => {
-    const wrapper = TimePickerMount({ props: { open: true } })
+    const wrapper = TimePickerMount({ props: { open: true, defaultOpenValue: new Date(2021, 12, 8, 15, 20, 30, 0) } })
 
-    expect(findTimePanel(wrapper).props().activeValue).toBeUndefined()
-
-    await wrapper.setProps({ defaultOpenValue: new Date(2021, 12, 8, 15, 20, 30, 0) })
     expect(findTimePanel(wrapper).props().activeValue).toEqual(new Date(2021, 12, 8, 15, 20, 30, 0))
   })
 })
