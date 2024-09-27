@@ -1,13 +1,13 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Space > render work 1`] = `
-"<div class=\\"ix-space\\" style=\\"margin-bottom: -8px;\\">
-  <div class=\\"ix-space-item\\" style=\\"margin-right: 8px; padding-bottom: 8px;\\">Space</div>
-  <div class=\\"ix-space-item\\" style=\\"margin-right: 8px; padding-bottom: 8px;\\"><button class=\\"ix-button ix-button-primary ix-button-sm\\" type=\\"button\\"><span>Button</span>
-      <div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div>
+"<div class="ix-space" style="margin-bottom: -8px;">
+  <div class="ix-space-item" style="margin-right: 8px; padding-bottom: 8px;">Space</div>
+  <div class="ix-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="ix-button ix-button-primary ix-button-sm" type="button"><span>Button</span>
+      <div aria-hidden="true" class="ix-wave"></div>
     </button></div>
-  <div class=\\"ix-space-item\\" style=\\"padding-bottom: 8px;\\"><button class=\\"ix-button ix-button-default ix-button-sm\\" type=\\"button\\"><span>Button</span>
-      <div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div>
+  <div class="ix-space-item" style="padding-bottom: 8px;"><button class="ix-button ix-button-default ix-button-sm" type="button"><span>Button</span>
+      <div aria-hidden="true" class="ix-wave"></div>
     </button></div>
 </div>"
 `;

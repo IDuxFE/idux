@@ -1,6 +1,7 @@
 import { resolve } from 'path'
 
 import vuePlugin from '@vitejs/plugin-vue'
+// eslint-disable-next-line import/default
 import vueJsxPlugin from '@vitejs/plugin-vue-jsx'
 // eslint-disable-next-line import/no-unresolved
 import { IduxResolver } from 'unplugin-vue-components/resolvers'

@@ -15,6 +15,7 @@ import { useZIndex } from '@idux/components/utils'
 import { useGlobalConfig } from '@idux/pro/config'
 import { useThemeToken } from '@idux/pro/theme'
 
+import { getThemeTokens } from '../theme'
 import SearchItemComp from './components/SearchItem'
 import QuickSelectPanel from './components/quickSelect/QuickSelectPanel'
 import NameSelectSegment from './components/segment/TempSegment'
@@ -32,7 +33,6 @@ import { useSearchValues } from './composables/useSearchValues'
 import { proSearchContext } from './token'
 import { type SearchItem, proSearchProps } from './types'
 import { renderIcon } from './utils/RenderIcon'
-import { getThemeTokens } from '../theme'
 
 const nameSelectOverflowItemKey = 'name-select'
 

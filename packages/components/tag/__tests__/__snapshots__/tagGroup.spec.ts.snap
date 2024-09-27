@@ -1,11 +1,11 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`TagGroup > render work 1`] = `
-"<div class=\\"ix-space ix-tag-group\\" style=\\"margin-bottom: -8px;\\">
-  <div class=\\"ix-space-item\\" style=\\"margin-right: 8px; padding-bottom: 8px;\\"><span class=\\"ix-tag ix-tag-normal\\"><!----><!----><span class=\\"ix-tag-content\\">A</span>
+"<div class="ix-space ix-tag-group" style="margin-bottom: -8px;">
+  <div class="ix-space-item" style="margin-right: 8px; padding-bottom: 8px;"><span class="ix-tag ix-tag-normal"><!----><!----><span class="ix-tag-content">A</span>
     <!----></span>
   </div>
-  <div class=\\"ix-space-item\\" style=\\"padding-bottom: 8px;\\"><span class=\\"ix-tag ix-tag-normal\\"><!----><!----><span class=\\"ix-tag-content\\">B</span>
+  <div class="ix-space-item" style="padding-bottom: 8px;"><span class="ix-tag ix-tag-normal"><!----><!----><span class="ix-tag-content">B</span>
     <!----></span>
   </div>
 </div>"

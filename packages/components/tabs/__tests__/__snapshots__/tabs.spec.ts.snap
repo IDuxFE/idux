@@ -1,29 +1,29 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Tabs > render work 1`] = `
-"<div class=\\"ix-tabs ix-tabs-md ix-tabs-card ix-tabs-nav-top\\">
-  <div class=\\"ix-tabs-nav-wrapper\\">
-    <div class=\\"ix-tabs-nav\\">
-      <transition-stub name=\\"[object Object]-fade\\" appear=\\"true\\" persisted=\\"false\\" css=\\"true\\">
+"<div class="ix-tabs ix-tabs-md ix-tabs-card ix-tabs-nav-top">
+  <div class="ix-tabs-nav-wrapper">
+    <div class="ix-tabs-nav">
+      <transition-stub name="[object Object]-fade" appear="true" persisted="false" css="true">
         <!---->
       </transition-stub>
-      <div class=\\"ix-tabs-nav-list\\">
-        <div class=\\"ix-tabs-nav-list-inner\\">
+      <div class="ix-tabs-nav-list">
+        <div class="ix-tabs-nav-list-inner">
           <!---->
           <!---->
           <!---->
         </div>
       </div>
-      <transition-stub name=\\"[object Object]-fade\\" appear=\\"true\\" persisted=\\"false\\" css=\\"true\\">
+      <transition-stub name="[object Object]-fade" appear="true" persisted="false" css="true">
         <!---->
       </transition-stub>
     </div>
-    <div class=\\"ix-tabs-nav-operations ix-tabs-nav-operations-hidden\\">
+    <div class="ix-tabs-nav-operations ix-tabs-nav-operations-hidden">
       <!---->
       <!---->
     </div>
-    <div class=\\"ix-tabs-nav-border\\"></div>
+    <div class="ix-tabs-nav-border"></div>
   </div>
-  <div class=\\"ix-tabs-pane-wrapper\\"></div>
+  <div class="ix-tabs-pane-wrapper"></div>
 </div>"
 `;

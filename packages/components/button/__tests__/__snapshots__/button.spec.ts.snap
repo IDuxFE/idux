@@ -1,7 +1,7 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Button > render work 1`] = `
-"<button class=\\"ix-button ix-button-default ix-button-sm\\" type=\\"button\\">
-  <div aria-hidden=\\"true\\" class=\\"ix-wave\\"></div>
+"<button class="ix-button ix-button-default ix-button-sm" type="button">
+  <div aria-hidden="true" class="ix-wave"></div>
 </button>"
 `;

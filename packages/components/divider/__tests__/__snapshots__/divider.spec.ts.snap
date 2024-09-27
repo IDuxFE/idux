@@ -1,7 +1,7 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Divider > render work 1`] = `
-"<div class=\\"ix-divider ix-divider-md ix-divider-horizontal\\">
+"<div class="ix-divider ix-divider-md ix-divider-horizontal">
   <!---->
 </div>"
 `;

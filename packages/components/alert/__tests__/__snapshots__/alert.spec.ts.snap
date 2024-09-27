@@ -1,10 +1,10 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Alert > render work 1`] = `
-"<transition-stub name=\\"ix-alert\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
-  <div class=\\"ix-alert ix-alert-warning\\"><span class=\\"ix-alert-icon\\"><i class=\\"ix-icon ix-icon-exclamation-circle\\" role=\\"img\\" aria-label=\\"exclamation-circle\\"></i></span>
-    <div class=\\"ix-alert-content\\">
-      <div class=\\"ix-alert-title\\"></div>
+"<transition-stub name="ix-alert" appear="false" persisted="false" css="true">
+  <div class="ix-alert ix-alert-warning"><span class="ix-alert-icon"><i class="ix-icon ix-icon-exclamation-circle" role="img" aria-label="exclamation-circle"></i></span>
+    <div class="ix-alert-content">
+      <div class="ix-alert-title"></div>
       <!---->
     </div>
     <!---->

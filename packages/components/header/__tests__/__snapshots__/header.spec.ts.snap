@@ -1,11 +1,11 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Header > render work 1`] = `
-"<div class=\\"ix-header ix-header-md\\">
+"<div class="ix-header ix-header-md">
   <!---->
   <!---->
-  <div class=\\"ix-header-content\\">
-    <div class=\\"ix-header-title-wrapper\\">
+  <div class="ix-header-content">
+    <div class="ix-header-title-wrapper">
       <!---->
       <!---->
     </div>

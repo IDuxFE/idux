@@ -1,12 +1,12 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Comment > render work 1`] = `
-"<div class=\\"ix-comment\\">
-  <div class=\\"ix-comment-inner\\">
+"<div class="ix-comment">
+  <div class="ix-comment-inner">
     <!---->
-    <div class=\\"ix-comment-content\\">
+    <div class="ix-comment-content">
       <!---->
-      <div class=\\"ix-comment-content-detail\\">comment content</div>
+      <div class="ix-comment-content-detail">comment content</div>
       <!---->
     </div>
   </div>

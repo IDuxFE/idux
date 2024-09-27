@@ -1,13 +1,13 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Badge > render work 1`] = `
-"<span class=\\"ix-badge ix-badge-error\\"><!----><span class=\\"ix-badge-content\\"><a href=\\"#\\"></a></span>
-<transition-stub name=\\"ix-badge-sub\\" appear=\\"true\\" persisted=\\"false\\" css=\\"true\\"><sup class=\\"ix-badge-sub ix-badge-count\\" title=\\"9\\"><span class=\\"ix-badge-count-track-wrapper\\"><span class=\\"ix-badge-count-track\\" style=\\"transform: translateY(-900%);\\"><span class=\\"ix-badge-count-unit\\">0</span><span class=\\"ix-badge-count-unit\\">1</span><span class=\\"ix-badge-count-unit\\">2</span><span class=\\"ix-badge-count-unit\\">3</span><span class=\\"ix-badge-count-unit\\">4</span><span class=\\"ix-badge-count-unit\\">5</span><span class=\\"ix-badge-count-unit\\">6</span><span class=\\"ix-badge-count-unit\\">7</span><span class=\\"ix-badge-count-unit\\">8</span><span class=\\"ix-badge-count-unit ix-badge-count-current\\">9</span></span>
+"<span class="ix-badge ix-badge-error"><!----><span class="ix-badge-content"><a href="#"></a></span>
+<transition-stub name="ix-badge-sub" appear="true" persisted="false" css="true"><sup class="ix-badge-sub ix-badge-count" title="9"><span class="ix-badge-count-track-wrapper"><span class="ix-badge-count-track" style="transform: translateY(-900%);"><span class="ix-badge-count-unit">0</span><span class="ix-badge-count-unit">1</span><span class="ix-badge-count-unit">2</span><span class="ix-badge-count-unit">3</span><span class="ix-badge-count-unit">4</span><span class="ix-badge-count-unit">5</span><span class="ix-badge-count-unit">6</span><span class="ix-badge-count-unit">7</span><span class="ix-badge-count-unit">8</span><span class="ix-badge-count-unit ix-badge-count-current">9</span></span>
     <!----></span>
   </sup></transition-stub></span>"
 `;
 
 exports[`Badge > render work 2`] = `
-"<span class=\\"ix-badge ix-badge-error\\"><!----><!----><transition-stub name=\\"ix-badge-sub\\" appear=\\"true\\" persisted=\\"false\\" css=\\"true\\"><sup class=\\"ix-badge-sub ix-badge-count\\" title=\\"9\\"><span class=\\"ix-badge-count-track-wrapper\\"><span class=\\"ix-badge-count-track\\" style=\\"transform: translateY(-900%);\\"><span class=\\"ix-badge-count-unit\\">0</span><span class=\\"ix-badge-count-unit\\">1</span><span class=\\"ix-badge-count-unit\\">2</span><span class=\\"ix-badge-count-unit\\">3</span><span class=\\"ix-badge-count-unit\\">4</span><span class=\\"ix-badge-count-unit\\">5</span><span class=\\"ix-badge-count-unit\\">6</span><span class=\\"ix-badge-count-unit\\">7</span><span class=\\"ix-badge-count-unit\\">8</span><span class=\\"ix-badge-count-unit ix-badge-count-current\\">9</span></span>
+"<span class="ix-badge ix-badge-error"><!----><!----><transition-stub name="ix-badge-sub" appear="true" persisted="false" css="true"><sup class="ix-badge-sub ix-badge-count" title="9"><span class="ix-badge-count-track-wrapper"><span class="ix-badge-count-track" style="transform: translateY(-900%);"><span class="ix-badge-count-unit">0</span><span class="ix-badge-count-unit">1</span><span class="ix-badge-count-unit">2</span><span class="ix-badge-count-unit">3</span><span class="ix-badge-count-unit">4</span><span class="ix-badge-count-unit">5</span><span class="ix-badge-count-unit">6</span><span class="ix-badge-count-unit">7</span><span class="ix-badge-count-unit">8</span><span class="ix-badge-count-unit ix-badge-count-current">9</span></span>
 <!----></span></sup></transition-stub></span>"
 `;
