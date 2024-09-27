@@ -249,6 +249,8 @@ function useResolvers<V extends TreeTypeData<V, C>, C extends keyof V>(
   )
 
   const updateMergedContext = () => {
+    updateCachedSelectedData()
+
     const { data, dataMap, parentKeyMap, depthMap } = resolverContext.value
     const {
       data: cachedData,
@@ -297,10 +299,6 @@ function useResolvers<V extends TreeTypeData<V, C>, C extends keyof V>(
 
     allCheckedKeySet.value = keySet
     const newUnexistedKeys = checkedKeys.value.filter(key => !keySet.has(key))
-
-    if (newUnexistedKeys.length !== unexistedKeys.value.length) {
-      updateCachedSelectedData()
-    }
 
     unexistedKeys.value = newUnexistedKeys
   }
