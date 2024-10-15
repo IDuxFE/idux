@@ -9,6 +9,7 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes } from '@idux/cdk/ut
 import type { DefineComponent, HTMLAttributes, PropType } from 'vue'
 
 export type TimelinePlacement = 'start' | 'alternate' | 'end'
+export type TimelineLabelPlacement = 'top' | 'bottom'
 export type TimelineItemPlacement = 'start' | 'end'
 
 export const timelineProps = {
@@ -24,6 +25,10 @@ export const timelineProps = {
   placement: {
     type: String as PropType<TimelinePlacement>,
     default: 'end',
+  },
+  labelPlacement: {
+    type: String as PropType<TimelineLabelPlacement>,
+    default: 'bottom',
   },
   both: {
     type: Boolean,
