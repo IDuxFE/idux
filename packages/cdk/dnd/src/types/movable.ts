@@ -7,9 +7,14 @@
 
 import type { Axis, DndOptions } from './dnd'
 import type { MaybeElement, MaybeElementRef, MaybeRef } from '@idux/cdk/utils'
-import type { ComputedRef } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 
-export type DndMovableBoundaryType = 'parent' | 'viewport' | MaybeElement | null
+export type DndMovableBoundaryType =
+  | 'parent'
+  | 'viewport'
+  | MaybeElement
+  | ((el: HTMLElement | undefined) => ResolvedBoundary | undefined)
+  | null
 export type DndMovableStrategy = 'fixed' | 'absolute' | 'transform'
 export type DndMovableMode = 'immediate' | 'afterDrop'
 
@@ -41,6 +46,7 @@ export type DndMovablePreviewOptions =
     }
 
 export interface DndMovableOptions extends Omit<DndOptions, 'monitor'> {
+  offset?: Ref<Position | undefined>
   mode?: MaybeRef<DndMovableMode | undefined>
   strategy?: MaybeRef<DndMovableStrategy | undefined>
   canDrag?: MaybeRef<boolean | undefined>
@@ -50,9 +56,11 @@ export interface DndMovableOptions extends Omit<DndOptions, 'monitor'> {
   dragHandle?: MaybeElementRef
   allowedAxis?: MaybeRef<Axis>
   preview?: MaybeRef<DndMovablePreviewOptions>
+  onOffsetChange?: (newOffset: Position, oldOffset: Position) => void
 }
 
 export interface ResolvedMovableOptions extends Omit<DndOptions, 'monitor'> {
+  offset: ComputedRef<Position | undefined>
   mode: ComputedRef<DndMovableMode>
   strategy: ComputedRef<DndMovableStrategy>
   canDrag: ComputedRef<boolean>
@@ -62,4 +70,5 @@ export interface ResolvedMovableOptions extends Omit<DndOptions, 'monitor'> {
   dragHandle: ComputedRef<HTMLElement | undefined>
   allowedAxis: ComputedRef<Axis>
   preview: ComputedRef<DndMovablePreviewOptions | undefined>
+  onOffsetChange?: (newOffset: Position, oldOffset: Position) => void
 }

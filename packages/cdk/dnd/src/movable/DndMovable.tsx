@@ -9,7 +9,7 @@ import { Teleport, computed, defineComponent, provide, shallowRef, toRef } from 
 
 import { isNil } from 'lodash-es'
 
-import { callEmit, convertCssPixel, useState } from '@idux/cdk/utils'
+import { callEmit, convertCssPixel, useControlledProp, useState } from '@idux/cdk/utils'
 
 import { useDndMovable } from '../composables/useDndMovable'
 import { defaultMovableStrategy } from '../consts'
@@ -21,6 +21,7 @@ export default defineComponent({
   props: dndMovableProps,
   setup(props, { slots, expose }) {
     const [previewState, setPreviewState] = useState<{ container: HTMLElement } | null>(null)
+    const [offsetProp, setOffsetProp] = useControlledProp(props, 'offset')
 
     const elementRef = shallowRef<HTMLElement>()
     const dragHandleRef = shallowRef<HTMLElement>()
@@ -67,6 +68,7 @@ export default defineComponent({
     })
 
     const { init, position, offset } = useDndMovable({
+      offset: offsetProp,
       mode: toRef(props, 'mode'),
       strategy: mergedStrategy,
       canDrag: toRef(props, 'canDrag'),
@@ -94,6 +96,10 @@ export default defineComponent({
       onDropOfTarget(args) {
         callEmit(props.onDropOfTarget, args)
       },
+      onOffsetChange(newOffset, oldOffset) {
+        callEmit(props.onOffsetChange, newOffset, oldOffset)
+        setOffsetProp(newOffset)
+      },
     })
 
     expose({
@@ -104,6 +110,10 @@ export default defineComponent({
       const strategy = mergedStrategy.value
 
       if (strategy === 'fixed' || strategy === 'absolute') {
+        if (!position.value) {
+          return
+        }
+
         return {
           position: strategy,
           top: convertCssPixel(position.value.y),
@@ -111,7 +121,7 @@ export default defineComponent({
         }
       }
 
-      if (offset.value.x === 0 && offset.value.y === 0) {
+      if (!offset.value) {
         return
       }
 

@@ -9,7 +9,7 @@ import type { DndMovableBoundaryType, DndMovableOptions, ResolvedBoundary, Resol
 
 import { computed, unref } from 'vue'
 
-import { isNil } from 'lodash-es'
+import { isFunction, isNil } from 'lodash-es'
 
 import { convertElement, useState } from '@idux/cdk/utils'
 
@@ -17,6 +17,7 @@ import { defaultMovableAllowedAxis, defaultMovableMode, defaultMovableStrategy }
 
 export function useResolvedOptions(options: DndMovableOptions): ResolvedMovableOptions {
   const {
+    offset: optionOffset,
     mode,
     strategy,
     canDrag,
@@ -40,6 +41,7 @@ export function useResolvedOptions(options: DndMovableOptions): ResolvedMovableO
   }
 
   return {
+    offset: computed(() => unref(optionOffset)),
     mode: computed(() => {
       const moveMode = unref(mode)
 
@@ -79,6 +81,10 @@ function getBoundary(element: HTMLElement | undefined, boundary: DndMovableBound
 
   if (_boundary === 'viewport') {
     return { left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight }
+  }
+
+  if (isFunction(_boundary)) {
+    return _boundary(element)
   }
 
   const boundaryElement = _boundary === 'parent' ? element?.parentElement : convertElement(_boundary)

@@ -1,7 +1,13 @@
 <template>
   <IxSpace vertical>
     <div class="dnd-movable-wrapper">
-      <CdkDndMovable class="dnd-movable-item" :mode="mode" :strategy="strategy" :allowedAxis="allowedAxis">
+      <CdkDndMovable
+        v-model:offset="offset"
+        class="dnd-movable-item"
+        :mode="mode"
+        :strategy="strategy"
+        :allowedAxis="allowedAxis"
+      >
         <CdkDndMovableHandle v-if="useHandle" class="dnd-movable-item__handle">
           <IxIcon name="holder" />
         </CdkDndMovableHandle>
@@ -34,6 +40,8 @@ import type { Axis, DndMovableMode, DndMovableStrategy } from '@idux/cdk/dnd'
 import type { RadioData } from '@idux/components/radio'
 
 import { ref } from 'vue'
+
+const offset = ref({ x: 0, y: 0 })
 
 const strategy = ref<DndMovableStrategy>('transform')
 const mode = ref<DndMovableMode>('afterDrop')

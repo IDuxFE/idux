@@ -23,8 +23,8 @@ import { useDndContext } from '../useDndContext'
 
 export interface DndMovableContext {
   init: () => void
-  position: ComputedRef<Position>
-  offset: ComputedRef<Position>
+  position: ComputedRef<Position | undefined>
+  offset: ComputedRef<Position | undefined>
 }
 
 export function useDndMovable(options: DndMovableOptions): DndMovableContext {
@@ -38,9 +38,11 @@ export function useDndMovable(options: DndMovableOptions): DndMovableContext {
     boundary,
     dragHandle,
     preview,
+    offset: optionOffset,
     onDragStart,
     onDrag,
     onDrop,
+    onOffsetChange,
     ...rest
   } = useResolvedOptions(options)
 
@@ -51,7 +53,7 @@ export function useDndMovable(options: DndMovableOptions): DndMovableContext {
     start,
     end,
     update,
-  } = useMovablePosition(draggableElement, strategy, boundary, allowedAxis)
+  } = useMovablePosition(draggableElement, strategy, boundary, allowedAxis, optionOffset, onOffsetChange)
 
   let currentTarget: Element | null = null
 

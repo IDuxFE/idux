@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import type { Axis } from '../dnd'
-import type { DndMovableMode, DndMovableStrategy } from '../movable'
+import type { DndMovableBoundaryType, DndMovableMode, DndMovableStrategy, Position } from '../movable'
 import type {
   ElementDropTargetEventBasePayload,
   ElementEventBasePayload,
@@ -17,6 +17,7 @@ import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, MaybeEl
 import type { Component, DefineComponent, FunctionalComponent, HTMLAttributes, PropType } from 'vue'
 
 export const dndMovableProps = {
+  offset: Object as PropType<Position>,
   tag: { type: [String, Object, Function] as PropType<string | Component | FunctionalComponent>, default: 'div' },
   allowedAxis: { type: String as PropType<Axis>, default: 'all' },
   mode: { type: String as PropType<DndMovableMode>, default: undefined },
@@ -28,14 +29,16 @@ export const dndMovableProps = {
   canDrag: { type: Boolean, default: true },
   dragHandle: { type: Object as PropType<MaybeElement>, default: undefined },
   dropTargets: { type: Array as PropType<(HTMLElement | undefined)[]>, default: undefined },
-  boundary: { type: [String, Object] as PropType<'parent' | 'viewport' | MaybeElement>, default: undefined },
+  boundary: { type: [String, Object, Function] as PropType<DndMovableBoundaryType>, default: undefined },
 
+  'onUpdate:offset': [Function, Array] as PropType<(offset: Position) => void>,
   onDragStart: [Function, Array] as PropType<MaybeArray<(args: ElementEventBasePayload) => void>>,
   onDrag: [Function, Array] as PropType<MaybeArray<(args: ElementEventBasePayload) => void>>,
   onDragEnter: [Function, Array] as PropType<MaybeArray<(args: ElementDropTargetEventBasePayload) => void>>,
   onDragLeave: [Function, Array] as PropType<MaybeArray<(args: ElementDropTargetEventBasePayload) => void>>,
   onDrop: [Function, Array] as PropType<MaybeArray<(args: ElementEventBasePayload) => void>>,
   onDropOfTarget: [Function, Array] as PropType<MaybeArray<(args: ElementDropTargetEventBasePayload) => void>>,
+  onOffsetChange: [Function, Array] as PropType<MaybeArray<(newOffset: Position, oldOffset: Position) => void>>,
 } as const
 
 export interface DndMovableBindings {

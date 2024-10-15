@@ -7,7 +7,7 @@
 
 import type { Axis, DndMovableStrategy, Position, ResolvedBoundary } from '../../types'
 
-import { type ComputedRef, watch } from 'vue'
+import { type ComputedRef, computed, toRaw, watch } from 'vue'
 
 import { useState } from '@idux/cdk/utils'
 
@@ -18,25 +18,74 @@ export function useMovablePosition(
   strategy: ComputedRef<DndMovableStrategy>,
   boundary: ComputedRef<ResolvedBoundary | undefined>,
   allowedAxis: ComputedRef<Axis>,
+  optionOffset: ComputedRef<Position | undefined>,
+  onOffsetChange?: (newOffset: Position, oldOffset: Position) => void,
 ): {
-  position: ComputedRef<Position>
-  offset: ComputedRef<Position>
+  position: ComputedRef<Position | undefined>
+  offset: ComputedRef<Position | undefined>
   init: (reset?: boolean) => void
   start: (initial: Position) => void
   end: () => void
   update: (current: Position) => void
 } {
-  const [position, setPosition] = useState<Position>({ x: 0, y: 0 })
-  const [offset, setOffset] = useState<Position>({ x: 0, y: 0 })
+  const [initalPosition, setInitialPosition] = useState<Position | undefined>(undefined)
+  const [initialOffset, setInitialOffset] = useState<Position | undefined>(undefined)
+
+  const [moveOffset, setMoveOffset] = useState<Position>({ x: 0, y: 0 })
+
+  watch(optionOffset, offset => {
+    if (offset) {
+      setMoveOffset(offset)
+    }
+  })
+
+  const updateMoveOffset = (newOffset: Position) => {
+    const oldOffset = toRaw(moveOffset.value)
+
+    onOffsetChange?.(newOffset, oldOffset)
+    setMoveOffset(newOffset)
+  }
+
+  const getMoveOffset = () => {
+    return optionOffset.value ?? moveOffset.value
+  }
+
+  const position = computed<Position | undefined>(() => {
+    const _initialPosition = initalPosition.value
+    if (!_initialPosition) {
+      return
+    }
+
+    const _moveOffset = getMoveOffset()
+
+    return {
+      x: _initialPosition.x + _moveOffset.x,
+      y: _initialPosition.y + _moveOffset.y,
+    }
+  })
+  const offset = computed<Position | undefined>(() => {
+    const _initialOffset = initialOffset.value
+
+    if (!_initialOffset) {
+      return
+    }
+
+    const _moveOffset = getMoveOffset()
+
+    return {
+      x: _initialOffset.x + _moveOffset.x,
+      y: _initialOffset.y + _moveOffset.y,
+    }
+  })
 
   const initPosition = (element: HTMLElement) => {
     const _strategy = strategy.value
     if (_strategy === 'absolute' || _strategy === 'transform') {
       const { offsetTop, offsetLeft } = element
-      setPosition({ x: offsetLeft, y: offsetTop })
+      setInitialPosition({ x: offsetLeft, y: offsetTop })
     } else {
       const { x, y } = element.getBoundingClientRect()
-      setPosition({ x, y })
+      setInitialPosition({ x, y })
     }
   }
 
@@ -46,26 +95,32 @@ export function useMovablePosition(
     }
 
     if (reset) {
-      setOffset({ x: 0, y: 0 })
+      setInitialOffset({ x: 0, y: 0 })
     }
 
     const { transform } = getComputedStyle(element)
 
     const offset = getPositionFromMatrix(transform)
 
-    if (offset) {
-      setOffset(offset)
-    }
+    setInitialOffset(offset ?? { x: 0, y: 0 })
   }
 
   let isDragging = false
   let lastDragPosition: Position | undefined
 
   const start = (initial: Position) => {
+    if (optionOffset.value) {
+      setMoveOffset({ ...optionOffset.value })
+    }
+
     lastDragPosition = initial
     isDragging = true
   }
   const end = () => {
+    if (optionOffset.value) {
+      setMoveOffset({ ...optionOffset.value })
+    }
+
     isDragging = false
   }
 
@@ -91,16 +146,11 @@ export function useMovablePosition(
       return
     }
 
-    const _offset = offset.value
-    const _position = position.value
+    const _offset = moveOffset.value
 
-    setOffset({
+    updateMoveOffset({
       x: _offset.x + offsetXOfTick,
       y: _offset.y + offsetYOfTick,
-    })
-    setPosition({
-      x: _position.x + offsetXOfTick,
-      y: _position.y + offsetYOfTick,
     })
 
     lastDragPosition = current
@@ -115,7 +165,7 @@ export function useMovablePosition(
     }
   }
 
-  watch([elementRef, strategy], () => init())
+  watch([elementRef, strategy], () => init(), { immediate: true })
 
   return {
     position,
