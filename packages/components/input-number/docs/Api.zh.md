@@ -12,6 +12,7 @@
 | `addonAfter` | 设置后缀 | `string \| #addonAfter` | - | - | - |
 | `addonBefore` | 设置前缀 | `string \| #addonBefore` | - | - | - |
 | `disabled` | 禁用 | `boolean` | `false` | - | 使用 `control` 时，此配置无效 |
+| `formatter` | 文字格式化函数 | `(value: number \| null) => string` | - | - | - |
 | `keyboard` | 启用键盘行为 | `boolean` | `true` | ✅ | - |
 | `max` | 最大值 | `number` | `Infinity` | - | - |
 | `min` | 最小值 | `number` | `-Infinity` | - | - |

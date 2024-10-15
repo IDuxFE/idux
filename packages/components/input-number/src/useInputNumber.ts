@@ -39,6 +39,7 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
   const mergedSize = useFormSize(props, config)
   const mergedStatus = useFormStatus(props, control)
 
+  const rawDisplayValue = ref('')
   const displayValue = ref('')
   const isIllegal = ref(true)
   const nowValue = computed(() => accessor.value ?? undefined)
@@ -64,6 +65,21 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
   const disabledDec = computed(() => getIncValueFormAccessor(-props.step) < props.min)
   const disabledInc = computed(() => getIncValueFormAccessor(props.step) > props.max)
 
+  const updateDisplayValue = (v: string) => {
+    rawDisplayValue.value = v
+
+    if (!v) {
+      displayValue.value = v
+      return
+    }
+
+    if (!props.formatter) {
+      displayValue.value = v
+    } else {
+      displayValue.value = props.formatter(Number(v))
+    }
+  }
+
   function getIncValueFormAccessor(step: number) {
     const { value } = accessor
     let newVal = step
@@ -79,18 +95,18 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
     const { value } = accessor
     // Check whether value is empty.
     if ((!value && value !== 0) || !String(value).trim()) {
-      displayValue.value = ''
+      updateDisplayValue('')
 
       // Check whether value is not a number.
     } else if (Number.isNaN(Number(value)) || (typeof value !== 'number' && typeof value !== 'string')) {
-      displayValue.value = ''
+      updateDisplayValue('')
       if (__DEV__) {
         Logger.warn('components/input-number', `model value(${value}) is not a number.`)
       }
     } else {
       const newValue = Number(value)
       if (displayValue.value === '' || newValue !== Number(displayValue.value)) {
-        displayValue.value = newValue.toFixed(precision.value)
+        updateDisplayValue(newValue.toFixed(precision.value))
       }
     }
   }
@@ -106,7 +122,7 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
       updateDisplayValueFromAccessor()
     } else {
       const newVal = Math.max(props.min, Math.min(props.max, numberVal))
-      displayValue.value = newVal.toFixed(precision.value)
+      updateDisplayValue(newVal.toFixed(precision.value))
       updateModelValue(newVal)
     }
   }
@@ -129,7 +145,7 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
     const { value: inputVal } = evt.target as HTMLInputElement
     const strVal = inputVal.trim().replace(/。/g, '.')
 
-    displayValue.value = strVal
+    updateDisplayValue(strVal)
 
     if (strVal === '') {
       updateModelValue(null)
@@ -190,7 +206,7 @@ export function useInputNumber(props: InputNumberProps, config: InputNumberConfi
   }
 
   watch(
-    displayValue,
+    rawDisplayValue,
     value => {
       if (value !== '') {
         const numberVal = Number(value)
