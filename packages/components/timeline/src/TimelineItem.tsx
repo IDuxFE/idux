@@ -39,6 +39,8 @@ export default defineComponent({
 
     const isPresetOrStatusColor = computed(() => isPresetColor(props.color) || isStatusColor(props.color))
 
+    const isTopLabel = computed(() => parentProps.labelPlacement === 'top')
+
     const dotStyle = computed(() => {
       const { color } = props
       if (isPresetOrStatusColor.value) {
@@ -98,10 +100,17 @@ export default defineComponent({
               {!isCustomDot.value && <div class={`${prefixCls}-head-dot-inner`} style={dotInnerStyle.value}></div>}
             </div>
           </div>
-          <div class={`${prefixCls}-content`}>
-            {slots.default && <div class={`${prefixCls}-content-desc`}>{slots.default()}</div>}
-            {labelNode && <div class={`${prefixCls}-content-label`}>{labelNode}</div>}
-          </div>
+          {isTopLabel.value ? (
+            <div class={`${prefixCls}-content ${prefixCls}-content-top`}>
+              {labelNode && <div class={`${prefixCls}-content-label`}>{labelNode}</div>}
+              {slots.default && <div class={`${prefixCls}-content-desc`}>{slots.default()}</div>}
+            </div>
+          ) : (
+            <div class={`${prefixCls}-content`}>
+              {slots.default && <div class={`${prefixCls}-content-desc`}>{slots.default()}</div>}
+              {labelNode && <div class={`${prefixCls}-content-label`}>{labelNode}</div>}
+            </div>
+          )}
         </li>
       )
     }

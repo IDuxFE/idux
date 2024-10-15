@@ -91,6 +91,16 @@
         margin-top: var(--ix-timeline-content-label-margin-top);
       }
     }
+
+    &-content-top {
+      .@{timeline-item-prefix}-content-label {
+        margin-top: 0;
+      }
+
+      .@{timeline-item-prefix}-content-desc {
+        margin-top: var(--ix-timeline-content-label-margin-top);
+      }
+    }
   }
 
   .timeline-dot-color-classes(@status-colors);

@@ -6,10 +6,11 @@
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
 | `pending` | 设置幽灵节点 | `boolean\|string\|#pending` | `false` | - | - |
-| `pendingDot` | 幽灵节点存在时的时间轴点 | `string\|#pendingDot` | `undefined` | - |- |
+| `pendingDot` | 幽灵节点存在时的时间轴点 | `string\|#pendingDot` | `undefined` | - | - |
 | `reverse` | 时间节点是否倒叙 | `boolean` | `false` | - |- |
-| `placement` | 时间节点内容相对于时间轴的位置 | `'start'\| 'end' \| 'alternate'` | `'end'` | - |- |
-| `both` | 设置标签和内容是否分开 | `boolean` | `false` | - |- |
+| `placement` | 时间节点内容相对于时间轴的位置 | `'start' \| 'end' \| 'alternate'` | `'end'` | - | - |
+| `labelPlacement` | 标签文本在时间节点中的位置 | `'top' \| 'bottom'` | `'bottom'` | - | - |
+| `both` | 设置标签和内容是否分开 | `boolean` | `false` | - | - |
 
 ### IxTimelineItem
 
