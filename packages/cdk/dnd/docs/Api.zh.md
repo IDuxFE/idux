@@ -123,6 +123,7 @@ interface DndSortableReorderInfo {
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
+| `v-model:offset` | 偏移量 | `{ x: number, y: number }` | - | 通过该属性可受控控制移动的偏移量 |
 | `tag` | 自定义组件根节点 | `string \| Component \| FunctionalComponent` | `'div'` | - | - |
 | `allowedAxis` | 可以拖拽移动的方向 | `'horizontal' \| 'vertical' \| 'all'` | `'all'` | - | - |
 | `mode` | 拖拽移动模式 | `'immediate' \| 'afterDrop'` | `'afterDrop'` | - | `'immediate'` 模式下，会随着拖拽实时改变元素位置，`'afterDrop'`则会在拖拽结束改变 |
@@ -138,6 +139,7 @@ interface DndSortableReorderInfo {
 | `onDragLeave` | 目标拖拽离开回调函数 | `((args: ElementDropTargetEventBasePayload) => void) \| ((args: ElementDropTargetEventBasePayload) => void)[]` | - | - |
 | `onDrop` | 拖拽结束回调函数 | `((args: DndSortableOnDropArgs) => void) \| ((args: DndSortableOnDropArgs) => void)[]` | - | - |
 | `onDropOfTarget` | 目标元素拖拽放入回调函数 | `((args: ElementDropTargetEventBasePayload) => void) \| ((args: ElementDropTargetEventBasePayload) => void)[]` | - | - |
+| `onOffsetChange` | 偏移量改变回调函数 | `(newOffset: Position, oldOffset: Position) => void` | - | - |
 
 #### DndMovableSlots
 
@@ -250,6 +252,7 @@ type DndSortablePreviewOptions =
 function useDndMovable(options: DndMovableOptions): DndMovableContext
 
 interface DndMovableOptions extends Omit<DndOptions, 'monitor'> {
+  offset?: Ref<Position | undefined>
   mode?: MaybeRef<DndMovableMode | undefined>
   strategy?: MaybeRef<DndMovableStrategy | undefined>
   canDrag?: MaybeRef<boolean | undefined>
@@ -259,6 +262,7 @@ interface DndMovableOptions extends Omit<DndOptions, 'monitor'> {
   dragHandle?: MaybeElementRef
   allowedAxis?: MaybeRef<Axis>
   preview?: MaybeRef<DndMovablePreviewOptions>
+  onOffsetChange?: (newOffset: Position, oldOffset: Position) => void
 }
 
 interface DndMovableContext {
