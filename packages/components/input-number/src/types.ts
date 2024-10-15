@@ -22,6 +22,7 @@ export const inputNumberProps = {
     type: Boolean,
     default: false,
   },
+  formatter: Function as PropType<(value: number | null) => string>,
   keyboard: {
     type: Boolean,
     default: undefined,
