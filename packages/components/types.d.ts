@@ -17,6 +17,12 @@ import type { CarouselComponent } from '@idux/components/carousel'
 import type { CascaderComponent, CascaderPanelComponent } from '@idux/components/cascader'
 import type { CheckboxComponent, CheckboxGroupComponent } from '@idux/components/checkbox'
 import type { CollapseComponent, CollapsePanelComponent } from '@idux/components/collapse'
+import type {
+  ColorPickerComponent,
+  ColorPickerIndicatorComponent,
+  ColorPickerPanelComponent,
+  ColorPickerTriggerComponent,
+} from '@idux/components/color-picker'
 import type { ControlTriggerComponent, ControlTriggerOverlayComponent } from '@idux/components/control-trigger'
 import type {
   DatePanelComponent,
@@ -116,6 +122,10 @@ declare module 'vue' {
     IxCollapsePanel: CollapsePanelComponent
     IxControlTrigger: ControlTriggerComponent
     IxControlTriggerOverlay: ControlTriggerOverlayComponent
+    IxColorPicker: ColorPickerComponent
+    IxColorPickerTrigger: ColorPickerTriggerComponent
+    IxColorPickerPanel: ColorPickerPanelComponent
+    IxColorPickerIndicator: ColorPickerIndicatorComponent
     IxDatePicker: DatePickerComponent
     IxDatePanel: DatePanelComponent
     IxDateRangePicker: DateRangePickerComponent

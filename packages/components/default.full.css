@@ -455,6 +455,32 @@
   --ix-collapse-panel-content-bg-color: #f7f9fc;
 }
 
+/* ------ color-picker css variables ------ */
+:root {
+  --ix-color-picker-panel-width: 358px;
+  --ix-color-picker-slider-height: 12px;
+  --ix-color-picker-slider-handle-size: 12px;
+  --ix-color-picker-slider-handle-border-width: 2px;
+  --ix-color-picker-slider-handle-border-color: #ffffff;
+  --ix-color-picker-slider-handle-box-shadow: inset 0 0 1px 0 rgb(0 0 0 / 25%),
+    0 0 0 1px rgb(0 0 0 / 6%);
+  --ix-color-picker-indicator-border-radius: 2px;
+  --ix-color-picker-indicator-checked-icon-color-light: #454c59;
+  --ix-color-picker-indicator-checked-icon-color-dark: #edf1f7;
+  --ix-color-picker-indicator-hover-box-shadow: 0px 0px 0px 2px
+    rgba(191, 223, 255, 0.4);
+  --ix-color-picker-indicator-checked-box-shadow: 0px 0px 0px 2px
+    rgba(191, 223, 255, 0.4);
+  --ix-color-picker-trigger-size-sm: 24px;
+  --ix-color-picker-trigger-size-md: 32px;
+  --ix-color-picker-trigger-size-lg: 40px;
+  --ix-color-picker-trigger-font-size-sm: 12px;
+  --ix-color-picker-trigger-font-size-md: 12px;
+  --ix-color-picker-trigger-font-size-lg: 14px;
+  --ix-color-picker-alpha-grid-color: rgb(0 0 0 / 6%);
+  --ix-color-picker-alpha-grid-box-shadow: inset 0 0 1px 0 rgb(0 0 0 / 25%);
+}
+
 /* ------ comment css variables ------ */
 :root {
   --ix-comment-nest-indent: 44px;

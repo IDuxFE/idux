@@ -12,6 +12,9 @@ import { enUS as dateFnsLocale } from 'date-fns/locale'
 const enUS: Locale = {
   type: 'en-US',
   date: dateFnsLocale,
+  colorPicker: {
+    presetEmpty: 'Empty',
+  },
   datePicker: {
     today: 'Today',
     ok: 'OK',

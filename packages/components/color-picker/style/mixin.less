@@ -1,0 +1,11 @@
+.alphaBgGrid(@size) {
+  background-image: conic-gradient(
+    var(--ix-color-picker-alpha-grid-color) 0 25%,
+    transparent 0 50%,
+    var(--ix-color-picker-alpha-grid-color) 0 75%,
+    transparent 0
+  );
+  background-size: @size @size;
+  background-repeat: repeat;
+  box-shadow: var(--ix-color-picker-alpha-grid-box-shadow);
+}

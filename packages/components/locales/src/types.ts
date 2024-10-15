@@ -9,6 +9,10 @@ import { Locale as FNSLocale } from 'date-fns'
 
 export type DateLocale = FNSLocale
 
+export interface ColorPickerLocale {
+  presetEmpty: string
+}
+
 export interface DatePickerLocale {
   today: string
   ok: string
@@ -142,6 +146,7 @@ export interface UploadLocale {
 export interface Locale {
   type: LocaleType
   date: DateLocale
+  colorPicker: ColorPickerLocale
   datePicker: DatePickerLocale
   dateRangePicker: DateRangePickerLocale
   empty: EmptyLocale
