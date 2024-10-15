@@ -10,6 +10,24 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 2.5.0(2024-10-15)
+
+
+### Bug Fixes
+
+* **comp:desc:** 在某些情况下，label和content没有在顶部对齐，增加 `vertical-align: top` ([#1996](https://github.com/IDuxFE/idux/issues/1996)) ([ae37a96](https://github.com/IDuxFE/idux/commit/ae37a96477da88e51995a698f8016c3aacd43b9c))
+* **comp:table:** selectable 列的 onChange 事件没有抛出已经缓存过的节点 ([#1991](https://github.com/IDuxFE/idux/issues/1991)) ([ee26db6](https://github.com/IDuxFE/idux/commit/ee26db60d4307dd6303b80a2e2bc4b6725923994))
+* **comp:textarea:** autoRows 的 minRows 不生效 ([#1987](https://github.com/IDuxFE/idux/issues/1987)) ([31b98b9](https://github.com/IDuxFE/idux/commit/31b98b940d18cf48c6e31b66ec3aa14ac2b4f9bb))
+* **pro:search:** 搜索项的段输入文字宽度计算不正确 ([#1989](https://github.com/IDuxFE/idux/issues/1989)) ([8de7df7](https://github.com/IDuxFE/idux/commit/8de7df7b1c8df757538d346fe02edf7039064384))
+
+
+### Features
+
+* **cdk:dnd:** `useDndMovable` 和 `CdkDndMovable` 新增受控属性 `offset`, 用来控制移动的偏移量 ([#1994](https://github.com/IDuxFE/idux/issues/1994)) ([5e982e5](https://github.com/IDuxFE/idux/commit/5e982e5904c598dca7060cd1d57c3071a88bd0df))
+* **comp:color-picker:** 新增颜色选择器组件 ([#1995](https://github.com/IDuxFE/idux/issues/1995)) ([0c384d3](https://github.com/IDuxFE/idux/commit/0c384d3cac1b4528cee99a5f82598fe12e0ede6e))
+* **comp:input-number:** 新增 `formatter` 属性用来格式化数字的展示 ([#1993](https://github.com/IDuxFE/idux/issues/1993)) ([003a180](https://github.com/IDuxFE/idux/commit/003a1805fd223bf7a52b0ca8e096304307d4d371))
+* **comp:timeline:** 新增 `labelPlacement` 支持 ([#1992](https://github.com/IDuxFE/idux/issues/1992)) ([c35a883](https://github.com/IDuxFE/idux/commit/c35a88371f1ec00a5b06c415ea30a792cbec7ea8))
+
 ## 2.4.3(2024-08-12)
 
 
