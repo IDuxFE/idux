@@ -1,0 +1,40 @@
+.@{color-picker-prefix}-presets {
+  width: 100%;
+
+  .@{collapse-prefix}-panel {
+    .@{header-prefix} {
+      min-height: var(--ix-height-md);
+      padding-left: 0;
+    }
+
+    .@{header-prefix}-prefix {
+      margin-right: 0;
+      margin-left: calc(var(--ix-font-size-icon) * -1 / 5);
+    }
+
+    .@{collapse-prefix}-panel-content-box {
+      padding: 0;
+    }
+  }
+
+  &-colors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ix-margin-size-xs);
+  }
+
+  &-empty {
+    color: var(--ix-color-text-disabled)
+  }
+
+  &-indicator {
+    height: var(--ix-height-sm);
+    width: var(--ix-height-sm);
+  }
+
+  & &-collapse-icon {
+    font-size: var(--ix-font-size-icon);
+    color: var(--ix-color-icon-info);
+    margin-right: var(--ix-margin-size-xs);
+  }
+}

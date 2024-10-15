@@ -12,6 +12,9 @@ import { zhCN as dateFnsLocale } from 'date-fns/locale'
 const zhCN: Locale = {
   type: 'zh-CN',
   date: dateFnsLocale,
+  colorPicker: {
+    presetEmpty: '暂无',
+  },
   datePicker: {
     today: '今天',
     ok: '确定',

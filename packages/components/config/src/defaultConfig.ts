@@ -119,6 +119,10 @@ export const defaultConfig: GlobalConfig = {
     ghost: false,
     size: 'md',
   },
+  colorPicker: {
+    format: 'hex',
+    size: 'md',
+  },
   datePicker: {
     allowInput: false,
     borderless: false,

@@ -1,0 +1,30 @@
+.@{color-picker-prefix} {
+  &-editor {
+    width: 100%;
+    display: flex;
+    gap: var(--ix-margin-size-xs);
+
+    & &-format-select {
+      width: 70px;
+      flex-shrink: 0;
+    }
+    & &-alpha-input {
+      width: 80px;
+      flex-shrink: 0;
+    }
+
+    &-sub {
+      flex: auto;
+      width: 0;
+      display: flex;
+      gap: var(--ix-margin-size-xs);
+    }
+  }
+
+  &-hsb-editor-input {
+    flex: 1;
+  }
+  &-rgb-edigor-input {
+    flex: 1;
+  }
+}

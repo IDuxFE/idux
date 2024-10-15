@@ -20,6 +20,15 @@ import { IxCarousel } from '@idux/components/carousel'
 import { IxCascader, IxCascaderPanel } from '@idux/components/cascader'
 import { IxCheckbox, IxCheckboxGroup } from '@idux/components/checkbox'
 import { IxCollapse, IxCollapsePanel } from '@idux/components/collapse'
+import {
+  IxColorPicker,
+  IxColorPickerEditor,
+  IxColorPickerIndicator,
+  IxColorPickerPalette,
+  IxColorPickerPanel,
+  IxColorPickerPresets,
+  IxColorPickerTrigger,
+} from '@idux/components/color-picker'
 import { IxComment } from '@idux/components/comment'
 import { IxControlTrigger, IxControlTriggerOverlay } from '@idux/components/control-trigger'
 import { IxDatePanel, IxDatePicker, IxDateRangePanel, IxDateRangePicker } from '@idux/components/date-picker'
@@ -106,6 +115,13 @@ const components = [
   IxCheckboxGroup,
   IxCollapse,
   IxCollapsePanel,
+  IxColorPicker,
+  IxColorPickerTrigger,
+  IxColorPickerPanel,
+  IxColorPickerIndicator,
+  IxColorPickerPresets,
+  IxColorPickerPalette,
+  IxColorPickerEditor,
   IxDatePicker,
   IxDatePanel,
   IxDateRangePicker,
@@ -221,6 +237,7 @@ export * from '@idux/components/collapse'
 export * from '@idux/components/comment'
 export * from '@idux/components/control-trigger'
 export * from '@idux/components/config'
+export * from '@idux/components/color-picker'
 export * from '@idux/components/date-picker'
 export * from '@idux/components/desc'
 export * from '@idux/components/divider'

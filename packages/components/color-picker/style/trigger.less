@@ -1,0 +1,37 @@
+.@{color-picker-prefix}-trigger {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  .@{color-picker-prefix}-indicator + &-text {
+    margin-left: var(--ix-margin-size-xs);
+  }
+
+  &-disabled {
+    cursor: not-allowed;
+    .@{color-picker-prefix}-indicator + .@{color-picker-prefix}-trigger-text {
+      color: var(--ix-color-text-disabled);
+    }
+  }
+
+  &-sm {
+    .picker-trigger-size(var(--ix-color-picker-trigger-size-sm), var(--ix-color-picker-trigger-font-size-sm));
+  }
+  &-md {
+    .picker-trigger-size(var(--ix-color-picker-trigger-size-md), var(--ix-color-picker-trigger-font-size-md));
+  }
+  &-lg {
+    .picker-trigger-size(var(--ix-color-picker-trigger-size-lg), var(--ix-color-picker-trigger-font-size-lg));
+  }
+}
+
+.picker-trigger-size(@trigger-size, @font-size) {
+  .@{color-picker-prefix}-indicator {
+    width: @trigger-size;
+    height: @trigger-size;
+  }
+
+  .@{color-picker-prefix}-trigger-text {
+    font-size: @font-size;
+  }
+}

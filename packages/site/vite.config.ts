@@ -35,6 +35,13 @@ const componentPath: Record<string, string> = {
   IxLoadingBarProvider: '@idux/components/loading-bar',
   IxThemeProvider: '@idux/components/theme',
   IxControlTrigger: '@idux/components/control-trigger',
+  IxColorPicker: '@idux/components/color-picker',
+  IxColorPickerTrigger: '@idux/components/color-picker',
+  IxColorPickerPanel: '@idux/components/color-picker',
+  IxColorPickerIndicator: '@idux/components/color-picker',
+  IxColorPickerPalette: '@idux/components/color-picker',
+  IxColorPickerEditor: '@idux/components/color-picker',
+  IxColorPickerPresets: '@idux/components/color-picker',
   IxProTagSelect: '@idux/pro/tag-select',
 }
 

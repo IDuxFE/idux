@@ -17,6 +17,7 @@ import type { CarouselThemeTokens } from '@idux/components/carousel'
 import type { CascaderThemeTokens } from '@idux/components/cascader'
 import type { CheckboxThemeTokens } from '@idux/components/checkbox'
 import type { CollapseThemeTokens } from '@idux/components/collapse'
+import type { ColorPickerThemeTokens } from '@idux/components/color-picker'
 import type { CommentThemeTokens } from '@idux/components/comment'
 import type { DatePickerThemeTokens } from '@idux/components/date-picker'
 import type { DescThemeTokens } from '@idux/components/desc'
@@ -73,6 +74,7 @@ export type ComponentThemeTokens = {
   card: CardThemeTokens
   carousel: CarouselThemeTokens
   collapse: CollapseThemeTokens
+  colorPicker: ColorPickerThemeTokens
   comment: CommentThemeTokens
   cascader: CascaderThemeTokens
   datePicker: DatePickerThemeTokens

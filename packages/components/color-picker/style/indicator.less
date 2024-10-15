@@ -1,0 +1,81 @@
+@import './mixin.less';
+
+.@{color-picker-prefix}-indicator {
+  border-radius: var(--ix-color-picker-indicator-border-radius);
+  overflow: hidden;
+  .alphaBgGrid(50%);
+
+  &:not(&-disabled).@{color-picker-prefix}-indicator-hoverable {
+    cursor: pointer;
+  }
+  &-disabled {
+    cursor: not-allowed;
+  }
+
+  &-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+  
+  &:not(&-blank) &-inner::after {
+    position: absolute;
+    top: 47%;
+    left: 30%;
+    right: 0;
+    width: 35%;
+    height: 55%;
+    border: 2px solid var(--ix-color-picker-indicator-checked-icon-color-dark);
+    border-top: 0;
+    border-left: 0;
+    transform: rotate(45deg) scale(0) translate(-50%, -50%);
+    transition: all var(--ix-motion-duration-fast) var(--ix-motion-ease-in-out);
+    content: ' ';
+    opacity: 0;
+  }
+
+  &.@{color-picker-prefix}-indicator-checked &-inner::after {
+    opacity: 1;
+    transform: rotate(45deg) scale(1) translate(-65%, -50%);
+  }
+
+  &.@{color-picker-prefix}-indicator-bright &-inner::after {
+    border-color: var(--ix-color-picker-indicator-checked-icon-color-light);
+  }
+
+  &-with-box-shadow {
+    &.@{color-picker-prefix}-indicator-hoverable:hover {
+      box-shadow: var(--ix-color-picker-indicator-hover-box-shadow);
+    }
+
+    &.@{color-picker-prefix}-indicator-focused,
+    &.@{color-picker-prefix}-indicator-checked {
+      box-shadow: var(--ix-color-picker-indicator-checked-box-shadow);
+    }
+  }
+
+  &-blank {
+    border: var(--ix-line-width) var(--ix-line-type) var(--ix-color-border);
+    .@{color-picker-prefix}-indicator-inner {
+      background-color: var(--ix-color-container-bg);
+
+      @slash-width: 2px;
+
+      &::before {
+        content: ' ';
+        position: absolute;
+        inset-inline-end: calc(var(--ix-line-width) * -1);
+        top: calc(var(--ix-line-width) * -1);
+        left: calc(-50% + 1.414 * @slash-width);
+        display: block;
+        width: 141.4214%;
+        height: @slash-width;
+        transform-origin: calc(100% - 1px) 1px;
+        transform: rotate(-45deg);
+        background-color: var(--ix-color-error);
+        transition: none;
+      }
+    }
+  }
+}

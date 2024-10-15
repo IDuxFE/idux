@@ -17,6 +17,7 @@ import type { CardSize } from '@idux/components/card'
 import type { CarouselDotPlacement, CarouselDotTrigger } from '@idux/components/carousel'
 import type { CascaderData } from '@idux/components/cascader'
 import type { CollapseSize } from '@idux/components/collapse'
+import type { ColorFormat } from '@idux/components/color-picker'
 import type { DatePickerType } from '@idux/components/date-picker'
 import type { DescLabelAlign, DescLayout, DescSize } from '@idux/components/desc'
 import type { FormLabelAlign, FormLayout, FormSize } from '@idux/components/form'
@@ -68,6 +69,7 @@ export interface GlobalConfig {
   cascader: CascaderConfig
   checkbox: CheckboxConfig
   collapse: CollapseConfig
+  colorPicker: ColorPickerConfig
   datePicker: DatePickerConfig
   desc: DescConfig
   divider: DividerConfig
@@ -206,6 +208,13 @@ export interface CollapseConfig {
   expandIcon: string
   ghost: boolean
   size: CollapseSize
+}
+
+export interface ColorPickerConfig {
+  format: ColorFormat
+  size: FormSize
+  overlayContainer?: OverlayContainerType
+  overlayTabindex?: number
 }
 
 export interface DatePickerConfig {

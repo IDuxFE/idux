@@ -1,0 +1,71 @@
+@import '../../style/variable/index.less';
+@import '../../style/mixins/reset.less';
+@import './indicator.less';
+@import './presets.less';
+@import './slider.less';
+@import './trigger.less';
+@import './editor.less';
+
+.@{color-picker-prefix} {
+  .reset-component();
+
+  &-palette {
+    width: 100%;
+
+    .@{color-picker-prefix}-color-selector {
+      width: 100%;
+      margin-bottom: var(--ix-margin-size-sm);
+    }
+
+    &-bottom {
+      width: 100%;
+      height: var(--ix-height-lg);
+      display: flex;
+    }
+
+    &-sliders {
+      flex: auto;
+      width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    &-indicator {
+      width: var(--ix-height-lg);
+      height: var(--ix-height-lg);
+      margin-left: var(--ix-margin-size-sm);
+    }
+  }
+
+  &-hsb-editor-input {
+    flex: 1;
+  }
+  &-rgb-edigor-input {
+    flex: 1;
+  }
+
+  &-panel:not(&-panel-paddingless) {
+    padding: var(--ix-padding-size-sm) var(--ix-padding-size-md);
+  }
+
+  &-panel-inner {
+    width: calc(var(--ix-color-picker-panel-width) - var(--ix-padding-size-md));
+    .@{color-picker-prefix}-panel-paddingless & {
+      width: var(--ix-color-picker-panel-width);
+    }
+
+    .@{color-picker-prefix} {
+      &-palette {
+        margin-bottom: var(--ix-margin-size-sm);
+      }
+
+      &-panel-separator {
+        margin: var(--ix-margin-size-lg) 0 var(--ix-margin-size-sm) 0;
+        width: 100%;
+        height: 0;
+        border-bottom: var(--ix-line-width) var(--ix-line-type) var(--ix-color-separator);
+      }
+    }
+  }
+}
