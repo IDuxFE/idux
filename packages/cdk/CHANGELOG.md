@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/IDuxFE/idux/compare/v2.4.3...v2.5.0) (2024-10-15)
+
+
+### Features
+
+* **cdk:dnd:** add support for controlled offset prop ([#1994](https://github.com/IDuxFE/idux/issues/1994)) ([5e982e5](https://github.com/IDuxFE/idux/commit/5e982e5904c598dca7060cd1d57c3071a88bd0df))
+
+
+
+
+
 ## [2.4.1](https://github.com/IDuxFE/idux/compare/v2.4.0...v2.4.1) (2024-08-02)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/IDuxFE/idux/compare/v2.4.3...v2.5.0) (2024-10-15)
+
+
+### Features
+
+* **comp:color-picker:** add colorPicker component ([#1995](https://github.com/IDuxFE/idux/issues/1995)) ([0c384d3](https://github.com/IDuxFE/idux/commit/0c384d3cac1b4528cee99a5f82598fe12e0ede6e))
+
+
+
+
+
 ## [2.4.3](https://github.com/IDuxFE/idux/compare/v2.4.2...v2.4.3) (2024-08-12)
 
 **Note:** Version bump only for package @idux/site

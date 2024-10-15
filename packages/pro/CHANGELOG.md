@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/IDuxFE/idux/compare/v2.4.3...v2.5.0) (2024-10-15)
+
+
+### Bug Fixes
+
+* **pro:search:** search item input text width measure incorrect ([#1989](https://github.com/IDuxFE/idux/issues/1989)) ([8de7df7](https://github.com/IDuxFE/idux/commit/8de7df7b1c8df757538d346fe02edf7039064384))
+
+
+
+
+
 ## [2.4.3](https://github.com/IDuxFE/idux/compare/v2.4.2...v2.4.3) (2024-08-12)
 
 
