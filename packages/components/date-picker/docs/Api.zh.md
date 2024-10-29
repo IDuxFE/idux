@@ -42,13 +42,6 @@ const defaultFormat = {
 }
 ```
 
-以下 `Slots` 为 `IxDatePicker`、`IxDateRangePicker` 共享的插槽。
-
-| 名称 | 说明 | 参数类型 | 备注 |
-| --- | --- | --- | --- |
-| `footer` | 自定义日期面板中的页脚 | - | - |
-| `cell` | 自定义日期面板中的单元格 | `{date: Date}` | - |
-
 以下 `Methods` 为 `IxDatePicker`、`IxDateRangePicker` 共享的方法。
 
 | 名称 | 说明 | 参数类型 | 备注 |
@@ -81,6 +74,24 @@ const defaultFormat = {
 | `minuteStep` | 分钟选项的间隔 | `number` | `1` | - | - |
 | `secondStep` | 秒选项的间隔 | `number` | `1` | - | - |
 
+#### DatePickerSlots
+
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| `footer` | 自定义日期面板中的页脚 | - | - |
+| `cell` | 自定义日期面板中的单元格 | `{date: Date}` | - |
+| `triggerContent` | 自定义日期选择器的触发器内容 | `DatePickerTriggerContentSlotParams` | - |
+
+```ts
+interface DatePickerTriggerContentSlotParams {
+  inputValue: string
+  placeholder: string
+  readonly: boolean
+  disabled: boolean
+  handleInput: (evt: Event) => void
+}
+```
+
 ### IxDateRangePicker
 
 #### DateRangePickerProps
@@ -91,10 +102,63 @@ const defaultFormat = {
 | `footer` | 自定义底部按钮 | `boolean \| ButtonProps[] \| VNode \| #footer` | `false` | - | 默认会根据 `type` 的不同渲染相应的按钮，如果传入 `false` 则不显示 |
 | `placeholder` | 选择框默认文本 | `string[] \| #placeholder=placement:'start'\|'end'` | - | - | 默认使用 `i18n` 配置 |
 | `separator` | 自定义分隔符图标 | `string \| VNode \| #separator` | - | ✅ | - |
+| `shortcuts` | 时间范围快捷选项配置 | `RangeShortcutProp` | - | - | - |
 | `timePanelOptions` | 时间选择面板配置 | `PickerTimePanelOptions \| PickerTimePanelOptions[]` | - | - | 如果需要对前后的时间选择器使用不同配置，可以传入一个数组 |
 | `onChange` | 选中的日期范围值改变后的回调 | `(value: Date[], oldValue: Date[]) => void` | - | - | - |
 | `onInput` | 输入后的回调 | `(isFrom: boolean, evt: Event) => void` | - | - | - |
 | `onSelect` | 面板选择的日期范围值改变的回调 | `(dates: (Date \| undefined)[] \| undefined) => void` | - | - | 仅选中起点或终点时也会触发 |
+
+```ts
+// 内置支持的快捷选项
+type PresetRangeShortcut = 'today' | 'yesterday' | 'last24h' | 'last7d' | 'last30d' | 'last180d' | 'custom'
+
+// 快捷选项对应面板渲染函数的上下文
+interface RangeShortcutPanelRenderContext {
+  slots: Slots // IxDataRangePicker 的插槽
+  setBuffer: (value: [Date, Date] | undefined) => void // 修改临时日期范围值
+  setValue: (value: [Date, Date] | undefined) => void // 修改日期范围值
+  ok: () => void // 确定
+  cancel: () => void // 取消
+}
+interface RangeShortcutOptions {
+  key: VKey // 唯一的Key
+  label: string // 在快捷栏中展示的label
+  confirmOnSelect?: boolean // 是否在选中快捷选项的时候确认选择，而不是仅仅修改buffer
+  selectedLabel?: string // 选中后在选择框中显示的label
+  value?: [Date, Date] // 快捷选项对应的日期范围值
+  onClick?: (evt: MouseEvent) => void // 点击回调
+  panelRenderer?: (context: RangeShortcutPanelRenderContext) => VNodeChild // 自定义快捷选项对应的面板渲染
+}
+
+type RangeShortcut = PresetRangeShortcut | RangeShortcutOptions
+
+type RangeShortcutProp =
+  | RangeShortcut[]
+  | {
+      showPanel?: boolean // 是否默认展示面板
+      shortcuts: RangeShortcut[] // 快捷选项
+    }
+```
+
+#### DateRangePickerSlots
+
+| 名称 | 说明 | 参数类型 | 备注 |
+| --- | --- | --- | --- |
+| `footer` | 自定义日期面板中的页脚 | - | - |
+| `cell` | 自定义日期面板中的单元格 | `{date: Date}` | - |
+| `triggerContent` | 自定义日期选择器的触发器内容 | `DateRangePickerTriggerContentSlotParams` | - |
+
+```ts
+interface DateRangePickerTriggerContentSlotParams {
+  selectedShortcut: RangeShortcutOption | undefined
+  inputValue: [string, string]
+  placeholder: [string, string]
+  readonly: boolean
+  disabled: boolean
+  handleFromInput: (evt: Event) => void
+  handleToInput: (evt: Event) => void
+}
+```
 
 ### IxDatePickerPanel
 

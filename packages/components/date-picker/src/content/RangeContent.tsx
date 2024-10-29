@@ -5,172 +5,115 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { defineComponent, inject, onMounted, ref } from 'vue'
+import type { RangeShortcutOptions } from '../types'
 
-import { ɵFooter } from '@idux/components/_private/footer'
-import { ɵInput, type ɵInputInstance } from '@idux/components/_private/input'
+import { type VNodeChild, computed, defineComponent, inject } from 'vue'
 
-import { useInputProps } from '../composables/useInputProps'
-import { useRangeTimePanelProps } from '../composables/useTimePanelProps'
+import RangePickerOverlayFooter from './RangePickerOverlayFooter'
+import RangePickerOverlayInputs from './RangePickerOverlayInputs'
 import RangePanel from '../panel/RangePanel'
 import { dateRangePickerToken } from '../token'
+import RangeShortcuts from './RangeShortcuts'
+import { extractShortcutValue } from '../utils'
 
 export default defineComponent({
-  setup() {
+  setup(_, { slots }) {
     const context = inject(dateRangePickerToken)!
     const {
       props,
-      locale,
-      slots,
-      dateFormatRef,
-      timeFormatRef,
-      hourEnabled,
-      minuteEnabled,
-      secondEnabled,
-      use12Hours,
-      rangeControlContext: { buffer, visiblePanel, fromControl, toControl, handlePanelChange },
       mergedPrefixCls,
-      inputEnableStatus,
-      inputRef,
+      shortcuts,
+      selectedShortcut,
+      showShortcutPanel,
+      setSelectedShortcut,
+      rangeControlContext: { buffer, bufferUpdated, handlePanelChange },
       handleChange,
-      handleKeyDown,
-      overlayVisible,
-      renderSeparator,
       setOverlayOpened,
     } = context
 
-    const inputInstance = ref<ɵInputInstance>()
-    onMounted(() => {
-      if (inputEnableStatus.value.allowInput !== 'overlay') {
+    const handleShortcutChange = (shortcut: RangeShortcutOptions) => {
+      setSelectedShortcut(shortcut)
+      if (!shortcut.value) {
         return
       }
 
-      inputRef.value = inputInstance.value?.getInputElement()
-    })
+      if (shortcut.confirmOnSelect) {
+        handleChange(extractShortcutValue(shortcut))
+        setOverlayOpened(false)
+      } else {
+        handlePanelChange(extractShortcutValue(shortcut))
+      }
+    }
 
-    const handleConfirm = () => {
-      handleChange(buffer.value)
+    const shortcutOk = () => {
+      if (bufferUpdated.value) {
+        handleChange(buffer.value)
+      }
+
       setOverlayOpened(false)
     }
 
-    const inputProps = useInputProps(context)
-    const timePanelProps = useRangeTimePanelProps(props, hourEnabled, minuteEnabled, secondEnabled, use12Hours)
-
-    const renderInputsSide = (prefixCls: string, isFrom: boolean) => {
-      const { enableOverlayTimeInput } = inputEnableStatus.value
-
-      const {
-        dateInputValue,
-        timeInputValue,
-        dateInputFocused,
-        timeInputFocused,
-        handleDateInput,
-        handleTimeInput,
-        handleDateInputClear,
-        handleTimeInputClear,
-        handleDateInputFocus,
-        handleTimeInputFocus,
-        handleDateInputBlur,
-        handleTimeInputBlur,
-      } = isFrom ? fromControl : toControl
-
-      const _handleDateInputFocus = (evt: FocusEvent) => {
-        handleDateInputFocus()
-        if (inputEnableStatus.value.allowInput === 'overlay') {
-          inputRef.value = evt.target as HTMLInputElement
-        }
-      }
-      const _handleTimeInputFocus = (evt: FocusEvent) => {
-        handleTimeInputFocus()
-        if (inputEnableStatus.value.allowInput === 'overlay') {
-          inputRef.value = evt.target as HTMLInputElement
-        }
-      }
-
-      return (
-        <div class={`${prefixCls}-side`}>
-          <ɵInput
-            ref={isFrom ? inputInstance : undefined}
-            {...inputProps.value}
-            class={`${prefixCls}-date-input`}
-            v-slots={slots}
-            value={dateInputValue.value}
-            clearVisible={!!dateInputValue.value && !!inputEnableStatus.value.allowInput}
-            focused={dateInputFocused.value}
-            placeholder={dateFormatRef.value}
-            readonly={!inputEnableStatus.value.allowInput}
-            onInput={handleDateInput}
-            onFocus={_handleDateInputFocus}
-            onBlur={handleDateInputBlur}
-            onKeydown={handleKeyDown}
-            onClear={handleDateInputClear}
-          />
-          {enableOverlayTimeInput && (
-            <ɵInput
-              {...inputProps.value}
-              class={`${prefixCls}-time-input`}
-              v-slots={slots}
-              value={timeInputValue.value}
-              clearVisible={!!timeInputValue.value && !!inputEnableStatus.value.allowInput}
-              focused={timeInputFocused.value}
-              placeholder={timeFormatRef.value}
-              readonly={!inputEnableStatus.value.allowInput}
-              onInput={handleTimeInput}
-              onFocus={_handleTimeInputFocus}
-              onBlur={handleTimeInputBlur}
-              onKeydown={handleKeyDown}
-              onClear={handleTimeInputClear}
-            />
-          )}
-        </div>
-      )
+    const shorcutCancel = () => {
+      setOverlayOpened(false)
     }
 
     return () => {
-      const prefixCls = `${mergedPrefixCls.value}-overlay`
-      const inputsCls = `${prefixCls}-inputs`
-
-      const panelProps = {
-        value: buffer.value as Date[],
-        cellTooltip: props.cellTooltip,
-        disabledDate: props.disabledDate,
-        type: props.type,
-        timePanelOptions: timePanelProps.value,
-        visible: overlayVisible.value && visiblePanel.value,
-        onChange: handlePanelChange,
-        onSelect: props.onSelect,
+      if (slots.overlay) {
+        return slots.overlay()
       }
 
-      const panelSlots = {
-        cell: slots.cell,
-        separator: inputEnableStatus.value.enableOverlayDateInput
-          ? () => <div class={`${prefixCls}-separator`}></div>
-          : undefined,
+      let children: VNodeChild
+
+      const contentClasses = computed(() => {
+        const prefixCls = `${mergedPrefixCls.value}-overlay-content`
+
+        return {
+          [prefixCls]: true,
+          [`${prefixCls}-with-shortcuts`]: !!shortcuts.value.length,
+        }
+      })
+
+      const shortcutPanelRenderContext = {
+        slots,
+        setBuffer: handlePanelChange,
+        setValue: handleChange,
+        ok: shortcutOk,
+        cancel: shorcutCancel,
       }
 
-      const children = [
-        <div class={`${prefixCls}-body`}>
-          {inputEnableStatus.value.enableOverlayDateInput && (
-            <div class={inputsCls}>
-              {renderInputsSide(inputsCls, true)}
-              <div class={`${prefixCls}-separator`}>{renderSeparator()}</div>
-              {renderInputsSide(inputsCls, false)}
+      if (shortcuts.value.length) {
+        children = [
+          <RangeShortcuts
+            class={{
+              [`${mergedPrefixCls.value}-shortcuts-with-panel`]:
+                showShortcutPanel.value || !!selectedShortcut.value?.panelRenderer,
+            }}
+            prefixCls={mergedPrefixCls.value}
+            shortcuts={shortcuts.value}
+            selectedShortcut={selectedShortcut.value?.key}
+            onChange={handleShortcutChange}
+          />,
+          selectedShortcut.value?.panelRenderer ? (
+            <div class={`${mergedPrefixCls.value}-shortcuts-panel`}>
+              {selectedShortcut.value.panelRenderer(shortcutPanelRenderContext)}
             </div>
-          )}
-          <RangePanel v-slots={panelSlots} {...panelProps} />
-        </div>,
-        <ɵFooter
-          v-slots={slots}
-          class={`${prefixCls}-footer`}
-          footer={props.footer}
-          okText={locale.dateRangePicker.okText}
-          okButton={{ size: 'xs', mode: 'primary' }}
-          cancelVisible={false}
-          ok={handleConfirm}
-        />,
-      ]
+          ) : showShortcutPanel.value ? (
+            <div class={`${mergedPrefixCls.value}-shortcuts-panel`}>
+              <RangePickerOverlayInputs v-slots={slots} />
+              <RangePanel />
+              <RangePickerOverlayFooter v-slots={slots} />
+            </div>
+          ) : undefined,
+        ]
+      } else {
+        children = [
+          <RangePickerOverlayInputs v-slots={slots} />,
+          <RangePanel />,
+          <RangePickerOverlayFooter v-slots={slots} />,
+        ]
+      }
 
-      return props.overlayRender ? props.overlayRender(children) : <div>{children}</div>
+      return props.overlayRender ? props.overlayRender(children) : <div class={contentClasses.value}>{children}</div>
     }
   },
 })

@@ -1,7 +1,7 @@
 ---
 title:
-  zh: 快捷选择+日期范围选择
-  en: Shortcuts with date range
-order: 71
+  zh: 日期范围快捷选择
+  en: Date range shortcuts
+order: 73
 ---
 

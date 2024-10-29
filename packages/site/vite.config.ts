@@ -42,6 +42,11 @@ const componentPath: Record<string, string> = {
   IxColorPickerPalette: '@idux/components/color-picker',
   IxColorPickerEditor: '@idux/components/color-picker',
   IxColorPickerPresets: '@idux/components/color-picker',
+  IxDatePickerOverlayInputs: '@idux/components/date-picker',
+  IxDatePickerOverlayFooter: '@idux/components/date-picker',
+  IxDateRangePickerOverlayInputs: '@idux/components/date-picker',
+  IxDateRangePickerOverlayFooter: '@idux/components/date-picker',
+  IxDateRangePanel: '@idux/components/date-picker',
   IxProTagSelect: '@idux/pro/tag-select',
 }
 

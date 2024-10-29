@@ -13,7 +13,7 @@ import { datePickerToken } from '../token'
 
 export default defineComponent({
   inheritAttrs: false,
-  setup(_, { expose }) {
+  setup(_, { expose, slots }) {
     const context = inject(datePickerToken)!
     const {
       accessor,
@@ -45,17 +45,25 @@ export default defineComponent({
     return () => {
       return (
         <div class={`${mergedPrefixCls.value}-input`}>
-          <input
-            ref={inputEnableStatus.value.allowInput === 'overlay' ? triggerInputRef : inputRef}
-            class={`${mergedPrefixCls.value}-input-inner`}
-            autocomplete="off"
-            disabled={accessor.disabled}
-            placeholder={placeholder.value}
-            readonly={props.readonly || inputEnableStatus.value.enableInput === false}
-            size={inputSize.value}
-            value={inputValue.value}
-            onInput={handleInput}
-          />
+          {slots.triggerContent?.({
+            inputValue: inputValue.value,
+            placeholder: placeholder.value,
+            readonly: props.readonly || inputEnableStatus.value.enableInput === false,
+            disabled: accessor.disabled,
+            handleInput,
+          }) ?? (
+            <input
+              ref={inputEnableStatus.value.allowInput === 'overlay' ? triggerInputRef : inputRef}
+              class={`${mergedPrefixCls.value}-input-inner`}
+              autocomplete="off"
+              disabled={accessor.disabled}
+              placeholder={placeholder.value}
+              readonly={props.readonly || inputEnableStatus.value.enableInput === false}
+              size={inputSize.value}
+              value={inputValue.value}
+              onInput={handleInput}
+            />
+          )}
         </div>
       )
     }

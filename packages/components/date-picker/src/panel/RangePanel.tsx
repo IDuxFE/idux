@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 
 import { isArray } from 'lodash-es'
 
@@ -18,13 +18,16 @@ import { getTimePickerThemeTokens } from '@idux/components/time-picker'
 import { getThemeTokens } from '../../theme'
 import { useRangeActiveValue } from '../composables/useActiveValue'
 import { useRangePanelState } from '../composables/useRangePanelState'
-import { dateRangePanelProps } from '../types'
+import { dateRangePickerPanelPropsToken } from '../token'
+import { type DateRangePanelProps, dateRangePanelProps } from '../types'
 import { convertPickerTypeToConfigType } from '../utils'
 
 export default defineComponent({
   name: 'IxDateRangePanel',
   props: dateRangePanelProps,
   setup(props, { slots }) {
+    const inherittedProps = inject(dateRangePickerPanelPropsToken, null)
+
     const common = useGlobalConfig('common')
     const { globalHashId, hashId, registerToken } = useThemeToken('datePicker')
     const { registerToken: registerTimePickerToken } = useThemeToken('timePicker')
@@ -34,18 +37,37 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-date-range-picker-panel`)
     const dateConfig = useDateConfig()
 
+    const mergedProps = computed(() => {
+      if (!inherittedProps) {
+        return props
+      }
+
+      const res = {} as DateRangePanelProps
+
+      Object.keys(props).forEach(key => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ;(res as any)[key] =
+          props[key as keyof DateRangePanelProps] ?? inherittedProps.value[key as keyof DateRangePanelProps]
+      })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ;(res as any).type = res.type ?? 'date'
+
+      return res
+    })
+
     const { handleChange, handleDatePanelCellClick, handleDatePanelCellMouseenter, panelValue, isSelecting } =
-      useRangePanelState(props, dateConfig)
+      useRangePanelState(mergedProps, dateConfig)
     const { fromActiveValue, toActiveValue, setFromActiveValue, setToActiveValue } = useRangeActiveValue(
       dateConfig,
-      props,
+      mergedProps,
       panelValue,
       isSelecting,
     )
 
     const renderSide = (isFrom: boolean) => {
+      const _props = mergedProps.value
       const timeValue = panelValue.value?.[isFrom ? 0 : 1]
-      const datePanelType = convertPickerTypeToConfigType(props.type)
+      const datePanelType = convertPickerTypeToConfigType(_props.type!)
       const activeValue = isFrom ? fromActiveValue.value : toActiveValue.value
 
       const handleTimePanelChange = (value: Date) => {
@@ -53,29 +75,30 @@ export default defineComponent({
       }
 
       const datePanelProps = {
-        cellTooltip: props.cellTooltip,
-        disabledDate: props.disabledDate,
+        cellTooltip: _props.cellTooltip,
+        disabledDate: _props.disabledDate,
         type: datePanelType,
         value: panelValue.value,
-        visible: props.type === 'datetime' ? props.visible === 'datePanel' : !!props.visible,
+        visible: _props.type === 'datetime' ? _props.visible === 'datePanel' : !!_props.visible,
         activeDate: activeValue,
         onCellClick: handleDatePanelCellClick,
         onCellMouseenter: handleDatePanelCellMouseenter,
         'onUpdate:activeDate': isFrom ? setFromActiveValue : setToActiveValue,
       }
       const _timePanelProps = {
-        ...((isArray(props.timePanelOptions) ? props.timePanelOptions[isFrom ? 0 : 1] : props.timePanelOptions) ?? {}),
+        ...((isArray(_props.timePanelOptions) ? _props.timePanelOptions[isFrom ? 0 : 1] : _props.timePanelOptions) ??
+          {}),
         activeValue: timeValue ?? activeValue,
         value: timeValue,
-        visible: props.type === 'datetime' ? props.visible === 'timePanel' : false,
+        visible: _props.type === 'datetime' ? _props.visible === 'timePanel' : false,
         onChange: handleTimePanelChange,
         'onUpdate:activeValue': isFrom ? setFromActiveValue : setToActiveValue,
       }
 
       return (
         <div class={`${mergedPrefixCls.value}-side`}>
-          <ɵDatePanel v-show={props.visible !== 'timePanel'} v-slots={slots} {...datePanelProps} />
-          {props.type === 'datetime' && <ɵTimePanel v-show={props.visible === 'timePanel'} {..._timePanelProps} />}
+          <ɵDatePanel v-show={_props.visible !== 'timePanel'} v-slots={slots} {...datePanelProps} />
+          {_props.type === 'datetime' && <ɵTimePanel v-show={_props.visible === 'timePanel'} {..._timePanelProps} />}
         </div>
       )
     }

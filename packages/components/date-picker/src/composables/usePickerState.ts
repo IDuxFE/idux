@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, toRaw } from 'vue'
+import { type ComputedRef, computed, toRaw } from 'vue'
 
 import { isArray } from 'lodash-es'
 
@@ -23,6 +23,7 @@ type StateValueType<T extends DatePickerProps | DateRangePickerProps> = T extend
 
 export interface PickerStateContext<T extends DatePickerProps | DateRangePickerProps> {
   accessor: FormAccessor<T['value']>
+  convertedValue: ComputedRef<StateValueType<T>>
   mergedSize: ComputedRef<FormSize>
   mergedStatus: ComputedRef<ValidateStatus | undefined>
   focused: ComputedRef<boolean>
@@ -44,6 +45,14 @@ export function usePickerState<T extends DatePickerProps | DateRangePickerProps>
   const mergedStatus = useFormStatus(props, control)
   const [focused, setFocused] = useState(false)
 
+  const convertedValue = computed(() => {
+    if (isArray(accessor.value)) {
+      return accessor.value.map(v => convertToDate(dateConfig, v, formatRef.value)) as StateValueType<T>
+    }
+
+    return convertToDate(dateConfig, accessor.value, formatRef.value) as StateValueType<T>
+  })
+
   function handleChange(value: StateValueType<T>) {
     const newValue = (isArray(value) ? sortRangeValue(dateConfig, value) : value) as StateValueType<T>
 
@@ -51,12 +60,7 @@ export function usePickerState<T extends DatePickerProps | DateRangePickerProps>
       return
     }
 
-    let oldValue = toRaw(accessor.value) as StateValueType<T>
-    oldValue = (
-      isArray(oldValue)
-        ? oldValue.map(v => convertToDate(dateConfig, v, formatRef.value))
-        : convertToDate(dateConfig, oldValue, formatRef.value)
-    ) as StateValueType<T>
+    const oldValue = toRaw(convertedValue.value)
     accessor.setValue(newValue as T['value'])
     callEmit(props.onChange as (value: StateValueType<T>, oldValue: StateValueType<T>) => void, newValue, oldValue)
   }
@@ -79,6 +83,7 @@ export function usePickerState<T extends DatePickerProps | DateRangePickerProps>
 
   return {
     accessor,
+    convertedValue,
     mergedSize,
     mergedStatus,
     focused,

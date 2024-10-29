@@ -5,25 +5,27 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, normalizeClass, provide, ref, toRef, watch } from 'vue'
+import { type Slots, computed, defineComponent, normalizeClass, provide, ref, toRef, watch } from 'vue'
 
 import { useDateConfig, useGlobalConfig } from '@idux/components/config'
 import { IxControlTrigger } from '@idux/components/control-trigger'
 import { useFormElement } from '@idux/components/form'
 import { useThemeToken } from '@idux/components/theme'
 
+import { getThemeTokens } from '../theme'
 import { useFormat } from './composables/useFormat'
 import { useInputEnableStatus } from './composables/useInputEnableStatus'
 import { useRangeKeyboardEvents } from './composables/useKeyboardEvents'
 import { useOverlayState } from './composables/useOverlayState'
 import { usePickerState } from './composables/usePickerState'
 import { useRangeControl } from './composables/useRangeControl'
+import { useRangePickerPanelProps } from './composables/useRangePickerPanelProps'
+import { useRangeShortcuts } from './composables/useRangeShortcuts'
 import { useTriggerProps } from './composables/useTriggerProps'
 import RangeContent from './content/RangeContent'
-import { dateRangePickerToken } from './token'
+import { dateRangePickerPanelPropsToken, dateRangePickerPanelSlotsToken, dateRangePickerToken } from './token'
 import RangeTrigger from './trigger/RangeTrigger'
 import { dateRangePickerProps } from './types'
-import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxDateRangePicker',
@@ -50,7 +52,7 @@ export default defineComponent({
     const formatContext = useFormat(props, config)
     const pickerStateContext = usePickerState(props, config, dateConfig, formatContext.formatRef)
 
-    const { accessor, focused, handleFocus, handleBlur, handleChange } = pickerStateContext
+    const { accessor, convertedValue, focused, handleFocus, handleBlur, handleChange } = pickerStateContext
 
     const rangeControlContext = useRangeControl(
       dateConfig,
@@ -59,6 +61,13 @@ export default defineComponent({
       toRef(accessor, 'value'),
       toRef(props, 'type'),
     )
+
+    const rangeShortcutsContext = useRangeShortcuts(
+      computed(() => props.shortcuts),
+      convertedValue,
+      overlayOpened,
+    )
+
     const handleKeyDown = useRangeKeyboardEvents(rangeControlContext, overlayOpened, setOverlayOpened, handleChange)
 
     const renderSeparator = () => slots.separator?.() ?? props.separator ?? locale.dateRangePicker.separator
@@ -82,13 +91,26 @@ export default defineComponent({
       handleKeyDown,
       ...formatContext,
       ...pickerStateContext,
+      ...rangeShortcutsContext,
       handleFocus,
       handleBlur,
     }
 
+    const { shortcuts, selectedShortcut, showShortcutPanel } = rangeShortcutsContext
+
     const triggerProps = useTriggerProps(context)
+    const dateRangePanelProps = useRangePickerPanelProps(context)
+
+    const dateRangePanelSlots = {
+      cell: slots.cell,
+      separator: inputEnableStatus.value.enableOverlayDateInput
+        ? () => <div class={`${mergedPrefixCls.value}-overlay-separator`}></div>
+        : undefined,
+    } as Slots
 
     provide(dateRangePickerToken, context)
+    provide(dateRangePickerPanelPropsToken, dateRangePanelProps)
+    provide(dateRangePickerPanelSlotsToken, dateRangePanelSlots)
 
     watch(overlayOpened, opened => {
       if (opened) {
@@ -106,8 +128,8 @@ export default defineComponent({
       }
     })
 
-    const renderTrigger = () => <RangeTrigger ref={triggerRef}></RangeTrigger>
-    const renderContent = () => <RangeContent></RangeContent>
+    const renderTrigger = () => <RangeTrigger ref={triggerRef} v-slots={slots}></RangeTrigger>
+    const renderContent = () => <RangeContent v-slots={slots}></RangeContent>
     const overlayClass = computed(() =>
       normalizeClass([`${mergedPrefixCls.value}-overlay`, globalHashId.value, hashId.value, props.overlayClassName]),
     )
@@ -117,6 +139,9 @@ export default defineComponent({
         {...triggerProps.value}
         class={`${mergedPrefixCls.value} ${globalHashId.value} ${hashId.value}`}
         overlayClassName={overlayClass.value}
+        overlayMatchWidth={
+          !!shortcuts.value.length && !showShortcutPanel.value && !selectedShortcut.value?.panelRenderer
+        }
         {...attrs}
         v-slots={{ default: renderTrigger, overlay: renderContent, suffix: slots.suffix, clearIcon: slots.clearIcon }}
       />

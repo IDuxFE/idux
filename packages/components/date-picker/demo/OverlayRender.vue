@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import type { DatePickerType } from '@idux/components/date-picker'
 
-import { type VNodeChild, h, ref } from 'vue'
+import { VNodeChild, h, ref } from 'vue'
 
 import { addDays, addHours, addMonths } from 'date-fns'
 
@@ -57,7 +57,7 @@ const customOverlayRender = (children: VNodeChild) => {
           renderShortcut('Pick Datetime', undefined, 'datetime'),
         ],
       ),
-      h('div', [children]),
+      h('div', { class: 'demo-custom-panel__overlay__shortcuts__panel' }, [children]),
     ],
   )
 }
@@ -69,10 +69,11 @@ const customOverlayRender = (children: VNodeChild) => {
   &__shortcuts {
     width: 120px;
     padding: 8px 0;
-    margin-right: 16px;
-    margin-left: -16px;
-    margin-top: -16px;
     border-right: 1px solid #e1e5eb;
+
+    &__panel {
+      padding: 16px 16px 0 16px;
+    }
   }
   &__shortcut {
     width: 100%;

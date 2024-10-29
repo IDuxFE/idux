@@ -22,6 +22,10 @@ export interface DatePickerThemeTokens {
   rangeOverlaySeparatorWidth: string | number
   rangeOverlaySeparatorFontSize: number
 
+  rangeShortcutsItemHeight: number
+  rangeShortcutsItemPadding: string
+  rangeShortcutsItemFontSize: number
+
   panelFontSize: number
   panelColor: string
 
