@@ -8,7 +8,6 @@ import { IduxResolver } from 'unplugin-vue-components/resolvers'
 // eslint-disable-next-line import/no-unresolved
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
-import { chunkSplitPlugin } from 'vite-plugin-chunk-split'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 import cdkPackage from '@idux/cdk/package.json'
@@ -45,9 +44,13 @@ const componentPath: Record<string, string> = {
   IxProTagSelect: '@idux/pro/tag-select',
 }
 
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(async ({ command, mode }) => {
   const isBuild = command === 'build'
   const baseUrl = mode === 'pre-version' ? `/version/${cdkPackage.version.slice(0, -1)}x/` : '/'
+
+  // https://github.com/sanyuan0704/vite-plugin-chunk-split/issues/43#issuecomment-2333086626
+  // import-meta-resolve is not supported by CommonJS modules
+  const { chunkSplitPlugin } = await import('vite-plugin-chunk-split')
 
   return {
     plugins: [
