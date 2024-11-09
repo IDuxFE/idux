@@ -217,7 +217,7 @@ export const buildApiJson = (options: Options, pro?: boolean): TaskFunction => {
     const componentsApi = processAPIs(await Promise.all(components.map(comp => parseComponentInfo(comp))))
 
     mergeExtraAPIs(componentsApi, join(targetDirname, 'api.extra.json'))
-    pro && migrateToProAPIs(componentsApi, join(distDirname.replace('pro', 'components'), 'api.json'))
+    pro && migrateToProAPIs(componentsApi, join(distDirname, '../', 'components', 'api.json'))
 
     await writeJson(join(distDirname, 'api.json'), componentsApi)
     done()
