@@ -94,6 +94,16 @@ describe('Pagination', () => {
     await wrapper.find('.ix-input').trigger('keydown', { key: 'enter' })
 
     expect(wrapper.find('.ix-pagination-item-active').text()).toEqual('3')
+
+    await wrapper.find('.ix-input').setValue('aaa')
+    await wrapper.find('.ix-input').trigger('keydown', { key: 'enter' })
+
+    expect(wrapper.find('.ix-pagination-item-active').text()).toEqual('3')
+
+    await wrapper.find('.ix-input').setValue('10')
+    await wrapper.find('.ix-input').trigger('keydown', { key: 'enter' })
+
+    expect(wrapper.find('.ix-pagination-item-active').text()).toEqual('5')
   })
 
   test('showTitle work', async () => {
@@ -128,28 +138,35 @@ describe('Pagination', () => {
 
     expect(wrapper.find('.ix-pagination-item-slash').exists()).toBeTruthy()
 
-    await wrapper.find('.ix-input').setValue('3')
-    await wrapper.find('.ix-input').trigger('keydown', { key: 'enter' })
+    const input = wrapper.find('.ix-input') as DOMWrapper<HTMLInputElement>
 
+    await input.setValue('3')
+    await input.trigger('keydown', { key: 'enter' })
+
+    expect(input.element.value).toEqual('3')
     expect(onUpdatePageIndex).toBeCalledWith(3)
 
-    await wrapper.find('.ix-input').setValue('6')
-    await wrapper.find('.ix-input').trigger('keydown', { key: 'enter' })
+    await input.setValue('6')
+    await input.trigger('keydown', { key: 'enter' })
 
+    expect(input.element.value).toEqual('5')
     expect(onUpdatePageIndex).toBeCalledWith(5)
 
-    await wrapper.find('.ix-input').setValue('asdasd')
-    await wrapper.find('.ix-input').trigger('keydown', { key: 'enter' })
+    await input.setValue('asdasd')
+    await input.trigger('keydown', { key: 'enter' })
 
+    expect(input.element.value).toEqual('5')
     expect(onUpdatePageIndex).toBeCalledWith(5)
 
     const [prev, , next] = wrapper.findAll('.ix-pagination-item')
     await prev.trigger('click')
 
+    expect(input.element.value).toEqual('4')
     expect(onUpdatePageIndex).toBeCalledWith(4)
 
     await next.trigger('click')
 
+    expect(input.element.value).toEqual('5')
     expect(onUpdatePageIndex).toBeCalledWith(5)
 
     await wrapper.setProps({ showQuickJumper: false })
