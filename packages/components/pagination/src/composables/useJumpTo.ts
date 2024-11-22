@@ -18,9 +18,7 @@ export function useJumpToIndex(
     const target = evt.target as HTMLInputElement
     const index = Math.floor(convertNumber(target.value, activeIndex.value))
     changePageIndex(index)
-    if (!simple.value) {
-      target.value = ''
-    }
+    target.value = simple.value ? `${activeIndex.value}` : ''
   }
 
   return withKeys(jumpToIndex, ['enter'])
