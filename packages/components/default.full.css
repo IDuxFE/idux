@@ -505,6 +505,9 @@
   --ix-date-picker-range-overlay-footer-padding: 8px 0;
   --ix-date-picker-range-overlay-separator-width: 32px;
   --ix-date-picker-range-overlay-separator-font-size: 12px;
+  --ix-date-picker-range-shortcuts-item-height: 32px;
+  --ix-date-picker-range-shortcuts-item-font-size: 12px;
+  --ix-date-picker-range-shortcuts-item-padding: 8px 12px;
   --ix-date-picker-panel-font-size: 12px;
   --ix-date-picker-panel-color: #2f3540;
   --ix-date-picker-panel-cell-width: 28px;

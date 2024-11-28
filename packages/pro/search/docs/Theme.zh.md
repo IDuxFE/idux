@@ -6,8 +6,12 @@
 | `heightSm` | sm 尺寸高度 | `number` | `24` | `24` |
 | `namePanelMinWidth` | 搜索项名称选择面板的最小宽度 | `number` | `160` | `160` |
 | `operatorPanelMinWidth` | 操作符选择面板的最小宽度 | `number` | `20` | `20` |
+| `quickSelectItemMaxHeight` | 快捷搜索面板中搜索项的最大高度 | `number` | `345` | `345` |
+| `quickSelectItemMinWidth` | 快捷搜索面板中搜索项的最小宽度 | `number` | `220` | `220` |
 | `quickSelectPaddingMd` | md 尺寸快捷搜索面板padding | `string | number` | `12` | `12` |
 | `quickSelectPaddingSm` | sm 尺寸快捷搜索面板padding | `string | number` | `8` | `8` |
+| `quickSelectSelectPanelMinHeight` | 快捷搜索面板中select面板的最小高度 | `number` | `230` | `230` |
+| `quickSelectTreeSelectPanelMinHeight` | 快捷搜索面板中treeSelect面板的最小高度 | `number` | `230` | `230` |
 | `searchBtnBgColor` | 搜索按钮背景颜色 | `string` | `#1c6eff` | `#4083E8` |
 | `searchBtnBgColorDisabled` | 搜索按钮禁用背景颜色 | `string` | `#bec3cc` | `#687080` |
 | `searchBtnBgColorHover` | 搜索按钮悬浮背景颜色 | `string` | `#458fff` | `#1B61DD` |

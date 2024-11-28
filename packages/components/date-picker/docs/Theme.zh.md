@@ -37,4 +37,7 @@
 | `rangeOverlayPadding` |  | `string | number` | `16px 16px 0 16px` | `16px 16px 0 16px` |
 | `rangeOverlaySeparatorFontSize` |  | `number` | `12` | `12` |
 | `rangeOverlaySeparatorWidth` |  | `string | number` | `32` | `32` |
+| `rangeShortcutsItemFontSize` |  | `number` | `12` | `12` |
+| `rangeShortcutsItemHeight` |  | `number` | `32` | `32` |
+| `rangeShortcutsItemPadding` |  | `string` | `8px 12px` | `8px 12px` |
 | `separatorMarginHorizontal` |  | `string | number` | `16` | `16` |
