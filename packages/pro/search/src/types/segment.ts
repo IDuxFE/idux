@@ -37,6 +37,8 @@ export interface PanelRenderContext<V = unknown> {
   value: V
   states: SegmentState[]
   renderLocation: RenderLocation
+  visible: boolean
+  active: boolean
   ok: () => void
   cancel: () => void
   setValue: (value: V) => void

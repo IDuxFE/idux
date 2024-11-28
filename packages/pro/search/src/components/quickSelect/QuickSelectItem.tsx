@@ -185,6 +185,8 @@ export default defineComponent({
               value: itemValue.value,
               states: searchState.value?.segmentStates ?? [],
               renderLocation: 'quick-select-panel',
+              visible: true,
+              active: true,
               ok,
               cancel,
               setValue,

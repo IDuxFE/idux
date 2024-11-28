@@ -7,10 +7,12 @@
 
 import type { ResolvedSearchField, SearchField, Segment } from '../types'
 import type { VKey } from '@idux/cdk/utils'
-import type { DateConfig } from '@idux/components/config'
+import type { DateRangePickerLocale } from '@idux/components/locales'
 import type { ProSearchLocale } from '@idux/pro/locales'
 
 import { type ComputedRef, computed } from 'vue'
+
+import { type DateConfig, useGlobalConfig } from '@idux/components/config'
 
 import { createCascaderSegment } from '../segments/CreateCascaderSegment'
 import { createDatePickerSegment } from '../segments/CreateDatePickerSegment'
@@ -32,6 +34,7 @@ export function useResolvedSearchFields(
   dateConfig: DateConfig,
   locale: ProSearchLocale,
 ): ResolvedSearchFieldsContext {
+  const componentLocale = useGlobalConfig('locale')
   const resolvedSearchFields = computed(
     () =>
       searchFields.value.map(searchField => {
@@ -39,7 +42,13 @@ export function useResolvedSearchFields(
           ...searchField,
           segments: [
             createOperatorSegment(mergedPrefixCls.value, searchField),
-            ...createSearchItemContentSegments(mergedPrefixCls.value, searchField, dateConfig, locale),
+            ...createSearchItemContentSegments(
+              mergedPrefixCls.value,
+              searchField,
+              dateConfig,
+              locale,
+              componentLocale.dateRangePicker,
+            ),
           ].filter(Boolean) as Segment[],
         }
       }) ?? [],
@@ -64,18 +73,19 @@ function createSearchItemContentSegments(
   prefixCls: string,
   searchField: SearchField,
   dateConfig: DateConfig,
-  locale: ProSearchLocale,
+  proSearchLocale: ProSearchLocale,
+  dateRangePickerLocale: DateRangePickerLocale,
 ) {
   if (searchField.type === 'multiSegment') {
     return searchField.fieldConfig.segments.map(segmentConfig =>
-      createCustomSegment(prefixCls, dateConfig, segmentConfig, locale),
+      createCustomSegment(prefixCls, dateConfig, segmentConfig, proSearchLocale),
     )
   }
 
   const segment = (() => {
     switch (searchField.type) {
       case 'select':
-        return createSelectSegment(prefixCls, searchField.fieldConfig, locale)
+        return createSelectSegment(prefixCls, searchField.fieldConfig, proSearchLocale)
       case 'treeSelect':
         return createTreeSelectSegment(prefixCls, searchField.fieldConfig)
       case 'cascader':
@@ -85,9 +95,9 @@ function createSearchItemContentSegments(
       case 'datePicker':
         return createDatePickerSegment(prefixCls, searchField.fieldConfig, dateConfig)
       case 'dateRangePicker':
-        return createDateRangePickerSegment(prefixCls, searchField.fieldConfig, dateConfig)
+        return createDateRangePickerSegment(prefixCls, searchField.fieldConfig, dateConfig, dateRangePickerLocale)
       case 'custom':
-        return createCustomSegment(prefixCls, dateConfig, searchField.fieldConfig, locale)
+        return createCustomSegment(prefixCls, dateConfig, searchField.fieldConfig, proSearchLocale)
       default:
         return
     }

@@ -186,6 +186,8 @@ export default defineComponent({
         value: props.value,
         states: searchState.value?.segmentStates ?? [],
         renderLocation: 'individual',
+        visible: overlayOpened.value,
+        active: isActive.value,
         cancel: handleCancel,
         ok: handleConfirm,
         setValue: handleChange,

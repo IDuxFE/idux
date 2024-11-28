@@ -9,7 +9,12 @@
 
 import type { ExtractInnerPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { CascaderData, CascaderExpandTrigger, CascaderStrategy } from '@idux/components/cascader'
-import type { DatePanelProps, DateRangePanelProps } from '@idux/components/date-picker'
+import type {
+  DatePanelProps,
+  DateRangePanelProps,
+  RangeShortcutOptions,
+  RangeShortcutProp,
+} from '@idux/components/date-picker'
 import type { SelectData } from '@idux/components/select'
 import type { TreeDragDropOptions, TreeDroppable } from '@idux/components/tree'
 import type { TreeSelectNode } from '@idux/components/tree-select'
@@ -134,17 +139,21 @@ export const proSearchDatePanelProps = {
   cellTooltip: Function as PropType<(cell: { value: Date; disabled: boolean }) => string | void>,
   disabledDate: Function as PropType<(date: Date) => boolean>,
   defaultOpenValue: [Date, Array] as PropType<Date | Date[]>,
+  shortcuts: [Array, Object] as PropType<RangeShortcutProp>,
   showFooter: { type: Boolean, default: true },
   type: {
     type: String as PropType<DatePanelProps['type']>,
     default: 'date',
   },
+  visible: Boolean,
+  active: Boolean,
   timePanelOptions: [Object, Array] as PropType<
     DatePanelProps['timePanelOptions'] | DateRangePanelProps['timePanelOptions']
   >,
   onChange: Function as PropType<(value: Date | Date[] | undefined) => void>,
   onConfirm: Function as PropType<() => void>,
   onCancel: Function as PropType<() => void>,
+  onSelectedShortcutChange: Function as PropType<(shortcut: RangeShortcutOptions | undefined) => void>,
 } as const
 export type ProSearchDatePanelProps = ExtractInnerPropTypes<typeof proSearchDatePanelProps>
 
