@@ -24,11 +24,15 @@ export interface RangeActiveValueContext {
   setToActiveValue: (value: Date) => void
 }
 
-export function useActiveValue(dateConfig: DateConfig, props: DatePanelProps): ActiveValueContext {
-  const [activeValue, setActiveValue] = useControlledProp(props, 'activeValue', props.value ?? dateConfig.now())
+export function useActiveValue(dateConfig: DateConfig, mergedProps: ComputedRef<DatePanelProps>): ActiveValueContext {
+  const [activeValue, setActiveValue] = useControlledProp(
+    mergedProps,
+    'activeValue',
+    mergedProps.value.value ?? dateConfig.now(),
+  )
 
   watch(
-    () => props.value,
+    () => mergedProps.value.value,
     value => setActiveValue(value ?? dateConfig.now()),
   )
 
@@ -49,15 +53,15 @@ const viewTypeMap: Record<DatePickerType, 'month' | 'year'> = {
 
 export function useRangeActiveValue(
   dateConfig: DateConfig,
-  props: DateRangePanelProps,
+  mergedProps: ComputedRef<DateRangePanelProps>,
   panelValue: ComputedRef<(Date | undefined)[] | undefined>,
   isSelecting: ComputedRef<boolean>,
 ): RangeActiveValueContext {
   const { set, get } = dateConfig
   const now = dateConfig.now()
 
-  const viewType = computed(() => viewTypeMap[props.type])
-  const viewSpan = computed(() => (props.type === 'year' ? 12 : 1))
+  const viewType = computed(() => viewTypeMap[mergedProps.value.type!])
+  const viewSpan = computed(() => (mergedProps.value.type === 'year' ? 12 : 1))
 
   const fromPanelValue = computed(() => panelValue.value?.[0])
   const toPanelValue = computed(() => panelValue.value?.[1])
@@ -72,7 +76,7 @@ export function useRangeActiveValue(
     const toViewValue = get(to, viewType.value)
 
     /* eslint-disable indent */
-    return props.type === 'year'
+    return mergedProps.value.type === 'year'
       ? fromViewValue < toViewValue - viewSpan.value
       : (() => {
           const fromViewYearValue = get(from, 'year')
@@ -122,7 +126,7 @@ export function useRangeActiveValue(
       }
 
       const yearValue = get(value, 'year')
-      if (viewTypeMap[props.type] === 'year') {
+      if (viewTypeMap[mergedProps.value.type!] === 'year') {
         return [fromActiveValue, toActiveValue].map(activeDate => get(activeDate.value, 'year')).includes(yearValue)
       }
 
@@ -140,7 +144,7 @@ export function useRangeActiveValue(
     setActiveValue([fromValue, calcValidActiveDate(fromValue, toValue, 'to')])
   }
 
-  const [activeValue, setActiveValue] = useControlledProp(props, 'activeValue', [
+  const [activeValue, setActiveValue] = useControlledProp(mergedProps, 'activeValue', [
     fromPanelValue.value ?? now,
     calcValidActiveDate(fromPanelValue.value ?? now, toPanelValue.value, 'to'),
   ])
@@ -148,7 +152,7 @@ export function useRangeActiveValue(
   const toActiveValue = computed(() => activeValue.value[1])
 
   // reset panel active value when value, picker type, or visible state changes
-  watch([panelValue, () => props.visible, () => props.type], initActiveDate)
+  watch([panelValue, () => mergedProps.value.visible, () => mergedProps.value.type], initActiveDate)
 
   const handleFromActiveValueUpdate = (value: Date) => {
     setActiveValue([value, calcValidActiveDate(value, toActiveValue.value, 'to')])

@@ -21,6 +21,7 @@ export function getDefaultThemeTokens(
     colorInfoContainerBg,
     marginSizeLg,
     paddingSizeSm,
+    paddingSizeMd,
     paddingSizeLg,
     fontSizeSm,
     fontWeightMd,
@@ -45,6 +46,9 @@ export function getDefaultThemeTokens(
     rangeOverlayFooterPadding: `${paddingSizeSm}px 0`,
     rangeOverlaySeparatorWidth: 32,
     rangeOverlaySeparatorFontSize: fontSizeSm,
+    rangeShortcutsItemHeight: heightMd,
+    rangeShortcutsItemFontSize: fontSizeSm,
+    rangeShortcutsItemPadding: `${paddingSizeSm}px ${paddingSizeMd}px`,
 
     panelFontSize: fontSizeSm,
     panelColor: colorText,

@@ -6,11 +6,39 @@
  */
 
 import type { AbstractControl, ValidateStatus } from '@idux/cdk/forms'
-import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray } from '@idux/cdk/utils'
+import type { ExtractInnerPropTypes, ExtractPublicPropTypes, MaybeArray, VKey } from '@idux/cdk/utils'
 import type { ɵFooterButtonProps } from '@idux/components/_private/footer'
 import type { FormSize } from '@idux/components/form'
 import type { OverlayContainerType } from '@idux/components/utils'
-import type { DefineComponent, HTMLAttributes, PropType, VNode, VNodeChild } from 'vue'
+import type { DefineComponent, HTMLAttributes, PropType, Slots, VNode, VNodeChild } from 'vue'
+
+export type PresetRangeShortcut = 'today' | 'yesterday' | 'last24h' | 'last7d' | 'last30d' | 'last180d' | 'custom'
+
+export interface RangeShortcutPanelRenderContext {
+  slots: Slots
+  setBuffer: (value: [Date, Date] | undefined) => void
+  setValue: (value: [Date, Date] | undefined) => void
+  ok: () => void
+  cancel: () => void
+}
+export interface RangeShortcutOptions {
+  key: VKey
+  label: string
+  confirmOnSelect?: boolean
+  selectedLabel?: string
+  value?: [Date, Date] | (() => [Date, Date])
+  onClick?: (evt: MouseEvent) => void
+  panelRenderer?: (context: RangeShortcutPanelRenderContext) => VNodeChild
+}
+
+export type RangeShortcut = PresetRangeShortcut | RangeShortcutOptions
+
+export type RangeShortcutProp =
+  | RangeShortcut[]
+  | {
+      showPanel?: boolean
+      shortcuts: RangeShortcut[]
+    }
 
 export interface PickerTimePanelOptions {
   disabledHours?: (selectedAmPm: string | undefined) => number[]
@@ -75,7 +103,7 @@ const datePickerCommonProps = {
     default: undefined,
   },
   overlayTabindex: { type: Number, default: undefined },
-  overlayRender: Function as PropType<(children: VNode[]) => VNodeChild>,
+  overlayRender: Function as PropType<(children: VNodeChild) => VNodeChild>,
   readonly: {
     type: Boolean as PropType<boolean>,
     default: false,
@@ -129,6 +157,7 @@ export const dateRangePickerProps = {
   footer: { type: [Boolean, Array, Object] as PropType<boolean | ɵFooterButtonProps[] | VNode>, default: true },
   placeholder: Array as PropType<string[]>,
   separator: [String, Object] as PropType<string | VNode>,
+  shortcuts: [Array, Object] as PropType<RangeShortcut[] | RangeShortcutProp>,
   timePanelOptions: [Object, Array] as PropType<PickerTimePanelOptions | PickerTimePanelOptions[]>,
 
   onChange: [Function, Array] as PropType<
@@ -156,13 +185,16 @@ export const datePanelProps = {
   value: Date as PropType<Date>,
   type: {
     type: String as PropType<DatePickerType>,
-    default: 'date',
+    default: undefined,
   },
   timePanelOptions: {
     type: Object as PropType<TimePanelOptions>,
-    default: () => ({}),
+    default: undefined,
   },
-  visible: [String, Boolean] as PropType<'datePanel' | 'timePanel' | boolean>,
+  visible: {
+    type: [String, Boolean] as PropType<'datePanel' | 'timePanel' | boolean>,
+    default: undefined,
+  },
 
   onChange: [Function, Array] as PropType<MaybeArray<(value: Date | undefined) => void>>,
   'onUpdate:activeValue': [Function, Array] as PropType<MaybeArray<(date: Date | undefined) => void>>,
@@ -181,13 +213,16 @@ export const dateRangePanelProps = {
   value: Array as PropType<Date[] | undefined>,
   type: {
     type: String as PropType<DatePickerType>,
-    default: 'date',
+    default: undefined,
   },
   timePanelOptions: {
     type: Array as PropType<TimePanelOptions[]>,
-    default: () => [],
+    default: undefined,
   },
-  visible: [String, Boolean] as PropType<'datePanel' | 'timePanel' | boolean>,
+  visible: {
+    type: [String, Boolean] as PropType<'datePanel' | 'timePanel' | boolean>,
+    default: undefined,
+  },
 
   onChange: [Function, Array] as PropType<MaybeArray<(value: Date[] | undefined) => void>>,
   onSelect: [Function, Array] as PropType<MaybeArray<(selectingDate: (Date | undefined)[] | undefined) => void>>,

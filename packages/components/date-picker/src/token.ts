@@ -13,7 +13,8 @@ import type { InputEnableStatus } from './composables/useInputEnableStatus'
 import type { OverlayStateContext } from './composables/useOverlayState'
 import type { PickerStateContext } from './composables/usePickerState'
 import type { PickerRangeControlContext } from './composables/useRangeControl'
-import type { DatePickerProps, DateRangePickerProps } from './types'
+import type { DateRangeShortcutsContext } from './composables/useRangeShortcuts'
+import type { DatePanelProps, DatePickerProps, DateRangePanelProps, DateRangePickerProps } from './types'
 import type { CommonConfig, DateConfig, DatePickerConfig } from '@idux/components/config'
 import type { Locale } from '@idux/components/locales'
 import type { ComputedRef, InjectionKey, Ref, Slots, VNodeTypes } from 'vue'
@@ -35,7 +36,8 @@ export interface DatePickerContext extends OverlayStateContext, FormatContext, P
 export interface DateRangePickerContext
   extends OverlayStateContext,
     FormatContext,
-    PickerStateContext<DateRangePickerProps> {
+    PickerStateContext<DateRangePickerProps>,
+    DateRangeShortcutsContext {
   props: DateRangePickerProps
   slots: Slots
   common: CommonConfig
@@ -52,3 +54,9 @@ export interface DateRangePickerContext
 
 export const datePickerToken: InjectionKey<DatePickerContext> = Symbol('datePickerToken')
 export const dateRangePickerToken: InjectionKey<DateRangePickerContext> = Symbol('dateRangePickerToken')
+
+export const datePickerPanelPropsToken: InjectionKey<ComputedRef<DatePanelProps>> = Symbol('datePickerPanelPropsToken')
+export const dateRangePickerPanelPropsToken: InjectionKey<ComputedRef<DateRangePanelProps>> = Symbol(
+  'dateRangePickerPanelPropsToken',
+)
+export const dateRangePickerPanelSlotsToken: InjectionKey<Slots> = Symbol('dateRangePickerPanelSlotsToken')

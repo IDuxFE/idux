@@ -5,7 +5,9 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type ComputedRef, type EffectScope, computed, effectScope, ref, shallowRef, toRaw, watch } from 'vue'
+import type { MaybeRef } from './convert'
+
+import { type ComputedRef, type EffectScope, computed, effectScope, ref, shallowRef, toRaw, unref, watch } from 'vue'
 
 import { isFunction } from 'lodash-es'
 
@@ -51,35 +53,36 @@ export function useState<T>(defaultOrFactory: T | (() => T), shallow = true): [C
 }
 
 export function useControlledProp<T, K extends keyof T>(
-  props: T,
+  props: MaybeRef<T>,
   key: K,
 ): [ComputedRef<T[K]>, (value: T[K], ...args: unknown[]) => void]
 export function useControlledProp<T, K extends keyof T>(
-  props: T,
+  props: MaybeRef<T>,
   key: K,
   defaultOrFactory: Exclude<T[K], undefined> | (() => Exclude<T[K], undefined>),
 ): [ComputedRef<Exclude<T[K], undefined>>, (value: Exclude<T[K], undefined>, ...args: unknown[]) => void]
 export function useControlledProp<T, K extends keyof T>(
-  props: T,
+  props: MaybeRef<T>,
   key: K,
   defaultOrFactory?: Exclude<T[K], undefined> | (() => Exclude<T[K], undefined>),
 ): [ComputedRef<T[K]>, (value: T[K], ...args: unknown[]) => void] {
-  const tempProp = shallowRef(props[key])
+  const tempProp = shallowRef(unref(props)[key])
 
   watch(
-    () => props[key],
+    () => unref(props)[key],
     value => (tempProp.value = value),
   )
 
   const state = computed(
-    () => props[key] ?? tempProp.value ?? (isFunction(defaultOrFactory) ? defaultOrFactory() : defaultOrFactory)!,
+    () =>
+      unref(props)[key] ?? tempProp.value ?? (isFunction(defaultOrFactory) ? defaultOrFactory() : defaultOrFactory)!,
   )
 
   const setState = (value: T[K], ...args: unknown[]) => {
     if (value !== toRaw(state.value)) {
       tempProp.value = value
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      callEmit((props as any)[`onUpdate:${key as string}`], value, ...args)
+      callEmit((unref(props) as any)[`onUpdate:${key as string}`], value, ...args)
     }
   }
 

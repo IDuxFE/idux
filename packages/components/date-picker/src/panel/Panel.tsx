@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 
 import { callEmit } from '@idux/cdk/utils'
 import { ɵDatePanel } from '@idux/components/_private/date-panel'
@@ -17,13 +17,16 @@ import { applyDateTime } from '@idux/components/utils'
 
 import { getThemeTokens } from '../../theme'
 import { useActiveValue } from '../composables/useActiveValue'
-import { datePanelProps } from '../types'
+import { datePickerPanelPropsToken } from '../token'
+import { type DatePanelProps, datePanelProps } from '../types'
 import { convertPickerTypeToConfigType } from '../utils'
 
 export default defineComponent({
   name: 'IxDatePanel',
   props: datePanelProps,
   setup(props, { slots }) {
+    const inherittedProps = inject(datePickerPanelPropsToken, null)
+
     const common = useGlobalConfig('common')
     const { globalHashId, hashId, registerToken } = useThemeToken('datePicker')
     const { registerToken: registerTimePickerToken } = useThemeToken('timePicker')
@@ -33,20 +36,41 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-date-picker-panel`)
     const dateConfig = useDateConfig()
 
-    const { activeValue, setActiveValue } = useActiveValue(dateConfig, props)
+    const mergedProps = computed(() => {
+      if (!inherittedProps) {
+        return props
+      }
+
+      const res = {} as DatePanelProps
+
+      Object.keys(props).forEach(key => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ;(res as any)[key] = props[key as keyof DatePanelProps] ?? inherittedProps.value[key as keyof DatePanelProps]
+      })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ;(res as any).type = res.type ?? 'date'
+
+      return res
+    })
+
+    const { activeValue, setActiveValue } = useActiveValue(dateConfig, mergedProps)
 
     function handleChange(value: Date | undefined) {
-      callEmit(props.onChange, value)
+      callEmit(mergedProps.value.onChange, value)
     }
     function handleDatePanelChange(value: Date) {
       handleChange(
-        props.value
-          ? applyDateTime(dateConfig, props.value, value, ['hour', 'minute', 'second', 'millisecond'])
+        mergedProps.value.value
+          ? applyDateTime(dateConfig, mergedProps.value.value, value, ['hour', 'minute', 'second', 'millisecond'])
           : value,
       )
     }
     function handleTimePanelChange(value: Date) {
-      handleChange(props.value ? applyDateTime(dateConfig, props.value, value, ['year', 'month', 'date']) : value)
+      handleChange(
+        mergedProps.value.value
+          ? applyDateTime(dateConfig, mergedProps.value.value, value, ['year', 'month', 'date'])
+          : value,
+      )
     }
 
     const handleDatePanelCellClick = (value: Date) => {
@@ -54,31 +78,32 @@ export default defineComponent({
     }
 
     return () => {
-      const datePanelType = convertPickerTypeToConfigType(props.type)
+      const _props = mergedProps.value
+      const datePanelType = convertPickerTypeToConfigType(_props.type!)
 
       const datePanelProps = {
-        cellTooltip: props.cellTooltip,
-        disabledDate: props.disabledDate,
+        cellTooltip: _props.cellTooltip,
+        disabledDate: _props.disabledDate,
         type: datePanelType,
-        value: props.value,
-        visible: props.type === 'datetime' ? props.visible === 'datePanel' : !!props.visible,
+        value: _props.value,
+        visible: _props.type === 'datetime' ? _props.visible === 'datePanel' : !!_props.visible,
         activeDate: activeValue.value,
         onCellClick: handleDatePanelCellClick,
         'onUpdate:activeDate': setActiveValue,
       }
       const _timePanelProps = {
-        ...props.timePanelOptions,
+        ..._props.timePanelOptions,
         activeValue: activeValue.value,
-        value: props.value,
-        visible: props.type === 'datetime' ? props.visible === 'timePanel' : false,
+        value: _props.value,
+        visible: _props.type === 'datetime' ? _props.visible === 'timePanel' : false,
         onChange: handleTimePanelChange,
         'onUpdate:activeValue': setActiveValue,
       }
 
       return (
         <div class={[mergedPrefixCls.value, globalHashId.value, hashId.value]}>
-          <ɵDatePanel v-show={props.visible !== 'timePanel'} v-slots={slots} {...datePanelProps} />
-          {props.type === 'datetime' && <ɵTimePanel v-show={props.visible === 'timePanel'} {..._timePanelProps} />}
+          <ɵDatePanel v-show={_props.visible !== 'timePanel'} v-slots={slots} {...datePanelProps} />
+          {_props.type === 'datetime' && <ɵTimePanel v-show={_props.visible === 'timePanel'} {..._timePanelProps} />}
         </div>
       )
     }

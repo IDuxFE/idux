@@ -5,6 +5,8 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
+import type { PresetRangeShortcut } from '@idux/components/date-picker'
+
 import { Locale as FNSLocale } from 'date-fns'
 
 export type DateLocale = FNSLocale
@@ -45,6 +47,9 @@ export interface DateRangePickerLocale {
   yearPlaceholder: [string, string]
   datetimePlaceholder: [string, string]
   separator: string
+  shortcuts: {
+    [key in PresetRangeShortcut]: string
+  }
   okText: string
   cancelText: string
 }

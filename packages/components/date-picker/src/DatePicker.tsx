@@ -12,18 +12,19 @@ import { IxControlTrigger } from '@idux/components/control-trigger'
 import { useFormElement } from '@idux/components/form'
 import { useThemeToken } from '@idux/components/theme'
 
+import { getThemeTokens } from '../theme'
 import { useControl } from './composables/useControl'
 import { useFormat } from './composables/useFormat'
 import { useInputEnableStatus } from './composables/useInputEnableStatus'
 import { useKeyboardEvents } from './composables/useKeyboardEvents'
 import { useOverlayState } from './composables/useOverlayState'
+import { usePickerPanelProps } from './composables/usePickerPanelProps'
 import { usePickerState } from './composables/usePickerState'
 import { useTriggerProps } from './composables/useTriggerProps'
 import Content from './content/Content'
-import { datePickerToken } from './token'
+import { datePickerPanelPropsToken, datePickerToken } from './token'
 import Trigger from './trigger/Trigger'
 import { datePickerProps } from './types'
-import { getThemeTokens } from '../theme'
 
 export default defineComponent({
   name: 'IxDatePicker',
@@ -84,8 +85,10 @@ export default defineComponent({
     }
 
     const triggerProps = useTriggerProps(context)
+    const datePanelProps = usePickerPanelProps(context)
 
     provide(datePickerToken, context)
+    provide(datePickerPanelPropsToken, datePanelProps)
 
     watch(overlayOpened, opened => {
       if (opened) {
@@ -101,8 +104,8 @@ export default defineComponent({
       }
     })
 
-    const renderTrigger = () => <Trigger ref={triggerRef}></Trigger>
-    const renderContent = () => <Content></Content>
+    const renderTrigger = () => <Trigger ref={triggerRef} v-slots={slots}></Trigger>
+    const renderContent = () => <Content v-slots={slots}></Content>
     const overlayClass = computed(() =>
       normalizeClass([`${mergedPrefixCls.value}-overlay`, globalHashId.value, hashId.value, props.overlayClassName]),
     )

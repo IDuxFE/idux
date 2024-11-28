@@ -182,6 +182,7 @@ export default defineComponent({
         lazy={props.overlayLazy}
         tabindex={props.overlayTabindex}
         trigger="manual"
+        onAfterLeave={props.onOverlayAfterLeave}
         v-slots={{ default: renderTrigger, content: renderContent }}
       />
     )
