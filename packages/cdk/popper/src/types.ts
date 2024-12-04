@@ -6,7 +6,8 @@
  */
 
 import type { Middleware, Strategy } from '@floating-ui/dom'
-import type { ComponentPublicInstance, ComputedRef, Ref } from 'vue'
+import type { MaybeRef } from '@idux/cdk/utils'
+import type { ComponentPublicInstance, ComputedRef, Ref, UnwrapRef } from 'vue'
 
 export type PopperStrategy = Strategy
 export type PopperTrigger = 'click' | 'hover' | 'focus' | 'contextmenu' | 'manual'
@@ -44,12 +45,12 @@ export interface PopperOptions {
    * Whether to allow the mouse to enter the popper
    * * default is `true`
    */
-  allowEnter?: boolean
+  allowEnter?: MaybeRef<boolean | undefined>
   /**
    * Whether auto adjust when space is not enough
    * * default is `true`
    */
-  autoAdjust?: boolean
+  autoAdjust?: MaybeRef<boolean | undefined>
   /**
    * Delay in ms once a trigger event is fired before a tippy shows or hides
    *
@@ -59,37 +60,45 @@ export interface PopperOptions {
    * * [100, 200]: show delay is 100ms, hide delay is 200ms
    * * [100, null]: show delay is 100ms, hide delay is the default
    */
-  delay?: number | [number | null, number | null]
+  delay?: MaybeRef<number | [number | null, number | null] | undefined>
   /**
    * Disable the popper
    * * default is `false`
    */
-  disabled?: boolean
+  disabled?: MaybeRef<boolean | undefined>
   /**
    * Popper offset.
    * * [Horizontal axis offset, vertical axis offset]
    * * default is `[0, 0]`
    */
-  offset?: [number, number]
+  offset?: MaybeRef<[number, number] | undefined>
   /**
    * Alignment of popper
    * * default is `top`
    */
-  placement?: PopperPlacement
+  placement?: MaybeRef<PopperPlacement | undefined>
   /**
    * Trigger method
    * * default is `hover`
    */
-  trigger?: PopperTrigger
+  trigger?: MaybeRef<PopperTrigger | undefined>
   /**
    * Control the visibility of the popper
    * * default is `false`
    */
-  visible?: boolean
+  visible?: MaybeRef<boolean | undefined>
 
-  strategy?: PopperStrategy
-  middlewares?: Array<Middleware>
+  strategy?: MaybeRef<PopperStrategy | undefined>
+  middlewares?: MaybeRef<Array<Middleware> | undefined>
+
+  /**
+   * visible change event callback
+   */
+  onVisibleChange?: (visible: boolean) => void
 }
+
+export type ResolvedPopperOptions = Required<UnwrapRef<Omit<PopperOptions, 'onVisibleChange' | 'visible'>>> &
+  Pick<PopperOptions, 'onVisibleChange' | 'visible'>
 
 export interface PopperInstance<TE extends PopperElement = PopperElement, PE extends PopperElement = PopperElement> {
   /**

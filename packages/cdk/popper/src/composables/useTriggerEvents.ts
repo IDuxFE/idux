@@ -5,12 +5,12 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { PopperOptions, PopperTriggerEvents } from '../types'
+import type { PopperTriggerEvents, ResolvedPopperOptions } from '../types'
 
 import { type ComputedRef, computed } from 'vue'
 
 export function useTriggerEvents(
-  baseOptions: Required<PopperOptions>,
+  baseOptions: ComputedRef<ResolvedPopperOptions>,
   eventOptions: { visibility: ComputedRef<boolean>; show(): void; hide(): void },
 ): ComputedRef<PopperTriggerEvents> {
   const { visibility, show, hide } = eventOptions
@@ -21,7 +21,7 @@ export function useTriggerEvents(
   const onBlur = () => hide()
 
   const onClick = () => {
-    const { trigger } = baseOptions
+    const { trigger } = baseOptions.value
     if (trigger === 'click') {
       visibility.value ? hide() : show()
     } else if (trigger === 'contextmenu') {
@@ -42,5 +42,5 @@ export function useTriggerEvents(
     manual: {},
   }
 
-  return computed(() => eventsMap[baseOptions.trigger])
+  return computed(() => eventsMap[baseOptions.value.trigger])
 }
