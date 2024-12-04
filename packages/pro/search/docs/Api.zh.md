@@ -30,6 +30,7 @@
 | --- | --- | --- | --- |
 | `blur` | 移除焦点 | - | - |
 | `focus` | 获取焦点 | `(options?: FocusOptions) => void` | - |
+| `clear` | 清空搜索条件 | - | - |
 
 #### ProSearchSlots
 
