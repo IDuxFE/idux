@@ -26,13 +26,18 @@ import {
 import { isFunction } from 'lodash-es'
 
 import { vClickOutside } from '@idux/cdk/click-outside'
-import { type PopperElement, type PopperEvents, type PopperOptions, usePopper } from '@idux/cdk/popper'
+import { type PopperElement, type PopperEvents, usePopper } from '@idux/cdk/popper'
 import { CdkPortal } from '@idux/cdk/portal'
-import { Logger, callEmit, convertElement, getFirstValidNode, useState } from '@idux/cdk/utils'
+import { Logger, callEmit, convertElement, getFirstValidNode } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { useThemeToken } from '@idux/components/theme'
 import { useZIndex } from '@idux/components/utils'
 
+import Content from './Content'
+import { useMergedEvents } from './composables/useMergedEvents'
+import { useOverlayStates } from './composables/useOverlayState'
+import { usePopperOptions } from './composables/usePopperOptions'
+import { useVisible } from './composables/useVisible'
 import { type OverlayProps, overlayProps } from './types'
 
 export default defineComponent({
@@ -46,6 +51,13 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-overlay`)
     const contentArrowRef = ref<HTMLElement>()
     const { options: popperOptions, update: updateOptions } = usePopperOptions(props, contentArrowRef)
+    const { isHovered, isFocused, statePopperEvents, stateTriggerEvents } = useOverlayStates()
+    const { visible, visibleLocked, updateVisible, lock, unlock } = useVisible(
+      props,
+      popperOptions.trigger,
+      isHovered,
+      isFocused,
+    )
 
     const {
       arrowRef,
@@ -57,10 +69,16 @@ export default defineComponent({
       placement,
       initialize,
       update,
-      show,
       hide,
       destroy,
-    } = usePopper({ ...popperOptions.value, visible: props.visible })
+    } = usePopper({ ...popperOptions, visible, onVisibleChange: updateVisible })
+
+    const { mergedTriggerEvents, mergedPopperEvents } = useMergedEvents(
+      triggerEvents,
+      popperEvents,
+      stateTriggerEvents,
+      statePopperEvents,
+    )
 
     const currentZIndex = useZIndex(toRef(props, 'zIndex'), toRef(common, 'overlayZIndex'), visibility)
     const mergedContainer = computed(() => {
@@ -76,17 +94,8 @@ export default defineComponent({
         nextTick(updateOptions)
         props.destroyOnHide && initialize()
       }
-      callEmit(props['onUpdate:visible'], value)
     })
     watch(placement, value => callEmit(props['onUpdate:placement'], value))
-    watch(popperOptions, options => update(options))
-    watch(
-      () => props.visible,
-      visible => {
-        visible ? show() : hide()
-      },
-      { flush: 'post' },
-    )
     watch(
       contentArrowRef,
       () => {
@@ -108,6 +117,10 @@ export default defineComponent({
     })
 
     const handleClickOutside = (evt: Event) => {
+      if (visibleLocked.value) {
+        return
+      }
+
       const popperElement = convertElement(popperRef)
       const target = evt.target as Node
       if (!popperElement || popperElement === target || popperElement.contains(target)) {
@@ -123,7 +136,12 @@ export default defineComponent({
         __DEV__ && Logger.warn('components/overlay', 'Trigger must is single rooted node')
         return null
       }
-      const trigger = renderTrigger(props, triggerNode, { ref: triggerRef, ...triggerEvents.value }, handleClickOutside)
+      const trigger = renderTrigger(
+        props,
+        triggerNode,
+        { ref: triggerRef, ...mergedTriggerEvents.value },
+        handleClickOutside,
+      )
       const contentNode = slots.content?.()
       if (!getFirstValidNode(contentNode)) {
         // 避免没有 content 时, trigger 被重新创建
@@ -144,8 +162,10 @@ export default defineComponent({
         contentNode!,
         contentArrowRef,
         popperRef,
-        popperEvents,
+        mergedPopperEvents,
         attrs,
+        lock,
+        unlock,
       )
 
       return (
@@ -162,39 +182,6 @@ export default defineComponent({
   },
 })
 
-function usePopperOptions(
-  props: OverlayProps,
-  arrowRef: Ref<HTMLElement | undefined>,
-): {
-  options: ComputedRef<PopperOptions>
-  update: () => void
-} {
-  const [options, setOptions] = useState<PopperOptions>({})
-
-  const updateOptions = () => {
-    const { allowEnter, autoAdjust, delay, disabled, offset, placement, trigger } = props
-
-    let _offset: [number, number] | undefined
-    if (!arrowRef.value) {
-      _offset = offset
-    } else {
-      const { offsetHeight, offsetWidth } = arrowRef.value
-      _offset = offset ? [...offset] : [0, 0]
-      _offset[1] += [offsetWidth, offsetHeight][1] / 2
-    }
-
-    setOptions({ allowEnter, autoAdjust, delay, disabled, offset: _offset, placement, trigger })
-  }
-
-  watch(props, updateOptions, { immediate: true, deep: true })
-  watch(arrowRef, updateOptions)
-
-  return {
-    options,
-    update: updateOptions,
-  }
-}
-
 function renderContent(
   props: OverlayProps,
   globalHashId: ComputedRef<string>,
@@ -206,6 +193,8 @@ function renderContent(
   popperRef: Ref<PopperElement | undefined>,
   popperEvents: ComputedRef<PopperEvents>,
   attrs: Record<string, unknown>,
+  lock: () => void,
+  unlock: () => void,
 ) {
   if (props.destroyOnHide && !visibility.value) {
     return null
@@ -216,18 +205,21 @@ function renderContent(
   const { triggerId } = props
   const overlayId = triggerId != null ? `__IDUX_OVERLAY-${triggerId}` : undefined
   const style = `z-index: ${currentZIndex.value}`
+
   const overlay = (
-    <div
+    <Content
       ref={popperRef}
       id={overlayId}
       class={[prefixCls, globalHashId.value]}
       style={style}
+      lock={lock}
+      unlock={unlock}
       {...popperEvents.value}
       {...attrs}
     >
       {contentNode}
       {props.showArrow && <div ref={arrowRef} class={`${prefixCls}-arrow`}></div>}
-    </div>
+    </Content>
   )
 
   return props.destroyOnHide ? overlay : withDirectives(overlay, [[vShow, visibility.value]])

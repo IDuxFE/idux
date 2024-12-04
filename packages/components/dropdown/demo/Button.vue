@@ -48,6 +48,16 @@ const dataSource: MenuData[] = [
   { type: 'item', key: 'two', label: 'Two' },
   { type: 'divider' },
   { type: 'item', key: 'three', label: 'Three', disabled: true },
+  {
+    type: 'sub',
+    key: 'sub',
+    label: 'Sub',
+    children: [
+      { type: 'item', key: 'four', label: 'Four' },
+      { type: 'item', key: 'five', label: 'Five' },
+      { type: 'item', key: 'six', label: 'Six' },
+    ],
+  },
 ]
 
 const onClick = () => console.log('button click')
