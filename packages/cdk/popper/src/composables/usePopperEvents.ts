@@ -5,14 +5,14 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { PopperEvents, PopperOptions } from '../types'
+import type { PopperEvents, ResolvedPopperOptions } from '../types'
 
 import { type ComputedRef, computed } from 'vue'
 
 import { NoopObject } from '@idux/cdk/utils'
 
 export function usePopperEvents(
-  baseOptions: Required<PopperOptions>,
+  baseOptions: ComputedRef<ResolvedPopperOptions>,
   eventOptions: { show(): void; hide(): void },
 ): ComputedRef<PopperEvents> {
   const { show, hide } = eventOptions
@@ -28,5 +28,8 @@ export function usePopperEvents(
     manual: NoopObject,
   }
 
-  return computed(() => (baseOptions.allowEnter ? eventsMap[baseOptions.trigger] : NoopObject))
+  return computed(() => {
+    const { allowEnter, trigger } = baseOptions.value
+    return allowEnter ? eventsMap[trigger] : NoopObject
+  })
 }

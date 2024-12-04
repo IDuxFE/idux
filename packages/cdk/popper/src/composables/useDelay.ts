@@ -5,13 +5,13 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { PopperOptions } from '../types'
+import type { ResolvedPopperOptions } from '../types'
 
 import { type ComputedRef, computed } from 'vue'
 
 import { defaultDelay } from './useOptions'
 
-export function useDelay(options: Required<PopperOptions>): ComputedRef<{ show: number; hide: number }> {
+export function useDelay(options: ComputedRef<ResolvedPopperOptions>): ComputedRef<{ show: number; hide: number }> {
   const convertDelay = (delay: number | [number | null, number | null]) => {
     if (Array.isArray(delay)) {
       const [show, hide] = delay
@@ -20,5 +20,5 @@ export function useDelay(options: Required<PopperOptions>): ComputedRef<{ show: 
     return { show: delay, hide: delay }
   }
 
-  return computed(() => convertDelay(options.delay))
+  return computed(() => convertDelay(options.value.delay))
 }

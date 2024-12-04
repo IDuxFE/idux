@@ -5,60 +5,66 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { PopperOptions } from '../types'
+import type { PopperOptions, ResolvedPopperOptions } from '../types'
 
-import { type ComputedRef, computed, isReactive, reactive, watch } from 'vue'
+import { type ComputedRef, type UnwrapRef, computed, isReactive, nextTick, reactive, unref, watch } from 'vue'
 
 import { isEqual } from 'lodash-es'
 
 export const defaultDelay = 0
 
 export function usePopperOptions(options: PopperOptions): {
-  popperOptions: Required<PopperOptions>
+  resolvedOptions: ComputedRef<ResolvedPopperOptions>
   updateOptions: (options: PopperOptions) => void
 } {
-  const popperOptions = reactive<Required<PopperOptions>>({
-    allowEnter: options.allowEnter ?? true,
-    autoAdjust: options.autoAdjust ?? true,
-    delay: options.delay ?? defaultDelay,
-    disabled: options.disabled ?? false,
-    offset: options.offset ?? [0, 0],
-    placement: options.placement ?? 'bottomStart',
-    trigger: options.trigger ?? 'hover',
-    visible: options.visible ?? false,
-    strategy: options.strategy ?? 'absolute',
-    middlewares: options.middlewares ?? [],
+  const localOptions: PopperOptions = reactive({})
+  const resolvedOptions = computed<ResolvedPopperOptions>(() => {
+    return {
+      allowEnter: unref(options.allowEnter ?? localOptions.allowEnter) ?? true,
+      autoAdjust: unref(options.autoAdjust ?? localOptions.autoAdjust) ?? true,
+      delay: unref(options.delay ?? localOptions.delay) ?? defaultDelay,
+      disabled: unref(options.disabled ?? localOptions.disabled) ?? false,
+      offset: unref(options.offset ?? localOptions.offset) ?? [0, 0],
+      placement: unref(options.placement ?? localOptions.placement) ?? 'bottomStart',
+      trigger: unref(options.trigger ?? localOptions.trigger) ?? 'hover',
+      strategy: unref(options.strategy ?? localOptions.strategy) ?? 'absolute',
+      middlewares: unref(options.middlewares ?? localOptions.middlewares) ?? [],
+      visible: unref(options.visible ?? localOptions.visible),
+      onVisibleChange: options.onVisibleChange ?? localOptions.onVisibleChange,
+    }
   })
+
   const updateOptions = (options: PopperOptions) => {
     Object.entries(options).forEach(([key, value]) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if (value !== undefined && !isEqual(value, (popperOptions as any)[key])) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ;(popperOptions as any)[key] = value
+      const _key = key as keyof PopperOptions
+      if (value !== undefined && !isEqual(unref(value), resolvedOptions.value[_key])) {
+        localOptions[_key] = value
       }
     })
   }
 
   if (isReactive(options)) {
     watch(options, _options => {
-      updateOptions(_options)
+      nextTick(() => {
+        updateOptions(_options)
+      })
     })
   }
 
   return {
-    popperOptions,
+    resolvedOptions,
     updateOptions,
   }
 }
 
 export type BaseOptions = Pick<
-  Required<PopperOptions>,
+  Required<UnwrapRef<PopperOptions>>,
   'placement' | 'strategy' | 'middlewares' | 'offset' | 'autoAdjust'
 >
 
-export function useBaseOptions(options: Required<PopperOptions>): ComputedRef<BaseOptions> {
+export function useBaseOptions(options: ComputedRef<ResolvedPopperOptions>): ComputedRef<BaseOptions> {
   return computed(() => {
-    const { placement, strategy, middlewares, offset, autoAdjust } = options
+    const { placement, strategy, middlewares, offset, autoAdjust } = options.value
     return { placement, strategy, middlewares, offset, autoAdjust }
   })
 }

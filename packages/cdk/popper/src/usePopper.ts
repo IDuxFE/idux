@@ -30,25 +30,25 @@ export function usePopper<TE extends PopperElement = PopperElement, PE extends P
   const popperRef = ref<PE>()
   const arrowRef = ref<HTMLElement>()
 
-  const { popperOptions, updateOptions } = usePopperOptions(options)
-  const baseOptions = useBaseOptions(popperOptions)
+  const { resolvedOptions, updateOptions } = usePopperOptions(options)
+  const baseOptions = useBaseOptions(resolvedOptions)
   const convertedOptions = computed(() =>
     convertOptions(baseOptions.value, { arrowElement: convertElement(arrowRef), updatePlacement }),
   )
 
-  const visibility = useVisibility(popperOptions)
-  const { placement, updatePlacement } = usePlacement(popperOptions)
-  const delay = useDelay(popperOptions)
+  const { visibility, updateVisibility } = useVisibility(resolvedOptions)
+  const { placement, updatePlacement } = usePlacement(resolvedOptions)
+  const delay = useDelay(resolvedOptions)
 
   const { setTimer, clearTimer } = useTimer()
-  const triggerEvents = useTriggerEvents(popperOptions, { visibility, show, hide })
-  const popperEvents = usePopperEvents(popperOptions, { show, hide })
+  const triggerEvents = useTriggerEvents(resolvedOptions, { visibility, show, hide })
+  const popperEvents = usePopperEvents(resolvedOptions, { show, hide })
 
   function toggle(visible: boolean, delay: number): void {
     clearTimer()
 
     const action = () => {
-      popperOptions.visible = visible
+      updateVisibility(visible)
     }
     if (delay > 0) {
       setTimer(action, delay)
