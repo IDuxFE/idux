@@ -34,16 +34,21 @@ describe('Overlay', () => {
   test('visible work', async () => {
     const onUpdateVisible = vi.fn()
     const wrapper = OverlayMount({
-      props: { visible: true, 'onUpdate:visible': onUpdateVisible },
+      props: { visible: true, 'onUpdate:visible': onUpdateVisible, trigger: 'hover' },
       slots,
     })
 
     expect(isElementVisible(document.querySelector('#content'))).toBe(true)
 
+    await wrapper.find('#trigger').trigger('mouseleave')
+    expect(onUpdateVisible).toBeCalledWith(false)
+
     await wrapper.setProps({ visible: false })
 
     expect(isElementVisible(document.querySelector('#content'))).toBe(false)
-    expect(onUpdateVisible).toBeCalledWith(false)
+
+    await wrapper.find('#trigger').trigger('mouseenter')
+    expect(onUpdateVisible).toBeCalledWith(true)
   })
 
   test('destroyOnHide work', async () => {

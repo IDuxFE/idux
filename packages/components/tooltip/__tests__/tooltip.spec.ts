@@ -27,19 +27,17 @@ describe('Tooltip', () => {
       props: { visible: false, 'onUpdate:visible': onUpdateVisible, title: 'Title' },
       slots,
     })
-
     expect(isElementVisible(document.querySelector('.ix-tooltip'))).toBe(false)
 
     await wrapper.find('#trigger').trigger('mouseenter')
     await wait(100)
-
-    expect(isElementVisible(document.querySelector('.ix-tooltip'))).toBe(true)
     expect(onUpdateVisible).toBeCalledWith(true)
 
     await wrapper.setProps({ visible: true })
+    expect(isElementVisible(document.querySelector('.ix-tooltip'))).toBe(true)
+
     await wrapper.find('#trigger').trigger('mouseleave')
     await wait(100)
-
     expect(onUpdateVisible).toBeCalledWith(false)
   })
 
