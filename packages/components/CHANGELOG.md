@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/IDuxFE/idux/compare/v2.5.0...v2.6.0) (2024-12-05)
+
+
+### Bug Fixes
+
+* **comp:icon:** modify branch icon ([#2007](https://github.com/IDuxFE/idux/issues/2007)) ([867f0ba](https://github.com/IDuxFE/idux/commit/867f0bad5c5b6399e4c6eb3e463451c35ea2e438))
+* **comp:pagination:** enter an incorrect page, the display is abnormal ([#2005](https://github.com/IDuxFE/idux/issues/2005)) ([17a4df1](https://github.com/IDuxFE/idux/commit/17a4df19cb7b4cb741c9b9567dce18e801aab5d7))
+* **comp:pagination:** size select text shouldn't overflow at 100 ([#2010](https://github.com/IDuxFE/idux/issues/2010)) ([de8b856](https://github.com/IDuxFE/idux/commit/de8b8561a83c8ab2f40f3fc7e68ed26b664bc274))
+
+
+### Features
+
+* **comp:*:** overlay supports nested control ([#2013](https://github.com/IDuxFE/idux/issues/2013)) ([413b37f](https://github.com/IDuxFE/idux/commit/413b37f075850a210079ceb68c11c5e438902532))
+* **comp:date-picker:** add shortcut support for dateRangePicker ([#2004](https://github.com/IDuxFE/idux/issues/2004)) ([18b9d31](https://github.com/IDuxFE/idux/commit/18b9d31af7609732014fbea7267531ebb8b88e94))
+* **pro:search:** add quickSelect item size theme tokens ([#2008](https://github.com/IDuxFE/idux/issues/2008)) ([804e73b](https://github.com/IDuxFE/idux/commit/804e73b5be57ceaf033bcd480ce79c04cd845163))
+
+
+
+
+
 # [2.5.0](https://github.com/IDuxFE/idux/compare/v2.4.3...v2.5.0) (2024-10-15)
 
 

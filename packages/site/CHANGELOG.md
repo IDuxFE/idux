@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/IDuxFE/idux/compare/v2.5.0...v2.6.0) (2024-12-05)
+
+
+### Features
+
+* **comp:date-picker:** add shortcut support for dateRangePicker ([#2004](https://github.com/IDuxFE/idux/issues/2004)) ([18b9d31](https://github.com/IDuxFE/idux/commit/18b9d31af7609732014fbea7267531ebb8b88e94))
+
+
+
+
+
 # [2.5.0](https://github.com/IDuxFE/idux/compare/v2.4.3...v2.5.0) (2024-10-15)
 
 

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/IDuxFE/idux/compare/v2.5.0...v2.6.0) (2024-12-05)
+
+
+### Features
+
+* **pro:search:** add quickSelect item size theme tokens ([#2008](https://github.com/IDuxFE/idux/issues/2008)) ([804e73b](https://github.com/IDuxFE/idux/commit/804e73b5be57ceaf033bcd480ce79c04cd845163))
+* **pro:search:** add shortcut support for dateRangePicker field ([#2006](https://github.com/IDuxFE/idux/issues/2006)) ([d82fc7d](https://github.com/IDuxFE/idux/commit/d82fc7d3590935e036a838650820c816df355f38))
+* **pro:search:** expose `clear` methods ([#2014](https://github.com/IDuxFE/idux/issues/2014)) ([cff9e16](https://github.com/IDuxFE/idux/commit/cff9e160456d98a9533de2061093e1a7a54d2bc2))
+
+
+
+
+
 # [2.5.0](https://github.com/IDuxFE/idux/compare/v2.4.3...v2.5.0) (2024-10-15)
 
 

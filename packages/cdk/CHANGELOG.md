@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/IDuxFE/idux/compare/v2.5.0...v2.6.0) (2024-12-05)
+
+
+### Bug Fixes
+
+* **cdk:dnd:** useDndMovable init doesn't work ([#1997](https://github.com/IDuxFE/idux/issues/1997)) ([98298bd](https://github.com/IDuxFE/idux/commit/98298bd8e3de87008cdea2b42c5c5d7428ef3b23))
+
+
+### Features
+
+* **cdk:popper:** popper visible supports fully controlled ([#2012](https://github.com/IDuxFE/idux/issues/2012)) ([6c234a8](https://github.com/IDuxFE/idux/commit/6c234a8a5fae60fa92d4df98aa77a8c3162a0e73))
+* **comp:date-picker:** add shortcut support for dateRangePicker ([#2004](https://github.com/IDuxFE/idux/issues/2004)) ([18b9d31](https://github.com/IDuxFE/idux/commit/18b9d31af7609732014fbea7267531ebb8b88e94))
+
+
+
+
+
 # [2.5.0](https://github.com/IDuxFE/idux/compare/v2.4.3...v2.5.0) (2024-10-15)
 
 

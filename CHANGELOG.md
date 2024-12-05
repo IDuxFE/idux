@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/IDuxFE/idux/compare/v2.5.0...v2.6.0) (2024-12-05)
+
+
+### Bug Fixes
+
+* **cdk:dnd:** useDndMovable init doesn't work ([#1997](https://github.com/IDuxFE/idux/issues/1997)) ([98298bd](https://github.com/IDuxFE/idux/commit/98298bd8e3de87008cdea2b42c5c5d7428ef3b23))
+* **comp:icon:** modify branch icon ([#2007](https://github.com/IDuxFE/idux/issues/2007)) ([867f0ba](https://github.com/IDuxFE/idux/commit/867f0bad5c5b6399e4c6eb3e463451c35ea2e438))
+* **comp:pagination:** enter an incorrect page, the display is abnormal ([#2005](https://github.com/IDuxFE/idux/issues/2005)) ([17a4df1](https://github.com/IDuxFE/idux/commit/17a4df19cb7b4cb741c9b9567dce18e801aab5d7))
+* **comp:pagination:** size select text shouldn't overflow at 100 ([#2010](https://github.com/IDuxFE/idux/issues/2010)) ([de8b856](https://github.com/IDuxFE/idux/commit/de8b8561a83c8ab2f40f3fc7e68ed26b664bc274))
+* set the correct api.json path ([#2001](https://github.com/IDuxFE/idux/issues/2001)) ([5c52c55](https://github.com/IDuxFE/idux/commit/5c52c55728a24640cfe7ab7d4d3e7df5eb9723a1)), closes [#2000](https://github.com/IDuxFE/idux/issues/2000)
+
+
+### Features
+
+* **cdk:popper:** popper visible supports fully controlled ([#2012](https://github.com/IDuxFE/idux/issues/2012)) ([6c234a8](https://github.com/IDuxFE/idux/commit/6c234a8a5fae60fa92d4df98aa77a8c3162a0e73))
+* **comp:*:** overlay supports nested control ([#2013](https://github.com/IDuxFE/idux/issues/2013)) ([413b37f](https://github.com/IDuxFE/idux/commit/413b37f075850a210079ceb68c11c5e438902532))
+* **comp:date-picker:** add shortcut support for dateRangePicker ([#2004](https://github.com/IDuxFE/idux/issues/2004)) ([18b9d31](https://github.com/IDuxFE/idux/commit/18b9d31af7609732014fbea7267531ebb8b88e94))
+* **pro:search:** add quickSelect item size theme tokens ([#2008](https://github.com/IDuxFE/idux/issues/2008)) ([804e73b](https://github.com/IDuxFE/idux/commit/804e73b5be57ceaf033bcd480ce79c04cd845163))
+* **pro:search:** add shortcut support for dateRangePicker field ([#2006](https://github.com/IDuxFE/idux/issues/2006)) ([d82fc7d](https://github.com/IDuxFE/idux/commit/d82fc7d3590935e036a838650820c816df355f38))
+* **pro:search:** expose `clear` methods ([#2014](https://github.com/IDuxFE/idux/issues/2014)) ([cff9e16](https://github.com/IDuxFE/idux/commit/cff9e160456d98a9533de2061093e1a7a54d2bc2))
+
+
+
+
+
 # [2.5.0](https://github.com/IDuxFE/idux/compare/v2.4.3...v2.5.0) (2024-10-15)
 
 
