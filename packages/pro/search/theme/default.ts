@@ -32,8 +32,6 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): ProCertainThem
     containerPaddingMd: paddingSizeXs,
     tagGapSm: paddingSize2Xs,
     tagGapMd: paddingSizeXs,
-    quickSelectPaddingSm: paddingSizeSm,
-    quickSelectPaddingMd: paddingSizeMd,
 
     tagColor: colorText,
     tagBgColor: colorEmphasizedContainerBg,
@@ -57,5 +55,12 @@ export function getDefaultThemeTokens(tokens: GlobalThemeTokens): ProCertainThem
     selectPanelMinWidth: 100,
     treeSelectPanelMinWidth: 200,
     treeSelectPanelMaxWidth: 400,
+
+    quickSelectPaddingSm: paddingSizeSm,
+    quickSelectPaddingMd: paddingSizeMd,
+    quickSelectItemMinWidth: 220,
+    quickSelectItemMaxHeight: 345,
+    quickSelectSelectPanelMinHeight: 230,
+    quickSelectTreeSelectPanelMinHeight: 230,
   }
 }

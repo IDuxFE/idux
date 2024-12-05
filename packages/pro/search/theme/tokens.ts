@@ -30,14 +30,6 @@ export interface ProSearchThemeTokens {
    * @desc md 尺寸标签间距
    */
   tagGapMd: number
-  /**
-   * @desc sm 尺寸快捷搜索面板padding
-   */
-  quickSelectPaddingSm: string | number
-  /**
-   * @desc md 尺寸快捷搜索面板padding
-   */
-  quickSelectPaddingMd: string | number
 
   /**
    * @desc 标签字体颜色
@@ -115,4 +107,29 @@ export interface ProSearchThemeTokens {
    * @desc treeSelect搜索项面板的最大宽度
    */
   treeSelectPanelMaxWidth: number
+
+  /**
+   * @desc sm 尺寸快捷搜索面板padding
+   */
+  quickSelectPaddingSm: string | number
+  /**
+   * @desc md 尺寸快捷搜索面板padding
+   */
+  quickSelectPaddingMd: string | number
+  /**
+   * @desc 快捷搜索面板中搜索项的最小宽度
+   */
+  quickSelectItemMinWidth: number
+  /**
+   * @desc 快捷搜索面板中搜索项的最大高度
+   */
+  quickSelectItemMaxHeight: number
+  /**
+   * @desc 快捷搜索面板中select面板的最小高度
+   */
+  quickSelectSelectPanelMinHeight: number
+  /**
+   * @desc 快捷搜索面板中treeSelect面板的最小高度
+   */
+  quickSelectTreeSelectPanelMinHeight: number
 }

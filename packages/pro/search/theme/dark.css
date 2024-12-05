@@ -6,8 +6,6 @@
   --ix-pro-search-container-padding-md: 4px;
   --ix-pro-search-tag-gap-sm: 2px;
   --ix-pro-search-tag-gap-md: 4px;
-  --ix-pro-search-quick-select-padding-sm: 8px;
-  --ix-pro-search-quick-select-padding-md: 12px;
   --ix-pro-search-tag-color: #f4f8ff;
   --ix-pro-search-tag-bg-color: #1f2329;
   --ix-pro-search-tag-color-disabled: #687080;
@@ -26,4 +24,10 @@
   --ix-pro-search-select-panel-min-width: 100px;
   --ix-pro-search-tree-select-panel-min-width: 200px;
   --ix-pro-search-tree-select-panel-max-width: 400px;
+  --ix-pro-search-quick-select-padding-sm: 8px;
+  --ix-pro-search-quick-select-padding-md: 12px;
+  --ix-pro-search-quick-select-item-min-width: 220px;
+  --ix-pro-search-quick-select-item-max-height: 345px;
+  --ix-pro-search-quick-select-select-panel-min-height: 230px;
+  --ix-pro-search-quick-select-tree-select-panel-min-height: 230px;
 }
