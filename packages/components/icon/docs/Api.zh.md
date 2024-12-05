@@ -85,6 +85,7 @@ export default defineConfig({
     }),
   ],
 });
+```
 
 当然，你也可以手动拷贝，默认图标的存放地址为 `./node_modules/@idux/components/icon/assets`。
 
