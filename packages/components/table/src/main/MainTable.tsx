@@ -31,7 +31,15 @@ import {
   type VirtualRowRenderFn,
   type VirtualScrollRowData,
 } from '@idux/cdk/scroll'
-import { Logger, type VKey, callEmit, convertArray, convertElement, isVisibleElement } from '@idux/cdk/utils'
+import {
+  Logger,
+  type VKey,
+  callEmit,
+  convertArray,
+  convertElement,
+  isEmptyNode,
+  isVisibleElement,
+} from '@idux/cdk/utils'
 import { ɵEmpty } from '@idux/components/_private/empty'
 
 import ColGroup from './ColGroup'
@@ -186,13 +194,14 @@ export default defineComponent({
     }
 
     const renderAlert = (columns: TableColumnMerged[] | undefined) => {
-      if (!slots.alert) {
+      const alertNodes = slots.alert?.()
+      if (isEmptyNode(alertNodes)) {
         return
       }
 
       return (
         <BodyRowSingle class={`${mergedPrefixCls.value}-alert-row`} columns={columns}>
-          {slots.alert()}
+          {alertNodes}
         </BodyRowSingle>
       )
     }
