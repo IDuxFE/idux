@@ -56,6 +56,7 @@ export const proSearchProps = {
 export interface ProSearchBindings {
   focus: (options?: FocusOptions) => void
   blur: () => void
+  clear: () => void
 }
 
 export type ProSearchProps = ExtractInnerPropTypes<typeof proSearchProps>

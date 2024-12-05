@@ -147,7 +147,7 @@ export default defineComponent({
         : undefined,
     )
 
-    expose({ focus, blur })
+    expose({ focus, blur, clear: clearSearchState })
 
     const handleSearchBtnClick = () => {
       updateSearchValues()
