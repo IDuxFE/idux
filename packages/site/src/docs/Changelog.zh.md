@@ -10,6 +10,32 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+# 2.6.0(2024-12-05)
+
+
+### Bug Fixes
+
+* **cdk:dnd:** useDndMovable 的初始化不生效，没有重置拖拽移动的位置 ([#1997](https://github.com/IDuxFE/idux/issues/1997)) ([98298bd](https://github.com/IDuxFE/idux/commit/98298bd8e3de87008cdea2b42c5c5d7428ef3b23))
+* **comp:icon:** 修改 branch 图标 ([#2007](https://github.com/IDuxFE/idux/issues/2007)) ([867f0ba](https://github.com/IDuxFE/idux/commit/867f0bad5c5b6399e4c6eb3e463451c35ea2e438))
+* **comp:pagination:** 当输入了一个不正确的页码时，显示不正常 ([#2005](https://github.com/IDuxFE/idux/issues/2005)) ([17a4df1](https://github.com/IDuxFE/idux/commit/17a4df19cb7b4cb741c9b9567dce18e801aab5d7))
+* **comp:pagination:** 当每页数量在100时，选择每页数量的select显示不应该溢出 ([#2010](https://github.com/IDuxFE/idux/issues/2010)) ([de8b856](https://github.com/IDuxFE/idux/commit/de8b8561a83c8ab2f40f3fc7e68ed26b664bc274))
+* 设置正确的 api.json 路径 ([#2001](https://github.com/IDuxFE/idux/issues/2001)) ([5c52c55](https://github.com/IDuxFE/idux/commit/5c52c55728a24640cfe7ab7d4d3e7df5eb9723a1)), closes [#2000](https://github.com/IDuxFE/idux/issues/2000)
+
+
+### Features
+
+* **cdk:popper:** usePopper的visible支持完全受控，所有属性支持传入Ref变量 ([#2012](https://github.com/IDuxFE/idux/issues/2012)) ([6c234a8](https://github.com/IDuxFE/idux/commit/6c234a8a5fae60fa92d4df98aa77a8c3162a0e73))
+  - 现在无论 `trigger` 是什么，`visible` 都支持完全受控，新增了 `onVisibleChange` 配置来监听内部的 `visible` 变更
+  - 所有属性均支持传入Ref变量，并且不推荐通过 `reactive` 的方式修改传入的 option，以及调用 `update` 方法修改 option
+  - 所有的浮层组件，均支持 `visible` 完全受控，不只有 `trigger` 为 `manual`时受控
+* **comp:*:** 所有浮层组件支持嵌套的内置控制 ([#2013](https://github.com/IDuxFE/idux/issues/2013)) ([413b37f](https://github.com/IDuxFE/idux/commit/413b37f075850a210079ceb68c11c5e438902532))
+  - 嵌套的浮层，不会再因为子级的浮层被悬浮或点击而导致上级的浮层被异常关闭
+* **comp:date-picker:** dateRangePicker 新增内置快捷选择栏 `shortcuts` 支持 ([#2004](https://github.com/IDuxFE/idux/issues/2004)) ([18b9d31](https://github.com/IDuxFE/idux/commit/18b9d31af7609732014fbea7267531ebb8b88e94))
+* **pro:search:** 新增快捷选择面板尺寸相关的主题token配置 ([#2008](https://github.com/IDuxFE/idux/issues/2008)) ([804e73b](https://github.com/IDuxFE/idux/commit/804e73b5be57ceaf033bcd480ce79c04cd845163))
+  - 推荐使用主题token自定义各个搜索项面板的高度等，通过非暴露的class进行样式覆盖并不可靠
+* **pro:search:** `dateRangePicker` 搜索项新增内置快捷选择栏 `shortcuts` 支持 ([#2006](https://github.com/IDuxFE/idux/issues/2006)) ([d82fc7d](https://github.com/IDuxFE/idux/commit/d82fc7d3590935e036a838650820c816df355f38))
+* **pro:search:** 新增暴露的 `clear` 方法，用于完全清空搜索条件，包括创建但未确认的 ([#2014](https://github.com/IDuxFE/idux/issues/2014)) ([cff9e16](https://github.com/IDuxFE/idux/commit/cff9e160456d98a9533de2061093e1a7a54d2bc2))
+
 # 2.5.0(2024-10-15)
 
 
