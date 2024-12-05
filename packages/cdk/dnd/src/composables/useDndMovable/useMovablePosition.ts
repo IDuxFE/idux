@@ -163,6 +163,8 @@ export function useMovablePosition(
       initPosition(element)
       initOffset(element, reset)
     }
+
+    updateMoveOffset({ x: 0, y: 0 })
   }
 
   watch([elementRef, strategy], () => init(), { immediate: true })
