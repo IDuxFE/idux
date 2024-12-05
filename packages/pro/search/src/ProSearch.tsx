@@ -110,7 +110,7 @@ export default defineComponent({
     const { isActive, overlayOpened, quickSelectActive, setTempActive, setOverlayOpened } = activeSegmentContext
 
     watch(
-      () => props.value,
+      searchValues,
       () => {
         initSearchStates()
       },

@@ -13,7 +13,7 @@ import type { SearchValue } from './searchValue'
 import type { InputFormater, InputParser, PanelRenderContext, Segment, SegmentState } from './segment'
 import type { MaybeArray, VKey } from '@idux/cdk/utils'
 import type { CascaderExpandTrigger, CascaderStrategy } from '@idux/components/cascader'
-import type { DatePanelProps, DateRangePanelProps } from '@idux/components/date-picker'
+import type { DatePanelProps, DateRangePanelProps, RangeShortcutProp } from '@idux/components/date-picker'
 import type { TreeDragDropOptions } from '@idux/components/tree'
 import type { VNodeChild } from 'vue'
 
@@ -156,6 +156,7 @@ interface DateRangePickerSearchFieldBase {
     cellTooltip?: DateRangePanelProps['cellTooltip']
     disabledDate?: DateRangePanelProps['disabledDate']
     timePanelOptions?: DateRangePanelProps['timePanelOptions']
+    shortcuts?: RangeShortcutProp
   }
 }
 export type DateRangePickerSearchField = SearchFieldBase<Date[]> & DateRangePickerSearchFieldBase

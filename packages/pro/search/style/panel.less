@@ -9,9 +9,53 @@
     .panel-footer();
   }
 
-  &-date-picker-panel-body {
-    padding: @pro-search-date-picker-panel-body-padding;
-    display: flex;
+  &-date-picker-panel {
+    &-with-shortcuts {
+      display: flex;
+    }
+
+    &-body {
+      padding: @pro-search-date-picker-panel-body-padding;
+      display: flex;
+    }
+
+    &-shortcuts {
+      min-width: 120px;
+      &&-with-panel {
+        width: 120px;
+        border-right: var(--ix-line-width) var(--ix-line-type) var(--ix-color-separator);
+      }
+      &-item {
+        display: flex;
+        align-items: center;
+        height: var(--ix-date-picker-range-shortcuts-item-height);
+        line-height: 1;
+        padding: var(--ix-date-picker-range-shortcuts-item-padding);
+        font-size: var(--ix-date-picker-range-shortcuts-item-font-size);
+        color: var(--ix-color-text);
+        transition: background var(--ix-motion-duration-medium) var(--ix-motion-ease-in-out);
+        cursor: pointer;
+    
+        &:hover {
+          background-color: var(--ix-color-container-bg-hover);
+        }
+    
+        &-selected {
+          color: var(--ix-color-primary-text);
+          background-color: var(--ix-color-container-bg-active);
+        }
+    
+        &-label {
+          .ellipsis();
+    
+          line-height: calc(var(--ix-date-picker-range-shortcuts-item-font-size) + var(--ix-line-height-gutter));
+        }
+      }
+      &-panel {
+        padding: @pro-search-date-picker-panel-body-padding;
+        padding-bottom: 0;
+      }
+    }
   }
 
   &-name-segment-panel.@{pro-search-prefix}-select-panel {
