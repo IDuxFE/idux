@@ -8,7 +8,7 @@
 import type { OverlayProps } from '../types'
 import type { PopperTrigger } from '@idux/cdk/popper'
 
-import { type ComputedRef, inject, nextTick, onMounted, watch } from 'vue'
+import { type ComputedRef, inject, nextTick, onBeforeUnmount, onMounted, watch } from 'vue'
 
 import { useControlledProp, useState } from '@idux/cdk/utils'
 
@@ -31,6 +31,10 @@ export function useVisible(
   const [visible, setVisible] = useControlledProp(props, 'visible', false)
   const [visibleLocked, setVisibleLocked] = useState(false)
   const lock = () => {
+    if (visibleLocked.value) {
+      return
+    }
+
     setVisibleLocked(true)
 
     if (parentLockContext?.lock) {
@@ -39,6 +43,10 @@ export function useVisible(
   }
 
   const unlock = () => {
+    if (!visibleLocked.value) {
+      return
+    }
+
     setVisibleLocked(false)
 
     if ((trigger.value === 'hover' && !isHovered.value) || (trigger.value === 'focus' && !isFocused.value)) {
@@ -67,6 +75,9 @@ export function useVisible(
     if (visible.value) {
       parentLockContext?.lock()
     }
+  })
+  onBeforeUnmount(() => {
+    parentLockContext?.unlock()
   })
 
   return {
