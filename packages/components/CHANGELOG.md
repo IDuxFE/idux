@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.1](https://github.com/IDuxFE/idux/compare/v2.6.0...v2.6.1) (2024-12-06)
+
+
+### Bug Fixes
+
+* **cdk:popper:** visible shouldn't be updated when disabled ([#2017](https://github.com/IDuxFE/idux/issues/2017)) ([8bc2f0d](https://github.com/IDuxFE/idux/commit/8bc2f0d28791cb116085cebd44a2475f649b7cff))
+* **comp:table:** alert row shouldn't render when alert slot returns empty node ([#2018](https://github.com/IDuxFE/idux/issues/2018)) ([8673395](https://github.com/IDuxFE/idux/commit/86733952de592929b487613df76b9f367309ba49))
+
+
+
+
+
 # [2.6.0](https://github.com/IDuxFE/idux/compare/v2.5.0...v2.6.0) (2024-12-05)
 
 
