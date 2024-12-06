@@ -10,6 +10,15 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 2.6.1(2024-12-06)
+
+
+### Bug Fixes
+
+* **cdk:popper:** visible 在浮层被禁用的时候，不应该触发更新事件 ([#2017](https://github.com/IDuxFE/idux/issues/2017)) ([8bc2f0d](https://github.com/IDuxFE/idux/commit/8bc2f0d28791cb116085cebd44a2475f649b7cff))
+  - 嵌套的浮层会在visible更新为true的时候阻止上层浮层的visible更新，而被禁用的内层浮层如果还会触发visible的更新，则会导致外层的浮层永远被锁住
+* **comp:table:** 当alert插槽内容为空节点的时候，不应该渲染alert行 ([#2018](https://github.com/IDuxFE/idux/issues/2018)) ([8673395](https://github.com/IDuxFE/idux/commit/86733952de592929b487613df76b9f367309ba49))
+
 # 2.6.0(2024-12-05)
 
 
