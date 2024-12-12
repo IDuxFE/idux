@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.2](https://github.com/IDuxFE/idux/compare/v2.6.1...v2.6.2) (2024-12-12)
+
+
+### Bug Fixes
+
+* **comp:icon:** modify icons' svg ([#2019](https://github.com/IDuxFE/idux/issues/2019)) ([569aa2b](https://github.com/IDuxFE/idux/commit/569aa2bed86056d5523831222f6065e1fe83f566))
+
+
+
+
+
 ## [2.6.1](https://github.com/IDuxFE/idux/compare/v2.6.0...v2.6.1) (2024-12-06)
 
 
