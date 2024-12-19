@@ -32,7 +32,9 @@ export default defineComponent({
   setup() {
     const placement = ref<PopperPlacement>('top')
 
-    const { initialize, destroy, update, popperRef, triggerRef, popperEvents, triggerEvents, visibility } = usePopper()
+    const { initialize, destroy, update, popperRef, triggerRef, popperEvents, triggerEvents, visibility } = usePopper({
+      placement: placement.value,
+    })
 
     onMounted(() => initialize())
     onBeforeUnmount(() => destroy())
