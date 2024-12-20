@@ -33,11 +33,11 @@
 | `heightXs` |  | `number` | `24` | `24` |
 | `iconColor` |  | `string` | `inherit` | `inherit` |
 | `iconFontSize` |  | `number` | `16` | `16` |
-| `minWidthLg` |  | `string | number` | `120` | `120` |
-| `minWidthMd` |  | `string | number` | `72` | `72` |
-| `minWidthSm` |  | `string | number` | `64` | `64` |
-| `minWidthXl` |  | `string | number` | `160` | `160` |
-| `minWidthXs` |  | `string | number` | `56` | `56` |
+| `minWidthLg` |  | `string \| number` | `120` | `120` |
+| `minWidthMd` |  | `string \| number` | `72` | `72` |
+| `minWidthSm` |  | `string \| number` | `64` | `64` |
+| `minWidthXl` |  | `string \| number` | `160` | `160` |
+| `minWidthXs` |  | `string \| number` | `56` | `56` |
 | `paddingSizeHorizontalLg` |  | `number` | `24` | `24` |
 | `paddingSizeHorizontalMd` |  | `number` | `16` | `16` |
 | `paddingSizeHorizontalSm` |  | `number` | `12` | `12` |
