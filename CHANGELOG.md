@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.3](https://github.com/IDuxFE/idux/compare/v2.6.2...v2.6.3) (2024-12-31)
+
+
+### Bug Fixes
+
+* **cdk:popper:** `update` shouldn't change ref option param ([#2023](https://github.com/IDuxFE/idux/issues/2023)) ([9d982d2](https://github.com/IDuxFE/idux/commit/9d982d27e95c09afb01c52f79125a0f6c54061b4))
+* **cdk:popper:** popper can't open when visible is updated by user ([#2022](https://github.com/IDuxFE/idux/issues/2022)) ([b8bca6d](https://github.com/IDuxFE/idux/commit/b8bca6d3ed691cd399ccc4250d051d6b0a40ede6))
+
+
+
+
+
 ## [2.6.2](https://github.com/IDuxFE/idux/compare/v2.6.1...v2.6.2) (2024-12-12)
 
 
