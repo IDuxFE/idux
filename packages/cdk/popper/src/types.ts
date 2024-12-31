@@ -74,7 +74,7 @@ export interface PopperOptions {
   offset?: MaybeRef<[number, number] | undefined>
   /**
    * Alignment of popper
-   * * default is `top`
+   * * default is `bottomStart`
    */
   placement?: MaybeRef<PopperPlacement | undefined>
   /**
@@ -84,7 +84,7 @@ export interface PopperOptions {
   trigger?: MaybeRef<PopperTrigger | undefined>
   /**
    * Control the visibility of the popper
-   * * default is `false`
+   * * default is `undefined`
    */
   visible?: MaybeRef<boolean | undefined>
 

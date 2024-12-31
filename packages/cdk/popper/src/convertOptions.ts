@@ -31,6 +31,8 @@ export function convertOptions(baseOptions: BaseOptions, extraOptions: ExtraOpti
   const { placement, strategy, middlewares, offset, autoAdjust } = baseOptions
   const { arrowElement, updatePlacement: _updatePlacement } = extraOptions
 
+  console.log(baseOptions)
+
   const { width } = arrowElement?.getBoundingClientRect() ?? {}
   const arrowSize = width ? width / 2 : 0
 

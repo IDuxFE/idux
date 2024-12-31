@@ -7,7 +7,7 @@
 
 import type { PopperOptions, ResolvedPopperOptions } from '../types'
 
-import { type ComputedRef, type UnwrapRef, computed, isReactive, nextTick, reactive, unref, watch } from 'vue'
+import { type ComputedRef, type UnwrapRef, computed, isReactive, isRef, nextTick, reactive, unref, watch } from 'vue'
 
 import { isEqual } from 'lodash-es'
 
@@ -18,18 +18,40 @@ export function usePopperOptions(options: PopperOptions): {
   updateOptions: (options: PopperOptions) => void
 } {
   const localOptions: PopperOptions = reactive({})
+
+  function getOptionValue<K extends keyof PopperOptions>(key: K): UnwrapRef<PopperOptions[K]>
+  function getOptionValue<K extends keyof PopperOptions>(
+    key: K,
+    defaultValue: UnwrapRef<PopperOptions[K]>,
+  ): Exclude<UnwrapRef<PopperOptions[K]>, undefined>
+  function getOptionValue<K extends keyof PopperOptions>(
+    key: K,
+    defaultValue?: UnwrapRef<PopperOptions[K]>,
+  ): UnwrapRef<PopperOptions[K]> | undefined {
+    let value: UnwrapRef<PopperOptions[K]>
+    if (isRef(options[key])) {
+      value = unref(options[key]) as UnwrapRef<PopperOptions[K]>
+    } else if (isRef(localOptions[key])) {
+      value = unref(localOptions[key]) as UnwrapRef<PopperOptions[K]>
+    } else {
+      value = (localOptions[key] ?? options[key]) as UnwrapRef<PopperOptions[K]>
+    }
+
+    return value ?? defaultValue
+  }
+
   const resolvedOptions = computed<ResolvedPopperOptions>(() => {
     return {
-      allowEnter: unref(options.allowEnter ?? localOptions.allowEnter) ?? true,
-      autoAdjust: unref(options.autoAdjust ?? localOptions.autoAdjust) ?? true,
-      delay: unref(options.delay ?? localOptions.delay) ?? defaultDelay,
-      disabled: unref(options.disabled ?? localOptions.disabled) ?? false,
-      offset: unref(options.offset ?? localOptions.offset) ?? [0, 0],
-      placement: unref(options.placement ?? localOptions.placement) ?? 'bottomStart',
-      trigger: unref(options.trigger ?? localOptions.trigger) ?? 'hover',
-      strategy: unref(options.strategy ?? localOptions.strategy) ?? 'absolute',
-      middlewares: unref(options.middlewares ?? localOptions.middlewares) ?? [],
-      visible: unref(options.visible ?? localOptions.visible),
+      allowEnter: getOptionValue('allowEnter', true),
+      autoAdjust: getOptionValue('autoAdjust', true),
+      delay: getOptionValue('delay', defaultDelay),
+      disabled: getOptionValue('disabled', false),
+      offset: getOptionValue('offset', [0, 0]),
+      placement: getOptionValue('placement', 'bottomStart'),
+      trigger: getOptionValue('trigger', 'hover'),
+      strategy: getOptionValue('strategy', 'absolute'),
+      middlewares: getOptionValue('middlewares', []),
+      visible: getOptionValue('visible'),
       onVisibleChange: options.onVisibleChange ?? localOptions.onVisibleChange,
     }
   })
