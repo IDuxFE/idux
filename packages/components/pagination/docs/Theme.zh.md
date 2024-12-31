@@ -6,7 +6,7 @@
 | `itemContentSizeLg` | lg 尺寸下分页器内容尺寸（按钮） | `number` | `32` | `32` |
 | `itemContentSizeMd` | md 尺寸下分页器内容尺寸（按钮） | `number` | `24` | `24` |
 | `itemContentSizeSm` | sm 尺寸下分页器内容尺寸（按钮） | `number` | `24` | `24` |
-| `itemPaddingLg` | lg 尺寸下分页器padding | `string | number` | `4` | `4` |
-| `itemPaddingMd` | md 尺寸下分页器padding | `string | number` | `4` | `4` |
-| `itemPaddingSm` | sm 尺寸下分页器padding | `string | number` | `0` | `0` |
+| `itemPaddingLg` | lg 尺寸下分页器padding | `string \| number` | `4` | `4` |
+| `itemPaddingMd` | md 尺寸下分页器padding | `string \| number` | `4` | `4` |
+| `itemPaddingSm` | sm 尺寸下分页器padding | `string \| number` | `0` | `0` |
 | `outLineColor` | 分页项选中时的外边框颜色 | `string` | `#458fff` | `#1B61DD` |

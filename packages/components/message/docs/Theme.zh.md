@@ -11,5 +11,5 @@
 | `contentPaddingVertical` |  | `number` | `8` | `8` |
 | `fontSize` |  | `number` | `14` | `14` |
 | `iconMarginRight` |  | `number` | `8` | `8` |
-| `margin` |  | `string | number` | `8` | `8` |
-| `wrapperTop` |  | `string | number` | `15%` | `15%` |
+| `margin` |  | `string \| number` | `8` | `8` |
+| `wrapperTop` |  | `string \| number` | `15%` | `15%` |

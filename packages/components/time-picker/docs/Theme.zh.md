@@ -1,7 +1,7 @@
 | 名称 | 描述 | 类型 | default | dark |
 |---|---|---|---|---|
-| `overlayFooterPadding` |  | `string | number` | `8px 16px` | `8px 16px` |
-| `overlayPadding` |  | `string | number` | `8px 8px 0 8px` | `8px 8px 0 8px` |
+| `overlayFooterPadding` |  | `string \| number` | `8px 16px` | `8px 16px` |
+| `overlayPadding` |  | `string \| number` | `8px 8px 0 8px` | `8px 8px 0 8px` |
 | `overlayWidth` |  | `number` | `200` | `200` |
 | `panelCellBgColorActive` |  | `string` | `transparent` | `transparent` |
 | `panelCellBgColorHover` |  | `string` | `transparent` | `transparent` |
@@ -20,8 +20,8 @@
 | `panelScrollbarWidth` |  | `number` | `6` | `6` |
 | `rangeBoardBorder` |  | `string` | `none` | `none` |
 | `rangeBoardWidth` |  | `number` | `184` | `184` |
-| `rangeOverlayFooterPadding` |  | `string | number` | `8px 0` | `8px 0` |
-| `rangeOverlayPadding` |  | `string | number` | `16px 16px 0 16px` | `16px 16px 0 16px` |
+| `rangeOverlayFooterPadding` |  | `string \| number` | `8px 0` | `8px 0` |
+| `rangeOverlayPadding` |  | `string \| number` | `16px 16px 0 16px` | `16px 16px 0 16px` |
 | `rangeOverlaySeparatorFontSize` |  | `number` | `12` | `12` |
-| `rangeOverlaySeparatorPadding` |  | `string | number` | `2px 10px` | `2px 10px` |
-| `separatorMarginHorizontal` |  | `string | number` | `24` | `24` |
+| `rangeOverlaySeparatorPadding` |  | `string \| number` | `2px 10px` | `2px 10px` |
+| `separatorMarginHorizontal` |  | `string \| number` | `24` | `24` |
