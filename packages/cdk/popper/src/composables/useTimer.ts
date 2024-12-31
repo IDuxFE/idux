@@ -9,10 +9,11 @@ export function useTimer(): { setTimer: (action: () => void, delay: number) => v
   let timer: number | null = null
 
   const setTimer = (action: () => void, delay: number) => {
-    if (timer) {
-      clearTimeout(timer)
-    }
-    timer = setTimeout(action, delay)
+    clearTimer()
+    timer = setTimeout(() => {
+      action()
+      timer = null
+    }, delay)
   }
 
   const clearTimer = () => {

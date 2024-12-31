@@ -4,7 +4,7 @@
     <IxButton ref="focusTriggerRef" v-bind="focusTriggerEvents">Focus</IxButton>
     <IxButton ref="clickTriggerRef" v-bind="clickTriggerEvents">Click</IxButton>
     <IxButton ref="contextmenuTriggerRef" v-bind="contextmenuTriggerEvents">Contextmenu</IxButton>
-    <IxButton ref="manualTriggerRef" @click="manualUpdate({ visible: !manualVisibility })">Manual</IxButton>
+    <IxButton ref="manualTriggerRef" @click="toggleManualVisible">Manual</IxButton>
   </IxSpace>
   <CdkPortal target=".ix-popper-container">
     <div v-if="hoverVisibility" ref="hoverPopperRef" class="popper popper-hover" v-bind="hoverPopperEvents">Hover</div>
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
 
 import { usePopper } from '@idux/cdk/popper'
 
@@ -28,6 +28,11 @@ export default defineComponent({
     const clickPopper = usePopper({ trigger: 'click' })
     const contextmenuPopper = usePopper({ trigger: 'contextmenu' })
     const manualPopper = usePopper({ trigger: 'manual' })
+
+    const manualVisible = ref(false)
+    const toggleManualVisible = () => {
+      manualVisible.value = !manualVisible.value
+    }
 
     const instances = [hoverPopper, focusPopper, clickPopper, contextmenuPopper, manualPopper]
 
@@ -64,7 +69,7 @@ export default defineComponent({
       manualTriggerRef: manualPopper.triggerRef,
       manualPopperRef: manualPopper.popperRef,
       manualVisibility: manualPopper.visibility,
-      manualUpdate: manualPopper.update,
+      toggleManualVisible,
     }
   },
 })

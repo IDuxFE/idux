@@ -24,7 +24,7 @@
 <script lang="ts">
 import type { PopperPlacement } from '@idux/cdk/popper'
 
-import { defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
 
 import { usePopper } from '@idux/cdk/popper'
 
@@ -32,14 +32,12 @@ export default defineComponent({
   setup() {
     const placement = ref<PopperPlacement>('top')
 
-    const { initialize, destroy, update, popperRef, triggerRef, popperEvents, triggerEvents, visibility } = usePopper()
+    const { initialize, destroy, popperRef, triggerRef, popperEvents, triggerEvents, visibility } = usePopper({
+      placement: placement.value,
+    })
 
     onMounted(() => initialize())
     onBeforeUnmount(() => destroy())
-
-    watch(placement, () => {
-      update({ placement: placement.value })
-    })
 
     return { placement, popperRef, popperEvents, triggerRef, triggerEvents, visibility }
   },

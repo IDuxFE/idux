@@ -11,15 +11,15 @@ export function usePopper(options?: PopperOptions): PopperInstance
 
 | 名称 | 说明 | 类型  | 默认值 | 全局配置 | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| `autoAdjust` | 空间不足时是否自动调整位置 | `boolean` | `true` | - |- |
-| `delay` | 延迟显示或隐藏的时间 | `number \| [number \| null, number \| null]` | `0` | - | 为数组时，第一个元素是延迟显示的时间，第二个元素是延迟隐藏的时间 |
-| `disabled` | 是否禁用浮层 | `boolean` | `false` | - | - |
-| `offset` | 浮层相对目标元素的偏移量 | `[number, number]` | `[0, 0]` | - | 第一个元素是水平偏移量，第二个元素是垂直偏移量 |
-| `placement` | 浮层的位置 | `PopperPlacement` | `bottomStart` | - | - |
-| `trigger` | 浮层的触发方式 | `PopperTrigger` | `hover` | - | - |
-| `visible` | 是否显示浮层 | `boolean` | `false` | - | - |
-| `strategy` | 浮层的定位策略 | `'absolute' \| 'fixed'` | `absolute` | - | - |
-| `middleware` | 自定义浮层的 `middleware` | `Middleware[]` | `[]` | - | 参见[floating-ui](https://floating-ui.com/docs/middleware) |
+| `autoAdjust` | 空间不足时是否自动调整位置 | `boolean \| Ref<boolean>` | `true` | - |- |
+| `delay` | 延迟显示或隐藏的时间 | `number \| [number \| null, number \| null] \| Ref<number \| [number \| null, number \| null]>` | `0` | - | 为数组时，第一个元素是延迟显示的时间，第二个元素是延迟隐藏的时间 |
+| `disabled` | 是否禁用浮层 | `boolean \| Ref<boolean>` | `false` | - | - |
+| `offset` | 浮层相对目标元素的偏移量 | `[number, number] \| Ref<[number, number]>` | `[0, 0]` | - | 第一个元素是水平偏移量，第二个元素是垂直偏移量 |
+| `placement` | 浮层的位置 | `PopperPlacement \| Ref<PopperPlacement>` | `bottomStart` | - | - |
+| `trigger` | 浮层的触发方式 | `PopperTrigger \| Ref<PopperTrigger>` | `hover` | - | - |
+| `visible` | 是否显示浮层 | `boolean \| Ref<boolean>` | `false` | - | - |
+| `strategy` | 浮层的定位策略 | `'absolute' \| 'fixed' \| Ref<'absolute' \| 'fixed'>` | `absolute` | - | - |
+| `middleware` | 自定义浮层的 `middleware` | `Middleware[] \| Ref<Middleware[]>` | `[]` | - | 参见[floating-ui](https://floating-ui.com/docs/middleware) |
 
 ```ts
 export declare type PopperPlacement = 'topStart' | 'top' | 'topEnd' | 'rightStart' | 'right' | 'rightEnd' | 'bottomStart' | 'bottom' | 'bottomEnd' | 'leftStart' | 'left' | 'leftEnd'
@@ -34,7 +34,7 @@ export type PopperTrigger = 'click' | 'hover' | 'focus' | 'contextmenu' | 'manua
 | `initialize` | 初始化浮层 | `(): void` | - | - | 应该在组件被创建后调用 |
 | `show` | 显示浮层 | `(delay?: number): void` | - | - | `delay` 是延迟显示的时间 |
 | `hide` | 隐藏浮层 | `(delay?: number): void` | - | - | `delay` 是延迟隐藏的时间 |
-| `update` | 更新浮层 | `(options: Partial<PopperOptions>): void` | - | - | - |
+| `update` | 更新浮层 | `(): void` | - | - | - |
 | `destroy` | 销毁浮层 | `(): void` | - | - | - |
 | `visibility` | 浮层显示状态 | `ComputedRef<boolean>` | -| - | - |
 | `placement` | 浮层位置 | `ComputedRef<PopperPlacement>` | - | - | - |
