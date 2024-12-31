@@ -6,6 +6,6 @@
 | `navFontSizeMd` |  | `number` | `12` | `12` |
 | `navTabHeight` |  | `number` | `40` | `40` |
 | `navTabMinWidth` |  | `number` | `72` | `72` |
-| `navTabPadding` |  | `string | number` | `0 16px` | `0 16px` |
+| `navTabPadding` |  | `string \| number` | `0 16px` | `0 16px` |
 | `panelPaddingSize` |  | `number` | `16` | `16` |
 | `segmentNavHeight` |  | `number` | `32` | `32` |

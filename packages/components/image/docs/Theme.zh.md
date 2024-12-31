@@ -12,5 +12,5 @@
 | `viewerOprColorDisabled` |  | `string` | `rgba(255, 255, 255, 0.35)` | `rgba(255, 255, 255, 0.35)` |
 | `viewerOprFontSize` |  | `number` | `20` | `20` |
 | `viewerOprHeight` |  | `number` | `48` | `48` |
-| `viewerOprItemMargin` |  | `string | number` | `0 24px` | `0 24px` |
+| `viewerOprItemMargin` |  | `string \| number` | `0 24px` | `0 24px` |
 | `viewerOprMarginBottom` |  | `number` | `48` | `48` |

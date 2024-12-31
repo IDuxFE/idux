@@ -116,7 +116,7 @@ function formatDoc(themes: ThemeOption[], tokens: Token[]) {
   const contents = tokens
     .map(
       token =>
-        `| ${'`' + token.name + '`'} | ${token.desc} | ${'`' + token.type + '`'} |${themes
+        `| ${'`' + token.name + '`'} | ${token.desc} | ${'`' + token.type?.replaceAll('|', '\\|') + '`'} |${themes
           .map(({ tokens }) => ' ' + '`' + tokens[token.name] + '`' + ' |')
           .join('')}`,
     )

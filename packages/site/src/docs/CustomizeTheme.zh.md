@@ -548,7 +548,7 @@ token `getter` 只会在第一次注册成功的时候实际执行，因此不�
 | `overlayArrowSize` | 浮层箭头尺寸 | `number` | `6` | `6` |
 | `overlayBgColor` | 浮层背景颜色 | `string` | `#ffffff` | `#0A0C0F` |
 | `overlayBorderColor` | 浮层边框颜色 | `string` | `transparent` | `#1F2329` |
-| `overlayBorderRadius` | 浮层边框圆角 | `string | number` | `2` | `2` |
+| `overlayBorderRadius` | 浮层边框圆角 | `string \| number` | `2` | `2` |
 | `overlayBorderType` | 浮层边框样式 | `string` | `solid` | `solid` |
 | `overlayBorderWidth` | 浮层边框宽度 | `number` | `0` | `1` |
 | `scrollbarHeight` | 滚动条高度 | `number` | `12` | `12` |

@@ -7,5 +7,5 @@
 | `labelFontSize` |  | `number` | `12` | `12` |
 | `labelRequiredColor` |  | `string` | `#cf171d` | `#E8514C` |
 | `messageTooltipBgColor` |  | `string` | `#ff5752` | `#E8514C` |
-| `verticalItemLabelMargin` |  | `string | number` | `0` | `0` |
-| `verticalItemLabelPadding` |  | `string | number` | `0 0 8px` | `0 0 8px` |
+| `verticalItemLabelMargin` |  | `string \| number` | `0` | `0` |
+| `verticalItemLabelPadding` |  | `string \| number` | `0 0 8px` | `0 0 8px` |
