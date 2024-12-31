@@ -10,6 +10,15 @@ order: 13
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+## 2.6.3(2024-12-31)
+
+
+### Bug Fixes
+
+* **cdk:popper:** 当option传入ref变量时，`update`方法不应该更新该参数 ([#2023](https://github.com/IDuxFE/idux/issues/2023)) ([9d982d2](https://github.com/IDuxFE/idux/commit/9d982d27e95c09afb01c52f79125a0f6c54061b4))
+  - 不建议再使用 `update` 方法修改配置，建议使用ref变量
+* **cdk:popper:** 当popper的visible被受控修改为 `false` 之后，内部事件无法正确更新visible的值 ([#2022](https://github.com/IDuxFE/idux/issues/2022)) ([b8bca6d](https://github.com/IDuxFE/idux/commit/b8bca6d3ed691cd399ccc4250d051d6b0a40ede6))
+
 ## 2.6.2(2024-12-12)
 
 
