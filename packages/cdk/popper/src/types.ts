@@ -98,7 +98,8 @@ export interface PopperOptions {
 }
 
 export type ResolvedPopperOptions = Required<UnwrapRef<Omit<PopperOptions, 'onVisibleChange' | 'visible'>>> &
-  Pick<PopperOptions, 'onVisibleChange' | 'visible'>
+  UnwrapRef<Pick<PopperOptions, 'visible'>> &
+  Pick<PopperOptions, 'onVisibleChange'>
 
 export interface PopperInstance<TE extends PopperElement = PopperElement, PE extends PopperElement = PopperElement> {
   /**

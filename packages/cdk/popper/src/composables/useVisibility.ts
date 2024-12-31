@@ -18,7 +18,7 @@ export function useVisibility(options: ComputedRef<ResolvedPopperOptions>): {
   const mergedVisible = computed(() => !options.value.disabled && !!(options.value.visible ?? visible.value))
 
   const updateVisibility = (v: boolean) => {
-    if (options.value.disabled || v === visible.value) {
+    if (options.value.disabled || v === (options.value.visible ?? visible.value)) {
       return
     }
 
