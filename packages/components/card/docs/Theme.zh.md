@@ -3,9 +3,9 @@
 | `fontSizeLg` |  | `number` | `14` | `14` |
 | `fontSizeMd` |  | `number` | `12` | `12` |
 | `fontSizeSm` |  | `number` | `12` | `12` |
-| `gridWidth` |  | `string | number` | `25%` | `25%` |
-| `headerPadding` |  | `string | number` | `8` | `8` |
-| `loadingBgSize` |  | `string | number` | `600%` | `600%` |
+| `gridWidth` |  | `string \| number` | `25%` | `25%` |
+| `headerPadding` |  | `string \| number` | `8` | `8` |
+| `loadingBgSize` |  | `string \| number` | `600%` | `600%` |
 | `loadingEndColor` |  | `string` | `#e1e5eb` | `#1F2329` |
 | `loadingHeight` |  | `number` | `14` | `14` |
 | `loadingSpacing` |  | `number` | `4` | `4` |

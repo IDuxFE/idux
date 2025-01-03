@@ -12,5 +12,5 @@
 | `nodeContentLabelHighlightColor` |  | `string` | `#1c6eff` | `#4083E8` |
 | `nodeContentPrefixMarginRight` |  | `number` | `4` | `4` |
 | `nodeIconWidth` |  | `number` | `24` | `24` |
-| `nodePaddingHorizontal` |  | `string | number` | `4` | `4` |
-| `nodePaddingVertical` |  | `string | number` | `0px` | `0px` |
+| `nodePaddingHorizontal` |  | `string \| number` | `4` | `4` |
+| `nodePaddingVertical` |  | `string \| number` | `0px` | `0px` |

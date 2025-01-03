@@ -3,8 +3,8 @@
 | `boardMaxHeight` |  | `number` | `260` | `260` |
 | `boardWidth` |  | `number` | `220` | `220` |
 | `overlayDateInputWidth` |  | `number` | `120` | `120` |
-| `overlayFooterPadding` |  | `string | number` | `8px 16px` | `8px 16px` |
-| `overlayPadding` |  | `string | number` | `16` | `16` |
+| `overlayFooterPadding` |  | `string \| number` | `8px 16px` | `8px 16px` |
+| `overlayPadding` |  | `string \| number` | `16` | `16` |
 | `overlayTimeInputWidth` |  | `number` | `96` | `96` |
 | `overlayWidth` |  | `number` | `252` | `252` |
 | `panelBodyHeaderBgColor` |  | `string` | `#f7f9fc` | `#171A1F` |
@@ -33,11 +33,11 @@
 | `panelHeaderSpacing` |  | `number` | `16` | `16` |
 | `panelHeaerHeight` |  | `number` | `32` | `32` |
 | `rangeBoardBorder` |  | `string` | `none` | `none` |
-| `rangeOverlayFooterPadding` |  | `string | number` | `8px 0` | `8px 0` |
-| `rangeOverlayPadding` |  | `string | number` | `16px 16px 0 16px` | `16px 16px 0 16px` |
+| `rangeOverlayFooterPadding` |  | `string \| number` | `8px 0` | `8px 0` |
+| `rangeOverlayPadding` |  | `string \| number` | `16px 16px 0 16px` | `16px 16px 0 16px` |
 | `rangeOverlaySeparatorFontSize` |  | `number` | `12` | `12` |
-| `rangeOverlaySeparatorWidth` |  | `string | number` | `32` | `32` |
+| `rangeOverlaySeparatorWidth` |  | `string \| number` | `32` | `32` |
 | `rangeShortcutsItemFontSize` |  | `number` | `12` | `12` |
 | `rangeShortcutsItemHeight` |  | `number` | `32` | `32` |
 | `rangeShortcutsItemPadding` |  | `string` | `8px 12px` | `8px 12px` |
-| `separatorMarginHorizontal` |  | `string | number` | `16` | `16` |
+| `separatorMarginHorizontal` |  | `string \| number` | `16` | `16` |

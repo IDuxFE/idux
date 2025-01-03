@@ -9,6 +9,6 @@
 | `lineSizeLg` |  | `number` | `8` | `8` |
 | `lineSizeMd` |  | `number` | `6` | `6` |
 | `lineSizeSm` |  | `number` | `2` | `2` |
-| `lineTextPadding` |  | `string | number` | `0 0 0 8px` | `0 0 0 8px` |
+| `lineTextPadding` |  | `string \| number` | `0 0 0 8px` | `0 0 0 8px` |
 | `textWidth` |  | `number` | `36` | `36` |
 | `trailBgColor` |  | `string` | `#edf1f7` | `#1F2329` |

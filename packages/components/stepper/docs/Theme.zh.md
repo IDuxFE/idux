@@ -8,8 +8,8 @@
 | `iconBorderWidthSm` |  | `number` | `2` | `2` |
 | `iconFontSizeMd` |  | `number` | `16` | `16` |
 | `iconFontSizeSm` |  | `number` | `14` | `14` |
-| `iconMarginMd` |  | `string | number` | `0 8px 0 0` | `0 8px 0 0` |
-| `iconMarginSm` |  | `string | number` | `0 8px 0 0` | `0 8px 0 0` |
+| `iconMarginMd` |  | `string \| number` | `0 8px 0 0` | `0 8px 0 0` |
+| `iconMarginSm` |  | `string \| number` | `0 8px 0 0` | `0 8px 0 0` |
 | `iconSizeMd` |  | `number` | `32` | `32` |
 | `iconSizeSm` |  | `number` | `24` | `24` |
 | `lineType` |  | `string` | `dashed` | `dashed` |

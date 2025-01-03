@@ -7,4 +7,4 @@
 | `linkColorHover` |  | `string` | `#1c6eff` | `#4083E8` |
 | `separatorColor` |  | `string` | `#bec3cc` | `#687080` |
 | `separatorFontSize` |  | `number` | `12` | `12` |
-| `separatorMargin` |  | `string | number` | `0 4px` | `0 4px` |
+| `separatorMargin` |  | `string \| number` | `0 4px` | `0 4px` |
