@@ -2,6 +2,7 @@
   .@{form-item-prefix}-label {
     flex-grow: 0;
   }
+
   .@{form-item-prefix}-control {
     flex: 1 1 0;
   }
@@ -50,26 +51,26 @@
   .form-vertical-layout-label();
 }
 
-@media (max-width: var(--ix-screen-xs-max)) {
+@media (max-width: @screen-xs-max) {
   .form-vertical-layout();
   .@{idux-prefix}-col-xs-24.@{form-item-prefix}-label {
     .form-vertical-layout-label();
   }
 }
 
-@media (max-width: var(--ix-screen-sm-max)) {
+@media (max-width: @screen-sm-max) {
   .@{idux-prefix}-col-sm-24.@{form-item-prefix}-label {
     .form-vertical-layout-label();
   }
 }
 
-@media (max-width: var(--ix-screen-md-max)) {
+@media (max-width: @screen-md-max) {
   .@{idux-prefix}-col-md-24.@{form-item-prefix}-label {
     .form-vertical-layout-label();
   }
 }
 
-@media (max-width: var(--ix-screen-lg-max)) {
+@media (max-width: @screen-lg-max) {
   .@{idux-prefix}-col-lg-24.@{form-item-prefix}-label {
     .form-vertical-layout-label();
   }
