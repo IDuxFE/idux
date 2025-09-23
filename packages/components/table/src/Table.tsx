@@ -59,6 +59,7 @@ export default defineComponent({
     const mergedChildrenKey = computed(() => props.childrenKey ?? config.childrenKey)
     const mergedGetKey = useGetKey(props, config, 'components/table')
     const mergedEmptyCell = computed(() => props.emptyCell ?? config.emptyCell)
+    const mergedSpinHeader = computed(() => props.spinHeader ?? config.spinHeader)
     const mergedInsetShadow = computed(() => props.insetShadow ?? config.insetShadow)
     const mergedSize = computed(() => props.size ?? config.size)
     const mergedVirtual = computed<VirtualScrollEnabled>(() => {
@@ -193,14 +194,18 @@ export default defineComponent({
         flattedData.value.length > 0,
         prefixCls,
       )
-      const children = [header]
+      const children = []
       const restChildren = [paginationTop, <MainTable />, footer, paginationBottom].filter(Boolean) as VNode[]
-
       const spinProps = convertSpinProps(props.spin)
       if (spinProps) {
+        if (mergedSpinHeader.value) {
+          restChildren.unshift(header)
+        } else {
+          children.push(header)
+        }
         children.push(<IxSpin {...spinProps}>{restChildren}</IxSpin>)
       } else {
-        children.push(...restChildren)
+        children.push(header, ...restChildren)
       }
       return <div class={classes.value}>{children}</div>
     }

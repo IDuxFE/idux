@@ -25,6 +25,7 @@
 | `scrollToTopOnChange` | 是否在表格的分页、筛选、排序信息改变后滚动到顶部 | `boolean` | `true` | ✅ | - |
 | `size` | 表格大小 | `'lg' \| 'md' \| 'sm'` | `md` | ✅ |- |
 | `spin` | 表格是否加载中 | `boolean \| SpinProps` | - | - | - |
+| `spinHeader` | Spin 组件是否包含 Header | `boolean` | `false` | ✅ | - |
 | `tableLayout` | 表格元素的 [table-layout](https://developer.mozilla.org/zh-CN/docs/Web/CSS/table-layout) 属性 | `'auto' \| 'fixed'` | - | - | 固定表头/列或设置了 `column.ellipsis` 时，默认值为 `fixed` |
 | `virtual` | 是否开启纵向虚拟滚动 | `boolean` | `false` | - | 需要设置 `scroll.height` |
 | `virtualHorizontal` | 是否开启横向虚拟滚动 | `boolean` | `false` | - | 不可以设置 `scroll.width`，并且每列的宽度必须配置 |

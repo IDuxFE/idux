@@ -349,6 +349,7 @@ export const defaultConfig: GlobalConfig = {
     getKey: 'key',
     size: 'md',
     scrollToTopOnChange: true,
+    spinHeader: false,
     insetShadow: true,
     pagination: {
       position: 'bottomEnd',
