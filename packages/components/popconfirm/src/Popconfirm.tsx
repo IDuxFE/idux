@@ -67,18 +67,20 @@ export default defineComponent({
 })
 
 function useTrigger(props: PopconfirmProps, setVisible: (value: boolean) => void) {
+  const hide = (result: boolean | unknown) => {
+    result !== false && setVisible(false)
+  }
+
   const cancelLoading = ref(false)
   const cancel = async (evt?: Event | unknown) => {
     let result = callEmit(props.onCancel, evt)
     if (isPromise(result)) {
       cancelLoading.value = true
-      result = await result
-      cancelLoading.value = false
+      result = await result.finally(() => {
+        cancelLoading.value = false
+      })
     }
-    if (result === false) {
-      return
-    }
-    setVisible(false)
+    hide(result)
   }
 
   const okLoading = ref(false)
@@ -86,13 +88,11 @@ function useTrigger(props: PopconfirmProps, setVisible: (value: boolean) => void
     let result = callEmit(props.onOk, evt)
     if (isPromise(result)) {
       okLoading.value = true
-      result = await result
-      okLoading.value = false
+      result = await result.finally(() => {
+        okLoading.value = false
+      })
     }
-    if (result === false) {
-      return
-    }
-    setVisible(false)
+    hide(result)
   }
 
   return { cancelLoading, okLoading, cancel, ok }

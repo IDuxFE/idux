@@ -143,11 +143,6 @@ export default defineComponent({
         closeIcon: slots.closeIcon,
       }
 
-      const spinSlots = {
-        default: slots.spinContent,
-        icon: slots.spinIcon,
-      }
-
       const spinProps = mergedSpin.value
 
       const children = [
@@ -194,11 +189,11 @@ export default defineComponent({
       )
 
       if (mergedSpinWithFullModal.value && spinProps) {
-        return (
-          <IxSpin v-slots={spinSlots} {...spinProps}>
-            {contentNode}
-          </IxSpin>
-        )
+        const spinSlots = {
+          default: slots.spinContent ?? (() => contentNode),
+          icon: slots.spinIcon,
+        }
+        return <IxSpin v-slots={spinSlots} {...spinProps}></IxSpin>
       }
 
       return contentNode

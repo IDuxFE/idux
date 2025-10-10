@@ -63,15 +63,10 @@ export default defineComponent({
 
       if (!mergedSpinWithFullModal.value && spinProps) {
         const spinSlots = {
-          default: slots.spinContent,
+          default: slots.spinContent ?? (() => bodyNode),
           icon: slots.spinIcon,
         }
-
-        return (
-          <IxSpin v-slots={spinSlots} {...spinProps}>
-            {bodyNode}
-          </IxSpin>
-        )
+        return <IxSpin v-slots={spinSlots} {...spinProps}></IxSpin>
       }
 
       return bodyNode
