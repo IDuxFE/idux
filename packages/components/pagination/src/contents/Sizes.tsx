@@ -32,6 +32,7 @@ export default defineComponent({
           <IxSelect
             disabled={props.disabled}
             dataSource={sizeData.value}
+            getKey="key"
             size={mergedSize.value === 'lg' ? 'md' : 'sm'}
             value={activeSize.value}
             onChange={changePageSize}

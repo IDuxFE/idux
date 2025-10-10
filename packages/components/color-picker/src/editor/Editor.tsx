@@ -62,6 +62,7 @@ export default defineComponent({
             class={`${prefixCls}-format-select`}
             value={format.value}
             dataSource={formatSelectDataSource as SelectData[]}
+            getKey="key"
             onChange={setFormat}
           />
           <SubEditorComp class={`${prefixCls}-sub`} />
