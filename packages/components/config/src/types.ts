@@ -499,6 +499,7 @@ export interface TableConfig {
   childrenKey: string
   getKey: string | ((data: any) => any)
   size: TableSize
+  spinHeader: boolean
   scrollToTopOnChange?: boolean
 
   emptyCell?: string | ((options: TableEmptyCellOptions) => VNodeChild)
