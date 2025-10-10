@@ -4,7 +4,17 @@ import { h } from 'vue'
 import { renderWork, wait } from '@tests'
 
 import Menu from '../src/Menu'
+import _MenuDivider from '../src/contents/MenuDivider'
+import _MenuItem from '../src/contents/MenuItem'
+import _MenuItemGroup from '../src/contents/MenuItemGroup'
+import { componentFactory } from '../src/contents/Utils'
+import _MenuSub from '../src/contents/menu-sub/MenuSub'
 import { MenuData, MenuProps } from '../src/types'
+
+componentFactory.registerComponent('item', _MenuItem)
+componentFactory.registerComponent('itemGroup', _MenuItemGroup)
+componentFactory.registerComponent('sub', _MenuSub)
+componentFactory.registerComponent('divider', _MenuDivider)
 
 const dataSource: MenuData[] = [
   { key: 'item1', icon: 'home', customLabel: () => h('a', 'Item 1') },
