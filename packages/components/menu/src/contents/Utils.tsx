@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { type Slot, type VNode, type VNodeChild } from 'vue'
+import { Component, Slot, type VNode, type VNodeChild } from 'vue'
 
 import { isString } from 'lodash-es'
 
@@ -13,11 +13,7 @@ import { Logger } from '@idux/cdk/utils'
 import { IxIcon } from '@idux/components/icon'
 import { type GetKeyFn } from '@idux/components/utils'
 
-import MenuDivider from './MenuDivider'
-import MenuItem from './MenuItem'
-import MenuItemGroup from './MenuItemGroup'
 import { type MenuData } from '../types'
-import MenuSub from './menu-sub/MenuSub'
 
 export function coverChildren(data: MenuData[] | undefined, getKetFn: GetKeyFn): VNode[] {
   if (!data || data.length === 0) {
@@ -26,16 +22,11 @@ export function coverChildren(data: MenuData[] | undefined, getKetFn: GetKeyFn):
 
   const nodes: VNode[] = []
   data.forEach((item, index) => {
-    const { type } = item
+    const { type = 'item' } = item
     const key = getKetFn(item)
-    if (!type || type === 'item') {
-      nodes.push(<MenuItem key={key} index={index} data={item}></MenuItem>)
-    } else if (type === 'sub') {
-      nodes.push(<MenuSub key={key} index={index} data={item}></MenuSub>)
-    } else if (type === 'itemGroup') {
-      nodes.push(<MenuItemGroup key={key} index={index} data={item}></MenuItemGroup>)
-    } else if (type === 'divider') {
-      nodes.push(<MenuDivider key={key} index={index} data={item}></MenuDivider>)
+    const component = componentFactory.getComponent(type)
+    if (component) {
+      nodes.push(<component key={key} index={index} data={item} />)
     } else {
       __DEV__ && Logger.warn('components/menu', `type [${type}] not supported`)
     }
@@ -43,6 +34,30 @@ export function coverChildren(data: MenuData[] | undefined, getKetFn: GetKeyFn):
 
   return nodes
 }
+
+type MenuType = 'item' | 'itemGroup' | 'sub' | 'divider'
+
+class ComponentFactory {
+  private static instance: ComponentFactory
+  private components = new Map<MenuType, Component>()
+
+  static getInstance(): ComponentFactory {
+    if (!ComponentFactory.instance) {
+      ComponentFactory.instance = new ComponentFactory()
+    }
+    return ComponentFactory.instance
+  }
+
+  registerComponent(type: MenuType, component: Component) {
+    this.components.set(type, component)
+  }
+
+  getComponent(type: MenuType): Component | undefined {
+    return this.components.get(type)
+  }
+}
+
+export const componentFactory = ComponentFactory.getInstance()
 
 export function coverIcon<T>(
   slot: Slot | ((data: T) => VNodeChild) | undefined,

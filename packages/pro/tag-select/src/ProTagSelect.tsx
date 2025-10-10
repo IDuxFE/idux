@@ -10,9 +10,8 @@ import { computed, defineComponent, normalizeClass, provide, ref, watch } from '
 import { useAccessorAndControl } from '@idux/cdk/forms'
 import { VKey, callEmit, useState } from '@idux/cdk/utils'
 import { type ControlTriggerSlots, IxControlTrigger } from '@idux/components/control-trigger'
-import { useFormItemRegister, useFormStatus } from '@idux/components/form'
+import { useFormItemRegister, useFormStatus, ɵUseMergedCommonControlProps } from '@idux/components/form'
 import { IxSelector, type SelectorInstance } from '@idux/components/selector'
-import { useMergedCommonControlProps } from '@idux/components/utils'
 import { useGlobalConfig } from '@idux/pro/config'
 import { useThemeToken } from '@idux/pro/theme'
 
@@ -45,7 +44,7 @@ export default defineComponent({
     const locales = useGlobalConfig('locale')
     const config = useGlobalConfig('tagSelect')
     const { accessor, control } = useAccessorAndControl()
-    const commonControlProps = useMergedCommonControlProps(props, config)
+    const commonControlProps = ɵUseMergedCommonControlProps(props, config)
     useFormItemRegister(control)
     const mergedStatus = useFormStatus(props, control)
 

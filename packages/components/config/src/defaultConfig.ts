@@ -7,7 +7,6 @@
 
 import { type VNodeChild, h } from 'vue'
 
-import { IxIcon } from '@idux/components/icon'
 import { zhCN } from '@idux/components/locales'
 
 import { numFormatter } from './numFormatter'
@@ -392,8 +391,7 @@ export const defaultConfig: GlobalConfig = {
     trim: false,
   },
   text: {
-    copyIcon: ({ copied }) =>
-      h(IxIcon, { name: !copied ? 'copy' : 'check-circle-filled', style: copied ? { color: '#20CC94' } : undefined }),
+    copyIcon: ['copy', 'check-circle-filled'],
   },
   timePicker: {
     borderless: false,

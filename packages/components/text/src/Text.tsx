@@ -151,6 +151,7 @@ export default defineComponent({
         [globalHashId.value]: globalHashId.value,
         [prefixCls]: true,
         [`${prefixCls}-simple`]: isSimple.value,
+        [`${prefixCls}-copied`]: copied.value,
         [`${prefixCls}-ellipsis`]: isEllipsis.value,
         [`${prefixCls}-expandable`]: expandable.value,
         [`${prefixCls}-has-expand-icon`]: hasExpandIcon,

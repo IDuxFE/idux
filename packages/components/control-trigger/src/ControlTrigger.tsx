@@ -10,8 +10,9 @@ import { computed, defineComponent, normalizeClass, provide, ref } from 'vue'
 import { callEmit } from '@idux/cdk/utils'
 import { ɵTrigger, type ɵTriggerInstance, type ɵTriggerSlots } from '@idux/components/_private/trigger'
 import { useGlobalConfig } from '@idux/components/config'
+import { ɵUseMergedCommonControlProps } from '@idux/components/form'
 import { useThemeToken } from '@idux/components/theme'
-import { useMergedCommonControlProps, useOverlayFocusMonitor } from '@idux/components/utils'
+import { useOverlayFocusMonitor } from '@idux/components/utils'
 
 import ControlTriggerOverlay from './ControlTriggerOverlay'
 import { useOverlayState } from './composables/useOverlayState'
@@ -38,7 +39,7 @@ export default defineComponent({
     const mergedPrefixCls = computed(() => `${common.prefixCls}-control-trigger`)
     const triggerRef = ref<ɵTriggerInstance>()
 
-    const mergedControlProps = useMergedCommonControlProps(props, defaultTriggerProps)
+    const mergedControlProps = ɵUseMergedCommonControlProps(props, defaultTriggerProps)
 
     const onFocus = (evt: FocusEvent) => {
       callEmit(props.onFocus, evt)
