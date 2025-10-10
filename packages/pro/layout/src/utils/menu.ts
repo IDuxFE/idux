@@ -6,13 +6,13 @@
  */
 
 import { NoopArray, type VKey } from '@idux/cdk/utils'
-import { type MenuData } from '@idux/components/menu'
+import { type MenuData, MenuSubProps } from '@idux/components/menu'
 
 export function getMenuChildren(menu: MenuData | undefined): MenuData[] {
-  if (!menu || !('children' in menu)) {
-    return NoopArray as unknown as MenuData[]
+  if (menu && Array.isArray((menu as MenuSubProps).children)) {
+    return (menu as MenuSubProps).children!
   }
-  return menu.children!
+  return NoopArray as unknown as MenuData[]
 }
 
 // 获取目标 key 的菜单路径

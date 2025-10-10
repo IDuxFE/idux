@@ -17,11 +17,10 @@ import { type VKey, callEmit, useControlledProp, useState } from '@idux/cdk/util
 import { ɵInput } from '@idux/components/_private/input'
 import { type SelectConfig, useGlobalConfig } from '@idux/components/config'
 import { type ControlTriggerSlots, IxControlTrigger } from '@idux/components/control-trigger'
-import { useFormItemRegister, useFormStatus } from '@idux/components/form'
+import { useFormItemRegister, useFormStatus, ɵUseMergedCommonControlProps } from '@idux/components/form'
 import { IxSelector, type SelectorInstance } from '@idux/components/selector'
 import { IxSpin } from '@idux/components/spin'
 import { useThemeToken } from '@idux/components/theme'
-import { useMergedCommonControlProps } from '@idux/components/utils'
 
 import { useActiveState } from './composables/useActiveState'
 import { GetKeyFn, useGetOptionKey } from './composables/useGetOptionKey'
@@ -67,7 +66,7 @@ export default defineComponent({
 
     const [overlayOpened, setOverlayOpened] = useControlledProp(props, 'open', false)
     const { accessor, control } = useAccessorAndControl()
-    const commonControlProps = useMergedCommonControlProps(props, config)
+    const commonControlProps = ɵUseMergedCommonControlProps(props, config)
     useFormItemRegister(control)
     const mergedStatus = useFormStatus(props, control)
 
