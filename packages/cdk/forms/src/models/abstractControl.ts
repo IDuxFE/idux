@@ -154,7 +154,7 @@ export abstract class AbstractControl<T = any> {
 
   /**
    * Reports the trigger validate of the `AbstractControl`.
-   * Possible values: `'change'` | `'blur'` | `'submit'`
+   * Possible values: `'change'` | `'blur'` | `'submit'` | `'interactions'`
    * Default value: `'change'`
    */
   get trigger(): ValidatorTrigger {
@@ -241,6 +241,9 @@ export abstract class AbstractControl<T = any> {
       this.markAsUnblurred()
       this.markAsPristine()
     }
+    nextTick(() => {
+      this._validated.value = false
+    })
   }
 
   /**
@@ -678,39 +681,22 @@ export abstract class AbstractControl<T = any> {
   }
 
   private _watchValid() {
-    let isChangeValidating = false
-    let isChanging = false
-
     this._blurMarkedCb = () => {
-      if (
-        this.trigger === 'blur' ||
-        (this.trigger === 'interactions' && (!this.validated.value || !isChangeValidating))
-      ) {
+      if (this.trigger === 'blur' || (this.trigger === 'interactions' && this.dirty.value && !this.validated.value)) {
         this._validate()
       }
-
-      isChangeValidating = false
-      isChanging = false
     }
 
-    watch(this._valueRef, (_, oldValue) => {
+    watch(this._valueRef, _ => {
       if (this.trigger === 'change') {
         this._validate()
         return
       }
 
-      if (this.trigger === 'interactions') {
-        if (((this.validated.value && !this.valid.value) || !!oldValue) && !isChanging) {
-          isChangeValidating = true
-        }
-
-        if (isChangeValidating) {
-          this._validate()
-        }
-      }
-
-      if (this.dirty.value) {
-        isChanging = true
+      // 这里的 && this.dirty.value && this.blurred.value， 似乎都可以不要
+      // 为了保险起见还是加上吧
+      if (this.trigger === 'interactions' && this.validated.value && this.dirty.value && this.blurred.value) {
+        this._validate()
       }
     })
   }
