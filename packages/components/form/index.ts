@@ -25,6 +25,7 @@ export {
   useFormSize,
   useFormStatus,
 } from './src/composables/public'
+export { useMergedCommonControlProps as ɵUseMergedCommonControlProps } from './src/composables/useMergedCommonControlProps'
 
 export { getThemeTokens as getFormThemeTokens } from './theme'
 

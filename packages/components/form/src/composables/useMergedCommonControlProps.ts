@@ -5,11 +5,10 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import type { FormSize } from '@idux/components/form'
-
 import { type ComputedRef, computed } from 'vue'
 
-import { useFormSize } from '@idux/components/form'
+import { type FormSize } from '../types'
+import { useFormSize } from './public'
 
 interface CommonControlProps {
   borderless: boolean

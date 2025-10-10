@@ -12,13 +12,14 @@ import { type ComputedRef, type Ref, computed, shallowRef, watch } from 'vue'
 import { isArray, isBoolean, isNil, isObject } from 'lodash-es'
 
 import { type TreeTypeData, type VKey, filterTree, mergeTree } from '@idux/cdk/utils'
+
+import { GetKeyFn } from './useKey'
 import {
-  GetKeyFn,
   type TreeCheckStateResolver,
   type TreeCheckStateResolverContext,
   getTreeCheckStateResolverContext,
   useTreeCheckStateResolver,
-} from '@idux/components/utils'
+} from './useTreeCheckStateResolver'
 
 interface GetAllCheckedKeys<V extends TreeTypeData<V, C>, C extends keyof V> {
   (data: V[], cached?: boolean): VKey[]
