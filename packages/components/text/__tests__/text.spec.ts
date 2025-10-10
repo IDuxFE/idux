@@ -32,6 +32,7 @@ describe('Text', () => {
     expect(document.execCommand).toHaveBeenCalledWith('copy')
     expect(onCopy).toBeCalledWith(true, defaultSlot())
 
+    await wait(3000)
     await wrapper.setProps({ copyable: false })
 
     expect(wrapper.html()).toMatchSnapshot()
