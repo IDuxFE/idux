@@ -130,7 +130,7 @@ exports[`Progress > strokeColor work 3`] = `
   <div class="ix-progress-line-outer">
     <div class="ix-progress-line-inner">
       <!---->
-      <div class="ix-progress-line-bg" style="width: 50%; background: red;"></div>
+      <div class="ix-progress-line-bg" style="width: 50%; background: linear-gradient(to right, #108ee9, #87d068);"></div>
     </div>
   </div>
   <div class="ix-progress-info">50%</div>
@@ -142,7 +142,7 @@ exports[`Progress > strokeColor work 4`] = `
   <div class="ix-progress-line-outer">
     <div class="ix-progress-line-inner">
       <!---->
-      <div class="ix-progress-line-bg" style="width: 50%; background: red;"></div>
+      <div class="ix-progress-line-bg" style="width: 50%; background: linear-gradient(to right, #108ee9 0%, #87d068 100%);"></div>
     </div>
   </div>
   <div class="ix-progress-info">50%</div>

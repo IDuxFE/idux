@@ -1644,6 +1644,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
+                      style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"
                       viewBox="0 0 16 16"
                     >
                       <rect
@@ -1850,6 +1851,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
+                      style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"
                       viewBox="0 0 16 16"
                     >
                       <rect
@@ -1996,6 +1998,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
+                      style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"
                       viewBox="0 0 16 16"
                     >
                       <rect
@@ -2272,6 +2275,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
+                      style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"
                       viewBox="0 0 16 16"
                     >
                       <rect
@@ -2418,6 +2422,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
+                      style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"
                       viewBox="0 0 16 16"
                     >
                       <rect
@@ -2694,6 +2699,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
+                      style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"
                       viewBox="0 0 16 16"
                     >
                       <rect
@@ -2840,6 +2846,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
+                      style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"
                       viewBox="0 0 16 16"
                     >
                       <rect
@@ -3116,6 +3123,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
+                      style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"
                       viewBox="0 0 16 16"
                     >
                       <rect
@@ -3262,6 +3270,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
+                      style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"
                       viewBox="0 0 16 16"
                     >
                       <rect
@@ -3686,6 +3695,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
+                      style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"
                       viewBox="0 0 16 16"
                     >
                       <rect
@@ -3769,6 +3779,7 @@ exports[`ProTransfer > tree transfer render work 1`] = `
                   >
                     <!---->
                     <svg
+                      style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"
                       viewBox="0 0 16 16"
                     >
                       <rect

@@ -588,7 +588,7 @@ exports[`Tree > render work 1`] = `
   <div class="ix-tree-content">
     <div class="ix-tree-content-inner">
       <div class="ix-tree-node ix-tree-node-expanded" aria-label="Node 0" aria-selected="false" title="Node 0"><span aria-hidden="true" class="ix-tree-node-indent"></span>
-        <!----><span class="ix-tree-node-expand"><!----><svg viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><!----></svg><!----></span><label class="ix-checkbox ix-tree-node-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+        <!----><span class="ix-tree-node-expand"><!----><svg viewBox="0 0 16 16" style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><!----></svg><!----></span><label class="ix-checkbox ix-tree-node-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
           <!---->
           <!---->
           <!---->
@@ -596,7 +596,7 @@ exports[`Tree > render work 1`] = `
         <!----></span>
       </div>
       <div class="ix-tree-node ix-tree-node-expanded" aria-label="Node 0-0" aria-selected="false" title="Node 0-0"><span aria-hidden="true" class="ix-tree-node-indent"><span class="ix-tree-node-indent-unit"></span></span>
-        <!----><span class="ix-tree-node-expand"><!----><svg viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><!----></svg><!----></span><label class="ix-checkbox ix-checkbox-checked ix-tree-node-checkbox" role="checkbox" aria-checked="true" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" checked=""><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+        <!----><span class="ix-tree-node-expand"><!----><svg viewBox="0 0 16 16" style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><!----></svg><!----></span><label class="ix-checkbox ix-checkbox-checked ix-tree-node-checkbox" role="checkbox" aria-checked="true" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" checked=""><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
           <!---->
           <!---->
           <!---->
@@ -628,7 +628,7 @@ exports[`Tree > render work 1`] = `
         <!----></span>
       </div>
       <div class="ix-tree-node ix-tree-node-active ix-tree-node-disabled ix-tree-node-selected ix-tree-node-expanded" aria-label="Node 0-1" aria-selected="true" title="Node 0-1"><span aria-hidden="true" class="ix-tree-node-indent"><span class="ix-tree-node-indent-unit"></span></span>
-        <!----><span class="ix-tree-node-expand"><!----><svg viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><!----></svg><!----></span><label class="ix-checkbox ix-checkbox-checked ix-checkbox-disabled ix-tree-node-checkbox" role="checkbox" aria-checked="true" aria-disabled="true"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" checked="" disabled=""><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+        <!----><span class="ix-tree-node-expand"><!----><svg viewBox="0 0 16 16" style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><!----></svg><!----></span><label class="ix-checkbox ix-checkbox-checked ix-checkbox-disabled ix-tree-node-checkbox" role="checkbox" aria-checked="true" aria-disabled="true"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" checked="" disabled=""><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
           <!---->
           <!---->
           <!---->
@@ -660,7 +660,7 @@ exports[`Tree > render work 1`] = `
         <!----></span>
       </div>
       <div class="ix-tree-node" aria-label="Node 1" aria-selected="false" title="Node 1"><span aria-hidden="true" class="ix-tree-node-indent"></span>
-        <!----><span class="ix-tree-node-expand"><!----><svg viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><rect x="7" y="5" width="2" height="6" rx="0.2" style="fill: var(--ix-color-icon);"></rect></svg><!----></span><label class="ix-checkbox ix-tree-node-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+        <!----><span class="ix-tree-node-expand"><!----><svg viewBox="0 0 16 16" style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><rect x="7" y="5" width="2" height="6" rx="0.2" style="fill: var(--ix-color-icon);"></rect></svg><!----></span><label class="ix-checkbox ix-tree-node-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
           <!---->
           <!---->
           <!---->
