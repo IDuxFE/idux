@@ -147,9 +147,6 @@ function useScrollStrategy(props: ModalProps, mask: ComputedRef<boolean>, merged
 
 function useTrigger(props: ModalProps, setVisible: (value: boolean) => void) {
   const open = () => setVisible(true)
-  const hide = (result: boolean | unknown) => {
-    result !== false && setVisible(false)
-  }
 
   const close = async (evt?: Event | unknown) => {
     const result = await callEmit(props.onBeforeClose, evt)
@@ -157,15 +154,18 @@ function useTrigger(props: ModalProps, setVisible: (value: boolean) => void) {
     result !== false && callEmit(props.onClose, evt)
   }
 
+  const hide = (result: boolean | unknown) => {
+    result !== false && setVisible(false)
+  }
+
   const cancelLoading = ref(false)
   const cancel = async (evt?: Event | unknown) => {
     let result = callEmit(props.onCancel, evt)
     if (isPromise(result)) {
       cancelLoading.value = true
-      result = await result
-      hide(result)
-      cancelLoading.value = false
-      return
+      result = await result.finally(() => {
+        cancelLoading.value = false
+      })
     }
     hide(result)
   }
@@ -175,10 +175,9 @@ function useTrigger(props: ModalProps, setVisible: (value: boolean) => void) {
     let result = callEmit(props.onOk, evt)
     if (isPromise(result)) {
       okLoading.value = true
-      result = await result
-      hide(result)
-      okLoading.value = false
-      return
+      result = await result.finally(() => {
+        okLoading.value = false
+      })
     }
     hide(result)
   }
