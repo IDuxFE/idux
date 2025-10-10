@@ -35,13 +35,19 @@ export class FormArray<T = any> extends AbstractControl<T[]> {
     this._watchDirty()
   }
 
-  setValue(value: T extends object ? Partial<T>[] : T[], options?: { dirty?: boolean; blur?: boolean }): void {
+  setValue(
+    value: T extends object ? Partial<T>[] : T[],
+    options: { dirty?: boolean; blur?: boolean; validate?: boolean },
+  ): void {
     value.forEach((item, index) => {
       const control = this.at(index)
       if (control) {
         control.setValue(item!, options)
       }
     })
+    if (options?.validate) {
+      this._validate()
+    }
   }
 
   getValue(options: { skipDisabled?: boolean } = {}): T[] {

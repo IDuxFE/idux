@@ -126,6 +126,6 @@ export function useFormStatus(
       return blurred.value ? status.value : undefined
     }
 
-    return validated.value ? status.value : undefined
+    return validated.value && dirty.value && blurred.value ? status.value : undefined
   })
 }

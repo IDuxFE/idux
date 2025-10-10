@@ -22,13 +22,16 @@ export class FormControl<T = any> extends AbstractControl<T> {
     this._watchStatus()
   }
 
-  setValue(value: T, options: { dirty?: boolean; blur?: boolean } = {}): void {
+  setValue(value: T, options: { dirty?: boolean; blur?: boolean; validate?: boolean } = {}): void {
     this._valueRef.value = value
     if (options.dirty) {
       this.markAsDirty()
     }
     if (options.blur) {
       this.markAsBlurred()
+    }
+    if (options.validate) {
+      this._validate()
     }
   }
 
