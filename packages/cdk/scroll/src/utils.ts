@@ -45,8 +45,8 @@ export function setScroll(options: number | ScrollOptions, target: Element | Win
 export function getScroll(target: Element | Window = window): Required<ScrollOptions> {
   if (target === window) {
     return {
-      scrollTop: target.pageYOffset || document.documentElement.scrollTop,
-      scrollLeft: target.pageXOffset || document.documentElement.scrollLeft,
+      scrollTop: target.scrollY || document.documentElement.scrollTop,
+      scrollLeft: target.scrollX || document.documentElement.scrollLeft,
     }
   } else {
     const { scrollTop, scrollLeft } = target as Element
@@ -97,6 +97,71 @@ export const scrollToTop = (options: ScrollToTopOptions = {}): void => {
   }
 
   rAF(frameFunc)
+}
+
+export interface ScrollToOptions {
+  /** Scroll amount of change, its priority is greater than `scrollLeft` */
+  amountOfLeft?: number
+  /** Scroll end position */
+  scrollLeft?: number
+  /** Scroll amount of change, its priority is greater than `scrollTop` */
+  amountOfTop?: number
+  /** Scroll end position */
+  scrollTop?: number
+  /** Scroll target, default as window */
+  target?: Element | Window
+  /** Animation duration, default as 0 */
+  duration?: number
+  /** Scroll easing function, default as easeInOutCubic */
+  easing?: EasingFn
+  /** Scroll end callback */
+  callback?: () => void
+}
+
+export const scrollTo = (options: ScrollToOptions = {}): void => {
+  const {
+    amountOfLeft,
+    scrollLeft,
+    amountOfTop,
+    scrollTop,
+    target = window,
+    duration = 0,
+    easing = easeInOutCubic,
+    callback,
+  } = options
+
+  if (isNil(amountOfLeft) && isNil(scrollLeft) && isNil(amountOfTop) && isNil(scrollTop)) {
+    return
+  }
+
+  const { scrollLeft: originScrollLeft, scrollTop: originScrollTop } = getScroll(target)
+
+  const startTime = Date.now()
+
+  const frameFunc = () => {
+    const time = Date.now() - startTime
+    const elapsed = time > duration ? duration : time
+
+    const leftChange = amountOfLeft ?? (scrollLeft ? scrollLeft - originScrollLeft : 0)
+    const nextScrollLeft = leftChange > 0 ? easing(elapsed, originScrollLeft, leftChange, duration) : originScrollLeft
+
+    const topChange = amountOfTop ?? (scrollTop ? scrollTop - originScrollTop : 0)
+    const nextScrollTop = topChange > 0 ? easing(elapsed, originScrollTop, topChange, duration) : originScrollTop
+
+    if (target === window) {
+      target.scrollTo(nextScrollLeft, nextScrollTop)
+    } else {
+      ;(target as HTMLElement).scrollLeft = nextScrollLeft
+      ;(target as HTMLElement).scrollTop = nextScrollTop
+    }
+    if (time < duration) {
+      rAF(frameFunc)
+    } else if (typeof callback === 'function') {
+      callback()
+    }
+  }
+
+  duration ? rAF(frameFunc) : frameFunc()
 }
 
 let cachedScrollBarSize: number

@@ -14,7 +14,7 @@ import { useEventListener } from '@idux/cdk/utils'
 
 import { useTouchMove } from './useTouchMove'
 import { useWheel } from './useWheel'
-import { type ScrollOptions, setScroll } from '../utils'
+import { type ScrollToOptions, scrollTo } from '../utils'
 
 export interface ScrollContext {
   scrolledTop: Ref<boolean>
@@ -47,6 +47,7 @@ const defaultSimulatedScrollOptions: SimulatedScrollOptions = {
 }
 
 export interface UseScrollOption {
+  animationDuration?: number
   updateOnResize?: boolean
   syncOnScroll?: boolean
   setContainerScroll?: boolean
@@ -61,6 +62,7 @@ export interface UseScrollOption {
 
 export function useScroll(elementRef: Ref<HTMLElement | undefined>, option?: UseScrollOption): ScrollContext {
   const {
+    animationDuration = 0,
     updateOnResize = true,
     syncOnScroll = true,
     setContainerScroll = true,
@@ -176,7 +178,10 @@ export function useScroll(elementRef: Ref<HTMLElement | undefined>, option?: Use
   }
 
   const syncScroll = ({ top, left }: { top?: number; left?: number }, _setContainerScroll = false) => {
-    const scrollOptions: ScrollOptions = {}
+    const scrollOptions: ScrollToOptions = {
+      target: elementRef.value,
+      duration: animationDuration,
+    }
     let updated = false
 
     update()
@@ -194,7 +199,7 @@ export function useScroll(elementRef: Ref<HTMLElement | undefined>, option?: Use
     }
 
     if (updated) {
-      _setContainerScroll && setScroll(scrollOptions, elementRef.value)
+      _setContainerScroll && scrollTo(scrollOptions)
       calcScrollEdge(true)
     }
 
