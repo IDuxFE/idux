@@ -62,7 +62,6 @@ export interface UseScrollOption {
 
 export function useScroll(elementRef: Ref<HTMLElement | undefined>, option?: UseScrollOption): ScrollContext {
   const {
-    animationDuration = 0,
     updateOnResize = true,
     syncOnScroll = true,
     setContainerScroll = true,
@@ -177,10 +176,13 @@ export function useScroll(elementRef: Ref<HTMLElement | undefined>, option?: Use
     horizontalOverflowed.value = _horizontalOverflowed
   }
 
-  const syncScroll = ({ top, left }: { top?: number; left?: number }, _setContainerScroll = false) => {
+  const syncScroll = (
+    { top, left, animationDuration }: { top?: number; left?: number; animationDuration?: number },
+    _setContainerScroll = false,
+  ) => {
     const scrollOptions: ScrollToOptions = {
       target: elementRef.value,
-      duration: animationDuration,
+      duration: animationDuration ?? (option?.animationDuration || 0),
     }
     let updated = false
 
