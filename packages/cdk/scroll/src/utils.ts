@@ -15,7 +15,7 @@ export interface ScrollOptions {
 }
 
 /**
- *  set the position of the scroll
+ * @deprecated use `scrollTo` instead
  *
  * @param options If it is number, it means scrollTop
  * @param target target element
@@ -69,6 +69,12 @@ export interface ScrollToTopOptions {
   callback?: () => void
 }
 
+/**
+ * @deprecated use `scrollTo` instead
+ *
+ * @param options
+ * @returns
+ */
 export const scrollToTop = (options: ScrollToTopOptions = {}): void => {
   const { top, amountOfChange, target = window, duration = 450, easing = easeInOutCubic, callback } = options
 
@@ -142,11 +148,11 @@ export const scrollTo = (options: ScrollToOptions = {}): void => {
     const time = Date.now() - startTime
     const elapsed = time > duration ? duration : time
 
-    const leftChange = amountOfLeft ?? (scrollLeft ? scrollLeft - originScrollLeft : 0)
-    const nextScrollLeft = leftChange > 0 ? easing(elapsed, originScrollLeft, leftChange, duration) : originScrollLeft
+    const leftChange = amountOfLeft ?? (!isNil(scrollLeft) ? scrollLeft - originScrollLeft : 0)
+    const nextScrollLeft = leftChange !== 0 ? easing(elapsed, originScrollLeft, leftChange, duration) : originScrollLeft
 
-    const topChange = amountOfTop ?? (scrollTop ? scrollTop - originScrollTop : 0)
-    const nextScrollTop = topChange > 0 ? easing(elapsed, originScrollTop, topChange, duration) : originScrollTop
+    const topChange = amountOfTop ?? (!isNil(scrollTop) ? scrollTop - originScrollTop : 0)
+    const nextScrollTop = topChange !== 0 ? easing(elapsed, originScrollTop, topChange, duration) : originScrollTop
 
     if (target === window) {
       target.scrollTo(nextScrollLeft, nextScrollTop)

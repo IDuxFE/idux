@@ -20,7 +20,7 @@
     <IxSpace>
       <IxButton @click="scrollTo(100)"> Scroll To 100px </IxButton>
       <IxButton @click="scrollTo({ rowKey: 'key-50', verticalAlign: 'top' })"> Scroll To key-50(top) </IxButton>
-      <IxButton @click="scrollTo({ index: 40, align: 'top' })"> Scroll To 40(top) </IxButton>
+      <IxButton @click="scrollTo({ rowIndex: 40, verticalAlign: 'top' })"> Scroll To 40(top) </IxButton>
       <IxButton @click="scrollTo({ rowIndex: 40, verticalAlign: 'bottom' })"> Scroll To 40(bottom) </IxButton>
       <IxButton @click="scrollTo({ rowIndex: 40, verticalAlign: 'auto' })"> Scroll To 40(auto) </IxButton>
       <IxButton @click="scrollTo({ rowIndex: 40, verticalAlign: 'top', offset: 15 })">
