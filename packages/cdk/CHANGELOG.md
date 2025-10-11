@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/IDuxFE/idux/compare/v2.6.3...v2.7.0) (2025-10-11)
+
+
+### Bug Fixes
+
+* **cdk:forms:** the interactions mode did not work as expected ([#2036](https://github.com/IDuxFE/idux/issues/2036)) ([cb9f053](https://github.com/IDuxFE/idux/commit/cb9f053d76213f6d35b4a5a524270b54eb645b18))
+* **cdk:scroll:** the scrollTo function is malfunctioning ([#2042](https://github.com/IDuxFE/idux/issues/2042)) ([b375d49](https://github.com/IDuxFE/idux/commit/b375d49292d08e176813d53313407a10539b1ce9))
+* **comp:form:** [@media](https://github.com/media) does not support CSS variables ([#2034](https://github.com/IDuxFE/idux/issues/2034)) ([f12e4d6](https://github.com/IDuxFE/idux/commit/f12e4d689aea7eacacc7296236342a1a5f9befea))
+
+
+### Features
+
+* **cdk:scroll:** useScroll support animation ([#2035](https://github.com/IDuxFE/idux/issues/2035)) ([6b03b3d](https://github.com/IDuxFE/idux/commit/6b03b3d3cb794ca0369d630c217d88d46752a133))
+
+
+
+
+
 ## [2.6.3](https://github.com/IDuxFE/idux/compare/v2.6.2...v2.6.3) (2024-12-31)
 
 
