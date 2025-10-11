@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/IDuxFE/idux/compare/v2.6.3...v2.8.0) (2025-10-11)
+
+
+### Bug Fixes
+
+* **cdk:forms:** the interactions mode did not work as expected ([#2036](https://github.com/IDuxFE/idux/issues/2036)) ([cb9f053](https://github.com/IDuxFE/idux/commit/cb9f053d76213f6d35b4a5a524270b54eb645b18))
+* **comp:form:** [@media](https://github.com/media) does not support CSS variables ([#2034](https://github.com/IDuxFE/idux/issues/2034)) ([f12e4d6](https://github.com/IDuxFE/idux/commit/f12e4d689aea7eacacc7296236342a1a5f9befea))
+* **comp:modal:** The spin and onOk and onCancel functions are not working properly. ([#2039](https://github.com/IDuxFE/idux/issues/2039)) ([19e4794](https://github.com/IDuxFE/idux/commit/19e47941e335bcd24e9a420508efaad8358ed703))
+* **comp:select:** the global configuration of the select component has an issue with getKey ([#2038](https://github.com/IDuxFE/idux/issues/2038)) ([764aab2](https://github.com/IDuxFE/idux/commit/764aab2958706086faf212974e706b1a9ad9ba49))
+
+
+### Features
+
+* **comp:alert:** support centered ([#2015](https://github.com/IDuxFE/idux/issues/2015)) ([0eeeba5](https://github.com/IDuxFE/idux/commit/0eeeba518ed522f61b19e783bc6a256f4d630f19))
+* **comp:table:** support spinHeader ([#2040](https://github.com/IDuxFE/idux/issues/2040)) ([0cd1e92](https://github.com/IDuxFE/idux/commit/0cd1e925a3cb3c7404ca4dab0dd1c364b30405c1))
+
+
+
+
+
 # [2.7.0](https://github.com/IDuxFE/idux/compare/v2.6.3...v2.7.0) (2025-10-11)
 
 
