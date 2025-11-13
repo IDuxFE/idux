@@ -105,7 +105,14 @@ export default defineComponent({
         )
       }
       return (
-        <button class={classes.value} disabled={mergedDisabled.value || loading} type={type} onClick={handleClick}>
+        <button
+          class={classes.value}
+          disabled={mergedDisabled.value || loading}
+          type={type}
+          aria-disabled={mergedDisabled.value || loading}
+          aria-busy={loading}
+          onClick={handleClick}
+        >
           {children}
           {!mergedWaveless.value && <ɵWave ref={waveRef} />}
         </button>

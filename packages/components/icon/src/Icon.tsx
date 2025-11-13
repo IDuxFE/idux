@@ -69,12 +69,21 @@ export default defineComponent({
     })
 
     return () => {
-      const { name } = props
+      const { name, ariaPressed } = props
       if (name) {
-        return <i ref={root} class={classes.value} style={style.value} role="img" aria-label={name}></i>
+        return (
+          <i
+            ref={root}
+            class={classes.value}
+            style={style.value}
+            role="img"
+            aria-label={name}
+            aria-pressed={ariaPressed}
+          ></i>
+        )
       } else {
         return (
-          <i ref={root} class={classes.value} style={style.value} role="img">
+          <i ref={root} class={classes.value} style={style.value} role="img" aria-pressed={ariaPressed}>
             {convertSVGNode(slots.default?.())}
           </i>
         )
