@@ -171,7 +171,6 @@ export default defineComponent({
 
       if (raw && defaultSlotNodes?.length === 1) {
         const node = defaultSlotNodes[0]
-        // 将 ariaControls 属性添加到节点上
         if (ariaControls) {
           node.props = { ...node.props, 'aria-controls': ariaControls }
         }

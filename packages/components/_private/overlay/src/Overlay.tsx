@@ -234,7 +234,6 @@ function renderTrigger(
   handleClickOutside: (evt: Event) => void,
   overlayId: Ref<string>,
 ) {
-  // 为 trigger 元素添加 aria-controls 属性，指向 content 元素的 id
   const triggerProps = {
     ...extraProps,
     'aria-controls': overlayId.value,
