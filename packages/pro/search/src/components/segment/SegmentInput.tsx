@@ -111,6 +111,7 @@ export default defineComponent({
             disabled={props.disabled}
             placeholder={props.placeholder}
             title={input.value ? undefined : props.placeholder}
+            aria-label={props.ariaLabel}
             onInput={handleInput}
             onCompositionstart={handleCompositionStart}
             onCompositionend={handleCompositionEnd}

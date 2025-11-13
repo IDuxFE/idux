@@ -102,14 +102,13 @@ export default defineComponent({
       const prefixCls = mergedPrefixCls.value
       const labelNode = convertStringVNode(slots.default, label)
       return (
-        <label
-          class={classes.value}
-          style={style as string}
-          role="radio"
-          aria-checked={isChecked.value}
-          aria-disabled={isDisabled.value}
-        >
-          <span class={`${prefixCls}-input`}>
+        <label class={classes.value} style={style as string}>
+          <span
+            class={`${prefixCls}-input`}
+            role="radio"
+            aria-checked={String(!!isChecked.value)}
+            aria-disabled={String(!!isDisabled.value)}
+          >
             <input
               ref={elementRef}
               type="radio"

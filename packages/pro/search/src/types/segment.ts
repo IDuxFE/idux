@@ -72,6 +72,7 @@ export const segmentProps = {
     type: Object as PropType<Segment>,
     required: true,
   },
+  ariaLabel: String,
 } as const
 export type SegmentProps = ExtractInnerPropTypes<typeof segmentProps>
 
@@ -80,6 +81,7 @@ export const segmentIputProps = {
   disabled: Boolean,
   ellipsis: Boolean,
   placeholder: String,
+  ariaLabel: String,
   onInput: [Function, Array] as PropType<MaybeArray<(input: string) => void>>,
   onWidthChange: [Function, Array] as PropType<MaybeArray<(width: number) => void>>,
 }

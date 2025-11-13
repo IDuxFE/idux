@@ -45,7 +45,13 @@ export default defineComponent({
       }
 
       return (
-        <span class={classes.value} onClick={onClick}>
+        <span
+          class={classes.value}
+          onClick={onClick}
+          role="button"
+          aria-label={props.expanded ? 'collapse-all' : 'expand-all'}
+          aria-expanded={!props.isLeaf ? String(props.expanded) : undefined}
+        >
           {props.hasTopLine && <div class={`${prefixCls}-top-line`} />}
           {children}
           {props.hasBottomLine && <div class={`${prefixCls}-bottom-line`} />}

@@ -95,9 +95,9 @@ export default defineComponent({
 
     return () => (
       <div class={classes.value}>
-        <TransferList isSource={true} />
+        <TransferList isSource={true} aria-label="transferLeft" />
         <TransferOperations />
-        <TransferList isSource={false} />
+        <TransferList isSource={false} aria-label="transferRight" />
       </div>
     )
   },

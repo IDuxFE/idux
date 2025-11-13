@@ -124,6 +124,19 @@ export default defineComponent({
       })
     })
 
+    const ariaSelected = computed(() => String(!!isSelected.value))
+
+    const ariaLabel = computed(() => {
+      const labels = [
+        dateConfig.format(cellDate.value, 'd'),
+        isCurrent.value && 'today',
+        isStart.value && 'start-date',
+        isEnd.value && 'end-date',
+      ].filter(Boolean)
+
+      return labels.join(',')
+    })
+
     const handleClick = (evt: Event) => {
       evt.stopPropagation()
       const currDate = cellDate.value
@@ -152,6 +165,8 @@ export default defineComponent({
         <td
           class={classes.value}
           role="gridcell"
+          aria-selected={ariaSelected.value}
+          aria-label={ariaLabel.value}
           onClick={isDisabled.value ? undefined : handleClick}
           onMouseenter={isDisabled.value ? undefined : handleMouseenter}
         >

@@ -26,6 +26,7 @@ export const triggerProps = {
   status: String as PropType<ValidateStatus>,
   suffix: String as PropType<string>,
   suffixRotate: { type: [Boolean, Number, String] as PropType<boolean | string | number>, default: undefined },
+  ariaControls: { type: String, default: undefined },
   onClear: [Array, Function] as PropType<MaybeArray<(evt: MouseEvent) => void>>,
   onFocus: [Array, Function] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
   onBlur: [Array, Function] as PropType<MaybeArray<(evt: FocusEvent) => void>>,
@@ -49,6 +50,7 @@ export type TriggerDefaultSlotParams = {
   suffixRotate: boolean | string | number | undefined
   clearable: boolean
   clearIcon: string
+  ariaControls: string
 }
 
 export type TriggerSlots = {

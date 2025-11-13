@@ -166,6 +166,7 @@ export default defineComponent({
       <SegmentInput
         ref={segmentInputRef}
         class={inputClasses.value}
+        ariaLabel={props.ariaLabel}
         value={props.input ?? ''}
         disabled={props.disabled}
         ellipsis={true}

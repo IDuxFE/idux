@@ -107,7 +107,9 @@ export default defineComponent({
       } else if (!isNil(index)) {
         original = createTextVNode(index as unknown as string)
       } else {
-        original = <IxIcon name={iconMap[type]} />
+        original = (
+          <IxIcon name={iconMap[type]} role="button" aria-label={type === 'prev' ? 'paging-prev' : 'paging-next'} />
+        )
       }
 
       const children = slots.item ? slots.item({ index, type, active: isActive.value, disabled, original }) : original
@@ -119,6 +121,8 @@ export default defineComponent({
           title={title.value}
           onClick={handleClick}
           onKeydown={handleKeydown}
+          aria-selected={isActive.value ? 'true' : undefined}
+          aria-disabled={disabled ? 'true' : undefined}
         >
           <span class={`${prefixCls}-content`}>{children}</span>
         </li>

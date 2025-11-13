@@ -115,6 +115,7 @@ export default defineComponent({
                 selectionStart={segment.selectionStart}
                 disabled={proSearchProps.disabled}
                 segment={segment}
+                aria-label="searchtag-input"
               />
             ))}
             {!proSearchProps.disabled && (

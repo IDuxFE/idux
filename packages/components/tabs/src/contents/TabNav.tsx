@@ -124,7 +124,13 @@ export default defineComponent({
           {contentNodes}
         </CdkDndSortableItem>
       ) : (
-        <div ref={elementRef} class={classes.value} onClick={handleClick}>
+        <div
+          ref={elementRef}
+          class={classes.value}
+          aria-disabled={String(!!props.disabled)}
+          aria-selected={String(!!props.selected)}
+          onClick={handleClick}
+        >
           {contentNodes}
         </div>
       )

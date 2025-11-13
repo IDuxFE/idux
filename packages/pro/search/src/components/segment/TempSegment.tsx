@@ -134,6 +134,7 @@ export default defineComponent({
         style={nameInputStyle.value}
         value={input.value}
         ellipsis={false}
+        ariaLabel="searchbox-input"
         onMousedown={handleMouseDown}
         onInput={handleInput}
         onKeydown={handleKeyDown}
