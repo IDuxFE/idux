@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Cascader > multiple work > render work 1`] = `
-"<div class="ix-trigger ix-trigger-md ix-trigger-paddingless ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-multiple ix-selector-opened ix-cascader ix-control-trigger ix-cascader" tabindex="-1">
+"<div class="ix-trigger ix-trigger-md ix-trigger-paddingless ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-multiple ix-selector-opened ix-cascader ix-control-trigger ix-cascader" tabindex="-1" aria-controls="control-overlay-5" aria-label="selector">
   <!---->
   <div class="ix-selector-content">
     <div class="ix-overflow ix-selector-overflow ">
@@ -25,7 +25,7 @@ exports[`Cascader > multiple work > render work 1`] = `
 `;
 
 exports[`Cascader > single work > render work 1`] = `
-"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-opened ix-selector-single ix-cascader ix-control-trigger ix-cascader" tabindex="-1">
+"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-opened ix-selector-single ix-cascader ix-control-trigger ix-cascader" tabindex="-1" aria-controls="control-overlay-0" aria-label="selector">
   <!---->
   <div class="ix-selector-content">
     <div class="ix-selector-item"><span class="ix-selector-item-label">Components/General/Button</span>

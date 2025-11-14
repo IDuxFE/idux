@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`TimePicker > render work 1`] = `
-"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-control-trigger ix-time-picker" tabindex="-1" opened="true">
+"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-control-trigger ix-time-picker" tabindex="-1" aria-controls="control-overlay-0" opened="true">
   <!----><input class="ix-time-picker-input" autocomplete="off" placeholder="请选择时间" size="12" value="">
   <div class="ix-trigger-suffix"><i class="ix-icon ix-icon-clock-circle" role="img" aria-label="clock-circle"></i></div>
   <!---->

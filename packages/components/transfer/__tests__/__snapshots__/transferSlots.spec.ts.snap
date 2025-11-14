@@ -5,6 +5,7 @@ exports[`Transfer > clearIcon slot work 1`] = `
   class="ix-transfer"
 >
   <div
+    aria-label="transferLeft"
     class="ix-transfer-content ix-transfer-content-source"
   >
     
@@ -15,13 +16,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
         class="ix-transfer-header-inner"
       >
         <label
-          aria-checked="false"
-          aria-disabled="false"
           class="ix-checkbox ix-transfer-header-check-all"
-          role="checkbox"
         >
           <span
+            aria-checked="false"
+            aria-disabled="false"
             class="ix-checkbox-input"
+            role="checkbox"
           >
             <input
               aria-hidden="true"
@@ -66,13 +67,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -100,13 +101,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -135,13 +136,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -169,13 +170,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -203,13 +204,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -237,13 +238,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -271,13 +272,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -306,13 +307,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -340,13 +341,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -374,13 +375,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -408,13 +409,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -442,13 +443,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -476,13 +477,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -511,13 +512,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -545,13 +546,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -579,13 +580,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -613,13 +614,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -648,13 +649,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -682,13 +683,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -716,13 +717,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -759,6 +760,7 @@ exports[`Transfer > clearIcon slot work 1`] = `
       class="ix-transfer-operations-inner"
     >
       <button
+        aria-disabled="true"
         class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-sm ix-transfer-operations-btn"
         disabled=""
         type="button"
@@ -776,6 +778,7 @@ exports[`Transfer > clearIcon slot work 1`] = `
         />
       </button>
       <button
+        aria-disabled="true"
         class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-sm ix-transfer-operations-btn"
         disabled=""
         type="button"
@@ -795,6 +798,7 @@ exports[`Transfer > clearIcon slot work 1`] = `
     </div>
   </div>
   <div
+    aria-label="transferRight"
     class="ix-transfer-content ix-transfer-content-target"
   >
     
@@ -805,13 +809,13 @@ exports[`Transfer > clearIcon slot work 1`] = `
         class="ix-transfer-header-inner"
       >
         <label
-          aria-checked="false"
-          aria-disabled="true"
           class="ix-checkbox ix-checkbox-disabled ix-transfer-header-check-all"
-          role="checkbox"
         >
           <span
+            aria-checked="false"
+            aria-disabled="true"
             class="ix-checkbox-input"
+            role="checkbox"
           >
             <input
               aria-hidden="true"
@@ -926,6 +930,7 @@ exports[`Transfer > default slot work 1`] = `
   class="ix-transfer"
 >
   <div
+    aria-label="transferLeft"
     class="ix-transfer-content ix-transfer-content-source"
   >
     
@@ -936,13 +941,13 @@ exports[`Transfer > default slot work 1`] = `
         class="ix-transfer-header-inner"
       >
         <label
-          aria-checked="false"
-          aria-disabled="false"
           class="ix-checkbox ix-transfer-header-check-all"
-          role="checkbox"
         >
           <span
+            aria-checked="false"
+            aria-disabled="false"
             class="ix-checkbox-input"
+            role="checkbox"
           >
             <input
               aria-hidden="true"
@@ -972,6 +977,8 @@ exports[`Transfer > default slot work 1`] = `
         >
           <!---->
           <input
+            aria-disabled="false"
+            aria-readonly="false"
             class="ix-input-inner"
             placeholder="搜索关键字"
             type="text"
@@ -1112,6 +1119,7 @@ exports[`Transfer > default slot work 1`] = `
     
   </div>
   <div
+    aria-label="transferRight"
     class="ix-transfer-content ix-transfer-content-target"
   >
     
@@ -1122,13 +1130,13 @@ exports[`Transfer > default slot work 1`] = `
         class="ix-transfer-header-inner"
       >
         <label
-          aria-checked="false"
-          aria-disabled="true"
           class="ix-checkbox ix-checkbox-disabled ix-transfer-header-check-all"
-          role="checkbox"
         >
           <span
+            aria-checked="false"
+            aria-disabled="true"
             class="ix-checkbox-input"
+            role="checkbox"
           >
             <input
               aria-hidden="true"
@@ -1159,6 +1167,8 @@ exports[`Transfer > default slot work 1`] = `
         >
           <!---->
           <input
+            aria-disabled="false"
+            aria-readonly="false"
             class="ix-input-inner"
             placeholder="搜索关键字"
             type="text"
@@ -1294,6 +1304,7 @@ exports[`Transfer > empty slot work 1`] = `
   class="ix-transfer"
 >
   <div
+    aria-label="transferLeft"
     class="ix-transfer-content ix-transfer-content-source"
   >
     
@@ -1304,13 +1315,13 @@ exports[`Transfer > empty slot work 1`] = `
         class="ix-transfer-header-inner"
       >
         <label
-          aria-checked="false"
-          aria-disabled="false"
           class="ix-checkbox ix-transfer-header-check-all"
-          role="checkbox"
         >
           <span
+            aria-checked="false"
+            aria-disabled="false"
             class="ix-checkbox-input"
+            role="checkbox"
           >
             <input
               aria-hidden="true"
@@ -1355,13 +1366,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -1389,13 +1400,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -1424,13 +1435,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -1458,13 +1469,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -1492,13 +1503,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -1526,13 +1537,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -1560,13 +1571,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -1595,13 +1606,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -1629,13 +1640,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -1663,13 +1674,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -1697,13 +1708,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -1731,13 +1742,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -1765,13 +1776,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -1800,13 +1811,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -1834,13 +1845,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -1868,13 +1879,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -1902,13 +1913,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -1937,13 +1948,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -1971,13 +1982,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2005,13 +2016,13 @@ exports[`Transfer > empty slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2048,6 +2059,7 @@ exports[`Transfer > empty slot work 1`] = `
       class="ix-transfer-operations-inner"
     >
       <button
+        aria-disabled="true"
         class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-sm ix-transfer-operations-btn"
         disabled=""
         type="button"
@@ -2065,6 +2077,7 @@ exports[`Transfer > empty slot work 1`] = `
         />
       </button>
       <button
+        aria-disabled="true"
         class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-sm ix-transfer-operations-btn"
         disabled=""
         type="button"
@@ -2084,6 +2097,7 @@ exports[`Transfer > empty slot work 1`] = `
     </div>
   </div>
   <div
+    aria-label="transferRight"
     class="ix-transfer-content ix-transfer-content-target"
   >
     
@@ -2094,13 +2108,13 @@ exports[`Transfer > empty slot work 1`] = `
         class="ix-transfer-header-inner"
       >
         <label
-          aria-checked="false"
-          aria-disabled="true"
           class="ix-checkbox ix-checkbox-disabled ix-transfer-header-check-all"
-          role="checkbox"
         >
           <span
+            aria-checked="false"
+            aria-disabled="true"
             class="ix-checkbox-input"
+            role="checkbox"
           >
             <input
               aria-hidden="true"
@@ -2163,6 +2177,7 @@ exports[`Transfer > footer slot work 1`] = `
   class="ix-transfer"
 >
   <div
+    aria-label="transferLeft"
     class="ix-transfer-content ix-transfer-content-source"
   >
     
@@ -2173,13 +2188,13 @@ exports[`Transfer > footer slot work 1`] = `
         class="ix-transfer-header-inner"
       >
         <label
-          aria-checked="false"
-          aria-disabled="false"
           class="ix-checkbox ix-transfer-header-check-all"
-          role="checkbox"
         >
           <span
+            aria-checked="false"
+            aria-disabled="false"
             class="ix-checkbox-input"
+            role="checkbox"
           >
             <input
               aria-hidden="true"
@@ -2209,6 +2224,8 @@ exports[`Transfer > footer slot work 1`] = `
         >
           <!---->
           <input
+            aria-disabled="false"
+            aria-readonly="false"
             class="ix-input-inner"
             placeholder="搜索关键字"
             type="text"
@@ -2245,13 +2262,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2279,13 +2296,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2314,13 +2331,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2348,13 +2365,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2382,13 +2399,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2416,13 +2433,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2450,13 +2467,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2485,13 +2502,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2519,13 +2536,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2553,13 +2570,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2587,13 +2604,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2621,13 +2638,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2655,13 +2672,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2690,13 +2707,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2724,13 +2741,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2758,13 +2775,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2792,13 +2809,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2827,13 +2844,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2861,13 +2878,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -2895,13 +2912,13 @@ exports[`Transfer > footer slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3046,6 +3063,7 @@ exports[`Transfer > footer slot work 1`] = `
     
   </div>
   <div
+    aria-label="transferRight"
     class="ix-transfer-content ix-transfer-content-target"
   >
     
@@ -3056,13 +3074,13 @@ exports[`Transfer > footer slot work 1`] = `
         class="ix-transfer-header-inner"
       >
         <label
-          aria-checked="false"
-          aria-disabled="true"
           class="ix-checkbox ix-checkbox-disabled ix-transfer-header-check-all"
-          role="checkbox"
         >
           <span
+            aria-checked="false"
+            aria-disabled="true"
             class="ix-checkbox-input"
+            role="checkbox"
           >
             <input
               aria-hidden="true"
@@ -3093,6 +3111,8 @@ exports[`Transfer > footer slot work 1`] = `
         >
           <!---->
           <input
+            aria-disabled="false"
+            aria-readonly="false"
             class="ix-input-inner"
             placeholder="搜索关键字"
             type="text"
@@ -3292,6 +3312,7 @@ exports[`Transfer > headerLabel slot work 1`] = `
   class="ix-transfer"
 >
   <div
+    aria-label="transferLeft"
     class="ix-transfer-content ix-transfer-content-source"
   >
     
@@ -3302,13 +3323,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
         class="ix-transfer-header-inner"
       >
         <label
-          aria-checked="false"
-          aria-disabled="false"
           class="ix-checkbox ix-transfer-header-check-all"
-          role="checkbox"
         >
           <span
+            aria-checked="false"
+            aria-disabled="false"
             class="ix-checkbox-input"
+            role="checkbox"
           >
             <input
               aria-hidden="true"
@@ -3359,13 +3380,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3393,13 +3414,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3428,13 +3449,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3462,13 +3483,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3496,13 +3517,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3530,13 +3551,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3564,13 +3585,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3599,13 +3620,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3633,13 +3654,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3667,13 +3688,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3701,13 +3722,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3735,13 +3756,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3769,13 +3790,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3804,13 +3825,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3838,13 +3859,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3872,13 +3893,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3906,13 +3927,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3941,13 +3962,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -3975,13 +3996,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -4009,13 +4030,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -4052,6 +4073,7 @@ exports[`Transfer > headerLabel slot work 1`] = `
       class="ix-transfer-operations-inner"
     >
       <button
+        aria-disabled="true"
         class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-sm ix-transfer-operations-btn"
         disabled=""
         type="button"
@@ -4069,6 +4091,7 @@ exports[`Transfer > headerLabel slot work 1`] = `
         />
       </button>
       <button
+        aria-disabled="true"
         class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-sm ix-transfer-operations-btn"
         disabled=""
         type="button"
@@ -4088,6 +4111,7 @@ exports[`Transfer > headerLabel slot work 1`] = `
     </div>
   </div>
   <div
+    aria-label="transferRight"
     class="ix-transfer-content ix-transfer-content-target"
   >
     
@@ -4098,13 +4122,13 @@ exports[`Transfer > headerLabel slot work 1`] = `
         class="ix-transfer-header-inner"
       >
         <label
-          aria-checked="false"
-          aria-disabled="true"
           class="ix-checkbox ix-checkbox-disabled ix-transfer-header-check-all"
-          role="checkbox"
         >
           <span
+            aria-checked="false"
+            aria-disabled="true"
             class="ix-checkbox-input"
+            role="checkbox"
           >
             <input
               aria-hidden="true"
@@ -4225,6 +4249,7 @@ exports[`Transfer > label slot work 1`] = `
   class="ix-transfer"
 >
   <div
+    aria-label="transferLeft"
     class="ix-transfer-content ix-transfer-content-source"
   >
     
@@ -4235,13 +4260,13 @@ exports[`Transfer > label slot work 1`] = `
         class="ix-transfer-header-inner"
       >
         <label
-          aria-checked="false"
-          aria-disabled="false"
           class="ix-checkbox ix-transfer-header-check-all"
-          role="checkbox"
         >
           <span
+            aria-checked="false"
+            aria-disabled="false"
             class="ix-checkbox-input"
+            role="checkbox"
           >
             <input
               aria-hidden="true"
@@ -4286,13 +4311,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -4328,13 +4353,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -4371,13 +4396,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -4413,13 +4438,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -4455,13 +4480,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -4497,13 +4522,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -4539,13 +4564,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -4582,13 +4607,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -4624,13 +4649,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -4666,13 +4691,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -4708,13 +4733,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -4750,13 +4775,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -4792,13 +4817,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -4835,13 +4860,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -4877,13 +4902,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -4919,13 +4944,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -4961,13 +4986,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="true"
               class="ix-checkbox ix-checkbox-disabled ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="true"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -5004,13 +5029,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -5046,13 +5071,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -5088,13 +5113,13 @@ exports[`Transfer > label slot work 1`] = `
           >
             
             <label
-              aria-checked="false"
-              aria-disabled="false"
               class="ix-checkbox ix-transfer-list-item-checkbox"
-              role="checkbox"
             >
               <span
+                aria-checked="false"
+                aria-disabled="false"
                 class="ix-checkbox-input"
+                role="checkbox"
               >
                 <input
                   aria-hidden="true"
@@ -5139,6 +5164,7 @@ exports[`Transfer > label slot work 1`] = `
       class="ix-transfer-operations-inner"
     >
       <button
+        aria-disabled="true"
         class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-sm ix-transfer-operations-btn"
         disabled=""
         type="button"
@@ -5156,6 +5182,7 @@ exports[`Transfer > label slot work 1`] = `
         />
       </button>
       <button
+        aria-disabled="true"
         class="ix-button ix-button-disabled ix-button-icon-only ix-button-default ix-button-sm ix-transfer-operations-btn"
         disabled=""
         type="button"
@@ -5175,6 +5202,7 @@ exports[`Transfer > label slot work 1`] = `
     </div>
   </div>
   <div
+    aria-label="transferRight"
     class="ix-transfer-content ix-transfer-content-target"
   >
     
@@ -5185,13 +5213,13 @@ exports[`Transfer > label slot work 1`] = `
         class="ix-transfer-header-inner"
       >
         <label
-          aria-checked="false"
-          aria-disabled="true"
           class="ix-checkbox ix-checkbox-disabled ix-transfer-header-check-all"
-          role="checkbox"
         >
           <span
+            aria-checked="false"
+            aria-disabled="true"
             class="ix-checkbox-input"
+            role="checkbox"
           >
             <input
               aria-hidden="true"

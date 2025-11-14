@@ -3,38 +3,38 @@
 exports[`Pagination > render work 1`] = `
 "<ul class="ix-pagination ix-pagination-sm">
   <li class="ix-pagination-total">共 50 项</li>
-  <li class="ix-pagination-item ix-pagination-item-prev ix-pagination-item-disabled" tabindex="-1" title="上一页"><span class="ix-pagination-item-content"><i class="ix-icon ix-icon-left" role="img" aria-label="left"></i></span></li>
-  <li class="ix-pagination-item ix-pagination-item-page ix-pagination-item-active" tabindex="0" title="1"><span class="ix-pagination-item-content">1</span></li>
-  <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="2"><span class="ix-pagination-item-content">2</span></li>
-  <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="3"><span class="ix-pagination-item-content">3</span></li>
-  <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="4"><span class="ix-pagination-item-content">4</span></li>
-  <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="5"><span class="ix-pagination-item-content">5</span></li>
-  <li class="ix-pagination-item ix-pagination-item-next" tabindex="0" title="下一页"><span class="ix-pagination-item-content"><i class="ix-icon ix-icon-right" role="img" aria-label="right"></i></span></li>
+  <li class="ix-pagination-item ix-pagination-item-prev ix-pagination-item-disabled" tabindex="-1" title="上一页" role="gridcell" aria-disabled="true"><span class="ix-pagination-item-content"><i class="ix-icon ix-icon-left" role="button" aria-label="paging-prev"></i></span></li>
+  <li class="ix-pagination-item ix-pagination-item-page ix-pagination-item-active" tabindex="0" title="1" role="gridcell" aria-selected="true"><span class="ix-pagination-item-content">1</span></li>
+  <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="2" role="gridcell"><span class="ix-pagination-item-content">2</span></li>
+  <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="3" role="gridcell"><span class="ix-pagination-item-content">3</span></li>
+  <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="4" role="gridcell"><span class="ix-pagination-item-content">4</span></li>
+  <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="5" role="gridcell"><span class="ix-pagination-item-content">5</span></li>
+  <li class="ix-pagination-item ix-pagination-item-next" tabindex="0" title="下一页" role="gridcell"><span class="ix-pagination-item-content"><i class="ix-icon ix-icon-right" role="button" aria-label="paging-next"></i></span></li>
 </ul>"
 `;
 
 exports[`Pagination > render work 2`] = `
 "<ul class="ix-pagination ix-pagination-simple ix-pagination-sm">
   <li class="ix-pagination-total">共 50 项</li>
-  <li class="ix-pagination-item ix-pagination-item-prev ix-pagination-item-disabled" tabindex="-1" title="上一页"><span class="ix-pagination-item-content"><i class="ix-icon ix-icon-left" role="img" aria-label="left"></i></span></li>
+  <li class="ix-pagination-item ix-pagination-item-prev ix-pagination-item-disabled" tabindex="-1" title="上一页" role="gridcell" aria-disabled="true"><span class="ix-pagination-item-content"><i class="ix-icon ix-icon-left" role="button" aria-label="paging-prev"></i></span></li>
   <li class="ix-pagination-item">1<span class="ix-pagination-item-slash">/</span><span>5</span></li>
-  <li class="ix-pagination-item ix-pagination-item-next" tabindex="0" title="下一页"><span class="ix-pagination-item-content"><i class="ix-icon ix-icon-right" role="img" aria-label="right"></i></span></li>
+  <li class="ix-pagination-item ix-pagination-item-next" tabindex="0" title="下一页" role="gridcell"><span class="ix-pagination-item-content"><i class="ix-icon ix-icon-right" role="button" aria-label="paging-next"></i></span></li>
 </ul>"
 `;
 
 exports[`Pagination > render work 3`] = `
 "<ul class="ix-pagination ix-pagination-sm">
   <li class="ix-pagination-total">共 500 项</li>
-  <li class="ix-pagination-item ix-pagination-item-prev ix-pagination-item-disabled" tabindex="-1" title="上一页"><span class="ix-pagination-item-content"><i class="ix-icon ix-icon-left" role="img" aria-label="left"></i></span></li>
-  <li class="ix-pagination-item ix-pagination-item-page ix-pagination-item-active" tabindex="0" title="1"><span class="ix-pagination-item-content">1</span></li>
-  <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="2"><span class="ix-pagination-item-content">2</span></li>
-  <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="3"><span class="ix-pagination-item-content">3</span></li>
-  <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="4"><span class="ix-pagination-item-content">4</span></li>
-  <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="5"><span class="ix-pagination-item-content">5</span></li>
-  <li class="ix-pagination-item ix-pagination-item-next5" tabindex="0" title="向后 5 页"><span class="ix-pagination-item-content"><span class=" ix-pagination-item-jumper"><i class="ix-icon ix-icon-double-right" role="img" aria-label="double-right"></i><i class="ix-icon ix-icon-ellipsis ix-pagination-item-ellipsis" role="img" aria-label="ellipsis"></i></span></span></li>
-  <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="50"><span class="ix-pagination-item-content">50</span></li>
-  <li class="ix-pagination-item ix-pagination-item-next" tabindex="0" title="下一页"><span class="ix-pagination-item-content"><i class="ix-icon ix-icon-right" role="img" aria-label="right"></i></span></li>
-  <li class="ix-pagination-sizes">每页<div class="ix-trigger ix-trigger-sm ix-trigger-with-suffix ix-selector ix-selector-sm ix-selector-single ix-select ix-control-trigger ix-select" tabindex="-1">
+  <li class="ix-pagination-item ix-pagination-item-prev ix-pagination-item-disabled" tabindex="-1" title="上一页" role="gridcell" aria-disabled="true"><span class="ix-pagination-item-content"><i class="ix-icon ix-icon-left" role="button" aria-label="paging-prev"></i></span></li>
+  <li class="ix-pagination-item ix-pagination-item-page ix-pagination-item-active" tabindex="0" title="1" role="gridcell" aria-selected="true"><span class="ix-pagination-item-content">1</span></li>
+  <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="2" role="gridcell"><span class="ix-pagination-item-content">2</span></li>
+  <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="3" role="gridcell"><span class="ix-pagination-item-content">3</span></li>
+  <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="4" role="gridcell"><span class="ix-pagination-item-content">4</span></li>
+  <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="5" role="gridcell"><span class="ix-pagination-item-content">5</span></li>
+  <li class="ix-pagination-item ix-pagination-item-next5" tabindex="0" title="向后 5 页" role="gridcell"><span class="ix-pagination-item-content"><span class=" ix-pagination-item-jumper"><i class="ix-icon ix-icon-double-right" role="img" aria-label="double-right"></i><i class="ix-icon ix-icon-ellipsis ix-pagination-item-ellipsis" role="img" aria-label="ellipsis"></i></span></span></li>
+  <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="50" role="gridcell"><span class="ix-pagination-item-content">50</span></li>
+  <li class="ix-pagination-item ix-pagination-item-next" tabindex="0" title="下一页" role="gridcell"><span class="ix-pagination-item-content"><i class="ix-icon ix-icon-right" role="button" aria-label="paging-next"></i></span></li>
+  <li class="ix-pagination-sizes">每页<div class="ix-trigger ix-trigger-sm ix-trigger-with-suffix ix-selector ix-selector-sm ix-selector-single ix-select ix-control-trigger ix-select" tabindex="-1" aria-controls="control-overlay-0" aria-label="selector">
       <!---->
       <div class="ix-selector-content">
         <div class="ix-selector-item"><span class="ix-selector-item-label">10</span>
@@ -49,6 +49,6 @@ exports[`Pagination > render work 3`] = `
     </div>
     <!---->项
   </li>
-  <li class="ix-pagination-jumper">前往<input class="ix-input ix-input-sm">页</li>
+  <li class="ix-pagination-jumper">前往<input class="ix-input ix-input-sm" aria-disabled="false" aria-readonly="false">页</li>
 </ul>"
 `;

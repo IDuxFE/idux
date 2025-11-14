@@ -13,11 +13,11 @@ exports[`Menu > render work 1`] = `
   </li>
   <li class="ix-menu-divider"></li>
   <li class="ix-menu-sub ix-menu-level-1" aria-expanded="false" aria-haspopup="true" role="menuitem">
-    <div class="ix-menu-sub-label"><i class="ix-icon ix-icon-setting" role="img" aria-label="setting"></i><span>Sub Menu 1</span><span class="ix-menu-sub-label-suffix"><i class="ix-icon ix-icon-right" style="transform: rotate(0deg);" role="img" aria-label="right"></i></span></div>
+    <div class="ix-menu-sub-label" aria-controls="control-overlay-0"><i class="ix-icon ix-icon-setting" role="img" aria-label="setting"></i><span>Sub Menu 1</span><span class="ix-menu-sub-label-suffix"><i class="ix-icon ix-icon-right" style="transform: rotate(0deg);" role="img" aria-label="right"></i></span></div>
     <!---->
   </li>
   <li class="ix-menu-sub ix-menu-level-1 ix-menu-sub-disabled" aria-expanded="false" aria-haspopup="true" role="menuitem">
-    <div class="ix-menu-sub-label"><i class="ix-icon ix-icon-github" role="img" aria-label="github"></i><span>Menu Sub 4</span><span class="ix-menu-sub-label-suffix"><i class="ix-icon ix-icon-right" style="transform: rotate(0deg);" role="img" aria-label="right"></i></span></div>
+    <div class="ix-menu-sub-label" aria-controls="control-overlay-1"><i class="ix-icon ix-icon-github" role="img" aria-label="github"></i><span>Menu Sub 4</span><span class="ix-menu-sub-label-suffix"><i class="ix-icon ix-icon-right" style="transform: rotate(0deg);" role="img" aria-label="right"></i></span></div>
     <!---->
   </li>
 </ul>"

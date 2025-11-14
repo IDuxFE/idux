@@ -1,9 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Footer > render work 1`] = `
-"<div><button class="ix-button ix-button-primary ix-button-sm" type="button"><span>ok</span>
+"<div><button class="ix-button ix-button-primary ix-button-sm" type="button" aria-disabled="false" aria-busy="false"><span>ok</span>
     <div aria-hidden="true" class="ix-wave"></div>
-  </button><button class="ix-button ix-button-default ix-button-sm" type="button"><span>cancel</span>
+  </button><button class="ix-button ix-button-default ix-button-sm" type="button" aria-disabled="false" aria-busy="false"><span>cancel</span>
     <div aria-hidden="true" class="ix-wave"></div>
   </button></div>"
 `;

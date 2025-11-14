@@ -8,7 +8,7 @@ exports[`Form > basic work > render work 1`] = `
       </label></div>
     <div class="ix-col ix-form-item-control">
       <div class="ix-form-item-control-input">
-        <div class="ix-form-item-control-input-content"><input class="ix-input ix-input-md"></div>
+        <div class="ix-form-item-control-input-content"><input class="ix-input ix-input-md" aria-disabled="false" aria-readonly="false"></div>
         <!---->
       </div>
       <div class="ix-form-item-message">
@@ -24,7 +24,7 @@ exports[`Form > basic work > render work 1`] = `
       </label></div>
     <div class="ix-col ix-form-item-control">
       <div class="ix-form-item-control-input">
-        <div class="ix-form-item-control-input-content"><input class="ix-input ix-input-md"></div>
+        <div class="ix-form-item-control-input-content"><input class="ix-input ix-input-md" aria-disabled="false" aria-readonly="false"></div>
         <!---->
       </div>
       <div class="ix-form-item-message">
@@ -40,7 +40,7 @@ exports[`Form > basic work > render work 1`] = `
       </label></div>
     <div class="ix-col ix-form-item-control">
       <div class="ix-form-item-control-input">
-        <div class="ix-form-item-control-input-content"><label class="ix-checkbox" role="checkbox" aria-checked="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+        <div class="ix-form-item-control-input-content"><label class="ix-checkbox"><span class="ix-checkbox-input" role="checkbox" aria-checked="false" aria-disabled="false"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
             <!---->
             <!---->
             <!---->
@@ -80,7 +80,7 @@ exports[`Form > item work > render work 1`] = `
     </label></div>
   <div class="ix-col ix-form-item-control">
     <div class="ix-form-item-control-input">
-      <div class="ix-form-item-control-input-content"><input class="ix-input ix-input-md"></div>
+      <div class="ix-form-item-control-input-content"><input class="ix-input ix-input-md" aria-disabled="false" aria-readonly="false"></div>
       <!---->
     </div>
     <div class="ix-form-item-message">
@@ -99,7 +99,7 @@ exports[`Form > wrapper work > render work 1`] = `
     </label></div>
   <div class="ix-col ix-form-item-control">
     <div class="ix-form-item-control-input">
-      <div class="ix-form-item-control-input-content"><input class="ix-input ix-input-md"></div>
+      <div class="ix-form-item-control-input-content"><input class="ix-input ix-input-md" aria-disabled="false" aria-readonly="false"></div>
       <!---->
     </div>
     <div class="ix-form-item-message">
@@ -115,7 +115,7 @@ exports[`Form > wrapper work > render work 1`] = `
     </label></div>
   <div class="ix-col ix-form-item-control">
     <div class="ix-form-item-control-input">
-      <div class="ix-form-item-control-input-content"><input class="ix-input ix-input-md"></div>
+      <div class="ix-form-item-control-input-content"><input class="ix-input ix-input-md" aria-disabled="false" aria-readonly="false"></div>
       <!---->
     </div>
     <div class="ix-form-item-message">
@@ -131,7 +131,7 @@ exports[`Form > wrapper work > render work 1`] = `
     </label></div>
   <div class="ix-col ix-form-item-control">
     <div class="ix-form-item-control-input">
-      <div class="ix-form-item-control-input-content"><label class="ix-checkbox" role="checkbox" aria-checked="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+      <div class="ix-form-item-control-input-content"><label class="ix-checkbox"><span class="ix-checkbox-input" role="checkbox" aria-checked="false" aria-disabled="false"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
           <!---->
           <!---->
           <!---->

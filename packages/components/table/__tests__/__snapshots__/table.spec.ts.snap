@@ -20,7 +20,7 @@ exports[`Table > basic work > render work 1`] = `
             <th class="ix-table-cell ix-table-cell-expandable">
               <!---->
             </th>
-            <th class="ix-table-cell ix-table-cell-selectable"><span class="ix-table-cell-triggers"><label class="ix-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+            <th class="ix-table-cell ix-table-cell-selectable"><span class="ix-table-cell-triggers"><label class="ix-checkbox"><span class="ix-checkbox-input" role="checkbox" aria-checked="false" aria-disabled="false"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
               <!---->
               <!---->
               <!----></label>
@@ -41,7 +41,7 @@ exports[`Table > basic work > render work 1`] = `
             <td class="ix-table-cell ix-table-cell-expandable">
               <div class="ix-table-expandable-wrapper"><span class="ix-table-expandable-trigger"><button class="ix-table-expandable-trigger-button" type="button"><svg viewBox="0 0 16 16" style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><rect x="7" y="5" width="2" height="6" rx="0.2" style="fill: var(--ix-color-icon);"></rect></svg></button><!----></span><span class="ix-table-expandable-trigger-gap"></span><a>expandable</a></div>
             </td>
-            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox ix-checkbox-disabled" role="checkbox" aria-checked="false" aria-disabled="true"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" disabled=""><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox ix-checkbox-disabled"><span class="ix-checkbox-input" role="checkbox" aria-checked="false" aria-disabled="true"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" disabled=""><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
                 <!---->
                 <!---->
                 <!---->
@@ -59,7 +59,7 @@ exports[`Table > basic work > render work 1`] = `
             <td class="ix-table-cell ix-table-cell-expandable">
               <div class="ix-table-expandable-wrapper"><span class="ix-table-expandable-trigger ix-table-expandable-trigger-disabled"><button class="ix-table-expandable-trigger-button" type="button"><svg viewBox="0 0 16 16" style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><rect x="7" y="5" width="2" height="6" rx="0.2" style="fill: var(--ix-color-icon);"></rect></svg></button><!----></span><span class="ix-table-expandable-trigger-gap"></span><a>expandable</a></div>
             </td>
-            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox"><span class="ix-checkbox-input" role="checkbox" aria-checked="false" aria-disabled="false"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
                 <!---->
                 <!---->
                 <!---->
@@ -77,7 +77,7 @@ exports[`Table > basic work > render work 1`] = `
             <td class="ix-table-cell ix-table-cell-expandable">
               <div class="ix-table-expandable-wrapper"><span class="ix-table-expandable-trigger ix-table-expandable-trigger-disabled"><button class="ix-table-expandable-trigger-button" type="button"><svg viewBox="0 0 16 16" style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><rect x="7" y="5" width="2" height="6" rx="0.2" style="fill: var(--ix-color-icon);"></rect></svg></button><!----></span><span class="ix-table-expandable-trigger-gap"></span><a>expandable</a></div>
             </td>
-            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox"><span class="ix-checkbox-input" role="checkbox" aria-checked="false" aria-disabled="false"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
                 <!---->
                 <!---->
                 <!---->
@@ -95,7 +95,7 @@ exports[`Table > basic work > render work 1`] = `
             <td class="ix-table-cell ix-table-cell-expandable">
               <div class="ix-table-expandable-wrapper"><span class="ix-table-expandable-trigger"><button class="ix-table-expandable-trigger-button" type="button"><svg viewBox="0 0 16 16" style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><rect x="7" y="5" width="2" height="6" rx="0.2" style="fill: var(--ix-color-icon);"></rect></svg></button><!----></span><span class="ix-table-expandable-trigger-gap"></span><a>expandable</a></div>
             </td>
-            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox ix-checkbox-disabled" role="checkbox" aria-checked="false" aria-disabled="true"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" disabled=""><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox ix-checkbox-disabled"><span class="ix-checkbox-input" role="checkbox" aria-checked="false" aria-disabled="true"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" disabled=""><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
                 <!---->
                 <!---->
                 <!---->
@@ -113,7 +113,7 @@ exports[`Table > basic work > render work 1`] = `
             <td class="ix-table-cell ix-table-cell-expandable">
               <div class="ix-table-expandable-wrapper"><span class="ix-table-expandable-trigger ix-table-expandable-trigger-disabled"><button class="ix-table-expandable-trigger-button" type="button"><svg viewBox="0 0 16 16" style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><rect x="7" y="5" width="2" height="6" rx="0.2" style="fill: var(--ix-color-icon);"></rect></svg></button><!----></span><span class="ix-table-expandable-trigger-gap"></span><a>expandable</a></div>
             </td>
-            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox"><span class="ix-checkbox-input" role="checkbox" aria-checked="false" aria-disabled="false"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
                 <!---->
                 <!---->
                 <!---->
@@ -131,7 +131,7 @@ exports[`Table > basic work > render work 1`] = `
             <td class="ix-table-cell ix-table-cell-expandable">
               <div class="ix-table-expandable-wrapper"><span class="ix-table-expandable-trigger ix-table-expandable-trigger-disabled"><button class="ix-table-expandable-trigger-button" type="button"><svg viewBox="0 0 16 16" style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><rect x="7" y="5" width="2" height="6" rx="0.2" style="fill: var(--ix-color-icon);"></rect></svg></button><!----></span><span class="ix-table-expandable-trigger-gap"></span><a>expandable</a></div>
             </td>
-            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox"><span class="ix-checkbox-input" role="checkbox" aria-checked="false" aria-disabled="false"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
                 <!---->
                 <!---->
                 <!---->
@@ -149,7 +149,7 @@ exports[`Table > basic work > render work 1`] = `
             <td class="ix-table-cell ix-table-cell-expandable">
               <div class="ix-table-expandable-wrapper"><span class="ix-table-expandable-trigger"><button class="ix-table-expandable-trigger-button" type="button"><svg viewBox="0 0 16 16" style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><rect x="7" y="5" width="2" height="6" rx="0.2" style="fill: var(--ix-color-icon);"></rect></svg></button><!----></span><span class="ix-table-expandable-trigger-gap"></span><a>expandable</a></div>
             </td>
-            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox ix-checkbox-disabled" role="checkbox" aria-checked="false" aria-disabled="true"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" disabled=""><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox ix-checkbox-disabled"><span class="ix-checkbox-input" role="checkbox" aria-checked="false" aria-disabled="true"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" disabled=""><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
                 <!---->
                 <!---->
                 <!---->
@@ -167,7 +167,7 @@ exports[`Table > basic work > render work 1`] = `
             <td class="ix-table-cell ix-table-cell-expandable">
               <div class="ix-table-expandable-wrapper"><span class="ix-table-expandable-trigger ix-table-expandable-trigger-disabled"><button class="ix-table-expandable-trigger-button" type="button"><svg viewBox="0 0 16 16" style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><rect x="7" y="5" width="2" height="6" rx="0.2" style="fill: var(--ix-color-icon);"></rect></svg></button><!----></span><span class="ix-table-expandable-trigger-gap"></span><a>expandable</a></div>
             </td>
-            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox"><span class="ix-checkbox-input" role="checkbox" aria-checked="false" aria-disabled="false"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
                 <!---->
                 <!---->
                 <!---->
@@ -185,7 +185,7 @@ exports[`Table > basic work > render work 1`] = `
             <td class="ix-table-cell ix-table-cell-expandable">
               <div class="ix-table-expandable-wrapper"><span class="ix-table-expandable-trigger ix-table-expandable-trigger-disabled"><button class="ix-table-expandable-trigger-button" type="button"><svg viewBox="0 0 16 16" style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><rect x="7" y="5" width="2" height="6" rx="0.2" style="fill: var(--ix-color-icon);"></rect></svg></button><!----></span><span class="ix-table-expandable-trigger-gap"></span><a>expandable</a></div>
             </td>
-            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox"><span class="ix-checkbox-input" role="checkbox" aria-checked="false" aria-disabled="false"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
                 <!---->
                 <!---->
                 <!---->
@@ -203,7 +203,7 @@ exports[`Table > basic work > render work 1`] = `
             <td class="ix-table-cell ix-table-cell-expandable">
               <div class="ix-table-expandable-wrapper"><span class="ix-table-expandable-trigger"><button class="ix-table-expandable-trigger-button" type="button"><svg viewBox="0 0 16 16" style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><rect x="7" y="5" width="2" height="6" rx="0.2" style="fill: var(--ix-color-icon);"></rect></svg></button><!----></span><span class="ix-table-expandable-trigger-gap"></span><a>expandable</a></div>
             </td>
-            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox ix-checkbox-disabled" role="checkbox" aria-checked="false" aria-disabled="true"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" disabled=""><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+            <td class="ix-table-cell ix-table-cell-selectable"><label class="ix-checkbox ix-checkbox-disabled"><span class="ix-checkbox-input" role="checkbox" aria-checked="false" aria-disabled="true"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" disabled=""><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
                 <!---->
                 <!---->
                 <!---->
@@ -224,15 +224,15 @@ exports[`Table > basic work > render work 1`] = `
   </div>
   <ul class="ix-pagination ix-pagination-md ix-table-pagination ix-table-pagination-end" position="bottomEnd">
     <li class="ix-pagination-total">共 100 项</li>
-    <li class="ix-pagination-item ix-pagination-item-prev ix-pagination-item-disabled" tabindex="-1" title="上一页"><span class="ix-pagination-item-content"><i class="ix-icon ix-icon-left" role="img" aria-label="left"></i></span></li>
-    <li class="ix-pagination-item ix-pagination-item-page ix-pagination-item-active" tabindex="0" title="1"><span class="ix-pagination-item-content">1</span></li>
-    <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="2"><span class="ix-pagination-item-content">2</span></li>
-    <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="3"><span class="ix-pagination-item-content">3</span></li>
-    <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="4"><span class="ix-pagination-item-content">4</span></li>
-    <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="5"><span class="ix-pagination-item-content">5</span></li>
-    <li class="ix-pagination-item ix-pagination-item-next5" tabindex="0" title="向后 5 页"><span class="ix-pagination-item-content"><span class=" ix-pagination-item-jumper"><i class="ix-icon ix-icon-double-right" role="img" aria-label="double-right"></i><i class="ix-icon ix-icon-ellipsis ix-pagination-item-ellipsis" role="img" aria-label="ellipsis"></i></span></span></li>
-    <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="10"><span class="ix-pagination-item-content">10</span></li>
-    <li class="ix-pagination-item ix-pagination-item-next" tabindex="0" title="下一页"><span class="ix-pagination-item-content"><i class="ix-icon ix-icon-right" role="img" aria-label="right"></i></span></li>
+    <li class="ix-pagination-item ix-pagination-item-prev ix-pagination-item-disabled" tabindex="-1" title="上一页" role="gridcell" aria-disabled="true"><span class="ix-pagination-item-content"><i class="ix-icon ix-icon-left" role="button" aria-label="paging-prev"></i></span></li>
+    <li class="ix-pagination-item ix-pagination-item-page ix-pagination-item-active" tabindex="0" title="1" role="gridcell" aria-selected="true"><span class="ix-pagination-item-content">1</span></li>
+    <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="2" role="gridcell"><span class="ix-pagination-item-content">2</span></li>
+    <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="3" role="gridcell"><span class="ix-pagination-item-content">3</span></li>
+    <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="4" role="gridcell"><span class="ix-pagination-item-content">4</span></li>
+    <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="5" role="gridcell"><span class="ix-pagination-item-content">5</span></li>
+    <li class="ix-pagination-item ix-pagination-item-next5" tabindex="0" title="向后 5 页" role="gridcell"><span class="ix-pagination-item-content"><span class=" ix-pagination-item-jumper"><i class="ix-icon ix-icon-double-right" role="img" aria-label="double-right"></i><i class="ix-icon ix-icon-ellipsis ix-pagination-item-ellipsis" role="img" aria-label="ellipsis"></i></span></span></li>
+    <li class="ix-pagination-item ix-pagination-item-page" tabindex="0" title="10" role="gridcell"><span class="ix-pagination-item-content">10</span></li>
+    <li class="ix-pagination-item ix-pagination-item-next" tabindex="0" title="下一页" role="gridcell"><span class="ix-pagination-item-content"><i class="ix-icon ix-icon-right" role="button" aria-label="paging-next"></i></span></li>
   </ul>
 </div>"
 `;

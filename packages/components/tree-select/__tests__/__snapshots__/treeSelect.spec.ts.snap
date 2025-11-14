@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`TreeSelect > multiple work > render work 1`] = `
-"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-opened ix-selector-single ix-tree-select ix-control-trigger" tabindex="-1">
+"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-opened ix-selector-single ix-tree-select ix-control-trigger" tabindex="-1" aria-controls="control-overlay-17" aria-label="selector">
   <!---->
   <div class="ix-selector-content">
     <div class="ix-selector-item"><span class="ix-selector-item-label">Node 0</span>
@@ -19,7 +19,7 @@ exports[`TreeSelect > multiple work > render work 1`] = `
 `;
 
 exports[`TreeSelect > single work > custom keys work 1`] = `
-"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-opened ix-selector-single ix-tree-select ix-control-trigger" tabindex="-1">
+"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-opened ix-selector-single ix-tree-select ix-control-trigger" tabindex="-1" aria-controls="control-overlay-6" aria-label="selector">
   <!---->
   <div class="ix-selector-content">
     <div class="ix-selector-item"><span class="ix-selector-item-label">Node 0</span>
@@ -37,7 +37,7 @@ exports[`TreeSelect > single work > custom keys work 1`] = `
 `;
 
 exports[`TreeSelect > single work > render work 1`] = `
-"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-opened ix-selector-single ix-tree-select ix-control-trigger" tabindex="-1">
+"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-opened ix-selector-single ix-tree-select ix-control-trigger" tabindex="-1" aria-controls="control-overlay-0" aria-label="selector">
   <!---->
   <div class="ix-selector-content">
     <div class="ix-selector-item"><span class="ix-selector-item-label">Node 0</span>
@@ -55,7 +55,7 @@ exports[`TreeSelect > single work > render work 1`] = `
 `;
 
 exports[`TreeSelect > single work > searchFn work 1`] = `
-"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-single ix-tree-select ix-control-trigger" tabindex="-1" searchvalue="node">
+"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-single ix-tree-select ix-control-trigger" tabindex="-1" aria-controls="control-overlay-14" aria-label="selector" searchvalue="node">
   <!---->
   <div class="ix-selector-content">
     <div class="ix-selector-item"><span class="ix-selector-item-label">Node 0</span>
@@ -73,7 +73,7 @@ exports[`TreeSelect > single work > searchFn work 1`] = `
 `;
 
 exports[`TreeSelect > single work > searchFn work 2`] = `
-"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-single ix-tree-select ix-control-trigger" tabindex="-1" searchvalue="node">
+"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-single ix-tree-select ix-control-trigger" tabindex="-1" aria-controls="control-overlay-14" aria-label="selector" searchvalue="node">
   <!---->
   <div class="ix-selector-content">
     <div class="ix-selector-item"><span class="ix-selector-item-label">Node 0</span>
@@ -93,7 +93,7 @@ exports[`TreeSelect > single work > searchFn work 2`] = `
 `;
 
 exports[`TreeSelect > single work > searchFn work 3`] = `
-"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-single ix-tree-select ix-control-trigger" tabindex="-1" searchvalue="node">
+"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-single ix-tree-select ix-control-trigger" tabindex="-1" aria-controls="control-overlay-14" aria-label="selector" searchvalue="node">
   <!---->
   <div class="ix-selector-content">
     <div class="ix-selector-item"><span class="ix-selector-item-label">Node 0</span>
@@ -113,7 +113,7 @@ exports[`TreeSelect > single work > searchFn work 3`] = `
 `;
 
 exports[`TreeSelect > single work > searchable work 1`] = `
-"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-allow-input ix-selector-opened ix-selector-searchable ix-selector-single ix-tree-select ix-control-trigger" tabindex="-1">
+"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-allow-input ix-selector-opened ix-selector-searchable ix-selector-single ix-tree-select ix-control-trigger" tabindex="-1" aria-controls="control-overlay-13" aria-label="selector">
   <!---->
   <div class="ix-selector-content">
     <div class="ix-selector-item"><span class="ix-selector-item-label">Node 0</span>
@@ -131,7 +131,7 @@ exports[`TreeSelect > single work > searchable work 1`] = `
 `;
 
 exports[`TreeSelect > single work > searchable work 2`] = `
-"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-opened ix-selector-single ix-tree-select ix-control-trigger" tabindex="-1">
+"<div class="ix-trigger ix-trigger-md ix-trigger-with-suffix ix-selector ix-selector-md ix-selector-opened ix-selector-single ix-tree-select ix-control-trigger" tabindex="-1" aria-controls="control-overlay-13" aria-label="selector">
   <!---->
   <div class="ix-selector-content">
     <div class="ix-selector-input"><input class="ix-selector-input-inner" style="opacity: 0;" autocomplete="off" readonly="" value="">

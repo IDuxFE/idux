@@ -18,13 +18,13 @@ exports[`ProTree > render work 1`] = `
   </div>
   <div class="ix-pro-tree-search-wrapper"><button class="ix-button ix-button-icon-only ix-button-default ix-button-square ix-button-xs" type="button" title="收起全部"><i class="ix-icon ix-icon-collapse-all" role="img" aria-label="collapse-all"></i>
       <div aria-hidden="true" class="ix-wave"></div>
-    </button><span class="ix-input ix-input-sm ix-input-clearable ix-input-with-suffix"><!----><input class="ix-input-inner" value=""><span class="ix-input-suffix"><i class="ix-icon ix-icon-search" role="img" aria-label="search"></i></span><span class="ix-input-clear"><i class="ix-icon ix-icon-close-circle" role="img" aria-label="close-circle"></i></span></span></div>
+    </button><span class="ix-input ix-input-sm ix-input-clearable ix-input-with-suffix"><!----><input class="ix-input-inner" aria-disabled="false" aria-readonly="false" value=""><span class="ix-input-suffix"><i class="ix-icon ix-icon-search" role="img" aria-label="search"></i></span><span class="ix-input-clear"><i class="ix-icon ix-icon-close-circle" role="img" aria-label="close-circle"></i></span></span></div>
   <div class="ix-tree ix-tree-blocked ix-tree-auto-height ix-tree-show-line" role="tree">
     <!----><input style="width: 0px; height: 0px; display: flex; overflow: hidden; opacity: 0; border: 0px; padding: 0px; margin: 0px;" tabindex="0" aria-label="for screen reader" value="">
     <div class="ix-tree-content">
       <div class="ix-tree-content-inner">
-        <div class="ix-tree-node ix-tree-node-last" aria-label="Node 0" aria-selected="false" title="Node 0"><span aria-hidden="true" class="ix-tree-node-indent"></span>
-          <!----><span class="ix-tree-node-expand"><!----><svg viewBox="0 0 16 16" style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><rect x="7" y="5" width="2" height="6" rx="0.2" style="fill: var(--ix-color-icon);"></rect></svg><!----></span>
+        <div class="ix-tree-node ix-tree-node-last" aria-label="Node 0" aria-selected="false" aria-expanded="false" aria-level="0" role="treeitem" title="Node 0"><span aria-hidden="true" class="ix-tree-node-indent"></span>
+          <!----><span class="ix-tree-node-expand" role="button" aria-label="expand-all" aria-expanded="false"><!----><svg viewBox="0 0 16 16" style="width: var(--ix-font-size-icon); height: var(--ix-font-size-icon);"><rect x="1" y="1" width="14" height="14" rx="1" style="fill: var(--ix-color-emphasized-container-bg);"></rect><rect x="5" y="7" width="6" height="2" rx="0.2" style="fill: var(--ix-color-icon);"></rect><rect x="7" y="5" width="2" height="6" rx="0.2" style="fill: var(--ix-color-icon);"></rect></svg><!----></span>
           <!----><span class="ix-tree-node-content"><!----><span class="ix-tree-node-content-label">Node 0</span>
           <!----></span>
         </div>

@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`TransferListItem > render work 1`] = `
-"<li class="ix-transfer-list-item"><label class="ix-checkbox ix-transfer-list-item-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="1"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+"<li class="ix-transfer-list-item"><label class="ix-checkbox ix-transfer-list-item-checkbox"><span class="ix-checkbox-input" role="checkbox" aria-checked="false" aria-disabled="false"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="1"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
     <!---->
     <!----><span class="ix-checkbox-label">Option-1</span>
   </label>

@@ -5,5 +5,5 @@ exports[`Tour > panel render work 1`] = `"<div class="ix-header ix-header-sm"><!
 exports[`Tour > render work 1`] = `
 "<!--teleport start-->
 <!--teleport end-->
-<div class="ix-tour-placeholder"></div>"
+<div class="ix-tour-placeholder" aria-controls="control-overlay-0"></div>"
 `;

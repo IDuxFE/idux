@@ -34,222 +34,222 @@ exports[`DatePanel > date type disabledDate work 1`] = `
       </thead>
       <tbody>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="27">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">27</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="28">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">28</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="29">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">29</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="30">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">30</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-selected ix-date-panel-cell-start" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-selected ix-date-panel-cell-start" role="gridcell" aria-selected="true" aria-label="1,start-date">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">1</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="2">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="3">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">3</div>
             </div>
           </td>
         </tr>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="4">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">4</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="5">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">5</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="6">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">6</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="7">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">7</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="8">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">8</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="9">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">9</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="10">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">10</div>
             </div>
           </td>
         </tr>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="11">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">11</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="12">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">12</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="13">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">13</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="14">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">14</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="15">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">15</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="16">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">16</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="17">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">17</div>
             </div>
           </td>
         </tr>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="18">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">18</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="19">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">19</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="20">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">20</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="21">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">21</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="22">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">22</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="23">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">23</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="24">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">24</div>
             </div>
           </td>
         </tr>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="25">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">25</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="26">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">26</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="27">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">27</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="28">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">28</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="29">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">29</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="30">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">30</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="31">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">31</div>
             </div>
           </td>
         </tr>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">1</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="2">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="3">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">3</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="4">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">4</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="5">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">5</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="6">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">6</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="7">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">7</div>
             </div>
@@ -271,68 +271,68 @@ exports[`DatePanel > month type disabledDate work 1`] = `
       <!---->
       <tbody>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">1月</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2月</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">3月</div>
             </div>
           </td>
         </tr>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">4月</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">5月</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">6月</div>
             </div>
           </td>
         </tr>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">7月</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">8月</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">9月</div>
             </div>
           </td>
         </tr>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-selected ix-date-panel-cell-start" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-selected ix-date-panel-cell-start" role="gridcell" aria-selected="true" aria-label="1,start-date">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">10月</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">11月</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">12月</div>
             </div>
@@ -378,222 +378,222 @@ exports[`DatePanel > render work 1`] = `
       </thead>
       <tbody>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="27">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">27</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="28">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">28</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="29">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">29</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="30">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">30</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-selected ix-date-panel-cell-start" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-selected ix-date-panel-cell-start" role="gridcell" aria-selected="true" aria-label="1,start-date">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">1</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="2">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="3">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">3</div>
             </div>
           </td>
         </tr>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="4">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">4</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="5">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">5</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="6">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">6</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="7">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">7</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="8">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">8</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="9">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">9</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="10">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">10</div>
             </div>
           </td>
         </tr>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="11">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">11</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="12">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">12</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="13">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">13</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="14">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">14</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="15">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">15</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="16">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">16</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="17">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">17</div>
             </div>
           </td>
         </tr>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="18">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">18</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="19">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">19</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="20">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">20</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="21">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">21</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="22">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">22</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="23">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">23</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="24">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">24</div>
             </div>
           </td>
         </tr>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="25">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">25</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="26">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">26</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="27">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">27</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="28">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">28</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="29">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">29</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="30">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">30</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="31">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">31</div>
             </div>
           </td>
         </tr>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">1</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="2">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="3">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">3</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="4">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">4</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="5">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">5</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="6">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">6</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="7">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">7</div>
             </div>
@@ -615,68 +615,68 @@ exports[`DatePanel > year type disabledDate work 1`] = `
       <!---->
       <tbody>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled ix-date-panel-cell-out-view" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2019</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2020</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell ix-date-panel-cell-selected ix-date-panel-cell-start" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-selected ix-date-panel-cell-start" role="gridcell" aria-selected="true" aria-label="1,start-date">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2021</div>
             </div>
           </td>
         </tr>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-disabled" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2022</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2023</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2024</div>
             </div>
           </td>
         </tr>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell ix-date-panel-cell-current" role="gridcell">
+          <td class="ix-date-panel-cell ix-date-panel-cell-current" role="gridcell" aria-selected="false" aria-label="1,today">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2025</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2026</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2027</div>
             </div>
           </td>
         </tr>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2028</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2029</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2030</div>
             </div>

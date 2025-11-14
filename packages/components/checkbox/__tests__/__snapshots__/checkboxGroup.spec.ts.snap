@@ -2,15 +2,15 @@
 
 exports[`CheckboxGroup > render work 1`] = `
 "<div class="ix-space ix-checkbox-group" style="margin-bottom: -8px;">
-  <div class="ix-space-item" style="margin-right: 8px; padding-bottom: 8px;"><label class="ix-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="option1"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+  <div class="ix-space-item" style="margin-right: 8px; padding-bottom: 8px;"><label class="ix-checkbox"><span class="ix-checkbox-input" role="checkbox" aria-checked="false" aria-disabled="false"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="option1"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
       <!---->
       <!----><span class="ix-checkbox-label">option1</span>
     </label></div>
-  <div class="ix-space-item" style="margin-right: 8px; padding-bottom: 8px;"><label class="ix-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="option2"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+  <div class="ix-space-item" style="margin-right: 8px; padding-bottom: 8px;"><label class="ix-checkbox"><span class="ix-checkbox-input" role="checkbox" aria-checked="false" aria-disabled="false"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="option2"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
       <!---->
       <!----><span class="ix-checkbox-label">option2</span>
     </label></div>
-  <div class="ix-space-item" style="padding-bottom: 8px;"><label class="ix-checkbox" role="checkbox" aria-checked="false" aria-disabled="false"><span class="ix-checkbox-input"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="option3"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
+  <div class="ix-space-item" style="padding-bottom: 8px;"><label class="ix-checkbox"><span class="ix-checkbox-input" role="checkbox" aria-checked="false" aria-disabled="false"><input type="checkbox" class="ix-checkbox-input-inner" aria-hidden="true" value="option3"><span class="ix-checkbox-input-box"><div aria-hidden="true" class="ix-wave"></div></span></span>
       <!---->
       <!----><span class="ix-checkbox-label">option3</span>
     </label></div>
