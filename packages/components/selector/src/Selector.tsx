@@ -222,7 +222,7 @@ export default defineComponent({
       return (
         <ɵTrigger
           ref={triggerRef}
-          role="selector"
+          aria-label="selector"
           class={classes.value}
           borderless={borderless}
           clearable={clearable}
