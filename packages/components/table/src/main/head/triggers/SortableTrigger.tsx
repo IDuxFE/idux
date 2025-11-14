@@ -56,6 +56,7 @@ function renderSortTrigger(
     <IxIcon
       name="caret-up-filled"
       class={activeOrderBy === 'ascend' ? activeClassName : undefined}
+      role="button"
       ariaPressed={String(activeOrderBy === 'ascend')}
     />
   )
@@ -63,6 +64,7 @@ function renderSortTrigger(
     <IxIcon
       name="caret-down-filled"
       class={activeOrderBy === 'descend' ? activeClassName : undefined}
+      role="button"
       ariaPressed={String(activeOrderBy === 'descend')}
     />
   )

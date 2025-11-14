@@ -121,6 +121,7 @@ export default defineComponent({
           title={title.value}
           onClick={handleClick}
           onKeydown={handleKeydown}
+          role="gridcell"
           aria-selected={isActive.value ? 'true' : undefined}
           aria-disabled={disabled ? 'true' : undefined}
         >

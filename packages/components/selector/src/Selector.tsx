@@ -222,6 +222,7 @@ export default defineComponent({
       return (
         <ɵTrigger
           ref={triggerRef}
+          role="selector"
           class={classes.value}
           borderless={borderless}
           clearable={clearable}
