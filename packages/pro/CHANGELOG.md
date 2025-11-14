@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/IDuxFE/idux/compare/v2.6.3...v2.9.0) (2025-11-14)
+
+
+### Bug Fixes
+
+* **comp:form:** [@media](https://github.com/media) does not support CSS variables ([#2034](https://github.com/IDuxFE/idux/issues/2034)) ([f12e4d6](https://github.com/IDuxFE/idux/commit/f12e4d689aea7eacacc7296236342a1a5f9befea))
+* **comp:select:** the global configuration of the select component has an issue with getKey ([#2038](https://github.com/IDuxFE/idux/issues/2038)) ([764aab2](https://github.com/IDuxFE/idux/commit/764aab2958706086faf212974e706b1a9ad9ba49))
+
+
+### Features
+
+* add ally attributes ([#2043](https://github.com/IDuxFE/idux/issues/2043)) ([e5e6173](https://github.com/IDuxFE/idux/commit/e5e617323a3c3161f346c2168c2a5d3e11e8cbbe))
+
+
+
+
+
 # [2.8.0](https://github.com/IDuxFE/idux/compare/v2.6.3...v2.8.0) (2025-10-11)
 
 
