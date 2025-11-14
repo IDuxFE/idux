@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, normalizeClass, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, defineComponent, isVNode, normalizeClass, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { isArray, isNil, toString } from 'lodash-es'
 
@@ -171,7 +171,7 @@ export default defineComponent({
 
       if (raw && defaultSlotNodes?.length === 1) {
         const node = defaultSlotNodes[0]
-        if (ariaControls) {
+        if (isVNode(node) && ariaControls) {
           node.props = { ...node.props, 'aria-controls': ariaControls }
         }
 
