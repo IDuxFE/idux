@@ -39,6 +39,7 @@ export default defineComponent({
       handleDragover,
       handleDragleave,
       handleDrop,
+      isChecked,
     } = inject(treeToken)!
 
     const nodeKey = computed(() => props.node.key)
@@ -48,6 +49,7 @@ export default defineComponent({
     const hasTopLine = computed(() => mergedShowLine.value && !props.isLeaf && (!props.isFirst || props.level !== 0))
     const hasBottomLine = computed(() => mergedShowLine.value && !props.isLeaf && !props.isLast)
     const selected = computed(() => selectedKeys.value.includes(nodeKey.value))
+    const checked = computed(() => isChecked(props.node.key))
     const disabled = computed(() => props.selectDisabled || !treeProps.selectable)
 
     const dragging = computed(() => dragKey.value === nodeKey.value)
@@ -140,7 +142,10 @@ export default defineComponent({
           class={classes.value}
           aria-grabbed={dragging.value || undefined}
           aria-label={label}
-          aria-selected={selected.value}
+          aria-selected={String(checked.value)}
+          aria-expanded={!isLeaf ? String(expanded) : undefined}
+          aria-level={level}
+          role="treeitem"
           draggable={mergedDraggable || undefined}
           title={label}
           onDragstart={mergedDraggable ? onDragstart : undefined}
@@ -153,7 +158,9 @@ export default defineComponent({
         >
           <Indent level={level} noopIdentUnitArr={noopIdentUnitArr} prefixCls={mergedPrefixCls.value} />
           {mergedDraggable ? (
-            <span class={`${mergedPrefixCls.value}-node-draggable-icon`}>{draggableIconNode}</span>
+            <span class={`${mergedPrefixCls.value}-node-draggable-icon`} role="img">
+              {draggableIconNode}
+            </span>
           ) : (
             draggable && <span class={`${mergedPrefixCls.value}-node-draggable-icon-noop`}></span>
           )}

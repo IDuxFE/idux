@@ -28,7 +28,7 @@ import { isFunction } from 'lodash-es'
 import { vClickOutside } from '@idux/cdk/click-outside'
 import { type PopperElement, type PopperEvents, usePopper } from '@idux/cdk/popper'
 import { CdkPortal } from '@idux/cdk/portal'
-import { Logger, callEmit, convertElement, getFirstValidNode } from '@idux/cdk/utils'
+import { Logger, callEmit, convertElement, getFirstValidNode, uniqueId } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { useThemeToken } from '@idux/components/theme'
 import { useZIndex } from '@idux/components/utils'
@@ -47,6 +47,7 @@ export default defineComponent({
   setup(props, { slots, attrs, expose }) {
     const common = useGlobalConfig('common')
     const { globalHashId } = useThemeToken()
+    const overlayId = ref(props.triggerId != null ? `__IDUX_OVERLAY-${props.triggerId}` : uniqueId('control-overlay'))
 
     const mergedPrefixCls = computed(() => `${common.prefixCls}-overlay`)
     const contentArrowRef = ref<HTMLElement>()
@@ -141,6 +142,7 @@ export default defineComponent({
         triggerNode,
         { ref: triggerRef, ...mergedTriggerEvents.value },
         handleClickOutside,
+        overlayId,
       )
       const contentNode = slots.content?.()
       if (!getFirstValidNode(contentNode)) {
@@ -166,6 +168,7 @@ export default defineComponent({
         attrs,
         lock,
         unlock,
+        overlayId,
       )
 
       return (
@@ -195,6 +198,7 @@ function renderContent(
   attrs: Record<string, unknown>,
   lock: () => void,
   unlock: () => void,
+  overlayId: Ref<string>,
 ) {
   if (props.destroyOnHide && !visibility.value) {
     return null
@@ -202,18 +206,16 @@ function renderContent(
 
   const prefixCls = mergedPrefixCls.value
 
-  const { triggerId } = props
-  const overlayId = triggerId != null ? `__IDUX_OVERLAY-${triggerId}` : undefined
   const style = `z-index: ${currentZIndex.value}`
 
   const overlay = (
     <Content
       ref={popperRef}
-      id={overlayId}
       class={[prefixCls, globalHashId.value]}
       style={style}
       lock={lock}
       unlock={unlock}
+      id={overlayId.value}
       {...popperEvents.value}
       {...attrs}
     >
@@ -230,8 +232,14 @@ function renderTrigger(
   triggerNode: VNode,
   extraProps: Record<string, unknown>,
   handleClickOutside: (evt: Event) => void,
+  overlayId: Ref<string>,
 ) {
-  const element = cloneVNode(triggerNode, extraProps, true)
+  const triggerProps = {
+    ...extraProps,
+    'aria-controls': overlayId.value,
+  }
+  const element = cloneVNode(triggerNode, triggerProps, true)
+
   if (props.clickOutside) {
     return withDirectives(element, [[vClickOutside, handleClickOutside]])
   }

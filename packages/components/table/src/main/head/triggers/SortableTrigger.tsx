@@ -53,10 +53,20 @@ function renderSortTrigger(
   const prefixCls = mergedPrefixCls.value
   const activeClassName = `${prefixCls}-sortable-trigger-active`
   const upNode = orders!.includes('ascend') && (
-    <IxIcon name="caret-up-filled" class={activeOrderBy === 'ascend' ? activeClassName : undefined} />
+    <IxIcon
+      name="caret-up-filled"
+      class={activeOrderBy === 'ascend' ? activeClassName : undefined}
+      role="button"
+      ariaPressed={String(activeOrderBy === 'ascend')}
+    />
   )
   const downNode = orders!.includes('descend') && (
-    <IxIcon name="caret-down-filled" class={activeOrderBy === 'descend' ? activeClassName : undefined} />
+    <IxIcon
+      name="caret-down-filled"
+      class={activeOrderBy === 'descend' ? activeClassName : undefined}
+      role="button"
+      ariaPressed={String(activeOrderBy === 'descend')}
+    />
   )
   return (
     <span class={`${prefixCls}-sortable-trigger`}>

@@ -20,6 +20,10 @@ export const iconProps = {
   },
   color: String,
   size: [String, Number] as PropType<string | number>,
+  ariaPressed: {
+    type: String,
+    default: undefined,
+  },
 } as const
 
 export type IconProps = ExtractInnerPropTypes<typeof iconProps>

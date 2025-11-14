@@ -13,7 +13,7 @@ import { computed, defineComponent, inject, normalizeClass } from 'vue'
 
 import { isString } from 'lodash-es'
 
-import { getFirstValidNode, useKey } from '@idux/cdk/utils'
+import { getFirstValidNode, uniqueId, useKey } from '@idux/cdk/utils'
 import { ɵCollapseTransition } from '@idux/components/_private/collapse-transition'
 import { useGlobalConfig } from '@idux/components/config'
 import { IxHeader } from '@idux/components/header'
@@ -58,6 +58,7 @@ export default defineComponent({
     return () => {
       const expanded = isExpanded.value
       const prefixCls = mergedPrefixCls.value
+      const triggerId = uniqueId('control-collapse-panel')
       const headerNode = renderHeader(
         props,
         slots,
@@ -68,13 +69,14 @@ export default defineComponent({
         expanded,
         expandIcon,
         handleClick,
+        triggerId,
       )
 
       return (
         <div class={classes.value}>
           {headerNode}
           <ɵCollapseTransition appear>
-            <div v-show={expanded} class={`${prefixCls}-content`}>
+            <div v-show={expanded} class={`${prefixCls}-content`} id={triggerId}>
               <div class={`${prefixCls}-content-box`}>{slots.default?.()}</div>
             </div>
           </ɵCollapseTransition>
@@ -94,9 +96,20 @@ function renderHeader(
   expanded: boolean,
   expandIcon: ComputedRef<string>,
   changeExpand: () => void,
+  triggerId: string,
 ) {
   if (slots.header) {
-    return slots.header({ expanded, onClick: changeExpand, changeExpand })
+    const headerSlots = slots.header({ expanded, onClick: changeExpand, changeExpand })
+
+    if (headerSlots?.length) {
+      const headerNode = headerSlots[0]
+      headerNode.props = {
+        ...headerNode.props,
+        'aria-controls': triggerId,
+      }
+    }
+
+    return headerSlots
   }
   let iconNode: VNodeTypes | undefined
   if (collapseSlots.expandIcon) {
@@ -119,6 +132,7 @@ function renderHeader(
       disabled={disabled}
       size={mergedSize.value}
       onClick={changeExpand}
+      aria-controls={triggerId}
       {...headerProps}
     />
   )

@@ -62,12 +62,30 @@ export default defineComponent({
       )
 
       if (!(addonBeforeNode || addonAfterNode || prefixNode || suffixNode || clearNode)) {
-        return <input ref={inputRef} class={classes.value} disabled={disabled} {...attrs} />
+        return (
+          <input
+            ref={inputRef}
+            class={classes.value}
+            disabled={disabled}
+            aria-disabled={String(!!disabled)}
+            aria-readonly={String(!!attrs.readonly)}
+            {...attrs}
+          />
+        )
       }
 
-      const { class: className, style, ...rest } = attrs
+      const { class: className, style, readonly, ...rest } = attrs
       const classNames = normalizeClass([classes.value, className])
-      const inputNode = <input ref={inputRef} class={`${prefixCls}-inner`} disabled={disabled} {...rest} />
+      const inputNode = (
+        <input
+          ref={inputRef}
+          class={`${prefixCls}-inner`}
+          disabled={disabled}
+          aria-disabled={String(!!disabled)}
+          aria-readonly={String(!!readonly)}
+          {...rest}
+        />
+      )
 
       if (!(addonBeforeNode || addonAfterNode)) {
         return (

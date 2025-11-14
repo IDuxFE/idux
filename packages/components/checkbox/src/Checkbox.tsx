@@ -93,7 +93,7 @@ export default defineComponent({
     })
 
     return () => {
-      const { autofocus, label } = props
+      const { autofocus, label, indeterminate } = props
       const { class: className, style, type, tabindex, ...restAttrs } = attrs
       const prefixCls = mergedPrefixCls.value
       const checked = isChecked.value
@@ -102,11 +102,13 @@ export default defineComponent({
         <label
           class={slots.fieldset ? classes.value : normalizeClass([classes.value, className])}
           style={slots.fieldset ? undefined : (style as string)}
-          role="checkbox"
-          aria-checked={checked}
-          aria-disabled={isDisabled.value}
         >
-          <span class={`${prefixCls}-input`}>
+          <span
+            class={`${prefixCls}-input`}
+            role="checkbox"
+            aria-checked={indeterminate ? 'mixed' : String(!!checked)}
+            aria-disabled={String(!!isDisabled.value)}
+          >
             <input
               ref={elementRef}
               type="checkbox"

@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { computed, defineComponent, normalizeClass, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, defineComponent, isVNode, normalizeClass, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { isArray, isNil, toString } from 'lodash-es'
 
@@ -139,25 +139,41 @@ export default defineComponent({
     }
 
     return () => {
-      const { value, borderless, disabled, readonly, raw, size, status, suffix, suffixRotate, clearIcon } = props
-      const defaultSlotParams = {
+      const {
         value,
         borderless,
         disabled,
         readonly,
+        raw,
+        size,
+        status,
+        suffix,
+        suffixRotate,
+        clearIcon,
+        ariaControls,
+      } = props
+      const defaultSlotParams = {
+        value,
+        borderless: !!borderless,
+        disabled: !!disabled,
+        readonly: !!readonly,
         focused: mergedFocused.value,
         size,
         status,
         suffix,
         suffixRotate,
-        clearable: mergedClearable.value,
-        clearIcon,
+        clearable: !!mergedClearable.value,
+        clearIcon: clearIcon || 'close-circle',
+        ariaControls: ariaControls || '',
       }
 
       const defaultSlotNodes = slots.default?.(defaultSlotParams)
 
       if (raw && defaultSlotNodes?.length === 1) {
         const node = defaultSlotNodes[0]
+        if (isVNode(node) && ariaControls) {
+          node.props = { ...node.props, 'aria-controls': ariaControls }
+        }
 
         return <ProxyNode ref={triggerRef}>{node}</ProxyNode>
       }
@@ -165,7 +181,13 @@ export default defineComponent({
       const defaultSlotEmpty = isEmptyNode(defaultSlotNodes)
 
       return (
-        <div ref={triggerRef} class={classes.value} tabindex={-1} onMousedown={handleMouseDown}>
+        <div
+          ref={triggerRef}
+          class={classes.value}
+          tabindex={-1}
+          onMousedown={handleMouseDown}
+          aria-controls={ariaControls}
+        >
           {props.focused && (
             <span style={hiddenBoxStyle} aria-live="polite">
               {ariaLivePoliteValue.value}

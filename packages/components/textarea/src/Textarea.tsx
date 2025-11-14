@@ -106,6 +106,8 @@ export default defineComponent({
             style={textareaStyle.value}
             disabled={accessor.disabled}
             readonly={props.readonly}
+            aria-disabled={String(!!accessor.disabled)}
+            aria-readonly={String(!!props.readonly)}
             onInput={_handleInput}
             onCompositionstart={handleCompositionStart}
             onCompositionend={handleCompositionEnd}
@@ -113,6 +115,8 @@ export default defineComponent({
           {clearable.value && (
             <span
               class={normalizeClass([`${prefixCls}-clear`, clearVisible.value ? 'visible' : ''])}
+              role="button"
+              aria-label="clear"
               onClick={handleClear}
             >
               {slots.clearIcon ? slots.clearIcon() : <IxIcon name={clearIcon.value}></IxIcon>}

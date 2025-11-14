@@ -259,7 +259,13 @@ export default defineComponent({
       }
 
       return (
-        <div ref={elementRef} class={classes.value} {...attrs} tabindex={(attrs.tabIndex as number) ?? 0}>
+        <div
+          ref={elementRef}
+          class={classes.value}
+          {...attrs}
+          tabindex={(attrs.tabIndex as number) ?? 0}
+          aria-label="searchbox"
+        >
           <ɵOverlay
             ref={quickSelectOverlayRef}
             v-slots={quickSelectOverlaySlots}
