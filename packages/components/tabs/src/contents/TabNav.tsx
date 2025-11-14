@@ -126,6 +126,7 @@ export default defineComponent({
       ) : (
         <div
           ref={elementRef}
+          role="tab"
           class={classes.value}
           aria-disabled={String(!!props.disabled)}
           aria-selected={String(!!props.selected)}
