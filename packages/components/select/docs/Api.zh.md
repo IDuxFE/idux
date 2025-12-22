@@ -35,19 +35,23 @@
 | `readonly` | 只读模式 | `boolean` | - | - | - |
 | `searchable` | 是否可搜索 | `boolean \| 'overlay'` | `false` | - | 当为 `true` 时搜索功能集成在选择器上，当为 `overlay` 时，搜索功能集成在悬浮层上 |
 | `searchFn` | 根据搜索的文本进行筛选 | `boolean \| SelectSearchFn` | `true` | - | 为 `true` 时使用默认的搜索规则, 如果使用远程搜索，应该设置为 `false` |
+| `searchPlaceholder` | 搜索框占位文本 | `string` | - | - | 仅当 `searchable='overlay'` 时有效 |
+| `autoClearSearchValue` | 选择项后是否自动清除搜索值 | `boolean` | `true` | - | 一般在 `multiple` 模式下使用 |
 | `size` | 设置选择器大小 | `'sm' \| 'md' \| 'lg'` | `md` | ✅ | - |
 | `spin` | 是否显示加载中状态 | `boolean \| SpinProps` | `undefined` | - | - |
 | `status` | 手动指定校验状态 | `valid \| invalid \| validating` | - | - | - |
 | `suffix` | 设置后缀图标 | `string \| #suffix` | `down` | ✅ | - |
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | - |
+| `virtualItemHeight` | 虚拟滚动项目高度 | `number` | - | - | 通常设置为项目的大致高度 |
 | `virtualScrollMode` | 虚拟滚动的滚动模式 | `'native' \| 'simulated'` | `'native'` | - | - |
 | `onChange` | 选中值发生改变后的回调 | `(value: any, oldValue: any) => void` | - | - | - |
 | `onClear` | 清除图标被点击后的回调 | `(evt: MouseEvent) => void` | - | - | - |
+| `onFocus` | 获取焦点时的回调 | `(evt: FocusEvent) => void` | - | - | - |
+| `onBlur` | 失去焦点时的回调 | `(evt: FocusEvent) => void` | - | - | - |
 | `onSearch` | 开启搜索功能后，输入后的回调 | `(searchValue: string) => void` | - | - | 通常用于服务端搜索 |
 | `onScroll` | 滚动事件 | `(evt: Event) => void` | - | - | - |
 | `onScrolledChange` | 滚动的位置发生变化 | `(startIndex: number, endIndex: number, visibleData: SelectData[]) => void` | - | - | 仅 `virtual` 模式下可用 |
 | `onScrolledBottom` | 滚动到底部时触发 | `() => void` | - | - | 仅 `virtual` 模式下可用 |
-| `onScrolledChange` | 滚动的位置发生变化 | `(startIndex: number, endIndex: number, visibleData: SelectData[]) => void` | - | - | 仅 `virtual` 模式下可用 |
 | `onDndSortReorder` | 数据重排序之后的回调 | `(reorderInfo: DndSortableReorderInfo) => void` | - | - | - |
 | `onDndSortChange` | 数据排序改变之后的回调 | `(newData: SelectData[], oldData: SelectData[]) => void` | - | - | - |
 
@@ -117,7 +121,7 @@ interface SelectedItemProps {
 | 名称 | 说明 | 参数类型 | 备注 |
 | --- | --- | --- | --- |
 | `blur` | 失去焦点 | - | - |
-| `focus` | 获取焦点 | - | - |
+| `focus` | 获取焦点 | `(options?: FocusOptions) => void` | - | 支持传入 FocusOptions 参数，如 `{ preventScroll: true }` |
 | `scrollTo` | 滚动到指定位置 | `(option?: number \| VirtualScrollToOptions) => void` | 仅 `virtual` 模式下可用 |
 
 ### IxSelectPanel
@@ -137,6 +141,8 @@ interface SelectedItemProps {
 | `multiple` | 多选模式 | `boolean` | `false` | - | - |
 | `multipleLimit` | 最多选中多少项 | `number` | - | - | - |
 | `virtual` | 是否开启虚拟滚动 | `boolean` | `false` | - | - |
+| `virtualItemHeight` | 虚拟滚动项目高度 | `number` | `32` | - | 通常设置为项目的大致高度 |
+| `virtualScrollMode` | 虚拟滚动的滚动模式 | `'native' \| 'simulated'` | `'native'` | - | - |
 | `onScroll` | 滚动事件 | `(evt: Event) => void` | - | - | - |
 | `onScrolledChange` | 滚动的位置发生变化 | `(startIndex: number, endIndex: number, visibleData: SelectData[]) => void` | - | - | 仅 `virtual` 模式下可用 |
 | `onScrolledBottom` | 滚动到底部时触发 | `() => void` | - | - | 仅 `virtual` 模式下可用 |
