@@ -24,7 +24,8 @@ import type { Locale } from '@idux/components/locales'
 import type { ComputedRef, InjectionKey, Ref, Slots, VNodeChild } from 'vue'
 
 export interface TableContext
-  extends ColumnsContext,
+  extends
+    ColumnsContext,
     ColumnWidthMeasureContext,
     ColumnOffsetsContext,
     DataSourceContext,

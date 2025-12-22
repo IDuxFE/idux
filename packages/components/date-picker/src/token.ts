@@ -34,10 +34,7 @@ export interface DatePickerContext extends OverlayStateContext, FormatContext, P
 }
 
 export interface DateRangePickerContext
-  extends OverlayStateContext,
-    FormatContext,
-    PickerStateContext<DateRangePickerProps>,
-    DateRangeShortcutsContext {
+  extends OverlayStateContext, FormatContext, PickerStateContext<DateRangePickerProps>, DateRangeShortcutsContext {
   props: DateRangePickerProps
   slots: Slots
   common: CommonConfig
