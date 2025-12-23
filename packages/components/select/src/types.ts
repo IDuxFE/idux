@@ -97,6 +97,7 @@ export const selectProps = {
   searchable: { type: [Boolean, String] as PropType<boolean | 'overlay'>, default: false },
   searchFn: { type: [Boolean, Function] as PropType<boolean | SelectSearchFn>, default: true },
   searchPlaceholder: { type: String, default: undefined },
+  autoClearSearchValue: { type: Boolean, default: true },
   size: { type: String as PropType<FormSize>, default: undefined },
   status: String as PropType<ValidateStatus>,
   suffix: { type: String, default: undefined },
