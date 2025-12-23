@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/IDuxFE/idux/compare/v2.9.0...v2.10.0) (2025-12-23)
+
+
+### Features
+
+* **comp:select:** support autoClearSearchValue and update docs ([#2044](https://github.com/IDuxFE/idux/issues/2044)) ([96ca563](https://github.com/IDuxFE/idux/commit/96ca5638324a15992fbbe41fd4506f6c3e0c8021))
+
+
+
+
+
 # [2.9.0](https://github.com/IDuxFE/idux/compare/v2.6.3...v2.9.0) (2025-11-14)
 
 
