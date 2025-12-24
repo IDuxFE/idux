@@ -125,6 +125,16 @@ export default defineComponent({
       syncScroll({ top: offset }, true)
     }
 
+    const { syncScroll, handleScroll } = useScrollPlacement(
+      props,
+      holderRef,
+      scroll,
+      containerScrollHeight,
+      containerSize,
+      changeScroll,
+      syncContainerScroll,
+    )
+
     const {
       scrollHeight,
       scrollWidth,
@@ -134,16 +144,16 @@ export default defineComponent({
       leftIndex,
       rightIndex,
       bottomIndex,
-    } = useScrollState(props, enabled, getKey, scroll, containerSize, sizeUpdateMark, getRowHeight, getColWidth)
-
-    const { syncScroll, handleScroll } = useScrollPlacement(
+    } = useScrollState(
       props,
-      holderRef,
+      enabled,
+      getKey,
       scroll,
-      containerScrollHeight,
       containerSize,
-      changeScroll,
-      syncContainerScroll,
+      sizeUpdateMark,
+      getRowHeight,
+      getColWidth,
+      syncScroll,
     )
 
     const {
