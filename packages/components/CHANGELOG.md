@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.1](https://github.com/IDuxFE/idux/compare/v2.10.0...v2.10.1) (2025-12-24)
+
+
+### Bug Fixes
+
+* **cdk:scroll:** fix data calculation anomalies in virtual scroll mode ([#2045](https://github.com/IDuxFE/idux/issues/2045)) ([88d6031](https://github.com/IDuxFE/idux/commit/88d6031891155c4c824ac0c48c484a563f567f58))
+
+
+
+
+
 # [2.10.0](https://github.com/IDuxFE/idux/compare/v2.9.0...v2.10.0) (2025-12-23)
 
 

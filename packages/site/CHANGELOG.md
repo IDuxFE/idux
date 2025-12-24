@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.1](https://github.com/IDuxFE/idux/compare/v2.10.0...v2.10.1) (2025-12-24)
+
+**Note:** Version bump only for package @idux/site
+
+
+
+
+
 # [2.10.0](https://github.com/IDuxFE/idux/compare/v2.9.0...v2.10.0) (2025-12-23)
 
 **Note:** Version bump only for package @idux/site
