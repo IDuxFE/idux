@@ -6,7 +6,7 @@
  */
 
 import type { GetKey } from './useGetKey'
-import type { Scroll } from './useScrollPlacement'
+import type { Scroll, SyncScroll } from './useScrollPlacement'
 import type { VirtualScrollEnabled, VirtualScrollProps, VirtualScrollRowData } from '../types'
 import type { VKey } from '@idux/cdk/utils'
 import type { ComputedRef, Ref } from 'vue'
@@ -35,6 +35,7 @@ export function useScrollState(
   heightUpdatedMark: Ref<number>,
   getRowHeight: (rowKey: VKey) => number,
   getColWidth: (rowKey: VKey, colKey: VKey) => number,
+  syncScroll: SyncScroll,
 ): ScrollStateContext {
   const scrollHeight = ref(0)
   const scrollWidth = ref(0)
@@ -117,6 +118,11 @@ export function useScrollState(
         !calculated,
       )
 
+      if (verticalState && verticalState.scrollHeight < (scroll.top ?? 0)) {
+        syncScroll({ top: 0, left: scroll.left }, true)
+        return
+      }
+
       if (verticalState) {
         setNum(verticalState.topIndex, topIndex)
         setNum(verticalState.bottomIndex, bottomIndex)
@@ -146,6 +152,11 @@ export function useScrollState(
         minHorizontalLength,
         !calculated || !!verticalState,
       )
+
+      if (horizontalState && horizontalState.scrollWidth < (scroll.left ?? 0)) {
+        syncScroll({ top: scroll.top, left: 0 }, true)
+        return
+      }
 
       if (horizontalState) {
         setNumArray(getGridHorizontalIndex(horizontalState.leftIndex), leftIndex)

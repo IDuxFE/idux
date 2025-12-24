@@ -4,6 +4,7 @@
     :dataSource="dataSource"
     multiple
     virtual
+    searchable
     @change="onChange"
     @scroll="onScroll"
     @scrolledChange="onScrolledChange"
