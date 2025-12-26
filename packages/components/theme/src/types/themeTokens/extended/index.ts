@@ -22,4 +22,9 @@ export type {
 }
 
 export interface ExtendedTokens
-  extends ExtendedColorTokens, ExtendedFontTokens, ExtendedSizeTokens, ControlTokens, OverlayTokens, ScrollbarTokens {}
+  extends ExtendedColorTokens,
+    ExtendedFontTokens,
+    ExtendedSizeTokens,
+    ControlTokens,
+    OverlayTokens,
+    ScrollbarTokens {}

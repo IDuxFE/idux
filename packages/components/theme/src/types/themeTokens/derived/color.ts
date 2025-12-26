@@ -317,8 +317,7 @@ interface DerivedInfoColorTokens {
 }
 
 export interface DerivedColorTokens
-  extends
-    DerivedPrimaryColorTokens,
+  extends DerivedPrimaryColorTokens,
     DerivedSuccessColorTokens,
     DerivedWarningColorTokens,
     DerivedErrorColorTokens,

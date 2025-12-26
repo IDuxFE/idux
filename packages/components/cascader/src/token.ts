@@ -22,7 +22,11 @@ import type { ComputedRef, InjectionKey, Slots } from 'vue'
 import { VKey } from '@idux/cdk/utils'
 
 export interface CascaderContext
-  extends ActiveStateContext, DataSourceContext, ExpandableContext, SearchableContext, SelectedStateContext {
+  extends ActiveStateContext,
+    DataSourceContext,
+    ExpandableContext,
+    SearchableContext,
+    SelectedStateContext {
   props: CascaderProps
   slots: Slots
   config: CascaderConfig
@@ -43,8 +47,7 @@ export interface CascaderContext
 }
 
 export interface CascaderPanelContext
-  extends
-    ActiveStateContext,
+  extends ActiveStateContext,
     DataSourceContext,
     ExpandableContext,
     SearchableContext,

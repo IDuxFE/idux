@@ -17,7 +17,11 @@ import type { ProTagSelectLocale } from '@idux/pro/locales'
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
 
 export interface ProTagSelectContext
-  extends TagDataContext, TagEditContext, OperationsContext, OverlayStateContext, PanelActiveStateContext {
+  extends TagDataContext,
+    TagEditContext,
+    OperationsContext,
+    OverlayStateContext,
+    PanelActiveStateContext {
   triggerRef: Ref<SelectorInstance | undefined>
   props: ProTagSelectProps
   focused: ComputedRef<boolean>
