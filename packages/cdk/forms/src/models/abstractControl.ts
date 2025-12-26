@@ -175,6 +175,11 @@ export abstract class AbstractControl<T = any> {
   protected _dirty = ref(false)
   protected _initializing = ref(true)
   protected _validated = ref(false)
+  // 这里的 && this.dirty.value && this.blurred.value， 似乎都可以不要
+  // 为了保险起见还是加上吧
+  protected _interactionsValidate = computed(
+    () => this.trigger === 'interactions' && this._validated.value && this._dirty.value && this._blurred.value,
+  )
 
   private _validators: ValidatorFn | ValidatorFn[] | undefined
   private _composedValidators: ValidatorFn | undefined
@@ -204,10 +209,11 @@ export abstract class AbstractControl<T = any> {
    * @param options
    * * `dirty`: Marks it dirty, default is `false`.
    * * `blur`: Marks it blurred, default is `false`.
+   * * `validate`: Run validation after setting value, default is `false`.
    */
   abstract setValue(
     value: T | Partial<T> | Partial<ArrayElement<T>>[],
-    options?: { dirty?: boolean; blur?: boolean },
+    options?: { dirty?: boolean; blur?: boolean; validate?: boolean },
   ): void
 
   /**
@@ -236,14 +242,11 @@ export abstract class AbstractControl<T = any> {
       } else {
         // There are cases where the value does not change but the validator changes,
         // so manual validation is required here
-        this._validate()
+        this._validate(true)
       }
       this.markAsUnblurred()
       this.markAsPristine()
     }
-    nextTick(() => {
-      this._validated.value = false
-    })
   }
 
   /**
@@ -282,7 +285,7 @@ export abstract class AbstractControl<T = any> {
       this._forEachControls(control => control.enable())
     }
 
-    this._validate()
+    this._validate(true)
   }
 
   /**
@@ -533,7 +536,12 @@ export abstract class AbstractControl<T = any> {
     return watch(this.status, cb, options)
   }
 
-  protected async _validate(): Promise<ValidateErrors | undefined> {
+  /**
+   *
+   * @param isInner 内部触发的验证，不应该设置 validated 为 true
+   * @returns
+   */
+  protected async _validate(isInner = false): Promise<ValidateErrors | undefined> {
     let newErrors = undefined
     let value = undefined
     if (!this._disabled.value) {
@@ -549,7 +557,9 @@ export abstract class AbstractControl<T = any> {
         newErrors = await this._composedAsyncValidators(value, this)
       }
     }
-    this._validated.value = true
+    if (!isInner) {
+      this._validated.value = true
+    }
     this.setErrors(newErrors)
     this._status.value = newErrors ? 'invalid' : 'valid'
 
@@ -693,9 +703,7 @@ export abstract class AbstractControl<T = any> {
         return
       }
 
-      // 这里的 && this.dirty.value && this.blurred.value， 似乎都可以不要
-      // 为了保险起见还是加上吧
-      if (this.trigger === 'interactions' && this.validated.value && this.dirty.value && this.blurred.value) {
+      if (this._interactionsValidate.value) {
         this._validate()
       }
     })

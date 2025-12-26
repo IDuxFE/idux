@@ -15,10 +15,10 @@ import { isAbstractControl } from './typeof'
 import { type AsyncValidatorFn, type ValidatorFn, type ValidatorOptions } from './types'
 
 type ControlConfig<T> =
-  | [T]
-  | [T, ValidatorOptions]
-  | [T, ValidatorFn | ValidatorFn[]]
-  | [T, ValidatorFn | ValidatorFn[], AsyncValidatorFn | AsyncValidatorFn[]]
+  | [T | undefined]
+  | [T | undefined, ValidatorOptions]
+  | [T | undefined, ValidatorFn | ValidatorFn[]]
+  | [T | undefined, ValidatorFn | ValidatorFn[], AsyncValidatorFn | AsyncValidatorFn[]]
 
 type GroupConfig<T> = {
   [K in keyof T]: ControlConfig<T[K]> | GroupConfig<T[K]> | AbstractControl<T[K]>
