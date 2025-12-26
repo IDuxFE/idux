@@ -37,7 +37,7 @@ export class FormArray<T = any> extends AbstractControl<T[]> {
 
   setValue(
     value: T extends object ? Partial<T>[] : T[],
-    options: { dirty?: boolean; blur?: boolean; validate?: boolean },
+    options: { dirty?: boolean; blur?: boolean; validate?: boolean } = {},
   ): void {
     value.forEach((item, index) => {
       const control = this.at(index)
@@ -45,8 +45,8 @@ export class FormArray<T = any> extends AbstractControl<T[]> {
         control.setValue(item!, options)
       }
     })
-    if (options?.validate) {
-      this._validate()
+    if (options.validate || this._interactionsValidate.value) {
+      this._validate(true)
     }
   }
 

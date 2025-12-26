@@ -29,7 +29,7 @@ export class FormGroup<T extends object = object> extends AbstractControl<T> {
     this._watchDirty()
   }
 
-  setValue(value: Partial<T>, options?: { dirty?: boolean; blur?: boolean; validate?: boolean }): void {
+  setValue(value: Partial<T>, options: { dirty?: boolean; blur?: boolean; validate?: boolean } = {}): void {
     const controls = this._controls.value
     ;(Object.keys(value) as Array<keyof T>).forEach(key => {
       const control = controls[key]
@@ -37,8 +37,8 @@ export class FormGroup<T extends object = object> extends AbstractControl<T> {
         control.setValue(value[key]!, options)
       }
     })
-    if (options?.validate) {
-      this._validate()
+    if (options.validate || this._interactionsValidate.value) {
+      this._validate(!options.validate)
     }
   }
 

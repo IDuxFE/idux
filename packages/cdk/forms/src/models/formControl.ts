@@ -30,8 +30,8 @@ export class FormControl<T = any> extends AbstractControl<T> {
     if (options.blur) {
       this.markAsBlurred()
     }
-    if (options.validate) {
-      this._validate()
+    if (options.validate || this._interactionsValidate.value) {
+      this._validate(true)
     }
   }
 
