@@ -87,7 +87,7 @@ function useEvents(
   props: TableBodyRowProps,
   expandable: ComputedRef<TableColumnMergedExpandable | undefined>,
   checkExpandDisabled: (data: FlattedData) => boolean,
-  handleExpandChange: (key: VKey, record: unknown) => void,
+  handleExpandChange: (key: VKey) => void,
   selectable: ComputedRef<TableColumnMergedSelectable | undefined>,
   handleSelectChange: (key: VKey, record: unknown) => void,
   isCheckDisabled: (key: VKey) => boolean,
@@ -95,8 +95,8 @@ function useEvents(
   const expandDisabled = computed(() => checkExpandDisabled(props.rowData))
   const expendTrigger = computed(() => expandable.value?.trigger)
   const handleExpend = () => {
-    const { rowKey, record } = props
-    handleExpandChange(rowKey, record)
+    const { rowKey } = props
+    handleExpandChange(rowKey)
   }
 
   const selectDisabled = computed(() => isCheckDisabled(props.rowKey))

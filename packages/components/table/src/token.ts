@@ -24,7 +24,8 @@ import type { Locale } from '@idux/components/locales'
 import type { ComputedRef, InjectionKey, Ref, Slots, VNodeChild } from 'vue'
 
 export interface TableContext
-  extends ColumnsContext,
+  extends
+    ColumnsContext,
     ColumnWidthMeasureContext,
     ColumnOffsetsContext,
     DataSourceContext,
@@ -42,6 +43,7 @@ export interface TableContext
   getVirtualColWidth: (rowKey: VKey, colKey: VKey) => number | undefined
   clientWidth: ComputedRef<number>
   setClientWidth: (clientWidth: number) => void
+  mergedChildrenKey: ComputedRef<string>
   mergedPrefixCls: ComputedRef<string>
   mergedAutoHeight: ComputedRef<boolean>
   mergedEmptyCell: ComputedRef<string | ((options: TableEmptyCellOptions) => VNodeChild) | undefined>

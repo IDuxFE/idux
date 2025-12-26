@@ -14,8 +14,4 @@ import type { DerivedSizeTokens } from './size'
 export type { DerivedColorTokens, DerivedFontTokens, DerivedSizeTokens, DerivedMotionTokens, ShadowTokens }
 
 export interface DerivedTokens
-  extends DerivedColorTokens,
-    DerivedFontTokens,
-    DerivedSizeTokens,
-    DerivedMotionTokens,
-    ShadowTokens {}
+  extends DerivedColorTokens, DerivedFontTokens, DerivedSizeTokens, DerivedMotionTokens, ShadowTokens {}

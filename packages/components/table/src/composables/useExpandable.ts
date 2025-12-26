@@ -13,24 +13,49 @@ import { type TableColumnMerged, type TableColumnMergedExpandable } from './useC
 import { type MergedData } from './useDataSource'
 import { type TableProps } from '../types'
 
-export function useExpandable(props: TableProps, flattedColumns: ComputedRef<TableColumnMerged[]>): ExpandableContext {
+export interface ExpandableContext {
+  expandable: ComputedRef<TableColumnMergedExpandable | undefined>
+  expandedRowKeys: ComputedRef<VKey[]>
+  setExpandedRowKeys: (value: VKey[]) => void
+  checkExpandDisabled: (data: MergedData) => boolean
+  handleExpandChange: (key: VKey) => void
+  setRowExpanded: (key: VKey, expanded: boolean) => void
+}
+
+export function useExpandable(
+  props: TableProps,
+  flattedColumns: ComputedRef<TableColumnMerged[]>,
+  getRecord: (key: VKey) => unknown | undefined,
+): ExpandableContext {
   const expandable = computed(() =>
     flattedColumns.value.find(column => 'type' in column && column.type === 'expandable'),
   ) as ComputedRef<TableColumnMergedExpandable | undefined>
 
   const [expandedRowKeys, setExpandedRowKeys] = useControlledProp(props, 'expandedRowKeys', () => [])
 
-  const handleExpandChange = (key: VKey, record: unknown) => {
-    const { onChange, onExpand } = expandable.value || {}
+  const handleExpandChange = (key: VKey) => {
+    setRowExpanded(key, !(expandedRowKeys.value.indexOf(key) >= 0))
+  }
+
+  const setRowExpanded = (key: VKey, expanded: boolean) => {
     const tempKeys = [...expandedRowKeys.value]
-    const index = tempKeys.indexOf(key)
-    const expanded = index >= 0
-    if (expanded) {
-      tempKeys.splice(index, 1)
-    } else {
-      tempKeys.push(key)
+    const currentExpanded = tempKeys.includes(key)
+    if (currentExpanded === expanded) {
+      return
     }
-    callEmit(onExpand, !expanded, record)
+
+    const index = tempKeys.indexOf(key)
+
+    if (expanded) {
+      tempKeys.push(key)
+    } else {
+      tempKeys.splice(index, 1)
+    }
+
+    const record = getRecord(key)
+
+    const { onChange, onExpand } = expandable.value || {}
+    callEmit(onExpand, expanded, record)
     setExpandedRowKeys(tempKeys)
     callEmit(onChange, tempKeys)
   }
@@ -50,13 +75,5 @@ export function useExpandable(props: TableProps, flattedColumns: ComputedRef<Tab
     return !(customExpand || (data.children && data.children.length > 0))
   }
 
-  return { expandable, expandedRowKeys, setExpandedRowKeys, checkExpandDisabled, handleExpandChange }
-}
-
-export interface ExpandableContext {
-  expandable: ComputedRef<TableColumnMergedExpandable | undefined>
-  expandedRowKeys: ComputedRef<VKey[]>
-  setExpandedRowKeys: (value: VKey[]) => void
-  checkExpandDisabled: (data: MergedData) => boolean
-  handleExpandChange: (key: VKey, record: unknown) => void
+  return { expandable, expandedRowKeys, setExpandedRowKeys, checkExpandDisabled, setRowExpanded, handleExpandChange }
 }

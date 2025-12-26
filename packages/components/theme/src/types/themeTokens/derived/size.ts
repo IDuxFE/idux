@@ -154,11 +154,7 @@ interface ScreenTokens {
 }
 
 export interface DerivedSizeTokens
-  extends PaddingSizeTokens,
-    MarginSizeTokens,
-    HeightTokens,
-    BorderRadiusTokens,
-    ScreenTokens {
+  extends PaddingSizeTokens, MarginSizeTokens, HeightTokens, BorderRadiusTokens, ScreenTokens {
   /**
    * @desc 粗线框尺寸
    */

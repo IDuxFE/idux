@@ -16,8 +16,7 @@ import type { Locale } from '@idux/components/locales'
 import type { ComputedRef, InjectionKey, Ref, Slots, VNodeTypes } from 'vue'
 
 interface BasePickerContext<T extends TimePickerProps | TimeRangePickerProps>
-  extends PickerStateContext<T>,
-    OverlayStateContext {
+  extends PickerStateContext<T>, OverlayStateContext {
   props: T
   slots: Slots
   dateConfig: DateConfig
