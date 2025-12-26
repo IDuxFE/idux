@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.11.0](https://github.com/IDuxFE/idux/compare/v2.10.1...v2.11.0) (2025-12-26)
+
+
+### Bug Fixes
+
+* **comp-footer:** The mode of the cancel button was accidentally overridden ([#2048](https://github.com/IDuxFE/idux/issues/2048)) ([2348d9f](https://github.com/IDuxFE/idux/commit/2348d9fa0be2603ff357da72a7b7d77da89e3098))
+
+
+### Features
+
+* **comp:*:** upgrade date-fns ([#2049](https://github.com/IDuxFE/idux/issues/2049)) ([93855ab](https://github.com/IDuxFE/idux/commit/93855abc12567df201a7fe41aa95cacd3fad49be))
+* **pro:table:** supports dnd sortable for tree data ([#2050](https://github.com/IDuxFE/idux/issues/2050)) ([20fc54c](https://github.com/IDuxFE/idux/commit/20fc54c15746cf557a35af09dcab1984caacd029))
+
+
+
+
+
 ## [2.10.1](https://github.com/IDuxFE/idux/compare/v2.10.0...v2.10.1) (2025-12-24)
 
 
