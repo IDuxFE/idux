@@ -28,7 +28,7 @@ export const tableProps = {
   borderless: { type: Boolean, default: undefined },
   childrenKey: { type: String, default: undefined },
   cascaderStrategy: { type: String as PropType<CascaderStrategy>, default: 'all' },
-  columns: { type: Array as PropType<TableColumn[]>, default: () => [] },
+  columns: { type: Array as PropType<TableColumn<any, any>[]>, default: () => [] },
   customAdditional: { type: Object as PropType<TableCustomAdditional<any, any>>, default: undefined },
   customTag: { type: Object as PropType<TableCustomTag>, default: undefined },
   dataSource: { type: Array as PropType<any[]>, default: () => [] },
@@ -100,6 +100,7 @@ export interface TableColumnCommon<T = any> {
 }
 
 export interface TableColumnBase<T = any, K = VKey> extends TableColumnCommon<T> {
+  type?: never
   dataKey?: VKey | VKey[]
   ellipsis?: boolean | { title?: boolean; head?: boolean }
   sortable?: TableColumnSortable<T>
@@ -111,7 +112,7 @@ export interface TableColumnBase<T = any, K = VKey> extends TableColumnCommon<T>
   customTitle?: string | ((data: { title?: string }) => VNodeChild)
 }
 
-export interface TableColumnExpandable<T = any, K = VKey> extends TableColumnBase<T, K> {
+export interface TableColumnExpandable<T = any, K = VKey> extends Omit<TableColumnBase<T, K>, 'type'> {
   type: 'expandable'
   disabled?: (record: T) => boolean
 

@@ -30,6 +30,7 @@ export default defineComponent({
         text: cancelText,
         onClick: cancel,
         loading: cancelLoading,
+        mode: 'default',
         ...cancelButton,
       } as FooterButtonProps
     })
