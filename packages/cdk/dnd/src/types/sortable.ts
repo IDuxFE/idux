@@ -85,7 +85,8 @@ export interface DndSortableOnDragStartArgs extends BaseDndSortableEventArgs {}
 export interface DndSortableOnDragEnterArgs extends DndSortableEvetWithSourceArgs {}
 export interface DndSortableOnDragLeaveArgs extends DndSortableEvetWithSourceArgs {}
 export interface DndSortableOnDropArgs
-  extends Omit<DndSortableEvetWithSourceArgs, 'key' | 'data'>,
+  extends
+    Omit<DndSortableEvetWithSourceArgs, 'key' | 'data'>,
     Partial<Pick<DndSortableEvetWithSourceArgs, 'key' | 'data'>> {}
 
 export interface DndSortableDraggingState {

@@ -18,11 +18,7 @@ import type { ProSearchLocale } from '@idux/pro/locales'
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
 
 export interface ProSearchContext
-  extends FocusStateContext,
-    SearchStateContext,
-    ResolvedSearchFieldsContext,
-    ActiveSegmentContext,
-    CacheDataContext {
+  extends FocusStateContext, SearchStateContext, ResolvedSearchFieldsContext, ActiveSegmentContext, CacheDataContext {
   elementRef: Ref<HTMLElement | undefined>
   tempSegmentInputRef: Ref<HTMLInputElement | undefined>
   props: ProSearchProps

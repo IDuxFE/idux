@@ -85,4 +85,6 @@ export type {
   DndSortableStrategy,
   ListDraggingOverState,
   TreeDraggingOverState,
+  ListInstruction,
+  TreeInstruction,
 } from './src/types'

@@ -7,8 +7,16 @@
 
 import { computed, defineComponent, inject } from 'vue'
 
-import { type CanDragOptions, CdkDndSortable, type DndSortableReorderInfo, useDndAutoScroll } from '@idux/cdk/dnd'
-import { callEmit } from '@idux/cdk/utils'
+import {
+  type CanDragOptions,
+  CdkDndSortable,
+  type DndSortableOnDragStartArgs,
+  type DndSortableOnDropArgs,
+  type DndSortableReorderInfo,
+  type DndSortableStrategy,
+  useDndAutoScroll,
+} from '@idux/cdk/dnd'
+import { type VKey, callEmit } from '@idux/cdk/utils'
 import { TABLE_TOKEN } from '@idux/components/table'
 
 import { proTableToken } from '../token'
@@ -17,7 +25,15 @@ export default defineComponent({
   inheritAttrs: false,
   setup(_, { slots }) {
     const { props, mergedDndSortable, mergedGetKey } = inject(proTableToken)!
-    const { isCheckDisabled, scrollBodyRef } = inject(TABLE_TOKEN)!
+    const {
+      isCheckDisabled,
+      expandable,
+      mergedChildrenKey,
+      scrollBodyRef,
+      isTreeData,
+      expandedRowKeys,
+      setRowExpanded,
+    } = inject(TABLE_TOKEN)!
 
     const mergedCanDrag = computed(() => {
       if (!mergedDndSortable.value) {
@@ -41,6 +57,43 @@ export default defineComponent({
       }
 
       return mergedDndSortable.value.isSticky ?? true
+    })
+
+    const isTreeItemExpanded = (key: VKey) => expandedRowKeys.value.includes(key)
+
+    let currentDragKey: VKey | null = null
+    let currentDragItemExpanded = false
+
+    const strategy = computed<DndSortableStrategy>(() => {
+      if (!isTreeData.value) {
+        return 'list'
+      }
+      return 'tree'
+    })
+    const handleDragStart = computed(() => {
+      if (!isTreeData.value) {
+        return undefined
+      }
+      return ({ key }: DndSortableOnDragStartArgs) => {
+        currentDragKey = key
+        currentDragItemExpanded = isTreeItemExpanded(key)
+
+        if (currentDragItemExpanded) {
+          setRowExpanded(key, false)
+        }
+      }
+    })
+    const handleDrop = computed(() => {
+      if (!isTreeData.value) {
+        return undefined
+      }
+      return ({ sourceKey }: DndSortableOnDropArgs) => {
+        if (currentDragKey === sourceKey && currentDragItemExpanded) {
+          setRowExpanded(sourceKey, true)
+          currentDragKey = null
+          currentDragItemExpanded = false
+        }
+      }
     })
 
     const autoScrollRef = computed(() => {
@@ -71,12 +124,18 @@ export default defineComponent({
           tag="tbody"
           dataSource={props.dataSource}
           getKey={mergedGetKey.value}
+          childrenKey={mergedChildrenKey.value}
           canDrag={mergedCanDrag.value}
           canDrop={mergedCanDrop.value}
           isSticky={mergedIsSticky.value}
+          strategy={strategy.value}
+          isTreeItemExpanded={isTreeItemExpanded}
+          treeIndent={expandable.value?.indent}
           effect="none"
           onSortReorder={handleSortReorder}
           onSortChange={handleSortChange}
+          onDragStart={handleDragStart.value}
+          onDrop={handleDrop.value}
         >
           {slots.default?.()}
         </CdkDndSortable>

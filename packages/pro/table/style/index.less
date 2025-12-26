@@ -1,13 +1,10 @@
 @import '../../style/variable/index.less';
 @import '../../../components/style/variable/index.less';
 
+@import './draggable.less';
+@import './resizable.less';
+
 .@{pro-table-prefix} {
-  // .reset-component();
-
-  &-dnd-sortable-drag-handle {
-    font-size: var(--ix-font-size-icon);
-  }
-
   &-layout-tool {
     .@{header-prefix} {
       padding-bottom: 0;
@@ -77,6 +74,10 @@
             &:hover .@{tree-prefix}-node-content-suffix {
               visibility: visible;
             }
+
+            &:not(.@{tree-prefix}-node:last-child) {
+              border-bottom: none;
+            }
           }
 
           .@{empty-prefix} {
@@ -137,41 +138,6 @@
     }
   }
 
-  &.@{table-prefix} tbody tr.@{pro-table-prefix}-row-dragging-over {
-    &-top {
-      position: relative;
-      td::before {
-        position: absolute;
-        content: '';
-        top: calc(-0.5 * (var(--ix-line-width-bold) + 1px));
-        left: 0;
-        right: 0;
-        height: var(--ix-line-width-bold);
-        background-color: var(--ix-color-primary-hover);
-      }
-
-      &:first-child td::before {
-        top: 0;
-      }
-    }
-    &-bottom {
-      position: relative;
-      td::before {
-        position: absolute;
-        content: '';
-        bottom: calc(-0.5 * (var(--ix-line-width-bold) + 1px));
-        left: 0;
-        right: 0;
-        height: var(--ix-line-width-bold);
-        background-color: var(--ix-color-primary-hover);
-      }
-
-      &:last-child td::before {
-        bottom: 0;
-      }
-    }
-  }
-
   &.@{table-prefix}-lg .@{table-prefix}-container .@{pro-table-prefix}-layout-tool-trigger {
     line-height: calc(var(--ix-table-head-row-height-lg) - 2px);
     &::before {
@@ -193,17 +159,5 @@
     &::before {
       height: calc(var(--ix-table-head-row-height-sm) / 2);
     }
-  }
-
-  .cdk-resizable-preview {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 11;
-    border-right: 2px var(--ix-line-type) var(--ix-color-border);
-  }
-
-  table > thead th:last-child .cdk-resizable-handle {
-    right: 0;
   }
 }

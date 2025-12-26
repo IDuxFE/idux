@@ -86,7 +86,7 @@ export default defineComponent({
     const columnOffsetsContext = useColumnOffsets(fixedColumns, measuredColumnWidthMap, columnCount)
     const sortableContext = useSortable(flattedColumns)
     const filterableContext = useFilterable(flattedColumns)
-    const expandableContext = useExpandable(props, flattedColumns)
+    const expandableContext = useExpandable(props, flattedColumns, key => dataContext.mergedMap.value.get(key)?.record)
     const tableLayout = useTableLayout(
       props,
       columnsContext,
@@ -140,6 +140,7 @@ export default defineComponent({
       locale,
       clientWidth,
       setClientWidth,
+      mergedChildrenKey,
       mergedPrefixCls,
       mergedEmptyCell,
       mergedInsetShadow,
