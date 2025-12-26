@@ -5,8 +5,6 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-import { watch } from 'vue'
-
 import { AbstractControl } from './abstractControl'
 import { type AsyncValidatorFn, type ValidatorFn, type ValidatorOptions } from '../types'
 
@@ -18,8 +16,6 @@ export class FormControl<T = any> extends AbstractControl<T> {
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
   ) {
     super(undefined, validatorOrOptions, asyncValidator, _initValue)
-
-    this._watchStatus()
   }
 
   setValue(value: T, options: { dirty?: boolean; blur?: boolean; validate?: boolean } = {}): void {
@@ -30,14 +26,16 @@ export class FormControl<T = any> extends AbstractControl<T> {
     if (options.blur) {
       this.markAsBlurred()
     }
-    if (options.validate || this._interactionsValidate.value) {
-      this._validate(true)
+    if (options.validate) {
+      this._validate()
     }
   }
 
   getValue(): T {
     return this._valueRef.value
   }
+
+  protected _watchOtherStatuses(): void {}
 
   protected _calculateInitValue(): T {
     return this._initValue as T
@@ -47,11 +45,5 @@ export class FormControl<T = any> extends AbstractControl<T> {
 
   protected _find(_: string | number): AbstractControl<T> | undefined {
     return undefined
-  }
-
-  private _watchStatus() {
-    watch(this._errors, errors => {
-      this._status.value = errors ? 'invalid' : 'valid'
-    })
   }
 }

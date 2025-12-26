@@ -75,9 +75,9 @@ export function useFormControl<T = any>(
 
 function reduceControls<T>(config: GroupConfig<T>): GroupControls<T> {
   const controls = {} as GroupControls<T>
-  Object.keys(config).forEach(controlName => {
-    controls[controlName as keyof T] = createControl(config[controlName as keyof T]) as any
-  })
+  for (const [key, options] of Object.entries(config)) {
+    controls[key as keyof T] = createControl(options as AbstractControl<T[keyof T]>)
+  }
   return controls
 }
 

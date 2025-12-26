@@ -28,11 +28,6 @@ export class FormArray<T = any> extends AbstractControl<T[]> {
     super(controls, validatorOrOptions, asyncValidator)
 
     this.length = computed(() => this._controls.value.length)
-
-    this._watchValue()
-    this._watchStatus()
-    this._watchBlurred()
-    this._watchDirty()
   }
 
   setValue(
@@ -45,8 +40,8 @@ export class FormArray<T = any> extends AbstractControl<T[]> {
         control.setValue(item!, options)
       }
     })
-    if (options.validate || this._interactionsValidate.value) {
-      this._validate(true)
+    if (options.validate) {
+      this._validate()
     }
   }
 
@@ -56,6 +51,38 @@ export class FormArray<T = any> extends AbstractControl<T[]> {
     return controls
       .filter(control => !skipDisabled || !control.disabled.value)
       .map(control => control.getValue(options))
+  }
+
+  protected _watchOtherStatuses(): void {
+    watchEffect(() => {
+      this._valueRef.value = this.getValue()
+    })
+
+    watchEffect(() => {
+      let status: ValidateStatus = 'valid'
+      const controls = this._controls.value as AbstractControl<T>[]
+      for (const control of controls) {
+        const controlStatus = control.status.value
+        if (controlStatus === 'invalid') {
+          status = 'invalid'
+          break
+        }
+        if (controlStatus === 'validating' && status === 'valid') {
+          status = 'validating'
+        }
+      }
+      this._controlsStatus.value = status
+    })
+
+    watchEffect(() => {
+      const controls = this._controls.value as AbstractControl<T>[]
+      this._blurred.value = controls.some(control => control.blurred.value)
+    })
+
+    watchEffect(() => {
+      const controls = this._controls.value as AbstractControl<T>[]
+      this._dirty.value = controls.some(control => control.dirty.value)
+    })
   }
 
   protected _calculateInitValue(): T[] {
@@ -130,60 +157,5 @@ export class FormArray<T = any> extends AbstractControl<T[]> {
     const controls = [...this._controls.value]
     controls.splice(index, 1, control)
     this._controls.value = controls
-  }
-
-  private _watchValue() {
-    watchEffect(() => {
-      this._valueRef.value = this.getValue()
-    })
-  }
-
-  private _watchStatus() {
-    watchEffect(() => {
-      this._status.value = this._errors.value ? 'invalid' : 'valid'
-    })
-
-    watchEffect(() => {
-      let status: ValidateStatus = 'valid'
-      const controls = this._controls.value
-      for (const control of controls) {
-        const controlStatus = control.status.value
-        if (controlStatus === 'invalid') {
-          status = 'invalid'
-          break
-        } else if (controlStatus === 'validating') {
-          status = 'validating'
-        }
-      }
-      this._controlsStatus.value = status
-    })
-  }
-
-  private _watchBlurred() {
-    watchEffect(() => {
-      let blurred = false
-      const controls = this._controls.value
-      for (const control of controls) {
-        if (control.blurred.value) {
-          blurred = true
-          break
-        }
-      }
-      this._blurred.value = blurred
-    })
-  }
-
-  private _watchDirty() {
-    watchEffect(() => {
-      let dirty = false
-      const controls = this._controls.value
-      for (const control of controls) {
-        if (control.dirty.value) {
-          dirty = true
-          break
-        }
-      }
-      this._dirty.value = dirty
-    })
   }
 }

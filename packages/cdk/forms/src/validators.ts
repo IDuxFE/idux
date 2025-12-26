@@ -191,7 +191,7 @@ export class Validators {
       return undefined
     }
     const presentValidators: ValidatorFn[] = validators.filter(isFunction)
-    if (presentValidators.length == 0) {
+    if (presentValidators.length === 0) {
       return undefined
     }
 
@@ -204,13 +204,13 @@ export class Validators {
       return undefined
     }
     const presentValidators: AsyncValidatorFn[] = validators.filter(isFunction)
-    if (presentValidators.length == 0) {
+    if (presentValidators.length === 0) {
       return undefined
     }
 
     return (value: any, control: AbstractControl) => {
-      const ValidateErrors = executeValidators<AsyncValidatorFn>(value, control, presentValidators)
-      return Promise.all(ValidateErrors).then(mergeMessages)
+      const validateErrors = executeValidators<AsyncValidatorFn>(value, control, presentValidators)
+      return Promise.all(validateErrors).then(mergeMessages)
     }
   }
 }
@@ -236,22 +236,28 @@ function executeValidators<V extends GenericValidatorFn>(
 }
 
 function mergeMessages(validateErrors: (ValidateErrors | undefined)[]): ValidateErrors | undefined {
-  let res: { [key: string]: any } = {}
+  const res: ValidateErrors = {}
 
   // Not using Array.reduce here due to a Chrome 80 bug
   // https://bugs.chromium.org/p/chromium/issues/detail?id=1049982
-  validateErrors.forEach((errors: ValidateErrors | undefined) => {
-    res = isNil(errors) ? res : { ...res, ...errors }
-  })
+  for (const errors of validateErrors) {
+    if (!isNil(errors)) {
+      Object.assign(res, errors)
+    }
+  }
 
   return Object.keys(res).length === 0 ? undefined : res
 }
 
-function mergedLocaleMessages(currMessages: ValidateMessages, newMessages: ValidateMessages, locale?: string) {
+function mergedLocaleMessages(
+  currMessages: ValidateMessages,
+  newMessages: ValidateMessages,
+  locale?: string,
+): ValidateMessages {
   if (!locale) {
     return merge(currMessages, newMessages)
   }
-  const messageWithLocale = {} as any
+  const messageWithLocale: Record<string, Record<string, ValidateMessage>> = {}
   Object.keys(newMessages).forEach(key => {
     messageWithLocale[key] = { [locale]: newMessages[key] }
   })
@@ -265,7 +271,10 @@ export function hasValidator<T extends ValidatorFn | AsyncValidatorFn>(
   validators: T | T[] | undefined,
   validator: T | undefined,
 ): boolean {
-  return Array.isArray(validators) ? validators.includes(validator!) : validators === validator
+  if (!validator) {
+    return false
+  }
+  return Array.isArray(validators) ? validators.includes(validator) : validators === validator
 }
 
 export function addValidators<T extends ValidatorFn | AsyncValidatorFn>(

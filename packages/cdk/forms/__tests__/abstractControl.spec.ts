@@ -1,19 +1,15 @@
 import { flushPromises } from '@vue/test-utils'
-import { Ref, ref, watch } from 'vue'
 
 import { AbstractControl } from '../src/models/abstractControl'
 import { AsyncValidatorFn, ValidateErrors, ValidatorFn, ValidatorOptions } from '../src/types'
 import { Validators } from '../src/validators'
 
 class Control<T = unknown> extends AbstractControl<T> {
-  _valueRef: Ref<T> = ref() as Ref<T>
   constructor(
     validatorOrOptions?: ValidatorFn | ValidatorFn[] | ValidatorOptions,
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
   ) {
     super(undefined, validatorOrOptions, asyncValidator)
-
-    this._watchEffect()
   }
 
   setValue(value: T): void {
@@ -23,22 +19,13 @@ class Control<T = unknown> extends AbstractControl<T> {
     return this._valueRef.value
   }
 
+  protected _watchOtherStatuses(): void {}
   protected _forEachControls(): void {}
   protected _find(_: string | number): AbstractControl<T> | undefined {
     return undefined
   }
   protected _calculateInitValue(): T {
     return undefined as unknown as T
-  }
-
-  private _watchEffect() {
-    watch([this._valueRef], () => {
-      this._validate()
-    })
-
-    watch(this._errors, errors => {
-      this._status.value = errors ? 'invalid' : 'valid'
-    })
   }
 }
 
@@ -228,21 +215,21 @@ describe('abstractControl.ts', () => {
       const log = vi.fn()
       const stop = control.watchValue(value => log(value))
 
-      control.setValue('test')
-      await flushPromises()
-
-      expect(log).toBeCalledWith('test')
-      expect(log).toBeCalledTimes(1)
-
       control.setValue('')
       await flushPromises()
 
       expect(log).toBeCalledWith('')
+      expect(log).toBeCalledTimes(1)
+
+      control.setValue('test')
+      await flushPromises()
+
+      expect(log).toBeCalledWith('test')
       expect(log).toBeCalledTimes(2)
 
       stop()
 
-      control.setValue('test')
+      control.setValue('')
       await flushPromises()
 
       expect(log).toBeCalledTimes(2)
@@ -250,7 +237,7 @@ describe('abstractControl.ts', () => {
       control.watchValue(value => log(value), { immediate: true })
       await flushPromises()
 
-      expect(log).toBeCalledWith('test')
+      expect(log).toBeCalledWith('')
       expect(log).toBeCalledTimes(3)
     })
 
@@ -349,6 +336,71 @@ describe('abstractControl.ts', () => {
       expect(control.disabled.value).toEqual(true)
       expect(control.valid.value).toEqual(true)
       expect(await control.validate()).toEqual(undefined)
+    })
+
+    test('interactions trigger work', async () => {
+      control = new Control({ trigger: 'interactions', validators: Validators.required })
+
+      // 初始化时，如果值为空，会有错误
+      expect(control.hasError('required')).toEqual(true)
+
+      control.setValue('test')
+      await flushPromises()
+
+      // 值改变了，但还没有 dirty 和 blurred，所以验证不会触发，错误仍然存在
+      expect(control.hasError('required')).toEqual(true)
+
+      control.markAsBlurred()
+      await flushPromises()
+
+      // 只有 blurred，没有 dirty，验证不会触发
+      expect(control.hasError('required')).toEqual(true)
+
+      control.markAsDirty()
+      await flushPromises()
+
+      // 现在 dirty 和 blurred 都有了，验证应该触发，'test' 不为空，所以应该没有错误
+      expect(control.hasError('required')).toEqual(false)
+
+      control.setValue('')
+      await flushPromises()
+
+      // 值变回空了，此时 dirty 和 blurred 都是 true，验证应该触发，有错误
+      expect(control.hasError('required')).toEqual(true)
+
+      control.reset()
+      control.setValue('test')
+      control.markAsBlurred()
+      await flushPromises()
+
+      // 只有 blurred，没有 dirty，验证不会触发
+      expect(control.hasError('required')).toEqual(true)
+
+      control.markAsDirty()
+      await flushPromises()
+
+      // 现在 dirty 和 blurred 都有了，验证应该触发，'test' 不为空，所以应该没有错误
+      expect(control.hasError('required')).toEqual(false)
+
+      control.setValue('')
+      await flushPromises()
+
+      // 值变回空了，此时 dirty 和 blurred 都是 true，验证应该触发，有错误
+      expect(control.hasError('required')).toEqual(true)
+
+      control.reset()
+      control.setValue('test')
+      control.markAsDirty()
+      await flushPromises()
+
+      // 只有 dirty ，没有 blurred，验证不会触发
+      expect(control.hasError('required')).toEqual(true)
+
+      control.markAsBlurred()
+      await flushPromises()
+
+      // 现在 dirty 和 blurred 都有了，验证应该触发，'test' 不为空，所以应该没有错误
+      expect(control.hasError('required')).toEqual(false)
     })
   })
 })

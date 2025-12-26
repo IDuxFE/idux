@@ -148,6 +148,115 @@ describe('formControl.ts', () => {
 
       expect(control.hasError('required')).toEqual(false)
     })
+
+    test('interactions trigger validate work', async () => {
+      control = new FormControl('', { trigger: 'interactions', validators: Validators.required })
+
+      expect(control.hasError('required')).toEqual(true)
+
+      control.setValue('test')
+      await flushPromises()
+
+      expect(control.hasError('required')).toEqual(true)
+
+      control.markAsBlurred()
+      await flushPromises()
+
+      expect(control.hasError('required')).toEqual(true)
+
+      control.markAsDirty()
+      await flushPromises()
+
+      expect(control.hasError('required')).toEqual(false)
+
+      control.setValue('')
+      await flushPromises()
+
+      expect(control.hasError('required')).toEqual(true)
+
+      control.setValue('test')
+      await flushPromises()
+
+      expect(control.hasError('required')).toEqual(false)
+    })
+  })
+
+  describe('validators management work', () => {
+    let control: FormControl<string>
+
+    beforeEach(() => {
+      control = new FormControl('')
+    })
+
+    test('addValidators and removeValidators work', async () => {
+      const validator1 = Validators.required
+      const validator2 = Validators.email
+      const validator3 = Validators.minLength(11)
+
+      control.setValidators(validator1)
+      expect(await control.validate()).toEqual({ required: Validators.getError('required', control) })
+
+      control.addValidators(validator2)
+      control.setValue('test')
+      // 'test' 不为空，所以 required 通过，但不是有效的 email
+      expect(await control.validate()).toEqual({
+        email: Validators.getError('email', control, { actual: 'test' }),
+      })
+
+      control.addValidators([validator3])
+      control.setValue('1@test.com')
+      expect(await control.validate()).toEqual({
+        minLength: Validators.getError('minLength', control, { actual: 10, isArray: false, minLength: 11 }),
+      })
+
+      control.removeValidators([validator2, validator3])
+      control.setValue('')
+      expect(await control.validate()).toEqual({ required: Validators.getError('required', control) })
+
+      control.removeValidators(validator1)
+      expect(await control.validate()).toBeUndefined()
+    })
+
+    test('hasValidator and clearValidators work', async () => {
+      const validator1 = Validators.required
+      const validator2 = Validators.email
+
+      expect(control.hasValidator(validator1)).toBe(false)
+
+      control.setValidators(validator1)
+      expect(control.hasValidator(validator1)).toBe(true)
+      expect(control.hasValidator(validator2)).toBe(false)
+
+      control.addValidators(validator2)
+      expect(control.hasValidator(validator1)).toBe(true)
+      expect(control.hasValidator(validator2)).toBe(true)
+
+      control.clearValidators()
+      expect(control.hasValidator(validator1)).toBe(false)
+      expect(control.hasValidator(validator2)).toBe(false)
+      expect(await control.validate()).toBeUndefined()
+    })
+
+    test('asyncValidators management work', async () => {
+      const asyncValidator1 = (_: unknown) => Promise.resolve({ async1: { message: 'async1' } } as ValidateErrors)
+      const asyncValidator2 = (_: unknown) => Promise.resolve({ async2: { message: 'async2' } } as ValidateErrors)
+
+      control.setAsyncValidators(asyncValidator1)
+      expect(await control.validate()).toEqual({ async1: { message: 'async1' } })
+
+      control.addAsyncValidators(asyncValidator2)
+      expect(await control.validate()).toEqual({ async1: { message: 'async1' }, async2: { message: 'async2' } })
+
+      expect(control.hasAsyncValidator(asyncValidator1)).toBe(true)
+      expect(control.hasAsyncValidator(asyncValidator2)).toBe(true)
+
+      control.removeAsyncValidators(asyncValidator1)
+      expect(await control.validate()).toEqual({ async2: { message: 'async2' } })
+      expect(control.hasAsyncValidator(asyncValidator1)).toBe(false)
+
+      control.clearAsyncValidators()
+      expect(await control.validate()).toBeUndefined()
+    })
   })
 
   describe('disabled work', () => {

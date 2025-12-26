@@ -372,4 +372,88 @@ describe('formArray.ts', () => {
       expect(array.get('0')!.status.value).toEqual('valid')
     })
   })
+
+  describe('interactions trigger work', () => {
+    let array: FormArray<BasicGroup>
+
+    test('interactions trigger validate work', async () => {
+      array = new FormArray(
+        [
+          new FormGroup({
+            control: new FormControl('', Validators.required),
+            array: new FormArray([new FormControl(''), new FormControl('')]),
+            group: new FormGroup({
+              control: new FormControl(''),
+            }),
+          }),
+        ],
+        { trigger: 'interactions' },
+      )
+
+      expect(array.invalid.value).toEqual(true)
+      expect(array.hasError('required', [0, 'control'])).toEqual(true)
+
+      array.setValue([{ control: 'test' }])
+      await flushPromises()
+
+      expect(array.invalid.value).toEqual(true)
+      expect(array.hasError('required', [0, 'control'])).toEqual(true)
+
+      array.markAsBlurred()
+      await flushPromises()
+
+      expect(array.invalid.value).toEqual(true)
+      expect(array.hasError('required', [0, 'control'])).toEqual(true)
+
+      array.get([0, 'control'])!.markAsDirty()
+      await flushPromises()
+
+      expect(array.invalid.value).toEqual(false)
+      expect(array.hasError('required', [0, 'control'])).toEqual(false)
+    })
+  })
+
+  describe('validators management work', () => {
+    let array: FormArray<BasicGroup>
+
+    beforeEach(() => {
+      array = new FormArray([newFormGroup()])
+    })
+
+    test('addValidators and removeValidators work', async () => {
+      const validator = (value: unknown) => {
+        const v = value as BasicGroup[]
+        return v[0]?.control === 'test' ? undefined : ({ test: {} } as ValidateErrors)
+      }
+
+      array.setValidators(validator)
+      expect(await array.validate()).toEqual({ test: {} })
+
+      const validator2 = (value: unknown) => {
+        const v = value as BasicGroup[]
+        return v[0]?.control === 'test2' ? undefined : ({ test2: {} } as ValidateErrors)
+      }
+
+      array.addValidators(validator2)
+      expect(await array.validate()).toEqual({ test: {}, test2: {} })
+
+      array.removeValidators(validator)
+      expect(await array.validate()).toEqual({ test2: {} })
+
+      array.clearValidators()
+      expect(await array.validate()).toBeUndefined()
+    })
+
+    test('hasValidator work', () => {
+      const validator = () => ({ test: {} }) as ValidateErrors
+
+      expect(array.hasValidator(validator)).toBe(false)
+
+      array.setValidators(validator)
+      expect(array.hasValidator(validator)).toBe(true)
+
+      array.clearValidators()
+      expect(array.hasValidator(validator)).toBe(false)
+    })
+  })
 })

@@ -353,4 +353,96 @@ describe('formGroup.ts', () => {
       expect(group.get('group.control')!.disabled.value).toEqual(true)
     })
   })
+
+  describe('interactions trigger work', () => {
+    let group: FormGroup<BasicGroup>
+
+    test('interactions trigger validate work', async () => {
+      group = new FormGroup(
+        {
+          control: new FormControl('', Validators.required),
+          array: new FormArray([new FormControl(''), new FormControl('')]),
+          group: new FormGroup({
+            control: new FormControl('', Validators.required),
+          }),
+        },
+        { trigger: 'interactions' },
+      )
+
+      // 初始化时，空值会有错误
+      expect(group.invalid.value).toEqual(true)
+      expect(group.hasError('required', 'control')).toEqual(true)
+
+      group.setValue({ control: 'test', array: ['', ''], group: { control: '123' } })
+      await flushPromises()
+
+      // 值改变了，但 interactions 模式下需要 dirty 和 blurred
+      expect(group.invalid.value).toEqual(true)
+      expect(group.hasError('required', 'control')).toEqual(true)
+
+      group.markAsBlurred()
+      await flushPromises()
+
+      // 值改变了，但 interactions 模式下需要 dirty 和 blurred
+      expect(group.invalid.value).toEqual(true)
+      expect(group.hasError('required', 'control')).toEqual(true)
+
+      group.markAsDirty()
+      await flushPromises()
+
+      // 现在 dirty 和 blurred 都有了，验证应该触发
+      expect(group.invalid.value).toEqual(false)
+      expect(group.hasError('required', 'control')).toEqual(false)
+    })
+  })
+
+  describe('validators management work', () => {
+    let group: FormGroup<BasicGroup>
+
+    beforeEach(() => {
+      group = new FormGroup({
+        control: new FormControl(''),
+        array: new FormArray([new FormControl(''), new FormControl('')]),
+        group: new FormGroup({
+          control: new FormControl(''),
+        }),
+      })
+    })
+
+    test('addValidators and removeValidators work', async () => {
+      const validator = (value: unknown) => {
+        const v = value as BasicGroup
+        return v.control === 'test' ? undefined : ({ test: {} } as ValidateErrors)
+      }
+
+      group.setValidators(validator)
+      expect(await group.validate()).toEqual({ test: {} })
+
+      const validator2 = (value: unknown) => {
+        const v = value as BasicGroup
+        return v.control === 'test2' ? undefined : ({ test2: {} } as ValidateErrors)
+      }
+
+      group.addValidators(validator2)
+      expect(await group.validate()).toEqual({ test: {}, test2: {} })
+
+      group.removeValidators(validator)
+      expect(await group.validate()).toEqual({ test2: {} })
+
+      group.clearValidators()
+      expect(await group.validate()).toBeUndefined()
+    })
+
+    test('hasValidator work', () => {
+      const validator = () => ({ test: {} }) as ValidateErrors
+
+      expect(group.hasValidator(validator)).toBe(false)
+
+      group.setValidators(validator)
+      expect(group.hasValidator(validator)).toBe(true)
+
+      group.clearValidators()
+      expect(group.hasValidator(validator)).toBe(false)
+    })
+  })
 })
