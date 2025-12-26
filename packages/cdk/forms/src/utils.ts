@@ -49,7 +49,7 @@ export function useControl<T = any>(controlKey = 'control'): ShallowRef<Abstract
       cleanWatch()
       if (isAbstractControl(controlOrPath)) {
         control.value = controlOrPath
-      } else if (!!pControl && !isNil(controlOrPath)) {
+      } else if (pControl && !isNil(controlOrPath)) {
         watchStop = watch(
           pControl.controls,
           () => {
@@ -155,9 +155,9 @@ export function useAccessor<T = any>(
       { immediate: true },
     )
     accessor.setValue = value => {
-      if (value != toRaw(accessor.value)) {
+      if (value !== toRaw(accessor.value)) {
         tempRef.value = value
-        callEmit((props as any)[`onUpdate:${valueKey}`], value)
+        callEmit((props as Record<string, any>)[`onUpdate:${valueKey}`], value)
       }
     }
     accessor.markAsBlurred = NoopFunction

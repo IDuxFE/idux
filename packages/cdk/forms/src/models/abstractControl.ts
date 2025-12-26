@@ -61,6 +61,12 @@ function toAsyncValidator(asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[]
   return isArray(asyncValidator) ? Validators.composeAsync(asyncValidator) : asyncValidator
 }
 
+let DefaultTrigger: ValidatorTrigger = 'change'
+
+export function setDefaultTrigger(trigger: ValidatorTrigger): void {
+  DefaultTrigger = trigger
+}
+
 let controlId = 0
 export abstract class AbstractControl<T = any> {
   readonly uid: number = controlId++
@@ -158,7 +164,7 @@ export abstract class AbstractControl<T = any> {
    * Default value: `'change'`
    */
   get trigger(): ValidatorTrigger {
-    return this._trigger ?? this._parent?.trigger ?? 'change'
+    return this._trigger ?? this._parent?.trigger ?? DefaultTrigger
   }
 
   name?: string
@@ -175,11 +181,6 @@ export abstract class AbstractControl<T = any> {
   protected _dirty = ref(false)
   protected _initializing = ref(true)
   protected _validated = ref(false)
-  // 这里的 && this.dirty.value && this.blurred.value， 似乎都可以不要
-  // 为了保险起见还是加上吧
-  protected _interactionsValidate = computed(
-    () => this.trigger === 'interactions' && this._validated.value && this._dirty.value && this._blurred.value,
-  )
 
   private _validators: ValidatorFn | ValidatorFn[] | undefined
   private _composedValidators: ValidatorFn | undefined
@@ -187,7 +188,6 @@ export abstract class AbstractControl<T = any> {
   private _composedAsyncValidators: AsyncValidatorFn | undefined
   private _parent: AbstractControl<T> | undefined
   private _trigger?: ValidatorTrigger
-  private _blurMarkedCb?: () => void
 
   constructor(
     controls?: GroupControls<T> | AbstractControl<ArrayElement<T>>[],
@@ -200,6 +200,8 @@ export abstract class AbstractControl<T = any> {
     this._forEachControls(control => control.setParent(this))
     this._convertOptions(validatorOrOptions, asyncValidator)
     this._init()
+    this._watchCommonStatuses()
+    this._watchOtherStatuses()
   }
 
   /**
@@ -223,6 +225,8 @@ export abstract class AbstractControl<T = any> {
    * * `skipDisabled`: Ignore value of disabled control, default is `false`.
    */
   abstract getValue(options?: { skipDisabled?: boolean }): T
+
+  protected abstract _watchOtherStatuses(): void
 
   protected abstract _calculateInitValue(): T
   protected abstract _forEachControls(cb: (v: AbstractControl, k: keyof T) => void): void
@@ -298,7 +302,9 @@ export abstract class AbstractControl<T = any> {
       this._blurred.value = true
     }
 
-    this._blurMarkedCb?.()
+    if (this.trigger === 'blur') {
+      this._validate()
+    }
   }
 
   /**
@@ -506,7 +512,7 @@ export abstract class AbstractControl<T = any> {
    * to the control that should be queried for errors.
    */
   hasError(errorCode: string, path?: ControlPathType): boolean {
-    return !!this.getError(errorCode, path)
+    return this.getError(errorCode, path) !== undefined
   }
 
   /**
@@ -599,7 +605,22 @@ export abstract class AbstractControl<T = any> {
   }
 
   private _init(): void {
-    const current = this as any
+    // 使用类型断言来设置只读属性
+    const current = this as AbstractControl<T> & {
+      controls: ComputedRef<any>
+      valueRef: ComputedRef<T>
+      errors: ComputedRef<ValidateErrors | undefined>
+      status: ComputedRef<ValidateStatus>
+      valid: ComputedRef<boolean>
+      invalid: ComputedRef<boolean>
+      validating: ComputedRef<boolean>
+      disabled: ComputedRef<boolean>
+      blurred: ComputedRef<boolean>
+      unblurred: ComputedRef<boolean>
+      dirty: ComputedRef<boolean>
+      pristine: ComputedRef<boolean>
+      validated: ComputedRef<boolean>
+    }
     current.controls = computed(() => this._controls.value)
     current.valueRef = computed(() => this._valueRef.value)
     this._initErrorsAndStatus()
@@ -622,34 +643,21 @@ export abstract class AbstractControl<T = any> {
     current.validated = computed(() => this._validated.value)
 
     tryOnScopeDispose(() => {
-      current.controls = null
-      current.valueRef = null
-      current.errors = null
-      current.status = null
-      current.valid = null
-      current.invalid = null
-      current.validating = null
-      current.disabled = null
-      current.blurred = null
-      current.unblurred = null
-      current.dirty = null
-      current.pristine = null
-      current.validated = null
+      // 清理计算属性引用
+      current.controls = null as any
+      current.valueRef = null as any
+      current.errors = null as any
+      current.status = null as any
+      current.valid = null as any
+      current.invalid = null as any
+      current.validating = null as any
+      current.disabled = null as any
+      current.blurred = null as any
+      current.unblurred = null as any
+      current.dirty = null as any
+      current.pristine = null as any
+      current.validated = null as any
     })
-
-    if (this._disabledFn) {
-      nextTick(() => {
-        watchEffect(() => {
-          if (this._disabledFn!(this, false)) {
-            this.disable()
-          } else {
-            this.enable()
-          }
-        })
-      })
-    }
-
-    this._watchValid()
   }
 
   private _initErrorsAndStatus() {
@@ -670,8 +678,11 @@ export abstract class AbstractControl<T = any> {
       }
 
       this._forEachControls(control => {
-        if (control.status.value === 'invalid') {
+        const controlStatus = control.status.value
+        if (controlStatus === 'invalid') {
           controlsStatus = 'invalid'
+        } else if (controlStatus === 'validating' && controlsStatus === 'valid') {
+          controlsStatus = 'validating'
         }
       })
     }
@@ -681,7 +692,9 @@ export abstract class AbstractControl<T = any> {
     this._controlsStatus = ref(controlsStatus)
 
     if (!disabled && status === 'valid' && controlsStatus === 'valid' && this._composedAsyncValidators) {
-      value = this._validators ? value : this.getValue()
+      if (!this._composedValidators) {
+        value = this.getValue()
+      }
       this._status.value = 'validating'
       this._composedAsyncValidators(value, this).then(asyncErrors => {
         this._errors.value = asyncErrors
@@ -690,20 +703,46 @@ export abstract class AbstractControl<T = any> {
     }
   }
 
-  private _watchValid() {
-    this._blurMarkedCb = () => {
-      if (this.trigger === 'blur' || (this.trigger === 'interactions' && this.dirty.value && !this.validated.value)) {
-        this._validate()
-      }
+  private _watchCommonStatuses() {
+    if (this._disabledFn) {
+      nextTick(() => {
+        watchEffect(() => {
+          if (this._disabledFn!(this, false)) {
+            this.disable()
+          } else {
+            this.enable()
+          }
+        })
+      })
     }
 
-    watch(this._valueRef, _ => {
-      if (this.trigger === 'change') {
-        this._validate()
+    watchEffect(() => {
+      this._status.value = this._errors.value ? 'invalid' : 'valid'
+    })
+
+    watch(this._dirty, dirty => {
+      if (!dirty) {
         return
       }
+      if (this.trigger === 'interactions' && this._blurred.value && !this._validated.value) {
+        this._validate()
+      }
+    })
 
-      if (this._interactionsValidate.value) {
+    watch(this._blurred, blurred => {
+      if (!blurred) {
+        return
+      }
+      if (this.trigger === 'interactions' && this._dirty.value && !this._validated.value) {
+        this._validate()
+      }
+    })
+
+    watch(this._valueRef, () => {
+      if (
+        this.trigger === 'change' ||
+        (this.trigger === 'interactions' && this._validated.value && this._dirty.value && this._blurred.value)
+      ) {
         this._validate()
       }
     })

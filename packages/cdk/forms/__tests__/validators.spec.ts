@@ -1,7 +1,7 @@
 import { enUSMessages } from '../src/messages/en-US'
 import { FormControl } from '../src/models/formControl'
 import { AsyncValidatorFn, ValidateErrors, ValidateMessages, ValidatorFn } from '../src/types'
-import { Validators } from '../src/validators'
+import { Validators, addValidators, hasValidator, removeValidators } from '../src/validators'
 
 describe('validators.ts', () => {
   const control = new FormControl()
@@ -271,5 +271,44 @@ describe('validators.ts', () => {
     setMessages({ requiredTrue: () => 'please input true' })
 
     expect(requiredTrue(false, control)).toEqual({ requiredTrue: { message: 'please input true', actual: false } })
+  })
+
+  test('hasValidator work', () => {
+    const validator1: ValidatorFn = Validators.required
+    const validator2: ValidatorFn = Validators.email
+
+    expect(hasValidator(undefined, validator1)).toBe(false)
+    expect(hasValidator(validator1, validator1)).toBe(true)
+    expect(hasValidator(validator1, validator2)).toBe(false)
+    expect(hasValidator([validator1, validator2], validator1)).toBe(true)
+    expect(hasValidator([validator1, validator2], validator2)).toBe(true)
+    expect(hasValidator([validator1], validator2)).toBe(false)
+    expect(hasValidator(validator1, undefined)).toBe(false)
+  })
+
+  test('addValidators work', () => {
+    const validator1: ValidatorFn = Validators.required
+    const validator2: ValidatorFn = Validators.email
+    const validator3: ValidatorFn = Validators.minLength(5)
+
+    expect(addValidators(validator1, undefined)).toEqual([validator1])
+    expect(addValidators([validator1, validator2], undefined)).toEqual([validator1, validator2])
+    expect(addValidators(validator1, validator2)).toEqual([validator2, validator1])
+    expect(addValidators(validator1, [validator2, validator3])).toEqual([validator2, validator3, validator1])
+    expect(addValidators(validator1, validator1)).toEqual([validator1])
+    expect(addValidators([validator1, validator2], validator1)).toEqual([validator1, validator2])
+  })
+
+  test('removeValidators work', () => {
+    const validator1: ValidatorFn = Validators.required
+    const validator2: ValidatorFn = Validators.email
+    const validator3: ValidatorFn = Validators.minLength(5)
+
+    expect(removeValidators(validator1, undefined)).toEqual([])
+    expect(removeValidators(validator1, validator1)).toEqual([])
+    expect(removeValidators(validator1, validator2)).toEqual([validator2])
+    expect(removeValidators(validator1, [validator1, validator2])).toEqual([validator2])
+    expect(removeValidators([validator1, validator2], [validator1, validator2, validator3])).toEqual([validator3])
+    expect(removeValidators([validator1, validator2], validator1)).toEqual([])
   })
 })

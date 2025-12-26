@@ -84,7 +84,7 @@ export function useFormControl<T>(
 | `disabled` | 默认禁用当前控件 | `boolean \| (control: AbstractControl, initializing: boolean) => boolean` | - | `initializing` 为 `true` 时，表示处于初始化中，此时 `control` 的部分属性还不能访问。 |
 | `name` | 控件的名称 | `string` | - | 通常用于自定义提示信息 |
 | `example` | 控件的示例 | `string` | - | 通常用于自定义提示信息 |
-| `trigger` | 验证器触发的时机 | `'change' \| 'blur' \| 'submit' \| 'interactions'` | `change` | - |
+| `trigger` | 验证器触发的时机 | `'change' \| 'blur' \| 'submit' \| 'interactions'` | `change` | 可以通过 `setDefaultTrigger` 全局修改 |
 | `validators` | 一个同步验证器函数或数组 | `ValidatorFn \| ValidatorFn[]` | - | - |
 | `asyncValidators` | 一个异步验证器函数或数组 | `AsyncValidatorFn \| AsyncValidatorFn[]` | - | - |
 

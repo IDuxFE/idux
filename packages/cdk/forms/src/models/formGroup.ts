@@ -22,23 +22,18 @@ export class FormGroup<T extends object = object> extends AbstractControl<T> {
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
   ) {
     super(controls, validatorOrOptions, asyncValidator)
-
-    this._watchValue()
-    this._watchStatus()
-    this._watchBlurred()
-    this._watchDirty()
   }
 
   setValue(value: Partial<T>, options: { dirty?: boolean; blur?: boolean; validate?: boolean } = {}): void {
     const controls = this._controls.value
-    ;(Object.keys(value) as Array<keyof T>).forEach(key => {
+    for (const [key, controlValue] of Object.entries(value)) {
       const control = controls[key]
       if (control) {
-        control.setValue(value[key]!, options)
+        control.setValue(controlValue, options)
       }
-    })
-    if (options.validate || this._interactionsValidate.value) {
-      this._validate(!options.validate)
+    }
+    if (options.validate) {
+      this._validate()
     }
   }
 
@@ -52,6 +47,41 @@ export class FormGroup<T extends object = object> extends AbstractControl<T> {
       value[key] = control.getValue(options)
     })
     return value
+  }
+
+  protected _watchOtherStatuses(): void {
+    watchEffect(() => {
+      this._valueRef.value = this.getValue()
+    })
+
+    watchEffect(() => {
+      let status: ValidateStatus = 'valid'
+      const controls = this._controls.value
+      for (const key in controls) {
+        if (!hasOwnProperty(controls, key)) {
+          continue
+        }
+        const controlStatus = controls[key].status.value
+        if (controlStatus === 'invalid') {
+          status = 'invalid'
+          break
+        }
+        if (controlStatus === 'validating' && status === 'valid') {
+          status = 'validating'
+        }
+      }
+      this._controlsStatus.value = status
+    })
+
+    watchEffect(() => {
+      const controls = this._controls.value as Record<string, AbstractControl<T>>
+      this._blurred.value = Object.values(controls).some(control => control.blurred.value)
+    })
+
+    watchEffect(() => {
+      const controls = this._controls.value as Record<string, AbstractControl<T>>
+      this._dirty.value = Object.values(controls).some(control => control.dirty.value)
+    })
   }
 
   protected _calculateInitValue(): T {
@@ -106,69 +136,5 @@ export class FormGroup<T extends object = object> extends AbstractControl<T> {
     const controls = { ...this._controls.value }
     controls[key] = control
     this._controls.value = controls
-  }
-
-  private _watchValue() {
-    watchEffect(() => {
-      this._valueRef.value = this.getValue()
-    })
-  }
-
-  private _watchStatus() {
-    watchEffect(() => {
-      this._status.value = this._errors.value ? 'invalid' : 'valid'
-    })
-
-    watchEffect(() => {
-      let status: ValidateStatus = 'valid'
-      const controls = this._controls.value
-      for (const key in controls) {
-        if (!hasOwnProperty(controls, key)) {
-          continue
-        }
-        const controlStatus = controls[key].status.value
-        if (controlStatus === 'invalid') {
-          status = 'invalid'
-          break
-        } else if (controlStatus === 'validating') {
-          status = 'validating'
-        }
-      }
-      this._controlsStatus.value = status
-    })
-  }
-
-  private _watchBlurred() {
-    watchEffect(() => {
-      let blurred = false
-      const controls = this._controls.value
-      for (const key in controls) {
-        if (!hasOwnProperty(controls, key)) {
-          continue
-        }
-        if (controls[key].blurred.value) {
-          blurred = true
-          break
-        }
-      }
-      this._blurred.value = blurred
-    })
-  }
-
-  private _watchDirty() {
-    watchEffect(() => {
-      let dirty = false
-      const controls = this._controls.value
-      for (const key in controls) {
-        if (!hasOwnProperty(controls, key)) {
-          continue
-        }
-        if (controls[key].dirty.value) {
-          dirty = true
-          break
-        }
-      }
-      this._dirty.value = dirty
-    })
   }
 }

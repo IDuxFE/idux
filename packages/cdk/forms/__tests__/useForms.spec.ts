@@ -1,5 +1,6 @@
 import { flushPromises } from '@vue/test-utils'
 
+import { FormControl } from '../src/models/formControl'
 import { useFormArray, useFormControl, useFormGroup } from '../src/useForms'
 import { Validators } from '../src/validators'
 
@@ -57,5 +58,89 @@ describe('useForms.ts', () => {
     expect(group.invalid.value).toEqual(false)
     expect(group.hasError('required', 'control1')).toEqual(false)
     expect(group.hasError('required', 'control2')).toEqual(false)
+  })
+
+  test('useFormControl work', async () => {
+    const control = useFormControl('', Validators.required)
+
+    expect(control.getValue()).toEqual('')
+    expect(control.invalid.value).toEqual(true)
+    expect(control.hasError('required')).toEqual(true)
+
+    control.setValue('test')
+    await flushPromises()
+
+    expect(control.getValue()).toEqual('test')
+    expect(control.invalid.value).toEqual(false)
+    expect(control.hasError('required')).toEqual(false)
+  })
+
+  test('useFormArray work', async () => {
+    const array = useFormArray<string>([[''], ['test']])
+
+    expect(array.getValue()).toEqual(['', 'test'])
+    expect(array.length.value).toEqual(2)
+
+    array.setValue(['test1', 'test2'])
+    await flushPromises()
+
+    expect(array.getValue()).toEqual(['test1', 'test2'])
+
+    const control = new FormControl('test3')
+    array.push(control)
+
+    expect(array.length.value).toEqual(3)
+    expect(array.getValue()).toEqual(['test1', 'test2', 'test3'])
+  })
+
+  test('nested form structure work', async () => {
+    const group = useFormGroup({
+      user: useFormGroup({
+        name: ['', Validators.required],
+        age: [0, Validators.min(18)],
+      }),
+      tags: useFormArray<string>([['tag1'], ['tag2']]),
+    })
+
+    expect(group.getValue()).toEqual({
+      user: { name: '', age: 0 },
+      tags: ['tag1', 'tag2'],
+    })
+
+    expect(group.invalid.value).toEqual(true)
+    expect(group.hasError('required', 'user.name')).toEqual(true)
+    expect(group.hasError('min', 'user.age')).toEqual(true)
+
+    group.setValue(
+      {
+        user: { name: 'John', age: 25 },
+        tags: ['tag1', 'tag2', 'tag3'],
+      },
+      { dirty: true },
+    )
+    await flushPromises()
+
+    expect(group.invalid.value).toEqual(false)
+  })
+
+  test('validator options work', async () => {
+    const control = useFormControl('', {
+      validators: Validators.required,
+      trigger: 'blur',
+      disabled: false,
+    })
+
+    expect(control.trigger).toEqual('blur')
+    expect(control.disabled.value).toEqual(false)
+
+    control.setValue('')
+    await flushPromises()
+
+    expect(control.hasError('required')).toEqual(true)
+
+    control.markAsBlurred()
+    await flushPromises()
+
+    expect(control.hasError('required')).toEqual(true)
   })
 })
