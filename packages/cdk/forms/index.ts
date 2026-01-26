@@ -5,7 +5,7 @@
  * found in the LICENSE file at https://github.com/IDuxFE/idux/blob/main/LICENSE
  */
 
-export { AbstractControl } from './src/models/abstractControl'
+export { AbstractControl, setDefaultTrigger } from './src/models/abstractControl'
 export { FormArray } from './src/models/formArray'
 export { FormControl } from './src/models/formControl'
 export { FormGroup } from './src/models/formGroup'
