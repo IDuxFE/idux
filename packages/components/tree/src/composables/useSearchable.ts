@@ -26,7 +26,7 @@ export function useSearchable(
   const searchedKeys = computed(() => {
     const { searchValue } = props
     if (!searchValue) {
-      return NoopArray as unknown as VKey[]
+      return NoopArray as VKey[]
     }
     const searchFn = mergedSearchFn.value
     const keys: VKey[] = []

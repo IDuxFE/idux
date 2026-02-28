@@ -7,4 +7,4 @@
 
 export const NoopFunction = (): void => {}
 export const NoopObject = Object.freeze({})
-export const NoopArray = Object.freeze([])
+export const NoopArray = Object.freeze([] as unknown[])

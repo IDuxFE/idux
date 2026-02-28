@@ -649,12 +649,12 @@ exports[`DatePanel > year type disabledDate work 1`] = `
           </td>
         </tr>
         <tr role="row" class="ix-date-panel-row">
-          <td class="ix-date-panel-cell ix-date-panel-cell-current" role="gridcell" aria-selected="false" aria-label="1,today">
+          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="1">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2025</div>
             </div>
           </td>
-          <td class="ix-date-panel-cell" role="gridcell" aria-selected="false" aria-label="1">
+          <td class="ix-date-panel-cell ix-date-panel-cell-current" role="gridcell" aria-selected="false" aria-label="1,today">
             <div class="ix-date-panel-cell-inner">
               <div class="ix-date-panel-cell-trigger">2026</div>
             </div>

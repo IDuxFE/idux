@@ -31,7 +31,7 @@ export function useHeaderMenus(props: ProLayoutProps): ComputedRef<MenuData[]> {
       })
     }
 
-    return NoopArray as unknown as MenuData[]
+    return NoopArray as MenuData[]
   })
 }
 
@@ -48,6 +48,6 @@ export function useSiderMenus(
       const currActiveMenu = menus.find(menu => menu.key === activeHeaderKey.value)
       return getMenuChildren(currActiveMenu)
     }
-    return NoopArray as unknown as MenuData[]
+    return NoopArray as MenuData[]
   })
 }

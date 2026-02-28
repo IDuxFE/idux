@@ -10,7 +10,7 @@ import type { CSSProperties } from 'vue'
 
 import { computed, defineComponent, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
-import { throttleRAF } from '@idux/cdk/utils'
+import { NoopObject, throttleRAF } from '@idux/cdk/utils'
 import { useGlobalConfig } from '@idux/components/config'
 import { convertTarget } from '@idux/components/utils'
 
@@ -30,8 +30,8 @@ export default defineComponent({
   setup(props, { slots, expose }) {
     const common = useGlobalConfig('common')
     const mergedPrefixCls = computed(() => `${common.prefixCls}-affix`)
-    const contentStyle = ref<ContentStyle>({} as ContentStyle)
-    const affixStyle = ref({} as CSSProperties)
+    const contentStyle = ref<ContentStyle>(NoopObject as ContentStyle)
+    const affixStyle = ref(NoopObject as CSSProperties)
 
     const targetRef = ref<Window | HTMLElement | null>(null)
     const affixRef = ref<HTMLElement | null>(null)
@@ -80,8 +80,8 @@ export default defineComponent({
     }
 
     function clearStyle() {
-      affixStyle.value = {}
-      contentStyle.value = {}
+      affixStyle.value = NoopObject
+      contentStyle.value = NoopObject
     }
 
     function initContainer() {
