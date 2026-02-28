@@ -35,9 +35,7 @@ export const DnDRegistry = (): InnerRegistry => {
    */
   const on = (el: DnDElement, eventName?: DnDEventName, handler?: DnDEvent, state?: DnDState): void => {
     if (!dndElMap.has(el)) {
-      const dndMap = {} as DnDStateMap
-      dndMap.state = state ?? new DnDState()
-
+      const dndMap = { state: state ?? new DnDState() } as DnDStateMap
       dndElMap.set(el, dndMap)
     }
 

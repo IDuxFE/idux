@@ -89,7 +89,9 @@ export type ProTableColumn<T = any, K = VKey> =
   | ProTableColumnIndexable<T>
 
 export interface ProTableColumnBase<T = any, K = VKey>
-  extends TableColumnBase<T, K>, ProTableColumnResizable, ProTableColumnLayoutConfig {
+  extends TableColumnBase<T, K>,
+    ProTableColumnResizable,
+    ProTableColumnLayoutConfig {
   type?: never
   copyable?: boolean
   editable?: boolean
@@ -101,15 +103,18 @@ export interface ProTableColumnBase<T = any, K = VKey>
 }
 
 export interface ProTableColumnExpandable<T = any, K = VKey>
-  extends
-    Omit<TableColumnExpandable<T, K>, keyof Omit<ProTableColumnBase, 'type'>>,
+  extends Omit<TableColumnExpandable<T, K>, keyof Omit<ProTableColumnBase, 'type'>>,
     Omit<ProTableColumnBase<T, K>, 'type'> {}
 
 export interface ProTableColumnSelectable<T = any, K = VKey>
-  extends TableColumnSelectable<T, K>, ProTableColumnResizable, ProTableColumnLayoutConfig {}
+  extends TableColumnSelectable<T, K>,
+    ProTableColumnResizable,
+    ProTableColumnLayoutConfig {}
 
 export interface ProTableColumnIndexable<T = any>
-  extends TableColumnIndexable<T>, ProTableColumnResizable, ProTableColumnLayoutConfig {}
+  extends TableColumnIndexable<T>,
+    ProTableColumnResizable,
+    ProTableColumnLayoutConfig {}
 
 export type ProTableColumnLayoutConfig = {
   layoutable?: boolean

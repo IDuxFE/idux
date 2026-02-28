@@ -22,7 +22,7 @@ export function useIndeterminateKeys(
 ): ComputedRef<VKey[]> {
   return computed(() => {
     if (!strategyEnabled.value) {
-      return NoopArray as unknown as VKey[]
+      return NoopArray as VKey[]
     }
     const indeterminateKeySet = new Set<VKey>()
     const cascadedKeys = selectedWithStrategyKeys.value
