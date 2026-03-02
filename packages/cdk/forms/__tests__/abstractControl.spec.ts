@@ -401,6 +401,12 @@ describe('abstractControl.ts', () => {
 
       // 现在 dirty 和 blurred 都有了，验证应该触发，'test' 不为空，所以应该没有错误
       expect(control.hasError('required')).toEqual(false)
+
+      control.reset()
+      await flushPromises()
+
+      // 重置后，初始值为空，会有错误
+      expect(control.hasError('required')).toEqual(true)
     })
   })
 })

@@ -243,6 +243,9 @@ export abstract class AbstractControl<T = any> {
       const initValue = this._calculateInitValue()
       if (currValue !== initValue) {
         this._valueRef.value = initValue
+        if (this.trigger === 'interactions') {
+          this._validate(true)
+        }
       } else {
         // There are cases where the value does not change but the validator changes,
         // so manual validation is required here
