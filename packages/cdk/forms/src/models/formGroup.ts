@@ -50,38 +50,40 @@ export class FormGroup<T extends object = object> extends AbstractControl<T> {
   }
 
   protected _watchOtherStatuses(): void {
-    watchEffect(() => {
-      this._valueRef.value = this.getValue()
-    })
+    this._watchStopHandles.push(
+      watchEffect(() => {
+        this._valueRef.value = this.getValue()
+      }),
 
-    watchEffect(() => {
-      let status: ValidateStatus = 'valid'
-      const controls = this._controls.value
-      for (const key in controls) {
-        if (!hasOwnProperty(controls, key)) {
-          continue
+      watchEffect(() => {
+        let status: ValidateStatus = 'valid'
+        const controls = this._controls.value
+        for (const key in controls) {
+          if (!hasOwnProperty(controls, key)) {
+            continue
+          }
+          const controlStatus = controls[key].status.value
+          if (controlStatus === 'invalid') {
+            status = 'invalid'
+            break
+          }
+          if (controlStatus === 'validating' && status === 'valid') {
+            status = 'validating'
+          }
         }
-        const controlStatus = controls[key].status.value
-        if (controlStatus === 'invalid') {
-          status = 'invalid'
-          break
-        }
-        if (controlStatus === 'validating' && status === 'valid') {
-          status = 'validating'
-        }
-      }
-      this._controlsStatus.value = status
-    })
+        this._controlsStatus.value = status
+      }),
 
-    watchEffect(() => {
-      const controls = this._controls.value as Record<string, AbstractControl<T>>
-      this._blurred.value = Object.values(controls).some(control => control.blurred.value)
-    })
+      watchEffect(() => {
+        const controls = this._controls.value as Record<string, AbstractControl<T>>
+        this._blurred.value = Object.values(controls).some(control => control.blurred.value)
+      }),
 
-    watchEffect(() => {
-      const controls = this._controls.value as Record<string, AbstractControl<T>>
-      this._dirty.value = Object.values(controls).some(control => control.dirty.value)
-    })
+      watchEffect(() => {
+        const controls = this._controls.value as Record<string, AbstractControl<T>>
+        this._dirty.value = Object.values(controls).some(control => control.dirty.value)
+      }),
+    )
   }
 
   protected _calculateInitValue(): T {
