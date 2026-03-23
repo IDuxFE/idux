@@ -54,35 +54,37 @@ export class FormArray<T = any> extends AbstractControl<T[]> {
   }
 
   protected _watchOtherStatuses(): void {
-    watchEffect(() => {
-      this._valueRef.value = this.getValue()
-    })
+    this._watchStopHandles.push(
+      watchEffect(() => {
+        this._valueRef.value = this.getValue()
+      }),
 
-    watchEffect(() => {
-      let status: ValidateStatus = 'valid'
-      const controls = this._controls.value as AbstractControl<T>[]
-      for (const control of controls) {
-        const controlStatus = control.status.value
-        if (controlStatus === 'invalid') {
-          status = 'invalid'
-          break
+      watchEffect(() => {
+        let status: ValidateStatus = 'valid'
+        const controls = this._controls.value as AbstractControl<T>[]
+        for (const control of controls) {
+          const controlStatus = control.status.value
+          if (controlStatus === 'invalid') {
+            status = 'invalid'
+            break
+          }
+          if (controlStatus === 'validating' && status === 'valid') {
+            status = 'validating'
+          }
         }
-        if (controlStatus === 'validating' && status === 'valid') {
-          status = 'validating'
-        }
-      }
-      this._controlsStatus.value = status
-    })
+        this._controlsStatus.value = status
+      }),
 
-    watchEffect(() => {
-      const controls = this._controls.value as AbstractControl<T>[]
-      this._blurred.value = controls.some(control => control.blurred.value)
-    })
+      watchEffect(() => {
+        const controls = this._controls.value as AbstractControl<T>[]
+        this._blurred.value = controls.some(control => control.blurred.value)
+      }),
 
-    watchEffect(() => {
-      const controls = this._controls.value as AbstractControl<T>[]
-      this._dirty.value = controls.some(control => control.dirty.value)
-    })
+      watchEffect(() => {
+        const controls = this._controls.value as AbstractControl<T>[]
+        this._dirty.value = controls.some(control => control.dirty.value)
+      }),
+    )
   }
 
   protected _calculateInitValue(): T[] {

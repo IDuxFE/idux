@@ -181,6 +181,7 @@ export abstract class AbstractControl<T = any> {
   protected _dirty = ref(false)
   protected _initializing = ref(true)
   protected _validated = ref(false)
+  protected _watchStopHandles: WatchStopHandle[] = []
 
   private _validators: ValidatorFn | ValidatorFn[] | undefined
   private _composedValidators: ValidatorFn | undefined
@@ -660,6 +661,10 @@ export abstract class AbstractControl<T = any> {
       current.dirty = null as any
       current.pristine = null as any
       current.validated = null as any
+
+      this._watchStopHandles.forEach(stopHandle => stopHandle())
+      this._watchStopHandles = []
+      this._disabledFn = undefined
     })
   }
 
@@ -709,45 +714,49 @@ export abstract class AbstractControl<T = any> {
   private _watchCommonStatuses() {
     if (this._disabledFn) {
       nextTick(() => {
-        watchEffect(() => {
-          if (this._disabledFn!(this, false)) {
-            this.disable()
-          } else {
-            this.enable()
-          }
-        })
+        this._watchStopHandles.push(
+          watchEffect(() => {
+            if (this._disabledFn!(this, false)) {
+              this.disable()
+            } else {
+              this.enable()
+            }
+          }),
+        )
       })
     }
 
-    watchEffect(() => {
-      this._status.value = this._errors.value ? 'invalid' : 'valid'
-    })
+    this._watchStopHandles.push(
+      watchEffect(() => {
+        this._status.value = this._errors.value ? 'invalid' : 'valid'
+      }),
 
-    watch(this._dirty, dirty => {
-      if (!dirty) {
-        return
-      }
-      if (this.trigger === 'interactions' && this._blurred.value && !this._validated.value) {
-        this._validate()
-      }
-    })
+      watch(this._dirty, dirty => {
+        if (!dirty) {
+          return
+        }
+        if (this.trigger === 'interactions' && this._blurred.value) {
+          this._validate()
+        }
+      }),
 
-    watch(this._blurred, blurred => {
-      if (!blurred) {
-        return
-      }
-      if (this.trigger === 'interactions' && this._dirty.value && !this._validated.value) {
-        this._validate()
-      }
-    })
+      watch(this._blurred, blurred => {
+        if (!blurred) {
+          return
+        }
+        if (this.trigger === 'interactions' && this._dirty.value) {
+          this._validate()
+        }
+      }),
 
-    watch(this._valueRef, () => {
-      if (
-        this.trigger === 'change' ||
-        (this.trigger === 'interactions' && this._validated.value && this._dirty.value && this._blurred.value)
-      ) {
-        this._validate()
-      }
-    })
+      watch(this._valueRef, () => {
+        if (
+          this.trigger === 'change' ||
+          (this.trigger === 'interactions' && this._validated.value && this._dirty.value && this._blurred.value)
+        ) {
+          this._validate()
+        }
+      }),
+    )
   }
 }
